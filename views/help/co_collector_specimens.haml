@@ -1,0 +1,102 @@
+-content_for :title do
+  = I18n.t('help.fix_title')
+
+-content_for :scripts do
+  %script{src: "/js/application.js"}
+  :javascript
+    $(function() {
+      Application.init(#{@viewed_user.id}, "PUT", "/help-others", "#{@viewed_user.identifier}");
+    });
+
+-content_for :jumbotron do
+  = haml :'partials/help/jumbotron', layout: false
+
+= haml :'partials/help/tabs', layout: false, locals: { active_tab: "specimens" }
+= haml :'partials/help/subtabs_fix', layout: false, locals: { active_subtab: "co_collectors" }
+
+- if @pagy.count == 0
+  %div{class:"alert alert-warning", role: "alert"}
+    #{I18n.t('help.not_co_collector_name', { name: @co_collector.fullname })}
+- else
+  = haml :'partials/help/fixed_navbar', layout: false
+  %div{class:"alert alert-warning", role: "alert"}
+    #{I18n.t('help.co_collector_name', { name: @co_collector.fullname })}
+    %span
+      %i{class:"fas fa-random"}
+      %a{href: "/help-others/#{@co_collector.identifier}/co-collector/#{@viewed_user.identifier}"}
+        #{I18n.t('help.switch')}
+  %div{id: "helper-info", class: "alert alert-info tiny-margins", role: "alert"}
+    Choose
+    %img{src:"/images/net-unselected.png", alt:"#{I18n.t('general.collected')}", title:"#{I18n.t('general.collected')}", width:18}
+    collected,
+    %img{src:"/images/microscope-unselected.png", alt:"#{I18n.t('general.identified')}", title:"#{I18n.t('general.identified')}", width:18}
+    identified, or Both to correct the claims.
+
+  %div{class:"table-responsive-lg"}
+    %table{class:"table table-hover table-sm"}
+      %thead{class: "thead-light"}
+        %tr
+          %th{scope: "col", class:"selector"}
+            = haml :'partials/bulk_selector_top', layout: false
+          %th{scope: "col"}= I18n.t('specimen.scientific_name')
+          %th{scope: "col"}= I18n.t('specimen.collected_by')
+          %th{scope: "col"}= I18n.t('specimen.identified_by')
+          %th{scope: "col"}= I18n.t('specimen.date_collected')
+          %th{scope: "col"}= I18n.t('specimen.date_identified')
+          %th{scope: "col"}= I18n.t('specimen.institution')
+          %th{scope: "col"}= I18n.t('specimen.catalog_number')
+          %th{scope: "col"}= I18n.t('specimen.type_status')
+          %th{scope: "col"}= I18n.t('specimen.scribe')
+          %th{scope: "col", class:"btn-selector-wide"}
+
+      %tbody
+        - @results.each do |uo|
+          - o = uo.occurrence
+          %tr
+            %td{class: "selector"}
+              = haml :'partials/single_selector_preselected', layout: false, locals: { occurrence: uo }
+            %td
+              - scientific_name = o.scientificName.nil? ? "not recorded" : o.scientificName
+              %a{href: "https://gbif.org/occurrence/#{o.id}", target:"_blank"}
+                #{h(scientific_name)}
+              - if o.hasImage?
+                %i{class:"fas fa-image ml-1"}
+            %td #{h(o.recordedBy)}
+            %td #{h(o.identifiedBy)}
+            %td #{h(o.eventDate || o.year)}
+            %td #{h(o.dateIdentified)}
+            %td #{h(o.institutionCode)}
+            %td #{h(o.catalogNumber)}
+            %td #{h(o.typeStatus)}
+            %td
+              - if uo.claimant.is_bot?
+                #{uo.claimant.fullname}
+              - elsif uo.claimant.is_public?
+                %a{href: "/#{uo.claimant.orcid}"} #{uo.claimant.fullname_reverse}
+              - else
+                %a{href: "https://orcid.org/#{uo.claimant.orcid}"} #{uo.claimant.fullname_reverse}
+            %td
+              %button{type:"button", class:"btn btn-sm btn-outline-warning hide", "data-occurrence-id":"#{uo.user_occurrence_id}"}= I18n.t('specimen.not_them')
+
+      - if @total > 25
+        %tfoot{class: "thead-light"}
+          %tr
+            %th{scope: "col", class:"selector"}
+              = haml :'partials/bulk_selector_bottom', layout: false
+            %th{scope: "col"}= I18n.t('specimen.scientific_name')
+            %th{scope: "col"}= I18n.t('specimen.collected_by')
+            %th{scope: "col"}= I18n.t('specimen.identified_by')
+            %th{scope: "col"}= I18n.t('specimen.date_collected')
+            %th{scope: "col"}= I18n.t('specimen.date_identified')
+            %th{scope: "col"}= I18n.t('specimen.institution')
+            %th{scope: "col"}= I18n.t('specimen.catalog_number')
+            %th{scope: "col"}= I18n.t('specimen.type_status')
+            %th{scope: "col"}= I18n.t('specimen.scribe')
+            %th
+
+  - if @total > 25
+    = haml :'partials/page_size', layout: false
+
+  - if @pagy.pages > 1
+    %div{style:"overflow-y:scroll"}
+      = pagy_bootstrap_nav(@pagy)

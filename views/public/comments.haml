@@ -1,0 +1,39 @@
+= haml :'partials/user/twitter_img', layout: false
+
+- content_for(:title, "#{@viewed_user.fullname}")
+
+- content_for :scripts do
+  %script{id:"dsq-count-scr", src:"//#{Settings.disqus.shortname}.disqus.com/count.js", defer: ""}
+  :javascript
+    $(function() {
+      DISQUSWIDGETS.getCount({ reset: true });
+    });
+
+%div{class:"row"}
+  = haml :'partials/user/jumbotron', layout: false
+  %div{class:"col-12 col-lg-8 mt-2"}
+    - if @viewed_user.is_public?
+      = haml :'partials/user/tabs', layout: false
+
+    %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('user.comment_alert')
+
+    - if Settings.disqus.shortname
+      %div{id: "disqus_thread"}
+
+      :javascript
+        var disqus_config = function () {
+          this.page.url = "#{Settings.base_url}/#{@viewed_user.identifier}/comments";
+          this.page.identifier = "#{@viewed_user.identifier}";
+        };
+        (function() {
+          var d = document, s = d.createElement('script');
+          s.src = "https://#{Settings.disqus.shortname}.disqus.com/embed.js";
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      %noscript
+        Please enable JavaScript to view the
+        %a{href: "https://disqus.com/?ref_noscript"} comments powered by Disqus.
+
+    - else
+      = haml :'partials/user/offline_message', layout: false

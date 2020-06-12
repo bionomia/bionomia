@@ -1,0 +1,49 @@
+= haml :'partials/user/twitter_img', layout: false
+
+- content_for(:title, "#{@viewed_user.fullname}")
+
+- content_for :scripts do
+  %script{src: "/js/application.js"}
+  %script{id:"dsq-count-scr", src:"//#{Settings.disqus.shortname}.disqus.com/count.js", defer: ""}
+  %script{src: "https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"}
+  :javascript
+    $(function() {
+      Application.init();
+      DISQUSWIDGETS.getCount({ reset: true });
+    });
+
+%div{class:"row"}
+  = haml :'partials/user/jumbotron', layout: false
+  %div{class:"col-12 col-lg-8 mt-2"}
+    - if @viewed_user.is_public?
+      = haml :'partials/user/tabs', layout: false, locals: { active_page: "citations" }
+
+      - if @pagy.count == 0
+        %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('user.no_publications')
+      - else
+        %div{class: "alert alert-info tiny-margins", role: "alert"}
+          #{number_to_human(@pagy.count, units: :'user.publication_count', delimiter: ",", precision: 0)}
+
+        %div{class:"citation-wrapper"}
+          %h4= I18n.t('user.science_enabled_specimens')
+          - @results.each do |article|
+            %div{class: "card"}
+              %div{class: "card-header"}
+                %p{class: "citation card-title"}
+                  #{h(article.citation)}
+                  %a{href: "https://doi.org/#{article.doi}"} https://doi.org/#{article.doi}
+              %div{class: "card-body"}
+                %div{"data-badge-popover":"right", "data-badge-type":"donut", "data-doi":"#{article.doi}", "data-hide-no-mentions":"true", class:"altmetric-embed pull-left mr-2 float-left"}
+                %p{class:"card-text text-muted"} #{h(article.abstract)}
+              %div{class: "card-footer d-flex"}
+                %div{class: "small"}
+                  %span{class: "badge badge-light badge-pill citation-correction"} #{number_with_delimiter(article.user_specimen_count(@viewed_user.id))}
+                  %a{href: "/#{@viewed_user.identifier}/citation/#{article.id}"}
+                    = I18n.t('user.specimens_metric')
+
+        - if @pagy.pages > 1
+          %div{style:"overflow-y:scroll"}
+            = pagy_bootstrap_nav(@pagy)
+
+    - else
+      = haml :'partials/user/offline_message', layout: false

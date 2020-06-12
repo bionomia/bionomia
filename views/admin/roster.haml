@@ -1,0 +1,71 @@
+-content_for :title do
+  All Accounts
+
+-content_for :scripts do
+  %script{src: "https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"}
+  %script{src: "/js/application.js"}
+  :javascript
+    $(function() {
+      Application.init("", "POST", "/admin");
+    });
+
+-content_for :jumbotron do
+  %div{class:"jumbotron jumbotron-fluid alert-warning d-flex flex-wrap"}
+    %div{class:"mr-auto"}
+      %h1{class:"h2"} All People
+    = haml :'partials/admin/user_search', layout: false
+
+- if flash[:destroyed]
+  %div{class:"alert alert-danger alert-dismissible fade show d-block", role: "alert"}
+    %div
+      #{flash[:destroyed]} was destroyed and all claims, attributions, and messages were deleted.
+    %button{type:"button", class:"close", "data-dismiss":"alert", "aria-label":"Close"}
+      %span{"aria-hidden":"true"} &times;
+
+- sort = locals[:sort] == "asc" ? "desc" : "asc"
+%div{class:"table-responsive-lg"}
+  %table{class:"table table-hover table-sm"}
+    %thead{class: "thead-light"}
+      %tr
+        %th{scope: "col"}
+          %a{href: "/admin/users?order=family&sort=#{sort}"} Person
+        %th{scope: "col"}
+          %a{href: "/admin/users?order=country&sort=#{sort}"} Country
+        %th{scope: "col"}
+          %a{href: "/admin/users?order=is_public&sort=#{sort}"} Public
+        %th{scope: "col"}
+          %a{href: "/admin/users?order=wants_mail&sort=#{sort}"} Email
+        %th{scope: "col"}
+          %a{href: "/admin/users?order=zenodo_concept_doi&sort=#{sort}"} DOI
+        %th{scope: "col"}
+          %a{href: "/admin/users?order=visited&sort=#{sort}"} Last Login
+        %th{scope: "col"}
+          %a{href: "/admin/users?order=created&sort=#{sort}"} Created
+
+    %tbody
+      - @results.each do |u|
+        %tr
+          %td
+            - if u.orcid
+              %i{class:"fab fa-orcid"}
+            - else
+              %img{src: "/images/wikidata_16x16.png", alt:"Wikidata iD"}
+            %a{href: "/admin/user/#{u.identifier}"} #{u.fullname_reverse}
+          %td #{u.country}
+          %td
+            - if u.is_public?
+              %span{class: "text-success"} #{u.is_public}
+            - else
+              #{u.is_public}
+          %td
+            - if u.wants_mail?
+              %span{class: "text-success"} #{u.wants_mail}
+            - else
+              #{u.wants_mail}
+          %td
+            - if u.zenodo_concept_doi
+              %a{href: "https://doi.org/#{u.zenodo_concept_doi}"} #{u.zenodo_concept_doi}
+          %td #{u.visited}
+          %td #{u.created}
+
+= pagy_bootstrap_nav(@pagy) if @pagy.pages > 1

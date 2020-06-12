@@ -1,0 +1,11 @@
+-content_for :title do
+  = I18n.t('not_authorized.not_authorized')
+
+%div{class:"alert alert-warning", role: "alert"}= I18n.t('not_authorized.not_authorized')
+
+%form{action: "/auth/orcid?lang=#{I18n.locale}", method: "POST" }
+  %p
+    %button{class: "btn btn-lg btn-outline-dark connect-orcid-button"}
+      %i{class:"fab fa-orcid"}
+      = I18n.t('home.orcid_login')
+    %input{type:"hidden", name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}

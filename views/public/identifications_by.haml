@@ -1,0 +1,41 @@
+= haml :'partials/user/twitter_img', layout: false
+
+- content_for(:title, "#{@viewed_user.fullname}")
+
+- content_for :scripts do
+  %script{src: "/js/application.js"}
+  %script{id:"dsq-count-scr", src:"//#{Settings.disqus.shortname}.disqus.com/count.js", defer: ""}
+  :javascript
+    $(function() {
+      Application.init();
+      DISQUSWIDGETS.getCount({ reset: true });
+    });
+
+%div{class:"row"}
+  = haml :'partials/user/jumbotron', layout: false
+  %div{class:"col-12 col-lg-8 mt-2"}
+    - if @viewed_user.is_public?
+      = haml :'partials/user/tabs', layout: false, locals: { active_page: "network" }
+      = haml :'partials/user/network_tabs', layout: false, locals: { active_tab: locals[:active_tab] }
+
+      - if @pagy.count == 0
+        %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('user.no_identifications_by_alert')
+      - else
+        %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('user.identifications_by_alert')
+
+        %div{class:"container-fluid"}
+          - @results.in_groups_of(2).each do |group|
+            %div{class: "card-deck"}
+              - group.each do |u|
+                - if u.nil?
+                  %div{class:"card border-0"}
+                - else
+                  - cache_fragment(u.identifier) do
+                    = haml :'partials/user/card', layout: false, locals: { user: u }
+
+        - if @pagy.pages > 1
+          %div{style:"overflow-y:scroll"}
+            = pagy_bootstrap_nav(@pagy)
+
+    - else
+      = haml :'partials/user/offline_message', layout: false

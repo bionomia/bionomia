@@ -1,0 +1,19 @@
+%ul{class: "nav nav-tabs pl-2"}
+  %li{class: "nav-item"}
+    %a{class: "nav-link#{locals[:active_page] == "profile" ? " active" : nil}", href: "/profile"}
+      %i{class:"fas fa-user"}
+      = I18n.t('profile.overview')
+  %li{class: "nav-item badge-item"}
+    %a{class: "nav-link#{locals[:active_page] == "specimens" ? " active" : nil}", href: "/profile/specimens"}
+      %i{class:"fas fa-th"}
+      = I18n.t('profile.specimens')
+    %span{id:"specimen-counter", class: "badge-notify badge badge-danger badge-pill"}
+  %li{class: "nav-item badge-item"}
+    %a{class: "nav-link#{locals[:active_page] == "helped" ? " active" : nil}", href: "/profile/helped"}
+      %i{class:"fas fa-hands-helping"}
+      = I18n.t('profile.people_helped')
+    %span{id:"message-counter", class: "badge-notify badge badge-success badge-pill"}
+  %li{class: "nav-item"}
+    %a{class: "nav-link#{locals[:active_page] == "citations" ? " active" : nil}", href: "/profile/citations"}
+      %i{class:"fas fa-flask"}
+      = I18n.t('profile.science_enabled')

@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /*.csv$
+Disallow: /*.json$
+Disallow: /agent/*
+Crawl-delay: 120

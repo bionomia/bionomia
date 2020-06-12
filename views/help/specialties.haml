@@ -1,0 +1,52 @@
+-content_for :title do
+  = I18n.t('help.fix_title')
+
+-content_for :scripts do
+  %script{src: "/js/application.js"}
+  :javascript
+    $(function() {
+      Application.init(#{@viewed_user.id}, "POST", "/help-others", "#{@viewed_user.identifier}");
+    });
+
+-content_for :jumbotron do
+  = haml :'partials/help/jumbotron', layout: false
+
+= haml :'partials/help/tabs', layout: false, locals: { active_tab: "specimens" }
+= haml :'partials/help/subtabs_fix', layout: false, locals: { active_subtab: "specialties" }
+
+- if @families_identified.empty? && @families_recorded.empty?
+  %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('help.no_specialities_alert')
+
+- if !@families_identified.empty? || !@families_recorded.empty?
+  %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('help.specialties_alert')
+
+  %div{class: "row"}
+    %div{class: "col-12 col-lg-6 mb-3"}
+      - if @families_recorded.empty? && !@families_identified.empty?
+        %h4{class: "d-flex justify-content-between mt-0"}
+          = I18n.t('user.families_identified')
+          %span{class: "badge badge-light badge-secondary"} #{number_with_delimiter(@families_identified.count)}
+        %ul{class: "list-group mt-3"}
+          - @families_identified.each do |k,v|
+            %li{class: "list-group-item d-flex justify-content-between align-items-center"}
+              %a{href: "/help-others/#{@viewed_user.identifier}/specimens?action=identified&family=#{ERB::Util.url_encode(k)}"} #{k}
+              %span{class: "badge badge-light badge-pill"} #{number_with_delimiter(v)}
+      - elsif !@families_recorded.empty?
+        %h4{class: "d-flex justify-content-between mt-0"}
+          = I18n.t('user.families_collected')
+          %span{class: "badge badge-light badge-secondary"} #{number_with_delimiter(@families_recorded.count)}
+        %ul{class: "list-group mt-3"}
+          - @families_recorded.each do |k,v|
+            %li{class: "list-group-item d-flex justify-content-between align-items-center"}
+              %a{href: "/help-others/#{@viewed_user.identifier}/specimens?action=collected&family=#{ERB::Util.url_encode(k)}"} #{k}
+              %span{class: "badge badge-light badge-pill"} #{number_with_delimiter(v)}
+    %div{class: "col-12 col-lg-6 mb-3"}
+      - if !@families_recorded.empty? && !@families_identified.empty?
+        %h4{class: "d-flex justify-content-between mt-0"}
+          = I18n.t('user.families_identified')
+          %span{class: "badge badge-light badge-secondary"} #{number_with_delimiter(@families_identified.count)}
+        %ul{class: "list-group mt-3"}
+          - @families_identified.each do |k,v|
+            %li{class: "list-group-item d-flex justify-content-between align-items-center"}
+              %a{href: "/help-others/#{@viewed_user.identifier}/specimens?action=identified&family=#{ERB::Util.url_encode(k)}"} #{k}
+              %span{class: "badge badge-light badge-pill"} #{number_with_delimiter(v)}

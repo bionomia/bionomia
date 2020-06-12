@@ -1,0 +1,82 @@
+= haml :'partials/user/twitter_img', layout: false
+
+- content_for(:title, "#{@viewed_user.fullname}")
+
+- content_for :scripts do
+  %script{src: "/js/application.js"}
+  %script{id:"dsq-count-scr", src:"//#{Settings.disqus.shortname}.disqus.com/count.js", defer: ""}
+  :javascript
+    $(function() {
+      Application.init();
+      DISQUSWIDGETS.getCount({ reset: true });
+    });
+
+%div{class:"row"}
+  = haml :'partials/user/jumbotron', layout: false
+  %div{class:"col-12 col-lg-8 mt-2"}
+    - if @viewed_user.is_public?
+      = haml :'partials/user/tabs', layout: false, locals: { active_page: "specimens" }
+      = haml :'partials/user/specimens_tabs', layout: false, locals: { active_tab: locals[:active_tab] }
+
+      - if @pagy.count == 0
+        %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('user.no_scribe')
+      - else
+        %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('user.attributions_by')
+
+        %div{class:"container-fluid"}
+          - @results.in_groups_of(3).each do |group|
+            %div{class: "card-deck"}
+              - group.each do |u|
+                - if u.nil?
+                  %div{class:"card border-0"}
+                - else
+                  - if u[:user].is_bot?
+                    %div{class: "card my-3"}
+                      %div{class: "card-header"}
+                        %h5
+                          #{u[:user].fullname}
+                      %div{class: "card-body"}
+                      %div{class: "card-footer d-flex"}
+                        %div{class: "small text-right text-muted mr-2"}
+                          %i{class:"fas fa-lock"}
+                        %div{class: "small text-left text-muted mr-2"}
+                          %span{class:"badge badge-light"}
+                            #{number_with_delimiter(u[:total])}
+                          = I18n.t('user.specimens_attributed')
+                  - else
+                    %div{class: "card card-profile my-3"}
+                      - if u[:user].image_url
+                        %div{class: "card-header d-flex"}
+                          %div
+                            %img{src:"#{profile_image(u[:user], 'medium')}", alt:"#{u[:user].fullname}", class:"card-img-profile mr-2"}
+                          %div{class:"flex-grow-1"}
+                            %h5
+                              %a{href: "/#{u[:user].identifier}"}
+                                #{u[:user].fullname_reverse}
+                            - if u[:user].country
+                              %p{class:"small text-muted mt-0 mb-0"} #{u[:user].country.split("|").join("; ")}
+                      - else
+                        %div{class: "card-header"}
+                          %h5
+                            %a{href: "/#{u[:user].identifier}"}
+                              #{u[:user].fullname_reverse}
+                          - if u[:user].country
+                            %p{class:"small text-muted mt-0 mb-0"} #{u[:user].country.split("|").join("; ")}
+
+                      %div{class: "card-body"}
+
+                      %div{class: "card-footer d-flex"}
+                        - if !u[:user].is_public?
+                          %div{class: "small text-right text-muted mr-2"}
+                            %i{class:"fas fa-lock"}
+                        %div{class: "small text-left text-muted mr-2"}
+                          %span{class:"badge badge-light"}
+                            #{number_with_delimiter(u[:total])}
+                          = I18n.t('user.specimens_attributed')
+
+        - if @pagy.pages > 1
+          %div{style:"overflow-y:scroll"}
+            = pagy_bootstrap_nav(@pagy)
+
+    - else
+      = haml :'partials/user/offline_message', layout: false

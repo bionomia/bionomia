@@ -1,0 +1,58 @@
+-content_for :title do
+  = I18n.t('profile.overview')
+
+-content_for :scripts do
+  = haml :'partials/profile/scripts', layout: false, locals: { action_type: "POST" }
+  = haml :'partials/viz_scripts', layout: false, locals: { path: "/profile" }
+
+%div{class:"row"}
+  = haml :'partials/profile/jumbotron', layout: false
+  %div{class:"col-12 col-lg-8 mt-2"}
+    = haml :'partials/profile/tabs', layout: false, locals: { active_page: "profile" }
+
+    %div{class:"mt-3"}
+
+      - if @stats[:specimens][:identified] == 0 && @stats[:specimens][:recorded] == 0 && @stats[:attributions][:helped] == 0
+        %div{class: "alert alert-info tiny-margins", role: "alert"}
+          Claim your discovered specimens under the
+          %a{href: "/profile/specimens"}
+            Specimens
+          tab to build your profile and start tracking your citations. Acknowledge your peers, mentors, or anyone who inspires you by attributing specimens under
+          = succeed "." do
+            %a{href: "/help-others"}
+              Help Others
+      - else
+        %div{class: "alert alert-info tiny-margins", role: "alert"}
+          %ul{class:"list-unstyled"}
+            = haml :'partials/user_stats', layout: false
+
+      - if @stats[:specimens][:identified] > 0 || @stats[:specimens][:recorded] > 0
+        %div{class:"row d-flex mt-3"}
+          %div{class:"col-10 col-md-6"}
+            %h4= I18n.t('profile.identified_from')
+            #map-identified{style:"width: 100%; height: 350px"}
+          %div{class:"col-10 col-md-6"}
+            %h4= I18n.t('profile.collected_from')
+            #map-collected{style:"width: 100%; height: 350px"}
+      - else
+        #map-identified{style:"width: 0%; height: 0%; display: none;"}
+        #map-collected{style:"width: 0%; height: 0%; display: none;"}
+
+      - if @stats[:activity_dates].length > 0
+        %h4= I18n.t('profile.dates_identified_collected')
+        %div{id: "chart"}
+      - else
+        %div{id: "chart", style:"width: 0%; height: 0%; display:none;"}
+
+      - if @user.zenodo_concept_doi
+        %h4= I18n.t('profile.resume')
+        %p{class:"citation"}
+          #{@user.fullname_reverse}. #{DateTime.now.year}. Natural history specimens collected and/or identified and deposited. [Data set]. Zenodo.
+          %a{href: "https://doi.org/#{@user.zenodo_concept_doi}"}
+            https://doi.org/#{@user.zenodo_concept_doi}
+        %h5 HTML
+        %div{class:"alert alert-secondary"}
+          %pre{class:"p-0 m-0"}
+            &lt;a href="https://doi.org/#{@user.zenodo_concept_doi}"&gt;&lt;img src="https://zenodo.org/badge/DOI/#{@user.zenodo_concept_doi}.svg" alt="DOI"&gt;&lt;/a&gt;
+        %a{href:"https://doi.org/#{@user.zenodo_concept_doi}"}
+          %img{src:"/images/#{@user.zenodo_concept_doi}.svg"}

@@ -1,0 +1,129 @@
+-content_for :title do
+  Settings
+
+-content_for :scripts do
+  %script{src:"/js/application.js"}
+  %script{src:"/js/profile.js"}
+  :javascript
+    $(function() {
+        Application.init(#{@admin_user.id}, "PUT", "/admin", "#{@admin_user.identifier}");
+        Profile.init("/admin/user/#{@admin_user.identifier}");
+    });
+
+%div{class:"row"}
+  = haml :'partials/admin/jumbotron', layout: false, locals: { active_page: "settings" }
+  %div{class:"col-12 col-lg-8 mt-2"}
+    = haml :'partials/admin/user_tabs', layout: false, locals: { active_page: nil }
+
+    - if flash[:updated]
+      %div{class:"alert alert-success alert-dismissible fade show d-block", role: "alert"}
+        %div
+          User was updated.
+        %button{type:"button", class:"close", "data-dismiss":"alert", "aria-label":"Close"}
+          %span{"aria-hidden":"true"} &times;
+
+    %div{class:"citation-wrapper mt-3"}
+      %h4 Settings
+      %div{class:"card-deck"}
+        %div{class:"card"}
+          %h5{class:"card-header"} Public Availability
+          %div{class:"card-body"}
+            %p{class:"card-text"}
+              Include the account in public
+              = succeed "." do
+                %a{href: "/roster"} Profiles
+            %div{class:"row"}
+              %div{class:"col"}
+                %input{type:"checkbox", id: "toggle-public", "data-toggle":"toggle", "data-on":"Public", "data-off":"Private", "data-onstyle": "success", "data-size": "small", checked: @admin_user.is_public?, class:"btn-claim", "data-url": "/admin/user/#{@admin_user.identifier}/visibility.json" }
+              %div{class:"col text-right"}
+                - if @admin_user.is_public?
+                  %a{href: "/#{@admin_user.identifier}", target: "_blank"}
+                    Public Profile
+                    %i{class:"fas fa-external-link-alt"}
+
+        %div{class:"card"}
+          %h5{class:"card-header"} Citable Claims
+          %div{class:"card-body"}
+            - if !@admin_user.zenodo_access_token.empty?
+              %p{class:"card-text"}
+                User has created a link to Zenodo
+            - else
+              %p{class:"card-text"}
+                User has not yet created a link to Zenodo
+            - if @admin_user.zenodo_concept_doi
+              %p
+                %a{href:"https://doi.org/#{@admin_user.zenodo_concept_doi}"}
+                  %img{src:"/images/#{@admin_user.zenodo_concept_doi}.svg"}
+
+      %div{class:"card-deck"}
+        %div{class:"card"}
+          %h5{class:"card-header"}
+            - if @admin_user.orcid
+              %i{class:"fab fa-orcid"}
+              ORCID
+            - else
+              %img{src:"/images/wikidata_24x24.png", alt: "Wikidata"}
+              Wikidata
+          %div{class:"card-body"}
+            %p{class:"card-text"} Pull new updates to name, aliases, keywords, country, education, and employment from the ORCID account or other items if from Wikidata.
+            %p
+              %a{ href:"/admin/user/#{@admin_user.identifier}/refresh.json", role:"button", class:"btn btn-sm btn-outline-success profile-refresh"}
+                %i{class: "fas fa-sync-alt"}
+                Refresh
+                - if @admin_user.orcid
+                  %i{class:"fab fa-orcid"}
+                - else
+                  %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD", width:"18px"}
+
+            %div{id:"refresh-message", class:"alert alert-success alert-dismissible fade show text-center", role: "alert"}
+              - source = @admin_user.orcid ? "ORCID" : "Wikidata"
+              Data from #{source} were refreshed.
+              %button{type:"button", class:"close", "data-dismiss":"alert", "aria-label":"Close"}
+                %span{"aria-hidden":"true"} &times;
+
+        %div{class:"card"}
+          %h5{class:"card-header"} Email Notifications
+          %div{class:"card-body"}
+            %p{class:"card-text"}
+              - if @admin_user.wants_mail?
+                Subscribed with email address,
+                %strong #{@admin_user.email}
+              - else
+                Not subscribed.
+
+      %div{class:"card-deck"}
+        %div{class:"card"}
+          %h5{class:"card-header"}
+            Deceased Redirect
+          %div{class:"card-body"}
+            %p{class:"card-text"}
+              Use a wikidata Q number instead of ORCID when user has recently passed away. Requires that user currently has an ORCID and an existing, valid wikidata Q number with all necessary data.
+            - if !@admin_user.orcid.nil?
+              %form{action: "/admin/user/#{@admin_user.id}/deceased", method: :post}
+                %input{type: :hidden, name: "_method", value: 'PUT'}
+                %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
+                %input{type: "text", name: "wikidata", class:"form-control mb-3", id: "wikidata"}
+                %input{type: :submit, class:"btn btn-sm btn-outline-success", value:"Update"}
+
+        %div{class:"card"}
+          %h5{class:"card-header"}
+            Delete Account
+          %div{class:"card-body"}
+            %p{class:"card-text"} Permanently delete the account.
+            %button{type: "button", class:"btn btn-sm btn-outline-danger", "data-toggle": "modal", "data-target": "#deleteModal"} Delete
+
+          %div{class:"modal fade", id:"deleteModal", tabindex:"-1", role:"dialog", "aria-labelledby":"deleteModal", "aria-hidden":"true"}
+            %div{class:"modal-dialog", role:"document"}
+              %div{class:"modal-content"}
+                %div{class:"modal-header"}
+                  %h5{class:"modal-title", id:"deleteLabel"} Delete Account
+                  %button{type:"button", class:"close", "data-dismiss":"modal", "aria-label":"Close"}
+                    %span{"aria-hidden":"true"} &times;
+                %div{class:"modal-body"}
+                  Are you sure you want to delete this your account? It will be added to an ignore list and cannot be recreated.
+                %div{class:"modal-footer"}
+                  %form{action: "/admin/user/#{@admin_user.id}", method: :post}
+                    %button{type:"button", class:"btn btn-sm btn-outline-secondary", "data-dismiss":"modal"} Cancel
+                    %input{type: :hidden, name: "_method", value: 'DELETE'}
+                    %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
+                    %input{type: :submit, class:"btn btn-sm btn-outline-danger", value:"Delete"}

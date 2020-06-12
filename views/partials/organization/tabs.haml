@@ -1,0 +1,9 @@
+%ul{class: "nav nav-tabs mb-3"}
+  %li{class: "nav-item"}
+    %a{class: "nav-link#{locals[:active_tab] == "organization-current" ? " active" : nil}", href: "/organization/#{@organization.identifier}"}= I18n.t('organization.current')
+  %li{class: "nav-item"}
+    %a{class: "nav-link#{locals[:active_tab] == "organization-past" ? " active" : nil}", href: "/organization/#{@organization.identifier}/past"}= I18n.t('organization.previous')
+  %li{class: "nav-item"}
+    %a{class: "nav-link#{locals[:active_tab] == "organization-metrics" ? " active" : nil}", href: "/organization/#{@organization.identifier}/metrics"}= I18n.t('organization.metrics')
+  %li{class: "nav-item"}
+    %a{class: "nav-link#{locals[:active_tab] == "organization-articles" ? " active" : nil}", href: "/organization/#{@organization.identifier}/citations"}= I18n.t('organization.science_enabled')

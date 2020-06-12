@@ -1,0 +1,27 @@
+-content_for :title do
+  Reclaim Ignored for #{@viewed_user.fullname}
+
+-content_for :scripts do
+  %script{src: "/js/application.js"}
+  :javascript
+    $(function() {
+      Application.init(#{@viewed_user.id}, "PUT", "/help-others", "#{@viewed_user.identifier}");
+    });
+
+-content_for :jumbotron do
+  = haml :'partials/help/jumbotron', layout: false
+
+= haml :'partials/help/tabs', layout: false, locals: { active_tab: "ignored" }
+
+- if @pagy.count == 0
+  %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('help.not_ignored_alert')
+- else
+  = haml :'partials/help/fixed_navbar', layout: false
+  %div{id: "helper-info", class: "alert alert-info tiny-margins", role: "alert"}
+    Choose
+    %img{src:"/images/net-unselected.png", alt:"#{I18n.t('general.collected')}", title:"#{I18n.t('general.collected')}", width:18}
+    collected,
+    %img{src:"/images/microscope-unselected.png", alt:"#{I18n.t('general.identified')}", title:"#{I18n.t('general.identified')}", width:18}
+    identified, or Both to reclaim specimens mistakenly marked as "Not them".
+
+  = haml :'partials/tables/ignored', layout: false

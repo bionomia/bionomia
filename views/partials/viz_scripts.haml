@@ -1,0 +1,139 @@
+- if @stats && @stats[:specimens] && ( @stats[:specimens][:identified] > 0 || @stats[:specimens][:recorded] > 0 )
+  %script{src: "/js/geochart-hierarchy.js"}
+  %script{src: "//www.gstatic.com/charts/loader.js"}
+  - recorded = @stats[:countries][:recorded].to_a.map{|a| [ a[0], country_name(a[0]), a[1] ] }.unshift(["Country", "Country Name", "Collected"])
+  - identified = @stats[:countries][:identified].to_a.map{|a| [ a[0], country_name(a[0]), a[1] ] }.unshift(["Country", "Country Name", "Identified"])
+  :javascript
+    $(function() {
+
+      var countriesRecorded = #{recorded},
+          countriesIdentified = #{identified},
+          dateData = #{@stats[:activity_dates].to_a.unshift(["Year", "Identified", "Collected"])},
+          recorded_region = "world",
+          identified_region = "world",
+          recorded_hierarchies = $.map(#{@stats[:countries][:recorded].keys}, function(i) {
+            return [ancestors(GeoChartHierarchy, i)];
+          }).filter(function (el) { return el; }),
+          identified_hierarchies = $.map(#{@stats[:countries][:identified].keys}, function(i) {
+            return [ancestors(GeoChartHierarchy, i)];
+          }).filter(function (el) { return el; });
+
+      function ancestors(array, id) {
+        if (typeof array != 'undefined') {
+          for (var i = 0; i < array.length; i++) {
+            if (array[i].id == id) return [id];
+            var a = ancestors(array[i].children, id);
+            if (a != null) {
+              a.unshift(array[i].id);
+              return a;
+            }
+          }
+        }
+        return null;
+      }
+
+      function intersection() {
+      	var result = [];
+        var lists;
+
+        if(arguments.length === 1) {
+        	lists = arguments[0];
+        } else {
+        	lists = arguments;
+        }
+
+        for(var i = 0; i < lists.length; i++) {
+        	var currentList = lists[i];
+        	for(var y = 0; y < currentList.length; y++) {
+          	var currentValue = currentList[y];
+            if(result.indexOf(currentValue) === -1) {
+              if(lists.filter(function(obj) { return obj.indexOf(currentValue) == -1 }).length == 0) {
+                result.push(currentValue);
+              }
+            }
+          }
+        }
+        return result;
+      }
+
+      function drawVisualizations() {
+        var chartData = google.visualization.arrayToDataTable(dateData),
+            collectedMap = new google.visualization.GeoChart($('#map-collected')[0]),
+            identifiedMap = new google.visualization.GeoChart($('#map-identified')[0]),
+            chart = new google.visualization.ColumnChart($('#chart')[0]),
+            chartOptions = {
+              title: '',
+              hAxis: {
+                title: 'Year',
+                format: '0000',
+                titleTextStyle: {
+                  italic: false,
+                  fontSize: 18,
+                  bold: true
+                }
+              },
+              vAxis: {
+                title: '# specimens',
+                titleTextStyle: {
+                  italic: false,
+                  fontSize: 18,
+                  bold: true
+                }
+              },
+              colors: ['#54858C', '#306971'],
+              chartArea: {
+                right: 130,
+                left: 60,
+              }
+            },
+            mapOptions = {
+              chartArea: { left: 0 },
+              colorAxis: { colors: ['#54858C', '#306971'] },
+              legend: 'none'
+            };
+
+        google.visualization.events.addListener(chart, 'onmouseover', function(e) {
+          if (e.row !== null) { $('#chart').css('cursor','pointer'); }
+        });
+        google.visualization.events.addListener(chart, 'onmouseout', function() { $('#chart').css('cursor','default'); });
+        google.visualization.events.addListener(chart, 'select', function() {
+          var sel = chart.getSelection()[0];
+          if (typeof sel.row !== "undefined" && sel.row !== null) {
+            var yr = chartData.getValue(sel.row, 0), label = chartData.getColumnLabel(sel.column);
+            window.location = "#{locals[:path]}/specimens?action=" + label.toLowerCase() + "&start_year=" + yr + "&end_year=" + (parseInt(yr, 10)+5);
+          }
+        });
+        $.each([collectedMap, identifiedMap], function() {
+          var label = (this === collectedMap) ? "collected" : "identified";
+          google.visualization.events.addListener(this, 'regionClick', function(e) {
+            window.location = "#{locals[:path]}/specimens?action=" + label + "&country_code=" + e.region;
+          });
+        });
+
+        if (dateData.length > 1) {
+          chart.draw(chartData, chartOptions);
+        }
+
+      if (countriesRecorded.length > 1) {
+        var intx = intersection(recorded_hierarchies);
+        recorded_region = intx[intx.length - 1];
+        collectedMap.draw(google.visualization.arrayToDataTable(countriesRecorded), $.extend(mapOptions, { "region": recorded_region }));
+      } else {
+        collectedMap.draw(google.visualization.arrayToDataTable([["None"]]), $.extend(mapOptions, { "region": recorded_region }));
+      }
+
+      if (countriesIdentified.length > 1) {
+        var intx = intersection(identified_hierarchies);
+        identified_region = intx[intx.length - 1];
+        identifiedMap.draw(google.visualization.arrayToDataTable(countriesIdentified), $.extend(mapOptions, { "region": identified_region }));
+      } else {
+        identifiedMap.draw(google.visualization.arrayToDataTable([["None"]]), $.extend(mapOptions, { "region": identified_region }));
+      }
+      }
+
+      google.charts.load('current', {
+        packages: ['corechart', 'bar', 'geochart'],
+        mapsApiKey: "#{Settings.google.api_key}"
+      });
+      google.charts.setOnLoadCallback(drawVisualizations);
+    });

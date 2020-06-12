@@ -1,0 +1,39 @@
+-content_for :title do
+  Datasets
+
+-content_for :scripts do
+  %script{src: "/js/application.js"}
+  :javascript
+    $(function() {
+      Application.init("", "POST", "/admin");
+    });
+
+-content_for :jumbotron do
+  %div{class:"jumbotron jumbotron-fluid alert-warning d-flex flex-wrap"}
+    %div{class:"mr-auto"}
+      %h1{class:"h2"} Datasets
+    = haml :'partials/admin/dataset_search', layout: false
+
+- if flash[:destroyed]
+  %div{class:"alert alert-danger alert-dismissible fade show d-block", role: "alert"}
+    %div
+      #{flash[:destroyed].truncate(25)} was destroyed.
+    %button{type:"button", class:"close", "data-dismiss":"alert", "aria-label":"Close"}
+      %span{"aria-hidden":"true"} &times;
+
+- sort = locals[:sort] == "asc" ? "desc" : "asc"
+%div{class:"table-responsive-lg"}
+  %table{class:"table table-hover table-sm"}
+    %thead{class: "thead-light"}
+      %tr
+        %th{scope: "col"}
+          %a{href: "/admin/datasets?order=title&sort=#{sort}"} Name
+
+    %tbody
+      - @results.each do |d|
+        %tr
+          %td
+            %a{href: "/admin/dataset/#{d.datasetKey}"} #{d.title.truncate(200)}
+
+
+= pagy_bootstrap_nav(@pagy) if @pagy.pages > 1

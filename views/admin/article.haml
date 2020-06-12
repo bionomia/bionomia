@@ -1,0 +1,95 @@
+-content_for :title do
+  Article
+
+-content_for :scripts do
+  %script{src: "https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"}
+  %script{src:"/js/application.js"}
+  :javascript
+    $(function() {
+      Application.init(#{@user.id}, "POST", "/admin");
+    });
+
+-content_for :jumbotron do
+  %div{class:"jumbotron jumbotron-fluid alert-warning"}
+    %h1{class:"h2"} Article
+
+- if flash[:updated]
+  %div{class:"alert alert-success alert-dismissible fade show d-block", role: "alert"}
+    %div
+      Article metadata was updated.
+    %button{type:"button", class:"close", "data-dismiss":"alert", "aria-label":"Close"}
+      %span{"aria-hidden":"true"} &times;
+
+%form{id:"form-org-wrapper", method: "POST", action: "/admin/article/#{@article.id}", "accept-charset" => "UTF-8", class: "helpers"}
+
+  %div{class: "card"}
+    %div{class: "card-header"}
+      %p{class: "citation card-title"} #{h(@article.citation)}
+    %div{class: "card-body"}
+      %dl{class: "row"}
+        %dt{class: "col-sm-2"} Created:
+        %dd{class: "col-sm-10"} #{@article.created}
+        %dt{class: "col-sm-2"} Processed:
+        %dd{class: "col-sm-10"}
+          - if @article.processed
+            %span{class: "text-success"} #{@article.processed}
+          - else
+            %a{href:"/admin/article/#{@article.id}/process.json", role:"button", class:"btn btn-sm btn-outline-success article-process"}
+              %i{class: "fas fa-sync-alt"}
+              Process
+
+            %div{class:"alert alert-article-process alert-success alert-dismissible fade show text-center", role: "alert"}
+              Article data are being downloaded and processed.
+              %button{type:"button", class:"close", "data-dismiss":"alert", "aria-label":"Close"}
+                %span{"aria-hidden":"true"} &times;
+
+        %dt{class: "col-sm-2"} DOI:
+        %dd{class: "col-sm-10"}
+          %a{href: "https://doi.org/#{@article.doi}"} #{@article.doi}
+        %dt{class: "col-sm-2"} Abstract:
+        %dd{class: "col-sm-10 text-muted"} #{h(@article.abstract)}
+        %dt{class: "col-sm-2"} Specimens used:
+        %dd{class: "col-sm-10"}
+          %span{class: "badge badge-light badge-pill citation-correction"} #{number_with_delimiter(@article.article_occurrences.count)}
+        %dt{class: "col-sm-2"} Specimens claimed:
+        %dd{class: "col-sm-10"}
+          %span{class: "badge badge-light badge-pill citation-correction"} #{number_with_delimiter(@article.claimed_specimen_count)}
+        %dt{class: "col-sm-2"} Claimants:
+        %dd{class: "col-sm-10"}
+          - @article.claimants.sort_by{|u| u.orcid || u.wikidata }.each do |u|
+            %span{class:"mr-2"}
+              - if u.orcid
+                %a{href: "/#{u.identifier}"}
+                  %i{class:"fab fa-orcid"}
+                  #{u.fullname}
+              - else
+                %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD"}
+                  %a{href: "/#{u.identifier}"}
+                    #{u.fullname}
+
+        %dt{class: "col-sm-2"} All data in study:
+        %dd{class: "col-sm-10"}
+          - @article.gbif_dois.each do |doi|
+            %a{href: "https://doi.org/#{doi}", class: "badge badge-light citation-correction"} #{doi}
+
+      %div{"data-badge-popover":"right", "data-badge-type":"donut", "data-doi":"#{@article.doi}", "data-hide-no-mentions":"true", class:"altmetric-embed mb-4"}
+
+      %button{type:"submit", class:"btn btn-success"} Update
+      %button{type: "button", class:"btn btn-danger", "data-toggle": "modal", "data-target": "#deleteModal"} Delete
+      %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
+
+%div{class:"modal fade", id:"deleteModal", tabindex:"-1", role:"dialog", "aria-labelledby":"deleteModal", "aria-hidden":"true"}
+  %div{class:"modal-dialog", role:"document"}
+    %div{class:"modal-content"}
+      %div{class:"modal-header"}
+        %h5{class:"modal-title", id:"deleteLabel"} Delete Article
+        %button{type:"button", class:"close", "data-dismiss":"modal", "aria-label":"Close"}
+          %span{"aria-hidden":"true"} &times;
+      %div{class:"modal-body"}
+        Are you sure you want to delete this article?
+      %div{class:"modal-footer"}
+        %form{action: "/admin/article/#{@article.id}", method: :post}
+          %button{type:"button", class:"btn btn-sm btn-outline-secondary", "data-dismiss":"modal"} Cancel
+          %input{type: :hidden, name: "_method", value: 'DELETE'}
+          %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
+          %input{type: :submit, class:"btn btn-sm btn-outline-danger", value:"Delete"}

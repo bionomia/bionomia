@@ -1,0 +1,62 @@
+%div{class:"table-responsive-lg"}
+  %table{class:"table table-hover table-sm"}
+    %thead{class: "thead-light"}
+      %tr
+        %th{scope: "col", class:"selector"}
+          = haml :'partials/bulk_selector_top', layout: false, locals: { klass: "restore-ignored" }
+        %th{scope: "col"}= I18n.t('specimen.scientific_name')
+        %th{scope: "col"}= I18n.t('specimen.collected_by')
+        %th{scope: "col"}= I18n.t('specimen.identified_by')
+        %th{scope: "col"}= I18n.t('specimen.date_collected')
+        %th{scope: "col"}= I18n.t('specimen.date_identified')
+        %th{scope: "col"}= I18n.t('specimen.institution')
+        %th{scope: "col"}= I18n.t('specimen.catalog_number')
+        %th{scope: "col"}= I18n.t('specimen.type_status')
+        %th{scope: "col"}= I18n.t('specimen.scribe')
+
+    %tbody
+      - @results.each do |uo|
+        - o = uo.occurrence
+        %tr
+          %td{class: "selector"}
+            = haml :'partials/single_selector_preselected', layout: false, locals: { occurrence: uo, klass: "restore-ignored" }
+          %td
+            - scientific_name = o.scientificName.nil? ? "#{I18n.t('specimen.not_recorded')}" : o.scientificName
+            %a{href: "https://gbif.org/occurrence/#{o.id}", target:"_blank"}
+              #{h(scientific_name)}
+            - if o.hasImage?
+              %i{class:"fas fa-image ml-1"}
+          %td #{h(o.recordedBy)}
+          %td #{h(o.identifiedBy)}
+          %td #{h(o.eventDate || o.year)}
+          %td #{h(o.dateIdentified)}
+          %td #{h(o.institutionCode)}
+          %td #{h(o.catalogNumber)}
+          %td #{h(o.typeStatus)}
+          %td
+            - if uo.claimant.is_bot?
+              #{uo.claimant.fullname}
+            - else
+              %a{href: "/#{uo.claimant.orcid}"} #{uo.claimant.fullname_reverse}
+
+    - if @total > 25
+      %tfoot{class: "thead-light"}
+        %tr
+          %th{scope: "col", class:"selector"}
+            = haml :'partials/bulk_selector_bottom', layout: false, locals: { klass: "restore-ignored" }
+          %th{scope: "col"}= I18n.t('specimen.scientific_name')
+          %th{scope: "col"}= I18n.t('specimen.collected_by')
+          %th{scope: "col"}= I18n.t('specimen.identified_by')
+          %th{scope: "col"}= I18n.t('specimen.date_collected')
+          %th{scope: "col"}= I18n.t('specimen.date_identified')
+          %th{scope: "col"}= I18n.t('specimen.institution')
+          %th{scope: "col"}= I18n.t('specimen.catalog_number')
+          %th{scope: "col"}= I18n.t('specimen.type_status')
+          %th{scope: "col"}= I18n.t('specimen.scribe')
+
+- if @total > 25
+  = haml :'partials/page_size', layout: false
+
+- if @pagy.pages > 1
+  %div{style:"overflow-y:scroll"}
+    = pagy_bootstrap_nav(@pagy)

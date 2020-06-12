@@ -1,0 +1,32 @@
+-content_for :title do
+  Administration
+
+-content_for :jumbotron do
+  %div{class:"jumbotron jumbotron-fluid alert-warning"}
+    %h1{class:"h2"} Administration
+
+%div{class:"citation-wrapper ml-0"}
+
+  %div{class:"card-deck"}
+    %div{class:"card"}
+      %h5{class:"card-header"}
+        %a{href:"/admin/users"} All People
+      %div{class:"card-body"}
+        %p{class:"card-text"} View and search through a paginated and ordered list of people. This includes when last logged in, public status, and links to manage their settings.
+    %div{class:"card"}
+      %h5{class:"card-header"}
+        %a{href:"/admin/organizations"} Organizations
+      %div{class:"card-body"}
+        %p{class:"card-text"} View a paginated and ordered list of organizations from ORCID accounts. This includes their ISNI, ringgold, GRID, and wikidata identifiers.
+
+  %div{class:"card-deck"}
+    %div{class:"card"}
+      %h5{class:"card-header"}
+        %a{href:"/admin/articles"} Articles
+      %div{class:"card-body"}
+        %p{class:"card-text"} View a paginated and ordered list of latest references indexed by GBIF. This includes the number of specimens used in the study, the number claimed or attributed, and a list of claimants.
+    %div{class:"card"}
+      %h5{class:"card-header"}
+        %a{href:"/admin/datasets"} Datasets
+      %div{class:"card-body"}
+        %p{class:"card-text"} View a paginated and ordered list of datasets and adjust their metadata.

@@ -1,0 +1,61 @@
+-content_for :title do
+  Articles
+
+-content_for :scripts do
+  %script{src:"/js/application.js"}
+  :javascript
+    $(function() {
+      Application.init(#{@user.id}, "POST", "/admin");
+    });
+
+-content_for :jumbotron do
+  %div{class:"jumbotron jumbotron-fluid alert-warning"}
+    %h1{class:"h2"} Articles
+
+%p
+  %a{ href:"/admin/articles/check-new.json", id: "articles-check", role: "button", class: "btn btn-outline-success" }
+    %i{class: "fas fa-sync-alt"}
+    Check New
+
+  %a{href: "https://www.gbif.org/resource/search?contentType=literature&relevance=GBIF_USED", role: "button", class: "btn btn-outline-success"}
+    View latest
+
+- if flash[:destroyed]
+  %div{class:"alert alert-danger alert-dismissible fade show d-block", role: "alert"}
+    %div
+      #{flash[:destroyed].truncate(50)} was destroyed and all links to specimen records were deleted.
+    %button{type:"button", class:"close", "data-dismiss":"alert", "aria-label":"Close"}
+      %span{"aria-hidden":"true"} &times;
+
+- if @pagy.count == 0
+  %div{class: "alert alert-info tiny-margins", role: "alert"}
+    Articles have not yet been recorded.
+- else
+
+  %div{class:"table-responsive-lg"}
+    %table{class:"table table-hover table-sm"}
+      %thead{class: "thead-light"}
+        %tr
+          %th{scope: "col"} Article
+          %th{scope: "col"} DOI
+          %th{scope: "col"} Processed
+          %th{scope: "col"} Created
+
+      %tbody
+        - @results.each do |article|
+          %tr
+            %td
+              - if !article.citation.blank?
+                %a{href: "/admin/article/#{article.id}"} #{h(article.citation[0..120].gsub(/\s\w+\s*$/,'...'))}
+              - else
+                %a{href: "/admin/article/#{article.id}"} NO TITLE
+            %td
+              %a{href: "https://doi.org/#{article.doi}"} #{article.doi}
+            %td
+              - if article.processed
+                %span{class: "text-success"} #{article.processed}
+              - else
+                false
+            %td #{article.created}
+
+  = pagy_bootstrap_nav(@pagy) if @pagy.pages > 1

@@ -1,0 +1,97 @@
+%script{src: "/js/jquery.collapser.min.js"}
+:javascript
+  $(function() {
+    $('.truncate').show().collapser({
+      mode: 'lines',
+      truncate: 3,
+      showText: '[Show more...]',
+      hideText: '[Hide]'
+    });
+  });
+
+%div{class:"col-12 col-lg-4 text-center sidebar", itemscope: true, itemtype: "http://schema.org/Person"}
+  - if @viewed_user.image_url
+    %div{id:"profile-image", class:"mx-auto d-block align-self-center align-items-center"}
+      %img{src:"#{profile_image(@viewed_user)}", class:"rounded mx-auto d-block img-fluid", itemprop:"image", alt:"#{@viewed_user.fullname}"}
+
+  %h1{class:"mt-3 h2", itemprop: "name"} #{@viewed_user.fullname}
+
+  - if !@viewed_user.other_names.blank?
+    %p{class:"text-center text-muted p-0 mt-1 mb-1 truncate"} #{@viewed_user.other_names.split("|").join("; ")}
+
+  - if @viewed_user.wikidata
+    %p{class:" text-center text-muted p-0 mt-1 mb-1"}= format_lifespan(@viewed_user)
+
+  - if !@viewed_user.keywords.blank?
+    %p{class: "text-center text-muted font-italic pt-0 mt-1 mb-1"}
+      #{@viewed_user.keywords.split("|").join(", ")}
+
+  - if @viewed_user.signature_url
+    %div{id:"signature-image", class:"mx-auto d-block align-self-center align-items-center"}
+      %img{src:"#{signature_image(@viewed_user)}", class:"mx-auto d-block img-fluid", itemprop:"image", alt:"#{@viewed_user.fullname} signature"}
+
+  %p{class: "orcid text-lg-left p-0 mt-3 mb-1"}
+    - if @viewed_user.orcid
+      %a{href: "https://orcid.org/#{@viewed_user.orcid}", itemprop:"sameAs"}
+        %i{class:"fab fa-orcid"}
+        https://orcid.org/#{@viewed_user.orcid}
+    - else
+      %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD"}
+      %a{href: "https://www.wikidata.org/wiki/#{@viewed_user.wikidata}", itemprop:"sameAs"}
+        https://www.wikidata.org/wiki/#{@viewed_user.wikidata}
+
+  - if !@viewed_user.current_organization.nil?
+    %p{class: "text-lg-left p-0 mt-1 mb-1"}
+      - path = @viewed_user.current_organization.identifier
+      = succeed "," do
+        %i{class:"fas fa-building"}
+        %a{href: "/organization/#{path}"} #{@viewed_user.current_organization.name}
+      #{@viewed_user.current_organization.address}
+
+  - if !@viewed_user.country.blank?
+    - country_codes = @viewed_user.country_code.split("|") rescue []
+    - @viewed_user.country.split("|").each_with_index do |v,i|
+      - if !country_codes[i].nil? && !country_codes[i].empty?
+        %p{class:"text-lg-left p-0 mt-1 mb-1"}
+          %i{class:"fas fa-globe"}
+          %a{href:"/country/#{country_codes[i]}"} #{v}
+      - else
+        %p{class:"text-lg-left p-0 m-0"}
+          %i{class:"fas fa-globe"}
+          #{v}
+
+  - if Settings.base_url && @viewed_user.can_comment?
+    %p{class:"text-lg-left"}
+      %i{class:"fas fa-comments"}
+      %a{href: "#{Settings.base_url}/#{@viewed_user.identifier}/comments#disqus_thread", class:"disqus-comment-count", "data-disqus-identifier":"#{@viewed_user.identifier}"}
+        = I18n.t('user.field_notes')
+
+  - if @viewed_user.zenodo_doi
+    %p{class:"citation text-lg-left mt-3 small"}
+      #{@viewed_user.fullname_reverse}. #{DateTime.now.year}. Natural history specimens collected and/or identified and deposited. [Data set]. Zenodo.
+      %a{href: "https://doi.org/#{@viewed_user.zenodo_concept_doi}"}
+        https://doi.org/#{@viewed_user.zenodo_concept_doi}
+    %p
+      %a{href:"https://doi.org/#{@viewed_user.zenodo_concept_doi}"}
+        %img{src:"/images/#{@viewed_user.zenodo_concept_doi}.svg"}
+
+  - if authorized?
+    %div{class:"mt-3 pt-3 border-top"}
+      %a{href: "/help-others/#{@viewed_user.identifier}", class: "mr-2 mb-2"}
+        %i{class:"fas fa-hands-helping"}
+        = I18n.t('general.help_attribute')
+
+      - if ( @viewed_user.is_public? || admin_authorized? ) && locals[:active_page] == "overview"
+        %a{href:"/help-others/refresh-stats.json?user_id=#{@viewed_user.id}", class:"profile-flush mr-2 mb-2"}
+          %i{class: "fas fa-sync-alt"}
+          = I18n.t('general.rebuild_stats')
+
+      - if admin_authorized?
+        %a{href: "/admin/user/#{@viewed_user.identifier}/settings", class:"mb-2"}
+          %i{class:"fas fa-cog"}
+          = I18n.t('general.settings')
+
+    %div{id:"flush-message", class:"alert alert-success alert-dismissible fade show text-center", role: "alert"}
+      = I18n.t("user.caches_rebuilt")
+      %button{type:"button", class:"close", "data-dismiss":"alert", "aria-label":"Close"}
+        %span{"aria-hidden":"true"} &times;

@@ -1,0 +1,9 @@
+%div{class:"btn-group btn-group-toggle", "data-toggle":"buttons"}
+  %label{class:"btn btn-choice btn-light #{active_class(locals[:occurrence].action, "recorded")}"}
+    %input{type:"radio", class:"action-radio #{locals[:klass]}", name:"selection-#{locals[:occurrence].user_occurrence_id}", "data-occurrence-id":"#{locals[:occurrence].user_occurrence_id}", "data-action": "recorded", autocomplete:"off", checked: radio_checked(locals[:occurrence].action, "recorded")}
+      %img{src:"/images/net-unselected.png", alt:"#{I18n.t('general.collected')}", title:"#{I18n.t('general.collected')}", width:18}
+  %label{class:"btn  btn-choice btn-light #{active_class(locals[:occurrence].action, "identified")}"}
+    %input{type:"radio", class:"action-radio #{locals[:klass]}", name:"selection-#{locals[:occurrence].user_occurrence_id}", "data-occurrence-id":"#{locals[:occurrence].user_occurrence_id}", "data-action": "identified", autocomplete:"off", checked: radio_checked(locals[:occurrence].action, "identified")}
+      %img{src:"/images/microscope-unselected.png", alt:"#{I18n.t('general.identified')}", title:"#{I18n.t('general.identified')}", width:18}
+  %label{class:"btn  btn-choice btn-light #{active_class(locals[:occurrence].action, "recorded,identified")}"}
+    %input{type:"radio", class:"action-radio #{locals[:klass]}", name:"selection-#{locals[:occurrence].user_occurrence_id}", "data-occurrence-id":"#{locals[:occurrence].user_occurrence_id}", "data-action": "recorded,identified", autocomplete:"off", checked: radio_checked(locals[:occurrence].action, "recorded,identified")}= I18n.t('general.both')

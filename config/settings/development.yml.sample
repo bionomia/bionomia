@@ -1,0 +1,58 @@
+adapter: mysql2
+host: localhost
+username: root
+password:
+database: bionomia
+reconnect: true
+pool: 40
+timeout: 5000
+helping_download_limit: 10000
+base_url: ''
+offline_warning:
+  off_datetime:
+  off_duration:
+  online_when:
+google:
+  analytics: ''
+  api_key: ''
+disqus:
+  shortname: ''
+  domain: ''
+neo4j:
+  url: 'localhost:7474'
+orcid:
+  api_url: 'https://pub.orcid.org/v3.0/'
+  key: ''
+  secret: ''
+  site: 'https://orcid.org'
+  authorize_url: 'https://orcid.org/oauth/authorize'
+  token_url: 'https://pub.orcid.org/oauth/token'
+  keywords: ['taxonomy','taxonomist','entomology','zoology','botany']
+zenodo:
+  sandbox: true
+  api_url: 'https://sandbox.zenodo.org/api/'
+  key: ''
+  secret: ''
+  site: 'https://sandbox.zenodo.org'
+  authorize_url: 'https://sandbox.zenodo.org/oauth/authorize'
+  token_url: 'https://sandbox.zenodo.org/oauth/token'
+elastic:
+  server: 'http://localhost:9200'
+  agent_index: 'bionomia_agents'
+  user_index: 'bionomia_users'
+  organization_index: 'bionomia_organizations'
+  dataset_index: 'bionomia_datasets'
+  article_index: 'bionomia_articles'
+gmail:
+  domain: ''
+  email: '____@gmail.com'
+  username: ''
+  password: ''
+twitter:
+  consumer_key: ''
+  consumer_secret: ''
+  access_token: '-'
+  access_token_secret: ''
+gbif:
+  download_count:
+  download_doi:

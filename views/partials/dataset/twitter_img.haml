@@ -1,0 +1,3 @@
+- if @dataset.image_url
+  - content_for :twitter_image do
+    %meta{name:"twitter:image", content:"#{organization_image(@dataset, 'social')}"}

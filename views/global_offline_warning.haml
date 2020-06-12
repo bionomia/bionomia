@@ -1,0 +1,22 @@
+:javascript
+  $(function() {
+    var cookie_name = 'bionomia-offline-warning';
+    if (Cookies.get(cookie_name) !== "hide") {
+        $('#offline_warning').modal('show')
+                             .on('hide.bs.modal', function(e) {
+                                Cookies.set(cookie_name, "hide", { expires: 7 });
+                             });
+    }
+  });
+
+%div{id:"offline_warning", class:"modal fade", tabindex:"-1", role:"dialog"}
+  %div{class:"modal-dialog alert alert-warning", role:"document"}
+    %div{class:"modal-content"}
+      %div{class:"modal-header"}
+        %h5{class:"modal-title"} Offline Warning
+        %button{type:"button", class:"close", "data-dismiss":"modal", "aria-label":"Close"}
+          %span{"aria-hidden":"true"} &times;
+      %div{class:"modal-body"}
+        %p= I18n.t('offline.warning', datetime_off: Settings.offline_warning.off_datetime, duration: Settings.offline_warning.off_duration)
+      %div{class:"modal-footer"}
+        %button{type:"button", class:"btn btn-secondary", "data-dismiss":"modal"} Close

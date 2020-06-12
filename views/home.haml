@@ -1,0 +1,41 @@
+-content_for :title do
+  Bionomia
+
+-content_for :scripts do
+  %script{src: "/js/application.js"}
+  :javascript
+    $(function() {
+      Application.init("", "GET", "/agents");
+    });
+
+-content_for :jumbotron do
+  %div{id:"home-jumbotron", class: "jumbotron"}
+    %h1 Bionomia
+    %div{class:"attribution p-1 small"}
+      Photo:
+      %a{href:"https://www.flickr.com/photos/jeremyknight9/"} Jeremy A.A. Knight
+      %a{href: "https://creativecommons.org/licenses/by/2.0/"} CC-BY 2.0
+
+%div{class:"container-fluid"}
+  %p{class:"lead"}= I18n.t('home.tagline')
+  %p{id: "profile-buttons"}
+    %a{href:"/get-started", role: "button", class:"btn btn-lg btn-outline-dark"}= I18n.t('home.get_started')
+    - if !authorized?
+      %form{action: "/auth/orcid?lang=#{I18n.locale}", method: "POST" }
+        %button{class: "btn btn-lg btn-outline-dark button-login connect-orcid-button"}
+          %i{class:"fab fa-orcid"}
+          = I18n.t('home.orcid_login')
+        %input{type:"hidden", name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
+    - else
+      %a{ href:"/profile", id: "candidates-button", role: "button", class: "btn btn-lg btn-outline-dark" }= I18n.t('home.your_profile')
+
+- if !@results.empty?
+  %h2{class: "text-center"}= I18n.t('home.sample_profiles')
+
+  %div{class:"container"}
+  - @results.in_groups_of(3).each do |group|
+    %div{class: "card-deck"}
+      - group.each do |u|
+        - if !u.nil?
+          - cache_fragment(u.identifier) do
+            = haml :'partials/user/card', layout: false, locals: { user: u }

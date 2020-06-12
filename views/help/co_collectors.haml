@@ -1,0 +1,64 @@
+-content_for :title do
+  = I18n.t('help.fix_title')
+
+-content_for :scripts do
+  %script{src: "/js/application.js"}
+  :javascript
+    $(function() {
+      Application.init(#{@viewed_user.id}, "POST", "/help-others", "#{@viewed_user.identifier}");
+    });
+
+-content_for :jumbotron do
+  = haml :'partials/help/jumbotron', layout: false
+
+= haml :'partials/help/tabs', layout: false, locals: { active_tab: "specimens" }
+= haml :'partials/help/subtabs_fix', layout: false, locals: { active_subtab: "co_collectors" }
+
+- if @pagy.count == 0
+  %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('help.no_co_collectors_alert')
+- else
+  %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('help.co_collectors_alert')
+
+  - @results.in_groups_of(3).each do |group|
+    %div{class: "card-deck"}
+      - group.each do |u|
+        - if u.nil?
+          %div{class:"card border-0"}
+        - else
+          %div{class: "card card-profile my-3"}
+            - if u.image_url
+              %div{class: "card-header d-flex"}
+                %div
+                  %img{src:"#{profile_image(u, 'medium')}", alt:"#{u.fullname}", class:"card-img-profile mr-2"}
+                %div{class:"flex-grow-1"}
+                  %h5
+                    %a{href: "/help-others/#{@viewed_user.identifier}/co-collector/#{u.identifier}"} #{u.fullname_reverse}
+                  - if u.wikidata
+                    %p{class:"small text-muted mt-0 mb-0"}= format_lifespan(u)
+                  - if u.country
+                    %p{class:"small text-muted mt-0 mb-0"} #{u.country.split("|").join("; ")}
+            - else
+              %div{class: "card-header"}
+                %h5
+                  %a{href: "/help-others/#{@viewed_user.identifier}/co-collector/#{u.identifier}"} #{u.fullname_reverse}
+                - if u.wikidata
+                  %p{class:"small text-muted mt-0 mb-0"}= format_lifespan(u)
+                - if u.country
+                  %p{class:"small text-muted mt-0 mb-0"} #{u.country.split("|").join("; ")}
+
+            %div{class: "card-body d-flex"}
+
+            %div{class: "card-footer d-flex"}
+              - if !u.is_public?
+                %div{class: "small text-right text-muted mr-2"}
+                  %i{class:"fas fa-lock"}
+              %div{class: "small text-left text-muted mr-2"}
+                Co-collected
+                %span{class:"badge badge-light"}
+                  #{number_with_delimiter(@viewed_user.recordings_with(u).count, delimiter: ",")}
+                specimens
+              %div{class:"small ml-auto text-muted"}
+
+  - if @pagy.pages > 1
+    %div{style:"overflow-y:scroll"}
+      = pagy_bootstrap_nav(@pagy)

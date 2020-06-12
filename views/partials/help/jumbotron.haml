@@ -1,0 +1,118 @@
+%script{src: "/js/jquery.collapser.min.js"}
+:javascript
+  $(function() {
+    $('.truncate').show().collapser({
+      mode: 'lines',
+      truncate: 3,
+      showText: '[Show more...]',
+      hideText: '[Hide]'
+    });
+  });
+
+%div{class:"jumbotron jumbotron-fluid alert-warning-light"}
+
+  %div{class:"row"}
+    %div{class:"col"}
+      - if @viewed_user.image_url
+        %div{id:"profile-image", class:"mx-auto d-block align-self-center align-items-center"}
+          %img{src:"#{profile_image(@viewed_user)}", class:"rounded mx-auto d-block img-fluid", alt:"#{@viewed_user.fullname}"}
+      - if @viewed_user.signature_url
+        %div{id:"signature-image", class:"mx-auto d-block align-self-center align-items-center"}
+          %img{src:"#{signature_image(@viewed_user)}", class:"mx-auto d-block img-fluid", itemprop:"image", alt:"#{@viewed_user.fullname} signature"}
+
+    %div{class:"col-12 col-md-6"}
+
+      %h1{class:"mt-3 h2 text-center", itemprop: "name"}= @viewed_user.fullname
+
+      - if !@viewed_user.other_names.blank?
+        %p{class:"text-center text-muted p-0 mt-1 mb-1 truncate"}= @viewed_user.other_names.split("|").join("; ")
+
+      - if @viewed_user.wikidata
+        %p{class:"text-center text-muted p-0 mt-1 mb-1"}= format_lifespan(@viewed_user)
+
+      - if !@viewed_user.keywords.blank?
+        %p{class: "text-center text-muted font-italic p-0 mt-1 mb-1"}
+          #{@viewed_user.keywords.split("|").join(", ")}
+
+      %p{class: "orcid text-center p-0 mt-3 mb-1"}
+        - if @viewed_user.orcid
+          %a{href: "https://orcid.org/#{@viewed_user.orcid}"}
+            %i{class:"fab fa-orcid"}
+            https://orcid.org/#{@viewed_user.orcid}
+        - else
+          %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD"}
+          %a{href: "https://www.wikidata.org/wiki/#{@viewed_user.wikidata}"} https://www.wikidata.org/wiki/#{@viewed_user.wikidata}
+
+      - org = @viewed_user.current_organization
+      - if !org.nil?
+        %p{class: "text-center p-0 mt-1 mb-1"}
+          = succeed "," do
+            %i{class:"fas fa-building"}
+            %a{href: "/organization/#{org.identifier}"} #{org.name}
+          #{org.address}
+
+      - if !@viewed_user.country.blank?
+        %p{class:"text-center p-0 mt-1 mb-1"}
+          %i{class:"fas fa-globe"}
+          #{@viewed_user.country.split("|").join(", ")}
+
+      - if authorized? && !@viewed_user.is_public? && !@viewed_user.wikidata.nil?
+        %div{class:"modal fade text-left", id:"helperPublicModal", tabindex:"-1", role:"dialog", "aria-labelledby":"helperPublicModal", "aria-hidden":"true"}
+          %div{class:"modal-dialog", role:"document"}
+            %div{class:"modal-content"}
+              %div{class:"modal-header"}
+                %h5{class:"modal-title", id:"helperPublicLabel"}
+                  %i{class:"fas fa-unlock"}
+                  = I18n.t('help.make_public')
+                %button{type:"button", class:"close", "data-dismiss":"modal", "aria-label":"Close"}
+                  %span{"aria-hidden":"true"} &times;
+              %div{class:"modal-body"}
+                %p
+                  Would you like to make #{@viewed_user.fullname}'s profile publicly available? An automated Tweet from
+                  %a{href:"https://twitter.com/bio_nomia", target:"_blank"} @bio_nomia
+                  will be sent announcing the new profile.
+                %p{id:"helpers-list", style:"display:none;"}
+                  Other scribes have also helped attribute #{@viewed_user.fullname}'s specimens:
+                %ul
+                %p{id:"helpers-list-none", style:"display:none;"}
+                  No other scribes have helped attribute #{@viewed_user.fullname}'s specimens.
+
+              %div{class:"modal-footer"}
+                %form{id: "visibility-form", action: "/help-others/#{@viewed_user.identifier}/visibility", method: :post}
+                  %button{type:"button", class:"btn btn-sm btn-outline-secondary", "data-dismiss":"modal"}= I18n.t('help.not_yet')
+                  %input{type: :hidden, name: "_method", value: 'PUT'}
+                  %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
+                  %input{type: :submit, class:"btn btn-sm btn-outline-success", value:"Yes, Make Public"}
+
+      - if authorized?
+        %div{class: "text-center border-top mt-3 pt-3"}
+          - if @viewed_user.is_public?
+            %a{href: "/#{@viewed_user.identifier}", class:"mr-2 mb-2"}
+              %i{class:"fas fa-user"}
+              = I18n.t('help.public_profile')
+
+          - if !@viewed_user.is_public? && !@viewed_user.wikidata.nil?
+            %a{href:"#", class:"mr-2 mb-2", "data-toggle": "modal", "data-target": "#helperPublicModal"}
+              %i{class:"fas fa-unlock"}
+              = I18n.t('help.make_public')
+
+          %a{href:"/help-others/#{@viewed_user.identifier}/refresh.json", class:"mr-2 profile-refresh"}
+            %i{class: "fas fa-sync-alt"}
+            Refresh
+            - if @viewed_user.orcid
+              ORCID
+            - else
+              Wikidata
+
+          - if admin_authorized?
+            %a{href: "/admin/user/#{@viewed_user.identifier}/settings", class:"mb-2"}
+              %i{class:"fas fa-cog"}
+              = I18n.t('general.settings')
+
+        %div{id:"refresh-message", class:"alert alert-success alert-dismissible fade show text-center", role: "alert"}
+          - source = @viewed_user.orcid ? "ORCID" : "Wikidata"
+          Demographics from #{source} were refreshed.
+          %button{type:"button", class:"close", "data-dismiss":"alert", "aria-label":"Close"}
+            %span{"aria-hidden":"true"} &times;
+
+    %div{class:"col"}

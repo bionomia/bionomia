@@ -1,0 +1,80 @@
+%script{src: "/js/jquery.collapser.min.js"}
+:javascript
+  $(function() {
+    $('.truncate').show().collapser({
+      mode: 'lines',
+      truncate: 3,
+      showText: '[Show more...]',
+      hideText: '[Hide]'
+    });
+  });
+
+%div{class:"col-12 col-lg-4 text-center sidebar alert-warning pt-3 pb-3"}
+  %form{id:"form-wrapper", method: :post, action: "/", enctype: "multipart/form-data", "accept-charset": "UTF-8", class: "form"}
+    - bg_class = @admin_user.image_url ? "" : "profile-image-bg"
+    %div{id:"profile-image", class:"image-placeholder mx-auto d-block align-self-center align-items-center #{bg_class}"}
+      %img{src:"#{profile_image(@admin_user)}", class:"rounded mx-auto d-block img-fluid"}
+      - if locals[:active_page] == "settings"
+        %span
+          %a{href:"#"}= I18n.t('admin.change_photo')
+        %ul{id:"profile-upload-option", class:"list-group"}
+          %li{class:"list-group-item profile-upload-option-list"}
+            %input{name:"user-image", id:"user-image", type:"file", accept:"image/x-png,image/jpeg"}
+            %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
+            %span Upload
+          %li{id:"profile-remove", class:"list-group-item profile-upload-option-list"} Remove
+          %li{id:"profile-cancel", class:"list-group-item profile-upload-option-list"} Cancel
+
+  %h1{class:"display-6 h3"}= @admin_user.fullname
+
+  - if !@admin_user.other_names.blank?
+    %p{class:"text-center text-muted p-0 mt-1 mb-1 truncate"} #{@admin_user.other_names.split("|").join("; ")}
+
+  - if @admin_user.wikidata
+    %p{class:" text-center text-muted p-0 mt-1 mb-1"}= format_lifespan(@admin_user)
+
+  - if !@admin_user.keywords.blank?
+    %p{class: "text-center text-muted font-italic p-0 mt-1 mb-1"}
+      #{@admin_user.keywords.split("|").join(", ")}
+
+  - if @admin_user.signature_url
+    %div{id:"signature-image", class:"mx-auto d-block align-self-center align-items-center"}
+      %img{src:"#{signature_image(@admin_user)}", class:"mx-auto d-block img-fluid", itemprop:"image"}
+
+  %p{class: "orcid text-lg-left p-0 mt-3 mb-1"}
+    - if @admin_user.orcid
+      %a{href: "https://orcid.org/#{@admin_user.orcid}"}
+        %i{class:"fab fa-orcid"}
+        https://orcid.org/#{@admin_user.orcid}
+    - else
+      %a{href: "https://www.wikidata.org/wiki/#{@admin_user.wikidata}"}
+        %img{src: "/images/wikidata_16x16.png", alt:"WIkidata iD"}
+          %a{href: "https://www.wikidata.org/wiki/#{@admin_user.wikidata}"} https://www.wikidata.org/wiki/#{@admin_user.wikidata}
+
+  - if !@admin_user.current_organization.nil?
+    %p{class: "text-lg-left p-0 mt-1 mb-1"}
+      - path = @admin_user.current_organization.identifier
+      = succeed "," do
+        %i{class:"fas fa-building"}
+        %a{href: "/organization/#{path}"} #{@admin_user.current_organization.name}
+      #{@admin_user.current_organization.address}
+
+  - if !@admin_user.country.blank?
+    %p{class:"text-lg-left p-0 mt-1 mb-1"}
+      %i{class:"fas fa-globe"}
+      #{@admin_user.country}
+
+  - if locals[:active_page] != "settings"
+    %div{class:"mt-3 pt-3 border-top"}
+      - if !@admin_user.is_public?
+        %p{class:"m-2"}
+          %i{class:"fas fa-lock"}
+          Profile is private
+      %p{class:"mb-0"}
+        - if @admin_user.is_public?
+          %a{href: "/#{@admin_user.identifier}", class:"mr-2"}
+            %i{class:"fas fa-user"}
+            Public Profile
+        %a{href:"/admin/user/#{@admin_user.identifier}/settings"}
+          %i{class:"fas fa-cog"}
+          Settings & Integrations

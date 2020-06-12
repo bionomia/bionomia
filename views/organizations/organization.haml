@@ -1,0 +1,37 @@
+= haml :'partials/organization/twitter_img', layout: false
+
+-content_for :title do
+  #{@organization.name}
+
+-content_for :stylesheets do
+  - if @organization.latitude
+    %link{href: "https://unpkg.com/leaflet@1.4.0/dist/leaflet.css", rel: "stylesheet", type: "text/css"}
+
+-content_for :scripts do
+  = haml :'partials/organization/jumbotron_scripts', layout:false
+
+%div{class:"row"}
+  = haml :'partials/organization/jumbotron', layout:false
+
+  %div{class:"col-12 col-lg-8 mt-2"}
+    = haml :'partials/organization/tabs', layout:false, locals: { active_tab: locals[:active_tab] }
+
+    - if @pagy.count == 0
+      %div{class: "alert alert-info tiny-margins", role: "alert"}
+        - if locals[:active_tab] == "organization-current"
+          = I18n.t('organization.no_current_members_alert', org_name: @organization.name)
+        - else
+          = I18n.t('organization.no_previous_members_alert', org_name: @organization.name)
+    - else
+      - @results.in_groups_of(3).each do |group|
+        %div{class: "card-deck"}
+          - group.each do |u|
+            - if u.nil?
+              %div{class:"card border-0"}
+            - else
+              - cache_fragment(u.identifier) do
+                = haml :'partials/user/card', layout: false, locals: { user: u }
+
+      - if @pagy.pages > 1
+        %div{style:"overflow-y:scroll"}
+          = pagy_bootstrap_nav(@pagy)

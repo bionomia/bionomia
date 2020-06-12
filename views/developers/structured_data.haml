@@ -1,0 +1,57 @@
+-content_for :title do
+  For Developers: Structured Data
+
+-content_for :jumbotron do
+  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
+    %div{class:"mr-auto p-2"}
+      %h1{class:"h2"} For Developers
+
+= haml :'partials/developers/tabs', layout:false, locals: { active_tab: locals[:active_tab] }
+
+%h3{class:"mt-4 mb-3"} Structured Data
+
+%p{class:"mb-4"}
+  Bionomia data are exposed as csv or
+  %a{href: "https://json-ld.org/"}
+    JSON-LD
+  documents on publicly shared profile pages. Individual occurrence records are exposed as JSON-LD documents. Attributions and claims are shared as
+  %a{href: "https://frictionlessdata.io/"}
+    frictionless data
+  packages for every dataset.
+
+%div{class:"ml-3"}
+  %h5 User Data from a Public Profile
+  %div
+    %a{href: "/0000-0001-7618-5230/specimens.csv"} #{base_url}/0000-0001-7618-5230/specimens.csv
+  %div
+    %a{href: "/0000-0001-7618-5230/specimens.json"} #{base_url}/0000-0001-7618-5230/specimens.json
+  %p
+    %small{class:"text-muted"}
+      Where
+      %em 0000-0001-7618-5230
+      is a user's ORCID identifier,
+      %a{href: "https://orcid.org/0000-0001-7618-5230"} https://orcid.org/0000-0001-7618-5230
+
+  %div
+    %a{href: "/Q1035/specimens.csv"} #{base_url}/Q1035/specimens.csv
+  %div
+    %a{href: "/Q1035/specimens.json"} #{base_url}/Q1035/specimens.json
+  %p
+    %small{class:"text-muted"}
+      Where
+      %em Q1035
+      is a user's Wikidata Q number,
+      %a{href: "https://www.wikidata.org/wiki/Q1035"} https://www.wikidata.org/wiki/Q1035
+
+%div{class:"ml-3"}
+  %h5 Specimen Record
+  %div
+    %a{href: "/occurrence/477976412.json"} #{base_url}/occurrence/477976412.json
+  %p
+    %small{class:"text-muted"}
+      Where
+      %em /occurrence/477976412
+      is that provided by the Global Biodiversity Information Facility (GBIF),
+      %a{href: "https://gbif.org/occurrence/477976412"} https://gbif.org/occurrence/477976412.
+      This same service is used in two
+      %a{href:"/integrations"} browser extensions.

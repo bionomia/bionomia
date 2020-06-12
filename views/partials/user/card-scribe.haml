@@ -1,0 +1,27 @@
+%div{class: "card card-profile my-3"}
+  - if locals[:user].image_url
+    %div{class: "card-header d-flex"}
+      %div
+        %img{src:"#{profile_image(locals[:user], 'medium')}", alt:"#{locals[:user].fullname}", class:"card-img-profile mr-2"}
+      %div{class:"flex-grow-1"}
+        %h5
+          %a{href: "/#{locals[:user].identifier}"} #{locals[:user].fullname_reverse}
+        - if locals[:user].country
+          %p{class:"small text-muted mt-0 mb-0"} #{locals[:user].country.split("|").join("; ")}
+  - else
+    %div{class: "card-header"}
+      %h5
+        %a{href: "/#{locals[:user].identifier}"} #{locals[:user].fullname_reverse}
+      - if locals[:user].country
+        %p{class:"small text-muted mt-0 mb-0"} #{locals[:user].country.split("|").join("; ")}
+
+  %div{class: "card-body"}
+
+  %div{class: "card-footer d-flex"}
+    %div{class: "small text-muted"}
+      Attributed
+      %span{class:"badge badge-light"} #{number_with_delimiter(locals[:user].claims_given.count)}
+      #{'specimen'.pluralize(locals[:user].claims_given.count)}
+      to
+      %span{class:"badge badge-light"} #{number_with_delimiter(locals[:user].helped_count)}
+      #{'person'.pluralize(locals[:user].helped_count)}

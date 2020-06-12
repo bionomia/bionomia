@@ -1,0 +1,29 @@
+-content_for :title do
+  = I18n.t('profile.upload_title')
+
+-content_for :scripts do
+  = haml :'partials/profile/scripts', layout: false, locals: { action_type: "POST" }
+
+%div{class:"row"}
+  %div{class:"col-12 col-lg-4"}
+    %h1{class:"h3"}= @user.fullname
+  %div{class:"col-12 col-lg-8 mt-2"}
+    = haml :'partials/profile/tabs', layout: false, locals: { active_page: "specimens" }
+    = haml :'partials/profile/subtabs_specimens', layout: false, locals: { active_tab: "upload"}
+
+= haml :'partials/upload_instructions', layout: false
+
+%form{id:"form-wrapper", method: :post, action: "/profile/upload-result", enctype: "multipart/form-data", "accept-charset": "UTF-8", class: "form mt-4"}
+  - relaxed = params["relaxed"] == "1" ? "?relaxed=1" : nil
+  %div{class:"form-group row"}
+    %div{class:"col-sm-4 col-lg-2 col-form-label text-left text-sm-right"}= I18n.t('general.download_records')
+    %div{class:"col-sm-8 col-lg-10"}
+      %a{href: "/profile/candidates.csv#{relaxed}", class:"btn btn-primary"}
+        %i{class:"fas fa-file-download"}
+        = I18n.t('general.download')
+  %div{class:"form-group row"}
+    %label{for:"candidate-file", class:"col-sm-4 col-lg-2 col-form-label text-left text-sm-right"}= I18n.t('general.upload_csv_instructions')
+    %div{class:"col-sm-8 col-lg-10"}
+      %input{type:"file", class:"form-control-file", id:"candidate-file", name: "file"}
+      %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
+      %button{type:"submit", class:"btn btn-success mt-3"}= I18n.t('general.submit')

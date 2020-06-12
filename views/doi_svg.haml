@@ -1,0 +1,16 @@
+- width = (@doi.length*7.5).round
+%svg{xmlns:"http://www.w3.org/2000/svg", width:"#{width+31}", height:"20"}
+  %lineargradient{id:"b", x2:"0", y2:"100%"}
+    %stop{offset:"0", "stop-color":"#bbb", "stop-opactiy":".1"}
+    %stop{offset:"1", "stop-opacity":".1"}
+  %mask{id:"a", width:"#{width+31}", height:"20"}
+    %rect{width:"#{width+31}", height:"20", rx:"3", fill:"#fff"}
+  %g{mask:"url(#a)"}
+    %path{fill:"#555", d:"M0 0h31v20H0z"}
+    %path{fill:"#306971", d:"M31 0h#{width}v20H31z"}
+    %path{fill:"url(#b)", d:"M0 0h#{width+31}v20H0z"}
+  %g{fill:"#fff", "text-anchor":"middle", "font-family":"DejaVu Sans,Verdana,Geneva,sans-serif", "font-size":"11"}
+    %text{x:"16", y:"15", fill:"#010101", "fill-opacity":".3"} DOI
+    %text{x:"16", y:"14"} DOI
+    %text{x:"#{(3.1*@doi.length+39).round}", y:"15", fill:"#010101", "fill-opacity":".3"}= h(@doi)
+    %text{x:"#{(3.1*@doi.length+39).round}", y:"14"}= h(@doi)

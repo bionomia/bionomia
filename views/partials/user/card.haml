@@ -1,0 +1,40 @@
+- identified = locals[:user].top_family_identified
+- id_statement = "identified #{identified}" if identified
+- recorded = locals[:user].top_family_recorded
+- recorded_statement = "collected #{recorded}" if recorded
+- statement = nil
+- if identified || recorded
+  - statement = [id_statement,recorded_statement].compact.join(" and ")
+  - statement = statement.slice(0,1).capitalize + statement.slice(1..-1)
+%div{class: "card card-profile my-3"}
+  - if locals[:user].image_url
+    %div{class: "card-header d-flex"}
+      %div
+        %img{src:"#{profile_image(locals[:user], 'medium')}", alt:"#{locals[:user].fullname}", class:"card-img-profile mr-2"}
+      %div{class:"flex-grow-1"}
+        %h5
+          %a{href: "/#{locals[:user].identifier}"} #{locals[:user].fullname_reverse}
+        - if locals[:user].wikidata
+          %p{class:"small text-muted mt-0 mb-0"}= format_lifespan(locals[:user])
+        - if locals[:user].country
+          %p{class:"small text-muted mt-0 mb-0"} #{locals[:user].country.split("|").join("; ")}
+  - else
+    %div{class: "card-header"}
+      %h5
+        %a{href: "/#{locals[:user].identifier}"} #{locals[:user].fullname_reverse}
+      - if locals[:user].wikidata
+        %p{class:"small text-muted mt-0 mb-0"}= format_lifespan(locals[:user])
+      - if locals[:user].country
+        %p{class:"small text-muted mt-0 mb-0"} #{locals[:user].country.split("|").join("; ")}
+
+  %div{class: "card-body"}
+    %p{class:"card-text mt-2"} #{statement}
+
+  %div{class: "card-footer d-flex"}
+    - if !locals[:user].is_public?
+      %div{class: "small text-right text-muted mr-2"}
+        %i{class:"fas fa-lock"}
+    %div{class: "small text-left text-muted mr-2"}
+      - count = locals[:user].all_occurrences_count
+      %span{class:"badge badge-light"} #{number_with_delimiter(count)}
+      #{'specimen'.pluralize(count)} claimed

@@ -1,0 +1,79 @@
+= haml :'partials/user/twitter_img', layout: false
+
+- content_for(:title, "#{@viewed_user.fullname}")
+
+- content_for :scripts do
+  %script{src: "/js/application.js"}
+  %script{id:"dsq-count-scr", src:"//#{Settings.disqus.shortname}.disqus.com/count.js", defer: ""}
+  :javascript
+    $(function() {
+      Application.init();
+      DISQUSWIDGETS.getCount({ reset: true });
+    });
+
+%div{class:"row"}
+  = haml :'partials/user/jumbotron', layout: false
+  %div{class:"col-12 col-lg-8 mt-2"}
+    - if @viewed_user.is_public?
+      = haml :'partials/user/tabs', layout: false, locals: { active_page: "citations" }
+
+      - if @pagy.count == 0
+        %div{class: "alert alert-info row tiny-margins", role: "alert"}= I18n.t('user.no_specimens_cited')
+      - else
+        %div{class: "alert alert-info tiny-margins", role: "alert"}
+          %img{src:"/images/net-unselected.png", alt:"#{I18n.t('specimen.collected')}", title:"#{I18n.t('specimen.collected')}", width:18}
+            = I18n.t('user.collected')
+          %img{src:"/images/microscope-unselected.png", alt:"#{I18n.t('specimen.identified')}", title:"#{I18n.t('specimen.identified')}", width:18}
+            = I18n.t("user.identified")
+
+        %h4= I18n.t('user.specimen_used')
+        %p{class: "citation"}
+          #{@article.citation}
+          %a{href: "https://doi.org/#{@article.doi}"} https://doi.org/#{@article.doi}
+
+        %div{class:"table-responsive-lg"}
+          %table{class:"table table-hover table-sm"}
+            %thead{class: "thead-light"}
+              %tr
+                %th{scope: "col", style:"min-width:65px"}
+                %th{scope: "col"}= I18n.t('specimen.scientific_name')
+                %th{scope: "col"}= I18n.t('specimen.collected_by')
+                %th{scope: "col"}= I18n.t('specimen.identified_by')
+                %th{scope: "col"}= I18n.t('specimen.date_collected')
+                %th{scope: "col"}= I18n.t('specimen.date_identified')
+                %th{scope: "col"}= I18n.t('specimen.institution')
+                %th{scope: "col"}= I18n.t('specimen.catalog_number')
+                %th{scope: "col"}= I18n.t('specimen.type_status')
+
+            %tbody
+              - @results.each do |uo|
+                - o = uo.occurrence
+                %tr
+                  %td
+                    - if uo.action == "recorded"
+                      %img{src:"/images/net-unselected.png", alt:"#{I18n.t('user.collected')}", title:"#{I18n.t('user.collected')}", width:18}
+                    - elsif uo.action == "identified"
+                      %img{src:"/images/microscope-unselected.png", alt:"#{I18n.t('user.identified')}", title:"#{I18n.t('user.identified')}", width:18}
+                    - else
+                      %img{src:"/images/net-unselected.png", alt:"#{I18n.t('user.collected')}", title:"#{I18n.t('user.collected')}", width:18}
+                      %img{src:"/images/microscope-unselected.png", alt:"#{I18n.t('user.identified')}", title:"#{I18n.t('user.identified')}", width:18}
+                  %td
+                    - scientific_name = o.scientificName.nil? ? "not recorded" : o.scientificName
+                    %a{href: "https://www.gbif.org/occurrence/#{o.id}", target: "_blank" }
+                      #{h(scientific_name)}
+                    - if o.hasImage?
+                      %i{class:"fas fa-image ml-1"}
+                  %td #{h(o.recordedBy)}
+                  %td #{h(o.identifiedBy)}
+                  %td #{h(o.eventDate || o.year)}
+                  %td #{h(o.dateIdentified)}
+                  %td #{h(o.institutionCode)}
+                  %td #{h(o.catalogNumber)}
+                  %td #{h(o.typeStatus)}
+
+        - if @pagy.pages > 1
+          %div{style:"overflow-y:scroll"}
+            = pagy_bootstrap_nav(@pagy)
+
+    - else
+      = haml :'partials/user/offline_message', layout: false

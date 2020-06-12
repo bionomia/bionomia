@@ -1,0 +1,81 @@
+-content_for :title do
+  #{@admin_user.fullname} Candidate Specimens
+
+-content_for :scripts do
+  %script{src:"/js/application.js"}
+  %script{src:"/js/profile.js"}
+  :javascript
+    $(function() {
+      var BULK_ERROR_MESSAGE = "#{locals[:bulk_error]}";
+      Application.init(#{@admin_user.id}, "POST", "/admin", "#{@admin_user.identifier}");
+      Profile.init("/admin/user/#{@admin_user.identifier}");
+      if (BULK_ERROR_MESSAGE) {
+        $("#bot_claims").modal("show");
+      }
+    });
+
+-content_for :jumbotron do
+  %div{class:"jumbotron jumbotron-fluid alert-warning"}
+    %div{class:"row"}
+      %div{class:"col-12 col-lg-4 alert-warning mb-2"}
+        %h1{class:"h3"}= @admin_user.fullname
+      %div{class:"col-12 col-lg-8 mt-2"}
+        = haml :'partials/admin/user_tabs', layout: false, locals: { active_page: "specimens" }
+        = haml :'partials/admin/subtabs_specimens', layout: false, locals: { active_tab: "candidates"}
+
+- alert_class = "info"
+- placeholder = @admin_user.fullname
+- if !@searched_user.nil?
+  - alert_class = "warning"
+  - placeholder = @searched_user.fullname
+
+- if !@searched_user.nil?
+  = haml :'partials/admin/bot_claim_modal', layout: false, locals: { user: @admin_user, agent: @searched_user, bulk_error: "#{locals[:bulk_error]}" }
+
+- if @pagy.count == 0
+  %div{class: "alert alert-info row tiny-margins", role:"alert"}
+    %div{class: "col col-12 col-sm-12 col-md-8 col-lg-8 pl-0"}
+      Bionomia did not find any specimens indexed by
+      %a{href:"https://gbif.org"} GBIF
+      that were collected or identified
+
+      %div{class:"form-check d-inline-flex"}
+        - checked = params[:relaxed] == "1" ? "checked" : nil
+        %input{type:"checkbox", class:"form-check-input", id:"relaxed", checked: checked }
+        %label{for:"relaxed", class:"relaxed"} Make less exact
+    %div{class:"col col-12 col-sm-8 col-md-6 col-lg-4"}
+      %form{id:"#form-wrapper", method: "get", action: "/", "accept-charset" => "UTF-8", class: "form-inline"}
+        %div{class: "inputs search-agent form-group"}
+          %label{for: "typeahead"}= "Search"
+          %input{id: "typeahead-agent", type: :text, name: "q", placeholder: "#{placeholder}", value: "#{params[:q]}", class:"typeahead"}
+- else
+  = haml :'partials/admin/fixed_navbar', layout: false
+  %div{id: "helper-info", class: "alert alert-#{alert_class} row candidates-alert tiny-margins", role: "alert"}
+    %div{class: "col col-12 col-sm-12 col-md-8 col-lg-8 pl-0"}
+      = succeed "." do
+        Bionomia found #{number_with_delimiter(@total, delimeter: ",")} specimens for
+        %span{class:"font-weight-bold"} #{placeholder}
+      - if !@searched_user.nil?
+        = succeed "." do
+          Attribute with
+          %a{href: "#", "data-toggle":"modal", "data-target":"#bot_claims"} Bionomia Bot
+
+      %br
+      Choose
+      %img{src:"/images/net-unselected.png", alt:"Collected", title:"Collected", width:18}
+      collected,
+      %img{src:"/images/microscope-unselected.png", alt:"Collected", title:"Collected", width:18}
+      identified, or Both.
+      - if @searched_user.nil?
+        %div{class:"form-check d-inline-flex"}
+          - checked = params[:relaxed] == "1" ? "checked" : nil
+          %input{type:"checkbox", class:"form-check-input", id:"relaxed", checked: checked }
+          %label{for:"relaxed", class:"relaxed"} Make less exact
+
+    %div{class:"col col-12 col-sm-8 col-md-6 col-lg-4"}
+      %form{id:"#form-wrapper", method: "get", action: "/", "accept-charset" => "UTF-8", class: "form-inline"}
+        %div{class: "inputs search-agent form-group"}
+          %label{for: "typeahead", class:"font-weight-bold col-form-label mr-2"}= "Search"
+          %input{id: "typeahead-agent", type: :text, name: "q", placeholder: "#{placeholder}", value: "#{params[:q]}", class:"typeahead"}
+
+  = haml :'partials/tables/candidates', layout: false

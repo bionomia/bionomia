@@ -1,0 +1,29 @@
+-content_for :title do
+  = I18n.t('scribes.scribes_title')
+
+-content_for :scripts do
+  %script{src: "/js/application.js"}
+  :javascript
+    $(function() {
+      Application.init();
+    });
+
+-content_for :jumbotron do
+  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
+    %div{class:"mr-auto p-2"}
+      %h1{class:"h2"}= I18n.t('scribes.scribes_title')
+      %p{class: "lead text-muted"}
+        #{number_to_human(@pagy.count, units: :'scribes.lede', delimiter: ",", precision: 0)}
+
+- @results.in_groups_of(3).each do |group|
+  %div{class: "card-deck"}
+    - group.each do |u|
+      - if u.nil?
+        %div{class:"card border-0"}
+      - else
+        - cache_fragment(u.identifier + "-scribe") do
+          = haml :'partials/user/card-scribe', layout: false, locals: { user: u }
+
+- if @pagy.pages > 1
+  %div{style:"overflow-y:scroll"}
+    = pagy_bootstrap_nav(@pagy)

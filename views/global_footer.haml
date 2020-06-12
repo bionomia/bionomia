@@ -1,0 +1,27 @@
+%div{class:"px-2 px-sm-3 px-md-5"}
+  %h5= I18n.t('layout.resources')
+  %ul{class: "list-unstyled text-small"}
+    %li
+      %a{href: "/integrations", class: "text-muted"}= I18n.t('layout.integrations')
+    %li
+      %a{href: "/collection-data-managers", class: "text-muted"}= I18n.t('layout.for_collection_data_managers')
+    %li
+      %a{href: "/developers", class: "text-muted"}= I18n.t('layout.for_developers')
+    %li
+      %a{href: "/on-this-day", class: "text-muted"}= I18n.t('layout.on_this_day')
+%div{class: "px-2 px-sm-3 px-md-5"}
+  %h5= I18n.t('layout.about')
+  %ul{class: "list-unstyled text-small"}
+    %li
+      %a{href: "/about", class: "text-muted"}= I18n.t('layout.rationale')
+    %li
+      %a{href: "/how-it-works", class: "text-muted"}= I18n.t('layout.how_works')
+    %li
+      %a{href: "https://github.com/bionomia/bionomia/issues", class: "text-muted"}= I18n.t('layout.feedback')
+%div{class:"pr-2 pr-md-3"}
+  %ul{class: "list-unstyled text-small"}
+    %li{class:"text-center"}
+      %a{ href:"/donate", role: "button", class: "btn btn-sm btn-success" }= I18n.t('layout.support')
+    %li{class:"text-center"}
+      %a{href: "https://twitter.com/bio_nomia", class:"mt-2 twitter"}
+        %i{class:"fab fa-twitter"}

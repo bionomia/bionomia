@@ -1,0 +1,7 @@
+%div{class: "alert alert-warning"}
+  %i{class:"fas fa-lock"}
+  - specimen_count = @viewed_user.all_occurrences_count
+  - if specimen_count > 0
+    #{number_to_human(specimen_count, units: :'user.private_with_claims', delimiter: ",", precision: 0)}
+  - else
+    = I18n.t('user.private_no_claims')

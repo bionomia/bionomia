@@ -1,0 +1,5 @@
+%div{class:"p-2"}
+  %form{id:"form-org-wrapper", method: "get", action: "/article/search", "accept-charset" => "UTF-8", class: "form-inline helpers"}
+    %div{class: "form-group w-75"}
+      %input{class:"typeahead article-search", id:"typeahead-article", type: :text, name: "q", placeholder: "#{I18n.t('article.placeholder')}", value: "#{h(params[:q])}", size:"25"}
+    %input{type: :submit, class:"btn btn-success medium-margins", value:"#{I18n.t('general.search')}"}

@@ -1,0 +1,33 @@
+-content_for :title do
+  Search Accounts
+
+-content_for :scripts do
+  %script{src: "/js/application.js"}
+  :javascript
+    $(function() {
+      Application.init("", "POST", "/admin");
+    });
+
+-content_for :jumbotron do
+  %div{class:"jumbotron jumbotron-fluid alert-warning d-flex flex-wrap"}
+    %div{class:"mr-auto"}
+      %h1{class:"h2"} Search Accounts
+    = haml :'partials/admin/user_search', layout: false
+
+- if @pagy.count == 0
+  %div{class: "alert alert-info tiny-margins", role: "alert"}
+    No users found.
+- else
+  %div{class: "alert alert-info tiny-margins", role: "alert"}
+    #{@pagy.count} search results for
+    %span{class: "font-weight-bold"} #{h(params[:q])}
+
+  - @results.in_groups_of(3).each do |group|
+    %div{class: "card-deck"}
+      - group.each do |user|
+        - if user.nil?
+          %div{class:"card border-0"}
+        - else
+          = haml :'partials/user/card_dynamic', layout: false, locals: { user: User.find(user[:_id]), path: "/admin/user" }
+
+  = pagy_bootstrap_nav(@pagy) if @pagy.pages > 1

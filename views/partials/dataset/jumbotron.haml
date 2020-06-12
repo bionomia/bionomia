@@ -1,0 +1,30 @@
+%div{class:"col-12 col-lg-4 text-center sidebar", itemscope: true, itemtype: "http://schema.org/Dataset"}
+  %h1{class:"mt-3 h2", itemprop: "name"} #{h(@dataset.title)}
+
+  %p
+    %a{href: "https://gbif.org/dataset/#{@dataset.datasetKey}", itemprop: "url"}
+      https://gbif.org/dataset/#{@dataset.datasetKey}
+
+  - if @dataset.image_url
+    %div{class:"m-1"}
+      %img{src:"https://abekpgaoen.cloudimg.io/bound/350x200/q100/#{@dataset.image_url}", class:"rounded mx-auto img-fluid", itemprop:"image", alt:"#{@dataset.title}"}
+
+  - if @dataset.description
+    %p{class:"text-muted text-left", itemprop: "description"}
+      #{h(Sanitize.fragment(@dataset.description))}
+
+  - if @dataset.license && @dataset.license_icon
+    %p
+      %a{href: "#{@dataset.license}", itemprop: "license"}
+        %img{src:"#{@dataset.license_icon}"}
+
+  - if @dataset.doi
+    %p
+      %a{href: "https://doi.org/#{@dataset.doi}"}
+        %img{src:"/images/#{@dataset.doi}.svg"}
+
+  - if admin_authorized?
+    %div{class:"mt-3 pt-3 border-top"}
+      %a{href: "/admin/dataset/#{@dataset.datasetKey}"}
+        %i{class:"fas fa-cog"}
+        = I18n.t('general.settings')

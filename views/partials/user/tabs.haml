@@ -1,0 +1,13 @@
+%ul{class: "nav nav-tabs pl-2"}
+  %li{class: "nav-item"}
+    %a{class: "nav-link#{locals[:active_page] == "overview" ? " active" : nil}", href: "/#{@viewed_user.identifier}"}= I18n.t('user.overview')
+  %li{class: "nav-item"}
+    %a{class: "nav-link#{locals[:active_page] == "specialties" ? " active" : nil}", href: "/#{@viewed_user.identifier}/specialties"}= I18n.t('user.specialties')
+  %li{class: "nav-item"}
+    %a{class: "nav-link#{locals[:active_page] == "network" ? " active" : nil}", href: "/#{@viewed_user.identifier}/co-collectors"}= I18n.t('user.network')
+  %li{class: "nav-item"}
+    %a{class: "nav-link#{locals[:active_page] == "deposits" ? " active" : nil}", href: "/#{@viewed_user.identifier}/deposited-at"}= I18n.t('user.deposited_at')
+  %li{class: "nav-item"}
+    %a{class: "nav-link#{locals[:active_page] == "specimens" ? " active" : nil}", href: "/#{@viewed_user.identifier}/specimens"}= I18n.t('user.specimens')
+  %li{class: "nav-item"}
+    %a{class: "nav-link#{locals[:active_page] == "citations" ? " active" : nil}", href: "/#{@viewed_user.identifier}/citations"}= I18n.t('user.science_enabled')

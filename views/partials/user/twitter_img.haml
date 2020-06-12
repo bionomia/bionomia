@@ -1,0 +1,3 @@
+- if @viewed_user.image_url
+  - content_for :twitter_image do
+    %meta{name:"twitter:image", content:"#{profile_image(@viewed_user, 'social')}"}

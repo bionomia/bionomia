@@ -1,0 +1,26 @@
+-content_for :title do
+  = I18n.t('profile.upload_title')
+
+-content_for :scripts do
+  = haml :'partials/profile/scripts', layout: false, locals: { action_type: "POST" }
+
+%div{class:"row"}
+  %div{class:"col-12 col-lg-4"}
+    %h1{class:"h3"}= @user.fullname
+  %div{class:"col-12 col-lg-8 mt-2"}
+    = haml :'partials/profile/tabs', layout: false, locals: { active_page: "specimens" }
+    = haml :'partials/profile/subtabs_specimens', layout: false, locals: { active_tab: "upload"}
+
+- if flash[:error]
+  %div{class: "alert alert-danger tiny-margins", role: "alert"}
+    #{flash[:error]}
+    %a{href: "/profile/upload"} Try again.
+
+- else
+  %div{class: "alert alert-info tiny-margins", role: "alert"}
+    A total of
+    %span{class:"font-weight-bold"} #{number_with_delimiter(@record_count)} #{'record'.pluralize(@record_count)}
+    were handled. Existing claims, if present in your upload, were skipped.
+    %a{href: "/profile/specimens"}
+      View
+    all your claims.

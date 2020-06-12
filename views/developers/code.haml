@@ -1,0 +1,19 @@
+-content_for :title do
+  = I18n.t('developer.code_title')
+
+-content_for :jumbotron do
+  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
+    %div{class:"mr-auto p-2"}
+      %h1{class:"h2"}= I18n.t('developer.title')
+
+= haml :'partials/developers/tabs', layout:false, locals: { active_tab: locals[:active_tab] }
+
+%h3{class:"mt-4 mb-3"}= I18n.t('developer.code')
+
+%p{class:"mb-4"}
+  The MIT-licensed code is available on
+  = succeed "." do
+    %a{href: "https://github.com/bionomia/bionomia" } GitHub
+  Technologies at play include Apache Spark to group occurrence records by raw entries in recordedBy and identifiedBy and to import into MySQL, Neo4j to store the scores between similarly structured people names, Elasticsearch to aid in the searching of people names once parsed and cleaned, Redis to coordinate the processing queues, and Sinatra/ruby for the application layer. A stand-alone ruby gem,
+  %a{href:"https://github.com/bionomia/dwc_agent"} dwc_agent
+  may be used to parse people names and additionally score them for structural similarity.

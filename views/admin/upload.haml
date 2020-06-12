@@ -1,0 +1,33 @@
+-content_for :title do
+  #{@admin_user.fullname} Upload
+
+-content_for :scripts do
+  %script{src:"/js/application.js"}
+  %script{src:"/js/profile.js"}
+  :javascript
+    $(function() {
+        Application.init(#{@admin_user.id}, "PUT", "/admin", "#{@admin_user.identifier}");
+        Profile.init("/admin/user/#{@admin_user.identifier}");
+    });
+
+-content_for :jumbotron do
+  %div{class:"jumbotron jumbotron-fluid alert-warning"}
+    %div{class:"row"}
+      %div{class:"col-12 col-lg-4 alert-warning mb-2"}
+        %h1{class:"h3"}= @admin_user.fullname
+      %div{class:"col-12 col-lg-8 mt-2"}
+        = haml :'partials/admin/user_tabs', layout: false, locals: { active_page: "help" }
+
+- if flash[:error]
+  %div{class: "alert alert-danger tiny-margins", role: "alert"}
+    #{flash[:error]}
+    %a{href: "/admin/user/#{@admin_user.identifier}/candidates"} Try again.
+
+- else
+  %div{class: "alert alert-info tiny-margins", role: "alert"}
+    A total of
+    %span{class:"font-weight-bold"} #{number_with_delimiter(@record_count)} #{'record'.pluralize(@record_count)}
+    were handled. Existing claims, if present, were skipped.
+    %a{href: "/admin/user/#{@admin_user.identifier}/specimens"}
+      View
+    all claims.

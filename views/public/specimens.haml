@@ -1,0 +1,97 @@
+= haml :'partials/user/twitter_img', layout: false
+
+- content_for(:title, "#{@viewed_user.fullname}")
+
+- content_for :scripts do
+  %script{src: "/js/application.js"}
+  %script{id:"dsq-count-scr", src:"//#{Settings.disqus.shortname}.disqus.com/count.js", defer: ""}
+  :javascript
+    $(function() {
+      Application.init();
+      DISQUSWIDGETS.getCount({ reset: true });
+    });
+
+%div{class:"row"}
+  = haml :'partials/user/jumbotron', layout: false
+  %div{class:"col-12 col-lg-8 mt-2"}
+    - if @viewed_user.is_public?
+      = haml :'partials/user/tabs', layout: false, locals: { active_page: "specimens" }
+      = haml :'partials/user/specimens_tabs', layout: false, locals: { active_tab: locals[:active_tab] }
+
+      - if @filter.length > 0
+        %div{class: "alert alert-warning", role: "alert"}
+          %i{class:"fas fa-filter"}
+          Filtered by
+          %span{class:"font-weight-bold mr-2"}
+            #{h([@filter[:action], @filter[:country], @filter[:range], @filter[:family], @filter[:institutionCode]].compact.join(", "))}
+          %a{href: "/#{@viewed_user.identifier}/specimens", class:"text-danger"}
+            %i{class:"fas fa-minus-circle"}
+            Remove
+
+      - if @pagy.count == 0
+        %div{class: "alert alert-info tiny-margins", role: "alert"}
+          - claim_type = @viewed_user.orcid ? "claimed or attributed" : "attributed"
+          - filter_message = @filter.length > 0 ? " with this applied filter" : ""
+          Specimens have not yet been #{claim_type}#{filter_message}.
+      - else
+        %div{class: "alert alert-info row tiny-margins pl-0 pr-0", role: "alert"}
+          %div{class: "col-12 col-md-8"}
+            %img{src:"/images/net-unselected.png", alt:"#{I18n.t('user.collected')}", title:"#{I18n.t('user.collected')}", width:18}
+            collected or
+            %img{src:"/images/microscope-unselected.png", alt:"#{I18n.t('user.identified')}", title:"#{I18n.t('user.identified')}", width:18}
+            identified #{number_with_delimiter(@pagy.count)} #{'specimen'.pluralize(@pagy.count)}.
+            = I18n.t('user.not_all_columns')
+          %div{class: "col-12 col-md-4 text-md-right"}
+            %a{href: "/#{@viewed_user.identifier}/specimens.csv", class:"mr-2"}
+              %i{class:"fas fa-file-csv text-dark h5 m-0 p-1"}
+              CSV
+            %a{href: "/#{@viewed_user.identifier}/specimens.json"}
+              %i{class:"fas fa-file-code text-dark h5 m-0 p-1"}
+              JSON-LD
+
+        %div{class:"table-responsive-lg"}
+          %table{class:"table table-hover table-sm"}
+            %thead{class: "thead-light"}
+              %tr
+                %th{scope: "col", style:"min-width:65px"}
+                %th{scope: "col"}= I18n.t('specimen.scientific_name')
+                %th{scope: "col"}= I18n.t('specimen.collected_by')
+                %th{scope: "col"}= I18n.t('specimen.identified_by')
+                %th{scope: "col"}= I18n.t('specimen.date_collected')
+                %th{scope: "col"}= I18n.t('specimen.date_identified')
+                %th{scope: "col"}= I18n.t('specimen.institution')
+                %th{scope: "col"}= I18n.t('specimen.catalog_number')
+                %th{scope: "col"}= I18n.t('specimen.type_status')
+
+            %tbody
+              - @results.each do |uo|
+                - o = uo.occurrence
+                %tr
+                  %td
+                    - if uo.action == "recorded"
+                      %img{src:"/images/net-unselected.png", alt:"#{I18n.t('user.collected')}", title:"#{I18n.t('user.collected')}", width:18}
+                    - elsif uo.action == "identified"
+                      %img{src:"/images/microscope-unselected.png", alt:"#{I18n.t('user.identified')}", title:"#{I18n.t('user.identified')}", width:18}
+                    - else
+                      %img{src:"/images/net-unselected.png", alt:"#{I18n.t('user.collected')}", title:"#{I18n.t('user.collected')}", width:18}
+                      %img{src:"/images/microscope-unselected.png", alt:"#{I18n.t('user.identified')}", title:"#{I18n.t('user.identified')}", width:18}
+                  %td
+                    - scientific_name = o.scientificName.nil? ? "not recorded" : o.scientificName
+                    %a{href: "https://gbif.org/occurrence/#{o.id}", target:"_blank"}
+                      #{h(scientific_name)}
+                    - if o.hasImage?
+                      %i{class:"fas fa-image ml-1"}
+                  %td #{h(o.recordedBy)}
+                  %td #{h(o.identifiedBy)}
+                  %td #{h(o.eventDate || o.year)}
+                  %td #{h(o.dateIdentified)}
+                  %td #{h(o.institutionCode)}
+                  %td #{h(o.catalogNumber)}
+                  %td #{h(o.typeStatus)}
+
+        - if @pagy.pages > 1
+          %div{style:"overflow-y:scroll"}
+            = pagy_bootstrap_nav(@pagy)
+
+    - else
+      = haml :'partials/user/offline_message', layout: false

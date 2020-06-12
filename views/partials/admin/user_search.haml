@@ -1,0 +1,16 @@
+%div
+  %form{id:"form-org-wrapper", method: "get", action: "/admin/users/search", "accept-charset" => "UTF-8", class: "form-inline helpers"}
+    %div{class: "form-group w-75"}
+      %input{class:"typeahead user-search", id:"typeahead-user", type: :text, name: "q", placeholder: "Mary Smith", value: "#{params[:q]}", size:"25"}
+    %input{type: :submit, class:"btn btn-success medium-margins", value:"Search"}
+
+%script{id:"result-template", type:"text/x-handlebars-template"}
+  %div{class:"d-flex"}
+    %div
+      %img{class:"rounded", src:"{{thumbnail}}"}
+    %div{class:"ml-2 flex-grow-1 small"}
+      %h5{class:"m-0 p-0"} {{fullname_reverse}}
+      %div{class:"m-0 p-0 small muted"} {{{lifespan}}}
+
+%script{id:"empty-template", type:"text/x-handlebars-template"}
+  %div{class:"m-2 tt-no-result"}= I18n.t('general.search_dropdown_no_users')

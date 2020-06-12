@@ -1,0 +1,65 @@
+-content_for :title do
+  = I18n.t('on_this_day.born_title')
+
+-content_for :stylesheets do
+  %link{href:"/css/bootstrap-datepicker3.standalone.min.css", rel:"stylesheet", type:"text/css"}
+
+-content_for :scripts do
+  %script{src: "/js/bootstrap-datepicker.min.js"}
+  %script{src: "/js/application.js"}
+  :javascript
+    $(function() {
+      var browser_today = new Date();
+      var browser_date = browser_today.getFullYear()+'-'+('0'+(browser_today.getMonth()+1)).slice(-2)+'-'+('0'+browser_today.getDate()).slice(-2);
+      var server_date = "#{@date.strftime("%Y-%m-%d")}";
+      var date_param = function(){
+        return window.location.href.search("[?&]date=") != -1;
+      };
+      if (!date_param() && server_date !== browser_date) {
+        window.location = "/on-this-day?date=" + browser_date;
+      }
+      Application.init("", "GET", "/on-this-day");
+      $('#datepicker').datepicker({
+        format: 'yyyy-mm-dd'
+      }).on("changeDate", function(e) {
+        var selected_date = e.format(0, "yyyy-mm-dd");
+        window.location = "/on-this-day?date=" + selected_date;
+      });
+    });
+
+-content_for :jumbotron do
+  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
+    %div{class:"mr-auto p-2"}
+      %h1{class:"h2"}= I18n.t('on_this_day.global_title')
+
+%div{class:"row"}
+  %div{class:"col-12 col-sm-8 col-lg-9"}
+    %h3{class:"ml-2"} #{@date.strftime("%B %-d")}
+  %div{class:"col-12 col-sm-4 col-lg-3"}
+    %div{class:"form-group"}
+      %div{id:"datepicker", class:"input-group date", "date-provide":"datepicker"}
+        %div{class:"input-group-prepend"}
+          %div{class:"input-group-text"}
+            %i{class:"fas fa-calendar-alt"}
+        %input{type:"text", class:"form-control", placeholder:"#{@date.strftime("%Y-%m-%d")}", size:"12"}
+
+= haml :'partials/on_this_day/tabs', layout: false, locals: { active_tab: "born" }
+
+- if @pagy.count == 0
+  %div{class: "alert alert-warning tiny-margins", role: "alert"}
+    No one found who was born on #{@date.strftime("%B %-d")}
+- else
+  - @results.in_groups_of(3).each do |group|
+    %div{class: "card-deck"}
+      - group.each do |u|
+        - if u.nil?
+          %div{class:"card border-0"}
+        - else
+          - if params[:q] && params[:q].present?
+            - u = User.find(u[:_id])
+          - cache_fragment(u.identifier) do
+            = haml :'partials/user/card', layout: false, locals: { user: u }
+
+  - if @pagy.pages > 1
+    %div{style:"overflow-y:scroll"}
+      = pagy_bootstrap_nav(@pagy)

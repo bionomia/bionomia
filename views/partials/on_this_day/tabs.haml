@@ -1,0 +1,7 @@
+%ul{class: "nav nav-tabs mt-3 mb-3"}
+  %li{class: "nav-item"}
+    %a{class: "nav-link#{locals[:active_tab] == "born" ? " active" : nil}", href: "/on-this-day"}= I18n.t('on_this_day.collector_born')
+  %li{class: "nav-item"}
+    %a{class: "nav-link#{locals[:active_tab] == "died" ? " active" : nil}", href: "/on-this-day/died"}= I18n.t('on_this_day.collector_died')
+  %li{class: "nav-item"}
+    %a{class: "nav-link#{locals[:active_tab] == "specimens" ? " active" : nil}", href: "/on-this-day/collected"}= I18n.t('on_this_day.type_collected')

@@ -1,0 +1,7 @@
+%ul{class: "nav nav-tabs"}
+  %li{class: "nav-item"}
+    %a{class: "nav-link#{locals[:active_tab] == "people" ? " active" : nil}", href: "/dataset/#{@dataset.datasetKey}"}= I18n.t('dataset.people')
+  %li{class: "nav-item"}
+    %a{class: "nav-link#{locals[:active_tab] == "scribes" ? " active" : nil}", href: "/dataset/#{@dataset.datasetKey}/scribes"}= I18n.t('dataset.scribes')
+  %li{class: "nav-item"}
+    %a{class: "nav-link#{locals[:active_tab] == "agents" ? " active" : nil}", href: "/dataset/#{@dataset.datasetKey}/agents"}= I18n.t('dataset.agent_strings')

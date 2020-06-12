@@ -1,0 +1,8 @@
+- action_type = locals[:action_type] ||= "POST"
+%script{src: "/js/application.js"}
+%script{src: "/js/profile.js"}
+:javascript
+  $(function() {
+    Application.init(#{@user.id}, "#{action_type}", "/profile");
+    Profile.init();
+  });

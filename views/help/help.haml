@@ -1,0 +1,56 @@
+-content_for :title do
+  = I18n.t('help.help_title')
+
+-content_for :scripts do
+  %script{src: "https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"}
+  %script{src: "/js/application.js"}
+  :javascript
+    $(function() {
+      Application.init("", "GET", "/help-others");
+    });
+
+-content_for :jumbotron do
+  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap alert-warning-light"}
+    %div{class: "mr-auto p-2"}
+      %h1{class:"h2"}= I18n.t('help.help_title')
+      %p{class: "lead text-muted"}= I18n.t('help.basic_instructions_lede')
+    = haml :'partials/help/search', layout: false
+
+= haml :'partials/help/main_tabs', layout: false, locals: { active_main_tab: "help" }
+
+%p{class:"mt-4"}
+  Scribe
+  %a{href: "/0000-0002-5398-7721"} Siobhan Leachman
+  (see her
+  = succeed ")" do
+    %a{href:"https://twitter.com/SiobhanLeachman"} Twitter feed
+  assumed control of the
+  %a{href: "https://twitter.com/bio_nomia"} @bio_nomia
+  Twitter account May 4–8, 2020 and posted a helpful series of tweet threads.
+
+%div{class:"row mt-4"}
+  %div{class:"col mb-3"}
+    %div{class:"card"}
+      %div{class:"card-header border-bottom"}
+        %h4 Getting Started with ORCID & Claiming Specimen Records
+      %div{class:"card-body mt-3"}
+        %iframe{type:"text/html", width:"100%", height:"600", frameborder:"0", align:"left", style:"align:left;max-width:100%;margin-top:20px;border:none;overflow-y: auto;", src:"https://threadreaderapp.com/embed/1257010391600660481.html"}
+  %div{class:"col mb-3"}
+    %div{class:"card"}
+      %div{class:"card-header border-bottom"}
+        %h4 Helping Others
+      %div{class:"card-body mt-3"}
+        %iframe{type:"text/html", width:"100%", height:"600", frameborder:"0", align:"left", style:"align:left;max-width:100%;margin-top:20px;border:none;overflow-y: auto;", src:"https://threadreaderapp.com/embed/1257020903163981824.html"}
+%div{class:"row mt-4"}
+  %div{class:"col mb-3"}
+    %div{class:"card"}
+      %div{class:"card-header border-bottom"}
+        %h4 Creating a Wikidata Item
+      %div{class:"card-body mt-3"}
+        %iframe{type:"text/html", width:"100%", height:"600", frameborder:"0", align:"left", style:"align:left;max-width:100%;margin-top:20px;border:none;overflow-y: auto;", src:"https://threadreaderapp.com/embed/1257053327809888256.html"}
+  %div{class:"col mb-3"}
+    %div{class:"card"}
+      %div{class:"card-header border-bottom"}
+        %h4 Uploads to Attribute Records in Bulk
+      %div{class:"card-body mt-3"}
+        %iframe{type:"text/html", width:"100%", height:"600", frameborder:"0", align:"left", style:"align:left;max-width:100%;margin-top:20px;border:none;overflow-y: auto;", src:"https://threadreaderapp.com/embed/1258487417876688901.html"}

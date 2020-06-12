@@ -1,0 +1,10 @@
+%nav{id:"helper-navbar", class:"navbar navbar-expand-sm bg-light fixed-top d-none"}
+  %span{class:"nav-item text-nowrap"}
+    %i{class:"fas fa-hands-helping text-muted mr-2"}
+    - if @viewed_user.image_url
+      %img{src:"#{profile_image(@viewed_user, 'thumbnail')}", class:"rounded mr-2", alt:"#{@viewed_user.fullname}"}
+    #{@viewed_user.fullname}
+  - if !@viewed_user.other_names.blank?
+    %span{class:"nav-item text-muted ml-2"} [#{@viewed_user.other_names.split("|")[0,2].join("; ")}]
+  - if @viewed_user.date_born || @viewed_user.date_died
+    %span{class: "nav-item text-muted ml-2"}= format_lifespan(@viewed_user)

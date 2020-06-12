@@ -1,0 +1,44 @@
+-content_for :title do
+  = I18n.t('profile.specimens_title')
+
+-content_for :scripts do
+  = haml :'partials/profile/scripts', layout: false, locals: { action_type: "PUT" }
+
+%div{class:"row"}
+  %div{class:"col-12 col-lg-4"}
+    %h1{class:"h3"}= @user.fullname
+  %div{class:"col-12 col-lg-8 mt-2"}
+    = haml :'partials/profile/tabs', layout: false, locals: { active_page: "specimens"}
+    = haml :'partials/profile/subtabs_specimens', layout: false, locals: { active_tab: "specimens"}
+
+- if @filter.length > 0
+  %div{class: "alert alert-warning", role: "alert"}
+    %i{class:"fas fa-filter"}
+    Filtered by
+    %span{class:"font-weight-bold mr-2"}
+      #{h([@filter[:action], @filter[:country], @filter[:range]].compact.join(", "))}
+    %a{href: "/profile/specimens", class:"text-danger"}
+      %i{class:"fas fa-minus-circle"}
+      Remove
+
+- if @pagy.count == 0
+  %div{class: "alert alert-info tiny-margins", role: "alert"}
+    - filter_message = @filter.length > 0 ? " with this applied filter" : ""
+    You have not yet claimed any specimens#{filter_message}.
+- else
+  %div{class: "alert alert-info row tiny-margins", role: "alert"}
+    %div{class: "col-12 col-md-8"}
+      Choose
+      %img{src:"/images/net-unselected.png", alt:"#{I18n.t('general.collected')}", title:"#{I18n.t('general.collected')}", width:18}
+      collected,
+      %img{src:"/images/microscope-unselected.png", alt:"#{I18n.t('general.identified')}", title:"#{I18n.t('general.identified')}", width:18}
+      identified, or Both to correct your claims.
+    %div{class: "col-12 col-md-4 text-md-right"}
+      %a{href: "/profile/download.csv", alt:"CSV file download", class:"mr-2"}
+        %i{class:"fas fa-file-csv text-dark h5 m-0 p-1"}
+        CSV
+      %a{href: "/profile/download.json", alt:"JSON file download"}
+        %i{class:"fas fa-file-code text-dark h5 m-0 p-1"}
+        JSON-LD
+
+  = haml :'partials/tables/specimens', layout: false

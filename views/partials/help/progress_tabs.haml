@@ -1,0 +1,6 @@
+%nav{id:"network-nav", class:"navbar navbar-light navbar-expand bg-light overflow-auto"}
+  %ul{class:"navbar-nav"}
+    %li{class:"nav-item"}
+      %a{class:"nav-link#{locals[:active_tab] == "orcid" ? " active" : nil}", href:"/help-others/progress"} ORCID
+    %li{class:"nav-item"}
+      %a{class:"nav-link#{locals[:active_tab] == "wikidata" ? " active" : nil}", href:"/help-others/progress/wikidata"} Wikidata

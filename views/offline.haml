@@ -1,0 +1,41 @@
+!!! 5
+%html{lang: "en", prefix: "og: http://ogp.me/ns#"}
+  %head
+    %meta{charset: "UTF-8" }/
+    %meta{name:"description", content:"#{I18n.t('home.tagline')}"}/
+    %meta{name:"keywords", content:"credit,specimens,natural,history,orcid,gbif"}/
+    %meta{name:"author", content:"David P. Shorthouse"}/
+    %meta{name:"viewport", content:"width=device-width, initial-scale=1"}/
+    %meta{name:"twitter:card", content:"summary"}/
+    %meta{name:"twitter:site" ,content:"@bio_nomia"}/
+    %meta{name:"twitter:description", content:"#{I18n.t('home.tagline')}"}/
+    %meta{name:"twitter:creator", content:"@bio_nomia"}/
+    %meta{name:"twitter:image", content:"#{base_url}/images/screenshot.png"}/
+    %meta{property:"og:title", content:"#{yield_content(:title)}"}/
+    %meta{property:"og:description", content:"#{I18n.t('home.tagline')}"}/
+    %meta{property:"og:locale", content:"en_US"}/
+    %meta{property:"og:type", content:"website"}/
+    %meta{property:"og:url", content:"#{base_url}"}/
+    %meta{property:"og:image", content:"#{base_url}/images/screenshot.png"}/
+
+    %title Bionomia - Offline
+
+    %link{href: "/favicon.ico", rel:"shortcut icon", type:"image/x-icon"}
+    %link{href: "/favicon.ico", rel:"icon", type:"image/x-icon"}
+    %link{href: "/css/bootstrap.min.css", rel: "stylesheet", type: "text/css", crossorigin: "anonymous"}
+    %link{href: "/css/application.css", rel: "stylesheet", type: "text/css"}
+
+  %body{class:"d-flex flex-column"}
+    %header
+      %nav{class:"navbar navbar-expand-md navbar-dark bg-dark"}
+        %a{class:"navbar-brand", href:"/"}
+          %img{src: "/images/logo.png", height:48, alt: "Bionomia"}
+
+      %div{id:"home-jumbotron", class: "jumbotron"}
+        %h1{class: "display-2"} Bionomia
+
+    %main{id:"main", role:"main", class:"mb-5"}
+      %div{class: "container-fluid"}
+        %div{class: "alert alert-warning row tiny-margins", role:"alert"}
+          = I18n.t('offline.message')
+          We will be online at #{Settings.offline_warning.online_when}.

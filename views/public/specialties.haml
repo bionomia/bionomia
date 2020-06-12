@@ -1,0 +1,58 @@
+= haml :'partials/user/twitter_img', layout: false
+
+- content_for(:title, "#{@viewed_user.fullname}")
+
+- content_for :scripts do
+  %script{src: "/js/application.js"}
+  %script{id:"dsq-count-scr", src:"//#{Settings.disqus.shortname}.disqus.com/count.js", defer: ""}
+  :javascript
+    $(function() {
+      Application.init();
+      DISQUSWIDGETS.getCount({ reset: true });
+    });
+
+%div{class:"row"}
+  = haml :'partials/user/jumbotron', layout: false
+  %div{class:"col-12 col-lg-8 mt-2"}
+    - if @viewed_user.is_public?
+      = haml :'partials/user/tabs', layout: false, locals: { active_page: "specialties" }
+
+      - if @families_identified.empty? && @families_recorded.empty?
+        %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('user.no_specialities_alert')
+
+      - if !@families_identified.empty? || !@families_recorded.empty?
+        %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('user.specialties_alert')
+
+        %div{class: "row"}
+          %div{class: "col-12 col-lg-6 mb-3"}
+            - if @families_recorded.empty? && !@families_identified.empty?
+              %h4{class: "d-flex justify-content-between mt-0"}
+                = I18n.t('user.families_identified')
+                %span{class: "badge badge-light badge-secondary"} #{number_with_delimiter(@families_identified.count)}
+              %ul{class: "list-group mt-3"}
+                - @families_identified.each do |k,v|
+                  %li{class: "list-group-item d-flex justify-content-between align-items-center"}
+                    %a{href: "/#{@viewed_user.identifier}/specimens?action=identified&family=#{ERB::Util.url_encode(k)}"} #{k}
+                    %span{class: "badge badge-light badge-pill"} #{number_with_delimiter(v)}
+            - elsif !@families_recorded.empty?
+              %h4{class: "d-flex justify-content-between mt-0"}
+                = I18n.t('user.families_collected')
+                %span{class: "badge badge-light badge-secondary"} #{number_with_delimiter(@families_recorded.count)}
+              %ul{class: "list-group mt-3"}
+                - @families_recorded.each do |k,v|
+                  %li{class: "list-group-item d-flex justify-content-between align-items-center"}
+                    %a{href: "/#{@viewed_user.identifier}/specimens?action=collected&family=#{ERB::Util.url_encode(k)}"} #{k}
+                    %span{class: "badge badge-light badge-pill"} #{number_with_delimiter(v)}
+          %div{class: "col-12 col-lg-6 mb-3"}
+            - if !@families_recorded.empty? && !@families_identified.empty?
+              %h4{class: "d-flex justify-content-between mt-0"}
+                = I18n.t('user.families_identified')
+                %span{class: "badge badge-light badge-secondary"} #{number_with_delimiter(@families_identified.count)}
+              %ul{class: "list-group mt-3"}
+                - @families_identified.each do |k,v|
+                  %li{class: "list-group-item d-flex justify-content-between align-items-center"}
+                    %a{href: "/#{@viewed_user.identifier}/specimens?action=identified&family=#{ERB::Util.url_encode(k)}"} #{k}
+                    %span{class: "badge badge-light badge-pill"} #{number_with_delimiter(v)}
+
+    - else
+      = haml :'partials/user/offline_message', layout: false

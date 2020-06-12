@@ -1,0 +1,63 @@
+!!! 5
+%html{lang: "en", prefix: "og: http://ogp.me/ns#"}
+  %head
+    %meta{charset: "UTF-8" }/
+    %meta{name:"description", content:"#{I18n.t('home.tagline')}"}/
+    %meta{name:"keywords", content:"credit,specimens,natural,history,collection,museum,attribution,tracker,tracking,gbif"}/
+    %meta{name:"author", content:"David P. Shorthouse"}/
+    %meta{name:"viewport", content:"width=device-width, initial-scale=1"}/
+    %meta{name:"twitter:card", content:"summary"}/
+    %meta{name:"twitter:site" ,content:"@bio_nomia"}/
+    %meta{name:"twitter:description", content:"#{I18n.t('home.tagline')}"}/
+    %meta{name:"twitter:creator", content:"@bio_nomia"}/
+    %meta{name:"csrf-token", content:"#{env['rack.session'][:csrf]}"}/
+    - if content_for?(:twitter_image)
+      = yield_content :twitter_image
+    - else
+      %meta{name:"twitter:image", content:"#{base_url}/images/screenshot.png"}/
+    %meta{property:"og:title", content:"#{yield_content(:title)}"}/
+    %meta{property:"og:description", content:"#{I18n.t('home.tagline')}"}/
+    %meta{property:"og:locale", content:"en_US"}/
+    %meta{property:"og:type", content:"website"}/
+    %meta{property:"og:url", content:"#{base_url}"}/
+    - if content_for?(:og_image)
+      = yield_content :og_image
+    - else
+      %meta{property:"og:image", content:"#{base_url}/images/screenshot.png"}/
+
+    %title= yield_content :title
+
+    %link{href: "/favicon.ico", rel:"shortcut icon", type:"image/x-icon"}
+    %link{href: "/favicon.ico", rel:"icon", type:"image/x-icon"}
+    %link{href: "/favicon-32x32.png", rel:"icon", sizes:"32x32"}
+    %link{href: "/favicon-16x16.png", rel:"icon", sizes:"16x16"}
+    %link{href: "/apple-touch-icon.png", rel:"apple-touch-icon", sizes:"180x180"}
+    %link{href: "/site.webmanifest", rel:"manifest"}
+    %link{href: "/css/bootstrap.min.css", rel: "stylesheet", type: "text/css", crossorigin: "anonymous"}
+    %link{href: "/css/application.css", rel: "stylesheet", type: "text/css"}
+    %link{href: "/css/bootstrap-toggle.min.css", rel: "stylesheet", type: "text/css"}
+    %link{href: "/css/typeahead.css", rel: "stylesheet", type: "text/css"}
+    = yield_content :stylesheets
+
+    %script{src: "//kit.fontawesome.com/c0c5b90533.js", crossorigin: "anonymous"}
+    %script{src: "/js/jquery-3.5.1.min.js", crossorigin: "anonymous"}
+    %script{src: "/js/popper.min.js", crossorigin: "anonymous"}
+    %script{src: "/js/bootstrap.min.js", crossorigin: "anonymous"}
+    %script{src: "/js/bootstrap-toggle.min.js", crossorigin: "anonymous"}
+    %script{src: "/js/typeahead.bundle.min.js", crossorigin: "anonymous"}
+    %script{src: "/js/js.cookie.min.js", crossorigin: "anonymous"}
+    = yield_content :scripts
+
+  %body{class:"d-flex flex-column"}
+    %header
+      - if Settings.offline_warning.off_datetime
+        = haml :'global_offline_warning', layout: false
+      = haml :'global_navigation', layout: false, locals: { active_page: "#{locals[:active_page]}" }
+      = yield_content :jumbotron
+
+    %main{id:"main", class:"mb-5"}
+      %div{class: "container-fluid"}
+        = yield
+
+    %footer{class: "footer mt-auto py-3 border-top d-flex justify-content-end"}
+      = haml :'global_footer', layout: false

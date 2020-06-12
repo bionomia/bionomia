@@ -1,0 +1,75 @@
+-content_for :title do
+  = I18n.t('profile.support_title')
+
+-content_for :scripts do
+  = haml :'partials/profile/scripts', layout: false, locals: { action_type: "PUT" }
+
+%div{class:"row"}
+  %div{class:"col-12 col-lg-4"}
+    %h1{class:"h3"}= @user.fullname
+  %div{class:"col-12 col-lg-8 mt-2"}
+    = haml :'partials/profile/tabs', layout: false, locals: { active_page: "specimens" }
+    = haml :'partials/profile/subtabs_specimens', layout: false, locals: { active_tab: "support"}
+
+- if @pagy.count == 0
+  %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('profile.no_help_alert')
+
+- else
+  %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('profile.thanks_alert')
+
+  - @results.in_groups_of(3).each do |group|
+    %div{class: "card-deck"}
+      - group.each do |u|
+        - if u.nil?
+          %div{class:"card border-0"}
+        - else
+          %div{class: "card card-profile my-3"}
+            - if u[:user].image_url
+              %div{class: "card-header d-flex"}
+                %div
+                  %img{src:"#{profile_image(u[:user], 'medium')}", alt:"#{u[:user].fullname}", class:"card-img-profile mr-2"}
+                %div{class:"flex-grow-1"}
+                  %h5
+                    %a{href: "/profile/support/#{u[:user].identifier}"}
+                      - if u[:user].is_bot?
+                        #{u[:user].fullname}
+                      - else
+                        #{u[:user].fullname_reverse}
+                  - if u[:user].country
+                    %p{class:"small text-muted mt-0 mb-0"} #{u[:user].country.split("|").join("; ")}
+            - else
+              %div{class: "card-header"}
+                %h5
+                  %a{href: "/profile/support/#{u[:user].identifier}"}
+                    - if u[:user].is_bot?
+                      #{u[:user].fullname}
+                    - else
+                      #{u[:user].fullname_reverse}
+                - if u[:user].country
+                  %p{class:"small text-muted mt-0 mb-0"} #{u[:user].country.split("|").join("; ")}
+
+            %div{class: "card-body"}
+
+            %div{class: "card-footer d-flex"}
+              - if !u[:user].is_public?
+                %div{class: "small text-right text-muted mr-2"}
+                  %i{class:"fas fa-lock"}
+              %div{class: "small text-left text-muted mr-2"}
+                %span{class:"badge badge-light"}
+                  #{number_with_delimiter(u[:total])}
+                %a{href: "/profile/support/#{u[:user].identifier}"}
+                  #{'specimen'.pluralize(u[:total])} attributed
+              %div{class:"small ml-auto"}
+                - if !u[:user].is_bot?
+                  %button{type:"button", class:"btn btn-sm btn-outline-danger thanks", "data-recipient-identifier": "#{u[:user].orcid}"}
+                    %i{class:"fas fa-heart"}
+                    Thanks
+                    - if u[:user].messages_by_sender_count(@user.id) > 0
+                      (#{u[:user].messages_by_sender_count(@user.id)})
+
+  - if @total > 25
+    = haml :'partials/page_size', layout: false
+
+  - if @pagy.pages > 1
+    %div{style:"overflow-y:scroll"}
+      = pagy_bootstrap_nav(@pagy)

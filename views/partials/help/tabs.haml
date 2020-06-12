@@ -1,0 +1,10 @@
+%ul{class: "nav nav-tabs pl-2"}
+  %li{class: "nav-item badge-item"}
+    %a{class: "nav-link#{locals[:active_tab] == "discovered" ? " active" : nil}", href: "/help-others/#{@viewed_user.identifier}"}= I18n.t('help.discovered')
+    %span{id:"specimen-counter", class: "badge-notify badge badge-danger badge-pill"}
+  %li{class: "nav-item"}
+    %a{class: "nav-link#{locals[:active_tab] == "specimens" ? " active" : nil}", href: "/help-others/#{@viewed_user.identifier}/specimens"}= I18n.t('help.fix_claims')
+  %li{class: "nav-item"}
+    %a{class: "nav-link#{locals[:active_tab] == "ignored" ? " active" : nil}", href: "/help-others/#{@viewed_user.identifier}/ignored"}= I18n.t('help.reclaim_ignored')
+  %li{class: "nav-item"}
+    %a{class: "nav-link#{locals[:active_tab] == "upload" ? " active" : nil}", href: "/help-others/#{@viewed_user.identifier}/upload"}= I18n.t('help.bulk_attribution')

@@ -1,0 +1,7 @@
+%div{class:"mt-3"}
+  - @countries.each do |k, group|
+    %h3 #{k}
+    %ul{class:"list-inline"}
+      - group.each do |country|
+        %li{class:"list-inline-item"}
+          %a{href: "/help-others/country/#{country[1]}", class:"btn btn-outline-dark btn-sm mb-2"} #{country[0]}

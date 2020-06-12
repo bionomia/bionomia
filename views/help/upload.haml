@@ -1,0 +1,31 @@
+-content_for :title do
+  Upload for #{@viewed_user.fullname}
+
+-content_for :scripts do
+  %script{src: "/js/application.js"}
+  :javascript
+    $(function() {
+      Application.init(#{@viewed_user.id}, "PUT", "/help-others", "#{@viewed_user.identifier}");
+    });
+
+-content_for :jumbotron do
+  = haml :'partials/help/jumbotron', layout: false
+
+= haml :'partials/help/tabs', layout: false, locals: { active_tab: "upload" }
+
+= haml :'partials/upload_instructions', layout: false
+
+%form{id:"form-wrapper", method: :post, action: "/help-others/#{@viewed_user.identifier}/upload-result", enctype: "multipart/form-data", "accept-charset": "UTF-8", class: "form mt-4"}
+  - relaxed = params["relaxed"] == "1" ? "?relaxed=1" : nil
+  %div{class:"form-group row"}
+    %div{class:"col-sm-4 col-lg-2 col-form-label text-left text-sm-right"} Download discovered records
+    %div{class:"col-sm-8 col-lg-10"}
+      %a{href: "/help-others/#{@viewed_user.identifier}/candidates.csv#{relaxed}", class:"btn btn-primary"}
+        %i{class:"fas fa-file-csv h4 m-0 p-0"}
+        Download
+  %div{class:"form-group row"}
+    %label{for:"candidate-file", class:"col-sm-4 col-lg-2 col-form-label text-left text-sm-right"} Upload csv with claims
+    %div{class:"col-sm-8 col-lg-10"}
+      %input{type:"file", class:"form-control-file", id:"candidate-file", name: "file"}
+      %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
+      %button{type:"submit", class:"btn btn-success mt-3"} Submit

@@ -1,0 +1,89 @@
+-content_for :title do
+  #{@admin_user.fullname} Help Received
+
+-content_for :scripts do
+  %script{src:"/js/application.js"}
+  :javascript
+    $(function() {
+        Application.init(#{@admin_user.id}, "PUT", "/admin", "#{@admin_user.identifier}");
+    });
+
+-content_for :jumbotron do
+  %div{class:"jumbotron jumbotron-fluid alert-warning"}
+    %div{class:"row"}
+      %div{class:"col-12 col-lg-4 alert-warning mb-2"}
+        %h1{class:"h3"}= @admin_user.fullname
+      %div{class:"col-12 col-lg-8 mt-2"}
+        = haml :'partials/admin/user_tabs', layout: false, locals: { active_page: "specimens" }
+        = haml :'partials/admin/subtabs_specimens', layout: false, locals: { active_tab: "support"}
+
+- if @pagy.count == 0
+  %div{class: "alert alert-info tiny-margins", role: "alert"}
+    This Bionomia scribe has not helped claim this user's specimens.
+
+- else
+  = haml :'partials/admin/fixed_navbar', layout: false
+  %div{id: "helper-info", class: "alert alert-info row tiny-margins", role: "alert"}
+    %div{class: "col col-12"}
+      Choose
+      %img{src:"/images/net-unselected.png", alt:"Collected", title:"Collected", width:18}
+      collected,
+      %img{src:"/images/microscope-unselected.png", alt:"Collected", title:"Collected", width:18}
+      identified, or Both or the Remove button to refine attributions made by
+      %span{class:"font-weight-bold"}
+        #{@helped_user.fullname}
+
+  %div{class:"table-responsive-lg"}
+    %table{class:"table table-hover table-sm"}
+      %thead{class: "thead-light"}
+        %tr
+          %th{scope: "col", class:"selector"}
+            = haml :'partials/bulk_selector_top', layout: false
+          %th{scope: "col"} Scientific Name
+          %th{scope: "col"} Collected By
+          %th{scope: "col"} Identified By
+          %th{scope: "col"} Date Collected
+          %th{scope: "col"} Date Identified
+          %th{scope: "col"} Institution
+          %th{scope: "col"} Catalog Number
+          %th{scope: "col"} Type Status
+          %th
+
+      %tbody
+        - @results.each do |uo|
+          - o = uo.occurrence
+          %tr
+            %td{class: "selector"}
+              = haml :'partials/single_selector_preselected', layout: false, locals: { occurrence: uo }
+            %td
+              - scientific_name = o.scientificName.nil? ? "not recorded" : o.scientificName
+              %a{href: "https://gbif.org/occurrence/#{o.id}", target:"_blank"} #{h(scientific_name)}
+            %td #{h(o.recordedBy)}
+            %td #{h(o.identifiedBy)}
+            %td #{h(o.eventDate || o.year)}
+            %td #{h(o.dateIdentified)}
+            %td #{h(o.institutionCode)}
+            %td #{h(o.catalogNumber)}
+            %td #{h(o.typeStatus)}
+            %td
+              %button{type:"button", class:"btn btn-sm btn-danger remove", "data-occurrence-id":"#{uo.user_occurrence_id}"} Remove
+
+      - if @total > 25
+        %tfoot{class: "thead-light"}
+          %tr
+            %th{scope: "col", class:"selector"}
+              = haml :'partials/bulk_selector_bottom', layout: false
+            %th{scope: "col"} Scientific Name
+            %th{scope: "col"} Collected By
+            %th{scope: "col"} Identified By
+            %th{scope: "col"} Date Collected
+            %th{scope: "col"} Date Identified
+            %th{scope: "col"} Institution
+            %th{scope: "col"} Catalog Number
+            %th{scope: "col"} Type Status
+            %th
+
+  - if @total > 25
+    = haml :'partials/page_size', layout: false
+
+  = pagy_bootstrap_nav(@pagy) if @pagy.pages > 1

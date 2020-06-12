@@ -1,0 +1,40 @@
+-content_for :title do
+  = I18n.t('article.articles_title')
+
+-content_for :scripts do
+  %script{src: "https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"}
+  %script{src: "/js/application.js"}
+  :javascript
+    $(function() {
+      Application.init("", "GET", "/articles");
+    });
+
+-content_for :jumbotron do
+  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
+    %div{class:"mr-auto p-2"}
+      %h1{class:"h2"}= I18n.t('article.articles_title')
+      %p{class: "lead text-muted"}
+        #{number_to_human(Article.count, units: :'article.articles_lede', delimiter: ",", precision: 0)}
+
+    = haml :'partials/article/search', layout: false
+
+- @results.each do |article|
+  %div{class: "card card-profile mb-3"}
+    %div{class: "card-header"}
+      %p{class: "citation card-title"}
+        %a{href: "/article/#{article.doi}"}
+          #{h(article.citation)}
+    %div{class: "card-body"}
+      %div{"data-badge-popover":"right", "data-badge-type":"donut", "data-doi":"#{article.doi}", "data-hide-no-mentions":"true", class:"altmetric-embed pull-left mr-2 float-left"}
+      %p{class:"card-text text-muted"} #{h(article.abstract)}
+    %div{class: "card-footer d-flex"}
+      %div{class: "col small text-left text-muted"}
+        %span{class: "badge badge-light badge-pill citation-correction"} #{number_with_delimiter(article.claimed_specimen_count)}
+        = I18n.t('article.claims')
+      %div{class: "col small text-right text-muted"}
+        %span{class: "badge badge-light badge-pill citation-correction"} #{number_with_delimiter(article.article_occurrences.count)}
+        = I18n.t('article.specimens')
+
+- if @pagy.pages > 1
+  %div{style:"overflow-y:scroll"}
+    = pagy_bootstrap_nav(@pagy)

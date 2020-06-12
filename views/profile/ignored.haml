@@ -1,0 +1,27 @@
+-content_for :title do
+  = I18n.t('profile.ignored_title')
+
+-content_for :scripts do
+  = haml :'partials/profile/scripts', layout: false, locals: { action_type: "PUT" }
+
+%div{class:"row"}
+  %div{class:"col-12 col-lg-4"}
+    %h1{class:"h3"}= @user.fullname
+  %div{class:"col-12 col-lg-8 mt-2"}
+    = haml :'partials/profile/tabs', layout: false, locals: { active_page: "specimens" }
+    = haml :'partials/profile/subtabs_specimens', layout: false, locals: { active_tab: "ignored"}
+
+%div{class: "alert alert-info tiny-margins", role: "alert"}
+  - if @pagy.count == 0
+    = I18n.t('profile.ignored_alert')
+
+  - else
+    Choose
+    %img{src:"/images/net-unselected.png", alt:"#{I18n.t('general.collected')}", title:"#{I18n.t('general.collected')}", width:18}
+    collected,
+    %img{src:"/images/microscope-unselected.png", alt:"#{I18n.t('general.identified')}", title:"#{I18n.t('general.identified')}", width:18}
+    identified, or Both to claim specimens
+    %span{class:"font-weight-bold"} you may have mistakenly marked as "Not me".
+
+- if !@results.empty?
+  = haml :'partials/tables/ignored', layout: false
