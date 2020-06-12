@@ -17,7 +17,7 @@
       %a{href: "https://creativecommons.org/licenses/by/2.0/"} CC-BY 2.0
 
 %div{class:"container-fluid"}
-  %p{class:"lead"}= I18n.t('home.tagline')
+  %p{class:"lead tagline"}= I18n.t('home.tagline')
   %p{id: "profile-buttons"}
     %a{href:"/get-started", role: "button", class:"btn btn-lg btn-outline-dark"}= I18n.t('home.get_started')
     - if !authorized?

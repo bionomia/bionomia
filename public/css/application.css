@@ -54,11 +54,11 @@ a:hover, .page-link:hover{
   border-color:#A4D4AC;
   color:#0B5618;
 }
-.bg-dark{
+.bg-dark {
   background-color:#012429!important;
 }
 .navbar-dark .navbar-nav .nav-link {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.6);
 }
 #home-jumbotron{
   background-image: url('/images/curiosities.jpg');
@@ -80,6 +80,9 @@ a:hover, .page-link:hover{
   bottom:0px;
   background-color:#DCDCDC;
   opacity: 0.9;
+}
+.tagline {
+  font-size:1.75rem;
 }
 #main{
   padding-top:1rem;
