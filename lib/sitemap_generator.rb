@@ -23,6 +23,7 @@ module Bionomia
       @map.add '/developers/structured-data'
       @map.add '/developers/raw-data'
       @map.add '/developers/code'
+      @map.add '/history'
       @map.add '/how-it-works'
       @map.add '/integrations'
       @map.add '/organizations'

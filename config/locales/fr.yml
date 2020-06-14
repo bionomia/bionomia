@@ -230,6 +230,8 @@ fr:
     reclaim_ignored: Récupérer ignoré
     fix_claims: Corriger les attributions
     discovered: Découvert
+  history:
+    history_title: Histoire
   home:
     tagline: Reliez des spécimens d'histoire naturelle aux collectionneurs du monde.
     get_started: Commencer
@@ -271,6 +273,7 @@ fr:
     about: À propos
     rationale: Raisonnement
     how_works: Comment ça marche
+    history: Histoire
     feedback: Commentaires
     twitter: Bionomia sur Twitter
     support: Faire un don

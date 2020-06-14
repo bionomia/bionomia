@@ -230,6 +230,8 @@ en:
     reclaim_ignored: Reclaim Ignored
     fix_claims: Fix Attributions
     discovered: Discovered
+  history:
+    history_title: History
   home:
     tagline: Link natural history specimens to the world's collectors.
     get_started: Get started
@@ -271,6 +273,7 @@ en:
     about: About
     rationale: Rationale
     how_works: How it Works
+    history: History
     feedback: Feedback
     twitter: Bionomia on Twitter
     support: Donate

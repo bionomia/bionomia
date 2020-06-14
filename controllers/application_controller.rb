@@ -230,6 +230,10 @@ module Sinatra
             haml :'donate_wall', locals: { active_page: "wall" }
           end
 
+          app.get '/history' do
+            haml :'history', locals: { active_page: "history" }
+          end
+
           app.get '/scribes' do
             scribes
             haml :'scribes', locals: { active_page: "scribes" }

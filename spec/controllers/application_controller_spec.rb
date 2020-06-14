@@ -95,6 +95,11 @@ describe "Bionomia Application Controller" do
     expect(last_response).to be_ok
   end
 
+  it "should allow accessing the history page" do
+    get '/history'
+    expect(last_response).to be_ok
+  end
+
   it "should allow accessing the offline page" do
     get '/offline'
     expect(last_response).to be_ok
