@@ -5,15 +5,7 @@ Sinatra app to parse people names from structured biodiversity occurrence data, 
 
 ## Recent Updates
 
-- **April 30, 2020**: Import existing claims from recordedByID and identifiedByID.
-- **April 15, 2020**: Make OpenRefine endpoint.
-- **March 23, 2020**: Create dedicated API repository.
-- **December 1, 2019**: Include datasets indexed by GBIF, each with pages for people and agents.
-- **February 15, 2019**: Use Wikidata as optional identifier for the deceased.
-- **February 3, 2019**: Allow download of candidate specimen records then upload of claims.
-- **January 26, 2019**: Present citations of user specimens based on contents of GBIF data packages.
-- **October 12, 2018**: Used Neo4j to store weighted graphs of similarly structured people names as a quick mechanism to expand the list of users' candidate specimens & then present them in greatest to least probable.
-- **September 29, 2018**: The core, parsing component of this project has been split off into a stand-alone ruby gem, [dwc_agent](https://rubygems.org/gems/dwc_agent).
+- **TBD**: Relaunch of project with new brand.
 
 ## Requirements
 
