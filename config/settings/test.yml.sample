@@ -15,9 +15,6 @@ offline_warning:
 google:
   analytics: ''
   api_key: ''
-disqus:
-  shortname: ''
-  domain: ''
 neo4j:
   url: 'localhost:7474'
 orcid:

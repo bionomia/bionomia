@@ -274,16 +274,6 @@ module Sinatra
             haml :'public/deposited_at', locals: { active_page: "roster" }
           end
 
-          app.get '/:id/comments' do
-            check_identifier
-            check_redirect
-            @viewed_user = find_user(params[:id])
-            if !@viewed_user.can_comment?
-              halt 404, haml(:oops)
-            end
-            haml :'public/comments', locals: { active_page: "roster"}
-          end
-
           app.get '/:id/progress.json' do
             content_type "application/json"
             expires 0, :no_cache, :must_revalidate

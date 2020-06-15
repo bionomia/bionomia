@@ -442,7 +442,6 @@ en:
         one: "person who has attributed natural history specimens to their peers, mentors, and role models"
         other: "people who have attributed natural history specimens to their peers, mentors, and role models"
   user:
-    field_notes: Field notes
     caches_rebuilt: Caches for counts and visualizations were rebuilt.
     overview: Overview
     specialties: Specialties

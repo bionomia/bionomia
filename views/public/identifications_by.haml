@@ -4,11 +4,9 @@
 
 - content_for :scripts do
   %script{src: "/js/application.js"}
-  %script{id:"dsq-count-scr", src:"//#{Settings.disqus.shortname}.disqus.com/count.js", defer: ""}
   :javascript
     $(function() {
       Application.init();
-      DISQUSWIDGETS.getCount({ reset: true });
     });
 
 %div{class:"row"}

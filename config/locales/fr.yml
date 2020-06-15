@@ -442,7 +442,6 @@ fr:
         one: "personne qui a attribué des spécimens d'histoire naturelle à leurs pairs, mentors et modèles"
         other: "personnes qui ont attribué des spécimens d'histoire naturelle à leurs pairs, mentors et modèles"
   user:
-    field_notes: Notes du terrain
     caches_rebuilt: Les dénombrements et les visualisations ont été reconstruites.
     overview: Aperçu
     specialties: Spécialtés

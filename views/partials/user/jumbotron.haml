@@ -60,12 +60,6 @@
           %i{class:"fas fa-globe"}
           #{v}
 
-  - if Settings.base_url && @viewed_user.can_comment?
-    %p{class:"text-lg-left"}
-      %i{class:"fas fa-comments"}
-      %a{href: "#{Settings.base_url}/#{@viewed_user.identifier}/comments#disqus_thread", class:"disqus-comment-count", "data-disqus-identifier":"#{@viewed_user.identifier}"}
-        = I18n.t('user.field_notes')
-
   - if @viewed_user.zenodo_doi
     %p{class:"citation text-lg-left mt-3 small"}
       #{@viewed_user.fullname_reverse}. #{DateTime.now.year}. Natural history specimens collected and/or identified and deposited. [Data set]. Zenodo.

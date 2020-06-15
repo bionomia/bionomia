@@ -2,13 +2,6 @@
 
 - content_for(:title, "#{@viewed_user.fullname}")
 
-- content_for :scripts do
-  %script{id:"dsq-count-scr", src:"//#{Settings.disqus.shortname}.disqus.com/count.js", defer: ""}
-  :javascript
-    $(function() {
-      DISQUSWIDGETS.getCount({reset: true});
-    });
-
   - if @viewed_user.is_public? || admin_authorized?
     %script{src: "/js/application.js"}
     %script{src: "/js/progress-bar.js"}
