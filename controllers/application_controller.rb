@@ -253,10 +253,6 @@ module Sinatra
             haml :'developers/structured_data', locals: { active_tab: "structured_data" }
           end
 
-          app.get '/developers/raw-data' do
-            haml :'developers/raw_data', locals: { active_tab: "raw_data" }
-          end
-
           app.get '/developers/code' do
             haml :'developers/code', locals: { active_tab: "code" }
           end

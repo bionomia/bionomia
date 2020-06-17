@@ -21,7 +21,6 @@ module Bionomia
       @map.add '/collection-data-managers'
       @map.add '/developers'
       @map.add '/developers/structured-data'
-      @map.add '/developers/raw-data'
       @map.add '/developers/code'
       @map.add '/history'
       @map.add '/how-it-works'
