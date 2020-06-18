@@ -405,7 +405,7 @@ en:
     private: Private
     active: "On"
     inactive: "Off"
-    make_public_message: Include your account in public Profiles. Your claims will be included in a bulk data download, exposed through Google Chrome and Firefox extensions and a Tweet will be sent from @bio_nomia.
+    make_public_message: Include your account in public Profiles. Your claims will be included in a bulk data download, exposed through Google Chrome and Firefox extensions and a Tweet will be sent from @BionomaTrack.
     no_candidates_alert: Bionomia did not find any specimens indexed by GBIF that you may have collected or identified.
     ignored_alert: Specimen records you marked as "Not me" will appear here.
     scribe_not_helped: This Bionomia scribe has not yet helped you claim specimens.
