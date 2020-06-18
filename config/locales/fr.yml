@@ -405,7 +405,7 @@ fr:
     private: Privé
     active: Actif
     inactive: Inactif
-    make_public_message: Incluez votre compte dans les profils publics. Vos réclamations seront incluses dans un téléchargement de données en masse, exposées via les extensions Google Chrome et Firefox et un Tweet sera envoyé par @BionomaTrack.
+    make_public_message: Incluez votre compte dans les profils publics. Vos réclamations seront incluses dans un téléchargement de données en masse, exposées via les extensions Google Chrome et Firefox et un Tweet sera envoyé par @BionomiaTrack.
     no_candidates_alert: Bionomia n'a reniflé aucun spécimen répertorié par GBIF que vous ayez collecté ou identifié.
     ignored_alert: Les spécimens que vous avez marqués comme "Pas moi" apparaîtront ici.
     scribe_not_helped: Cette scribe Bionomia ne vous a pas encore aidé à récupérer des spécimens.
