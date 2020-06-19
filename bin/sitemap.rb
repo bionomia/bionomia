@@ -27,12 +27,8 @@ if options[:directory] && options[:domain]
   directory = options[:directory]
   raise "Directory not found" unless File.directory?(directory)
 
-  map = Bionomia::SitemapGenerator.new({domain: options[:domain], directory: options[:directory] })
-  map.add_flat_pages
-  map.add_users
-  map.add_organizations
-  map.add_countries
-  map.add_datasets
-  map.add_articles
-  map.render
+  SitemapGenerator::Sitemap.create do
+    opts = { sitemap: sitemap, domain: options[:domain], directory: directory }
+    Bionomia::SitemapGenerator.new(opts).run
+  end
 end

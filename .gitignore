@@ -25,4 +25,4 @@ processed
 verbatim
 claims-unioned-csv
 tmp
-sitemap.xml.gz
+*.gz

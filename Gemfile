@@ -49,12 +49,12 @@ gem 'sinatra-contrib'
 gem 'sinatra-outputbuffer'
 gem 'sinatra-flash'
 gem 'sinatra-support'
+gem 'sitemap_generator'
 gem 'sparql-client'
 gem 'sucker_punch'
 gem 'thin'
 gem 'twitter'
 gem 'wikidata-client'
-gem 'xml-sitemap'
 
 group :production do
 end
