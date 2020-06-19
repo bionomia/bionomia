@@ -427,6 +427,14 @@ module Sinatra
             end
           end
 
+          app.get '/privacy' do
+            haml :privacy, locals: { active_page: "privay" }
+          end
+
+          app.get '/terms-of-service' do
+            haml :terms_service, locals: { active_page: "terms_service" }
+          end
+
           app.get '/roster' do
             if params[:q] && params[:q].present?
               search_user
