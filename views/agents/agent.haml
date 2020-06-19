@@ -14,7 +14,7 @@
     Filtered by
     %span{class:"font-weight-bold mr-2"}
       #{h([@filter[:dataset]].compact.join(", "))}
-    %a{href: "/agent/#{@agent.id}"}
+    %a{href: "/agent/#{@agent.id}", class:"text-danger"}
       %i{class:"fas fa-minus-circle"}
       Remove
 
