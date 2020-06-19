@@ -4,9 +4,21 @@ require 'filemagic'
 module Bionomia
   class Zenodo
 
-    def initialize(hash:, opts: {})
-      @hash = hash
+    def initialize(user:, opts: {})
+      @user = user
       @settings = Settings.merge!(opts)
+    end
+
+    def metadata
+      {
+        upload_type: "dataset",
+        title: "Natural history specimens collected and/or identified and deposited.",
+        creators:  [{ name: @user.fullname, orcid: @user.orcid }],
+        description: "Natural history specimen data collected and/or identified by #{@user.fullname}, <a href=\"https://orcid.org/#{@user.orcid}\">https://orcid.org/#{@user.orcid}</a>. Claims were made on Bionomia, <a href=\"http://bionomia.net\">https://bionomia.net</a> using specimen data from the Global Biodiversity Information Facility, <a href=\"https://gbif.org\">https://gbif.org</a>.",
+        access_right: "open",
+        license: "cc-zero",
+        keywords: ["specimen", "natural history", "taxonomy"]
+      }
     end
 
     def client
@@ -58,7 +70,7 @@ module Bionomia
     end
 
     def access_token
-      @access_token ||= OAuth2::AccessToken.from_hash(client, @hash)
+      @access_token ||= OAuth2::AccessToken.from_hash(client, @user.zenodo_access_token)
     end
 
     # Have to store this again otherwise can no longer use the old one
@@ -81,29 +93,16 @@ module Bionomia
 
     def update_deposit(id:, metadata:)
       headers = { "Content-Type": "application/json"}
-      body = {
-        metadata: metadata
-      }
+      body = { metadata: metadata }
       raw_response = access_token.put(deposit_url(id), { body: body.to_json, headers: headers })
       JSON.parse(raw_response.body).deep_symbolize_keys
     end
 
     # Input, name: "Shorthouse, David", orcid: "0000-0001-7618-5230"
     # Returns { doi: "10.5281/zenodo.2652234", recid: 2652234}
-    def new_deposit(name:, orcid:)
+    def new_deposit
       headers = { "Content-Type": "application/json"}
-      creators = [{ name: name, orcid: orcid }]
-      body = {
-        metadata: {
-          upload_type: "dataset",
-          title: "Natural history specimens collected and/or identified and deposited.",
-          creators: creators,
-          description: "Natural history specimen data collected and/or identified by #{name}, <a href=\"https://orcid.org/#{orcid}\">https://orcid.org/#{orcid}</a>. Claims were made on Bionomia, <a href=\"http://bionomia.net\">https://bionomia.net</a> using specimen data from the Global Biodiversity Information Facility, <a href=\"https://gbif.org\">https://gbif.org</a>.",
-          access_right: "open",
-          license: "cc-zero",
-          keywords: ["specimen", "natural history", "taxonomy"]
-        }
-      }
+      body = { metadata: global_metadata }
       raw_response = access_token.post(new_deposit_url, { body: body.to_json, headers: headers })
       response = JSON.parse(raw_response.body).deep_symbolize_keys
       response[:metadata][:prereserve_doi]
@@ -150,6 +149,7 @@ module Bionomia
       response = JSON.parse(raw_response.body).deep_symbolize_keys
       new_id = response[:links][:latest_draft].split("/").last.to_i
       metadata = get_deposit(id: new_id)
+      metadata.merge!(global_metadata)
       metadata[:publication_date] = Time.now.strftime('%F')
       update_deposit(id: new_id, metadata: metadata)
       metadata[:prereserve_doi]

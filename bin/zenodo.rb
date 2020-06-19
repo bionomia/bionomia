@@ -38,11 +38,11 @@ if options[:new]
   User.where.not(orcid: nil)
       .where.not(zenodo_access_token: nil)
       .where(zenodo_doi: nil).find_each do |u|
-    z = Bionomia::Zenodo.new(hash: u.zenodo_access_token)
+    z = Bionomia::Zenodo.new(user: u)
     u.zenodo_access_token = z.refresh_token
     u.save
 
-    doi_id = z.new_deposit(name: u.fullname_reverse, orcid: u.orcid)
+    doi_id = z.new_deposit
     id = doi_id[:recid]
     io = Bionomia::IO.new({ user: u })
     csv = io.csv_stream_occurrences(u.visible_occurrences)
@@ -62,7 +62,7 @@ elsif options[:orcid]
           .where.not(zenodo_access_token: nil)
           .first
   if !u.nil?
-    z = Bionomia::Zenodo.new(hash: u.zenodo_access_token)
+    z = Bionomia::Zenodo.new(user: u)
     u.zenodo_access_token = z.refresh_token
     u.save
 
@@ -102,7 +102,7 @@ elsif options[:all] || options[:within_week]
     qry = qry.where("visited >= '#{week_ago}'")
   end
   qry.find_each do |u|
-    z = Bionomia::Zenodo.new(hash: u.zenodo_access_token)
+    z = Bionomia::Zenodo.new(user: u)
     u.zenodo_access_token = z.refresh_token
     u.save
 
@@ -136,7 +136,7 @@ end
 
 if options[:refresh]
   User.where.not(zenodo_access_token: nil).find_each do |u|
-    z = Bionomia::Zenodo.new(hash: u.zenodo_access_token)
+    z = Bionomia::Zenodo.new(user: u)
     u.zenodo_access_token = z.refresh_token
     u.save
   end
