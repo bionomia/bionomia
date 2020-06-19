@@ -15,6 +15,7 @@
     %span{class:"font-weight-bold mr-2"}
       #{h([@filter[:dataset]].compact.join(", "))}
     %a{href: "/agent/#{@agent.id}"}
+      %i{class:"fas fa-minus-circle"}
       Remove
 
 %div{class: "alert alert-info tiny-margins", role:"alert"}
