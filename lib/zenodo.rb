@@ -9,7 +9,7 @@ module Bionomia
       @settings = Settings.merge!(opts)
     end
 
-    def metadata
+    def global_metadata
       {
         upload_type: "dataset",
         title: "Natural history specimens collected and/or identified and deposited.",
