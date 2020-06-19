@@ -57,7 +57,10 @@ if options[:new]
   end
 
 elsif options[:orcid]
-  u = User.where(orcid: options[:orcid]).where.not(zenodo_doi: nil).first
+  u = User.where(orcid: options[:orcid])
+          .where.not(zenodo_doi: nil)
+          .where.not(zenodo_access_token: nil)
+          .first
   if !u.nil?
     z = Bionomia::Zenodo.new(hash: u.zenodo_access_token)
     u.zenodo_access_token = z.refresh_token
@@ -93,6 +96,7 @@ elsif options[:orcid]
 
 elsif options[:all] || options[:within_week]
   qry = User.where.not(zenodo_doi: nil)
+            .where.not(zenodo_access_token: nil)
   if options[:within_week]
     week_ago = DateTime.now - 7.days
     qry = qry.where("visited >= '#{week_ago}'")

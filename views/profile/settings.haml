@@ -50,41 +50,42 @@
             - if !@user.made_claim?
               %p{class:"card-text"}= I18n.t('profile.connect_zenodo_claim')
             - else
-              - if !@user.zenodo_concept_doi
+              - if @user.zenodo_access_token.empty?
                 %p{class:"card-text"}= I18n.t('profile.connect_zenodo')
-                - if @user.zenodo_access_token.empty?
-                  %form{action: "/auth/zenodo", method: "POST" }
-                    %p{class:"card-text"}
-                      %button{class: "btn btn-sm btn-outline-info"}= I18n.t('profile.integrate_zenodo')
-                      %input{type:"hidden", name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
-                - elsif !@user.zenodo_access_token.empty?
+                %form{action: "/auth/zenodo", method: "POST" }
+                  %p{class:"card-text"}
+                    %button{class: "btn btn-sm btn-outline-info"}= I18n.t('profile.integrate_zenodo')
+                    %input{type:"hidden", name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
+              - else
+                - if @user.zenodo_concept_doi
+                  %p{class:"card-text"}
+                    Your profile is linked to
+                    %a{href:"https://doi.org/#{@user.zenodo_concept_doi}", target:"_blank"}
+                      Zenodo
+                      %i{class:"fas fa-external-link-alt"}
+                    and your claims are versioned and archived.
+                  %p
+                    %a{href:"https://doi.org/#{@user.zenodo_concept_doi}"}
+                      %img{src:"/images/#{@user.zenodo_concept_doi}.svg"}
+                  %p
+                    %button{type: "button", class:"btn btn-sm btn-outline-danger", "data-toggle": "modal", "data-target": "#zenodoModal"}= I18n.t('profile.disconnect')
+
+                  %div{class:"modal fade", id:"zenodoModal", tabindex:"-1", role:"dialog", "aria-labelledby":"zenodoModal", "aria-hidden":"true"}
+                    %div{class:"modal-dialog", role:"document"}
+                      %div{class:"modal-content"}
+                        %div{class:"modal-header"}
+                          %h5{class:"modal-title", id:"zenodoLabel"}= I18n.t('profile.disconnect_zenodo')
+                          %button{type:"button", class:"close", "data-dismiss":"modal", "aria-label":"Close"}
+                            %span{"aria-hidden":"true"} &times;
+                        %div{class:"modal-body"}= I18n.t('profile.disconnect_warning')
+                        %div{class:"modal-footer"}
+                          %button{type:"button", class:"btn btn-sm btn-outline-secondary", "data-dismiss":"modal"}= I18n.t('profile.cancel')
+                          %button{type:"button", class:"btn btn-sm btn-outline-danger", id:"zenodo-disconnect"}= I18n.t('profile.disconnect')
+                - else
+                  %p{class:"card-text"}= I18n.t('profile.connect_zenodo')
                   %p{class:"alert alert-success"}
                     %i{class:"fas fa-check-circle"}
                     = I18n.t('profile.zenodo_linked')
-              - else
-                %p{class:"card-text"}
-                  Your profile is linked to
-                  %a{href:"https://doi.org/#{@user.zenodo_concept_doi}", target:"_blank"}
-                    Zenodo
-                    %i{class:"fas fa-external-link-alt"}
-                  and your claims are versioned and archived.
-                %p
-                  %a{href:"https://doi.org/#{@user.zenodo_concept_doi}"}
-                    %img{src:"/images/#{@user.zenodo_concept_doi}.svg"}
-                %p
-                  %button{type: "button", class:"btn btn-sm btn-outline-danger", "data-toggle": "modal", "data-target": "#zenodoModal"}= I18n.t('profile.disconnect')
-
-                %div{class:"modal fade", id:"zenodoModal", tabindex:"-1", role:"dialog", "aria-labelledby":"zenodoModal", "aria-hidden":"true"}
-                  %div{class:"modal-dialog", role:"document"}
-                    %div{class:"modal-content"}
-                      %div{class:"modal-header"}
-                        %h5{class:"modal-title", id:"zenodoLabel"}= I18n.t('profile.disconnect_zenodo')
-                        %button{type:"button", class:"close", "data-dismiss":"modal", "aria-label":"Close"}
-                          %span{"aria-hidden":"true"} &times;
-                      %div{class:"modal-body"}= I18n.t('profile.disconnect_warning')
-                      %div{class:"modal-footer"}
-                        %button{type:"button", class:"btn btn-sm btn-outline-secondary", "data-dismiss":"modal"}= I18n.t('profile.cancel')
-                        %button{type:"button", class:"btn btn-sm btn-outline-danger", id:"zenodo-disconnect"}= I18n.t('profile.disconnect')
 
         %div{class:"card"}
           %h5{class:"card-header"}= I18n.t('profile.email_notifications')
