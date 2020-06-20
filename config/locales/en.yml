@@ -61,7 +61,7 @@ en:
         one: "search result found for"
         other: "search results found for"
   cdm:
-    title: For Collection Data Managers
+    title: For Data Managers
     background_title: Background
     engaging_title: Engaging With Your Community
     enhancements_title: Incorporating Enhancements
@@ -270,7 +270,10 @@ en:
     resources: Resources
     integrations: Integrations
     for_developers: For Developers
-    for_collection_data_managers: For Collection Data Managers
+    for_data_managers: For Data Managers
+    policies: Policies
+    privacy: Privacy Policy
+    terms_service: Terms of Service
     on_this_day: On This Day
     about: About
     rationale: Rationale

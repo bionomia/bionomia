@@ -61,7 +61,7 @@ fr:
         one: "résultat de recherche pour"
         other: "résultats de recherche pour"
   cdm:
-    title: Pour les gestionnaires de données de collecte
+    title: Pour les gestionnaires de données
     background_title: Contexte
     engaging_title: S'engager Avec Votre Communauté
     enhancements_title: Intégration d'Améliorations
@@ -270,7 +270,10 @@ fr:
     resources: Ressources
     integrations: Intégrations
     for_developers: Pour les informaticiens
-    for_collection_data_managers: Pour les gestionnaires de collections
+    for_data_managers: Pour les gestionnaires de données
+    policies: Politiques
+    privacy: Politique de confidentialité
+    terms_service: Conditions d'utilisation
     on_this_day: Aujourd'hui
     about: À propos
     rationale: Raisonnement

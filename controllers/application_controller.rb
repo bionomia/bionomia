@@ -240,7 +240,7 @@ module Sinatra
           end
 
           app.get '/collection-data-managers' do
-            haml :collection_data_managers
+            haml :data_managers
           end
 
           app.get '/developers' do

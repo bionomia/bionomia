@@ -488,6 +488,13 @@ dl.citation{
   #home-jumbotron h1 {
     font-size:4.5rem;
   }
+  .attribution {
+    font-size:0.8rem;
+  }
+  .attribution img {
+    width:1.2rem;
+  }
+
   .display-2 {
     font-size:3.5rem;
   }
