@@ -127,8 +127,10 @@ val url = "jdbc:mysql://localhost:3306/bionomia?serverTimezone=UTC&useSSL=false"
 
 //check new occurrences against existing user_occurrences table to see how many orphaned occurrences we have
 val user_occurrences = spark.read.jdbc(url, "user_occurrences", prop)
+
 val missing = occurrences.
     join(user_occurrences, $"gbifID" === $"occurrence_id", "rightouter").
+    where("visible = true").
     where("gbifID IS NULL").
     count
 
