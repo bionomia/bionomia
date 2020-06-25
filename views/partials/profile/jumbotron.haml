@@ -58,6 +58,14 @@
             Settings & Integrations
           to maximize reuse.
       %p{class:"m-0"}
+        %a{href:"/#{@user.identifier}/refresh-stats.json", class:"profile-flush mr-2 mb-2"}
+          %i{class: "fas fa-sync-alt"}
+          = I18n.t('general.rebuild_stats')
         %a{href:"/profile/settings"}
           %i{class:"fas fa-cog"}
           = I18n.t('profile.settings')
+
+    %div{id:"flush-message", class:"alert alert-success alert-dismissible fade show text-center", role: "alert"}
+      = I18n.t("user.caches_rebuilt")
+      %button{type:"button", class:"close", "data-dismiss":"alert", "aria-label":"Close"}
+        %span{"aria-hidden":"true"} &times;

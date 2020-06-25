@@ -75,6 +75,14 @@
           %a{href: "/#{@admin_user.identifier}", class:"mr-2"}
             %i{class:"fas fa-user"}
             Public Profile
+        %a{href:"/#{@admin_user.identifier}/refresh-stats.json", class:"profile-flush mr-2 mb-2"}
+          %i{class: "fas fa-sync-alt"}
+          = I18n.t('general.rebuild_stats')
         %a{href:"/admin/user/#{@admin_user.identifier}/settings"}
           %i{class:"fas fa-cog"}
           Settings & Integrations
+
+    %div{id:"flush-message", class:"alert alert-success alert-dismissible fade show text-center", role: "alert"}
+      = I18n.t("user.caches_rebuilt")
+      %button{type:"button", class:"close", "data-dismiss":"alert", "aria-label":"Close"}
+        %span{"aria-hidden":"true"} &times;

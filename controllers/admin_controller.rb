@@ -263,7 +263,7 @@ module Sinatra
             admin_protected!
             check_redirect
             @admin_user = find_user(params[:id])
-            @stats = user_stats(@admin_user)
+            @stats = cache_block("#{@admin_user.identifier}-stats") { user_stats(@admin_user) }
             haml :'admin/overview', locals: { active_page: "administration" }
           end
 

@@ -77,7 +77,7 @@
           = I18n.t('general.help_attribute')
 
       - if ( @viewed_user.is_public? || admin_authorized? ) && locals[:active_page] == "overview"
-        %a{href:"/help-others/refresh-stats.json?user_id=#{@viewed_user.id}", class:"profile-flush mr-2 mb-2"}
+        %a{href:"/#{@viewed_user.identifier}/refresh-stats.json", class:"profile-flush mr-2 mb-2"}
           %i{class: "fas fa-sync-alt"}
           = I18n.t('general.rebuild_stats')
 

@@ -288,6 +288,14 @@ module Sinatra
             { claimed: claimed, unclaimed: unclaimed }.to_json
           end
 
+          app.get '/:id/refresh-stats.json' do
+            protected!
+            content_type "application/json", charset: 'utf-8'
+            user = find_user(params[:id])
+            user.flush_caches
+            { message: "ok" }.to_json
+          end
+
         end
 
       end

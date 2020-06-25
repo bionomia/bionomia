@@ -47,14 +47,6 @@ module Sinatra
             { message: "ok" }.to_json
           end
 
-          app.get '/help-others/refresh-stats.json' do
-            protected!
-            content_type "application/json", charset: 'utf-8'
-            user = User.find(params[:user_id].to_i)
-            user.flush_caches
-            { message: "ok" }.to_json
-          end
-
           app.get '/help-others/progress' do
             protected!
             latest_claims("living")

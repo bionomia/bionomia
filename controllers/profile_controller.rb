@@ -64,7 +64,7 @@ module Sinatra
 
           app.get '/profile' do
             protected!
-            @stats = user_stats(@user)
+            @stats = cache_block("#{@user.identifier}-stats") { user_stats(@user) }
             haml :'profile/overview', locals: { active_page: "profile" }
           end
 
