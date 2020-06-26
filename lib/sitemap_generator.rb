@@ -38,6 +38,7 @@ module Bionomia
       sitemap.add '/developers/structured-data'
       sitemap.add '/developers/code'
       sitemap.add '/history'
+      sitemap.add '/help'
       sitemap.add '/how-it-works'
       sitemap.add '/integrations'
       sitemap.add '/organizations'
