@@ -33,11 +33,6 @@ module Sinatra
             { count: count }.to_json
           end
 
-          app.get '/help-others/help' do
-            protected!
-            haml :'help/help', locals: { active_page: "help" }
-          end
-
           app.get '/help-others/:id/refresh.json' do
             protected!
             content_type "application/json", charset: 'utf-8'

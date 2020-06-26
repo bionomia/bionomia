@@ -14,7 +14,7 @@ header, section, footer, aside, nav, main, article, figure {
 }
 footer {
   background-color:#f9f9f9;
-  min-height:10rem;
+  min-height:11rem;
 }
 pre {
   white-space:pre-wrap;

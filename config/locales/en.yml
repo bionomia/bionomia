@@ -232,6 +232,8 @@ en:
     reclaim_ignored: Reclaim Ignored
     fix_claims: Fix Attributions
     discovered: Discovered
+  help_docs:
+    title: Help Documents
   history:
     history_title: History
   home:
@@ -282,6 +284,7 @@ en:
     feedback: Feedback
     twitter: Bionomia on Twitter
     support: Donate
+    help: Help Documents
   not_authorized:
     not_authorized: Not authorized or session terminated.
   occurrence:

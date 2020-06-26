@@ -1,22 +1,23 @@
 -content_for :title do
-  = I18n.t('help.help_title')
-
--content_for :scripts do
-  %script{src: "https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"}
-  %script{src: "/js/application.js"}
-  :javascript
-    $(function() {
-      Application.init("", "GET", "/help-others");
-    });
+  = I18n.t('help_docs.title')
 
 -content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap alert-warning"}
-    %div{class: "mr-auto p-2"}
-      %h1{class:"h2"}= I18n.t('help.help_title')
-      %p{class: "lead text-muted"}= I18n.t('help.basic_instructions_lede')
-    = haml :'partials/help/search', layout: false
+  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
+    %div{class:"mr-auto p-2"}
+      %h1{class:"h2"}= I18n.t('help_docs.title')
 
-= haml :'partials/help/main_tabs', layout: false, locals: { active_main_tab: "help" }
+%h3{class:"mt-4 mb-3"} For New Users & Group Settings
+
+%div{class:"card", style:"max-width: 505px;"}
+  %a{href: "http://doi.org/10.5281/zenodo.3908726"}
+    %img{src:"/images/leachman_auckland_wmm.png", alt:"Leachman help doc for volunteers", width:"500px"}
+  %div{class:"card-body"}
+    %p{class:"citation"}
+      Siobhan Leachman. (2020, June 26). Auckland Museum Volunteer Instructions for Bionomia. Zenodo. 26pp. PDF
+      %a{href: "http://doi.org/10.5281/zenodo.3908726"}
+        http://doi.org/10.5281/zenodo.3908726
+
+%h3{class:"mt-4 mb-3"} Focused Tasks
 
 %p{class:"mt-4"}
   Scribe
@@ -24,7 +25,7 @@
   (see her
   = succeed ")" do
     %a{href:"https://twitter.com/SiobhanLeachman"} Twitter feed
-  produced a helpful series of step-by-step documents.
+  also produced a helpful series of step-by-step documents. These are presently being reworked to match the recent rebranding of the site.
 
 %div{class:"row mt-4"}
   %div{class:"col mb-3"}

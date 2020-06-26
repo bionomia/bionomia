@@ -232,6 +232,8 @@ fr:
     reclaim_ignored: Récupérer ignoré
     fix_claims: Corriger les attributions
     discovered: Découvert
+  help_docs:
+    title: Documents d'Aide
   history:
     history_title: Histoire
   home:
@@ -282,6 +284,7 @@ fr:
     feedback: Commentaires
     twitter: Bionomia sur Twitter
     support: Faire un don
+    help: Documents d'Aide
   not_authorized:
     not_authorized: Non autorisé ou session terminée.
   occurrence:

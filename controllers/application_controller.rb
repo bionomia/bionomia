@@ -257,6 +257,10 @@ module Sinatra
             haml :'developers/code', locals: { active_tab: "code" }
           end
 
+          app.get '/help' do
+            haml :help_docs
+          end
+
           app.get '/how-it-works' do
             haml :how_it_works
           end
