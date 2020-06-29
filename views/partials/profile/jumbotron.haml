@@ -58,10 +58,14 @@
             Settings & Integrations
           to maximize reuse.
       %p{class:"m-0"}
+        - if @user.is_public?
+          %a{href: "/#{@user.orcid}", class:"mr-2 mb-2"}
+            %i{class:"fas fa-users"}
+            = I18n.t('profile.public_profile')
         %a{href:"/#{@user.identifier}/refresh-stats.json", class:"profile-flush mr-2 mb-2"}
           %i{class: "fas fa-sync-alt"}
           = I18n.t('general.rebuild_stats')
-        %a{href:"/profile/settings"}
+        %a{href:"/profile/settings", class:"mb-2"}
           %i{class:"fas fa-cog"}
           = I18n.t('profile.settings')
 

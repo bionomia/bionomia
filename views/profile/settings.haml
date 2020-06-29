@@ -22,9 +22,9 @@
                 %input{type:"checkbox", id: "toggle-public", "data-toggle":"toggle", "data-on":"#{I18n.t('profile.public')}", "data-off":"#{I18n.t('profile.private')}", "data-onstyle": "success", "data-size": "small", checked: @user.is_public?, class:"btn-claim", "data-url": "/profile/visibility.json" }
               %div{class:"col text-right"}
                 - if @user.is_public?
-                  %a{href: "/#{@user.orcid}", target: "_blank"}
+                  %a{href: "/#{@user.orcid}"}
                     = I18n.t('profile.public_profile')
-                    %i{class:"fas fa-external-link-alt"}
+                    %i{class:"fas fa-users"}
 
         %div{class:"card"}
           %h5{class:"card-header"}
