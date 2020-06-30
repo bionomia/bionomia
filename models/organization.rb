@@ -48,32 +48,18 @@ class Organization < ActiveRecord::Base
   def others_specimens(type = "recorded")
     date_field = type == "recorded" ? "eventDate_processed" : "dateIdentified_processed"
 
-    current = Occurrence.joins(users: :organizations)
-                  .where(user_occurrences:  { visible: true })
-                  .where("user_occurrences.action LIKE ?", "%#{type}%")
-                  .where(user_organizations: { organization_id: id })
-                  .where(user_organizations: { end_year: nil })
-                  .where("YEAR(occurrences.#{date_field}) >= user_organizations.start_year")
-                  .where.not(occurrences: { institutionCode: nil })
-                  .where("occurrences.institutionCode NOT IN (?)", institution_codes)
+    data = Occurrence.joins(users: :organizations)
+                .where(user_occurrences:  { visible: true })
+                .where("user_occurrences.action LIKE ?", "%#{type}%")
+                .where(user_organizations: { organization_id: id })
+                .where("( user_organizations.end_year IS NULL AND YEAR(occurrences.#{date_field}) >= user_organizations.start_year) OR ( user_organizations.end_year IS NOT NULL AND user_organizations.start_year IS NOT NULL AND YEAR(occurrences.#{date_field}) >= user_organizations.start_year AND YEAR(occurrences.#{date_field}) <= user_organizations.end_year )")
+                .where.not(occurrences: { institutionCode: nil })
+                .where("occurrences.institutionCode NOT IN (?)", institution_codes)
+                .distinct
+                .unscope(:order)
+                .pluck(:gbifID, :institutionCode).compact
 
-    past = Occurrence.joins(users: :organizations)
-                  .where(user_occurrences:  { visible: true })
-                  .where("user_occurrences.action LIKE ?", "%#{type}%")
-                  .where(user_organizations: { organization_id: id })
-                  .where.not(user_organizations: { end_year: nil })
-                  .where.not(user_organizations: { start_year: nil })
-                  .where("YEAR(occurrences.#{date_field}) >= user_organizations.start_year")
-                  .where("YEAR(occurrences.#{date_field}) <= user_organizations.end_year")
-                  .where.not(occurrences: { institutionCode: nil })
-                  .where("occurrences.institutionCode NOT IN (?)", institution_codes)
-
-    combined = current.union_all(past)
-                      .distinct
-                      .unscope(:order)
-                      .pluck(:gbifID, :institutionCode).compact
-
-    Hash.new(0).tap{ |h| combined.each { |f| h[f[1]] += 1 } }
+    Hash.new(0).tap{ |h| data.each { |f| h[f[1]] += 1 } }
                .sort_by {|_key, value| value}
                .reverse
                .to_h
@@ -82,33 +68,20 @@ class Organization < ActiveRecord::Base
   def others_specimens_by_year(type = "recorded", year = DateTime.now.year)
     date_field = type == "recorded" ? "eventDate_processed" : "dateIdentified_processed"
 
-    current = Occurrence.joins(users: :organizations)
-                  .where(user_occurrences: { visible: true })
-                  .where("user_occurrences.action LIKE ?", "%#{type}%")
-                  .where(user_organizations: { organization_id: id })
-                  .where(user_organizations: { end_year: nil })
-                  .where("user_organizations.start_year <= ?", year)
-                  .where("YEAR(occurrences.#{date_field}) = ?", year)
-                  .where.not(occurrences: { institutionCode: nil })
-                  .where("occurrences.institutionCode NOT IN (?)", institution_codes)
+    data = Occurrence.joins(users: :organizations)
+                .where(user_occurrences: { visible: true })
+                .where("user_occurrences.action LIKE ?", "%#{type}%")
+                .where(user_organizations: { organization_id: id })
+                .where("( user_organizations.end_year IS NULL AND user_organizations.start_year <= ? ) OR ( user_organizations.start_year IS NOT NULL AND user_organizations.end_year IS NOT NULL )", year)
+                .where("YEAR(occurrences.#{date_field}) = ?", year)
+                .where.not(occurrences: { institutionCode: nil })
+                .where("occurrences.institutionCode NOT IN (?)", institution_codes)
+                .distinct
+                .unscope(:order)
+                .pluck(:gbifID, :institutionCode).compact
+                .compact
 
-    past = Occurrence.joins(users: :organizations)
-                  .where(user_occurrences: { visible: true })
-                  .where("user_occurrences.action LIKE ?", "%#{type}%")
-                  .where(user_organizations: { organization_id: id })
-                  .where.not(user_organizations: { start_year: nil })
-                  .where.not(user_organizations: { end_year: nil })
-                  .where("YEAR(occurrences.#{date_field}) = ?", year)
-                  .where.not(occurrences: { institutionCode: nil })
-                  .where("occurrences.institutionCode NOT IN (?)", institution_codes)
-
-    combined = current.union_all(past)
-                      .distinct
-                      .unscope(:order)
-                      .pluck(:gbifID, :institutionCode).compact
-                      .compact
-
-    Hash.new(0).tap{ |h| combined.each { |f| h[f[1]] += 1 } }
+    Hash.new(0).tap{ |h| data.each { |f| h[f[1]] += 1 } }
                .sort_by {|_key, value| value}
                .reverse
                .to_h
