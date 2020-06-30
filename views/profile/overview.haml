@@ -44,6 +44,37 @@
       - else
         %div{id: "chart", style:"width: 0%; height: 0%; display:none;"}
 
+      %div{class: "row mt-4"}
+        %div{class: "col-12 col-lg-6 mb-3"}
+          - if @families_recorded.empty? && !@families_identified.empty?
+            %h4{class: "d-flex justify-content-between mt-0"}
+              = I18n.t('user.families_identified')
+              %span{class: "badge badge-light badge-secondary"} #{number_with_delimiter(@families_identified.count)}
+            %ul{class: "list-group mt-3"}
+              - @families_identified.each do |k,v|
+                %li{class: "list-group-item d-flex justify-content-between align-items-center"}
+                  %a{href: "/profile/specimens?action=identified&family=#{ERB::Util.url_encode(k)}"} #{k}
+                  %span{class: "badge badge-light badge-pill"} #{number_with_delimiter(v)}
+          - elsif !@families_recorded.empty?
+            %h4{class: "d-flex justify-content-between mt-0"}
+              = I18n.t('user.families_collected')
+              %span{class: "badge badge-light badge-secondary"} #{number_with_delimiter(@families_recorded.count)}
+            %ul{class: "list-group mt-3"}
+              - @families_recorded.each do |k,v|
+                %li{class: "list-group-item d-flex justify-content-between align-items-center"}
+                  %a{href: "/profile/specimens?action=collected&family=#{ERB::Util.url_encode(k)}"} #{k}
+                  %span{class: "badge badge-light badge-pill"} #{number_with_delimiter(v)}
+        %div{class: "col-12 col-lg-6 mb-3"}
+          - if !@families_recorded.empty? && !@families_identified.empty?
+            %h4{class: "d-flex justify-content-between mt-0"}
+              = I18n.t('user.families_identified')
+              %span{class: "badge badge-light badge-secondary"} #{number_with_delimiter(@families_identified.count)}
+            %ul{class: "list-group mt-3"}
+              - @families_identified.each do |k,v|
+                %li{class: "list-group-item d-flex justify-content-between align-items-center"}
+                  %a{href: "/profile/specimens?action=identified&family=#{ERB::Util.url_encode(k)}"} #{k}
+                  %span{class: "badge badge-light badge-pill"} #{number_with_delimiter(v)}
+
       - if @user.zenodo_concept_doi
         %h4= I18n.t('profile.resume')
         %p{class:"citation"}

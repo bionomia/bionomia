@@ -264,6 +264,8 @@ module Sinatra
             check_redirect
             @admin_user = find_user(params[:id])
             @stats = cache_block("#{@admin_user.identifier}-stats") { user_stats(@admin_user) }
+            @families_identified = @admin_user.identified_families
+            @families_recorded = @admin_user.recorded_families
             haml :'admin/overview', locals: { active_page: "administration" }
           end
 
@@ -340,10 +342,12 @@ module Sinatra
               range = [params[:start_year], params[:end_year]].join(" – ")
             end
             country = IsoCountryCodes.find(params[:country_code]).name rescue nil
+            family = params[:family] rescue nil
             @filter = {
               action: params[:action],
               country: country,
-              range: range
+              range: range,
+              family: family
             }.compact
 
             begin

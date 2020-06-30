@@ -18,7 +18,7 @@
           %li{id:"profile-remove", class:"list-group-item profile-upload-option-list"}= I18n.t('profile.remove')
           %li{id:"profile-cancel", class:"list-group-item profile-upload-option-list"}= I18n.t('profile.cancel')
 
-  %h1{class:"h3"}= @user.fullname
+  %h1{class:"h2"}= @user.fullname
 
   - if !@user.other_names.blank?
     %p{class:"text-center text-muted p-0 mt-1 mb-1"} #{@user.other_names.split("|").join("; ")}

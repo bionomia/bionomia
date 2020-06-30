@@ -24,7 +24,7 @@
     %i{class:"fas fa-filter"}
     Filtered by
     %span{class:"font-weight-bold mr-2"}
-      #{h([@filter[:action], @filter[:country], @filter[:range]].compact.join(", "))}
+      #{h([@filter[:action], @filter[:country], @filter[:range], @filter[:family]].compact.join(", "))}
     %a{href: "/admin/user/#{@admin_user.identifier}/specimens", class:"text-danger"}
       %i{class:"fas fa-minus-circle"}
       Remove
@@ -37,7 +37,10 @@
   = haml :'partials/admin/fixed_navbar', layout: false
   %div{id: "helper-info", class: "alert alert-info row tiny-margins", role: "alert"}
     %div{class: "col-12 col-md-8 pl-0"}
-      #{@admin_user.fullname} has claimed #{number_with_delimiter(@total)} specimens.
+      - if @filter.length > 0
+        #{@admin_user.fullname} has claimed #{number_with_delimiter(@pagy.count)} specimens with this filter.
+      - else
+        #{@admin_user.fullname} has claimed #{number_with_delimiter(@total)} specimens.
       Choose
       %img{src:"/images/net-unselected.png", alt:"Collected", title:"Collected", width:18}
       collected,

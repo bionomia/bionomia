@@ -65,6 +65,8 @@ module Sinatra
           app.get '/profile' do
             protected!
             @stats = cache_block("#{@user.identifier}-stats") { user_stats(@user) }
+            @families_identified = @user.identified_families
+            @families_recorded = @user.recorded_families
             haml :'profile/overview', locals: { active_page: "profile" }
           end
 
@@ -105,10 +107,12 @@ module Sinatra
               range = [params[:start_year], params[:end_year]].join(" – ")
             end
             country = IsoCountryCodes.find(params[:country_code]).name rescue nil
+            family = params[:family] rescue nil
             @filter = {
               action: params[:action],
               country: country,
-              range: range
+              range: range,
+              family: family
             }.compact
 
             begin
