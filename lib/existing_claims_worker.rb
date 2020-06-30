@@ -39,32 +39,35 @@ module Bionomia
 
     def get_user(id)
       user = nil
-      w = ::Bionomia::WikidataSearch.new
       if id.wiki_from_url
-        user = get_wiki_user(id.wiki_from_url)
+        user = get_wiki_user(id.wiki_from_url) rescue nil
       end
       if id.orcid_from_url
-        user = User.find_or_create_by({ orcid: id.orcid_from_url })
+        user = get_orcid_user(id.orcid_from_url) rescue nil
       end
       if id.viaf_from_url
+        w = ::Bionomia::WikidataSearch.new
         wikidata = w.wiki_by_property('viaf', id.viaf_from_url)[:wikidata] rescue nil
         if wikidata
           user = get_wiki_user(wikidata)
         end
       end
       if id.ipni_from_url
+        w = ::Bionomia::WikidataSearch.new
         wikidata = w.wiki_by_property('ipni', id.ipni_from_url)[:wikidata] rescue nil
         if wikidata
           user = get_wiki_user(wikidata)
         end
       end
       if id.bhl_from_url
+        w = ::Bionomia::WikidataSearch.new
         wikidata = w.wiki_by_property('bhl', id.bhl_from_url)[:wikidata] rescue nil
         if wikidata
           user = get_wiki_user(wikidata)
         end
       end
       if id.zoobank_from_url
+        w = ::Bionomia::WikidataSearch.new
         wikidata = w.wiki_by_property('zoobank', id.zoobank_from_url)[:wikidata] rescue nil
         if wikidata
           user = get_wiki_user(wikidata)
@@ -73,8 +76,14 @@ module Bionomia
       user
     end
 
+    def get_orcid_user(id)
+      User.create_with({ orcid: id })
+          .find_or_create_by({ orcid: id })
+    end
+
     def get_wiki_user(id)
-      user = User.find_or_create_by({ wikidata: id })
+      user = User.create_with({ wikidata: id })
+                 .find_or_create_by({ wikidata: id })
       if !user.valid_wikicontent?
         user.delete_search
         user.delete
