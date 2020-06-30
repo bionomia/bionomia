@@ -25,7 +25,7 @@
           %li{id:"profile-remove", class:"list-group-item profile-upload-option-list"} Remove
           %li{id:"profile-cancel", class:"list-group-item profile-upload-option-list"} Cancel
 
-  %h1{class:"display-6 h3"}= @admin_user.fullname
+  %h1{class:"h2"}= @admin_user.fullname
 
   - if !@admin_user.other_names.blank?
     %p{class:"text-center text-muted p-0 mt-1 mb-1 truncate"} #{@admin_user.other_names.split("|").join("; ")}
