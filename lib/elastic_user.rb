@@ -88,6 +88,10 @@ module Bionomia
               search_analyzer: :fullname_search,
               norms: false
             },
+            fullname_reverse: {
+              type: 'text',
+              norms: false
+            },
             other_names: {
               type: 'text',
               analyzer: :fullname_index,
