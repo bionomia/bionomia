@@ -50,7 +50,7 @@
             %h4{class: "d-flex justify-content-between mt-0"}
               = I18n.t('user.families_identified')
               %span{class: "badge badge-light badge-secondary"} #{number_with_delimiter(@families_identified.count)}
-            %ul{class: "list-group mt-3"}
+            %ul{class: "list-group mt-3 truncate"}
               - @families_identified.each do |k,v|
                 %li{class: "list-group-item d-flex justify-content-between align-items-center"}
                   %a{href: "/profile/specimens?action=identified&family=#{ERB::Util.url_encode(k)}"} #{k}
@@ -59,7 +59,7 @@
             %h4{class: "d-flex justify-content-between mt-0"}
               = I18n.t('user.families_collected')
               %span{class: "badge badge-light badge-secondary"} #{number_with_delimiter(@families_recorded.count)}
-            %ul{class: "list-group mt-3"}
+            %ul{class: "list-group mt-3 truncate"}
               - @families_recorded.each do |k,v|
                 %li{class: "list-group-item d-flex justify-content-between align-items-center"}
                   %a{href: "/profile/specimens?action=collected&family=#{ERB::Util.url_encode(k)}"} #{k}
@@ -69,7 +69,7 @@
             %h4{class: "d-flex justify-content-between mt-0"}
               = I18n.t('user.families_identified')
               %span{class: "badge badge-light badge-secondary"} #{number_with_delimiter(@families_identified.count)}
-            %ul{class: "list-group mt-3"}
+            %ul{class: "list-group mt-3 truncate"}
               - @families_identified.each do |k,v|
                 %li{class: "list-group-item d-flex justify-content-between align-items-center"}
                   %a{href: "/profile/specimens?action=identified&family=#{ERB::Util.url_encode(k)}"} #{k}
