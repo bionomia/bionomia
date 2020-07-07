@@ -4,10 +4,17 @@
 -content_for :scripts do
   %script{src:"/js/application.js"}
   %script{src:"/js/profile.js"}
+  %script{src: "/js/jquery.collapser.min.js"}
   :javascript
     $(function() {
         Application.init(#{@admin_user.id}, "PUT", "/admin", "#{@admin_user.identifier}");
         Profile.init("/admin/user/#{@admin_user.identifier}");
+        $('.truncate').show().collapser({
+            mode: 'lines',
+            truncate: 15,
+            showText: '[Show more...]',
+            hideText: '[Show less...]'
+        });
     });
   = haml :'partials/viz_scripts', layout: false, locals: { path: "/admin/user/#{@admin_user.identifier}" }
 
@@ -49,7 +56,7 @@
             %h4{class: "d-flex justify-content-between mt-0"}
               = I18n.t('user.families_identified')
               %span{class: "badge badge-light badge-secondary"} #{number_with_delimiter(@families_identified.count)}
-            %ul{class: "list-group mt-3"}
+            %ul{class: "list-group mt-3 truncate"}
               - @families_identified.each do |k,v|
                 %li{class: "list-group-item d-flex justify-content-between align-items-center"}
                   %a{href: "/admin/user/#{@admin_user.identifier}/specimens?action=identified&family=#{ERB::Util.url_encode(k)}"} #{k}
@@ -58,7 +65,7 @@
             %h4{class: "d-flex justify-content-between mt-0"}
               = I18n.t('user.families_collected')
               %span{class: "badge badge-light badge-secondary"} #{number_with_delimiter(@families_recorded.count)}
-            %ul{class: "list-group mt-3"}
+            %ul{class: "list-group mt-3 truncate"}
               - @families_recorded.each do |k,v|
                 %li{class: "list-group-item d-flex justify-content-between align-items-center"}
                   %a{href: "/admin/user/#{@admin_user.identifier}/specimens?action=collected&family=#{ERB::Util.url_encode(k)}"} #{k}
@@ -68,7 +75,7 @@
             %h4{class: "d-flex justify-content-between mt-0"}
               = I18n.t('user.families_identified')
               %span{class: "badge badge-light badge-secondary"} #{number_with_delimiter(@families_identified.count)}
-            %ul{class: "list-group mt-3"}
+            %ul{class: "list-group mt-3 truncate"}
               - @families_identified.each do |k,v|
                 %li{class: "list-group-item d-flex justify-content-between align-items-center"}
                   %a{href: "/admin/user/#{@admin_user.identifier}/specimens?action=identified&family=#{ERB::Util.url_encode(k)}"} #{k}

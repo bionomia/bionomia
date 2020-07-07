@@ -1,11 +1,11 @@
 - if @stats && @stats[:specimens] && ( @stats[:specimens][:identified] > 0 || @stats[:specimens][:recorded] > 0 )
   %script{src: "/js/geochart-hierarchy.js"}
+  %script{src: "/js/jquery.collapser.min.js"}
   %script{src: "//www.gstatic.com/charts/loader.js"}
   - recorded = @stats[:countries][:recorded].to_a.map{|a| [ a[0], country_name(a[0]), a[1] ] }.unshift(["Country", "Country Name", "Collected"])
   - identified = @stats[:countries][:identified].to_a.map{|a| [ a[0], country_name(a[0]), a[1] ] }.unshift(["Country", "Country Name", "Identified"])
   :javascript
     $(function() {
-
       var countriesRecorded = #{recorded},
           countriesIdentified = #{identified},
           dateData = #{@stats[:activity_dates].to_a.unshift(["Year", "Identified", "Collected"])},
@@ -17,6 +17,13 @@
           identified_hierarchies = $.map(#{@stats[:countries][:identified].keys}, function(i) {
             return [ancestors(GeoChartHierarchy, i)];
           }).filter(function (el) { return el; });
+
+      $('.truncate').show().collapser({
+          mode: 'lines',
+          truncate: 15,
+          showText: '[Show more...]',
+          hideText: '[Show less...]'
+      });
 
       function ancestors(array, id) {
         if (typeof array != 'undefined') {
