@@ -473,6 +473,10 @@ dl.citation{
   font-size: 0.85rem;
 }
 
+.truncate .list-group-item a {
+  font-size: 1rem;
+}
+
 /* pre code display */
 .token.property, .token.symbol {
   color: #f8c555;
