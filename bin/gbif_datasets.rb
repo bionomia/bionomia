@@ -47,6 +47,7 @@ if options[:populate]
   Occurrence.counter_culture_fix_counts only: :dataset
 elsif options[:all]
   datasets.update_all
+  Occurrence.counter_culture_fix_counts only: :dataset
 elsif options[:new]
   occurrence_keys = Occurrence.select(:datasetKey).distinct.pluck(:datasetKey).compact
   dataset_keys = Dataset.select(:datasetKey).distinct.pluck(:datasetKey)
