@@ -21,6 +21,7 @@ class Occurrence < ActiveRecord::Base
   has_one :taxon, through: :taxon_occurrence, source: :taxon
 
   belongs_to :dataset, primary_key: :datasetKey, foreign_key: :datasetKey
+  counter_culture :dataset
 
   alias_attribute :id, :gbifID
 

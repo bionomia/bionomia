@@ -211,7 +211,7 @@ module Sinatra
 
             dataset_from_param
             qry = Occurrence.where(datasetKey: @dataset.datasetKey)
-            total = qry.count
+            total = @dataset.occurrences_count
             claimed = qry.joins(:user_occurrences).count
             { claimed: claimed, unclaimed: total - claimed }.to_json
           end

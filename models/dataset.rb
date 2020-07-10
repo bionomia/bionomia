@@ -5,7 +5,7 @@ class Dataset < ActiveRecord::Base
 
   before_update :set_update_time
   after_create :add_search
-  after_update :update_search
+  after_update :update_search, :fix_occurrences_count
   after_destroy :remove_search
 
   def has_claim?
@@ -210,6 +210,10 @@ class Dataset < ActiveRecord::Base
       es.delete(self)
     rescue
     end
+  end
+
+  def fix_occurrences_count
+    Occurrence.counter_culture_fix_counts only: :dataset, where: { datasetKey: datasetKey }
   end
 
 end

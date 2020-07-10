@@ -44,6 +44,7 @@ if options[:populate]
   keys = Occurrence.select(:datasetKey).distinct.pluck(:datasetKey).compact
   Dataset.import keys.map{|k| { datasetKey: k }}, batch_size: 1_000, on_duplicate_key_ignore: true, validate: false
   datasets.update_all
+  Occurrence.counter_culture_fix_counts only: :dataset
 elsif options[:all]
   datasets.update_all
 elsif options[:new]
@@ -51,6 +52,8 @@ elsif options[:new]
   dataset_keys = Dataset.select(:datasetKey).distinct.pluck(:datasetKey)
   (occurrence_keys - dataset_keys).each do |d|
     datasets.process_dataset(d)
+    d = Dataset.find_by_datasetKey(d)
+    Occurrence.counter_culture_fix_counts only: :dataset, where: { datasetKey: d.datasetKey }
     puts d.green
   end
 elsif options[:flush]
@@ -62,6 +65,8 @@ elsif options[:flush]
   end
 elsif options[:datasetkey]
   datasets.process_dataset(options[:datasetkey])
+  d = Dataset.find_by_datasetKey(options[:datasetkey])
+  Occurrence.counter_culture_fix_counts only: :dataset, where: { datasetKey: d.datasetKey }
 elsif options[:remove]
   Dataset.find_each do |d|
     next if d.has_agent?
