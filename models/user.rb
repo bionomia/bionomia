@@ -519,11 +519,13 @@ class User < ActiveRecord::Base
     current = user_organizations
                 .where.not(start_year: nil)
                 .where(end_year: nil)
+                .or(user_organizations.where.not(start_year: nil).where("end_year > ?", DateTime.now.year))
                 .first
                 .organization rescue nil
     if current.nil?
       current = user_organizations
                 .where(end_year: nil)
+                .or(user_organizations.where("end_year > ?", DateTime.now.year))
                 .first
                 .organization rescue nil
     end
