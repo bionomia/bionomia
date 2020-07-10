@@ -210,9 +210,8 @@ module Sinatra
             expires 0, :no_cache, :must_revalidate
 
             dataset_from_param
-            qry = Occurrence.where(datasetKey: @dataset.datasetKey)
             total = @dataset.occurrences_count
-            claimed = qry.joins(:user_occurrences).count
+            claimed = @dataset.occurrences.joins(:user_occurrences).count
             { claimed: claimed, unclaimed: total - claimed }.to_json
           end
 
