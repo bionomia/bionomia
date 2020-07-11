@@ -1,9 +1,13 @@
 class DatasetCounterCulture < ActiveRecord::Migration[6.0]
   def up
-    add_column :datasets, :occurrences_count, :integer, null: false, default: 0
+    unless column_exists? :datasets, :occurrences_count
+      add_column :datasets, :occurrences_count, :integer, null: false, default: 0
+    end
   end
 
   def down
-    remove_column :datasets, :occurrences_count, :integer, null: false, default: 0
+    if column_exists? :datasets, :occurrences_count
+      remove_column :datasets, :occurrences_count, :integer, null: false, default: 0
+    end
   end
 end
