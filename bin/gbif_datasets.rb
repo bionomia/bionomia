@@ -32,6 +32,10 @@ OptionParser.new do |opts|
     options[:datasetkey] = datasetkey
   end
 
+  opts.on("-c", "--counter", "Rebuild occurrence counter") do
+    options[:counter] = true
+  end
+
   opts.on("-h", "--help", "Prints this help") do
     puts opts
     exit
@@ -74,4 +78,7 @@ elsif options[:remove]
     puts d.datasetKey.red
     d.destroy
   end
+elsif options[:counter]
+  Occurrence.counter_culture_fix_counts only: :dataset
+  puts "Counters rebuilt".green
 end

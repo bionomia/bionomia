@@ -10,7 +10,7 @@ On a Mac with Homebrew:
 
 ```bash
 $ brew install apache-spark
-$ spark-shell --jars /usr/local/opt/mysql-connector-java/libexec/mysql-connector-java-8.0.19.jar --packages org.apache.spark:spark-avro_2.11:2.4.5 --driver-memory 12G
+$ spark-shell --jars /usr/local/opt/mysql-connector-java/libexec/mysql-connector-java-8.0.20.jar --packages org.apache.spark:spark-avro_2.12:3.0.0 --driver-memory 12G
 ```
 
 ```scala
@@ -19,6 +19,9 @@ import org.apache.spark.sql.Column
 import org.apache.spark.sql.types._
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.avro._
+
+# Deal with really old dates
+spark.sql("SET spark.sql.legacy.avro.datetimeRebaseModeInWrite=CORRECTED")
 
 val verbatimTerms = List(
   "gbifID",
@@ -122,9 +125,6 @@ prop.setProperty("password", "")
 
 val url = "jdbc:mysql://localhost:3306/bionomia?serverTimezone=UTC&useSSL=false"
 
-// Best to drop indices then recreate later
-// ALTER TABLE `occurrences` DROP KEY `typeStatus_idx`, DROP KEY `index_occurrences_on_datasetKey`;
-
 //check new occurrences against existing user_occurrences table to see how many orphaned occurrences we have
 val user_occurrences = spark.read.jdbc(url, "user_occurrences", prop)
 
@@ -140,6 +140,9 @@ val missing = user_occurrences.
       join(occurrences, $"occurrence_id" === $"gbifID", "leftouter").
       where("occurrence_id IS NULL").
       count
+
+// Best to drop indices then recreate later
+// ALTER TABLE `occurrences` DROP KEY `typeStatus_idx`, DROP KEY `index_occurrences_on_datasetKey`;
 
 //write occurrences data to the database
 occurrences.write.mode("append").jdbc(url, "occurrences", prop)
