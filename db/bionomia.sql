@@ -48,7 +48,8 @@ CREATE TABLE `datasets` (
   `license` tinytext COLLATE utf8mb4_bin,
   `image_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `occurrences_count` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `destroyed_users` (
@@ -256,8 +257,8 @@ ALTER TABLE `user_occurrences`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `user_occurrence_idx` (`occurrence_id`,`user_id`),
   ADD KEY `created_by_idx` (`created_by`),
-  ADD KEY `user_created_idx` (`user_id`,`created`),
-  ADD KEY `user_created_by_idx` (`user_id`,`created_by`) USING BTREE;
+  ADD KEY `user_created_by_idx` (`user_id`,`created_by`) USING BTREE,
+  ADD KEY `user_created_idx` (`user_id`,`created`);
 
 ALTER TABLE `user_organizations`
   ADD PRIMARY KEY (`id`),
