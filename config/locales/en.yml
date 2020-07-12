@@ -122,6 +122,7 @@ en:
     title: For Developers
     code_title: "For Developers: Code"
     code: Code
+    parser: Parse Names
   donate:
     donate_title: Donate
     lede: Your one-time or periodic donation will help complete the data pipeline and ensure that credit is given for contributions made to natural history collections as quickly and as seamlessly as possible.

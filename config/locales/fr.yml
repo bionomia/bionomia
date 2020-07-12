@@ -122,6 +122,7 @@ fr:
     title: Pour les Développeurs
     code_title: "Pour les Développeurs: Code Informatique"
     code: Code Informatique
+    parser: Analyser les Noms
   donate:
     donate_title: Faire un don
     lede: Votre don unique ou périodique contribuera à compléter le pipeline de données et à garantir que le crédit est accordé aux contributions faites aux collections d'histoire naturelle le plus rapidement et le plus facilement possible.

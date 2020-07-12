@@ -14,6 +14,28 @@
   The MIT-licensed code is available on
   = succeed "." do
     %a{href: "https://github.com/bionomia/bionomia" } GitHub
-  Technologies at play include Apache Spark to group occurrence records by raw entries in recordedBy and identifiedBy and to import into MySQL, Neo4j to store the scores between similarly structured people names, Elasticsearch to aid in the searching of people names once parsed and cleaned, Redis to coordinate the processing queues, and Sinatra/ruby for the application layer. A stand-alone ruby gem,
-  %a{href:"https://github.com/bionomia/dwc_agent"} dwc_agent
-  may be used to parse people names and additionally score them for structural similarity.
+  Technologies at play include Apache Spark to group occurrence records by raw entries in recordedBy and identifiedBy and to import into MySQL, Neo4j to store the scores between similarly structured people names, Elasticsearch to aid in the searching of people names once parsed and cleaned, Redis to coordinate the processing queues, and Sinatra/ruby for the application layer.
+
+%h3= I18n.t('developer.parser')
+
+%div{class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
+  %a{href:"https://rubygems.org/gems/dwc_agent"}
+    %img{class:"mb-3 mr-3", src:"/images/ruby_gem.png", alt:"Ruby gem"}
+  %div{class:"media-body"}
+    %p{class:"mb-3"}
+      A stand-alone ruby gem,
+      %a{href:"https://rubygems.org/gems/dwc_agent"} dwc_agent
+      = surround '(', ')' do
+        %a{href:"https://github.com/bionomia/dwc_agent"} code
+      may be used to parse people names and additionally score given names for structural similarity.
+      %pre{class:"pre-scrollable bg-dark text-white border rounded p-3"}
+        %code
+          :preserve
+            $ gem install dwc_agent
+            $ irb
+            > parsed = DwcAgent.parse "Lepschi BJ; Albrecht DE"
+              <span class="token property">=> [#&lt;Name family="BJ" given="Lepschi"&gt;, #&lt;Name family="DE" given="Albrecht"&gt;]</span>
+            > DwcAgent.clean parsed[0]
+              <span class="token property">=> {:given=>"B.J.", :family=>"Lepschi", :particle=>nil}</span>
+            > DwcAgent.similarity_score "J.R.", "Jill R."
+              <span class="token property">=> 2</span>
