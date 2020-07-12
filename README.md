@@ -174,7 +174,7 @@ Take site offline and in the bionomia database, remove the tablespaces from the 
       ALTER TABLE `taxa` DISCARD TABLESPACE;
       ALTER TABLE `taxon_occurrences` DISCARD TABLESPACE;
 
-Now copy the \*.ibd files for the above 6 tables from the bionomia_restore database into the bionomia database data directory then import the tablespaces:
+Now copy the \*.ibd files for the above 6 tables from the bionomia_restore database into the bionomia database data directory, reset the permissions, then import the tablespaces:
 
       ALTER TABLE `agents` IMPORT TABLESPACE;
       ALTER TABLE `occurrences` IMPORT TABLESPACE;
