@@ -68,7 +68,7 @@ elsif options[:flush]
   dataset_keys = Dataset.select(:datasetKey).distinct.pluck(:datasetKey)
   (dataset_keys - occurrence_keys).each do |d|
     Dataset.find_by_datasetKey(d).destroy
-    puts d.datasetKey.red
+    puts d
   end
 elsif options[:datasetkey]
   datasets.process_dataset(options[:datasetkey])
