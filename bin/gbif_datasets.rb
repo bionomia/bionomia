@@ -58,15 +58,17 @@ elsif options[:new]
   (occurrence_keys - dataset_keys).each do |d|
     datasets.process_dataset(d)
     d = Dataset.find_by_datasetKey(d)
-    Occurrence.counter_culture_fix_counts only: :dataset, where: { datasetKey: d.datasetKey }
-    puts d.green
+    if !d.nil?
+      Occurrence.counter_culture_fix_counts only: :dataset, where: { datasetKey: d.datasetKey }
+      puts d.datasetKey.green
+    end
   end
 elsif options[:flush]
   occurrence_keys = Occurrence.select(:datasetKey).distinct.pluck(:datasetKey).compact
   dataset_keys = Dataset.select(:datasetKey).distinct.pluck(:datasetKey)
   (dataset_keys - occurrence_keys).each do |d|
     Dataset.find_by_datasetKey(d).destroy
-    puts d.red
+    puts d.datasetKey.red
   end
 elsif options[:datasetkey]
   datasets.process_dataset(options[:datasetkey])
