@@ -27,7 +27,9 @@
       %a{href:"https://rubygems.org/gems/dwc_agent"} dwc_agent
       = surround '(', ')' do
         %a{href:"https://github.com/bionomia/dwc_agent"} code
-      may be used to parse people names and additionally score given names for structural similarity.
+      may be used to parse people names and additionally score given names for structural similarity. It also includes a command-line executable
+      %em dwcagent
+      that combines parsing and cleaning then produces JSON as output.
       %pre{class:"pre-scrollable bg-dark text-white border rounded p-3"}
         %code
           :preserve
@@ -39,3 +41,5 @@
               <span class="token property">=> {:given=>"B.J.", :family=>"Lepschi", :particle=>nil}</span>
             > DwcAgent.similarity_score "J.R.", "Jill R."
               <span class="token property">=> 2</span>
+            $ dwcagent "Lepschi BJ; Albrecht DE"
+            <span class="token property">[{"given":"B.J.","family":"Lepschi","particle":null},{"given":"D.E.","family":"Albrecht","particle":null}]</span>
