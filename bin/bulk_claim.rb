@@ -44,7 +44,12 @@ if options[:file]
   CSV.foreach(options[:file], headers: true) do |row|
     next if !row["identifier"].is_orcid? && !row["identifier"].is_wiki_id?
     if row["identifier"].is_wiki_id?
-      u = User.find_or_create_by({ wikidata: row["identifier"] })
+      d = DestroyedUser.find_by_identifier(row["identifier"])
+      if d.nil?
+        u = User.find_or_create_by({ wikidata: row["identifier"] })
+      else
+        u = User.find_by_wikidata(d.redirect_to)
+      end
       if u.wikidata && !u.valid_wikicontent?
         u.delete_search
         u.delete
