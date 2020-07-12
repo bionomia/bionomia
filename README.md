@@ -5,7 +5,7 @@ Sinatra app to parse people names from structured biodiversity occurrence data, 
 
 ## Recent Updates
 
-- **TBD**: Relaunch of project with new brand.
+- 2020-06-11: Relaunch of project with new brand.
 
 ## Requirements
 
