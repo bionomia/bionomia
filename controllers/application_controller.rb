@@ -211,7 +211,7 @@ module Sinatra
 
             dataset_from_param
             total = @dataset.occurrences_count
-            claimed = @dataset.occurrences.joins(:user_occurrences).count
+            claimed = @dataset.claimed_occurrences_count
             { claimed: claimed, unclaimed: total - claimed }.to_json
           end
 

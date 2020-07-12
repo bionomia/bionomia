@@ -69,6 +69,13 @@ class Dataset < ActiveRecord::Base
                   .where(occurrences: { datasetKey: datasetKey })
   end
 
+  def claimed_occurrences_count
+    occ = UserOccurrences.select(:occurrence_id, :visible)
+                         .joins(:occurrence)
+                         .where(occurrences: { datasetKey: datasetKey })
+    occ.map{|o| o.occurrence_id if o.visible == true }.uniq.count
+  end
+
   def agents
     determiners = OccurrenceDeterminer
                     .select(:agent_id)
