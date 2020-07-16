@@ -92,8 +92,57 @@
       %div{class:"card-header border-bottom"}
         %h4 Helping Others
       %div{class:"card-body overflow-auto mt-3", style:"max-height: 300px; min-height: 300px;"}
-        Coming soon...
-        //%iframe{type:"text/html", width:"100%", height:"600", frameborder:"0", align:"left", style:"align:left;max-width:100%;margin-top:20px;border:none;overflow-y: auto;", src:"https://threadreaderapp.com/embed/1257020903163981824.html"}
+        %p
+          So I'm going to start by choosing someone to help. I've logged into Bionomia with my ORCID id & I've pressed
+          %em Help Others
+          button on the top right. I'm now going to pick a country. Yep, New Zealand! I'm going to pick the entomologist George Howes.
+        %p{class:"mt-3 mb-3"}
+          %img{src:"/images/help-others-link.png", alt:"Help Others button"}
+          %img{src:"/images/countries-help.png", alt:"Countries helping list"}
+          %img{src:"/images/help-new-zealand.png", alt:"Help New Zealand"}
+          %img{src:"/images/george-howes.png", alt:"George Howes"}
+        %p
+          The reason I've chosen him is that I started his
+          = succeed "." do
+            %a{href: "https://en.wikipedia.org/wiki/George_Howes_(entomologist)"} Wikipedia article
+          I think he was marvellous and should get credit for his collecting work. His Bionomia page looks like this.
+          %img{src:"/images/helping-george-howes.png", alt:"George Howes", class:"d-block mt-3 mb-3"}
+          The first specimen was collected by someone with his initials, at the correct dates, is held in a New Zealand collection.
+          I'm confident he collected it. So, I press the
+          %em net
+          button beside the specimen.
+          %img{src:"/images/fenwicki-net.png", alt:"Selecting P. fenwicki", class:"d-block mt-3 mb-3"}
+          If I was confident he had collected ALL 25 specimens in this view, I could have pressed the white
+          %em net
+          with black background. That would automatically attribute to him in bulk all these 25 specimen records (but no more).
+          I can even increase the number of specimens on the page up to 250 (bottom-left dropdown) and bulk assign all of them!
+        %p{class:"mt-3 mb-3"}
+          %img{src:"/images/bulk-assignment.png", alt:"Bulk assignment buttons"}
+          %img{src:"/images/per-page-dropdown.png", alt:"Per page dropdown"}
+        %p
+          But in this case some way down the set there are specimens collected by "G Howes" in NHMUK.
+          I'm unsure whether this is OUR George Howes. If I'm unsure it is him or not I'll have to leave the specimens.
+          %img{src:"/images/helping-unsure.png", alt:"Helping unsure", class:"d-block mt-3 mb-3"}
+          To try and work out whether it is George I'll click on the scientific name on the specimen.
+          This opens a new tab & takes me to its details in GBIF. Here I can see it's a specimen from the Leith Valley in Dunedin, collected in 1922 by G. Howes.
+          %img{src:"/images/helping-gbif.png", alt:"Helping GBIF", class:"d-block mt-3 mb-3"}
+          Yep it's our George! So I'll claim those specimens for him.
+
+        %p
+          BUT you still have to be very careful. I keep an eye on dates. On the next page I see a page that isn't 1921 or 1922.
+          There's a specimen collected in 1937 - still while our George was alive. But again dates - so I click to check.
+          That specimen WASN'T collected by George. It was collected in Bolivia.
+          %img{src:"/images/parvispina-dates.png", alt:"parvispina 1937", class:"d-block mt-3 mb-1"}
+          %img{src:"/images/parvispina-gbif.png", alt:"parvispina 1937", class:"d-block mb-3"}
+        %p
+          Further down I see specimens coming from FishBase, but George was an entomologist. I confirm that he didn't collect those specimens either. So I claim the specimens he did collect and press the
+          %em Not them
+          button for the one's he didn't collect or identify.
+          %img{src:"/images/fishbase-not-them.png", alt:"parvispina 1937", class:"d-block mt-3 mb-3"}
+
+
+
+
 %div{class:"row mt-4"}
   %div{class:"col mb-3"}
     %div{class:"card"}
