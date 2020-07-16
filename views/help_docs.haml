@@ -25,21 +25,73 @@
   (see her
   = succeed ")" do
     %a{href:"https://twitter.com/SiobhanLeachman"} Twitter feed
-  also produced a helpful series of step-by-step tweet threads. These are presently being reworked into documents to match the recent rebranding of the site.
+  also produced a helpful series of step-by-step tweet threads. These are reworked as focused tasks below.
 
 %div{class:"row mt-4"}
   %div{class:"col mb-3"}
     %div{class:"card"}
       %div{class:"card-header border-bottom"}
         %h4 Getting Started with ORCID & Claiming Specimen Records
-      %div{class:"card-body mt-3"}
-        Coming soon...
-        //%iframe{type:"text/html", width:"100%", height:"600", frameborder:"0", align:"left", style:"align:left;max-width:100%;margin-top:20px;border:none;overflow-y: auto;", src:"https://threadreaderapp.com/embed/1257010391600660481.html"}
+      %div{class:"card-body overflow-auto mt-3", style:"max-height: 300px; min-height: 300px;"}
+        %p
+          First, you need to get an ORCID identifier. This is because you'll be creating and adding data to the site. So, if you do not have an ORCID, got to
+          %a{href: "https://orcid.org/register"} https://orcid.org/register
+          and get one. Please make some information you put into ORCID public such as your employer or add one of your publications. This ensures that someone will know who you are.
+          See the
+          %a{href: "/get-started"} Get Started
+          page to learn what public details Bionomia draws-in from your ORCID account.
+        %p
+          Then, login to Bionomia using your ORCID account.
+          %img{src:"/images/login.png", at: "Login button", class:"d-block mt-3 mb-3"}
+
+          You will first be taken to the Overview page in your profile.
+          If you have collected specimens whose metadata has been loaded into GBIF, you can go to the
+          %em Specimens
+          tab to claim them.
+          %img{src:"/images/profile-tabs.png", alt: "profile tabs", class:"d-block mt-3 mb-3"}
+        %p
+          This will link your specimens to your ORCID identifier, enriching the data and helping to ensure you get credit for your work at collecting or identifying specimens.
+          Claim your specimens by pressing the
+          %em net
+          button for those you have collected, the
+          %em microscope
+          button for those you have identified, or the
+          %em Both
+          button where you have done both.
+          If you did not collect or identify a candidate record that Bionomia found, click the
+          %em Not me
+          button.
+        %p{class:"mt-3 mb-3"}
+          %img{src:"/images/button-selectors.png", alt: "Specimen claiming buttons"}
+          %img{src:"/images/not-me.png", alt: "Not me buttons"}
+
+        %p
+          Don't panic if you make an error! You can rectify it.
+          Go to the
+          %em Claimed
+          subtab to adjust the records you indicated as identified, collected or both.
+          Go to the
+          %em Ignored
+          subtab to reclaim the records you indicated as "Not me".
+
+        %p
+          Once you have claimed your specimen records, press the
+          %em Science Enabled
+          tab.
+          This will show you what papers have used your specimen records in their analyses. This relies on the authors of those papers crediting and citing the download DOI of the GBIF dataset they used.
+
+        %p
+          Visit
+          %em Setting & Integrations
+          to make your Bionomia profile publicly available.
+          %img{src:"/images/settings-integrations.png", alt:"Settings & Integrations", class:"mt-3 mb-3"}
+          %img{src:"/images/make-public.png", alt:"Make profile public", class:"mt-3 mb-3"}
+
   %div{class:"col mb-3"}
     %div{class:"card"}
       %div{class:"card-header border-bottom"}
         %h4 Helping Others
-      %div{class:"card-body mt-3"}
+      %div{class:"card-body overflow-auto mt-3", style:"max-height: 300px; min-height: 300px;"}
         Coming soon...
         //%iframe{type:"text/html", width:"100%", height:"600", frameborder:"0", align:"left", style:"align:left;max-width:100%;margin-top:20px;border:none;overflow-y: auto;", src:"https://threadreaderapp.com/embed/1257020903163981824.html"}
 %div{class:"row mt-4"}
@@ -47,13 +99,13 @@
     %div{class:"card"}
       %div{class:"card-header border-bottom"}
         %h4 Creating a Wikidata Item
-      %div{class:"card-body mt-3"}
+      %div{class:"card-body overflow-auto mt-3", style:"max-height: 300px; min-height: 300px;"}
         Coming soon...
         //%iframe{type:"text/html", width:"100%", height:"600", frameborder:"0", align:"left", style:"align:left;max-width:100%;margin-top:20px;border:none;overflow-y: auto;", src:"https://threadreaderapp.com/embed/1257053327809888256.html"}
   %div{class:"col mb-3"}
     %div{class:"card"}
       %div{class:"card-header border-bottom"}
         %h4 Uploads to Attribute Records in Bulk
-      %div{class:"card-body mt-3"}
+      %div{class:"card-body overflow-auto mt-3", style:"max-height: 300px; min-height: 300px;"}
         Coming soon...
         //%iframe{type:"text/html", width:"100%", height:"600", frameborder:"0", align:"left", style:"align:left;max-width:100%;margin-top:20px;border:none;overflow-y: auto;", src:"https://threadreaderapp.com/embed/1258487417876688901.html"}
