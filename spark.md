@@ -56,7 +56,7 @@ val df1 = spark.
     option("treatEmptyValuesAsNulls", "true").
     option("ignoreLeadingWhiteSpace", "true").
     load("/Users/dshorthouse/Downloads/GBIF/verbatim.txt").
-    select(verbatimTerms.map(col): _*).
+    select(verbatimTerms.map(col):_*).
     filter(coalesce($"identifiedBy",$"recordedBy").isNotNull).
     where(!$"scientificName".contains("BOLD:")).
     where(!$"scientificName".contains("BOLD-")).
@@ -91,7 +91,7 @@ val df2 = spark.
     option("treatEmptyValuesAsNulls", "true").
     option("ignoreLeadingWhiteSpace", "true").
     load("/Users/dshorthouse/Downloads/GBIF/occurrence.txt").
-    select(processedTerms.map(col): _*).
+    select(processedTerms.map(col):_*).
     withColumnRenamed("dateIdentified","dateIdentified_processed").
     withColumnRenamed("eventDate", "eventDate_processed").
     withColumnRenamed("mediaType", "hasImage").
