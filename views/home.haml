@@ -12,18 +12,18 @@
   %div{id:"home-jumbotron", class: "jumbotron"}
     %h1 Bionomia
 
-%div{class:"container-fluid"}
-  %p{class:"lead tagline"}= I18n.t('home.tagline')
-  %p{id: "profile-buttons"}
-    %a{href:"/get-started", role: "button", class:"btn btn-lg btn-outline-dark"}= I18n.t('home.get_started')
-    - if !authorized?
-      %form{action: "/auth/orcid?lang=#{I18n.locale}", method: "POST" }
+  %p{class:"lead tagline ml-4 mt-3"}= I18n.t('home.tagline')
+  %form{action: "/auth/orcid?lang=#{I18n.locale}", method: "POST"}
+    %p{id: "profile-buttons", class:"ml-4"}
+      %a{href:"/get-started", role: "button", class:"btn btn-lg btn-success"}
+        #{I18n.t('home.get_started')} »
+      - if !authorized?
         %button{class: "btn btn-lg btn-outline-dark button-login connect-orcid-button"}
           %i{class:"fab fa-orcid"}
           = I18n.t('home.orcid_login')
         %input{type:"hidden", name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
-    - else
-      %a{ href:"/profile", id: "candidates-button", role: "button", class: "btn btn-lg btn-outline-dark" }= I18n.t('home.your_profile')
+      - else
+        %a{ href:"/profile", id: "candidates-button", role: "button", class: "btn btn-lg btn-outline-dark" }= I18n.t('home.your_profile')
 
 - if !@results.empty?
   %h2{class: "text-center"}= I18n.t('home.sample_profiles')

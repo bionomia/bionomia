@@ -511,9 +511,11 @@ dl.citation{
   .form-inline .form-group {
     margin-bottom:0.25rem;
   }
-  .button-login{display:inline-block;}
 }
 
+@media(max-width: 575px) {
+  .button-login{display:inline-block;}
+}
 /*
  * Responsive text aligning
  * http://ohryan.ca/2014/08/14/set-responsive-text-alignment-bootstrap-3/
