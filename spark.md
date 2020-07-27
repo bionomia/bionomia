@@ -32,7 +32,6 @@ val verbatimTerms = List(
   "country",
   "eventDate",
   "year",
-  "family",
   "identifiedBy",
   "institutionCode",
   "collectionCode",
@@ -77,7 +76,8 @@ val processedTerms = List(
   "countryCode",
   "dateIdentified",
   "eventDate",
-  "mediaType"
+  "mediaType",
+  "family"
 )
 
 val df2 = spark.

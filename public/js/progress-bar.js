@@ -1,4 +1,4 @@
-/*global jQuery, window, document, self, encodeURIComponent, Bloodhound */
+/*global jQuery, window, document, self, encodeURIComponent */
 var ProgressBar = (function($, window) {
 
   "use strict";
