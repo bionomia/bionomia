@@ -11,15 +11,26 @@ class ArticleOccurrence < ActiveRecord::Base
    validates :article_id, presence: true
 
    def self.orphaned_count
-     self.left_joins(:occurrence).where(occurrences: { id: nil }).count
+     counter = 0
+     Article.find_each do |article|
+       article_ids = article.article_occurrences.pluck(:occurrence_id)
+       Parallel.each(article_ids.in_groups_of(10_000, false), in_threads: 4) do |group|
+          occurrence_ids = Occurrence.where(id: group).pluck(:gbifID)
+          counter = counter + (group - occurrence_ids).count
+          puts counter.to_s.green
+       end
+     end
+     counter
    end
 
    def self.orphaned_delete
-     self.select(:id)
-         .left_joins(:occurrence)
-         .where(occurrences: { id: nil })
-         .find_in_batches(batch_size: 10_000) do |ids|
-       self.where(id: ids).delete_all
+     Article.find_each do |article|
+       article_ids = article.article_occurrences.pluck(:occurrence_id)
+       Parallel.each(article_ids.in_groups_of(10_000, false), in_threads: 4) do |group|
+          occurrence_ids = Occurrence.where(id: group).pluck(:gbifID)
+          missing = group - occurrence_ids
+          self.where(occurrence_id: missing).delete_all
+       end
      end
    end
 

@@ -44,11 +44,11 @@ class UserOccurrence < ActiveRecord::Base
    end
 
    def self.delete_orphaned
-     self.select(:id)
-         .left_joins(:occurrence)
-         .where(occurrences: { id: nil })
-         .find_each do |ids|
-       self.where(id: ids).delete_all
+     Parallel.each(self.in_batches(of: 50_000), in_threads: 4) do |batch|
+       ids = batch.select(:id)
+                  .left_joins(:occurrence)
+                  .where(occurrences: { id: nil })
+       UserOccurrence.where(id: ids).delete_all
      end
    end
 
