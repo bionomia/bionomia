@@ -503,6 +503,8 @@ fr:
     collected: collecté
     identified: identifié
     not_all_columns: Toutes les colonnes disponibles ne sont pas affichées.
+    map: Carte
+    list: Liste
     stats_identified_specimens_nocountry:
       unit:
         one: "spécimen identifié"

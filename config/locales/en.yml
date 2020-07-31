@@ -503,6 +503,8 @@ en:
     collected: collected
     identified: identified
     not_all_columns: Not all available columns are shown.
+    map: Map
+    list: List
     stats_identified_specimens_nocountry:
       unit:
         one: "specimen identified"
