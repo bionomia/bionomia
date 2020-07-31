@@ -33,10 +33,10 @@ a:hover, .page-link:hover{
   color:#003309;
 }
 .custom-pills .active, .custom-pills .active:hover {
-  color: #28a745 !important;
+  color: #3a7179 !important;
   background-color: transparent !important;
   background-image: none !important;
-  border: 1px solid #28a745 !important;
+  border: 1px solid #3a7179 !important;
 }
 .col{
   padding-left:10px;
