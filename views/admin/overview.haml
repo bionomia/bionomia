@@ -36,10 +36,42 @@
         %div{class:"row d-flex mt-3"}
           %div{class:"col-10 col-md-6"}
             %h4 Identified From
-            #map-identified{style:"width: 100%; height: 350px"}
+            %ul{class: "nav nav-pills custom-pills mt-3", role:"tablist"}
+              %li{class: "nav-item"}
+                %a{class: "nav-link active", "data-toggle":"tab", href: "#map-identified"}= I18n.t('user.map')
+              %li{class: "nav-item"}
+                %a{class: "nav-link", "data-toggle":"tab", href: "#list-identified"}= I18n.t('user.list')
+
+            %div{class:"tab-content"}
+              %div{class:"tab-pane fade show active", id:"map-identified", role:"tabpanel"}
+                #map-identified{style:"width: 100%; height: 350px"}
+              %div{class:"tab-pane fade", id:"list-identified", role:"tabpanel"}
+                %ul{class: "list-group mt-3"}
+                  - identified = @stats[:countries][:identified].sort_by{|k, v| -v}.map{|a| [ a[0], country_name(a[0]), a[1] ] }
+                  - identified.each do |country|
+                    %li{class: "list-group-item d-flex justify-content-between align-items-center"}
+                      %a{href: "/admin/user/#{@admin_user.identifier}/specimens?action=identified&country_code=#{country[0]}"} #{country[1]}
+                      %span{class: "badge badge-light badge-pill"} #{number_with_delimiter(country[2])}
+
           %div{class:"col-10 col-md-6"}
             %h4 Collected From
-            #map-collected{style:"width: 100%; height: 350px"}
+            %ul{class: "nav nav-pills custom-pills mt-3", role:"tablist"}
+              %li{class: "nav-item"}
+                %a{class: "nav-link active", "data-toggle":"tab", href: "#map-collected"}= I18n.t('user.map')
+              %li{class: "nav-item"}
+                %a{class: "nav-link", "data-toggle":"tab", href: "#list-collected"}= I18n.t('user.list')
+
+            %div{class:"tab-content"}
+              %div{class:"tab-pane fade show active", id:"map-collected", role:"tabpanel"}
+                #map-collected{style:"width: 100%; height: 350px"}
+              %div{class:"tab-pane fade", id:"list-collected", role:"tabpanel"}
+                %ul{class: "list-group mt-3"}
+                  - recorded = @stats[:countries][:recorded].sort_by{|k, v| -v}.map{|a| [ a[0], country_name(a[0]), a[1] ] }
+                  - recorded.each do |country|
+                    %li{class: "list-group-item d-flex justify-content-between align-items-center"}
+                      %a{href: "/admin/user/#{@admin_user.identifier}/specimens?action=collected&country_code=#{country[0]}"} #{country[1]}
+                      %span{class: "badge badge-light badge-pill"} #{number_with_delimiter(country[2])}
+
       - else
         #map-identified{style:"width: 0%; height: 0%; display: none;"}
         #map-collected{style:"width: 0%; height: 0%; display: none;"}
