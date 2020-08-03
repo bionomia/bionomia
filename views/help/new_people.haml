@@ -3,8 +3,8 @@
 
 - content_for :scripts do
   %script{src: "https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"}
-  %script{src: "/js/application.js"}
   %script{src: "/js/progress-bar.js"}
+  %script{src: "/js/application.js"}
   :javascript
     $(function() {
       var ids = $.map($('.progress-bar'), function(obj) { return $(obj).attr("id").split("_").pop(); });
