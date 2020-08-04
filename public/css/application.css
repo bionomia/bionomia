@@ -1,5 +1,6 @@
 @font-face {
   font-family:'lovely_homeregular';
+  src: url('/font/lovely_homeregular.eot');
   src: url('/font/lovelyhome-9abz-webfont.woff2') format('woff2'),
        url('/font/lovelyhome-9abz-webfont.woff2') format('woff');
   font-weight: normal;
