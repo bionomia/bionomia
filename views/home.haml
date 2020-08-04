@@ -10,7 +10,7 @@
 
 -content_for :jumbotron do
   %div{id:"home-jumbotron", class: "jumbotron"}
-    %h1 Bionomia
+    %h1 Bionomia>
 
   %p{class:"lead tagline ml-4 mt-3"}= I18n.t('home.tagline')
   %form{action: "/auth/orcid?lang=#{I18n.locale}", method: "POST"}
