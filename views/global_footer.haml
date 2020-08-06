@@ -8,9 +8,25 @@
     %li
       %a{href: "/collection-data-managers", class: "text-muted"}= I18n.t('layout.for_data_managers')
     %li
-      %a{href: "/developers", class: "text-muted"}= I18n.t('layout.for_developers')
-    %li
       %a{href: "/on-this-day", class: "text-muted"}= I18n.t('layout.on_this_day')
+
+%div{class:"px-2 px-sm-3 px-md-3"}
+  %h5= I18n.t('layout.tools')
+  %ul{class: "list-unstyled text-small"}
+    %li
+      %a{href: "/parse", class: "text-muted"}= I18n.t('layout.parse')
+    %li
+      %a{href: "/reconcile", class: "text-muted"}= I18n.t('layout.reconcile')
+    %li
+      %a{href: "/developers", class: "text-muted"}= I18n.t('layout.for_developers')
+
+%div{class:"px-2 px-sm-3 px-md-3"}
+  %h5= I18n.t('layout.policies')
+  %ul{class: "list-unstyled text-small"}
+    %li
+      %a{href: "/privacy", class: "text-muted"}= I18n.t('layout.privacy')
+    %li
+      %a{href: "/terms-of-service", class: "text-muted"}= I18n.t('layout.terms_service')
 
 %div{class: "px-2 px-sm-3 px-md-3"}
   %h5= I18n.t('layout.about')
@@ -23,14 +39,6 @@
       %a{href: "/history", class: "text-muted"}= I18n.t('layout.history')
     %li
       %a{href: "https://github.com/bionomia/bionomia/issues", class: "text-muted"}= I18n.t('layout.feedback')
-
-%div{class:"px-2 px-sm-3 px-md-3"}
-  %h5= I18n.t('layout.policies')
-  %ul{class: "list-unstyled text-small"}
-    %li
-      %a{href: "/privacy", class: "text-muted"}= I18n.t('layout.privacy')
-    %li
-      %a{href: "/terms-of-service", class: "text-muted"}= I18n.t('layout.terms_service')
 
 %div{class:"pr-2 pr-md-3"}
   %ul{class: "list-unstyled text-small"}

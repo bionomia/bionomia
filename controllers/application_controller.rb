@@ -256,6 +256,10 @@ module Sinatra
             haml :'developers/code', locals: { active_tab: "code" }
           end
 
+          app.get '/developers/parse' do
+            haml :'developers/parse', locals: { active_tab: "parse" }
+          end
+
           app.get '/help' do
             haml :help_docs
           end
@@ -316,6 +320,33 @@ module Sinatra
                                     .limit(50)
             @pagy, @results = pagy(occurrences)
             haml :'on_this_day/collected', locals: { active_tab: "specimens" }
+          end
+
+          app.get '/parse' do
+            @output = []
+            haml :'tools/parse'
+          end
+
+          app.post '/parse' do
+            @output = []
+            @columns = 0
+            lines = params[:names].split("\r\n")[0..500]
+            lines.each_with_index do |line, index|
+              item = {}
+              item[index] = { original: line.dup, parsed: [] }
+              parsed_names = DwcAgent.parse(line)
+              parsed_names.each do |name|
+                item[index][:parsed] << DwcAgent.clean(name)
+              end
+              cols = item[index][:parsed].size
+              @columns = @columns > cols ? @columns : cols
+              @output << item
+            end
+            haml :'tools/parse'
+          end
+
+          app.get '/reconcile' do
+            haml :'tools/reconcile'
           end
 
           app.get '/agent.json' do

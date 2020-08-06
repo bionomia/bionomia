@@ -1,5 +1,5 @@
 -content_for :title do
-  For Developers: Search & Reconcile
+  For Developers: Search
 
 -content_for :jumbotron do
   %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
@@ -8,7 +8,7 @@
 
 = haml :'partials/developers/tabs', layout:false, locals: { active_tab: locals[:active_tab] }
 
-%h3{class:"mt-4 mb-3"} Search
+%h3{class:"mt-4 mb-3"}= I18n.t('developer.search')
 
 %p{class:"mb-4"}
   Search for people is exposed as JSON-LD documents with Cross-Origin Resource Sharing (CORS) using elements from
@@ -126,5 +126,3 @@
               }
             ]
           }
-
-= haml :'partials/developers/reconcile', layout: false

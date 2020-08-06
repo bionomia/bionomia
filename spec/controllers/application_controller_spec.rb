@@ -45,6 +45,11 @@ describe "Bionomia Application Controller" do
     expect(last_response).to be_ok
   end
 
+  it "should allow accessing the developers parse page" do
+    get '/developers/parse'
+    expect(last_response).to be_ok
+  end
+
   it "should allow accessing the collection data managers page" do
     get '/collection-data-managers'
     expect(last_response).to be_ok
@@ -112,6 +117,16 @@ describe "Bionomia Application Controller" do
 
   it "should allow accessing the on-this-day/collected page" do
     get '/on-this-day/collected'
+    expect(last_response).to be_ok
+  end
+
+  it "should allow accessing the parse page" do
+    get '/parse'
+    expect(last_response).to be_ok
+  end
+
+  it "should allow accessing the reconcile page" do
+    get '/reconcile'
     expect(last_response).to be_ok
   end
 

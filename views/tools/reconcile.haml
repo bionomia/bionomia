@@ -1,0 +1,17 @@
+-content_for :title do
+  = I18n.t('layout.search_reconcile')
+
+-content_for :jumbotron do
+  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
+    %div{class:"mr-auto p-2"}
+      %h1{class:"h2"}= I18n.t('layout.reconcile')
+
+= haml :'partials/developers/reconcile', layout: false
+
+%h3 Google Sheets Add-on
+
+%p
+  In the
+  %a{href:"https://gsuite.google.com/marketplace/app/bionomia/778630534738"}
+    G Suite Markeplace
+%iframe{class:"mt-2 mb-3", width: 560, height: 315, src:"https://www.youtube.com/embed/WESI0l-3O4k", frameborder: 0, allow:"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture", allowfullscreen: true}

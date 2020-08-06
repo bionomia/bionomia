@@ -113,7 +113,7 @@ en:
         one: "person claimed or was attributed specimens represented in this dataset"
         other: "people claimed or were attributed specimens represented in this dataset"
   developer:
-    search_reconcile: "Search & Reconcile"
+    search: Search
     structured_data: Structured Data
     raw_data: Raw Data
     code: Code
@@ -123,6 +123,7 @@ en:
     code_title: "For Developers: Code"
     code: Code
     parser: Parse Names
+    parse_names: Parse Human Names
   donate:
     donate_title: Donate
     lede: Your one-time or periodic donation will help complete the data pipeline and ensure that credit is given for contributions made to natural history collections as quickly and as seamlessly as possible.
@@ -286,6 +287,9 @@ en:
     twitter: Bionomia on Twitter
     support: Donate
     help: Help Documents
+    tools: Tools
+    parse: Parse Names
+    reconcile: Reconcile Names
   not_authorized:
     not_authorized: Not authorized or session terminated.
   occurrence:

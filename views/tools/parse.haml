@@ -1,0 +1,53 @@
+-content_for :title do
+  = I18n.t('layout.parse')
+
+-content_for :jumbotron do
+  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
+    %div{class:"mr-auto p-2"}
+      %h1{class:"h2"}= I18n.t('layout.parse')
+
+%p
+  Paste list of entries (limited to first 500 rows) as typically seen in the Darwin Core terms,
+  %a{href: "https://dwc.tdwg.org/terms/#dwc:recordedBy"} recordedBy
+  or
+  %a{href: "https://dwc.tdwg.org/terms/#dwc:identifiedBy"} identifiedBy
+  where each line is a new entry. See the
+  %a{href:"/developers/code"} Ruby gem
+  used for this service.
+
+%form{action:"/parse", method: :post}
+  %div{class: "form-group"}
+    %textarea{name: "names", class:"form-control", rows: 5}= params[:names]
+  %button{class:"btn btn-success", type:"submit"}= I18n.t('general.submit')
+
+- if !@output.empty?
+
+  - if @output.size >= 300
+    %div{class:"alert alert-warning mt-4"}
+      Parsed results are limited to the first 500 rows.
+
+  %div{class:"table-responsive mt-4"}
+    %table{class:"table table-hover table-sm border-bottom"}
+      %thead{class:"thead-light"}
+        %tr
+          %th{scope:"col", class:"border-right"} Original
+          - (1..@columns).each do |col|
+            %th{scope:"col"} Family
+            %th{scope:"col"} Given
+            %th{scope:"col", class:"border-right"} Particle
+      %tbody
+        - @output.each_with_index do |row, index|
+          %tr
+            %th{scope:"row", class:"small border-right font-weight-bold"}
+              #{row[index][:original]}
+            - row[index][:parsed].each do |col|
+              %td
+                #{col[:family]}
+              %td
+                #{col[:given]}
+              %td{class:"border-right"}
+                #{col[:particle]}
+            - (1..@columns - row[index][:parsed].size).each do |col|
+              %td
+              %td
+              %td{class:"border-right"}

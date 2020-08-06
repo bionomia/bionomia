@@ -113,7 +113,7 @@ fr:
         one: "personne a réclamé ou a été attribuée des spécimens dans cet ensemble de données"
         other: "personnes ont réclamé ou ont été attribuées des spécimens dans cet ensemble de données"
   developer:
-    search_reconcile: "Rechercher et Rapprocher"
+    search: Rechercher
     structured_data: Données Structurées
     raw_data: Données Brutes
     code: Code Informatique
@@ -123,6 +123,7 @@ fr:
     code_title: "Pour les Développeurs: Code Informatique"
     code: Code Informatique
     parser: Analyser les Noms
+    parse_names: Analyser les Noms Humains
   donate:
     donate_title: Faire un don
     lede: Votre don unique ou périodique contribuera à compléter le pipeline de données et à garantir que le crédit est accordé aux contributions faites aux collections d'histoire naturelle le plus rapidement et le plus facilement possible.
@@ -286,6 +287,9 @@ fr:
     twitter: Bionomia sur Twitter
     support: Faire un don
     help: Documents d'Aide
+    tools: Outils
+    parse: Analyser les noms
+    reconcile: Réconcilier les noms
   not_authorized:
     not_authorized: Non autorisé ou session terminée.
   occurrence:

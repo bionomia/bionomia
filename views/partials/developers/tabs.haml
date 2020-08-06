@@ -1,6 +1,8 @@
 %ul{class: "nav nav-tabs mt-3 mb-3"}
   %li{class: "nav-item"}
-    %a{class: "nav-link#{locals[:active_tab] == "search" ? " active" : nil}", href: "/developers"}= I18n.t('developer.search_reconcile')
+    %a{class: "nav-link#{locals[:active_tab] == "search" ? " active" : nil}", href: "/developers"}= I18n.t('developer.search')
+  %li{class: "nav-item"}
+    %a{class: "nav-link#{locals[:active_tab] == "parse" ? " active" : nil}", href: "/developers/parse"}= I18n.t('developer.parse_names')
   %li{class: "nav-item"}
     %a{class: "nav-link#{locals[:active_tab] == "structured_data" ? " active" : nil}", href: "/developers/structured-data"}= I18n.t('developer.structured_data')
   %li{class: "nav-item"}
