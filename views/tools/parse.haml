@@ -32,22 +32,28 @@
         %tr
           %th{scope:"col", class:"border-right"} Original
           - (1..@columns).each do |col|
-            %th{scope:"col"} Family
+            %th{scope:"col"} Title
+            %th{scope:"col"} Appellation
             %th{scope:"col"} Given
-            %th{scope:"col", class:"border-right"} Particle
+            %th{scope:"col"} Particle
+            %th{scope:"col"} Family
+            %th{scope:"col", class:"border-right"} Suffix
       %tbody
         - @output.each_with_index do |row, index|
           %tr
             %th{scope:"row", class:"small border-right font-weight-bold"}
               #{row[index][:original]}
             - row[index][:parsed].each do |col|
-              %td
-                #{col[:family]}
-              %td
-                #{col[:given]}
-              %td{class:"border-right"}
-                #{col[:particle]}
+              %td #{col[:title]}
+              %td #{col[:appellation]}
+              %td #{col[:given]}
+              %td #{col[:particle]}
+              %td #{col[:family]}
+              %td{class:"border-right"} #{col[:suffix]}
             - (1..@columns - row[index][:parsed].size).each do |col|
+              %td
+              %td
+              %td
               %td
               %td
               %td{class:"border-right"}
