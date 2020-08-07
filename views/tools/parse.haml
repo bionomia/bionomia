@@ -5,11 +5,21 @@
   %script{src: "/js/csvExport.min.js"}
   :javascript
     $(function() {
-      var ele = $("#bionomia-parse-results");
+      var ele = $("#bionomia-parse-results"),
+          textarea = $('textarea[name="names"]'),
+          sample = "Miss Anna von Hoff; Dr. MA Smith Jr.; Groom Q\nBro. Aimé (coll. 2002-VI-06)";
       $("#csv-export").on("click", function(e) {
         e.preventDefault();
         ele.csvExport({ title: ele.attr("id") + ".csv" });
         return false;
+      });
+      $("#try-some").on("click", function(e) {
+        e.preventDefault();
+        textarea.val(sample);
+        return false;
+      });
+      $("#reset").on("click", function(e) {
+        textarea.val('').text('');
       });
     });
 
@@ -28,11 +38,14 @@
   used for this service and documentation for the
   = succeed "." do
     %a{href:"/developers/parse"} API
+  = succeed "." do
+    %a{href:"#", id:"try-some"} Try some
 
 %form{action:"/parse", method: :post}
   %div{class: "form-group"}
     %textarea{name: "names", class:"form-control", rows: 5}= params[:names]
   %button{class:"btn btn-success", type:"submit"}= I18n.t('general.submit')
+  %button{class:"btn btn-warning", type:"reset", id:"reset"}= I18n.t('general.reset')
 
 - if !@output.empty?
 

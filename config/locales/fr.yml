@@ -155,6 +155,7 @@ fr:
     This routine does not update underlying specimen data nor does it update existing claims. If existing claims are present in the upload, these will be skipped.
     Your uploaded csv must use a comma to separate columns each optionally enclosed by quotes."
     search_dropdown_no_users: "Votre recherche a retourné 0 résultats."
+    reset: Réinitialiser
   get_started:
     get_started_title: Commencer
     lede: Quatre étapes pour réclamer les spécimens que vous avez collectés ou identifiés et pour aider à reconnaître vos pairs, mentors et organisations.
