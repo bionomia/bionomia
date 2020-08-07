@@ -1,13 +1,25 @@
 -content_for :title do
   = I18n.t('layout.parse')
 
+-content_for :scripts do
+  %script{src: "/js/csvExport.min.js"}
+  :javascript
+    $(function() {
+      var ele = $("#bionomia-parse-results");
+      $("#csv-export").on("click", function(e) {
+        e.preventDefault();
+        ele.csvExport({ title: ele.attr("id") + ".csv" });
+        return false;
+      });
+    });
+
 -content_for :jumbotron do
   %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
     %div{class:"mr-auto p-2"}
       %h1{class:"h2"}= I18n.t('layout.parse')
 
 %p
-  Paste list of human names (limited to first 500 rows) as typically seen in the Darwin Core terms,
+  Paste list of human names (limited to first 1,000 rows) as typically seen in the Darwin Core terms,
   %a{href: "https://dwc.tdwg.org/terms/#dwc:recordedBy"} recordedBy
   or
   %a{href: "https://dwc.tdwg.org/terms/#dwc:identifiedBy"} identifiedBy
@@ -24,12 +36,18 @@
 
 - if !@output.empty?
 
-  - if @output.size >= 300
-    %div{class:"alert alert-warning mt-4"}
-      Parsed results are limited to the first 500 rows.
+  - klass = @output.size >= 300 ? "warning" : "success"
+  %div{class:"alert alert-#{klass} mt-4"}
+    %div{class:"row"}
+      %div{class:"col col-12 col-lg-10"}
+        Parsed results are limited to the first 1,000 rows.
+      %div{class:"col col-12 col-lg-2 text-lg-right pr-3"}
+        %a{href:"#", id:"csv-export"}
+          %i{class:"fas fa-file-csv h5 text-dark m-0 p-1"}
+          CSV
 
   %div{class:"table-responsive mt-4"}
-    %table{class:"table table-hover table-sm border-bottom"}
+    %table{class:"table table-hover table-sm border-bottom", id:"bionomia-parse-results"}
       %thead{class:"thead-light"}
         %tr
           %th{scope:"col", class:"border-right"} Original

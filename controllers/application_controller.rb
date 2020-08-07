@@ -330,7 +330,7 @@ module Sinatra
           app.post '/parse' do
             @output = []
             @columns = 0
-            lines = params[:names].split("\r\n")[0..500]
+            lines = params[:names].split("\r\n")[0..999]
             lines.each_with_index do |line, index|
               item = {}
               item[index] = { original: line.dup, parsed: [] }
