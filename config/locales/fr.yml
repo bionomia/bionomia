@@ -124,6 +124,8 @@ fr:
     code: Code Informatique
     parser: Analyser les Noms
     parse_names: Analyser les Noms Humains
+    parse_names_title: "Pour les Développeurs: Analyser les Noms"
+    structured_data_title: "For Developers: Données Structurées"
   donate:
     donate_title: Faire un don
     lede: Votre don unique ou périodique contribuera à compléter le pipeline de données et à garantir que le crédit est accordé aux contributions faites aux collections d'histoire naturelle le plus rapidement et le plus facilement possible.
