@@ -19,7 +19,6 @@ header, section, footer, aside, nav, main, article, figure {
 }
 footer {
   background-color:#f9f9f9;
-  min-height:11rem;
 }
 pre {
   white-space:pre-wrap;
@@ -499,7 +498,29 @@ dl.citation{
   color: #f08d49;
 }
 
+@media(max-width: 767px) {
+  .form-inline .form-group {
+    margin-bottom:0.25rem;
+  }
+  footer.justify-content-end {
+    justify-content: space-around!important;
+  }
+}
+
+@media(max-width: 575px) {
+  .button-login{display:inline-block;}
+}
+
+@media (max-width: 530px) {
+  #home-jumbotron h1 {
+    font-size:5.5rem;
+  }
+}
+
 @media (max-width: 450px) {
+  #home-jumbotron {
+    padding:0.5rem;
+  }
   #home-jumbotron h1 {
     font-size:4.5rem;
   }
@@ -518,15 +539,6 @@ dl.citation{
   }
 }
 
-@media(max-width: 767px) {
-  .form-inline .form-group {
-    margin-bottom:0.25rem;
-  }
-}
-
-@media(max-width: 575px) {
-  .button-login{display:inline-block;}
-}
 /*
  * Responsive text aligning
  * http://ohryan.ca/2014/08/14/set-responsive-text-alignment-bootstrap-3/
