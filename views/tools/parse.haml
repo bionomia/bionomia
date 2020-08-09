@@ -44,6 +44,7 @@
 %form{action:"/parse", method: :post}
   %div{class: "form-group"}
     %textarea{name: "names", class:"form-control", rows: 5}= params[:names]
+  %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
   %button{class:"btn btn-success", type:"submit"}= I18n.t('general.submit')
   %button{class:"btn btn-warning", type:"reset", id:"reset"}= I18n.t('general.reset')
 
