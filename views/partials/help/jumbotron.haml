@@ -25,7 +25,7 @@
       %h1{class:"mt-3 h2 text-center", itemprop: "name"}= @viewed_user.fullname
 
       - if !@viewed_user.other_names.blank?
-        %p{class:"text-center text-muted p-0 mt-1 mb-1 truncate"}= @viewed_user.other_names.split("|").join("; ")
+        %p{class:"text-center text-muted p-0 mt-1 mb-1 truncate"} #{@viewed_user.other_names.split("|").join("; ")}
 
       - if @viewed_user.wikidata
         %p{class:"text-center text-muted p-0 mt-1 mb-1"}= format_lifespan(@viewed_user)

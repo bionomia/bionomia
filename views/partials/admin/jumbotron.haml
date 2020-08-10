@@ -1,13 +1,14 @@
-%script{src: "/js/jquery.collapser.min.js"}
-:javascript
-  $(function() {
-    $('.truncate').show().collapser({
-      mode: 'lines',
-      truncate: 3,
-      showText: '[Show more...]',
-      hideText: '[Hide]'
+- content_for :scripts do
+  %script{src: "/js/jquery.collapser.min.js"}
+  :javascript
+    $(function() {
+      $('.truncate').show().collapser({
+        mode: 'lines',
+        truncate: 3,
+        showText: '[Show more...]',
+        hideText: '[Hide]'
+      });
     });
-  });
 
 %div{class:"col-12 col-lg-4 text-center sidebar alert-warning pt-3 pb-3"}
   %form{id:"form-wrapper", method: :post, action: "/", enctype: "multipart/form-data", "accept-charset": "UTF-8", class: "form"}

@@ -4,17 +4,10 @@
 -content_for :scripts do
   %script{src:"/js/application.js"}
   %script{src:"/js/profile.js"}
-  %script{src: "/js/jquery.collapser.min.js"}
   :javascript
     $(function() {
         Application.init(#{@admin_user.id}, "PUT", "/admin", "#{@admin_user.identifier}");
         Profile.init("/admin/user/#{@admin_user.identifier}");
-        $('.truncate').show().collapser({
-            mode: 'lines',
-            truncate: 22,
-            showText: '[Show more...]',
-            hideText: '[Show less...]'
-        });
     });
   = haml :'partials/viz_scripts', layout: false, locals: { path: "/admin/user/#{@admin_user.identifier}" }
 
