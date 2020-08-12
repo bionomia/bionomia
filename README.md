@@ -35,7 +35,6 @@ Sinatra app to parse people names from structured biodiversity occurrence data, 
 
 See the [Apache Spark recipes](spark.md) for quickly importing into MySQL the occurrence csv from a DwC Archive downloaded from [GBIF](https://www.gbif.org). Apache Spark is used to produce the necessary source csv files for the "Parse & Populate Agents" and "Populate Taxa" steps below.
 
-
 ### Step 2: Check for Dramatic Changes in gbifIDs
 
 Unfortunately, gbifIDs are not persistent. These occasionally disappear through processing at GBIF's end. As a result, claims may no longer point to existing occurrence records. The following produces a count for how many claims and attributions might be orphaned:
