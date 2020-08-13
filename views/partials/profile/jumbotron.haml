@@ -1,3 +1,15 @@
+- content_for :scripts do
+  %script{src: "/js/jquery.collapser.min.js"}
+  :javascript
+    $(function() {
+      $('.truncate').show().collapser({
+        mode: 'lines',
+        truncate: 4,
+        showText: '[Show more...]',
+        hideText: '[Hide]'
+      });
+    });
+
 %div{class:"col-12 col-lg-4 text-center sidebar"}
   %div{id:"image-alert", class:"alert alert-danger alert-dismissible fade", "data-dismiss":"alert", role:"alert"}
     = I18n.t('profile.upload_error')
