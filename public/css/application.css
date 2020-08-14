@@ -524,6 +524,12 @@ dl.citation{
   #home-jumbotron h1 {
     font-size:4.5rem;
   }
+  footer {
+    flex-direction: column!important;
+  }
+  footer h5, footer li {
+    text-align: center!important;
+  }
   .attribution {
     font-size:0.8rem;
   }
