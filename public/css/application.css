@@ -502,9 +502,6 @@ dl.citation{
   .form-inline .form-group {
     margin-bottom:0.25rem;
   }
-  footer.justify-content-end {
-    justify-content: space-around!important;
-  }
 }
 
 @media(max-width: 575px) {
@@ -529,6 +526,10 @@ dl.citation{
   }
   footer h5, footer li {
     text-align: center!important;
+    width:100%;
+  }
+  .justify-content-end {
+    justify-content: center!important;
   }
   .attribution {
     font-size:0.8rem;
