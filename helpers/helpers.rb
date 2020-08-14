@@ -8,6 +8,14 @@ module Sinatra
         @base_url ||= "#{request.env['rack.url_scheme']}://#{request.env['HTTP_HOST']}"
       end
 
+      def locale
+        locales = {
+          en: "en_US",
+          fr: "fr_FR"
+        }
+        locales[I18n.locale] || "en_US"
+      end
+
       def check_identifier
         if !params[:id].is_orcid? && !params[:id].is_wiki_id?
           halt 404

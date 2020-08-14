@@ -94,5 +94,12 @@ class BIONOMIA < Sinatra::Base
     haml :error if !content_type
   end
 
+  before do
+    locale = request.host.split('.')[0]
+    if I18n.available_locales.include? locale.to_sym
+      I18n.locale = locale
+    end
+  end
+
   run! if app_file == $0
 end

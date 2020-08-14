@@ -17,7 +17,7 @@
       %meta{name:"twitter:image", content:"#{base_url}/images/screenshot.png"}/
     %meta{property:"og:title", content:"#{yield_content(:title)}"}/
     %meta{property:"og:description", content:"#{I18n.t('home.tagline')}"}/
-    %meta{property:"og:locale", content:"en_US"}/
+    %meta{property:"og:locale", content:"#{locale}"}/
     %meta{property:"og:type", content:"website"}/
     %meta{property:"og:url", content:"#{base_url}"}/
     - if content_for?(:og_image)
