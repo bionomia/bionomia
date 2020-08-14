@@ -319,7 +319,7 @@ en:
     no_types_alert: "No type specimens found collected on %{date}"
   oops:
     not_found_title: Not found
-    not_found: We looked looked everywhere but could not find that page.
+    not_found: We looked everywhere but could not find that page.
     error_title: Error
     error: Sorry, we experienced an error.
   organization:
