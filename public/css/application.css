@@ -37,7 +37,7 @@ a:hover, .page-link:hover{
   color:#003309;
 }
 .flex-wrap {
-  -webkit-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap!important;
 }
 .custom-pills .active, .custom-pills .active:hover {
   color: #3a7179 !important;
