@@ -36,6 +36,9 @@ a, .page-link{
 a:hover, .page-link:hover{
   color:#003309;
 }
+.flex-wrap {
+  -webkit-flex-wrap: wrap;
+}
 .custom-pills .active, .custom-pills .active:hover {
   color: #3a7179 !important;
   background-color: transparent !important;
@@ -523,13 +526,14 @@ dl.citation{
   }
   footer {
     flex-direction: column!important;
+    -webkit-flex-direction: column!important;
   }
   footer h5, footer li {
     text-align: center!important;
-    width:100%;
   }
   .justify-content-end {
     justify-content: center!important;
+    -webkit-justify-content: center!important;
   }
   .attribution {
     font-size:0.8rem;
@@ -537,7 +541,6 @@ dl.citation{
   .attribution img {
     width:1.2rem;
   }
-
   .display-2 {
     font-size:3.5rem;
   }

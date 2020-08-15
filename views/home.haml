@@ -28,7 +28,6 @@
 - if !@results.empty?
   %h2{class: "text-center"}= I18n.t('home.sample_profiles')
 
-  %div{class:"container"}
   - @results.in_groups_of(3).each do |group|
     %div{class: "card-deck"}
       - group.each do |u|
