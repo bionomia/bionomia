@@ -65,7 +65,7 @@
               %a{href: "https://gbif.org/occurrence/#{o.id}", target:"_blank"}
                 #{h(scientific_name)}
               - if o.hasImage?
-                %i{class:"fas fa-image ml-1"}
+                %i{class:"fas fa-image ml-1", "data-toggle":"popover", "data-gbifid":"#{o.id}"}
             %td #{h(o.recordedBy)}
             %td #{h(o.identifiedBy)}
             %td #{h(o.eventDate || o.year)}

@@ -67,6 +67,28 @@ module Sinatra
             end
           end
 
+          app.get '/occurrence/:id/image_url' do
+            content_type "application/json", charset: 'utf-8'
+            begin
+              response = RestClient::Request.execute(
+                method: :get,
+                url: "https://api.gbif.org/v1/occurrence/#{params[:id]}"
+              )
+              result = JSON.parse(response, :symbolize_names => true)
+              result[:media].each do |media|
+                if media[:type] == "StillImage"
+                  return {
+                    cropped: "https://abekpgaoen.cloudimg.io/width/250/x/#{media[:identifier]}",
+                    original: "#{media[:identifier]}"
+                  }.to_json
+                  break
+                end
+              end
+            rescue
+              { image_url: nil }.to_json
+            end
+          end
+
           app.get '/occurrence/:id' do
             @occurrence = Occurrence.find(params[:id]) rescue nil
             if @occurrence.nil?

@@ -46,6 +46,7 @@ var Application = (function($, window) {
       this.activate_radios();
       this.activate_switch();
       this.activate_refresh();
+      this.activate_popovers();
       this.candidate_counter();
       this.helper_navbar();
       this.helper_modal();
@@ -536,6 +537,32 @@ var Application = (function($, window) {
         });
         return false;
       });
+    },
+    activate_popovers: function() {
+      var self = this;
+      $.each($('[data-toggle="popover"]'), function(index, value) {
+        var _self = this;
+        $(this).popover({
+          container: $(_self),
+          trigger: 'hover',
+          html: true,
+          content: function() { return self.gbif_image($(_self)); }
+        }).on('hide.bs.popover', function() {
+          if($('.popover:hover', _self).length) {
+            return false;
+          }
+        });
+      });
+    },
+    gbif_image: function(obj) {
+      $.ajax({
+        url: "/occurrence/" + $(obj).attr("data-gbifid") + "/image_url",
+        method: "GET",
+        dataType: "json"
+      }).done(function(data) {
+        $(obj).find('.popover-body').html('<img src="'+ data.cropped +'"/>');
+      });
+      return "Loading...";
     },
     candidate_counter: function() {
       var self = this, slug = "";
