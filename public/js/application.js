@@ -546,7 +546,7 @@ var Application = (function($, window) {
           container: $(_self),
           trigger: 'hover',
           html: true,
-          content: function() { return self.gbif_image($(_self)); }
+          content: function() { return self.gbif_images($(_self)); }
         }).on('hide.bs.popover', function() {
           if($('.popover:hover', _self).length) {
             return false;
@@ -554,15 +554,60 @@ var Application = (function($, window) {
         });
       });
     },
-    gbif_image: function(obj) {
+    gbif_images: function(obj) {
+      var self = this;
       $.ajax({
-        url: "/occurrence/" + $(obj).attr("data-gbifid") + "/image_url",
+        url: "/occurrence/" + $(obj).attr("data-gbifid") + "/still_images",
         method: "GET",
         dataType: "json"
       }).done(function(data) {
-        $(obj).find('.popover-body').html('<img src="'+ data.cropped +'"/>');
+        $(obj).find('.popover-body')
+              .html(self.carousel_template(data, $(obj).attr("data-gbifid")))
+              .find("img").each(function() {
+                if($(this)[0].naturalHeight > 300) {
+                  $(this).mlens({
+                    imgSrc:$(this).attr("data-big"),
+                    lensShape:"square",
+                    lensSize: ["100px","100px"],
+                    borderSize:0,
+                    zoomLevel: 1
+                  });
+                }
+              });
       });
-      return "Loading...";
+      return self.spinner;
+    },
+    carousel_template: function(data, id) {
+      var html  = "";
+      html += '<div id="carousel-indicators-'+id+'" class="carousel slide" data-ride="carousel" style="min-width:250px;min-height:100px;">';
+      if (data.length > 1) {
+        html += '<ol class="carousel-indicators">';
+        $.each(data, function(index, value) {
+          var active = (index === 0) ? " class='active'" : "";
+          html += '<li data-target="#carousel-indicators-'+id+'" data-slide-to="'+index+'"'+active+'></li>';
+        });
+        html += '</ol>';
+      }
+      html += '<div class="carousel-inner">';
+      $.each(data, function(index, value) {
+        var active = (index === 0) ? " active" : "";
+        html += '<div class="carousel-item'+active+'">';
+        html += '<a href="'+value.original+'" target="_blank"><img src="'+ value.small +'" class="d-block" data-big="'+value.large+'"/></a>';
+        html += '</div>';
+      });
+      html += '</div>';
+      if (data.length > 1) {
+        html += '<a class="carousel-control-prev" href="#carousel-indicators-'+id+'" role="button" data-slide="prev">';
+        html += '<span class="carousel-control-prev-icon" aria-hidden="true"></span>';
+        html += '<span class="sr-only">Previous</span>';
+        html += '</a>';
+        html += '<a class="carousel-control-next" href="#carousel-indicators-'+id+'" role="button" data-slide="next">';
+        html += '<span class="carousel-control-next-icon" aria-hidden="true"></span>';
+        html += '<span class="sr-only">Next</span>';
+        html += '</a>';
+      }
+      html += '</div>';
+      return html;
     },
     candidate_counter: function() {
       var self = this, slug = "";

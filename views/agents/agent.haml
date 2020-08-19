@@ -1,6 +1,14 @@
 -content_for :title do
   = I18n.t('agent.agent_name_title', agent_name: "#{@agent.fullname}")
 
+-content_for :scripts do
+  %script{src: "/js/jquery.mlens-1.7.min.js"}
+  %script{src:"/js/application.js"}
+  :javascript
+    $(function() {
+      Application.init();
+    });
+
 -content_for :jumbotron do
   = haml :'partials/agent/jumbotron', layout: false
 
