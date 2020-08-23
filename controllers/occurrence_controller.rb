@@ -67,7 +67,7 @@ module Sinatra
             end
           end
 
-          app.get '/occurrence/:id/still_images' do
+          app.get '/occurrence/:id/still_images.json' do
             content_type "application/json", charset: 'utf-8'
             begin
               response = RestClient::Request.execute(

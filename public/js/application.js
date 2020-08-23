@@ -557,9 +557,9 @@ var Application = (function($, window) {
     gbif_images: function(obj) {
       var self = this;
       $.ajax({
-        url: "/occurrence/" + $(obj).attr("data-gbifid") + "/still_images",
+        url: "/occurrence/" + $(obj).attr("data-gbifid") + "/still_images.json",
         method: "GET",
-        dataType: "json"
+        dataType: "json",
       }).done(function(data) {
         $(obj).find('.popover-body')
               .html(self.carousel_template(data, $(obj).attr("data-gbifid")))
