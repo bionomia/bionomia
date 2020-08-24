@@ -44,7 +44,7 @@ if options[:directory] && options[:key]
   else
     puts "Package #{options[:key]} not found".red
   end
-elsif options[:directory] && options[:all]
+elsif options[:directory] && ( options[:all] || options[:missing] )
   Dataset.find_each do |d|
     next if !d.has_claim?
     if options[:missing]
