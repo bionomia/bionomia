@@ -134,6 +134,20 @@ val missing = occurrences.
     where("gbifID IS NULL").
     count
 
+//make a list of missing occurrence_ids
+val missing_occurrences = occurrences.
+      join(user_occurrences, $"gbifID" === $"occurrence_id", "rightouter").
+      select("occurrence_id").
+      where("visible = true").
+      where("gbifID IS NULL").
+      repartition(1).
+      write.
+      mode("overwrite").
+      option("header", "true").
+      option("quote", "\"").
+      option("escape", "\"").
+      csv("missing-claims")
+
 //check user_occurrences against new occurrences table to see how many orphaned claims we have
 val user_occurrences = spark.read.jdbc(url, "user_occurrences", prop)
 val missing = user_occurrences.
