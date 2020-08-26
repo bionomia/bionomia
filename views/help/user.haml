@@ -2,7 +2,6 @@
   Helping #{@viewed_user.fullname}
 
 - content_for :scripts do
-  %script{src: "/js/jquery.mlens-1.7.min.js"}
   %script{src: "/js/application.js"}
   :javascript
     $(function() {
@@ -98,66 +97,4 @@
           Advanced Search & Filter
 
   - if @pagy.count > 0
-    %div{class:"table-responsive-lg"}
-      %table{class:"table table-hover table-sm"}
-        %thead{class: "thead-light"}
-          %tr
-            %th{scope: "col", class:"selector"}
-              = haml :'partials/bulk_selector_top', layout: false
-            %th{scope: "col"}= I18n.t('specimen.scientific_name')
-            %th{scope: "col"}= I18n.t('specimen.collected_by')
-            %th{scope: "col"}= I18n.t('specimen.identified_by')
-            %th{scope: "col"}= I18n.t('specimen.date_collected')
-            %th{scope: "col"}= I18n.t('specimen.date_identified')
-            %th{scope: "col"}= I18n.t('specimen.family')
-            %th{scope: "col"}= I18n.t('specimen.institution')
-            %th{scope: "col"}= I18n.t('specimen.catalog_number')
-            %th{scope: "col"}= I18n.t('specimen.type_status')
-            %th{scope: "col", class:"btn-selector-wide"}
-              %button{type:"button", name:"notme-all", class:"btn btn-sm btn-warning hide-all"}= I18n.t('specimen.not_them')
-
-        %tbody
-          - @results.each do |o|
-            %tr
-              %td{class: "selector"}
-                = haml :'partials/single_selector', layout: false, locals: { occurrence: o }
-              %td
-                - scientific_name = o.scientificName.nil? ? "#{I18n.t('specimen.not_recorded')}" : o.scientificName
-                %a{href: "https://gbif.org/occurrence/#{o.id}", target:"_blank"}
-                  #{h(scientific_name)}
-                - if o.hasImage?
-                  %i{class:"fas fa-image ml-1", "data-toggle":"popover", "data-gbifid":"#{o.id}"}
-              %td #{h(o.recordedBy)}
-              %td #{h(o.identifiedBy)}
-              %td #{h(o.eventDate || o.year)}
-              %td #{h(o.dateIdentified)}
-              %td #{h(o.family)}
-              %td #{h(o.institutionCode)}
-              %td #{h(o.catalogNumber)}
-              %td #{h(o.typeStatus)}
-              %td
-                %button{type:"button", class:"btn btn-sm btn-outline-warning hide", "data-occurrence-id":"#{o.id}"}= I18n.t('specimen.not_them')
-
-        - if @total > 25
-          %tfoot{class: "thead-light"}
-            %tr
-              %th{scope: "col", class:"selector"}
-                = haml :'partials/bulk_selector_bottom', layout: false
-              %th{scope: "col"}= I18n.t('specimen.scientific_name')
-              %th{scope: "col"}= I18n.t('specimen.collected_by')
-              %th{scope: "col"}= I18n.t('specimen.identified_by')
-              %th{scope: "col"}= I18n.t('specimen.date_collected')
-              %th{scope: "col"}= I18n.t('specimen.date_identified')
-              %th{scope: "col"}= I18n.t('specimen.family')
-              %th{scope: "col"}= I18n.t('specimen.institution')
-              %th{scope: "col"}= I18n.t('specimen.catalog_number')
-              %th{scope: "col"}= I18n.t('specimen.type_status')
-              %th{scope: "col"}
-                %button{type:"button", name:"notme-all", class:"btn btn-sm btn-warning hide-all"}= I18n.t('specimen.not_them')
-
-    - if @total > 25
-      = haml :'partials/page_size', layout: false
-
-    - if @pagy.pages > 1
-      %div{style:"overflow-y:scroll"}
-        = pagy_bootstrap_nav(@pagy)
+   = haml :'partials/tables/candidates', layout: false

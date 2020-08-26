@@ -2,7 +2,6 @@
   = I18n.t('agent.agent_name_title', agent_name: "#{@agent.fullname}")
 
 -content_for :scripts do
-  %script{src: "/js/jquery.mlens-1.7.min.js"}
   %script{src:"/js/application.js"}
   :javascript
     $(function() {
