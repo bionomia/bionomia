@@ -1,10 +1,10 @@
 -content_for :title do
-  Privacy Policy
+  = I18n.t('privacy.privacy_title')
 
 -content_for :jumbotron do
   %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
     %div{class:"mr-auto p-2"}
-      %h1{class:"h2"} Privacy Policy
+      %h1{class:"h2"}= I18n.t('privacy.privacy_title')
 
 %h3 What Bionomia Collects
 

@@ -353,6 +353,8 @@ en:
     previous: Previous
     metrics: Metrics
     science_enabled: Science Enabled
+  privacy:
+    privacy_title: Privacy Policy
   profile:
     thanks_title: Thanks Received
     candidates_title: Unclaimed Specimens
@@ -457,6 +459,8 @@ en:
       unit:
         one: "person who has attributed natural history specimens to their peers, mentors, and role models"
         other: "people who have attributed natural history specimens to their peers, mentors, and role models"
+  terms:
+    terms_title: Terms of Service
   user:
     caches_rebuilt: Caches for counts and visualizations were rebuilt.
     overview: Overview

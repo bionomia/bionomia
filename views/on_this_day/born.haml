@@ -9,12 +9,12 @@
   %script{src: "/js/application.js"}
   :javascript
     $(function() {
-      var browser_today = new Date();
-      var browser_date = browser_today.getFullYear()+'-'+('0'+(browser_today.getMonth()+1)).slice(-2)+'-'+('0'+browser_today.getDate()).slice(-2);
-      var server_date = "#{@date.strftime("%Y-%m-%d")}";
-      var date_param = function(){
-        return window.location.href.search("[?&]date=") != -1;
-      };
+      var browser_today = new Date(),
+          browser_date = browser_today.getFullYear()+'-'+('0'+(browser_today.getMonth()+1)).slice(-2)+'-'+('0'+browser_today.getDate()).slice(-2),
+          server_date = "#{@date.strftime("%Y-%m-%d")}",
+          date_param = function() {
+            return window.location.href.search("[?&]date=") != -1;
+          };
       if (!date_param() && server_date !== browser_date) {
         window.location = "/on-this-day?date=" + browser_date;
       }

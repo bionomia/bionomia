@@ -353,6 +353,8 @@ fr:
     previous: Précédent
     metrics: Métrique
     science_enabled: Science Activée
+  privacy:
+    privacy_title: Politique de confidentialité
   profile:
     thanks_title: Remerciements Reçus
     candidates_title: Spécimens non réclamés
@@ -457,6 +459,8 @@ fr:
       unit:
         one: "personne qui a attribué des spécimens d'histoire naturelle à leurs pairs, mentors et modèles"
         other: "personnes qui ont attribué des spécimens d'histoire naturelle à leurs pairs, mentors et modèles"
+  terms:
+    terms_title: Conditions d'utilisation
   user:
     caches_rebuilt: Les dénombrements et les visualisations ont été reconstruites.
     overview: Aperçu
