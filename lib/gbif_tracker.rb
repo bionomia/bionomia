@@ -159,6 +159,7 @@ module Bionomia
           end
 
           tmp_file.unlink
+          GC.compact
         end
       end
     end

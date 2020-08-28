@@ -35,6 +35,7 @@ module Bionomia
         end
       end
       FileUtils.remove_dir(dir)
+      GC.compact
     end
 
     def add_resources
