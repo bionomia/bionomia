@@ -5,8 +5,10 @@ module Bionomia
     include SuckerPunch::Job
 
     def perform(data)
-      fd = FrictionlessData.new(data)
-      fd.create_package
+      ActiveRecord::Base.connection_pool.with_connection do
+        fd = FrictionlessData.new(data)
+        fd.create_package
+      end
     end
 
   end

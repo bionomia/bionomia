@@ -78,7 +78,7 @@ class Article < ActiveRecord::Base
       response = RestClient::Request.execute(
         method: :get,
         headers: { Accept: "text/x-bibliography" },
-        url: "https://doi.org/" + URI.escape(doi)
+        url: "https://doi.org/" + URI.encode_www_form_component(doi)
       )
       self.update_columns(citation: response)
     rescue

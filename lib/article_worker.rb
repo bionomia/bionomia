@@ -5,8 +5,10 @@ module Bionomia
     include SuckerPunch::Job
 
     def perform(data)
-      gt = GbifTracker.new({ first_page_only: true })
-      gt.process_article(data[:article_id])
+      ActiveRecord::Base.connection_pool.with_connection do
+        gt = GbifTracker.new({ first_page_only: true })
+        gt.process_article(data[:article_id])
+      end
     end
 
   end

@@ -5,9 +5,11 @@ module Bionomia
     include SuckerPunch::Job
 
     def perform(data)
-      twitter = Twitter.new
-      user = User.find(data[:user_id])
-      twitter.welcome_user(user)
+      ActiveRecord::Base.connection_pool.with_connection do
+        twitter = Twitter.new
+        user = User.find(data[:user_id])
+        twitter.welcome_user(user)
+      end
     end
 
   end
