@@ -42,9 +42,9 @@
                   %span
                     - if index != article.user_ids.split(",").size - 1
                       = succeed ", " do
-                        %a{href: "/#{user.identifier}"} #{user.fullname}
+                        %a{href: url("/#{user.identifier}")} #{user.fullname}
                     - else
-                      %a{href: "/#{user.identifier}"} #{user.fullname}
+                      %a{href: url("/#{user.identifier}")} #{user.fullname}
 
       - if @pagy.pages > 1
         %div{style:"overflow-y:scroll"}

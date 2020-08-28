@@ -37,7 +37,7 @@
             - if uo.claimant.is_bot?
               #{uo.claimant.fullname}
             - else
-              %a{href: "/#{uo.claimant.orcid}"} #{uo.claimant.fullname_reverse}
+              %a{href: url("/#{uo.claimant.orcid}")} #{uo.claimant.fullname_reverse}
 
     - if @total > 25
       %tfoot{class: "thead-light"}

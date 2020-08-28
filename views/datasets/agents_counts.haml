@@ -22,7 +22,7 @@
               - group.each do |a|
                 - agent = Agent.find(a[0])
                 %li
-                  %a{href:"/agent/#{agent.id}?datasetKey=#{@dataset.datasetKey}"} #{agent.fullname_reverse}
+                  %a{href: url("/agent/#{agent.id}?datasetKey=#{@dataset.datasetKey}")} #{agent.fullname_reverse}
                   %span{class:"badge badge-light"} #{number_with_delimiter(a[1])}
 
       - if @pagy.pages > 1

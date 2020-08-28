@@ -14,13 +14,13 @@
 - if flash[:error]
   %div{class: "alert alert-danger tiny-margins", role: "alert"}
     #{flash[:error]}
-    %a{href: "/profile/upload"} Try again.
+    %a{href: url("/profile/upload")} Try again.
 
 - else
   %div{class: "alert alert-info tiny-margins", role: "alert"}
     A total of
     %span{class:"font-weight-bold"} #{number_with_delimiter(@record_count)} #{'record'.pluralize(@record_count)}
     were handled. Existing claims, if present in your upload, were skipped.
-    %a{href: "/profile/specimens"}
+    %a{href: url("/profile/specimens")}
       View
     all your claims.

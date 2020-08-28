@@ -46,7 +46,7 @@
       - path = @viewed_user.current_organization.identifier
       = succeed "," do
         %i{class:"fas fa-building"}
-        %a{href: "/organization/#{path}"} #{@viewed_user.current_organization.name}
+        %a{href: url("/organization/#{path}")} #{@viewed_user.current_organization.name}
       #{@viewed_user.current_organization.address}
 
   - if !@viewed_user.country.blank?
@@ -55,7 +55,7 @@
       - if !country_codes[i].nil? && !country_codes[i].empty?
         %p{class:"text-lg-left p-0 mt-1 mb-1"}
           %i{class:"fas fa-globe"}
-          %a{href:"/country/#{country_codes[i]}"} #{v}
+          %a{href: url("/country/#{country_codes[i]}")} #{v}
       - else
         %p{class:"text-lg-left p-0 m-0"}
           %i{class:"fas fa-globe"}
@@ -73,17 +73,17 @@
   - if authorized?
     %div{class:"mt-3 pt-3 border-top"}
       - if @user.identifier != @viewed_user.identifier
-        %a{href: "/help-others/#{@viewed_user.identifier}", class: "mr-2 mb-2"}
+        %a{href: url("/help-others/#{@viewed_user.identifier}"), class: "mr-2 mb-2"}
           %i{class:"fas fa-hands-helping"}
           = I18n.t('general.help_attribute')
 
       - if ( @viewed_user.is_public? || admin_authorized? ) && locals[:active_page] == "overview"
-        %a{href:"/#{@viewed_user.identifier}/refresh-stats.json", class:"profile-flush mr-2 mb-2"}
+        %a{href: url("/#{@viewed_user.identifier}/refresh-stats.json"), class:"profile-flush mr-2 mb-2"}
           %i{class: "fas fa-sync-alt"}
           = I18n.t('general.rebuild_stats')
 
       - if admin_authorized?
-        %a{href: "/admin/user/#{@viewed_user.identifier}/settings", class:"mb-2"}
+        %a{href: url("/admin/user/#{@viewed_user.identifier}/settings"), class:"mb-2"}
           %i{class:"fas fa-cog"}
           = I18n.t('general.settings')
 

@@ -39,12 +39,12 @@
                     %img{src:"#{organization_image(dataset, 'medium')}", alt:"#{dataset.title}", class:"mr-2 rounded"}
                   %div{class:"flex-grow-1"}
                     %h5
-                      %a{href: "/dataset/#{dataset.datasetKey}"} #{dataset.title}
+                      %a{href: url("/dataset/#{dataset.datasetKey}")} #{dataset.title}
                     %p{class:"text-muted"}
               - else
                 %div{class: "card-header"}
                   %h5
-                    %a{href: "/dataset/#{dataset.datasetKey}"} #{dataset.title}
+                    %a{href: url("/dataset/#{dataset.datasetKey}")} #{dataset.title}
                   %p{class:"text-muted"}
               %div{class: "card-body"}
 

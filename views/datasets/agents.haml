@@ -21,7 +21,7 @@
             %ul{class: "list-unstyled m-2"}
               - group.each do |a|
                 %li
-                  %a{href:"/agent/#{a.id}?datasetKey=#{@dataset.datasetKey}"} #{a.fullname_reverse}
+                  %a{href: url("/agent/#{a.id}?datasetKey=#{@dataset.datasetKey}")} #{a.fullname_reverse}
 
       - if @pagy.pages > 1
         %div{style:"overflow-y:scroll"}

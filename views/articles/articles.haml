@@ -22,7 +22,7 @@
   %div{class: "card card-profile mb-3"}
     %div{class: "card-header"}
       %p{class: "citation card-title"}
-        %a{href: "/article/#{article.doi}"}
+        %a{href: url("/article/#{article.doi}")}
           #{h(article.citation)}
     %div{class: "card-body"}
       %div{"data-badge-popover":"right", "data-badge-type":"donut", "data-doi":"#{article.doi}", "data-hide-no-mentions":"true", class:"altmetric-embed pull-left mr-2 float-left"}

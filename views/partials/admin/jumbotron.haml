@@ -57,7 +57,7 @@
       - path = @admin_user.current_organization.identifier
       = succeed "," do
         %i{class:"fas fa-building"}
-        %a{href: "/organization/#{path}"} #{@admin_user.current_organization.name}
+        %a{href: url("/organization/#{path}")} #{@admin_user.current_organization.name}
       #{@admin_user.current_organization.address}
 
   - if !@admin_user.country.blank?
@@ -73,13 +73,13 @@
           Profile is private
       %p{class:"mb-0"}
         - if @admin_user.is_public?
-          %a{href: "/#{@admin_user.identifier}", class:"mr-2"}
+          %a{href: url("/#{@admin_user.identifier}"), class:"mr-2"}
             %i{class:"fas fa-user"}
             Public Profile
-        %a{href:"/#{@admin_user.identifier}/refresh-stats.json", class:"profile-flush mr-2 mb-2"}
+        %a{href: url("/#{@admin_user.identifier}/refresh-stats.json"), class:"profile-flush mr-2 mb-2"}
           %i{class: "fas fa-sync-alt"}
           = I18n.t('general.rebuild_stats')
-        %a{href:"/admin/user/#{@admin_user.identifier}/settings"}
+        %a{href: url("/admin/user/#{@admin_user.identifier}/settings")}
           %i{class:"fas fa-cog"}
           Settings & Integrations
 

@@ -18,7 +18,7 @@
   %div{class:"form-group row"}
     %div{class:"col-sm-4 col-lg-2 col-form-label text-left text-sm-right"}= I18n.t('general.download_records')
     %div{class:"col-sm-8 col-lg-10"}
-      %a{href: "/profile/candidates.csv#{relaxed}", class:"btn btn-primary"}
+      %a{href: url("/profile/candidates.csv#{relaxed}"), class:"btn btn-primary"}
         %i{class:"fas fa-file-download"}
         = I18n.t('general.download')
   %div{class:"form-group row"}

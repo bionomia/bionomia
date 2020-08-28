@@ -23,7 +23,7 @@
     #{I18n.t('help.co_collector_name', { name: @co_collector.fullname })}
     %span
       %i{class:"fas fa-random"}
-      %a{href: "/help-others/#{@co_collector.identifier}/co-collector/#{@viewed_user.identifier}"}
+      %a{href: url("/help-others/#{@co_collector.identifier}/co-collector/#{@viewed_user.identifier}")}
         #{I18n.t('help.switch')}
   %div{id: "helper-info", class: "alert alert-info tiny-margins", role: "alert"}
     Choose
@@ -72,7 +72,7 @@
               - if uo.claimant.is_bot?
                 #{uo.claimant.fullname}
               - elsif uo.claimant.is_public?
-                %a{href: "/#{uo.claimant.orcid}"} #{uo.claimant.fullname_reverse}
+                %a{href: url("/#{uo.claimant.orcid}")} #{uo.claimant.fullname_reverse}
               - else
                 %a{href: "https://orcid.org/#{uo.claimant.orcid}"} #{uo.claimant.fullname_reverse}
             %td

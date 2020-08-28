@@ -32,7 +32,7 @@
         %ul{class: "list-unstyled m-2"}
           - group.each do |o|
             %li
-              %a{href: "/agent/#{o[:id]}"} #{o[:fullname_reverse]}
+              %a{href: url("/agent/#{o[:id]}")} #{o[:fullname_reverse]}
 
   - if @pagy.pages > 1
     %div{style:"overflow-y:scroll"}

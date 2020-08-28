@@ -24,7 +24,7 @@
         #{h(params[:q])}
     See how to
     = succeed "." do
-      %a{href: "/help-others/add", class: "font-weight-bold"} add someone
+      %a{href: url("/help-others/add"), class: "font-weight-bold"} add someone
 
 - if @results.empty? || params[:q].nil?
   = haml :'partials/help/main_tabs', layout: false, locals: { active_main_tab: "country" }
@@ -37,7 +37,7 @@
       %span{class: "font-weight-bold"} #{h(params[:q])}
     Not found? See how to
     = succeed "." do
-      %a{href:"/help-others/add", class: "font-weight-bold"} add someone
+      %a{href: url("/help-others/add"), class: "font-weight-bold"} add someone
 
   %div
     - @results.in_groups_of(3).each do |group|

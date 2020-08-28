@@ -49,14 +49,14 @@
                             %img{src:"#{profile_image(u[:user], 'medium')}", alt:"#{u[:user].fullname}", class:"card-img-profile mr-2"}
                           %div{class:"flex-grow-1"}
                             %h5
-                              %a{href: "/#{u[:user].identifier}"}
+                              %a{href: url("/#{u[:user].identifier}")}
                                 #{u[:user].fullname_reverse}
                             - if u[:user].country
                               %p{class:"small text-muted mt-0 mb-0"} #{u[:user].country.split("|").join("; ")}
                       - else
                         %div{class: "card-header"}
                           %h5
-                            %a{href: "/#{u[:user].identifier}"}
+                            %a{href: url("/#{u[:user].identifier}")}
                               #{u[:user].fullname_reverse}
                           - if u[:user].country
                             %p{class:"small text-muted mt-0 mb-0"} #{u[:user].country.split("|").join("; ")}

@@ -42,7 +42,7 @@
                   %img{src:"#{profile_image(u[:user], 'medium')}", alt:"#{u[:user].fullname}", class:"card-img-profile mr-2"}
                 %div{class:"flex-grow-1"}
                   %h5
-                    %a{href: "/admin/user/#{@admin_user.identifier}/support/#{u[:user].identifier}"}
+                    %a{href: url("/admin/user/#{@admin_user.identifier}/support/#{u[:user].identifier}")}
                       - if u[:user].is_bot?
                         #{u[:user].fullname}
                       - else
@@ -52,7 +52,7 @@
             - else
               %div{class: "card-header"}
                 %h5
-                  %a{href: "/admin/user/#{@admin_user.identifier}/support/#{u[:user].identifier}"}
+                  %a{href: url("/admin/user/#{@admin_user.identifier}/support/#{u[:user].identifier}")}
                     - if u[:user].is_bot?
                       #{u[:user].fullname}
                     - else
@@ -69,7 +69,7 @@
               %div{class: "small text-left text-muted mr-2"}
                 %span{class:"badge badge-light"}
                   #{number_with_delimiter(u[:total])}
-                %a{href: "/admin/user/#{@admin_user.identifier}/support/#{u[:user].identifier}"}
+                %a{href: url("/admin/user/#{@admin_user.identifier}/support/#{u[:user].identifier}")}
                   #{'specimen'.pluralize(u[:total])} attributed
 
   - if @total > 25

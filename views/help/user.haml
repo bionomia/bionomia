@@ -24,7 +24,7 @@
     %p{class:"mt-3"}
       View the
       = succeed "." do
-        %a{href:"/#{@viewed_user.identifier}"} public profile
+        %a{href: url("/#{@viewed_user.identifier}")} public profile
 
 - else
 
@@ -32,7 +32,7 @@
     %div{class:"alert alert-success alert-dismissible fade show d-block", role: "alert"}
       %div
         Thank you for your help!
-        %a{href: "/#{@viewed_user.identifier}"}
+        %a{href: url("/#{@viewed_user.identifier}")}
           #{@viewed_user.fullname}'s
         profile is now visible to the public.
       %button{type:"button", class:"close", "data-dismiss":"alert", "aria-label":"Close"}
@@ -45,7 +45,7 @@
 
   - if @dataset
     %div{class: "alert alert-warning", role: "alert"}
-      %a{href: "/help-others/#{@viewed_user.identifier}?agent_id=#{params[:agent_id]}", class:"ml-2 text-danger"}
+      %a{href: url("/help-others/#{@viewed_user.identifier}?agent_id=#{params[:agent_id]}"), class:"ml-2 text-danger"}
         %i{class:"fas fa-minus-circle"}
         Remove
       %i{class:"fas fa-filter"}
@@ -57,7 +57,7 @@
 
   - if @agent
     %div{class: "alert alert-warning", role: "alert"}
-      %a{href: "/help-others/#{@viewed_user.identifier}?datasetKey=#{params[:datasetKey]}", class:"ml-2 text-danger"}
+      %a{href: url("/help-others/#{@viewed_user.identifier}?datasetKey=#{params[:datasetKey]}"), class:"ml-2 text-danger"}
         %i{class:"fas fa-minus-circle"}
         Remove
       %i{class:"fas fa-search"}
@@ -74,7 +74,7 @@
           %input{type:"checkbox", class:"form-check-input", id:"relaxed", checked: checked }
           %label{for:"relaxed", class:"relaxed"} Make less exact.
       %div{class:"col col-12 col-md-4 text-md-right"}
-        %a{href:"/help-others/#{@viewed_user.identifier}/advanced-search"}
+        %a{href: url("/help-others/#{@viewed_user.identifier}/advanced-search")}
           %i{class:"fas fa-search-plus"}
           Advanced Search & Filter
   - else
@@ -92,7 +92,7 @@
           %input{type:"checkbox", class:"form-check-input", id:"relaxed", checked: checked }
           %label{for:"relaxed", class:"relaxed"} Make less exact.
       %div{class:"col col-12 col-md-4 text-md-right"}
-        %a{href:"/help-others/#{@viewed_user.identifier}/advanced-search"}
+        %a{href: url("/help-others/#{@viewed_user.identifier}/advanced-search")}
           %i{class:"fas fa-search-plus"}
           Advanced Search & Filter
 

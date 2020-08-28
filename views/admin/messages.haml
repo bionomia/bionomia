@@ -42,7 +42,7 @@
                   %img{src:"#{profile_image(u, 'medium')}", alt:"#{u.fullname}", class:"card-img-profile mr-2"}
                 %div{class:"flex-grow-1"}
                   %h5
-                    %a{href: "/#{u.identifier}"} #{u.fullname_reverse}
+                    %a{href: url("/#{u.identifier}")} #{u.fullname_reverse}
                   - if u.wikidata
                     %p{class:"small text-muted mt-0 mb-0"}= format_lifespan(u)
                   - if u.country
@@ -50,7 +50,7 @@
             - else
               %div{class: "card-header"}
                 %h5
-                  %a{href: "/#{u.identifier}"} #{u.fullname_reverse}
+                  %a{href: url("/#{u.identifier}")} #{u.fullname_reverse}
                 - if u.wikidata
                   %p{class:"small text-muted mt-0 mb-0"}= format_lifespan(u)
                 - if u.country

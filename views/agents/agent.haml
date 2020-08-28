@@ -21,7 +21,7 @@
     Filtered by
     %span{class:"font-weight-bold mr-2"}
       #{h([@filter[:dataset]].compact.join(", "))}
-    %a{href: "/agent/#{@agent.id}", class:"text-danger"}
+    %a{href: url("/agent/#{@agent.id}"), class:"text-danger"}
       %i{class:"fas fa-minus-circle"}
       Remove
 
@@ -33,7 +33,7 @@
         = I18n.t('agent.search_html', agent_link: "<a href=\"/help-others?q=#{@agent.fullname}\"><i class=\"fas fa-hands-helping mr-1\"></i>#{@agent.fullname}</a>")
     %div{class: "col col-12 col-lg-2 text-lg-right pr-3"}
       - if authorized?
-        %a{href: "/agent/#{@agent.id}/specimens.csv"}
+        %a{href: url("/agent/#{@agent.id}/specimens.csv")}
           %i{class:"fas fa-file-csv text-dark h5 m-0 p-1"}
           CSV
 

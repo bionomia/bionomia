@@ -55,7 +55,7 @@
       - if !flash[:new_user][:slug].nil?
         %div{class:"alert alert-success tiny-margins d-block", role: "alert"}
           %span{class:"font-weight-bold"}
-            %a{href: "/help-others/#{flash[:new_user][:slug]}"} #{flash[:new_user][:fullname]}
+            %a{href: url("/help-others/#{flash[:new_user][:slug]}")} #{flash[:new_user][:fullname]}
           was created or updated.
       - else
         %div{class:"alert alert-danger tiny-margins d-block", role: "alert"}

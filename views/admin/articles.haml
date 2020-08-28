@@ -46,9 +46,9 @@
           %tr
             %td
               - if !article.citation.blank?
-                %a{href: "/admin/article/#{article.id}"} #{h(article.citation[0..120].gsub(/\s\w+\s*$/,'...'))}
+                %a{href: url("/admin/article/#{article.id}")} #{h(article.citation[0..120].gsub(/\s\w+\s*$/,'...'))}
               - else
-                %a{href: "/admin/article/#{article.id}"} NO TITLE
+                %a{href: url("/admin/article/#{article.id}")} NO TITLE
             %td
               %a{href: "https://doi.org/#{article.doi}"} #{article.doi}
             %td

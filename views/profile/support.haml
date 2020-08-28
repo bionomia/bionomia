@@ -30,7 +30,7 @@
                   %img{src:"#{profile_image(u[:user], 'medium')}", alt:"#{u[:user].fullname}", class:"card-img-profile mr-2"}
                 %div{class:"flex-grow-1"}
                   %h5
-                    %a{href: "/profile/support/#{u[:user].identifier}"}
+                    %a{href: url("/profile/support/#{u[:user].identifier}")}
                       - if u[:user].is_bot?
                         #{u[:user].fullname}
                       - else
@@ -40,7 +40,7 @@
             - else
               %div{class: "card-header"}
                 %h5
-                  %a{href: "/profile/support/#{u[:user].identifier}"}
+                  %a{href: url("/profile/support/#{u[:user].identifier}")}
                     - if u[:user].is_bot?
                       #{u[:user].fullname}
                     - else
@@ -57,7 +57,7 @@
               %div{class: "small text-left text-muted mr-2"}
                 %span{class:"badge badge-light"}
                   #{number_with_delimiter(u[:total])}
-                %a{href: "/profile/support/#{u[:user].identifier}"}
+                %a{href: url("/profile/support/#{u[:user].identifier}")}
                   #{'specimen'.pluralize(u[:total])} attributed
               %div{class:"small ml-auto"}
                 - if !u[:user].is_bot?

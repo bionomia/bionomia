@@ -78,12 +78,12 @@
     - if !authorized?
       Overview
     - else
-      %a{href: "/profile"} Overview
+      %a{href: url("/profile")} Overview
     of your profile. It pulls your full name and other details (see above) from your ORCID account, which you may refresh at any time. Click the
     - if !authorized?
       Discovered
     - else
-      %a{href: "/profile/candidates"} Discovered
+      %a{href: url("/profile/candidates")} Discovered
     tab to see a list of candidate specimens. Much like an email inbox, Bionomia shows the number of specimens that await action.
     Specimen data are fully refreshed from the
     %a{href:"https://gbif.org"} Global Biodiversity Information Facility
@@ -96,7 +96,7 @@
     - if !authorized?
       Discovered
     - else
-      %a{href: "/profile/candidates"} Discovered
+      %a{href: url("/profile/candidates")} Discovered
     page of your Specimens tab, you may bulk claim
     %em all visible rows
     of specimens or claim single rows by clicking:
@@ -120,12 +120,12 @@
     - if !authorized?
       Claimed
     - else
-      %a{href: "/profile/specimens"} Claimed
+      %a{href: url("/profile/specimens")} Claimed
     or
     - if !authorized?
       Ignored
     - else
-      %a{href: "/profile/ignored"} Ignored
+      %a{href: url("/profile/ignored")} Ignored
     to repair or adjust your selections.
   %div{class:"bd-callout bd-callout-bionomia"}
     Too many specimen records or want to sort by columns and/or filter by content? Click the "Bulk Claim" page on your Specimens tab to view instructions on how to download, add claims in a spreadsheet, then upload a completed csv file.
@@ -135,7 +135,7 @@
   %p
     While authenticated via ORCID, visit
     - if authorized?
-      %a{href:"/help-others"} Help Others
+      %a{href: url("/help-others")} Help Others
     - else
       Help Others
     to search for your peers, mentors, or anyone who inspires you. Attribute specimens to them just as you claimed your own specimens. If they too have an ORCID ID, they may send you a quick thanks and these will appear in your Thanks Received tab.

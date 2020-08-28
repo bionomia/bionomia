@@ -41,12 +41,12 @@
                     %img{src:"#{organization_image(org, 'medium')}", alt:"#{org.name}", class:"mr-2 rounded"}
                   %div{class:"flex-grow-1"}
                     %h5
-                      %a{href: "/organization/#{org.identifier}"} #{org.name}
+                      %a{href: url("/organization/#{org.identifier}")} #{org.name}
                     %p{class:"text-muted"} #{org.address}
               - else
                 %div{class: "card-header"}
                   %h5
-                    %a{href: "/organization/#{org.identifier}"} #{org.name}
+                    %a{href: url("/organization/#{org.identifier}")} #{org.name}
                   %p{class:"text-muted"} #{org.address}
               %div{class: "card-body"}
 

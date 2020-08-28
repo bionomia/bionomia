@@ -20,7 +20,7 @@
   %div{class:"form-group row"}
     %div{class:"col-sm-4 col-lg-2 col-form-label text-left text-sm-right"} Download discovered records
     %div{class:"col-sm-8 col-lg-10"}
-      %a{href: "/help-others/#{@viewed_user.identifier}/candidates.csv#{relaxed}", class:"btn btn-primary"}
+      %a{href: url("/help-others/#{@viewed_user.identifier}/candidates.csv#{relaxed}"), class:"btn btn-primary"}
         %i{class:"fas fa-file-csv h4 m-0 p-0"}
         Download
   %div{class:"form-group row"}

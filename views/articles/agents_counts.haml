@@ -28,7 +28,7 @@
 
 - if admin_authorized?
   %div{class:"mt-3 mb-3 pt-3 border-top text-center"}
-    %a{href: "/admin/article/#{@article.id}"}
+    %a{href: url("/admin/article/#{@article.id}")}
       %i{class:"fas fa-cog"}
       = I18n.t('general.settings')
 
@@ -47,7 +47,7 @@
           - group.each do |a|
             - agent = Agent.find(a[0])
             %li
-              %a{href:"/agent/#{agent.id}"} #{agent.fullname_reverse}
+              %a{href: url("/agent/#{agent.id}")} #{agent.fullname_reverse}
               %span{class:"badge badge-light"} #{number_with_delimiter(a[1])}
 
   - if @pagy.pages > 1

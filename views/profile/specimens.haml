@@ -17,7 +17,7 @@
     Filtered by
     %span{class:"font-weight-bold mr-2"}
       #{h([@filter[:action], @filter[:country], @filter[:range], @filter[:family]].compact.join(", "))}
-    %a{href: "/profile/specimens", class:"text-danger"}
+    %a{href: url("/profile/specimens"), class:"text-danger"}
       %i{class:"fas fa-minus-circle"}
       Remove
 
@@ -34,10 +34,10 @@
       %img{src:"/images/microscope-unselected.png", alt:"#{I18n.t('general.identified')}", title:"#{I18n.t('general.identified')}", width:18}
       identified, or Both to correct your claims.
     %div{class: "col-12 col-md-4 text-md-right"}
-      %a{href: "/profile/download.csv", alt:"CSV file download", class:"mr-2"}
+      %a{href: url("/profile/download.csv"), alt:"CSV file download", class:"mr-2"}
         %i{class:"fas fa-file-csv text-dark h5 m-0 p-1"}
         CSV
-      %a{href: "/profile/download.json", alt:"JSON file download"}
+      %a{href: url("/profile/download.json"), alt:"JSON file download"}
         %i{class:"fas fa-file-code text-dark h5 m-0 p-1"}
         JSON-LD
 

@@ -42,7 +42,7 @@
               %i{class:"fab fa-orcid"}
             - else
               %img{src: "/images/wikidata_16x16.png", alt:"Wikidata iD"}
-            %a{href: "/help-others/#{claim.user.identifier}"} #{claim.user.fullname_reverse}
+            %a{href: url("/help-others/#{claim.user.identifier}")} #{claim.user.fullname_reverse}
           %td
             %div{class:"progress progress-border"}
               %div{id:"progress-bar_#{claim.user.identifier}", class:"progress-bar bg-info", role:"progressbar", style:"width: 0%;", "aria-valuenow":"0", "aria-valuemin":"0", "aria-valuemax":"100"}
@@ -55,7 +55,7 @@
             - if claim.claimant.is_bot?
               #{claim.claimant.fullname}
             - else
-              %a{href: "/#{claim.claimant.orcid}"} #{claim.claimant.fullname_reverse}
+              %a{href: url("/#{claim.claimant.orcid}")} #{claim.claimant.fullname_reverse}
           %td
             #{claim.created}
 

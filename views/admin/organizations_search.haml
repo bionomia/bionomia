@@ -33,12 +33,12 @@
                     %img{src:"#{organization_image(org, 'medium')}", alt:"#{org.name}", class:"mr-2 rounded"}
                   %div{class:"flex-grow-1"}
                     %h5
-                      %a{href: "/admin/organization/#{org.id}"} #{org.name}
+                      %a{href: url("/admin/organization/#{org.id}")} #{org.name}
                     %p{class:"text-muted"} #{org.address}
               - else
                 %div{class: "card-header"}
                   %h5
-                    %a{href: "/admin/organization/#{org.id}"} #{org.name}
+                    %a{href: url("/admin/organization/#{org.id}")} #{org.name}
                   %p{class:"text-muted"} #{org.address}
               %div{class: "card-body"}
 

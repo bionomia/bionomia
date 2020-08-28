@@ -16,7 +16,7 @@
 - if flash[:error]
   %div{class: "alert alert-danger tiny-margins", role: "alert"}
     #{flash[:error]}
-    %a{href: "/help-others/#{@viewed_user.identifier}/upload"}= I18n.t('help.try_again')
+    %a{href: url("/help-others/#{@viewed_user.identifier}/upload")}= I18n.t('help.try_again')
 - else
   %div{class: "alert alert-info tiny-margins", role: "alert"}
     #{number_to_human(@record_count, units: :'help.upload_message', delimiter: ",", precision: 0)}

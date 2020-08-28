@@ -22,7 +22,7 @@
           Filtered by
           %span{class:"font-weight-bold mr-2"}
             #{h([@filter[:action], @filter[:country], @filter[:range], @filter[:family], @filter[:institutionCode]].compact.join(", "))}
-          %a{href: "/#{@viewed_user.identifier}/specimens", class:"text-danger"}
+          %a{href: url("/#{@viewed_user.identifier}/specimens"), class:"text-danger"}
             %i{class:"fas fa-minus-circle"}
             Remove
 
@@ -40,10 +40,10 @@
             identified #{number_with_delimiter(@pagy.count)} #{'specimen'.pluralize(@pagy.count)}.
             = I18n.t('user.not_all_columns')
           %div{class: "col-12 col-md-4 text-md-right"}
-            %a{href: "/#{@viewed_user.identifier}/specimens.csv", class:"mr-2"}
+            %a{href: url("/#{@viewed_user.identifier}/specimens.csv"), class:"mr-2"}
               %i{class:"fas fa-file-csv text-dark h5 m-0 p-1"}
               CSV
-            %a{href: "/#{@viewed_user.identifier}/specimens.json"}
+            %a{href: url("/#{@viewed_user.identifier}/specimens.json")}
               %i{class:"fas fa-file-code text-dark h5 m-0 p-1"}
               JSON-LD
 

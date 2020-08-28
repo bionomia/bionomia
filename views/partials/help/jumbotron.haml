@@ -48,7 +48,7 @@
         %p{class: "text-center p-0 mt-1 mb-1"}
           = succeed "," do
             %i{class:"fas fa-building"}
-            %a{href: "/organization/#{org.identifier}"} #{org.name}
+            %a{href: url("/organization/#{org.identifier}")} #{org.name}
           #{org.address}
 
       - if !@viewed_user.country.blank?
@@ -87,7 +87,7 @@
       - if authorized?
         %div{class: "text-center border-top mt-3 pt-3"}
           - if @viewed_user.is_public?
-            %a{href: "/#{@viewed_user.identifier}", class:"mr-2 mb-2"}
+            %a{href: url("/#{@viewed_user.identifier}"), class:"mr-2 mb-2"}
               %i{class:"fas fa-user"}
               = I18n.t('help.public_profile')
 
@@ -96,7 +96,7 @@
               %i{class:"fas fa-unlock"}
               = I18n.t('help.make_public')
 
-          %a{href:"/help-others/#{@viewed_user.identifier}/refresh.json", class:"mr-2 profile-refresh"}
+          %a{href: url("/help-others/#{@viewed_user.identifier}/refresh.json"), class:"mr-2 profile-refresh"}
             %i{class: "fas fa-sync-alt"}
             Refresh
             - if @viewed_user.orcid
@@ -105,7 +105,7 @@
               Wikidata
 
           - if admin_authorized?
-            %a{href: "/admin/user/#{@viewed_user.identifier}/settings", class:"mb-2"}
+            %a{href: url("/admin/user/#{@viewed_user.identifier}/settings"), class:"mb-2"}
               %i{class:"fas fa-cog"}
               = I18n.t('general.settings')
 

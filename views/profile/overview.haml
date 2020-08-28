@@ -15,11 +15,11 @@
       - if @stats[:specimens][:identified] == 0 && @stats[:specimens][:recorded] == 0 && @stats[:attributions][:helped] == 0
         %div{class: "alert alert-info tiny-margins", role: "alert"}
           Claim your discovered specimens under the
-          %a{href: "/profile/specimens"}
+          %a{href: url("/profile/specimens")}
             Specimens
           tab to build your profile and start tracking your citations. Acknowledge your peers, mentors, or anyone who inspires you by attributing specimens under
           = succeed "." do
-            %a{href: "/help-others"}
+            %a{href: url("/help-others")}
               Help Others
       - else
         %div{class: "alert alert-info tiny-margins", role: "alert"}
@@ -51,7 +51,7 @@
             %ul{class: "list-group mt-3 truncate"}
               - @families_identified.each do |k,v|
                 %li{class: "list-group-item d-flex justify-content-between align-items-center"}
-                  %a{href: "/profile/specimens?action=identified&family=#{ERB::Util.url_encode(k)}"} #{k}
+                  %a{href: url("/profile/specimens?action=identified&family=#{ERB::Util.url_encode(k)}")} #{k}
                   %span{class: "badge badge-light badge-pill"} #{number_with_delimiter(v)}
           - elsif !@families_recorded.empty?
             %h4{class: "d-flex justify-content-between mt-0"}
@@ -60,7 +60,7 @@
             %ul{class: "list-group mt-3 truncate"}
               - @families_recorded.each do |k,v|
                 %li{class: "list-group-item d-flex justify-content-between align-items-center"}
-                  %a{href: "/profile/specimens?action=collected&family=#{ERB::Util.url_encode(k)}"} #{k}
+                  %a{href: url("/profile/specimens?action=collected&family=#{ERB::Util.url_encode(k)}")} #{k}
                   %span{class: "badge badge-light badge-pill"} #{number_with_delimiter(v)}
         %div{class: "col-12 col-lg-6 mb-3"}
           - if !@families_recorded.empty? && !@families_identified.empty?
@@ -70,7 +70,7 @@
             %ul{class: "list-group mt-3 truncate"}
               - @families_identified.each do |k,v|
                 %li{class: "list-group-item d-flex justify-content-between align-items-center"}
-                  %a{href: "/profile/specimens?action=identified&family=#{ERB::Util.url_encode(k)}"} #{k}
+                  %a{href: url("/profile/specimens?action=identified&family=#{ERB::Util.url_encode(k)}")} #{k}
                   %span{class: "badge badge-light badge-pill"} #{number_with_delimiter(v)}
 
       - if @user.zenodo_concept_doi

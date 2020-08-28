@@ -61,7 +61,7 @@
         %a{href: "https://www.wikidata.org/wiki/#{@organization.wikidata}"}
           %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD"}
         %a{href: "https://www.wikidata.org/wiki/#{@organization.wikidata}", target:"_blank"} https://www.wikidata.org/wiki/#{@organization.wikidata}
-      %a{href:"/admin/organization/#{@organization.id}/refresh.json", role:"button", class:"btn btn-sm btn-outline-success organization-refresh"}
+      %a{href: url("/admin/organization/#{@organization.id}/refresh.json"), role:"button", class:"btn btn-sm btn-outline-success organization-refresh"}
         %i{class: "fas fa-sync-alt"}
         Refresh
         %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD", width:"18px"}

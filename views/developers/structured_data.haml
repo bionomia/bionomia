@@ -22,9 +22,9 @@
 %div{class:"ml-3"}
   %h5 User Data from a Public Profile
   %div
-    %a{href: "/0000-0001-7618-5230/specimens.csv"} #{base_url}/0000-0001-7618-5230/specimens.csv
+    %a{href: url("/0000-0001-7618-5230/specimens.csv")} #{url("/0000-0001-7618-5230/specimens.csv")}
   %div
-    %a{href: "/0000-0001-7618-5230/specimens.json"} #{base_url}/0000-0001-7618-5230/specimens.json
+    %a{href: url("/0000-0001-7618-5230/specimens.json")} #{url("/0000-0001-7618-5230/specimens.json")}
   %p
     %small{class:"text-muted"}
       Where
@@ -33,9 +33,9 @@
       %a{href: "https://orcid.org/0000-0001-7618-5230"} https://orcid.org/0000-0001-7618-5230
 
   %div
-    %a{href: "/Q1035/specimens.csv"} #{base_url}/Q1035/specimens.csv
+    %a{href: url("/Q1035/specimens.csv")} #{url("/Q1035/specimens.csv")}
   %div
-    %a{href: "/Q1035/specimens.json"} #{base_url}/Q1035/specimens.json
+    %a{href: url("/Q1035/specimens.json")} #{url("/Q1035/specimens.json")}
   %p
     %small{class:"text-muted"}
       Where
@@ -46,7 +46,7 @@
 %div{class:"ml-3"}
   %h5 Specimen Record
   %div
-    %a{href: "/occurrence/477976412.json"} #{base_url}/occurrence/477976412.json
+    %a{href: url("/occurrence/477976412.json")} #{url("/occurrence/477976412.json")}
   %p
     %small{class:"text-muted"}
       Where
@@ -54,14 +54,14 @@
       is that provided by the Global Biodiversity Information Facility (GBIF),
       %a{href: "https://gbif.org/occurrence/477976412"} https://gbif.org/occurrence/477976412.
       This same service is used in two
-      %a{href:"/integrations"} browser extensions.
+      %a{href: url("/integrations")} browser extensions.
 
 %h3{class:"mt-4 mb-3"} Raw Data
 
 %div{class:"ml-3"}
   %h5 List of Public Profiles
   %div
-    %a{href: "/data/bionomia-public-profiles.csv"} bionomia-public-profiles.csv
+    %a{href: url("/data/bionomia-public-profiles.csv")} bionomia-public-profiles.csv
   %p
     %smal{class:"text-muted"}
       Where the above csv includes a header, "Family, Given, wikidata, ORCID, URL"

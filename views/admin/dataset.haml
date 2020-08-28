@@ -42,11 +42,11 @@
       %a{href: "https://gbif.org/dataset/#{@dataset.datasetKey}", target:"_blank"} https://gbif.org/dataset/#{@dataset.datasetKey}
 
   %p
-    %a{href:"/admin/dataset/refresh.json?datasetKey=#{@dataset.datasetKey}", role:"button", class:"btn btn-sm btn-outline-success dataset-refresh mt-3"}
+    %a{href: url("/admin/dataset/refresh.json?datasetKey=#{@dataset.datasetKey}"), role:"button", class:"btn btn-sm btn-outline-success dataset-refresh mt-3"}
       %i{class: "fas fa-sync-alt"}
       Refresh
       %img{src: "/images/gbif_40x40.png", alt:"GBIF", width:"18px"}
-    %a{href:"/admin/dataset/frictionless.json?datasetKey=#{@dataset.datasetKey}", role:"button", class:"btn btn-sm btn-outline-success dataset-frictionless mt-3"}
+    %a{href: url("/admin/dataset/frictionless.json?datasetKey=#{@dataset.datasetKey}"), role:"button", class:"btn btn-sm btn-outline-success dataset-frictionless mt-3"}
       %i{class: "fas fa-sync-alt"}
       Rebuild
       %i{class: "fas fa-file-archive"}

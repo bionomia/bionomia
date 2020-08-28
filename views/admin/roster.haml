@@ -28,19 +28,19 @@
     %thead{class: "thead-light"}
       %tr
         %th{scope: "col"}
-          %a{href: "/admin/users?order=family&sort=#{sort}"} Person
+          %a{href: url("/admin/users?order=family&sort=#{sort}")} Person
         %th{scope: "col"}
-          %a{href: "/admin/users?order=country&sort=#{sort}"} Country
+          %a{href: url("/admin/users?order=country&sort=#{sort}")} Country
         %th{scope: "col"}
-          %a{href: "/admin/users?order=is_public&sort=#{sort}"} Public
+          %a{href: url("/admin/users?order=is_public&sort=#{sort}")} Public
         %th{scope: "col"}
-          %a{href: "/admin/users?order=wants_mail&sort=#{sort}"} Email
+          %a{href: url("/admin/users?order=wants_mail&sort=#{sort}")} Email
         %th{scope: "col"}
-          %a{href: "/admin/users?order=zenodo_concept_doi&sort=#{sort}"} DOI
+          %a{href: url("/admin/users?order=zenodo_concept_doi&sort=#{sort}")} DOI
         %th{scope: "col"}
-          %a{href: "/admin/users?order=visited&sort=#{sort}"} Last Login
+          %a{href: url("/admin/users?order=visited&sort=#{sort}")} Last Login
         %th{scope: "col"}
-          %a{href: "/admin/users?order=created&sort=#{sort}"} Created
+          %a{href: url("/admin/users?order=created&sort=#{sort}")} Created
 
     %tbody
       - @results.each do |u|
@@ -50,7 +50,7 @@
               %i{class:"fab fa-orcid"}
             - else
               %img{src: "/images/wikidata_16x16.png", alt:"Wikidata iD"}
-            %a{href: "/admin/user/#{u.identifier}"} #{u.fullname_reverse}
+            %a{href: url("/admin/user/#{u.identifier}")} #{u.fullname_reverse}
           %td #{u.country}
           %td
             - if u.is_public?

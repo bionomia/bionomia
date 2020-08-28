@@ -27,22 +27,22 @@
     %thead{class: "thead-light"}
       %tr
         %th{scope: "col"}
-          %a{href: "/admin/organizations?order=name&sort=#{sort}"} Name
+          %a{href: url("/admin/organizations?order=name&sort=#{sort}")} Name
         %th{scope: "col"} Address
         %th{scope: "col"}
-          %a{href: "/admin/organizations?order=isni&sort=#{sort}"} ISNI
+          %a{href: url("/admin/organizations?order=isni&sort=#{sort}")} ISNI
         %th{scope: "col"}
-          %a{href: "/admin/organizations?order=ringgold&sort=#{sort}"} Ringgold
+          %a{href: url("/admin/organizations?order=ringgold&sort=#{sort}")} Ringgold
         %th{scope: "col"}
-          %a{href: "/admin/organizations?order=grid&sort=#{sort}"} GRID
+          %a{href: url("/admin/organizations?order=grid&sort=#{sort}")} GRID
         %th{scope: "col"}
-          %a{href: "/admin/organizations?order=wikidata&sort=#{sort}"} Wikidata
+          %a{href: url("/admin/organizations?order=wikidata&sort=#{sort}")} Wikidata
 
     %tbody
       - @results.each do |o|
         %tr
           %td
-            %a{href: "/admin/organization/#{o.id}"} #{o.name}
+            %a{href: url("/admin/organization/#{o.id}")} #{o.name}
           %td #{o.address}
           %td
             - if !o.isni.blank?

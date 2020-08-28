@@ -5,13 +5,13 @@
         %img{src:"#{profile_image(locals[:user], 'medium')}", alt:"#{locals[:user].fullname}", class:"card-img-profile mr-2"}
       %div{class:"flex-grow-1"}
         %h5
-          %a{href: "/#{locals[:user].identifier}"} #{locals[:user].fullname_reverse}
+          %a{href: url("/#{locals[:user].identifier}")} #{locals[:user].fullname_reverse}
         - if locals[:user].country
           %p{class:"small text-muted mt-0 mb-0"} #{locals[:user].country.split("|").join("; ")}
   - else
     %div{class: "card-header"}
       %h5
-        %a{href: "/#{locals[:user].identifier}"} #{locals[:user].fullname_reverse}
+        %a{href: url("/#{locals[:user].identifier}")} #{locals[:user].fullname_reverse}
       - if locals[:user].country
         %p{class:"small text-muted mt-0 mb-0"} #{locals[:user].country.split("|").join("; ")}
 

@@ -11,7 +11,7 @@
   %h3= I18n.t('cdm.background_title')
   %p
     Bionomia
-    %a{href:"/scribes"} scribes
+    %a{href: url("/scribes")} scribes
     attribute specimen records to the collectors and determiners represented in your dataset(s) by linking natural history specimen records you publish to
     %a{href:"https://gbif.org"} GBIF
     to their
@@ -52,12 +52,12 @@
         = succeed "." do
           %a{href: "https://gbif.org"} GBIF
         See
-        %a{href:"/how-it-works"} how it works
+        %a{href: url("/how-it-works")} how it works
         for more details.
 
       %p
         Search for your
-        %a{href:"/datasets"} dataset(s)
+        %a{href: url("/datasets")} dataset(s)
         and find the link to a
         %a{href:"https://frictionlessdata.io/"} Frictionless Data
         package. These zipped, UTF-8 encoded relational files are similar to the Darwin Core Archives you produced for GBIF. They differ in that they more efficiently represent

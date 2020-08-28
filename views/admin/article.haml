@@ -34,7 +34,7 @@
           - if @article.processed
             %span{class: "text-success"} #{@article.processed}
           - else
-            %a{href:"/admin/article/#{@article.id}/process.json", role:"button", class:"btn btn-sm btn-outline-success article-process"}
+            %a{href: url("/admin/article/#{@article.id}/process.json"), role:"button", class:"btn btn-sm btn-outline-success article-process"}
               %i{class: "fas fa-sync-alt"}
               Process
 
@@ -59,12 +59,12 @@
           - @article.claimants.sort_by{|u| u.orcid || u.wikidata }.each do |u|
             %span{class:"mr-2"}
               - if u.orcid
-                %a{href: "/#{u.identifier}"}
+                %a{href: url("/#{u.identifier}")}
                   %i{class:"fab fa-orcid"}
                   #{u.fullname}
               - else
                 %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD"}
-                  %a{href: "/#{u.identifier}"}
+                  %a{href: url("/#{u.identifier}")}
                     #{u.fullname}
 
         %dt{class: "col-sm-2"} All data in study:

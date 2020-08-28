@@ -22,7 +22,7 @@
                 %input{type:"checkbox", id: "toggle-public", "data-toggle":"toggle", "data-on":"#{I18n.t('profile.public')}", "data-off":"#{I18n.t('profile.private')}", "data-onstyle": "success", "data-size": "small", checked: @user.is_public?, class:"btn-claim", "data-url": "/profile/visibility.json" }
               %div{class:"col text-right"}
                 - if @user.is_public?
-                  %a{href: "/#{@user.orcid}"}
+                  %a{href: url("/#{@user.orcid}")}
                     = I18n.t('profile.public_profile')
                     %i{class:"fas fa-users"}
 
@@ -33,7 +33,7 @@
           %div{class:"card-body"}
             %p{class:"card-text"}= I18n.t('profile.orcid_updates')
             %p
-              %a{href:"/profile/refresh.json", role:"button", class:"btn btn-sm btn-outline-success profile-refresh"}
+              %a{href: url("/profile/refresh.json"), role:"button", class:"btn btn-sm btn-outline-success profile-refresh"}
                 %i{class: "fas fa-sync-alt"}
                 = I18n.t('profile.refresh')
                 %i{class:"fab fa-orcid"}

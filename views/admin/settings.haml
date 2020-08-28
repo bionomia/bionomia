@@ -31,13 +31,13 @@
             %p{class:"card-text"}
               Include the account in public
               = succeed "." do
-                %a{href: "/roster"} Profiles
+                %a{href: url("/roster")} Profiles
             %div{class:"row"}
               %div{class:"col"}
                 %input{type:"checkbox", id: "toggle-public", "data-toggle":"toggle", "data-on":"Public", "data-off":"Private", "data-onstyle": "success", "data-size": "small", checked: @admin_user.is_public?, class:"btn-claim", "data-url": "/admin/user/#{@admin_user.identifier}/visibility.json" }
               %div{class:"col text-right"}
                 - if @admin_user.is_public?
-                  %a{href: "/#{@admin_user.identifier}", target: "_blank"}
+                  %a{href: url("/#{@admin_user.identifier}"), target: "_blank"}
                     Public Profile
                     %i{class:"fas fa-external-link-alt"}
 
@@ -67,7 +67,7 @@
           %div{class:"card-body"}
             %p{class:"card-text"} Pull new updates to name, aliases, keywords, country, education, and employment from the ORCID account or other items if from Wikidata.
             %p
-              %a{ href:"/admin/user/#{@admin_user.identifier}/refresh.json", role:"button", class:"btn btn-sm btn-outline-success profile-refresh"}
+              %a{ href: url("/admin/user/#{@admin_user.identifier}/refresh.json"), role:"button", class:"btn btn-sm btn-outline-success profile-refresh"}
                 %i{class: "fas fa-sync-alt"}
                 Refresh
                 - if @admin_user.orcid

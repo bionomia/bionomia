@@ -27,13 +27,13 @@
     %thead{class: "thead-light"}
       %tr
         %th{scope: "col"}
-          %a{href: "/admin/datasets?order=title&sort=#{sort}"} Name
+          %a{href: url("/admin/datasets?order=title&sort=#{sort}")} Name
 
     %tbody
       - @results.each do |d|
         %tr
           %td
-            %a{href: "/admin/dataset/#{d.datasetKey}"} #{d.title.truncate(200)}
+            %a{href: url("/admin/dataset/#{d.datasetKey}")} #{d.title.truncate(200)}
 
 
 = pagy_bootstrap_nav(@pagy) if @pagy.pages > 1

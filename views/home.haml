@@ -15,7 +15,7 @@
   %p{class:"lead tagline ml-4 mt-3"}= I18n.t('home.tagline')
   %form{action: "/auth/orcid?lang=#{I18n.locale}", method: "POST"}
     %p{id: "profile-buttons", class:"ml-4"}
-      %a{href:"/get-started", role: "button", class:"btn btn-lg btn-success"}
+      %a{href: url("/get-started"), role: "button", class:"btn btn-lg btn-success"}
         #{I18n.t('home.get_started')} »
       - if !authorized?
         %button{class: "btn btn-lg btn-outline-dark button-login connect-orcid-button"}

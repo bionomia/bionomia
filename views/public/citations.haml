@@ -36,7 +36,7 @@
               %div{class: "card-footer d-flex"}
                 %div{class: "small"}
                   %span{class: "badge badge-light badge-pill citation-correction"} #{number_with_delimiter(article.user_specimen_count(@viewed_user.id))}
-                  %a{href: "/#{@viewed_user.identifier}/citation/#{article.id}"}
+                  %a{href: url("/#{@viewed_user.identifier}/citation/#{article.id}")}
                     = I18n.t('user.specimens_metric')
 
         - if @pagy.pages > 1
