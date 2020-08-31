@@ -428,6 +428,14 @@ module Bionomia
       data
     end
 
+    def wiki_bionomia_id
+      qnumbers = []
+      @sparql.query(wikidata_people_query("P6944")).each_solution do |solution|
+        qnumbers << solution.to_h[:item].to_s.match(/Q[0-9]{1,}/).to_s
+      end
+      qnumbers.uniq
+    end
+
     def wiki_by_property(property, identifier)
       data = {}
       @sparql.query(wikidata_by_property_query(property, identifier)).each_solution do |solution|
