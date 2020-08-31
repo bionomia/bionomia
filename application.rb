@@ -61,7 +61,11 @@ class BIONOMIA < Sinatra::Base
   include Pagy::Frontend
   Pagy::VARS[:items] = 30
 
-  use Rack::GoogleAnalytics, tracker: Settings.google.analytics
+  if environment == :production
+    use Rack::Tracker do
+      handler :google_analytics, { tracker: Settings.google.analytics }
+    end
+  end
 
   helpers Sinatra::ContentFor
   helpers Sinatra::Bionomia::Formatters

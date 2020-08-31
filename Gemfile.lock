@@ -1,13 +1,6 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    actionpack (6.0.3.2)
-      actionview (= 6.0.3.2)
-      activesupport (= 6.0.3.2)
-      rack (~> 2.0, >= 2.0.8)
-      rack-test (>= 0.6.3)
-      rails-dom-testing (~> 2.0)
-      rails-html-sanitizer (~> 1.0, >= 1.2.0)
     actionview (6.0.3.2)
       activesupport (= 6.0.3.2)
       builder (~> 3.1)
@@ -231,13 +224,12 @@ GEM
     rack (2.2.3)
     rack-contrib (2.2.0)
       rack (~> 2.0)
-    rack-google-analytics (1.2.0)
-      actionpack
-      activesupport
     rack-protection (2.0.8.1)
       rack
-    rack-test (1.1.0)
-      rack (>= 1.0, < 3)
+    rack-tracker (1.12.1)
+      activesupport (>= 3.0)
+      rack (>= 1.4)
+      tilt (>= 1.4)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -380,7 +372,7 @@ DEPENDENCIES
   pluck_to_hash
   pony
   rack-contrib
-  rack-google-analytics
+  rack-tracker
   rake
   redis
   require_all
