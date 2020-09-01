@@ -8,27 +8,24 @@ class BIONOMIA < Sinatra::Base
   set :haml, :format => :html5
   set :public_folder, 'public'
   set :show_exceptions, false
-
-  register Sinatra::I18nSupport
-  load_locales File.join(root, 'config', 'locales')
-  I18n.available_locales = [:en, :fr]
+  set :cache_enabled_in, [:development, :production]
 
   register Config
-
+  register Sinatra::I18nSupport
   register Sinatra::Cacher
   register Sinatra::Flash
   register Sinatra::OutputBuffer
-  set :cache_enabled_in, [:development, :production]
-
   register Sinatra::Bionomia::Config::Initialize
+  register Sinatra::Bionomia::Helper::Initialize
+  register Sinatra::Bionomia::Controller::Initialize
+  register Sinatra::Bionomia::Model::Initialize
+
+  load_locales File.join(root, 'config', 'locales')
+  I18n.available_locales = [:en, :fr]
 
   include Pagy::Backend
   include Pagy::Frontend
   Pagy::VARS[:items] = 30
-
-  register Sinatra::Bionomia::Helper::Initialize
-  register Sinatra::Bionomia::Controller::Initialize
-  register Sinatra::Bionomia::Model::Initialize
 
   not_found do
     haml :oops if !content_type
