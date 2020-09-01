@@ -226,6 +226,8 @@ GEM
       rack (~> 2.0)
     rack-protection (2.0.8.1)
       rack
+    rack-test (1.1.0)
+      rack (>= 1.0, < 3)
     rack-tracker (1.12.1)
       activesupport (>= 3.0)
       rack (>= 1.4)
@@ -372,6 +374,7 @@ DEPENDENCIES
   pluck_to_hash
   pony
   rack-contrib
+  rack-test
   rack-tracker
   rake
   redis
