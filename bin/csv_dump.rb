@@ -21,7 +21,7 @@ OptionParser.new do |opts|
     options[:profiles] = true
   end
 
-  opts.on("-q", "--quickstatements", "Dump list of wikidata profiles to be used in quickstatements") do
+  opts.on("-q", "--quickstatements", "Dump list of new wikidata profiles to be used in quickstatements") do
     options[:quickstatements] = true
   end
 
@@ -84,12 +84,14 @@ if options[:directory]
 
   if options[:quickstatements]
     csv_file = File.join(directory, "quickstatements.csv")
-    puts "Making public profiles...".green
-    users = User.where(is_public: true).where.not(wikidata: nil)
+    puts "Making new public profiles...".green
+    local = User.where(is_public: true).where.not(wikidata: nil).pluck(:wikidata)
+    wiki = Bionomia::WikidataSearch.new
+    new_qnumbers = local - wiki.wiki_bionomia_id
     CSV.open(csv_file, 'w') do |csv|
       csv << ["qid", "P6944"]
-      users.find_each do |u|
-        csv << [u.wikidata, "\"#{u.wikidata}\""]
+      new_qnumbers.each do |w|
+        csv << [w, "\"#{w}\""]
       end
     end
   end

@@ -152,7 +152,6 @@ CREATE TABLE `users` (
   `date_died` date DEFAULT NULL,
   `date_died_precision` varchar(255) DEFAULT NULL,
   `is_public` tinyint(1) DEFAULT '0',
-  `can_comment` tinyint(1) NOT NULL DEFAULT '1',
   `made_public` timestamp NULL DEFAULT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated` timestamp NULL DEFAULT NULL,
