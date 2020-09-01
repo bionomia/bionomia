@@ -71,6 +71,7 @@ require 'twitter'
 require 'sucker_punch'
 
 require_relative File.join(File.dirname(__FILE__), 'lib', 'omniauth_authenticity_checker')
+require_relative File.join(File.dirname(__FILE__), 'config', 'initialize')
 
 Encoding.default_internal = Encoding::UTF_8
 Encoding.default_external = Encoding::UTF_8
@@ -85,6 +86,5 @@ OmniAuth.config.before_request_phase = OmniauthAuthenticityChecker.new(reaction:
 
 require_all File.join(File.dirname(__FILE__), 'lib')
 require_all File.join(File.dirname(__FILE__), 'helpers')
-require_all File.join(File.dirname(__FILE__), 'formatters')
 require_all File.join(File.dirname(__FILE__), 'controllers')
 require_all File.join(File.dirname(__FILE__), 'models')
