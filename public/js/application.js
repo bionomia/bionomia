@@ -564,18 +564,24 @@ var Application = (function($, window) {
         $(obj).find('.popover-body')
               .html(self.carousel_template(data, $(obj).attr("data-gbifid")))
               .find("img").each(function() {
-                if($(this)[0].naturalHeight > 300) {
-                  $(this).mlens({
-                    imgSrc:$(this).attr("data-big"),
-                    lensShape:"square",
-                    lensSize: ["100px","100px"],
-                    borderSize:0,
-                    zoomLevel: 1
-                  });
-                }
+                var item = $(this);
+                self.wait_loader(item[0]).then(()=>{
+                  if(item[0].naturalHeight > 300) {
+                    item.mlens({
+                      imgSrc:item.attr("data-big"),
+                      lensShape:"square",
+                      lensSize: ["100px","100px"],
+                      borderSize:0,
+                      zoomLevel: 1
+                    });
+                  }
+                });
               });
       });
       return self.spinner;
+    },
+    wait_loader: function(img) {
+      return new Promise(resolve=>{img.onload = resolve});
     },
     carousel_template: function(data, id) {
       var html  = "";
