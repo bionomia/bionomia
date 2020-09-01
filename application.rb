@@ -65,23 +65,18 @@ class BIONOMIA < Sinatra::Base
 
   helpers Sinatra::ContentFor
   helpers Sinatra::Bionomia::Formatters
-  helpers Sinatra::Bionomia::Helpers
-  helpers Sinatra::Bionomia::AgentHelpers
-  helpers Sinatra::Bionomia::ArticleHelpers
-  helpers Sinatra::Bionomia::DatasetHelpers
-  helpers Sinatra::Bionomia::OrganizationHelpers
-  helpers Sinatra::Bionomia::UserHelpers
-  helpers Sinatra::Bionomia::Queries
-  helpers Sinatra::Bionomia::Security
-  helpers Sinatra::Bionomia::Uploaders
 
-  register Sinatra::Bionomia::Controller::ApplicationController
-  register Sinatra::Bionomia::Controller::AdminController
-  register Sinatra::Bionomia::Controller::HelpingController
-  register Sinatra::Bionomia::Controller::OccurrenceController
-  register Sinatra::Bionomia::Controller::ProfileController
-  register Sinatra::Bionomia::Controller::UserController
-  register Sinatra::Bionomia::Controller::UserOccurrenceController
+  Sinatra::Bionomia::Helper.constants.sort.each do |h|
+    if Sinatra::Bionomia::Helper.const_get(h).is_a?(Module)
+      helpers "Sinatra::Bionomia::Helper::#{h}".constantize
+    end
+  end
+
+  Sinatra::Bionomia::Controller.constants.sort.each do |c|
+    if Sinatra::Bionomia::Controller.const_get(c).is_a?(Module)
+      register "Sinatra::Bionomia::Controller::#{c}".constantize
+    end
+  end
 
   register Sinatra::Bionomia::Model::Initialize
   use Sinatra::Bionomia::Model::QueryCache
