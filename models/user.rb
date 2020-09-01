@@ -52,10 +52,6 @@ class User < ActiveRecord::Base
     is_admin
   end
 
-  def can_comment?
-    can_comment
-  end
-
   def made_claim?
     visible_user_occurrences.count > 0
   end
