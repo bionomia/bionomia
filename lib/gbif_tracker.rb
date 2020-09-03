@@ -121,7 +121,7 @@ module Bionomia
     def process_data_packages(article)
       article.gbif_downloadkeys.each do |key|
         if datapackage_file_size(key) < @max_size
-          tmp_file = Tempfile.new('gbif')
+          tmp_file = Tempfile.new(['gbif', '.zip'])
           zip = RestClient.get("#{@package_url}#{key}.zip") rescue nil
           next if zip.nil?
           File.open(tmp_file, 'wb') do |output|
@@ -130,12 +130,15 @@ module Bionomia
 
           begin
             dwc = DarwinCore.new(tmp_file.path)
-            gbifID = dwc.core.fields.select{|term| term[:term] == "http://rs.gbif.org/terms/1.0/gbifID"}[0][:index]
+            gbifID = dwc.core.fields.select{|term| term[:term].include?("gbifID")}[0][:index]
+            basisOfRecord = dwc.core.fields.select{|term| term[:term].include?("basisOfRecord")}[0][:index]
             dwc.core.read(1000) do |data, errors|
-              ArticleOccurrence.import data.map{|a| { article_id: article.id, occurrence_id: a[gbifID].to_i } }, batch_size: 1_000, on_duplicate_key_ignore: true, validate: false
+              records = data.map{|a| { article_id: article.id, occurrence_id: a[gbifID].to_i } if a[basisOfRecord] != "HUMAN_OBSERVATION" }
+                            .compact
+              ArticleOccurrence.import records, batch_size: 1_000, on_duplicate_key_ignore: true, validate: false
             end
           rescue
-            tmp_csv = Tempfile.new('gbif_csv')
+            tmp_csv = Tempfile.new(['gbif_csv', '.zip'])
             Zip::File.open(tmp_file) do |zip_file|
               entry = zip_file.glob('*.csv').first
               if entry
@@ -147,10 +150,10 @@ module Bionomia
                 all_files.each do |csv|
                   CSV.foreach(csv, headers: :first_row, col_sep: "\t", liberal_parsing: true, quote_char: "\x00") do |row|
                     occurrence_id = row["gbifid"] || row["gbifID"]
-                    next if occurrence_id.nil?
+                    next if occurrence_id.nil? || row["basisOfRecord"] == "HUMAN_OBSERVATION"
                     items << ArticleOccurrence.new(article_id: article.id, occurrence_id: occurrence_id)
                   end
-                  ArticleOccurrence.import items, batch_size: 50_000, on_duplicate_key_ignore: true, validate: false
+                  ArticleOccurrence.import items, batch_size: 10_000, on_duplicate_key_ignore: true, validate: false
                   File.unlink(csv)
                 end
               end
