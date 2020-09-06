@@ -48,21 +48,24 @@
           - if @dataset.nil?
             %input{id: "typeahead-dataset", type: :text, name: "dataset", value: "#{params[:dataset]}", class:"typeahead"}
           - else
+            - q = params.except("id", "datasetKey").to_query
             %span
-              %a{href: url("/help-others/#{@viewed_user.identifier}/advanced-search?agent_id=#{params[:agent_id]}"), class:"text-danger"}
+              %a{href: url("/help-others/#{@viewed_user.identifier}/advanced-search?#{q}"), class:"text-danger"}
                 %i{class:"fas fa-minus-circle"}
                 Remove
             %span
               #{@dataset}
             %input{type: :hidden, name: "datasetKey", value: params[:datasetKey]}
+
       %div{class: "form-group"}
         %label{for: "typeahead", class:"font-weight-bold"}= I18n.t('help.agent_string')
         %div{class:"col-12 col-md-8 pl-0"}
           - if @agent.nil?
             %input{id: "typeahead-agent", type: :text, name: "agent", value: "#{params[:agent]}", class:"typeahead"}
           - else
+            - q = params.except("id", "agent_id").to_query
             %span
-              %a{href: url("/help-others/#{@viewed_user.identifier}/advanced-search?datasetKey=#{params[:datasetKey]}"), class:"text-danger"}
+              %a{href: url("/help-others/#{@viewed_user.identifier}/advanced-search?#{q}"), class:"text-danger"}
                 %i{class:"fas fa-minus-circle"}
                 Remove
             %span
@@ -73,7 +76,8 @@
       %button{type:"submit", class:"btn btn-success"}= I18n.t('general.search')
 
       - if @agent || @dataset
-        %a{href: url("/help-others/#{@viewed_user.identifier}?datasetKey=#{params[:datasetKey]}&agent_id=#{params[:agent_id]}"), class:"btn btn-info"}= I18n.t('general.apply')
+        - q = params.except("id").to_query
+        %a{href: url("/help-others/#{@viewed_user.identifier}?#{q}"), class:"btn btn-info"}= I18n.t('general.apply')
 
   - if params[:dataset] && params[:dataset].size > 0 && !@dataset_results.empty? && params[:agent] && params[:agent].size > 0 && !@agent_results.empty?
     %p{class:"mt-3"}
