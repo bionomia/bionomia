@@ -77,21 +77,32 @@ module Bionomia
     end
 
     def get_orcid_user(id)
-      User.create_with({ orcid: id })
-          .find_or_create_by({ orcid: id })
+      destroyed = DestroyedUser.find_by_identifier(id)
+      if !destroyed.nil? && !destroyed.redirect_to.nil?
+        user = User.find_by_identifier(destroyed.redirect_to)
+      else
+        user = User.create_with({ orcid: id })
+                   .find_or_create_by({ orcid: id })
+      end
+      user
     end
 
     def get_wiki_user(id)
-      user = User.create_with({ wikidata: id })
-                 .find_or_create_by({ wikidata: id })
-      if !user.valid_wikicontent?
-        user.delete_search
-        user.delete
-        user = nil
-      elsif !user.is_public?
-        user.is_public = true
-        user.made_public = Time.now
-        user.save
+      destroyed = DestroyedUser.find_by_identifier(id)
+      if !destroyed.nil? && !destroyed.redirect_to.nil?
+        user = User.find_by_identifier(destroyed.redirect_to)
+      else
+        user = User.create_with({ wikidata: id })
+                   .find_or_create_by({ wikidata: id })
+        if !user.valid_wikicontent?
+          user.delete_search
+          user.delete
+          user = nil
+        elsif !user.is_public?
+          user.is_public = true
+          user.made_public = Time.now
+          user.save
+        end
       end
       user
     end

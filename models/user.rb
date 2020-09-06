@@ -44,6 +44,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.find_by_identifier(id)
+    self.find_by_orcid(id) || self.find_by_wikidata(id) || self.find(id) || nil rescue nil
+  end
+
   def is_public?
     is_public
   end
