@@ -193,7 +193,8 @@ module Bionomia
 
     def merge_users
       merged_wikicodes = {}
-      PEOPLE_PROPERTIES.each do |key,property|
+      watched_properties = PEOPLE_PROPERTIES.merge("Bionomia ID": "P6944")
+      watched_properties.each do |key,property|
         puts "Merges for #{key}...".yellow
         @sparql.query(merged_wikidata_people_query(property)).each_solution do |solution|
           qid = solution.to_h[:qid].to_s.match(/Q[0-9]{1,}/).to_s
