@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
   after_destroy :remove_search, :create_destroyed_user
 
   def self.merge_wikidata(qid, dest_qid)
+    return if DestroyedUser.find_by_identifier(qid)
+
     DestroyedUser.create(identifier: qid, redirect_to: dest_qid)
 
     src = self.find_by_wikidata(qid)
