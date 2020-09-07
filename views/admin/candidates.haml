@@ -78,4 +78,4 @@
           %label{for: "typeahead", class:"font-weight-bold col-form-label mr-2"}= "Search"
           %input{id: "typeahead-agent", type: :text, name: "q", placeholder: "#{placeholder}", value: "#{params[:q]}", class:"typeahead"}
 
-  = haml :'partials/tables/candidates', layout: false
+  = haml :'partials/tables/candidates', layout: false, locals: { user_scope: "other" }

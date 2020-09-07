@@ -14,7 +14,11 @@
         %th{scope: "col"}= I18n.t('specimen.type_status')
         %th{scope: "col", class:"btn-selector-wide"}
           - if @searched_user.nil?
-            %button{type:"button", name:"notme-all", class:"btn btn-sm btn-warning hide-all"}= I18n.t('specimen.not_me')
+            %button{type:"button", name:"notme-all", class:"btn btn-sm btn-warning hide-all"}
+              - if locals[:user_scope] == "self"
+                #{I18n.t('specimen.not_me')}
+              - else
+                #{I18n.t('specimen.not_them')}
 
     %tbody
       - @results.each do |o|
@@ -36,7 +40,11 @@
           %td #{h(o.typeStatus)}
           %td
             - if @searched_user.nil?
-              %button{type:"button", class:"btn btn-sm btn-outline-warning hide", "data-occurrence-id":"#{o.id}"}= I18n.t('specimen.not_me')
+              %button{type:"button", class:"btn btn-sm btn-outline-warning hide", "data-occurrence-id":"#{o.id}"}
+                - if locals[:user_scope] == "self"
+                  #{I18n.t('specimen.not_me')}
+                - else
+                  #{I18n.t('specimen.not_them')}
 
     - if @total > 25
       %tfoot{class: "thead-light"}
@@ -53,7 +61,11 @@
           %th{scope: "col"}= I18n.t('specimen.type_status')
           %th{scope: "col"}
             - if @searched_user.nil?
-              %button{type:"button", name:"notme-all", class:"btn btn-sm btn-warning hide-all"}= I18n.t('specimen.not_me')
+              %button{type:"button", name:"notme-all", class:"btn btn-sm btn-warning hide-all"}
+                - if locals[:user_scope] == "self"
+                  #{I18n.t('specimen.not_me')}
+                - else
+                  #{I18n.t('specimen.not_them')}
 
 - if @total > 25
   = haml :'partials/page_size', layout: false
