@@ -31,9 +31,11 @@ class User < ActiveRecord::Base
       src.reload
       src.update_wikidata_profile
     else
-      occurrences = src.user_occurrences
-      dest.user_occurrences.pluck(:occurrence_id).in_groups_of(500, false) do |group|
-        occurrences.where.not(occurrence_id: group).update_all({ user_id: dest.id })
+      src_occurrences = src.user_occurrences.pluck(:occurrence_id)
+      dest_occurrences = dest.user_occurrences.pluck(:occurrence_id) rescue []
+      (src_occurrences - dest_occurrences).in_groups_of(500, false) do |group|
+        src.user_occurrences.where(occurrence_id: group)
+                            .update_all({ user_id: dest.id})
       end
       if src.is_public?
         dest.is_public = true
