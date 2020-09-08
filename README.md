@@ -11,7 +11,7 @@ Sinatra app to parse people names from structured biodiversity occurrence data, 
 
 1. ruby 2.7.1+
 2. Elasticsearch 7.5.0+
-3. MySQL 14.14+
+3. MySQL 8.0.21
 4. Redis 4.0.9+
 5. Apache Spark 3+
 6. Neo4j 3.5.12+
@@ -39,11 +39,10 @@ See the [Apache Spark recipes](spark.md) for quickly importing into MySQL the oc
 
 Unfortunately, gbifIDs are not persistent. These occasionally disappear through processing at GBIF's end. As a result, claims may no longer point to existing occurrence records. The following produces a count for how many claims and attributions might be orphaned:
 
-      RACK_ENV=production irb
-      require "./application"
-      require "pp"
-      UserOccurrence.orphaned_count
-      pp UserOccurrence.orphaned_user_claims
+      $ RACK_ENV=production irb
+      > require "./application"
+      > pp UserOccurrence.orphaned_count
+      > pp UserOccurrence.orphaned_user_claims
 
 ### Step 3:  Parse & Populate Agents
 
@@ -84,9 +83,9 @@ See Neo4j Dump & Restore below for additional steps.
 
 First, import all users and user_occurrences content from production.
 
-    $ RACK_ENV=production ./bin/populate_existing_claims.rb --truncate --directory /directory-to-spark-csv-files/
-    # Reduce number of workers for now until we have many more records to process, bottleneck is queries to wikidata
-    $ RACK_ENV=production sidekiq -c 2 -q existing_claims -r ./application.rb
+     $ RACK_ENV=production ./bin/populate_existing_claims.rb --truncate --directory /directory-to-spark-csv-files/
+     # Reduce number of workers for now until we have many more records to process, bottleneck is queries to wikidata
+     $ RACK_ENV=production sidekiq -c 2 -q existing_claims -r ./application.rb
 
 Then, find newly created users and manually create them in production. Export a csv of all claims made by User::GBIF_AGENT_ID
 
@@ -96,8 +95,8 @@ Finally, import the bulk claims on production:
 
 But first, delete all existing claims made by User::GBIF_AGENT_ID.
 
-    $ DELETE FROM user_occurrences where created_by = 2;
-    $ RACK_ENV=production ./bin/bulk_claim.rb --file "gbif_claims.csv"
+     mysql> DELETE FROM user_occurrences where created_by = 2;
+     $ RACK_ENV=production ./bin/bulk_claim.rb --file "gbif_claims.csv"
 
 ### Step 7: Populate Search in Elasticsearch
 
@@ -122,21 +121,22 @@ Or from scratch:
 
 Notes to self because I never remember how to dump from my laptop and reload onto the server. Must stop Neo4j before this can be executed.
 
-      neo4j-admin dump --database=<database> --to=<destination-path>
-      neo4j-admin load --from=<archive-path> --database=<database> [--force]
+      $ neo4j-admin dump --database=<database> --to=<destination-path>
+      $ neo4j-admin load --from=<archive-path> --database=<database> [--force]
 
 Example:
 
-      brew services stop neo4j
-      neo4j-admin dump --database=graph.db --to=/Users/dshorthouse/Documents/neo4j_backup/
-      brew services start neo4j
+      $ brew services stop neo4j
+      $ neo4j-admin dump --database=graph.db --to=/Users/dshorthouse/Documents/neo4j_backup/
+      $ brew services start neo4j
 
-      service neo4j stop
-      rm -rf /var/lib/neo4j/data/databases/graph.db
-      neo4j-admin load --from=/home/dshorthouse/neo4j_backup/graph.db.dump --database=graph.db
+      $ service neo4j stop
+      $ rm -rf /var/lib/neo4j/data/databases/graph.db
+      $ neo4j-admin load --from=/home/dshorthouse/neo4j_backup/graph.db.dump --database=graph.db
+
       #reset permissions
-      chown neo4j:adm -R /var/lib/neo4j/data/databases/graph.db
-      service neo4j start
+      $ chown neo4j:adm -R /var/lib/neo4j/data/databases/graph.db
+      $ service neo4j start
 
 Replacing the database through load requires that the database first be deleted [usually found in /var/lib/neo4j/data/databases on linux machine] and then its permissions be recursively set for the neo4j:adm user:group.
 
@@ -144,43 +144,43 @@ Replacing the database through load requires that the database first be deleted 
 
 Unfortunately, gbifIDs are not persistent. These occasionally disappear through processing at GBIF's end. As a result, claims may no longer point to an existing occurrence record and these must then be purged from the user_occurrences table. The following SQL statement can remove these with successive data imports from GBIF:
 
-      RACK_ENV=production irb
-      require "./application"
-      UserOccurrence.orphaned_user_claims
-      UserOccurrence.delete_orphaned
+     $ RACK_ENV=production irb
+     > require "./application"
+     > UserOccurrence.orphaned_user_claims
+     > UserOccurrence.delete_orphaned
 
-      ArticleOccurrence.orphaned_count
-      ArticleOccurrence.orphaned_delete
+     > ArticleOccurrence.orphaned_count
+     > ArticleOccurrence.orphaned_delete
 
 To migrate tables, use mydumper and myloader. But for even faster data migration, drop indices before mydumper then recreate indices after myloader. This is especially true for the three largest tables: occurrences, occurrence_recorders, and occurrence_determiners whose indices are (almost) larger than the tables themselves.
 
-      brew install mydumper
+     $ brew install mydumper
 
-      mydumper --user root --password <PASSWORD> --database bionomia --tables-list agents,occurrences,occurrence_recorders,occurrence_determiners,taxa,taxon_occurrences --compress --threads 8 --rows 10000000 --trx-consistency-only --long-query-guard 6000 --outputdir /Users/dshorthouse/Documents/bionomia_dump
+     $ mydumper --user root --password <PASSWORD> --database bionomia --tables-list agents,occurrences,occurrence_recorders,occurrence_determiners,taxa,taxon_occurrences --compress --threads 8 --rows 10000000 --trx-consistency-only --long-query-guard 6000 --outputdir /Users/dshorthouse/Documents/bionomia_dump
 
-      apt-get install mydumper
-      # Restore tables use nohup into a new database `bionomia_restore`. See https://blogs.oracle.com/jsmyth/apparmor-and-mysql if symlinks might be used in the MySQL data directory to another partition.
-      nohup myloader --database bionomia_restore --user bionomia --password <PASSWORD> --threads 2 --queries-per-transaction 100 --compress-protocol --overwrite-tables --directory /home/dshorthouse/bionomia_restore &
+     $ apt-get install mydumper
+     # Restore tables use nohup into a new database `bionomia_restore`. See https://blogs.oracle.com/jsmyth/apparmor-and-mysql if symlinks might be used in the MySQL data directory to another partition.
+     $ nohup myloader --database bionomia_restore --user bionomia --password <PASSWORD> --threads 2 --queries-per-transaction 100 --compress-protocol --overwrite-tables --directory /home/dshorthouse/bionomia_restore &
 
 One way to make this even faster is to copy database files from one database to another rather than dropping/truncating and importing, but this has to be done with a bit of care.
 
 Take site offline and in the bionomia database, remove the tablespaces from the tables that will be overwritten. Before removing, it's a good idea to keep the \*.ibd files on-hand in the event something bad happens and they need to be restored.
 
-      ALTER TABLE `agents` DISCARD TABLESPACE;
-      ALTER TABLE `occurrences` DISCARD TABLESPACE;
-      ALTER TABLE `occurrence_determiners` DISCARD TABLESPACE;
-      ALTER TABLE `occurrence_recorders` DISCARD TABLESPACE;
-      ALTER TABLE `taxa` DISCARD TABLESPACE;
-      ALTER TABLE `taxon_occurrences` DISCARD TABLESPACE;
+      mysql> ALTER TABLE `agents` DISCARD TABLESPACE;
+      mysql> ALTER TABLE `occurrences` DISCARD TABLESPACE;
+      mysql> ALTER TABLE `occurrence_determiners` DISCARD TABLESPACE;
+      mysql> ALTER TABLE `occurrence_recorders` DISCARD TABLESPACE;
+      mysql> ALTER TABLE `taxa` DISCARD TABLESPACE;
+      mysql> ALTER TABLE `taxon_occurrences` DISCARD TABLESPACE;
 
 Now copy the \*.ibd files for the above 6 tables from the bionomia_restore database into the bionomia database data directory, reset the permissions, then import the tablespaces:
 
-      ALTER TABLE `agents` IMPORT TABLESPACE;
-      ALTER TABLE `occurrences` IMPORT TABLESPACE;
-      ALTER TABLE `occurrence_determiners` IMPORT TABLESPACE;
-      ALTER TABLE `occurrence_recorders` IMPORT TABLESPACE;
-      ALTER TABLE `taxa` IMPORT TABLESPACE;
-      ALTER TABLE `taxon_occurrences` IMPORT TABLESPACE;
+      mysql> ALTER TABLE `agents` IMPORT TABLESPACE;
+      mysql> ALTER TABLE `occurrences` IMPORT TABLESPACE;
+      mysql> ALTER TABLE `occurrence_determiners` IMPORT TABLESPACE;
+      mysql> ALTER TABLE `occurrence_recorders` IMPORT TABLESPACE;
+      mysql> ALTER TABLE `taxa` IMPORT TABLESPACE;
+      mysql> ALTER TABLE `taxon_occurrences` IMPORT TABLESPACE;
 
 ## License
 
