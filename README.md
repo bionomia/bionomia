@@ -9,12 +9,12 @@ Sinatra app to parse people names from structured biodiversity occurrence data, 
 
 ## Requirements
 
-1. ruby 2.6.3+
-2. Elasticsearch 6.2.4+
+1. ruby 2.7.1+
+2. Elasticsearch 7.5.0+
 3. MySQL 14.14+
 4. Redis 4.0.9+
-5. Apache Spark 2+
-6. Neo4j
+5. Apache Spark 3+
+6. Neo4j 3.5.12+
 7. Unix-based operating system to use GNU parallel to process GBIF downloads
 
 ## Installation
