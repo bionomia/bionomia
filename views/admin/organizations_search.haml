@@ -14,8 +14,8 @@
       %h1{class:"h2"} Organizations
     = haml :'partials/admin/organization_search', layout: false
 
-- if @pagy.count == 0
-  %div{class: "alert alert-info tiny-margins", role: "alert"}
+- if @results.size == 0
+  %div{class: "alert alert-warning tiny-margins", role: "alert"}
     No organizations found.
 - else
   - @results.in_groups_of(3).each do |group|
@@ -50,4 +50,4 @@
                   #{'member'.pluralize(count)}
 
 
-  = pagy_bootstrap_nav(@pagy) if @pagy.pages > 1
+  = pagy_bootstrap_nav(@pagy) if @pagy && @pagy.pages > 1

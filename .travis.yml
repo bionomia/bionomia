@@ -25,7 +25,6 @@ install:
   - gem install bundler
   - bundle install
 before_script:
-  - sleep 10
   - cp config/settings/test.yml.sample config/settings/test.yml
   - RACK_ENV=test
   - rake db:create:all

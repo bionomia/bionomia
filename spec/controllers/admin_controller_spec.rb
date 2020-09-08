@@ -13,4 +13,39 @@ describe "Bionomia Administration Controller" do
     expect(last_response).to be_ok
   end
 
+  it "should allow access to the admin articles page" do
+    get '/admin/articles'
+    expect(last_response).to be_ok
+  end
+
+  it "should allow access to the admin datasets page" do
+    get '/admin/datasets'
+    expect(last_response).to be_ok
+  end
+
+  it "should allow access to the admin datasets search page" do
+    get '/admin/datasets/search'
+    expect(last_response).to be_ok
+  end
+
+  it "should allow access to the admin organizations page" do
+    get '/admin/organizations'
+    expect(last_response).to be_ok
+  end
+
+  it "should allow access to the admin organizations search page" do
+    get '/admin/organizations/search'
+    expect(last_response).to be_ok
+  end
+
+  it "should allow access to the admin users page" do
+    get '/admin/users'
+    expect(last_response).to be_ok
+  end
+
+  it "should allow access to the admin users search page" do
+    get '/admin/users/search'
+    expect(last_response).to be_ok
+  end
+
 end
