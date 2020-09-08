@@ -24,4 +24,4 @@ before_script:
   - rake db:create:all
   - rake db:schema:load
   - rake db:migrate
-  - ./bin/populate_search --rebuild
+  - ./bin/populate_search.rb --rebuild
