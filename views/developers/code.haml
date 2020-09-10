@@ -38,8 +38,8 @@
             > parsed = DwcAgent.parse "Lepschi BJ; Albrecht DE"
               <span class="token property">=> [#&lt;Name family="BJ" given="Lepschi"&gt;, #&lt;Name family="DE" given="Albrecht"&gt;]</span>
             > DwcAgent.clean parsed[0]
-              <span class="token property">=> {:given=>"B.J.", :family=>"Lepschi", :particle=>nil}</span>
+              <span class="token property">=> {:title=>nil, :appellation=>nil, :given=>"B.J.", :particle=>nil, :family=>"Lepschi", :suffix=>nil}</span>
             > DwcAgent.similarity_score "J.R.", "Jill R."
               <span class="token property">=> 2</span>
             $ dwcagent "Lepschi BJ; Albrecht DE"
-            <span class="token property">[{"given":"B.J.","family":"Lepschi","particle":null},{"given":"D.E.","family":"Albrecht","particle":null}]</span>
+            <span class="token property">[{"title":null,"appellation":null,"given":"B.J.","particle":null,"family":"Lepschi","suffix":null},{"title":null,"appellation":null,"given":"D.E.","particle":null,"family":"Albrecht","suffix":null}]</span>
