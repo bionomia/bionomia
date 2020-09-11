@@ -32,7 +32,7 @@
 - if !@searched_user.nil?
   = haml :'partials/admin/bot_claim_modal', layout: false, locals: { user: @admin_user, agent: @searched_user, bulk_error: "#{locals[:bulk_error]}" }
 
-- if @pagy.count == 0
+- if @results.size == 0
   %div{class: "alert alert-info row tiny-margins", role:"alert"}
     %div{class: "col col-12 col-sm-12 col-md-8 col-lg-8 pl-0"}
       Bionomia did not find any specimens indexed by
