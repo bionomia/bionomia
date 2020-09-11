@@ -17,7 +17,7 @@
   - alert_class = "warning"
   - placeholder = @searched_user.fullname
 
-- if @pagy.count == 0
+- if @results.size == 0
   %div{class: "alert alert-info row tiny-margins", role:"alert"}
     %div{class: "col col-12 col-sm-12 col-md-8 col-lg-8"}
       = I18n.t('profile.no_candidates_alert')
