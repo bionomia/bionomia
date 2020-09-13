@@ -117,7 +117,7 @@ module Sinatra
           app.get '/country/:country_code' do
             country_code = params[:country_code]
             @results = []
-#            begin
+            begin
               @country = IsoCountryCodes.find(country_code)
               @action = params[:action] if ["identified","collected"].include?(params[:action])
               @family = params[:q].present? ? params[:q] : nil
@@ -130,10 +130,10 @@ module Sinatra
                 @pagy, @results = pagy(users, items: 30)
               end
               haml :'countries/country', locals: { active_page: "countries" }
-#            rescue
-#              status 404
-#              haml :oops
-#            end
+            rescue
+              status 404
+              haml :oops
+            end
           end
 
           app.get '/datasets' do

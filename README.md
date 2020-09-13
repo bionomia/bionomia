@@ -101,6 +101,7 @@ But first, delete all existing claims made by User::GBIF_AGENT_ID.
 ### Step 7: Populate Search in Elasticsearch
 
      $ RACK_ENV=production ./bin/populate_search.rb --index agent
+     $ RACK_ENV=production ./bin/populate_search.rb --index taxon
 
 Or from scratch:
 
