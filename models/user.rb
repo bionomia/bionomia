@@ -749,11 +749,14 @@ class User < ActiveRecord::Base
     BIONOMIA.cache_clear("blocks/#{identifier}-stats")
     BIONOMIA.cache_clear("fragments/#{identifier}")
     BIONOMIA.cache_clear("fragments/#{identifier}-scribe")
-    update_search
   end
 
   def delete_search
     remove_search
+  end
+
+  def refresh_search
+    update_search
   end
 
   private

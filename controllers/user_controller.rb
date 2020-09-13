@@ -293,6 +293,7 @@ module Sinatra
             content_type "application/json", charset: 'utf-8'
             user = find_user(params[:id])
             user.flush_caches
+            user.refresh_search
             { message: "ok" }.to_json
           end
 
