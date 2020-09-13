@@ -106,15 +106,33 @@ module Bionomia
               type: 'date',
               format: 'yyyy-MM-dd'
             },
-            families_collected: {
-              type: 'keyword',
-              normalizer: :taxa,
-              norms: false
+            recorded: {
+              type: 'nested',
+              properties: {
+                family: {
+                  type: 'keyword',
+                  normalizer: :taxa,
+                  norms: false
+                },
+                country: {
+                  type: 'keyword',
+                  norms: false
+                }
+              }
             },
-            families_identified: {
-              type: 'keyword',
-              normalizer: :taxa,
-              norms: false
+            identified: {
+              type: 'nested',
+              properties: {
+                family: {
+                  type: 'keyword',
+                  normalizer: :taxa,
+                  norms: false
+                },
+                country: {
+                  type: 'keyword',
+                  norms: false
+                }
+              }
             }
           }
         }
@@ -144,8 +162,8 @@ module Bionomia
         other_names: u.other_names.split("|").map(&:strip),
         date_born: date_born,
         date_died: date_died,
-        families_collected: u.recorded_families.keys.map(&:strip),
-        families_identified: u.identified_families.keys.map(&:strip)
+        identified: u.identified_families_countries,
+        recorded: u.recorded_families_countries
       }
     end
 

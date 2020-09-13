@@ -23,6 +23,29 @@ module Sinatra
           @results = results[:hits]
         end
 
+        def search_user_country
+          @results = []
+          country_code = params[:country_code]
+          action = params[:action] && !params[:action].blank? ? params[:action] : nil
+          family = params[:q] && !params[:q].blank? ? params[:q] : nil
+
+          return if action && !["identified","collected"].include?(action)
+
+          action = "recorded" if action == "collected"
+          page = (params[:page] || 1).to_i
+
+          client = Elasticsearch::Client.new url: Settings.elastic.server
+          body = build_country_query(country_code, action, family)
+
+          from = (page -1) * 30
+
+          response = client.search index: Settings.elastic.user_index, from: from, size: 30, body: body
+          results = response["hits"].deep_symbolize_keys
+
+          @pagy = Pagy.new(count: results[:total][:value], items: 30, page: page)
+          @results = results[:hits]
+        end
+
         def find_user(id)
           if id.is_orcid?
             user = User.find_by_orcid(id)

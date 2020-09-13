@@ -401,6 +401,26 @@ class User < ActiveRecord::Base
       .count
   end
 
+  def identified_families_countries
+    visible_user_occurrences
+      .joins(:occurrence)
+      .where(qry_identified)
+      .pluck(:family, :countryCode)
+      .uniq
+      .compact
+      .map{|a| { family: a[0], country: a[1] }}
+  end
+
+  def recorded_families_countries
+    visible_user_occurrences
+      .joins(:occurrence)
+      .where(qry_recorded)
+      .pluck(:family, :countryCode)
+      .uniq
+      .compact
+      .map{|a| { family: a[0], country: a[1] }}
+  end
+
   def recorded_bins(years = 5)
     recordings = visible_user_occurrences
         .joins(:occurrence)

@@ -107,10 +107,10 @@
 .candidates-alert .col-12{
   margin-top:0.2rem;
 }
-.search-agent, .search-organization {
+.search-agent, .search-organization, .search-taxon {
   width:100%;
 }
-.search-agent label, .search-organization label{
+.search-agent label, .search-organization label, .search-taxon label {
   margin-right:0.2rem;
   margin-bottom:0rem;
 }
@@ -136,7 +136,7 @@
   background-color: #fff;
 }
 
-.orcid-add:focus, .dataset-search:focus, .organization-search:focus, .help-search:focus, .article-search:focus {
+.orcid-add:focus, .dataset-search:focus, .organization-search:focus, .help-search:focus, .article-search:focus, .taxon-search:focus {
   border: 2px solid #40924F;
 }
 #profile-buttons input, #profile-buttons a{
@@ -151,6 +151,6 @@ dl.col{
 #form-orcid{
   margin-top: 0.5rem;
 }
-#form-org-wrapper .twitter-typeahead, #form-user-wrapper .twitter-typeahead, #form-helper-wrapper .twitter-typeahead {
+#form-org-wrapper .twitter-typeahead, #form-user-wrapper .twitter-typeahead, #form-helper-wrapper .twitter-typeahead, #form-taxon-wrapper .twitter-typeahead {
   width:100%;
 }

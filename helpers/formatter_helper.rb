@@ -138,6 +138,14 @@ module Sinatra
           }
         end
 
+        def format_taxon
+          @results.map{ |n|
+            { id: n[:_source][:id],
+              name: n[:_source][:name]
+            }
+          }
+        end
+
         def format_articles
           @results.map{ |n|
             { id: n[:_source][:id],

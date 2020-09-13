@@ -68,8 +68,14 @@ fr:
     dq_title: Évaluation de la Qualité des Données
   country:
     country_title: Pays
-    lede: Depuis les pays indiqués dans les comptes ORCID et les entrées Wikidata
+    lede: Depuis les pays indiqués dans les comptes ORCID et les entrées Wikidata ou les spécimens d'enregistrés dans GBIF
+    intro: Depuis les pays indiqués dans les comptes ORCID et les entrées Wikidata. Recherche par famille de taxons pour explorer l'expertise.
     no_one_alert: "Personne trouvé du"
+    no_one_collected_alert: Personne n'a collecté au
+    no_one_identified_alert: Personne n'a identifié de spécimens au
+    resided_in: Résidé
+    collected_from: Collecté
+    identified_from: Identifié
   dataset:
     dataset_title: Jeux de données
     search_title: Recherche de Jeux de Données
@@ -158,6 +164,7 @@ fr:
     Your uploaded csv must use a comma to separate columns each optionally enclosed by quotes."
     search_dropdown_no_users: "Votre recherche a retourné 0 résultats."
     reset: Réinitialiser
+    remove: Enlever
   get_started:
     get_started_title: Commencer
     lede: Quatre étapes pour réclamer les spécimens que vous avez collectés ou identifiés et pour aider à reconnaître vos pairs, mentors et organisations.

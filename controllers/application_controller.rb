@@ -117,16 +117,23 @@ module Sinatra
           app.get '/country/:country_code' do
             country_code = params[:country_code]
             @results = []
-            begin
+#            begin
               @country = IsoCountryCodes.find(country_code)
-              users = User.where("country_code LIKE ?", "%#{country_code}%")
-                          .order(:family)
-              @pagy, @results = pagy(users, items: 30)
+              @action = params[:action] if ["identified","collected"].include?(params[:action])
+              @family = params[:q].present? ? params[:q] : nil
+
+              if @action || @family
+                search_user_country
+              else
+                users = User.where("country_code LIKE ?", "%#{country_code}%")
+                            .order(:family)
+                @pagy, @results = pagy(users, items: 30)
+              end
               haml :'countries/country', locals: { active_page: "countries" }
-            rescue
-              status 404
-              haml :oops
-            end
+#            rescue
+#              status 404
+#              haml :oops
+#            end
           end
 
           app.get '/datasets' do
@@ -405,6 +412,12 @@ module Sinatra
             content_type "application/json", charset: 'utf-8'
             search_organization
             format_organizations.to_json
+          end
+
+          app.get '/taxon.json' do
+            content_type "application/json", charset: 'utf-8'
+            search_taxon
+            format_taxon.to_json
           end
 
           app.get '/organizations' do

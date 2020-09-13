@@ -40,6 +40,7 @@ elastic:
   organization_index: 'bionomia_organizations'
   dataset_index: 'bionomia_datasets'
   article_index: 'bionomia_articles'
+  taxon_index: 'bionomia_taxa'
 gmail:
   domain: ''
   email: '____@gmail.com'

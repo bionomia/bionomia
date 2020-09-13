@@ -1,5 +1,8 @@
 -content_for :title do
-  #{@country.name}
+  - if @action
+    #{@action.capitalize} in #{@country.name}
+  - else
+    #{@country.name}
 
 - content_for :scripts do
   %script{src: "/js/application.js"}
@@ -12,19 +15,52 @@
   %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
     %div{class:"mr-auto p-2"}
       %h1{class:"h2"} #{@country.name}
-      %p{class: "lead text-muted"}= I18n.t('country.lede')
+      %p{class: "lead text-muted"}
+        #{I18n.t('country.lede')}
+    = haml :'partials/countries/search', layout: false
 
-- if @pagy.count == 0
+- if @results.size == 0
   %div{class: "alert alert-warning tiny-margins", role: "alert"}
-    = I18n.t('country.no_one_alert')
-    %span{class:"font-weight-bold"}= @country.name
+    - if @action || @family
+      %i{class:"fas fa-filter"}
+      - action = !@action.blank? ? @action : "collected or identified"
+      No one has #{action}
+      %span{class:"font-weight-bold"}
+        #{h(@family)}
+      from
+      %span{class:"font-weight-bold"}
+        #{@country.name}.
+      %a{href: url("/country/#{@country.alpha2}"), class:"text-danger ml-2"}
+        %i{class:"fas fa-minus-circle"}
+        #{I18n.t('general.remove')}
+    - else
+      = I18n.t('country.no_one_alert')
+      %span{class:"font-weight-bold"}
+        #{@country.name}.
 - else
+  %div{class:"alert alert-info tiny-margins", role: "alert"}
+    - if @action || @family
+      %i{class:"fas fa-filter"}
+      - action = !@action.blank? ? @action.capitalize : "Collected or identified"
+      #{action}
+      %span{class:"font-weight-bold"}
+        #{h(@family)}
+      from
+      %span{class:"font-weight-bold"}
+        #{@country.name}.
+      %a{href: url("/country/#{@country.alpha2}"), class:"text-danger ml-2"}
+        %i{class:"fas fa-minus-circle"}
+        #{I18n.t('general.remove')}
+    - else
+      #{I18n.t('country.intro')}
   - @results.in_groups_of(3).each do |group|
     %div{class: "card-deck"}
       - group.each do |u|
         - if u.nil?
           %div{class:"card border-0"}
         - else
+          - if @action || @family
+            - u = User.find(u[:_id])
           - cache_fragment(u.identifier) do
             = haml :'partials/user/card', layout: false, locals: { user: u }
 

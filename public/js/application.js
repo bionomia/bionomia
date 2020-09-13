@@ -89,6 +89,8 @@ var Application = (function($, window) {
       this.data_sources.organization.initialize();
       this.data_sources.dataset = this.create_bloodhound("dataset");
       this.data_sources.dataset.initialize();
+      this.data_sources.taxon = this.create_bloodhound("taxon");
+      this.data_sources.taxon.initialize();
     },
     create_bloodhound: function(type) {
       return new Bloodhound({
@@ -195,6 +197,20 @@ var Application = (function($, window) {
             window.location.href = "/dataset/" + datum.datasetkey;
           }
         });
+
+        $("#typeahead-taxon").typeahead({
+            minLength: 1,
+            highlight: true
+          },
+          {
+            name: "taxon",
+            limit: 10,
+            source : this.data_sources.taxon.ttAdapter(),
+            display : "name"
+          }
+          ).on("typeahead:select", function(obj, datum) {
+            window.location.href = window.location.pathname + "?q=" + datum.name;
+          });
 
     },
     activate_switch: function() {

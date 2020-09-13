@@ -68,8 +68,14 @@ en:
     dq_title: Assessing Data Quality
   country:
     country_title: Countries
-    lede: From countries stated in ORCID accounts and Wikidata entries
+    lede: From countries stated in ORCID accounts and Wikidata entries or specimen records in GBIF
+    intro: From countries stated in ORCID accounts and Wikidata entries. Search by Taxon Family to explore expertise.
     no_one_alert: "No one found from"
+    no_one_collected_alert: No one has collected specimens from
+    no_one_identified_alert: No one has identified specimens from
+    resided_in: Resided In
+    collected_from: Collected From
+    identified_from: Identified From
   dataset:
     dataset_title: Datasets
     search_title: Datasets Search
@@ -158,6 +164,7 @@ en:
     Your uploaded csv must use a comma to separate columns each optionally enclosed by quotes."
     search_dropdown_no_users: "Your search turned up 0 results."
     reset: Reset
+    remove: Remove
   get_started:
     get_started_title: Get Started
     lede:  Four steps to claim the specimens you collected or identified and to help acknowledge your peers, mentors, and organizations.

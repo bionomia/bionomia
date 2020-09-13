@@ -4,7 +4,7 @@ require File.dirname(File.dirname(__FILE__)) + '/application.rb'
 
 ARGV << '-h' if ARGV.empty?
 
-INDICES = ["agent", "article", "dataset", "organization", "user"]
+INDICES = ["agent", "article", "dataset", "organization", "user", "taxon"]
 
 options = {}
 OptionParser.new do |opts|
