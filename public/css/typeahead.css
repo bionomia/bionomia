@@ -129,6 +129,7 @@
 }
 .helpers .twitter-typeahead{
   width:70%;
+  line-height: 1.5em;
 }
 .orcid-add, .dataset-search, .organization-search, .help-search, .article-search {
   width:100%;
