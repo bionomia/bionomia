@@ -75,6 +75,11 @@ describe "Bionomia Application Controller" do
     expect(last_response).to be_ok
   end
 
+  it "should allow accessing a country page" do
+    get '/country/CA'
+    expect(last_response).to be_ok
+  end
+
   it "should allow accessing the articles page" do
     get '/articles'
     expect(last_response).to be_ok
