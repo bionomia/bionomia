@@ -33,10 +33,10 @@ module Sinatra
                         .map{|k,v| response[k] = v }
 
               response["recorded"] = occurrence.user_recordings.map{|o|
-                id_url = o.user.orcid ? "https://orcid.org/#{o.user.orcid}" : "https://www.wikidata.org/wiki/#{o.user.wikidata}"
+                id_url = o.user.orcid ? "https://orcid.org/#{o.user.orcid}" : "http://www.wikidata.org/entity/#{o.user.wikidata}"
                 {
                     "@type": "Person",
-                    "@id": id_url,
+                    "@id": "#{base_url}/#{o.user.identifier}",
                     sameAs: id_url,
                     givenName: "#{o.user.given}",
                     familyName: "#{o.user.family}",
@@ -44,10 +44,10 @@ module Sinatra
                   }
               }
               response["identified"] = occurrence.user_identifications.map{|o|
-                id_url = o.user.orcid ? "https://orcid.org/#{o.user.orcid}" : "https://www.wikidata.org/wiki/#{o.user.wikidata}"
+                id_url = o.user.orcid ? "https://orcid.org/#{o.user.orcid}" : "http://www.wikidata.org/entity/#{o.user.wikidata}"
                 {
                     "@type": "Person",
-                    "@id": id_url,
+                    "@id": "#{base_url}/#{o.user.identifier}",
                     sameAs: id_url,
                     givenName: "#{o.user.given}",
                     familyName: "#{o.user.family}",
