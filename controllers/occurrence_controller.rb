@@ -26,7 +26,7 @@ module Sinatra
                   PreservedSpecimen: "http://rs.tdwg.org/dwc/terms/PreservedSpecimen",
               }.merge(dwc_contexts)
               response["@type"] = "PreservedSpecimen"
-              response["@id"] = "https://gbif.org/occurrence/#{occurrence.id}"
+              response["@id"] = "#{base_url}/#{occurrence.id}"
               response["sameAs"] = "https://gbif.org/occurrence/#{occurrence.id}"
               occurrence.attributes
                         .reject{|column| ignore_cols.include?(column)}
