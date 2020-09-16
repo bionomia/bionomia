@@ -32,6 +32,12 @@
       is a user's ORCID identifier,
       %a{href: "https://orcid.org/0000-0001-7618-5230"} https://orcid.org/0000-0001-7618-5230
 
+  %h5 Content Negotiation for JSON-LD
+  %pre{class:"pre-scrollable bg-dark text-white border rounded p-3"}
+    %code
+      :preserve
+        curl -HL "Accept: application/ls+json" "#{url("/0000-0001-7618-5230")}"
+
   %div
     %a{href: url("/Q1035/specimens.csv")} #{url("/Q1035/specimens.csv")}
   %div
