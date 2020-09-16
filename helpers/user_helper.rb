@@ -54,7 +54,12 @@ module Sinatra
           else
             user = User.find(id)
           end
-          halt 404 if user.nil?
+          if request && request.url.match(/.json$/)
+            halt 404, {}.to_json if user.nil?
+          else
+            halt 404 if user.nil?
+          end
+
           user
         end
 

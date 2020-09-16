@@ -32,12 +32,6 @@
       is a user's ORCID identifier,
       %a{href: "https://orcid.org/0000-0001-7618-5230"} https://orcid.org/0000-0001-7618-5230
 
-  %h5 Content Negotiation for JSON-LD
-  %pre{class:"pre-scrollable bg-dark text-white border rounded p-3"}
-    %code
-      :preserve
-        curl -LH "Accept: application/ld+json" "#{url("/0000-0001-7618-5230")}"
-
   %div
     %a{href: url("/Q1035/specimens.csv")} #{url("/Q1035/specimens.csv")}
   %div
@@ -48,6 +42,12 @@
       %em Q1035
       is a user's Wikidata Q number,
       %a{href: "https://www.wikidata.org/wiki/Q1035"} https://www.wikidata.org/wiki/Q1035
+
+  %h5 Content Negotiation for JSON-LD
+  %pre{class:"pre-scrollable bg-dark text-white border rounded p-3"}
+    %code
+      :preserve
+        curl -LH "Accept: application/ld+json" "#{url("/0000-0001-7618-5230")}"
 
 %div{class:"ml-3"}
   %h5 Specimen Record
