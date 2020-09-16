@@ -36,7 +36,7 @@
   %pre{class:"pre-scrollable bg-dark text-white border rounded p-3"}
     %code
       :preserve
-        curl -HL "Accept: application/ls+json" "#{url("/0000-0001-7618-5230")}"
+        curl -LH "Accept: application/ld+json" "#{url("/0000-0001-7618-5230")}"
 
   %div
     %a{href: url("/Q1035/specimens.csv")} #{url("/Q1035/specimens.csv")}
