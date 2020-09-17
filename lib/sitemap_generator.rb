@@ -65,7 +65,6 @@ module Bionomia
         sitemap.add "/#{user.identifier}/deposited-at"
         sitemap.add "/#{user.identifier}/citations"
         sitemap.add "/#{user.identifier}/specimens"
-        sitemap.add "/#{user.identifier}/comments"
         sitemap.add "/#{user.identifier}/support"
       end
     end
