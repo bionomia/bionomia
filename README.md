@@ -147,7 +147,7 @@ Unfortunately, gbifIDs are not persistent. These occasionally disappear through 
 
      $ RACK_ENV=production irb
      > require "./application"
-     > UserOccurrence.orphaned_user_claims
+     > pp UserOccurrence.orphaned_user_claims
      > UserOccurrence.delete_orphaned
 
      > ArticleOccurrence.orphaned_count
