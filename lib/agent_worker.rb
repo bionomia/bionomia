@@ -12,20 +12,20 @@ module Bionomia
           family: a[:family].to_s.strip,
           given: a[:given].to_s.strip
         })
-        recs = row["gbifIDs_recordedBy"]
-                  .tr('[]', '')
-                  .split(',')
-                  .map{|r| [ r.to_i, agent.id ] }
-        ids = row["gbifIDs_identifiedBy"]
-                  .tr('[]', '')
-                  .split(',')
-                  .map{|r| [ r.to_i, agent.id ] }
-        if !recs.empty?
-          OccurrenceRecorder.import [:occurrence_id, :agent_id], recs, batch_size: 2500, validate: false, on_duplicate_key_ignore: true
-        end
-        if !ids.empty?
-          OccurrenceDeterminer.import [:occurrence_id, :agent_id], ids, batch_size: 2500, validate: false, on_duplicate_key_ignore: true
-        end
+        row["gbifIDs_recordedBy"]
+          .tr('[]', '')
+          .split(',')
+          .in_groups_of(1000, false) do |group|
+            import = group.map{|r| [ r.to_i, agent.id ] }
+            OccurrenceRecorder.import [:occurrence_id, :agent_id], import, batch_size: 1000, validate: false, on_duplicate_key_ignore: true
+          end
+        row["gbifIDs_identifiedBy"]
+          .tr('[]', '')
+          .split(',')
+          .in_groups_of(1000, false) do |group|
+            import = group.map{|r| [ r.to_i, agent.id ] }
+            OccurrenceDeterminer.import [:occurrence_id, :agent_id], import, batch_size: 1000, validate: false, on_duplicate_key_ignore: true
+          end
       end
     end
 

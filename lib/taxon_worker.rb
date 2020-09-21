@@ -10,10 +10,10 @@ module Bionomia
       data = row["gbifIDs_family"]
                 .tr('[]', '')
                 .split(',')
-                .map{|r| [ r.to_i, taxon.id ] }
-      if !data.empty?
-        TaxonOccurrence.import [:occurrence_id, :taxon_id],  data, batch_size: 2500, validate: false, on_duplicate_key_ignore: true
-      end
+                .in_groups_of(1000, false) do |group|
+                  import = group.map{|r| [ r.to_i, taxon.id] }
+                  TaxonOccurrence.import [:occurrence_id, :taxon_id],  import, batch_size: 1000, validate: false, on_duplicate_key_ignore: true
+                end
     end
 
   end
