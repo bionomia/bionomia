@@ -346,6 +346,31 @@ var Application = (function($, window) {
         });
         return false;
       });
+      $("button.remove-all").on("click", function() {
+        var occurrence_ids = $.map($("[data-occurrence-id]"), function(e) {
+              return $(e).attr("data-occurrence-id");
+            }).all_unique().toString();
+        $.ajax({
+            method: "DELETE",
+            url: self.path + "/user-occurrence/bulk.json",
+            dataType: "json",
+            data: JSON.stringify({
+              user_id: self.user_id,
+              occurrence_ids: occurrence_ids
+            }),
+            beforeSend: function(xhr) {
+              $(".table label").addClass("disabled");
+              $(".table button").addClass("disabled");
+            }
+        }).done(function(data) {
+          $(".table tbody tr").fadeOut(250).promise().done(function() {
+            $(this).remove();
+            $(".table tbody").append("<tr><td colspan=\"10\">" + self.spinner + "</td></tr>");
+            location.reload();
+          });
+        });
+        return false;
+      });
       $("button.hide-all").on("click", function() {
         var occurrence_ids = $.map($("[data-occurrence-id]"), function(e) {
               return $(e).attr("data-occurrence-id");

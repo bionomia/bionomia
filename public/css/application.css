@@ -23,7 +23,7 @@ footer {
 pre {
   white-space:pre-wrap;
 }
-button.hide, button.remove, button.hide-all {
+button.hide, button.remove, button.hide-all, button.remove-all {
   font-size:0.8rem;
   padding:0.25rem 0.35rem;
 }

@@ -141,6 +141,16 @@ module Sinatra
             { message: "ok" }.to_json
           end
 
+          app.delete '/help-others/user-occurrence/bulk.json' do
+            protected!
+            content_type "application/json", charset: 'utf-8'
+            req = JSON.parse(request.body.read).symbolize_keys
+            occurrence_ids = req[:occurrence_ids].split(",")
+            UserOccurrence.where({ id: occurrence_ids, user_id: req[:user_id].to_i })
+                          .delete_all
+            { message: "ok" }.to_json
+          end
+
           app.put '/help-others/user-occurrence/:id.json' do
             protected!
             content_type "application/json", charset: 'utf-8'

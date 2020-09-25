@@ -53,7 +53,9 @@
           %th{scope: "col"}= I18n.t('specimen.catalog_number')
           %th{scope: "col"}= I18n.t('specimen.type_status')
           %th{scope: "col", class:"btn-selector-wide"}
+            %button{type:"button", name:"notme-all", class:"btn btn-sm btn-warning hide-all"}= I18n.t('specimen.not_them')
           %th{scope: "col", class:"btn-selector-wide"}
+            %button{type:"button", name:"remove-all", class:"btn btn-sm btn-danger remove-all"}= I18n.t('specimen.remove')
           %th{scope: "col"}= I18n.t('specimen.scribe')
 
       %tbody
@@ -103,7 +105,9 @@
             %th{scope: "col"}= I18n.t('specimen.catalog_number')
             %th{scope: "col"}= I18n.t('specimen.type_status')
             %th
+              %button{type:"button", name:"notme-all", class:"btn btn-sm btn-warning hide-all"}= I18n.t('specimen.not_them')
             %th
+              %button{type:"button", name:"remove-all", class:"btn btn-sm btn-danger remove-all"}= I18n.t('specimen.remove')
             %th{scope: "col"}= I18n.t('specimen.scribe')
 
   - if @total > 25
