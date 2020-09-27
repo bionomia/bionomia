@@ -224,5 +224,81 @@
       %div{class:"card-header border-bottom"}
         %h4 Uploads to Attribute Records in Bulk
       %div{class:"card-body overflow-auto mt-3", style:"max-height: 300px; min-height: 300px;"}
-        Coming soon...
-        //%iframe{type:"text/html", width:"100%", height:"600", frameborder:"0", align:"left", style:"align:left;max-width:100%;margin-top:20px;border:none;overflow-y: auto;", src:"https://threadreaderapp.com/embed/1258487417876688901.html"}
+        %p
+          Today I thought I'd share a "how to" for bulk uploads.
+          After only a day of doing these I feel like I need the extra practise.
+          Plus some other folk have mentioned they'd like to join me in attempting this but don't know how.
+          So here it goes!
+        %p
+          First you have to find a person with specimens that need uploading.
+          I'm going to pick the fabulous Alexander Wetmore.
+          I've previously transcribed his photo albums with
+          = succeed "." do
+            %a{href:"https://twitter.com/TranscribeSI"} @TranscribeSI
+          He was a prolific collector and needs some
+          %a{href:"https://twitter.com/BionomiaTrack"} @BionomiaTrack
+          love.
+        %p{class:"mt-3 mb-3"}
+          %img{src:"/images/wetmore-jumbotron.png", alt: "Wetmore overview", class:"align-top"}
+        %p
+          So I go to the "Bulk Attributions" tab on his profile page. And then press the blue "Download" csv file button.
+        %p{class:"mt-3 mb-3"}
+          %img{src:"/images/wetmore-download.png", alt:"Wetmore download", class:"align-top"}
+          %img{src:"/images/download-buttons.png", alt:"Download buttons", class:"align-top"}
+        %p
+          This downloads a csv file of specimen data.
+          I open up the file.
+          Now I'm going to be using Excel but you may use something else.
+          When opened the file looks like this in Excel.
+        %p{class:"mt-3 mb-3"}
+          %img{src:"/images/excel-download.jpg", alt:"Excel download", class:"align-top"}
+        %p
+          I'll go through the important columns.
+          The first is the "action" column.
+          This is where you'll put "recorded" if the specimen was collected by Alexander, or "identified" if it was identified by him.
+          If he did both you add "recorded, identified".
+          Note the comma separating the two!
+        %p{class:"mt-3 mb-3"}
+          %img{src:"/images/recorded-identified.png", alt:"recorded identified", class:"align-top"}
+        %p
+          You can see whether Alexander recorded or identified specimens by checked the "recordedBy" or "identifiedBy" columns in the spreadsheet.
+        %p{class:"mt-3 mb-3"}
+          %img{src:"/images/recordedby.png", alt:"recordedBy", class:"align-top"}
+          %img{src:"/images/identifiedby.png", alt:"identifiedBy", class:"align-top"}
+        %p
+          The other column that may be of use is the "Not Me" column.
+          If it isn't your collector that either collected or identified the specimen you can add "True" to this column.
+        %p{class:"mt-3 mb-3"}
+          %img{src:"/images/notme.png", alt:"Not me", class:"align-top"}
+        %p
+          Once you've got your spreadsheet ready with some claims added you can then upload it into Bionomia.
+          I'm just going to do a few so I can show you what to do.
+          I'm going to assume you have basic Excel skills.
+          All I'm going to do is use the sort & filter and search recordedBy.
+        %p{class:"mt-3 mb-3"}
+          %img{src:"/images/sort-filter.png", alt:"Sort and filter", class:"align-top"}
+        %p
+          I'll add "recorded" in the "action" column to all those lines.
+          I'll then check the "identifiedBy" column to make sure he didn't identify any of the specimens.
+          If he did I'll add a comma and "identified" to those specimens he also identified.
+        %p{class:"mt-3 mb-3"}
+          %img{src:"/images/excel-action.png", alt:"Adding action", class:"align-top"}
+        %p
+          Now obviously you can keep on working on the spreadsheet.
+          But I'll just leave it there so I can show you the next steps.
+          What I do next may not be the best way but it works.
+          I save the spreadsheet and a warning pops up.
+          I press "No" on the warning and save as an Excel workbook.
+        %p{class:"mt-3 mb-3"}
+          %img{src:"/images/csv-dialog.jpg", alt:"CSV dialog", class:"align-top"}
+          %img{src:"/images/csv-save-workbook.jpg", alt:"Saving csv as workbook", class:"align-top"}
+        %p
+          I then press "save as" and choose the file format CSV UTF-8 format.
+          I'll rename the file as Q34558Alex.csv.
+        %p{class:"mt-3 mb-3"}
+          %img{src:"/images/save-utf8.jpg", alt:"Save as UTF-8", class:"align-top"}
+        %p
+          Then I go back to Bionomia - Alexander's profile, the Bulk Attributions tab and press "Choose file".
+          I choose the file I've just renamed and saved as a csv file. Then I press submit.
+        %p
+          And the 56 records that I've done will be added. The biggest batch you can do is 10,000. So there you go and happy bulk uploading of data!
