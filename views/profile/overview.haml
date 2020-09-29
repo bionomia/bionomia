@@ -22,9 +22,16 @@
             %a{href: url("/help-others")}
               Help Others
       - else
-        %div{class: "alert alert-info tiny-margins", role: "alert"}
-          %ul{class:"list-unstyled"}
-            = haml :'partials/user_stats', layout: false
+        %div{class: "d-flex flex-row mt-3 alert alert-info justify-content-between", role: "alert"}
+          %div
+            %ul{class:"list-unstyled"}
+              = haml :'partials/user_stats', layout: false
+
+          - if @stats[:specimens][:recorded] > 0 || @stats[:specimens][:identified] > 0
+            %div{class:"col-4 col-md-2"}
+              = I18n.t('user.progress')
+              %div{class:"progress progress-border"}
+                %div{id:"progress-bar_#{@user.identifier}", class:"progress-bar bg-info", role:"progressbar", style:"width: 0%;", "aria-valuenow":"0", "aria-valuemin":"0", "aria-valuemax":"100"}
 
       - if @stats[:specimens][:identified] > 0 || @stats[:specimens][:recorded] > 0
         %div{class:"row d-flex mt-3"}
