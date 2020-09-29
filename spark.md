@@ -77,7 +77,10 @@ val processedTerms = List(
   "dateIdentified",
   "eventDate",
   "mediaType",
-  "family"
+  "family",
+  "recordedBy",
+  "identifiedBy",
+  "scientificName"
 )
 
 val df2 = spark.
@@ -92,12 +95,17 @@ val df2 = spark.
     option("ignoreLeadingWhiteSpace", "true").
     load("/Users/dshorthouse/Downloads/GBIF/occurrence.txt").
     select(processedTerms.map(col):_*).
+    filter(coalesce($"identifiedBy",$"recordedBy").isNotNull).
+    where(!$"scientificName".contains("BOLD:")).
+    where(!$"scientificName".contains("BOLD-")).
+    where(!$"scientificName".contains("BIOUG")).
     withColumnRenamed("dateIdentified","dateIdentified_processed").
     withColumnRenamed("eventDate", "eventDate_processed").
     withColumnRenamed("mediaType", "hasImage").
     withColumn("eventDate_processed", to_timestamp($"eventDate_processed")).
     withColumn("dateIdentified_processed", to_timestamp($"dateIdentified_processed")).
-    withColumn("hasImage", when($"hasImage".contains("StillImage"), 1).otherwise(0))
+    withColumn("hasImage", when($"hasImage".contains("StillImage"), 1).otherwise(0)).
+    drop("recordedBy", "identifiedBy", "scientificName")
 
 df2.write.mode("overwrite").format("avro").save("processed")
 
@@ -107,7 +115,7 @@ val df2 = spark.
     format("avro").
     load("processed")
 
-val occurrences = df1.join(df2, Seq("gbifID"), "leftouter").orderBy($"gbifID").distinct
+val occurrences = df1.join(df2, Seq("gbifID"), "inner").orderBy($"gbifID").distinct
 
 occurrences.write.mode("overwrite").format("avro").save("occurrences")
 
