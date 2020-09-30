@@ -4,7 +4,7 @@
 -content_for :scripts do
   %script{src: "/js/application.js"}
   :javascript
-    var DataSet = { "datasetKey": "#{params[:datasetKey]}", "agent_id": "#{params[:agent_id]}" };
+    var DataSet = { "datasetKey": "#{params[:datasetKey]}", "agent_id": "#{params[:agent_id]}", "taxon_id": "#{params[:taxon_id]}" };
     $(function() {
       Application.init(#{@viewed_user.id}, "POST", "/help-others", "#{@viewed_user.identifier}");
     });
@@ -43,7 +43,7 @@
     %form{method: :post, action: "/help-others/#{@viewed_user.identifier}/advanced-search", "accept-charset" => "UTF-8"}
 
       %div{class: "form-group"}
-        %label{for: "typeahead", class:"font-weight-bold"}= I18n.t("help.dataset")
+        %label{for: "typeahead-dataset", class:"font-weight-bold"}= I18n.t("help.dataset")
         %div{class:"col-12 col-md-8 pl-0"}
           - if @dataset.nil?
             %input{id: "typeahead-dataset", type: :text, name: "dataset", value: "#{params[:dataset]}", class:"typeahead"}
@@ -58,7 +58,22 @@
             %input{type: :hidden, name: "datasetKey", value: params[:datasetKey]}
 
       %div{class: "form-group"}
-        %label{for: "typeahead", class:"font-weight-bold"}= I18n.t('help.agent_string')
+        %label{for: "typeahead-taxon", class:"font-weight-bold"}= I18n.t('help.taxon_string')
+        %div{class:"col-12 col-md-8 pl-0"}
+          - if @taxon.nil?
+            %input{id: "typeahead-taxon", type: :text, name: "taxon", value: "#{params[:taxon]}", class:"typeahead"}
+          - else
+            - q = params.except("id", "taxon_id").to_query
+            %span
+              %a{href: url("/help-others/#{@viewed_user.identifier}/advanced-search?#{q}"), class:"text-danger"}
+                %i{class:"fas fa-minus-circle"}
+                Remove
+            %span
+              #{@taxon}
+            %input{type: :hidden, name: "taxon_id", value: params[:taxon_id]}
+
+      %div{class: "form-group"}
+        %label{for: "typeahead-agent", class:"font-weight-bold"}= I18n.t('help.agent_string')
         %div{class:"col-12 col-md-8 pl-0"}
           - if @agent.nil?
             %input{id: "typeahead-agent", type: :text, name: "agent", value: "#{params[:agent]}", class:"typeahead"}
@@ -75,14 +90,17 @@
       %input{type:"hidden", name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
       %button{type:"submit", class:"btn btn-success"}= I18n.t('general.search')
 
-      - if @agent || @dataset
+      - if @agent || @dataset || @taxon
         - q = params.except("id").to_query
         %a{href: url("/help-others/#{@viewed_user.identifier}?#{q}"), class:"btn btn-info"}= I18n.t('general.apply')
 
-  - if params[:dataset] && params[:dataset].size > 0 && !@dataset_results.empty? && params[:agent] && params[:agent].size > 0 && !@agent_results.empty?
+  - if params[:dataset] && params[:dataset].size > 0 && !@dataset_results.empty? && params[:agent] && params[:agent].size > 0 && !@agent_results.empty? && params[:taxon] && params[:taxon].size > 0 && !@taxon_results.empty?
     %p{class:"mt-3"}
       %a{href: "#datasets"}
         = I18n.t('help.datasets')
+      |
+      %a{href:"#taxa"}
+        = I18n.t('help.taxa')
       |
       %a{href:"#agents"}
         = I18n.t('help.agents')
@@ -110,12 +128,12 @@
                       %img{src:"#{organization_image(dataset, 'medium')}", alt:"#{dataset.title}", class:"mr-2 rounded"}
                     %div{class:"flex-grow-1"}
                       %h5
-                        %a{href: url("/help-others/#{@viewed_user.identifier}/advanced-search?datasetKey=#{dataset.datasetKey}&agent_id=#{params[:agent_id]}")} #{dataset.title}
+                        %a{href: url("/help-others/#{@viewed_user.identifier}/advanced-search?datasetKey=#{dataset.datasetKey}&agent_id=#{params[:agent_id]}&taxon_id=#{params[:taxon_id]}")} #{dataset.title}
                       %p{class:"text-muted"}
                 - else
                   %div{class: "card-header"}
                     %h5
-                      %a{href: url("/help-others/#{@viewed_user.identifier}/advanced-search?datasetKey=#{dataset.datasetKey}&agent_id=#{params[:agent_id]}")} #{dataset.title}
+                      %a{href: url("/help-others/#{@viewed_user.identifier}/advanced-search?datasetKey=#{dataset.datasetKey}&agent_id=#{params[:agent_id]}&taxon_id=#{params[:taxon_id]}")} #{dataset.title}
                     %p{class:"text-muted"}
                 %div{class: "card-body"}
 
@@ -129,6 +147,28 @@
     %div{class: "alert alert-warning tiny-margins", role: "alert"}
       Dataset not found using the search
       %span{class: "font-weight-bold"} #{h(params[:dataset])}
+
+
+  - if @taxon_results && !@taxon_results.empty?
+    %a{name: "taxa"}
+    %div{class: "alert alert-info tiny-margins", role: "alert"}
+      Search results for
+      = succeed "." do
+        %span{class: "font-weight-bold"} #{h(params[:taxon])}
+      Click Family below to add a filter.
+
+    %div{class: "row"}
+      - @taxon_results.in_groups_of(25, false).each do |group|
+        %div{class: "col-12 col-md-3 mb-3"}
+          %ul{class: "list-unstyled m-2"}
+            - group.each do |o|
+              %li
+                %a{href: url("/help-others/#{@viewed_user.identifier}/advanced-search?datasetKey=#{params[:datasetKey]}&agent_id=#{params[:agent_id]}&taxon_id=#{o[:id]}")} #{o[:name]}
+
+  - elsif params[:taxon] && params[:taxon].size > 0 && @taxon_results.empty?
+    %div{class: "alert alert-warning tiny-margins", role: "alert"}
+      Taxonomic family not found using the search
+      %span{class: "font-weight-bold"} #{h(params[:taxon])}
 
 
   - if @agent_results && !@agent_results.empty?
@@ -145,7 +185,7 @@
           %ul{class: "list-unstyled m-2"}
             - group.each do |o|
               %li
-                %a{href: url("/help-others/#{@viewed_user.identifier}/advanced-search?datasetKey=#{params[:datasetKey]}&agent_id=#{o[:id]}")} #{o[:fullname_reverse]}
+                %a{href: url("/help-others/#{@viewed_user.identifier}/advanced-search?datasetKey=#{params[:datasetKey]}&agent_id=#{o[:id]}&taxon_id=#{params[:taxon_id]}")} #{o[:fullname_reverse]}
 
   - elsif params[:agent] && params[:agent].size > 0 && @agent_results.empty?
     %div{class: "alert alert-warning tiny-margins", role: "alert"}

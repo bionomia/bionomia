@@ -203,9 +203,11 @@ en:
     by_country: By Country
     not_ignored_alert: Bionomia scribes have not flagged specimens to be ignored.
     agent_string: Agent String
+    taxon_string: Taxon Family
     dataset: Dataset
     datasets: Datasets
     agents: Agents
+    taxa: Taxonomic Families
     specimens: Specimens
     visualizations: Visualizations
     specialties: Specialties

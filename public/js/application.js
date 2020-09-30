@@ -129,7 +129,8 @@ var Application = (function($, window) {
             window.location.href = "/agent/" + datum.id;
           } else if (self.path === "/help-others") {
             var datasetKey = (typeof DataSet !== "undefined") ? DataSet.datasetKey : "";
-            window.location.href = "/help-others/" + self.identifier + "/advanced-search?agent_id=" + datum.id + "&datasetKey=" + datasetKey;
+            var taxon_id = (typeof DataSet !== "undefined") ? DataSet.taxon_id : "";
+            window.location.href = "/help-others/" + self.identifier + "/advanced-search?agent_id=" + datum.id + "&datasetKey=" + datasetKey + "&taxon_id=" + taxon_id;
           } else {
             window.location.href = "/profile/candidates/agent/" + datum.id;
           }
@@ -192,7 +193,8 @@ var Application = (function($, window) {
             window.location.href = "/admin/dataset/" + datum.datasetkey;
           } else if (self.path === "/help-others") {
             var agent_id = (typeof DataSet !== "undefined") ? DataSet.agent_id : "";
-            window.location.href = "/help-others/" + self.identifier + "/advanced-search?datasetKey=" + datum.datasetkey + "&agent_id=" + agent_id;
+            var taxon_id = (typeof DataSet !== "undefined") ? DataSet.taxon_id : "";
+            window.location.href = "/help-others/" + self.identifier + "/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datum.datasetkey + "&taxon_id=" + taxon_id;
           } else {
             window.location.href = "/dataset/" + datum.datasetkey;
           }
@@ -209,7 +211,13 @@ var Application = (function($, window) {
             display : "name"
           }
           ).on("typeahead:select", function(obj, datum) {
-            window.location.href = window.location.pathname + "?q=" + datum.name;
+            if (self.path === "/help-others") {
+              var agent_id = (typeof DataSet !== "undefined") ? DataSet.agent_id : "";
+              var datasetKey = (typeof DataSet !== "undefined") ? DataSet.datasetKey : "";
+              window.location.href = "/help-others/" + self.identifier + "/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datasetKey + "&taxon_id=" + datum.id;
+            } else {
+              window.location.href = window.location.pathname + "?q=" + datum.name;
+            }
           });
 
     },

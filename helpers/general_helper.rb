@@ -78,6 +78,10 @@ module Sinatra
             occurrences = occurrences.where(occurrences: { datasetKey: @dataset[:datasetKey] })
           end
 
+          if @taxon && @taxon[:family]
+            occurrences = occurrences.where(occurrences: { family: @taxon[:family] })
+          end
+
           occurrences.pluck(:agent_id, :typeStatus, :occurrence_id)
                      .sort_by{|o| [ scores.fetch(o[0]), o[1].nil? ? "" : o[1] ] }
                      .reverse

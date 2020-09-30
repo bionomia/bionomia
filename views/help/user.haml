@@ -43,27 +43,34 @@
   - placeholder = @dataset ? @dataset.title : ""
   - checked = params[:relaxed] == "1" ? "checked" : nil
 
-  - if @dataset
+  - if @dataset || @agent || @taxon
     %div{class: "alert alert-warning", role: "alert"}
-      %a{href: url("/help-others/#{@viewed_user.identifier}?agent_id=#{params[:agent_id]}"), class:"ml-2 text-danger"}
-        %i{class:"fas fa-minus-circle"}
-        Remove
-      %i{class:"fas fa-filter"}
-      Filtered by
-      %span{class:"font-weight-bold mr-2"}
-        #{@dataset.title.truncate(125, separator: ' ')}
-      %a{href: "#{@dataset.license}", itemprop: "license"}
-        %img{src:"#{@dataset.license_icon("small")}"}
-
-  - if @agent
-    %div{class: "alert alert-warning", role: "alert"}
-      %a{href: url("/help-others/#{@viewed_user.identifier}?datasetKey=#{params[:datasetKey]}"), class:"ml-2 text-danger"}
-        %i{class:"fas fa-minus-circle"}
-        Remove
-      %i{class:"fas fa-search"}
-      Searched for
-      %span{class:"font-weight-bold mr-2"}
-        #{@agent.fullname_reverse}
+      - if @dataset
+        %div
+          %a{href: url("/help-others/#{@viewed_user.identifier}?&datasetKey=&agent_id=#{params[:agent_id]}&taxon_id=#{params[:taxon_id]}"), class:"ml-2 text-danger"}
+            %i{class:"fas fa-minus-circle"}
+            Remove
+          Filtered by
+          %span{class:"font-weight-bold mr-2"}
+            #{@dataset.title.truncate(125, separator: ' ')}
+          %a{href: "#{@dataset.license}", itemprop: "license"}
+            %img{src:"#{@dataset.license_icon("small")}"}
+      - if @agent
+        %div
+          %a{href: url("/help-others/#{@viewed_user.identifier}?datasetKey=#{params[:datasetKey]}&agent_id=&taxon_id=#{params[:taxon_id]}"), class:"ml-2 text-danger"}
+            %i{class:"fas fa-minus-circle"}
+            Remove
+          Searched for
+          %span{class:"font-weight-bold mr-2"}
+            #{@agent.fullname_reverse}
+      - if @taxon
+        %div
+          %a{href: url("/help-others/#{@viewed_user.identifier}?datasetKey=#{params[:datasetKey]}&agent_id=#{params[:agent_id]}&taxon_id="), class:"ml-2 text-danger"}
+            %i{class:"fas fa-minus-circle"}
+            Remove
+          Filtered by
+          %span{class:"font-weight-bold mr-2"}
+            #{@taxon.family}
 
   - if @pagy.count == 0
     %div{class: "alert alert-info tiny-margins row", role: "alert"}

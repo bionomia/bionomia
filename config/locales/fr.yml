@@ -203,9 +203,11 @@ fr:
     by_country: Par Pays
     not_ignored_alert: Les scribes n'ont pas signalé les spécimens à ignorer
     agent_string: Chaîne d'agent
+    taxon_string: Famille taxonomique
     dataset: Base de données
     datasets: Jeux de données
     agents: Agents
+    taxa: Familles taxonomiques
     specimens: Spécimens
     visualizations: Visualisations
     specialties: Spécialtiés

@@ -190,12 +190,15 @@ module Sinatra
                 redirect "/profile/candidates"
               end
 
-              @dataset, @agent = nil
+              @dataset, @agent, @taxon = nil
               if params[:datasetKey]
                 @dataset = Dataset.find_by_datasetKey(params[:datasetKey]) rescue nil
               end
               if params[:agent_id]
                 @agent = Agent.find(params[:agent_id]) rescue nil
+              end
+              if params[:taxon_id]
+                @taxon = Taxon.find(params[:taxon_id]) rescue nil
               end
 
               if @viewed_user.family.nil?
@@ -239,8 +242,10 @@ module Sinatra
 
             @agent_results = []
             @dataset_results = []
+            @taxon_results = []
             @agent = nil
             @dataset = nil
+            @taxon = nil
 
             if params[:datasetKey]
               @dataset = Dataset.find_by_datasetKey(params[:datasetKey]).title rescue nil
@@ -254,6 +259,13 @@ module Sinatra
             elsif params[:agent]
               search_agent({ item_size: 75 })
               @agent_results = format_agents
+            end
+
+            if params[:taxon_id]
+              @taxon = Taxon.find(params[:taxon_id]).family rescue nil
+            elsif params[:taxon]
+              search_taxon
+              @taxon_results = format_taxon
             end
 
             haml :'help/advanced_search', locals: { active_page: "help" }
@@ -270,6 +282,9 @@ module Sinatra
             end
             if params[:agent_id]
               @agent = Agent.find(params[:agent_id]).fullname_reverse rescue nil
+            end
+            if params[:taxon_id]
+              @taxon = Taxon.find(params[:taxon_id]).family rescue nil
             end
             haml :'help/advanced_search', locals: { active_page: "help" }
           end

@@ -7,7 +7,7 @@ module Sinatra
 
         def search_taxon
           @results = []
-          searched_term = params[:q]
+          searched_term = params[:q] || params[:taxon]
           return if !searched_term.present?
 
           page = (params[:page] || 1).to_i
