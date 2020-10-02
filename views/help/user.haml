@@ -47,30 +47,33 @@
     %div{class: "alert alert-warning", role: "alert"}
       - if @dataset
         %div
-          %a{href: url("/help-others/#{@viewed_user.identifier}?&datasetKey=&agent_id=#{params[:agent_id]}&taxon_id=#{params[:taxon_id]}"), class:"ml-2 text-danger"}
-            %i{class:"fas fa-minus-circle"}
-            Remove
+          %i{class:"fas fa-filter"}
           Filtered by
           %span{class:"font-weight-bold mr-2"}
             #{@dataset.title.truncate(125, separator: ' ')}
           %a{href: "#{@dataset.license}", itemprop: "license"}
             %img{src:"#{@dataset.license_icon("small")}"}
-      - if @agent
-        %div
-          %a{href: url("/help-others/#{@viewed_user.identifier}?datasetKey=#{params[:datasetKey]}&agent_id=&taxon_id=#{params[:taxon_id]}"), class:"ml-2 text-danger"}
+          %a{href: url("/help-others/#{@viewed_user.identifier}?&datasetKey=&agent_id=#{params[:agent_id]}&taxon_id=#{params[:taxon_id]}"), class:"ml-2 text-danger"}
             %i{class:"fas fa-minus-circle"}
             Remove
+      - if @agent
+        %div
+          %i{class:"fas fa-search"}
           Searched for
           %span{class:"font-weight-bold mr-2"}
             #{@agent.fullname_reverse}
-      - if @taxon
-        %div
-          %a{href: url("/help-others/#{@viewed_user.identifier}?datasetKey=#{params[:datasetKey]}&agent_id=#{params[:agent_id]}&taxon_id="), class:"ml-2 text-danger"}
+          %a{href: url("/help-others/#{@viewed_user.identifier}?datasetKey=#{params[:datasetKey]}&agent_id=&taxon_id=#{params[:taxon_id]}"), class:"ml-2 text-danger"}
             %i{class:"fas fa-minus-circle"}
             Remove
+      - if @taxon
+        %div
+          %i{class:"fas fa-filter"}
           Filtered by
           %span{class:"font-weight-bold mr-2"}
             #{@taxon.family}
+          %a{href: url("/help-others/#{@viewed_user.identifier}?datasetKey=#{params[:datasetKey]}&agent_id=#{params[:agent_id]}&taxon_id="), class:"ml-2 text-danger"}
+            %i{class:"fas fa-minus-circle"}
+            Remove
 
   - if @pagy.count == 0
     %div{class: "alert alert-info tiny-margins row", role: "alert"}

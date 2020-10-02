@@ -43,12 +43,14 @@ if options[:directory]
 
   files.each do |file|
     file_path = File.join(options[:directory], file)
-    group = []
-    CSV.foreach(file_path, :headers => true).with_index do |row, i|
-      group << [row.to_hash]
-      next if i % 25 != 0
-      Sidekiq::Client.push_bulk({ 'class' => Bionomia::TaxonWorker, 'args' => group })
-      group = []
+    CSV.foreach(file_path, headers: true) do |row|
+      groups = []
+      row["gbifIDs_family"].tr('[]', '')
+                          .split(",")
+                          .in_groups_of(1000, false) do |group|
+        groups << [{ family: row["family"], gbifIDs_family: group.map(&:to_i) }]
+      end
+      Sidekiq::Client.push_bulk({ 'class' => Bionomia::TaxonWorker, 'args' => groups })
     end
     puts file.green
   end
