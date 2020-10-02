@@ -313,8 +313,8 @@ fr:
     location: Emplacement
     has_image: A une image
   offline:
-    message: Bionomia est actuellement hors ligne, suivant l’odeur de nouvelles données.
-    warning: "Bionomia sera hors ligne %{datetime_off} pendant environ %{duration}, suivant l'odeur des nouvelles données."
+    message: Bionomia est actuellement hors ligne, suivant des nouvelles données.
+    warning: "Bionomia sera hors ligne %{datetime_off} pendant environ %{duration}, suivant des nouvelles données."
   on_this_day:
     global_title: Ce jour-là
     born_title: Collectionneur né ce jour-là
