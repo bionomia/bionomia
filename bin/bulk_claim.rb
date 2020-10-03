@@ -42,7 +42,6 @@ if options[:file]
   mime_type = `file --mime -b "#{options[:file]}"`.chomp
   raise RuntimeError, 'File must be a csv' if !mime_type.include?("text/plain")
   CSV.foreach(options[:file], headers: true) do |row|
-    puts row["identifier"].green
     next if !row["identifier"].is_orcid? && !row["identifier"].is_wiki_id?
     if row["identifier"].is_wiki_id?
       d = DestroyedUser.find_by_identifier(row["identifier"])
