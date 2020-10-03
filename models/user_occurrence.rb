@@ -44,7 +44,7 @@ class UserOccurrence < ActiveRecord::Base
    end
 
    def self.delete_orphaned
-     Parallel.each(self.in_batches(of: 10_000), in_processes: 4) do |batch|
+     Parallel.each(self.in_batches(of: 10_000), in_threads: 4) do |batch|
        ActiveRecord::Base.connection_pool.with_connection do
          ids = batch.left_joins(:occurrence)
                     .where(occurrences: { id: nil })
