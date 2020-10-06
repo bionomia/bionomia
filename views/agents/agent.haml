@@ -46,6 +46,7 @@
         %th{scope: "col"}= I18n.t('specimen.identified_by')
         %th{scope: "col"}= I18n.t('specimen.date_collected')
         %th{scope: "col"}= I18n.t('specimen.date_identified')
+        %th{scope: "col"}= I18n.t('specimen.family')
         %th{scope: "col"}= I18n.t('specimen.institution')
         %th{scope: "col"}= I18n.t('specimen.catalog_number')
         %th{scope: "col"}= I18n.t('specimen.type_status')
@@ -63,6 +64,7 @@
           %td #{h(o.identifiedBy)}
           %td #{h(o.eventDate || o.year)}
           %td #{h(o.dateIdentified)}
+          %td #{h(o.family)}
           %td #{h(o.institutionCode)}
           %td #{h(o.catalogNumber)}
           %td #{h(o.typeStatus)}
