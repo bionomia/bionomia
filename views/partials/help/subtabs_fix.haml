@@ -8,3 +8,5 @@
       %a{class:"nav-link#{locals[:active_subtab] == "specialties" ? " active" : nil}", href:"/help-others/#{@viewed_user.identifier}/specialties"}= I18n.t('help.specialties')
     %li{class:"nav-item"}
       %a{class:"nav-link#{locals[:active_subtab] == "co_collectors" ? " active" : nil}", href:"/help-others/#{@viewed_user.identifier}/co-collectors"}= I18n.t('help.co-collectors')
+    %li{class:"nav-item"}
+      %a{class:"nav-link#{locals[:active_subtab] == "support" ? " active" : nil}", href:"/help-others/#{@viewed_user.identifier}/support"}= I18n.t('help.support')

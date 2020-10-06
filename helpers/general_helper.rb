@@ -235,6 +235,11 @@ module Sinatra
             results = results.where(occurrences: { family: params[:family] })
           end
 
+          if params[:attributor] && !params[:attributor].blank?
+            attributor = find_user(params[:attributor])
+            results = results.where(created_by: attributor.id)
+          end
+
           results
         end
 

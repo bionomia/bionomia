@@ -210,6 +210,7 @@ fr:
     taxa: Familles taxonomiques
     specimens: Spécimens
     visualizations: Visualisations
+    support: Aidé par
     specialties: Spécialtiés
     public_profile: Profil Public
     make_public: Rendre Public
@@ -246,6 +247,7 @@ fr:
     reclaim_ignored: Récupérer ignoré
     fix_claims: Corriger les attributions
     discovered: Découvert
+    support_alert: Les scribes suivants ont attribué des spécimens.
   help_docs:
     title: Documents d'Aide
   history:

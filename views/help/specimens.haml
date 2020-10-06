@@ -19,7 +19,7 @@
     %i{class:"fas fa-filter"}
     Filtered by
     %span{class:"font-weight-bold mr-2"}
-      #{h([@filter[:action], @filter[:country], @filter[:range], @filter[:family]].compact.join(", "))}
+      #{h([@filter[:action], @filter[:country], @filter[:range], @filter[:family], @filter[:attributor]].compact.join(", "))}
     %a{href: url("/help-others/#{@viewed_user.identifier}/specimens"), class:"text-danger"}
       %i{class:"fas fa-minus-circle"}
       Remove

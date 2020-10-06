@@ -306,21 +306,48 @@ module Sinatra
 
             @page = 1 if @page <= 0
 
+            action = params[:action] rescue nil
             range = nil
             if params[:start_year] || params[:end_year]
               range = [params[:start_year], params[:end_year]].join(" – ")
             end
             country = IsoCountryCodes.find(params[:country_code]).name rescue nil
             family = params[:family] rescue nil
+            attributor = nil
+            if params[:attributor]
+              attributor = find_user(params[:attributor]).fullname rescue nil
+            end
             @filter = {
-              action: params[:action],
+              action: action,
               country: country,
               range: range,
-              family: family
+              family: family,
+              attributor: attributor
             }.compact
 
             @pagy, @results = pagy(helping_specimen_filters, items: search_size, page: @page)
             haml :'help/specimens', locals: { active_page: "help" }
+          end
+
+          app.get '/help-others/:id/support' do
+            protected!
+            check_identifier
+            check_redirect
+
+            @viewed_user = find_user(params[:id])
+            @page = (params[:page] || 1).to_i
+            helped_by = @viewed_user.helped_by_counts
+            @total = helped_by.count
+
+            if @page*search_size > @total
+              bump_page = @total % search_size.to_i != 0 ? 1 : 0
+              @page = @total/search_size.to_i + bump_page
+            end
+
+            @page = 1 if @page <= 0
+
+            @pagy, @results = pagy_array(helped_by, items: search_size, page: @page)
+            haml :'help/support', locals: { active_page: "help" }
           end
 
           app.get '/help-others/:id/visualizations' do

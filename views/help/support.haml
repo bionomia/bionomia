@@ -1,0 +1,68 @@
+-content_for :title do
+  = I18n.t('help.fix_title')
+
+-content_for :scripts do
+  %script{src: "/js/application.js"}
+  :javascript
+    $(function() {
+      Application.init(#{@viewed_user.id}, "POST", "/help-others", "#{@viewed_user.identifier}");
+    });
+
+-content_for :jumbotron do
+  = haml :'partials/help/jumbotron', layout: false
+
+= haml :'partials/help/tabs', layout: false, locals: { active_tab: "specimens" }
+= haml :'partials/help/subtabs_fix', layout: false, locals: { active_subtab: "support" }
+
+- if @pagy.count == 0
+  %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('help.not_helped_alert')
+- else
+  %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('help.support_alert')
+
+  - @results.in_groups_of(3).each do |group|
+    %div{class: "card-deck"}
+      - group.each do |u|
+        - if u.nil?
+          %div{class:"card border-0"}
+        - else
+          %div{class: "card card-profile my-3"}
+            - if u[:user].image_url
+              %div{class: "card-header d-flex"}
+                %div
+                  %img{src:"#{profile_image(u[:user], 'medium')}", alt:"#{u[:user].fullname}", class:"card-img-profile mr-2"}
+                %div{class:"flex-grow-1"}
+                  %h5
+                    %a{href: url("/help-others/#{@viewed_user.identifier}/specimens?attributor=#{u[:user].identifier}")}
+                      - if u[:user].is_bot?
+                        #{u[:user].fullname}
+                      - else
+                        #{u[:user].fullname_reverse}
+                  - if u[:user].country
+                    %p{class:"small text-muted mt-0 mb-0"} #{u[:user].country.split("|").join("; ")}
+            - else
+              %div{class: "card-header"}
+                %h5
+                  %a{href: url("/help-others/#{@viewed_user.identifier}/specimens?attributor=#{u[:user].identifier}")}
+                    - if u[:user].is_bot?
+                      #{u[:user].fullname}
+                    - else
+                      #{u[:user].fullname_reverse}
+                - if u[:user].country
+                  %p{class:"small text-muted mt-0 mb-0"} #{u[:user].country.split("|").join("; ")}
+
+            %div{class: "card-body"}
+
+            %div{class: "card-footer d-flex"}
+              - if !u[:user].is_public?
+                %div{class: "small text-right text-muted mr-2"}
+                  %i{class:"fas fa-lock"}
+              %div{class: "small text-left text-muted mr-2"}
+                %span{class:"badge badge-light"}
+                  #{number_with_delimiter(u[:total])}
+                %a{href: url("/help-others/#{@viewed_user.identifier}/specimens?attributor=#{u[:user].identifier}")}
+                  #{'specimen'.pluralize(u[:total])} attributed
+
+  - if @total > 25
+    = haml :'partials/page_size', layout: false
+
+  = pagy_bootstrap_nav(@pagy) if @pagy.pages > 1
