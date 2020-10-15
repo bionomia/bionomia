@@ -56,7 +56,7 @@ if options[:new]
       u.save
       puts "#{u.fullname_reverse}".green
     rescue
-      puts "#{u.fullname_reverse} token failed".red
+      puts "#{u.fullname_reverse} (id=#{u.id}) token failed".red
     end
   end
 
@@ -96,7 +96,7 @@ elsif options[:orcid]
         puts "#{u.fullname_reverse}".red
       end
     rescue
-      puts "#{u.fullname_reverse} token failed".red
+      puts "#{u.fullname_reverse} (id=#{u.id}) token failed".red
     end
   end
 
@@ -138,7 +138,7 @@ elsif options[:all] || options[:within_week]
         puts "#{u.fullname_reverse}".red
       end
     rescue
-      puts "#{u.fullname_reverse} token failed".red
+      puts "#{u.fullname_reverse} (id=#{u.id}) token failed".red
     end
   end
 end
@@ -146,7 +146,11 @@ end
 if options[:refresh]
   User.where.not(zenodo_access_token: nil).find_each do |u|
     z = Bionomia::Zenodo.new(user: u)
-    u.zenodo_access_token = z.refresh_token
-    u.save
+    begin
+      u.zenodo_access_token = z.refresh_token
+      u.save
+    rescue
+      puts "#{u.fullname_reverse} (id=#{u.id}) token failed".red
+    end
   end
 end
