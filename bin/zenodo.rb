@@ -39,21 +39,25 @@ if options[:new]
       .where.not(zenodo_access_token: nil)
       .where(zenodo_doi: nil).find_each do |u|
     z = Bionomia::Zenodo.new(user: u)
-    u.zenodo_access_token = z.refresh_token
-    u.save
+    begin
+      u.zenodo_access_token = z.refresh_token
+      u.save
 
-    doi_id = z.new_deposit
-    id = doi_id[:recid]
-    io = Bionomia::IO.new({ user: u })
-    csv = io.csv_stream_occurrences(u.visible_occurrences)
-    z.add_file_enum(id: id, enum: csv, file_name: u.orcid + ".csv")
-    json = io.jsonld_stream("all")
-    z.add_file_string(id: id, string: json, file_name: u.orcid + ".json")
-    pub = z.publish(id: id)
-    u.zenodo_doi = pub[:doi]
-    u.zenodo_concept_doi = pub[:conceptdoi]
-    u.save
-    puts "#{u.fullname_reverse}".green
+      doi_id = z.new_deposit
+      id = doi_id[:recid]
+      io = Bionomia::IO.new({ user: u })
+      csv = io.csv_stream_occurrences(u.visible_occurrences)
+      z.add_file_enum(id: id, enum: csv, file_name: u.orcid + ".csv")
+      json = io.jsonld_stream("all")
+      z.add_file_string(id: id, string: json, file_name: u.orcid + ".json")
+      pub = z.publish(id: id)
+      u.zenodo_doi = pub[:doi]
+      u.zenodo_concept_doi = pub[:conceptdoi]
+      u.save
+      puts "#{u.fullname_reverse}".green
+    rescue
+      puts "#{u.fullname_reverse} token failed".red
+    end
   end
 
 elsif options[:orcid]
@@ -105,34 +109,37 @@ elsif options[:all] || options[:within_week]
   end
   qry.find_each do |u|
     z = Bionomia::Zenodo.new(user: u)
-    u.zenodo_access_token = z.refresh_token
-    u.save
-
-    old_id = u.zenodo_doi.split(".").last
-    doi_id = z.new_version(id: old_id)
-
-    id = doi_id[:recid]
-    files = z.list_files(id: id).map{|f| f[:id]}
-    files.each do |file_id|
-      z.delete_file(id: id, file_id: file_id)
-    end
-
-    io = Bionomia::IO.new({ user: u })
-    csv = io.csv_stream_occurrences(u.visible_occurrences)
-    z.add_file_enum(id: id, enum: csv, file_name: u.orcid + ".csv")
-    json = io.jsonld_stream("all")
-    z.add_file_string(id: id, string: json, file_name: u.orcid + ".json")
-
-    pub = z.publish(id: id)
-    if !pub[:doi].nil?
-      u.zenodo_doi = pub[:doi]
+    begin
+      u.zenodo_access_token = z.refresh_token
       u.save
-      puts "#{u.fullname_reverse}".green
-    else
-      z.discard_version(id: id)
-      puts "#{u.fullname_reverse}".red
-    end
 
+      old_id = u.zenodo_doi.split(".").last
+      doi_id = z.new_version(id: old_id)
+
+      id = doi_id[:recid]
+      files = z.list_files(id: id).map{|f| f[:id]}
+      files.each do |file_id|
+        z.delete_file(id: id, file_id: file_id)
+      end
+
+      io = Bionomia::IO.new({ user: u })
+      csv = io.csv_stream_occurrences(u.visible_occurrences)
+      z.add_file_enum(id: id, enum: csv, file_name: u.orcid + ".csv")
+      json = io.jsonld_stream("all")
+      z.add_file_string(id: id, string: json, file_name: u.orcid + ".json")
+
+      pub = z.publish(id: id)
+      if !pub[:doi].nil?
+        u.zenodo_doi = pub[:doi]
+        u.save
+        puts "#{u.fullname_reverse}".green
+      else
+        z.discard_version(id: id)
+        puts "#{u.fullname_reverse}".red
+      end
+    rescue
+      puts "#{u.fullname_reverse} token failed".red
+    end
   end
 end
 
