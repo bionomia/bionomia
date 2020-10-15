@@ -63,35 +63,37 @@ elsif options[:orcid]
           .first
   if !u.nil?
     z = Bionomia::Zenodo.new(user: u)
-    u.zenodo_access_token = z.refresh_token
-    u.save
-
-    old_id = u.zenodo_doi.split(".").last
-    doi_id = z.new_version(id: old_id)
-
-    id = doi_id[:recid]
-    files = z.list_files(id: id).map{|f| f[:id]}
-    files.each do |file_id|
-      z.delete_file(id: id, file_id: file_id)
-    end
-
-    io = Bionomia::IO.new({ user: u })
-    csv = io.csv_stream_occurrences(u.visible_occurrences)
-    z.add_file_enum(id: id, enum: csv, file_name: u.orcid + ".csv")
-    json = io.jsonld_stream("all")
-    z.add_file_string(id: id, string: json, file_name: u.orcid + ".json")
-
-    pub = z.publish(id: id)
-    if !pub[:doi].nil?
-      u.zenodo_doi = pub[:doi]
+    begin
+      u.zenodo_access_token = z.refresh_token
       u.save
-      puts "#{u.fullname_reverse}".green
-    else
-      z.discard_version(id: id)
-      puts "#{u.fullname_reverse}".red
+
+      old_id = u.zenodo_doi.split(".").last
+      doi_id = z.new_version(id: old_id)
+
+      id = doi_id[:recid]
+      files = z.list_files(id: id).map{|f| f[:id]}
+      files.each do |file_id|
+        z.delete_file(id: id, file_id: file_id)
+      end
+
+      io = Bionomia::IO.new({ user: u })
+      csv = io.csv_stream_occurrences(u.visible_occurrences)
+      z.add_file_enum(id: id, enum: csv, file_name: u.orcid + ".csv")
+      json = io.jsonld_stream("all")
+      z.add_file_string(id: id, string: json, file_name: u.orcid + ".json")
+
+      pub = z.publish(id: id)
+      if !pub[:doi].nil?
+        u.zenodo_doi = pub[:doi]
+        u.save
+        puts "#{u.fullname_reverse}".green
+      else
+        z.discard_version(id: id)
+        puts "#{u.fullname_reverse}".red
+      end
+    rescue
+      puts "#{u.fullname_reverse} token failed".red
     end
-  else
-    puts "User does not yet have a data package in Zenodo".red
   end
 
 elsif options[:all] || options[:within_week]
