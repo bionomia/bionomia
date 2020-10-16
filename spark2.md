@@ -1,0 +1,139 @@
+# Apache Spark Bulk Import Data and Aggregations into MySQL
+
+The following script written in Scala illustrates how to rapidly import into MySQL a massive GBIF occurrence csv file extracted from a custom Bionomia download like this one: [https://doi.org/10.15468/dl.p9q8hh](https://doi.org/10.15468/dl.gyp78m).
+
+- Create the database using the [schema in /db](db/bionomia.sql)
+- Ensure that MySQL has utf8mb4 collation. See [https://mathiasbynens.be/notes/mysql-utf8mb4](https://mathiasbynens.be/notes/mysql-utf8mb4) to set server connection
+- Get the mysql-connector-java (Connector/J) from [https://dev.mysql.com/downloads/connector/j/8.0.html](https://dev.mysql.com/downloads/connector/j/8.0.html).
+
+On a Mac with Homebrew:
+
+```bash
+$ spark-shell --jars /usr/local/opt/mysql-connector-java/libexec/mysql-connector-java-8.0.20.jar --packages org.apache.spark:spark-avro_2.12:3.0.0 --driver-memory 12G
+```
+
+```scala
+import sys.process._
+import org.apache.spark.sql.Column
+import org.apache.spark.sql.types._
+import org.apache.spark.sql.functions._
+import org.apache.spark.sql.avro._
+
+# Deal with really old dates
+spark.sql("SET spark.sql.legacy.avro.datetimeRebaseModeInWrite=CORRECTED")
+
+val occurrences = spark.
+    read.
+    format("avro").
+    option("treatEmptyValuesAsNulls", "true").
+    option("ignoreLeadingWhiteSpace", "true").
+    load("occurrence.avro").
+    drop(col("license")).
+    drop(col("recordedBy")).
+    drop(col("identifiedBy")).
+    drop(col("scientificName")).
+    withColumnRenamed("eventDate","eventDate_processed").
+    withColumnRenamed("dateIdentified","dateIdentified_processed").
+    withColumnRenamed("v_occurrenceID","occurrenceID").
+    withColumnRenamed("v_dateIdentified","dateIdentified").
+    withColumnRenamed("v_decimalLatitude","decimalLatitude").
+    withColumnRenamed("v_decimalLongitude","decimalLongitude").
+    withColumnRenamed("v_country","country").
+    withColumnRenamed("v_eventDate","eventDate").
+    withColumnRenamed("v_year","year").
+    withColumnRenamed("v_identifiedBy","identifiedBy").
+    withColumnRenamed("v_identifiedByID","identifiedByID").
+    withColumnRenamed("v_institutionCode","institutionCode").
+    withColumnRenamed("v_collectionCode","collectionCode").
+    withColumnRenamed("v_catalogNumber","catalogNumber").
+    withColumnRenamed("v_recordedBy","recordedBy").
+    withColumnRenamed("v_recordedByID","recordedByID").
+    withColumnRenamed("v_scientificName","scientificName").
+    withColumnRenamed("v_typeStatus","typeStatus").
+    withColumn("hasImage", when($"hasImage" === true, 1).otherwise(0)).
+    withColumn("eventDate_processed", to_timestamp($"eventDate_processed")).
+    withColumn("dateIdentified_processed", to_timestamp($"dateIdentified_processed"))
+
+//set some properties for a MySQL connection
+val prop = new java.util.Properties
+prop.setProperty("driver", "com.mysql.cj.jdbc.Driver")
+prop.setProperty("user", "root")
+prop.setProperty("password", "")
+
+val url = "jdbc:mysql://localhost:3306/bionomia?serverTimezone=UTC&useSSL=false"
+
+//check new occurrences against existing user_occurrences table to see how many orphaned occurrences we have
+val user_occurrences = spark.read.jdbc(url, "user_occurrences", prop)
+
+val missing = occurrences.
+    join(user_occurrences, $"gbifID" === $"occurrence_id", "rightouter").
+    where("visible = true").
+    where("gbifID IS NULL").
+    count
+
+val recordedByIDGroups = occurrences.
+    select($"gbifID", $"v_recordedByID").
+    filter($"v_recordedByID".isNotNull).
+    groupBy($"v_recordedByID" as "agentIDs").
+    agg(collect_set($"gbifID") as "gbifIDs_recordedByIDs").
+    withColumn("gbifIDs_identifiedByIDs", lit(null))
+
+val identifiedByIDGroups = occurrences.
+    select($"gbifID", $"v_identifiedByID").
+    filter($"v_identifiedByID".isNotNull).
+    groupBy($"v_identifiedByID" as "agentIDs").
+    agg(collect_set($"gbifID") as "gbifIDs_identifiedByIDs").
+    withColumn("gbifIDs_recordedByIDs", lit(null))
+
+//union identifiedByID, recordedByID entries then group by agentIDs
+val unioned2 = recordedByIDGroups.
+    unionByName(identifiedByIDGroups).
+    groupBy($"agentIDs").
+    agg(flatten(collect_set($"gbifIDs_recordedByIDs")) as "gbifIDs_recordedByIDs", flatten(collect_set($"gbifIDs_identifiedByIDs")) as "gbifIDs_identifiedByIDs")
+
+//write aggregated agentIDs to csv files for the Populate Existing Claims script, /bin/populate_existing_claims.rb
+unioned2.select("agentIDs", "gbifIDs_recordedByIDs", "gbifIDs_identifiedByIDs").
+    withColumn("gbifIDs_recordedByIDs", stringify($"gbifIDs_recordedByIDs")).
+    withColumn("gbifIDs_identifiedByIDs", stringify($"gbifIDs_identifiedByIDs")).
+    write.
+    mode("overwrite").  
+    option("header", "true").
+    option("quote", "\"").
+    option("escape", "\"").
+    csv("claims-unioned-csv")
+
+val agents = spark.
+    read.
+    format("avro").
+    load("agents.avro")
+
+def stringify(c: Column) = concat(lit("["), concat_ws(",", c), lit("]"))
+
+agents.select("agent", "gbifIDsRecordedBy", "gbifIDsIdentifiedBy").
+    withColumn("gbifIDsRecordedBy", stringify($"gbifIDsRecordedBy")).
+    withColumn("gbifIDsIdentifiedBy", stringify($"gbifIDsIdentifiedBy")).
+    withColumnRenamed("agent","agents").
+    withColumnRenamed("gbifIDsRecordedBy","gbifIDs_recordedBy").
+    withColumnRenamed("gbifIDsIdentifiedBy","gbifIDs_identifiedBy").
+    write.
+    mode("overwrite").
+    option("header", "true").
+    option("quote", "\"").
+    option("escape", "\"").
+    csv("agents-unioned-csv")
+
+val families = spark.
+    read.
+    format("avro").
+    load("families.avro")
+
+families.select("family", "gbifIDsFamily").
+    withColumnRenamed("gbifIDsFamily","gbifIDs_family").
+    withColumn("gbifIDs_family", stringify($"gbifIDs_family")).
+    write.
+    mode("overwrite").
+    option("header", "true").
+    option("quote", "\"").
+    option("escape", "\"").
+    csv("family-csv")
+```

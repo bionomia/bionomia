@@ -33,7 +33,7 @@ Sinatra app to parse people names from structured biodiversity occurrence data, 
 
 ### Step 1:  Import Data
 
-See the [Apache Spark recipes](spark.md) for quickly importing into MySQL the occurrence csv from a DwC Archive downloaded from [GBIF](https://www.gbif.org). Apache Spark is used to produce the necessary source csv files for the "Parse & Populate Agents" and "Populate Taxa" steps below.
+See the [Apache Spark recipes](spark.md) for quickly importing into MySQL the occurrence csv from a DwC Archive downloaded from [GBIF](https://www.gbif.org) or from a custom [Bionomia download](spark2.md). Apache Spark is used to produce the necessary source csv files for the "Parse & Populate Agents" and "Populate Taxa" steps below.
 
 ### Step 2: Check for Dramatic Changes in gbifIDs
 
