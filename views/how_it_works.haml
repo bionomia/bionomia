@@ -27,13 +27,12 @@
       %a{href: "https://doi.org/#{Settings.gbif.download_doi}"} specimen records
       are downloaded from
       %a{href:"https://gbif.org"} GBIF
-      as Darwin Core Archive files. Records with the basisOfRecord PRESERVED_SPECIMEN, FOSSIL_SPECIMEN, or LIVING_SPECIMEN are selected and then
-      %a{href:"https://github.com/bionomia/bionomia/blob/master/spark.md"} processed for entries
-      in
+      as a custom format based on Apache Avro. Records with the basisOfRecord PRESERVED_SPECIMEN, FOSSIL_SPECIMEN, or LIVING_SPECIMEN are selected as well as content in either
       %a{href: "http://rs.tdwg.org/dwc/terms/#recordedBy"} recordedBy
-      (collector) or
+      or
       %a{href: "http://rs.tdwg.org/dwc/terms/#identifiedBy"} identifiedBy
-      fields.
+      and then
+      %a{href:"https://github.com/bionomia/bionomia/blob/master/spark2.md"} processed.
     %ul
       %li
         all occurrence data fully refreshed every 2 weeks
