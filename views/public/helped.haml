@@ -19,7 +19,8 @@
         %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('user.no_helped_alert')
       - else
         %div{class: "alert alert-info tiny-margins", role: "alert"}
-          #{number_to_human(@pagy.count, units: :'user.helped_alert', delimiter: ",", precision: 0)}
+          #{number_to_human(@stats[:attributions][:number], units: :'user.stats_attributions_specimens', delimiter: ",", precision: 0)}
+          #{number_to_human(@stats[:attributions][:helped], units: :'user.stats_attributions_people', delimiter: ",", precision: 0)}
 
         %div{class:"container-fluid"}
           - @results.in_groups_of(2).each do |group|

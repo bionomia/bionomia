@@ -519,10 +519,6 @@ en:
     families_identified: Families Identified
     no_claims_alert: Claims or attributions have not yet been recorded.
     no_helped_alert: Attributions have not yet been made.
-    helped_alert:
-      unit:
-        one: person received attributions
-        other: people received attributions
     progress: Progress
     identified_from: Identified From
     collected_from: Collected From
