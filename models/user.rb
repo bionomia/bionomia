@@ -272,7 +272,8 @@ class User < ActiveRecord::Base
   end
 
   def helped
-    claims_given.pluck(:user_id)
+    claims_given.order(created: :desc)
+                .pluck(:user_id)
                 .uniq
                 .map{|u| User.find(u)}
   end

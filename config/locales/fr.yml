@@ -482,6 +482,7 @@ fr:
     science_enabled: Science Activée
     science_enabled_specimens: Science Rendue Possible
     helped_by: Assisté par
+    helped: Personnes Aidées
     no_scribe: Aucun spécimen n'a été attribué par une scribe.
     attributions_by: "Attribuer par:"
     private_no_claims: Cet profil n'est pas accessible au public.
@@ -517,6 +518,11 @@ fr:
     families_collected: Familles Recueillies
     families_identified: Familles Identifiées
     no_claims_alert: Les réclamations ou attributions n'ont pas encore été enregistrées.
+    no_helped_alert: Les attributions n'ont pas encore été faites.
+    helped_alert:
+      unit:
+        one: personne a reçu des attributions
+        other: personnes ont reçu des attributions
     progress: Progrès
     identified_from: Identifié à Partir de
     collected_from: Collectés à Partir de

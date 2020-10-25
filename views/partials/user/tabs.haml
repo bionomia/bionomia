@@ -11,3 +11,6 @@
     %a{class: "nav-link#{locals[:active_page] == "specimens" ? " active" : nil}", href: "/#{@viewed_user.identifier}/specimens"}= I18n.t('user.specimens')
   %li{class: "nav-item"}
     %a{class: "nav-link#{locals[:active_page] == "citations" ? " active" : nil}", href: "/#{@viewed_user.identifier}/citations"}= I18n.t('user.science_enabled')
+  - if @viewed_user.orcid
+    %li{class: "nav-item"}
+      %a{class: "nav-link#{locals[:active_page] == "helped" ? " active" : nil}", href: "/#{@viewed_user.identifier}/helped"}= I18n.t('user.helped')

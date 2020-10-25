@@ -482,6 +482,7 @@ en:
     science_enabled: Science Enabled
     science_enabled_specimens: Science Enabled by Specimen Data
     helped_by: Helped By
+    helped: People Helped
     no_scribe: Specimens have not been attributed by a scribe.
     attributions_by: "Attributions made by:"
     private_no_claims: Profile is not publicly available.
@@ -517,6 +518,11 @@ en:
     families_collected: Families Collected
     families_identified: Families Identified
     no_claims_alert: Claims or attributions have not yet been recorded.
+    no_helped_alert: Attributions have not yet been made.
+    helped_alert:
+      unit:
+        one: person received attributions
+        other: people received attributions
     progress: Progress
     identified_from: Identified From
     collected_from: Collected From

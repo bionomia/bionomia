@@ -274,6 +274,16 @@ module Sinatra
             haml :'public/deposited_at', locals: { active_page: "roster" }
           end
 
+          app.get '/:id/helped' do
+            check_identifier
+            check_redirect
+            @viewed_user = find_user(params[:id])
+
+            page = (params[:page] || 1).to_i
+            @pagy, @results = pagy_array(@viewed_user.helped, items: 30, page: page)
+            haml :'public/helped', locals: { active_page: "roster" }
+          end
+
           app.get '/:id/progress.json' do
             content_type "application/json"
             expires 0, :no_cache, :must_revalidate
