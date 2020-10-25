@@ -66,11 +66,7 @@ module Sinatra
             check_redirect
             @viewed_user = find_user(params[:id])
             check_user_public
-
-            @stats = {}
-            if @viewed_user.is_public?
-              @stats = cache_block("#{@viewed_user.identifier}-stats") { user_stats(@viewed_user) }
-            end
+            @stats = cache_block("#{@viewed_user.identifier}-stats") { user_stats(@viewed_user) }
             haml :'public/overview', locals: { active_page: "roster" }
           end
 

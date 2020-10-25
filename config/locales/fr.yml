@@ -485,7 +485,7 @@ fr:
     helped: Personnes Aidées
     no_scribe: Aucun spécimen n'a été attribué par une scribe.
     attributions_by: "Attribuer par:"
-    private_no_claims: Cet profil n'est pas accessible au public.
+    private: Cet profil n'est pas accessible au public.
     private_with_claims:
       unit:
         one: "spécimen a été attribué, mais ce profil n'est pas accessible au public."

@@ -485,7 +485,7 @@ en:
     helped: People Helped
     no_scribe: Specimens have not been attributed by a scribe.
     attributions_by: "Attributions made by:"
-    private_no_claims: Profile is not publicly available.
+    private: Profile is not publicly available.
     private_with_claims:
       unit:
         one: "specimen was claimed or attributed, but this profile is not publicly available."
