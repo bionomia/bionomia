@@ -20,7 +20,8 @@
         %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('user.no_publications')
       - else
         %div{class: "alert alert-info tiny-margins", role: "alert"}
-          #{number_to_human(@pagy.count, units: :'user.publication_count', delimiter: ",", precision: 0)}
+          #{number_to_human(@stats[:articles][:specimens_cited], units: :'user.stats_articles_specimens', delimiter: ",", precision: 0)}
+          #{number_to_human(@stats[:articles][:number], units: :'user.stats_articles_articles', delimiter: ",", precision: 0)}
 
         %div{class:"citation-wrapper"}
           %h4= I18n.t('user.science_enabled_specimens')

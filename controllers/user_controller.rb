@@ -160,6 +160,7 @@ module Sinatra
               @pagy, @results = {}, []
               if @viewed_user.is_public?
                 page = (params[:page] || 1).to_i
+                @stats = cache_block("#{@viewed_user.identifier}-stats") { user_stats(@viewed_user) }
                 @pagy, @results = pagy(@viewed_user.articles_citing_specimens, items: 10, page: page)
               end
               haml :'public/citations', locals: { active_page: "roster" }
