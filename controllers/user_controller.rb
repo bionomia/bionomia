@@ -274,7 +274,7 @@ module Sinatra
             check_identifier
             check_redirect
             @viewed_user = find_user(params[:id])
-
+            halt 404 if !@viewed_user.orcid
             page = (params[:page] || 1).to_i
             @pagy, @results = pagy_array(@viewed_user.helped, items: 30, page: page)
             haml :'public/helped', locals: { active_page: "roster" }
