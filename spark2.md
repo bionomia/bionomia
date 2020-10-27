@@ -2,7 +2,7 @@
 
 The following script written in Scala illustrates how to rapidly import into MySQL a massive GBIF occurrence csv file extracted from a custom Bionomia download like this one: [https://doi.org/10.15468/dl.p9q8hh](https://doi.org/10.15468/dl.gyp78m).
 
-The download request sent to GBIF looks like this using [bionomia_gbif_request.json](@bionomia_gbif_request.json):
+The download request sent to GBIF looks like this using [@bionomia_gbif_request.json](bionomia_gbif_request.json):
 
 ```bash
 $ curl -i --user davidpshorthouse:***password*** -H "Content-Type:application/json" -X POST -d @bionomia_gbif_request.json https://api.gbif.org/v1/occurrence/download/request
