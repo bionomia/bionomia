@@ -2,6 +2,12 @@
 
 The following script written in Scala illustrates how to rapidly import into MySQL a massive GBIF occurrence csv file extracted from a custom Bionomia download like this one: [https://doi.org/10.15468/dl.p9q8hh](https://doi.org/10.15468/dl.gyp78m).
 
+The download request sent to GBIF looks like this using [bionomia_gbif_request.json](@bionomia_gbif_request.json):
+
+```bash
+$ curl -i --user davidpshorthouse:***password*** -H "Content-Type:application/json" -X POST -d @bionomia_gbif_request.json https://api.gbif.org/v1/occurrence/download/request
+```
+
 - Create the database using the [schema in /db](db/bionomia.sql)
 - Ensure that MySQL has utf8mb4 collation. See [https://mathiasbynens.be/notes/mysql-utf8mb4](https://mathiasbynens.be/notes/mysql-utf8mb4) to set server connection
 - Get the mysql-connector-java (Connector/J) from [https://dev.mysql.com/downloads/connector/j/8.0.html](https://dev.mysql.com/downloads/connector/j/8.0.html).
