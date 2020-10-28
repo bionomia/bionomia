@@ -148,6 +148,19 @@ module Bionomia
       end
     end
 
+    def thumbnail(u)
+      img = Settings.base_url + "/images/photo.png"
+      cloud_img = "https://abekpgaoen.cloudimg.io/crop/24x24/n/"
+      if u.image_url
+        if u.wikidata
+          img =  cloud_img + u.image_url
+        else
+          img = cloud_img + Settings.base_url + "/images/users/" + u.image_url
+        end
+      end
+      img
+    end
+
     def document(u)
       date_born = (u.date_born_precision == "day") ? u.date_born : nil
       date_died = (u.date_died_precision == "day") ? u.date_died : nil
@@ -162,6 +175,7 @@ module Bionomia
         other_names: u.other_names.split("|").map(&:strip),
         date_born: date_born,
         date_died: date_died,
+        thumbnail: thumbnail(u),
         identified: u.identified_families_countries,
         recorded: u.recorded_families_countries
       }

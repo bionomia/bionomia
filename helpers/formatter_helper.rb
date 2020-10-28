@@ -31,7 +31,7 @@ module Sinatra
         end
 
         def profile_image(user, size=nil)
-          img = "/images/photo.png"
+          img = Settings.base_url + "/images/photo.png"
           cloud_img = "https://abekpgaoen.cloudimg.io/height/200/x/"
           if size == "thumbnail"
             cloud_img = "https://abekpgaoen.cloudimg.io/crop/24x24/n/"
@@ -69,7 +69,7 @@ module Sinatra
         end
 
         def signature_image(user)
-          img = "/images/signature.png"
+          img = Settings.base_url + "/images/signature.png"
           cloud_img = "https://abekpgaoen.cloudimg.io/height/80/x/"
           if user.signature_url
             img =  cloud_img + user.signature_url
@@ -98,14 +98,13 @@ module Sinatra
           @results.map{ |n|
             user = User.find(n[:_source][:id])
             lifespan = user.wikidata ? format_lifespan(user) : nil
-            thumbnail = user.image_url ? profile_image(user, "thumbnail") : "/images/photo24X24.png"
             { id: n[:_source][:id],
               score: n[:_score],
               orcid: n[:_source][:orcid],
               wikidata: n[:_source][:wikidata],
               fullname: n[:_source][:fullname],
               fullname_reverse: n[:_source][:fullname_reverse],
-              thumbnail: thumbnail,
+              thumbnail: n[:_source][:thumbnail],
               lifespan: lifespan
             }
           }
