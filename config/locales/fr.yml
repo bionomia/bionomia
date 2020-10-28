@@ -120,6 +120,7 @@ fr:
         other: "personnes ont réclamé ou ont été attribuées des spécimens dans cet ensemble de données"
   developer:
     search: Rechercher
+    autocomplete_widget: Autocomplete Widget
     structured_data: Données Structurées
     raw_data: Données Brutes
     code: Code Informatique

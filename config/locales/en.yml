@@ -120,6 +120,7 @@ en:
         other: "people claimed or were attributed specimens represented in this dataset"
   developer:
     search: Search
+    autocomplete_widget: Autocomplete Widget
     structured_data: Structured Data
     raw_data: Raw Data
     code: Code
