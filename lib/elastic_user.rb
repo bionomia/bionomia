@@ -149,7 +149,7 @@ module Bionomia
     end
 
     def thumbnail(u)
-      img = Settings.base_url + "/images/photo.png"
+      img = Settings.base_url + "/images/photo24X24.png"
       cloud_img = "https://abekpgaoen.cloudimg.io/crop/24x24/n/"
       if u.image_url
         if u.wikidata
