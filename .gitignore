@@ -27,3 +27,6 @@ claims-unioned-csv
 missing-claims
 tmp
 *.gz
+agents.avro/*
+families.avro/*
+occurrence.avro/*
