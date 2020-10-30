@@ -335,11 +335,11 @@ module Bionomia
       signature_url = nil
       image = wiki_user.image.value rescue nil
       if image
-        image_url = "https://commons.wikimedia.org/wiki/Special:FilePath/" << URI.encode_www_form_component(image)
+        image_url = "https://commons.wikimedia.org/wiki/Special:FilePath/" << URI.encode(image)
       end
       signature = wiki_user.properties("P109").first.value rescue nil
       if signature
-        signature_url = "https://commons.wikimedia.org/wiki/Special:FilePath/" << URI.encode_www_form_component(signature)
+        signature_url = "https://commons.wikimedia.org/wiki/Special:FilePath/" << URI.encode(signature)
       end
 
       other_names = ""
