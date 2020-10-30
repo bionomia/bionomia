@@ -105,7 +105,8 @@ module Sinatra
               fullname: n[:_source][:fullname],
               fullname_reverse: n[:_source][:fullname_reverse],
               thumbnail: n[:_source][:thumbnail],
-              lifespan: lifespan
+              lifespan: lifespan,
+              description: n[:_source][:description]
             }
           }
         end

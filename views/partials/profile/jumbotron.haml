@@ -39,6 +39,10 @@
     %p{class: "text-center text-muted font-italic pt-0 mt-1 mb-1"}
       #{@user.keywords.split("|").join(", ")}
 
+  - if !@user.description.nil?
+    %p{class: "text-lg-left p-0 mt-3 mb-1"}
+      #{h(@user.description.truncate(255))}
+
   %p{class: "orcid text-lg-left p-0 mt-3 mb-1"}
     %a{href: "https://orcid.org/#{@user.orcid}"}
       %i{class:"fab fa-orcid"}

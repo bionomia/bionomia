@@ -77,17 +77,26 @@ val missing = occurrences.
     where("gbifID IS NULL").
     count
 
+// Best to drop indices then recreate later
+// ALTER TABLE `occurrences` DROP KEY `typeStatus_idx`, DROP KEY `index_occurrences_on_datasetKey`;
+
+//write occurrences data to the database
+occurrences.write.mode("append").jdbc(url, "occurrences", prop)
+
+// Recreate indices
+// ALTER TABLE `occurrences` ADD KEY `typeStatus_idx` (`typeStatus`(256)), ADD KEY `index_occurrences_on_datasetKey` (`datasetKey`);
+
 val recordedByIDGroups = occurrences.
-    select($"gbifID", $"v_recordedByID").
-    filter($"v_recordedByID".isNotNull).
-    groupBy($"v_recordedByID" as "agentIDs").
+    select($"gbifID", $"recordedByID").
+    filter($"recordedByID".isNotNull).
+    groupBy($"recordedByID" as "agentIDs").
     agg(collect_set($"gbifID") as "gbifIDs_recordedByIDs").
     withColumn("gbifIDs_identifiedByIDs", lit(null))
 
 val identifiedByIDGroups = occurrences.
-    select($"gbifID", $"v_identifiedByID").
-    filter($"v_identifiedByID".isNotNull).
-    groupBy($"v_identifiedByID" as "agentIDs").
+    select($"gbifID", $"identifiedByID").
+    filter($"identifiedByID".isNotNull).
+    groupBy($"identifiedByID" as "agentIDs").
     agg(collect_set($"gbifID") as "gbifIDs_identifiedByIDs").
     withColumn("gbifIDs_recordedByIDs", lit(null))
 
@@ -96,6 +105,8 @@ val unioned2 = recordedByIDGroups.
     unionByName(identifiedByIDGroups).
     groupBy($"agentIDs").
     agg(flatten(collect_set($"gbifIDs_recordedByIDs")) as "gbifIDs_recordedByIDs", flatten(collect_set($"gbifIDs_identifiedByIDs")) as "gbifIDs_identifiedByIDs")
+
+def stringify(c: Column) = concat(lit("["), concat_ws(",", c), lit("]"))
 
 //write aggregated agentIDs to csv files for the Populate Existing Claims script, /bin/populate_existing_claims.rb
 unioned2.select("agentIDs", "gbifIDs_recordedByIDs", "gbifIDs_identifiedByIDs").
@@ -112,8 +123,6 @@ val agents = spark.
     read.
     format("avro").
     load("agents.avro")
-
-def stringify(c: Column) = concat(lit("["), concat_ws(",", c), lit("]"))
 
 agents.select("agent", "gbifIDsRecordedBy", "gbifIDsIdentifiedBy").
     withColumn("gbifIDsRecordedBy", stringify($"gbifIDsRecordedBy")).

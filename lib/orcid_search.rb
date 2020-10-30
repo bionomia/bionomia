@@ -113,6 +113,7 @@ module Bionomia
       other_names = (credit_name + aliases).uniq.compact.join("|") rescue ""
 
       keywords = data[:person][:keywords][:keyword].map{|k| k[:content]}.compact.join("|") rescue nil
+      description = data[:person][:biography][:content] rescue nil
       email = nil
       data[:person][:emails][:email].each do |mail|
         next if !mail[:primary]
@@ -151,6 +152,7 @@ module Bionomia
         country: country,
         country_code: country_code,
         keywords: keywords,
+        description: description,
         organizations: organizations.compact
       }
     end

@@ -326,6 +326,7 @@ module Bionomia
                           .map{|k| k.title if !/^Q\d+/.match?(k.title)}
                           .compact
                           .join("|") rescue nil
+      description = wiki_user.descriptions["en"].value rescue nil
       orcid = wiki_user.properties("P496")
                        .first
                        .value rescue nil
@@ -334,11 +335,11 @@ module Bionomia
       signature_url = nil
       image = wiki_user.image.value rescue nil
       if image
-        image_url = "https://commons.wikimedia.org/wiki/Special:FilePath/" << URI.encode(image)
+        image_url = "https://commons.wikimedia.org/wiki/Special:FilePath/" << URI.encode_www_form_component(image)
       end
       signature = wiki_user.properties("P109").first.value rescue nil
       if signature
-        signature_url = "https://commons.wikimedia.org/wiki/Special:FilePath/" << URI.encode(signature)
+        signature_url = "https://commons.wikimedia.org/wiki/Special:FilePath/" << URI.encode_www_form_component(signature)
       end
 
       other_names = ""
@@ -370,6 +371,7 @@ module Bionomia
         country: country,
         country_code: country_code,
         keywords: keywords,
+        description: description,
         orcid: nil, #might have ORCID but null it out
         image_url: image_url,
         signature_url: signature_url,

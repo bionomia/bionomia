@@ -56,6 +56,8 @@ module Bionomia
             id: { type: 'integer', index: false },
             orcid: { type: 'text', index: false },
             wikidata: { type: 'text', index: false },
+            thumbnail: { type: 'text', index: false },
+            description: { type: 'text', index: false },
             family: {
               type: 'text',
               analyzer: :name_part_index,
@@ -164,6 +166,7 @@ module Bionomia
     def document(u)
       date_born = (u.date_born_precision == "day") ? u.date_born : nil
       date_died = (u.date_died_precision == "day") ? u.date_died : nil
+      description = u.description.truncate(50) rescue nil
       {
         id: u.id,
         orcid: u.orcid,
@@ -176,6 +179,7 @@ module Bionomia
         date_born: date_born,
         date_died: date_died,
         thumbnail: thumbnail(u),
+        description: description,
         identified: u.identified_families_countries,
         recorded: u.recorded_families_countries
       }

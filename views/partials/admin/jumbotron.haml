@@ -42,6 +42,10 @@
     %div{id:"signature-image", class:"mx-auto d-block align-self-center align-items-center"}
       %img{src:"#{signature_image(@admin_user)}", class:"mx-auto d-block img-fluid", itemprop:"image"}
 
+  - if !@admin_user.description.nil?
+    %p{class: "text-lg-left p-0 mt-3 mb-1"}
+      #{h(@admin_user.description.truncate(255))}
+
   %p{class: "orcid text-lg-left p-0 mt-3 mb-1"}
     - if @admin_user.orcid
       %a{href: "https://orcid.org/#{@admin_user.orcid}"}

@@ -21,6 +21,7 @@ module Sinatra
             other_names = session_data[:extra][:raw_info][:other_names].join("|") rescue nil
             country_code = session_data[:extra][:raw_info][:location]
             country = IsoCountryCodes.find(country_code).name rescue nil
+            description = session_data[:info][:description] rescue nil
             user = User.create_with(
                           family: family,
                           given: given,
@@ -28,7 +29,8 @@ module Sinatra
                           email: email,
                           other_names: other_names,
                           country: country,
-                          country_code: country_code
+                          country_code: country_code,
+                          description: description
                         )
                        .find_or_create_by(orcid: orcid)
             organization = user.current_organization.as_json.symbolize_keys rescue nil
