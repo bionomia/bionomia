@@ -146,10 +146,10 @@
 
 %pre{class:"bg-light border rounded p-3"}
   :escaped
-    <!-- Bootstrap from a CDN -->
+    /* Bootstrap from a CDN */
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <!-- Customizations -->
+    /* Customizations */
     <style>
       .twitter-typeahead { line-height:1em; }
       .typeahead, .tt-query, .tt-hint {
@@ -205,7 +205,7 @@
 
 %pre{class:"bg-light border rounded p-3"}
   :escaped
-    <!-- jQuery, typeahead.js and handlebars.js from a CDN -->
+    // jQuery, typeahead.js and handlebars.js from a CDN
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script>
@@ -243,7 +243,14 @@
         ).on("typeahead:select", function(obj, datum) {
           var identifier = datum.orcid || datum.wikidata;
           console.log(identifier);
-          /* DO SOMETHING WITH THE IDENTIFIER HERE */
+          // DO SOMETHING WITH THE IDENTIFIER WHEN THE ITEM IS SELECTED
+          /*
+             The identifier will appear either in the form
+             0000-0002-4286-147X or Q10293705.
+             Recommended best practice is to show the user the identifier they
+             chose by rendering an active link to either
+             https://orcid.org/{{identifier}} or https://www.wikidata.org/wiki/{{identifier}}
+           */
         });
       });
     </script>
@@ -256,7 +263,7 @@
       <input class="typeahead" type="text" placeholder="Mary Anning" size="50">
     </div>
 
-    <!-- Handlebars result template -->
+    <!-- Result template -->
     <script id='result-template' type='text/x-handlebars-template'>
       <div class='d-flex'>
         <div>
@@ -270,7 +277,7 @@
       </div>
     </script>
 
-    <!-- Handlebars non-result template -->
+    <!-- Non-result template -->
     <script id='empty-template' type='text/x-handlebars-template'>
       <div class='m-2 tt-no-result'>Your search turned up 0 results.</div>
     </script>
