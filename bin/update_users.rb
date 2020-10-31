@@ -70,6 +70,13 @@ OptionParser.new do |opts|
   end
 end.parse!
 
+def update(u)
+  puts "#{u.fullname_reverse}".yellow
+  u.update_profile
+  u.flush_caches
+  puts "#{u.fullname_reverse}".green
+end
+
 if options[:poll_orcid]
   search = Bionomia::OrcidSearch.new
   search.populate_new_users
@@ -124,6 +131,7 @@ if options[:wikidata]
     u.delete
     puts "#{u.wikidata} deleted. Missing either family name, birth or death date or has an ORCID".red
   else
+    u.update_profile
     u.flush_caches
     puts "#{u.fullname_reverse} created/updated".green
   end
@@ -133,59 +141,34 @@ elsif options[:orcid]
   puts "#{u.fullname_reverse} created/updated".green
 elsif options[:logged]
   User.where.not(visited: nil).find_each do |u|
-    sleep(3)
-    puts "#{u.fullname_reverse}".yellow
-    u.update_profile
-    u.flush_caches
-    puts "#{u.fullname_reverse}".green
+    update(u)
   end
 elsif options[:public]
   User.where(is_public: true).find_each do |u|
-    sleep(3)
-    puts "#{u.fullname_reverse}".yellow
-    u.update_profile
-    u.flush_caches
-    puts "#{u.fullname_reverse}".green
+    update(u)
   end
 elsif options[:all]
   User.find_each do |u|
-    sleep(3)
-    puts "#{u.fullname_reverse}".yellow
-    u.update_profile
-    u.flush_caches
-    puts "#{u.fullname_reverse}".green
+    update(u)
   end
 elsif options[:claimed]
   User.where(id: UserOccurrence.select(:user_id).group(:user_id)).find_each do |u|
-    puts "#{u.fullname_reverse}".yellow
-    u.update_profile
-    u.flush_caches
-    puts "#{u.fullname_reverse}".green
+    update(u)
   end
 elsif options[:update_wikidata]
-  wikidata_lib = Bionomia::WikidataSearch.new
   User.where.not(wikidata: nil).find_each do |u|
-    sleep(3)
-    puts "#{u.fullname_reverse}".yellow
-    u.update_profile
-    u.flush_caches
-    puts "#{u.fullname_reverse}".green
+    update(u)
   end
 elsif options[:update_orcid]
   User.where.not(orcid: nil).find_each do |u|
-    puts "#{u.fullname_reverse}".yellow
-    u.update_profile
-    u.flush_caches
-    puts "#{u.fullname_reverse}".green
+    update(u)
   end
 elsif options[:modified_wikidata]
   wikidata_lib = Bionomia::WikidataSearch.new
   wikidata_lib.recently_modified.each do |qid|
-    sleep(3)
     u = User.find_by_wikidata(qid) rescue nil
     if !u.nil?
-      u.update_wikidata_profile
-      puts "#{u.fullname_reverse}".green
+      update(u)
     end
   end
 elsif options[:duplicates]
