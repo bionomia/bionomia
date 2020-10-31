@@ -65,9 +65,16 @@
       #{@admin_user.current_organization.address}
 
   - if !@admin_user.country.blank?
-    %p{class:"text-lg-left p-0 mt-1 mb-1"}
-      %i{class:"fas fa-globe"}
-      #{@admin_user.country}
+    - country_codes = @admin_user.country_code.split("|") rescue []
+    - @admin_user.country.split("|").each_with_index do |v,i|
+      - if !country_codes[i].nil? && !country_codes[i].empty?
+        %p{class:"text-lg-left p-0 mt-1 mb-1"}
+          %i{class:"fas fa-globe"}
+          %a{href: url("/country/#{country_codes[i]}")} #{v}
+      - else
+        %p{class:"text-lg-left p-0 m-0"}
+          %i{class:"fas fa-globe"}
+          #{v}
 
   - if locals[:active_page] != "settings"
     %div{class:"mt-3 pt-3 border-top"}
