@@ -133,24 +133,28 @@ elsif options[:orcid]
   puts "#{u.fullname_reverse} created/updated".green
 elsif options[:logged]
   User.where.not(visited: nil).find_each do |u|
+    puts "#{u.fullname_reverse}".yellow
     u.update_profile
     u.flush_caches
     puts "#{u.fullname_reverse}".green
   end
 elsif options[:public]
   User.where(is_public: true).find_each do |u|
+    puts "#{u.fullname_reverse}".yellow
     u.update_profile
     u.flush_caches
     puts "#{u.fullname_reverse}".green
   end
 elsif options[:all]
   User.find_each do |u|
+    puts "#{u.fullname_reverse}".yellow
     u.update_profile
     u.flush_caches
     puts "#{u.fullname_reverse}".green
   end
 elsif options[:claimed]
   User.where(id: UserOccurrence.select(:user_id).group(:user_id)).find_each do |u|
+    puts "#{u.fullname_reverse}".yellow
     u.update_profile
     u.flush_caches
     puts "#{u.fullname_reverse}".green
@@ -158,12 +162,14 @@ elsif options[:claimed]
 elsif options[:update_wikidata]
   wikidata_lib = Bionomia::WikidataSearch.new
   User.where.not(wikidata: nil).find_each do |u|
+    puts "#{u.fullname_reverse}".yellow
     u.update_profile
     u.flush_caches
     puts "#{u.fullname_reverse}".green
   end
 elsif options[:update_orcid]
   User.where.not(orcid: nil).find_each do |u|
+    puts "#{u.fullname_reverse}".yellow
     u.update_profile
     u.flush_caches
     puts "#{u.fullname_reverse}".green
