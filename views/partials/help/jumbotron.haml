@@ -35,7 +35,8 @@
           #{@viewed_user.keywords.split("|").join(", ")}
 
       - if !@viewed_user.description.nil?
-        %p{class: "text-lg-left p-0 mt-3 mb-1"}
+        - layout_class = (@viewed_user.description.length > 100) ? "text-lg-left" : "text-center"
+        %p{class: "#{layout_class} p-0 mt-3 mb-1"}
           #{h(@viewed_user.description.truncate(255))}
 
       %p{class: "orcid text-center p-0 mt-3 mb-1"}
