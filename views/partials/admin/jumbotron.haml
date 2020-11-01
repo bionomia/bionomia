@@ -89,7 +89,14 @@
             Public Profile
         %a{href: url("/#{@admin_user.identifier}/refresh-stats.json"), class:"profile-flush mr-2 mb-2"}
           %i{class: "fas fa-sync-alt"}
-          = I18n.t('general.rebuild_stats')
+          = I18n.t('general.refresh_stats')
+        %a{href: url("/#{@admin_user.identifier}/refresh.json"), class:"profile-flush mr-2 mb-2"}
+          %i{class: "fas fa-sync-alt"}
+          = I18n.t('general.refresh_profile')
+          - if @admin_user.orcid
+            %i{class:"fab fa-orcid"}
+          - else
+            %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD", width:"18px"}
         %a{href: url("/admin/user/#{@admin_user.identifier}/settings")}
           %i{class:"fas fa-cog"}
           Settings & Integrations

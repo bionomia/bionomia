@@ -80,7 +80,7 @@
             = I18n.t('profile.public_profile')
         %a{href: url("/#{@user.identifier}/refresh-stats.json"), class:"profile-flush mr-2 mb-2"}
           %i{class: "fas fa-sync-alt"}
-          = I18n.t('general.rebuild_stats')
+          = I18n.t('general.refresh_stats')
         %a{href: url("/profile/settings"), class:"mb-2"}
           %i{class:"fas fa-cog"}
           = I18n.t('profile.settings')

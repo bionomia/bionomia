@@ -145,7 +145,8 @@ fr:
     search: Chercher
     apply: Postuler
     help_attribute: Attribuer
-    rebuild_stats: Reconstruire les statistiques
+    refresh_profile: Rafraîchir
+    refresh_stats: Rafraîchir les statistiques
     settings: Paramètres
     bulk_assignment: En masse
     collected_all: Tout collecté
@@ -474,7 +475,7 @@ fr:
   terms:
     terms_title: Conditions d'utilisation
   user:
-    caches_rebuilt: Les dénombrements et les visualisations ont été reconstruites.
+    caches_rebuilt: Les caches ont été reconstruits.
     overview: Aperçu
     specialties: Spécialtés
     network: Réseau

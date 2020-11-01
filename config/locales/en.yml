@@ -145,7 +145,8 @@ en:
     search: Search
     apply: Apply
     help_attribute: Help Attribute
-    rebuild_stats: Rebuild stats
+    refresh_profile: Refresh
+    refresh_stats: Refresh stats
     settings: Settings
     bulk_assignment: Bulk Assignment
     collected_all: Collected All
@@ -474,7 +475,7 @@ en:
   terms:
     terms_title: Terms of Service
   user:
-    caches_rebuilt: Caches for counts and visualizations were rebuilt.
+    caches_rebuilt: Caches were rebuilt.
     overview: Overview
     specialties: Specialties
     network: Network
