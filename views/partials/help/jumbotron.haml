@@ -103,11 +103,11 @@
 
           %a{href: url("/help-others/#{@viewed_user.identifier}/refresh.json"), class:"mr-2 profile-refresh"}
             %i{class: "fas fa-sync-alt"}
-            Refresh
+            = I18n.t('general.refresh_profile')
             - if @viewed_user.orcid
-              ORCID
+              %i{class:"fab fa-orcid"}
             - else
-              Wikidata
+              %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD", width:"18px"}
 
           - if admin_authorized?
             %a{href: url("/admin/user/#{@viewed_user.identifier}/settings"), class:"mb-2"}

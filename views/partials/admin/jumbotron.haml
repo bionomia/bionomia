@@ -78,15 +78,14 @@
 
   - if locals[:active_page] != "settings"
     %div{class:"mt-3 pt-3 border-top"}
-      - if !@admin_user.is_public?
-        %p{class:"m-2"}
-          %i{class:"fas fa-lock"}
-          Profile is private
       %p{class:"mb-0"}
         - if @admin_user.is_public?
           %a{href: url("/#{@admin_user.identifier}"), class:"mr-2"}
             %i{class:"fas fa-user"}
             Public Profile
+        - else
+          %i{class:"fas fa-lock"}
+          %span{class:"mr-2"} Private Profile
         %a{href: url("/#{@admin_user.identifier}/refresh-stats.json"), class:"profile-flush mr-2 mb-2"}
           %i{class: "fas fa-sync-alt"}
           = I18n.t('general.refresh_stats')
@@ -97,6 +96,7 @@
             %i{class:"fab fa-orcid"}
           - else
             %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD", width:"18px"}
+      %p{class:"mb-0"}
         %a{href: url("/admin/user/#{@admin_user.identifier}/settings")}
           %i{class:"fas fa-cog"}
           Settings & Integrations
