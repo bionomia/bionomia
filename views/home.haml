@@ -2,15 +2,18 @@
   Bionomia
 
 -content_for :scripts do
+  %script{src: "https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"}
   %script{src: "/js/application.js"}
   :javascript
     $(function() {
-      Application.init("", "GET", "/agents");
+      Application.init("", "GET", "/roster");
     });
 
 -content_for :jumbotron do
-  %div{id:"home-jumbotron", class: "jumbotron"}
-    %h1 Bionomia>
+  %div{id:"home-jumbotron", class: "jumbotron jumbotron-fluid d-flex flex-wrap"}
+    %div{class:"mr-auto p-2"}
+      %h1 Bionomia>
+    = haml :'partials/user/search', layout: false
 
   %p{class:"lead tagline ml-4 mt-3"}= I18n.t('home.tagline')
   %form{action: "/auth/orcid?lang=#{I18n.locale}", method: "POST"}
