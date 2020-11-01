@@ -16,6 +16,10 @@ OptionParser.new do |opts|
     options[:truncate] = true
   end
 
+  opts.on("-s", "--start-date [DATE]", String, "Start date in the form YYYY-MM-DD") do |date|
+    options[:start_date] = date
+  end
+
   opts.on("-e", "--export [directory]", String, "Export a csv of attributions made at the completion of all jobs") do |directory|
     options[:export] = directory
   end
@@ -51,9 +55,15 @@ end
 if options[:export]
   CSV.open(options[:export], "wb") do |csv|
     csv << ["identifier", "occurrence_id", "action", "created_by"]
-    UserOccurrence.includes(:user)
-                  .where(created_by: User::GBIF_AGENT_ID)
-                  .find_each do |o|
+    claims = UserOccurrence.includes(:user)
+                           .where(created_by: User::GBIF_AGENT_ID)
+
+    if options[:start_date]
+      date = DateTime.strptime(options[:start_date], '%Y-%m-%d')
+      claims = claims.where("created >= '#{date}'")
+    end
+
+    claims.find_each do |o|
       csv << [o.user.identifier, o.occurrence_id, o.action, o.created_by]
     end
   end

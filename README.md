@@ -87,9 +87,9 @@ First, import all users and user_occurrences content from production.
      # Reduce number of workers for now until we have many more records to process, bottleneck is queries to wikidata
      $ RACK_ENV=production sidekiq -c 2 -q existing_claims -r ./application.rb
 
-Then, find newly created users and manually create them in production. Export a csv of all claims made by User::GBIF_AGENT_ID
+Then, find newly created users and manually create them in production. Export a csv of all claims made by User::GBIF_AGENT_ID from a start date.
 
-     $ RACK_ENV=production ./bin/populate_existing_claims.rb --export "gbif_claims.csv"
+     $ RACK_ENV=production ./bin/populate_existing_claims.rb --export "gbif_claims.csv" --start-date 2020-11-01
 
 Finally, import the bulk claims on production (existing claims will be skipped):
 
