@@ -26,6 +26,17 @@
 
     %title= yield_content :title
 
+    - I18n.available_locales.map(&:to_s).each do |lang|
+      - if I18n.locale.to_s == lang
+        %link{href: "#{request.base_url}#{request.fullpath}", rel:"canonical"}
+      - if lang == "en"
+        %link{href: "#{Settings.base_url}#{request.fullpath}", rel:"alternate", hreflang: "en"}
+      - elsif I18n.locale == :en && lang != "en"
+        %link{href: "#{request.base_url.sub("://", "://" + lang + ".")}#{request.fullpath}", rel:"alternate", hreflang: "#{lang}"}
+      - else
+        %link{href: "#{request.base_url.sub("://" + I18n.locale.to_s + ".", "://" + lang + ".")}#{request.fullpath}", rel:"alternate", hreflang: "#{lang}"}
+
+
     %link{href: "/favicon.ico", rel:"shortcut icon", type:"image/x-icon"}
     %link{href: "/favicon.ico", rel:"icon", type:"image/x-icon"}
     %link{href: "/favicon-32x32.png", rel:"icon", sizes:"32x32"}
@@ -44,6 +55,7 @@
     %script{src: "/js/bootstrap.min.js", crossorigin: "anonymous"}
     %script{src: "/js/bootstrap-toggle.min.js", crossorigin: "anonymous"}
     %script{src: "/js/typeahead.bundle.min.js", crossorigin: "anonymous"}
+    %script{src: "/js/handlebars.min.js"}
     %script{src: "/js/js.cookie.min.js", crossorigin: "anonymous"}
     %script{src: "/js/jquery.mlens-1.7.min.js", crossorigin: "anonymous"}
     = yield_content :scripts
