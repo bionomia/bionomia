@@ -108,8 +108,8 @@ var Application = (function($, window) {
     },
     typeahead: function(){
       var self = this,
-          user_template = (typeof Handlebars === 'undefined') ? "" : Handlebars.compile($("#result-template").html()),
-          user_empty = (typeof Handlebars === 'undefined') ? "" : Handlebars.compile($("#empty-template").html());
+          user_template = (typeof Handlebars !== 'undefined' && $("#result-template").length > 0) ? Handlebars.compile($("#result-template").html()) : "",
+          user_empty = (typeof Handlebars !== 'undefined' && $("#empty-template").length > 0) ? Handlebars.compile($("#empty-template").html()) : "";
 
       $("#typeahead-agent").typeahead({
           minLength: 3,
