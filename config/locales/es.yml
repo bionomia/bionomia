@@ -2,72 +2,72 @@ es:
   "true": "Si"
   "false": "No"
   about:
-    about_title: Rationale
-    the_problem: The Problem
-    metrics: Metrics on Organizations
-    in_a_name: What is a Bionomia?
-    focus_people: A Focus on People
+    about_title: El razonamiento
+    the_problem: El problema
+    metrics: Métricas sobre las organizaciones
+    in_a_name: Qué es una Bionomía?
+    focus_people: Un enfoque en las personas
   admin:
-    change_photo: Change profile photo
+    change_photo: Cambiar imagen de perfil
   agent:
-    agent_title: Agent Strings
-    search_title: Agent String Search
+    agent_title: Personas
+    search_title: Búsqueda por nombre
     lede:
       unit:
-        one: "raw string from parsed collector and determiner names in specimen data from GBIF"
-        other: "raw strings from parsed collector and determiner names in specimen data from GBIF"
-    search_none: No agent string found for
+        one: "cadenas de texto sin procesar para nombres de colector e identificador capturados de los datos de especímenes en GBIF"
+        other: "cadenas de texto sin procesar para nombres de colector e identificador capturados de los datos de especímenes en GBIF"
+    search_none: No se encontró una cadena de texto para el agente
     search_count:
       unit:
-        one: "search result for"
-        other: "search results for"
-    warning: "WARNING:"
-    warning_statement: Unlike all other URLs in this site, URLs for agent strings are unreliable for linking because they will point to different results every few weeks
-    agent_name_title: "%{agent_name} Specimens"
-    agent_lede: A raw string from parsed collector and determiner names in natural history specimen data
+        one: "resultado de la búsqueda de"
+        other: "resultado de la búsqueda de"
+    warning: "ADVERTENCIA:"
+    warning_statement: A diferencia de todas las demás URL de este sitio, las URL de las cadenas de agentes no son confiables para la vinculación porque indicarán resultados diferentes cada pocas semanas.
+    agent_name_title: "%{agent_name} especímenes"
+    agent_lede: Una cadena sin procesar de los nombres de colectores e identificadores analizados en datos de datos de historia natural
     found_statement:
       unit:
-        one: "specimen found. Not all columns are shown."
-        other: "specimens found. Not all columns are shown."
-    search_html: "Search for %{agent_link} the person and help attribute their specimens."
+        one: "especimen encontrado. No se muestran todas las columnas."
+        other: "especímenes encontrados. No se muestran todas las columnas."
+    search_html: "Búsqueda de %{agent_link} la persona y ayude a atribuir sus especímenes."
   article:
-    article_title: Article
-    articles_title: Articles
+    article_title: Artículo
+    articles_title: Artículos
     articles_lede:
       unit:
-        one: "article cited downloads from GBIF"
-        other: "articles that cited downloads from GBIF"
-    no_claims_alert: People have not yet claimed or were attributed specimens represented in data downloaded from GBIF in support of this article
+        one: "artículo que cita descargas de GBIF"
+        other: "artículos que citan descargas de GBIF"
+    no_claims_alert: Nadie ha reclamado o ha recibido atribuciones de especímenes representados en los datos descargados de GBIF en apoyo de este artículo
     claims_alert:
       unit:
         one: "person collected or identified specimens included in data downloaded from GBIF in support of this article"
-        other: "people collected or identified specimens included in data downloaded from GBIF in support of this article"
-    placeholder: "Evolution and systematics of..."
-    people: People
-    agent_strings: Agent Strings
-    agent_title: Article Agents
-    alphabetical: Alphabetical
-    counts: Counts
-    no_agent_strings_alert: Raw strings from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article have not been found
+        other: "palguien colectó o identificó especímenes incluidos en datos descargados de GBIF en soporte de este artículo"
+    placeholder: "Evolucion y sistemática de..."
+    people: Personas
+    agent_strings: Cadenas de agentes
+    agent_title: Agentes de artículo
+    alphabetical: Alfabético
+    counts: Conteo
+    no_agent_strings_alert: No se han encontrado cadenas sin procesar de los nombres de colectores o identificadores analizados en datos de especímenes descargados de GBIF para respaldar este artículo
     agent_strings_alert:
       unit:
-        one: "raw string from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article"
-        other: "raw strings from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article"
-    claims: claims
-    specimens: specimens
-    no_search_alert: "No articles found for"
+        one: "cadena sin procesar de los nombres analizados del colector y del identificador en los datos de los especímenes descargados de GBIF en apoyo de este artículo"
+        other: "cadena sin procesar de los nombres analizados del colector y del identificador en los datos de los especímenes descargados de GBIF en apoyo de este artículo"
+    claims: reclamos
+    specimens: especímenes
+    no_search_alert: "No se encontraron artículos para"
     search_alert:
       unit:
-        one: "search result found for"
-        other: "search results found for"
+        one: "resultado de la búsqueda por"
+        other: "resultados de la búsqueda por"
   cdm:
-    title: For Data Managers
-    background_title: Background
-    engaging_title: Engaging With Your Community
-    enhancements_title: Incorporating Enhancements
-    dq_title: Assessing Data Quality
+    title: Para Manejadores de Datos
+    background_title: Antecedentes
+    engaging_title: Involucrándose con su comunidad
+    enhancements_title: Incorporando Mejoras
+    dq_title: Estimandola calidad de los datos
   country:
-    country_title: Countries
+    country_title: Países
     lede: From countries stated in ORCID accounts and Wikidata entries or specimen records in GBIF
     intro: From countries stated in ORCID accounts and Wikidata entries. Search by Taxon Family to explore expertise.
     no_one_alert: "No one found from"
