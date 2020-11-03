@@ -68,36 +68,36 @@ es:
     dq_title: Estimandola calidad de los datos
   country:
     country_title: Países
-    lede: From countries stated in ORCID accounts and Wikidata entries or specimen records in GBIF
-    intro: From countries stated in ORCID accounts and Wikidata entries. Search by Taxon Family to explore expertise.
-    no_one_alert: "No one found from"
-    no_one_collected_alert: No one has collected specimens from
-    no_one_identified_alert: No one has identified specimens from
-    resided_in: Resided In
-    collected_from: Collected From
-    identified_from: Identified From
+    lede: De países indicados en cuentas ORCID y entradas de Wikidata o registros de especímenes en GBIF
+    intro: De países indicados en cuentas ORCID y entradas de Wikidata. Búsqueda por Taxon Familia para explorar experiencia.
+    no_one_alert: "No se encontró nadie de"
+    no_one_collected_alert: Nadie ha colectado especímenes de
+    no_one_identified_alert: Nadie ha identificado especímenes de
+    resided_in: Vivió En
+    collected_from: Colectado De
+    identified_from: Identificado De
   dataset:
-    dataset_title: Datasets
-    search_title: Datasets Search
-    scribes_title: Scribes
+    dataset_title: Conjuntos de datos
+    search_title: Búsqueda en Conjuntos de datos
+    scribes_title: Anotaciones
     lede:
       unit:
-        one: "dataset from GBIF"
-        other: "datasets from GBIF"
-    placeholder: Butterflies of Brazil
-    people: People
-    scribes: Scribes
-    agents: Agents
-    agent_strings: Agent Strings
-    agent_strings_unclaimed: Unclaimed Agent Strings
-    alphabetical: Alphabetical
-    counts: Counts
-    unclaimed: Unclaimed
-    no_agents_alert: Raw strings from parsed collector and determiner names in specimen data included in this dataset have not yet been recorded
+        one: "Conjunto de datos de GBIF"
+        other: "Conjuntos de datos de GBIF"
+    placeholder: Mariposas de Brasil
+    people: Personas
+    scribes: Anotaciones
+    agents: Agentes
+    agent_strings: Cadenas de agente
+    agent_strings_unclaimed: Cadenas de agente sin reclamar
+    alphabetical: Alfabético
+    counts: Conteo
+    unclaimed: Sin reclamar
+    no_agents_alert: Aún no se han registrado cadenas sin procesar de los nombres analizados del colector y del identificador en los datos de los especímenes incluidas en este conjunto de datos
     agents_alert:
       unit:
-        one: "raw string from parsed collector and determiner names in specimen data included in this dataset"
-        other: "raw strings from parsed collector and determiner names in specimen data included in this dataset"
+        one: "cadena sin procesar de los nombres analizados del colector y del identificador en los datos de los especímenes incluidos en este conjunto de datos"
+        other: "cadena sin procesar de los nombres analizados del colector y del identificador en los datos de los especímenes incluidos en este conjunto de datos"
     agents_alert_unclaimed:
       unit:
         one: "raw string from parsed collector and determiner names in entirely unattributed specimen data included in this dataset"
