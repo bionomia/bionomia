@@ -204,110 +204,110 @@ es:
     new_people_lede: Atribuya especímenes a personas recientemente descubiertas en ORCID o Wikidata
     by_country: Por País
     not_ignored_alert: Los anotadores de Bionomía no han marcado especímenes para ser ignorados.
-    agent_string: Agent String
-    taxon_string: Taxon Family
-    dataset: Dataset
-    datasets: Datasets
-    agents: Agents
-    taxa: Taxonomic Families
-    specimens: Specimens
-    visualizations: Visualizations
-    support: Helped By
-    specialties: Specialties
-    public_profile: Public Profile
-    make_public: Make Public
-    not_yet: Not yet
-    viz_none_alert: Bionomia scribes have not yet helped attribute specimens.
-    viz_alert: Click regions on the map or bars in the chart to execute a filter.
-    problems: Problems Discovered
-    collections_before_birth: "Collections made before birth:"
-    collections_after_death: "Collections made after death:"
-    identifications_before_birth: "Identifications made before birth:"
-    identifications_after_death: "Identifications made after death:"
-    view: view
-    none: none
-    identified_from: Identified From
-    collected_from: Collected From
-    dates_identified_collected: Dates Identified and Collected
-    no_filter_alert: Bionomia scribes have not yet helped attribute specimens under this filter.
-    not_helped_alert: Bionomia scribes have not yet helped attribute specimens.
+    agent_string: Cadena de Agente
+    taxon_string: Taxon Familia
+    dataset: Conjunto de Datos
+    datasets: Conjuntos de Datos
+    agents: Agentes
+    taxa: Familias Taxonómicas
+    specimens: Epecímenes
+    visualizations: Visualizaciones
+    support: Con ayuda de
+    specialties: Especialidades
+    public_profile: Perfil Público
+    make_public: Hacer Público
+    not_yet: Todavía No
+    viz_none_alert: Los anotadores de Bionomía todavía no han ayudado a atribuir especímenes.
+    viz_alert: Haga click en las regiones del mapa o en las barras de la gráfica para ejecutar un filtro.
+    problems: Problemas Descubiertos
+    collections_before_birth: "Colectas hechas antes del nacimiento:"
+    collections_after_death: "Colectas hechas después de la muerte:"
+    identifications_before_birth: "Identificaciones hechas antes del nacimiento:"
+    identifications_after_death: "Identificaciones hechas después de la muerte:"
+    view: ver
+    none: ninguna
+    identified_from: Identificado de
+    collected_from: Colectado de
+    dates_identified_collected: Fechas de Identificación y Colecta
+    no_filter_alert: Los anotadores de Bionomía todavía no han ayudado a atribuir especímenes bajo este filtro.
+    not_helped_alert: Los anotadores de Bionomía todavía no han ayudado a atribuir especímenes.
     upload_message:
       unit:
-        one: "record was handled. Existing claims, if present in your upload, were skipped."
-        other: "records were handled. Existing claims, if present in your upload, were skipped."
-    help_question: "Want to help attribute specimens to %{name}?"
-    try_again: Try again.
-    no_specialities_alert: Bionomia scribes have not yet helped attribute specimens.
-    specialties_alert: "Collected or identified specimens in the following Families:"
-    co-collectors: Co-collectors
-    no_co_collectors_alert: Co-collectors have not yet been recorded.
-    co_collectors_alert: "Choose a co-collector to adjust attributions made for specimens in common."
-    co_collector_name: "Specimens co-collected with %{name}."
-    switch: Switch
-    not_co_collector_name: "Specimens have not beed co-collected with %{name}."
-    bulk_attribution: Bulk Attributions
-    reclaim_ignored: Reclaim Ignored
-    fix_claims: Fix Attributions
-    discovered: Discovered
-    support_alert: The following scribes have attributed specimens.
+        one: "El registro fue procesado. Se omitieron las adjudicaciones existentes, si están presentes en su carga."
+        other: "Los registros fueron procesados. Se omitieron las adjudicaciones existentes, si están presentes en su carga."
+    help_question: "¿Quiere ayudar a atribuirle especímenes a %{name}?"
+    try_again: Inente de nuevo.
+    no_specialities_alert: Los anotadores de Bionomía todavía no han ayudado a atribuir especímenes.
+    specialties_alert: "Colectó o identificó especímenes en las siguientes Familias:"
+    co-collectors: Co-colectores
+    no_co_collectors_alert: No se han registrado Co-colectores.
+    co_collectors_alert: "Elija un co-colector para ajustar las atribuciones hechas para especímenes en común."
+    co_collector_name: "Especímenes co-colectados con %{name}."
+    switch: Cambiar
+    not_co_collector_name: "No se encontraron especímenes co-colectados con %{name}."
+    bulk_attribution: Atribuciones en masa
+    reclaim_ignored: Reclamar Ignorados
+    fix_claims: Ajustar Atribuciones
+    discovered: Descubiertos
+    support_alert: Los siguientes anotadores han atribuido especímenes.
   help_docs:
-    title: Help Documents
+    title: Documentos de Ayuda
   history:
-    history_title: History
+    history_title: Historia
   home:
-    tagline: Link natural history specimens to the world's collectors.
-    get_started: Get started
-    your_profile: Your profile
-    sample_profiles: Sample Profiles
-    orcid_login: Log in with ORCID
-    orcid_logo: ORCID logo
+    tagline: Enlace especímenes de historia natural a los colectores del mundo.
+    get_started: Comenzar
+    your_profile: Su perfil
+    sample_profiles: Perfiles de Ejemplo
+    orcid_login: Registrarse con ORCID
+    orcid_logo: Logo de ORCID
   how_works:
-    title: How it Works
-    inner_workings: Inner Workings
-    gbif_title: Integration with GBIF
-    wikidata_title: Integration with Wikidata
-    orcid_title: Integration with ORCID
-    zenodo_title: Integration with Zenodo
+    title: Como funciona
+    inner_workings: Trabajo Interno
+    gbif_title: Integración con GBIF
+    wikidata_title: Integración con Wikidata
+    orcid_title: Integración con ORCID
+    zenodo_title: Integración con Zenodo
   layout:
-    profiles: Profiles
-    scribes: Scribes
-    organizations: Organizations
-    datasets: Datasets
-    articles: Articles
-    countries: Countries
-    agent_strings: Agent Strings
-    help_others: Help Others
-    help_received: Help Received
-    people_helped: People Helped
-    toggle_dropdown: Toggle Dropdown
-    overview: Overview
-    specimens: Specimens
-    discovered: Discovered
-    science_enabled: Science enabled
-    settings: Settings
-    administration: Administration
-    logout: Logout
-    resources: Resources
-    integrations: Integrations
-    for_developers: For Developers
-    for_data_managers: For Data Managers
-    policies: Policies
-    privacy: Privacy Policy
-    terms_service: Terms of Service
-    on_this_day: On This Day
-    about: About
-    rationale: Rationale
-    how_works: How it Works
-    history: History
-    feedback: Feedback
-    twitter: Bionomia on Twitter
-    support: Donate
-    help: Help Documents
-    tools: Tools
-    parse: Parse Names
-    reconcile: Reconcile Names
+    profiles: Perfiles
+    scribes: Anotadores
+    organizations: Organizaciones
+    datasets: Conjuntos de Datos
+    articles: Artículos
+    countries: Países
+    agent_strings: Cadenas de Agente
+    help_others: Ayudar a otros
+    help_received: Ayuda Recibida
+    people_helped: Personas Ayudadas
+    toggle_dropdown: Alternar menú desplegable
+    overview: Visión general
+    specimens: Especímenes
+    discovered: Descubiertos
+    science_enabled: Ciencia habilitada
+    settings: Configuración
+    administration: Administración
+    logout: Salir
+    resources: Recursos
+    integrations: Integraciones
+    for_developers: Para Desarrolladores
+    for_data_managers: Para Manejadores de Datos
+    policies: Políticas
+    privacy: Política de Pivacidad
+    terms_service: Términos del Servicio
+    on_this_day: En este día
+    about: Acerca de
+    rationale: Razonamiento
+    how_works: Cómo funciona
+    history: Historia
+    feedback: Retroalimentación
+    twitter: Bionomía en Twitter
+    support: Donar
+    help: Documentos de Ayuda
+    tools: Herramientas
+    parse: Analizar Nombres
+    reconcile: Reconciliar Nombres
   not_authorized:
-    not_authorized: Not authorized or session terminated.
+    not_authorized: Sin autorización o la sesión ha terminado.
   occurrence:
     occurrence_title: Specimen Record
     lede: From partial data obtained from GBIF
