@@ -244,7 +244,7 @@ en:
     co_collectors_alert: "Choose a co-collector to adjust attributions made for specimens in common."
     co_collector_name: "Specimens co-collected with %{name}."
     switch: Switch
-    not_co_collector_name: "Specimens have not beed co-collected with %{name}."
+    not_co_collector_name: "Specimens have not been co-collected with %{name}."
     bulk_attribution: Bulk Attributions
     reclaim_ignored: Reclaim Ignored
     fix_claims: Fix Attributions
