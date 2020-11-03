@@ -79,14 +79,14 @@ es:
   dataset:
     dataset_title: Conjuntos de datos
     search_title: Búsqueda en Conjuntos de datos
-    scribes_title: Anotaciones
+    scribes_title: Anotadores
     lede:
       unit:
         one: "Conjunto de datos de GBIF"
         other: "Conjuntos de datos de GBIF"
     placeholder: Mariposas de Brasil
     people: Personas
-    scribes: Anotaciones
+    scribes: Anotadores
     agents: Agentes
     agent_strings: Cadenas de agente
     agent_strings_unclaimed: Cadenas de agente sin reclamar
