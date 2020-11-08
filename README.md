@@ -14,8 +14,7 @@ Sinatra app to parse people names from structured biodiversity occurrence data, 
 3. MySQL 8.0.21
 4. Redis 4.0.9+
 5. Apache Spark 3+
-6. Neo4j 3.5.12+
-7. Unix-based operating system to use GNU parallel to process GBIF downloads
+6. Unix-based operating system to use GNU parallel to process GBIF downloads
 
 ## Installation
 
@@ -44,7 +43,7 @@ Unfortunately, gbifIDs are not persistent. These occasionally disappear through 
       > pp UserOccurrence.orphaned_count
       > pp UserOccurrence.orphaned_user_claims
 
-### Step 3:  Parse & Populate Agents
+### Step 3: Parse & Populate Agents
 
      $ RACK_ENV=production ./bin/populate_agents.rb --truncate --directory /directory-to-spark-csv-files/
      # Can start 2+ workers, each with 40 threads to help speed-up processing
@@ -58,28 +57,7 @@ Unfortunately, gbifIDs are not persistent. These occasionally disappear through 
      # Can start 2+ workers, each with 40 threads to help speed-up processing
      $ RACK_ENV=production sidekiq -c 40 -q taxon -r ./application.rb
 
-### Step 5: Cluster Agents & Store in Neo4j
-
-Truncating a large Neo4j graph.db usually does not work. Instead, it is best to entirely delete graph.db then recreate it.
-
-Example on Mac with homebrew:
-
-     $ brew services stop neo4j
-     $ sudo rm -rf /usr/local/opt/neo4j/libexec/data/databases/graph.db
-     # Could also be
-     $ sudo rm -rf /usr/local/var/neo4j/data/databases/graph.db
-     $ brew services start neo4j # recreates graph.db
-     $ rake neo4j:migrate # recreate the constraint on graph.db
-
-Now populate the clusters.
-
-     $ RACK_ENV=production ./bin/cluster_agents.rb --truncate --cluster
-     # Can start 2+ workers, each with 40 threads to help speed-up processing
-     $ RACK_ENV=production sidekiq -c 40 -q cluster -r ./application.rb
-
-See Neo4j Dump & Restore below for additional steps.
-
-### Step 6: Import Existing recordedByID and identifiedByID
+### Step 5: Import Existing recordedByID and identifiedByID
 
 First, import all users and user_occurrences content from production.
 
@@ -95,7 +73,7 @@ Finally, import the bulk claims on production (existing claims will be skipped):
 
      $ RACK_ENV=production ./bin/bulk_claim.rb --file "gbif_claims.csv"
 
-### Step 7: Populate Search in Elasticsearch
+### Step 6: Populate Search in Elasticsearch
 
      $ RACK_ENV=production ./bin/populate_search.rb --index agent
      $ RACK_ENV=production ./bin/populate_search.rb --index taxon
@@ -114,29 +92,6 @@ Or from scratch:
 Or from scratch:
 
      $ RACK_ENV=production ./bin/gbif_datasets.rb --populate
-
-## Neo4j Dump & Restore
-
-Notes to self because I never remember how to dump from my laptop and reload onto the server. Must stop Neo4j before this can be executed.
-
-      $ neo4j-admin dump --database=<database> --to=<destination-path>
-      $ neo4j-admin load --from=<archive-path> --database=<database> [--force]
-
-Example:
-
-      $ brew services stop neo4j
-      $ neo4j-admin dump --database=graph.db --to=/Users/dshorthouse/Documents/neo4j_backup/
-      $ brew services start neo4j
-
-      $ service neo4j stop
-      $ rm -rf /var/lib/neo4j/data/databases/graph.db
-      $ neo4j-admin load --from=/home/dshorthouse/neo4j_backup/graph.db.dump --database=graph.db
-
-      #reset permissions
-      $ chown neo4j:adm -R /var/lib/neo4j/data/databases/graph.db
-      $ service neo4j start
-
-Replacing the database through load requires that the database first be deleted [usually found in /var/lib/neo4j/data/databases on linux machine] and then its permissions be recursively set for the neo4j:adm user:group.
 
 ## Successive Data Migrations
 

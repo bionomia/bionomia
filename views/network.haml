@@ -1,0 +1,77 @@
+-content_for :title do
+  Network Browser
+
+-content_for :scripts do
+  %script{src: "https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.16.3/cytoscape.min.js"}
+  %script{src: "/js/cytoscape-euler.js"}
+  %script{src: "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"}
+  :javascript
+    $(function() {
+      var style = [
+        {
+          selector: 'node',
+          style: {
+            'content': 'data(label)',
+            'background-color': '#28a745',
+            'height': 23,
+            'width': 23,
+            'font-size': '8px',
+            'border-width': 1,
+            'border-color': '#6c757d'
+          }
+        },
+        {
+          selector: 'edge',
+          style: {
+            'line-color': '#6c757d',
+            'opacity': 0.5,
+            'width': 2
+          }
+        },
+        {
+          selector: ':selected',
+          style: {
+          }
+        }
+      ];
+      $.ajax({
+        method: "GET",
+        url: "/Q19060876/co-collectors.json",
+        dataType: "json"
+      }).done(function(data) {
+        $.each(data['elements']['nodes'], function(e, data) {
+          var obj = {
+            selector: '#' + data["data"]["id"],
+            style: {
+              'background-image': data["data"]["img"],
+              'background-clip': 'node',
+              'background-fit': 'cover',
+              "text-valign": "bottom",
+              "text-halign": "center"
+            }
+          };
+          style.push(obj);
+        });
+        var cy = cytoscape({
+          container: $('#cy'),
+          zoom: 1,
+          pan: { x: 0, y: 0 },
+          layout: {
+            name: 'euler',
+            randomize: true,
+            animate: false
+          },
+          style: style,
+          elements: data['elements']
+        });
+        cy.on('tap', 'node', function(){
+          try { // your browser may block popups
+            window.open( this.data('href') );
+          } catch(e){ // fall back on url change
+            window.location.href = this.data('href');
+          }
+        });
+      });
+    });
+
+%div{id: "cy", style: "height: 70vh;width: 90vw;"}

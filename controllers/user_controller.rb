@@ -214,6 +214,25 @@ module Sinatra
             end
           end
 
+          app.get '/:id/co-collectors.json' do
+            check_identifier
+            check_redirect
+            @viewed_user = find_user(params[:id])
+            nodes = []
+            edges = []
+            nodes << { data: {
+                id: @viewed_user.identifier,
+                label: @viewed_user.fullname,
+                img: profile_image(@viewed_user, 'medium')
+              }
+            }
+            @viewed_user.recorded_with.each do |user|
+              nodes << { data: { id: user.identifier, label: user.fullname, img: profile_image(user, 'medium') } }
+              edges << { data: { source: user.identifier, target: @viewed_user.identifier }}
+            end
+            { elements: { nodes: nodes, edges: edges } }.to_json
+          end
+
           app.get '/:id/identified-for' do
             check_identifier
             check_redirect

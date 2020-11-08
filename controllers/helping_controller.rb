@@ -208,22 +208,9 @@ module Sinatra
               else
                 if @agent
                   id_scores = [{ id: @agent.id, score: 3 }]
-
-                  node = AgentNode.find_by(agent_id: @agent.id)
-                  if !node.nil?
-                    id_scores.concat(node.agent_nodes_weights.map{|a| { id: a[0], score: a[1] }})
-                  end
+                  occurrence_ids = occurrences_by_score(id_scores, @viewed_user)
                 else
                   id_scores = candidate_agents(@viewed_user)
-                end
-                if !id_scores.empty?
-                  ids = id_scores.map{|a| a[:id]}
-                  nodes = AgentNode.where({ agent_id: ids })
-                  if !nodes.empty?
-                    (nodes.map(&:agent_id) - ids).each do |id|
-                      id_scores << { id: id, score: 1 } #TODO: how to more effectively use the edge weights here?
-                    end
-                  end
                   occurrence_ids = occurrences_by_score(id_scores, @viewed_user)
                 end
                 specimen_pager(occurrence_ids.uniq)
