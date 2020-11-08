@@ -491,10 +491,6 @@ module Sinatra
             haml :roster, locals: { active_page: "roster" }
           end
 
-          app.get '/network' do
-            haml :network
-          end
-
           app.get '/offline' do
             haml :offline, layout: false
           end
