@@ -1,5 +1,4 @@
 # encoding: utf-8
-require 'neo4j/core/cypher_session/adaptors/http'
 
 module Sinatra
   module Bionomia
@@ -27,9 +26,6 @@ module Sinatra
             inflect.irregular 'specimen', 'specimens'
             inflect.irregular 'person', 'people'
           end
-
-          neo4j_adaptor = Neo4j::Core::CypherSession::Adaptors::HTTP.new(Settings.neo4j.url)
-          Neo4j::ActiveBase.on_establish_session { Neo4j::Core::CypherSession.new(neo4j_adaptor) }
 
           app.before { ActiveRecord::Base.verify_active_connections! if ActiveRecord::Base.respond_to?(:verify_active_connections!) }
           app.after { ActiveRecord::Base.clear_active_connections! }

@@ -15,8 +15,6 @@ offline_warning:
 google:
   analytics: ''
   api_key: ''
-neo4j:
-  url: 'localhost:7474'
 orcid:
   api_url: 'https://pub.orcid.org/v3.0/'
   key: ''
