@@ -121,6 +121,7 @@ en:
   developer:
     search: Search
     autocomplete_widget: Autocomplete Widget
+    json_ld_search: JSON-LD Search
     structured_data: Structured Data
     raw_data: Raw Data
     code: Code

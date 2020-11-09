@@ -121,6 +121,7 @@ fr:
   developer:
     search: Rechercher
     autocomplete_widget: Autocomplete Widget
+    json_ld_search: Researcher JSON-LD
     structured_data: Données Structurées
     raw_data: Données Brutes
     code: Code Informatique
