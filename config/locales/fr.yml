@@ -441,6 +441,7 @@ fr:
     scribe_not_helped: Cette scribe Bionomia ne vous a pas encore aidé à récupérer des spécimens.
     upload_error: Veuillez télécharger une image d'une taille inférieure à 5 Mo.
     bulk_claim: En masse
+    advanced_search: Advanced Search & Filter
   roster:
     roster_title: Profils publics
     lede:

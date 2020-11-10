@@ -122,17 +122,18 @@ var Application = (function($, window) {
           display : "fullname_reverse"
         }
         ).on("typeahead:select", function(obj, datum) {
+          var datasetKey = (typeof DataSet !== "undefined") ? DataSet.datasetKey : "";
+          var taxon_id = (typeof DataSet !== "undefined") ? DataSet.taxon_id : "";
+
           if (self.path === "/admin") {
             var identifier = window.location.pathname.split("/")[3];
             window.location.href = "/admin/user/" + identifier + "/candidates/agent/" + datum.id;
           } else if (self.path === "/agents") {
             window.location.href = "/agent/" + datum.id;
           } else if (self.path === "/help-others") {
-            var datasetKey = (typeof DataSet !== "undefined") ? DataSet.datasetKey : "";
-            var taxon_id = (typeof DataSet !== "undefined") ? DataSet.taxon_id : "";
             window.location.href = "/help-others/" + self.identifier + "/advanced-search?agent_id=" + datum.id + "&datasetKey=" + datasetKey + "&taxon_id=" + taxon_id;
           } else {
-            window.location.href = "/profile/candidates/agent/" + datum.id;
+            window.location.href = "/profile/advanced-search?agent_id=" + datum.id + "&datasetKey=" + datasetKey + "&taxon_id=" + taxon_id;
           }
         });
 
@@ -189,12 +190,14 @@ var Application = (function($, window) {
           display : "title"
         }
         ).on("typeahead:select", function(obj, datum) {
+          var agent_id = (typeof DataSet !== "undefined") ? DataSet.agent_id : "";
+          var taxon_id = (typeof DataSet !== "undefined") ? DataSet.taxon_id : "";
           if (self.path === "/admin") {
             window.location.href = "/admin/dataset/" + datum.datasetkey;
           } else if (self.path === "/help-others") {
-            var agent_id = (typeof DataSet !== "undefined") ? DataSet.agent_id : "";
-            var taxon_id = (typeof DataSet !== "undefined") ? DataSet.taxon_id : "";
             window.location.href = "/help-others/" + self.identifier + "/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datum.datasetkey + "&taxon_id=" + taxon_id;
+          } else if (self.path === "/profile") {
+            window.location.href = "/profile/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datum.datasetkey + "&taxon_id=" + taxon_id;
           } else {
             window.location.href = "/dataset/" + datum.datasetkey;
           }
@@ -211,10 +214,12 @@ var Application = (function($, window) {
             display : "name"
           }
           ).on("typeahead:select", function(obj, datum) {
+            var agent_id = (typeof DataSet !== "undefined") ? DataSet.agent_id : "";
+            var datasetKey = (typeof DataSet !== "undefined") ? DataSet.datasetKey : "";
             if (self.path === "/help-others") {
-              var agent_id = (typeof DataSet !== "undefined") ? DataSet.agent_id : "";
-              var datasetKey = (typeof DataSet !== "undefined") ? DataSet.datasetKey : "";
               window.location.href = "/help-others/" + self.identifier + "/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datasetKey + "&taxon_id=" + datum.id;
+            } else if (self.path === "/profile") {
+              window.location.href = "/profile/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datasetKey + "&taxon_id=" + datum.id;
             } else {
               window.location.href = window.location.pathname + "?q=" + datum.name;
             }

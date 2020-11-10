@@ -441,6 +441,7 @@ en:
     scribe_not_helped: This Bionomia scribe has not yet helped you claim specimens.
     upload_error: Please upload an image less than 5MB in size.
     bulk_claim: Bulk Claim
+    advanced_search: Advanced Search & Filter
   roster:
     roster_title: Public Profiles
     lede:

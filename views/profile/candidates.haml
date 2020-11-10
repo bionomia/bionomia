@@ -11,52 +11,70 @@
     = haml :'partials/profile/tabs', layout: false, locals: { active_page: "specimens" }
     = haml :'partials/profile/subtabs_specimens', layout: false, locals: { active_tab: "candidates"}
 
-- alert_class = "info"
-- placeholder = @user.fullname
-- if !@searched_user.nil?
-  - alert_class = "warning"
-  - placeholder = @searched_user.fullname
+- placeholder = @dataset ? @dataset.title : ""
+- checked = params[:relaxed] == "1" ? "checked" : nil
+
+- if @dataset || @agent || @taxon
+  %div{class: "alert alert-warning", role: "alert"}
+    - if @dataset
+      %div
+        %i{class:"fas fa-filter"}
+        Filtered by
+        %span{class:"font-weight-bold mr-2"}
+          #{@dataset.title.truncate(125, separator: ' ')}
+        %a{href: "#{@dataset.license}", itemprop: "license"}
+          %img{src:"#{@dataset.license_icon("small")}"}
+        %a{href: url("/profile/candidates?&datasetKey=&agent_id=#{params[:agent_id]}&taxon_id=#{params[:taxon_id]}"), class:"ml-2 text-danger"}
+          %i{class:"fas fa-minus-circle"}
+          Remove
+    - if @agent
+      %div
+        %i{class:"fas fa-search"}
+        Searched for
+        %span{class:"font-weight-bold mr-2"}
+          #{@agent.fullname_reverse}
+        %a{href: url("/profile/candidates?datasetKey=#{params[:datasetKey]}&agent_id=&taxon_id=#{params[:taxon_id]}"), class:"ml-2 text-danger"}
+          %i{class:"fas fa-minus-circle"}
+          Remove
+    - if @taxon
+      %div
+        %i{class:"fas fa-filter"}
+        Filtered by
+        %span{class:"font-weight-bold mr-2"}
+          #{@taxon.family}
+        %a{href: url("/profile/candidates?datasetKey=#{params[:datasetKey]}&agent_id=#{params[:agent_id]}&taxon_id="), class:"ml-2 text-danger"}
+          %i{class:"fas fa-minus-circle"}
+          Remove
 
 - if @results.size == 0
   %div{class: "alert alert-info row tiny-margins", role:"alert"}
-    %div{class: "col col-12 col-sm-12 col-md-8 col-lg-8"}
+    %div{class: "col col-12 col-md-8"}
       = I18n.t('profile.no_candidates_alert')
-
-      %div{class:"form-check d-inline-flex"}
-        - checked = params[:relaxed] == "1" ? "checked" : nil
-        %input{type:"checkbox", class:"form-check-input", id:"relaxed", checked: checked }
-        %label{for:"relaxed", class:"relaxed"} Make less exact
-    %div{class:"col col-12 col-sm-8 col-md-6 col-lg-4"}
-      %form{id:"#form-wrapper", method: "get", action: "/", "accept-charset" => "UTF-8", class: "form-inline"}
-        %div{class: "inputs search-agent form-group"}
-          %label{for: "typeahead", class:"font-weight-bold col-form-label mr-2"}= I18n.t('general.search')
-          %input{id: "typeahead-agent", type: :text, name: "q", placeholder: "#{placeholder}", value: "#{params[:q]}", class:"typeahead"}
-- else
-  %div{class: "alert alert-#{alert_class} row candidates-alert tiny-margins", role: "alert"}
-    %div{class: "col col-12 col-sm-12 col-md-6 col-lg-8"}
-      = succeed "." do
-        Found #{number_with_delimiter(@total, delimeter: ",")} specimens for
-        %span{class:"font-weight-bold"} #{placeholder}
-      - if @searched_user.nil?
-        %div{class:"form-check d-inline-flex"}
-          - checked = params[:relaxed] == "1" ? "checked" : nil
+      - if !@dataset && !@agent && !@taxon
+        %div{class:"form-check d-inline-flex ml-2"}
           %input{type:"checkbox", class:"form-check-input", id:"relaxed", checked: checked }
           %label{for:"relaxed", class:"relaxed"} Make less exact
-      %br
+    %div{class:"col col-12 col-md-4 text-md-right"}
+      %a{href: url("/profile/advanced-search")}
+        %i{class:"fas fa-search-plus"}
+        Advanced Search & Filter
+- else
+  %div{class: "alert alert-info row candidates-alert tiny-margins", role: "alert"}
+    %div{class: "col col-12 col-md-8"}
+      Found #{number_with_delimiter(@total, delimeter: ",")} specimens.
       Choose
       %img{src:"/images/net-unselected.png", alt:"Collected", title:"Collected", width:18}
       collected,
       %img{src:"/images/microscope-unselected.png", alt:"Collected", title:"Collected", width:18}
       identified, or Both.
-      - if !@searched_user.nil?
-        Claim the following specimen records
-        %span{class:"font-weight-bold"}
-          as your own.
+      - if !@dataset && !@agent && !@taxon
+        %div{class:"form-check d-inline-flex ml-2"}
+          %input{type:"checkbox", class:"form-check-input", id:"relaxed", checked: checked }
+          %label{for:"relaxed", class:"relaxed"} Make less exact
 
-    %div{class:"col col-12 col-sm-8 col-md-6 col-lg-4"}
-      %form{id:"#form-wrapper", method: "get", action: "/", "accept-charset" => "UTF-8", class: "form-inline"}
-        %div{class: "inputs search-agent form-group"}
-          %label{for: "typeahead", class:"font-weight-bold col-form-label mr-2"}= "Search"
-          %input{id: "typeahead-agent", type: :text, name: "q", placeholder: "#{placeholder}", value: "#{params[:q]}", class:"typeahead"}
+    %div{class:"col col-12 col-md-4 text-md-right"}
+      %a{href: url("/profile/advanced-search")}
+        %i{class:"fas fa-search-plus"}
+        Advanced Search & Filter
 
   = haml :'partials/tables/candidates', layout: false, locals: { user_scope: "self" }
