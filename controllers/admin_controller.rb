@@ -503,7 +503,12 @@ module Sinatra
               specimen_pager(occurrence_ids.uniq)
             end
 
-            haml :'admin/candidates', locals: { active_page: "administration" }
+            bulk_error_message = flash.now[:error] ? flash.now[:error] : ""
+            locals = {
+              active_page: "administration",
+              bulk_error: bulk_error_message
+            }
+            haml :'admin/candidates', locals: locals
           end
 
           app.post '/admin/user/:id/advanced-search' do
@@ -574,28 +579,6 @@ module Sinatra
             { count: count }.to_json
           end
 
-          app.get '/admin/user/:id/candidates/agent/:agent_id' do
-            admin_protected!
-            check_redirect
-            @admin_user = find_user(params[:id])
-
-            occurrence_ids = []
-            @page = (params[:page] || 1).to_i
-
-            @searched_user = Agent.find(params[:agent_id])
-            id_scores = [{ id: @searched_user.id, score: 3 }]
-
-            occurrence_ids = occurrences_by_score(id_scores, @admin_user)
-            specimen_pager(occurrence_ids.uniq)
-
-            bulk_error_message = flash.now[:error] ? flash.now[:error] : ""
-            locals = {
-              active_page: "administration",
-              bulk_error: bulk_error_message
-            }
-            haml :'admin/candidates', locals: locals
-          end
-
           app.post '/admin/user/:id/candidates/agent/:agent_id/bulk-claim' do
             admin_protected!
             check_redirect
@@ -606,7 +589,7 @@ module Sinatra
             rescue ArgumentError => e
               flash.next[:error] = "#{e.message}"
             end
-            redirect "/admin/user/#{params[:id]}/candidates/agent/#{params[:agent_id]}"
+            redirect "/admin/user/#{params[:id]}/candidates?agent_id=#{params[:agent_id]}"
           end
 
           app.get '/admin/user/:id/ignored' do
