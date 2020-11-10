@@ -122,8 +122,8 @@ var Application = (function($, window) {
           display : "fullname_reverse"
         }
         ).on("typeahead:select", function(obj, datum) {
-          var datasetKey = (typeof DataSet !== "undefined") ? DataSet.datasetKey : "";
-          var taxon_id = (typeof DataSet !== "undefined") ? DataSet.taxon_id : "";
+          var datasetKey = (typeof Filters !== "undefined") ? Filters.datasetKey : "";
+          var taxon_id = (typeof Filters !== "undefined") ? Filters.taxon_id : "";
 
           if (self.path === "/admin") {
             var identifier = window.location.pathname.split("/")[3];
@@ -190,8 +190,8 @@ var Application = (function($, window) {
           display : "title"
         }
         ).on("typeahead:select", function(obj, datum) {
-          var agent_id = (typeof DataSet !== "undefined") ? DataSet.agent_id : "";
-          var taxon_id = (typeof DataSet !== "undefined") ? DataSet.taxon_id : "";
+          var agent_id = (typeof Filters !== "undefined") ? Filters.agent_id : "";
+          var taxon_id = (typeof Filters !== "undefined") ? Filters.taxon_id : "";
           if (self.path === "/admin") {
             window.location.href = "/admin/dataset/" + datum.datasetkey;
           } else if (self.path === "/help-others") {
@@ -214,8 +214,8 @@ var Application = (function($, window) {
             display : "name"
           }
           ).on("typeahead:select", function(obj, datum) {
-            var agent_id = (typeof DataSet !== "undefined") ? DataSet.agent_id : "";
-            var datasetKey = (typeof DataSet !== "undefined") ? DataSet.datasetKey : "";
+            var agent_id = (typeof Filters !== "undefined") ? Filters.agent_id : "";
+            var datasetKey = (typeof Filters !== "undefined") ? Filters.datasetKey : "";
             if (self.path === "/help-others") {
               window.location.href = "/help-others/" + self.identifier + "/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datasetKey + "&taxon_id=" + datum.id;
             } else if (self.path === "/profile") {

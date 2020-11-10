@@ -1,9 +1,9 @@
 -content_for :title do
-  = I18n.t('profile.advanced_ssearch')
+  = I18n.t('profile.advanced_search')
 
 -content_for :scripts do
   :javascript
-    var DataSet = { "datasetKey": "#{params[:datasetKey]}", "agent_id": "#{params[:agent_id]}", "taxon_id": "#{params[:taxon_id]}" };
+    var Filters = { "datasetKey": "#{params[:datasetKey]}", "agent_id": "#{params[:agent_id]}", "taxon_id": "#{params[:taxon_id]}" };
   = haml :'partials/profile/scripts', layout: false, locals: { action_type: "POST" }
 
 %div{class:"row"}
