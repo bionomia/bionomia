@@ -277,7 +277,6 @@ module Sinatra
               @results = []
               @total = nil
             else
-
               @dataset, @agent, @taxon = nil
               if params[:datasetKey]
                 @dataset = Dataset.find_by_datasetKey(params[:datasetKey]) rescue nil

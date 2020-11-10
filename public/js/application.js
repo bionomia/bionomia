@@ -126,8 +126,7 @@ var Application = (function($, window) {
           var taxon_id = (typeof Filters !== "undefined") ? Filters.taxon_id : "";
 
           if (self.path === "/admin") {
-            var identifier = window.location.pathname.split("/")[3];
-            window.location.href = "/admin/user/" + identifier + "/candidates/agent/" + datum.id;
+            window.location.href = "/admin/user/" + self.identifier + "/advanced-search?agent_id=" + datum.id + "&datasetKey=" + datasetKey + "&taxon_id=" + taxon_id;
           } else if (self.path === "/agents") {
             window.location.href = "/agent/" + datum.id;
           } else if (self.path === "/help-others") {
@@ -192,8 +191,10 @@ var Application = (function($, window) {
         ).on("typeahead:select", function(obj, datum) {
           var agent_id = (typeof Filters !== "undefined") ? Filters.agent_id : "";
           var taxon_id = (typeof Filters !== "undefined") ? Filters.taxon_id : "";
-          if (self.path === "/admin") {
+          if (self.path === "/admin" && !self.identifier) {
             window.location.href = "/admin/dataset/" + datum.datasetkey;
+          } else if (self.path === "/admin" && self.identifier) {
+            window.location.href = "/admin/user/" + self.identifier + "/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datum.datasetkey + "&taxon_id=" + taxon_id;
           } else if (self.path === "/help-others") {
             window.location.href = "/help-others/" + self.identifier + "/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datum.datasetkey + "&taxon_id=" + taxon_id;
           } else if (self.path === "/profile") {
@@ -220,6 +221,8 @@ var Application = (function($, window) {
               window.location.href = "/help-others/" + self.identifier + "/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datasetKey + "&taxon_id=" + datum.id;
             } else if (self.path === "/profile") {
               window.location.href = "/profile/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datasetKey + "&taxon_id=" + datum.id;
+            } else if (self.path === "/admin") {
+              window.location.href = "/admin/user/"+self.identifier+"/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datasetKey + "&taxon_id=" + datum.id;
             } else {
               window.location.href = window.location.pathname + "?q=" + datum.name;
             }

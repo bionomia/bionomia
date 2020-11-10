@@ -13,37 +13,7 @@
 
 - checked = params[:relaxed] == "1" ? "checked" : nil
 
-- if @dataset || @agent || @taxon
-  %div{class: "alert alert-warning", role: "alert"}
-    - if @dataset
-      %div
-        %i{class:"fas fa-filter"}
-        Filtered by
-        %span{class:"font-weight-bold mr-2"}
-          #{@dataset.title.truncate(125, separator: ' ')}
-        %a{href: "#{@dataset.license}", itemprop: "license"}
-          %img{src:"#{@dataset.license_icon("small")}"}
-        %a{href: url("/profile/candidates?&datasetKey=&agent_id=#{params[:agent_id]}&taxon_id=#{params[:taxon_id]}"), class:"ml-2 text-danger"}
-          %i{class:"fas fa-minus-circle"}
-          Remove
-    - if @agent
-      %div
-        %i{class:"fas fa-search"}
-        Searched for
-        %span{class:"font-weight-bold mr-2"}
-          #{@agent.fullname_reverse}
-        %a{href: url("/profile/candidates?datasetKey=#{params[:datasetKey]}&agent_id=&taxon_id=#{params[:taxon_id]}"), class:"ml-2 text-danger"}
-          %i{class:"fas fa-minus-circle"}
-          Remove
-    - if @taxon
-      %div
-        %i{class:"fas fa-filter"}
-        Filtered by
-        %span{class:"font-weight-bold mr-2"}
-          #{@taxon.family}
-        %a{href: url("/profile/candidates?datasetKey=#{params[:datasetKey]}&agent_id=#{params[:agent_id]}&taxon_id="), class:"ml-2 text-danger"}
-          %i{class:"fas fa-minus-circle"}
-          Remove
+= haml :'partials/advanced_search_filter', layout: false, locals: { url: "/profile/candidates" }
 
 - if @results.size == 0
   %div{class: "alert alert-info row tiny-margins", role:"alert"}
