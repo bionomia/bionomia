@@ -11,7 +11,6 @@
     = haml :'partials/profile/tabs', layout: false, locals: { active_page: "specimens" }
     = haml :'partials/profile/subtabs_specimens', layout: false, locals: { active_tab: "candidates"}
 
-- placeholder = @dataset ? @dataset.title : ""
 - checked = params[:relaxed] == "1" ? "checked" : nil
 
 - if @dataset || @agent || @taxon
