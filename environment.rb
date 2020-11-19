@@ -68,6 +68,7 @@ require 'pluck_to_hash'
 require 'pony'
 require 'twitter'
 require 'sucker_punch'
+require 'optparse'
 
 require_relative File.join(File.dirname(__FILE__), 'lib', 'omniauth_authenticity_checker')
 require_relative File.join(File.dirname(__FILE__), 'config', 'initialize')
