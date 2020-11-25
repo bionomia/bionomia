@@ -15,16 +15,14 @@
       %p{class: "lead text-muted"}
         - if @pagy && @pagy.count > 0
           #{number_to_human(@pagy.count, units: :"taxa.number_agents", delimiter: ",", precision: 0)}
+        - else
     = haml :'partials/taxa/search', layout: false
 
 = haml :'partials/taxa/tabs', layout:false, locals: { active_tab: locals[:active_tab] }
 = haml :'partials/taxa/agent_nav', layout: false, locals: { active_subtab: locals[:active_subtab] }
 
 - if @results.size == 0
-  %div{class: "alert alert-warning tiny-margins", role: "alert"}
-    No agents have collected or identified for
-    %span{class:"font-weight-bold"}
-      #{h(@taxon.family)}
+  %div{class: "alert alert-warning tiny-margins", role: "alert"}= I18n.t('taxa.no_agents', taxon: h(@taxon.family))
 - else
   %div{class: "row"}
     - @results.in_groups_of(25, false).each do |group|

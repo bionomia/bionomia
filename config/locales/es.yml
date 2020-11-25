@@ -503,6 +503,11 @@ es:
       unit:
         one: "agent string from specimen data in GBIF"
         other: "agent strings from specimen data in GBIF"
+    number_agents_unclaimed:
+      unit:
+        one: "agent string has unclaimed specimen records from data in GBIF"
+        other: "agent strings have unclaimed specimen records from data in GBIF"
+    no_agents_unclaimed: No specimen records are unclaimed or unattributed
     alphabetical: Alphabetical
     counts: Counts
     unclaimed: Unclaimed

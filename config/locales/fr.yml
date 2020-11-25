@@ -503,6 +503,11 @@ fr:
       unit:
         one: "chaîne d'agent à partir de données dans GBIF"
         other: "chaînes d'agents à partir de données dans GBIF"
+    number_agents_unclaimed:
+      unit:
+        one: "chaîne d'agent a des spécimens non-attribués à partir de données dans GBIF"
+        other: "chaînes d'agents a des spécimens non-attribués à partir de données dans GBIF"
+    no_agents_unclaimed: Aucun chaîne d'agent a des spécimens non-attribués
     alphabetical: Alphabétique
     counts: Compte
     unclaimed: Non Attribuées
