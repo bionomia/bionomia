@@ -246,7 +246,7 @@ ALTER TABLE `taxa`
 
 ALTER TABLE `taxon_occurrences`
   ADD PRIMARY KEY (`occurrence_id`) USING BTREE,
-  ADD KEY `taxon_idx` (`taxon_id`);
+  ADD KEY `index_taxon_occurrences_on_taxon_id` (`taxon_id`) USING BTREE;
 
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
