@@ -270,6 +270,7 @@ es:
     wikidata_title: Integration with Wikidata
     orcid_title: Integration with ORCID
     zenodo_title: Integration with Zenodo
+    acknowledgments_title: Acknowledgments
   layout:
     profiles: Profiles
     scribes: Scribes

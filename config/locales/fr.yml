@@ -270,6 +270,7 @@ fr:
     wikidata_title: Intégration avec Wikidata
     orcid_title: Intégration avec ORCID
     zenodo_title: Intégration avec Zenodo
+    acknowledgments_title: Remerciements
   layout:
     profiles: Profils
     scribes: Scribes

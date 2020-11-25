@@ -22,6 +22,7 @@ module Bionomia
       add_countries
       add_datasets
       add_articles
+      add_taxa
     end
 
     def add_flat_pages
@@ -52,6 +53,7 @@ module Bionomia
       sitemap.add '/roster'
       sitemap.add '/scribes'
       sitemap.add '/terms-of-service'
+      sitemap.add '/taxa'
     end
 
     def add_users
@@ -101,6 +103,14 @@ module Bionomia
       puts "Adding articles..."
       Article.find_each do |a|
         sitemap.add "/article/#{a.doi}"
+      end
+    end
+
+    def add_taxa
+      puts "Adding taxa..."
+      Taxon.find_each do |t|
+        sitemap.add "/taxon/#{t.family}"
+        sitemap.add "/taxon/#{t.family}?action=identified"
       end
     end
 
