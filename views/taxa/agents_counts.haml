@@ -16,6 +16,7 @@
         - if @pagy && @pagy.count > 0
           #{number_to_human(@pagy.count, units: :"taxa.number_agents", delimiter: ",", precision: 0)}
         - else
+          = I18n.t('taxa.no_agents', taxon: h(@taxon.family))
     = haml :'partials/taxa/search', layout: false
 
 = haml :'partials/taxa/tabs', layout:false, locals: { active_tab: locals[:active_tab] }
