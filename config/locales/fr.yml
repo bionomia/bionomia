@@ -513,6 +513,8 @@ fr:
     unclaimed: Non Attribuées
     example_families: Exemples aléatoires
     none_collected_identified: "Personne a collecté ou identifié %{taxon}"
+    none_collected: "Personne a collecté %{taxon}"
+    none_identified: "Personne a identifié %{taxon}"
     no_agents: "Acun chaîne d'agent a collecté ou identifié %{taxon}"
   terms:
     terms_title: Conditions d'utilisation

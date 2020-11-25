@@ -513,6 +513,8 @@ es:
     unclaimed: Unclaimed
     example_families: Random Samples
     none_collected_identified: "No one has collected or identified %{taxon}"
+    none_collected: "No one has collected %{taxon}"
+    none_identified: "No one has identified %{taxon}"
     no_agents: "No agents have collected or identified %{taxon}"
   terms:
     terms_title: Terms of Service

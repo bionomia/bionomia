@@ -11,12 +11,23 @@
 -content_for :jumbotron do
   %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
     %div{class:"mr-auto p-2"}
-      %h1{class:"h2"} #{@taxon.family}
-      %p{class: "lead text-muted"}
-        - if @pagy && @pagy.count > 0
-          #{number_to_human(@pagy.count, units: :"taxa.number_agents_unclaimed", delimiter: ",", precision: 0)}
-        - else
-          = I18n.t('taxa.no_agents_unclaimed', taxon: h(@taxon.family))
+      - if @taxon.has_image?
+        %div{class:"media"}
+          %img{src: "/images/taxa/#{@taxon.image.file_name}", alt:"#{@taxon.family}", class:"mr-4"}
+          %div{class:"media-body"}
+            %h1{class:"h2 mt-0"} #{@taxon.family}
+            %p{class: "lead text-muted"}
+              - if @pagy && @pagy.count > 0
+                #{number_to_human(@pagy.count, units: :"taxa.number_agents_unclaimed", delimiter: ",", precision: 0)}
+              - else
+                = I18n.t('taxa.no_agents_unclaimed', taxon: h(@taxon.family))
+      - else
+        %h1{class:"h2 mt-0"} #{@taxon.family}
+        %p{class: "lead text-muted"}
+          - if @pagy && @pagy.count > 0
+            #{number_to_human(@pagy.count, units: :"taxa.number_agents_unclaimed", delimiter: ",", precision: 0)}
+          - else
+            = I18n.t('taxa.no_agents_unclaimed', taxon: h(@taxon.family))
     = haml :'partials/taxa/search', layout: false
 
 = haml :'partials/taxa/tabs', layout:false, locals: { active_tab: locals[:active_tab] }

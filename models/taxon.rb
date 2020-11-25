@@ -1,8 +1,13 @@
 class Taxon < ActiveRecord::Base
   has_many :taxon_occurrences, dependent: :delete_all
   has_many :occurrences, through: :taxon_occurrences, source: :occurrence
+  has_one :image, class_name: "TaxonImage", foreign_key: :family, primary_key: :family
 
   validates :family, presence: true
+
+  def has_image?
+    image
+  end
 
   def agent_recorders
     Agent.joins(:occurrence_recorders)

@@ -509,7 +509,7 @@ module Sinatra
 
           app.get '/taxon/:taxon' do
             @count = Taxon.count
-            @taxon = nil
+            taxon_from_param
             @results = []
             @action = "collected"
             if ["identified","collected"].include?(params[:action])
@@ -521,12 +521,10 @@ module Sinatra
               active_subtab: @action
             }
             begin
-              @taxon = Taxon.where({ family: params[:taxon] }).first
               search_user_taxa
               haml :'taxa/users', locals: locals
             rescue
-              status 404
-              haml :oops, locals: locals
+              halt 404, haml(:oops)
             end
           end
 
