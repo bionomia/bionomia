@@ -32,11 +32,11 @@ Sinatra app to parse people names from structured biodiversity occurrence data, 
 
 ### Step 1:  Import Data
 
-See the [Apache Spark recipes](spark.md) for quickly importing into MySQL the occurrence csv from a DwC Archive downloaded from [GBIF](https://www.gbif.org) or from a custom [Bionomia download](spark2.md). Apache Spark is used to produce the necessary source csv files for the "Parse & Populate Agents" and "Populate Taxa" steps below.
+See the Apache Spark recipes [here](spark.md) and [here](spark2.md) for quickly importing into MySQL the occurrence csv from a DwC Archive downloaded from [GBIF](https://www.gbif.org) or from a custom [Bionomia download](spark2.md). Apache Spark is used to produce the necessary source csv files for the "Parse & Populate Agents" and "Populate Taxa" steps below.
 
 ### Step 2: Check for Dramatic Changes in gbifIDs
 
-Unfortunately, gbifIDs are not persistent. These occasionally disappear through processing at GBIF's end. As a result, claims may no longer point to existing occurrence records. The following produces a count for how many claims and attributions might be orphaned:
+Unfortunately, gbifIDs are not persistent. These occasionally disappear through processing at GBIF's end. As a result, claims may no longer point to existing occurrence records. The following produces a count for how many claims and attributions might be orphaned. An alternative, more efficient process is found in an Apache Spark [script](spark2.md).
 
       $ RACK_ENV=production irb
       > require "./application"
@@ -82,7 +82,7 @@ Or from scratch:
 
      $ RACK_ENV=production ./bin/populate_search.rb --rebuild
 
-### Step 8: Populate dataset metadata
+### Step 7: Populate dataset metadata
 
      $ RACK_ENV=production ./bin/gbif_datasets.rb --new
      $ RACK_ENV=production ./bin/gbif_datasets.rb --flush
