@@ -29,8 +29,18 @@ module Sinatra
               end
             end
 
+            taxon_name = nil
+            if params[:taxon]
+              begin
+                taxon_name = Taxon.find_by_family(params[:taxon]).family
+              rescue
+                halt 404
+              end
+            end
+
             @filter = {
-              dataset: dataset_name
+              dataset: dataset_name,
+              taxon: taxon_name
             }.compact
 
             begin
@@ -38,6 +48,9 @@ module Sinatra
               occurrences = @agent.occurrences
               if params[:datasetKey]
                 occurrences = occurrences.where({ datasetKey: params[:datasetKey] })
+              end
+              if params[:taxon]
+                occurrences = occurrences.where({ family: params[:taxon] })
               end
               @pagy, @results = pagy(occurrences, page: page)
 
@@ -60,9 +73,13 @@ module Sinatra
           end
 
           app.get '/agents' do
-            search_agent({ item_size: 75 })
-            @formatted_results = format_agents
             @count = Agent.count
+            if params[:q] && !params[:q].empty?
+              search_agent({ item_size: 75 })
+              @formatted_results = format_agents
+            else
+              @results = agent_examples
+            end
             haml :'agents/agents', locals: { active_page: "agents" }
           end
 
@@ -476,6 +493,71 @@ module Sinatra
 
           app.get '/privacy' do
             haml :privacy, locals: { active_page: "privay" }
+          end
+
+          app.get '/taxa' do
+            @taxon_results = []
+            @count = Taxon.count
+            if params[:q] && params[:q].present?
+              search_taxon
+              @taxon_results = format_taxon
+            else
+              @taxon_results = taxon_examples
+            end
+            haml :'taxa/taxa', locals: { active_page: "taxa" }
+          end
+
+          app.get '/taxon/:taxon' do
+            @count = Taxon.count
+            @taxon = nil
+            @results = []
+            @action = "collected"
+            if ["identified","collected"].include?(params[:action])
+              @action = params[:action]
+            end
+            locals = {
+              active_page: "taxa",
+              active_tab: "people",
+              active_subtab: @action
+            }
+            begin
+              @taxon = Taxon.where({ family: params[:taxon] }).first
+              search_user_taxa
+              haml :'taxa/users', locals: locals
+            rescue
+              status 404
+              haml :oops, locals: locals
+            end
+          end
+
+          app.get '/taxon/:taxon/agents' do
+            taxon_agents
+            locals = {
+              active_page: "taxa",
+              active_tab: "agents",
+              active_subtab: "default"
+            }
+            haml :'taxa/agents', locals: locals
+          end
+
+          app.get '/taxon/:taxon/agents/counts' do
+            taxon_agents_counts
+            locals = {
+              active_page: "taxa",
+              active_tab: "agents",
+              active_subtab: "counts"
+            }
+            haml :'taxa/agents_counts', locals: locals
+          end
+
+          app.get '/taxon/:taxon/agents/unclaimed' do
+            taxon_agents_unclaimed
+            locals = {
+              active_page: "taxa",
+              active_tab: "agents",
+              active_subtab: "unclaimed"
+            }
+            haml :'taxa/agents_unclaimed', locals: locals
           end
 
           app.get '/terms-of-service' do

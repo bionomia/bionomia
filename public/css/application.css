@@ -501,6 +501,12 @@ dl.citation{
   color: #f08d49;
 }
 
+@media (min-width: 1300px) {
+  .d-xxl-inline-block {
+    display: inline-block!important;
+  }
+}
+
 @media(max-width: 767px) {
   .form-inline .form-group {
     margin-bottom:0.25rem;

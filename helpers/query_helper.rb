@@ -64,9 +64,12 @@ module Sinatra
           }
         end
 
-        def build_country_query(countryCode, type = nil, family = nil)
+        def build_user_country_query(countryCode, type = nil, family = nil)
           if !type.nil?
             qry = {
+              sort: [
+                { "family.keyword": "asc" }
+              ],
               query: {
                 nested: {
                   path: type,
@@ -85,6 +88,9 @@ module Sinatra
             end
           else
             qry = {
+              sort: [
+                { "family.keyword": "asc" }
+              ],
               query: {
                 bool: {
                   should: [
@@ -122,6 +128,65 @@ module Sinatra
             end
           end
 
+          qry
+        end
+
+        def build_user_taxon_query(family, type)
+          if !type.nil?
+            qry = {
+              sort: [
+                { "family.keyword": "asc" }
+              ],
+              query: {
+                nested: {
+                  path: type,
+                  query: {
+                    bool: {
+                      must: [
+                        { term: { "#{type}.family": { value: family } } }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          else
+            qry = {
+              sort: [
+                { "family.keyword": "asc" }
+              ],
+              query: {
+                bool: {
+                  should: [
+                    {
+                      nested: {
+                        path: "recorded",
+                        query: {
+                          bool: {
+                            must: [
+                              { term: { "recorded.family": { value: family } } }
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    {
+                      nested: {
+                        path: "identified",
+                        query: {
+                          bool: {
+                            must: [
+                              { term: { "identified.family": { value: family } } }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          end
           qry
         end
 

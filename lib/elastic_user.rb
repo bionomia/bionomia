@@ -54,15 +54,19 @@ module Bionomia
         mappings: {
           properties: {
             id: { type: 'integer', index: false },
-            orcid: { type: 'text', index: false },
-            wikidata: { type: 'text', index: false },
-            thumbnail: { type: 'text', index: false },
+            orcid: { type: 'keyword', index: false },
+            wikidata: { type: 'keyword', index: false },
+            thumbnail: { type: 'keyword', index: false },
             description: { type: 'text', index: false },
             family: {
               type: 'text',
               analyzer: :name_part_index,
               norms: false,
               fields: {
+                keyword: {
+                  type: 'keyword',
+                  norms: false
+                },
                 edge: {
                   type: 'text',
                   analyzer: :name_part_search,

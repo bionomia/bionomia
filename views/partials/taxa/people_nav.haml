@@ -1,0 +1,6 @@
+%nav{id:"network-nav", class:"navbar navbar-light navbar-expand bg-light overflow-auto"}
+  %ul{class:"navbar-nav"}
+    %li{class:"nav-item"}
+      %a{class:"nav-link#{locals[:active_subtab] == "collected" ? " active" : nil}", href:"/taxon/#{@taxon.family}?action=collected"}= I18n.t('taxa.collected')
+    %li{class:"nav-item"}
+      %a{class:"nav-link#{locals[:active_subtab] == "identified" ? " active" : nil}", href:"/taxon/#{@taxon.family}?action=identified"}= I18n.t('taxa.identified')

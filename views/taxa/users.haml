@@ -1,0 +1,40 @@
+-content_for :title do
+  #{@taxon.family} Collectors or Determiners
+
+- content_for :scripts do
+  %script{src: "/js/application.js"}
+  :javascript
+    $(function() {
+      Application.init("", "GET", "/taxa");
+    });
+
+-content_for :jumbotron do
+  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
+    %div{class:"mr-auto p-2"}
+      %h1{class:"h2"} #{@taxon.family}
+      %p{class: "lead text-muted"}
+        - if @pagy && @pagy.count > 0
+          #{number_to_human(@pagy.count, units: :"taxa.number_#{@action}", delimiter: ",", precision: 0)}
+
+    = haml :'partials/taxa/search', layout: false
+
+= haml :'partials/taxa/tabs', layout:false, locals: { active_tab: locals[:active_tab] }
+= haml :'partials/taxa/people_nav', layout: false, locals: { active_subtab: locals[:active_subtab] }
+
+- if @results.size == 0
+  %div{class: "alert alert-warning tiny-margins", role: "alert"}
+    = I18n.t('taxa.none_collected_identified', taxon: h(@taxon.family))
+- else
+  - @results.in_groups_of(3).each do |group|
+    %div{class: "card-deck"}
+      - group.each do |u|
+        - if u.nil?
+          %div{class:"card border-0"}
+        - else
+          - u = User.find(u[:_id])
+          - cache_fragment(u.identifier) do
+            = haml :'partials/user/card', layout: false, locals: { user: u }
+
+  - if @pagy.pages > 1
+    %div{style:"overflow-y:scroll"}
+      = pagy_bootstrap_nav(@pagy)

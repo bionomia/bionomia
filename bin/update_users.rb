@@ -119,6 +119,7 @@ if options[:file]
       u.delete
       puts "#{u.wikidata} deleted. Missing either family name, birth or death date or has an ORCID".red
     else
+      u.flush_caches
       puts "#{u.fullname_reverse} created/updated".green
     end
   end

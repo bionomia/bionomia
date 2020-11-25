@@ -223,6 +223,8 @@ var Application = (function($, window) {
               window.location.href = "/profile/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datasetKey + "&taxon_id=" + datum.id;
             } else if (self.path === "/admin") {
               window.location.href = "/admin/user/"+self.identifier+"/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datasetKey + "&taxon_id=" + datum.id;
+            } else if (self.path === "/taxa") {
+              window.location.href = "/taxon/" + datum.name;
             } else {
               window.location.href = window.location.pathname + "?q=" + datum.name;
             }

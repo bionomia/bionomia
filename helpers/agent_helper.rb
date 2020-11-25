@@ -103,6 +103,10 @@ module Sinatra
                 .map{|a| { id: a[0], score: a[1] }}
         end
 
+        def agent_examples
+          @results = Agent.limit(75).order(Arel.sql("RAND()"))
+        end
+
       end
     end
   end

@@ -20,7 +20,7 @@
     %i{class:"fas fa-filter"}
     Filtered by
     %span{class:"font-weight-bold mr-2"}
-      #{h([@filter[:dataset]].compact.join(", "))}
+      #{h([@filter.values].compact.join(", "))}
     %a{href: url("/agent/#{@agent.id}"), class:"text-danger"}
       %i{class:"fas fa-minus-circle"}
       Remove

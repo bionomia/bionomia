@@ -144,7 +144,7 @@ CREATE TABLE `users` (
   `country` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `country_code` varchar(50) DEFAULT NULL,
   `keywords` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `description` varchar(255) DEFAULT NULL,
+  `description` text,
   `twitter` varchar(50) DEFAULT NULL,
   `image_url` text,
   `signature_url` varchar(255) DEFAULT NULL,
@@ -218,7 +218,9 @@ ALTER TABLE `messages`
   ADD KEY `index_messages_on_recipient_id` (`recipient_id`);
 
 ALTER TABLE `occurrences`
-  ADD PRIMARY KEY (`gbifID`) USING BTREE;
+  ADD PRIMARY KEY (`gbifID`) USING BTREE,
+  ADD KEY `typeStatus_idx` (`typeStatus`(256)),
+  ADD KEY `index_occurrences_on_datasetKey` (`datasetKey`);
 
 ALTER TABLE `occurrence_determiners`
   ADD PRIMARY KEY (`agent_id`,`occurrence_id`),
@@ -243,7 +245,8 @@ ALTER TABLE `taxa`
   ADD UNIQUE KEY `family_idx` (`family`);
 
 ALTER TABLE `taxon_occurrences`
-  ADD PRIMARY KEY (`occurrence_id`) USING BTREE;
+  ADD PRIMARY KEY (`occurrence_id`) USING BTREE,
+  ADD KEY `taxon_idx` (`taxon_id`);
 
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
