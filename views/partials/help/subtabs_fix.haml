@@ -1,12 +1,12 @@
 %nav{id:"helped-nav", class:"navbar navbar-light navbar-expand bg-light overflow-auto"}
   %ul{class:"navbar-nav"}
     %li{class:"nav-item"}
-      %a{class:"nav-link#{locals[:active_subtab] == "specimens" ? " active" : nil}", href:"/help-others/#{@viewed_user.identifier}/specimens"}= I18n.t('help.specimens')
+      %a{class:"nav-link#{locals[:active_subtab] == "specimens" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/specimens")}= I18n.t('help.specimens')
     %li{class:"nav-item"}
-      %a{class:"nav-link#{locals[:active_subtab] == "visualizations" ? " active" : nil}", href:"/help-others/#{@viewed_user.identifier}/visualizations"}= I18n.t('help.visualizations')
+      %a{class:"nav-link#{locals[:active_subtab] == "visualizations" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/visualizations")}= I18n.t('help.visualizations')
     %li{class:"nav-item"}
-      %a{class:"nav-link#{locals[:active_subtab] == "specialties" ? " active" : nil}", href:"/help-others/#{@viewed_user.identifier}/specialties"}= I18n.t('help.specialties')
+      %a{class:"nav-link#{locals[:active_subtab] == "specialties" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/specialties")}= I18n.t('help.specialties')
     %li{class:"nav-item"}
-      %a{class:"nav-link#{locals[:active_subtab] == "co_collectors" ? " active" : nil}", href:"/help-others/#{@viewed_user.identifier}/co-collectors"}= I18n.t('help.co-collectors')
+      %a{class:"nav-link#{locals[:active_subtab] == "co_collectors" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/co-collectors")}= I18n.t('help.co-collectors')
     %li{class:"nav-item"}
-      %a{class:"nav-link#{locals[:active_subtab] == "support" ? " active" : nil}", href:"/help-others/#{@viewed_user.identifier}/support"}= I18n.t('help.support')
+      %a{class:"nav-link#{locals[:active_subtab] == "support" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/support")}= I18n.t('help.support')

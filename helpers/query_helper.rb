@@ -131,7 +131,7 @@ module Sinatra
           qry
         end
 
-        def build_user_taxon_query(family, type)
+        def build_user_taxon_query(family, type = nil)
           if !type.nil?
             qry = {
               sort: [
