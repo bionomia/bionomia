@@ -10,21 +10,6 @@ describe "Bionomia Application Controller" do
     expect(last_response).to be_ok
   end
 
-  it "should allow accessing the public list of organizations" do
-    get '/organizations'
-    expect(last_response).to be_ok
-  end
-
-  it "should allow accessing the public list of organizations/search" do
-    get '/organizations/search'
-    expect(last_response).to be_ok
-  end
-
-  it "should allow accessing the public list of agents" do
-    get '/agents'
-    expect(last_response).to be_ok
-  end
-
   it "should allow accessing the integrations page" do
     get '/integrations'
     expect(last_response).to be_ok
@@ -67,26 +52,6 @@ describe "Bionomia Application Controller" do
 
   it "should allow accessing the how it works page" do
     get '/how-it-works'
-    expect(last_response).to be_ok
-  end
-
-  it "should allow accessing the countries page" do
-    get '/countries'
-    expect(last_response).to be_ok
-  end
-
-  it "should allow accessing a country page" do
-    get '/country/CA'
-    expect(last_response).to be_ok
-  end
-
-  it "should allow accessing the articles page" do
-    get '/articles'
-    expect(last_response).to be_ok
-  end
-
-  it "should allow accessing the datasets page" do
-    get '/datasets'
     expect(last_response).to be_ok
   end
 
@@ -135,23 +100,4 @@ describe "Bionomia Application Controller" do
     expect(last_response).to be_ok
   end
 
-  it "should allow accessing the about user rss feed" do
-    get '/user.rss'
-    expect(last_response).to be_ok
-  end
-
-  it "should allow accessing the organization json search" do
-    get '/organization.json'
-    expect(last_response).to be_ok
-  end
-
-  it "should allow accessing the user json search" do
-    get '/user.json'
-    expect(last_response).to be_ok
-  end
-
-  it "should allow accessing the agent json search" do
-    get '/agent.json'
-    expect(last_response).to be_ok
-  end
 end

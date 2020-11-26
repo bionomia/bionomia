@@ -42,7 +42,10 @@
 
 - if @results.size == 0
   %div{class: "alert alert-warning tiny-margins", role: "alert"}
-    = I18n.t('taxa.none_collected_identified', taxon: h(@taxon.family))
+    - if @action == "collected"
+      = I18n.t('taxa.none_collected', taxon: h(@taxon.family))
+    - else
+      = I18n.t('taxa.none_identified', taxon: h(@taxon.family))
 - else
   - @results.in_groups_of(3).each do |group|
     %div{class: "card-deck"}
