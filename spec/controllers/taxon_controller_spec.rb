@@ -1,6 +1,13 @@
 describe "Bionomia Taxon Controller" do
+  before(:each) do
+    @taxon = Taxon.create!({ family: "Linyphiidae" })
+  end
 
-  it "should allow accessing the countries page" do
+  after(:each) do
+    @taxon.destroy
+  end
+
+  it "should allow accessing the taxa page" do
     get '/taxa'
     expect(last_response).to be_ok
   end
