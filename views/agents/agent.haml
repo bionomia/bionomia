@@ -1,5 +1,4 @@
--content_for :title do
-  = I18n.t('agent.agent_name_title', agent_name: "#{@agent.fullname}")
+-content_for :title, I18n.t('agent.agent_name_title', agent_name: "#{@agent.fullname}")
 
 -content_for :scripts do
   %script{src:"/js/application.js"}
