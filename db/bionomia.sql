@@ -127,6 +127,12 @@ CREATE TABLE `taxa` (
   `family` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
+CREATE TABLE `taxon_images` (
+  `id` int NOT NULL,
+  `family` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `file_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
 CREATE TABLE `taxon_occurrences` (
   `occurrence_id` bigint UNSIGNED NOT NULL,
   `taxon_id` int NOT NULL
@@ -244,6 +250,10 @@ ALTER TABLE `taxa`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `family_idx` (`family`);
 
+ALTER TABLE `taxon_images`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `index_taxon_images_on_family` (`family`) USING BTREE;
+
 ALTER TABLE `taxon_occurrences`
   ADD PRIMARY KEY (`occurrence_id`) USING BTREE,
   ADD KEY `index_taxon_occurrences_on_taxon_id` (`taxon_id`) USING BTREE;
@@ -286,6 +296,9 @@ ALTER TABLE `organizations`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `taxa`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `taxon_images`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `users`

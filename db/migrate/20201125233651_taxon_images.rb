@@ -5,7 +5,7 @@ class TaxonImages < ActiveRecord::Migration[6.0]
       t.string :file_name, null: false
     end
     if column_exists?(:taxon_images, :family)
-      add_index  :taxon_images, :family unless index_exists?(:taxon_images, :family)
+      add_index  :taxon_images, :family, unique: true unless index_exists?(:taxon_images, :family)
     end
   end
 
