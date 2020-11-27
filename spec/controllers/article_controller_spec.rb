@@ -1,14 +1,9 @@
 describe "Bionomia Article Controller" do
-
   before(:each) do
     @doi = "10.0000/12345"
     gbif_dois = ["10.0001/1", "10.0001/2"]
     gbif_downloadkeys = ["123x", "123y"]
-    @article = Article.create!({
-        doi: @doi,
-        gbif_dois: gbif_dois,
-        gbif_downloadkeys: gbif_downloadkeys
-      })
+    @article = Article.create!({ doi: @doi, gbif_dois: gbif_dois, gbif_downloadkeys: gbif_downloadkeys })
   end
 
   after(:each) do
