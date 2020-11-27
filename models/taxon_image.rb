@@ -30,7 +30,7 @@ class TaxonImage < ActiveRecord::Base
          end
        rescue
          puts "Failed #{taxon.family}".red
-          next
+         next
        end
      end
    end

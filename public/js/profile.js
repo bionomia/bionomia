@@ -8,6 +8,7 @@ var Profile = (function($, window) {
 
     user_id: "",
     path: "",
+
     init: function(path) {
       this.path = typeof path !== 'undefined' ? path : "/profile";
       this.activate_profile_image();
@@ -15,6 +16,7 @@ var Profile = (function($, window) {
       this.activate_email();
       this.message_counter();
     },
+
     activate_profile_image: function() {
       var popup = $('#profile-upload-option'), self = this;
 
@@ -90,6 +92,7 @@ var Profile = (function($, window) {
         }
       });
     },
+
     activate_email: function() {
       var self = this;
       $("#toggle-mail").on("change", function() {
@@ -104,6 +107,7 @@ var Profile = (function($, window) {
         return false;
       });
     },
+
     activate_zenodo: function() {
       $('#zenodo-disconnect').on('click', function() {
         $.ajax({
@@ -116,6 +120,7 @@ var Profile = (function($, window) {
         });
       });
     },
+
     message_counter: function() {
       var self = this;
       $.ajax({
@@ -129,6 +134,7 @@ var Profile = (function($, window) {
         }
       });
     },
+
     calculateAspectRatioFit: function(srcWidth, srcHeight) {
       var ratio = 1;
       if (srcWidth > 250 || srcHeight > 250) {

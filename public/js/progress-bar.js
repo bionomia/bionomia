@@ -6,11 +6,13 @@ var ProgressBar = (function($, window) {
   var _private = {
 
     identifier: "",
+
     init: function(identifier, path = "user") {
       this.identifier = typeof identifier !== 'undefined' ? identifier : "";
       this.path = path;
       this.candidate_counter();
     },
+
     candidate_counter: function() {
       var self = this, denominator, percent, message, progress_bar = $('#progress-bar_' + this.identifier),
           path = (this.path == "user") ? "" : this.path + "/";

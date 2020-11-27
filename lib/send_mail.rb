@@ -34,7 +34,8 @@ module Bionomia
               body: construct_message(user, articles)
             )
           rescue
-            puts "Email failed"
+            puts "Email failed for #{user.email}"
+            next
           end
         end
         user.mail_last_sent = Time.now
