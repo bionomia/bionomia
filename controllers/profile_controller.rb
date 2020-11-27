@@ -357,7 +357,6 @@ module Sinatra
 
           app.get '/profile/upload' do
             protected!
-
             haml :'profile/upload', locals: { active_page: "profile" }
           end
 

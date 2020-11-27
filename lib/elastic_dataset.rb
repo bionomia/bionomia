@@ -37,7 +37,7 @@ module Bionomia
         },
         mappings: {
           properties: {
-            id: { type: 'text', index: false },
+            id: { type: 'integer', index: false },
             datasetkey: { type: 'text', index: false },
             title: {
               type: 'text',
