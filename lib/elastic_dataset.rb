@@ -38,7 +38,7 @@ module Bionomia
         mappings: {
           properties: {
             id: { type: 'integer', index: false },
-            datasetkey: { type: 'text', index: false },
+            datasetkey: { type: 'keyword', index: false },
             title: {
               type: 'text',
               search_analyzer: :standard,
