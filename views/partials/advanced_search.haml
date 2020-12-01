@@ -33,7 +33,7 @@
         - else
           - q = params.except("id", "taxon_id").to_query
           %span
-            %a{href: url("#{locals[:url]}/advanced-search#{q}"), class:"text-danger"}
+            %a{href: url("#{locals[:url]}/advanced-search?#{q}"), class:"text-danger"}
               %i{class:"fas fa-minus-circle"}
               Remove
           %span
@@ -48,7 +48,7 @@
         - else
           - q = params.except("id", "agent_id").to_query
           %span
-            %a{href: url("#{locals[:url]}/advanced-search#{q}"), class:"text-danger"}
+            %a{href: url("#{locals[:url]}/advanced-search?#{q}"), class:"text-danger"}
               %i{class:"fas fa-minus-circle"}
               Remove
           %span
