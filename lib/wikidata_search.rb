@@ -158,7 +158,8 @@ module Bionomia
       new_wikicodes = {}
       PEOPLE_PROPERTIES.each do |key,property|
         puts "Polling #{key}...".yellow
-        @sparql.query(wikidata_people_query(property)).each_solution do |solution|
+        @sparql.query(wikidata_people_query(property))
+               .each_solution do |solution|
           wikicode = solution.to_h[:item].to_s.match(/Q[0-9]{1,}/).to_s
           next if existing.include? wikicode
           new_wikicodes[wikicode] = solution.to_h[:itemLabel].to_s
@@ -184,7 +185,8 @@ module Bionomia
       requires_refresh = []
       PEOPLE_PROPERTIES.each do |key,property|
         puts "Updates for #{key}...".yellow
-        @sparql.query(wikidata_modified_query(property)).each_solution do |solution|
+        @sparql.query(wikidata_modified_query(property))
+               .each_solution do |solution|
           requires_refresh << solution.to_h[:qid].to_s.match(/Q[0-9]{1,}/).to_s
         end
       end
@@ -196,9 +198,13 @@ module Bionomia
       watched_properties = PEOPLE_PROPERTIES.merge("Bionomia ID": "P6944")
       watched_properties.each do |key,property|
         puts "Merges for #{key}...".yellow
-        @sparql.query(merged_wikidata_people_query(property)).each_solution do |solution|
+        @sparql.query(merged_wikidata_people_query(property))
+               .each_solution do |solution|
           qid = solution.to_h[:qid].to_s.match(/Q[0-9]{1,}/).to_s
-          merged_wikicodes[qid] =  solution.to_h[:redirect_toqid].to_s.match(/Q[0-9]{1,}/).to_s
+          merged_wikicodes[qid] =  solution.to_h[:redirect_toqid]
+                                           .to_s
+                                           .match(/Q[0-9]{1,}/)
+                                           .to_s
         end
       end
       qids_to_merge = merged_wikicodes.keys & existing_wikicodes
@@ -211,7 +217,8 @@ module Bionomia
 
     def wiki_institution_codes(identifier)
       institution_codes = []
-      @sparql.query(wikidata_institution_code_query(identifier)).each_solution do |solution|
+      @sparql.query(wikidata_institution_code_query(identifier))
+             .each_solution do |solution|
         institution_codes << solution.code.to_s
       end
       { institution_codes: institution_codes.uniq }
@@ -230,7 +237,8 @@ module Bionomia
         image_url = image || logo
         website = data.properties("P856").last.value rescue nil
       else
-        response = @sparql.query(wikidata_institution_wiki_query(identifier)).first
+        response = @sparql.query(wikidata_institution_wiki_query(identifier))
+                          .first
         if response
           wikicode = response[:item].to_s.match(/Q[0-9]{1,}/).to_s
           latitude = response[:lat].to_f if !response[:lat].nil?
@@ -272,16 +280,27 @@ module Bionomia
     def wiki_date_precision(wiki_user, property)
       date = nil
       precision = nil
-      date = Date.parse(wiki_user.properties(property).compact.map{|a| a.value.time if a.precision_key == :day}.compact.first) rescue nil
+      date = Date.parse(wiki_user.properties(property)
+                 .compact
+                 .map{|a| a.value.time if a.precision_key == :day}
+                 .compact.first) rescue nil
       if !date.nil?
         precision = "day"
       else
-        wiki_date = wiki_user.properties(property).compact.map{|a| a.value.time if a.precision_key == :month}.compact.first rescue nil
+        wiki_date = wiki_user.properties(property)
+                             .compact
+                             .map{|a| a.value.time if a.precision_key == :month}
+                             .compact
+                             .first rescue nil
         if !wiki_date.nil?
           date = Date.parse(wiki_date[1..7] + "-01")
           precision = "month"
         else
-          wiki_date = wiki_user.properties(property).compact.map{|a| a.value.time if a.precision_key == :year}.compact.first rescue nil
+          wiki_date = wiki_user.properties(property)
+                               .compact
+                               .map{|a| a.value.time if a.precision_key == :year}
+                               .compact
+                               .first rescue nil
           if !wiki_date.nil?
             date = Date.parse(wiki_date[1..4] + "-01-01")
             precision = "year"
