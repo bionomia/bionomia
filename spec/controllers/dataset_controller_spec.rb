@@ -1,10 +1,13 @@
 describe "Bionomia Dataset Controller" do
+
   before(:each) do
-    @datasetkey = "12345"
+    @datasetkey = "826f67d2-f762-11e1-a439-00145eb45e9a"
+    @occurrence = Occurrence.create({ gbifID: 1, datasetKey: @datasetKey })
     @dataset = Dataset.create!({ datasetKey: @datasetkey })
   end
 
   after(:each) do
+    @occurrence.destroy
     @dataset.destroy
   end
 
