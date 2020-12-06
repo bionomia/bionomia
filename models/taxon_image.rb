@@ -44,8 +44,30 @@ class TaxonImage < ActiveRecord::Base
      end
      create(
        family: taxon.family,
-       file_name: file_name
+       file_name: file_name,
+       credit: metadata[0][:credit],
+       licenseURL: metadata[0][:licenseURL]
      )
+     puts "#{taxon.family}.green"
+   end
+
+   def update_credit
+     image_uuid = file_name.split(".")[0]
+     url = "http://phylopic.org/api/a/image/#{image_uuid}?options=credit+licenseURL"
+     begin
+       response = RestClient::Request.execute(
+         method: :get,
+         url: url
+       )
+       result = JSON.parse(response, symbolize_names: true)
+       if result[:result]
+         update(
+           credit: result[:result][:credit],
+           licenseURL: result[:result][:licenseURL]
+         )
+       end
+     rescue
+     end
    end
 
 end
