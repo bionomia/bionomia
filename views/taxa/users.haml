@@ -9,41 +9,38 @@
     });
 
 -content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid"}
-    %div{class:"d-flex flex-wrap"}
-      %div{class:"mr-auto p-2"}
-        - if @taxon.has_image?
-          %div{class:"media"}
-            %img{src: "/images/taxa/#{@taxon.image.file_name}", alt:"#{@taxon.family}", class:"mr-4"}
-            %div{class:"media-body"}
-              %h1{class:"h2 mt-0"} #{@taxon.family}
-              %p{class: "lead text-muted"}
-                - if @pagy && @pagy.count > 0
-                  #{number_to_human(@pagy.count, units: :"taxa.number_#{@action}", delimiter: ",", precision: 0)}
-                - else
-                  - if @action == "collected"
-                    = I18n.t('taxa.none_collected', taxon: h(@taxon.family))
-                  - else
-                    = I18n.t('taxa.none_identified', taxon: h(@taxon.family))
-        - else
-          %h1{class:"h2 mt-0"} #{@taxon.family}
-          %p{class: "lead text-muted"}
-            - if @pagy && @pagy.count > 0
-              #{number_to_human(@pagy.count, units: :"taxa.number_#{@action}", delimiter: ",", precision: 0)}
-            - else
-              - if @action == "collected"
-                = I18n.t('taxa.none_collected', taxon: h(@taxon.family))
+  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
+    %div{class:"mr-auto p-2"}
+      - if @taxon.has_image?
+        %div{class:"media"}
+          %img{src: "/images/taxa/#{@taxon.image.file_name}", alt:"#{@taxon.family}", class:"mr-4"}
+          %div{class:"media-body"}
+            %h1{class:"h2 mt-0"} #{@taxon.family}
+            %p{class: "lead text-muted"}
+              - if @pagy && @pagy.count > 0
+                #{number_to_human(@pagy.count, units: :"taxa.number_#{@action}", delimiter: ",", precision: 0)}
               - else
-                = I18n.t('taxa.none_identified', taxon: h(@taxon.family))
+                - if @action == "collected"
+                  = I18n.t('taxa.none_collected', taxon: h(@taxon.family))
+                - else
+                  = I18n.t('taxa.none_identified', taxon: h(@taxon.family))
+        %p{class:"small text-muted mb-0"}
+          - if @taxon.image.credit
+            #{@taxon.image.credit}
+          - if @taxon.image.licenseURL
+            %a{href: "#{@taxon.image.licenseURL}"}= @taxon.image.licenseURL
+      - else
+        %h1{class:"h2 mt-0"} #{@taxon.family}
+        %p{class: "lead text-muted"}
+          - if @pagy && @pagy.count > 0
+            #{number_to_human(@pagy.count, units: :"taxa.number_#{@action}", delimiter: ",", precision: 0)}
+          - else
+            - if @action == "collected"
+              = I18n.t('taxa.none_collected', taxon: h(@taxon.family))
+            - else
+              = I18n.t('taxa.none_identified', taxon: h(@taxon.family))
 
-      = haml :'partials/taxa/search', layout: false
-
-    - if @taxon.has_image? && (@taxon.image.credit || @taxon.image.licenseURL)
-      %p{class:"small text-muted"}
-        - if @taxon.image.credit
-          #{@taxon.image.credit}
-        - if @taxon.image.licenseURL
-          %a{href: "#{@taxon.image.licenseURL}"}= @taxon.image.licenseURL
+    = haml :'partials/taxa/search', layout: false
 
 = haml :'partials/taxa/tabs', layout:false, locals: { active_tab: locals[:active_tab] }
 = haml :'partials/taxa/people_nav', layout: false, locals: { active_subtab: locals[:active_subtab] }
