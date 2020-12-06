@@ -130,7 +130,9 @@ CREATE TABLE `taxa` (
 CREATE TABLE `taxon_images` (
   `id` int NOT NULL,
   `family` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `file_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
+  `file_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `credit` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  `licenseURL` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `taxon_occurrences` (
