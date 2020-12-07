@@ -57,16 +57,17 @@ module Sinatra
             response = client.search index: Settings.elastic.user_index, body: body, scroll: '5m'
             scroll_id = response['_scroll_id']
             Enumerator.new do |y|
-              header = ["name", "identifier", "action", "date_born", "date_died"]
+              header = ["name", "URI", "bionomia_url", "action", "date_born", "date_died"]
               y << CSV::Row.new(header, header, true).to_s
               loop do
                 hits = response.deep_symbolize_keys.dig(:hits, :hits)
                 break if hits.empty?
 
                 hits.each do |o|
-                  identifier = o[:_source][:orcid] ?
-                                "https://orcid.org/#{o[:_source][:orcid]}" :
-                                "http://www.wikidata.org/entity/#{o[:_source][:wikidata]}"
+                  uri = o[:_source][:orcid] ?
+                          "https://orcid.org/#{o[:_source][:orcid]}" :
+                          "http://www.wikidata.org/entity/#{o[:_source][:wikidata]}"
+                  identifier = o[:_source][:orcid] || o[:_source][:wikidata]
                   identified = o[:_source][:identified].map{|f| f[:family]}
                                                        .uniq
                                                        .include?(@taxon.family)
@@ -77,7 +78,9 @@ module Sinatra
                   action << "identified" if identified
                   action << "recorded" if recorded
                   data = [ o[:_source][:fullname],
-                           identifier, action.join(","),
+                           uri,
+                           "#{Settings.base_url}/#{identifier}",
+                           action.join(","),
                            o[:_source][:date_born],
                            o[:_source][:date_died]
                          ]
