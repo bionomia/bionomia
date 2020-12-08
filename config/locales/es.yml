@@ -27,10 +27,10 @@ es:
     agent_lede: Una cadena sin procesar de los nombres de colectores e identificadores analizados en datos de datos de historia natural
     found_statement:
       unit:
-        one: "especimen encontrado. No se muestran todas las columnas."
+        one: "un especímen encontrado. No se muestran todas las columnas."
         other: "especímenes encontrados. No se muestran todas las columnas."
     search_html: "Búsqueda de %{agent_link} la persona y ayude a atribuir sus especímenes."
-    example_agents: Random Samples
+    example_agents: Muestras aleatorias
   article:
     article_title: Artículo
     articles_title: Artículos
@@ -41,9 +41,9 @@ es:
     no_claims_alert: Nadie ha reclamado o ha recibido atribuciones de especímenes representados en los datos descargados de GBIF en apoyo de este artículo
     claims_alert:
       unit:
-        one: "person collected or identified specimens included in data downloaded from GBIF in support of this article"
-        other: "palguien colectó o identificó especímenes incluidos en datos descargados de GBIF en soporte de este artículo"
-    placeholder: "Evolucion y sistemática de..."
+        one: "persona colectó o identificó especímenes incluidos en datos descargados de GBIF en soporte de este artículo"
+        other: "alguien colectó o identificó especímenes incluidos en datos descargados de GBIF en soporte de este artículo"
+    placeholder: "Evolución y sistemática de..."
     people: Personas
     agent_strings: Cadenas de agentes
     agent_title: Agentes de artículo
@@ -66,7 +66,7 @@ es:
     background_title: Antecedentes
     engaging_title: Involucrándose con su comunidad
     enhancements_title: Incorporando Mejoras
-    dq_title: Estimandola calidad de los datos
+    dq_title: Estimando la calidad de los datos
   country:
     country_title: Países
     lede: De países indicados en cuentas ORCID y entradas de Wikidata o registros de especímenes en GBIF
@@ -111,7 +111,7 @@ es:
     no_scribes_alert: Anotadores todavía no han atribuido especímenes a colectores o identificadores representados en este conjunto de datos
     scribes_alert:
       unit:
-        one: "anotador ha atribuido especímenes a colectores o identificadores representados en este conjunto de datos"
+        one: "un anotador ha atribuido especímenes a colectores o identificadores representados en este conjunto de datos"
         other: "anotadores han atribuido especímenes a colectores o identificadores representados en este conjunto de datos"
     people: Personas
     no_users_alert: Ninguna persona ha reclamado o se le han atribuido especímenes representados en este conjunto de datos
@@ -122,7 +122,7 @@ es:
   developer:
     search: Buscar
     autocomplete_widget: Herramienta para autocompletar
-    json_ld_search: JSON-LD Search
+    json_ld_search: Búsqueda JSON-LD
     structured_data: Datos Estructurados
     raw_data: Datos Sin Procesar
     code: Código
@@ -181,13 +181,13 @@ es:
   help:
     help_title: Ayude a atribuir especímenes
     country_title: Ayude a atribuir especímenes
-    latest_title: ültimos Receptores
+    latest_title: Últimos Receptores
     country_name_title: "Ayude a atribuir especímenes a personas de %{country}"
     country_no_one: "No se encontraron personas de"
     advanced_search_title: "Búsqueda Avanzada y Filtros"
     fix_title: Ayude a ajustar atribuciones
     upload_title: Envíe
-    basic_instructions_lede: Instricciones básicas para comenzar
+    basic_instructions_lede: Instrucciones básicas para comenzar
     add_someone_lede: "Añadir a alguien que aún no ha sido descubierto"
     country_name_lede: De países indicados en ORCID o Wikidata
     latest_lede: Únase al grupo de anotadores ayudando a atribuir especímenes
@@ -207,7 +207,7 @@ es:
     by_country: Por País
     not_ignored_alert: Los anotadores de Bionomía no han marcado especímenes para ser ignorados.
     agent_string: Cadena de Agente
-    taxon_string: Taxon Familia
+    taxon_string: Taxon familia
     dataset: Conjunto de Datos
     datasets: Conjuntos de Datos
     agents: Agentes
@@ -216,9 +216,9 @@ es:
     visualizations: Visualizaciones
     support: Con ayuda de
     specialties: Especialidades
-    public_profile: Perfil Público
-    make_public: Hacer Público
-    not_yet: Todavía No
+    public_profile: Perfil público
+    make_public: Hacer público
+    not_yet: Todavía no
     viz_none_alert: Los anotadores de Bionomía todavía no han ayudado a atribuir especímenes.
     viz_alert: Haga click en las regiones del mapa o en las barras de la gráfica para ejecutar un filtro.
     problems: Problemas Descubiertos
@@ -238,9 +238,9 @@ es:
         one: "El registro fue procesado. Se omitieron las adjudicaciones existentes, si están presentes en su carga."
         other: "Los registros fueron procesados. Se omitieron las adjudicaciones existentes, si están presentes en su carga."
     help_question: "¿Quiere ayudar a atribuirle especímenes a %{name}?"
-    try_again: Inente de nuevo.
+    try_again: Intente de nuevo.
     no_specialities_alert: Los anotadores de Bionomía todavía no han ayudado a atribuir especímenes.
-    specialties_alert: "Colectó o identificó especímenes en las siguientes Familias:"
+    specialties_alert: "Colectó o identificó especímenes en las siguientes familias:"
     co-collectors: Co-colectores
     no_co_collectors_alert: No se han registrado Co-colectores.
     co_collectors_alert: "Elija un co-colector para ajustar las atribuciones hechas para especímenes en común."
@@ -313,96 +313,96 @@ es:
   not_authorized:
     not_authorized: Sin autorización o la sesión ha terminado.
   occurrence:
-    occurrence_title: Specimen Record
-    lede: From partial data obtained from GBIF
-    record: Record
-    event: Event
-    identification: Identification
-    location: Location
-    has_image: Has Image
+    occurrence_title: Registro de especímen
+    lede: De datos parciales obtenidos de GBIF
+    record: Registro
+    event: Evento
+    identification: Identificación
+    location: Localidad
+    has_image: Tiene imagen
   offline:
-    message: Bionomia is currently offline, refreshing data from the Global Biodiversity Information Facility.
-    warning: "Bionomia will be offline %{datetime_off} for approximately %{duration} to refresh specimen data from the Global Biodiversity Information Facility."
+    message: Bionomia está actualmente fuera de línea, actualizando datos de la Global Biodiversity Information Facility.
+    warning: "Bionomia estará fuera de línea %{datetime_off} por aproximadamente %{duration} para actualizar datos de especímenes de la Global Biodiversity Information Facility."
   on_this_day:
-    global_title: On This Day
-    born_title: Collector Born On This Day
-    died_title: Collector Died On This Day
-    collected_title: Collected On This Day
-    collector_born: Collector Born
-    collector_died: Collector Died
-    type_collected: Type Specimens Collected
-    none_died_alert: "No one found who died on %{date}"
-    limit_alert: Results limited to 50 holotype or paratype specimen records
-    no_types_alert: "No type specimens found collected on %{date}"
+    global_title: En este día
+    born_title: Colector nació en este día
+    died_title: Colector murió en este día
+    collected_title: Colectado en este día
+    collector_born: Collector Nació
+    collector_died: Collector Murió
+    type_collected: Especímenes Tipo Colectados
+    none_died_alert: "No se encontró a nadie que haya muerto en %{date}"
+    limit_alert: Resultados limitados a 50 registros de especímenes holotipos o paratipos
+    no_types_alert: "No se encontraron especímenes tipo colectados en %{date}"
   oops:
-    not_found_title: Not found
-    not_found: We looked everywhere but could not find that page.
+    not_found_title: No encontrado
+    not_found: Buscamos en todas partes pero no pudimos encontrar esa página.
     error_title: Error
-    error: Sorry, we experienced an error.
+    error: Perdón, sufrimos un error.
   organization:
-    organization_title: Organizations
+    organization_title: Organizaciones
     lede:
      unit:
-       one: "organization from ORCID accounts and Wikidata entries"
-       other: "organizations from ORCID accounts and Wikidata entries"
-    placeholder: Canadian Museum of Nature
-    affiliation_none_alert: Publications based on specimens collected or identified by current and previous personnel have not yet been recorded by GBIF
-    affiliation_alert: "%{count} publications used specimen data downloaded from GBIF based on specimens collected or identified by current and previous personnel while affiliated with %{org_name}"
-    collected_by: "Specimens collected or identified by:"
-    science_enabled: Science Enabled Through Specimens Collected or Identified by Personnel
-    impact: Impact on Activities in Other Organizations
-    no_metric_alert: "Current and previous personnel have not yet claimed or have been attributed specimens now curated at other organizations while they were affiliated with %{org_name}."
-    metric_alert: "Current and previous personnel have claimed or were attributed specimens now curated at the following organizations while affiliated with %{org_name}."
-    none_collected_alert: "Specimens collected or identified in %{year} by personnel and curated elsewhere have not yet been claimed or attributed."
-    all_years: All Years
-    specimens: specimens
-    organizations: organizations
-    specimens_identified: Specimens Identified
-    specimens_collected: Specimens Collected
-    no_current_members_alert: "Current members of %{org_name} have not yet been recorded."
-    no_previous_members_alert: "Previous members of %{org_name} have not yet been recorded."
-    no_search_alert: "No organizations found for"
+       one: "organización de cuentas de ORCID y entradas de Wikidata"
+       other: "organizaciones de cuentas de ORCID y entradas de Wikidata"
+    placeholder: Museo Canadiense de la Naturaleza
+    affiliation_none_alert: Publicaciones basadas en especímenes colectados o identificados por personal actual y personal previo todavía no han sido registrados por GBIF
+    affiliation_alert: "%{count} publicaciones usaron datos de especímenes descargados de GBIF basados en especímenes colectados o identificados por personal actual y personal previo mientras afiliados a %{org_name}"
+    collected_by: "Epecímenes colectados o identificados por:"
+    science_enabled: Ciencia habilitada a través de especímenes colectados o identificados por personal
+    impact: Impacto sobre las actividades de otras Organizaciones
+    no_metric_alert: "personal actual y previo todavía no han reclamado o les han sido atribuidos especímenes ahora curados en otras organizaciones mientras estaban afiliados a %{org_name}."
+    metric_alert: "personal actual y previo han reclamado o les han sido atribuidos especímenes ahora curados en las siguientes organizaciones mientras estaban afiliados a %{org_name}."
+    none_collected_alert: "Especímenes colectados o identificados en %{year} por personal y curados en otras partes todavía no se han reclamado o atribuido."
+    all_years: Todos los años
+    specimens: especímenes
+    organizations: organizaciones
+    specimens_identified: Especímenes Identificados
+    specimens_collected: Especímenes Colectados
+    no_current_members_alert: "Miembros actuales de %{org_name} todavía no se han registrado."
+    no_previous_members_alert: "Miembros pasados de %{org_name} todavía no se han registrado."
+    no_search_alert: "No se encontraron organizaciones para"
     search_alert:
       unit:
-        one: "search result for"
-        other: "search results for"
-    current: Current
-    previous: Previous
-    metrics: Metrics
-    science_enabled: Science Enabled
+        one: "resultado de la búsqueda para"
+        other: "resultados de la búsqueda para"
+    current: Actual
+    previous: Previo
+    metrics: Métricas
+    science_enabled: Ciencia Habilitada
   privacy:
-    privacy_title: Privacy Policy
+    privacy_title: Política de Privacidad
   profile:
-    thanks_title: Thanks Received
-    candidates_title: Unclaimed Specimens
-    ignored_title: Ignored
-    specimens_title: Specimens
-    support_title: Help Received
-    upload_title: Upload
-    helped_title: People Helped
-    citation_title: Citation
-    citations_title: Citations
-    overview: Overview
-    specimens: Specimens
-    people_helped: People Helped
-    science_enabled: Science Enabled
-    claimed: Claimed
-    discovered: Discovered
-    upload: Upload
-    ignored: Ignored
-    help_received: Help Received
-    helped: Helped
-    helped_alert: You helped attribute specimens to the following people, with the most recent shown first.
-    not_helped_alert: You have not yet attributed specimens to anyone.
-    no_help_alert: Bionomia scribes have not yet helped you claim specimens.
-    thanks_alert: Bionomia scribes have helped you claim specimens. Send them your appreciation.
-    thanks_received: Thanks Received
-    thanks_received_alert: You have received thanks for attributing specimens.
-    no_thanks_received_alert: You have not yet received thanks for attributing specimen records to other collectors. Have you tried helping others?
-    change_photo: Change profile photo
-    remove: Remove
-    cancel: Cancel
-    settings: Settings & Integrations
+    thanks_title: Gracias recibidas
+    candidates_title: Especímenes sin reclamar
+    ignored_title: Ignorados
+    specimens_title: Especímenes
+    support_title: Ayuda Recibida
+    upload_title: Cargar
+    helped_title: Personas Ayudadas
+    citation_title: Citación
+    citations_title: Citaciones
+    overview: Visión de conjunto
+    specimens: Especímenes
+    people_helped: Personas Ayudadas
+    science_enabled: Ciencia Habilitada
+    claimed: Reclamados
+    discovered: Descubiertos
+    upload: Cargar
+    ignored: Ignorado
+    help_received: Ayuda Recibida
+    helped: Ayudado
+    helped_alert: Usted ayudó a atribuir especímenes a las siguientes personas, con las más recientes mostradas primero.
+    not_helped_alert: Usted todavía no ha atribuido especímenes a nadie.
+    no_help_alert: Los anotadores de Bionomia todavía no le han ayudado a reclamar especímenes.
+    thanks_alert: Los anotadores de Bionomia le han ayudado a reclamar especímenes. Envíeles su apreciación.
+    thanks_received: Gracias recibidas
+    thanks_received_alert: Usted ha recibido gracias por haber atribuido especímenes.
+    no_thanks_received_alert: Usted todavía no ha recibido gracias por haber atribuido registros de especímenes a otros colectores. ¿Ha tratado de ayudar a alguien?
+    change_photo: Cambiar foto de perfil
+    remove: Remover
+    cancel: Cancelar
+    settings: Configuración e integraciones
     no_science: Your specimen data have not yet been recorded in downloads from GBIF and used in new publications.
     no_citation_alert: Your specimens were not included in a download from GBIF in support of this study.
     has_science:
