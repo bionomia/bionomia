@@ -1,6 +1,7 @@
 -content_for :title, I18n.t('agent.agent_name_title', agent_name: "#{@agent.fullname}")
 
 -content_for :scripts do
+  %meta{name:"robots", content:"noindex,nofollow"}
   %script{src:"/js/application.js"}
   :javascript
     $(function() {
@@ -29,7 +30,7 @@
     %div{class: "col col-12 col-lg-10"}
       #{number_to_human(@pagy.count, units: :'agent.found_statement', delimiter: ",", precision: 0)}
       - if authorized?
-        = I18n.t('agent.search_html', agent_link: "<a href=\"/help-others?q=#{@agent.fullname}\"><i class=\"fas fa-hands-helping mr-1\"></i>#{@agent.fullname}</a>")
+        = I18n.t('agent.search_html', agent_link: "<a href=\"/help-others?q=#{URI.encode_www_form_component(@agent.fullname)}\"><i class=\"fas fa-hands-helping mr-1\"></i>#{@agent.fullname}</a>")
     %div{class: "col col-12 col-lg-2 text-lg-right pr-3"}
       - if authorized?
         %a{href: url("/agent/#{@agent.id}/specimens.csv")}

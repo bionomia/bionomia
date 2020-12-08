@@ -44,6 +44,7 @@
           %th{scope: "col"} Identified By
           %th{scope: "col"} Date Collected
           %th{scope: "col"} Date Identified
+          %th{scope: "col"} Family
           %th{scope: "col"} Institution
           %th{scope: "col"} Catalog Number
           %th{scope: "col"} Type Status
@@ -65,6 +66,7 @@
             %td #{h(o.identifiedBy)}
             %td #{h(o.eventDate || o.year)}
             %td #{h(o.dateIdentified)}
+            %td #{h(o.family)}
             %td #{h(o.institutionCode)}
             %td #{h(o.catalogNumber)}
             %td #{h(o.typeStatus)}
@@ -81,6 +83,7 @@
             %th{scope: "col"} Identified By
             %th{scope: "col"} Date Collected
             %th{scope: "col"} Date Identified
+            %th{scope: "col"} Family
             %th{scope: "col"} Institution
             %th{scope: "col"} Catalog Number
             %th{scope: "col"} Type Status
