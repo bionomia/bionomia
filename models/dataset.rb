@@ -162,6 +162,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def license_icon(form = "button")
+    return if license.nil?
     size = (form == "button") ? "88x31" : "80x15"
     if license.include?("/zero/")
       url = "https://i.creativecommons.org/p/zero/1.0/#{size}.png"

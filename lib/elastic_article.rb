@@ -33,7 +33,7 @@ module Bionomia
         mappings: {
           properties: {
             id: { type: 'text', index: false },
-            doi: { type: 'text', index: false },
+            doi: { type: 'keyword', index: false },
             citation: {
               type: 'text',
               search_analyzer: :standard,

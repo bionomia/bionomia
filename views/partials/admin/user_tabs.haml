@@ -1,19 +1,19 @@
 %ul{id: "admin-tabs", class: "nav nav-tabs pl-2"}
   %li{class: "nav-item"}
-    %a{class: "nav-link#{locals[:active_page] == "overview" ? " active" : nil}", href: "/admin/user/#{@admin_user.identifier}"}
+    %a{class: "nav-link#{locals[:active_page] == "overview" ? " active" : nil}", href: url("/admin/user/#{@admin_user.identifier}")}
       %i{class:"fas fa-user"}
       Overview
   %li{class: "nav-item badge-item"}
-    %a{class: "nav-link#{locals[:active_page] == "specimens" ? " active" : nil}", href: "/admin/user/#{@admin_user.identifier}/specimens"}
+    %a{class: "nav-link#{locals[:active_page] == "specimens" ? " active" : nil}", href: url("/admin/user/#{@admin_user.identifier}/specimens")}
       %i{class:"fas fa-th"}
       Specimens
     %span{id:"specimen-counter", class: "badge-notify badge badge-danger badge-pill"}
   %li{class: "nav-item badge-item"}
-    %a{class: "nav-link#{locals[:active_page] == "helped" ? " active" : nil}", href: "/admin/user/#{@admin_user.identifier}/helped"}
+    %a{class: "nav-link#{locals[:active_page] == "helped" ? " active" : nil}", href: url("/admin/user/#{@admin_user.identifier}/helped")}
       %i{class:"fas fa-hands-helping"}
       People Helped
     %span{id:"message-counter", class: "badge-notify badge badge-success badge-pill"}
   %li{class: "nav-item"}
-    %a{class: "nav-link#{locals[:active_page] == "citations" ? " active" : nil}", href: "/admin/user/#{@admin_user.identifier}/citations"}
+    %a{class: "nav-link#{locals[:active_page] == "citations" ? " active" : nil}", href: url("/admin/user/#{@admin_user.identifier}/citations")}
       %i{class:"fas fa-flask"}
       Science Enabled

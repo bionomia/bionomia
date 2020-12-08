@@ -73,9 +73,13 @@ val user_occurrences = spark.read.jdbc(url, "user_occurrences", prop)
 
 val missing = occurrences.
     join(user_occurrences, $"gbifID" === $"occurrence_id", "rightouter").
+    select($"occurrence_id").
     where("visible = true").
     where("gbifID IS NULL").
-    count
+    distinct
+
+//write to "missing" table then do additional querying there
+missing.write.mode("append").jdbc(url, "missing", prop)
 
 // Best to drop indices then recreate later
 // ALTER TABLE `occurrences` DROP KEY `typeStatus_idx`, DROP KEY `index_occurrences_on_datasetKey`;

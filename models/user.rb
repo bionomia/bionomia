@@ -25,8 +25,8 @@ class User < ActiveRecord::Base
 
     DestroyedUser.create(identifier: qid, redirect_to: dest_qid)
 
-    src = self.find_by_wikidata(qid)
-    dest = self.find_by_wikidata(dest_qid)
+    src = User.default_scoped.find_by_wikidata(qid)
+    dest = User.default_scoped.find_by_wikidata(dest_qid)
     if dest.nil?
       src.wikidata = dest_qid
       src.save

@@ -37,7 +37,7 @@ module Bionomia
         },
         mappings: {
           properties: {
-            id: { type: 'text', index: false },
+            id: { type: 'integer', index: false },
             name: {
               type: 'text',
               search_analyzer: :standard,
@@ -55,11 +55,11 @@ module Bionomia
               analyzer: :institution_codes,
               norms: false
             },
-            isni: { type: 'text', index: false },
-            ringgold: { type: 'text', index: false },
-            grid: { type: 'text', index: false },
-            wikidata: { type: 'text', index: false },
-            preferred: { type: 'text', index: false }
+            isni: { type: 'keyword', index: false },
+            ringgold: { type: 'keyword', index: false },
+            grid: { type: 'keyword', index: false },
+            wikidata: { type: 'keyword', index: false },
+            preferred: { type: 'keyword', index: false }
           }
         }
       }

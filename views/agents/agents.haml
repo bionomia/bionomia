@@ -1,5 +1,4 @@
--content_for :title do
-  = I18n.t('agent.agent_title')
+-content_for :title, I18n.t('agent.agent_title')
 
 -content_for :scripts do
   %script{src: "/js/application.js"}
@@ -42,3 +41,12 @@
   %div{class: "alert alert-warning tiny-margins mt-0", role: "alert"}
     %span{class:"font-weight-bold"}= I18n.t('agent.warning')
     = I18n.t('agent.warning_statement')
+
+  %h3= I18n.t('agent.example_agents')
+  %div{class: "row"}
+    - @results.in_groups_of(25, false).each do |group|
+      %div{class: "col-12 col-sm-3 mb-3"}
+        %ul{class: "list-unstyled m-2"}
+          - group.each do |a|
+            %li
+              %a{href: url("/agent/#{a.id}")} #{a.fullname_reverse}

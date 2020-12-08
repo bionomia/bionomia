@@ -1,0 +1,5 @@
+%ul{class: "nav nav-tabs"}
+  %li{class: "nav-item"}
+    %a{class: "nav-link#{locals[:active_tab] == "people" ? " active" : nil}", href: url("/taxon/#{@taxon.family}")}= I18n.t('taxa.people')
+  %li{class: "nav-item"}
+    %a{class: "nav-link#{locals[:active_tab] == "agents" ? " active" : nil}", href: url("/taxon/#{@taxon.family}/agents")}= I18n.t('taxa.agent_strings')

@@ -1,0 +1,23 @@
+-content_for :title do
+  = I18n.t('help.help_title')
+
+-content_for :scripts do
+  %script{src: "/js/application.js"}
+  %script{src:"/js/profile.js"}
+  :javascript
+    var Filters = { "datasetKey": "#{params[:datasetKey]}", "agent_id": "#{params[:agent_id]}", "taxon_id": "#{params[:taxon_id]}" };
+    $(function() {
+      Application.init(#{@admin_user.id}, "POST", "/admin", "#{@admin_user.identifier}");
+      Profile.init("/admin/user/#{@admin_user.identifier}");
+    });
+
+-content_for :jumbotron do
+  %div{class:"jumbotron jumbotron-fluid alert-warning"}
+    %div{class:"row"}
+      %div{class:"col-12 col-lg-4 alert-warning mb-2"}
+        %h1{class:"h3"}= @admin_user.fullname
+      %div{class:"col-12 col-lg-8 mt-2"}
+        = haml :'partials/admin/user_tabs', layout: false, locals: { active_page: "specimens" }
+        = haml :'partials/admin/subtabs_specimens', layout: false, locals: { active_tab: "candidates"}
+
+= haml :'partials/advanced_search', layout: false, locals: { url: "/admin/user/#{@admin_user.identifier}", dest: "/admin/user/#{@admin_user.identifier}/candidates"}

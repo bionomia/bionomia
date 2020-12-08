@@ -42,14 +42,16 @@ module Sinatra
           agents.concat search_agents(user.family.dup)
 
           initials = user.initials
-          initials.split(".").each_with_index do |element, index|
-            abbreviated_name = [initials[0..index*2+1], user.family].join(" ")
-            agents.concat search_agents(abbreviated_name)
-            full_names << abbreviated_name
-            given_names << initials[0..index*2+1].dup
+          if initials != user.given
+            initials.split(".").each_with_index do |element, index|
+              abbreviated_name = [initials[0..index*2+1], user.family].join(" ")
+              agents.concat search_agents(abbreviated_name)
+              full_names << abbreviated_name
+              given_names << initials[0..index*2+1].dup
+            end
           end
 
-          if !user.other_names.nil?
+          if !user.other_names.empty?
             user.other_names.split("|").first(10).each do |other_name|
               #Attempt to ignore botanist abbreviation or naked family name, often as "other" name in wikidata
               next if user.family.include?(other_name.gsub(".",""))
@@ -83,10 +85,10 @@ module Sinatra
             remove_agents = []
 
             agents.each do |a|
-              if full_names.include?(a[:fullname])
+              if full_names.map(&:downcase).include?(a[:fullname].downcase)
                 a[:score] += 40
               else
-                scores = given_names.map{ |g| DwcAgent.similarity_score(g, a[:given]) }
+                scores = given_names.map{ |g| DwcAgent.similarity_score(g.downcase, a[:given].downcase) }
                 remove_agents << a[:id] if scores.include?(0)
               end
             end
@@ -99,6 +101,10 @@ module Sinatra
                 .map{|b| [b, agents.map{|v| v[:score] if v[:id] == b }.compact.max]}
                 .sort_by{|k,v| -v}
                 .map{|a| { id: a[0], score: a[1] }}
+        end
+
+        def agent_examples
+          @results = Agent.limit(75).order(Arel.sql("RAND()"))
         end
 
       end

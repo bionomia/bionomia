@@ -1,5 +1,4 @@
--content_for :title do
-  = I18n.t('developer.code_title')
+-content_for :title, I18n.t('developer.code_title')
 
 -content_for :jumbotron do
   %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
@@ -14,7 +13,7 @@
   The MIT-licensed code is available on
   = succeed "." do
     %a{href: "https://github.com/bionomia/bionomia" } GitHub
-  Technologies at play include Apache Spark to group occurrence records by raw entries in recordedBy and identifiedBy and to import into MySQL, Neo4j to store the scores between similarly structured people names, Elasticsearch to aid in the searching of people names once parsed and cleaned, Redis to coordinate the processing queues, and Sinatra/ruby for the application layer.
+  Technologies at play include Apache Spark to group occurrence records by raw entries in recordedBy and identifiedBy and to import into MySQL, Elasticsearch to aid in the searching of people names once parsed and cleaned, Redis to coordinate the processing queues, and Sinatra/ruby for the application layer.
 
 %h3= I18n.t('developer.parser')
 

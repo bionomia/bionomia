@@ -10,17 +10,6 @@ task :environment do
   require_relative './application'
 end
 
-# Monkey patch Rails here because neo4j migration requires a Rails.root
-if defined?(Rails)
-  module Rails
-    class << self
-      def root
-        Pathname.new(File.dirname(__FILE__))
-      end
-    end
-  end
-end
-
 if !defined?(RSpec)
   puts "spec targets require RSpec"
 else

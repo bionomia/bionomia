@@ -35,7 +35,29 @@ module Sinatra
           page = (params[:page] || 1).to_i
 
           client = Elasticsearch::Client.new url: Settings.elastic.server
-          body = build_country_query(country_code, action, family)
+          body = build_user_country_query(country_code, action, family)
+
+          from = (page -1) * 30
+
+          response = client.search index: Settings.elastic.user_index, from: from, size: 30, body: body
+          results = response["hits"].deep_symbolize_keys
+
+          @pagy = Pagy.new(count: results[:total][:value], items: 30, page: page)
+          @results = results[:hits]
+        end
+
+        def search_user_taxa
+          @results = []
+          action = params[:action] && !params[:action].blank? ? params[:action] : nil
+          family = params[:taxon] && !params[:taxon].blank? ? params[:taxon] : nil
+
+          return if action && !["identified","collected"].include?(action)
+
+          action = "recorded" if action == "collected" || action.nil?
+          page = (params[:page] || 1).to_i
+
+          client = Elasticsearch::Client.new url: Settings.elastic.server
+          body = build_user_taxon_query(family, action)
 
           from = (page -1) * 30
 

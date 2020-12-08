@@ -74,12 +74,14 @@ var Application = (function($, window) {
       $(document).ajaxSend(register_xhr);
       $(document).ajaxComplete(unregister_xhr);
     },
+
     profile_cards: function() {
       $(".card-profile").on("click", function(e) {
         e.stopPropagation();
         window.location = $(this).find(".card-header a").attr("href");
       });
     },
+
     bloodhound: function() {
       this.data_sources.agent = this.create_bloodhound("agent");
       this.data_sources.agent.initialize();
@@ -92,6 +94,7 @@ var Application = (function($, window) {
       this.data_sources.taxon = this.create_bloodhound("taxon");
       this.data_sources.taxon.initialize();
     },
+
     create_bloodhound: function(type) {
       return new Bloodhound({
         datumTokenizer : Bloodhound.tokenizers.whitespace,
@@ -106,6 +109,7 @@ var Application = (function($, window) {
         }
       });
     },
+
     typeahead: function(){
       var self = this,
           user_template = (typeof Handlebars !== 'undefined' && $("#result-template").length > 0) ? Handlebars.compile($("#result-template").html()) : "",
@@ -122,17 +126,17 @@ var Application = (function($, window) {
           display : "fullname_reverse"
         }
         ).on("typeahead:select", function(obj, datum) {
+          var datasetKey = (typeof Filters !== "undefined") ? Filters.datasetKey : "";
+          var taxon_id = (typeof Filters !== "undefined") ? Filters.taxon_id : "";
+
           if (self.path === "/admin") {
-            var identifier = window.location.pathname.split("/")[3];
-            window.location.href = "/admin/user/" + identifier + "/candidates/agent/" + datum.id;
+            window.location.href = "/admin/user/" + self.identifier + "/advanced-search?agent_id=" + datum.id + "&datasetKey=" + datasetKey + "&taxon_id=" + taxon_id;
           } else if (self.path === "/agents") {
             window.location.href = "/agent/" + datum.id;
           } else if (self.path === "/help-others") {
-            var datasetKey = (typeof DataSet !== "undefined") ? DataSet.datasetKey : "";
-            var taxon_id = (typeof DataSet !== "undefined") ? DataSet.taxon_id : "";
             window.location.href = "/help-others/" + self.identifier + "/advanced-search?agent_id=" + datum.id + "&datasetKey=" + datasetKey + "&taxon_id=" + taxon_id;
           } else {
-            window.location.href = "/profile/candidates/agent/" + datum.id;
+            window.location.href = "/profile/advanced-search?agent_id=" + datum.id + "&datasetKey=" + datasetKey + "&taxon_id=" + taxon_id;
           }
         });
 
@@ -189,12 +193,16 @@ var Application = (function($, window) {
           display : "title"
         }
         ).on("typeahead:select", function(obj, datum) {
-          if (self.path === "/admin") {
+          var agent_id = (typeof Filters !== "undefined") ? Filters.agent_id : "";
+          var taxon_id = (typeof Filters !== "undefined") ? Filters.taxon_id : "";
+          if (self.path === "/admin" && !self.identifier) {
             window.location.href = "/admin/dataset/" + datum.datasetkey;
+          } else if (self.path === "/admin" && self.identifier) {
+            window.location.href = "/admin/user/" + self.identifier + "/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datum.datasetkey + "&taxon_id=" + taxon_id;
           } else if (self.path === "/help-others") {
-            var agent_id = (typeof DataSet !== "undefined") ? DataSet.agent_id : "";
-            var taxon_id = (typeof DataSet !== "undefined") ? DataSet.taxon_id : "";
             window.location.href = "/help-others/" + self.identifier + "/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datum.datasetkey + "&taxon_id=" + taxon_id;
+          } else if (self.path === "/profile") {
+            window.location.href = "/profile/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datum.datasetkey + "&taxon_id=" + taxon_id;
           } else {
             window.location.href = "/dataset/" + datum.datasetkey;
           }
@@ -211,16 +219,23 @@ var Application = (function($, window) {
             display : "name"
           }
           ).on("typeahead:select", function(obj, datum) {
+            var agent_id = (typeof Filters !== "undefined") ? Filters.agent_id : "";
+            var datasetKey = (typeof Filters !== "undefined") ? Filters.datasetKey : "";
             if (self.path === "/help-others") {
-              var agent_id = (typeof DataSet !== "undefined") ? DataSet.agent_id : "";
-              var datasetKey = (typeof DataSet !== "undefined") ? DataSet.datasetKey : "";
               window.location.href = "/help-others/" + self.identifier + "/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datasetKey + "&taxon_id=" + datum.id;
+            } else if (self.path === "/profile") {
+              window.location.href = "/profile/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datasetKey + "&taxon_id=" + datum.id;
+            } else if (self.path === "/admin") {
+              window.location.href = "/admin/user/"+self.identifier+"/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datasetKey + "&taxon_id=" + datum.id;
+            } else if (self.path === "/taxa") {
+              window.location.href = "/taxon/" + datum.name;
             } else {
               window.location.href = window.location.pathname + "?q=" + datum.name;
             }
           });
 
     },
+
     activate_switch: function() {
       $("#toggle-public").on("change", function() {
         $.ajax({
@@ -234,6 +249,7 @@ var Application = (function($, window) {
         return false;
       });
     },
+
     activate_radios: function(){
       var self = this, url = "", identifier = "";
 
@@ -333,6 +349,7 @@ var Application = (function($, window) {
           }
           return false;
       });
+
       $("button.remove").on("click", function() {
         var occurrence_id = $(this).attr("data-occurrence-id"),
             row = $(this).parents("tr");
@@ -354,6 +371,7 @@ var Application = (function($, window) {
         });
         return false;
       });
+
       $("button.remove-all").on("click", function() {
         var occurrence_ids = $.map($("[data-occurrence-id]"), function(e) {
               return $(e).attr("data-occurrence-id");
@@ -379,6 +397,7 @@ var Application = (function($, window) {
         });
         return false;
       });
+
       $("button.hide-all").on("click", function() {
         var occurrence_ids = $.map($("[data-occurrence-id]"), function(e) {
               return $(e).attr("data-occurrence-id");
@@ -405,6 +424,7 @@ var Application = (function($, window) {
         });
         return false;
       });
+
       $("button.hide").on("click", function() {
         var occurrence_id = $(this).attr("data-occurrence-id"),
             row = $(this).parents("tr");
@@ -427,6 +447,7 @@ var Application = (function($, window) {
         });
         return false;
       });
+
       $("button.thanks").on("click", function(e) {
         e.stopPropagation();
 
@@ -448,8 +469,10 @@ var Application = (function($, window) {
         });
       });
     },
+
     activate_refresh: function(){
       var self = this;
+
       $("a.profile-refresh").on("click", function(e) {
         var link = $(this);
 
@@ -470,6 +493,7 @@ var Application = (function($, window) {
         });
         return false;
       });
+
       $("a.profile-flush").on("click", function(e) {
         var link = $(this);
 
@@ -490,6 +514,7 @@ var Application = (function($, window) {
         });
         return false;
       });
+
       $("a.organization-refresh").on("click", function(e) {
         var button = $(this);
 
@@ -510,6 +535,7 @@ var Application = (function($, window) {
         });
         return false;
       });
+
       $("a.dataset-refresh").on("click", function(e) {
         var button = $(this);
 
@@ -530,6 +556,7 @@ var Application = (function($, window) {
         });
         return false;
       });
+
       $("a.dataset-frictionless").on("click", function(e) {
         var button = $(this);
 
@@ -550,6 +577,7 @@ var Application = (function($, window) {
         });
         return false;
       });
+
       $("#articles-check").on("click", function(e) {
         var button = $(this);
 
@@ -566,6 +594,7 @@ var Application = (function($, window) {
         });
         return false;
       });
+
       $("a.article-process").on("click", function(e) {
         var button = $(this);
 
@@ -587,6 +616,7 @@ var Application = (function($, window) {
         return false;
       });
     },
+
     activate_popovers: function() {
       var self = this;
       $.each($('[data-toggle="popover"]'), function(index, value) {
@@ -603,6 +633,7 @@ var Application = (function($, window) {
         });
       });
     },
+
     gbif_images: function(obj) {
       var self = this;
       $.ajax({
@@ -629,9 +660,11 @@ var Application = (function($, window) {
       });
       return self.spinner;
     },
+
     wait_loader: function(img) {
       return new Promise(resolve=>{img.onload = resolve});
     },
+
     carousel_template: function(data, id) {
       var html  = "";
       html += '<div id="carousel-indicators-'+id+'" class="carousel slide" data-ride="carousel" style="min-width:250px;min-height:100px;">';
@@ -664,6 +697,7 @@ var Application = (function($, window) {
       html += '</div>';
       return html;
     },
+
     candidate_counter: function() {
       var self = this, slug = "";
       if (self.path === "/profile") {
@@ -686,6 +720,7 @@ var Application = (function($, window) {
         });
       }
     },
+
     helper_navbar: function() {
       var self = this;
       if ($('#helper-info').length && $('#helper-navbar').length) {
@@ -701,6 +736,7 @@ var Application = (function($, window) {
         }
       }
     },
+
     helper_modal: function() {
       var self = this, helper_list = "";
       $('#helperPublicModal').on('show.bs.modal', function (event) {

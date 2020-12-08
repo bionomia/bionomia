@@ -41,8 +41,10 @@ end.parse!
 if options[:file]
   mime_type = `file --mime -b "#{options[:file]}"`.chomp
   raise RuntimeError, 'File must be a csv' if !mime_type.include?("text/plain")
+  identifiers = []
   CSV.foreach(options[:file], headers: true) do |row|
     next if !row["identifier"].is_orcid? && !row["identifier"].is_wiki_id?
+    identifiers << row["identifier"]
     if row["identifier"].is_wiki_id?
       d = DestroyedUser.find_by_identifier(row["identifier"])
       if d.nil?
@@ -68,6 +70,9 @@ if options[:file]
     rescue ActiveRecord::RecordNotUnique => e
     end
   end
+  identifiers.uniq.each do |id|
+    User.find_by_identifier(id).flush_caches rescue nil
+  end
 elsif options[:agent_id] && ![options[:orcid], options[:wikidata]].compact.empty?
   agent = Agent.find(options[:agent_id])
 
@@ -82,6 +87,7 @@ elsif options[:agent_id] && ![options[:orcid], options[:wikidata]].compact.empty
     exit
   else
     result = user.bulk_claim(agent: agent, conditions: options[:conditions], ignore: options[:ignore])
+    user.flush_caches
     puts result.green
   end
 else

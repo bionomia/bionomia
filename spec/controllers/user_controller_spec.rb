@@ -16,4 +16,14 @@ describe "Bionomia User Controller" do
     expect(last_request.env['rack.session']['csrf']).to eq('token')
   end
 
+  it "should allow accessing the about user rss feed" do
+    get '/user.rss'
+    expect(last_response).to be_ok
+  end
+
+  it "should allow accessing the user json search" do
+    get '/user.json'
+    expect(last_response).to be_ok
+  end
+
 end

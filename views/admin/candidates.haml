@@ -23,18 +23,14 @@
         = haml :'partials/admin/user_tabs', layout: false, locals: { active_page: "specimens" }
         = haml :'partials/admin/subtabs_specimens', layout: false, locals: { active_tab: "candidates"}
 
-- alert_class = "info"
-- placeholder = @admin_user.fullname
-- if !@searched_user.nil?
-  - alert_class = "warning"
-  - placeholder = @searched_user.fullname
+  - if @agent
+    = haml :'partials/admin/bot_claim_modal', layout: false, locals: { user: @admin_user, agent: @agent, bulk_error: "#{locals[:bulk_error]}" }
 
-- if !@searched_user.nil?
-  = haml :'partials/admin/bot_claim_modal', layout: false, locals: { user: @admin_user, agent: @searched_user, bulk_error: "#{locals[:bulk_error]}" }
+= haml :'partials/advanced_search_filter', layout: false, locals: { url: "/admin/user/#{@admin_user.identifier}/candidates" }
 
 - if @results.size == 0
   %div{class: "alert alert-info row tiny-margins", role:"alert"}
-    %div{class: "col col-12 col-sm-12 col-md-8 col-lg-8 pl-0"}
+    %div{class: "col col-12 col-md-8"}
       Bionomia did not find any specimens indexed by
       %a{href:"https://gbif.org"} GBIF
       that were collected or identified
@@ -43,39 +39,33 @@
         - checked = params[:relaxed] == "1" ? "checked" : nil
         %input{type:"checkbox", class:"form-check-input", id:"relaxed", checked: checked }
         %label{for:"relaxed", class:"relaxed"} Make less exact
-    %div{class:"col col-12 col-sm-8 col-md-6 col-lg-4"}
-      %form{id:"#form-wrapper", method: "get", action: "/", "accept-charset" => "UTF-8", class: "form-inline"}
-        %div{class: "inputs search-agent form-group"}
-          %label{for: "typeahead"}= "Search"
-          %input{id: "typeahead-agent", type: :text, name: "q", placeholder: "#{placeholder}", value: "#{params[:q]}", class:"typeahead"}
+    %div{class:"col col-12 col-md-4 text-md-right"}
+      %a{href: url("/admin/user/#{@admin_user.identifier}/advanced-search")}
+        %i{class:"fas fa-search-plus"}
+        Advanced Search & Filter
 - else
   = haml :'partials/admin/fixed_navbar', layout: false
-  %div{id: "helper-info", class: "alert alert-#{alert_class} row candidates-alert tiny-margins", role: "alert"}
-    %div{class: "col col-12 col-sm-12 col-md-8 col-lg-8 pl-0"}
-      = succeed "." do
-        Bionomia found #{number_with_delimiter(@total, delimeter: ",")} specimens for
-        %span{class:"font-weight-bold"} #{placeholder}
-      - if !@searched_user.nil?
+  %div{id: "helper-info", class: "alert alert-info row candidates-alert tiny-margins", role: "alert"}
+    %div{class: "col col-12 col-md-8"}
+      Bionomia found #{number_with_delimiter(@total, delimeter: ",")} specimens.
+      - if @agent
+        Attribute with the
         = succeed "." do
-          Attribute with
           %a{href: "#", "data-toggle":"modal", "data-target":"#bot_claims"} Bionomia Bot
-
-      %br
       Choose
       %img{src:"/images/net-unselected.png", alt:"Collected", title:"Collected", width:18}
       collected,
       %img{src:"/images/microscope-unselected.png", alt:"Collected", title:"Collected", width:18}
       identified, or Both.
-      - if @searched_user.nil?
+      - if !@dataset && !@agent && !@taxon
         %div{class:"form-check d-inline-flex"}
           - checked = params[:relaxed] == "1" ? "checked" : nil
           %input{type:"checkbox", class:"form-check-input", id:"relaxed", checked: checked }
           %label{for:"relaxed", class:"relaxed"} Make less exact
 
-    %div{class:"col col-12 col-sm-8 col-md-6 col-lg-4"}
-      %form{id:"#form-wrapper", method: "get", action: "/", "accept-charset" => "UTF-8", class: "form-inline"}
-        %div{class: "inputs search-agent form-group"}
-          %label{for: "typeahead", class:"font-weight-bold col-form-label mr-2"}= "Search"
-          %input{id: "typeahead-agent", type: :text, name: "q", placeholder: "#{placeholder}", value: "#{params[:q]}", class:"typeahead"}
+    %div{class:"col col-12 col-md-4 text-md-right"}
+      %a{href: url("/admin/user/#{@admin_user.identifier}/advanced-search")}
+        %i{class:"fas fa-search-plus"}
+        Advanced Search & Filter
 
   = haml :'partials/tables/candidates', layout: false, locals: { user_scope: "other" }

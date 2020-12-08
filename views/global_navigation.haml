@@ -8,45 +8,61 @@
       %li{class: "nav-item mr-2"}
         %a{href: url("/roster"), class:"nav-link#{locals[:active_page] == "roster" ? " active" : nil}" }
           %i{class:"fas fa-users"}
-          %span{class:"d-inline-block d-sm-none d-xl-inline-block"}
+          %span{class:"d-inline-block d-sm-none d-xxl-inline-block"}
             = I18n.t('layout.profiles')
       %li{class: "nav-item mr-2"}
         %a{href: url("/scribes"), class: "nav-link#{locals[:active_page] == "scribes" ? " active" : nil}"}
           %i{class:"fas fa-feather-alt"}
-          %span{class:"d-inline-block d-sm-none d-xl-inline-block"}
+          %span{class:"d-inline-block d-sm-none d-xxl-inline-block"}
             = I18n.t('layout.scribes')
       %li{class: "nav-item mr-2"}
         %a{href: url("/organizations"), class:"nav-link#{locals[:active_page] == "organizations" ? " active" : nil}" }
           %i{class:"fas fa-building"}
-          %span{class:"d-inline-block d-sm-none d-xl-inline-block"}
+          %span{class:"d-inline-block d-sm-none d-xxl-inline-block"}
             = I18n.t('layout.organizations')
       %li{class: "nav-item mr-2"}
         %a{href: url("/datasets"), class:"nav-link#{locals[:active_page] == "datasets" ? " active" : nil}" }
           %i{class:"fas fa-database"}
-          %span{class:"d-inline-block d-sm-none d-xl-inline-block"}
+          %span{class:"d-inline-block d-sm-none d-xxl-inline-block"}
             = I18n.t('layout.datasets')
       %li{class: "nav-item mr-2"}
         %a{href: url("/articles"), class:"nav-link#{locals[:active_page] == "articles" ? " active" : nil}" }
           %i{class:"fas fa-file-alt"}
-          %span{class:"d-inline-block d-sm-none d-xl-inline-block"}
+          %span{class:"d-inline-block d-sm-none d-xxl-inline-block"}
             = I18n.t('layout.articles')
       %li{class: "nav-item mr-2"}
         %a{href: url("/countries"), class:"nav-link#{locals[:active_page] == "countries" ? " active" : nil}" }
           %i{class:"fas fa-globe"}
-          %span{class:"d-inline-block d-sm-none d-xl-inline-block"}
+          %span{class:"d-inline-block d-sm-none d-xxl-inline-block"}
             = I18n.t('layout.countries')
+      %li{class: "nav-item mr-2"}
+        %a{href: url("/taxa"), class: "nav-link#{locals[:active_page] == "taxa" ? " active" : nil}" }
+          %i{class:"fab fa-pagelines"}
+          %span{class:"d-inline-block d-sm-none d-xxl-inline-block"}
+            = I18n.t('layout.taxa')
       %li{class: "nav-item mr-2"}
         %a{href: url("/agents"), class: "nav-link#{locals[:active_page] == "agents" ? " active" : nil}" }
           %i{class:"fas fa-signature"}
-          %span{class:"d-inline-block d-sm-none d-xl-inline-block"}
+          %span{class:"d-inline-block d-sm-none d-xxl-inline-block"}
             = I18n.t('layout.agent_strings')
     %ul{class: "navbar-nav mr-2"}
       - if authorized?
         %li{class: "nav-item"}
           %a{href: url("/help-others"), class: "nav-link#{locals[:active_page] == "help" ? " active" : nil}"}
             %i{class:"fas fa-hands-helping"}
-            %span{class:"d-inline-block d-sm-none d-xl-inline-block"}
+            %span{class:"d-inline-block d-sm-none d-md-inline-block"}
               = I18n.t('layout.help_others')
+
+      -# %li{class: "nav-item mr-2"}
+        %div{class:"btn-group"}
+          %button{class:"btn dropdown-toggle text-white", type:"button", "data-toggle": "dropdown", "aria-haspopup": "true", "aria-expanded": "false"}
+            %i{class:"fas fa-language"}
+            %span{class:"sr-only"}= I18n.t('layout.toggle_dropdown')
+          %div{class:"dropdown-menu dropdown-menu-right"}
+            %a{href: "#{Settings.base_url}#{request.fullpath}", class:"dropdown-item"} English
+            %a{href: "#{Settings.base_url.sub("://", "://es.")}#{request.fullpath}", class:"dropdown-item"} Español
+            %a{href: "#{Settings.base_url.sub("://", "://fr.")}#{request.fullpath}", class:"dropdown-item"} Français
+
       - if authorized?
         %li{class: "nav-item"}
           %div{class:"btn-group"}

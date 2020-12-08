@@ -36,28 +36,27 @@
       - else
         %link{href: "#{request.base_url.sub("://" + I18n.locale.to_s + ".", "://" + lang + ".")}#{request.fullpath}", rel:"alternate", hreflang: "#{lang}"}
 
-
     %link{href: "/favicon.ico", rel:"shortcut icon", type:"image/x-icon"}
     %link{href: "/favicon.ico", rel:"icon", type:"image/x-icon"}
     %link{href: "/favicon-32x32.png", rel:"icon", sizes:"32x32"}
     %link{href: "/favicon-16x16.png", rel:"icon", sizes:"16x16"}
     %link{href: "/apple-touch-icon.png", rel:"apple-touch-icon", sizes:"180x180"}
     %link{href: "/site.webmanifest", rel:"manifest"}
-    %link{href: "/css/bootstrap.min.css", rel: "stylesheet", type: "text/css", crossorigin: "anonymous"}
+    %link{href: "/css/bootstrap.min.css", rel: "stylesheet", type: "text/css"}
     %link{href: "/css/application.css", rel: "stylesheet", type: "text/css"}
     %link{href: "/css/bootstrap-toggle.min.css", rel: "stylesheet", type: "text/css"}
     %link{href: "/css/typeahead.css", rel: "stylesheet", type: "text/css"}
     = yield_content :stylesheets
 
     %script{src: "//kit.fontawesome.com/c0c5b90533.js", crossorigin: "anonymous"}
-    %script{src: "/js/jquery-3.5.1.min.js", crossorigin: "anonymous"}
-    %script{src: "/js/popper.min.js", crossorigin: "anonymous"}
-    %script{src: "/js/bootstrap.min.js", crossorigin: "anonymous"}
-    %script{src: "/js/bootstrap-toggle.min.js", crossorigin: "anonymous"}
-    %script{src: "/js/handlebars.min.js", crossorigin: "anonymous"}
-    %script{src: "/js/typeahead.bundle.min.js", crossorigin: "anonymous"}
-    %script{src: "/js/js.cookie.min.js", crossorigin: "anonymous"}
-    %script{src: "/js/jquery.mlens-1.7.min.js", crossorigin: "anonymous"}
+    %script{src: "/js/jquery-3.5.1.min.js"}
+    %script{src: "/js/popper.min.js"}
+    %script{src: "/js/bootstrap.min.js"}
+    %script{src: "/js/bootstrap-toggle.min.js"}
+    %script{src: "/js/handlebars.min.js"}
+    %script{src: "/js/typeahead.bundle.min.js"}
+    %script{src: "/js/js.cookie.min.js"}
+    %script{src: "/js/jquery.mlens-1.7.min.js"}
     = yield_content :scripts
 
   %body{class:"d-flex flex-column"}

@@ -5,6 +5,7 @@
         %img{src:"#{profile_image(locals[:user], 'medium')}", alt:"#{locals[:user].fullname}", class:"card-img-profile mr-2"}
       %div{class:"flex-grow-1"}
         %h5
+          // Do not use url method here becase caching breaks language-based subdomains
           %a{href: "#{locals[:path]}/#{locals[:user].identifier}"} #{locals[:user].fullname_reverse}
         - if locals[:user].wikidata
           %p{class:"small text-muted mt-0 mb-0"}= format_lifespan(locals[:user])
@@ -13,6 +14,7 @@
   - else
     %div{class: "card-header"}
       %h5
+        // Do not use url method here becase caching breaks language-based subdomains
         %a{href: "#{locals[:path]}/#{locals[:user].identifier}"} #{locals[:user].fullname_reverse}
       - if locals[:user].wikidata
         %p{class:"small text-muted mt-0 mb-0"}= format_lifespan(locals[:user])

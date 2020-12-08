@@ -481,24 +481,87 @@ module Sinatra
               @results = []
               @total = nil
             else
-              id_scores = candidate_agents(@admin_user)
-                            .map{|a| { id: a[:id], score: a[:score] } }
-                            .compact
-              if !id_scores.empty?
-                ids = id_scores.map{|a| a[:id]}
-                nodes = AgentNode.where(agent_id: ids)
-                if !nodes.empty?
-                  (nodes.map(&:agent_id) - ids).each do |id|
-                    id_scores << { id: id, score: 1 }
-                  end
-                end
+              @dataset, @agent, @taxon = nil
+              if params[:datasetKey]
+                @dataset = Dataset.find_by_datasetKey(params[:datasetKey]) rescue nil
+              end
+              if params[:agent_id]
+                @agent = Agent.find(params[:agent_id]) rescue nil
+              end
+              if params[:taxon_id]
+                @taxon = Taxon.find(params[:taxon_id]) rescue nil
+              end
+
+              if @agent
+                id_scores = [{ id: @agent.id, score: 3 }]
+                occurrence_ids = occurrences_by_score(id_scores, @admin_user)
+              else
+                id_scores = candidate_agents(@admin_user)
                 occurrence_ids = occurrences_by_score(id_scores, @admin_user)
               end
 
               specimen_pager(occurrence_ids.uniq)
             end
 
-            haml :'admin/candidates', locals: { active_page: "administration" }
+            bulk_error_message = flash.now[:error] ? flash.now[:error] : ""
+            locals = {
+              active_page: "administration",
+              bulk_error: bulk_error_message
+            }
+            haml :'admin/candidates', locals: locals
+          end
+
+          app.post '/admin/user/:id/advanced-search' do
+            admin_protected!
+
+            @admin_user = find_user(params[:id])
+
+            @agent_results = []
+            @dataset_results = []
+            @taxon_results = []
+            @agent = nil
+            @dataset = nil
+            @taxon = nil
+
+            if params[:datasetKey]
+              @dataset = Dataset.find_by_datasetKey(params[:datasetKey]).title rescue nil
+            elsif params[:dataset]
+              search_dataset
+              @dataset_results = format_datasets
+            end
+
+            if params[:agent_id]
+              @agent = Agent.find(params[:agent_id]).fullname_reverse rescue nil
+            elsif params[:agent]
+              search_agent({ item_size: 75 })
+              @agent_results = format_agents
+            end
+
+            if params[:taxon_id]
+              @taxon = Taxon.find(params[:taxon_id]).family rescue nil
+            elsif params[:taxon]
+              search_taxon
+              @taxon_results = format_taxon
+            end
+
+            haml :'admin/advanced_search', locals: { active_page: "administration" }
+          end
+
+          app.get '/admin/user/:id/advanced-search' do
+            admin_protected!
+
+            @admin_user = find_user(params[:id])
+
+            if params[:datasetKey]
+              @dataset = Dataset.find_by_datasetKey(params[:datasetKey]).title rescue nil
+            end
+            if params[:agent_id]
+              @agent = Agent.find(params[:agent_id]).fullname_reverse rescue nil
+            end
+            if params[:taxon_id]
+              @taxon = Taxon.find(params[:taxon_id]).family rescue nil
+            end
+            haml :'admin/advanced_search', locals: { active_page: "administration" }
           end
 
           app.get '/admin/user/:id/candidate-count.json' do
@@ -516,33 +579,6 @@ module Sinatra
             { count: count }.to_json
           end
 
-          app.get '/admin/user/:id/candidates/agent/:agent_id' do
-            admin_protected!
-            check_redirect
-            @admin_user = find_user(params[:id])
-
-            occurrence_ids = []
-            @page = (params[:page] || 1).to_i
-
-            @searched_user = Agent.find(params[:agent_id])
-            id_scores = [{ id: @searched_user.id, score: 3 }]
-
-            node = AgentNode.find_by(agent_id: @searched_user.id)
-            if !node.nil?
-              id_scores.concat(node.agent_nodes_weights.map{|a| { id: a[0], score: a[1] }})
-            end
-
-            occurrence_ids = occurrences_by_score(id_scores, @admin_user)
-            specimen_pager(occurrence_ids.uniq)
-
-            bulk_error_message = flash.now[:error] ? flash.now[:error] : ""
-            locals = {
-              active_page: "administration",
-              bulk_error: bulk_error_message
-            }
-            haml :'admin/candidates', locals: locals
-          end
-
           app.post '/admin/user/:id/candidates/agent/:agent_id/bulk-claim' do
             admin_protected!
             check_redirect
@@ -553,7 +589,7 @@ module Sinatra
             rescue ArgumentError => e
               flash.next[:error] = "#{e.message}"
             end
-            redirect "/admin/user/#{params[:id]}/candidates/agent/#{params[:agent_id]}"
+            redirect "/admin/user/#{params[:id]}/candidates?agent_id=#{params[:agent_id]}"
           end
 
           app.get '/admin/user/:id/ignored' do

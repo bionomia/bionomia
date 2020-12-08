@@ -30,6 +30,7 @@ fr:
         one: "spécimen trouvé. Toutes les colonnes ne sont pas affichées."
         other: "spécimens trouvés. Toutes les colonnes ne sont pas affichées."
     search_html: "Recherchez %{agent_link} la personne et aidez à attribuer ces spécimens."
+    example_agents: Exemples aléatoires
   article:
     article_title: Article
     articles_title: Articles
@@ -85,7 +86,7 @@ fr:
         one: "jeu de données de GBIF"
         other: "jeux de données de GBIF"
     placeholder: papillons du Brésil
-    people: Gens
+    people: Personnes
     scribes: Scribes
     agents: Agents
     agent_strings: Chaînes d'Agent
@@ -121,6 +122,7 @@ fr:
   developer:
     search: Rechercher
     autocomplete_widget: Autocomplete Widget
+    json_ld_search: Researcher JSON-LD
     structured_data: Données Structurées
     raw_data: Données Brutes
     code: Code Informatique
@@ -268,6 +270,7 @@ fr:
     wikidata_title: Intégration avec Wikidata
     orcid_title: Intégration avec ORCID
     zenodo_title: Intégration avec Zenodo
+    acknowledgments_title: Remerciements
   layout:
     profiles: Profils
     scribes: Scribes
@@ -275,10 +278,11 @@ fr:
     datasets: Jeux de Données
     articles: Articles
     countries: Pays
+    taxa: Familles
     agent_strings: Chaînes d'Agents
     help_others: Aider les autres
     help_received: Aide reçue
-    people_helped: Gens aidés
+    people_helped: Personnes aidées
     toggle_dropdown: Menu déroulant
     overview: Résumé
     specimens: Spécimens
@@ -380,7 +384,7 @@ fr:
     citations_title: Citations
     overview: Aperçu
     specimens: Spécimens
-    people_helped: Gens Aidés
+    people_helped: Personnes Aidées
     science_enabled: Science Activée
     claimed: Réclamations
     discovered: Découverts
@@ -440,6 +444,7 @@ fr:
     scribe_not_helped: Cette scribe Bionomia ne vous a pas encore aidé à récupérer des spécimens.
     upload_error: Veuillez télécharger une image d'une taille inférieure à 5 Mo.
     bulk_claim: En masse
+    advanced_search: Advanced Search & Filter
   roster:
     roster_title: Profils publics
     lede:
@@ -472,6 +477,46 @@ fr:
       unit:
         one: "personne qui a attribué des spécimens d'histoire naturelle à leurs pairs, mentors et modèles"
         other: "personnes qui ont attribué des spécimens d'histoire naturelle à leurs pairs, mentors et modèles"
+  taxa:
+    lede:
+      unit:
+        one: "Famille taxonomique à partir de données dans GBIF"
+        other: "Familles taxonomiques à partir de données dans GBIF"
+    search_title: Familles taxonomiques
+    none_found: "Aucune Famille taxonomique trouvée pour %{searched}"
+    search_found:
+      unit:
+        one: "résultat de la recherche pour"
+        other: "résultats de la recherche pour"
+    people: Personnes
+    agent_strings: Chaînes d'agent
+    collected: Collectés
+    identified: Identifiés
+    number_collected:
+      unit:
+        one: "personne a collecté des spécimens à partir de GBIF"
+        other: "personnes ont collectés des specimens à partir de GBIF"
+    number_identified:
+      unit:
+        one: "personne a identifié des spécimens à partir de GBIF"
+        other: "personnes ont identifiés des spécimens à partir de GBIF"
+    number_agents:
+      unit:
+        one: "chaîne d'agent à partir de données dans GBIF"
+        other: "chaînes d'agents à partir de données dans GBIF"
+    number_agents_unclaimed:
+      unit:
+        one: "chaîne d'agent a des spécimens non-attribués à partir de données dans GBIF"
+        other: "chaînes d'agents a des spécimens non-attribués à partir de données dans GBIF"
+    no_agents_unclaimed: Aucun chaîne d'agent a des spécimens non-attribués
+    alphabetical: Alphabétique
+    counts: Compte
+    unclaimed: Non Attribuées
+    example_families: Exemples aléatoires
+    none_collected_identified: "Personne a collecté ou identifié %{taxon}"
+    none_collected: "Personne a collecté %{taxon}"
+    none_identified: "Personne a identifié %{taxon}"
+    no_agents: "Acun chaîne d'agent a collecté ou identifié %{taxon}"
   terms:
     terms_title: Conditions d'utilisation
   user:

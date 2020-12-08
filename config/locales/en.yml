@@ -30,6 +30,7 @@ en:
         one: "specimen found. Not all columns are shown."
         other: "specimens found. Not all columns are shown."
     search_html: "Search for %{agent_link} the person and help attribute their specimens."
+    example_agents: Random Samples
   article:
     article_title: Article
     articles_title: Articles
@@ -121,6 +122,7 @@ en:
   developer:
     search: Search
     autocomplete_widget: Autocomplete Widget
+    json_ld_search: JSON-LD Search
     structured_data: Structured Data
     raw_data: Raw Data
     code: Code
@@ -244,7 +246,7 @@ en:
     co_collectors_alert: "Choose a co-collector to adjust attributions made for specimens in common."
     co_collector_name: "Specimens co-collected with %{name}."
     switch: Switch
-    not_co_collector_name: "Specimens have not beed co-collected with %{name}."
+    not_co_collector_name: "Specimens have not been co-collected with %{name}."
     bulk_attribution: Bulk Attributions
     reclaim_ignored: Reclaim Ignored
     fix_claims: Fix Attributions
@@ -268,6 +270,7 @@ en:
     wikidata_title: Integration with Wikidata
     orcid_title: Integration with ORCID
     zenodo_title: Integration with Zenodo
+    acknowledgments_title: Acknowledgments
   layout:
     profiles: Profiles
     scribes: Scribes
@@ -275,6 +278,7 @@ en:
     datasets: Datasets
     articles: Articles
     countries: Countries
+    taxa: Families
     agent_strings: Agent Strings
     help_others: Help Others
     help_received: Help Received
@@ -440,6 +444,7 @@ en:
     scribe_not_helped: This Bionomia scribe has not yet helped you claim specimens.
     upload_error: Please upload an image less than 5MB in size.
     bulk_claim: Bulk Claim
+    advanced_search: Advanced Search & Filter
   roster:
     roster_title: Public Profiles
     lede:
@@ -472,6 +477,46 @@ en:
       unit:
         one: "person who has attributed natural history specimens to their peers, mentors, and role models"
         other: "people who have attributed natural history specimens to their peers, mentors, and role models"
+  taxa:
+    lede:
+      unit:
+        one: "taxonomic Family from specimen data in GBIF"
+        other: "taxonomic Families from specimen data in GBIF"
+    search_title: Taxonomic Families
+    none_found: "No taxonomic Family found for %{searched}"
+    search_found:
+      unit:
+        one: "search result for"
+        other: "search results for"
+    people: People
+    agent_strings: Agent Strings
+    collected: Collected
+    identified: Identified
+    number_collected:
+      unit:
+        one: "person collected specimens from data in GBIF"
+        other: "people collected specimens from data in GBIF"
+    number_identified:
+      unit:
+        one: "person identified specimens from data in GBIF"
+        other: "people identified specimens from data in GBIF"
+    number_agents:
+      unit:
+        one: "agent string from specimen data in GBIF"
+        other: "agent strings from specimen data in GBIF"
+    number_agents_unclaimed:
+      unit:
+        one: "agent string has unclaimed specimen records from data in GBIF"
+        other: "agent strings have unclaimed specimen records from data in GBIF"
+    no_agents_unclaimed: No specimen records are unclaimed or unattributed
+    alphabetical: Alphabetical
+    counts: Counts
+    unclaimed: Unclaimed
+    example_families: Random Samples
+    none_collected_identified: "No one has collected or identified %{taxon}"
+    none_collected: "No one has collected %{taxon}"
+    none_identified: "No one has identified %{taxon}"
+    no_agents: "No agents have collected or identified %{taxon}"
   terms:
     terms_title: Terms of Service
   user:

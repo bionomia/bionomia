@@ -1,5 +1,4 @@
--content_for :title do
-  = I18n.t('how_works.title')
+-content_for :title, I18n.t('how_works.title')
 
 -content_for :jumbotron do
   %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
@@ -124,3 +123,10 @@
       in two clicks using your ORCID credentials. Once you make this
       %em set-it-and-forget-it
       connection, Bionomia pushes your specimen data into this industry-recognized, stable, longterm archive and mints a new DataCite DOI. Your Zenodo token is cached in Bionomia and every week on your behalf, a new version of your specimen data is pushed to the archive when you make new claims. You will also receive a DataCite DOI badge on your Bionomia profile page and a formatted citation for your professional resume. The versioned data packages stored in Zenodo each consist of a csv file and a JSON-LD document, preparing the way for future Linked Data integrations. If you accept DataCite as a trusted organization in your ORCID account, you will receive a new formatted work entry there for your specimen dataset.
+
+%h4= I18n.t('how_works.acknowledgments_title')
+
+%p
+  Silhouette images of taxonomic Families originate from the amazing
+  = succeed "." do
+    %a{href: "http://phylopic.org/"} PhyloPic

@@ -15,6 +15,52 @@ module Sinatra
 
         def self.registered(app)
 
+          app.get '/user.json' do
+            content_type "application/json", charset: 'utf-8'
+            search_user
+            format_users.to_json
+          end
+
+          app.get '/user.rss' do
+            content_type "application/rss+xml", charset: 'utf-8'
+            rss = RSS::Maker.make("2.0") do |maker|
+              maker.channel.language = "en"
+              maker.channel.author = "Bionomia"
+              maker.channel.updated = Time.now.to_s
+              maker.channel.link = "#{Settings.base_url}/user.rss"
+              maker.channel.title = "Bionomia New User Feed"
+              maker.channel.description = "New User Feed on #{Settings.base_url}"
+
+              User.where(is_public: true).where.not(made_public: nil)
+                  .where("made_public >= ?", 2.days.ago)
+                  .find_each do |user|
+                id_statement = nil
+                recorded_statement = nil
+                twitter = nil
+                statement = nil
+                if !user.twitter.nil?
+                  twitter = "@#{user.twitter}"
+                end
+                if !user.top_family_identified.nil?
+                  id_statement = "identified #{user.top_family_identified}"
+                end
+                if !user.top_family_recorded.nil?
+                  recorded_statement = "collected #{user.top_family_recorded}"
+                end
+                if !user.top_family_identified.nil? || !user.top_family_recorded.nil?
+                  statement = [id_statement,recorded_statement].compact.join(" and ")
+                end
+                maker.items.new_item do |item|
+                  item.link = "#{Settings.base_url}/#{user.identifier}"
+                  item.title = "#{user.fullname}"
+                  item.description = "#{user.fullname} #{twitter} #{statement}".split.join(" ")
+                  item.updated = user.updated
+                end
+              end
+            end
+            rss.to_s
+          end
+
           app.get '/:id/specimens.json' do
             content_type "application/ld+json", charset: 'utf-8'
             if !params[:id].is_orcid? && !params[:id].is_wiki_id?

@@ -1,9 +1,9 @@
 %ul{class: "nav nav-tabs mt-3 mb-3"}
   %li{class: "nav-item"}
-    %a{class: "nav-link#{locals[:active_tab] == "search" ? " active" : nil}", href: "/developers"}= I18n.t('developer.search')
+    %a{class: "nav-link#{locals[:active_tab] == "search" ? " active" : nil}", href: url("/developers")}= I18n.t('developer.search')
   %li{class: "nav-item"}
-    %a{class: "nav-link#{locals[:active_tab] == "parse" ? " active" : nil}", href: "/developers/parse"}= I18n.t('developer.parse_names')
+    %a{class: "nav-link#{locals[:active_tab] == "parse" ? " active" : nil}", href: url("/developers/parse")}= I18n.t('developer.parse_names')
   %li{class: "nav-item"}
-    %a{class: "nav-link#{locals[:active_tab] == "structured_data" ? " active" : nil}", href: "/developers/structured-data"}= I18n.t('developer.structured_data')
+    %a{class: "nav-link#{locals[:active_tab] == "structured_data" ? " active" : nil}", href: url("/developers/structured-data")}= I18n.t('developer.structured_data')
   %li{class: "nav-item"}
-    %a{class: "nav-link#{locals[:active_tab] == "code" ? " active" : nil}", href: "/developers/code"}= I18n.t('developer.code')
+    %a{class: "nav-link#{locals[:active_tab] == "code" ? " active" : nil}", href: url("/developers/code")}= I18n.t('developer.code')

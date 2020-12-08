@@ -27,7 +27,6 @@
         %a{href: url("/#{@viewed_user.identifier}")} public profile
 
 - else
-
   - if flash[:public]
     %div{class:"alert alert-success alert-dismissible fade show d-block", role: "alert"}
       %div
@@ -40,49 +39,18 @@
 
   = haml :'partials/help/tabs', layout: false, locals: { active_tab: "discovered" }
 
-  - placeholder = @dataset ? @dataset.title : ""
   - checked = params[:relaxed] == "1" ? "checked" : nil
 
-  - if @dataset || @agent || @taxon
-    %div{class: "alert alert-warning", role: "alert"}
-      - if @dataset
-        %div
-          %i{class:"fas fa-filter"}
-          Filtered by
-          %span{class:"font-weight-bold mr-2"}
-            #{@dataset.title.truncate(125, separator: ' ')}
-          %a{href: "#{@dataset.license}", itemprop: "license"}
-            %img{src:"#{@dataset.license_icon("small")}"}
-          %a{href: url("/help-others/#{@viewed_user.identifier}?&datasetKey=&agent_id=#{params[:agent_id]}&taxon_id=#{params[:taxon_id]}"), class:"ml-2 text-danger"}
-            %i{class:"fas fa-minus-circle"}
-            Remove
-      - if @agent
-        %div
-          %i{class:"fas fa-search"}
-          Searched for
-          %span{class:"font-weight-bold mr-2"}
-            #{@agent.fullname_reverse}
-          %a{href: url("/help-others/#{@viewed_user.identifier}?datasetKey=#{params[:datasetKey]}&agent_id=&taxon_id=#{params[:taxon_id]}"), class:"ml-2 text-danger"}
-            %i{class:"fas fa-minus-circle"}
-            Remove
-      - if @taxon
-        %div
-          %i{class:"fas fa-filter"}
-          Filtered by
-          %span{class:"font-weight-bold mr-2"}
-            #{@taxon.family}
-          %a{href: url("/help-others/#{@viewed_user.identifier}?datasetKey=#{params[:datasetKey]}&agent_id=#{params[:agent_id]}&taxon_id="), class:"ml-2 text-danger"}
-            %i{class:"fas fa-minus-circle"}
-            Remove
+  = haml :'partials/advanced_search_filter', layout: false, locals: { url: "/help-others/#{@viewed_user.identifier}" }
 
   - if @pagy.count == 0
     %div{class: "alert alert-info tiny-margins row", role: "alert"}
       %div{class: "col col-12 col-md-8"}
         Bionomia did not find any unclaimed specimens.
-
-        %div{class:"form-check d-inline-flex"}
-          %input{type:"checkbox", class:"form-check-input", id:"relaxed", checked: checked }
-          %label{for:"relaxed", class:"relaxed"} Make less exact.
+        - if !@dataset && !@agent && !@taxon
+          %div{class:"form-check d-inline-flex"}
+            %input{type:"checkbox", class:"form-check-input", id:"relaxed", checked: checked }
+            %label{for:"relaxed", class:"relaxed"} Make less exact.
       %div{class:"col col-12 col-md-4 text-md-right"}
         %a{href: url("/help-others/#{@viewed_user.identifier}/advanced-search")}
           %i{class:"fas fa-search-plus"}
@@ -98,9 +66,10 @@
         collected,
         %img{src:"/images/microscope-unselected.png", alt:"#{I18n.t('general.identified')}", title:"#{I18n.t('general.identified')}", width:18}
         identified, or Both.
-        %div{class:"form-check d-inline-flex"}
-          %input{type:"checkbox", class:"form-check-input", id:"relaxed", checked: checked }
-          %label{for:"relaxed", class:"relaxed"} Make less exact.
+        - if !@dataset && !@agent && !@taxon
+          %div{class:"form-check d-inline-flex"}
+            %input{type:"checkbox", class:"form-check-input", id:"relaxed", checked: checked }
+            %label{for:"relaxed", class:"relaxed"} Make less exact.
       %div{class:"col col-12 col-md-4 text-md-right"}
         %a{href: url("/help-others/#{@viewed_user.identifier}/advanced-search")}
           %i{class:"fas fa-search-plus"}

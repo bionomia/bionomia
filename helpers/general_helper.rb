@@ -12,7 +12,8 @@ module Sinatra
         def locale
           locales = {
             en: "en_US",
-            fr: "fr_FR"
+            fr: "fr_FR",
+            es: "es_ES"
           }
           locales[I18n.locale] || "en_US"
         end

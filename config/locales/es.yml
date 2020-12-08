@@ -30,6 +30,7 @@ es:
         one: "especimen encontrado. No se muestran todas las columnas."
         other: "especímenes encontrados. No se muestran todas las columnas."
     search_html: "Búsqueda de %{agent_link} la persona y ayude a atribuir sus especímenes."
+    example_agents: Random Samples
   article:
     article_title: Artículo
     articles_title: Artículos
@@ -121,6 +122,7 @@ es:
   developer:
     search: Buscar
     autocomplete_widget: Herramienta para autocompletar
+    json_ld_search: JSON-LD Search
     structured_data: Datos Estructurados
     raw_data: Datos Sin Procesar
     code: Código
@@ -268,6 +270,7 @@ es:
     wikidata_title: Integración con Wikidata
     orcid_title: Integración con ORCID
     zenodo_title: Integración con Zenodo
+    acknowledgments_title: Acknowledgments
   layout:
     profiles: Perfiles
     scribes: Anotadores
@@ -275,6 +278,7 @@ es:
     datasets: Conjuntos de Datos
     articles: Artículos
     countries: Países
+    taxa: Families
     agent_strings: Cadenas de Agente
     help_others: Ayudar a otros
     help_received: Ayuda Recibida
@@ -440,6 +444,7 @@ es:
     scribe_not_helped: This Bionomia scribe has not yet helped you claim specimens.
     upload_error: Please upload an image less than 5MB in size.
     bulk_claim: Bulk Claim
+    advanced_search: Advanced Search & Filter
   roster:
     roster_title: Public Profiles
     lede:
@@ -472,6 +477,46 @@ es:
       unit:
         one: "person who has attributed natural history specimens to their peers, mentors, and role models"
         other: "people who have attributed natural history specimens to their peers, mentors, and role models"
+  taxa:
+    lede:
+      unit:
+        one: "taxonomic Family from specimen data in GBIF"
+        other: "taxonomic Families from specimen data in GBIF"
+    search_title: Taxonomic Families
+    none_found: "No taxonomic Family found for %{searched}"
+    search_found:
+      unit:
+        one: "search result for"
+        other: "search results for"
+    people: People
+    agent_strings: Agent Strings
+    collected: Collected
+    identified: Identified
+    number_collected:
+      unit:
+        one: "person collected specimens from data in GBIF"
+        other: "people collected specimens from data in GBIF"
+    number_identified:
+      unit:
+        one: "person identified specimens from data in GBIF"
+        other: "people identified specimens from data in GBIF"
+    number_agents:
+      unit:
+        one: "agent string from specimen data in GBIF"
+        other: "agent strings from specimen data in GBIF"
+    number_agents_unclaimed:
+      unit:
+        one: "agent string has unclaimed specimen records from data in GBIF"
+        other: "agent strings have unclaimed specimen records from data in GBIF"
+    no_agents_unclaimed: No specimen records are unclaimed or unattributed
+    alphabetical: Alphabetical
+    counts: Counts
+    unclaimed: Unclaimed
+    example_families: Random Samples
+    none_collected_identified: "No one has collected or identified %{taxon}"
+    none_collected: "No one has collected %{taxon}"
+    none_identified: "No one has identified %{taxon}"
+    no_agents: "No agents have collected or identified %{taxon}"
   terms:
     terms_title: Terms of Service
   user:

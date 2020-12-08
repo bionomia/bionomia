@@ -8,7 +8,210 @@
 
 = haml :'partials/developers/tabs', layout:false, locals: { active_tab: locals[:active_tab] }
 
-%h3{class:"mt-4 mb-3"}= I18n.t('developer.search')
+%h3{class:"mt-4 mb-3"}= I18n.t('developer.autocomplete_widget')
+
+%p
+  %img{src:"/images/search_widget.png", alt:"Autocomplete Widget"}
+
+%dl
+  %dt Base URL
+  %dd{class:"pl-2"} https://api.bionomia.net/user.json
+
+  %dt ?q=
+  %dd{class:"pl-2"} part of a human name
+
+  %dt Response
+  %dd
+    %pre{class:"pre-scrollable bg-dark text-white border rounded p-3"}
+      %code
+        :preserve
+          [
+            {
+              <span class="token property">"id"</span>:<span class="token number">41338</span>,
+              <span class="token property">"score"</span>:<span class="token number">53.074413</span>,
+              <span class="token property">"orcid"</span>:<span class="token symbol">null</span>,
+              <span class="token property">"wikidata"</span>:<span class="token string">"Q230491"</span>,
+              <span class="token property">"fullname"</span>:<span class="token string">"Mary Anning"</span>,
+              <span class="token property">"fullname_reverse"</span>:<span class="token string">"Anning, Mary"</span>,
+              <span class="token property">"thumbnail"</span>:<span class="token string">"https://abekpgaoen.cloudimg.io/crop/24x24/n/https://commons.wikimedia.org/wiki/Special:FilePath/Mary%20Anning%20painting.jpg"</span>,
+              <span class="token property">"lifespan"</span>:<span class="token string">"(b. 1799-05-21 &ndash; d. 1847-03-09)"</span>,
+              <span class="token property">"description"</span>:<span class="token string">"British fossil collector, dealer, and paleontol..."</span>
+            }
+          ]
+
+%p
+  A
+  %a{href:"https://github.com/ericgio/react-bootstrap-typeahead"}
+    %i{class:"fab fa-react"}
+    React.js widget
+  or a
+  %a{href:"https://github.com/alexurquhart/vue-bootstrap-typeahead"}
+    %i{class:"fab fa-vuejs"}
+    Vue.js widget
+  both based on Bootstrap styling could be modified to make use of the same Base URL in the jQuery example below.
+
+%h4 jQuery
+
+%p
+  Using
+  = succeed ", " do
+    %a{href: "https://twitter.github.io/typeahead.js/"} typeahead.js
+  = succeed ", " do
+    %a{href:"https://handlebarsjs.com/"} handlebars.js
+  and
+  = succeed "." do
+    %a{href: "https://getbootstrap.com/"} Bootstrap
+  A javascript callback entitled
+  %strong typeahead:select
+  is fired when a user selects a name in the dropdown and the response produces either an ORCID ID or a Wikidata Q number.
+
+%ul{class:"nav nav-tabs", role:"tablist"}
+  %li{class:"nav-item"}
+    %a{href:"#javascript", "data-toggle":"tab", class:"nav-link active", id:"javascript-tab", role:"tab", "aria-controls":"javascript", "aria-selected": true} Javascript
+  %li{class:"nav-item"}
+    %a{href:"#html", "data-toggle":"tab", class:"nav-link", id:"html-tab", role:"tab", "aria-controls":"html", "aria-selected": false} HTML
+  %li{class:"nav-item"}
+    %a{href:"#css", "data-toggle":"tab", class:"nav-link", id:"css-tab", role:"tab", "aria-controls":"css", "aria-selected": false} CSS
+
+%div{class:"tab-content"}
+  %div{class:"tab-pane fade show active mt-3", id:"javascript", role:"tabpanel", "arial-labelledby":"javascript-tab"}
+    %pre{class:"bg-light border rounded p-3"}
+      :escaped
+        // jQuery, typeahead.js and handlebars.js from a CDN
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script>
+
+        <script>
+          $(function() {
+
+            var collectors = new Bloodhound({
+              datumTokenizer: Bloodhound.tokenizers.whitespace,
+              queryTokenizer: Bloodhound.tokenizers.whitespace,
+              sufficient: 10,
+              remote: {
+                url: 'https://api.bionomia.net/user.json?q=%QUERY',
+                wildcard: '%QUERY',
+                transform : function(r) {
+                  return $.map(r, function (v) { v.type = "user"; return v; });
+                }
+              }
+            });
+
+            $('#collector-search .typeahead').typeahead({
+                minLength: 3,
+                highlight: true
+              },
+              {
+                name: 'user',
+                limit: 10,
+                source: collectors,
+                display: 'fullname_reverse',
+                templates: {
+                  suggestion: Handlebars.compile($("#result-template").html()),
+                  empty: Handlebars.compile($("#empty-template").html())
+                }
+              }
+            ).on("typeahead:select", function(obj, datum) {
+              var identifier = datum.orcid || datum.wikidata;
+              console.log(identifier);
+              // DO SOMETHING WITH THE IDENTIFIER WHEN THE ITEM IS SELECTED
+              /*
+                 The identifier will appear either in the form
+                 0000-0002-4286-147X or Q10293705.
+                 Recommended best practice is to show the user the identifier they
+                 chose by rendering an active link to either
+                 https://orcid.org/{{identifier}} or https://www.wikidata.org/wiki/{{identifier}}
+               */
+            });
+          });
+        </script>
+
+  %div{class:"tab-pane fade show mt-3", id:"html", role:"tabpanel", "arial-labelledby":"html-tab"}
+    %pre{class:"bg-light border rounded p-3"}
+      :escaped
+        <div id="collector-search" class="m-2">
+          <input class="typeahead" type="text" placeholder="Mary Anning" size="50">
+        </div>
+
+        <!-- Result template -->
+        <script id='result-template' type='text/x-handlebars-template'>
+          <div class='d-flex'>
+            <div>
+              <img class='rounded' src='{{thumbnail}}'>
+            </div>
+            <div class='ml-2 flex-grow-1 small'>
+              <h5 class='m-0 p-0'>{{fullname_reverse}}</h5>
+              <div class='m-0 p-0 small muted'>{{{lifespan}}}</div>
+              <div class='m-0 p-0 small muted'>{{{description}}}</div>
+            </div>
+          </div>
+        </script>
+
+        <!-- Non-result template -->
+        <script id='empty-template' type='text/x-handlebars-template'>
+          <div class='m-2 tt-no-result'>Your search turned up 0 results.</div>
+        </script>
+
+  %div{class:"tab-pane fade show mt-3", id:"css", role:"tabpanel", "arial-labelledby":"css-tab"}
+    %pre{class:"bg-light border rounded p-3"}
+      :escaped
+        /* Bootstrap from a CDN */
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+        /* Customizations */
+        <style>
+          .twitter-typeahead { line-height:1em; }
+          .typeahead, .tt-query, .tt-hint {
+            width: 100%;
+            height: 1rem;
+            padding: 1rem;
+            font-size: 1rem;
+            line-height: 1rem;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+          }
+        .typeahead { background-color: #fff; width:300px; }
+        .typeahead:focus { border: 2px solid #40924F; }
+        .tt-query { box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
+        .tt-hint { color: #999; }
+        .tt-menu {
+          width: 100%;
+          margin: 5px 0;
+          padding: 8px 0;
+          background-color: #fff;
+          border: 1px solid rgba(0, 0, 0, 0.2);
+          border-radius: 8px;
+          box-shadow: 0 5px 10px rgba(0,0,0,.2);
+          z-index:10000 !important;
+        }
+        .tt-suggestion, .tt-no-result {
+          padding: 3px 10px;
+          font-size: 1rem;
+          line-height: 1.1rem;
+          color:#495057;
+        }
+        .tt-suggestion:hover {
+          cursor: pointer;
+          color: #fff;
+          background-color: #40924F;
+        }
+        .tt-suggestion.tt-cursor { color: #fff; background-color: #40924F; }
+        .tt-suggestion p { margin: 0; }
+        .tt-menu-header {
+          margin: 0 10px 5px 10px;
+          padding: 3px 0;
+          border-bottom: 1px solid #a8a7a5;
+          font-size:1em;
+        }
+        .dropdown-menu{
+          border-radius:0px !important;
+          font-size:1rem !important;
+        }
+        </style>
+
+%h3{class:"mt-4 mb-3"}= I18n.t('developer.json_ld_search')
 
 %p{class:"mb-4"}
   Search for people is exposed as JSON-LD documents with Cross-Origin Resource Sharing (CORS) using elements from
@@ -126,161 +329,3 @@
               }
             ]
           }
-
-%h3{class:"mt-4 mb-3"}= I18n.t('developer.autocomplete_widget')
-
-%p
-  Using jQuery,
-  = succeed ", " do
-    %a{href: "https://twitter.github.io/typeahead.js/"} typeahead.js
-  = succeed ", " do
-    %a{href:"https://handlebarsjs.com/"} handlebars.js
-  and
-  = succeed "." do
-    %a{href: "https://getbootstrap.com/"} Bootstrap
-  A javascript callback entitled
-  %strong typeahead:select
-  is fired when a user selects a name in the dropdown and the response produces either an ORCID ID or a Wikidata Q number. 
-
-
-%img{src:"/images/search_widget.png", alt:"Autocomplete Widget"}
-
-%h4 Stylesheets
-
-%pre{class:"bg-light border rounded p-3"}
-  :escaped
-    /* Bootstrap from a CDN */
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-    /* Customizations */
-    <style>
-      .twitter-typeahead { line-height:1em; }
-      .typeahead, .tt-query, .tt-hint {
-        width: 100%;
-        height: 1rem;
-        padding: 1rem;
-        font-size: 1rem;
-        line-height: 1rem;
-        border: 2px solid #ccc;
-        border-radius: 8px;
-        outline: none;
-      }
-    .typeahead { background-color: #fff; width:300px; }
-    .typeahead:focus { border: 2px solid #40924F; }
-    .tt-query { box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
-    .tt-hint { color: #999; }
-    .tt-menu {
-      width: 100%;
-      margin: 5px 0;
-      padding: 8px 0;
-      background-color: #fff;
-      border: 1px solid rgba(0, 0, 0, 0.2);
-      border-radius: 8px;
-      box-shadow: 0 5px 10px rgba(0,0,0,.2);
-      z-index:10000 !important;
-    }
-    .tt-suggestion, .tt-no-result {
-      padding: 3px 10px;
-      font-size: 1rem;
-      line-height: 1.1rem;
-      color:#495057;
-    }
-    .tt-suggestion:hover {
-      cursor: pointer;
-      color: #fff;
-      background-color: #40924F;
-    }
-    .tt-suggestion.tt-cursor { color: #fff; background-color: #40924F; }
-    .tt-suggestion p { margin: 0; }
-    .tt-menu-header {
-      margin: 0 10px 5px 10px;
-      padding: 3px 0;
-      border-bottom: 1px solid #a8a7a5;
-      font-size:1em;
-    }
-    .dropdown-menu{
-      border-radius:0px !important;
-      font-size:1rem !important;
-    }
-    </style>
-
-%h4 Javascript
-
-%pre{class:"bg-light border rounded p-3"}
-  :escaped
-    // jQuery, typeahead.js and handlebars.js from a CDN
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script>
-
-    <script>
-      $(function() {
-
-        var collectors = new Bloodhound({
-          datumTokenizer: Bloodhound.tokenizers.whitespace,
-          queryTokenizer: Bloodhound.tokenizers.whitespace,
-          sufficient: 10,
-          remote: {
-            url: 'https://api.bionomia.net/user.json?q=%QUERY',
-            wildcard: '%QUERY',
-            transform : function(r) {
-              return $.map(r, function (v) { v.type = "user"; return v; });
-            }
-          }
-        });
-
-        $('#collector-search .typeahead').typeahead({
-            minLength: 3,
-            highlight: true
-          },
-          {
-            name: 'user',
-            limit: 10,
-            source: collectors,
-            display: 'fullname_reverse',
-            templates: {
-              suggestion: Handlebars.compile($("#result-template").html()),
-              empty: Handlebars.compile($("#empty-template").html())
-            }
-          }
-        ).on("typeahead:select", function(obj, datum) {
-          var identifier = datum.orcid || datum.wikidata;
-          console.log(identifier);
-          // DO SOMETHING WITH THE IDENTIFIER WHEN THE ITEM IS SELECTED
-          /*
-             The identifier will appear either in the form
-             0000-0002-4286-147X or Q10293705.
-             Recommended best practice is to show the user the identifier they
-             chose by rendering an active link to either
-             https://orcid.org/{{identifier}} or https://www.wikidata.org/wiki/{{identifier}}
-           */
-        });
-      });
-    </script>
-
-%h4 HTML
-
-%pre{class:"bg-light border rounded p-3"}
-  :escaped
-    <div id="collector-search" class="m-2">
-      <input class="typeahead" type="text" placeholder="Mary Anning" size="50">
-    </div>
-
-    <!-- Result template -->
-    <script id='result-template' type='text/x-handlebars-template'>
-      <div class='d-flex'>
-        <div>
-          <img class='rounded' src='{{thumbnail}}'>
-        </div>
-        <div class='ml-2 flex-grow-1 small'>
-          <h5 class='m-0 p-0'>{{fullname_reverse}}</h5>
-          <div class='m-0 p-0 small muted'>{{{lifespan}}}</div>
-          <div class='m-0 p-0 small muted'>{{{description}}}</div>
-        </div>
-      </div>
-    </script>
-
-    <!-- Non-result template -->
-    <script id='empty-template' type='text/x-handlebars-template'>
-      <div class='m-2 tt-no-result'>Your search turned up 0 results.</div>
-    </script>
