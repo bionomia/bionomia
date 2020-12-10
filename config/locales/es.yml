@@ -7,6 +7,9 @@ es:
     metrics: Métricas sobre las organizaciones
     in_a_name: Qué es una Bionomía?
     focus_people: Un enfoque en las personas
+  acknowledgments:
+    acknowledgments_title: Acknowledgments
+    taxon_silhouettes: Taxon Family Silhouettes
   admin:
     change_photo: Cambiar imagen de perfil
   agent:
@@ -270,7 +273,6 @@ es:
     wikidata_title: Integración con Wikidata
     orcid_title: Integración con ORCID
     zenodo_title: Integración con Zenodo
-    acknowledgments_title: Acknowledgments
   layout:
     profiles: Perfiles
     scribes: Anotadores
@@ -310,6 +312,7 @@ es:
     tools: Herramientas
     parse: Analizar Nombres
     reconcile: Reconciliar Nombres
+    acknowledgments: Acknowledgments
   not_authorized:
     not_authorized: Sin autorización o la sesión ha terminado.
   occurrence:

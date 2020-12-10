@@ -4,11 +4,11 @@
     %li
       %a{href: url("/help"), class: "text-muted"}= I18n.t('layout.help')
     %li
-      %a{href: url("/integrations"), class: "text-muted"}= I18n.t('layout.integrations')
-    %li
       %a{href: url("/collection-data-managers"), class: "text-muted"}= I18n.t('layout.for_data_managers')
     %li
       %a{href: url("/on-this-day"), class: "text-muted"}= I18n.t('layout.on_this_day')
+    %li
+      %a{href: url("/acknowledgments"), class: "text-muted"}= I18n.t('layout.acknowledgments')
 
 %div{class:"px-3"}
   %h5= I18n.t('layout.tools')
@@ -19,6 +19,8 @@
       %a{href: url("/reconcile"), class: "text-muted"}= I18n.t('layout.reconcile')
     %li
       %a{href: url("/developers"), class: "text-muted"}= I18n.t('layout.for_developers')
+    %li
+      %a{href: url("/integrations"), class: "text-muted"}= I18n.t('layout.integrations')
 
 %div{class:"px-3"}
   %h5= I18n.t('layout.policies')

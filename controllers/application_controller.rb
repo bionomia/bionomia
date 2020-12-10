@@ -16,6 +16,10 @@ module Sinatra
             haml :about, locals: { active_page: "about" }
           end
 
+          app.get '/acknowledgments' do
+            haml :acknowledgments, locals: { active_page: "acknowledgments" }
+          end
+
           app.get '/donate' do
             haml :'donate', locals: { active_page: "donate" }
           end

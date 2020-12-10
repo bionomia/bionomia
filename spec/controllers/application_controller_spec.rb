@@ -10,6 +10,11 @@ describe "Bionomia Application Controller" do
     expect(last_response).to be_ok
   end
 
+  it "should allow accessing the acknowledgments page" do
+    get '/acknowledgments'
+    expect(last_response).to be_ok
+  end
+
   it "should allow accessing the integrations page" do
     get '/integrations'
     expect(last_response).to be_ok
