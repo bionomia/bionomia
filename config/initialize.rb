@@ -11,7 +11,9 @@ module Sinatra
 
           app.use Rack::Session::Cookie, key: 'rack.session',
                                      path: '/',
-                                     secret: Settings.orcid.key
+                                     secret: Settings.orcid.key,
+                                     domain: Settings.cookie_domain,
+                                     same_site: :lax
           app.use Rack::Protection, reaction: :drop_session, use: :authenticity_token
 
           app.use OmniAuth::Builder do
