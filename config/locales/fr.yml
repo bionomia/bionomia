@@ -7,6 +7,9 @@ fr:
     metrics: Mesures sur les organisations
     in_a_name: Qu'est-ce qu'un Bionomia?
     focus_people: Un focus sur les practiciens
+  acknowledgments:
+    acknowledgments_title: Remerciements
+    taxon_silhouettes: Silhouettes des Familles Taxonomiques
   admin:
     change_photo: Changer votre photo
   agent:
@@ -270,7 +273,6 @@ fr:
     wikidata_title: Intégration avec Wikidata
     orcid_title: Intégration avec ORCID
     zenodo_title: Intégration avec Zenodo
-    acknowledgments_title: Remerciements
   layout:
     profiles: Profils
     scribes: Scribes
@@ -310,6 +312,7 @@ fr:
     tools: Outils
     parse: Analyser les noms
     reconcile: Réconcilier les noms
+    acknowledgments: Remerciements
   not_authorized:
     not_authorized: Non autorisé ou session terminée.
   occurrence:

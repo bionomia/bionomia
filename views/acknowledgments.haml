@@ -1,0 +1,12 @@
+-content_for :title, I18n.t('acknowledgments.acknowledgments_title')
+
+-content_for :jumbotron do
+  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
+    %div{class:"mr-auto p-2"}
+      %h1{class:"h2"}= I18n.t('acknowledgments.acknowledgments_title')
+
+%h3= I18n.t('acknowledgments.taxon_silhouettes')
+%p
+  Silhouette images of taxonomic Families originate from the amazing
+  %a{href: "http://phylopic.org/"} PhyloPic
+  developed and maintained by Mike Keesey.

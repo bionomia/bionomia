@@ -233,7 +233,7 @@ module Bionomia
         @dataset.user_occurrences
                 .select(attributes).find_each(batch_size: 10_000) do |o|
           next if !o.visible
-          uri = !o.orcid.nil? ? "https://orcid.org/#{o.orcid}" : "https://www.wikidata.org/wiki/#{o.wikidata}"
+          uri = !o.orcid.nil? ? "https://orcid.org/#{o.orcid}" : "http://www.wikidata.org/entity/#{o.wikidata}"
           identified_uri = o.action.include?("identified") ? uri : nil
           recorded_uri = o.action.include?("recorded") ? uri : nil
           claimant_name = [o.claimantGiven, o.claimantFamily].join(" ")

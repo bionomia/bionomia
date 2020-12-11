@@ -21,9 +21,10 @@
                 #{number_to_human(@pagy.count, units: :"taxa.number_agents", delimiter: ",", precision: 0)}
               - else
                 = I18n.t('taxa.no_agents', taxon: h(@taxon.family))
-        %p{class:"small text-muted mb-0"}
+        %p{class:"small text-muted mb-0 mt-2"}
           - if @taxon.image.credit
             #{@taxon.image.credit}
+            %br
           - if @taxon.image.licenseURL
             %a{href: "#{@taxon.image.licenseURL}"}= @taxon.image.licenseURL
       - else
