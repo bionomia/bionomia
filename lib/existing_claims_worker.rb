@@ -20,7 +20,7 @@ module Bionomia
       both = recs & ids
 
       row["agentIDs"].split("|").each do |id|
-        u = get_user(id)
+        u = get_user(id.strip)
         next if u.nil?
         if !uniq_recs.empty?
           uo = uniq_recs.map{|r| [u.id, r.to_i, "recorded", EXTERNAL_USER_ID]}
