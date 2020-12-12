@@ -7,8 +7,7 @@
       %a{href: url("/collection-data-managers"), class: "text-muted"}= I18n.t('layout.for_data_managers')
     %li
       %a{href: url("/on-this-day"), class: "text-muted"}= I18n.t('layout.on_this_day')
-    %li
-      %a{href: url("/acknowledgments"), class: "text-muted"}= I18n.t('layout.acknowledgments')
+
 
 %div{class:"px-3"}
   %h5= I18n.t('layout.tools')
@@ -34,13 +33,13 @@
   %h5= I18n.t('layout.about')
   %ul{class: "list-unstyled text-small"}
     %li
-      %a{href: url("/about"), class: "text-muted"}= I18n.t('layout.rationale')
-    %li
       %a{href: url("/how-it-works"), class: "text-muted"}= I18n.t('layout.how_works')
+    %li
+      %a{href: url("/about"), class: "text-muted"}= I18n.t('layout.rationale')
     %li
       %a{href: url("/history"), class: "text-muted"}= I18n.t('layout.history')
     %li
-      %a{href: "https://github.com/bionomia/bionomia/issues", class: "text-muted"}= I18n.t('layout.feedback')
+      %a{href: url("/acknowledgments"), class: "text-muted"}= I18n.t('layout.acknowledgments')
 
 %div{class:"px-3"}
   %ul{class: "list-unstyled text-small"}
@@ -49,3 +48,6 @@
     %li{class:"text-center"}
       %a{href: "https://twitter.com/BionomiaTrack", class:"mt-2 twitter"}
         %i{class:"fab fa-twitter"}
+    %li{class:"text-center"}
+      %a{href: "https://github.com/bionomia/bionomia", class:"mt-2 github"}
+        %i{class:"fab fa-github"}

@@ -262,6 +262,8 @@ en:
     close: Close
   help_docs:
     title: Help Documents
+    new_users: For New Users & Group Settings
+    focused_tasks: Focused Tasks
   history:
     history_title: History
   home:

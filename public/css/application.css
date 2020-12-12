@@ -239,6 +239,28 @@ svg > g > g:not([column-id]):last-child { pointer-events: none }
   line-height:42px;
 }
 
+.github {
+  background-color:#012429;
+  color:#fff;
+  width:42px;
+  height:42px;
+  border-radius:100px;
+  line-height:20px;
+  font-size:23px;
+  display:inline-block;
+  text-align:center;
+}
+
+.github:hover {
+  color:#fff;
+  background-color:#02414b;
+}
+
+.github i {
+  font-size:23px;
+  line-height:42px;
+}
+
 .fa-orcid{
   color:#A6CE39;
 }
