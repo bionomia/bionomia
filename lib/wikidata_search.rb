@@ -337,7 +337,7 @@ module Bionomia
                          .join("|") rescue nil
       country_code = wiki_user.properties("P27")
                               .compact
-                              .map{|a| find_country_code(a.title) || "" }
+                              .map{|a| I18nData.country_code(a.title) || "" }
                               .compact
                               .join("|")
                               .presence rescue nil
@@ -472,14 +472,6 @@ module Bionomia
 
     def destroyed_users
       DestroyedUser.pluck(:identifier).compact
-    end
-
-    def find_country_code(name)
-      begin
-        IsoCountryCodes.search_by_name(name).first.alpha2
-      rescue
-        nil
-      end
     end
 
   end

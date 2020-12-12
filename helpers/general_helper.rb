@@ -163,7 +163,7 @@ module Sinatra
           end
 
           if params[:country_code] && !params[:country_code].blank?
-            country = IsoCountryCodes.find(params[:country_code]) rescue nil
+            country = I18nData.countries(I18n.locale)[params[:country_code]] rescue nil
             if country.nil?
               halt 404
             end
@@ -225,7 +225,7 @@ module Sinatra
           end
 
           if params[:country_code] && !params[:country_code].blank?
-            country = IsoCountryCodes.find(params[:country_code]) rescue nil
+            country = I18nData.countries(I18n.locale)[params[:country_code]] rescue nil
             if country.nil?
               halt 404
             end

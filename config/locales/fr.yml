@@ -235,7 +235,7 @@ fr:
     identified_from: Identifié à Partir de
     collected_from: Collectés à Partir de
     dates_identified_collected: Dates Identifiées et Collectées
-    no_filter: Les scribes Bionomia n'ont pas encore aidé à attribuer des spécimens sous ce filtre.
+    no_filter_alert: Les scribes Bionomia n'ont pas encore aidé à attribuer des spécimens sous ce filtre.
     not_helped_alert: Les scribes Bionomia n'ont pas encore aidé à attribuer des spécimens.
     upload_message:
       unit:

@@ -86,9 +86,8 @@ module Bionomia
 
     def add_countries
       puts "Adding countries..."
-      countries = IsoCountryCodes.for_select
-      countries.each do |country|
-        sitemap.add "/country/#{country[1]}"
+      I18nData.countries(:en).keys.each do |code|
+        sitemap.add "/country/#{code}"
       end
     end
 

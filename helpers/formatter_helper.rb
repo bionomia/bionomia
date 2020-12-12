@@ -27,7 +27,7 @@ module Sinatra
         end
 
         def country_name(code)
-          IsoCountryCodes.find(code).name rescue nil
+          I18nData.countries(I18n.locale)[country_code] rescue nil
         end
 
         def profile_image(user, size=nil)

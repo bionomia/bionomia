@@ -20,7 +20,7 @@ module Sinatra
             email = session_data[:info][:email] rescue nil
             other_names = session_data[:extra][:raw_info][:other_names].join("|") rescue nil
             country_code = session_data[:extra][:raw_info][:location]
-            country = IsoCountryCodes.find(country_code).name rescue nil
+            country = I18nData.countries(:en)[country_code] rescue nil
             description = session_data[:info][:description] rescue nil
             user = User.create_with(
                           family: family,
@@ -108,7 +108,7 @@ module Sinatra
             if params[:start_year] || params[:end_year]
               range = [params[:start_year], params[:end_year]].join(" – ")
             end
-            country = IsoCountryCodes.find(params[:country_code]).name rescue nil
+            country = I18nData.countries(:en)[country_code] rescue nil
             family = params[:family] rescue nil
             @filter = {
               action: params[:action],

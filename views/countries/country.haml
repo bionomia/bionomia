@@ -1,8 +1,8 @@
 -content_for :title do
   - if @action
-    #{@action.capitalize} in #{@country.name}
+    #{@action.capitalize} in #{@country[1]}
   - else
-    #{@country.name}
+    #{@country[1]}
 
 - content_for :scripts do
   %script{src: "/js/application.js"}
@@ -14,7 +14,7 @@
 -content_for :jumbotron do
   %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
     %div{class:"mr-auto p-2"}
-      %h1{class:"h2"} #{@country.name}
+      %h1{class:"h2"} #{@country[1]}
       %p{class: "lead text-muted"}
         #{I18n.t('country.lede')}
     = haml :'partials/countries/search', layout: false
@@ -29,14 +29,14 @@
         #{h(@family)}
       from
       %span{class:"font-weight-bold"}
-        #{@country.name}.
-      %a{href: url("/country/#{@country.alpha2}"), class:"text-danger ml-2"}
+        #{@country[1]}
+      %a{href: url("/country/#{@country[0]}"), class:"text-danger ml-2"}
         %i{class:"fas fa-minus-circle"}
         #{I18n.t('general.remove')}
     - else
       No one found from
       %span{class:"font-weight-bold"}
-        #{@country.name}
+        #{@country[1]}
       in ORCID accounts or Wikidata entries. Search by Taxon Family to explore expertise.
 - else
   %div{class:"alert alert-info tiny-margins", role: "alert"}
@@ -48,8 +48,8 @@
         #{h(@family)}
       from
       %span{class:"font-weight-bold"}
-        #{@country.name}.
-      %a{href: url("/country/#{@country.alpha2}"), class:"text-danger ml-2"}
+        #{@country[1]}.
+      %a{href: url("/country/#{@country[0]}"), class:"text-danger ml-2"}
         %i{class:"fas fa-minus-circle"}
         #{I18n.t('general.remove')}
     - else

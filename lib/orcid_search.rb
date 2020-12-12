@@ -120,7 +120,7 @@ module Bionomia
         email = mail[:email]
       end
       country_code = data[:person][:addresses][:address][0][:country][:value] rescue nil
-      country = IsoCountryCodes.find(country_code).name rescue nil
+      country = I18nData.countries(:en)[country_code] rescue nil
 
       organizations = []
       data[:"activities-summary"][:educations][:"affiliation-group"].each do |group|

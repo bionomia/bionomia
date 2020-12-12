@@ -1,5 +1,5 @@
 %div{class:"p-2 ml-3"}
-  %form{id:"form-taxon-wrapper", method: "get", action: "/country/#{@country.alpha2}?action=#{@action}", "accept-charset" => "UTF-8", class: "helpers"}
+  %form{id:"form-taxon-wrapper", method: "get", action: "/country/#{@country[0]}?action=#{@action}", "accept-charset" => "UTF-8", class: "helpers"}
     %div{class:"row"}
       %div{class:"col-12 col-sm-8 p-0"}
         %div{class: "form-group mb-2"}

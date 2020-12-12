@@ -10,8 +10,9 @@ module Sinatra
           app.get '/help-others' do
             protected!
             @results = []
-            @countries = IsoCountryCodes.for_select
-                                        .group_by{|u| ActiveSupport::Inflector.transliterate(u[0][0]) }
+            @countries = I18nData.countries(I18n.locale)
+                          .group_by{|u| ActiveSupport::Inflector.transliterate(u[1][0]) }
+                          .sort
             if params[:q]
               search_user
             end
@@ -82,7 +83,7 @@ module Sinatra
             country_code = params[:country_code]
             @results = []
             begin
-              @country = IsoCountryCodes.find(country_code)
+              @country = I18nData.countries(I18n.locale).slice(country_code).flatten
               @pagy, @results = pagy(User.where("country_code LIKE ?", "%#{country_code}%").order(:family), items: 30)
               haml :'help/country', locals: { active_page: "help" }
             rescue
@@ -298,7 +299,8 @@ module Sinatra
             if params[:start_year] || params[:end_year]
               range = [params[:start_year], params[:end_year]].join(" – ")
             end
-            country = IsoCountryCodes.find(params[:country_code]).name rescue nil
+
+            country = I18nData.countries(I18n.locale)[params[:country_code]] rescue nil
             family = params[:family] rescue nil
             attributor = nil
             if params[:attributor]

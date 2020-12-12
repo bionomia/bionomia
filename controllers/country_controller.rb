@@ -9,9 +9,9 @@ module Sinatra
 
           app.get '/countries' do
             @results = []
-            @countries = IsoCountryCodes
-                          .for_select
-                          .group_by{|u| ActiveSupport::Inflector.transliterate(u[0][0]) }
+            @countries = I18nData.countries(I18n.locale)
+                          .group_by{|u| ActiveSupport::Inflector.transliterate(u[1][0]) }
+                          .sort
             haml :'countries/countries', locals: { active_page: "countries" }
           end
 
@@ -19,7 +19,7 @@ module Sinatra
             country_code = params[:country_code]
             @results = []
             begin
-              @country = IsoCountryCodes.find(country_code)
+              @country = I18nData.countries(I18n.locale).slice(country_code).flatten
               @action = params[:action] if ["identified","collected"].include?(params[:action])
               @family = params[:q].present? ? params[:q] : nil
 

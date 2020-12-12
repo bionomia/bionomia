@@ -139,7 +139,7 @@ module Sinatra
             if params[:start_year] || params[:end_year]
               range = [params[:start_year], params[:end_year]].join(" – ")
             end
-            country = IsoCountryCodes.find(params[:country_code]).name rescue nil
+            country = I18nData.countries(:en)[country_code] rescue nil
             family = params[:family] rescue nil
             institutionCode = params[:institutionCode] rescue nil
             @filter = {

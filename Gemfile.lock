@@ -135,7 +135,7 @@ GEM
     http_parser.rb (0.6.0)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
-    iso_country_codes (0.7.8)
+    i18n_data (0.13.0)
     jwt (2.2.2)
     link_header (0.0.8)
     loofah (2.8.0)
@@ -328,7 +328,7 @@ DEPENDENCIES
   haml
   htmlentities
   i18n
-  iso_country_codes
+  i18n_data
   mysql2
   namae
   nokogiri

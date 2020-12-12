@@ -1,4 +1,4 @@
--content_for :title, I18n.t('help.country_name_title', country: @country.name)
+-content_for :title, I18n.t('help.country_name_title', country: @country[1])
 
 -content_for :scripts do
   %script{src: "/js/application.js"}
@@ -10,14 +10,14 @@
 -content_for :jumbotron do
   %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap alert-warning"}
     %div{class: "mr-auto p-2"}
-      %h2= I18n.t('help.country_name_title', country: @country.name)
+      %h2= I18n.t('help.country_name_title', country: @country[1])
       %p{class: "lead text-muted"}= I18n.t('help.country_name_lede')
     = haml :'partials/help/search', layout: false
 
 - if @pagy.count == 0
   %div{class: "alert alert-warning tiny-margins", role: "alert"}
     = I18n.t('help.country_no_one')
-    %span{class: "font-weight-bold"} #{@country.name}
+    %span{class: "font-weight-bold"} #{@country[1]}
 - else
   - @results.in_groups_of(3).each do |group|
     %div{class: "card-deck"}

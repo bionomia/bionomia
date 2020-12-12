@@ -354,9 +354,9 @@ class User < ActiveRecord::Base
         end
       end
       .each_with_object({}) do |k, data|
-        country = IsoCountryCodes.find(k[0]) rescue nil
+        country = I18nData.countries(:en)[k[0]] rescue nil
         if country
-          data[k[0]] = k[1].merge({name: country.name})
+          data[k[0]] = k[1].merge({ name: country })
         else
           data["OTHER"] = k[1]
         end
@@ -384,9 +384,9 @@ class User < ActiveRecord::Base
         end
       end
       .each_with_object({}) do |k, data|
-        country = IsoCountryCodes.find(k[0]) rescue nil
+        country = I18nData.countries(:en)[k[0]] rescue nil
         if country
-          data[k[0]] = k[1].merge({name: country.name})
+          data[k[0]] = k[1].merge({ name: country })
         else
           data["OTHER"] = k[1]
         end

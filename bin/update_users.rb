@@ -92,7 +92,7 @@ if options[:country_codes]
     if !user.country.blank?
       codes = []
       user.country.split("|").each do |country|
-        codes << IsoCountryCodes.search_by_name(country).first.alpha2 rescue nil
+        codes << I18nData.country_code(country) rescue nil
       end
       if !codes.compact.empty?
         user.country_code = codes.compact.join("|")
