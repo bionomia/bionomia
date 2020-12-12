@@ -159,7 +159,7 @@ fr:
     collected: Collecter
     identified_all: Tout identifié
     identified: Identifier
-    both: Les deux
+    both: Chacun
     per_page: Par page
     download: Télécharger
     submit: Soumettre
@@ -256,6 +256,10 @@ fr:
     fix_claims: Corriger les attributions
     discovered: Découvert
     support_alert: Les scribes suivants ont attribué des spécimens.
+    advanced_search: Recherche avancée et filtre
+    less_exact: Rendre moins exact
+    no_unclaimed: Bionomia n'a trouvé aucun spécimen non réclamé.
+    close: Fermer
   help_docs:
     title: Documents d'Aide
   history:

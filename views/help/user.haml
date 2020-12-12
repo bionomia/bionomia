@@ -46,15 +46,15 @@
   - if @pagy.count == 0
     %div{class: "alert alert-info tiny-margins row", role: "alert"}
       %div{class: "col col-12 col-md-8"}
-        Bionomia did not find any unclaimed specimens.
+        = I18n.t('help.no_unclaimed')
         - if !@dataset && !@agent && !@taxon
           %div{class:"form-check d-inline-flex"}
             %input{type:"checkbox", class:"form-check-input", id:"relaxed", checked: checked }
-            %label{for:"relaxed", class:"relaxed"} Make less exact.
+            %label{for:"relaxed", class:"relaxed"}= I18n.t('help.less_exact')
       %div{class:"col col-12 col-md-4 text-md-right"}
         %a{href: url("/help-others/#{@viewed_user.identifier}/advanced-search")}
           %i{class:"fas fa-search-plus"}
-          Advanced Search & Filter
+          = I18n.t('help.advanced_search')
   - else
     = haml :'partials/help/fixed_navbar', layout: false
 
@@ -69,11 +69,11 @@
         - if !@dataset && !@agent && !@taxon
           %div{class:"form-check d-inline-flex"}
             %input{type:"checkbox", class:"form-check-input", id:"relaxed", checked: checked }
-            %label{for:"relaxed", class:"relaxed"} Make less exact.
+            %label{for:"relaxed", class:"relaxed"}= I18n.t('help.less_exact')
       %div{class:"col col-12 col-md-4 text-md-right"}
         %a{href: url("/help-others/#{@viewed_user.identifier}/advanced-search")}
           %i{class:"fas fa-search-plus"}
-          Advanced Search & Filter
+          = I18n.t('help.advanced_search')
 
   - if @pagy.count > 0
     = haml :'partials/tables/candidates', layout: false, locals: { user_scope: "other" }

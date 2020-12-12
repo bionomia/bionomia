@@ -256,6 +256,10 @@ en:
     fix_claims: Fix Attributions
     discovered: Discovered
     support_alert: The following scribes have attributed specimens.
+    advanced_search: Advanced Search & Filter
+    less_exact: Make less exact
+    no_unclaimed: Bionomia did not find any unclaimed specimens.
+    close: Close
   help_docs:
     title: Help Documents
   history:

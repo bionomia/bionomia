@@ -256,6 +256,10 @@ es:
     fix_claims: Ajustar Atribuciones
     discovered: Descubiertos
     support_alert: Los siguientes anotadores han atribuido especímenes.
+    advanced_search: Advanced Search & Filter
+    less_exact: Make less exact
+    no_unclaimed: Bionomia did not find any unclaimed specimens.
+    close: Close
   help_docs:
     title: Documentos de Ayuda
   history:

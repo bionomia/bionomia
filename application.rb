@@ -7,7 +7,6 @@ class BIONOMIA < Sinatra::Base
   set :root, File.dirname(__FILE__)
   set :haml, :format => :html5
   set :public_folder, 'public'
-  set :show_exceptions, false if environment == :production
   set :cache_enabled_in, [:development, :production]
   set :protection, :except => [:json_csrf, :remote]
 
