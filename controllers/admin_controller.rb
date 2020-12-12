@@ -342,7 +342,7 @@ module Sinatra
               range = [params[:start_year], params[:end_year]].join(" – ")
             end
 
-            country = I18nData.countries(:en)[params[:country_code]] rescue nil
+            country = I18nData.countries(I18n.locale)[params[:country_code]] rescue nil
             family = params[:family] rescue nil
             @filter = {
               action: params[:action],
