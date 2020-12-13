@@ -56,10 +56,10 @@
         %a{href: url("/organization/#{path}")} #{@user.current_organization.name}
       #{@user.current_organization.address}
 
-  - if !@user.country.blank?
+  - if !@user.country_code.blank?
     %p{class:"text-lg-left p-0 mt-1 mb-1"}
       %i{class:"fas fa-globe"}
-      #{@user.country}
+      #{country_name(@user.country_code)}
 
   - if locals[:active_page] != "settings"
     %div{class:"mt-3 pt-3 border-top"}

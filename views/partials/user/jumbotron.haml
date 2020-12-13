@@ -59,7 +59,7 @@
       - if !country_codes[i].nil? && !country_codes[i].empty?
         %p{class:"text-lg-left p-0 mt-1 mb-1"}
           %i{class:"fas fa-globe"}
-          %a{href: url("/country/#{country_codes[i]}")} #{v}
+          %a{href: url("/country/#{country_codes[i]}")} #{country_name(country_codes[i])}
       - else
         %p{class:"text-lg-left p-0 m-0"}
           %i{class:"fas fa-globe"}
