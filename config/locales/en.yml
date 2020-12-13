@@ -71,6 +71,11 @@ en:
     engaging_title: Engaging With Your Community
     enhancements_title: Incorporating Enhancements
     dq_title: Assessing Data Quality
+  charts:
+    year: Year
+    number_specimens: "# specimens"
+    identified: Identified
+    collected: Collected
   country:
     country_title: Countries
     lede: From countries stated in ORCID accounts and Wikidata entries or specimen records in GBIF
@@ -181,6 +186,7 @@ en:
     search_dropdown_no_users: "Your search turned up 0 results."
     reset: Reset
     remove: Remove
+    filtered_by: Filtered by
   get_started:
     get_started_title: Get Started
     lede:  Four steps to claim the specimens you collected or identified and to help acknowledge your peers, mentors, and organizations.

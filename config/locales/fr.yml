@@ -71,6 +71,11 @@ fr:
     engaging_title: S'engager Avec Votre Communauté
     enhancements_title: Intégration d'Améliorations
     dq_title: Évaluation de la Qualité des Données
+  charts:
+    year: An
+    number_specimens: "# spécimens"
+    identified: identifiés
+    collected: collectés
   country:
     country_title: Pays
     lede: Depuis les pays indiqués dans les comptes ORCID et les entrées Wikidata ou les spécimens d'enregistrés dans GBIF
@@ -162,10 +167,10 @@ fr:
     refresh_stats: Rafraîchir les statistiques
     settings: Paramètres
     bulk_assignment: En masse
-    collected_all: Tout collecté
-    collected: Collecter
-    identified_all: Tout identifié
-    identified: Identifier
+    collected_all: Tous collectés
+    collected: Collecté
+    identified_all: Tous identifiés
+    identified: Identifié
     both: Chacun
     either: L'un des deux
     per_page: Par page
@@ -181,6 +186,7 @@ fr:
     search_dropdown_no_users: "Votre recherche a retourné 0 résultats."
     reset: Réinitialiser
     remove: Enlever
+    filtered_by: Filtré par
   get_started:
     get_started_title: Commencer
     lede: Quatre étapes pour réclamer les spécimens que vous avez collectés ou identifiés et pour aider à reconnaître vos pairs, mentors et organisations.
@@ -457,7 +463,7 @@ fr:
     active: Actif
     inactive: Inactif
     make_public_message: Incluez votre compte dans les profils publics. Vos réclamations seront incluses dans un téléchargement de données en masse, exposées via les extensions Google Chrome et Firefox et un Tweet sera envoyé par @BionomiaTrack.
-    no_candidates_alert: Bionomia n'a reniflé aucun spécimen répertorié par GBIF que vous ayez collecté ou identifié.
+    no_candidates_alert: Bionomia n'a trouvé aucun spécimen répertorié par GBIF que vous ayez collecté ou identifié.
     ignored_alert: Les spécimens que vous avez marqués comme "Pas moi" apparaîtront ici.
     scribe_not_helped: Cette scribe Bionomia ne vous a pas encore aidé à récupérer des spécimens.
     upload_error: Veuillez télécharger une image d'une taille inférieure à 5 Mo.

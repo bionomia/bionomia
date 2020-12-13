@@ -71,6 +71,11 @@ es:
     engaging_title: Involucrándose con su comunidad
     enhancements_title: Incorporando mejoras
     dq_title: Estimando la calidad de los datos
+  charts:
+    year: Year
+    number_specimens: "# specimens"
+    identified: Identified
+    collected: Collected
   country:
     country_title: Países
     lede: países indicados en cuentas de ORCID y entradas de Wikidata o registros de especímenes en GBIF
@@ -181,6 +186,7 @@ es:
     search_dropdown_no_users: "Su búsqueda encontró 0 resultados."
     reset: Reiniciar
     remove: Remover
+    filtered_by: Filtrado por
   get_started:
     get_started_title: Comience
     lede: Cuatro pasos para reclamar los especímenes que recolectó o identificó y para ayudar a reconocer a sus colegas, mentores y organizaciones.
@@ -596,32 +602,32 @@ es:
     list: Lista
     stats_identified_specimens_nocountry:
       unit:
-        one: "espécimen identificado"
+        one: "especimen identificado"
         other: "especímenes identificados"
     stats_collected_specimens_nocountry:
       unit:
-        one: "espécimen colectado"
+        one: "especimen colectado"
         other: "especímenes colectados"
     stats_identified_specimens:
       unit:
-        one: "espécimen identificado de al menos"
+        one: "especimen identificado de al menos"
         other: "especímenes identificados de al menos"
     stats_identified_countries:
       unit:
-        one: "País"
-        other: "Países"
+        one: "país"
+        other: "países"
     stats_collected_specimens:
       unit:
-        one: "Espécimen colectado de al menos"
-        other: "Especímenes colectados en al menos"
+        one: "especimen colectado de al menos"
+        other: "especímenes colectado de al menos"
     stats_collected_countries:
       unit:
-        one: "País"
-        other: "Países"
+        one: "país"
+        other: "países"
     stats_attributions_specimens:
       unit:
-        one: "Espécimen atribuido a"
-        other: "Especímenes atribuidos a"
+        one: "especimen atribuido a"
+        other: "especímenes atribuidos a"
     stats_attributions_people:
       unit:
         one: "persona"

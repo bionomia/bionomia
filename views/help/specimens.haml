@@ -16,12 +16,12 @@
 - if @filter.length > 0
   %div{class: "alert alert-warning", role: "alert"}
     %i{class:"fas fa-filter"}
-    Filtered by
+    #{I18n.t('general.filtered_by')}
     %span{class:"font-weight-bold mr-2"}
       #{h([@filter[:action], @filter[:country], @filter[:range], @filter[:family], @filter[:attributor]].compact.join(", "))}
     %a{href: url("/help-others/#{@viewed_user.identifier}/specimens"), class:"text-danger"}
       %i{class:"fas fa-minus-circle"}
-      Remove
+      #{I18n.t('general.remove')}
 
 - if @pagy.count == 0 && @filter.length > 0
   %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('help.no_filter_alert')

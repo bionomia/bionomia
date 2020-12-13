@@ -108,10 +108,11 @@ module Sinatra
             if params[:start_year] || params[:end_year]
               range = [params[:start_year], params[:end_year]].join(" – ")
             end
+            action = I18n.t("general.#{params[:action].downcase}").downcase rescue nil
             country = I18nData.countries(I18n.locale)[params[:country_code]] rescue nil
             family = params[:family] rescue nil
             @filter = {
-              action: params[:action],
+              action: action,
               country: country,
               range: range,
               family: family

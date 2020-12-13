@@ -2,13 +2,13 @@
   - content_for :scripts do
     %script{src: "/js/geochart-hierarchy.js"}
     %script{src: "//www.gstatic.com/charts/loader.js"}
-    - recorded = @stats[:countries][:recorded].to_a.map{|a| [ a[0], country_name(a[0]), a[1] ] }.unshift(["Country", "Country Name", "Collected"])
-    - identified = @stats[:countries][:identified].to_a.map{|a| [ a[0], country_name(a[0]), a[1] ] }.unshift(["Country", "Country Name", "Identified"])
+    - recorded = @stats[:countries][:recorded].to_a.map{|a| [ a[0], country_name(a[0]), a[1] ] }.unshift(["Country", "Country Name", "#{I18n.t('charts.collected')}"])
+    - identified = @stats[:countries][:identified].to_a.map{|a| [ a[0], country_name(a[0]), a[1] ] }.unshift(["Country", "Country Name", "#{I18n.t('charts.identified')}"])
     :javascript
       $(function() {
         var countriesRecorded = #{recorded},
             countriesIdentified = #{identified},
-            dateData = #{@stats[:activity_dates].to_a.unshift(["Year", "Identified", "Collected"])},
+            dateData = #{@stats[:activity_dates].to_a.unshift(["#{I18n.t('charts.year')}", "#{I18n.t('charts.identified')}", "#{I18n.t('charts.collected')}"])},
             recorded_region = "world",
             identified_region = "world",
             recorded_hierarchies = $.map(#{@stats[:countries][:recorded].keys}, function(i) {
@@ -64,7 +64,7 @@
               chartOptions = {
                 title: '',
                 hAxis: {
-                  title: 'Year',
+                  title: "#{I18n.t('charts.year')}",
                   format: '0000',
                   titleTextStyle: {
                     italic: false,
@@ -73,7 +73,7 @@
                   }
                 },
                 vAxis: {
-                  title: '# specimens',
+                  title: "#{I18n.t('charts.number_specimens')}",
                   titleTextStyle: {
                     italic: false,
                     fontSize: 18,
@@ -99,8 +99,8 @@
           google.visualization.events.addListener(chart, 'select', function() {
             var sel = chart.getSelection()[0];
             if (typeof sel.row !== "undefined" && sel.row !== null) {
-              var yr = chartData.getValue(sel.row, 0), label = chartData.getColumnLabel(sel.column);
-              window.location = "#{locals[:path]}/specimens?action=" + label.toLowerCase() + "&start_year=" + yr + "&end_year=" + (parseInt(yr, 10)+5);
+              var yr = chartData.getValue(sel.row, 0), action = (sel.column === 1) ? "identified" : "collected";
+              window.location = "#{locals[:path]}/specimens?action=" + action + "&start_year=" + yr + "&end_year=" + (parseInt(yr, 10)+5);
             }
           });
           $.each([collectedMap, identifiedMap], function() {
