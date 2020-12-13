@@ -294,7 +294,7 @@ module Sinatra
 
             @page = 1 if @page <= 0
 
-            action = params[:action] rescue nil
+            action = I18n.t("general.#{params[:action].downcase}").downcase rescue nil
             range = nil
             if params[:start_year] || params[:end_year]
               range = [params[:start_year], params[:end_year]].join(" – ")
