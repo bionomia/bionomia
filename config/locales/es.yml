@@ -123,6 +123,13 @@ es:
       unit:
         one: "una persona ha reclamado o se le han atribuido especímenes representados en este conjunto de datos"
         other: "personas han reclamado o se les han atribuido especímenes representados en este conjunto de datos"
+  date:
+    formats:
+      month_and_year: "%B %Y"
+      long: "%d %B %Y"
+      year: "%Y"
+    month_names: [~, enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre]
+    abbr_month_names: [~, ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic]
   developer:
     search: Buscar
     autocomplete_widget: Herramienta para autocompletar

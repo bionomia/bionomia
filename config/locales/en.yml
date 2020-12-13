@@ -123,6 +123,13 @@ en:
       unit:
         one: "person claimed or was attributed specimens represented in this dataset"
         other: "people claimed or were attributed specimens represented in this dataset"
+  date:
+    formats:
+      month_and_year: "%B %Y"
+      long: "%B %d, %Y"
+      year: "%Y"
+    month_names: [~, January, February, March, April, May, June, July, August, September, October, November, December]
+    abbr_month_names: [~, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
   developer:
     search: Search
     autocomplete_widget: Autocomplete Widget

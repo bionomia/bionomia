@@ -158,26 +158,26 @@ module Sinatra
 
         def format_lifespan(user)
           if user.date_born_precision == "day"
-            born = user.date_born.to_formatted_s(:long)
+            born = I18n.l user.date_born, format: :long
           elsif user.date_born_precision == "month"
-            born = user.date_born.to_formatted_s(:month_and_year)
+            born = I18n.l user.date_born, format: :month_and_year
           elsif user.date_born_precision == "year"
-            born = user.date_born.to_formatted_s(:year)
+            born = I18n.l user.date_born, format: :year
           else
             born = "?"
           end
 
           if user.date_died_precision == "day"
-            died = user.date_died.to_formatted_s(:long)
+            died = I18n.l user.date_died, format: :long
           elsif user.date_died_precision == "month"
-            died = user.date_died.to_formatted_s(:month_and_year)
+            died = I18n.l user.date_died, format: :month_and_year
           elsif user.date_died_precision == "year"
-            died = user.date_died.to_formatted_s(:year)
+            died = I18n.l user.date_died, format: :year
           else
             died = "?"
           end
 
-          "(" + ["b. " + born, "d. " + died].join(" &ndash; ") + ")"
+          "(" + ["&#42; " + born, died + " &dagger;"].join(" &ndash; ") + ")"
         end
 
       end

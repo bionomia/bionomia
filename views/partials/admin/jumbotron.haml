@@ -64,7 +64,7 @@
         %a{href: url("/organization/#{path}")} #{@admin_user.current_organization.name}
       #{@admin_user.current_organization.address}
 
-  - if !@admin_user.country_code.blank?
+  - if !@admin_user.country.blank?
     - country_codes = @admin_user.country_code.split("|") rescue []
     - @admin_user.country.split("|").each_with_index do |v,i|
       - if !country_codes[i].nil? && !country_codes[i].empty?

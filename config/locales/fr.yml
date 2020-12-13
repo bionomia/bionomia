@@ -123,6 +123,13 @@ fr:
       unit:
         one: "personne a réclamé ou a été attribuée des spécimens dans cet ensemble de données"
         other: "personnes ont réclamé ou ont été attribuées des spécimens dans cet ensemble de données"
+  date:
+    formats:
+      month_and_year: "%B %Y"
+      long: "%d %B %Y"
+      year: "%Y"
+    month_names: [~, janvier, février, mars, avril, mai, juin, juillet, août, septembre, octobre, november, décembre]
+    abbr_month_names: [~, jan., fév., mar., avr., mai., juin, juil., août, sept., oct., nov., déc.]
   developer:
     search: Rechercher
     autocomplete_widget: Autocomplete Widget

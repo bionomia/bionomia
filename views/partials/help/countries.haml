@@ -4,4 +4,4 @@
     %ul{class:"list-inline"}
       - group.each do |country|
         %li{class:"list-inline-item"}
-          %a{href: url("/help-others/country/#{country[0]}"), class:"btn btn-outline-dark btn-sm mb-2"} #{country[1]}
+          %a{href: url("/help-others/country/#{country[0]}"), class:"btn btn-outline-dark btn-sm mb-2"} #{country_name(country[0])}
