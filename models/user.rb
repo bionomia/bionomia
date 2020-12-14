@@ -748,8 +748,7 @@ class User < ActiveRecord::Base
   def flush_caches
     return if !::Module::const_get("BIONOMIA")
     BIONOMIA.cache_clear("blocks/#{identifier}-stats")
-    BIONOMIA.cache_clear("fragments/#{identifier}")
-    BIONOMIA.cache_clear("fragments/#{identifier}-scribe")
+    BIONOMIA.cache_clear("blocks/#{identifier}-scribe")
   end
 
   def delete_search

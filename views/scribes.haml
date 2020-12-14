@@ -20,8 +20,8 @@
       - if u.nil?
         %div{class:"card border-0"}
       - else
-        - cache_fragment(u.identifier + "-scribe") do
-          = haml :'partials/user/card-scribe', layout: false, locals: { user: u }
+        - stats = cache_block("#{u.identifier}-scribe") { scribe_stats(u) }
+        = haml :'partials/user/card-scribe', layout: false, locals: { user: u, stats: stats }
 
 - if @pagy.pages > 1
   %div{style:"overflow-y:scroll"}

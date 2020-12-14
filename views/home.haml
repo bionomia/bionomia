@@ -33,5 +33,5 @@
     %div{class: "card-deck"}
       - group.each do |u|
         - if !u.nil?
-          - cache_fragment(u.identifier) do
-            = haml :'partials/user/card', layout: false, locals: { user: u }
+          - stats = cache_block("#{u.identifier}-stats") { user_stats(u) }
+          = haml :'partials/user/card', layout: false, locals: { user: u, stats: stats }

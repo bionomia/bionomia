@@ -22,8 +22,11 @@
 
 - if @pagy.count == 0
   %div{class: "alert alert-info tiny-margins", role: "alert"}
-    - filter_message = @filter.length > 0 ? " with this applied filter" : ""
-    You have not yet claimed any specimens#{filter_message}. See your candidate specimen records on the Discovered page.
+    - if @filter.length > 0
+      #{I18n.t('profile.no_specimens_filter')}
+    - else
+      #{I18n.t('profile.no_specimens')}
+
 - else
   %div{class: "alert alert-info row tiny-margins", role: "alert"}
     %div{class: "col-12 col-md-9"}

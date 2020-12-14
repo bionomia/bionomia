@@ -139,8 +139,11 @@ module Sinatra
 
           {
             specimens: {
+              total: user.all_occurrences_count,
               identified: identified_count,
-              recorded: recorded_count
+              recorded: recorded_count,
+              top_family_identified: user.top_family_identified,
+              top_family_recorded: user.top_family_recorded
             },
             attributions: {
               helped: helped.count,
@@ -204,6 +207,13 @@ module Sinatra
                   .delete_if{|k,v| k > Date.today.year || k <= 1700 || v == [0,0] }
                   .sort
                   .map{|k,v| v.flatten.unshift(k.to_s) }
+          }
+        end
+
+        def scribe_stats(user)
+          {
+            attributions: user.claims_given.count,
+            people: user.helped_count
           }
         end
 

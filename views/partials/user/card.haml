@@ -1,11 +1,15 @@
-- identified = locals[:user].top_family_identified
-- id_statement = "identified #{identified}" if identified
-- recorded = locals[:user].top_family_recorded
-- recorded_statement = "collected #{recorded}" if recorded
-- statement = nil
-- if identified || recorded
-  - statement = [id_statement,recorded_statement].compact.join(" and ")
-  - statement = statement.slice(0,1).capitalize + statement.slice(1..-1)
+- identified = locals[:stats][:specimens][:top_family_identified]
+- recorded = locals[:stats][:specimens][:top_family_recorded]
+
+- if identified && recorded
+  - statement = "#{I18n.t('card.identified_collected', identified: identified, collected: recorded)}"
+- elsif identified
+  - statement = "#{I18n.t('card.identified', family: identified)}"
+- elsif recorded
+  - statement = "#{I18n.t('card.collected', family: recorded)}"
+- else
+  - statement = nil
+
 %div{class: "card card-profile my-3"}
   - if locals[:user].image_url
     %div{class: "card-header d-flex"}
@@ -13,12 +17,19 @@
         %img{src:"#{profile_image(locals[:user], 'medium')}", alt:"#{locals[:user].fullname}", class:"card-img-profile mr-2"}
       %div{class:"flex-grow-1"}
         %h5
-          // Do not use url method here becase caching breaks language-based subdomains
+          // Do not use url method here because caching breaks language-based subdomains
           %a{href: "/#{locals[:user].identifier}"} #{locals[:user].fullname_reverse}
         - if locals[:user].wikidata
           %p{class:"small text-muted mt-0 mb-0"}= format_lifespan(locals[:user])
         - if locals[:user].country
-          %p{class:"small text-muted mt-0 mb-0"} #{locals[:user].country.split("|").join("; ")}
+          %p{class:"small text-muted mt-0 mb-0"}
+            - country_codes = locals[:user].country_code.split("|") rescue []
+            - locals[:user].country.split("|").each_with_index do |v,i|
+              = succeed (country_codes[i+1]) ? '; ' : '' do
+                - if !country_codes[i].nil? && !country_codes[i].empty?
+                  #{country_name(country_codes[i])}
+                - else
+                  #{v}
   - else
     %div{class: "card-header"}
       %h5
@@ -27,7 +38,14 @@
       - if locals[:user].wikidata
         %p{class:"small text-muted mt-0 mb-0"}= format_lifespan(locals[:user])
       - if locals[:user].country
-        %p{class:"small text-muted mt-0 mb-0"} #{locals[:user].country.split("|").join("; ")}
+        %p{class:"small text-muted mt-0 mb-0"}
+          - country_codes = locals[:user].country_code.split("|") rescue []
+          - locals[:user].country.split("|").each_with_index do |v,i|
+            = succeed (country_codes[i+1]) ? '; ' : '' do
+              - if !country_codes[i].nil? && !country_codes[i].empty?
+                #{country_name(country_codes[i])}
+              - else
+                #{v}
 
   %div{class: "card-body"}
     %p{class:"card-text mt-2"} #{statement}
@@ -37,6 +55,5 @@
       %div{class: "small text-right text-muted mr-2"}
         %i{class:"fas fa-lock"}
     %div{class: "small text-left text-muted mr-2"}
-      - count = locals[:user].all_occurrences_count
-      %span{class:"badge badge-light"} #{number_with_delimiter(count)}
-      #{'specimen'.pluralize(count)} claimed
+      %span{class:"badge badge-light"} #{number_with_delimiter(locals[:stats][:specimens][:total])}
+      #{I18n.t('card.claimed', count: locals[:stats][:specimens][:total])}

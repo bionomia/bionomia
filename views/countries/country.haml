@@ -34,10 +34,7 @@
         %i{class:"fas fa-minus-circle"}
         #{I18n.t('general.remove')}
     - else
-      No one found from
-      %span{class:"font-weight-bold"}
-        #{@country[1]}
-      in ORCID accounts or Wikidata entries. Search by Taxon Family to explore expertise.
+      #{I18n.t('country.no_one_message', country: @country[1])}
 - else
   %div{class:"alert alert-info tiny-margins", role: "alert"}
     - if @action || @family
@@ -62,8 +59,8 @@
         - else
           - if @action || @family
             - u = User.find(u[:_id])
-          - cache_fragment(u.identifier) do
-            = haml :'partials/user/card', layout: false, locals: { user: u }
+          - stats = cache_block("#{u.identifier}-stats") { user_stats(u) }
+          = haml :'partials/user/card', layout: false, locals: { user: u, stats: stats }
 
   - if @pagy.pages > 1
     %div{style:"overflow-y:scroll"}

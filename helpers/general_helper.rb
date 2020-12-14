@@ -40,9 +40,8 @@ module Sinatra
         end
 
         def clear_caches(user)
-          cache_clear "fragments/#{user.identifier}"
-          cache_clear "fragments/#{user.identifier}-scribe"
-          cache_clear "blocks/#{user.identifier}-stats"
+          cache_clear "blocks/#{user.identifier}"
+          cache_clear "blocks/#{user.identifier}-scribe"
         end
 
         def latest_claims(type = "living")

@@ -65,6 +65,19 @@ en:
       unit:
         one: "search result found for"
         other: "search results found for"
+  card:
+    collected: "Collected %{family}"
+    identified: "Identified %{family}"
+    identified_collected: "Identified %{identified} and collected %{collected}"
+    claimed:
+      one: specimen claimed
+      other: specimens claimed
+    attributed:
+      one: specimen attributed
+      other: specimens attributed
+    helped:
+      one: person helped
+      other: people helped
   cdm:
     title: For Data Managers
     background_title: Background
@@ -86,6 +99,7 @@ en:
     resided_in: Resided In
     collected_from: Collected From
     identified_from: Identified From
+    no_one_message: "No one found from %{country} in ORCID accounts or Wikidata entries. Search by Taxon Family to explore expertise."
   dataset:
     dataset_title: Datasets
     search_title: Datasets Search
@@ -274,6 +288,8 @@ en:
     less_exact: Make less exact
     no_unclaimed: Bionomia did not find any unclaimed specimens.
     close: Close
+    add_person: Add a Person
+    add_orcid_wikidata: Add ORCID Identifier or Wikidata Q Number
   help_docs:
     title: Help Documents
     new_users: For New Users & Group Settings
@@ -394,6 +410,7 @@ en:
     previous: Previous
     metrics: Metrics
     science_enabled: Science Enabled
+    member: member
   privacy:
     privacy_title: Privacy Policy
   profile:
@@ -469,6 +486,8 @@ en:
     upload_error: Please upload an image less than 5MB in size.
     bulk_claim: Bulk Claim
     advanced_search: Advanced Search & Filter
+    no_specimens_filter: You have not yet claimed any specimens with this applied filter. See your candidate specimen records on the Discovered page.
+    no_specimens: You have not yet claimed any specimens. See your candidate specimen records on the Discovered page.
   roster:
     roster_title: Public Profiles
     lede:

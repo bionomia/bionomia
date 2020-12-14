@@ -177,7 +177,7 @@ module Sinatra
             died = "?"
           end
 
-          "(" + ["&#42; " + born, died + " &dagger;"].join(" &ndash; ") + ")"
+          ["&#42; " + born, died + " &dagger;"].join(" &ndash; ")
         end
 
       end

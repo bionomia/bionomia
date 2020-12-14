@@ -8,22 +8,35 @@
           // Do not use url method here becase caching breaks language-based subdomains
           %a{href: "/#{locals[:user].identifier}"} #{locals[:user].fullname_reverse}
         - if locals[:user].country
-          %p{class:"small text-muted mt-0 mb-0"} #{locals[:user].country.split("|").join("; ")}
+          - country_codes = locals[:user].country_code.split("|") rescue []
+          - locals[:user].country.split("|").each_with_index do |v,i|
+            = succeed (country_codes[i+1]) ? '; ' : '' do
+              - if !country_codes[i].nil? && !country_codes[i].empty?
+                #{country_name(country_codes[i])}
+              - else
+                #{v}
   - else
     %div{class: "card-header"}
       %h5
         // Do not use url method here becase caching breaks language-based subdomains
         %a{href: "/#{locals[:user].identifier}"} #{locals[:user].fullname_reverse}
       - if locals[:user].country
-        %p{class:"small text-muted mt-0 mb-0"} #{locals[:user].country.split("|").join("; ")}
+        %p{class:"small text-muted mt-0 mb-0"}
+          - country_codes = locals[:user].country_code.split("|") rescue []
+          - locals[:user].country.split("|").each_with_index do |v,i|
+            = succeed (country_codes[i+1]) ? '; ' : '' do
+              - if !country_codes[i].nil? && !country_codes[i].empty?
+                #{country_name(country_codes[i])}
+              - else
+                #{v}
 
   %div{class: "card-body"}
 
-  %div{class: "card-footer d-flex"}
-    %div{class: "small text-muted"}
-      Attributed
-      %span{class:"badge badge-light"} #{number_with_delimiter(locals[:user].claims_given.count)}
-      #{'specimen'.pluralize(locals[:user].claims_given.count)}
-      to
-      %span{class:"badge badge-light"} #{number_with_delimiter(locals[:user].helped_count)}
-      #{'person'.pluralize(locals[:user].helped_count)}
+  %div{class: "card-footer"}
+    %div{class: "small text-muted row"}
+      %div{class:"col-12 col-md-6"}
+        %span{class:"badge badge-light"} #{number_with_delimiter(locals[:stats][:attributions])}
+        #{I18n.t('card.attributed', count: locals[:stats][:attributions])}
+      %div{class:"col-12 col-md-6 text-md-left text-lg-right"}
+        %span{class:"badge badge-light"} #{number_with_delimiter(locals[:stats][:people])}
+        #{I18n.t('card.helped', count: locals[:stats][:people])}

@@ -43,7 +43,7 @@
             %div{class: "col small text-right text-muted"}
               - count = org.active_users.count
               %span{class:"badge badge-light"} #{number_with_delimiter(count)}
-              #{'member'.pluralize(count)}
+              #{I18n.t('organization.member').pluralize(count)}
 
 - if @pagy.pages > 1
   %div{style:"overflow-y:scroll"}

@@ -65,6 +65,19 @@ es:
       unit:
         one: "resultado de la búsqueda por"
         other: "resultados de la búsqueda por"
+  card:
+    collected: "Collected %{family}"
+    identified: "Identified %{family}"
+    identified_collected: "Identified %{identified} and collected %{collected}"
+    claimed:
+      one: specimen claimed
+      other: specimens claimed
+    attributed:
+      one: specimen attributed
+      other: specimens attributed
+    helped:
+      one: person helped
+      other: people helped
   cdm:
     title: Para manejadores de datos
     background_title: Antecedentes
@@ -86,6 +99,7 @@ es:
     resided_in: Vivió En
     collected_from: Colectado De
     identified_from: Identificado De
+    no_one_message: "No one found from %{country} in ORCID accounts or Wikidata entries. Search by Taxon Family to explore expertise."
   dataset:
     dataset_title: Conjuntos de datos
     search_title: Búsqueda en conjuntos de datos
@@ -274,6 +288,8 @@ es:
     less_exact: Hacer menos precisa
     no_unclaimed: Bionomía no encontró especímenes sin reclamar.
     close: Cerrar
+    add_person: Add a Person
+    add_orcid_wikidata: Add ORCID Identifier or Wikidata Q Number
   help_docs:
     title: Documentos de ayuda
     new_users: Para usuarios nuevos y configuración de grupo
@@ -394,6 +410,7 @@ es:
     previous: Previo
     metrics: Métricas
     science_enabled: Ciencia habilitada
+    member: member
   privacy:
     privacy_title: Política de privacidad
   profile:
@@ -469,6 +486,8 @@ es:
     upload_error: Por favor cargue una imagen de menos de 5MB en tamaño.
     bulk_claim: Reclamar en bloque
     advanced_search: Búsqueda avanzada y filtro
+    no_specimens_filter: You have not yet claimed any specimens with this applied filter. See your candidate specimen records on the Discovered page.
+    no_specimens: You have not yet claimed any specimens. See your candidate specimen records on the Discovered page.
   roster:
     roster_title: Perfiles públicos
     lede:

@@ -37,12 +37,12 @@
         %span{class: "font-italic"} #{::Bionomia::WikidataSearch::PEOPLE_PROPERTIES.keys.join(", ")}
         \. Bionomia will also add them by the following day.
 
-%h4 Add a Person
+%h4= I18n.t('help.add_person')
 
 %form{id:"form-user-wrapper", method: "post", action: "/help-others/add", "accept-charset" => "UTF-8", class:"helpers"}
   %div{class:"d-flex flex-sm-row flex-column mt-3"}
     %div{class:"form-group"}
-      %label{for: "identifier", class:"font-weight-bold"}= "Add ORCID Identifier or Wikidata Q Number"
+      %label{for: "identifier", class:"font-weight-bold"}= I18n.t('help.add_orcid_wikidata')
       %input{class: "orcid-add", type: :text, name: "identifier", placeholder: "Q1234567", size:"12"}
       %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
       %input{type: :submit, class:"btn btn-success mt-3", value: "Add"}

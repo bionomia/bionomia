@@ -65,6 +65,19 @@ fr:
       unit:
         one: "résultat de recherche pour"
         other: "résultats de recherche pour"
+  card:
+    collected: "Collecté des %{family}"
+    identified: "Identifié des %{family}"
+    identified_collected: "Identifié des %{identified} et collecté des %{collected}"
+    claimed:
+      one: spécimen réclamé
+      other: spécimens réclamés
+    attributed:
+      one: spécimen attribué
+      other: spécimens attributés
+    helped:
+      one: personne aidé
+      other: personnes aidés
   cdm:
     title: Pour les gestionnaires de données
     background_title: Contexte
@@ -86,6 +99,7 @@ fr:
     resided_in: Résidé
     collected_from: Collecté
     identified_from: Identifié
+    no_one_message: "Personne ne se trouve au %{country} dans les comptes ORCID ou les entrées Wikidata. Recherche par famille taxonomique pour explorer l'expertise."
   dataset:
     dataset_title: Jeux de données
     search_title: Recherche de Jeux de Données
@@ -274,6 +288,8 @@ fr:
     less_exact: Rendre moins exact
     no_unclaimed: Bionomia n'a trouvé aucun spécimen non réclamé.
     close: Fermer
+    add_person: Ajouter une personne
+    add_orcid_wikidata: Ajouter un identifiant ORCID ou un numéro Wikidata Q
   help_docs:
     title: Documents d'Aide
     new_users: For New Users & Group Settings
@@ -394,6 +410,7 @@ fr:
     previous: Précédent
     metrics: Métrique
     science_enabled: Science Activée
+    member: membre
   privacy:
     privacy_title: Politique de confidentialité
   profile:
@@ -468,7 +485,9 @@ fr:
     scribe_not_helped: Cette scribe Bionomia ne vous a pas encore aidé à récupérer des spécimens.
     upload_error: Veuillez télécharger une image d'une taille inférieure à 5 Mo.
     bulk_claim: En masse
-    advanced_search: Advanced Search & Filter
+    advanced_search: Recherche et filtre avancée
+    no_specimens_filter: Vous n'avez encore réclamé aucun spécimen avec ce filtre appliqué.
+    no_specimens: Vous n'avez encore réclamé aucun spécimen.
   roster:
     roster_title: Profils publics
     lede:
