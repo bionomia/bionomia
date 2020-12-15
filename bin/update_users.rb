@@ -6,7 +6,7 @@ ARGV << '-h' if ARGV.empty?
 
 options = {}
 OptionParser.new do |opts|
-  opts.banner = "Usage: update_agents.rb [options]"
+  opts.banner = "Usage: update_users.rb [options]"
 
   opts.on("-c", "--country-codes", "Update country codes") do
     options[:country_codes] = true
@@ -182,7 +182,7 @@ elsif options[:duplicates]
 elsif options[:stats]
   stats = Class.new
   stats.extend Sinatra::Bionomia::Helper::UserHelper
-  Users.where(is_public: true).find_each do |u|
+  User.where(is_public: true).find_each do |u|
     BIONOMIA.cache_clear("blocks/#{u.identifier}-stats")
     BIONOMIA.cache_put_tag("blocks/#{u.identifier}-stats", stats.user_stats(u))
     "#{u.fullname_reverse}".green
