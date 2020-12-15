@@ -190,7 +190,7 @@ fr:
     per_page: Par page
     download: Télécharger
     submit: Soumettre
-    upload_csv_instructions: Upload csv with claims
+    upload_csv_instructions: Importer un fichier csv avec des réclamations
     download_records: Téléchargez csv avec des réclamations
     download_alert: "Download discovered specimen records, work offline, then upload new claims as a csv. A file containing at most
     %{num_records} records is generated.
@@ -290,6 +290,19 @@ fr:
     close: Fermer
     add_person: Ajouter une personne
     add_orcid_wikidata: Ajouter un identifiant ORCID ou un numéro Wikidata Q
+    attribute_count:
+      one: Aidez à attriber 1 spécimen.
+      other: Aidez à attribuer %{count} spécimens.
+    specimens_attributed_count:
+      one: specimen attribué
+      other: specimens attribués
+    download: Télécharger
+    download_label: Télécharger les enregistrements découverts
+    upload_label: Importer un fichier csv avec des réclamations
+    choose_instructions_html: "Choisissez %{coll_img} collecté, %{det_img} identifié, ou chacun pour les deux."
+    search_count:
+      one: "1 résultat pour %{search}"
+      other: "%{count} résultats pour %{search}"
   help_docs:
     title: Documents d'Aide
     new_users: For New Users & Group Settings
@@ -488,6 +501,13 @@ fr:
     advanced_search: Recherche et filtre avancée
     no_specimens_filter: Vous n'avez encore réclamé aucun spécimen avec ce filtre appliqué.
     no_specimens: Vous n'avez encore réclamé aucun spécimen.
+    candidate_count:
+      one: Trouvé 1 spécimen.
+      other: "Trouvé %{count} spécimens."
+    latest_helped: "Dernier à %{time}"
+    attributed_count:
+      one: "spécimen attribué"
+      other: "spécimens attribués"
   roster:
     roster_title: Profils publics
     lede:

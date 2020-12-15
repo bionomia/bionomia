@@ -33,7 +33,14 @@
                   - if u.wikidata
                     %p{class:"small text-muted mt-0 mb-0"}= format_lifespan(u)
                   - if u.country
-                    %p{class:"small text-muted mt-0 mb-0"} #{u.country.split("|").join("; ")}
+                    %p{class:"small text-muted mt-0 mb-0"}
+                      - country_codes = u.country_code.split("|") rescue []
+                      - u.country.split("|").each_with_index do |v,i|
+                        = succeed (country_codes[i+1]) ? ', ' : '' do
+                          - if !country_codes[i].nil? && !country_codes[i].empty?
+                            #{country_name(country_codes[i])}
+                          - else
+                            #{v}
             - else
               %div{class: "card-header"}
                 %h5
@@ -41,7 +48,14 @@
                 - if u.wikidata
                   %p{class:"small text-muted mt-0 mb-0"}= format_lifespan(u)
                 - if u.country
-                  %p{class:"small text-muted mt-0 mb-0"} #{u.country.split("|").join("; ")}
+                  %p{class:"small text-muted mt-0 mb-0"}
+                    - country_codes = u.country_code.split("|") rescue []
+                    - u.country.split("|").each_with_index do |v,i|
+                      = succeed (country_codes[i+1]) ? ', ' : '' do
+                        - if !country_codes[i].nil? && !country_codes[i].empty?
+                          #{country_name(country_codes[i])}
+                        - else
+                          #{v}
 
             %div{class: "card-body"}
 
@@ -55,7 +69,7 @@
                 %span{class:"text-danger"}
                   %i{class:"fas fa-heart"}
               %div{class:"small ml-auto text-muted"}
-                Latest at #{m[:latest]}
+                #{I18n.t('profile.latest_helped', time: m[:latest])}
 
   - if @pagy.pages > 1
     %div{style:"overflow-y:scroll"}

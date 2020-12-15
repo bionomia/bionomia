@@ -15,12 +15,7 @@
     = I18n.t('profile.ignored_alert')
 
   - else
-    Choose
-    %img{src:"/images/net-unselected.png", alt:"#{I18n.t('general.collected')}", title:"#{I18n.t('general.collected')}", width:18}
-    collected,
-    %img{src:"/images/microscope-unselected.png", alt:"#{I18n.t('general.identified')}", title:"#{I18n.t('general.identified')}", width:18}
-    identified, or Both to claim specimens
-    %span{class:"font-weight-bold"} you may have mistakenly marked as "Not me".
+    = haml :'partials/choose_instructions', layout: false
 
 - if !@results.empty?
   = haml :'partials/tables/ignored', layout: false

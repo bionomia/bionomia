@@ -290,6 +290,19 @@ es:
     close: Cerrar
     add_person: Add a Person
     add_orcid_wikidata: Add ORCID Identifier or Wikidata Q Number
+    attribute_count:
+      one: Help attribute 1 specimen.
+      other: Help attribute %{count} specimens.
+    specimens_attributed_count:
+      one: specimen attributed
+      other: specimens attributed
+    download: Download
+    download_label: Download discovered records
+    upload_label: Upload csv with claims
+    choose_instructions_html: "Choose %{coll_img} collected, %{det_img} identified, or Both."
+    search_count:
+      one: "1 search result for %{search}"
+      other: "%{count} search results for %{search}"
   help_docs:
     title: Documentos de ayuda
     new_users: Para usuarios nuevos y configuración de grupo
@@ -488,6 +501,13 @@ es:
     advanced_search: Búsqueda avanzada y filtro
     no_specimens_filter: You have not yet claimed any specimens with this applied filter. See your candidate specimen records on the Discovered page.
     no_specimens: You have not yet claimed any specimens. See your candidate specimen records on the Discovered page.
+    candidate_count:
+      one: Found 1 specimen.
+      other: "Found %{count} specimens."
+    latest_helped: "Latest at %{time}"
+    attributed_count:
+      one: "specimen attributed"
+      other: "specimens attributed"
   roster:
     roster_title: Perfiles públicos
     lede:

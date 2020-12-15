@@ -30,9 +30,7 @@
 
 - else
   %div{class: "alert alert-info tiny-margins", role: "alert"}
-    #{@pagy.count} search results for
-    = succeed "." do
-      %span{class: "font-weight-bold"} #{h(params[:q])}
+    #{I18n.t('help.search_count', count: @pagy.count, search: h(params[:q]))}
     Not found? See how to
     = succeed "." do
       %a{href: url("/help-others/add"), class: "font-weight-bold"} add someone

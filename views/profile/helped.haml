@@ -39,7 +39,14 @@
                   - if u.wikidata
                     %p{class:"small text-muted mt-0 mb-0"}= format_lifespan(u)
                   - if u.country
-                    %p{class:"small text-muted mt-0 mb-0"} #{u.country.split("|").join("; ")}
+                    %p{class:"small text-muted mt-0 mb-0"}
+                      - country_codes = u.country_code.split("|") rescue []
+                      - u.country.split("|").each_with_index do |v,i|
+                        = succeed (country_codes[i+1]) ? ', ' : '' do
+                          - if !country_codes[i].nil? && !country_codes[i].empty?
+                            #{country_name(country_codes[i])}
+                          - else
+                            #{v}
             - else
               %div{class: "card-header"}
                 %h5
@@ -47,7 +54,14 @@
                 - if u.wikidata
                   %p{class:"small text-muted mt-0 mb-0"}= format_lifespan(u)
                 - if u.country
-                  %p{class:"small text-muted mt-0 mb-0"} #{u.country.split("|").join("; ")}
+                  %p{class:"small text-muted mt-0 mb-0"}
+                    - country_codes = u.country_code.split("|") rescue []
+                    - u.country.split("|").each_with_index do |v,i|
+                      = succeed (country_codes[i+1]) ? ', ' : '' do
+                        - if !country_codes[i].nil? && !country_codes[i].empty?
+                          #{country_name(country_codes[i])}
+                        - else
+                          #{v}
 
             %div{class: "card-body d-flex"}
               %div{class: "flex-fill"}
@@ -60,12 +74,11 @@
                 %div{class: "small text-right text-muted mr-2"}
                   %i{class:"fas fa-lock"}
               %div{class: "small text-left text-muted mr-2"}
-                Attributed
                 %span{class:"badge badge-light"}
                   #{number_with_delimiter(m[:attribution_count])}
-                specimens
+                #{I18n.t('profile.attributed_count', count: m[:attribution_count])}
               %div{class:"small ml-auto text-muted"}
-                Latest at #{m[:created]}
+                #{I18n.t('profile.latest_helped', time: m[:created])}
 
   - if @pagy.pages > 1
     %div{style:"overflow-y:scroll"}

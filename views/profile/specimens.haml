@@ -30,11 +30,7 @@
 - else
   %div{class: "alert alert-info row tiny-margins", role: "alert"}
     %div{class: "col-12 col-md-9"}
-      Choose
-      %img{src:"/images/net-unselected.png", alt:"#{I18n.t('general.collected')}", title:"#{I18n.t('general.collected')}", width:18}
-      collected,
-      %img{src:"/images/microscope-unselected.png", alt:"#{I18n.t('general.identified')}", title:"#{I18n.t('general.identified')}", width:18}
-      identified, or Both to correct your claims.
+      = haml :'partials/choose_instructions', layout: false
     %div{class: "col-12 col-md-3 text-md-right"}
       %a{href: url("/profile/download.csv"), alt:"CSV file download", class:"mr-2"}
         %i{class:"fas fa-file-csv text-dark h5 m-0 p-1"}

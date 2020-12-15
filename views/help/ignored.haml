@@ -18,10 +18,6 @@
 - else
   = haml :'partials/help/fixed_navbar', layout: false
   %div{id: "helper-info", class: "alert alert-info tiny-margins", role: "alert"}
-    Choose
-    %img{src:"/images/net-unselected.png", alt:"#{I18n.t('general.collected')}", title:"#{I18n.t('general.collected')}", width:18}
-    collected,
-    %img{src:"/images/microscope-unselected.png", alt:"#{I18n.t('general.identified')}", title:"#{I18n.t('general.identified')}", width:18}
-    identified, or Both to reclaim specimens mistakenly marked as "Not them".
+    = haml :'partials/choose_instructions', layout: false
 
   = haml :'partials/tables/ignored', layout: false

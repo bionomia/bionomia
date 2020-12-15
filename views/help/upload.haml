@@ -18,14 +18,14 @@
 %form{id:"form-wrapper", method: :post, action: "/help-others/#{@viewed_user.identifier}/upload-result", enctype: "multipart/form-data", "accept-charset": "UTF-8", class: "form mt-4"}
   - relaxed = params["relaxed"] == "1" ? "?relaxed=1" : nil
   %div{class:"form-group row"}
-    %div{class:"col-sm-4 col-lg-2 col-form-label text-left text-sm-right"} Download discovered records
-    %div{class:"col-sm-8 col-lg-10"}
+    %div{class:"col-sm-4 col-lg-3 col-form-label text-left text-sm-right"}= I18n.t('help.download_label')
+    %div{class:"col-sm-8 col-lg-9"}
       %a{href: url("/help-others/#{@viewed_user.identifier}/candidates.csv#{relaxed}"), class:"btn btn-primary"}
         %i{class:"fas fa-file-csv h4 m-0 p-0"}
-        Download
+        #{I18n.t('help.download')}
   %div{class:"form-group row"}
-    %label{for:"candidate-file", class:"col-sm-4 col-lg-2 col-form-label text-left text-sm-right"} Upload csv with claims
-    %div{class:"col-sm-8 col-lg-10"}
+    %label{for:"candidate-file", class:"col-sm-4 col-lg-3 col-form-label text-left text-sm-right"}= I18n.t('help.upload_label')
+    %div{class:"col-sm-8 col-lg-9"}
       %input{type:"file", class:"form-control-file", id:"candidate-file", name: "file"}
       %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
-      %button{type:"submit", class:"btn btn-success mt-3"} Submit
+      %button{type:"submit", class:"btn btn-success mt-3"}= I18n.t('general.submit')
