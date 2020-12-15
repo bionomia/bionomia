@@ -65,7 +65,7 @@ OptionParser.new do |opts|
   end
 
   opts.on("-s", "--stats", "Rebuild user stats.") do
-    options[:stats]
+    options[:stats] = true
   end
 
   opts.on("-h", "--help", "Prints this help") do
