@@ -64,6 +64,10 @@ OptionParser.new do |opts|
     options[:duplicates] = true
   end
 
+  opts.on("-s", "--stats", "Rebuild user stats.") do
+    options[:stats]
+  end
+
   opts.on("-h", "--help", "Prints this help") do
     puts opts
     exit
@@ -175,4 +179,12 @@ elsif options[:modified_wikidata]
 elsif options[:duplicates]
   wiki = Bionomia::WikidataSearch.new
   wiki.merge_users
+elsif options[:stats]
+  stats = Class.new
+  stats.extend Sinatra::Bionomia::Helper::UserHelper
+  Users.where(is_public: true).find_each do |u|
+    BIONOMIA.cache_clear("blocks/#{u.identifier}-stats")
+    BIONOMIA.cache_put_tag("blocks/#{u.identifier}-stats", stats.user_stats(u))
+    "#{u.fullname_reverse}".green
+  end
 end
