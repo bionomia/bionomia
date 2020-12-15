@@ -14,12 +14,7 @@
 - else
   %div{class: "alert alert-info row tiny-margins", role: "alert"}
     %div{class: "col col-12"}
-      Choose
-      %img{src:"/images/net-unselected.png", alt:"#{I18n.t('general.collected')}", title:"#{I18n.t('general.collected')}", width:18}
-      collected,
-      %img{src:"/images/microscope-unselected.png", alt:"#{I18n.t('general.identified')}", title:"#{I18n.t('general.identified')}", width:18}
-      identified, or Both to
-      %span{class:"font-weight-bold"} adjust your claims.
+      = haml :'partials/choose_instructions', layout: false
 
   %h4= I18n.t('profile.specimens_used')
   %p{class: "citation"}
