@@ -105,4 +105,9 @@ describe "Bionomia Application Controller" do
     expect(last_response).to be_ok
   end
 
+  it "should allow accessing the workshops page" do
+    get '/workshops'
+    expect(last_response).to be_ok
+  end
+
 end
