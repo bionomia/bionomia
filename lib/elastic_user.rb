@@ -171,6 +171,7 @@ module Bionomia
       date_born = (u.date_born_precision == "day") ? u.date_born : nil
       date_died = (u.date_died_precision == "day") ? u.date_died : nil
       description = u.description.truncate(50) rescue nil
+      other_names = u.other_names.split("|").map(&:strip) rescue []
       {
         id: u.id,
         orcid: u.orcid,
@@ -179,7 +180,7 @@ module Bionomia
         given: u.given,
         fullname: u.fullname,
         fullname_reverse: u.fullname_reverse,
-        other_names: u.other_names.split("|").map(&:strip),
+        other_names: other_names,
         date_born: date_born,
         date_died: date_died,
         thumbnail: thumbnail(u),
