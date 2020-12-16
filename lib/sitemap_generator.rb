@@ -54,6 +54,7 @@ module Bionomia
       sitemap.add '/scribes'
       sitemap.add '/terms-of-service'
       sitemap.add '/taxa'
+      sitemap.add '/workshops'
     end
 
     def add_users
