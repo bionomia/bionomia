@@ -363,6 +363,7 @@ es:
     parse: Analizar nombres
     reconcile: Reconciliar nombres
     acknowledgments: Agradecimientos
+    workshops: Workshops
   not_authorized:
     not_authorized: Sin autorización o la sesión ha terminado.
   occurrence:
@@ -679,3 +680,5 @@ es:
       unit:
         one: "trabajo"
         other: "trabajos"
+  workshops:
+    title: Workshops

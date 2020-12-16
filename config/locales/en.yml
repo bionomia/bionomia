@@ -363,6 +363,7 @@ en:
     parse: Parse Names
     reconcile: Reconcile Names
     acknowledgments: Acknowledgments
+    workshops: Workshops
   not_authorized:
     not_authorized: Not authorized or session terminated.
   occurrence:
@@ -679,3 +680,5 @@ en:
       unit:
         one: "work"
         other: "works"
+  workshops:
+    title: Workshops

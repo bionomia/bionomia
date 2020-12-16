@@ -363,6 +363,7 @@ fr:
     parse: Analyser les noms
     reconcile: Réconcilier les noms
     acknowledgments: Remerciements
+    workshops: Ateliers
   not_authorized:
     not_authorized: Non autorisé ou session terminée.
   occurrence:
@@ -679,3 +680,5 @@ fr:
       unit:
         one: "publication"
         other: "publications"
+  workshops:
+    title: Ateliers

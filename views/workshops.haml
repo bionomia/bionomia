@@ -1,0 +1,15 @@
+-content_for :title, I18n.t('workshops.title')
+
+-content_for :jumbotron do
+  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
+    %div{class:"mr-auto p-2"}
+      %h1{class:"h2"}= I18n.t('workshops.title')
+
+%h3= I18n.l Date.parse("December 1, 2020"), format: :long
+
+%h4{class:"mt-4"} The "Who" in Collections: Revealing the Network of Collectors and Determiners of Bat Specimens
+
+%iframe{src:"//www.slideshare.net/slideshow/embed_code/key/4Q3YPulKTtgYUe", width:"595", height:"485", frameborder:"0", marginwidth:"0", marginheight:"0", scrolling:"no", class:"mt-3", style:"border:1px solid #CCC; border-width:1px; max-width: 100%;", allowfullscreen: true}
+%p
+  %a{href:"//www.slideshare.net/DavidShorthouse/the-who-in-collections-revealing-the-network-of-collectors-and-determiners-of-bat-specimens", title:"The Who in Collections: Revealing the Network of Collectors and Determiners of Bat Specimens", target:"_blank"}
+    The Who in Collections: Revealing the Network of Collectors and Determiners of Bat Specimens

@@ -169,6 +169,10 @@ module Sinatra
             haml :offline, layout: false
           end
 
+          app.get '/workshops' do
+            haml :workshops
+          end
+
         end
 
       end
