@@ -52,14 +52,29 @@
                               %a{href: url("/#{u[:user].identifier}")}
                                 #{u[:user].fullname_reverse}
                             - if u[:user].country
-                              %p{class:"small text-muted mt-0 mb-0"} #{u[:user].country.split("|").join("; ")}
+                              %p{class:"small text-muted mt-0 mb-0"}
+                                - country_codes = u[:user].country_code.split("|") rescue []
+                                - u[:user].country.split("|").each_with_index do |v,i|
+                                  = succeed (country_codes[i+1]) ? '; ' : '' do
+                                    - if !country_codes[i].nil? && !country_codes[i].empty?
+                                      #{country_name(country_codes[i])}
+                                    - else
+                                      #{v}
                       - else
                         %div{class: "card-header"}
                           %h5
                             %a{href: url("/#{u[:user].identifier}")}
                               #{u[:user].fullname_reverse}
                           - if u[:user].country
-                            %p{class:"small text-muted mt-0 mb-0"} #{u[:user].country.split("|").join("; ")}
+                            %p{class:"small text-muted mt-0 mb-0"}
+                              - country_codes = u[:user].country_code.split("|") rescue []
+                              - u[:user].country.split("|").each_with_index do |v,i|
+                                = succeed (country_codes[i+1]) ? '; ' : '' do
+                                  - if !country_codes[i].nil? && !country_codes[i].empty?
+                                    #{country_name(country_codes[i])}
+                                  - else
+                                    #{v}
+
 
                       %div{class: "card-body"}
 

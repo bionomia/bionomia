@@ -680,5 +680,8 @@ fr:
       unit:
         one: "publication"
         other: "publications"
+    specimen_icon_count:
+      one: "%{coll_img} collecté or %{det_img} identifié 1 spécimen."
+      other: "%{coll_img} collectés or %{det_img} identifiés %{count} spécimens."
   workshops:
     title: Ateliers

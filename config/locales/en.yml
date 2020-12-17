@@ -680,5 +680,8 @@ en:
       unit:
         one: "work"
         other: "works"
+    specimen_icon_count:
+      one: "%{coll_img} collected or %{det_img} identified 1 specimen."
+      other: "%{coll_img} collected or %{det_img} identified %{count} specimens."
   workshops:
     title: Workshops

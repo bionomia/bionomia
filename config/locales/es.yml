@@ -680,5 +680,8 @@ es:
       unit:
         one: "trabajo"
         other: "trabajos"
+    specimen_icon_count:
+      one: "%{coll_img} colectados o %{det_img} identificados 1 especimen."
+      other: "%{coll_img} colectados o %{det_img} identificados %{count} especímenes."
   workshops:
     title: Talleres
