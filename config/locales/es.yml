@@ -66,18 +66,18 @@ es:
         one: "resultado de la búsqueda por"
         other: "resultados de la búsqueda por"
   card:
-    collected: "Collected %{family}"
-    identified: "Identified %{family}"
-    identified_collected: "Identified %{identified} and collected %{collected}"
+    collected: "Colectó %{family}"
+    identified: "Identificó %{family}"
+    identified_collected: "Identificó %{identified} y colectó %{collected}"
     claimed:
-      one: specimen claimed
-      other: specimens claimed
+      one: espécimen reclamado
+      other: especímenes reclamados
     attributed:
-      one: specimen attributed
-      other: specimens attributed
+      one: espécimen atribuido
+      other: especímenes atribuidos
     helped:
-      one: person helped
-      other: people helped
+      one: persona ayudada
+      other: personas ayudadas
   cdm:
     title: Para manejadores de datos
     background_title: Antecedentes
@@ -85,10 +85,10 @@ es:
     enhancements_title: Incorporando mejoras
     dq_title: Estimando la calidad de los datos
   charts:
-    year: Year
-    number_specimens: "# specimens"
-    identified: Identified
-    collected: Collected
+    year: Año
+    number_specimens: "# especímenes"
+    identified: Identificó
+    collected: Colectó
   country:
     country_title: Países
     lede: países indicados en cuentas de ORCID y entradas de Wikidata o registros de especímenes en GBIF
@@ -99,7 +99,7 @@ es:
     resided_in: Vivió En
     collected_from: Colectado De
     identified_from: Identificado De
-    no_one_message: "No one found from %{country} in ORCID accounts or Wikidata entries. Search by Taxon Family to explore expertise."
+    no_one_message: "No se encontró a nadie de %{country} en cuentas de ORCID o entradas de Wikidata. Buscar por familia taxonómica para explorar experticia."
   dataset:
     dataset_title: Conjuntos de datos
     search_title: Búsqueda en conjuntos de datos
@@ -153,16 +153,16 @@ es:
     search: Buscar
     autocomplete_widget: Herramienta para autocompletar
     json_ld_search: Búsqueda JSON-LD
-    structured_data: Datos Estructurados
-    raw_data: Datos Sin Procesar
+    structured_data: Datos estructurados
+    raw_data: Datos sin procesar
     code: Código
     reconcile_title: Reconciliar
-    recommended_use: Uso Recomendado
+    recommended_use: Uso recomendado
     title: Para desarrolladores
     code_title: "Para desarrolladores: Código"
     code: Código
     parser: Analizar nombres
-    parse_names: Analizar Nombres Humanos
+    parse_names: Analizar nombres humanos
     parse_names_title: "Para desarrolladores: Analizar nombres"
     structured_data_title: "Para desarrolladores: Datos estructurados"
   donate:
@@ -288,21 +288,21 @@ es:
     less_exact: Hacer menos precisa
     no_unclaimed: Bionomía no encontró especímenes sin reclamar.
     close: Cerrar
-    add_person: Add a Person
-    add_orcid_wikidata: Add ORCID Identifier or Wikidata Q Number
+    add_person: Agregar a una persona
+    add_orcid_wikidata: Agregar identificador de ORCID o número Q de Wikidata
     attribute_count:
-      one: Help attribute 1 specimen.
-      other: Help attribute %{count} specimens.
+      one: Ayude a atribuir 1 espécimen.
+      other: Ayude a atribuir %{count} especímenes.
     specimens_attributed_count:
-      one: specimen attributed
-      other: specimens attributed
-    download: Download
-    download_label: Download discovered records
-    upload_label: Upload csv with claims
-    choose_instructions_html: "Choose %{coll_img} collected, %{det_img} identified, or Both."
+      one: espécimen atribuido
+      other: especímenes atribuidos
+    download: Descargar
+    download_label: Descargar registros descubiertos
+    upload_label: Cargar csv con reclamos
+    choose_instructions_html: "Escoger %{coll_img} colectados, %{det_img} identificados, o ambos."
     search_count:
-      one: "1 search result for %{search}"
-      other: "%{count} search results for %{search}"
+      one: "1 resultado de la búsqueda por %{search}"
+      other: "%{count} resultados de la búsqueda por %{search}"
   help_docs:
     title: Documentos de ayuda
     new_users: Para usuarios nuevos y configuración de grupo
@@ -424,7 +424,7 @@ es:
     previous: Previo
     metrics: Métricas
     science_enabled: Ciencia habilitada
-    member: member
+    member: miembro
   privacy:
     privacy_title: Política de privacidad
   profile:
@@ -500,15 +500,15 @@ es:
     upload_error: Por favor cargue una imagen de menos de 5MB en tamaño.
     bulk_claim: Reclamar en bloque
     advanced_search: Búsqueda avanzada y filtro
-    no_specimens_filter: You have not yet claimed any specimens with this applied filter. See your candidate specimen records on the Discovered page.
-    no_specimens: You have not yet claimed any specimens. See your candidate specimen records on the Discovered page.
+    no_specimens_filter: Usted todavía no ha reclamado especímenes bajo este filtro. Vea los registros de sus especímenes candidatos en la página de Descubiertos.
+    no_specimens: Usted todavía no ha reclamado especímenes. Vea los registros de sus especímenes candidatos en la página de Descubiertos.
     candidate_count:
-      one: Found 1 specimen.
-      other: "Found %{count} specimens."
-    latest_helped: "Latest at %{time}"
+      one: Un espécimen encontrado.
+      other: "%{count} especímenes encontrados."
+    latest_helped: "Último en %{time}"
     attributed_count:
-      one: "specimen attributed"
-      other: "specimens attributed"
+      one: "espécimen atribuido"
+      other: "especímens atribuidos"
   roster:
     roster_title: Perfiles públicos
     lede:
@@ -681,4 +681,4 @@ es:
         one: "trabajo"
         other: "trabajos"
   workshops:
-    title: Workshops
+    title: Talleres
