@@ -1,12 +1,6 @@
 en:
   "true": "Yes"
   "false": "No"
-  about:
-    about_title: Rationale
-    the_problem: The Problem
-    metrics: Metrics on Organizations
-    in_a_name: What is a Bionomia?
-    focus_people: A Focus on People
   acknowledgments:
     acknowledgments_title: Acknowledgments
     taxon_silhouettes: Taxon Family Silhouettes
@@ -78,12 +72,6 @@ en:
     helped:
       one: person helped
       other: people helped
-  cdm:
-    title: For Data Managers
-    background_title: Background
-    engaging_title: Engaging With Your Community
-    enhancements_title: Incorporating Enhancements
-    dq_title: Assessing Data Quality
   charts:
     year: Year
     number_specimens: "# specimens"
@@ -201,15 +189,6 @@ en:
     reset: Reset
     remove: Remove
     filtered_by: Filtered by
-  get_started:
-    get_started_title: Get Started
-    lede:  Four steps to claim the specimens you collected or identified and to help acknowledge your peers, mentors, and organizations.
-    orcid_description: ORCID is a nonprofit organization helping create a world in which all who participate in research, scholarship and innovation are uniquely identified and connected to their contributions and affiliations, across disciplines, borders, and time.
-    suggested: Suggested details to make publicly visible in your ORCID account
-    step1: "Step 1: Authenticate via ORCID"
-    step2: "Step 2: Visit the Specimens tab"
-    step3: "Step 3: Claim your specimens"
-    step4: "Step 4: Attribute specimens to others"
   help:
     help_title: Help Attribute Specimens
     country_title: Help Attribute Specimens
@@ -303,12 +282,6 @@ en:
     search_count:
       one: "1 search result for %{search}"
       other: "%{count} search results for %{search}"
-  help_docs:
-    title: Help Documents
-    new_users: For New Users & Group Settings
-    focused_tasks: Focused Tasks
-  history:
-    history_title: History
   home:
     tagline: Link natural history specimens to the world's collectors.
     get_started: Get started
@@ -316,13 +289,6 @@ en:
     sample_profiles: Sample Profiles
     orcid_login: Log in with ORCID
     orcid_logo: ORCID logo
-  how_works:
-    title: How it Works
-    inner_workings: Inner Workings
-    gbif_title: Integration with GBIF
-    wikidata_title: Integration with Wikidata
-    orcid_title: Integration with ORCID
-    zenodo_title: Integration with Zenodo
   layout:
     profiles: Profiles
     scribes: Scribes
@@ -425,8 +391,6 @@ en:
     metrics: Metrics
     science_enabled: Science Enabled
     member: member
-  privacy:
-    privacy_title: Privacy Policy
   profile:
     thanks_title: Thanks Received
     candidates_title: Unclaimed Specimens
@@ -581,8 +545,6 @@ en:
     none_collected: "No one has collected %{taxon}"
     none_identified: "No one has identified %{taxon}"
     no_agents: "No agents have collected or identified %{taxon}"
-  terms:
-    terms_title: Terms of Service
   user:
     caches_rebuilt: Caches were rebuilt.
     overview: Overview

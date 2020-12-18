@@ -1,12 +1,6 @@
 es:
   "true": "Si"
   "false": "No"
-  about:
-    about_title: Razonamiento
-    the_problem: El problema
-    metrics: Métricas sobre las organizaciones
-    in_a_name: Qué es una Bionomía?
-    focus_people: Un enfoque en las personas
   acknowledgments:
     acknowledgments_title: Agradecimientos
     taxon_silhouettes: Siluetas de taxón por familia
@@ -78,12 +72,6 @@ es:
     helped:
       one: persona ayudada
       other: personas ayudadas
-  cdm:
-    title: Para manejadores de datos
-    background_title: Antecedentes
-    engaging_title: Involucrándose con su comunidad
-    enhancements_title: Incorporando mejoras
-    dq_title: Estimando la calidad de los datos
   charts:
     year: Año
     number_specimens: "# especímenes"
@@ -201,15 +189,6 @@ es:
     reset: Reiniciar
     remove: Remover
     filtered_by: Filtrado por
-  get_started:
-    get_started_title: Comience
-    lede: Cuatro pasos para reclamar los especímenes que recolectó o identificó y para ayudar a reconocer a sus colegas, mentores y organizaciones.
-    orcid_description: es una organización sin ánimo de lucro que ayuda a crear un mundo en el que todos aquellos que participan en investigación, escolaridad e innovación, estén identificados y conectados de manera única con sus contribuciones y afiliaciones, a lo largo de disciplinas, fronteras y tiempo.
-    suggested: Detalles sugeridos para hacerlos públicamente visibles en su cuenta ORCID
-    step1: "Paso 1: Autenticar vía ORCID"
-    step2: "Paso 2: Visite la pestaña de Especímenes"
-    step3: "Paso 3: Reclame sus especímenes"
-    step4: "Paso 4: Atribuya especímenes a otros"
   help:
     help_title: Ayude a atribuir especímenes
     country_title: Ayude a atribuir especímenes
@@ -303,12 +282,6 @@ es:
     search_count:
       one: "1 resultado de la búsqueda por %{search}"
       other: "%{count} resultados de la búsqueda por %{search}"
-  help_docs:
-    title: Documentos de ayuda
-    new_users: Para usuarios nuevos y configuración de grupo
-    focused_tasks: Tareas enfocadas
-  history:
-    history_title: Historia
   home:
     tagline: Enlace especímenes de historia natural a los colectores del mundo.
     get_started: Comenzar
@@ -316,13 +289,6 @@ es:
     sample_profiles: Perfiles de ejemplo
     orcid_login: Registrarse con ORCID
     orcid_logo: Logo de ORCID
-  how_works:
-    title: Como funciona
-    inner_workings: Trabajo interno
-    gbif_title: Integración con GBIF
-    wikidata_title: Integración con Wikidata
-    orcid_title: Integración con ORCID
-    zenodo_title: Integración con Zenodo
   layout:
     profiles: Perfiles
     scribes: Anotadores
@@ -425,8 +391,6 @@ es:
     metrics: Métricas
     science_enabled: Ciencia habilitada
     member: miembro
-  privacy:
-    privacy_title: Política de privacidad
   profile:
     thanks_title: Gracias recibidas
     candidates_title: Especímenes sin reclamar
@@ -581,8 +545,6 @@ es:
     none_collected: "Nadie ha colectado %{taxon}"
     none_identified: "Nadie ha identificado %{taxon}"
     no_agents: "Ningún agente ha colectado o identificado %{taxon}"
-  terms:
-    terms_title: Términos del servicio
   user:
     caches_rebuilt: Se han reconstruido las memorias caché.
     overview: Visión de conjunto

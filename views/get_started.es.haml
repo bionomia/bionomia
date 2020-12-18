@@ -1,19 +1,19 @@
--content_for :title, "Get Started"
+-content_for :title, "Comience"
 
 -content_for :jumbotron do
   %div{class: "jumbotron jumbotron-fluid d-flex flex-wrap"}
     %div{class: "mr-auto p-2"}
-      %h1{class:"h2"} Get Started
+      %h1{class:"h2"} Comience
       %p{class: "lead text-muted"}
-        Four steps to claim the specimens you collected or identified and to help acknowledge your peers, mentors, and organizations.
+        Cuatro pasos para reclamar los especímenes que recolectó o identificó y para ayudar a reconocer a sus colegas, mentores y organizaciones.
 
 
-%h3 Step 1: Authenticate via ORCID
+%h3 Paso 1: Autenticar vía ORCID
 %div{class:"ml-3 mt-4"}
   %div{class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
     %img{src:"/images/orcid-logo.png", alt:"ORCID", class:"mb-3 mr-3"}
     %div{class:"media-body"}
-      is a nonprofit organization helping create a world in which all who participate in research, scholarship and innovation are uniquely identified and connected to their contributions and affiliations, across disciplines, borders, and time.
+      es una organización sin ánimo de lucro que ayuda a crear un mundo en el que todos aquellos que participan en investigación, escolaridad e innovación, estén identificados y conectados de manera única con sus contribuciones y afiliaciones, a lo largo de disciplinas, fronteras y tiempo.
 
   - if !authorized?
     %form{action: "/auth/orcid?lang=#{I18n.locale}", method: "POST" }
@@ -23,7 +23,7 @@
           = I18n.t('home.orcid_login')
         %input{type:"hidden", name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
 
-  %p Suggested details to make publicly visible in your ORCID account
+  %p Detalles sugeridos para hacerlos públicamente visibles en su cuenta ORCID
 
   %ul
     %li
@@ -75,7 +75,7 @@
         %em eg
         Ringgold or GRID have been captured in your ORCID account.
 
-%h3 Step 2: Visit the Specimens tab
+%h3 Paso 2: Visite la pestaña de Especímenes
 %div{class:"ml-3 mt-4"}
   %img{src:"/images/profile-tabs.png", alt:"Bionomia profile tabs", class:"mb-3 img-fluid"}
   %p
@@ -94,7 +94,7 @@
     %a{href:"https://gbif.org"} Global Biodiversity Information Facility
     every two weeks.
 
-%h3 Step 3: Claim your specimens
+%h3 Paso 3: Reclame sus especímenes
 %div{class:"ml-3 mt-4"}
   %p
     Under the
@@ -135,7 +135,7 @@
   %div{class:"bd-callout bd-callout-bionomia"}
     Too many specimen records or want to sort by columns and/or filter by content? Click the "Bulk Claim" page on your Specimens tab to view instructions on how to download, add claims in a spreadsheet, then upload a completed csv file.
 
-%h3 Step 4: Attribute specimens to others
+%h3 Paso 4: Atribuya especímenes a otros
 %div{class:"ml-3 mt-4"}
   %p
     While authenticated via ORCID, visit

@@ -5,6 +5,14 @@ module Sinatra
     module Helper
       module GeneralHelper
 
+        def haml_i18n(template, *args)
+          if File.exists? "views/#{template}.#{I18n.locale.to_s}.haml"
+            haml("#{template}.#{I18n.locale}".to_sym, *args)
+          else
+            haml(template, *args)
+          end
+        end
+
         def base_url
           @base_url ||= "#{request.env['rack.url_scheme']}://#{request.env['HTTP_HOST']}"
         end

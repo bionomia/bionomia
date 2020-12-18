@@ -1,12 +1,6 @@
 fr:
   "true": "Oui"
   "false": "Non"
-  about:
-    about_title: Raisonnement
-    the_problem: Le problème
-    metrics: Mesures sur les organisations
-    in_a_name: Qu'est-ce qu'un Bionomia?
-    focus_people: Un focus sur les practiciens
   acknowledgments:
     acknowledgments_title: Remerciements
     taxon_silhouettes: Silhouettes des Familles Taxonomiques
@@ -78,12 +72,6 @@ fr:
     helped:
       one: personne aidé
       other: personnes aidés
-  cdm:
-    title: Pour les gestionnaires de données
-    background_title: Contexte
-    engaging_title: S'engager Avec Votre Communauté
-    enhancements_title: Intégration d'Améliorations
-    dq_title: Évaluation de la Qualité des Données
   charts:
     year: An
     number_specimens: "# spécimens"
@@ -201,15 +189,6 @@ fr:
     reset: Réinitialiser
     remove: Enlever
     filtered_by: Filtré par
-  get_started:
-    get_started_title: Commencer
-    lede: Quatre étapes pour réclamer les spécimens que vous avez collectés ou identifiés et pour aider à reconnaître vos pairs, mentors et organisations.
-    orcid_description: ORCID est une organisation à but non lucratif qui aide à créer un monde dans lequel tous ceux qui participent à la recherche, à l'érudition et à l'innovation sont identifiés de manière unique et connectés à leurs contributions et affiliations, à travers les disciplines, les frontières et le temps.
-    suggested: Détails suggérés pour rendre publiquement visible dans votre compte ORCID
-    step1: "Étape 1: authentification via ORCID"
-    step2: "Étape 2: visitez l'onglet Spécimens"
-    step3: "Étape 3: réclamez vos spécimens"
-    step4: "Étape 4: Attribuer des spécimens à d'autres"
   help:
     help_title: Aider à attribuer des spécimens
     country_title: Aider à attribuer des spécimens
@@ -303,12 +282,6 @@ fr:
     search_count:
       one: "1 résultat pour %{search}"
       other: "%{count} résultats pour %{search}"
-  help_docs:
-    title: Documents d'Aide
-    new_users: For New Users & Group Settings
-    focused_tasks: Focused Tasks
-  history:
-    history_title: Histoire
   home:
     tagline: Reliez des spécimens d'histoire naturelle aux collectionneurs du monde.
     get_started: Commencer
@@ -316,13 +289,6 @@ fr:
     sample_profiles: Exemples
     orcid_login: connecter avec ORCID
     orcid_logo: logo ORCID
-  how_works:
-    title: Comment ça Marche
-    inner_workings: Fonctionnement Intérieur
-    gbif_title: Intégration avec GBIF
-    wikidata_title: Intégration avec Wikidata
-    orcid_title: Intégration avec ORCID
-    zenodo_title: Intégration avec Zenodo
   layout:
     profiles: Profils
     scribes: Scribes
@@ -425,8 +391,6 @@ fr:
     metrics: Métrique
     science_enabled: Science Activée
     member: membre
-  privacy:
-    privacy_title: Politique de confidentialité
   profile:
     thanks_title: Remerciements Reçus
     candidates_title: Spécimens non réclamés
@@ -581,8 +545,6 @@ fr:
     none_collected: "Personne a collecté %{taxon}"
     none_identified: "Personne a identifié %{taxon}"
     no_agents: "Acun chaîne d'agent a collecté ou identifié %{taxon}"
-  terms:
-    terms_title: Conditions d'utilisation
   user:
     caches_rebuilt: Les caches ont été reconstruits.
     overview: Aperçu

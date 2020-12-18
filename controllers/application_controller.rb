@@ -13,7 +13,7 @@ module Sinatra
           end
 
           app.get '/about' do
-            haml :about, locals: { active_page: "about" }
+            haml_i18n :about, locals: { active_page: "about" }
           end
 
           app.get '/acknowledgments' do
@@ -29,7 +29,7 @@ module Sinatra
           end
 
           app.get '/history' do
-            haml :'history', locals: { active_page: "history" }
+            haml_i18n :'history', locals: { active_page: "history" }
           end
 
           app.get '/scribes' do
@@ -38,7 +38,7 @@ module Sinatra
           end
 
           app.get '/collection-data-managers' do
-            haml :data_managers
+            haml_i18n :data_managers
           end
 
           app.get '/developers' do
@@ -60,11 +60,11 @@ module Sinatra
           end
 
           app.get '/help' do
-            haml :help_docs
+            haml_i18n :help_docs
           end
 
           app.get '/how-it-works' do
-            haml :how_it_works
+            haml_i18n :how_it_works
           end
 
           app.get '/images/*.svg' do
@@ -77,11 +77,11 @@ module Sinatra
           end
 
           app.get '/integrations' do
-            haml :integrations
+            haml_i18n :integrations
           end
 
           app.get '/get-started' do
-            haml :get_started
+            haml_i18n :get_started
           end
 
           app.get '/on-this-day' do
@@ -149,11 +149,11 @@ module Sinatra
           end
 
           app.get '/privacy' do
-            haml :privacy, locals: { active_page: "privay" }
+            haml_i18n :privacy, locals: { active_page: "privacy" }
           end
 
           app.get '/terms-of-service' do
-            haml :terms_service, locals: { active_page: "terms_service" }
+            haml_i18n :terms_service, locals: { active_page: "terms_service" }
           end
 
           app.get '/roster' do
@@ -170,7 +170,7 @@ module Sinatra
           end
 
           app.get '/workshops' do
-            haml :workshops
+            haml :workshops, locals: { active_page: "workshops" }
           end
 
         end
