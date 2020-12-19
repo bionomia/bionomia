@@ -21,7 +21,7 @@ class BIONOMIA < Sinatra::Base
   register Sinatra::Bionomia::Model::Initialize
 
   load_locales File.join(root, 'config', 'locales')
-  I18n.available_locales = [:en, :fr, :es]
+  I18n.available_locales = [:en, :fr, :es, :pt]
 
   include Pagy::Backend
   include Pagy::Frontend
