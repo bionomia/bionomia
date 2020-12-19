@@ -16,8 +16,9 @@
     a su número Q de
     %a{href:"https://www.wikidata.org"} Wikidata
     o a su identificdor de
-    %a{href:"https://orcid.org"} ORCID
-    . Las personas con identificador de ORCID también pueden reclamar registros de los especímenes que ellos mismos recolectaron o identificaron. Los identificadores de Wikidata y ORCID tienen recursos y servicios asociados que son indudablemente útiles para colecciones que van desde eliminar la ambigüedad de nombres de personas hasta medir el impacto que su colección tiene en la comunidad académica.
+    = succeed "." do
+      %a{href:"https://orcid.org"} ORCID
+    Las personas con identificador de ORCID también pueden reclamar registros de los especímenes que ellos mismos recolectaron o identificaron. Los identificadores de Wikidata y ORCID tienen recursos y servicios asociados que son indudablemente útiles para colecciones que van desde eliminar la ambigüedad de nombres de personas hasta medir el impacto que su colección tiene en la comunidad académica.
 
   %div{class: "row"}
     %div{class: "col-12 col-md-6"}
@@ -57,11 +58,13 @@
       %p
         Busque su(s)
         %a{href: url("/datasets")} conjunto(s) de datos
-        y encuentre un enlace al paquete 
-        %a{href:"https://frictionlessdata.io/"} Frictionless Data
-        . Estos archivos relacionales comprimidos, codificados UTF-8 son similares a los archivos de Darwin Core que usted produjo para GBIF. Se diferencian en que representan de manera más eficiente relaciones
-        %em many:many
-        . También hay una variedad amplia de
+        y encuentre un enlace al paquete
+        = succeed "." do
+          %a{href:"https://frictionlessdata.io/"} Frictionless Data
+        Estos archivos relacionales comprimidos, codificados UTF-8 son similares a los archivos de Darwin Core que usted produjo para GBIF. Se diferencian en que representan de manera más eficiente relaciones
+        = succeed "." do
+          %em many:many
+        También hay una variedad amplia de
         %a{href: "https://frictionlessdata.io/software/"}
           bibliotecas de software abierto
         en muchos lenguajes de programación que leen, validan y procesan datos sin fricción. También puede extraer el paquete comprimido e importar los archivos csv codificados en UTF-8 en cualquier programa de hojas de cálculo, siempre que los archivos no sean excesivamente grandes.
@@ -96,10 +99,10 @@
       %h3 Estimando la calidad de los datos
 
       %p
-         En el conjunto de páginas "Ayudar a otros" donde los registros de especímenes se atribuyen a recolectores e identificadores, hay pestañas para corregir y visualizar registros.
-         Aquí, las fechas de nacimiento y muerte de un recolector se comparan con las de sus registros de especímenes.
-         También se puede hacer clic en países en mapas y rangos de fechas en gráficos para ejecutar filtros dinámicos.
-         Con el tiempo y a medida que se realizan más atribuciones, los informes de calidad de datos como estos en los registros de especímenes de las personas pueden acumularse en informes a nivel de conjunto de datos.
-         Estos pueden incluirse como archivos csv adicionales en sus paquetes de Frictionless Data para que pueda investigar y reparar registros problemáticos en su sistema de gestión de colecciones según sea necesario.
+        En el conjunto de páginas "Ayudar a otros" donde los registros de especímenes se atribuyen a recolectores e identificadores, hay pestañas para corregir y visualizar registros.
+        Aquí, las fechas de nacimiento y muerte de un recolector se comparan con las de sus registros de especímenes.
+        También se puede hacer clic en países en mapas y rangos de fechas en gráficos para ejecutar filtros dinámicos.
+        Con el tiempo y a medida que se realizan más atribuciones, los informes de calidad de datos como estos en los registros de especímenes de las personas pueden acumularse en informes a nivel de conjunto de datos.
+        Estos pueden incluirse como archivos csv adicionales en sus paquetes de Frictionless Data para que pueda investigar y reparar registros problemáticos en su sistema de gestión de colecciones según sea necesario.
 
       = haml_i18n :'partials/developers/reconcile', layout: false
