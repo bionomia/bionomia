@@ -1,10 +1,11 @@
 :javascript
   $(function() {
-    var cookie_name = 'bionomia-offline-warning';
+    var cookie_name = 'bionomia-offline-warning',
+        domain = '#{Settings.cookie_domain}';
     if (Cookies.get(cookie_name) !== "hide") {
         $('#offline_warning').modal('show')
                              .on('hide.bs.modal', function(e) {
-                                Cookies.set(cookie_name, "hide", { expires: 7 });
+                                Cookies.set(cookie_name, "hide", { domain: domain, sameSite: 'Lax', expires: 7 });
                              });
     }
   });
