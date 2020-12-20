@@ -401,14 +401,14 @@ es:
     helped_title: Personas ayudadas
     citation_title: Citación
     citations_title: Citaciones
-    overview: Visión de conjunto
+    overview: Descripción general
     specimens: Especímenes
     people_helped: Personas ayudadas
     science_enabled: Ciencia habilitada
     claimed: Reclamados
     discovered: Descubiertos
     upload: Cargar
-    ignored: Ignorado
+    ignored: Ignorados
     help_received: Ayuda recibida
     helped: Ayudado
     helped_alert: Usted ayudó a atribuir especímenes a las siguientes personas, con las más recientes mostradas primero.
@@ -457,12 +457,12 @@ es:
     private: Privado
     active: "On"
     inactive: "Off"
-    make_public_message: Incluya su cuenta en perfiles públicos. Sus asignaciones se incluirán en una descarga de datos en bloque, expuestos a través de extensiones de Google Chrome y Firefox y un trino se enviará desde @BionomiaTrack.
+    make_public_message: Incluya su cuenta en perfiles públicos. Sus asignaciones se incluirán en una descarga de datos en masa, expuestos a través de extensiones de Google Chrome y Firefox y un trino se enviará desde @BionomiaTrack.
     no_candidates_alert: Bionomía no encontró especímenes indizados por GBIF que usted pueda haber colectado o identificado.
     ignored_alert: Los registros de especímenes que usted marcó como "No soy yo" aparecerán aquí.
     scribe_not_helped: Este anotador de Bionomía aún no le ha ayudado a reclamar especímenes.
     upload_error: Por favor cargue una imagen de menos de 5MB en tamaño.
-    bulk_claim: Reclamar en bloque
+    bulk_claim: Reclamar en masa
     advanced_search: Búsqueda avanzada y filtro
     no_specimens_filter: Usted todavía no ha reclamado especímenes bajo este filtro. Vea los registros de sus especímenes candidatos en la página de Descubiertos.
     no_specimens: Usted todavía no ha reclamado especímenes. Vea los registros de sus especímenes candidatos en la página de Descubiertos.
@@ -496,7 +496,7 @@ es:
     type_status: Estatus de tipo
     scribe: Anotador
     not_me: No soy yo
-    not_them: No son ellos
+    not_them: No es ella/él
     not_recorded: sin registrar
     remove: Remover
   scribes:
@@ -547,7 +547,7 @@ es:
     no_agents: "Ningún agente ha colectado o identificado %{taxon}"
   user:
     caches_rebuilt: Se han reconstruido las memorias caché.
-    overview: Visión de conjunto
+    overview: Descripción general
     specialties: Especialidades
     network: Red
     deposited_at: Depositado en
