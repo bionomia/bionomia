@@ -21,7 +21,8 @@ module Sinatra
           locales = {
             en: "en_US",
             fr: "fr_FR",
-            es: "es_ES"
+            es: "es_ES",
+            pt: "pt_PT"
           }
           locales[I18n.locale] || "en_US"
         end
