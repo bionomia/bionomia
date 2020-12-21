@@ -79,8 +79,8 @@ es:
     collected: Colectó
   country:
     country_title: Países
-    lede: países indicados en cuentas de ORCID y entradas de Wikidata o registros de especímenes en GBIF
-    intro: países indicados en cuentas de ORCID y entradas de Wikidata. Busque por familia taxonómica para explorar experticia.
+    lede: Países indicados en cuentas de ORCID y entradas de Wikidata o registros de especímenes en GBIF
+    intro: Países indicados en cuentas de ORCID y entradas de Wikidata. Busque por familia taxonómica para explorar experticia.
     no_one_alert: "No se encontró nadie de"
     no_one_collected_alert: Nadie ha colectado especímenes de
     no_one_identified_alert: Nadie ha identificado especímenes de
@@ -180,8 +180,8 @@ es:
     submit: Enviar
     upload_csv_instructions: Enviar csv con adjudicaciones
     download_records: Descargar registros descubiertos
-    download_alert: "Descargue registros de especímenes descubiertos, trabaje desconectado, luego cargue adjudicaciones nuevas como csv. Un archivo que contiene al menos
-    %{num_records} registros se ha generado.
+    download_alert: "Descargue registros de especímenes descubiertos, trabaje desconectado, luego cargue adjudicaciones nuevas como csv. Se ha generado un archivo que contiene al menos
+    %{num_records} registros.
     Si tiene mucho más que estos, puede trabajar en tandas.
     Esta rutina no actualiza los datos de los especímenes subyacentes ni actualiza las adjudicaciones existentes. Si hay reclamos existentes en el archivo a cargar, estos se omitirán.
     Su csv cargado debe usar una coma para separar las columnas, cada una opcionalmente entre comillas."
@@ -202,7 +202,7 @@ es:
     add_someone_lede: "Añadir a alguien que aún no ha sido descubierto"
     country_name_lede: Países indicados en ORCID o Wikidata
     latest_lede: Únase al grupo de anotadores ayudando a atribuir especímenes
-    country_lede: Únase al grupo de anotadores en reconocer a sus colegas, mentores, o cualquier persona que le inspire
+    country_lede: Únase al grupo de anotadores reconociendo a sus colegas, mentores, o cualquier persona que le inspire.
     person: Persona
     progress: Progreso
     public: Público
@@ -218,7 +218,7 @@ es:
     by_country: Por país
     not_ignored_alert: Los anotadores de Bionomía no han marcado especímenes para ser ignorados.
     agent_string: Cadena de agente
-    taxon_string: Taxon familia
+    taxon_string: Familia taxonómica
     dataset: Conjunto de datos
     datasets: Conjuntos de datos
     agents: Agentes
@@ -363,8 +363,8 @@ es:
     organization_title: Organizaciones
     lede:
      unit:
-       one: "organización con cuenta de ORCID y entradas de Wikidata"
-       other: "organizaciones con cuentas de ORCID y entradas de Wikidata"
+       one: "organización en cuentas de ORCID y entradas de Wikidata"
+       other: "organizaciones en cuentas de ORCID y entradas de Wikidata"
     placeholder: Museo Canadiense de la Naturaleza
     affiliation_none_alert: Publicaciones basadas en especímenes colectados o identificados por personal actual y personal previo todavía no han sido registrados por GBIF
     affiliation_alert: "%{count} publicaciones usaron datos de especímenes descargados de GBIF basados en especímenes colectados o identificados por personal actual y personal previo mientras afiliados a %{org_name}"
@@ -621,7 +621,7 @@ es:
     stats_collected_specimens:
       unit:
         one: "especimen colectado de al menos"
-        other: "especímenes colectado de al menos"
+        other: "especímenes colectados de al menos"
     stats_collected_countries:
       unit:
         one: "país"
