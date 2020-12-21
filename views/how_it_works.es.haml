@@ -6,31 +6,32 @@
       %h1{class:"h2"} Como funciona
 
 %p
-  Bionomia is developed and maintained by
+  Bionomía es desarrollada y mantenida por
   %a{href:"https://orcid.org/0000-0001-7618-5230"}
     %i{class:"fab fa-orcid"}
     David P. Shorthouse
-  using specimen data periodically downloaded from the
+  utilizando datos de especímenes descargados periódicamente de la
   %a{href: "https://gbif.org"} Global Biodiversity Information Facility
-  (GBIF) and authentication provided by
+  (GBIF) y autenticación proporcionada por
   = succeed "." do
     %a{href: "https://orcid.org" } ORCID
-  It was launched in August 2018 as a submission to the annual
+  Fue lanzada en agosto de 2018 como una postulación al
   = succeed "." do
     %a{href: "https://www.gbif.org/news/1GQURfK5jS4Iq4O06Y0EK4/2018-gbif-ebbe-nielsen-challenge-seeks-open-data-innovations-for-biodiversity"} Ebbe Nielsen Challenge
-  Since then,
-  %a{href: "https://www.wikidata.org"} wikidata identifiers
-  were integrated to capture the names, birth, and dates of death for deceased biologists to help maximize downstream data integration, engagement, and as a means to discover errors or inconsistencies in natural history specimen data.
+  Desde entonces, se han integrado identificadores de
+  %a{href: "https://www.wikidata.org"} Wikidata
+  para capturar los nombres y las fechas de nacimiento y de muerte de biólogos fallecidos para ayudar a maximizar la integración de datos posteriores, el envolvimiento y como un medio para descubrir errores o inconsistencias en los datos de los especímenes de historia natural.
 
 %h3 Trabajo interno
 
 %p
-  Names of collectors and determiners are parsed and cleaned using the test-driven
-  %a{href: "https://github.com/dshorthouse/dwc_agent"} dwc_agent ruby gem
-  available for free integration in other projects. Similarity of people names is scored using a graph theory method outlined by
+  Los nombres de los recolectores e identificadores se analizan y limpian utilizando el método de prueba
+  %a{href: "https://github.com/dshorthouse/dwc_agent"} dwc_agent gema de ruby
+  disponible gratis para su integración en otros proyectos. La similitud de los nombres de las personas se califica utilizando un método de teoría de grafos descrito por
   %a{href: "https://orcid.org/0000-0002-7101-9767"} R.D.M. Page
-  and incorporated as a method in the dwc_agent gem. These scores are used to help expand the search for candidate specimens, presented in order of greatest to least probable. If you declared alternate names in your ORCID account such as a maiden name or if aliases are mentioned in wikidata profiles, these are used to search for candidate specimen records. Processing this large number of specimen records is an intensive though repeatable process using MIT-licensed,
-  %a{href: "https://github.com/bionomia/bionomia"} open source code.
+  e incorporado como método en la gema dwc_agent. Estos puntajes se utilizan para ayudar a expandir la búsqueda de especímenes candidatos, presentados en orden de mayor a menor probabilidad. Si usted declaró nombres alternativos en su cuenta de ORCID, como un apellido de soltera o si se mencionan alias en los perfiles de Wikidata, estos se utilizan para buscar registros de especímenes candidatos. El procesamiento de esta gran cantidad de registros de especímenes es un proceso intensivo, aunque repetible, que utiliza
+  %a{href: "https://github.com/bionomia/bionomia"} código fuente abierto
+  con licencia del MIT.
 
 %h4 Integración con GBIF
 
@@ -39,23 +40,23 @@
     %img{class:"mb-3 mr-3", src:"/images/gbif-logo.jpg", alt:"GBIF logo"}
   %div{class:"media-body"}
     %p
-      Approximately #{Settings.gbif.download_count}
-      %a{href: "https://doi.org/#{Settings.gbif.download_doi}"} specimen records
-      are downloaded from
+      Approximadamente #{Settings.gbif.download_count}
+      %a{href: "https://doi.org/#{Settings.gbif.download_doi}"} registros de especímenes
+      se descargan de
       %a{href:"https://gbif.org"} GBIF
-      as a custom format based on Apache Avro. Records with the basisOfRecord PRESERVED_SPECIMEN, FOSSIL_SPECIMEN, or LIVING_SPECIMEN are selected as well as content in either
+      como formato personalizado basado en Apache Avro. Se seleccionan registros con baseOfRecord PRESERVED_SPECIMEN, FOSSIL_SPECIMEN o LIVING_SPECIMEN, así como el contenido en
       %a{href: "http://rs.tdwg.org/dwc/terms/#recordedBy"} recordedBy
-      or
+      o
       %a{href: "http://rs.tdwg.org/dwc/terms/#identifiedBy"} identifiedBy
-      and then
-      %a{href:"https://github.com/bionomia/bionomia/blob/master/spark2.md"} processed.
+      y entonces son
+      %a{href:"https://github.com/bionomia/bionomia/blob/master/spark2.md"} procesados.
     %ul
       %li
-        all occurrence data fully refreshed every 2 weeks
+        todos los datos de ocurrencias se actualizan por completo cada 2 semanas
       %li
-        daily poll for
-        %a{href:"https://www.gbif.org/resource/search?contentType=literature&relevance=GBIF_USED"} cited data download packages
-        (less than 100MB zipped), extracted and linked to attributed specimen records
+        encuesta diaria para
+        %a{href:"https://www.gbif.org/resource/search?contentType=literature&relevance=GBIF_USED"} paquetes de descarga de datos citados
+        (menos de 100MB comprimidos), extraídos y vinculados a registros de especímenes atribuidos
 
 %h4 Integración con Wikidata
 
@@ -64,37 +65,37 @@
     %img{class:"mb-3 mr-3", src:"/images/wikidata-logo.png", alt:"Wikidata logo"}
   %div{class:"media-body"}
     %p
-      Synchrony with
-      %a{href:"https://www.wikidata.org"} wikidata
-      is maintained in several ways. With the exception of the last item on the list below, all automated methods executed via scheduled cron jobs using
-      %a{href:"https://github.com/ruby-rdf/sparql-client"} a ruby gem
-      require that people pages on wikidata have death dates as well as a value for any of the properties:
+      La sincronización con
+      %a{href:"https://www.wikidata.org"} Wikidata
+      se mantiene de varias formas. Con la excepción del último elemento de la lista a continuación, todos los métodos automatizados se ejecutan a través de trabajos cron programados utilizando
+      %a{href:"https://github.com/ruby-rdf/sparql-client"} una gema ruby
+      requieren que las páginas de personas en Wikidata tengan fechas de muerte, así como un valor para cualquiera de estas propiedades:
       %em #{::Bionomia::WikidataSearch::PEOPLE_PROPERTIES.keys.join(", ")}.
 
     %ul
       %li
-        daily poll for new pages (
+        encuesta diaria para nuevas páginas (
         %a{href:"https://w.wiki/J2a"} SPARQL
         )
       %li
-        daily refresh for entries that were modified within previous 24 hours (
+        actualización diaria para las entradas que se modificaron en las 24 horas anteriores (
         = succeed ", " do
           %a{href:"https://w.wiki/J2e"} SPARQL
-        using 2020-01-01 as example date
+        usando 2020-01-01 como fecha de ejemplo
         )
       %li
-        weekly query for merge events (
+        consulta semanal para eventos de combinación (
         = succeed ", " do
           %a{href: "https://w.wiki/J2g"} SPARQL
-        using 2020-01-01 as example date
+        usando 2020-01-01 como fecha de ejemplo
         )
       %li
-        a Scribe can refresh on demand
+        un anotador puede actualizar a solicitud en cualquier momento
 
     %p{class:"small"}
-      Example SPARQL queries above are limited to
-      %em Entomologists of the World (P5370)
-      but all the watched properties are used in production
+      Las consultas SPARQL de ejemplo anteriores están limitadas a
+      %em Entomólogos del mundo (P5370)
+      pero todas las propiedades observadas se utilizan en producción
 
 %h4 Integración con ORCID
 
@@ -103,30 +104,30 @@
     %img{class:"mb-3 mr-3", src:"/images/orcid-logo.png", alt:"ORCID logo"}
   %div{class:"media-body"}
     %p
-      Synchrony with
+      La sincronización con
       %a{href: "https://orcid.org"} ORCID
-      is maintained in several ways.
+      se mantiene de varias maneras.
 
     %ul
       %li
-        OAuth2 pass-through authentication
+        autenticación de paso OAuth2
       %li
-        daily poll for new accounts by querying the API for any of the keywords:
+        encuesta diaria para nuevas cuentas consultando la API para cualquiera de las palabras clave:
         %em #{Settings.orcid.keywords.join(", ")}
       %li
-        cache full name, aliases, keywords, employment, and education along with start and end dates
+        almacenar en caché el nombre completo, los alias, las palabras clave, el empleo y la educación junto con las fechas de inicio y finalización
       %li
-        incorporate employment and education data using ORCID-supplied
+        incorporar datos de empleo y educación provistas en identificadores de ORCID
         %a{href:"https://www.ringgold.com/"} Ringgold
-        or
+        o
         %a{href:"https://www.grid.ac/"} GRID
-        identifiers for organizations
+        para organizaciones
       %li
-        resolution of Ringgold or GRID identifiers against wikidata Q numbers
+        resolución de identificadores de Ringgold o GRID contra números Q de Wikidata
       %li
-        periodic full refresh of ORCID profiles
+        actualización periódica completa de los perfiles de ORCID
       %li
-        user or a Scribe can refresh on-demand
+        el usuario o un anotador puede actualizar a solicitud en cualquier momento
 
 %h4 Integración con Zenodo
 
@@ -135,8 +136,8 @@
     %img{class:"mb-3 mr-3", src:"/images/zenodo-logo.png", alt:"Zenodo logo"}
   %div{class:"media-body"}
     %p
-      From the settings panel in your account, you may connect with
+      Desde el panel de configuración de su cuenta, usted puede conectarse con
       %a{href:"https://zenodo.org/"} Zenodo
-      in two clicks using your ORCID credentials. Once you make this
+      en dos clicks usando sus credenciales de ORCID. Una vez se establece esta conexión
       %em set-it-and-forget-it
-      connection, Bionomia pushes your specimen data into this industry-recognized, stable, longterm archive and mints a new DataCite DOI. Your Zenodo token is cached in Bionomia and every week on your behalf, a new version of your specimen data is pushed to the archive when you make new claims. You will also receive a DataCite DOI badge on your Bionomia profile page and a formatted citation for your professional resume. The versioned data packages stored in Zenodo each consist of a csv file and a JSON-LD document, preparing the way for future Linked Data integrations. If you accept DataCite as a trusted organization in your ORCID account, you will receive a new formatted work entry there for your specimen dataset.
+      , Bionomía inserta los datos de sus especímenes en este repositorio que es estable, reconocido por la industria y a largo plazo, y crea un nuevo DataCite DOI. Su token de Zenodo se almacena en caché en Bionomía y, cada semana, en su nombre, se envía una nueva versión de los datos de sus especímenes al archivo cuando hace reclamos nuevos. También recibirá una insignia de DataCite DOI en su página de perfil de Bionomía y una cita formateada para su currículum profesional. Los paquetes de datos versionados almacenados en Zenodo consisten en un archivo csv y un documento JSON-LD, preparando el camino para futuras integraciones de Linked Data. Si acepta DataCite como una organización confiable en su cuenta ORCID, recibirá una nueva entrada de trabajo formateada allí para su conjunto de datos de especímenes.
