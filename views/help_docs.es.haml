@@ -58,8 +58,8 @@
           %em Ambos
           para aquellos en los que usted ha hecho ambas cosas.
           Si usted no recolectó o identificó uno de los registros candidatos que Bionomía encontró, haga clic en el botón
-          %em No soy yo
-          .
+          = succeed "." do
+            %em No soy yo
         %p{class:"mt-3 mb-3"}
           %img{src:"/images/button-selectors.png", alt: "Specimen claiming buttons"}
           %img{src:"/images/not-me.png", alt: "Not me buttons"}
@@ -75,8 +75,8 @@
 
         %p
           Una vez que haya reclamado sus registros de especímenes, vaya a la pestaña
-          %em Ciencia habilitada
-          .
+          = succeed "." do
+            %em Ciencia habilitada
           Ésta le mostrará qué trabajos han utilizado en sus análisis registros de sus especímenes. Esto depende de que los autores de esos artículos acrediten y citen el DOI de la descarga del conjunto de datos de GBIF que utilizaron.
 
         %p
@@ -160,8 +160,9 @@
           %script{async: true, src:"https://platform.twitter.com/widgets.js", charset:"utf-8"}
         %p
           Me encontré con "Miss Blackler" porque la había visto en el índice de botánicos de
-          %a{href:"https://twitter.com/HarvardHerbaria"} @HarvardHerbaria
-          . Ella colectó en Oregon y California. Creé un artículo de
+          = succeed "." do
+            %a{href:"https://twitter.com/HarvardHerbaria"} @HarvardHerbaria
+          Ella colectó en Oregon y California. Creé un artículo de
           %a{href:"https://twitter.com/wikidata"} @Wikidata
           para ella y agregué su identificador HUH.
         %p{class:"mt-3 mb-3"}
@@ -201,10 +202,11 @@
           Hago click en el botón
           %em Ayudar a otros
           en la parte superior derecha, y luego hago click en la pestaña
-          %em Agregar a alguien
-          . Agrego el número Q del artículo de Wikidata y presiono el botón verde
-          %em Add
-          .
+          = succeed "." do
+            %em Agregar a alguien
+          Agrego el número Q del artículo de Wikidata y presiono el botón verde
+          = succeed "." do
+            %em Add
         %p{class:"mt-3 mb-3"}
           %img{src:"/images/help-others-link.png", alt:"Help others link"}
           %img{src:"/images/help-tabs.png", alt:"Helping tabs"}
@@ -213,7 +215,7 @@
           Así queda ella agregada en Bionomía. Ahora es solo cuestión de hacer clic en su nombre y luego atribuirle especímenes como hicimos anteriormente para George Howes.
           %img{src:"/images/help-blackler.png", alt:"Helping Blackler", class:"mt-3 mb-3"}
           No se olvide de hacer click en
-          %em Hacer público 
+          %em Hacer público
           una vez que haya atribuido algunos especímenes.
           %img{src:"/images/make-public-button.png", class:"d-block mt-3 mb-3"}
           Usted no TIENE QUE competar el 100%, cualquier cosa es mejor que nada.
@@ -235,8 +237,8 @@
           = succeed "." do
             %a{href:"https://twitter.com/TranscribeSI"} @TranscribeSI
           Fue un colector prolífico y necesita un poco de cariño en
-          %a{href:"https://twitter.com/BionomiaTrack"} @BionomiaTrack
-          .
+          = succeed "." do
+            %a{href:"https://twitter.com/BionomiaTrack"} @BionomiaTrack
         %p{class:"mt-3 mb-3"}
           %img{src:"/images/wetmore-jumbotron.png", alt: "Wetmore overview", class:"align-top"}
         %p
