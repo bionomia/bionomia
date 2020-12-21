@@ -13,7 +13,7 @@
   %div{class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
     %img{src:"/images/orcid-logo.png", alt:"ORCID", class:"mb-3 mr-3"}
     %div{class:"media-body"}
-      es una organización sin ánimo de lucro que ayuda a crear un mundo en el que todos aquellos que participan en investigación, escolaridad e innovación, estén identificados y conectados de manera única con sus contribuciones y afiliaciones, a lo largo de disciplinas, fronteras y tiempo.
+      es una organización sin ánimo de lucro que ayuda a crear un mundo en el que todos aquellos que participan en investigación, escolaridad e innovación, estén identificados y conectados de manera única con sus contribuciones y afiliaciones, a lo largo de las disciplinas, las fronteras y el tiempo.
 
   - if !authorized?
     %form{action: "/auth/orcid?lang=#{I18n.locale}", method: "POST" }
@@ -31,7 +31,7 @@
       %small
         %sup a
     %li
-      %em también conocido como
+      %em También conocido como
       (otros nombres)
       %small
         %sup a,b
@@ -52,7 +52,7 @@
       %small
         %sup a,c
     %li
-      Educación and calificaciones
+      Educación y calificaciones
       %small
         %sup a,c
 
@@ -64,12 +64,13 @@
     %div
       %small
         %sup b
-        Nombres alternativos, incluidos los apodos y los apellidos, son útiles para ayudar a Bionomía a encontrar sus especímenes, por ejemplo, Miles Zhang, Y. Miles Zhang, Yuanmeng	Zhang.
+        Nombres alternativos, incluidos los apodos y los apellidos, son útiles para ayudar a Bionomía a encontrar sus especímenes, por ejemplo, Miles Zhang, Y. Miles Zhang y Yuanmeng Zhang son diferentes nombres usados por la misma persona en sus publicaciones.
     %div
       %small
         %sup c
         Si incluye las fechas de inicio y finalización de Empleo y / o Educación y calificaciones, estas se compararán con las fechas de los especímenes que usted recopiló o identificó y ayudarán a sus organizaciones a medir su impacto. Al seleccionar sus organizaciones, asegúrese de que los
-        %strong identificadores de organizaciones, por ejemplo, Ringgold or GRID han sido capturados en su cuenta de ORCID.
+        %strong identificadores de organizaciones
+        , por ejemplo, Ringgold o GRID han sido capturados en su cuenta de ORCID.
 
 %h3 Paso 2: Visite la pestaña de Especímenes
 %div{class:"ml-3 mt-4"}
@@ -77,10 +78,10 @@
   %p
     Una vez autenticado a través de ORCID, Bionomía primero le muestra una
     - if !authorized?
-      Visión general
+      Descripción general
     - else
-      %a{href: url("/profile")} Overview
-    de su perfil. Obtiene su nombre completo y otros detalles (ver arriba) de su cuenta de ORCID, que puede actualizar en cualquier momento. Haga clic en la pestaña
+      %a{href: url("/profile")} Descripción general
+    de su perfil. Obtiene su nombre completo y otros detalles de su cuenta de ORCID (ver arriba), que usted puede actualizar en cualquier momento. Haga clic en la pestaña
     - if !authorized?
       Descubiertos
     - else
@@ -98,7 +99,7 @@
       Descubiertos
     - else
       %a{href: url("/profile/candidates")} Descubiertos
-    de su pestaña de especímenes, usted puede reclamar en masa
+    de su pestaña Especímenes, usted puede reclamar en masa
     %em todas las filas visibles
     de especímenes o reclamar una sola fila dando click en:
     %ul{class:"list-unstyled"}
@@ -129,7 +130,7 @@
       %a{href: url("/profile/ignored")} Ignorados
     para arreglar o ajustar sus selecciones.
   %div{class:"bd-callout bd-callout-bionomia"}
-    ¿Demasiados registros de especímenes o desea ordenar por columnas y / o filtrar por contenido? Haga clic en la página "Reclamar en masa" en la pestaña Especímenes para ver las instrucciones sobre cómo descargar, agregar reclamos en una hoja de cálculo y luego cargar un archivo csv completo.
+    ¿Demasiados registros de especímenes o desea ordenar por columnas y / o filtrar por contenido? Haga clic en la página "Reclamar en masa" en la pestaña Especímenes para ver las instrucciones sobre cómo descargar, agregar atribuciones en una hoja de cálculo y luego cargar un archivo csv completo.
 
 %h3 Paso 4: Atribuya especímenes a otros
 %div{class:"ml-3 mt-4"}
