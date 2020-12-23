@@ -79,21 +79,18 @@
                   %span{"aria-hidden":"true"} &times;
               %div{class:"modal-body"}
                 %p
-                  Would you like to make #{@viewed_user.fullname}'s profile publicly available? An automated Tweet from
-                  %a{href:"https://twitter.com/BionomiaTrack", target:"_blank"} @BionomiaTrack
-                  will be sent announcing the new profile.
-                %p{id:"helpers-list", style:"display:none;"}
-                  Other scribes have also helped attribute #{@viewed_user.fullname}'s specimens:
+                  = I18n.t('help.make_public_question', user_name: "#{@viewed_user.fullname}")
+                  = I18n.t('help.tweet_message')
+                %p{id:"helpers-list", style:"display:none;"}= I18n.t('help.other_scribes', user_name: "#{@viewed_user.fullname}")
                 %ul
-                %p{id:"helpers-list-none", style:"display:none;"}
-                  No other scribes have helped attribute #{@viewed_user.fullname}'s specimens.
+                %p{id:"helpers-list-none", style:"display:none;"}= I18n.t('help.no_scribes', user_name: "#{@viewed_user.fullname}")
 
               %div{class:"modal-footer"}
                 %form{id: "visibility-form", action: "/help-others/#{@viewed_user.identifier}/visibility", method: :post}
                   %button{type:"button", class:"btn btn-sm btn-outline-secondary", "data-dismiss":"modal"}= I18n.t('help.not_yet')
                   %input{type: :hidden, name: "_method", value: 'PUT'}
                   %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
-                  %input{type: :submit, class:"btn btn-sm btn-outline-success", value:"Yes, Make Public"}
+                  %input{type: :submit, class:"btn btn-sm btn-outline-success", value:"#{I18n.t('help.make_public')}"}
 
       - if authorized?
         %div{class: "text-center border-top mt-3 pt-3"}

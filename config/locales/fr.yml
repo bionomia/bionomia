@@ -282,6 +282,11 @@ fr:
     search_count:
       one: "1 résultat pour %{search}"
       other: "%{count} résultats pour %{search}"
+    make_public: "Oui, rendre public"
+    other_scribes: "D'autres scribes ont également aidé à attribuer les spécimens de %{user_name}:"
+    no_scribes: "Aucun autre scribe n'a aidé à attribuer les spécimens de %{user_name}"
+    make_public_question: "Souhaitez-vous rendre le profil de %{user_name} accessible au public?"
+    tweet_message: "Un Tweet automatisé de @BionomiaTrack sera envoyé pour annoncer le nouveau profil."
   home:
     tagline: Reliez des spécimens d'histoire naturelle aux collectionneurs du monde.
     get_started: Commencer

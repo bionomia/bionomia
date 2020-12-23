@@ -282,6 +282,11 @@ en:
     search_count:
       one: "1 search result for %{search}"
       other: "%{count} search results for %{search}"
+    make_public: "Yes, Make Public"
+    other_scribes: "Other scribes have also helped attribute %{user_name}'s specimens:"
+    no_scribes: "No other scribes have helped attribute %{user_name}'s specimens."
+    make_public_question: "Would you like to make %{user_name}'s profile publicly available?"
+    tweet_message: "An automated Tweet from @BionomiaTrack will be sent announcing the new profile."
   home:
     tagline: Link natural history specimens to the world's collectors.
     get_started: Get started
