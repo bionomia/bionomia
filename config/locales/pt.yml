@@ -1,56 +1,56 @@
 pt:
-  "true": "Yes"
-  "false": "No"
+  "true": "Sim"
+  "false": "Não"
   acknowledgments:
-    acknowledgments_title: Acknowledgments
-    taxon_silhouettes: Taxon Family Silhouettes
-    translations: Translations
+    acknowledgments_title: Agradecimentos
+    taxon_silhouettes: Silhuetas de táxon família 
+    translations: Translações
   admin:
-    change_photo: Change profile photo
+    change_photo: Mudar foto de perfil
   agent:
-    agent_title: Agent Strings
-    search_title: Agent String Search
+    agent_title: Agente de usuário
+    search_title: Busca por agente de usuário
     lede:
       unit:
-        one: "raw string from parsed collector and determiner names in specimen data from GBIF"
-        other: "raw strings from parsed collector and determiner names in specimen data from GBIF"
-    search_none: No agent string found for
+        one: "cadeia de coletores e identificadores de nomes separados da data do especime do GBIF"
+        other: "cadeia de coletores e identificadores de nomes separados da data do especime do GBIF"
+    search_none: Cadeia de usuário não encontrado
     search_count:
       unit:
-        one: "search result for"
-        other: "search results for"
-    warning: "WARNING:"
-    warning_statement: Unlike all other URLs in this site, URLs for agent strings are unreliable for linking because they will point to different results every few weeks
-    agent_name_title: "%{agent_name} Specimens"
-    agent_lede: A raw string from parsed collector and determiner names in natural history specimen data
+        one: "resultados de busca para"
+        other: "resultados de busca para"
+    warning: "ATENÇÃO:"
+    warning_statement: Diferente de todas outras URLs neste site, URLs para cadeia de usuários não são confiáveis para conexão pois indicarão resultados diferentes em poucas semanas
+    agent_name_title: "%{agente_nome} Espécimes"
+    agent_lede: Uma cadeia não processada de coletores e identificadores de nomes separados na história natural istory specimen data
     found_statement:
       unit:
-        one: "specimen found. Not all columns are shown."
-        other: "specimens found. Not all columns are shown."
-    search_html: "Search for %{agent_link} the person and help attribute their specimens."
-    example_agents: Random Samples
+        one: "Espécime não encontrado. Nem todas as colunas são mostradas."
+        other: "Espécime ecnontrado. Nem todas as colunas são mostradas."
+    search_html: "Busca por %{agente_link} a pessoas e ajude na atribuição de seus espécimes."
+    example_agents: Amostras aleatórias
   article:
-    article_title: Article
-    articles_title: Articles
+    article_title: Artigo
+    articles_title: Artigos
     articles_lede:
       unit:
-        one: "article cited downloads from GBIF"
-        other: "articles that cited downloads from GBIF"
-    no_claims_alert: People have not yet claimed or were attributed specimens represented in data downloaded from GBIF in support of this article
+        one: "artigo citou downloads do GBIF"
+        other: "artigos que citaram downloads do GBIF"
+    no_claims_alert: Pessoas ainda não reivindicaram ou foram atribuídos espécimes representados nos dados baixados do GBIF em suporte a este artigo
     claims_alert:
       unit:
-        one: "person collected or identified specimens included in data downloaded from GBIF in support of this article"
-        other: "people collected or identified specimens included in data downloaded from GBIF in support of this article"
-    placeholder: "Evolution and systematics of..."
-    people: People
-    agent_strings: Agent Strings
-    agent_title: Article Agents
-    alphabetical: Alphabetical
-    counts: Counts
-    no_agent_strings_alert: Raw strings from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article have not been found
+        one: "pessoas coletaram ou identificaram espécimes incluídos na data derivada do GBIF em suporte a este artigo"
+        other: "pessoas coletaram ou identificaram espécimes incluídos na data derivada do GBIF em suporte a este artigo"
+    placeholder: "Evolução e sistemática de..."
+    people: Pessoas
+    agent_strings: Agente de usuário
+    agent_title: Agentes do artigo
+    alphabetical: Alfabético
+    counts: Contagens
+    no_agent_strings_alert: Cadeias brutas de coletores e identifcadores de nomes separados em data de espécimes derivadas do GBIF em suporte desse artigo não foram encontrados
     agent_strings_alert:
       unit:
-        one: "raw string from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article"
+        one: "Cadeias brutas de coletores e identifcadores de nomes separados de especimens derivados do GBIF em suporte desse artigo"
         other: "raw strings from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article"
     claims: claims
     specimens: specimens
@@ -135,60 +135,60 @@ pt:
       month_and_year: "%B %Y"
       long: "%B %d, %Y"
       year: "%Y"
-    month_names: [~, January, February, March, April, May, June, July, August, September, October, November, December]
-    abbr_month_names: [~, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+    month_names: [~, Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro]
+    abbr_month_names: [~, Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez]
   developer:
     search: Search
-    autocomplete_widget: Autocomplete Widget
-    json_ld_search: JSON-LD Search
-    structured_data: Structured Data
-    raw_data: Raw Data
-    code: Code
-    reconcile_title: Reconcile
-    recommended_use: Recommended Use
-    title: For Developers
-    code_title: "For Developers: Code"
-    code: Code
-    parser: Parse Names
-    parse_names: Parse Human Names
-    parse_names_title: "For Developers: Parse Names"
-    structured_data_title: "For Developers: Structured Data"
+    autocomplete_widget: Ferramenta de Autocompletação
+    json_ld_search: JSON-LD Busca
+    structured_data: Data Estruturada
+    raw_data:  Data Crua
+    code: Código
+    reconcile_title: Reconciliar
+    recommended_use: Uso Recomendado
+    title: Para Desenvolvedores
+    code_title: "Para Desenvolvedores: Código"
+    code: Código
+    parser: Separar Nomes
+    parse_names: Separar Nomes Humanos
+    parse_names_title: "Para Desenvolvedores: Separar Nomes"
+    structured_data_title: "Para Desenvolvedores: Data Estruturada"
   donate:
-    donate_title: Donate
-    lede: Your one-time or periodic donation will help complete the data pipeline and ensure that credit is given for contributions made to natural history collections as quickly and as seamlessly as possible.
-    campaign: Campaign
-    donor_wall: Donor Wall
+    donate_title: Doe
+    lede: Sua doação única ou periódica ajudará a completar o pipeline de dados e garantir que o crédito seja dado por contribuições feitas para coleções de história natural o mais rápido e perfeitamente possível.
+    campaign: Campanha
+    donor_wall: Parede de doadores
   donor_wall:
-    donor_wall_title: Donor Wall
-    lede: Thanks to the following donors who are supporting the completion of the data pipeline.
+    donor_wall_title: Parede de doadores
+    lede: Obrigado aos seguintes doadores que estão apoiando a conclusão do pipeline de dados.
   general:
-    search: Search
-    apply: Apply
-    help_attribute: Help Attribute
-    refresh_profile: Refresh
-    refresh_stats: Refresh stats
-    settings: Settings
-    bulk_assignment: Bulk Assignment
-    collected_all: Collected All
-    collected: Collected
-    identified_all: Identified All
-    identified: Identified
-    both: Both
-    either: Either
-    per_page: Per page
+    search: Busca
+    apply: aplicar
+    help_attribute: Atributo de ajuda
+    refresh_profile: Atualizar
+    refresh_stats: Atualizar status
+    settings: Configurações
+    bulk_assignment: Atribuição em massa
+    collected_all: Todos coletados
+    collected: Coletaods
+    identified_all: Todos Identificados
+    identified: Identificados
+    both: Ambos
+    either: Ou
+    per_page: Por página
     download: Download
-    submit: Submit
-    upload_csv_instructions: Upload csv with claims
-    download_records: Download discovered records
-    download_alert: "Download discovered specimen records, work offline, then upload new claims as a csv. A file containing at most
-    %{num_records} records is generated.
-    If you have many more than this, you may work in batches.
-    This routine does not update underlying specimen data nor does it update existing claims. If existing claims are present in the upload, these will be skipped.
-    Your uploaded csv must use a comma to separate columns each optionally enclosed by quotes."
-    search_dropdown_no_users: "Your search turned up 0 results."
-    reset: Reset
-    remove: Remove
-    filtered_by: Filtered by
+    submit: Submeter
+    upload_csv_instructions: Carregar csv com reivindicações
+    download_records: Baixar registros descobertos
+    download_alert: "Baixe registros de espécimes descobertos, trabalhe off-line e, em seguida, carregue novas reivindicações como um csv. Um arquivo contendo no máximo
+     % {num_records} registros é gerado.
+    Se você tiver muito mais do que isso, poderá trabalhar em lotes.
+     Esta rotina não atualiza dados de espécimes subjacentes nem atualiza reivindicações existentes. Se reivindicações existentes estiverem presentes no upload, elas serão ignoradas.
+     Seu csv carregado deve usar uma vírgula para separar as colunas, cada uma opcionalmente entre aspas."
+    search_dropdown_no_users: "Sua busca resultou em 0 resultados."
+    reset: Restabelecer
+    remove: Remover
+    filtered_by: Filtrado por
   help:
     help_title: Help Attribute Specimens
     country_title: Help Attribute Specimens
