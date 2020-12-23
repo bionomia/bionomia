@@ -3,7 +3,7 @@ pt:
   "false": "Não"
   acknowledgments:
     acknowledgments_title: Agradecimentos
-    taxon_silhouettes: Silhuetas de táxon família 
+    taxon_silhouettes: Silhuetas de táxon família
     translations: Translações
   admin:
     change_photo: Mudar foto de perfil
@@ -21,13 +21,13 @@ pt:
         other: "resultados de busca para"
     warning: "ATENÇÃO:"
     warning_statement: Diferente de todas outras URLs neste site, URLs para cadeia de usuários não são confiáveis para conexão pois indicarão resultados diferentes em poucas semanas
-    agent_name_title: "%{agente_nome} Espécimes"
+    agent_name_title: "%{agent_name} Espécimes"
     agent_lede: Uma cadeia não processada de coletores e identificadores de nomes separados na história natural istory specimen data
     found_statement:
       unit:
         one: "Espécime não encontrado. Nem todas as colunas são mostradas."
         other: "Espécime ecnontrado. Nem todas as colunas são mostradas."
-    search_html: "Busca por %{agente_link} a pessoas e ajude na atribuição de seus espécimes."
+    search_html: "Busca por %{agent_link} a pessoas e ajude na atribuição de seus espécimes."
     example_agents: Amostras aleatórias
   article:
     article_title: Artigo
@@ -181,10 +181,10 @@ pt:
     upload_csv_instructions: Carregar csv com reivindicações
     download_records: Baixar registros descobertos
     download_alert: "Baixe registros de espécimes descobertos, trabalhe off-line e, em seguida, carregue novas reivindicações como um csv. Um arquivo contendo no máximo
-     % {num_records} registros é gerado.
+    %{num_records} registros é gerado.
     Se você tiver muito mais do que isso, poderá trabalhar em lotes.
-     Esta rotina não atualiza dados de espécimes subjacentes nem atualiza reivindicações existentes. Se reivindicações existentes estiverem presentes no upload, elas serão ignoradas.
-     Seu csv carregado deve usar uma vírgula para separar as colunas, cada uma opcionalmente entre aspas."
+    Esta rotina não atualiza dados de espécimes subjacentes nem atualiza reivindicações existentes. Se reivindicações existentes estiverem presentes no upload, elas serão ignoradas.
+    Seu csv carregado deve usar uma vírgula para separar as colunas, cada uma opcionalmente entre aspas."
     search_dropdown_no_users: "Sua busca resultou em 0 resultados."
     reset: Restabelecer
     remove: Remover
