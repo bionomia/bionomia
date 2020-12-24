@@ -1,8 +1,5 @@
 -content_for :title do
-  - if @action
-    #{@action.capitalize} in #{@country[1]}
-  - else
-    #{@country[1]}
+  #{@country[1]}
 
 - content_for :scripts do
   %script{src: "/js/application.js"}
@@ -23,13 +20,12 @@
   %div{class: "alert alert-warning tiny-margins", role: "alert"}
     - if @action || @family
       %i{class:"fas fa-filter"}
-      - action = !@action.blank? ? @action : "collected or identified"
-      No one has #{action}
-      %span{class:"font-weight-bold"}
-        #{h(@family)}
-      from
-      %span{class:"font-weight-bold"}
-        #{@country[1]}
+      - if @action == "collected"
+        = I18n.t('country.no_one_collected_from', family: h(@family), country: @country[1])
+      - elsif @action == "identified"
+        = I18n.t('country.no_one_identified_from', family: h(@family), country: @country[1])
+      - else
+        = I18n.t('country.no_one_collected_identified_from', family: h(@family), country: @country[1])
       %a{href: url("/country/#{@country[0]}"), class:"text-danger ml-2"}
         %i{class:"fas fa-minus-circle"}
         #{I18n.t('general.remove')}
@@ -39,13 +35,12 @@
   %div{class:"alert alert-info tiny-margins", role: "alert"}
     - if @action || @family
       %i{class:"fas fa-filter"}
-      - action = !@action.blank? ? @action.capitalize : "Collected or identified"
-      #{action}
-      %span{class:"font-weight-bold"}
-        #{h(@family)}
-      from
-      %span{class:"font-weight-bold"}
-        #{@country[1]}.
+      - if @action == "collected"
+        = I18n.t('country.collected_from', family: h(@family), country: @country[1])
+      - elsif @action === "identified"
+        = I18n.t('country.identified_from', family: h(@family), country: @country[1])
+      - else
+        = I18n.t('country.collected_identified_from', family: h(@family), country: @country[1])
       %a{href: url("/country/#{@country[0]}"), class:"text-danger ml-2"}
         %i{class:"fas fa-minus-circle"}
         #{I18n.t('general.remove')}

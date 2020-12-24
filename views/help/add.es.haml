@@ -11,7 +11,7 @@
   %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap alert-warning"}
     %div{class: "mr-auto p-2"}
       %h1{class:"h2"}= I18n.t('help.help_title')
-      %p{class: "lead text-muted"} Add someone not yet discovered
+      %p{class: "lead text-muted"}= I18n.t('help.add_someone_lede')
     = haml :'partials/help/search', layout: false
 
 = haml :'partials/help/main_tabs', layout: false, locals: { active_main_tab: "add" }
@@ -37,12 +37,12 @@
         %span{class: "font-italic"} #{::Bionomia::WikidataSearch::PEOPLE_PROPERTIES.keys.join(", ")}
         \. Bionomia will also add them by the following day.
 
-%h4 Add a Person
+%h4= I18n.t('help.add_person')
 
 %form{id:"form-user-wrapper", method: "post", action: "/help-others/add", "accept-charset" => "UTF-8", class:"helpers"}
   %div{class:"d-flex flex-sm-row flex-column mt-3"}
     %div{class:"form-group"}
-      %label{for: "identifier", class:"font-weight-bold"} Add ORCID Identifier or Wikidata Q Number
+      %label{for: "identifier", class:"font-weight-bold"}= I18n.t('help.add_orcid_wikidata')
       %input{class: "orcid-add", type: :text, name: "identifier", placeholder: "Q1234567", size:"12"}
       %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
       %input{type: :submit, class:"btn btn-success mt-3", value: "Add"}

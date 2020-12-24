@@ -81,12 +81,12 @@ fr:
     country_title: Pays
     lede: Depuis les pays indiqués dans les comptes ORCID et les entrées Wikidata ou les spécimens d'enregistrés dans GBIF
     intro: Depuis les pays indiqués dans les comptes ORCID et les entrées Wikidata. Recherche par famille de taxons pour explorer l'expertise.
-    no_one_alert: "Personne trouvé du"
-    no_one_collected_alert: Personne n'a collecté au
-    no_one_identified_alert: Personne n'a identifié de spécimens au
-    resided_in: Résidé
-    collected_from: Collecté
-    identified_from: Identifié
+    collected_from: "Collecté %{family} de %{country}"
+    identified_from: "Identifié %{family} de %{country}"
+    collected_identified_from: "Collecté ou identifié %{family} de %{country}"
+    no_one_collected_from: "Personne a collecté %{family} de %{country}"
+    no_one_identified_from: "Personne a identifié %{family} de %{country}"
+    no_one_collected_identified_from: "Personne a collecté ou identifié %{family} de %{country}"
     no_one_message: "Personne ne se trouve au %{country} dans les comptes ORCID ou les entrées Wikidata. Recherche par famille taxonomique pour explorer l'expertise."
   dataset:
     dataset_title: Jeux de données
@@ -287,6 +287,9 @@ fr:
     no_scribes: "Aucun autre scribe n'a aidé à attribuer les spécimens de %{user_name}"
     make_public_question: "Souhaitez-vous rendre le profil de %{user_name} accessible au public?"
     tweet_message: "Un Tweet automatisé de @BionomiaTrack sera envoyé pour annoncer le nouveau profil."
+    view_public_html: "Voir le %{href} public"
+    view_public_href: "profil"
+    now_public_html: "Merci de votre aide! Le profil de %{person} est maintenant accessible au public."
   home:
     tagline: Reliez des spécimens d'histoire naturelle aux collectionneurs du monde.
     get_started: Commencer
@@ -357,6 +360,7 @@ fr:
     collector_died: Collectionneur mort
     type_collected: Spécimens types collectés
     none_died_alert: "Personne trouvé qui est décédé le %{date}"
+    none_born_alert: "Personne trouvé qui est né le %{date}"
     limit_alert: Résultats limités à 50 enregistrements d'holotype ou de paratype
     no_types_alert: "Aucun spécimen type trouvé collecté le %{date}"
   oops:

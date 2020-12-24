@@ -81,12 +81,12 @@ es:
     country_title: Países
     lede: Países indicados en cuentas de ORCID y entradas de Wikidata o registros de especímenes en GBIF
     intro: Países indicados en cuentas de ORCID y entradas de Wikidata. Busque por familia taxonómica para explorar experticia.
-    no_one_alert: "No se encontró nadie de"
-    no_one_collected_alert: Nadie ha colectado especímenes de
-    no_one_identified_alert: Nadie ha identificado especímenes de
-    resided_in: Vivió En
-    collected_from: Colectado De
-    identified_from: Identificado De
+    collected_from: "Collected %{family} from %{country}"
+    identified_from: "Identified %{family} from %{country}"
+    collected_identified_from: "Collected or identified %{family} from %{country}"
+    no_one_collected_from: "No one collected %{family} from %{country}"
+    no_one_identified_from: "No one identified %{family} from %{country}"
+    no_one_collected_identified_from: "No one collected or identified %{family} from %{country}"
     no_one_message: "No se encontró a nadie de %{country} en cuentas de ORCID o entradas de Wikidata. Buscar por familia taxonómica para explorar experticia."
   dataset:
     dataset_title: Conjuntos de datos
@@ -287,6 +287,9 @@ es:
     no_scribes: "No other scribes have helped attribute %{user_name}'s specimens."
     make_public_question: "Would you like to make %{user_name}'s profile publicly available?"
     tweet_message: "An automated Tweet from @BionomiaTrack will be sent announcing the new profile."
+    view_public_html: "View the public %{href}"
+    view_public_href: "profile"
+    now_public_html: "Thank you for your help! The profile for %{person} is now visible to the public."
   home:
     tagline: Enlace especímenes de historia natural a los colectores del mundo.
     get_started: Comenzar
@@ -357,6 +360,7 @@ es:
     collector_died: Colector que murió
     type_collected: Especímenes tipo colectados
     none_died_alert: "No se encontró a nadie que haya muerto en %{date}"
+    none_born_alert: "No one found who was born on %{date}"
     limit_alert: Resultados limitados a 50 registros de especímenes holotipos o paratipos
     no_types_alert: "No se encontraron especímenes tipo colectados en %{date}"
   oops:

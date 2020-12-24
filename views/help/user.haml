@@ -12,7 +12,7 @@
   = haml :'partials/help/jumbotron', layout: false
 
 - if !authorized?
-  %p Want to help attribute specimens to #{@viewed_user.fullname}?
+  %p= I18n.t('help.help_question', name: h(@viewed_user.fullname))
 
   %form{action: "/auth/orcid?lang=#{I18n.locale}", method: "POST" }
     %button{class: "btn btn-lg btn-outline-dark"}
@@ -22,18 +22,13 @@
 
   - if @viewed_user.is_public?
     %p{class:"mt-3"}
-      View the
-      = succeed "." do
-        %a{href: url("/#{@viewed_user.identifier}")} public profile
+      = I18n.t('help.view_public_html', href: link_to(I18n.t('help.view_public_href'), url("/#{@viewed_user.identifier}")))
 
 - else
   - if flash[:public]
     %div{class:"alert alert-success alert-dismissible fade show d-block", role: "alert"}
       %div
-        Thank you for your help!
-        %a{href: url("/#{@viewed_user.identifier}")}
-          #{@viewed_user.fullname}'s
-        profile is now visible to the public.
+        = I18n.t('help.now_public_html', person: link_to("#{@viewed_user.fullname}", url("/#{@viewed_user.identifier}")))
       %button{type:"button", class:"close", "data-dismiss":"alert", "aria-label":"Close"}
         %span{"aria-hidden":"true"} &times;
 

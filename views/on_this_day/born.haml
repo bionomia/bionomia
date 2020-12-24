@@ -45,8 +45,7 @@
 = haml :'partials/on_this_day/tabs', layout: false, locals: { active_tab: "born" }
 
 - if @pagy.count == 0
-  %div{class: "alert alert-warning tiny-margins", role: "alert"}
-    No one found who was born on #{@date.strftime("%B %-d")}
+  %div{class: "alert alert-warning tiny-margins", role: "alert"}= I18n.t('on_this_day.none_born_alert', date: @date.strftime("%B %-d"))
 - else
   - @results.in_groups_of(3).each do |group|
     %div{class: "card-deck"}

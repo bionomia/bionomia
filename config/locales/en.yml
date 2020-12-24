@@ -81,12 +81,12 @@ en:
     country_title: Countries
     lede: From countries stated in ORCID accounts and Wikidata entries or specimen records in GBIF
     intro: From countries stated in ORCID accounts and Wikidata entries. Search by Taxon Family to explore expertise.
-    no_one_alert: "No one found from"
-    no_one_collected_alert: No one has collected specimens from
-    no_one_identified_alert: No one has identified specimens from
-    resided_in: Resided In
-    collected_from: Collected From
-    identified_from: Identified From
+    collected_from: "Collected %{family} from %{country}"
+    identified_from: "Identified %{family} from %{country}"
+    collected_identified_from: "Collected or identified %{family} from %{country}"
+    no_one_collected_from: "No one collected %{family} from %{country}"
+    no_one_identified_from: "No one identified %{family} from %{country}"
+    no_one_collected_identified_from: "No one collected or identified %{family} from %{country}"
     no_one_message: "No one found from %{country} in ORCID accounts or Wikidata entries. Search by Taxon Family to explore expertise."
   dataset:
     dataset_title: Datasets
@@ -287,6 +287,9 @@ en:
     no_scribes: "No other scribes have helped attribute %{user_name}'s specimens."
     make_public_question: "Would you like to make %{user_name}'s profile publicly available?"
     tweet_message: "An automated Tweet from @BionomiaTrack will be sent announcing the new profile."
+    view_public_html: "View the public %{href}"
+    view_public_href: "profile"
+    now_public_html: "Thank you for your help! The profile for %{person} is now visible to the public."
   home:
     tagline: Link natural history specimens to the world's collectors.
     get_started: Get started
@@ -357,6 +360,7 @@ en:
     collector_died: Collector Died
     type_collected: Type Specimens Collected
     none_died_alert: "No one found who died on %{date}"
+    none_born_alert: "No one found who was born on %{date}"
     limit_alert: Results limited to 50 holotype or paratype specimen records
     no_types_alert: "No type specimens found collected on %{date}"
   oops:
