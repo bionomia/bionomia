@@ -1,4 +1,4 @@
--content_for :title, I18n.t('help.help_title')
+-content_for :title, "Help Attribute Specimens"
 
 -content_for :scripts do
   %script{src: "/js/application.js"}
@@ -10,7 +10,7 @@
 -content_for :jumbotron do
   %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap alert-warning"}
     %div{class: "mr-auto p-2"}
-      %h1{class:"h2"}= I18n.t('help.help_title')
+      %h1{class:"h2"} Help Attribute Specimens
       %p{class: "lead text-muted"} Add someone not yet discovered
     = haml :'partials/help/search', layout: false
 
