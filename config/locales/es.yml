@@ -430,6 +430,7 @@ es:
     change_photo: Cambiar foto de perfil
     remove: Remover
     cancel: Cancelar
+    upload: Upload
     settings: Configuración e integraciones
     no_science: Los datos de sus especímenes aún no se han registrado en descargas de GBIF y usado en publicaciones nuevas.
     no_citation_alert: Sus especímenes no se incluyeron en una descarga de GBIF en soporte de este estudio.
@@ -482,6 +483,8 @@ es:
     attributed_count:
       one: "espécimen atribuido"
       other: "especímens atribuidos"
+    private_message_html: "Your profile is private. Claim your %{specimens} and then make it public in %{settings} to maximize reuse."
+    no_claims_html: "Claim your discovered specimens under the %{specimens} tab to build your profile and start tracking your citations. Acknowledge your peers, mentors, or anyone who inspires you by attributing specimens under %{help_others}."
   roster:
     roster_title: Perfiles públicos
     lede:

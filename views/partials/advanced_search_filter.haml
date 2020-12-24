@@ -10,7 +10,7 @@
           %img{src:"#{@dataset.license_icon("small")}"}
         %a{href: url("#{locals[:url]}?&datasetKey=&agent_id=#{params[:agent_id]}&taxon_id=#{params[:taxon_id]}"), class:"ml-2 text-danger"}
           %i{class:"fas fa-minus-circle"}
-          Remove
+          = I18n.t('general.remove')
     - if @agent
       %div
         %i{class:"fas fa-search"}
@@ -19,7 +19,7 @@
           #{@agent.fullname_reverse}
         %a{href: url("#{locals[:url]}?datasetKey=#{params[:datasetKey]}&agent_id=&taxon_id=#{params[:taxon_id]}"), class:"ml-2 text-danger"}
           %i{class:"fas fa-minus-circle"}
-          Remove
+          = I18n.t('general.remove')
     - if @taxon
       %div
         %i{class:"fas fa-filter"}
@@ -28,4 +28,4 @@
           #{@taxon.family}
         %a{href: url("#{locals[:url]}?datasetKey=#{params[:datasetKey]}&agent_id=#{params[:agent_id]}&taxon_id="), class:"ml-2 text-danger"}
           %i{class:"fas fa-minus-circle"}
-          Remove
+          = I18n.t('general.remove')

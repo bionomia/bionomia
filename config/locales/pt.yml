@@ -430,6 +430,7 @@ pt:
     change_photo: Change profile photo
     remove: Remove
     cancel: Cancel
+    upload: Upload
     settings: Settings & Integrations
     no_science: Your specimen data have not yet been recorded in downloads from GBIF and used in new publications.
     no_citation_alert: Your specimens were not included in a download from GBIF in support of this study.
@@ -482,6 +483,8 @@ pt:
     attributed_count:
       one: "specimen attributed"
       other: "specimens attributed"
+    private_message_html: "Your profile is private. Claim your %{specimens} and then make it public in %{settings} to maximize reuse."
+    no_claims_html: "Claim your discovered specimens under the %{specimens} tab to build your profile and start tracking your citations. Acknowledge your peers, mentors, or anyone who inspires you by attributing specimens under %{help_others}."
   roster:
     roster_title: Public Profiles
     lede:

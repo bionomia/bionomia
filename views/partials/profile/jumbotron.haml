@@ -26,7 +26,7 @@
           %li{class:"list-group-item profile-upload-option-list"}
             %input{name:"user-image", id:"user-image", type:"file", accept:"image/x-png,image/jpeg"}
             %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
-            %span Upload
+            %span= I18n.t('profile.upload')
           %li{id:"profile-remove", class:"list-group-item profile-upload-option-list"}= I18n.t('profile.remove')
           %li{id:"profile-cancel", class:"list-group-item profile-upload-option-list"}= I18n.t('profile.cancel')
 
@@ -66,13 +66,7 @@
       - if !@user.is_public?
         %p{class:"m-3 alert alert-warning"}
           %i{class:"fas fa-lock"}
-          Your profile is private. Claim your
-          %a{href: url("/profile/candidates")}
-            specimens
-          and then make it public in
-          %a{href: url("/profile/settings")}
-            Settings & Integrations
-          to maximize reuse.
+          = I18n.t('profile.private_message_html', specimens: link_to(I18n.t('profile.specimens'), url("/profile/candidates")), settings: link_to(I18n.t('profile.settings'), url("/profile/settings")))
       %p{class:"m-0"}
         - if @user.is_public?
           %a{href: url("/#{@user.orcid}"), class:"mr-2 mb-2"}

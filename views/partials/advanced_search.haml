@@ -20,7 +20,7 @@
           %span
             %a{href: url("#{locals[:url]}/advanced-search?#{q}"), class:"text-danger"}
               %i{class:"fas fa-minus-circle"}
-              Remove
+              = I18n.t('general.remove')
           %span
             #{@dataset}
           %input{type: :hidden, name: "datasetKey", value: params[:datasetKey]}
@@ -35,7 +35,7 @@
           %span
             %a{href: url("#{locals[:url]}/advanced-search?#{q}"), class:"text-danger"}
               %i{class:"fas fa-minus-circle"}
-              Remove
+              = I18n.t('general.remove')
           %span
             #{@taxon}
           %input{type: :hidden, name: "taxon_id", value: params[:taxon_id]}
@@ -50,7 +50,7 @@
           %span
             %a{href: url("#{locals[:url]}/advanced-search?#{q}"), class:"text-danger"}
               %i{class:"fas fa-minus-circle"}
-              Remove
+              = I18n.t('general.remove')
           %span
             #{@agent}
           %input{type: :hidden, name: "agent_id", value: params[:agent_id]}
