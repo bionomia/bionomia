@@ -32,6 +32,10 @@ OptionParser.new do |opts|
     options[:datasetkey] = datasetkey
   end
 
+  opts.on("-r", "--refresh", "Refresh metadata for all datasets") do
+    options[:refresh] = true
+  end
+
   opts.on("-c", "--counter", "Rebuild occurrence counter") do
     options[:counter] = true
   end
@@ -79,6 +83,16 @@ elsif options[:remove]
     next if d.has_agent?
     puts d.datasetKey.red
     d.destroy
+  end
+elsif options[:refresh]
+  dataset = ::Bionomia::GbifDataset.new
+  Dataset.find_each do |d|
+    processed = dataset.process_dataset(d.datasetKey)
+    if processed
+      d.datasetKey.green
+    else
+      d.datasetKey.red
+    end
   end
 elsif options[:counter]
   Occurrence.counter_culture_fix_counts only: :dataset
