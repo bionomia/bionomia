@@ -89,9 +89,9 @@ elsif options[:refresh]
   Dataset.find_each do |d|
     processed = dataset.process_dataset(d.datasetKey)
     if processed
-      d.datasetKey.green
+      puts d.datasetKey.green
     else
-      d.datasetKey.red
+      puts d.datasetKey.red
     end
   end
 elsif options[:counter]
