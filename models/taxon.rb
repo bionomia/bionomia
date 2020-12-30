@@ -67,6 +67,7 @@ class Taxon < ActiveRecord::Base
                     .where(user_occurrences: { occurrence_id: nil })
                     .distinct
     recorders.union(determiners)
+             .joins(:agent)
              .group(:agent_id)
              .order(Arel.sql("count(*) desc"))
              .count

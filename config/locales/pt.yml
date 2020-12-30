@@ -47,6 +47,7 @@ pt:
     agent_title: Agentes do artigo
     alphabetical: Alfabético
     counts: Contagens
+    unclaimed: Unclaimed
     no_agent_strings_alert: Cadeias brutas de coletores e identifcadores de nomes separados em data de espécimes derivadas do GBIF em suporte desse artigo não foram encontrados
     agent_strings_alert:
       unit:

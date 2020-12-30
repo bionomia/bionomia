@@ -47,6 +47,7 @@ fr:
     agent_title: Agents d'article
     alphabetical: Alphabétique
     counts: Compte
+    unclaimed: Non Attribuées
     no_agent_strings_alert: Les chaînes brutes des noms de collecteur et de détermineur analysés dans les données de spécimen téléchargées à partir du GBIF à l'appui de cet article n'ont pas été trouvées
     agent_strings_alert:
       unit:

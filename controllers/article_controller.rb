@@ -28,6 +28,16 @@ module Sinatra
             haml :'articles/agents_counts', locals: locals
           end
 
+          app.get '/article/*/agents/unclaimed' do
+            article_agents_unclaimed
+            locals = {
+              active_page: "articles",
+              active_tab: "agents",
+              active_subtab: "unclaimed"
+            }
+            haml :'articles/agents_unclaimed', locals: locals
+          end
+
           app.get '/article/*/agents' do
             article_agents
             locals = {

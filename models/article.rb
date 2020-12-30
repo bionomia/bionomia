@@ -70,6 +70,26 @@ class Article < ActiveRecord::Base
              .count
   end
 
+  def agents_occurrence_counts_unclaimed
+    determiners = OccurrenceDeterminer
+                    .joins("INNER JOIN article_occurrences ON occurrence_determiners.occurrence_id = article_occurrences.occurrence_id")
+                    .joins("LEFT JOIN user_occurrences ON occurrence_determiners.occurrence_id = user_occurrences.occurrence_id")
+                    .where(article_occurrences: { article_id: id })
+                    .where(user_occurrences: { occurrence_id: nil })
+                    .distinct
+    recorders = OccurrenceRecorder
+                    .joins("INNER JOIN article_occurrences ON occurrence_recorders.occurrence_id = article_occurrences.occurrence_id")
+                    .joins("LEFT JOIN user_occurrences ON occurrence_recorders.occurrence_id = user_occurrences.occurrence_id")
+                    .where(article_occurrences: { article_id: id })
+                    .where(user_occurrences: { occurrence_id: nil })
+                    .distinct
+    recorders.union(determiners)
+             .joins(:agent)
+             .group(:agent_id)
+             .order(Arel.sql("count(*) desc"))
+             .count
+  end
+
   private
 
   def update_citation

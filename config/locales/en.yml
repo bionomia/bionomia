@@ -47,6 +47,7 @@ en:
     agent_title: Article Agents
     alphabetical: Alphabetical
     counts: Counts
+    unclaimed: Unclaimed
     no_agent_strings_alert: Raw strings from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article have not been found
     agent_strings_alert:
       unit:

@@ -47,6 +47,7 @@ es:
     agent_title: Agentes de artículo
     alphabetical: Alfabético
     counts: Conteo
+    unclaimed: Sin reclamar
     no_agent_strings_alert: No se han encontrado cadenas sin procesar de los nombres de colectores o identificadores analizados en datos de especímenes descargados de GBIF para respaldar este artículo
     agent_strings_alert:
       unit:

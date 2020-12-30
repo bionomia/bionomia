@@ -4,3 +4,5 @@
       %a{class:"nav-link#{locals[:active_subtab] == "default" ? " active" : nil}", href: url("/article/#{@article.doi}/agents")}= I18n.t('article.alphabetical')
     %li{class:"nav-item"}
       %a{class:"nav-link#{locals[:active_subtab] == "counts" ? " active" : nil}", href: url("/article/#{@article.doi}/agents/counts")}= I18n.t('article.counts')
+    %li{class:"nav-item"}
+      %a{class:"nav-link#{locals[:active_subtab] == "unclaimed" ? " active" : nil}", href: url("/article/#{@article.doi}/agents/unclaimed")}= I18n.t('article.unclaimed')
