@@ -35,6 +35,7 @@
         %link{href: "#{request.base_url.sub("://", "://" + lang + ".")}#{request.fullpath}", rel:"alternate", hreflang: "#{lang}"}
       - else
         %link{href: "#{request.base_url.sub("://" + I18n.locale.to_s + ".", "://" + lang + ".")}#{request.fullpath}", rel:"alternate", hreflang: "#{lang}"}
+    %link{href: "#{Settings.base_url}#{request.fullpath}", rel:"alternate", hreflang: "x-default"}
 
     %link{href: "/favicon.ico", rel:"shortcut icon", type:"image/x-icon"}
     %link{href: "/favicon.ico", rel:"icon", type:"image/x-icon"}
