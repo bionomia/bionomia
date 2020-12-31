@@ -28,15 +28,16 @@
 
       - if @pagy.count == 0
         %div{class: "alert alert-info tiny-margins", role: "alert"}
-          - claim_type = @viewed_user.orcid ? "claimed or attributed" : "attributed"
-          - filter_message = @filter.length > 0 ? " with this applied filter" : ""
-          Specimens have not yet been #{claim_type}#{filter_message}.
+          - if @filter.length > 0
+            = I18n.t('user.no_specimens_filter')
+          - else
+            = I18n.t('user.no_specimens')
       - else
         %div{class: "alert alert-info row tiny-margins pl-0 pr-0", role: "alert"}
           %div{class: "col-12 col-md-9"}
             - coll_img = "%img{src:'/images/net-unselected.png', alt:'#{I18n.t('general.collected')}', title:'#{I18n.t('general.collected')}', width:18}"
             - det_img = "%img{src:'/images/microscope-unselected.png', alt:'#{I18n.t('general.identified')}', title:'#{I18n.t('general.identified')}', width:18}"
-            = I18n.t('user.specimen_icon_count', coll_img: haml(coll_img, layout: false), det_img: haml(det_img, layout: false), count: @pagy.count)
+            = I18n.t('user.specimen_icon_count', coll_img: haml(coll_img, layout: false), det_img: haml(det_img, layout: false), count: number_with_delimiter(@pagy.count, delimiter: ","))
             = I18n.t('user.not_all_columns')
           %div{class: "col-12 col-md-3 text-md-right"}
             %a{href: url("/#{@viewed_user.identifier}/specimens.csv"), class:"mr-2"}
