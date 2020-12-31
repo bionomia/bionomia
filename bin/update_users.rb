@@ -124,8 +124,7 @@ if options[:file]
       u.delete
       puts "#{u.wikidata} deleted. Missing either family name, birth or death date or has an ORCID".red
     else
-      u.flush_caches
-      puts "#{u.fullname_reverse} created/updated".green
+      update(u)
     end
   end
 end
@@ -137,9 +136,7 @@ if options[:wikidata]
     u.delete
     puts "#{u.wikidata} deleted. Missing either family name, birth or death date or has an ORCID".red
   else
-    u.update_profile
-    u.flush_caches
-    puts "#{u.fullname_reverse} created/updated".green
+    update(u)
   end
 elsif options[:orcid]
   u = User.find_or_create_by({ orcid: options[:orcid] })

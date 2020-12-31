@@ -4,7 +4,8 @@ module Bionomia
   class ElasticIndexer
 
     def initialize(opts = {})
-      @client = Elasticsearch::Client.new url: Settings.elastic.server, request_timeout: 5*60
+      @client = Elasticsearch::Client.new url: Settings.elastic.server, request_timeout: 5*60, retry_on_failure: true, reload_on_failure: true
+      @client.transport.reload_connections!
       @settings = { index: "index" }.merge(opts)
     end
 

@@ -14,7 +14,8 @@ module Sinatra
           page = (params[:page] || 1).to_i
 
           size = opts[:item_size] || search_size
-          client = Elasticsearch::Client.new url: Settings.elastic.server
+          client = Elasticsearch::Client.new url: Settings.elastic.server, request_timeout: 5*60, retry_on_failure: true, reload_on_failure: true
+          client.transport.reload_connections!
           body = build_name_query(searched_term)
           from = (page -1) * size
 
@@ -26,7 +27,8 @@ module Sinatra
         end
 
         def search_agents(search)
-          client = Elasticsearch::Client.new url: Settings.elastic.server
+          client = Elasticsearch::Client.new url: Settings.elastic.server, request_timeout: 5*60, retry_on_failure: true, reload_on_failure: true
+          client.transport.reload_connections!
           body = build_name_query(search)
           response = client.search index: Settings.elastic.agent_index, size: 50, body: body
           results = response["hits"].deep_symbolize_keys

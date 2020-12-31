@@ -12,7 +12,8 @@ module Sinatra
 
           page = (params[:page] || 1).to_i
 
-          client = Elasticsearch::Client.new url: Settings.elastic.server
+          client = Elasticsearch::Client.new url: Settings.elastic.server, request_timeout: 5*60, retry_on_failure: true, reload_on_failure: true
+          client.transport.reload_connections!
           body = build_organization_query(searched_term)
           from = (page -1) * 30
 
