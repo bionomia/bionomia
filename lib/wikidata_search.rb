@@ -337,7 +337,7 @@ module Bionomia
                          .join("|") rescue nil
       country_code = wiki_user.properties("P27")
                               .compact
-                              .map{|a| I18nData.country_code(a.title) || "" }
+                              .map{|a| I18nData.country_code(a.title) || IsoCountryCodes.search_by_name(a.title).first.alpha2 || "" }
                               .compact
                               .join("|")
                               .presence rescue nil

@@ -2,7 +2,7 @@
   %form{id:"form-org-wrapper", method: "get", action: "/admin/users/search", "accept-charset" => "UTF-8", class: "form-inline helpers"}
     %div{class: "form-group w-75"}
       %input{class:"typeahead user-search", id:"typeahead-user", type: :text, name: "q", placeholder: "Mary Smith", value: "#{params[:q]}", size:"25"}
-    %input{type: :submit, class:"btn btn-success medium-margins", value:"Search"}
+    %input{type: :submit, class:"btn btn-success medium-margins", value:"#{I18n.t('general.search')}"}
 
 %script{id:"result-template", type:"text/x-handlebars-template"}
   %div{class:"d-flex"}

@@ -22,9 +22,9 @@
           %li{class:"list-group-item profile-upload-option-list"}
             %input{name:"user-image", id:"user-image", type:"file", accept:"image/x-png,image/jpeg"}
             %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
-            %span Upload
-          %li{id:"profile-remove", class:"list-group-item profile-upload-option-list"} Remove
-          %li{id:"profile-cancel", class:"list-group-item profile-upload-option-list"} Cancel
+            %span= I18n.t('profile.upload')
+          %li{id:"profile-remove", class:"list-group-item profile-upload-option-list"}= I18n.t('profile.remove')
+          %li{id:"profile-cancel", class:"list-group-item profile-upload-option-list"}= I18n.t('profile.cancel')
 
   %h1{class:"h2"}= @admin_user.fullname
 
@@ -82,7 +82,7 @@
         - if @admin_user.is_public?
           %a{href: url("/#{@admin_user.identifier}"), class:"mr-2"}
             %i{class:"fas fa-user"}
-            Public Profile
+            = I18n.t('profile.public_profile')
         - else
           %i{class:"fas fa-lock"}
           %span{class:"mr-2"} Private Profile
@@ -99,7 +99,7 @@
       %p{class:"mb-0"}
         %a{href: url("/admin/user/#{@admin_user.identifier}/settings")}
           %i{class:"fas fa-cog"}
-          Settings & Integrations
+          = I18n.t('profile.settings')
 
     %div{id:"flush-message", class:"alert alert-success alert-dismissible fade show text-center", role: "alert"}
       = I18n.t("user.caches_rebuilt")
