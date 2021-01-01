@@ -1,7 +1,7 @@
 %nav{id:"specimen-nav", class:"navbar navbar-light navbar-expand overflow-auto alert-warning"}
   %ul{class:"navbar-nav"}
     %li{class:"nav-item"}
-      %a{class:"nav-link#{locals[:active_tab] == "specimens" ? " active" : nil}", href: url("/admin/user/#{@admin_user.identifier}/specimens")}= = I18n.t('profile.claimed')
+      %a{class:"nav-link#{locals[:active_tab] == "specimens" ? " active" : nil}", href: url("/admin/user/#{@admin_user.identifier}/specimens")}= I18n.t('profile.claimed')
     %li{class:"nav-item"}
       %a{class:"nav-link#{locals[:active_tab] == "candidates" ? " active" : nil}", href: url("/admin/user/#{@admin_user.identifier}/candidates?relaxed=0")}= I18n.t('profile.discovered')
     %li{class:"nav-item"}
