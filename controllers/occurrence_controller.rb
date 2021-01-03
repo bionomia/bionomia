@@ -9,58 +9,18 @@ module Sinatra
 
           app.get '/occurrence/:id.json' do
             content_type "application/ld+json", charset: 'utf-8'
-            ignore_cols = Occurrence::IGNORED_COLUMNS_OUTPUT
+            response = jsonld_occurrence_context
             begin
               occurrence = Occurrence.find(params[:id])
-              dwc_contexts = Hash[
-                  Occurrence.attribute_names
-                            .reject {|column| ignore_cols.include?(column)}
-                            .map{|o| ["#{o}", "http://rs.tdwg.org/dwc/terms/#{o}"] if !ignore_cols.include?(o) }
-              ]
-              response = {}
-              response["@context"] = {
-                  "@vocab": "http://schema.org/",
-                  identified: "http://rs.tdwg.org/dwc/iri/identifiedBy",
-                  recorded: "http://rs.tdwg.org/dwc/iri/recordedBy",
-                  associatedReferences: "http://rs.tdwg.org/dwc/terms/associatedReferences",
-                  PreservedSpecimen: "http://rs.tdwg.org/dwc/terms/PreservedSpecimen",
-              }.merge(dwc_contexts)
-              response["@type"] = "PreservedSpecimen"
-              response["@id"] = "#{base_url}/occurrence/#{occurrence.id}"
+              response["@id"] = "#{Settings.base_url}/occurrence/#{occurrence.id}"
               response["sameAs"] = "https://gbif.org/occurrence/#{occurrence.id}"
               occurrence.attributes
-                        .reject{|column| ignore_cols.include?(column)}
+                        .reject{|column| Occurrence::IGNORED_COLUMNS_OUTPUT.include?(column)}
                         .map{|k,v| response[k] = v }
 
-              response["recorded"] = occurrence.user_recordings.map{|o|
-                id_url = o.user.orcid ? "https://orcid.org/#{o.user.orcid}" : "http://www.wikidata.org/entity/#{o.user.wikidata}"
-                {
-                    "@type": "Person",
-                    "@id": "#{base_url}/#{o.user.identifier}",
-                    sameAs: id_url,
-                    givenName: "#{o.user.given}",
-                    familyName: "#{o.user.family}",
-                    alternateName: o.user.other_names.present? ? o.user.other_names.split("|") : []
-                  }
-              }
-              response["identified"] = occurrence.user_identifications.map{|o|
-                id_url = o.user.orcid ? "https://orcid.org/#{o.user.orcid}" : "http://www.wikidata.org/entity/#{o.user.wikidata}"
-                {
-                    "@type": "Person",
-                    "@id": "#{base_url}/#{o.user.identifier}",
-                    sameAs: id_url,
-                    givenName: "#{o.user.given}",
-                    familyName: "#{o.user.family}",
-                    alternateName: o.user.other_names.present? ? o.user.other_names.split("|") : []
-                  }
-              }
-              response["associatedReferences"] = occurrence.articles.map{|a| {
-                    "@type": "ScholarlyArticle",
-                    "@id": "https://doi.org/#{a.doi}",
-                    sameAs: "https://doi.org/#{a.doi}",
-                    description: a.citation
-                  }
-              }
+              response["recorded"] = jsonld_occurrence_recordings(occurrence)
+              response["identified"] = jsonld_occurrence_identifications(occurrence)
+              response["associatedReferences"] = jsonld_occurrence_references(occurrence)
               response.to_json
             rescue
               halt 404, {}.to_json
