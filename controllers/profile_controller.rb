@@ -101,6 +101,17 @@ module Sinatra
             haml :'profile/settings', locals: { active_page: "profile" }
           end
 
+          app.put '/profile/settings' do
+            protected!
+            content_type "application/json", charset: 'utf-8'
+            req = JSON.parse(request.body.read).symbolize_keys
+            if req[:wants_mail]
+              @user.wants_mail = req[:wants_mail]
+            end
+            @user.save
+            { message: "ok"}.to_json
+          end
+
           app.get '/profile/specimens' do
             protected!
 
@@ -202,15 +213,6 @@ module Sinatra
             @user.save
             @user.update_profile
             @user.flush_caches
-            { message: "ok"}.to_json
-          end
-
-          app.put '/profile/email-notification.json' do
-            protected!
-            content_type "application/json", charset: 'utf-8'
-            req = JSON.parse(request.body.read).symbolize_keys
-            @user.wants_mail = req[:wants_mail]
-            @user.save
             { message: "ok"}.to_json
           end
 

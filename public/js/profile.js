@@ -98,7 +98,7 @@ var Profile = (function($, window) {
       $("#toggle-mail").on("change", function() {
         $.ajax({
           method: "PUT",
-          url: self.path + "/email-notification.json",
+          url: self.path + "/settings",
           dataType: "json",
           data: JSON.stringify({ wants_mail: $(this).prop("checked") })
         }).done(function(data) {
