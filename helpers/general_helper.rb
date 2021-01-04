@@ -27,6 +27,36 @@ module Sinatra
           locales[I18n.locale] || "en_US"
         end
 
+        # Used from https://github.com/rack/rack-contrib/blob/master/lib/rack/contrib/locale.rb
+        def user_preferred_locale(header)
+          return if header.nil?
+
+          locales = header.gsub(/\s+/, '').split(",").map do |language_tag|
+            locale, quality = language_tag.split(/;q=/i)
+            quality = quality ? quality.to_f : 1.0
+            [locale, quality]
+          end.reject do |(locale, quality)|
+            locale == '*' || quality == 0
+          end.sort_by do |(_, quality)|
+            quality
+          end.map(&:first)
+
+          return if locales.empty?
+
+          if I18n.enforce_available_locales
+            locale = locales.reverse.find { |locale| I18n.available_locales.any? { |al| locale_match?(al, locale) } }
+            if locale
+              I18n.available_locales.find { |al| locale_match?(al, locale) }
+            end
+          else
+            locales.last
+          end
+        end
+
+        def locale_match?(s1, s2)
+          s1.to_s.casecmp(s2.to_s) == 0
+        end
+
         def check_identifier
           if !params[:id].is_orcid? && !params[:id].is_wiki_id?
             halt 404
