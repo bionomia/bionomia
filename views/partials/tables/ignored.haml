@@ -23,7 +23,7 @@
             = haml :'partials/single_selector_preselected', layout: false, locals: { occurrence: uo, klass: "restore-ignored" }
           %td
             - scientific_name = o.scientificName.nil? ? "#{I18n.t('specimen.not_recorded')}" : o.scientificName
-            %a{href: "https://gbif.org/occurrence/#{o.id}", target:"_blank"}
+            %a{href: gbif_occurrence_url(o.id), target:"_blank"}
               #{h(scientific_name)}
             - if o.hasImage?
               %i{class:"fas fa-image ml-1", "data-toggle":"popover", "data-gbifid":"#{o.id}"}

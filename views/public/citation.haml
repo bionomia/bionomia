@@ -57,7 +57,7 @@
                       %img{src:"/images/microscope-unselected.png", alt:"#{I18n.t('user.identified')}", title:"#{I18n.t('user.identified')}", width:18}
                   %td
                     - scientific_name = o.scientificName.nil? ? "not recorded" : o.scientificName
-                    %a{href: "https://www.gbif.org/occurrence/#{o.id}", target: "_blank" }
+                    %a{href: gbif_occurrence_url(o.id), target: "_blank" }
                       #{h(scientific_name)}
                     - if o.hasImage?
                       %i{class:"fas fa-image ml-1", "data-toggle":"popover", "data-gbifid":"#{o.id}"}

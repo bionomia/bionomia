@@ -5,6 +5,11 @@ module Sinatra
     module Helper
       module OccurrenceHelper
 
+        def gbif_occurrence_url(id)
+          lang = (I18n.locale == :en) ? "" : "#{I18n.locale}/"
+          "https://gbif.org/#{lang}occurrence/#{id}"
+        end
+
         def jsonld_occurrence_context
           response = {}
           ignore_cols = Occurrence::IGNORED_COLUMNS_OUTPUT
