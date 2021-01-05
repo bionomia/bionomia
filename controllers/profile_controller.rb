@@ -105,9 +105,7 @@ module Sinatra
             protected!
             content_type "application/json", charset: 'utf-8'
             req = JSON.parse(request.body.read).symbolize_keys
-            if req[:wants_mail]
-              @user.wants_mail = req[:wants_mail]
-            end
+            @user.wants_mail = req[:wants_mail]
             @user.save
             { message: "ok"}.to_json
           end
