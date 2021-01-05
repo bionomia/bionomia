@@ -31,10 +31,8 @@
         %link{href: "#{request.base_url}#{request.fullpath}", rel:"canonical"}
       - if lang == "en"
         %link{href: "#{Settings.base_url}#{request.fullpath}", rel:"alternate", hreflang: "en"}
-      - elsif I18n.locale == :en && lang != "en"
-        %link{href: "#{request.base_url.sub("://", "://" + lang + ".")}#{request.fullpath}", rel:"alternate", hreflang: "#{lang}"}
       - else
-        %link{href: "#{request.base_url.sub("://" + I18n.locale.to_s + ".", "://" + lang + ".")}#{request.fullpath}", rel:"alternate", hreflang: "#{lang}"}
+        %link{href: "#{Settings.base_url.sub("://", "://#{lang}.")}#{request.fullpath}", rel:"alternate", hreflang: "#{lang}"}
     %link{href: "#{Settings.base_url}#{request.fullpath}", rel:"alternate", hreflang: "x-default"}
 
     %link{href: "/favicon.ico", rel:"shortcut icon", type:"image/x-icon"}
