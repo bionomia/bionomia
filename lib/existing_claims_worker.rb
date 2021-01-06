@@ -42,7 +42,7 @@ module Bionomia
       if id.wiki_from_url
         user = get_wiki_user(id.wiki_from_url) rescue nil
       end
-      if id.orcid_from_url
+      if id.orcid_from_url && id.orcid_from_url.is_orcid?
         user = get_orcid_user(id.orcid_from_url) rescue nil
       end
       if id.viaf_from_url

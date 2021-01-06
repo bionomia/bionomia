@@ -1,8 +1,10 @@
 # encoding: utf-8
 class String
   def is_orcid?
-    ::Bionomia::Identifier.is_orcid_regex.match?(self)
+    ::Bionomia::Identifier.is_orcid_regex.match?(self) &&
+    ::Bionomia::Identifier.orcid_valid_checksum(self)
   end
+
   def is_wiki_id?
     ::Bionomia::Identifier.is_wiki_regex.match?(self)
   end
@@ -47,6 +49,15 @@ module Bionomia
 
       def is_doi_regex
         /^10.\d{4,9}\/[-._;()\/:<>A-Z0-9]+$/i
+      end
+
+      def orcid_valid_checksum(orcid_string)
+        parts = orcid_string.scan(/[0-9X]/)
+        mod = parts[0..14].map(&:to_i)
+                          .inject { |sum, n| (sum + n)*2 }
+                          .modulo(11)
+        result = (12 - mod) % 11
+        parts.last == ((result == 10) ? "X" : result.to_s)
       end
 
       def extract_orcid_regex
