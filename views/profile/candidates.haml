@@ -16,19 +16,19 @@
 
 - if @results.size == 0
   %div{class: "alert alert-info row tiny-margins", role:"alert"}
-    %div{class: "col col-12 col-md-8"}
+    %div{class: "col col-12 col-md-8 p-0"}
       = I18n.t('profile.no_candidates_alert')
       - if !@dataset && !@agent && !@taxon
         %div{class:"form-check d-inline-flex ml-2"}
           %input{type:"checkbox", class:"form-check-input", id:"relaxed", checked: checked }
           %label{for:"relaxed", class:"relaxed"}= I18n.t('help.less_exact')
-    %div{class:"col col-12 col-md-4 text-md-right"}
+    %div{class:"col col-12 col-md-4 p-0 text-md-right"}
       %a{href: url("/profile/advanced-search")}
         %i{class:"fas fa-search-plus"}
         #{I18n.t('profile.advanced_search')}
 - else
   %div{class: "alert alert-info row candidates-alert tiny-margins", role: "alert"}
-    %div{class: "col col-12 col-md-8"}
+    %div{class: "col col-12 col-md-8 p-0"}
       #{I18n.t('profile.candidate_count', count: number_with_delimiter(@total))}
       = haml :'partials/choose_instructions', layout: false
       - if !@dataset && !@agent && !@taxon
@@ -36,7 +36,7 @@
           %input{type:"checkbox", class:"form-check-input", id:"relaxed", checked: checked }
           %label{for:"relaxed", class:"relaxed"}= I18n.t('help.less_exact')
 
-    %div{class:"col col-12 col-md-4 text-md-right"}
+    %div{class:"col col-12 col-md-4 p-0 text-md-right"}
       %a{href: url("/profile/advanced-search")}
         %i{class:"fas fa-search-plus"}
         #{I18n.t('profile.advanced_search')}

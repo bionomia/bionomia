@@ -29,9 +29,9 @@
 
 - else
   %div{class: "alert alert-info row tiny-margins", role: "alert"}
-    %div{class: "col-12 col-md-9"}
+    %div{class: "col-12 col-md-9 p-0"}
       = haml :'partials/choose_instructions', layout: false
-    %div{class: "col-12 col-md-3 text-md-right"}
+    %div{class: "col-12 col-md-3 p-0 text-md-right"}
       %a{href: url("/profile/download.csv"), alt:"CSV file download", class:"mr-2"}
         %i{class:"fas fa-file-csv text-dark h5 m-0 p-1"}
         CSV

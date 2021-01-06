@@ -30,7 +30,7 @@
 
 - if @results.size == 0
   %div{class: "alert alert-info row tiny-margins", role:"alert"}
-    %div{class: "col col-12 col-md-8"}
+    %div{class: "col col-12 col-md-8 p-0"}
       Bionomia did not find any specimens indexed by
       %a{href:"https://gbif.org"} GBIF
       that were collected or identified
@@ -39,14 +39,14 @@
         - checked = params[:relaxed] == "1" ? "checked" : nil
         %input{type:"checkbox", class:"form-check-input", id:"relaxed", checked: checked }
         %label{for:"relaxed", class:"relaxed"} Make less exact
-    %div{class:"col col-12 col-md-4 text-md-right"}
+    %div{class:"col col-12 col-md-4 p-0 text-md-right"}
       %a{href: url("/admin/user/#{@admin_user.identifier}/advanced-search")}
         %i{class:"fas fa-search-plus"}
         Advanced Search & Filter
 - else
   = haml :'partials/admin/fixed_navbar', layout: false
   %div{id: "helper-info", class: "alert alert-info row candidates-alert tiny-margins", role: "alert"}
-    %div{class: "col col-12 col-md-8"}
+    %div{class: "col col-12 col-md-8 p-0"}
       Bionomia found #{number_with_delimiter(@total, delimeter: ",")} specimens.
       - if @agent
         Attribute with the
@@ -63,7 +63,7 @@
           %input{type:"checkbox", class:"form-check-input", id:"relaxed", checked: checked }
           %label{for:"relaxed", class:"relaxed"} Make less exact
 
-    %div{class:"col col-12 col-md-4 text-md-right"}
+    %div{class:"col col-12 col-md-4 p-0 text-md-right"}
       %a{href: url("/admin/user/#{@admin_user.identifier}/advanced-search")}
         %i{class:"fas fa-search-plus"}
         Advanced Search & Filter

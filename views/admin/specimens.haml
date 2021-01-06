@@ -36,7 +36,7 @@
 - else
   = haml :'partials/admin/fixed_navbar', layout: false
   %div{id: "helper-info", class: "alert alert-info row tiny-margins", role: "alert"}
-    %div{class: "col-12 col-md-8 pl-0"}
+    %div{class: "col-12 col-md-8 p-0"}
       - if @filter.length > 0
         #{@admin_user.fullname} has claimed #{number_with_delimiter(@pagy.count)} specimens with this filter.
       - else
@@ -46,7 +46,7 @@
       collected,
       %img{src:"/images/microscope-unselected.png", alt:"Collected", title:"Collected", width:18}
       identified, or Both.
-    %div{class: "col-12 col-md-4 text-md-right"}
+    %div{class: "col-12 col-md-4 p-0 text-md-right"}
       %a{href: url("/admin/user/#{@admin_user.identifier}/specimens.csv"), class:"mr-2"}
         %i{class:"fas fa-file-csv text-dark h5 m-0 p-1"}
         CSV
