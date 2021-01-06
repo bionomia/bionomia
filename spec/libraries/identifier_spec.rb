@@ -48,4 +48,24 @@ describe "Identifier library" do
     expect(url.zoobank_from_url).to eq id
   end
 
+  it "determines that https://orcid.org/0000-0002-4519-8167 is a valid ORCID" do
+    url = "https://orcid.org/0000-0002-4519-8167"
+    expect(url.orcid_from_url.is_orcid?).to be true
+  end
+
+  it "determines that https://orcid.org/0000-0002-4519-8165 is an invalid ORCID" do
+    url = "https://orcid.org/0000-0002-4519-8165"
+    expect(url.orcid_from_url.is_orcid?).to be false
+  end
+
+  it "determines that https://orcid.org/0000-0002-6662-847X is a valid ORCID" do
+    url = "https://orcid.org/0000-0002-6662-847X"
+    expect(url.orcid_from_url.is_orcid?).to be true
+  end
+
+  it "determines that https://orcid.org/0000-0002-6662-846X is an ivalid ORCID" do
+    url = "https://orcid.org/0000-0002-6662-846X"
+    expect(url.orcid_from_url.is_orcid?).to be false
+  end
+
 end
