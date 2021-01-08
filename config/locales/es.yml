@@ -486,6 +486,13 @@ es:
       other: "especímens atribuidos"
     private_message_html: "Your profile is private. Claim your %{specimens} and then make it public in %{settings} to maximize reuse."
     no_claims_html: "Claim your discovered specimens under the %{specimens} tab to build your profile and start tracking your citations. Acknowledge your peers, mentors, or anyone who inspires you by attributing specimens under %{help_others}."
+    try_again: Try again.
+    upload_count:
+      one: "A total of 1 uploaded record was handled."
+      other: "A total of %{count} records were handled."
+    upload_skipped: Existing claims, if present in your upload, were skipped.
+    upload_view: View
+    upload_view_html: "%{view} all your claims."
   roster:
     roster_title: Perfiles públicos
     lede:

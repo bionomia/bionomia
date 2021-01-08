@@ -486,6 +486,13 @@ fr:
       other: "spécimens attribués"
     private_message_html: "Votre profil est privé. Réclamez vos %{specimens} puis rendez-les publics dans %{settings} pour maximiser leur réutilisation."
     no_claims_html: "Réclamez vos spécimens découverts sous l'onglet %{specimens} pour créer votre profil et commencer à suivre vos citations. Reconnaissez vos pairs, vos mentors ou toute personne qui vous inspire en attribuant des spécimens sous %{help_others}."
+    try_again: Réessayer.
+    upload_count:
+      one: "Un total de 1 enregistrement téléchargé a été traité."
+      other: "Au total, %{count} enregistrements téléchargés ont été traités."
+    upload_skipped: "Les liens existants, s'ils étaient présents dans votre téléchargement, ont été ignorés."
+    upload_view: Afficher
+    upload_view_html: "%{view} tous vos liens."
   roster:
     roster_title: Profils publics
     lede:

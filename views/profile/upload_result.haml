@@ -13,13 +13,10 @@
 - if flash[:error]
   %div{class: "alert alert-danger tiny-margins", role: "alert"}
     #{flash[:error]}
-    %a{href: url("/profile/upload")} Try again.
+    %a{href: url("/profile/upload")}= I18n.t('profile.try_again')
 
 - else
   %div{class: "alert alert-info tiny-margins", role: "alert"}
-    A total of
-    %span{class:"font-weight-bold"} #{number_with_delimiter(@record_count)} #{'record'.pluralize(@record_count)}
-    were handled. Existing claims, if present in your upload, were skipped.
-    %a{href: url("/profile/specimens")}
-      View
-    all your claims.
+    = I18n.t('profile.upload_count', count: number_with_delimiter(@record_count))
+    = I18n.t('profile.upload_skipped')
+    = I18n.t('profile.upload_view_html', view: link_to(I18n.t('profile.upload_view'), url("/profile/specimens")))
