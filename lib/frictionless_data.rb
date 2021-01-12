@@ -8,33 +8,30 @@ module Bionomia
       raise ArgumentError, 'Dataset not found' if @dataset.nil?
       @package = descriptor
       @output_dir = output_directory
+      @folder = File.join(@output_dir, @dataset.datasetKey)
     end
 
     def create_package
-      add_resources
-      dir = File.join(@output_dir, @dataset.datasetKey)
-      FileUtils.mkdir(dir) unless File.exists?(dir)
+      FileUtils.mkdir(@folder) unless File.exists?(@folder)
 
-      #Add datapackage.json
-      File.open(File.join(dir, "datapackage.json"), 'wb') { |file| file.write(JSON.pretty_generate(@package)) }
+      add_resources
+
+      #Create datapackage.json
+      File.open(File.join(@folder, "datapackage.json"), 'wb') { |file| file.write(JSON.pretty_generate(@package)) }
 
       #Add data files
-      tables = ["users", "occurrences", "attributions"]
-      tables.each do |table|
-        file = File.open(File.join(dir, "#{table}.csv"), "wb")
-        send("#{table}_data_enum").each { |line| file << line }
-        file.close
-      end
+      add_data_files
 
       #Zip directory
       zip_file = File.join(@output_dir, "#{@dataset.datasetKey}.zip")
       FileUtils.rm zip_file, :force => true if File.file?(zip_file)
       Zip::File.open(zip_file, Zip::File::CREATE) do |zipfile|
-        ["datapackage.json"].concat(tables.map{|t| "#{t}.csv"}).each do |filename|
-          zipfile.add(filename, File.join(dir, filename))
-        end
+        zipfile.add("datapackage.json", File.join(@folder, "datapackage.json"))
+        zipfile.add("users.csv", File.join(@folder, "users.csv"))
+        zipfile.add("occurrences.csv", File.join(@folder, "occurrences.csv"))
+        zipfile.add("attributions.csv", File.join(@folder, "attributions.csv"))
       end
-      FileUtils.remove_dir(dir)
+      FileUtils.remove_dir(@folder)
       GC.compact
     end
 
@@ -163,94 +160,101 @@ module Bionomia
       }
     end
 
-    def users_data_enum
-      Enumerator.new do |y|
-        header = user_resource[:schema][:fields].map{ |u| u[:name] }
-        y << CSV::Row.new(header, header, true).to_s
-        @dataset.users.find_each do |u|
-          aliases = u.other_names.split("|").to_s if !u.other_names.blank?
-          date_born = (u.date_born_precision == "day") ? u.date_born : nil
-          date_died = (u.date_died_precision == "day") ? u.date_died : nil
-          data = [
-            u.id,
-            u.fullname,
-            u.family,
-            u.given,
-            aliases,
-            u.uri,
-            u.orcid,
-            u.wikidata,
-            date_born,
-            date_died
-          ]
-          y << CSV::Row.new(header, data).to_s
-        end
-      end
-    end
+    def add_data_files
+      users = File.open(File.join(@folder, "users.csv"), "wb")
+      occurrences = File.open(File.join(@folder, "occurrences.csv"), "wb")
+      attributions = File.open(File.join(@folder, "attributions.csv"), "wb")
 
-    def occurrences_data_enum
-      Enumerator.new do |y|
-        header = occurrence_resource[:schema][:fields].map{ |u| u[:name] }
-        y << CSV::Row.new(header, header, true).to_s
-        gbif_ids = []
-        ignored = [
-          "id",
-          "dateIdentified_processed",
-          "eventDate_processed",
-          "visible",
-          "hasImage",
-          "recordedByID",
-          "identifiedByID"
-        ]
-        @dataset.claimed_occurrences.find_each(batch_size: 10_000) do |o|
-          next if !o.visible || gbif_ids.include?(o.gbifID)
-          gbif_ids << o.gbifID
-          data = o.attributes
-                  .except(*ignored)
-                  .values
-          y << CSV::Row.new(header, data).to_s
-        end
-      end
-    end
+      users_header = user_resource[:schema][:fields].map{ |u| u[:name] }
+      users << CSV::Row.new(users_header, users_header, true).to_s
 
-    def attributions_data_enum
-      attributes = [
+      occurrences_header = occurrence_resource[:schema][:fields].map{ |u| u[:name] }
+      occurrences << CSV::Row.new(occurrences_header, occurrences_header, true).to_s
+
+      attributions_header = attribution_resource[:schema][:fields].map{ |u| u[:name] }
+      attributions << CSV::Row.new(attributions_header, attributions_header, true).to_s
+
+      fields = [
         "user_occurrences.id",
         "user_occurrences.user_id",
         "user_occurrences.occurrence_id",
         "user_occurrences.action",
         "user_occurrences.visible",
         "user_occurrences.created AS claimDateTime",
-        "users.wikidata",
-        "users.orcid",
+        "users.id AS u_id",
+        "users.given AS u_given",
+        "users.family AS u_family",
+        "users.date_born_precision AS u_date_born_precision",
+        "users.date_died_precision AS u_date_died_precision",
+        "users.date_born AS u_date_born",
+        "users.date_died AS u_date_died",
+        "users.other_names AS u_other_names",
+        "users.wikidata AS u_wikidata",
+        "users.orcid AS u_orcid",
         "claimants_user_occurrences.given AS claimantGiven",
         "claimants_user_occurrences.family AS claimantFamily",
-        "claimants_user_occurrences.orcid AS claimantORCID"
+        "claimants_user_occurrences.orcid AS claimantORCID",
       ]
-      Enumerator.new do |y|
-        header = attribution_resource[:schema][:fields].map{ |u| u[:name] }
-        y << CSV::Row.new(header, header, true).to_s
-        @dataset.user_occurrences
-                .select(attributes).find_each(batch_size: 10_000) do |o|
-          next if !o.visible
-          uri = !o.orcid.nil? ? "https://orcid.org/#{o.orcid}" : "http://www.wikidata.org/entity/#{o.wikidata}"
-          identified_uri = o.action.include?("identified") ? uri : nil
-          recorded_uri = o.action.include?("recorded") ? uri : nil
-          claimant_name = [o.claimantGiven, o.claimantFamily].join(" ")
-          claimant_orcid = !o.claimantORCID.blank? ? "https://orcid.org/#{o.claimantORCID}" : nil
-          data = [
-            o.user_id,
-            o.occurrence_id,
-            identified_uri,
-            recorded_uri,
-            claimant_name,
-            claimant_orcid,
-            o.claimDateTime.to_time.iso8601
-          ]
-          y << CSV::Row.new(header, data).to_s
-        end
-      end
-    end
+      fields.concat((["gbifID"] + Occurrence.accepted_fields).map{|a| "occurrences.#{a} AS occ_#{a}"})
 
+      gbif_ids = Set.new
+      user_ids = Set.new
+
+      @dataset.user_occurrences.select(fields).find_each(batch_size: 10_000) do |o|
+        next if !o.visible
+
+        # Add users.csv
+        if !user_ids.include?(o.u_id)
+          aliases = o.u_other_names.split("|").to_s if !o.u_other_names.blank?
+          uri = !o.u_orcid.nil? ? "https://orcid.org/#{o.u_orcid}" : "http://www.wikidata.org/entity/#{o.u_wikidata}"
+          date_born = (o.u_date_born_precision == "day") ? o.u_date_born : nil
+          date_died = (o.u_date_died_precision == "day") ? o.u_date_died : nil
+          data = [
+            o.u_id,
+            [o.u_given, o.u_family].join(" "),
+            o.u_family,
+            o.u_given,
+            aliases,
+            uri,
+            o.u_orcid,
+            o.u_wikidata,
+            date_born,
+            date_died
+          ]
+          users << CSV::Row.new(users_header, data).to_s
+          user_ids << o.u_id
+        end
+
+        # Add attributions.csv
+        uri = !o.u_orcid.nil? ? "https://orcid.org/#{o.u_orcid}" : "http://www.wikidata.org/entity/#{o.u_wikidata}"
+        identified_uri = o.action.include?("identified") ? uri : nil
+        recorded_uri = o.action.include?("recorded") ? uri : nil
+        claimant_name = [o.claimantGiven, o.claimantFamily].join(" ")
+        claimant_orcid = !o.claimantORCID.blank? ? "https://orcid.org/#{o.claimantORCID}" : nil
+        data = [
+          o.user_id,
+          o.occurrence_id,
+          identified_uri,
+          recorded_uri,
+          claimant_name,
+          claimant_orcid,
+          o.claimDateTime.to_time.iso8601
+        ]
+        attributions << CSV::Row.new(attributions_header, data).to_s
+
+        # Skip occurrences already added to file
+        next if gbif_ids.include?(o.occ_gbifID)
+
+        # Add occurrences.csv
+        data = o.attributes.select{|k,v| k.start_with?("occ_")}.values
+        occurrences << CSV::Row.new(occurrences_header, data).to_s
+        gbif_ids << o.occ_gbifID
+      end
+
+      users.close
+      occurrences.close
+      attributions.close
+    end
   end
+
 end

@@ -8,12 +8,16 @@ options = {}
 OptionParser.new do |opts|
   opts.banner = "Usage: populate_taxa.rb [options]"
 
-  opts.on("-t", "--truncate", "Truncate data") do |a|
+  opts.on("-t", "--truncate", "Truncate data") do
     options[:truncate] = true
   end
 
   opts.on("-d", "--directory [directory]", String, "Directory containing csv file(s)") do |directory|
     options[:directory] = directory
+  end
+
+  opts.on("-p", "--phylopic", "Add any new silhouettes from Phylopic") do
+    options[:phylopic] = true
   end
 
   opts.on("-h", "--help", "Prints this help") do
@@ -54,4 +58,8 @@ if options[:directory]
     end
     puts file.green
   end
+end
+
+if options[:phylopic]
+  TaxonImage.phylopic_search
 end
