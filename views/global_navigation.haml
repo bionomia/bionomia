@@ -64,7 +64,7 @@
             - else
               %a{href: "#{Settings.base_url}#{request.fullpath}", class:"dropdown-item"} English
             %a{href: "#{Settings.base_url.sub("://", "://es.")}#{request.fullpath}", class:"dropdown-item"} Español
-            -# %a{href: "#{Settings.base_url.sub("://", "://fr.")}#{request.fullpath}", class:"dropdown-item"} Français
+            %a{href: "#{Settings.base_url.sub("://", "://fr.")}#{request.fullpath}", class:"dropdown-item"} Français
             -# %a{href: "#{Settings.base_url.sub("://", "://pt.")}#{request.fullpath}", class:"dropdown-item"} Português
 
       - if authorized?
