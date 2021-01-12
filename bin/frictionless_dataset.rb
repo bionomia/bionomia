@@ -38,9 +38,11 @@ if options[:directory] && options[:key]
   dataset = Dataset.find_by_datasetKey(options[:key]) rescue nil
   if dataset
     puts "Starting #{dataset.title}...".yellow
+    t1 = Time.now
     f = Bionomia::FrictionlessData.new(uuid: options[:key], output_directory: options[:directory])
     f.create_package
-    puts "Package created for #{options[:key]}".green
+    t2 = Time.now
+    puts "Package created for #{options[:key]} in #{t2 - t1} seconds".green
   else
     puts "Package #{options[:key]} not found".red
   end
