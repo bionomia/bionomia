@@ -242,7 +242,7 @@ module Bionomia
         ]
         attributions << CSV::Row.new(attributions_header, data).to_s
 
-        # Skip occurrences already added to file
+        # Skip occurrences if already added to file
         next if gbif_ids.include?(o.occ_gbifID)
 
         # Add occurrences.csv
