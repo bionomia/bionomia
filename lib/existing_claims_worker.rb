@@ -5,8 +5,6 @@ module Bionomia
     include Sidekiq::Worker
     sidekiq_options queue: :existing_claims
 
-    EXTERNAL_USER_ID = 2
-
     def perform(row)
       recs = row["gbifIDs_recordedByIDs"]
                 .tr('[]', '')
@@ -23,17 +21,18 @@ module Bionomia
         u = get_user(id.strip)
         next if u.nil?
         if !uniq_recs.empty?
-          uo = uniq_recs.map{|r| [u.id, r.to_i, "recorded", EXTERNAL_USER_ID]}
+          uo = uniq_recs.map{|r| [u.id, r.to_i, "recorded", User::GBIF_AGENT_ID]}
           import_user_occurrences(uo)
         end
         if !uniq_ids.empty?
-          uo = uniq_ids.map{|r| [u.id, r.to_i, "identified", EXTERNAL_USER_ID]}
+          uo = uniq_ids.map{|r| [u.id, r.to_i, "identified", User::GBIF_AGENT_ID]}
           import_user_occurrences(uo)
         end
         if !both.empty?
-          uo = both.map{|r| [u.id, r.to_i, "recorded,identified", EXTERNAL_USER_ID]}
+          uo = both.map{|r| [u.id, r.to_i, "recorded,identified", User::GBIF_AGENT_ID]}
           import_user_occurrences(uo)
         end
+        u.flush_caches
       end
     end
 
