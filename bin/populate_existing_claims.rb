@@ -49,7 +49,6 @@ if options[:directory]
     end
     puts file.green
   end
-
 end
 
 if options[:export]

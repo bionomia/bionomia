@@ -97,7 +97,7 @@ module Bionomia
           user.delete_search
           user.delete
           user = nil
-        elsif !user.is_public?
+        elsif user.valid_wikicontent? && !user.is_public?
           user.is_public = true
           user.made_public = Time.now
           user.save
@@ -107,7 +107,7 @@ module Bionomia
     end
 
     def import_user_occurrences(uo)
-      UserOccurrence.import [:user_id, :occurrence_id, :action, :created_by], uo, batch_size: 500, validate: false, on_duplicate_key_ignore: true
+      UserOccurrence.import [:user_id, :occurrence_id, :action, :created_by], uo, batch_size: 5_000, validate: false, on_duplicate_key_ignore: true
     end
 
   end

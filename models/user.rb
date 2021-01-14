@@ -771,14 +771,14 @@ class User < ActiveRecord::Base
 
   def add_search
     if !self.family.blank?
-      es = Bionomia::ElasticUser.new
+      es = ::Bionomia::ElasticUser.new
       es.add(self)
     end
   end
 
   def update_search
     if !self.family.blank?
-      es = Bionomia::ElasticUser.new
+      es = ::Bionomia::ElasticUser.new
       if !es.get(self)
         es.add(self)
       else
@@ -788,7 +788,7 @@ class User < ActiveRecord::Base
   end
 
   def remove_search
-    es = Bionomia::ElasticUser.new
+    es = ::Bionomia::ElasticUser.new
     begin
       es.delete(self)
     rescue

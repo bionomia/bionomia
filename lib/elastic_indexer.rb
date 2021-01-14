@@ -4,14 +4,20 @@ module Bionomia
   class ElasticIndexer
 
     def initialize(opts = {})
-      @client = Elasticsearch::Client.new url: Settings.elastic.server, request_timeout: 5*60, retry_on_failure: true, reload_on_failure: true
-      @client.transport.reload_connections!
       @settings = { index: "index" }.merge(opts)
     end
 
+    def client
+      @client ||= Elasticsearch::Client.new \
+            url: Settings.elastic.server,
+            request_timeout: 5*60,
+            retry_on_failure: true,
+            reload_on_failure: true
+    end
+
     def delete_index
-      if @client.indices.exists index: @settings[:index]
-        @client.indices.delete index: @settings[:index]
+      if client.indices.exists index: @settings[:index]
+        client.indices.delete index: @settings[:index]
       end
     end
 
@@ -23,11 +29,11 @@ module Bionomia
           }
         }
       }
-      @client.indices.create index: @settings[:index], body: config
+      client.indices.create index: @settings[:index], body: config
     end
 
     def refresh_index
-      @client.indices.refresh index: @settings[:index]
+      client.indices.refresh index: @settings[:index]
     end
 
     def bulk(batch)
@@ -40,7 +46,7 @@ module Bionomia
           }
         }
       end
-      @client.bulk index: @settings[:index], refresh: false, body: documents
+      client.bulk index: @settings[:index], refresh: false, body: documents
     end
 
     def import
@@ -48,23 +54,23 @@ module Bionomia
 
     def get(d)
       begin
-        @client.get index: @settings[:index], id: d.id
+        client.get index: @settings[:index], id: d.id
       rescue Elasticsearch::Transport::Transport::Errors::NotFound
         nil
       end
     end
 
     def add(d)
-      @client.index index: @settings[:index], id: d.id, body: document(d)
+      client.index index: @settings[:index], id: d.id, body: document(d)
     end
 
     def update(d)
       doc = { doc: document(d) }
-      @client.update index: @settings[:index], id: d.id, body: doc
+      client.update index: @settings[:index], id: d.id, body: doc
     end
 
     def delete(d)
-      @client.delete index: @settings[:index], id: d.id
+      client.delete index: @settings[:index], id: d.id
     end
 
     def document(d)

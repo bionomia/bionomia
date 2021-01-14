@@ -62,8 +62,9 @@ Unfortunately, gbifIDs are not persistent. These occasionally disappear through 
 First, import all users and user_occurrences content from production.
 
      $ RACK_ENV=production ./bin/populate_existing_claims.rb --truncate --directory /directory-to-spark-csv-files/
-     # Reduce number of workers for now until we have many more records to process, bottleneck is queries to wikidata
-     $ RACK_ENV=production sidekiq -c 2 -q existing_claims -r ./application.rb
+     # System might complain with a Errno::EMFILE: Too many open files so fix it as follows:
+     $ ulimit -n 8192
+     $ RACK_ENV=production sidekiq -c 40 -q existing_claims -r ./application.rb
 
 Then, find newly created users and manually create them in production. Export a csv of all claims made by User::GBIF_AGENT_ID from a start date.
 
