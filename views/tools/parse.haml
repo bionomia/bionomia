@@ -6,7 +6,7 @@
     $(function() {
       var ele = $("#bionomia-parse-results"),
           textarea = $('textarea[name="names"]'),
-          sample = "Miss Anna von Hoff; Dr. MA Smith Jr.; Groom Q\nBro. Aimé (coll. 2002-VI-06)";
+          sample = "Miss Anna von Hoff; Dr. MA Smith Jr.; Groom Q\nBro. Aimé (coll. 2002-VI-06)\nSmith, Jackson & Peters\nK. and G.E. Ball";
       $("#csv-export").on("click", function(e) {
         e.preventDefault();
         ele.csvExport({ title: ele.attr("id") + ".csv" });
