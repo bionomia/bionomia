@@ -194,6 +194,14 @@ class Dataset < ActiveRecord::Base
     end
   end
 
+  def collected_before_birth_after_death
+    UserOccurrence.joins(:occurrence)
+                  .joins(:user)
+                  .where(occurrences: { datasetKey: datasetKey })
+                  .where(action: ["recorded", "recorded,identified", "identified,recorded"])
+                  .where("users.date_born > occurrences.eventDate_processed OR users.date_died < occurrences.eventDate_processed")
+  end
+
   private
 
   def set_update_time

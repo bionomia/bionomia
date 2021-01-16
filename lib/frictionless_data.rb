@@ -22,6 +22,9 @@ module Bionomia
       #Add data files
       add_data_files
 
+      #Add problem file
+      add_problem_collector_file
+
       #Zip directory
       zip_file = File.join(@output_dir, "#{@dataset.datasetKey}.zip")
       FileUtils.rm zip_file, :force => true if File.file?(zip_file)
@@ -30,6 +33,7 @@ module Bionomia
         zipfile.add("users.csv", File.join(@folder, "users.csv"))
         zipfile.add("occurrences.csv", File.join(@folder, "occurrences.csv"))
         zipfile.add("attributions.csv", File.join(@folder, "attributions.csv"))
+        zipfile.add("problem_collector_dates.csv", File.join(@folder, "problem_collector_dates.csv"))
       end
       FileUtils.remove_dir(@folder)
       GC.compact
@@ -39,6 +43,7 @@ module Bionomia
       @package[:resources] << user_resource
       @package[:resources] << occurrence_resource
       @package[:resources] << attribution_resource
+      @package[:resources] << problem_collector_resource
     end
 
     def descriptor
@@ -89,7 +94,9 @@ module Bionomia
             { name: "orcid", type: "string" },
             { name: "wikidata", type: "string" },
             { name: "birthDate", type: "date", rdfType: "https://schema.org/birthDate" },
-            { name: "deathDate", type: "date", rdfType: "https://schema.org/deathDate" }
+            { name: "birthDatePrecision", type: "string", description: "Values are year, month, or day and indicate the precision of birthDate; portions of birthDate should be ignored below that of the birthDatePrecision."},
+            { name: "deathDate", type: "date", rdfType: "https://schema.org/deathDate" },
+            { name: "deathDatePrecision", type: "string", description: "Values are year, month, or day and indicate the precision of deathDate; portions of deathDate should be ignored below that of the deathDatePrecision."}
           ]
         },
         primaryKey: "id"
@@ -160,6 +167,47 @@ module Bionomia
       }
     end
 
+    def problem_collector_resource
+      {
+        name: "problem-collector-dates",
+        path: "problem_collector_dates.csv",
+        description: "Associated occurrence records whose eventDates are earlier than a collector's birthDate or later than their deathDate.",
+        format: "csv",
+        mediatype: "text/csv",
+        encoding: "utf-8",
+        profile: "tabular-data-resource",
+        schema: {
+          fields: [
+            { name: "occurrence_id", type: "integer" },
+            { name: "user_id", type: "integer" },
+            { name: "wikidata", type: "string" },
+            { name: "birthDate", type: "date", rdfType: "https://schema.org/birthDate" },
+            { name: "birthDatePrecision", type: "string", description: "Values are year, month, or day and indicate the precision of birthDate; portions of birthDate should be ignored below that of the birthDatePrecision."},
+            { name: "deathDate", type: "date", rdfType: "https://schema.org/deathDate" },
+            { name: "deathDatePrecision", type: "string", description: "Values are year, month, or day and indicate the precision of deathDate; portions of deathDate should be ignored below that of the deathDatePrecision."},
+            { name: "eventDate", type: "string", rdfType: "http://rs.tdwg.org/dwc/terms/eventDate" }
+
+          ]
+        },
+        foreignKeys: [
+          {
+            fields: "user_id",
+            reference: {
+              resource: "users",
+              fields: "id"
+            }
+          },
+          {
+            fields: "occurrence_id",
+            reference: {
+              resource: "occurrences",
+              fields: "gbifID"
+            }
+          }
+        ]
+      }
+    end
+
     def add_data_files
       users = File.open(File.join(@folder, "users.csv"), "wb")
       occurrences = File.open(File.join(@folder, "occurrences.csv"), "wb")
@@ -207,8 +255,6 @@ module Bionomia
         if !user_ids.include?(o.u_id)
           aliases = o.u_other_names.split("|").to_s if !o.u_other_names.blank?
           uri = !o.u_orcid.nil? ? "https://orcid.org/#{o.u_orcid}" : "http://www.wikidata.org/entity/#{o.u_wikidata}"
-          date_born = (o.u_date_born_precision == "day") ? o.u_date_born : nil
-          date_died = (o.u_date_died_precision == "day") ? o.u_date_died : nil
           data = [
             o.u_id,
             [o.u_given, o.u_family].join(" "),
@@ -218,8 +264,10 @@ module Bionomia
             uri,
             o.u_orcid,
             o.u_wikidata,
-            date_born,
-            date_died
+            o.u_date_born,
+            o.u_date_born_precision,
+            o.u_date_died,
+            o.u_date_died_precision
           ]
           users << CSV::Row.new(users_header, data).to_s
           user_ids << o.u_id
@@ -255,6 +303,40 @@ module Bionomia
       occurrences.close
       attributions.close
     end
+
+    def add_problem_collector_file
+      problems_collector_header = problem_collector_resource[:schema][:fields].map{ |u| u[:name] }
+      problems = File.open(File.join(@folder, "problem_collector_dates.csv"), "wb")
+      problems << CSV::Row.new(problems_collector_header, problems_collector_header, true).to_s
+      fields = [
+        :id,
+        :occurrence_id,
+        :user_id,
+        :wikidata,
+        :date_born,
+        :date_born_precision,
+        :date_died,
+        :date_died_precision,
+        :eventDate
+      ]
+      @dataset.collected_before_birth_after_death
+              .select(fields)
+              .find_each do |o|
+        data = [
+          o.occurrence_id,
+          o.user_id,
+          o.wikidata,
+          o.date_born,
+          o.date_born_precision,
+          o.date_died,
+          o.date_died_precision,
+          o.eventDate
+        ]
+        problems << CSV::Row.new(problems_collector_header, data).to_s
+      end
+      problems.close
+    end
+
   end
 
 end
