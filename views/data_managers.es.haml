@@ -72,7 +72,7 @@
         Los paquetes contienen un archivo
         %em datapackage.json
         de metadatos estándar y tres archivos csv:
-        %em users.csv, occurrences.csv,
+        %em users.csv, occurrences.csv, problem_collector_dates.csv,
         y
         %em attributions.csv.
         El archivo de metadatos
@@ -90,6 +90,9 @@
         El archivo
         %em occurrences.csv
         contiene el subconjunto de campos de Darwin Core de los registros de especímenes para los que se han realizado atribuciones.
+        El archivo
+        %em problem_collector_dates.csv
+        file contains a list of occurrence records whose eventDate is earlier than a collector's birthDate or later than their deathDate.
         Por último, el archivo
         %em attributions.csv
         es una tabla combinada de los otros dos archivos csv y también contiene columnas para quién realizó la atribución, su identificador de ORCID y una marca de tiempo para cuando se realizó la atribución.
@@ -103,6 +106,5 @@
         Aquí, las fechas de nacimiento y muerte de un recolector se comparan con las de sus registros de especímenes.
         También se puede hacer clic en países en mapas y rangos de fechas en gráficos para ejecutar filtros dinámicos.
         Con el tiempo y a medida que se realizan más atribuciones, los informes de calidad de datos como estos en los registros de especímenes de las personas pueden acumularse en informes a nivel de conjunto de datos.
-        Estos pueden incluirse como archivos csv adicionales en sus paquetes de Frictionless Data para que pueda investigar y reparar registros problemáticos en su sistema de gestión de colecciones según sea necesario.
 
       = haml_i18n :'partials/developers/reconcile', layout: false

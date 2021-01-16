@@ -109,9 +109,17 @@ module Bionomia
               type: 'date',
               format: 'yyyy-MM-dd'
             },
+            date_born_precision: {
+              type: 'keyword',
+              norms: false
+            },
             date_died: {
               type: 'date',
               format: 'yyyy-MM-dd'
+            },
+            date_died_precision: {
+              type: 'keyword',
+              norms: false
             },
             recorded: {
               type: 'nested',
@@ -169,8 +177,6 @@ module Bionomia
     end
 
     def document(u)
-      date_born = (u.date_born_precision == "day") ? u.date_born : nil
-      date_died = (u.date_died_precision == "day") ? u.date_died : nil
       description = u.description.truncate(50) rescue nil
       other_names = u.other_names.split("|").map(&:strip) rescue []
       {
@@ -182,8 +188,10 @@ module Bionomia
         fullname: u.fullname,
         fullname_reverse: u.fullname_reverse,
         other_names: other_names,
-        date_born: date_born,
-        date_died: date_died,
+        date_born: u.date_born,
+        date_born_precision: u.date_born_precision,
+        date_died: u.date_died,
+        date_died_precision: u.date_died_precision,
         thumbnail: thumbnail(u),
         description: description,
         identified: u.identified_families_countries,

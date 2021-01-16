@@ -68,8 +68,8 @@
       %p
         The packages contain a standard
         %em datapackage.json
-        metadata file and three csv files:
-        %em users.csv, occurrences.csv,
+        metadata file and four csv files:
+        %em users.csv, occurrences.csv, problem_collector_dates.csv,
         and
         %em attributions.csv.
         The
@@ -87,6 +87,9 @@
         The
         %em occurrences.csv
         file contains the subset of Darwin Core fields from your specimen records for which attributions have been made.
+        The
+        %em problem_collector_dates.csv
+        file contains a list of occurrence records whose eventDate is earlier than a collector's birthDate or later than their deathDate.
         Finally, the
         %em attributions.csv
         file is a join table for the other two csv files and also contains columns for who made the attribution, their ORCID ID, and a timestamp for when they made the attribution.
@@ -100,6 +103,5 @@
         Here, a collector's birth and death dates are cross-referenced against those on their specimen records.
         Countries on maps and date ranges on charts can also be clicked to execute dynamic filters.
         In time and as more attributions are made, data quality reports like these on individuals' specimen records may be rolled-up to dataset-level reports.
-        These may be included as additional csv files in your Frictionless Data packages such that you can investigate and repair problem records in your collection management system as required.
 
       = haml_i18n :'partials/developers/reconcile', layout: false

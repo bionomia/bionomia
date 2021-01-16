@@ -57,8 +57,17 @@ module Sinatra
             body = build_user_taxon_query(@taxon.family)
             response = client.search index: Settings.elastic.user_index, body: body, scroll: '5m'
             scroll_id = response['_scroll_id']
+            header = [
+              "name",
+              "URI",
+              "bionomia_url",
+              "action",
+              "date_born",
+              "date_born_precision",
+              "date_died",
+              "date_died_precision"
+            ]
             Enumerator.new do |y|
-              header = ["name", "URI", "bionomia_url", "action", "date_born", "date_died"]
               y << CSV::Row.new(header, header, true).to_s
               loop do
                 hits = response.deep_symbolize_keys.dig(:hits, :hits)
@@ -83,7 +92,9 @@ module Sinatra
                            "#{Settings.base_url}/#{identifier}",
                            action.join(","),
                            o[:_source][:date_born],
-                           o[:_source][:date_died]
+                           o[:_source][:date_born_precision],
+                           o[:_source][:date_died],
+                           o[:_source][:date_died_precision]
                          ]
                   y << CSV::Row.new(header, data).to_s
                 end
