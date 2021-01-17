@@ -202,6 +202,19 @@ class Dataset < ActiveRecord::Base
                   .where("users.date_born > occurrences.eventDate_processed OR users.date_died < occurrences.eventDate_processed")
   end
 
+  def current_occurrences_count
+    begin
+      response = RestClient::Request.execute(
+        method: :get,
+        url: "https://api.gbif.org/v1/occurrence/search?dataset_key=#{datasetKey}&limit=0"
+      )
+      response = JSON.parse(response, :symbolize_names => true)
+      response[:count].to_i
+    rescue
+      0
+    end
+  end
+
   private
 
   def set_update_time

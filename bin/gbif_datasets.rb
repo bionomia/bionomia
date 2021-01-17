@@ -40,6 +40,10 @@ OptionParser.new do |opts|
     options[:counter] = true
   end
 
+  opts.on("-v", "--verify", "Verify that dataset record counts are less than or equal to current count on GBIF") do
+    options[:verify] = true
+  end
+
   opts.on("-h", "--help", "Prints this help") do
     puts opts
     exit
@@ -97,4 +101,11 @@ elsif options[:refresh]
 elsif options[:counter]
   Occurrence.counter_culture_fix_counts only: :dataset
   puts "Counters rebuilt".green
+elsif options[:verify]
+  url = "https://api.gbif.org/v1/occurrence/search?limit=0&dataset_key="
+  Dataset.where("occurrences_count > 1000").find_each do |d|
+    if d.current_occurrences_count < d.occurrences_count
+      puts d.datasetKey.red
+    end
+  end
 end
