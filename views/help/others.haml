@@ -26,6 +26,15 @@
 
 - if @results.empty? || params[:q].nil?
   = haml :'partials/help/main_tabs', layout: false, locals: { active_main_tab: "country" }
+
+  - if !@friends.empty?
+    %div{class: "alert alert-info tiny-margins", role: "alert"}
+      %i{class:"fas fa-user-friends mr-2"}
+      Do you know:
+      - @friends.each_with_index do |u, i|
+        = succeed (@friends.count > i+1) ? ", " : "" do
+          %a{href: url("/help-others/#{u[:identifier]}")} #{u[:fullname]}
+
   = haml :'partials/help/countries', layout: false
 
 - else
