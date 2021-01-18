@@ -762,6 +762,73 @@ class User < ActiveRecord::Base
     update_search
   end
 
+  def who_might_know
+    return [] if !orcid
+    users = []
+
+    #Ten identified same family
+    es = ::Bionomia::ElasticUser.new
+    doc = es.get(self)
+    id_family = doc["_source"]["identified"].map{|a| a["family"]}.uniq.sample rescue nil
+    if id_family
+      client = Elasticsearch::Client.new url: Settings.elastic.server, request_timeout: 5*60, retry_on_failure: true, reload_on_failure: true
+      client.transport.reload_connections!
+      body = {
+        query: {
+          function_score: {
+            random_score: {
+              seed: Time.now.to_i
+            },
+            query: {
+              nested: {
+                path: "identified",
+                query: {
+                  bool: {
+                    must: [
+                      { term: { "identified.family": { value: id_family } } }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      response = client.search index: Settings.elastic.user_index, body: body, size: 10, scroll: "1m"
+      response["hits"]["hits"].each do |a|
+        next if a["_source"]["orcid"] == orcid
+        users << {
+          identifier: a["_source"]["wikidata"] || a["_source"]["orcid"],
+          fullname: a["_source"]["fullname"]
+        }
+      end
+    end
+
+    #Ten co-collectors
+    User.uncached do
+      recorded_with.limit(10)
+                   .order(Arel.sql("RAND()"))
+                   .find_each do |u|
+        users << { identifier: u.identifier, fullname: u.fullname }
+      end
+    end
+
+    #Ten from same organization past/present
+    User.uncached do
+      User.joins(:user_organizations)
+          .where.not(id: id)
+          .where(user_organizations: { organization_id: organization_ids})
+          .distinct
+          .limit(10)
+          .order(Arel.sql("RAND()"))
+          .find_each do |u|
+          users << { identifier: u.identifier, fullname: u.fullname }
+      end
+    end
+
+    users.uniq.sample(5)
+  end
+
   private
 
   def family_part

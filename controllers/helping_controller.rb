@@ -10,6 +10,7 @@ module Sinatra
           app.get '/help-others' do
             protected!
             @results = []
+            @friends = @user.who_might_know
             @countries = I18nData.countries(I18n.locale)
                           .group_by{|u| ActiveSupport::Inflector.transliterate(u[1][0]) }
                           .sort
