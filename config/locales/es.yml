@@ -82,12 +82,12 @@ es:
     country_title: Países
     lede: Países indicados en cuentas de ORCID y entradas de Wikidata o registros de especímenes en GBIF
     intro: Países indicados en cuentas de ORCID y entradas de Wikidata. Busque por familia taxonómica para explorar experticia.
-    collected_from: "Collected %{family} from %{country}"
-    identified_from: "Identified %{family} from %{country}"
-    collected_identified_from: "Collected or identified %{family} from %{country}"
-    no_one_collected_from: "No one collected %{family} from %{country}"
-    no_one_identified_from: "No one identified %{family} from %{country}"
-    no_one_collected_identified_from: "No one collected or identified %{family} from %{country}"
+    collected_from: "Colectados %{family} de %{country}"
+    identified_from: "Identificados %{family} de %{country}"
+    collected_identified_from: "Collectados o identificados %{family} de %{country}"
+    no_one_collected_from: "Nadie ha colectado %{family} de %{country}"
+    no_one_identified_from: "Nadie ha identificado %{family} de %{country}"
+    no_one_collected_identified_from: "Nadie ha colectado o identificado %{family} de %{country}"
     no_one_message: "No se encontró a nadie de %{country} en cuentas de ORCID o entradas de Wikidata. Buscar por familia taxonómica para explorar experticia."
   dataset:
     dataset_title: Conjuntos de datos
@@ -283,14 +283,14 @@ es:
     search_count:
       one: "1 resultado de la búsqueda por %{search}"
       other: "%{count} resultados de la búsqueda por %{search}"
-    make_public: "Yes, Make Public"
-    other_scribes: "Other scribes have also helped attribute %{user_name}'s specimens:"
-    no_scribes: "No other scribes have helped attribute %{user_name}'s specimens."
-    make_public_question: "Would you like to make %{user_name}'s profile publicly available?"
-    tweet_message: "An automated Tweet from @BionomiaTrack will be sent announcing the new profile."
-    view_public_html: "View the public %{href}"
-    view_public_href: "profile"
-    now_public_html: "Thank you for your help! The profile for %{person} is now visible to the public."
+    make_public: "Si, hacer público"
+    other_scribes: "Otros anotadores han ayudado a atribuir especímenes a %{user_name}:"
+    no_scribes: "Ningún otro anotador ha ayudado a atribuir especímenes a %{user_name}."
+    make_public_question: "Quiere hacer público el perfil de %{user_name}?"
+    tweet_message: "Se enviará un trino automatizado desde @BionomiaTrack anunciando el nuevo perfil."
+    view_public_html: "ver el %{href} público"
+    view_public_href: "perfil"
+    now_public_html: "¡Gracias por su ayuda! El perfil de %{person} es ahora visible públicamente."
   home:
     tagline: Enlace especímenes de historia natural a los colectores del mundo.
     get_started: Comenzar
@@ -361,7 +361,7 @@ es:
     collector_died: Colector que murió
     type_collected: Especímenes tipo colectados
     none_died_alert: "No se encontró a nadie que haya muerto en %{date}"
-    none_born_alert: "No one found who was born on %{date}"
+    none_born_alert: "No se encontró a nadie que haya nacido en %{date}"
     limit_alert: Resultados limitados a 50 registros de especímenes holotipos o paratipos
     no_types_alert: "No se encontraron especímenes tipo colectados en %{date}"
   oops:
@@ -431,7 +431,7 @@ es:
     change_photo: Cambiar foto de perfil
     remove: Remover
     cancel: Cancelar
-    upload: Upload
+    upload: Cargar
     settings: Configuración e integraciones
     no_science: Los datos de sus especímenes aún no se han registrado en descargas de GBIF y usado en publicaciones nuevas.
     no_citation_alert: Sus especímenes no se incluyeron en una descarga de GBIF en soporte de este estudio.
@@ -484,15 +484,15 @@ es:
     attributed_count:
       one: "espécimen atribuido"
       other: "especímens atribuidos"
-    private_message_html: "Your profile is private. Claim your %{specimens} and then make it public in %{settings} to maximize reuse."
-    no_claims_html: "Claim your discovered specimens under the %{specimens} tab to build your profile and start tracking your citations. Acknowledge your peers, mentors, or anyone who inspires you by attributing specimens under %{help_others}."
-    try_again: Try again.
+    private_message_html: "Su perfil es privado. Reclame sus %{specimens} y luego hágalo público %{settings} para maximizar el re-uso."
+    no_claims_html: "Reclame sus especímenes descubiertos bajo la pestaña %{specimens} para construir su perfil y comience a rastrear sus citaciones. Reconozca a sus colegas, mentores, o a cualquier persona que le inspire atribuyéndoles especímenes bajo %{help_others}."
+    try_again: Intente nuevamente.
     upload_count:
-      one: "A total of 1 uploaded record was handled."
-      other: "A total of %{count} records were handled."
-    upload_skipped: Existing claims, if present in your upload, were skipped.
-    upload_view: View
-    upload_view_html: "%{view} all your claims."
+      one: "Se procesó un total de 1 registro cargado."
+      other: "Se procesó un total de %{count} registros cargados."
+    upload_skipped: Reclamos existentes, si estaban presentes en su carga, fueron omitidos.
+    upload_view: Ver
+    upload_view_html: "%{view} todos sus reclamos."
   roster:
     roster_title: Perfiles públicos
     lede:
@@ -622,8 +622,8 @@ es:
     not_all_columns: No se muestran todas las columnas disponibles.
     map: Mapa
     list: Lista
-    no_specimens: Specimens have not yet been claimed or attributed.
-    no_specimens_filter: Specimens have not yet been claimed or attributed with this applied filter.
+    no_specimens: Aún no se han reclamado o atribuido especímenes.
+    no_specimens_filter: Aún no se han reclamado o atribuido especímenes bajo este filtro.
     stats_identified_specimens_nocountry:
       unit:
         one: "especimen identificado"
