@@ -22,29 +22,30 @@ class User < ActiveRecord::Base
 
   def self.merge_wikidata(qid, dest_qid)
     return if DestroyedUser.find_by_identifier(qid)
+    transaction do
+      DestroyedUser.create(identifier: qid, redirect_to: dest_qid)
 
-    DestroyedUser.create(identifier: qid, redirect_to: dest_qid)
-
-    src = User.default_scoped.find_by_wikidata(qid)
-    dest = User.default_scoped.find_by_wikidata(dest_qid)
-    if dest.nil?
-      src.wikidata = dest_qid
-      src.save
-      src.reload
-      src.update_wikidata_profile
-    else
-      src_occurrences = src.user_occurrences.pluck(:occurrence_id)
-      dest_occurrences = dest.user_occurrences.pluck(:occurrence_id) rescue []
-      (src_occurrences - dest_occurrences).in_groups_of(500, false) do |group|
-        src.user_occurrences.where(occurrence_id: group)
-                            .update_all({ user_id: dest.id})
+      src = User.default_scoped.find_by_wikidata(qid)
+      dest = User.default_scoped.find_by_wikidata(dest_qid)
+      if dest.nil?
+        src.wikidata = dest_qid
+        src.save
+        src.reload
+        src.update_wikidata_profile
+      else
+        src_occurrences = src.user_occurrences.pluck(:occurrence_id)
+        dest_occurrences = dest.user_occurrences.pluck(:occurrence_id) rescue []
+        (src_occurrences - dest_occurrences).in_groups_of(500, false) do |group|
+          src.user_occurrences.where(occurrence_id: group)
+                              .update_all({ user_id: dest.id})
+        end
+        if src.is_public?
+          dest.is_public = true
+          dest.save
+        end
+        dest.update_wikidata_profile
+        src.destroy
       end
-      if src.is_public?
-        dest.is_public = true
-        dest.save
-      end
-      dest.update_wikidata_profile
-      src.destroy
     end
   end
 
@@ -652,11 +653,13 @@ class User < ActiveRecord::Base
   end
 
   def update_profile
-    UserOrganization.where({ user_id: id }).destroy_all
-    if wikidata
-      update_wikidata_profile
-    elsif orcid
-      update_orcid_profile
+    self.transaction do
+      UserOrganization.where({ user_id: id }).destroy_all
+      if wikidata
+        update_wikidata_profile
+      elsif orcid
+        update_orcid_profile
+      end
     end
   end
 

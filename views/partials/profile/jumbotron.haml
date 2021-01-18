@@ -59,25 +59,29 @@
   - if !@user.country_code.blank?
     %p{class:"text-lg-left p-0 mt-1 mb-1"}
       %i{class:"fas fa-globe"}
-      #{country_name(@user.country_code)}
+      %a{href: url("/country/#{@user.country_code}")} #{country_name(@user.country_code)}
 
-  - if locals[:active_page] != "settings"
-    %div{class:"mt-3 pt-3 border-top"}
-      - if !@user.is_public?
-        %p{class:"m-3 alert alert-warning"}
-          %i{class:"fas fa-lock"}
-          = I18n.t('profile.private_message_html', specimens: link_to(I18n.t('profile.specimens'), url("/profile/candidates")), settings: link_to(I18n.t('profile.settings'), url("/profile/settings")))
-      %p{class:"m-0"}
-        - if @user.is_public?
-          %a{href: url("/#{@user.orcid}"), class:"mr-2 mb-2"}
-            %i{class:"fas fa-users"}
-            = I18n.t('profile.public_profile')
-        %a{href: url("/#{@user.identifier}/refresh-stats.json"), class:"profile-flush mr-2 mb-2"}
-          %i{class: "fas fa-sync-alt"}
-          = I18n.t('general.refresh_stats')
+  %div{class:"mt-3 pt-3 border-top"}
+    - if !@user.is_public?
+      %p{class:"m-3 alert alert-warning"}
+        %i{class:"fas fa-lock"}
+        = I18n.t('profile.private_message_html', specimens: link_to(I18n.t('profile.specimens'), url("/profile/candidates")), settings: link_to(I18n.t('profile.settings'), url("/profile/settings")))
+    %p{class:"m-0"}
+      - if @user.is_public?
+        %a{href: url("/#{@user.orcid}"), class:"mr-2 mb-2"}
+          %i{class:"fas fa-users"}
+          = I18n.t('profile.public_profile')
+      %a{href: url("/#{@user.identifier}/refresh-stats.json"), class:"profile-flush mr-2 mb-2"}
+        %i{class: "fas fa-sync-alt"}
+        = I18n.t('general.refresh_stats')
+      - if locals[:active_page] != "settings"
         %a{href: url("/profile/settings"), class:"mb-2"}
           %i{class:"fas fa-cog"}
           = I18n.t('profile.settings')
+      - else
+        %a{href: url("/profile"), class:"mb-2"}
+          %i{class:"fas fa-user"}
+          = I18n.t('profile.overview')
 
     %div{id:"flush-message", class:"alert alert-success alert-dismissible fade show text-center", role: "alert"}
       = I18n.t("user.caches_rebuilt")

@@ -30,7 +30,7 @@ Sinatra app to parse people names from structured biodiversity occurrence data, 
 
 ## Processing Preamble
 
-There are occasionally hiccups at either the data publisher's end or at GBIF. BEFORE each successive data refresh routine outlined below, first produce a list of datasets whose total number of records here are greater here than what is currently available at GBIF. If they are, this a first indication that a new publication event has gone wrong, harvesting at GBIF's end has gone wrong, or a dataset has recently disappeared. This assumes a previous round of data processing below has already been executed and that there are counts on datasets produced from Step 7.
+There are occasional hiccups at either the data publisher's end or at GBIF. BEFORE each successive data refresh routine outlined below, first produce a list of datasets whose total number of records here are greater than what is currently available at GBIF. If they are, this is a first indication that republication has gone wrong, harvesting at GBIF's end has skipped a number of records, or a dataset has recently been unpublished. The script below assumes a previous, full round of data processing has already been executed and that there are counts on datasets produced from Step 7.
 
     $ RACK_ENV=production ./bin/gbif_datasets.rb --verify
 
