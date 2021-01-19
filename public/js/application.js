@@ -615,6 +615,13 @@ var Application = (function($, window) {
         });
         return false;
       });
+
+      $("a.help-refresh").on("click", function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        location.reload();
+      });
+
     },
 
     activate_popovers: function() {

@@ -29,6 +29,9 @@
       - @friends.each_with_index do |u, i|
         = succeed (@friends.count > i+1) ? ", " : "" do
           %a{href: url("/help-others/#{u[:identifier]}")} #{u[:fullname]}
+      %a{href:"#", class:"help-refresh ml-2"}
+        %i{class: "fas fa-sync-alt"}
+        = I18n.t('profile.refresh')
 
   = haml :'partials/help/countries', layout: false
 
