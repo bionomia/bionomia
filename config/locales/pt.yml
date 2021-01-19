@@ -291,6 +291,10 @@ pt:
     view_public_html: "View the public %{href}"
     view_public_href: "profile"
     now_public_html: "Thank you for your help! The profile for %{person} is now visible to the public."
+    do_you_know: Do you know
+    no_one_found: "No one found by the name %{name}."
+    add_someone_html: "See how to %{href}."
+    add_someone_href: "add someone"
   home:
     tagline: Link natural history specimens to the world's collectors.
     get_started: Get started

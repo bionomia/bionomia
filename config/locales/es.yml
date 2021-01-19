@@ -291,6 +291,10 @@ es:
     view_public_html: "ver el %{href} público"
     view_public_href: "perfil"
     now_public_html: "¡Gracias por su ayuda! El perfil de %{person} es ahora visible públicamente."
+    do_you_know: Do you know
+    no_one_found: "No one found by the name %{name}."
+    add_someone_html: "See how to %{href}."
+    add_someone_href: "add someone"
   home:
     tagline: Enlace especímenes de historia natural a los colectores del mundo.
     get_started: Comenzar

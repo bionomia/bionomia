@@ -16,13 +16,8 @@
 
 - if @results.empty? && params[:q] && !params[:q].empty?
   %div{class: "alert alert-warning tiny-margins", role: "alert"}
-    No one found by the name
-    = succeed "." do
-      %span{class: "font-weight-bold"}
-        #{h(params[:q])}
-    See how to
-    = succeed "." do
-      %a{href: url("/help-others/add"), class: "font-weight-bold"} add someone
+    = I18n.t('help.no_one_found', name: h(params[:q]))
+    = I18n.t('help.add_someone_html', href: link_to(I18n.t('help.add_someone_href'), url('/help-others/add')))
 
 - if @results.empty? || params[:q].nil?
   = haml :'partials/help/main_tabs', layout: false, locals: { active_main_tab: "country" }
@@ -30,7 +25,7 @@
   - if !@friends.empty?
     %div{class: "alert alert-info tiny-margins", role: "alert"}
       %i{class:"fas fa-user-friends mr-2"}
-      Do you know:
+      = I18n.t('help.do_you_know')
       - @friends.each_with_index do |u, i|
         = succeed (@friends.count > i+1) ? ", " : "" do
           %a{href: url("/help-others/#{u[:identifier]}")} #{u[:fullname]}
@@ -39,10 +34,9 @@
 
 - else
   %div{class: "alert alert-info tiny-margins", role: "alert"}
-    #{I18n.t('help.search_count', count: @pagy.count, search: h(params[:q]))}
-    Not found? See how to
     = succeed "." do
-      %a{href: url("/help-others/add"), class: "font-weight-bold"} add someone
+      = I18n.t('help.search_count', count: @pagy.count, search: h(params[:q]))
+    = I18n.t('help.add_someone_html', href: link_to(I18n.t('help.add_someone_href'), url('/help-others/add')))
 
   %div
     - @results.in_groups_of(3).each do |group|

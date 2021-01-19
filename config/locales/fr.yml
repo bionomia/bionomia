@@ -291,6 +291,10 @@ fr:
     view_public_html: "Voir le %{href} public"
     view_public_href: "profil"
     now_public_html: "Merci de votre aide! Le profil de %{person} est maintenant accessible au public."
+    do_you_know: Savez-vous
+    no_one_found: "Personne n'a été trouvé sous le nom de %{name}."
+    add_someone_html: "Découvrez comment %{href}."
+    add_someone_href: "ajouter quelqu'un"
   home:
     tagline: Reliez des spécimens d'histoire naturelle aux collectionneurs du monde.
     get_started: Commencer
