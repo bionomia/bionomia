@@ -94,6 +94,58 @@ module Sinatra
           end
         end
 
+        def dataset_json_ld
+          descriptor = {
+            "@context": "http://schema.org",
+            "@type": "Dataset",
+            "@id": "https://doi.org/#{@dataset.doi}",
+            identifier: [
+              {
+                "@type": "PropertyValue",
+                propertyID: "doi",
+                value: "https://doi.org/#{@dataset.doi}"
+              },
+              {
+                "@type": "PropertyValue",
+                propertyID: "UUID",
+                value: "#{@dataset.datasetKey}"
+              }
+            ],
+            url: "https://bionomia.net/dataset/#{@dataset.datasetKey}",
+            name: "ATTRIBUTIONS MADE FOR: #{h(@dataset.title)}"
+          }
+          if @dataset.description
+            descriptor.merge!(
+              {
+                description: "#{h(Sanitize.fragment(@dataset.description))}"
+              }
+            )
+          end
+          if @dataset.license && @dataset.license_icon
+            descriptor.merge!(
+              {
+                license: "#{@dataset.license}"
+              }
+            )
+          end
+          if @dataset.image_url
+            descriptor.merge!(
+              {
+                image: "https://abekpgaoen.cloudimg.io/bound/350x200/q100/#{@dataset.image_url}"
+              }
+            )
+          end
+          if @compressed_file_size
+            descriptor.merge!(
+              {
+                contentUrl: "https://bionomia.net/dataset/#{@dataset.datasetKey}.zip",
+                contentSize: "#{@compressed_file_size} MB"
+              }
+            )
+          end
+          descriptor
+        end
+
       end
     end
   end

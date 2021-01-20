@@ -4,6 +4,8 @@
   #{@dataset.title} – #{I18n.t('dataset.people')}
 
 -content_for :scripts do
+  %script{type: "application/ld+json"}
+    = dataset_json_ld.to_json
   %script{src: "/js/progress-bar.js"}
   %script{src: "/js/application.js"}
   :javascript
