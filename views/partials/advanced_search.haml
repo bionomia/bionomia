@@ -14,7 +14,7 @@
       %label{for: "typeahead-dataset", class:"font-weight-bold"}= I18n.t("help.dataset")
       %div{class:"col-12 col-md-8 pl-0"}
         - if @dataset.nil?
-          %input{id: "typeahead-dataset", type: :text, name: "dataset", value: "#{params[:dataset]}", class:"typeahead"}
+          %input{id: "typeahead-dataset", type: :text, name: "dataset", value: "#{params[:dataset]}", class:"typeahead", autocomplete:"off"}
         - else
           - q = params.except("id", "datasetKey").to_query
           %span
@@ -29,7 +29,7 @@
       %label{for: "typeahead-taxon", class:"font-weight-bold"}= I18n.t('help.taxon_string')
       %div{class:"col-12 col-md-8 pl-0"}
         - if @taxon.nil?
-          %input{id: "typeahead-taxon", type: :text, name: "taxon", value: "#{params[:taxon]}", class:"typeahead"}
+          %input{id: "typeahead-taxon", type: :text, name: "taxon", value: "#{params[:taxon]}", class:"typeahead", autocomplete:"off"}
         - else
           - q = params.except("id", "taxon_id").to_query
           %span
@@ -44,7 +44,7 @@
       %label{for: "typeahead-agent", class:"font-weight-bold"}= I18n.t('help.agent_string')
       %div{class:"col-12 col-md-8 pl-0"}
         - if @agent.nil?
-          %input{id: "typeahead-agent", type: :text, name: "agent", value: "#{params[:agent]}", class:"typeahead"}
+          %input{id: "typeahead-agent", type: :text, name: "agent", value: "#{params[:agent]}", class:"typeahead", autocomplete:"off"}
         - else
           - q = params.except("id", "agent_id").to_query
           %span

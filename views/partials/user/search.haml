@@ -2,7 +2,7 @@
   %form{id:"form-helper-wrapper", method: "get", action: "/roster", "accept-charset" => "UTF-8", class: "form-inline helpers"}
     %div{class: "form-group w-75"}
       - username = @viewed_user ? @viewed_user.fullname : "Mary Smith"
-      %input{class: "typeahead help-search", id: "typeahead-user", type: :text, name: "q", placeholder: "#{username}", value: "#{h(params[:q])}", size:"25"}
+      %input{class: "typeahead help-search", id: "typeahead-user", type: :text, name: "q", placeholder: "#{username}", value: "#{h(params[:q])}", size:"25", autocomplete:"off"}
     %input{type: :submit, class:"btn btn-success medium-margins", value:"#{I18n.t('general.search')}"}
 
 %script{id:"result-template", type:"text/x-handlebars-template"}

@@ -1,5 +1,5 @@
 %div
   %form{id:"form-org-wrapper", method: "get", action: "/admin/organizations/search", "accept-charset" => "UTF-8", class: "form-inline helpers"}
     %div{class: "form-group w-75"}
-      %input{class:"typeahead organization-search", id:"typeahead-organization", type: :text, name: "q", placeholder: "Canadian Museum of Nature", value: "#{params[:q]}", size:"25"}
+      %input{class:"typeahead organization-search", id:"typeahead-organization", type: :text, name: "q", placeholder: "Canadian Museum of Nature", value: "#{params[:q]}", size:"25", autocomplete:"off"}
     %input{type: :submit, class:"btn btn-success medium-margins", value:"#{I18n.t('general.search')}"}
