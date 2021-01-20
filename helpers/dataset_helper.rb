@@ -138,8 +138,11 @@ module Sinatra
           if @compressed_file_size
             descriptor.merge!(
               {
-                contentUrl: "https://bionomia.net/dataset/#{@dataset.datasetKey}.zip",
-                contentSize: "#{@compressed_file_size} MB"
+                distribution: {
+                  contentUrl: "https://bionomia.net/dataset/#{@dataset.datasetKey}.zip",
+                  contentSize: "#{@compressed_file_size} MB",
+                  encodingFormat: "application/zip"
+                }
               }
             )
           end
