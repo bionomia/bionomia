@@ -29,6 +29,22 @@ module Bionomia
         )
     end
 
+    def wikidata_people_query_recent_minus_bionomia(property)
+      yesterday = Time.now - 86400
+      %Q(
+          SELECT DISTINCT
+            ?item ?itemLabel
+          WHERE {
+            ?item wdt:#{property} ?id .
+            ?item wdt:P570 ?date_of_death .
+            ?item schema:dateModified ?change .
+            MINUS { ?item wdt:P6944 ?bionomia . }
+            SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+            FILTER(?change > "#{yesterday.iso8601}"^^xsd:dateTime)
+          }
+        )
+    end
+
     # With help from @rdmpage
     def wikidata_institution_code_query(identifier)
       %Q(
@@ -158,7 +174,7 @@ module Bionomia
       new_wikicodes = {}
       PEOPLE_PROPERTIES.each do |key,property|
         puts "Polling #{key}...".yellow
-        @sparql.query(wikidata_people_query(property))
+        @sparql.query(wikidata_people_query_recent_minus_bionomia(property))
                .each_solution do |solution|
           wikicode = solution.to_h[:item].to_s.match(/Q[0-9]{1,}/).to_s
           next if existing.include? wikicode
@@ -169,7 +185,9 @@ module Bionomia
       new_wikicodes.each do |wikicode, name|
         parsed = DwcAgent.parse(name.dup)[0] rescue nil
         next if parsed.nil? || parsed.family.nil? || parsed.given.nil?
-
+        user_data = wiki_user_data(wikicode)
+        next if (user_data[:date_died].nil? && user_data[:date_died_precision].nil?) ||
+          (user_data[:date_born].nil? && user_data[:date_born_precision].nil? && Date.today.year - user_data[:date_born].year >= 120)
         u = User.find_or_create_by({ wikidata: wikicode })
         if !u.valid_wikicontent?
           u.delete_search
