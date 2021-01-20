@@ -58,7 +58,7 @@ module Bionomia
 
       {
         name: "bionomia-attributions",
-        id: "https://doi.org/#{@dataset.doi}",
+        id: @dataset.datasetKey,
         licenses: [
           {
             name: license_name,
@@ -66,11 +66,26 @@ module Bionomia
           }
         ],
         profile: "tabular-data-package",
-        title: "#{@dataset.title}",
+        title: "ATTRIBUTIONS MADE FOR: #{@dataset.title}",
         description: "#{@dataset.description}",
         datasetKey: @dataset.datasetKey,
         homepage: "https://bionomia.net/dataset/#{@dataset.datasetKey}",
         created: Time.now.to_time.iso8601,
+        sources: [
+          {
+            title: "#{@dataset.title}",
+            path: "https://doi.org/#{@dataset.doi}"
+          }
+        ],
+        keywords: [
+          "specimen",
+          "museum",
+          "collection",
+          "credit",
+          "attribution",
+          "bionomia"
+        ],
+        image: "https://bionomia.net/images/logo.png",
         resources: []
       }
     end
