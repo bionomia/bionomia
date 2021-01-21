@@ -90,7 +90,9 @@ module Sinatra
 
         def create_user
           if params[:identifier] && !params[:identifier].empty?
-            if params[:identifier].is_orcid?
+            if DestroyedUser.where(identifier: params[:identifier]).exists?
+              flash.next[:new_user] = { fullname: params[:identifier], slug: nil }
+            elsif params[:identifier].is_orcid?
               new_user = User.find_or_create_by({ orcid: params[:identifier] })
               flash.next[:new_user] = { fullname: new_user.fullname, slug: new_user.orcid }
             elsif params[:identifier].is_wiki_id?
