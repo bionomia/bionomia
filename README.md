@@ -3,9 +3,9 @@ Sinatra app to parse people names from structured biodiversity occurrence data, 
 
 [![Build Status](https://travis-ci.org/bionomia/bionomia.svg?branch=master)](https://travis-ci.org/bionomia/bionomia)
 
-## Recent Updates
+## Translations
 
-- 2020-06-11: Relaunch of project with new brand.
+Strings of text in the user interface are translatable via [config/locales](config/locales). Large pages of text are fully translatable on [views](views) that have language codes in their file names, eg [views/about.es.haml](views/about.es.haml). 
 
 ## Requirements
 
