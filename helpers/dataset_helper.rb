@@ -120,6 +120,12 @@ module Sinatra
                 description: "#{h(Sanitize.fragment(@dataset.description))}"
               }
             )
+          else
+            descriptor.merge!(
+              {
+                description: "#{h(@dataset.title)}"
+              }
+            )
           end
           if @dataset.license && @dataset.license_icon
             descriptor.merge!(

@@ -18,7 +18,7 @@
             %p{class:"card-text"}= I18n.t('profile.make_public_message')
             %div{class:"row"}
               %div{class:"col"}
-                %input{type:"checkbox", id: "toggle-public", "data-toggle":"toggle", "data-on":"#{I18n.t('profile.public')}", "data-off":"#{I18n.t('profile.private')}", "data-onstyle": "success", "data-size": "small", checked: @user.is_public?, class:"btn-claim", "data-url": "/profile/visibility.json" }
+                %input{type:"checkbox", id: "toggle-public", "data-toggle":"toggle", "data-on":"#{I18n.t('profile.public')}", "data-off":"#{I18n.t('profile.private')}", "data-onstyle": "success", "data-size": "small", "data-width": "90", checked: @user.is_public?, class:"btn-claim", "data-url": "/profile/visibility.json" }
               %div{class:"col text-right"}
                 - if @user.is_public?
                   %a{href: url("/#{@user.orcid}")}
