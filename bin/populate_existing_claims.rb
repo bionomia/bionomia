@@ -63,6 +63,7 @@ if options[:export]
     end
 
     claims.find_each do |o|
+      next if !o.user
       csv << [o.user.identifier, o.occurrence_id, o.action, o.created_by]
     end
   end
