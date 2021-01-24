@@ -207,6 +207,7 @@ en:
     person: Person
     progress: Progress
     public: Public
+    private: Profile is not public
     created: Created
     latest_scribe: Latest Scribe
     latest_claim: Latest Claim

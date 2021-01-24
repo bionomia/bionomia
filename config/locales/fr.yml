@@ -207,6 +207,7 @@ fr:
     person: Personne
     progress: Progrès
     public: Publique
+    private: Profil n'est pas public
     created: Créé
     latest_scribe: Dernier scribe
     latest_claim: Dernière réclamation
