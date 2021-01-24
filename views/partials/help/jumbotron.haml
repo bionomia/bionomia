@@ -127,5 +127,6 @@
           %span{"aria-hidden":"true"} &times;
 
   %div{class:"w-100 w-sm-75 w-lg-50 w-xl-25 ml-auto"}
-    = haml :'partials/help/search', layout: false
+    - if authorized?
+      = haml :'partials/help/search', layout: false
   %div{class:"mr-auto"}
