@@ -207,7 +207,7 @@ es:
     person: Persona
     progress: Progreso
     public: Público
-    private: Profile is not public
+    private: El perfil no es público
     created: Creado
     latest_scribe: Último anotador
     latest_claim: Última adjudicación
