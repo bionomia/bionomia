@@ -5,7 +5,7 @@ Sinatra app to parse people names from structured biodiversity occurrence data, 
 
 ## Translations
 
-Strings of text in the user interface are translatable via [config/locales](config/locales). Large pages of text are fully translatable on [views](views) that have language codes in their file names, eg [views/about.es.haml](views/about.es.haml). 
+Strings of text in the user interface are translatable via [config/locales](config/locales). Large pages of text are fully translatable on [views](views) that have language codes in their file names, eg [views/about.es.haml](views/about.es.haml).
 
 ## Requirements
 
@@ -72,13 +72,13 @@ First, import all users and user_occurrences content from production.
      $ ulimit -n 8192
      $ RACK_ENV=production sidekiq -c 40 -q existing_claims -r ./application.rb
 
-Then, find newly created users and manually create them in production. Export a csv of all claims made by User::GBIF_AGENT_ID from a start date.
+Export a csv pivot table (for import performance) of all claims made by User::GBIF_AGENT_ID.
 
-     $ RACK_ENV=production ./bin/populate_existing_claims.rb --export "gbif_claims.csv" --start-date 2020-11-01
+     $ RACK_ENV=production ./bin/populate_existing_claims.rb --export "gbif_claims.csv"
 
-Finally, import the bulk claims on production (existing claims will be skipped):
+Finally, import the bulk claims on production (will create users & make public if wikidata):
 
-     $ RACK_ENV=production ./bin/bulk_claim.rb --file "gbif_claims.csv"
+     $ RACK_ENV=production ./bin/bulk_claim.rb --pivot-file "gbif_claims.csv"
 
 ### Step 6: Populate Search in Elasticsearch
 

@@ -16,11 +16,7 @@ OptionParser.new do |opts|
     options[:truncate] = true
   end
 
-  opts.on("-s", "--start-date [DATE]", String, "Start date in the form YYYY-MM-DD") do |date|
-    options[:start_date] = date
-  end
-
-  opts.on("-e", "--export [directory]", String, "Export a csv of attributions made at the completion of all jobs") do |directory|
+  opts.on("-e", "--export [directory]", String, "Export csv file of attributions made at the source using recordedByID or identifiedByID") do |directory|
     options[:export] = directory
   end
 
@@ -53,18 +49,27 @@ end
 
 if options[:export]
   CSV.open(options[:export], "wb") do |csv|
-    csv << ["identifier", "occurrence_id", "action", "created_by"]
-    claims = UserOccurrence.includes(:user)
-                           .where(created_by: User::GBIF_AGENT_ID)
+    csv << ["identifier", "action", "occurrence_ids"]
+    user_ids = UserOccurrence.where(created_by: User::GBIF_AGENT_ID)
+                             .pluck(:user_id)
+                             .uniq
 
-    if options[:start_date]
-      date = DateTime.strptime(options[:start_date], '%Y-%m-%d')
-      claims = claims.where("created >= '#{date}'")
-    end
+    user_ids.each do |u|
+      user = User.find(u)
+      recorded_ids = UserOccurrence.where(user_id: u)
+                                   .where(action: "recorded")
+                                   .pluck(:occurrence_id)
+      csv << [user.identifier, "recorded", recorded_ids.to_s] if !recorded_ids.empty?
 
-    claims.find_each do |o|
-      next if !o.user
-      csv << [o.user.identifier, o.occurrence_id, o.action, o.created_by]
+      identified_ids = UserOccurrence.where(user_id: u)
+                                     .where(action: "identified")
+                                     .pluck(:occurrence_id)
+      csv << [user.identifier, "identified", identified_ids.to_s] if !identified_ids.empty?
+
+      both_ids = UserOccurrence.where(user_id: u)
+                               .where(action: ["recorded,identified", "identified,recorded"])
+                               .pluck(:occurrence_id)
+      csv << [user.identifier, "recorded,identified", both_ids.to_s] if !both_ids.empty?
     end
   end
 end

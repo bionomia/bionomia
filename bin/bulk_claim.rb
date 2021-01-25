@@ -40,11 +40,12 @@ end.parse!
 
 if options[:file]
   mime_type = `file --mime -b "#{options[:file]}"`.chomp
-  raise RuntimeError, 'File must be a csv' if !mime_type.include?("text/plain")
-  identifiers = []
+  raise RuntimeError, 'File must be a csv' if !mime_type.include?("text/plain") && !mime_type.include?("application/csv")
+
+  UserOccurrence.where(created_by: User::GBIF_AGENT_ID).delete_all
+
   CSV.foreach(options[:file], headers: true) do |row|
     next if !row["identifier"].is_orcid? && !row["identifier"].is_wiki_id?
-    identifiers << row["identifier"]
     if row["identifier"].is_wiki_id?
       d = DestroyedUser.find_by_identifier(row["identifier"])
       if d.nil?
@@ -60,18 +61,16 @@ if options[:file]
     elsif row["identifier"].is_orcid?
       u = User.find_or_create_by({ orcid: row["identifier"] })
     end
-    begin
-      UserOccurrence.create!({
-          user_id: u.id,
-          occurrence_id: row["occurrence_id"].to_i,
-          action: row["action"],
-          created_by: row["created_by"].to_i
-      })
-    rescue ActiveRecord::RecordNotUnique => e
+    row["occurrence_ids"].tr('[]', '').split(',').in_groups_of(1_000, false) do |group|
+      import = group.map{|r| [ r.to_i, u.id, row["action"], User::GBIF_AGENT_ID ] }
+      UserOccurrence.import [:occurrence_id, :user_id, :action, :created_by], import, batch_size: 1000, validate: false, on_duplicate_key_ignore: true
     end
-  end
-  identifiers.uniq.each do |id|
-    User.find_by_identifier(id).flush_caches rescue nil
+    if u.wikidata && !u.is_public?
+      u.is_public = true
+      u.save
+    end
+    u.flush_caches
+    puts u.identifier.green
   end
 elsif options[:agent_id] && ![options[:orcid], options[:wikidata]].compact.empty?
   agent = Agent.find(options[:agent_id])
