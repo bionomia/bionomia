@@ -35,8 +35,9 @@
                   - if u.country
                     %p{class:"small text-muted mt-0 mb-0"}
                       - country_codes = u.country_code.split("|") rescue []
-                      - u.country.split("|").each_with_index do |v,i|
-                        = succeed (country_codes[i+1]) ? ', ' : '' do
+                      - countries = u.country.split("|") rescue []
+                      - countries.each_with_index do |v,i|
+                        = succeed (countries[i+1]) ? ', ' : '' do
                           - if !country_codes[i].nil? && !country_codes[i].empty?
                             #{country_name(country_codes[i])}
                           - else
@@ -50,8 +51,9 @@
                 - if u.country
                   %p{class:"small text-muted mt-0 mb-0"}
                     - country_codes = u.country_code.split("|") rescue []
-                    - u.country.split("|").each_with_index do |v,i|
-                      = succeed (country_codes[i+1]) ? ', ' : '' do
+                    - countries = u.country.split("|") rescue []
+                    - countries.each_with_index do |v,i|
+                      = succeed (countries[i+1]) ? ', ' : '' do
                         - if !country_codes[i].nil? && !country_codes[i].empty?
                           #{country_name(country_codes[i])}
                         - else

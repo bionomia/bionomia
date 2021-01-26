@@ -66,7 +66,8 @@
 
   - if !@admin_user.country.blank?
     - country_codes = @admin_user.country_code.split("|") rescue []
-    - @admin_user.country.split("|").each_with_index do |v,i|
+    - countries = @admin_user.country.split("|") rescue []
+    - countries.each_with_index do |v,i|
       - if !country_codes[i].nil? && !country_codes[i].empty?
         %p{class:"text-lg-left p-0 mt-1 mb-1"}
           %i{class:"fas fa-globe"}

@@ -58,8 +58,9 @@
       %p{class:"text-center p-0 mt-1 mb-1"}
         %i{class:"fas fa-globe"}
         - country_codes = @viewed_user.country_code.split("|") rescue []
-        - @viewed_user.country.split("|").each_with_index do |v,i|
-          = succeed (country_codes[i+1]) ? ', ' : '' do
+        - countries = @viewed_user.country.split("|") rescue []
+        - countries.each_with_index do |v,i|
+          = succeed (countries[i+1]) ? ', ' : '' do
             - if !country_codes[i].nil? && !country_codes[i].empty?
               #{country_name(country_codes[i])}
             - else
