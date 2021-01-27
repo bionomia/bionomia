@@ -24,6 +24,7 @@ occurrences-unioned
 processed
 verbatim
 claims-unioned-csv
+users-csv
 missing-claims
 tmp
 *.gz

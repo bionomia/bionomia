@@ -55,7 +55,8 @@ if options[:export]
                              .uniq
 
     user_ids.each do |u|
-      user = User.find(u)
+      user = User.find(u) rescue nil
+      next if user.nil?
       recorded_ids = UserOccurrence.where(user_id: u)
                                    .where(action: "recorded")
                                    .pluck(:occurrence_id)

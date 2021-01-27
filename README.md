@@ -70,7 +70,7 @@ First, import all users and user_occurrences content from production.
      $ RACK_ENV=production ./bin/populate_existing_claims.rb --truncate --directory /directory-to-spark-csv-files/
      # System might complain with a Errno::EMFILE: Too many open files so fix it as follows:
      $ ulimit -n 8192
-     $ RACK_ENV=production sidekiq -c 40 -q existing_claims -r ./application.rb
+     $ RACK_ENV=production sidekiq -c 30 -q existing_claims -r ./application.rb
 
 Export a csv pivot table (for import performance) of all claims made by User::GBIF_AGENT_ID.
 

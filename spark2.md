@@ -123,6 +123,14 @@ unioned2.select("agentIDs", "gbifIDs_recordedByIDs", "gbifIDs_identifiedByIDs").
     option("escape", "\"").
     csv("claims-unioned-csv")
 
+//Optionally make list of all unique identifiers for people
+unioned2.select($"agentIDs").
+    distinct.
+    repartition(1).
+    write.
+    mode("overwrite").
+    csv("users-csv")
+
 val agents = spark.
     read.
     format("avro").
