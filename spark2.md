@@ -123,7 +123,7 @@ unioned2.select("agentIDs", "gbifIDs_recordedByIDs", "gbifIDs_identifiedByIDs").
     option("escape", "\"").
     csv("claims-unioned-csv")
 
-//Optionally make list of all unique identifiers for people
+//Optionally make list of all unique identifiers for people (but need to be later split by '|')
 unioned2.select($"agentIDs").
     distinct.
     repartition(1).
