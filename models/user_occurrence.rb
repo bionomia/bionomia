@@ -35,6 +35,7 @@ class UserOccurrence < ActiveRecord::Base
          .where(occurrences: { id: nil })
          .where(visible: true)
          .group(:user_id)
+         .order("NULL")
          .count
          .sort_by { |_key, value| value }
          .reverse

@@ -158,6 +158,7 @@ class User < ActiveRecord::Base
         .joins(taxon_occurrence: :taxon)
         .select("taxa.family")
         .group("taxa.family")
+        .order("NULL")
         .count
         .sort_by{|_key, value| value}
         .reverse
@@ -171,6 +172,7 @@ class User < ActiveRecord::Base
         .joins(taxon_occurrence: :taxon)
         .select("taxa.family")
         .group("taxa.family")
+        .order("NULL")
         .count
         .sort_by{|_key, value| value}
         .reverse
@@ -187,6 +189,7 @@ class User < ActiveRecord::Base
         .joins(taxon_occurrence: :taxon)
         .select("taxa.family")
         .group("taxa.family")
+        .order("NULL")
         .count
         .sort_by{|_key, value| value}
         .reverse
@@ -200,6 +203,7 @@ class User < ActiveRecord::Base
         .joins(taxon_occurrence: :taxon)
         .select("taxa.family")
         .group("taxa.family")
+        .order("NULL")
         .count
         .sort_by{|_key, value| value}
         .reverse
@@ -267,6 +271,7 @@ class User < ActiveRecord::Base
 
   def helped_counts
     claims_given.group(:user_id)
+                .order("NULL")
                 .count
                 .sort_by{|a,b| b}
                 .reverse.to_h
@@ -339,6 +344,7 @@ class User < ActiveRecord::Base
     identifications_or_recordings
       .references(:occurrences)
       .group("occurrences.countryCode", :action)
+      .order("NULL")
       .pluck(Arel.sql("COALESCE(occurrences.countryCode, \"ZZ\")"), :action, Arel.sql("COUNT(COALESCE(occurrences.countryCode, \"ZZ\"))"))
       .each_with_object({}) do |code_action, data|
         if !data.key?(code_action[0])
@@ -369,6 +375,7 @@ class User < ActiveRecord::Base
       .where.not(created_by: self)
       .references(:occurrences)
       .group("occurrences.countryCode", :action)
+      .order("NULL")
       .pluck(Arel.sql("COALESCE(occurrences.countryCode, \"ZZ\")"), :action, Arel.sql("COUNT(COALESCE(occurrences.countryCode, \"ZZ\"))"))
       .each_with_object({}) do |code_action, data|
         if !data.key?(code_action[0])
@@ -431,6 +438,7 @@ class User < ActiveRecord::Base
         .where("occurrences.eventDate_processed <= CURDATE()")
         .select("FLOOR(YEAR(occurrences.eventDate_processed)/#{years})*#{years} as bin", "count(*) as sum")
         .group("bin")
+        .order("NULL")
         .compact
         .map{|d| [ d.bin, d.sum ] }
         .to_h
@@ -448,6 +456,7 @@ class User < ActiveRecord::Base
         .where("occurrences.eventDate_processed <= CURDATE()")
         .select("FLOOR(YEAR(occurrences.eventDate_processed)/#{years})*#{years} as bin", "count(*) as sum")
         .group("bin")
+        .order("NULL")
         .compact
         .map{|d| [ d.bin, d.sum ] }
         .to_h
@@ -464,6 +473,7 @@ class User < ActiveRecord::Base
         .where("occurrences.dateIdentified_processed <= CURDATE()")
         .select("FLOOR(YEAR(occurrences.dateIdentified_processed)/#{years})*#{years} as bin", "count(*) as sum")
         .group("bin")
+        .order("NULL")
         .compact
         .map{|d| [ d.bin, d.sum ] }
         .to_h
@@ -481,6 +491,7 @@ class User < ActiveRecord::Base
         .where("occurrences.dateIdentified_processed <= CURDATE()")
         .select("FLOOR(YEAR(occurrences.dateIdentified_processed)/#{years})*#{years} as bin", "count(*) as sum")
         .group("bin")
+        .order("NULL")
         .compact
         .map{|d| [ d.bin, d.sum ] }
         .to_h

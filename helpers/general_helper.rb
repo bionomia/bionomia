@@ -87,6 +87,7 @@ module Sinatra
           user_type = (type == "living") ? { orcid: nil } : { wikidata: nil }
           subq = UserOccurrence.select("user_occurrences.user_id AS user_id, MAX(user_occurrences.created) AS created")
                                 .group("user_occurrences.user_id")
+                                .order("NULL")
 
           qry = UserOccurrence.select(:user_id, :created_by, :created)
                               .joins(:user)
@@ -298,6 +299,7 @@ module Sinatra
           results = UserOccurrence.where.not({ created_by: User::BOT_IDS })
                                   .where("user_occurrences.user_id != user_occurrences.created_by")
                                   .group([:user_id, :created_by])
+                                  .order("NULL")
                                   .pluck(:created_by)
                                   .uniq
                                   .map{|u| User.find(u)}
