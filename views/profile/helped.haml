@@ -24,7 +24,7 @@
   - @results.in_groups_of(3).each do |group|
     %div{class: "card-deck"}
       - group.each do |m|
-        - u = m.user rescue nil
+        - u = User.find(m.user_id) rescue nil
         - if u.nil?
           %div{class:"card border-0"}
         - else
