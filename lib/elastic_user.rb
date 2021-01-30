@@ -181,7 +181,7 @@ module Bionomia
       if u.description
         description = u.description.truncate(50)
       elsif u.keywords
-        description = u.keywords.truncate(50)
+        description = u.keywords.split("|").map(&:strip).join(", ").truncate(50)
       end
       other_names = u.other_names.split("|").map(&:strip) rescue []
       {
