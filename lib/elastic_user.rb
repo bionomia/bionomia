@@ -177,7 +177,12 @@ module Bionomia
     end
 
     def document(u)
-      description = u.description.truncate(50) rescue nil
+      description = nil
+      if u.description
+        description = u.description.truncate(50)
+      elsif u.keywords
+        description = u.keywords.truncate(50)
+      end
       other_names = u.other_names.split("|").map(&:strip) rescue []
       {
         id: u.id,
