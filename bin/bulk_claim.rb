@@ -70,7 +70,7 @@ if options[:file]
       u.save
     end
     u.flush_caches
-    puts u.identifier.green
+    puts u.identifier.to_s.green
   end
 elsif options[:agent_id] && ![options[:orcid], options[:wikidata]].compact.empty?
   agent = Agent.find(options[:agent_id])

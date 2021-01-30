@@ -78,7 +78,7 @@ Export a csv pivot table (for import performance) of all claims made by User::GB
 
 Finally, import the bulk claims on production (will create users & make public if wikidata):
 
-     $ RACK_ENV=production ./bin/bulk_claim.rb --pivot-file "gbif_claims.csv"
+     $ RACK_ENV=production ./bin/bulk_claim.rb --file "gbif_claims.csv"
 
 ### Step 6: Populate Search in Elasticsearch
 
