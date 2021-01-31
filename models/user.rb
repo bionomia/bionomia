@@ -66,7 +66,7 @@ class User < ActiveRecord::Base
   end
 
   def wants_mail?
-    wants_mail
+    email && wants_mail
   end
 
   def is_bot?
