@@ -553,20 +553,11 @@ class User < ActiveRecord::Base
   end
 
   def current_organization
-    current = user_organizations
-                .where.not(start_year: nil)
-                .where(end_year: nil)
-                .or(user_organizations.where.not(start_year: nil).where("end_year > ?", DateTime.now.year))
-                .first
-                .organization rescue nil
-    if current.nil?
-      current = user_organizations
-                .where(end_year: nil)
-                .or(user_organizations.where("end_year > ?", DateTime.now.year))
-                .first
-                .organization rescue nil
-    end
-    current
+    user_organizations.where.not(start_year: nil)
+                      .where(end_year: nil)
+                      .or(user_organizations.where.not(start_year: nil).where("end_year > ?", DateTime.now.year))
+                      .first
+                      .organization rescue nil
   end
 
   def latest_messages_by_senders
