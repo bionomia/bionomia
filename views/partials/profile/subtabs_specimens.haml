@@ -9,4 +9,6 @@
     %li{class:"nav-item"}
       %a{class:"nav-link#{locals[:active_tab] == "ignored" ? " active" : nil}", href: url("/profile/ignored")}= I18n.t('profile.ignored')
     %li{class: "nav-item"}
+      %a{class: "nav-link#{locals[:active_tab] == "co_collectors" ? " active" : nil}", href: url("/profile/co-collectors")}= I18n.t('profile.co_collectors')
+    %li{class: "nav-item"}
       %a{class: "nav-link#{locals[:active_tab] == "support" ? " active" : nil}", href: url("/profile/support")}= I18n.t('profile.help_received')

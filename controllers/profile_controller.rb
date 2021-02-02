@@ -421,6 +421,32 @@ module Sinatra
             haml :'profile/citation', locals: { active_page: "profile" }
           end
 
+          app.get '/profile/co-collectors' do
+            protected!
+            page = (params[:page] || 1).to_i
+            @pagy, @results = pagy(@user.recorded_with, page: page)
+            haml :'profile/co_collectors', locals: { active_page: "profile", active_tab: "co_collectors" }
+          end
+
+          app.get '/profile/co-collector/:id' do
+            protected!
+
+            @co_collector = find_user(@params[:id])
+
+            @page = (params[:page] || 1).to_i
+            co_collections = @user.recordings_with(@co_collector)
+            @total = co_collections.count
+
+            if @page*search_size > @total
+              bump_page = @total % search_size.to_i != 0 ? 1 : 0
+              @page = @total/search_size.to_i + bump_page
+            end
+
+            @page = 1 if @page <= 0
+            @pagy, @results = pagy(co_collections, items: search_size, page: @page)
+            haml :'profile/co_collector_specimens', locals: { active_page: "profile", active_tab: "co_collectors" }
+          end
+
           app.post '/profile/message.json' do
             protected!
             content_type "application/json", charset: 'utf-8'

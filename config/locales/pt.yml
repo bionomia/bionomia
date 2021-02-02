@@ -296,6 +296,9 @@ pt:
     no_one_found: "No one found by the name %{name}."
     add_someone_html: "See how to %{href}."
     add_someone_href: "add someone"
+    co_collected_count:
+      one: "co-collected specimen"
+      other: "co-collected specimens"
   home:
     tagline: Link natural history specimens to the world's collectors.
     get_started: Get started
@@ -498,6 +501,15 @@ pt:
     upload_skipped: Existing claims, if present in your upload, were skipped.
     upload_view: View
     upload_view_html: "%{view} all your claims."
+    co_collectors: Co-collectors
+    no_co_collectors_alert: Co-collectors have not yet been recorded.
+    co_collectors_alert: "You have collected with:"
+    co_collector_name: "Specimens co-collected with %{name}."
+    switch: View theirs
+    not_co_collector_name: "Specimens have not been co-collected with %{name}."
+    co_collected_count:
+      one: "co-collected specimen"
+      other: "co-collected specimens"
   roster:
     roster_title: Public Profiles
     lede:

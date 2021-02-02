@@ -384,6 +384,10 @@ module Sinatra
             @viewed_user = find_user(@params[:id])
             @co_collector = find_user(@params[:id2])
 
+            if @viewed_user == @user
+              redirect "/profile/co-collector/#{@co_collector.identifier}", 301
+            end
+
             @page = (params[:page] || 1).to_i
             co_collections = @viewed_user.recordings_with(@co_collector)
             @total = co_collections.count

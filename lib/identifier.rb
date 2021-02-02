@@ -8,6 +8,7 @@ class String
   def is_wiki_id?
     ::Bionomia::Identifier.is_wiki_regex.match?(self)
   end
+
   def is_doi?
     ::Bionomia::Identifier.is_doi_regex.match?(self)
   end
@@ -15,21 +16,27 @@ class String
   def orcid_from_url
     ::Bionomia::Identifier.extract_orcid_regex.match(self)[0] rescue nil
   end
+
   def wiki_from_url
     ::Bionomia::Identifier.extract_wiki_regex.match(self)[0] rescue nil
   end
+
   def ipni_from_url
     ::Bionomia::Identifier.extract_ipni_regex.match(self)[0] rescue nil
   end
+
   def viaf_from_url
     ::Bionomia::Identifier.extract_viaf_regex.match(self)[0] rescue nil
   end
+
   def bhl_from_url
     ::Bionomia::Identifier.extract_bhl_regex.match(self)[0] rescue nil
   end
+
   def isni_from_url
     URI.decode_www_form_component(::Bionomia::Identifier.extract_isni_regex.match(self)[0]) rescue nil
   end
+
   def zoobank_from_url
     ::Bionomia::Identifier.extract_zoobank_regex.match(self)[0] rescue nil
   end

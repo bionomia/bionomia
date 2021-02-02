@@ -296,6 +296,9 @@ es:
     no_one_found: "No one found by the name %{name}."
     add_someone_html: "See how to %{href}."
     add_someone_href: "add someone"
+    co_collected_count:
+      one: "co-collected specimen"
+      other: "co-collected specimens"
   home:
     tagline: Enlace especímenes de historia natural a los colectores del mundo.
     get_started: Comenzar
@@ -498,6 +501,15 @@ es:
     upload_skipped: Reclamos existentes, si estaban presentes en su carga, fueron omitidos.
     upload_view: Ver
     upload_view_html: "%{view} todos sus reclamos."
+    co_collectors: Co-colectores
+    no_co_collectors_alert: Aún no se han registrado co-colectores.
+    co_collectors_alert: "You have collected with:"
+    co_collector_name: "Especímenes co-colectados con %{name}."
+    switch: View theirs
+    not_co_collector_name: "No se encontraron especímenes co-colectados con %{name}."
+    co_collected_count:
+      one: "co-collected specimen"
+      other: "co-collected specimens"
   roster:
     roster_title: Perfiles públicos
     lede:
