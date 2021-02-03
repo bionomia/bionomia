@@ -32,22 +32,22 @@ module Bionomia
               name_part_index: {
                 type: "custom",
                 tokenizer: "keyword",
-                filter: ["lowercase", "asciifolding"]
+                filter: ["lowercase", "asciifolding", "german_normalization"]
               },
               name_part_search: {
                 type: "custom",
                 tokenizer: "keyword",
-                filter: ["lowercase", "asciifolding", :autocomplete]
+                filter: ["lowercase", "asciifolding", "german_normalization", :autocomplete]
               },
               fullname_index: {
                 type: "custom",
                 tokenizer: "standard",
-                filter: ["lowercase", "asciifolding"]
+                filter: ["lowercase", "asciifolding", "german_normalization"]
               },
               fullname_search: {
                 type: "custom",
                 tokenizer: "standard",
-                filter: ["lowercase", "asciifolding", :autocomplete]
+                filter: ["lowercase", "asciifolding", "german_normalization", :autocomplete]
               }
             }
           }
