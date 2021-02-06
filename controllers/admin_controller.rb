@@ -274,12 +274,12 @@ module Sinatra
             admin_user = User.find(params[:id])
             if !admin_user.orcid.nil?
               old_orcid = admin_user.orcid.dup
-              User.transaction do
-                admin_user.orcid = nil
-                dest = find_user(params[:wikidata])
-                if !dest.nil?
-                  src_occurrences = admin_user.user_occurrences.pluck(:occurrence_id)
-                  dest_occurrences = dest.user_occurrences.pluck(:occurrence_id) rescue []
+              admin_user.orcid = nil
+              dest = find_user(params[:wikidata])
+              if !dest.nil?
+                src_occurrences = admin_user.user_occurrences.pluck(:occurrence_id)
+                dest_occurrences = dest.user_occurrences.pluck(:occurrence_id) rescue []
+                User.transaction do
                   (src_occurrences - dest_occurrences).in_groups_of(500, false) do |group|
                     admin_user.user_occurrences.where(occurrence_id: group)
                                                .update_all({ user_id: dest.id})
@@ -291,17 +291,17 @@ module Sinatra
                   dest.update_profile
                   dest.flush_caches
                   admin_user.destroy
-                  redirect "/admin/user/#{dest.identifier}/settings"
-                else
-                  admin_user.wikidata = params[:wikidata]
-                  admin_user.save
-                  admin_user.reload
-                  admin_user.update_profile
-                  admin_user.flush_caches
                 end
-                DestroyedUser.create(identifier: old_orcid, redirect_to: params[:wikidata])
-                flash.next[:updated] = true
+                redirect "/admin/user/#{dest.identifier}/settings"
+              else
+                admin_user.wikidata = params[:wikidata]
+                admin_user.save
+                admin_user.reload
+                admin_user.update_profile
+                admin_user.flush_caches
               end
+              DestroyedUser.create(identifier: old_orcid, redirect_to: params[:wikidata])
+              flash.next[:updated] = true
             end
             redirect "/admin/user/#{admin_user.identifier}/settings"
           end
