@@ -84,7 +84,7 @@ es:
     intro: Países indicados en cuentas de ORCID y entradas de Wikidata. Busque por familia taxonómica para explorar experticia.
     collected_from: "Colectados %{family} de %{country}"
     identified_from: "Identificados %{family} de %{country}"
-    collected_identified_from: "Collectados o identificados %{family} de %{country}"
+    collected_identified_from: "Colectados o identificados %{family} de %{country}"
     no_one_collected_from: "Nadie ha colectado %{family} de %{country}"
     no_one_identified_from: "Nadie ha identificado %{family} de %{country}"
     no_one_collected_identified_from: "Nadie ha colectado o identificado %{family} de %{country}"
@@ -291,14 +291,14 @@ es:
     tweet_message: "Se enviará un trino automatizado desde @BionomiaTrack anunciando el nuevo perfil."
     view_public_html: "ver el %{href} público"
     view_public_href: "perfil"
-    now_public_html: "¡Gracias por su ayuda! El perfil de %{person} es ahora visible públicamente."
-    do_you_know: Do you know
-    no_one_found: "No one found by the name %{name}."
-    add_someone_html: "See how to %{href}."
-    add_someone_href: "add someone"
+    now_public_html: "¡Gracias por su ayuda! El perfil de %{person} ahora es visible públicamente."
+    do_you_know: Usted conoce a
+    no_one_found: "No se encontró a nadie con el nombre %{name}."
+    add_someone_html: "Vea cómo %{href}."
+    add_someone_href: "agregar a alguien"
     co_collected_count:
-      one: "co-collected specimen"
-      other: "co-collected specimens"
+      one: "espécimen co-colectado"
+      other: "especímenes co-colectados"
   home:
     tagline: Enlace especímenes de historia natural a los colectores del mundo.
     get_started: Comenzar
@@ -396,7 +396,7 @@ es:
     specimens: especímenes
     organizations: organizaciones
     specimens_identified: Especímenes identificados
-    specimens_collected: Especímenes Colectados
+    specimens_collected: Especímenes colectados
     no_current_members_alert: "Miembros actuales de %{org_name} todavía no se han registrado."
     no_previous_members_alert: "Miembros pasados de %{org_name} todavía no se han registrado."
     no_search_alert: "No se encontraron organizaciones para"
@@ -503,13 +503,13 @@ es:
     upload_view_html: "%{view} todos sus reclamos."
     co_collectors: Co-colectores
     no_co_collectors_alert: Aún no se han registrado co-colectores.
-    co_collectors_alert: "You have collected with:"
+    co_collectors_alert: "Usted ha colectado con:"
     co_collector_name: "Especímenes co-colectados con %{name}."
-    switch: View theirs
+    switch: Vea los de ella/él
     not_co_collector_name: "No se encontraron especímenes co-colectados con %{name}."
     co_collected_count:
-      one: "co-collected specimen"
-      other: "co-collected specimens"
+      one: "espécimen co-colectado"
+      other: "especímenes co-colectadoss"
   roster:
     roster_title: Perfiles públicos
     lede:
