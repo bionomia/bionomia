@@ -274,14 +274,34 @@ module Sinatra
             admin_user = User.find(params[:id])
             if !admin_user.orcid.nil?
               old_orcid = admin_user.orcid.dup
-              admin_user.orcid = nil
-              admin_user.wikidata = params[:wikidata]
-              admin_user.save
-              admin_user.reload
-              admin_user.update_profile
-              DestroyedUser.create(identifier: old_orcid, redirect_to: params[:wikidata])
-              admin_user.flush_caches
-              flash.next[:updated] = true
+              User.transaction do
+                admin_user.orcid = nil
+                dest = find_user(params[:wikidata])
+                if !dest.nil?
+                  src_occurrences = admin_user.user_occurrences.pluck(:occurrence_id)
+                  dest_occurrences = dest.user_occurrences.pluck(:occurrence_id) rescue []
+                  (src_occurrences - dest_occurrences).in_groups_of(500, false) do |group|
+                    admin_user.user_occurrences.where(occurrence_id: group)
+                                               .update_all({ user_id: dest.id})
+                  end
+                  if admin_user.is_public?
+                    dest.is_public = true
+                    dest.save
+                  end
+                  dest.update_profile
+                  dest.flush_caches
+                  admin_user.destroy
+                  redirect "/admin/user/#{dest.identifier}/settings"
+                else
+                  admin_user.wikidata = params[:wikidata]
+                  admin_user.save
+                  admin_user.reload
+                  admin_user.update_profile
+                  admin_user.flush_caches
+                end
+                DestroyedUser.create(identifier: old_orcid, redirect_to: params[:wikidata])
+                flash.next[:updated] = true
+              end
             end
             redirect "/admin/user/#{admin_user.identifier}/settings"
           end
