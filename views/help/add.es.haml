@@ -18,24 +18,24 @@
 
 %div{class:"mt-4"}
   %div{class:"alert alert-info tiny-margins", role:"alert"}
-    Couldn't find someone?
+    ¿No pudo encontrar a alguien?
     %ul
       %li
         %strong
-          Living:
-        Ask them to create an
-        %a{href: "https://orcid.org/register"} ORCID account
-        with a publicly available name. If they assign themselves one or more of the keywords
+          Vivos:
+        Pídales crear una cuenta de
+        %a{href: "https://orcid.org/register"} ORCID
+        con un nombre disponible públicamente. Si la persona anota una o más palabras clave
         %span{class: "font-italic"} #{Settings.orcid.keywords.join(", ")}
-        to their ORCID account, Bionomia will add them the following day
+        en su cuenta de ORCID, Bionomía las agregará el día siguiente.
       %li
         %strong
-          Deceased:
-        Search on
+          Fallecidos:
+        Busque en
         %a{href:"https://www.wikidata.org"} Wikidata
-        and ensure they have a death date and there is a value for any of the properties:
+        y asegúrese de que tengan fecha de fallecimiento y de que tengan datos de alguna de las propiedades:
         %span{class: "font-italic"} #{::Bionomia::WikidataSearch::PEOPLE_PROPERTIES.keys.join(", ")}
-        \. Bionomia will also add them by the following day.
+        \. Bionomía también las agregará el día siguiente.
 
 %h4 Agregar a una persona
 
@@ -54,8 +54,8 @@
         %div{class:"alert alert-success tiny-margins d-block", role: "alert"}
           %span{class:"font-weight-bold"}
             %a{href: url("/help-others/#{flash[:new_user][:slug]}")} #{flash[:new_user][:fullname]}
-          was created or updated.
+          se creó o actualizó.
       - else
         %div{class:"alert alert-danger tiny-margins d-block", role: "alert"}
           %span{class:"font-weight-bold"} #{h(flash[:new_user][:fullname])}
-          not created because the identifier was incorrectly formatted or in the case of wikidata, the item is not a human, is not deceased, a family name was not found, or the user already exists with an ORCID identifier.
+          no se creó porque el identificador no presenta el formato correcto o en el caso de Wikidata, el elemento no es un humano, no ha fallecido, no se encontró un apellido, o el usuario ya existe con un identificador de ORCID.
