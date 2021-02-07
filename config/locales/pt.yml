@@ -130,7 +130,7 @@ pt:
     users_alert:
       unit:
         one: "pessoa reivindicou ou foi atribuída espécimes representados neste conjunto de dados"
-        other: "people claimed or were attributed specimens represented in this dataset"
+        other: "pessoas reivindicaram ou foram atribuídos espécimes representados neste conjunto de dados"
   date:
     formats:
       month_and_year: "%B %Y"
@@ -491,7 +491,7 @@ pt:
     latest_helped: "Mais recente em %{time}"
     attributed_count:
       one: "espécime atribuído"
-      other: "espécime atribuído
+      other: "espécime atribuído"
     private_message_html: "Seu perfil é privado. Reivindique suas %{specimens} e torne-as públicas em %{settings} para maximizar a reutilização."
     no_claims_html: "Reivindique seus espécimes descobertos na guia %{specimens} para construir seu perfil e começar a rastrear suas citações. Reconheça seus colegas, mentores ou qualquer pessoa que o inspire atribuindo espécimes sob %{help_others}."
     try_again: Tente novamente.
@@ -553,6 +553,7 @@ pt:
       unit:
         one: "resultado da pesquisa para"
         other: "resultado da pesquisa para"
+    people: Pessoas
     agent_strings: Cadeia de autores
     collected: Coletado
     identified: Identificado
