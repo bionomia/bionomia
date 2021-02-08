@@ -582,6 +582,7 @@ en:
     none_collected: "No one has collected %{taxon}"
     none_identified: "No one has identified %{taxon}"
     no_agents: "No agents have collected or identified %{taxon}"
+    taxon_string: Taxon Family
   user:
     caches_rebuilt: Caches were rebuilt.
     overview: Overview

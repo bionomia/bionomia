@@ -582,6 +582,7 @@ es:
     none_collected: "Nadie ha colectado %{taxon}"
     none_identified: "Nadie ha identificado %{taxon}"
     no_agents: "Ningún agente ha colectado o identificado %{taxon}"
+    taxon_string: Familia taxonómica
   user:
     caches_rebuilt: Se han reconstruido las memorias caché.
     overview: Descripción general

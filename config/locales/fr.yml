@@ -582,6 +582,7 @@ fr:
     none_collected: "Personne a collecté %{taxon}"
     none_identified: "Personne a identifié %{taxon}"
     no_agents: "Acun chaîne d'agent a collecté ou identifié %{taxon}"
+    taxon_string: Famille taxonomique
   user:
     caches_rebuilt: Les caches ont été reconstruits.
     overview: Aperçu

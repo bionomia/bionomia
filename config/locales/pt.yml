@@ -582,6 +582,7 @@ pt:
     none_collected: "Ninguém coletou %{taxon}"
     none_identified: "Ninguém se identificou %{taxon}"
     no_agents: "Nenhum agente coletou ou identificou %{taxon}"
+    taxon_string: Família Taxon
   user:
     caches_rebuilt: Caches foram reconstruídos.
     overview: Visão geral
