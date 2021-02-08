@@ -510,6 +510,7 @@ pt:
     co_collected_count:
       one: "espécime co-coletado"
       other: "espécime co-coletado"
+    zenodo_html: "Your profile is linked to %{zenodo} and your claims are versioned and archived."
   roster:
     roster_title: Perfis Públicos
     lede:

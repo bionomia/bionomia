@@ -58,11 +58,7 @@
               - else
                 - if @user.zenodo_concept_doi
                   %p{class:"card-text"}
-                    Your profile is linked to
-                    %a{href:"https://doi.org/#{@user.zenodo_concept_doi}", target:"_blank"}
-                      Zenodo
-                      %i{class:"fas fa-external-link-alt"}
-                    and your claims are versioned and archived.
+                    = I18n.t('profile.zenodo_html', zenodo: link_to("Zenodo", "https://doi.org/#{@user.zenodo_concept_doi}"))
                   %p
                     %a{href:"https://doi.org/#{@user.zenodo_concept_doi}"}
                       %img{src:"/images/#{@user.zenodo_concept_doi}.svg"}
