@@ -19,7 +19,7 @@ module Sinatra
             country_code = params[:country_code]
             @results = []
             begin
-              @country = I18nData.countries(I18n.locale).slice(country_code).flatten
+              @country = I18nData.countries(I18n.locale).slice(country_code.upcase).flatten
               @action = params[:action] if ["identified","collected"].include?(params[:action])
               @family = params[:q].present? ? params[:q] : nil
 
