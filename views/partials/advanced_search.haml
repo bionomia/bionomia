@@ -113,9 +113,7 @@
 
 - elsif params[:dataset] && params[:dataset].size > 0 && @dataset_results.empty?
   %div{class: "alert alert-warning tiny-margins", role: "alert"}
-    Dataset not found using the search
-    %span{class: "font-weight-bold"} #{h(params[:dataset])}
-
+    = I18n.t('dataset.none_found', searched: h(params[:dataset]))
 
 - if @taxon_results && !@taxon_results.empty?
   %a{name: "taxa"}
@@ -135,8 +133,7 @@
 
 - elsif params[:taxon] && params[:taxon].size > 0 && @taxon_results.empty?
   %div{class: "alert alert-warning tiny-margins", role: "alert"}
-    Taxonomic family not found using the search
-    %span{class: "font-weight-bold"} #{h(params[:taxon])}
+    = I18n.t('taxa.none_found', searched: h(params[:taxon]))
 
 - if @agent_results && !@agent_results.empty?
   %a{name: "agents"}
@@ -156,5 +153,4 @@
 
 - elsif params[:agent] && params[:agent].size > 0 && @agent_results.empty?
   %div{class: "alert alert-warning tiny-margins", role: "alert"}
-    Agent string not found using the search
-    %span{class: "font-weight-bold"} #{h(params[:agent])}
+    = I18n.t('agent.search_none', searched: h(params[:agent]))

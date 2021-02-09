@@ -14,7 +14,7 @@ es:
       unit:
         one: "cadenas de texto sin procesar para nombres de colector e identificador capturados de los datos de especímenes en GBIF"
         other: "cadenas de texto sin procesar para nombres de colector e identificador capturados de los datos de especímenes en GBIF"
-    search_none: No se encontró una cadena de texto para el agente
+    search_none: "No se encontró una cadena de texto para el agente %{searched}"
     search_count:
       unit:
         one: "resultado de la búsqueda de"

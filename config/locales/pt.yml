@@ -14,7 +14,7 @@ pt:
       unit:
         one: "cadeia de coletores e identificadores de nomes separados da data do especime do GBIF"
         other: "cadeia de coletores e identificadores de nomes separados da data do especime do GBIF"
-    search_none: Cadeia de usuário não encontrado
+    search_none: "Cadeia de usuário não encontrado %{searched}"
     search_count:
       unit:
         one: "resultados de busca para"

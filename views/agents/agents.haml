@@ -18,8 +18,8 @@
 
 - if params[:q] && !params[:q].empty? && @formatted_results.empty?
   %div{class: "alert alert-warning tiny-margins mt-0", role: "alert"}
-    = I18n.t('agent.search_none')
-    %span{class: "font-weight-bold"} #{h(params[:q])}
+    = I18n.t('agent.search_none', searched: h(params[:q]))
+
 - elsif @pagy && @pagy.count > 0
   %div{class: "alert alert-info tiny-margins mt-0", role: "alert"}
     #{number_to_human(@pagy.count, units: :'agent.search_count', delimiter: ",", precision: 0)}

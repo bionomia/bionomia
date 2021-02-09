@@ -14,7 +14,7 @@ en:
       unit:
         one: "raw string from parsed collector and determiner names in specimen data from GBIF"
         other: "raw strings from parsed collector and determiner names in specimen data from GBIF"
-    search_none: No agent string found for
+    search_none: "No agent string found for %{searched}"
     search_count:
       unit:
         one: "search result for"

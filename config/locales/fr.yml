@@ -14,7 +14,7 @@ fr:
       unit:
         one: "chaîne brute du collecteur et détermineur analysé dans les données de spécimen du GBIF"
         other: "chaînes brutes du collecteur et détermineur analysé dans les données de spécimen du GBIF"
-    search_none: Aucune chaîne d'agent trouvée pour
+    search_none: "Aucune chaîne d'agent trouvée pour %{searched}"
     search_count:
       unit:
         one: "résultat pour"
