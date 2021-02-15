@@ -294,7 +294,8 @@ module Sinatra
                   dest.update_profile
                   dest.flush_caches
                   admin_user.reload.destroy
-                  DestroyedUser.where(identifier: old_orcid).update_all({ redirect_to: params[:wikidata] })
+                  DestroyedUser.where(identifier: old_orcid)
+                               .update_all({ redirect_to: params[:wikidata] })
                 end
                 flash.next[:updated] = true
                 redirect "/admin/user/#{dest.identifier}/settings"

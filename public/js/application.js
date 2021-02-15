@@ -285,11 +285,9 @@ var Application = (function($, window) {
               var occurrence_ids = $.map($("[data-occurrence-id]:not(:disabled)"), function(e) {
                     return $(e).attr("data-occurrence-id");
                   }).all_unique().toString();
-
               if(!occurrence_ids.trim()) {
                 return false;
               }
-
               $.ajax({
                   method: self.method,
                   url: self.path + "/user-occurrence/bulk.json",
@@ -312,6 +310,7 @@ var Application = (function($, window) {
                     location.reload();
                   });
                 } else {
+                  $(".table button").removeClass("disabled");
                   $("label").each(function() {
                       var is_active = $(this).hasClass("active");
                       $(this).removeClass("active").removeClass("disabled");
@@ -325,9 +324,6 @@ var Application = (function($, window) {
                         }
                       }
                   });
-/*
-                  $(".table button").removeClass("disabled");
-*/
                 }
               });
           } else {
@@ -364,7 +360,7 @@ var Application = (function($, window) {
           return false;
       });
 
-      $("button.remove").on("click", function() {
+      $("button.remove:not(:disabled)").on("click", function() {
         var occurrence_id = $(this).attr("data-occurrence-id"),
             row = $(this).parents("tr");
         $.ajax({
@@ -378,7 +374,7 @@ var Application = (function($, window) {
         }).done(function(data) {
           row.fadeOut(250, function() {
             row.remove();
-            if ($("button.remove").length === 0) {
+            if ($("button.remove:not(:disabled)").length === 0) {
               location.reload();
             }
           });
@@ -445,7 +441,7 @@ var Application = (function($, window) {
         return false;
       });
 
-      $("button.hide").on("click", function() {
+      $("button.hide:not(:disabled)").on("click", function() {
         var occurrence_id = $(this).attr("data-occurrence-id"),
             row = $(this).parents("tr");
         $.ajax({
@@ -460,7 +456,7 @@ var Application = (function($, window) {
         }).done(function(data) {
           row.fadeOut(250, function() {
             row.remove();
-            if ($("button.hide").length === 0) {
+            if ($("button.hide:not(:disabled)").length === 0) {
               location.reload();
             }
           });
