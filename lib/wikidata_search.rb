@@ -188,13 +188,26 @@ module Bionomia
         user_data = wiki_user_data(wikicode)
         next if (user_data[:date_died].nil? && user_data[:date_died_precision].nil?) ||
           (user_data[:date_born].nil? && user_data[:date_born_precision].nil? && Date.today.year - user_data[:date_born].year >= 120)
-        u = User.find_or_create_by({ wikidata: wikicode })
-        if !u.valid_wikicontent?
-          u.delete_search
-          u.delete
-          puts "#{u.wikidata} deleted. Missing either family name, birth or death date".red
+
+        # We have the user with that ORCID so switch to wikidata
+        if user_data[:orcid] && User.where(orcid: user_data[:orcid]).exists?
+          user = User.find_by_orcid(user_data[:orcid])
+          user.orcid = nil
+          user.wikidata = wikicode
+          user.save
+          user.reload
+          user.update_profile
+          user.flush_caches
+          DestroyedUser.create(identifier: user_data[:orcid], redirect_to: wikicode)
         else
-          puts "#{u.fullname_reverse}".green
+          u = User.find_or_create_by({ wikidata: wikicode })
+          if !u.valid_wikicontent?
+            u.delete_search
+            u.delete
+            puts "#{u.wikidata} deleted. Missing either family name, birth or death date".red
+          else
+            puts "#{u.fullname_reverse}".green
+          end
         end
       end
     end
@@ -409,7 +422,7 @@ module Bionomia
         country_code: country_code,
         keywords: keywords,
         description: description,
-        orcid: nil, #might have ORCID but null it out
+        orcid: orcid,
         image_url: image_url,
         signature_url: signature_url,
         date_born: date_born,

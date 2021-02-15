@@ -694,7 +694,7 @@ class User < ActiveRecord::Base
       data[:organizations].each do |org|
         update_affiliation(org)
       end
-      update(data.except!(:organizations))
+      update(data.except!(:organizations).except!(:orcid))
     end
   end
 
