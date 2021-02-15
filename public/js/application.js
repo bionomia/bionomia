@@ -282,9 +282,14 @@ var Application = (function($, window) {
               input = $(this);
 
           if($(this).attr("name") === "selection-all") {
-              var occurrence_ids = $.map($("[data-occurrence-id]"), function(e) {
-                return $(e).attr("data-occurrence-id");
-              }).all_unique().toString();
+              var occurrence_ids = $.map($("[data-occurrence-id]:not(:disabled)"), function(e) {
+                    return $(e).attr("data-occurrence-id");
+                  }).all_unique().toString();
+
+              if(!occurrence_ids.trim()) {
+                return false;
+              }
+
               $.ajax({
                   method: self.method,
                   url: self.path + "/user-occurrence/bulk.json",
@@ -296,8 +301,8 @@ var Application = (function($, window) {
                     visible: true
                   }),
                   beforeSend: function(xhr) {
-                    $(".table label").addClass("disabled");
-                    $(".table button").addClass("disabled");
+                    $(".table label:not(:disabled)").addClass("disabled");
+                    $(".table button:not(:disabled)").addClass("disabled");
                   }
               }).done(function(data) {
                 if (self.method === "POST" || input.hasClass("restore-ignored")) {
@@ -308,12 +313,21 @@ var Application = (function($, window) {
                   });
                 } else {
                   $("label").each(function() {
+                      var is_active = $(this).hasClass("active");
                       $(this).removeClass("active").removeClass("disabled");
-                      if($("input:first-child", this).attr("data-action") === action) {
+                      if($("input:first-child:not(:disabled)", this).attr("data-action") === action) {
                         $(this).addClass("active");
                       }
+                      if($("input:first-child", this).prop("disabled")) {
+                        $(this).addClass("disabled");
+                        if (is_active) {
+                          $(this).addClass("active");
+                        }
+                      }
                   });
+/*
                   $(".table button").removeClass("disabled");
+*/
                 }
               });
           } else {
@@ -373,9 +387,12 @@ var Application = (function($, window) {
       });
 
       $("button.remove-all").on("click", function() {
-        var occurrence_ids = $.map($("[data-occurrence-id]"), function(e) {
+        var occurrence_ids = $.map($("[data-occurrence-id]:not(:disabled)"), function(e) {
               return $(e).attr("data-occurrence-id");
             }).all_unique().toString();
+        if(!occurrence_ids.trim()) {
+          return false;
+        }
         $.ajax({
             method: "DELETE",
             url: self.path + "/user-occurrence/bulk.json",
@@ -399,9 +416,12 @@ var Application = (function($, window) {
       });
 
       $("button.hide-all").on("click", function() {
-        var occurrence_ids = $.map($("[data-occurrence-id]"), function(e) {
+        var occurrence_ids = $.map($("[data-occurrence-id]:not(:disabled)"), function(e) {
               return $(e).attr("data-occurrence-id");
             }).all_unique().toString();
+        if(!occurrence_ids.trim()) {
+          return false;
+        }
         $.ajax({
             method: self.method,
             url: self.path + "/user-occurrence/bulk.json",

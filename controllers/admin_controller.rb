@@ -275,7 +275,7 @@ module Sinatra
             if !admin_user.orcid.nil?
               old_orcid = admin_user.orcid.dup
               admin_user.orcid = nil
-              dest = find_user(params[:wikidata])
+              dest = User.find_by_wikidata(params[:wikidata])
               if !dest.nil?
                 src_occurrences = admin_user.user_occurrences.pluck(:occurrence_id)
                 dest_occurrences = dest.user_occurrences.pluck(:occurrence_id) rescue []
@@ -283,6 +283,9 @@ module Sinatra
                   (src_occurrences - dest_occurrences).in_groups_of(500, false) do |group|
                     admin_user.user_occurrences.where(occurrence_id: group)
                                                .update_all({ user_id: dest.id})
+                    dest.user_occurrences.reload.where(occurrence_id: group)
+                                                .where(created_by: admin_user.id)
+                                                .update_all({ created_by: dest.id })
                   end
                   if admin_user.is_public?
                     dest.is_public = true
@@ -290,8 +293,10 @@ module Sinatra
                   end
                   dest.update_profile
                   dest.flush_caches
-                  admin_user.destroy
+                  admin_user.reload.destroy
+                  DestroyedUser.where(identifier: old_orcid).update_all({ redirect_to: params[:wikidata] })
                 end
+                flash.next[:updated] = true
                 redirect "/admin/user/#{dest.identifier}/settings"
               else
                 admin_user.wikidata = params[:wikidata]
@@ -299,11 +304,11 @@ module Sinatra
                 admin_user.reload
                 admin_user.update_profile
                 admin_user.flush_caches
+                DestroyedUser.create(identifier: old_orcid, redirect_to: params[:wikidata])
+                flash.next[:updated] = true
+                redirect "/admin/user/#{admin_user.identifier}/settings"
               end
-              DestroyedUser.create(identifier: old_orcid, redirect_to: params[:wikidata])
-              flash.next[:updated] = true
             end
-            redirect "/admin/user/#{admin_user.identifier}/settings"
           end
 
           app.delete '/admin/user/:id' do

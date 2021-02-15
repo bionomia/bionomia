@@ -50,7 +50,7 @@
           - o = uo.occurrence
           %tr
             %td{class: "selector"}
-              = haml :'partials/single_selector_preselected', layout: false, locals: { occurrence: uo }
+              = haml :'partials/single_selector_preselected', layout: false, locals: { occurrence: uo, user_id: @viewed_user.id }
             %td
               - scientific_name = o.scientificName.nil? ? "not recorded" : o.scientificName
               %a{href: gbif_occurrence_url(o.id), target:"_blank"}

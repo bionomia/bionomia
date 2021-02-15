@@ -18,7 +18,8 @@ class User < ActiveRecord::Base
   before_update :set_update_time
   after_create :update_profile, :add_search
   after_update :update_search
-  after_destroy :remove_search, :create_destroyed_user
+  before_destroy :create_destroyed_user
+  after_destroy :remove_search
 
   def self.merge_wikidata(qid, dest_qid)
     return if DestroyedUser.find_by_identifier(qid)

@@ -217,64 +217,6 @@ module Sinatra
             results = results.where(occurrences: { institutionCode: params[:institutionCode] })
           end
 
-          results
-        end
-
-        def helping_specimen_filters
-          if params[:action] && !["collected","identified"].include?(params[:action])
-            halt 404, haml(:oops)
-          elsif params[:action] && ["collected","identified"].include?(params[:action])
-            results = @viewed_user.claims_received.joins(:occurrence)
-            if params[:action] == "collected"
-              results = results.where(@viewed_user.qry_recorded)
-              if params[:start_year]
-                start_date = Date.new(params[:start_year].to_i)
-                if start_date > Date.today
-                  halt 404, haml(:oops)
-                end
-                results = results.where("occurrences.eventDate_processed >= ?", start_date)
-              end
-              if params[:end_year]
-                end_date = Date.new(params[:end_year].to_i)
-                if end_date > Date.today
-                  halt 404, haml(:oops)
-                end
-                results = results.where("occurrences.eventDate_processed <= ?", end_date)
-              end
-            end
-            if params[:action] == "identified"
-              results = results.where(@viewed_user.qry_identified)
-              if params[:start_year]
-                start_date = Date.new(params[:start_year].to_i)
-                if start_date > Date.today
-                  halt 404, haml(:oops)
-                end
-                results = results.where("occurrences.dateIdentified_processed >= ?", start_date)
-              end
-              if params[:end_year]
-                end_date = Date.new(params[:end_year].to_i)
-                if end_date > Date.today
-                  halt 404, haml(:oops)
-                end
-                results = results.where("occurrences.dateIdentified_processed <= ?", end_date)
-              end
-            end
-          else
-            results = @viewed_user.claims_received.joins(:occurrence)
-          end
-
-          if params[:country_code] && !params[:country_code].blank?
-            country = I18nData.countries(I18n.locale)[params[:country_code]] rescue nil
-            if country.nil?
-              halt 404
-            end
-            results = results.where(occurrences: { countryCode: params[:country_code] })
-          end
-
-          if params[:family] && !params[:family].blank?
-            results = results.where(occurrences: { family: params[:family] })
-          end
-
           if params[:attributor] && !params[:attributor].blank?
             attributor = find_user(params[:attributor])
             results = results.where(created_by: attributor.id)

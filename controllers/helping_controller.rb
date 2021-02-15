@@ -286,7 +286,7 @@ module Sinatra
             @viewed_user = find_user(params[:id])
 
             @page = (params[:page] || 1).to_i
-            @total = helping_specimen_filters.count
+            @total = specimen_filters(@viewed_user).count
 
             if @page*search_size > @total
               bump_page = @total % search_size.to_i != 0 ? 1 : 0
@@ -315,7 +315,7 @@ module Sinatra
               attributor: attributor
             }.compact
 
-            @pagy, @results = pagy(helping_specimen_filters, items: search_size, page: @page)
+            @pagy, @results = pagy(specimen_filters(@viewed_user), items: search_size, page: @page)
             haml :'help/specimens', locals: { active_page: "help" }
           end
 
@@ -346,7 +346,8 @@ module Sinatra
             check_redirect
 
             @viewed_user = find_user(@params[:id])
-            @stats = helping_user_stats(@viewed_user)
+
+            @stats = user_stats(@viewed_user)
             haml :'help/visualizations', locals: { active_page: "help" }
           end
 

@@ -38,7 +38,7 @@
           - o = uo.occurrence
           %tr
             %td{class: "selector"}
-              = haml :'partials/single_selector_preselected', layout: false, locals: { occurrence: uo }
+              = haml :'partials/single_selector_preselected', layout: false, locals: { occurrence: uo, user_id: nil }
             %td
               - scientific_name = o.scientificName.nil? ? "#{I18n.t('specimen.not_recorded')}" : o.scientificName
               %a{href: gbif_occurrence_url(o.id), target:"_blank"}

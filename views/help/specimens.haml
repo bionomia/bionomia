@@ -56,9 +56,10 @@
       %tbody
         - @results.each do |uo|
           - o = uo.occurrence
+          - disabled = (@viewed_user.id == uo.created_by) ? true : false
           %tr
             %td{class: "selector"}
-              = haml :'partials/single_selector_preselected', layout: false, locals: { occurrence: uo }
+              = haml :'partials/single_selector_preselected', layout: false, locals: { occurrence: uo, user_id: @viewed_user.id }
             %td
               - scientific_name = o.scientificName.nil? ? "not recorded" : o.scientificName
               %a{href: gbif_occurrence_url(o.id), target:"_blank"}
@@ -74,16 +75,20 @@
             %td #{h(o.catalogNumber)}
             %td #{h(o.typeStatus)}
             %td
-              %button{type:"button", class:"btn btn-sm btn-outline-warning hide", "data-occurrence-id":"#{uo.user_occurrence_id}"}= I18n.t('specimen.not_them')
+              %button{type:"button", class:"btn btn-sm btn-outline-warning hide", "data-occurrence-id":"#{uo.user_occurrence_id}", disabled: disabled}
+                = I18n.t('specimen.not_them')
             %td
-              %button{type:"button", class:"btn btn-sm btn-outline-danger remove", "data-occurrence-id":"#{uo.user_occurrence_id}"}= I18n.t('specimen.remove')
+              %button{type:"button", class:"btn btn-sm btn-outline-danger remove", "data-occurrence-id":"#{uo.user_occurrence_id}", disabled: disabled}
+                = I18n.t('specimen.remove')
             %td
               - if uo.claimant.is_bot?
                 #{uo.claimant.fullname}
               - elsif uo.claimant.is_public?
                 %a{href: url("/#{uo.claimant.orcid}")} #{uo.claimant.fullname_reverse}
-              - else
+              - elsif !uo.claimant.orcid.nil?
                 %a{href: "https://orcid.org/#{uo.claimant.orcid}"} #{uo.claimant.fullname_reverse}
+              - else
+                #{uo.claimant.fullname_reverse}
 
       - if @total > 25
         %tfoot{class: "thead-light"}

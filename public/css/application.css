@@ -155,6 +155,10 @@ table td.selector{
   text-align:center;
 }
 
+.btn-light.active.disabled, .btn-light.active:disabled {
+  background-color:#dae0e5;
+}
+
 .toggle-off.btn-sm {
   padding-left: 17px !important;
 }

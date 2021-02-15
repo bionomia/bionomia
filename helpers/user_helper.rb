@@ -169,52 +169,6 @@ module Sinatra
           }
         end
 
-        def helping_user_stats(user)
-          counts = user.country_counts_helped
-
-          identified_count = counts.values.reduce(0) {
-            |sum, val| sum + val[:identified]
-          }
-          recorded_count = counts.values.reduce(0) {
-            |sum, val| sum + val[:recorded]
-          }
-          countries_identified = counts.each_with_object({}) do |code, data|
-            if code[0] != "OTHER" && code[1][:identified] > 0
-              data[code[0]] = code[1][:identified]
-            end
-          end
-          countries_recorded = counts.each_with_object({}) do |code, data|
-            if code[0] != "OTHER" && code[1][:recorded] > 0
-              data[code[0]] = code[1][:recorded]
-            end
-          end
-
-          r = user.recorded_bins_helped
-          r.each{|k,v| r[k] = [0,v]}
-
-          i = user.identified_bins_helped
-          i.each {|k,v| i[k] = [v,0]}
-
-          activity_dates = r.merge(i) do |k, first_val, second_val|
-            [[first_val[0], second_val[0]].max, [first_val[1], second_val[1]].max]
-          end
-
-          {
-            specimens: {
-              identified: identified_count,
-              recorded: recorded_count
-            },
-            countries: {
-              identified: countries_identified,
-              recorded: countries_recorded
-            },
-            activity_dates: activity_dates
-                  .delete_if{|k,v| k > Date.today.year || k <= 1700 || v == [0,0] }
-                  .sort
-                  .map{|k,v| v.flatten.unshift(k.to_s) }
-          }
-        end
-
         def scribe_stats(user)
           {
             attributions: user.claims_given.count,
