@@ -98,7 +98,10 @@ module Bionomia
         identified: "http://rs.tdwg.org/dwc/iri/identifiedBy",
         recorded: "http://rs.tdwg.org/dwc/iri/recordedBy",
         PreservedSpecimen: "http://rs.tdwg.org/dwc/terms/PreservedSpecimen",
-        as: "https://www.w3.org/ns/activitystreams#"
+        as: "https://www.w3.org/ns/activitystreams#",
+        creator: "http://purl.org/dc/terms/creator",
+        created: "http://purl.org/dc/terms/created",
+        modified: "http://purl.org/dc/terms/modified"
       }.merge(dwc_contexts)
        .merge({ datasetKey: "http://rs.gbif.org/terms/1.0/datasetKey" })
     end
@@ -116,6 +119,8 @@ module Bionomia
       w.push_value(@user.given)
       w.push_key("familyName")
       w.push_value(@user.family)
+      w.push_key("name")
+      w.push_value(@user.fullname)
       w.push_value(@user.other_names.split("|"), "alternateName")
       w.push_key("sameAs")
       w.push_value(@user.uri)
@@ -200,10 +205,27 @@ module Bionomia
       end
 
       items = results.map do |o|
+        creator = {}
+        modified = { modified: nil }
+        if !o.claimant.orcid.nil?
+          creator = {
+            creator: {
+              "@type": "Person",
+              "@id": "https://orcid.org/#{o.claimant.orcid}",
+              name: o.claimant.fullname
+            }
+          }
+        end
+        if !o.updated.nil?
+          modified = { modified: o.updated.to_time.iso8601 }
+        end
         { "@type": "PreservedSpecimen",
           "@id": "https://gbif.org/occurrence/#{o.occurrence.id}",
           sameAs: "https://gbif.org/occurrence/#{o.occurrence.id}"
         }.merge(o.occurrence.attributes.reject {|column| ignored_cols(false).include?(column)})
+         .merge(creator)
+         .merge({ created: o.created.to_time.iso8601 })
+         .merge(modified)
       end
       { metadata: metadata, results: items }
     end
@@ -211,10 +233,27 @@ module Bionomia
     def jsonld_occurrences_enum(type = "identifications")
       Enumerator.new do |y|
         @user.send(type).find_each do |o|
+          creator = {}
+          modified = { modified: nil }
+          if !o.claimant.orcid.nil?
+            creator = {
+              creator: {
+                "@type": "Person",
+                "@id": "https://orcid.org/#{o.claimant.orcid}",
+                name: o.claimant.fullname
+              }
+            }
+          end
+          if !o.updated.nil?
+            modified = { modified: o.updated.to_time.iso8601 }
+          end
           y << { "@type": "PreservedSpecimen",
                  "@id": "https://gbif.org/occurrence/#{o.occurrence.id}",
                  sameAs: "https://gbif.org/occurrence/#{o.occurrence.id}"
                }.merge(o.occurrence.attributes.reject {|column| ignored_cols(false).include?(column)})
+                .merge(creator)
+                .merge( { created: o.created.to_time.iso8601 })
+                .merge(modified)
         end
       end
     end

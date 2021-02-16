@@ -315,7 +315,6 @@ module Sinatra
               attributor: attributor
             }.compact
 
-
             @pagy, @results = pagy(specimen_filters(@viewed_user).order(created: :desc), items: search_size, page: @page)
             haml :'help/specimens', locals: { active_page: "help" }
           end

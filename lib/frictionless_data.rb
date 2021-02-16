@@ -158,9 +158,10 @@ module Bionomia
             { name: "occurrence_id", type: "integer" },
             { name: "identifiedBy", type: "string", format: "uri", rdfType: "http://rs.tdwg.org/dwc/iri/identifiedBy" },
             { name: "recordedBy", type: "string", format: "uri", rdfType: "http://rs.tdwg.org/dwc/iri/recordedBy" },
-            { name: "attributedBy", type: "string", rdfType: "http://schema.org/name" },
-            { name: "attributedByURI", type: "string", format: "uri" },
-            { name: "attributionDateTime", type: "datetime", format: "any" }
+            { name: "createdBy", type: "string", rdfType: "http://schema.org/name" },
+            { name: "createdByURI", type: "string", format: "uri" },
+            { name: "createdDateTime", type: "datetime", format: "any" },
+            { name: "modifiedDateTime", type: "datetime", format: "any" }
           ]
         },
         foreignKeys: [
@@ -243,7 +244,8 @@ module Bionomia
         "user_occurrences.occurrence_id",
         "user_occurrences.action",
         "user_occurrences.visible",
-        "user_occurrences.created AS claimDateTime",
+        "user_occurrences.created AS createdDateTime",
+        "user_occurrences.updated AS modifiedDateTime",
         "users.id AS u_id",
         "users.given AS u_given",
         "users.family AS u_family",
@@ -254,9 +256,9 @@ module Bionomia
         "users.other_names AS u_other_names",
         "users.wikidata AS u_wikidata",
         "users.orcid AS u_orcid",
-        "claimants_user_occurrences.given AS claimantGiven",
-        "claimants_user_occurrences.family AS claimantFamily",
-        "claimants_user_occurrences.orcid AS claimantORCID",
+        "claimants_user_occurrences.given AS createdGiven",
+        "claimants_user_occurrences.family AS createdFamily",
+        "claimants_user_occurrences.orcid AS createdORCID",
       ]
       fields.concat((["gbifID"] + Occurrence.accepted_fields).map{|a| "occurrences.#{a} AS occ_#{a}"})
 
@@ -292,16 +294,19 @@ module Bionomia
         uri = !o.u_orcid.nil? ? "https://orcid.org/#{o.u_orcid}" : "http://www.wikidata.org/entity/#{o.u_wikidata}"
         identified_uri = o.action.include?("identified") ? uri : nil
         recorded_uri = o.action.include?("recorded") ? uri : nil
-        claimant_name = [o.claimantGiven, o.claimantFamily].join(" ")
-        claimant_orcid = !o.claimantORCID.blank? ? "https://orcid.org/#{o.claimantORCID}" : nil
+        created_name = [o.createdGiven, o.createdFamily].join(" ")
+        created_orcid = !o.createdORCID.blank? ? "https://orcid.org/#{o.createdORCID}" : nil
+        created_date_time = o.createdDateTime.to_time.iso8601
+        modified_date_time = !o.modifiedDateTime.blank? ? o.modifiedDateTime.to_time.iso8601 : nil
         data = [
           o.user_id,
           o.occurrence_id,
           identified_uri,
           recorded_uri,
-          claimant_name,
-          claimant_orcid,
-          o.claimDateTime.to_time.iso8601
+          created_name,
+          created_orcid,
+          created_date_time,
+          modified_date_time
         ]
         attributions << CSV::Row.new(attributions_header, data).to_s
 
