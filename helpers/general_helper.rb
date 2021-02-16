@@ -164,7 +164,7 @@ module Sinatra
             halt 404, haml(:oops)
           elsif params[:action] && ["collected","identified"].include?(params[:action])
             if params[:action] == "collected"
-              results = user.recordings
+              results = user.recordings.joins(:occurrence)
               if params[:start_year]
                 start_date = Date.new(params[:start_year].to_i)
                 if start_date > Date.today
@@ -181,7 +181,7 @@ module Sinatra
               end
             end
             if params[:action] == "identified"
-              results = user.identifications
+              results = user.identifications.joins(:occurrence)
               if params[:start_year]
                 start_date = Date.new(params[:start_year].to_i)
                 if start_date > Date.today
