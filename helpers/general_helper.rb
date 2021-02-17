@@ -245,7 +245,7 @@ module Sinatra
                                   .pluck(:created_by)
                                   .uniq
                                   .map{|u| User.find(u)}
-                                  .sort_by{|u| u.family}
+                                  .sort_by{|u| u.family || ""}
           @pagy, @results  = pagy_array(results, items: 30)
         end
 
