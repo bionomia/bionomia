@@ -98,8 +98,15 @@ module Sinatra
             elsif params[:identifier].is_wiki_id?
               wiki_search = ::Bionomia::WikidataSearch.new
               user_data = wiki_search.wiki_user_data(params[:identifier])
-              if (user_data[:date_died].nil? && user_data[:date_died_precision].nil?) ||
-                (user_data[:date_born].nil? && user_data[:date_born_precision].nil? && Date.today.year - user_data[:date_born].year >= 120)
+
+              date_died = user_data[:date_died]
+              date_born = user_data[:date_born]
+              date_died_precision = user_data[:date_died_precision]
+              date_born_precision = user_data[:date_born_precision]
+              if  !(
+                    ( !date_died.nil? && !date_died_precision.nil? ) ||
+                    ( !date_born.nil? && !date_born_precision.nil? && Date.today.year - date_born.year >= 120 )
+                  )
                 flash.next[:new_user] = { fullname: params[:identifier], slug: nil }
               # We have a user with that ORCID so switch to wikidata
               elsif user_data[:orcid] && User.where(orcid: user_data[:orcid]).exists?
