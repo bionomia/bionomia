@@ -30,18 +30,20 @@ class UserOccurrence < ActiveRecord::Base
    end
 
    def self.orphaned_user_claims
-     self.select(:user_id)
-         .left_joins(:occurrence)
-         .where(occurrences: { id: nil })
-         .where(visible: true)
-         .group(:user_id)
-         .order("NULL")
-         .count
-         .sort_by { |_key, value| value }
-         .reverse
-         .map{ |_key, value|
-           { user_id: _key, name: User.find(_key).fullname, orphaned: value }
-         }
+     orphaned = {}
+     self.in_batches(of: 25_000) do |batch|
+       missing = batch.left_joins(:occurrence)
+                      .where(occurrences: { id: nil })
+                      .pluck(:user_id, :created_by)
+       if missing.length > 0
+         missing.each do |item|
+           orphaned[item[0]] = { count: 0, claimants: [] } unless orphaned.key?(item[0])
+           orphaned[item[0]][:count] += 1
+           orphaned[item[0]][:claimants].push(item[1]) unless orphaned[item[0]][:claimants].include?(item[1])
+         end
+       end
+     end
+     orphaned
    end
 
    def self.delete_orphaned

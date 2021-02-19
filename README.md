@@ -42,12 +42,9 @@ See the Apache Spark recipes [here](spark.md) and [here](spark2.md) for quickly 
 
 ### Step 2: Check for Dramatic Changes in gbifIDs
 
-Unfortunately, gbifIDs are not persistent. These occasionally disappear through processing at GBIF's end. As a result, claims may no longer point to existing occurrence records. The following produces a count for how many claims and attributions might be orphaned. An alternative, more efficient process is found in an Apache Spark [script](spark2.md).
+Unfortunately, gbifIDs are not persistent. These occasionally disappear through processing at GBIF's end. As a result, claims may no longer point to existing occurrence records. The following produces a csv file for how many claims and attributions will be orphaned. An alternative, more efficient process is found in an Apache Spark [script](spark2.md).
 
-      $ RACK_ENV=production irb
-      > require "./application"
-      > pp UserOccurrence.orphaned_count
-      > pp UserOccurrence.orphaned_user_claims
+      $ RACK_ENV=production ./bin/csv_dump.rb -d ~/Desktop -o
 
 ### Step 3: Parse & Populate Agents
 
@@ -102,11 +99,12 @@ Or from scratch:
 
 ## Successive Data Migrations
 
-Unfortunately, gbifIDs are not persistent. These occasionally disappear through processing at GBIF's end. As a result, claims may no longer point to an existing occurrence record and these must then be purged from the user_occurrences table. The following SQL statement can remove these with successive data imports from GBIF:
+Unfortunately, gbifIDs are not persistent. These occasionally disappear through processing at GBIF's end. As a result, claims may no longer point to an existing occurrence record and these must then be purged from the user_occurrences table. The following are a few methods to produce a csv file of affected users and to then delete the orphans:
 
+     # csv dump requires approx. 15min for 20M attributions
+     $ RACK_ENV=production ./bin/csv_dump.rb -d ~/Desktop -o
      $ RACK_ENV=production irb
      > require "./application"
-     > pp UserOccurrence.orphaned_user_claims
      > UserOccurrence.delete_orphaned
 
      > ArticleOccurrence.orphaned_count
