@@ -54,17 +54,22 @@
         %a{href: url("/how-it-works")} how it works
         for more details.
 
-      %p
-        Search for your
-        %a{href: url("/datasets")} dataset(s)
-        and find the link to a
-        %a{href:"https://frictionlessdata.io/"} Frictionless Data
-        package. These zipped, UTF-8 encoded relational files are similar to the Darwin Core Archives you produced for GBIF. They differ in that they more efficiently represent
-        %em many:many
-        relationships. There is also a breadth of
-        %a{href: "https://frictionlessdata.io/software/"}
-          open software libraries
-        in many programming languages that read, validate, and process Frictionless Data. You can also extract the zipped package and import the UTF-8 encoded csv files into any spreadsheet software, provided the files are not excessively large.
+      %div{class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
+        %a{href:"https://frictionlessdata.io/"}
+          %img{class:"mb-3 mr-3", src:"/images/frictionless-color-logo.png", alt:"Frictionless Data"}
+        %div{class:"media-body"}
+          %p
+            Search for your
+            %a{href: url("/datasets")} dataset(s)
+            and find the link to a
+            %a{href:"https://frictionlessdata.io/"} Frictionless Data
+            package. These zipped, UTF-8 encoded relational files are similar to the Darwin Core Archives you produced for GBIF. They differ in that they more efficiently represent
+            %em many:many
+            relationships. There is also a breadth of
+            %a{href: "https://frictionlessdata.io/software/"}
+              open software libraries
+            in many programming languages that read, validate, and process Frictionless Data. You can also extract the zipped package and import the UTF-8 encoded csv files into any spreadsheet software, provided the files are not excessively large.
+
       %p
         The packages contain a standard
         %em datapackage.json

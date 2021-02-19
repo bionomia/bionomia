@@ -55,19 +55,24 @@
         %a{href: url("/how-it-works")} como funciona
         para más detalles.
 
-      %p
-        Busque su(s)
-        %a{href: url("/datasets")} conjunto(s) de datos
-        y encuentre un enlace al paquete
-        = succeed "." do
-          %a{href:"https://frictionlessdata.io/"} Frictionless Data
-        Estos archivos relacionales comprimidos, codificados UTF-8 son similares a los archivos de Darwin Core que usted produjo para GBIF. Se diferencian en que representan de manera más eficiente relaciones
-        = succeed "." do
-          %em many:many
-        También hay una variedad amplia de
-        %a{href: "https://frictionlessdata.io/software/"}
-          bibliotecas de software abierto
-        en muchos lenguajes de programación que leen, validan y procesan datos sin fricción. También puede extraer el paquete comprimido e importar los archivos csv codificados en UTF-8 en cualquier programa de hojas de cálculo, siempre que los archivos no sean excesivamente grandes.
+      %div{class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
+        %a{href:"https://frictionlessdata.io/"}
+          %img{class:"mb-3 mr-3", src:"/images/frictionless-color-logo.png", alt:"Frictionless Data"}
+        %div{class:"media-body"}
+          %p
+            Busque su(s)
+            %a{href: url("/datasets")} conjunto(s) de datos
+            y encuentre un enlace al paquete
+            = succeed "." do
+              %a{href:"https://frictionlessdata.io/"} Frictionless Data
+            Estos archivos relacionales comprimidos, codificados UTF-8 son similares a los archivos de Darwin Core que usted produjo para GBIF. Se diferencian en que representan de manera más eficiente relaciones
+            = succeed "." do
+              %em many:many
+            También hay una variedad amplia de
+            %a{href: "https://frictionlessdata.io/software/"}
+              bibliotecas de software abierto
+            en muchos lenguajes de programación que leen, validan y procesan datos sin fricción. También puede extraer el paquete comprimido e importar los archivos csv codificados en UTF-8 en cualquier programa de hojas de cálculo, siempre que los archivos no sean excesivamente grandes.
+
       %p
         Los paquetes contienen un archivo
         %em datapackage.json
