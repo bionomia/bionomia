@@ -10,7 +10,7 @@
       Application.init(#{@admin_user.id}, "PUT", "/admin", "#{@admin_user.identifier}");
       Profile.init("/admin/user/#{@admin_user.identifier}");
       var ids = $.map($('.progress-bar'), function(obj) { return $(obj).attr("id").split("_").pop(); });
-      $.when.apply($, $.each(ids, function(key, id) { ProgressBar.init(id); }));
+      $.each(ids, function(key, id) { ProgressBar.init(id); });
     });
 
 -content_for :jumbotron do
