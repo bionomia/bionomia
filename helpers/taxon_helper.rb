@@ -61,6 +61,19 @@ module Sinatra
           @results = Taxon.limit(75).order(Arel.sql("RAND()"))
         end
 
+        def taxon_image(taxon, size=nil)
+          img = nil
+          cloud_img = "https://abekpgaoen.cloudimg.io/height/64/x/"
+          if size == "thumbnail"
+            cloud_img = "https://abekpgaoen.cloudimg.io/width/24/x/"
+          end
+          taxon_image = TaxonImage.find_by_family(taxon) rescue nil
+          if taxon_image
+            img = cloud_img + Settings.base_url + "/images/taxa/" + taxon_image.file_name
+          end
+          img
+        end
+
       end
     end
   end
