@@ -38,7 +38,7 @@ class TaxonImage < ActiveRecord::Base
    def self.save_image(taxon, metadata)
      url = "http://phylopic.org" + metadata[0][:pngFiles][0][:url]
      file_name = File.basename(url)
-     read_image = open(url).read
+     read_image = URI.open(url).read
      File.open(File.join(BIONOMIA.root, BIONOMIA.public_folder, 'images', 'taxa', file_name), 'wb') do |file|
        file.write read_image
      end
@@ -48,7 +48,7 @@ class TaxonImage < ActiveRecord::Base
        credit: metadata[0][:credit],
        licenseURL: metadata[0][:licenseURL]
      )
-     puts "#{taxon.family}.green"
+     puts "#{taxon.family}".green
    end
 
    def update_credit
