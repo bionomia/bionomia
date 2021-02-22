@@ -58,7 +58,7 @@ module Sinatra
         end
 
         def taxon_examples
-          @results = Taxon.limit(75).order(Arel.sql("RAND()"))
+          @results = Taxon.limit(50).order(Arel.sql("RAND()"))
         end
 
         def taxon_image(taxon, size=nil)

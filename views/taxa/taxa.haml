@@ -23,6 +23,9 @@
         %ul{class: "list-unstyled m-2"}
           - group.each do |t|
             %li
+              - image = taxon_image(t.family, 'thumbnail')
+              - if !image.nil?
+                %img{src:"#{image}", alt:"#{t.family}", class:"mr-2"}
               %a{href: url("/taxon/#{t.family}")} #{t.family}
 
 - if @pagy && @pagy.count == 0
@@ -39,4 +42,7 @@
         %ul{class: "list-unstyled m-2"}
           - group.each do |o|
             %li
+              - image = taxon_image(o[:name], 'thumbnail')
+              - if !image.nil?
+                %img{src:"#{image}", alt:"#{o[:name]}", class:"mr-2"}
               %a{href: url("/taxon/#{o[:name]}")} #{o[:name]}

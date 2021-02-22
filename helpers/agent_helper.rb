@@ -106,7 +106,7 @@ module Sinatra
         end
 
         def agent_examples
-          @results = Agent.limit(75).order(Arel.sql("RAND()"))
+          @results = Agent.limit(50).order(Arel.sql("RAND()"))
         end
 
       end
