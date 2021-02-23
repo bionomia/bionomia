@@ -20,6 +20,10 @@ OptionParser.new do |opts|
     options[:phylopic] = true
   end
 
+  opts.on("-f", "--family [family]", String, "Limit adding new pic from Phylopic to a Family") do |family|
+    options[:family] = family
+  end
+
   opts.on("-h", "--help", "Prints this help") do
     puts opts
     exit
@@ -61,5 +65,9 @@ if options[:directory]
 end
 
 if options[:phylopic]
-  TaxonImage.phylopic_search
+  if options[:family]
+    TaxonImage.phylopic_search(options[:family])
+  else
+    TaxonImage.phylopic_search_all
+  end
 end
