@@ -26,6 +26,8 @@
               - image = taxon_image(t.family, 'thumbnail')
               - if !image.nil?
                 %img{src:"#{image}", alt:"#{t.family}", class:"mr-2"}
+              - else
+                %span{style:"width:24px;", class:"d-inline-block mr-2"}
               %a{href: url("/taxon/#{t.family}")} #{t.family}
 
 - if @pagy && @pagy.count == 0
@@ -45,4 +47,6 @@
               - image = taxon_image(o[:name], 'thumbnail')
               - if !image.nil?
                 %img{src:"#{image}", alt:"#{o[:name]}", class:"mr-2"}
+              - else
+                %span{style:"width:24px;", class:"d-inline-block mr-2"}
               %a{href: url("/taxon/#{o[:name]}")} #{o[:name]}

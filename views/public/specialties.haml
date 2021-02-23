@@ -34,6 +34,8 @@
                       - image = taxon_image(k, 'thumbnail')
                       - if !image.nil?
                         %img{src:"#{image}", alt:"#{k}", class:"mr-2"}
+                      - else
+                        %span{style:"width:24px;", class:"d-inline-block mr-2"}
                       %a{href: url("/#{@viewed_user.identifier}/specimens?action=identified&family=#{ERB::Util.url_encode(k)}")} #{k}
                     %span{class: "badge badge-light badge-pill"} #{number_with_delimiter(v)}
             - elsif !@families_recorded.empty?
@@ -46,7 +48,9 @@
                     %span
                       - image = taxon_image(k, 'thumbnail')
                       - if !image.nil?
-                        %img{src:"#{image}", alt:"#{k}", class:"mr-2"}
+                        %img{src:"#{image}", alt:"#{k}", class:"mr-2", style:"max-width:24px;"}
+                      - else
+                        %span{style:"width:24px;", class:"d-inline-block mr-2"}
                       %a{href: url("/#{@viewed_user.identifier}/specimens?action=collected&family=#{ERB::Util.url_encode(k)}")} #{k}
                     %span{class: "badge badge-light badge-pill"} #{number_with_delimiter(v)}
           %div{class: "col-12 col-lg-6 mb-3"}
@@ -61,6 +65,8 @@
                       - image = taxon_image(k, 'thumbnail')
                       - if !image.nil?
                         %img{src:"#{image}", alt:"#{k}", class:"mr-2"}
+                      - else
+                        %span{style:"width:24px;", class:"d-inline-block mr-2"}
                       %a{href: url("/#{@viewed_user.identifier}/specimens?action=identified&family=#{ERB::Util.url_encode(k)}")} #{k}
                     %span{class: "badge badge-light badge-pill"} #{number_with_delimiter(v)}
 

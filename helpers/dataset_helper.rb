@@ -123,7 +123,7 @@ module Sinatra
           else
             descriptor.merge!(
               {
-                description: "#{h(@dataset.title)}"
+                description: "(The description of this dataset is missing or too short)"
               }
             )
           end
