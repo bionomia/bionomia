@@ -20,9 +20,9 @@
   %div{class: "row"}
     - @results.in_groups_of(25, false).each do |group|
       %div{class: "col-12 col-sm-3 mb-3"}
-        %ul{class: "list-unstyled m-2"}
+        %ul{class: "list-group m-2"}
           - group.each do |t|
-            %li
+            %li{class:"list-group-item border-0"}
               - image = taxon_image(t.family, 'thumbnail')
               - if !image.nil?
                 %img{src:"#{image}", alt:"#{t.family}", class:"mr-2"}
@@ -39,9 +39,9 @@
   %div{class: "row"}
     - @taxon_results.in_groups_of(25, false).each do |group|
       %div{class: "col-12 col-md-3 mb-3"}
-        %ul{class: "list-unstyled m-2"}
+        %ul{class: "list-group m-2"}
           - group.each do |o|
-            %li
+            %li{class:"list-group-item border-0"}
               - image = taxon_image(o[:name], 'thumbnail')
               - if !image.nil?
                 %img{src:"#{image}", alt:"#{o[:name]}", class:"mr-2"}
