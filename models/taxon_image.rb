@@ -8,7 +8,7 @@ class TaxonImage < ActiveRecord::Base
      Taxon.find_each do |taxon|
        next if taxon.has_image?
        begin
-         get_image(taxon.family)
+         phylopic_search(taxon.family)
        rescue
          puts "#{taxon.family}".red
          next
