@@ -330,6 +330,7 @@ module Bionomia
       problems << CSV::Row.new(problems_collector_header, problems_collector_header, true).to_s
       fields = [
         :id,
+        :visible,
         :occurrence_id,
         :user_id,
         :wikidata,
@@ -342,6 +343,8 @@ module Bionomia
       @dataset.collected_before_birth_after_death
               .select(fields)
               .find_each do |o|
+                next if !o.visible
+                next if !o.eventDate
         data = [
           o.occurrence_id,
           o.user_id,

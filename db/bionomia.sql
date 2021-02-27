@@ -264,19 +264,19 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD KEY `orcid_idx` (`orcid`) USING BTREE,
   ADD KEY `wikidata_idx` (`wikidata`) USING BTREE,
-  ADD KEY `country_code` (`country_code`);
+  ADD KEY `country_code` (`country_code`) USING BTREE;
 
 ALTER TABLE `user_occurrences`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `user_occurrence_idx` (`occurrence_id`,`user_id`),
-  ADD KEY `created_by_idx` (`created_by`),
+  ADD KEY `created_by_idx` (`created_by`) USING BTREE,
   ADD KEY `user_created_by_idx` (`user_id`,`created_by`) USING BTREE,
   ADD KEY `user_created_idx` (`user_id`,`created`);
 
 ALTER TABLE `user_organizations`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_idx` (`user_id`),
-  ADD KEY `organization_idx` (`organization_id`);
+  ADD KEY `user_idx` (`user_id`) USING BTREE,
+  ADD KEY `organization_idx` (`organization_id`) USING BTREE;
 
 
 ALTER TABLE `agents`
