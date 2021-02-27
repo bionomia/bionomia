@@ -71,6 +71,7 @@ First, import all users and user_occurrences content from production.
      $ RACK_ENV=production sidekiq -c 30 -q existing_claims -r ./application.rb
      # Remove the duplicates that might have been created
      # DELETE u1 FROM user_occurrences u1 INNER JOIN user_occurrences u2 WHERE u1.id < u2.id AND u1.occurrence_id = u2.occurrence_id AND u1.user_id = u2.user_id AND u1.created_by = 2;
+     # DELETE u2 FROM user_occurrences u1 INNER JOIN user_occurrences u2 WHERE u1.id < u2.id AND u1.occurrence_id = u2.occurrence_id AND u1.user_id = u2.user_id AND u2.created_by = 2;
      # ALTER TABLE `user_occurrences` ADD UNIQUE KEY `user_occurrence_idx` (`occurrence_id`,`user_id`);
      # ALTER TABLE `user_occurrences` DROP INDEX `occurrence_idx`;
 
