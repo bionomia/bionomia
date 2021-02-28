@@ -112,7 +112,9 @@ module Sinatra
                 visible: visible
               }
             }
-            UserOccurrence.import data, batch_size: 250, validate: false, on_duplicate_key_ignore: true
+            UserOccurrence.transaction do
+              UserOccurrence.import data, batch_size: 250, validate: false, on_duplicate_key_ignore: true
+            end
             { message: "ok" }.to_json
           end
 

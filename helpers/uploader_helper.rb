@@ -55,7 +55,9 @@ module Sinatra
               @record_count += 1
             end
           end
-          UserOccurrence.import items, batch_size: 250, validate: false, on_duplicate_key_ignore: true
+          UserOccurrence.transaction do
+            UserOccurrence.import items, batch_size: 250, validate: false, on_duplicate_key_ignore: true
+          end
           tempfile.unlink
         end
 
