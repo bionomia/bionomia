@@ -107,7 +107,9 @@ module Bionomia
     end
 
     def import_user_occurrences(uo)
-      UserOccurrence.import [:user_id, :occurrence_id, :action, :created_by], uo, batch_size: 5_000, validate: false, on_duplicate_key_ignore: true
+      UserOccurrence.transaction do
+        UserOccurrence.import [:user_id, :occurrence_id, :action, :created_by], uo, batch_size: 5_000, validate: false, on_duplicate_key_ignore: true
+      end
     end
 
   end

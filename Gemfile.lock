@@ -37,7 +37,7 @@ GEM
     composite_primary_keys (6.0.5)
       activerecord (>= 4.0.0)
     concurrent-ruby (1.1.8)
-    config (2.2.3)
+    config (3.0.0)
       deep_merge (~> 1.2, >= 1.2.1)
       dry-validation (~> 1.0, >= 1.0.0)
     connection_pool (2.2.3)
@@ -144,7 +144,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.1)
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2021.0212)
+    mime-types-data (3.2021.0225)
     mini_mime (1.0.2)
     mini_portile2 (2.5.0)
     minitest (5.14.4)
@@ -373,4 +373,4 @@ RUBY VERSION
    ruby 2.7.1p83
 
 BUNDLED WITH
-   2.1.4
+   2.2.11
