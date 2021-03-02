@@ -51,6 +51,7 @@ if options[:export]
   CSV.open(options[:export], "wb") do |csv|
     csv << ["identifier", "action", "occurrence_ids"]
     user_ids = UserOccurrence.where(created_by: User::GBIF_AGENT_ID)
+                             .where.not(user_id: User::BOT_IDS) 
                              .pluck(:user_id)
                              .uniq
 

@@ -45,22 +45,24 @@ if options[:file]
   UserOccurrence.where(created_by: User::GBIF_AGENT_ID).delete_all
 
   CSV.foreach(options[:file], headers: true) do |row|
-    next if !row["identifier"].is_orcid? && !row["identifier"].is_wiki_id?
     if row["identifier"].is_wiki_id?
-      d = DestroyedUser.find_by_identifier(row["identifier"])
-      if d.nil?
-        u = User.find_or_create_by({ wikidata: row["identifier"] })
+      d = DestroyedUser.where(identifier: row["identifier"])
+      if d.exists?
+        redirect = d.where.not(redirect_to: nil).first
+        next if redirect.nil?
+        u = User.find_by_wikidata(redirect.redirect_to)
       else
-        u = User.find_by_wikidata(d.redirect_to)
-      end
-      if u.wikidata && !u.valid_wikicontent?
-        u.delete_search
-        u.delete
-        next
+        u = User.find_or_create_by({ wikidata: row["identifier"] })
+        if u.wikidata && !u.valid_wikicontent?
+          u.delete_search
+          u.delete
+          next
+        end
       end
     elsif row["identifier"].is_orcid?
       u = User.find_or_create_by({ orcid: row["identifier"] })
     end
+    next if User::BOT_IDS.include?(u.id)
     row["occurrence_ids"].tr('[]', '').split(',').in_groups_of(1_000, false) do |group|
       import = group.map{|r| [ r.to_i, u.id, row["action"], User::GBIF_AGENT_ID ] }
       UserOccurrence.import [:occurrence_id, :user_id, :action, :created_by], import, batch_size: 1000, validate: false, on_duplicate_key_ignore: true
