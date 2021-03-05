@@ -46,12 +46,12 @@ class TaxonImage < ActiveRecord::Base
      File.open(File.join(BIONOMIA.root, BIONOMIA.public_folder, 'images', 'taxa', file_name), 'wb') do |file|
        file.write read_image
      end
-     create(
+     upsert({
        family: family,
        file_name: file_name,
        credit: metadata[0][:credit],
        licenseURL: metadata[0][:licenseURL]
-     )
+     })
      puts "#{family}".green
    end
 
