@@ -98,6 +98,7 @@ module Sinatra
                               .where.not(users: user_type)
                               .order(created: :desc)
                               .distinct
+                              .limit(100)
 
           @pagy, @results = pagy_arel(qry, items: 20)
         end

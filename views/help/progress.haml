@@ -28,7 +28,6 @@
       %tr
         %th{scope: "col"}= I18n.t('help.person')
         %th{scope: "col"}= I18n.t('help.progress')
-        %th{scope: "col"}= I18n.t('help.public')
         %th{scope: "col"}= I18n.t('help.latest_scribe')
         %th{scope: "col"}= I18n.t('help.latest_claim')
 
@@ -41,14 +40,11 @@
             - else
               %img{src: "/images/wikidata_16x16.png", alt:"Wikidata iD"}
             %a{href: url("/help-others/#{claim.user.identifier}")} #{claim.user.fullname_reverse}
+            - if !claim.user.is_public?
+              %i{class:"fas fa-lock text-muted ml-2"}
           %td
             %div{class:"progress progress-border"}
               %div{id:"progress-bar_#{claim.user.identifier}", class:"progress-bar bg-info", role:"progressbar", style:"width: 0%;", "aria-valuenow":"0", "aria-valuemin":"0", "aria-valuemax":"100"}
-          %td
-            - if claim.user.is_public?
-              %span{class: "text-success"} #{claim.user.is_public}
-            - else
-              #{claim.user.is_public}
           %td
             - if claim.claimant.is_bot?
               #{claim.claimant.fullname}
