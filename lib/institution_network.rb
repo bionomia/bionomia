@@ -6,7 +6,11 @@
 module Bionomia
   class InstitutionNetwork
 
+    RGL::DOT::GRAPH_OPTS << 'splines'
     RGL::DOT::EDGE_OPTS << 'penwidth'
+    RGL::DOT::EDGE_OPTS << 'tailclip'
+    RGL::DOT::EDGE_OPTS << 'shared'
+    RGL::DOT::NODE_OPTS << 'type'
 
     def initialize(type = "dot")
       @graph = WeightedGraph.new
@@ -18,14 +22,17 @@ module Bionomia
     def graph_options
       {
         bgcolor: "#ffffff",
-        splines: true
+        splines: "curved"
       }
     end
 
-    def edge_options(penwidth = 2)
+    def edge_options(penwidth = 1)
       {
         color: "#333333",
-        penwidth: penwidth
+        penwidth: penwidth,
+        tailclip: "false",
+        fontsize: 0,
+        shared: pendwidth
       }
     end
 
@@ -85,15 +92,17 @@ module Bionomia
     def add_attributes
       @institutions.each do |i|
         @graph.add_vertex(i[:institution])
-        opts = { label: i[:institution] }
+        opts = { label: i[:institution], type: i[:type] }
         @graph.add_vertex_attributes(i[:institution], vertex_options.merge(opts))
       end
     end
 
     def add_edge(institution1, institution2)
-      common = institution1[:collectors] & institution2[:collectors]
-      @graph.add_edge(institution1[:institution], institution2[:institution], nil) if common.size > 0
-      @graph.add_edge_attributes(institution1[:institution], institution2[:institution], edge_options(common.size)) if common.size > 0
+      if institution1[:institution] != institution2[:institution]
+        common = institution1[:collectors] & institution2[:collectors]
+        @graph.add_edge(institution1[:institution], institution2[:institution], common.size) if common.size > 0
+        @graph.add_edge_attributes(institution1[:institution], institution2[:institution], edge_options(common.size)) if common.size > 0
+      end
     end
 
     def write_dot_file
