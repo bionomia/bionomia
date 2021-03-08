@@ -114,6 +114,14 @@ class User < ActiveRecord::Base
     )
   end
 
+  def has_recordings?
+    recordings.exists?
+  end
+
+  def has_identifications?
+    identifications.exists?
+  end
+
   def visible_user_occurrences
     user_occurrences.where(visible: true)
   end
