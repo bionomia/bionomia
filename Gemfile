@@ -58,6 +58,7 @@ gem 'sucker_punch'
 gem 'thin'
 gem 'twitter'
 gem 'wikidata-client'
+gem 'rgl'
 
 group :production do
 end
