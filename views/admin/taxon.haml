@@ -28,19 +28,25 @@
         %dd{class: "col-sm-10"}
           - if @taxon.has_image?
             %img{src:"/images/taxa/#{@taxon.image.file_name}"}
+          - else
+            None
         %dt{class: "col-sm-2"} Credit:
         %dd{class: "col-sm-10"}
           - if @taxon.has_image?
             #{@taxon.image.credit}
+          - else
+            N/A
         %dt{class: "col-sm-2"} License:
         %dd{class: "col-sm-10"}
           - if @taxon.has_image?
             #{@taxon.image.licenseURL}
-        %dt{class: "col-sm-2"} Process:
+          - else
+            N/A
+        %dt{class: "col-sm-2"} Update:
         %dd{class: "col-sm-10"}
           %a{href: url("/admin/taxon/#{@taxon.family}/process.json"), role:"button", class:"btn btn-sm btn-outline-success taxon-process"}
             %i{class: "fas fa-sync-alt"}
-            Process
+            Update
 
           %div{class:"alert alert-taxon-process alert-success alert-dismissible fade show text-center", role: "alert"}
             Taxon silhouette was searched and processed.
