@@ -42,6 +42,13 @@
             #{@taxon.image.licenseURL}
           - else
             N/A
+        %dt{class: "col-sm-2"} URL:
+        %dd{class: "col-sm-10"}
+          - if @taxon.has_image?
+            %a{href:"http://phylopic.org/image/#{@taxon.image.file_name.split(".").first}/", target:"_blank"}
+              http://phylopic.org/image/#{@taxon.image.file_name.split(".").first}/
+          - else
+            N/A
         %dt{class: "col-sm-2"} Update:
         %dd{class: "col-sm-10"}
           %a{href: url("/admin/taxon/#{@taxon.family}/process.json"), role:"button", class:"btn btn-sm btn-outline-success taxon-process"}
