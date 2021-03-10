@@ -21,7 +21,7 @@ module Sinatra
               response["recorded"] = jsonld_occurrence_recordings(occurrence)
               response["identified"] = jsonld_occurrence_identifications(occurrence)
               response["associatedReferences"] = jsonld_occurrence_references(occurrence)
-              response.to_json
+              JSON.pretty_generate(response)
             rescue
               halt 404, {}.to_json
             end
