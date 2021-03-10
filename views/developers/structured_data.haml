@@ -42,7 +42,7 @@
       is a user's Wikidata Q number,
       %a{href: "https://www.wikidata.org/wiki/Q1035"} https://www.wikidata.org/wiki/Q1035
 
-  %h5 Content Negotiation for JSON-LD
+  %h5 Content Negotiation for JSON-LD of a User
   %pre{class:"pre-scrollable bg-dark text-white border rounded p-3"}
     %code
       :preserve
@@ -60,6 +60,12 @@
       %a{href: "https://gbif.org/occurrence/477976412"} https://gbif.org/occurrence/477976412.
       This same service is used in two
       %a{href: url("/integrations")} browser extensions.
+
+  %h5 Content Negotiation for JSON-LD of an Occurrence
+  %pre{class:"pre-scrollable bg-dark text-white border rounded p-3"}
+    %code
+      :preserve
+        curl -LH "Accept: application/ld+json" "#{url("/occurrence/477976412")}"
 
 %h3{class:"mt-4 mb-3"} Raw Data
 
