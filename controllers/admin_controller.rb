@@ -243,7 +243,7 @@ module Sinatra
 
           app.get '/admin/taxa' do
             admin_protected!
-            if params[:q]
+            if params[:q] && params[:q].present?
               search_taxon
               @taxon_results = format_taxon
             else
