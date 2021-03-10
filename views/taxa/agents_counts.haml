@@ -36,6 +36,12 @@
             = I18n.t('taxa.no_agents', taxon: h(@taxon.family))
     = haml :'partials/taxa/search', layout: false
 
+- if admin_authorized?
+  %div{class:"mt-3 mb-3 pt-3 border-top text-center"}
+    %a{href: url("/admin/taxon/#{@taxon.family}")}
+      %i{class:"fas fa-cog"}
+      = I18n.t('general.settings')
+
 = haml :'partials/taxa/tabs', layout:false, locals: { active_tab: locals[:active_tab] }
 = haml :'partials/taxa/agent_nav', layout: false, locals: { active_subtab: locals[:active_subtab] }
 

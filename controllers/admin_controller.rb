@@ -241,6 +241,26 @@ module Sinatra
             redirect "/admin/organizations"
           end
 
+          app.get '/admin/taxa' do
+            admin_protected!
+            @pagy, @results = pagy(Taxon.order(family: :asc), items: 50)
+            haml :'admin/taxa', locals: { active_page: "administration" }
+          end
+
+          app.get '/admin/taxon/:taxon' do
+            admin_protected!
+            taxon_from_param
+            haml :'admin/taxon', locals: { active_page: "administration" }
+          end
+
+          app.get '/admin/taxon/:taxon/process.json' do
+            content_type "application/json", charset: 'utf-8'
+            admin_protected!
+            taxon_from_param
+            TaxonImage.phylopic_search(@taxon.family)
+            TaxonImage.find_by_family(@taxon.family).to_json
+          end
+
           app.get '/admin/users' do
             admin_protected!
             sort = params[:sort] || nil

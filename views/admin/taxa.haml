@@ -1,0 +1,40 @@
+-content_for :title do
+  Taxa
+
+-content_for :scripts do
+  %script{src:"/js/application.js"}
+  :javascript
+    $(function() {
+      Application.init(#{@user.id}, "POST", "/admin");
+    });
+
+-content_for :jumbotron do
+  %div{class:"jumbotron jumbotron-fluid alert-warning d-flex flex-wrap"}
+    %div{class:"mr-auto"}
+      %h1{class:"h2"} Taxa
+    = haml :'partials/admin/taxon_search', layout: false
+
+- if @pagy.count == 0
+  %div{class: "alert alert-info tiny-margins", role: "alert"}
+    Taxa are not available.
+- else
+
+  %div{class:"table-responsive-lg"}
+    %table{class:"table table-hover table-sm"}
+      %thead{class: "thead-light"}
+        %tr
+          %th{scope: "col"} Taxon
+          %th{scope: "col"} Silhouette
+
+      %tbody
+        - @results.each do |taxon|
+          %tr
+            %td
+              %a{href: url("/admin/taxon/#{taxon.family}")} #{taxon.family}
+            %td
+              - if taxon.has_image?
+                %span{class: "text-success"} true
+              - else
+                #{taxon.has_image?}
+
+  = pagy_bootstrap_nav(@pagy) if @pagy.pages > 1

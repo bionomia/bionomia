@@ -225,7 +225,9 @@ var Application = (function($, window) {
               window.location.href = "/help-others/" + self.identifier + "/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datasetKey + "&taxon_id=" + datum.id;
             } else if (self.path === "/profile") {
               window.location.href = "/profile/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datasetKey + "&taxon_id=" + datum.id;
-            } else if (self.path === "/admin") {
+            } else if (self.path === "/admin" && !self.identifier) {
+              window.location.href = "/admin/taxon/" + datum.name;
+            } else if (self.path === "/admin" && self.identifier) {
               window.location.href = "/admin/user/"+self.identifier+"/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datasetKey + "&taxon_id=" + datum.id;
             } else if (self.path === "/taxa") {
               window.location.href = "/taxon/" + datum.name;
@@ -233,7 +235,6 @@ var Application = (function($, window) {
               window.location.href = window.location.pathname + "?q=" + datum.name;
             }
           });
-
     },
 
     activate_switch: function() {
@@ -625,6 +626,31 @@ var Application = (function($, window) {
         }).done(function(data) {
           button.find("i").removeClass("fa-spin");
           $(".alert-article-process").alert().show();
+          $(".alert").on("closed.bs.alert", function () {
+            location.reload();
+          });
+        });
+        return false;
+      });
+
+      $("a.taxon-process").on("click", function(e) {
+        var button = $(this);
+
+        e.stopPropagation();
+        e.preventDefault();
+        $.ajax({
+            method: "GET",
+            url: button.attr("href"),
+            beforeSend: function(xhr) {
+              button.addClass("disabled").find("i").addClass("fa-spin");
+            }
+        }).done(function(data) {
+          button.find("i").removeClass("fa-spin");
+          if (data == null) {
+            $('#taxon-search-result').html("No image found.");
+            $(".alert-taxon-process").removeClass("alert-success").addClass("alert-warning");
+          }
+          $(".alert-taxon-process").alert().show();
           $(".alert").on("closed.bs.alert", function () {
             location.reload();
           });

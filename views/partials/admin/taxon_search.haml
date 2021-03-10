@@ -1,0 +1,5 @@
+%div
+  %form{id:"form-org-wrapper", method: "get", action: "/admin/taxa/search", "accept-charset" => "UTF-8", class: "form-inline helpers"}
+    %div{class: "form-group w-75"}
+      %input{class:"typeahead taxon-search", id:"typeahead-taxon", type: :text, name: "q", placeholder: "#{I18n.t('taxa.taxon_string')}", value: "#{h(params[:q] || params[:taxon])}", size:"25", autocomplete:"off"}
+    %input{type: :submit, class:"btn btn-success medium-margins", value:"#{I18n.t('general.search')}"}
