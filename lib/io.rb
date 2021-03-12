@@ -190,7 +190,7 @@ module Bionomia
 
     def jsonld_occurrences_paged(type = "identifcations")
       begin
-        pagy, results = pagy_countless(@user.send(type), items: 100)
+        pagy, results = pagy_countless(@user.send(type).includes(:claimant), items: 100)
         metadata = pagy_metadata(pagy)
       rescue
         results = []
@@ -232,7 +232,7 @@ module Bionomia
 
     def jsonld_occurrences_enum(type = "identifications")
       Enumerator.new do |y|
-        @user.send(type).find_each do |o|
+        @user.send(type).includes(:claimant).find_each do |o|
           creator = {}
           modified = { modified: nil }
           if !o.claimant.orcid.nil?
