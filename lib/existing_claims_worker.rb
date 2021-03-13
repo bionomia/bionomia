@@ -13,12 +13,13 @@ module Bionomia
                 .tr('[]', '')
                 .split(',')
 
-      uniq_recs = recs - ids
-      uniq_ids = ids - recs
-      both = recs & ids
+      uniq_recs = (recs - ids).uniq
+      uniq_ids = (ids - recs).uniq
+      both = (recs & ids).uniq
 
-      row["agentIDs"].split("|").each do |id|
-        u = get_user(id.strip)
+      row["agentIDs"].split("|").map(&:strip).uniq.each do |id|
+        next if id.empty?
+        u = get_user(id)
         next if u.nil? || User::BOT_IDS.include?(u.id)
         if !uniq_recs.empty?
           uo = uniq_recs.map{|r| [u.id, r.to_i, "recorded", User::GBIF_AGENT_ID]}
@@ -107,9 +108,11 @@ module Bionomia
     end
 
     def import_user_occurrences(uo)
-      UserOccurrence.transaction do
-        UserOccurrence.import [:user_id, :occurrence_id, :action, :created_by], uo, batch_size: 5_000, validate: false, on_duplicate_key_ignore: true
-      end
+      qry_string = uo.map { |pair| "(#{pair[1]},#{pair[0]})" }.join(",")
+      existing = UserOccurrence.where("(occurrence_id, user_id) IN (#{qry_string})")
+                               .pluck(:user_id, :occurrence_id)
+      uo.reject!{|k| existing.include?([k[0], k[1]])}
+      UserOccurrence.import [:user_id, :occurrence_id, :action, :created_by], uo, batch_size: 1_000, validate: false, on_duplicate_key_ignore: true
     end
 
   end
