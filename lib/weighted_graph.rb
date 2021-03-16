@@ -55,6 +55,10 @@ module Bionomia
       @weights[[u,v]] = w
     end
 
+    def add_vertex(v)
+      super(v)
+    end
+
     def add_edge_attributes(u, v, a)
       @edge_attributes[[u,v]] = a
     end
