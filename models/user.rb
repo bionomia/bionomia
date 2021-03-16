@@ -114,6 +114,10 @@ class User < ActiveRecord::Base
     )
   end
 
+  def has_photo?
+    !image_url.nil?
+  end
+
   def has_recordings?
     recordings.exists?
   end

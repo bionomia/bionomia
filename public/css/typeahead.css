@@ -66,9 +66,17 @@
   background-color: #40924F;
 }
 
+.tt-suggestion:hover img {
+  background-color: #fff;
+}
+
 .tt-suggestion.tt-cursor {
   color: #fff;
   background-color: #40924F;
+}
+
+.tt-suggestion.tt-cursor img {
+  background-color: #fff;
 }
 
 .tt-suggestion p {
