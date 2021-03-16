@@ -6,6 +6,7 @@
   %script{src:"/js/profile.js"}
   :javascript
     $(function() {
+
       Application.init(#{@admin_user.id}, "PUT", "/admin", "#{@admin_user.identifier}");
       Profile.init("/admin/user/#{@admin_user.identifier}");
     });
@@ -59,7 +60,7 @@
           - o = uo.occurrence
           %tr
             %td{class: "selector"}
-              = haml :'partials/single_selector_preselected', layout: false, locals: { occurrence: uo, user_id: @admin_user.id }
+              = haml :'partials/single_selector_preselected', layout: false, locals: { occurrence: uo, user_id: nil }
             %td
               - scientific_name = o.scientificName.nil? ? "not recorded" : o.scientificName
               %a{href: gbif_occurrence_url(o.id), target:"_blank"}
