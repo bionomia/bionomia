@@ -59,6 +59,11 @@ module Sinatra
             { message: "ok" }.to_json
           end
 
+          app.get '/auth/failure' do
+            session.clear
+            redirect '/profile'
+          end
+
           app.get '/logout' do
             session.clear
             redirect '/'

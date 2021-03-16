@@ -39,6 +39,7 @@ gem 'rack-test'
 gem 'redis'
 gem 'require_all'
 gem 'rest-client'
+gem 'rgl'
 gem 'rss'
 gem 'ruby-filemagic'
 gem 'ruby-progressbar'
@@ -58,7 +59,6 @@ gem 'sucker_punch'
 gem 'thin'
 gem 'twitter'
 gem 'wikidata-client'
-gem 'rgl'
 
 group :production do
 end
