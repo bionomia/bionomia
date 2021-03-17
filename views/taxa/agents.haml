@@ -54,7 +54,7 @@
         %ul{class: "list-unstyled m-2"}
           - group.each do |a|
             %li
-              %a{href: url("/agent/#{a.agent_id}?taxon=#{@taxon.family}")} #{a.agent.fullname_reverse}
+              %a{href: url("/agent/#{a.id}?taxon=#{@taxon.family}")} #{a.fullname_reverse}
 
   - if @pagy.pages > 1
     %div{style:"overflow-y:scroll"}

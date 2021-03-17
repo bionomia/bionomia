@@ -34,15 +34,14 @@ class Taxon < ActiveRecord::Base
                     .select(:agent_id, :occurrence_id)
                     .joins("INNER JOIN taxon_occurrences ON occurrence_recorders.occurrence_id = taxon_occurrences.occurrence_id")
                     .where(taxon_occurrences: { taxon_id: id })
-    recorders.union(determiners)
+    recorders.union(determiners).unscope(:order)
   end
 
   def agents
-    occurrence_determiners_union_recorders
-      .distinct
-      .joins(:agent)
-      .select(:agent_id, :'agents.family')
-      .order(Arel.sql("agents.family"))
+    combined = occurrence_determiners_union_recorders
+                .select(:agent_id)
+                .distinct
+    Agent.where(id: combined).order(:family)
   end
 
   def agent_counts
