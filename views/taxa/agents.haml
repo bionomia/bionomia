@@ -53,9 +53,8 @@
       %div{class: "col-12 col-sm-3 mb-3"}
         %ul{class: "list-unstyled m-2"}
           - group.each do |a|
-            - agent = Agent.find(a[0])
             %li
-              %a{href: url("/agent/#{agent.id}?taxon=#{@taxon.family}")} #{agent.fullname_reverse}
+              %a{href: url("/agent/#{a.agent_id}?taxon=#{@taxon.family}")} #{a.agent.fullname_reverse}
 
   - if @pagy.pages > 1
     %div{style:"overflow-y:scroll"}

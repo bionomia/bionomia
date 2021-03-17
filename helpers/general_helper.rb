@@ -131,7 +131,7 @@ module Sinatra
 
         def occurrences_by_agent_ids(agent_ids = [])
           OccurrenceRecorder.where({ agent_id: agent_ids })
-                            .union_all(OccurrenceDeterminer.where(agent_id: agent_ids))
+                            .union(OccurrenceDeterminer.where(agent_id: agent_ids))
                             .includes(:occurrence)
         end
 

@@ -78,6 +78,7 @@ CREATE TABLE `occurrences` (
   `countryCode` varchar(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `eventDate` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `year` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `kingdom` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `family` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `identifiedBy` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `institutionCode` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,

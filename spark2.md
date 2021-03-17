@@ -90,46 +90,25 @@ occurrences.write.mode("append").jdbc(url, "occurrences", prop)
 // Recreate indices
 // ALTER TABLE `occurrences` ADD KEY `typeStatus_idx` (`typeStatus`(256)), ADD KEY `index_occurrences_on_datasetKey` (`datasetKey`);
 
-val recordedByIDGroups = occurrences.
-    select($"gbifID", $"recordedByID").
-    filter($"recordedByID".isNotNull).
-    groupBy($"recordedByID" as "agentIDs").
-    agg(collect_set($"gbifID") as "gbifIDs_recordedByIDs").
-    withColumn("gbifIDs_identifiedByIDs", lit(null))
-
-val identifiedByIDGroups = occurrences.
-    select($"gbifID", $"identifiedByID").
-    filter($"identifiedByID".isNotNull).
-    groupBy($"identifiedByID" as "agentIDs").
-    agg(collect_set($"gbifID") as "gbifIDs_identifiedByIDs").
-    withColumn("gbifIDs_recordedByIDs", lit(null))
-
-//union identifiedByID, recordedByID entries then group by agentIDs
-val unioned2 = recordedByIDGroups.
-    unionByName(identifiedByIDGroups).
-    groupBy($"agentIDs").
-    agg(flatten(collect_set($"gbifIDs_recordedByIDs")) as "gbifIDs_recordedByIDs", flatten(collect_set($"gbifIDs_identifiedByIDs")) as "gbifIDs_identifiedByIDs")
-
 def stringify(c: Column) = concat(lit("["), concat_ws(",", c), lit("]"))
 
-//write aggregated agentIDs to csv files for the Populate Existing Claims script, /bin/populate_existing_claims.rb
-unioned2.select("agentIDs", "gbifIDs_recordedByIDs", "gbifIDs_identifiedByIDs").
-    withColumn("gbifIDs_recordedByIDs", stringify($"gbifIDs_recordedByIDs")).
-    withColumn("gbifIDs_identifiedByIDs", stringify($"gbifIDs_identifiedByIDs")).
+val identifiers = spark.
+    read.
+    format("avro").
+    load("identifiers.avro")
+
+identifiers.select("identifier", "gbifIDsRecordedByID", "gbifIDsIdentifiedByID").
+    withColumn("gbifIDsRecordedByID", stringify($"gbifIDsRecordedByID")).
+    withColumn("gbifIDsIdentifiedByID", stringify($"gbifIDsIdentifiedByID")).
+    withColumnRenamed("identifier","agentIDs").
+    withColumnRenamed("gbifIDsRecordedByID","gbifIDs_recordedByID").
+    withColumnRenamed("gbifIDsIdentifiedByID","gbifIDs_identifiedByID").
     write.
-    mode("overwrite").  
+    mode("overwrite").
     option("header", "true").
     option("quote", "\"").
     option("escape", "\"").
     csv("claims-unioned-csv")
-
-//Optionally make list of all unique identifiers for people (but need to be later split by '|')
-unioned2.select($"agentIDs").
-    distinct.
-    repartition(1).
-    write.
-    mode("overwrite").
-    csv("users-csv")
 
 val agents = spark.
     read.

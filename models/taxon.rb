@@ -25,52 +25,42 @@ class Taxon < ActiveRecord::Base
          .order(:family, :given)
   end
 
-  def agents
+  def occurrence_determiners_union_recorders
     determiners = OccurrenceDeterminer
+                    .select(:agent_id, :occurrence_id)
                     .joins("INNER JOIN taxon_occurrences ON occurrence_determiners.occurrence_id = taxon_occurrences.occurrence_id")
                     .where(taxon_occurrences: { taxon_id: id })
     recorders = OccurrenceRecorder
+                    .select(:agent_id, :occurrence_id)
                     .joins("INNER JOIN taxon_occurrences ON occurrence_recorders.occurrence_id = taxon_occurrences.occurrence_id")
                     .where(taxon_occurrences: { taxon_id: id })
-    recorders.union_all(determiners)
-             .joins(:agent)
-             .group(:agent_id)
-             .order(Arel.sql("agents.family"))
-             .count
+    recorders.union(determiners)
+  end
+
+  def agents
+    occurrence_determiners_union_recorders
+      .distinct
+      .joins(:agent)
+      .select(:agent_id, :'agents.family')
+      .order(Arel.sql("agents.family"))
   end
 
   def agent_counts
-    determiners = OccurrenceDeterminer
-                    .joins("INNER JOIN taxon_occurrences ON occurrence_determiners.occurrence_id = taxon_occurrences.occurrence_id")
-                    .where(taxon_occurrences: { taxon_id: id })
-    recorders = OccurrenceRecorder
-                    .joins("INNER JOIN taxon_occurrences ON occurrence_recorders.occurrence_id = taxon_occurrences.occurrence_id")
-                    .where(taxon_occurrences: { taxon_id: id })
-    recorders.union(determiners)
-             .joins(:agent)
-             .group(:agent_id)
-             .order(Arel.sql("count(*) desc"))
-             .count
+    occurrence_determiners_union_recorders
+      .joins(:agent)
+      .group(:agent_id)
+      .order(Arel.sql("count(*) desc"))
+      .count
   end
 
   def agent_counts_unclaimed
-    determiners = OccurrenceDeterminer
-                    .joins("INNER JOIN taxon_occurrences ON occurrence_determiners.occurrence_id = taxon_occurrences.occurrence_id")
-                    .joins("LEFT JOIN user_occurrences ON occurrence_determiners.occurrence_id = user_occurrences.occurrence_id")
-                    .where(taxon_occurrences: { taxon_id: id })
-                    .where(user_occurrences: { occurrence_id: nil })
-                    .distinct
-    recorders = OccurrenceRecorder
-                    .joins("INNER JOIN taxon_occurrences ON occurrence_recorders.occurrence_id = taxon_occurrences.occurrence_id")
-                    .joins("LEFT JOIN user_occurrences ON occurrence_recorders.occurrence_id = user_occurrences.occurrence_id")
-                    .where(taxon_occurrences: { taxon_id: id })
-                    .where(user_occurrences: { occurrence_id: nil })
-                    .distinct
-    recorders.union(determiners)
-             .joins(:agent)
-             .group(:agent_id)
-             .order(Arel.sql("count(*) desc"))
-             .count
+    occurrence_determiners_union_recorders
+      .joins("LEFT JOIN user_occurrences ON occurrence_recorders.occurrence_id = user_occurrences.occurrence_id")
+      .joins(:agent)
+      .where(user_occurrences: { occurrence_id: nil })
+      .group(:agent_id)
+      .order(Arel.sql("count(*) desc"))
+      .count
   end
 
 end
