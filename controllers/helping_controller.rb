@@ -297,25 +297,7 @@ module Sinatra
 
             @page = 1 if @page <= 0
 
-            action = I18n.t("general.#{params[:action].downcase}").downcase rescue nil
-            range = nil
-            if params[:start_year] || params[:end_year]
-              range = [params[:start_year], params[:end_year]].join(" – ")
-            end
-
-            country = I18nData.countries(I18n.locale)[params[:country_code]] rescue nil
-            family = params[:family] rescue nil
-            attributor = nil
-            if params[:attributor]
-              attributor = find_user(params[:attributor]).fullname rescue nil
-            end
-            @filter = {
-              action: action,
-              country: country,
-              range: range,
-              family: family,
-              attributor: attributor
-            }.compact
+            create_filter
 
             @pagy, @results = pagy(specimen_filters(@viewed_user).order(created: :desc), items: search_size, page: @page)
             haml :'help/specimens', locals: { active_page: "help" }

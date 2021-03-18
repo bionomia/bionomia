@@ -10,29 +10,7 @@ module Sinatra
           app.get '/agent/:id' do
             id = params[:id].to_i
             page = (params[:page] || 1).to_i
-
-            dataset_name = nil
-            if params[:datasetKey]
-              begin
-                dataset_name = Dataset.find_by_datasetKey(params[:datasetKey]).title
-              rescue
-                halt 404
-              end
-            end
-
-            taxon_name = nil
-            if params[:taxon]
-              begin
-                taxon_name = Taxon.find_by_family(params[:taxon]).family
-              rescue
-                halt 404
-              end
-            end
-
-            @filter = {
-              dataset: dataset_name,
-              taxon: taxon_name
-            }.compact
+            agent_filter
 
             begin
               @agent = Agent.find(id)

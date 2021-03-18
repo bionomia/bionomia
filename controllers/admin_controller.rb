@@ -387,20 +387,7 @@ module Sinatra
             admin_protected!
             check_redirect
             @admin_user = find_user(params[:id])
-
-            range = nil
-            if params[:start_year] || params[:end_year]
-              range = [params[:start_year], params[:end_year]].join(" – ")
-            end
-
-            country = I18nData.countries(I18n.locale)[params[:country_code]] rescue nil
-            family = params[:family] rescue nil
-            @filter = {
-              action: params[:action],
-              country: country,
-              range: range,
-              family: family
-            }.compact
+            create_filter
 
             begin
               @page = (params[:page] || 1).to_i

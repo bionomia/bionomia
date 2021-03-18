@@ -117,20 +117,7 @@ module Sinatra
 
           app.get '/profile/specimens' do
             protected!
-
-            range = nil
-            if params[:start_year] || params[:end_year]
-              range = [params[:start_year], params[:end_year]].join(" – ")
-            end
-            action = I18n.t("general.#{params[:action].downcase}").downcase rescue nil
-            country = I18nData.countries(I18n.locale)[params[:country_code]] rescue nil
-            family = params[:family] rescue nil
-            @filter = {
-              action: action,
-              country: country,
-              range: range,
-              family: family
-            }.compact
+            create_filter
 
             begin
               @page = (params[:page] || 1).to_i

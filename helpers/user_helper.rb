@@ -77,7 +77,7 @@ module Sinatra
           elsif id.is_wiki_id?
             user = User.find_by_wikidata(id)
           else
-            user = User.find(id)
+            user = User.find(id) rescue nil
           end
           if request && request.url.match(/.json$/)
             halt 404, {}.to_json if user.nil?
