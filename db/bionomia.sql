@@ -1,5 +1,4 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -65,6 +64,10 @@ CREATE TABLE `messages` (
   `read` tinyint(1) DEFAULT '0',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+CREATE TABLE `missing` (
+  `occurrence_id` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `occurrences` (
@@ -157,6 +160,7 @@ CREATE TABLE `users` (
   `twitter` varchar(50) DEFAULT NULL,
   `image_url` text,
   `signature_url` varchar(255) DEFAULT NULL,
+  `youtube_id` varchar(255) DEFAULT NULL,
   `date_born` date DEFAULT NULL,
   `date_born_precision` varchar(255) DEFAULT NULL,
   `date_died` date DEFAULT NULL,
@@ -265,19 +269,19 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD KEY `orcid_idx` (`orcid`) USING BTREE,
   ADD KEY `wikidata_idx` (`wikidata`) USING BTREE,
-  ADD KEY `country_code` (`country_code`) USING BTREE;
+  ADD KEY `country_code` (`country_code`);
 
 ALTER TABLE `user_occurrences`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `user_occurrence_idx` (`occurrence_id`,`user_id`),
-  ADD KEY `created_by_idx` (`created_by`) USING BTREE,
+  ADD KEY `created_by_idx` (`created_by`),
   ADD KEY `user_created_by_idx` (`user_id`,`created_by`) USING BTREE,
-  ADD KEY `user_created_idx` (`user_id`,`created`);
+  ADD KEY `user_created_idx` (`user_id`,`created`),
+  ADD KEY `user_occurrence_idx` (`occurrence_id`,`user_id`) USING BTREE;
 
 ALTER TABLE `user_organizations`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_idx` (`user_id`) USING BTREE,
-  ADD KEY `organization_idx` (`organization_id`) USING BTREE;
+  ADD KEY `user_idx` (`user_id`),
+  ADD KEY `organization_idx` (`organization_id`);
 
 
 ALTER TABLE `agents`
