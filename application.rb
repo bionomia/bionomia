@@ -9,6 +9,7 @@ class BIONOMIA < Sinatra::Base
   set :public_folder, 'public'
   set :cache_enabled_in, [:development, :production]
   set :protection, :except => [:json_csrf, :remote]
+  set :strict_paths, false
 
   register Config
   register Sinatra::I18nSupport
