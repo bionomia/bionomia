@@ -103,13 +103,16 @@ module Bionomia
 
     def wikidata_by_orcid_query(orcid)
       %Q(
-        SELECT ?item ?itemLabel ?twitter
+        SELECT ?item ?itemLabel ?twitter ?youtube_id
         WHERE {
           VALUES ?orcid {"#{orcid}"} {
             ?item wdt:P496 ?orcid .
           }
           OPTIONAL {
             ?item wdt:P2002 ?twitter .
+          }
+          OPTIONAL {
+            ?item wdt:P1651 ?youtube_id .
           }
           SERVICE wikibase:label {
             bd:serviceParam wikibase:language "en" .
@@ -383,6 +386,7 @@ module Bionomia
 
       image_url = nil
       signature_url = nil
+      youtube_id = wiki_user.properties("P1651").first.value rescue nil
       image = wiki_user.image.value rescue nil
       if image
         image_url = "https://commons.wikimedia.org/wiki/Special:FilePath/" << Addressable::URI.encode(image)
@@ -425,6 +429,7 @@ module Bionomia
         orcid: orcid,
         image_url: image_url,
         signature_url: signature_url,
+        youtube_id: youtube_id,
         date_born: date_born,
         date_born_precision: date_born_precision,
         date_died: date_died,
@@ -476,7 +481,8 @@ module Bionomia
     def wiki_user_by_orcid(orcid)
       data = {}
       @sparql.query(wikidata_by_orcid_query(orcid)).each_solution do |solution|
-        data[:twitter] = solution.to_h[:twitter] rescue nil
+        data[:twitter] = solution[:twitter].value rescue nil
+        data[:youtube_id] = solution[:youtube_id].value rescue nil
       end
       data
     end
