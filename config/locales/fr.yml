@@ -78,6 +78,7 @@ fr:
     number_specimens: "# spécimens"
     identified: identifiés
     collected: collectés
+    people: Personnes
   country:
     country_title: Pays
     lede: Depuis les pays indiqués dans les comptes ORCID et les entrées Wikidata ou les spécimens d'enregistrés dans GBIF

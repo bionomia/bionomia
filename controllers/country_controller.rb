@@ -12,6 +12,11 @@ module Sinatra
             @countries = I18nData.countries(I18n.locale)
                           .group_by{|u| ActiveSupport::Inflector.transliterate(u[1][0]) }
                           .sort
+            @country_counts = User.where.not(country_code: nil)
+                                  .map{|u| u.country_code.split("|")}
+                                  .flatten
+                                  .reject(&:empty?)
+                                  .tally
             haml :'countries/countries', locals: { active_page: "countries" }
           end
 

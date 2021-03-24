@@ -78,6 +78,7 @@ en:
     number_specimens: "# specimens"
     identified: Identified
     collected: Collected
+    people: People
   country:
     country_title: Countries
     lede: From countries stated in ORCID accounts and Wikidata entries or specimen records in GBIF
