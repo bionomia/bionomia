@@ -2,6 +2,7 @@
   - content_for :scripts do
     %script{src: "/js/geochart-hierarchy.js"}
     %script{src: "//www.gstatic.com/charts/loader.js"}
+    %script{src: "/js/jquery.throttledresize.js"}
     - recorded = @stats[:countries][:recorded].to_a.map{|a| [ a[0], country_name(a[0]), a[1] ] }.unshift(["Country", "Country Name", "#{I18n.t('charts.collected')}"])
     - identified = @stats[:countries][:identified].to_a.map{|a| [ a[0], country_name(a[0]), a[1] ] }.unshift(["Country", "Country Name", "#{I18n.t('charts.identified')}"])
     :javascript
@@ -16,7 +17,8 @@
             }).filter(function (el) { return el; }),
             identified_hierarchies = $.map(#{@stats[:countries][:identified].keys}, function(i) {
               return [ancestors(GeoChartHierarchy, i)];
-            }).filter(function (el) { return el; });
+            }).filter(function (el) { return el; }),
+            collectedMap, identifiedMap;
 
         function ancestors(array, id) {
           if (typeof array != 'undefined') {
@@ -58,8 +60,6 @@
 
         function drawVisualizations() {
           var chartData = google.visualization.arrayToDataTable(dateData),
-              collectedMap = new google.visualization.GeoChart($('#map-collected')[0]),
-              identifiedMap = new google.visualization.GeoChart($('#map-identified')[0]),
               chart = new google.visualization.ColumnChart($('#chart')[0]),
               chartOptions = {
                 title: '',
@@ -91,6 +91,9 @@
                 colorAxis: { colors: ['#B9D4D8', '#3A7179'] },
                 legend: 'none'
               };
+
+          collectedMap = new google.visualization.GeoChart($('#map-collected')[0]);
+          identifiedMap = new google.visualization.GeoChart($('#map-identified')[0]);
 
           google.visualization.events.addListener(chart, 'onmouseover', function(e) {
             if (e.row !== null) { $('#chart').css('cursor','pointer'); }
@@ -136,4 +139,11 @@
           mapsApiKey: "#{Settings.google.api_key}"
         });
         google.charts.setOnLoadCallback(drawVisualizations);
+
+        $(window).on("throttledresize", function(event) {
+          collectedMap.clearChart();
+          identifiedMap.clearChart();
+          drawVisualizations();
+        });
+
       });
