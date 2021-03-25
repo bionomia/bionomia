@@ -31,7 +31,9 @@
               %a{href: url("/admin/taxon/#{taxon.family}")} #{taxon.family}
             %td
               - if taxon.has_image?
-                %span{class: "text-success"} true
+                - image = taxon_image(taxon.family, 'thumbnail')
+                - if !image.nil?
+                  %img{src:"#{image}", alt:"#{taxon.family}"}
               - else
                 #{taxon.has_image?}
 

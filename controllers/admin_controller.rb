@@ -247,7 +247,7 @@ module Sinatra
               search_taxon
               @taxon_results = format_taxon
             else
-              @pagy, @results = pagy(Taxon.order(family: :asc), items: 50)
+              @pagy, @results = pagy(Taxon.includes(:image).order(family: :asc), items: 50)
             end
             haml :'admin/taxa', locals: { active_page: "administration" }
           end
