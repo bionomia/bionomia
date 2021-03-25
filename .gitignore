@@ -31,3 +31,4 @@ tmp
 agents.avro/*
 families.avro/*
 occurrence.avro/*
+identifiers.avro/*
