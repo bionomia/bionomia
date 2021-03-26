@@ -6,10 +6,10 @@ module Bionomia
     sidekiq_options queue: :existing_claims
 
     def perform(row)
-      recs = row["gbifIDs_recordedByIDs"]
+      recs = row["gbifIDs_recordedByID"]
                 .tr('[]', '')
                 .split(',')
-      ids = row["gbifIDs_identifiedByIDs"]
+      ids = row["gbifIDs_identifiedByID"]
                 .tr('[]', '')
                 .split(',')
 
