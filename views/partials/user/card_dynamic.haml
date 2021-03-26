@@ -47,3 +47,6 @@
       - count = locals[:user].all_occurrences_count
       %span{class:"badge badge-light"} #{number_with_delimiter(count)}
       #{I18n.t('card.claimed', count: count)}
+    %div{class: "flex-fill"}
+    %div{class:"progress progress-border flex-fill ml-auto align-self-end"}
+      %div{id:"progress-bar_#{locals[:user].identifier}", class:"progress-bar bg-info", role:"progressbar", style:"width: 0%;", "aria-valuenow":"0", "aria-valuemin":"0", "aria-valuemax":"100"}

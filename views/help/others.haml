@@ -5,37 +5,49 @@
   %script{src: "/js/jquery.throttledresize.js"}
   %script{src: "/js/geochart-hierarchy.js"}
   %script{src: "//www.gstatic.com/charts/loader.js"}
+  %script{src: "/js/progress-bar.js"}
   - countries = @country_counts.map{|k,v| [ k, country_name(k), v ] }.unshift(["Country", "Country Name", "#{I18n.t('charts.people')}"])
   :javascript
     $(function() {
       Application.init("", "GET", "/help-others");
-      var countries = #{countries}, map;
-
-      google.charts.load('current', {
-        packages: ['geochart'],
-        mapsApiKey: "#{Settings.google.api_key}"
+      var ids = $.map($('.progress-bar'), function(obj) {
+        if ( parseInt($(obj).parent().parent().find(".badge").text(), 10) > 0 ) {
+          return $(obj).attr("id").split("_").pop();
+        }
+      });
+      $.each(ids, function(key, id) {
+        ProgressBar.init(id);
       });
 
-      function drawVisualizations() {
-        var mapOptions = {
-              chartArea: { left: 0 },
-              colorAxis: { colors: ['#B9D4D8', '#3A7179'] },
-              legend: 'none',
-              region: 'world'
-            };
-        map = new google.visualization.GeoChart($('#country-map')[0]);
-        google.visualization.events.addListener(map, 'regionClick', function(e) {
-          window.location = "/help-others/country/" + e.region;
+      if ($('#country-map').length) {
+        var countries = #{countries}, map;
+
+        google.charts.load('current', {
+          packages: ['geochart'],
+          mapsApiKey: "#{Settings.google.api_key}"
         });
-        map.draw(google.visualization.arrayToDataTable(countries), mapOptions);
+
+        function drawVisualizations() {
+          var mapOptions = {
+                chartArea: { left: 0 },
+                colorAxis: { colors: ['#B9D4D8', '#3A7179'] },
+                legend: 'none',
+                region: 'world'
+              };
+          map = new google.visualization.GeoChart($('#country-map')[0]);
+          google.visualization.events.addListener(map, 'regionClick', function(e) {
+            window.location = "/help-others/country/" + e.region;
+          });
+          map.draw(google.visualization.arrayToDataTable(countries), mapOptions);
+        }
+
+        google.charts.setOnLoadCallback(drawVisualizations);
+
+        $(window).on("throttledresize", function(event) {
+          map.clearChart();
+          drawVisualizations();
+        });
       }
-
-      google.charts.setOnLoadCallback(drawVisualizations);
-
-      $(window).on("throttledresize", function(event) {
-        map.clearChart();
-        drawVisualizations();
-      });
     });
 
 -content_for :jumbotron do

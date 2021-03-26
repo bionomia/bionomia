@@ -3,9 +3,16 @@
 
 -content_for :scripts do
   %script{src: "/js/application.js"}
+  %script{src: "/js/progress-bar.js"}
   :javascript
     $(function() {
       Application.init("", "POST", "/admin");
+      var ids = $.map($('.progress-bar'), function(obj) {
+        if ( parseInt($(obj).parent().parent().find(".badge").text(), 10) > 0 ) {
+          return $(obj).attr("id").split("_").pop();
+        }
+      });
+      $.each(ids, function(key, id) { ProgressBar.init(id); });
     });
 
 -content_for :jumbotron do
