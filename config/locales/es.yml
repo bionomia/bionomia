@@ -222,6 +222,7 @@ es:
     not_ignored_alert: Los anotadores de Bionomía no han marcado especímenes para ser ignorados.
     agent_string: Cadena de agente
     taxon_string: Familia taxonómica
+    kingdom_string: Kingdom
     dataset: Conjunto de datos
     datasets: Conjuntos de datos
     agents: Agentes

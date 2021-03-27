@@ -1,4 +1,4 @@
-- if @dataset || @agent || @taxon
+- if @dataset || @agent || @taxon || @kingdom
   %div{class: "alert alert-warning", role: "alert"}
     - if @dataset
       %div
@@ -8,7 +8,7 @@
           #{@dataset.title.truncate(125, separator: ' ')}
         %a{href: "#{@dataset.license}", itemprop: "license"}
           %img{src:"#{@dataset.license_icon("small")}"}
-        %a{href: url("#{locals[:url]}?&datasetKey=&agent_id=#{params[:agent_id]}&taxon_id=#{params[:taxon_id]}"), class:"ml-2 text-danger"}
+        %a{href: url("#{locals[:url]}?agent_id=#{params[:agent_id]}&taxon_id=#{params[:taxon_id]}&kingdom=#{params[:kingdom]}&datasetKey="), class:"ml-2 text-danger"}
           %i{class:"fas fa-minus-circle"}
           = I18n.t('general.remove')
     - if @agent
@@ -17,7 +17,16 @@
         Searched for
         %span{class:"font-weight-bold mr-2"}
           #{@agent.fullname_reverse}
-        %a{href: url("#{locals[:url]}?datasetKey=#{params[:datasetKey]}&agent_id=&taxon_id=#{params[:taxon_id]}"), class:"ml-2 text-danger"}
+        %a{href: url("#{locals[:url]}?datasetKey=#{params[:datasetKey]}&taxon_id=#{params[:taxon_id]}&kingdom=#{params[:kingdom]}&agent_id="), class:"ml-2 text-danger"}
+          %i{class:"fas fa-minus-circle"}
+          = I18n.t('general.remove')
+    - if @kingdom
+      %div
+        %i{class:"fas fa-filter"}
+        Filtered by
+        %span{class:"font-weight-bold mr-2"}
+          #{@kingdom}
+        %a{href: url("#{locals[:url]}?datasetKey=#{params[:datasetKey]}&agent_id=#{params[:agent_id]}&taxon_id=#{params[:taxon_id]}&kingdom="), class:"ml-2 text-danger"}
           %i{class:"fas fa-minus-circle"}
           = I18n.t('general.remove')
     - if @taxon
@@ -26,6 +35,6 @@
         Filtered by
         %span{class:"font-weight-bold mr-2"}
           #{@taxon.family}
-        %a{href: url("#{locals[:url]}?datasetKey=#{params[:datasetKey]}&agent_id=#{params[:agent_id]}&taxon_id="), class:"ml-2 text-danger"}
+        %a{href: url("#{locals[:url]}?datasetKey=#{params[:datasetKey]}&agent_id=#{params[:agent_id]}&kingdom=#{params[:kingdom]}&taxon_id="), class:"ml-2 text-danger"}
           %i{class:"fas fa-minus-circle"}
           = I18n.t('general.remove')

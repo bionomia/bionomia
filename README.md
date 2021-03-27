@@ -106,6 +106,7 @@ Unfortunately, gbifIDs are not persistent. These occasionally disappear through 
      $ RACK_ENV=production ./bin/csv_dump.rb -d ~/Desktop -o
      $ RACK_ENV=production irb
      > require "./application"
+     > UserOccurrence.orphaned_count
      > UserOccurrence.delete_orphaned
 
      > ArticleOccurrence.orphaned_count

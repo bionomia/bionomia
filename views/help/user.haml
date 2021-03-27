@@ -42,7 +42,7 @@
     %div{class: "alert alert-info tiny-margins row", role: "alert"}
       %div{class: "col col-12 col-md-8 p-0"}
         = I18n.t('help.no_unclaimed')
-        - if !@dataset && !@agent && !@taxon
+        - if !@dataset && !@agent && !@taxon && !@kingdom
           %div{class:"form-check d-inline-flex"}
             %input{type:"checkbox", class:"form-check-input", id:"relaxed", checked: checked }
             %label{for:"relaxed", class:"relaxed"}= I18n.t('help.less_exact')
@@ -57,7 +57,7 @@
       %div{class: "col col-12 col-md-8 p-0"}
         #{I18n.t('help.attribute_count', count: number_with_delimiter(@total))}
         = haml :'partials/choose_instructions', layout: false
-        - if !@dataset && !@agent && !@taxon
+        - if !@dataset && !@agent && !@taxon && !@kingdom
           %div{class:"form-check d-inline-flex"}
             %input{type:"checkbox", class:"form-check-input", id:"relaxed", checked: checked }
             %label{for:"relaxed", class:"relaxed"}= I18n.t('help.less_exact')

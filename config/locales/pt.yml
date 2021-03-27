@@ -222,6 +222,7 @@ pt:
     not_ignored_alert: Os autores da Bionomia não sinalizaram que as amostras devem ser ignoradas.
     agent_string: Agente de usuário
     taxon_string: Família Taxon
+    kingdom_string: Kingdom
     dataset: Conjunto de dados
     datasets: Conjunto de dados
     agents: Agentes

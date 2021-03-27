@@ -48,7 +48,7 @@ class UserOccurrence < ActiveRecord::Base
    end
 
    def self.delete_orphaned
-     self.in_batches(of: 10_000) do |batch|
+     self.in_batches(of: 25_000) do |batch|
        ids = batch.left_joins(:occurrence)
                   .where(occurrences: { id: nil })
                   .pluck(:id)

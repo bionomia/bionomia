@@ -222,6 +222,7 @@ en:
     not_ignored_alert: Bionomia scribes have not flagged specimens to be ignored.
     agent_string: Agent String
     taxon_string: Taxon Family
+    kingdom_string: Kingdom
     dataset: Dataset
     datasets: Datasets
     agents: Agents

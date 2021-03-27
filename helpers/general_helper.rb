@@ -123,6 +123,10 @@ module Sinatra
             occurrences = occurrences.where(occurrences: { family: @taxon[:family] })
           end
 
+          if @kingdom
+            occurrences = occurrences.where(occurrences: { kingdom: @kingdom })
+          end
+
           occurrences.pluck(:agent_id, :typeStatus, :occurrence_id)
                      .sort_by{|o| [ scores.fetch(o[0]), o[1].nil? ? "" : o[1] ] }
                      .reverse
@@ -214,6 +218,10 @@ module Sinatra
             results = results.where(occurrences: { family: params[:family] })
           end
 
+          if params[:kingdom] && !params[:kingdom].blank?
+            results = results.where(occurrences: { kingdom: params[:kingdom] })
+          end
+
           if params[:institutionCode] && !params[:institutionCode].blank?
             results = results.where(occurrences: { institutionCode: params[:institutionCode] })
           end
@@ -258,6 +266,7 @@ module Sinatra
           action = I18n.t("general.#{params[:action].downcase}").downcase rescue nil
           country = I18nData.countries(I18n.locale)[params[:country_code]] rescue nil
           family = params[:family] rescue nil
+          kingdom = params[:kingdom] rescue nil
           institutionCode = params[:institutionCode] rescue nil
           attributor = nil
           if params[:attributor]
@@ -268,6 +277,7 @@ module Sinatra
             country: country,
             range: range,
             family: family,
+            kingdom: kingdom,
             institutionCode: institutionCode,
             attributor: attributor
           }.compact
