@@ -15,15 +15,10 @@
       %div{class:"col-12 col-md-3 pl-0"}
         - if @kingdom.nil?
           %select{class:"form-control", id:"kingdom", name:"kingdom"}
-            %option 
-            %option Animalia
-            %option Archaea
-            %option Bacteria
-            %option Chromista
-            %option Fungi
-            %option Plantae
-            %option Protozoa
-            %option incertae sedis
+            %option
+            - Taxon::KINGDOMS.each do |kingdom|
+              %option #{kingdom}
+
         - else
           - q = params.except("id", "kingdom").to_query
           %span

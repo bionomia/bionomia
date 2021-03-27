@@ -123,7 +123,7 @@ module Sinatra
             occurrences = occurrences.where(occurrences: { family: @taxon[:family] })
           end
 
-          if @kingdom
+          if @kingdom && Taxon.valid_kingdom?(@kingdom)
             occurrences = occurrences.where(occurrences: { kingdom: @kingdom })
           end
 
@@ -218,7 +218,7 @@ module Sinatra
             results = results.where(occurrences: { family: params[:family] })
           end
 
-          if params[:kingdom] && !params[:kingdom].blank?
+          if params[:kingdom] && !params[:kingdom].blank? && Taxon.valid_kingdom?(params[:kingdom])
             results = results.where(occurrences: { kingdom: params[:kingdom] })
           end
 

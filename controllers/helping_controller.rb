@@ -209,7 +209,7 @@ module Sinatra
               if params[:taxon_id] && !params[:taxon_id].blank?
                 @taxon = Taxon.find(params[:taxon_id]) rescue nil
               end
-              if params[:kingdom] && !params[:kingdom].blank?
+              if params[:kingdom] && !params[:kingdom].blank? && Taxon.valid_kingdom?(params[:kingdom])
                 @kingdom = params[:kingdom] rescue nil
               end
 
@@ -268,7 +268,7 @@ module Sinatra
               @taxon_results = format_taxon
             end
 
-            if params[:kingdom] && !params[:kingdom].blank?
+            if params[:kingdom] && !params[:kingdom].blank? && Taxon.valid_kingdom?(params[:kingdom])
               @kingdom = params[:kingdom]
             end
 
@@ -281,16 +281,16 @@ module Sinatra
             check_redirect
 
             @viewed_user = find_user(params[:id])
-            if params[:datasetKey]
+            if params[:datasetKey] && !params[:datasetKey].blank?
               @dataset = Dataset.find_by_datasetKey(params[:datasetKey]).title rescue nil
             end
-            if params[:agent_id]
+            if params[:agent_id] && !params[:agent_id].blank?
               @agent = Agent.find(params[:agent_id]).fullname_reverse rescue nil
             end
-            if params[:taxon_id]
+            if params[:taxon_id] && !params[:taxon_id].blank?
               @taxon = Taxon.find(params[:taxon_id]).family rescue nil
             end
-            if params[:kingdom]
+            if params[:kingdom] && !params[:kingdom].blank? && Taxon.valid_kingdom?(params[:kingdom])
               @kingdom = params[:kingdom]
             end
             haml :'help/advanced_search', locals: { active_page: "help" }

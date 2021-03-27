@@ -5,6 +5,21 @@ class Taxon < ActiveRecord::Base
 
   validates :family, presence: true
 
+  KINGDOMS = [
+    "Animalia",
+    "Archaea",
+    "Bacteria",
+    "Chromista",
+    "Fungi",
+    "Plantae",
+    "Protozoa",
+    "incertae sedis"
+  ]
+
+  def self.valid_kingdom?(kingdom)
+    KINGDOMS.include?(kingdom)
+  end
+
   def has_image?
     image
   end
