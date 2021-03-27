@@ -283,6 +283,22 @@ module Sinatra
           }.compact
         end
 
+        def filter_instances
+          @dataset, @agent, @taxon, @kingdom = nil
+          if params[:datasetKey] && !params[:datasetKey].blank?
+            @dataset = Dataset.find_by_datasetKey(params[:datasetKey]) rescue nil
+          end
+          if params[:agent_id] && !params[:agent_id].blank?
+            @agent = Agent.find(params[:agent_id]) rescue nil
+          end
+          if params[:taxon_id] && !params[:taxon_id].blank?
+            @taxon = Taxon.find(params[:taxon_id]) rescue nil
+          end
+          if params[:kingdom] && !params[:kingdom].blank? && Taxon.valid_kingdom?(params[:kingdom])
+            @kingdom = params[:kingdom]
+          end
+        end
+
       end
     end
   end

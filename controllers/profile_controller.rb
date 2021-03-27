@@ -270,17 +270,7 @@ module Sinatra
               @results = []
               @total = nil
             else
-              @dataset, @agent, @taxon = nil
-              if params[:datasetKey]
-                @dataset = Dataset.find_by_datasetKey(params[:datasetKey]) rescue nil
-              end
-              if params[:agent_id]
-                @agent = Agent.find(params[:agent_id]) rescue nil
-              end
-              if params[:taxon_id]
-                @taxon = Taxon.find(params[:taxon_id]) rescue nil
-              end
-
+              filter_instances
               if @agent
                 id_scores = [{ id: @agent.id, score: 3 }]
                 occurrence_ids = occurrences_by_score(id_scores, @user)
@@ -305,29 +295,31 @@ module Sinatra
             @agent_results = []
             @dataset_results = []
             @taxon_results = []
-            @agent = nil
-            @dataset = nil
-            @taxon = nil
+            @agent, @dataset, @taxon, @kingdom = nil
 
-            if params[:datasetKey]
+            if params[:datasetKey] && !params[:datasetKey].blank?
               @dataset = Dataset.find_by_datasetKey(params[:datasetKey]).title rescue nil
             elsif params[:dataset]
               search_dataset
               @dataset_results = format_datasets
             end
 
-            if params[:agent_id]
+            if params[:agent_id] && !params[:agent_id].blank?
               @agent = Agent.find(params[:agent_id]).fullname_reverse rescue nil
-            elsif params[:agent]
+            elsif params[:agent] && !params[:agent].blank?
               search_agent({ item_size: 75 })
               @agent_results = format_agents
             end
 
-            if params[:taxon_id]
+            if params[:taxon_id] && !params[:taxon_id].blank?
               @taxon = Taxon.find(params[:taxon_id]).family rescue nil
             elsif params[:taxon]
               search_taxon
               @taxon_results = format_taxon
+            end
+
+            if params[:kingdom] && !params[:kingdom].blank? && Taxon.valid_kingdom?(params[:kingdom])
+              @kingdom = params[:kingdom]
             end
 
             haml :'profile/advanced_search', locals: { active_page: "profile" }
@@ -335,16 +327,7 @@ module Sinatra
 
           app.get '/profile/advanced-search' do
             protected!
-
-            if params[:datasetKey]
-              @dataset = Dataset.find_by_datasetKey(params[:datasetKey]).title rescue nil
-            end
-            if params[:agent_id]
-              @agent = Agent.find(params[:agent_id]).fullname_reverse rescue nil
-            end
-            if params[:taxon_id]
-              @taxon = Taxon.find(params[:taxon_id]).family rescue nil
-            end
+            filter_instances
             haml :'profile/advanced_search', locals: { active_page: "profile" }
           end
 

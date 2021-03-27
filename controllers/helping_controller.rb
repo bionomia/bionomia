@@ -199,19 +199,7 @@ module Sinatra
                 redirect "/profile/candidates"
               end
 
-              @dataset, @agent, @taxon, @kingdom = nil
-              if params[:datasetKey] && !params[:datasetKey].blank?
-                @dataset = Dataset.find_by_datasetKey(params[:datasetKey]) rescue nil
-              end
-              if params[:agent_id] && !params[:agent_id].blank?
-                @agent = Agent.find(params[:agent_id]) rescue nil
-              end
-              if params[:taxon_id] && !params[:taxon_id].blank?
-                @taxon = Taxon.find(params[:taxon_id]) rescue nil
-              end
-              if params[:kingdom] && !params[:kingdom].blank? && Taxon.valid_kingdom?(params[:kingdom])
-                @kingdom = params[:kingdom] rescue nil
-              end
+              filter_instances
 
               if @viewed_user.family.nil?
                 results = []
@@ -242,10 +230,7 @@ module Sinatra
             @agent_results = []
             @dataset_results = []
             @taxon_results = []
-            @agent = nil
-            @dataset = nil
-            @taxon = nil
-            @kingdom = nil
+            @agent, @dataset, @taxon, @kingdom = nil
 
             if params[:datasetKey] && !params[:datasetKey].blank?
               @dataset = Dataset.find_by_datasetKey(params[:datasetKey]).title rescue nil
@@ -279,20 +264,8 @@ module Sinatra
             protected!
             check_identifier
             check_redirect
-
             @viewed_user = find_user(params[:id])
-            if params[:datasetKey] && !params[:datasetKey].blank?
-              @dataset = Dataset.find_by_datasetKey(params[:datasetKey]).title rescue nil
-            end
-            if params[:agent_id] && !params[:agent_id].blank?
-              @agent = Agent.find(params[:agent_id]).fullname_reverse rescue nil
-            end
-            if params[:taxon_id] && !params[:taxon_id].blank?
-              @taxon = Taxon.find(params[:taxon_id]).family rescue nil
-            end
-            if params[:kingdom] && !params[:kingdom].blank? && Taxon.valid_kingdom?(params[:kingdom])
-              @kingdom = params[:kingdom]
-            end
+            filter_instances
             haml :'help/advanced_search', locals: { active_page: "help" }
           end
 
