@@ -189,8 +189,14 @@ module Bionomia
         parsed = DwcAgent.parse(name.dup)[0] rescue nil
         next if parsed.nil? || parsed.family.nil? || parsed.given.nil?
         user_data = wiki_user_data(wikicode)
-        next if (user_data[:date_died].nil? && user_data[:date_died_precision].nil?) ||
-          (user_data[:date_born].nil? && user_data[:date_born_precision].nil? && Date.today.year - user_data[:date_born].year >= 120)
+        date_died = user_data[:date_died]
+        date_born = user_data[:date_born]
+        date_died_precision = user_data[:date_died_precision]
+        date_born_precision = user_data[:date_born_precision]
+        next if !(
+              ( !date_died.nil? && !date_died_precision.nil? ) ||
+              ( !date_born.nil? && !date_born_precision.nil? && Date.today.year - date_born.year >= 120 )
+            )
 
         # We have the user with that ORCID so switch to wikidata
         if user_data[:orcid] && User.where(orcid: user_data[:orcid]).exists?
