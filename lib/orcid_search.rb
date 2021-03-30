@@ -35,7 +35,7 @@ module Bionomia
         '?' => '\?',
         ':' => '\:'
       }
-      clean_doi = URI::encode(doi.gsub(/[#{lucene_chars.keys.join('\\')}]/, lucene_chars))
+      clean_doi = URI.encode_www_form_component(doi.gsub(/[#{lucene_chars.keys.join('\\')}]/, lucene_chars))
 
       Enumerator.new do |yielder|
         start = 0
@@ -62,7 +62,7 @@ module Bionomia
         raise ArgumentError, 'ORCID keywords to search on not in config.yml'
       end
 
-      keyword_parameter = URI::encode(@settings.orcid.keywords.map{ |k| "keyword:#{k}" }.join(" OR "))
+      keyword_parameter = URI.encode_www_form_component(@settings.orcid.keywords.map{ |k| "keyword:#{k}" }.join(" OR "))
       Enumerator.new do |yielder|
         start = 0
 
