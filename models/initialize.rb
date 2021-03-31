@@ -6,16 +6,8 @@ module Sinatra
       module Initialize
 
         def self.registered(app)
-          ActiveRecord::Base.establish_connection(
-            adapter: Settings.adapter,
-            database: Settings.database,
-            host: Settings.host,
-            username: Settings.username,
-            password: Settings.password,
-            reconnect: Settings.reconnect,
-            pool: Settings.pool,
-            timeout: Settings.timeout
-          )
+
+          app.set :database, Settings
 
           if app.settings.environment == :development
             ActiveRecord::Base.logger = Logger.new(STDOUT)
@@ -29,6 +21,23 @@ module Sinatra
 
           app.before { ActiveRecord::Base.verify_active_connections! if ActiveRecord::Base.respond_to?(:verify_active_connections!) }
           app.after { ActiveRecord::Base.clear_active_connections! }
+        end
+
+        def database=(spec)
+          ActiveRecord::Base.establish_connection(
+            adapter: spec.adapter,
+            database: spec.database,
+            host: spec.host,
+            username: spec.username,
+            password: spec.password,
+            reconnect: spec.reconnect,
+            pool: spec.pool,
+            timeout: spec.timeout
+          )
+        end
+
+        def database
+          ActiveRecord::Base
         end
 
       end

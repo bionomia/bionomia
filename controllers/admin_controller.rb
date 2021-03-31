@@ -241,6 +241,11 @@ module Sinatra
             redirect "/admin/organizations"
           end
 
+          app.get '/admin/stats' do
+            admin_protected!
+            haml :'admin/stats', locals: { active_page: "administration" }
+          end
+
           app.get '/admin/taxa' do
             admin_protected!
             if params[:q] && params[:q].present?
