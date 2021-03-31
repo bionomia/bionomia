@@ -38,6 +38,11 @@ describe "Bionomia Administration Controller" do
     expect(last_response).to be_ok
   end
 
+  it "should allow access to the admin taxa page" do
+    get '/admin/taxa'
+    expect(last_response).to be_ok
+  end
+
   it "should allow access to the admin users page" do
     get '/admin/users'
     expect(last_response).to be_ok
