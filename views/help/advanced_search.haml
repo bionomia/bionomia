@@ -1,11 +1,20 @@
 -content_for :title, I18n.t('help.help_title')
 
+-content_for :stylesheets do
+  %link{href:"/css/bootstrap-datepicker3.standalone.min.css", rel:"stylesheet", type:"text/css"}
+
 -content_for :scripts do
   %script{src: "/js/application.js"}
+  %script{src: "/js/bootstrap-datepicker.min.js"}
   :javascript
     var Filters = { "datasetKey": "#{params[:datasetKey]}", "agent_id": "#{params[:agent_id]}", "taxon_id": "#{params[:taxon_id]}", "kingdom": "#{params[:kingdom]}" };
     $(function() {
       Application.init(#{@viewed_user.id}, "POST", "/help-others", "#{@viewed_user.identifier}");
+      $('#date-start').datepicker({
+        format: 'yyyy-mm-dd'
+      }).on("changeDate", function(e) {
+
+      });
     });
 
 -content_for :jumbotron do

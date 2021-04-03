@@ -41,7 +41,7 @@
               %i{class:"fas fa-minus-circle"}
               = I18n.t('general.remove')
           %span
-            #{@taxon}
+            #{@taxon.family}
           %input{type: :hidden, name: "taxon_id", value: params[:taxon_id]}
 
     %div{class: "form-group"}
