@@ -301,6 +301,8 @@ fr:
     co_collected_count:
       one: "spécimen co-collecté"
       other: "spécimens co-collectés"
+    start_year: Start Year
+    end_year: End Year
   home:
     tagline: Reliez des spécimens d'histoire naturelle aux collectionneurs du monde.
     get_started: Commencer

@@ -12,7 +12,7 @@
 
     %div{class: "form-group"}
       %label{for: "kingdom", class:"font-weight-bold"}= I18n.t("help.kingdom_string")
-      %div{class:"col-12 col-md-3 pl-0"}
+      %div{class:"col-8 col-md-4 pl-0"}
         - if @kingdom.nil?
           %select{class:"form-control", id:"kingdom", name:"kingdom"}
             %option
@@ -56,7 +56,7 @@
               %i{class:"fas fa-minus-circle"}
               = I18n.t('general.remove')
           %span
-            #{@dataset}
+            #{@dataset.title}
           %input{type: :hidden, name: "datasetKey", value: params[:datasetKey]}
 
     %div{class: "form-group"}
@@ -71,13 +71,51 @@
               %i{class:"fas fa-minus-circle"}
               = I18n.t('general.remove')
           %span
-            #{@agent}
+            #{@agent.fullname_reverse}
           %input{type: :hidden, name: "agent_id", value: params[:agent_id]}
+
+    -# %div{class:"form-group col-12 col-md-6"}
+      %div{class:"row"}
+        %div{class:"col-12 col-sm-6 ml-0 pl-0"}
+          %label{for: "date-start", class:"font-weight-bold"}= I18n.t('help.start_year')
+          %div{id:"date-start", class:"input-group date", "date-provide":"date-start"}
+            - if @start_year.nil?
+              %div{class:"input-group-prepend"}
+                %div{class:"input-group-text"}
+                  %i{class:"fas fa-calendar-alt"}
+              %input{type:"text", name: "date-start", class:"form-control", placeholder:"1900", size:"12", autocomplete:"off"}
+            - else
+              - q = params.except("id", "start_year").to_query
+              %span
+                %a{href: url("#{locals[:url]}/advanced-search?#{q}"), class:"text-danger"}
+                  %i{class:"fas fa-minus-circle"}
+                  = I18n.t('general.remove')
+              %span
+                #{@start_year}
+              %input{type: :hidden, name: "start_year", value: params[:start_year]}
+
+        %div{class:"col-12 col-sm-6 ml-0 pl-0"}
+          %label{for: "date-end", class:"font-weight-bold"}= I18n.t('help.end_year')
+          %div{id:"date-end", class:"input-group date", "date-provide":"date-start"}
+            - if @end_year.nil?
+              %div{class:"input-group-prepend"}
+                %div{class:"input-group-text"}
+                  %i{class:"fas fa-calendar-alt"}
+              %input{type:"text", name: "date-end", class:"form-control", placeholder:"1902", size:"12", autocomplete:"off"}
+            - else
+              - q = params.except("id", "end_year").to_query
+              %span
+                %a{href: url("#{locals[:url]}/advanced-search?#{q}"), class:"text-danger"}
+                  %i{class:"fas fa-minus-circle"}
+                  = I18n.t('general.remove')
+              %span
+                #{@end_year}
+              %input{type: :hidden, name: "end_year", value: params[:end_year]}
 
     %input{type:"hidden", name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
     %button{type:"submit", class:"btn btn-success"}= I18n.t('general.search')
 
-    - if @agent || @dataset || @taxon || @kingdom
+    - if @agent || @dataset || @taxon || @kingdom || @start_year || @end_year
       - q = params.except("id", "authenticity_token").to_query
       %a{href: url("#{locals[:dest]}?#{q}"), class:"btn btn-info"}= I18n.t('general.apply')
 

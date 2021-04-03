@@ -10,8 +10,8 @@
     var Filters = { "datasetKey": "#{params[:datasetKey]}", "agent_id": "#{params[:agent_id]}", "taxon_id": "#{params[:taxon_id]}", "kingdom": "#{params[:kingdom]}" };
     $(function() {
       Application.init(#{@viewed_user.id}, "POST", "/help-others", "#{@viewed_user.identifier}");
-      $('#date-start').datepicker({
-        format: 'yyyy-mm-dd'
+      $('.date').datepicker({
+        format: 'yyyy'
       }).on("changeDate", function(e) {
 
       });

@@ -301,6 +301,8 @@ en:
     co_collected_count:
       one: "co-collected specimen"
       other: "co-collected specimens"
+    start_year: Start Year
+    end_year: End Year
   home:
     tagline: Link natural history specimens to the world's collectors.
     get_started: Get started
