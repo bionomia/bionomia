@@ -301,8 +301,6 @@ pt:
     co_collected_count:
       one: "espécime co-coletado"
       other: "espécime co-coletado"
-    start_year: Start Year
-    end_year: End Year
   home:
     tagline: Vincule espécimes de história natural a colecionadores do mundo.
     get_started: Inicie

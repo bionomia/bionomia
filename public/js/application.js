@@ -43,6 +43,7 @@ var Application = (function($, window) {
       this.profile_cards();
       this.bloodhound();
       this.typeahead();
+      this.activate_dropdowns();
       this.activate_radios();
       this.activate_switch();
       this.activate_refresh();
@@ -128,15 +129,16 @@ var Application = (function($, window) {
         ).on("typeahead:select", function(obj, datum) {
           var datasetKey = (typeof Filters !== "undefined") ? Filters.datasetKey : "";
           var taxon_id = (typeof Filters !== "undefined") ? Filters.taxon_id : "";
+          var kingdom = (typeof Filters !== "undefined") ? Filters.kingdom : "";
 
           if (self.path === "/admin") {
-            window.location.href = "/admin/user/" + self.identifier + "/advanced-search?agent_id=" + datum.id + "&datasetKey=" + datasetKey + "&taxon_id=" + taxon_id;
+            window.location.href = "/admin/user/" + self.identifier + "/advanced-search?agent_id=" + datum.id + "&datasetKey=" + datasetKey + "&taxon_id=" + taxon_id + "&kingdom=" + kingdom;
           } else if (self.path === "/agents") {
             window.location.href = "/agent/" + datum.id;
           } else if (self.path === "/help-others") {
-            window.location.href = "/help-others/" + self.identifier + "/advanced-search?agent_id=" + datum.id + "&datasetKey=" + datasetKey + "&taxon_id=" + taxon_id;
+            window.location.href = "/help-others/" + self.identifier + "/advanced-search?agent_id=" + datum.id + "&datasetKey=" + datasetKey + "&taxon_id=" + taxon_id + "&kingdom=" + kingdom;
           } else {
-            window.location.href = "/profile/advanced-search?agent_id=" + datum.id + "&datasetKey=" + datasetKey + "&taxon_id=" + taxon_id;
+            window.location.href = "/profile/advanced-search?agent_id=" + datum.id + "&datasetKey=" + datasetKey + "&taxon_id=" + taxon_id + "&kingdom=" + kingdom;
           }
         });
 
@@ -195,14 +197,15 @@ var Application = (function($, window) {
         ).on("typeahead:select", function(obj, datum) {
           var agent_id = (typeof Filters !== "undefined") ? Filters.agent_id : "";
           var taxon_id = (typeof Filters !== "undefined") ? Filters.taxon_id : "";
+          var kingdom = (typeof Filters !== "undefined") ? Filters.kingdom : "";
           if (self.path === "/admin" && !self.identifier) {
             window.location.href = "/admin/dataset/" + datum.datasetkey;
           } else if (self.path === "/admin" && self.identifier) {
-            window.location.href = "/admin/user/" + self.identifier + "/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datum.datasetkey + "&taxon_id=" + taxon_id;
+            window.location.href = "/admin/user/" + self.identifier + "/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datum.datasetkey + "&taxon_id=" + taxon_id + "&kingdom=" + kingdom;
           } else if (self.path === "/help-others") {
-            window.location.href = "/help-others/" + self.identifier + "/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datum.datasetkey + "&taxon_id=" + taxon_id;
+            window.location.href = "/help-others/" + self.identifier + "/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datum.datasetkey + "&taxon_id=" + taxon_id + "&kingdom=" + kingdom;
           } else if (self.path === "/profile") {
-            window.location.href = "/profile/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datum.datasetkey + "&taxon_id=" + taxon_id;
+            window.location.href = "/profile/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datum.datasetkey + "&taxon_id=" + taxon_id + "&kingdom=" + kingdom;
           } else {
             window.location.href = "/dataset/" + datum.datasetkey;
           }
@@ -221,20 +224,38 @@ var Application = (function($, window) {
           ).on("typeahead:select", function(obj, datum) {
             var agent_id = (typeof Filters !== "undefined") ? Filters.agent_id : "";
             var datasetKey = (typeof Filters !== "undefined") ? Filters.datasetKey : "";
+            var kingdom = (typeof Filters !== "undefined") ? Filters.kingdom : "";
             if (self.path === "/help-others") {
-              window.location.href = "/help-others/" + self.identifier + "/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datasetKey + "&taxon_id=" + datum.id;
+              window.location.href = "/help-others/" + self.identifier + "/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datasetKey + "&taxon_id=" + datum.id + "&kingdom=" + kingdom;
             } else if (self.path === "/profile") {
-              window.location.href = "/profile/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datasetKey + "&taxon_id=" + datum.id;
+              window.location.href = "/profile/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datasetKey + "&taxon_id=" + datum.id + "&kingdom=" + kingdom;
             } else if (self.path === "/admin" && !self.identifier) {
               window.location.href = "/admin/taxon/" + datum.name;
             } else if (self.path === "/admin" && self.identifier) {
-              window.location.href = "/admin/user/"+self.identifier+"/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datasetKey + "&taxon_id=" + datum.id;
+              window.location.href = "/admin/user/"+self.identifier+"/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datasetKey + "&taxon_id=" + datum.id + "&kingdom=" + kingdom;
             } else if (self.path === "/taxa") {
               window.location.href = "/taxon/" + datum.name;
             } else {
               window.location.href = window.location.pathname + "?q=" + datum.name;
             }
           });
+    },
+
+    activate_dropdowns: function() {
+      var self = this;
+      $("#kingdom").on("change", function() {
+        var agent_id = (typeof Filters !== "undefined") ? Filters.agent_id : "";
+        var datasetKey = (typeof Filters !== "undefined") ? Filters.datasetKey : "";
+        var taxon_id = (typeof Filters !== "undefined") ? Filters.taxon_id : "";
+        var kingdom = (typeof Filters !== "undefined") ? Filters.kingdom : "";
+        if (self.path === "/help-others") {
+          window.location.href = "/help-others/" + self.identifier + "/advanced-search?agent_id=" + agent_id +"&taxon_id=" + taxon_id + "&datasetKey=" + datasetKey + "&kingdom=" + this.value;
+        } else if (self.path === "/profile") {
+          window.location.href = "/profile/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datasetKey + "&taxon_id=" + taxon_id + "&kingdom=" + this.value;
+        } else if (self.path === "/admin") {
+          window.location.href = "/admin/user/"+self.identifier+"/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datasetKey + "&taxon_id=" + taxon_id + "&kingdom=" + this.value;
+        }
+      });
     },
 
     activate_switch: function() {

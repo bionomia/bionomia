@@ -2,7 +2,7 @@
 
 -content_for :scripts do
   :javascript
-    var Filters = { "datasetKey": "#{params[:datasetKey]}", "agent_id": "#{params[:agent_id]}", "taxon_id": "#{params[:taxon_id]}" };
+    var Filters = { "datasetKey": "#{params[:datasetKey]}", "agent_id": "#{params[:agent_id]}", "taxon_id": "#{params[:taxon_id]}", "kingdom": "#{params[:kingdom]}" };
   = haml :'partials/profile/scripts', layout: false, locals: { action_type: "POST" }
 
 %div{class:"row"}

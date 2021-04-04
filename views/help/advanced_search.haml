@@ -5,16 +5,10 @@
 
 -content_for :scripts do
   %script{src: "/js/application.js"}
-  %script{src: "/js/bootstrap-datepicker.min.js"}
   :javascript
     var Filters = { "datasetKey": "#{params[:datasetKey]}", "agent_id": "#{params[:agent_id]}", "taxon_id": "#{params[:taxon_id]}", "kingdom": "#{params[:kingdom]}" };
     $(function() {
       Application.init(#{@viewed_user.id}, "POST", "/help-others", "#{@viewed_user.identifier}");
-      $('.date').datepicker({
-        format: 'yyyy'
-      }).on("changeDate", function(e) {
-
-      });
     });
 
 -content_for :jumbotron do

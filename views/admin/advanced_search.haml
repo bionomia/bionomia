@@ -5,7 +5,7 @@
   %script{src: "/js/application.js"}
   %script{src:"/js/profile.js"}
   :javascript
-    var Filters = { "datasetKey": "#{params[:datasetKey]}", "agent_id": "#{params[:agent_id]}", "taxon_id": "#{params[:taxon_id]}" };
+    var Filters = { "datasetKey": "#{params[:datasetKey]}", "agent_id": "#{params[:agent_id]}", "taxon_id": "#{params[:taxon_id]}", "kingdom": "#{params[:kingdom]}"  };
     $(function() {
       Application.init(#{@admin_user.id}, "POST", "/admin", "#{@admin_user.identifier}");
       Profile.init("/admin/user/#{@admin_user.identifier}");
