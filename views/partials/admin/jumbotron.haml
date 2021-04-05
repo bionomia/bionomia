@@ -10,7 +10,7 @@
       });
     });
 
-%div{class:"col-12 col-lg-4 text-center sidebar alert-warning pt-2 pb-3"}
+%div{class:"col-12 col-lg-4 text-center sidebar alert-warning pt-1 pb-3"}
   %form{id:"form-wrapper", method: :post, action: "/", enctype: "multipart/form-data", "accept-charset": "UTF-8", class: "form"}
     - bg_class = @admin_user.image_url ? "" : "profile-image-bg"
     %div{id:"profile-image", class:"image-placeholder mx-auto d-block align-self-center align-items-center #{bg_class}"}
