@@ -43,21 +43,13 @@
     %link{href: "/site.webmanifest", rel:"manifest"}
     %link{href: "/font/LovelyHome.otf", rel:"preload", as:"font", type:"font/otf", crossorigin: true}
     %link{href: "/images/banner.jpg", rel:"preload", as:"image"}
-    %link{href: "/css/bootstrap.min.css", rel: "stylesheet", type: "text/css"}
+
+    %link{href: "/css/bootstrap-combined.min.css", rel: "stylesheet", type: "text/css"}
     %link{href: "/css/application.css", rel: "stylesheet", type: "text/css"}
-    %link{href: "/css/bootstrap-toggle.min.css", rel: "stylesheet", type: "text/css"}
-    %link{href: "/css/typeahead.css", rel: "stylesheet", type: "text/css"}
     = yield_content :stylesheets
 
     %script{src: "//kit.fontawesome.com/c0c5b90533.js", crossorigin: "anonymous"}
-    %script{src: "/js/jquery-3.5.1.min.js"}
-    %script{src: "/js/popper.min.js"}
-    %script{src: "/js/bootstrap.min.js"}
-    %script{src: "/js/bootstrap-toggle.min.js"}
-    %script{src: "/js/handlebars.min.js"}
-    %script{src: "/js/typeahead.bundle.min.js"}
-    %script{src: "/js/js.cookie.min.js"}
-    %script{src: "/js/jquery.mlens-1.7.min.js"}
+    %script{src: "/js/combined-libs.min.js"}
     = yield_content :scripts
 
   %body{class:"d-flex flex-column"}
