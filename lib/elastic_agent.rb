@@ -22,6 +22,12 @@ module Bionomia
                 max_gram: 50
               },
             },
+            tokenizer: {
+              simple_split: {
+                type: "simple_pattern_split",
+                pattern: " "
+              }
+            },
             analyzer: {
               name_part_index: {
                 type: "custom",
@@ -35,12 +41,12 @@ module Bionomia
               },
               fullname_index: {
                 type: "custom",
-                tokenizer: "standard",
+                tokenizer: :simple_split,
                 filter: ["lowercase", "asciifolding", "german_normalization"]
               },
               fullname_search: {
                 type: "custom",
-                tokenizer: "standard",
+                tokenizer: :simple_split,
                 filter: ["lowercase", "asciifolding", "german_normalization", :autocomplete]
               }
             }

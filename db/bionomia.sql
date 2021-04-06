@@ -66,10 +66,6 @@ CREATE TABLE `messages` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
-CREATE TABLE `missing` (
-  `occurrence_id` bigint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
 CREATE TABLE `occurrences` (
   `gbifID` bigint UNSIGNED NOT NULL,
   `datasetKey` binary(36) DEFAULT NULL,
@@ -269,7 +265,8 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD KEY `orcid_idx` (`orcid`) USING BTREE,
   ADD KEY `wikidata_idx` (`wikidata`) USING BTREE,
-  ADD KEY `country_code` (`country_code`);
+  ADD KEY `country_code` (`country_code`),
+  ADD KEY `index_users_on_is_public` (`is_public`);
 
 ALTER TABLE `user_occurrences`
   ADD PRIMARY KEY (`id`),
