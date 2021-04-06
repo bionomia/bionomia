@@ -9,6 +9,7 @@
     url("/font/LovelyHome.woff2") format("woff2"); /* Modern Browsers */
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 html, body {
