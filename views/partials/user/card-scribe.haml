@@ -2,7 +2,7 @@
   - if locals[:user].image_url
     %div{class: "card-header d-flex"}
       %div
-        %img{src:"#{profile_image(locals[:user], 'medium')}", alt:"#{locals[:user].fullname}", class:"card-img-profile mr-2"}
+        %img{src:"#{profile_image(locals[:user], 'medium')}", alt:"#{locals[:user].fullname}", class:"card-img-profile mr-2", width:48, height:48}
       %div{class:"flex-grow-1"}
         %h5
           // Do not use url method here becase caching breaks language-based subdomains

@@ -104,7 +104,9 @@ module Sinatra
         end
 
         def example_profiles
-          @results = User.where(is_public: true).limit(6).order(Arel.sql("RAND()"))
+          @results = User.where(is_public: true)
+                         .limit(6)
+                         .order(Arel.sql("RAND()"))
         end
 
         def occurrences_by_score(id_scores, user)
