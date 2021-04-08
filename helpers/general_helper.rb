@@ -141,6 +141,11 @@ module Sinatra
                             .includes(:occurrence)
         end
 
+        def user_occurrences_by_agent_ids(agent_ids = [])
+          OccurrenceRecorder.where({ agent_id: agent_ids })
+                            .union(OccurrenceDeterminer.where(agent_id: agent_ids))
+        end
+
         def search_size
           if [25,50,100,250].include?(params[:per].to_i)
             params[:per].to_i
