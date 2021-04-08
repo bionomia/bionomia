@@ -319,13 +319,13 @@ module Sinatra
             expires 0, :no_cache, :must_revalidate
 
             viewed_user = find_user(params[:id])
-            claimed = viewed_user.all_occurrences_count
+            claimed = viewed_user.user_occurrences.select(:occurrence_id)
             agent_ids = candidate_agents(viewed_user).pluck(:id)
             unclaimed = user_occurrences_by_agent_ids(agent_ids)
-                          .where.not({ occurrence_id: viewed_user.user_occurrences.select(:occurrence_id) })
+                          .where.not({ occurrence_id: claimed })
                           .distinct
                           .count(:occurrence_id)
-            { claimed: claimed, unclaimed: unclaimed }.to_json
+            { claimed: claimed.where(visible: true).count, unclaimed: unclaimed }.to_json
           end
 
           app.get '/:id/refresh.json' do
