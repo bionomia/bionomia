@@ -61,6 +61,7 @@ gem 'twitter'
 gem 'wikidata-client'
 
 group :production do
+  gem 'passenger'
 end
 
 group :test, :development do
