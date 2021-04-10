@@ -27,6 +27,7 @@ module Sinatra
         end
 
         def search_agents(search)
+          return [] if !search.present?
           client = Elasticsearch::Client.new url: Settings.elastic.server, request_timeout: 5*60, retry_on_failure: true, reload_on_failure: true
           client.transport.reload_connections!
           body = build_name_query(search)
@@ -36,6 +37,7 @@ module Sinatra
         end
 
         def candidate_agents(user)
+          return [] if user.fullname.is_orcid?
           agents = search_agents(user.fullname)
           full_names = [user.fullname.dup]
           given_names = [user.given.dup]
