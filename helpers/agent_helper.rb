@@ -38,6 +38,9 @@ module Sinatra
 
         def candidate_agents(user)
           return [] if user.fullname.is_orcid?
+
+          cutoff_score = 40
+
           agents = search_agents(user.fullname)
           full_names = [user.fullname.dup]
           given_names = [user.given.dup]
@@ -89,15 +92,24 @@ module Sinatra
             remove_agents = []
 
             agents.each do |a|
+              # Boost the matches to a family-only name
               if full_names.map(&:downcase).include?(a[:fullname].downcase)
-                a[:score] += 40
+                a[:score] += cutoff_score
               else
+                # Add to list of agent names to remove if the given names are not similar
                 scores = given_names.map{ |g| DwcAgent.similarity_score(g.downcase, a[:given].downcase) }
                 remove_agents << a[:id] if scores.include?(0)
               end
             end
 
-            agents.delete_if{|a| remove_agents.include?(a[:id]) || a[:score] < 40 }
+            # Flush an agent from the remove list if the score was actually doubly elevated
+            agents.each do |a|
+              if a[:score] > 2*cutoff_score
+                remove_agents.delete(a[:id])
+              end
+            end
+
+            agents.delete_if{|a| remove_agents.include?(a[:id]) || a[:score] < cutoff_score }
           end
 
           agents.pluck(:id)
