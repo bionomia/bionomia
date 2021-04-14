@@ -18,7 +18,7 @@
     %meta{property:"og:description", content:"#{I18n.t('home.tagline')}"}/
     %meta{property:"og:locale", content:"#{locale}"}/
     %meta{property:"og:type", content:"website"}/
-    %meta{property:"og:url", content:"#{base_url}"}/
+    %meta{property:"og:url", content:"#{Settings.base_url}#{request.fullpath}"}/
     - if content_for?(:og_image)
       = yield_content :og_image
     - else
