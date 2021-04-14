@@ -119,8 +119,12 @@ module Bionomia
         next if !mail[:primary]
         email = mail[:email]
       end
-      country_code = data[:person][:addresses][:address][0][:country][:value] rescue nil
-      country = I18nData.countries(:en)[country_code] rescue nil
+      country_code = data[:person][:addresses][:address]
+                      .map{|o| o[:country][:value]}
+                      .join("|") rescue nil
+      country = data[:person][:addresses][:address]
+                .map{|o| I18nData.countries(:en)[o[:country][:value]]}
+                .join("|") rescue nil
 
       organizations = []
       data[:"activities-summary"][:educations][:"affiliation-group"].each do |group|
