@@ -5,6 +5,14 @@
     %div{class:"mr-auto p-2"}
       %h1{class:"h2"}= I18n.t('workshops.title')
 
+%h3= I18n.l Date.parse("April 15, 2021"), format: :long
+
+%h4{class:"mt-4"} Serie de webinars SiB Colombia - 2021
+
+%div{class:"row"}
+  %div{class:"col-12 col-md-6 embed-responsive embed-responsive-4by3"}
+    %iframe{src:"https://www.youtube.com/embed/kXWXDWz6pEs?start=512", frameborder:"0", allow:"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture", class:"embed-responsive-item p-3", allowfullscreen: true}
+
 %h3= I18n.l Date.parse("December 1, 2020"), format: :long
 
 %h4{class:"mt-4"} The "Who" in Collections: Revealing the Network of Collectors and Determiners of Bat Specimens
