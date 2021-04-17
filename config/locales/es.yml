@@ -286,7 +286,7 @@ es:
     search_count:
       one: "1 resultado de la búsqueda por %{search}"
       other: "%{count} resultados de la búsqueda por %{search}"
-    make_public: "Si, hacer público"
+    make_public_yes: "Si, hacer público"
     other_scribes: "Otros anotadores han ayudado a atribuir especímenes a %{user_name}:"
     no_scribes: "Ningún otro anotador ha ayudado a atribuir especímenes a %{user_name}."
     make_public_question: "Quiere hacer público el perfil de %{user_name}?"

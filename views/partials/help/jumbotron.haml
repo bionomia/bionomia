@@ -89,7 +89,7 @@
                 %button{type:"button", class:"btn btn-sm btn-outline-secondary", "data-dismiss":"modal"}= I18n.t('help.not_yet')
                 %input{type: :hidden, name: "_method", value: 'PUT'}
                 %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
-                %input{type: :submit, class:"btn btn-sm btn-outline-success", value:"#{I18n.t('help.make_public')}"}
+                %input{type: :submit, class:"btn btn-sm btn-outline-success", value:"#{I18n.t('help.make_public_yes')}"}
 
     - if authorized?
       %div{class: "text-center border-top mt-3 pt-3"}
