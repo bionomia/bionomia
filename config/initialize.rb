@@ -14,7 +14,7 @@ module Sinatra
                                      secret: Settings.orcid.key,
                                      domain: Settings.cookie_domain,
                                      same_site: :lax
-          app.use Rack::Protection, reaction: :drop_session, use: :authenticity_token
+          app.use Rack::Protection::AuthenticityToken
 
           app.use OmniAuth::Builder do
             provider :orcid, Settings.orcid.key, Settings.orcid.secret,

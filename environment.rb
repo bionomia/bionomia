@@ -46,6 +46,7 @@ require 'uri'
 require 'net/http'
 require 'rack'
 require 'rack/contrib'
+require 'rack/protection'
 require 'rack/tracker'
 require 'redis'
 require 'capitalize_names'
@@ -74,7 +75,6 @@ require 'rgl/adjacency'
 require 'rgl/connected_components'
 require 'rgl/dot'
 
-require_relative File.join(File.dirname(__FILE__), 'lib', 'omniauth_authenticity_checker')
 require_relative File.join(File.dirname(__FILE__), 'config', 'initialize')
 
 Encoding.default_internal = Encoding::UTF_8
@@ -85,8 +85,7 @@ Zip.continue_on_exists_proc = true
 
 Hashie.logger = Logger.new(nil)
 
-OmniAuth.config.allowed_request_methods = [:post]
-OmniAuth.config.before_request_phase = OmniauthAuthenticityChecker.new(reaction: :drop_session)
+OmniAuth.config.request_validation_phase = OmniAuth::AuthenticityTokenProtection.new(reaction: :drop_session)
 
 require_all File.join(File.dirname(__FILE__), 'lib')
 require_all File.join(File.dirname(__FILE__), 'helpers')
