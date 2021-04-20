@@ -12,6 +12,15 @@ module Bionomia
       "Stuttgart Database of Scientific Illustrators ID": "P2349"
     }
 
+    Wikidata.configure do |config|
+      config.options = {
+        request: {
+          timeout: 20,
+          open_timeout: 20
+        }
+      }
+    end
+
     def initialize
       headers = { 'User-Agent' => 'Bionomia/1.0' }
       @sparql = SPARQL::Client.new("https://query.wikidata.org/sparql", headers: headers, read_timeout: 120)
