@@ -74,6 +74,7 @@ require 'optparse'
 require 'rgl/adjacency'
 require 'rgl/connected_components'
 require 'rgl/dot'
+require 'typhoeus'
 
 require_relative File.join(File.dirname(__FILE__), 'config', 'initialize')
 

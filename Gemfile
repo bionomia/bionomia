@@ -58,6 +58,7 @@ gem 'sparql-client'
 gem 'sucker_punch'
 gem 'thin'
 gem 'twitter'
+gem 'typhoeus'
 gem 'wikidata-client'
 
 group :production do

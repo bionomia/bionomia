@@ -100,6 +100,8 @@ GEM
       multi_json
     equalizer (0.0.11)
     erubi (1.10.0)
+    ethon (0.13.0)
+      ffi (>= 1.15.0)
     eventmachine (1.2.7)
     excon (0.80.1)
     faraday (0.17.4)
@@ -302,6 +304,8 @@ GEM
       multipart-post (~> 2.0)
       naught (~> 1.0)
       simple_oauth (~> 0.3.0)
+    typhoeus (1.4.0)
+      ethon (>= 0.9.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unf (0.1.4)
@@ -379,6 +383,7 @@ DEPENDENCIES
   sucker_punch
   thin
   twitter
+  typhoeus
   wikidata-client
 
 RUBY VERSION
