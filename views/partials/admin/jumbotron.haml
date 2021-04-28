@@ -111,8 +111,17 @@
           %i{class:"fas fa-cog"}
           = I18n.t('profile.settings')
       %ul{class:"list-inline mt-2"}
-        %li{class:"list-inline-item"} Last Visited: #{@admin_user.visited.to_date}
-        %li{class:"list-inline-item"} Created: #{@admin_user.created.to_date}
+        - if @admin_user.orcid
+          %li{class:"list-inline-item"}
+            Visited:
+            - if @admin_user.visited
+              #{@admin_user.visited.to_date}
+            - else
+              %span{class:"font-italic"} never
+        - if @admin_user.created
+          %li{class:"list-inline-item"} Created: #{@admin_user.created.to_date}
+        - if @admin_user.updated
+          %li{class:"list-inline-item"} Updated: #{@admin_user.updated.to_date}
 
     %div{id:"flush-message", class:"alert alert-success alert-dismissible fade show text-center", role: "alert"}
       = I18n.t("user.caches_rebuilt")
