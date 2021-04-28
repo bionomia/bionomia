@@ -110,6 +110,9 @@
         %a{href: url("/admin/user/#{@admin_user.identifier}/settings")}
           %i{class:"fas fa-cog"}
           = I18n.t('profile.settings')
+      %ul{class:"list-inline mt-2"}
+        %li{class:"list-inline-item"} Last Visited: #{@admin_user.visited.to_date}
+        %li{class:"list-inline-item"} Created: #{@admin_user.created.to_date}
 
     %div{id:"flush-message", class:"alert alert-success alert-dismissible fade show text-center", role: "alert"}
       = I18n.t("user.caches_rebuilt")
