@@ -4,79 +4,28 @@ module Bionomia
   class FrictionlessData
 
     def initialize(uuid:, output_directory:)
-      @dataset = Dataset.find_by_datasetKey(uuid) rescue nil
-      raise ArgumentError, 'Dataset not found' if @dataset.nil?
-      @package = descriptor
+      @uuid = uuid
       @output_dir = output_directory
-      @folder = File.join(@output_dir, @dataset.datasetKey)
-    end
-
-    def create_package
-      FileUtils.mkdir(@folder) unless File.exists?(@folder)
-
-      add_resources
-
-      #Create datapackage.json
-      File.open(File.join(@folder, "datapackage.json"), 'wb') { |file| file.write(JSON.pretty_generate(@package)) }
-
-      #Add data files
-      add_data_files
-
-      #Add problem file
-      add_problem_collector_file
-
-      #Zip directory
-      zip_file = File.join(@output_dir, "#{@dataset.datasetKey}.zip")
-      FileUtils.rm zip_file, :force => true if File.file?(zip_file)
-      Zip::File.open(zip_file, Zip::File::CREATE) do |zipfile|
-        zipfile.add("datapackage.json", File.join(@folder, "datapackage.json"))
-        zipfile.add("users.csv", File.join(@folder, "users.csv"))
-        zipfile.add("occurrences.csv", File.join(@folder, "occurrences.csv"))
-        zipfile.add("attributions.csv", File.join(@folder, "attributions.csv"))
-        zipfile.add("problem_collector_dates.csv", File.join(@folder, "problem_collector_dates.csv"))
-      end
-      FileUtils.remove_dir(@folder)
-      GC.compact
-    end
-
-    def add_resources
-      @package[:resources] << user_resource
-      @package[:resources] << occurrence_resource
-      @package[:resources] << attribution_resource
-      @package[:resources] << problem_collector_resource
+      @folder = File.join(@output_dir, @uuid)
+      @package = descriptor
     end
 
     def descriptor
-      license_name = ""
-      if @dataset.license.include?("/zero/1.0/")
-        license_name = "public-domain-dedication"
-      elsif @dataset.license.include?("/by/4.0/")
-        license_name = "cc-by-4.0"
-      elsif @dataset.license.include?("/by-nc/4.0/")
-        license_name = "cc-by-nc-4.0"
-      end
-
       {
         name: "bionomia-attributions",
-        id: @dataset.datasetKey,
+        id: @uuid,
         licenses: [
           {
-            name: license_name,
-            path: @dataset.license
+            name: "public-domain-dedication",
+            path: "http://creativecommons.org/publicdomain/zero/1.0/legalcode"
           }
         ],
         profile: "tabular-data-package",
-        title: "ATTRIBUTIONS MADE FOR: #{@dataset.title}",
-        description: "#{@dataset.description}",
-        datasetKey: @dataset.datasetKey,
-        homepage: "https://bionomia.net/dataset/#{@dataset.datasetKey}",
+        title: "Attributions made on Bionomia",
+        description: "Attributions made on Bionomia",
+        datasetKey: @uuid,
+        homepage: "https://bionomia.net",
         created: Time.now.to_time.iso8601,
-        sources: [
-          {
-            title: "#{@dataset.title}",
-            path: "https://doi.org/#{@dataset.doi}"
-          }
-        ],
         keywords: [
           "specimen",
           "museum",
@@ -90,10 +39,26 @@ module Bionomia
       }
     end
 
+    def users_file
+      "users.csv"
+    end
+
+    def occurrences_file
+      "occurrences.csv"
+    end
+
+    def attributions_file
+      "attributions.csv"
+    end
+
+    def problem_collectors_file
+      "problem_collector_dates.csv"
+    end
+
     def user_resource
       {
         name: "users",
-        path: "users.csv",
+        path: users_file,
         format: "csv",
         mediatype: "text/csv",
         encoding: "utf-8",
@@ -132,7 +97,7 @@ module Bionomia
           })
       {
         name: "occurrences",
-        path: "occurrences.csv",
+        path: occurrences_file,
         format: "csv",
         mediatype: "text/csv",
         encoding: "utf-8",
@@ -147,7 +112,7 @@ module Bionomia
     def attribution_resource
       {
         name: "attributions",
-        path: "attributions.csv",
+        path: attributions_file,
         format: "csv",
         mediatype: "text/csv",
         encoding: "utf-8",
@@ -186,7 +151,7 @@ module Bionomia
     def problem_collector_resource
       {
         name: "problem-collector-dates",
-        path: "problem_collector_dates.csv",
+        path: problem_collectors_file,
         description: "Associated occurrence records whose eventDates are earlier than a collector's birthDate or later than their deathDate.",
         format: "csv",
         mediatype: "text/csv",
@@ -224,142 +189,83 @@ module Bionomia
       }
     end
 
-    def add_data_files
-      users = File.open(File.join(@folder, "users.csv"), "wb")
-      occurrences = File.open(File.join(@folder, "occurrences.csv"), "wb")
-      attributions = File.open(File.join(@folder, "attributions.csv"), "wb")
+    def create_package
+      FileUtils.mkdir(@folder) unless File.exists?(@folder)
 
-      users_header = user_resource[:schema][:fields].map{ |u| u[:name] }
-      users << CSV::Row.new(users_header, users_header, true).to_s
+      add_resources
 
-      occurrences_header = occurrence_resource[:schema][:fields].map{ |u| u[:name] }
-      occurrences << CSV::Row.new(occurrences_header, occurrences_header, true).to_s
+      #Create datapackage.json
+      File.open(File.join(@folder, "datapackage.json"), 'wb') { |file| file.write(JSON.pretty_generate(@package)) }
 
-      attributions_header = attribution_resource[:schema][:fields].map{ |u| u[:name] }
-      attributions << CSV::Row.new(attributions_header, attributions_header, true).to_s
+      #Create empty data files
+      create_data_files
 
-      fields = [
-        "user_occurrences.id",
-        "user_occurrences.user_id",
-        "user_occurrences.occurrence_id",
-        "user_occurrences.action",
-        "user_occurrences.visible",
-        "user_occurrences.created AS createdDateTime",
-        "user_occurrences.updated AS modifiedDateTime",
-        "users.id AS u_id",
-        "users.given AS u_given",
-        "users.family AS u_family",
-        "users.date_born_precision AS u_date_born_precision",
-        "users.date_died_precision AS u_date_died_precision",
-        "users.date_born AS u_date_born",
-        "users.date_died AS u_date_died",
-        "users.other_names AS u_other_names",
-        "users.wikidata AS u_wikidata",
-        "users.orcid AS u_orcid",
-        "claimants_user_occurrences.given AS createdGiven",
-        "claimants_user_occurrences.family AS createdFamily",
-        "claimants_user_occurrences.orcid AS createdORCID",
-      ]
-      fields.concat((["gbifID"] + Occurrence.accepted_fields).map{|a| "occurrences.#{a} AS occ_#{a}"})
+      #Add data files
+      add_data
 
-      gbif_ids = Set.new
-      user_ids = Set.new
+      #Add problem file
+      add_problem_collector_data
 
-      @dataset.user_occurrences.select(fields).find_each(batch_size: 10_000) do |o|
-        next if !o.visible
-
-        # Add users.csv
-        if !user_ids.include?(o.u_id)
-          aliases = o.u_other_names.split("|").to_s if !o.u_other_names.blank?
-          uri = !o.u_orcid.nil? ? "https://orcid.org/#{o.u_orcid}" : "http://www.wikidata.org/entity/#{o.u_wikidata}"
-          data = [
-            o.u_id,
-            [o.u_given, o.u_family].join(" "),
-            o.u_family,
-            o.u_given,
-            aliases,
-            uri,
-            o.u_orcid,
-            o.u_wikidata,
-            o.u_date_born,
-            o.u_date_born_precision,
-            o.u_date_died,
-            o.u_date_died_precision
-          ]
-          users << CSV::Row.new(users_header, data).to_s
-          user_ids << o.u_id
-        end
-
-        # Add attributions.csv
-        uri = !o.u_orcid.nil? ? "https://orcid.org/#{o.u_orcid}" : "http://www.wikidata.org/entity/#{o.u_wikidata}"
-        identified_uri = o.action.include?("identified") ? uri : nil
-        recorded_uri = o.action.include?("recorded") ? uri : nil
-        created_name = [o.createdGiven, o.createdFamily].join(" ")
-        created_orcid = !o.createdORCID.blank? ? "https://orcid.org/#{o.createdORCID}" : nil
-        created_date_time = o.createdDateTime.to_time.iso8601
-        modified_date_time = !o.modifiedDateTime.blank? ? o.modifiedDateTime.to_time.iso8601 : nil
-        data = [
-          o.user_id,
-          o.occurrence_id,
-          identified_uri,
-          recorded_uri,
-          created_name,
-          created_orcid,
-          created_date_time,
-          modified_date_time
-        ]
-        attributions << CSV::Row.new(attributions_header, data).to_s
-
-        # Skip occurrences if already added to file
-        next if gbif_ids.include?(o.occ_gbifID)
-
-        # Add occurrences.csv
-        data = o.attributes.select{|k,v| k.start_with?("occ_")}.values
-        occurrences << CSV::Row.new(occurrences_header, data).to_s
-        gbif_ids << o.occ_gbifID
+      #Zip directory
+      zip_file = File.join(@output_dir, "#{@uuid}.zip")
+      FileUtils.rm zip_file, :force => true if File.file?(zip_file)
+      Zip::File.open(zip_file, Zip::File::CREATE) do |zipfile|
+        zipfile.add("datapackage.json", File.join(@folder, "datapackage.json"))
+        zipfile.add(users_file, File.join(@folder, users_file))
+        zipfile.add(occurrences_file, File.join(@folder, occurrences_file))
+        zipfile.add(attributions_file, File.join(@folder, attributions_file))
+        zipfile.add(problem_collectors_file, File.join(@folder, problem_collectors_file))
       end
-
-      users.close
-      occurrences.close
-      attributions.close
+      FileUtils.remove_dir(@folder)
+      GC.compact
     end
 
-    def add_problem_collector_file
-      problems_collector_header = problem_collector_resource[:schema][:fields].map{ |u| u[:name] }
-      problems = File.open(File.join(@folder, "problem_collector_dates.csv"), "wb")
+    def add_resources
+      @package[:resources] << user_resource
+      @package[:resources] << occurrence_resource
+      @package[:resources] << attribution_resource
+      @package[:resources] << problem_collector_resource
+    end
+
+    def create_data_files
+      users = File.open(File.join(@folder, users_file), "wb")
+      users << CSV::Row.new(users_header, users_header, true).to_s
+      users.close
+
+      occurrences = File.open(File.join(@folder, occurrences_file), "wb")
+      occurrences << CSV::Row.new(occurrences_header, occurrences_header, true).to_s
+      occurrences.close
+
+      attributions = File.open(File.join(@folder, attributions_file), "wb")
+      attributions << CSV::Row.new(attributions_header, attributions_header, true).to_s
+      attributions.close
+
+      problems = File.open(File.join(@folder, problem_collectors_file), "wb")
       problems << CSV::Row.new(problems_collector_header, problems_collector_header, true).to_s
-      fields = [
-        :id,
-        :visible,
-        :occurrence_id,
-        :user_id,
-        :wikidata,
-        :date_born,
-        :date_born_precision,
-        :date_died,
-        :date_died_precision,
-        :eventDate
-      ]
-      @dataset.collected_before_birth_after_death
-              .select(fields)
-              .find_each do |o|
-                next if !o.visible
-                next if !o.eventDate
-        data = [
-          o.occurrence_id,
-          o.user_id,
-          o.wikidata,
-          o.date_born,
-          o.date_born_precision,
-          o.date_died,
-          o.date_died_precision,
-          o.eventDate
-        ]
-        problems << CSV::Row.new(problems_collector_header, data).to_s
-      end
       problems.close
     end
 
-  end
+    def users_header
+      user_resource[:schema][:fields].map{ |u| u[:name] }
+    end
 
+    def occurrences_header
+      occurrence_resource[:schema][:fields].map{ |u| u[:name] }
+    end
+
+    def attributions_header
+      attribution_resource[:schema][:fields].map{ |u| u[:name] }
+    end
+
+    def problems_collector_header
+      problem_collector_resource[:schema][:fields].map{ |u| u[:name] }
+    end
+
+    def add_data
+    end
+
+    def add_problem_collector_data
+    end
+
+  end
 end

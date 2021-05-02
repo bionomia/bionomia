@@ -39,7 +39,7 @@ if options[:directory] && options[:key]
   if dataset
     puts "Starting #{dataset.title}...".yellow
     t1 = Time.now
-    f = Bionomia::FrictionlessData.new(uuid: options[:key], output_directory: options[:directory])
+    f = Bionomia::FrictionlessDataDataset.new(uuid: options[:key], output_directory: options[:directory])
     f.create_package
     t2 = Time.now
     puts "Package created for #{options[:key]} in #{t2 - t1} seconds".green
@@ -54,7 +54,7 @@ elsif options[:directory] && ( options[:all] || options[:missing] )
       next if File.file?(file)
     end
     puts "Starting #{d.title}...".yellow
-    f = Bionomia::FrictionlessData.new(uuid: d.datasetKey, output_directory: options[:directory])
+    f = Bionomia::FrictionlessDataDataset.new(uuid: d.datasetKey, output_directory: options[:directory])
     f.create_package
     puts "Package created for #{d.datasetKey}".green
   end
@@ -63,7 +63,7 @@ elsif options[:directory] && options[:list]
     dataset = Dataset.find_by_datasetKey(key) rescue nil
     if dataset
       puts "Starting #{dataset.title}...".yellow
-      f = Bionomia::FrictionlessData.new(uuid: key, output_directory: options[:directory])
+      f = Bionomia::FrictionlessDataDataset.new(uuid: key, output_directory: options[:directory])
       f.create_package
       puts "Package created for #{key}".green
     else
