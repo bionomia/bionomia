@@ -147,6 +147,16 @@ module Bionomia
           end
         end
       end
+      data[:"activities-summary"][:qualifications][:"affiliation-group"].each do |group|
+        group[:summaries].each do |summary|
+          if summary.has_key?(:"qualification-summary")
+            org = orcid_place(summary[:"qualification-summary"])
+            if !org.nil?
+              organizations << org
+            end
+          end
+        end
+      end
 
       {
         family: family,
