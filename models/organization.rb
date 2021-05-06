@@ -33,9 +33,11 @@ class Organization < ActiveRecord::Base
   end
 
   def inactive_users
-    users.includes(:user_organizations)
-         .where.not(user_organizations: { end_year: nil })
-         .distinct
+    known_end = users.joins(:user_organizations)
+                     .where.not(user_organizations: { end_year: nil })
+    unknown_end = users.joins(:user_organizations)
+                       .where.not(wikidata: nil)
+    known_end.union(unknown_end).distinct
   end
 
   def public_users

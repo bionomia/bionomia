@@ -426,7 +426,6 @@ module Bionomia
       ["P108", "P1416"].each do |property|
         wiki_user.properties(property).each do |org|
           organization = wiki_user_organization(wiki_user, org, property)
-          next if organization[:end_year].nil?
           organizations << organization
         end
       end
