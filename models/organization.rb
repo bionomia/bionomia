@@ -29,6 +29,7 @@ class Organization < ActiveRecord::Base
   def active_users
     users.includes(:user_organizations)
          .where(user_organizations: { end_year: nil })
+         .where(wikidata: nil)
          .distinct
   end
 
