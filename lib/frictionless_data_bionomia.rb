@@ -8,7 +8,6 @@ module Bionomia
       super
     end
 
-    #TODO: separating production of occurrences.csv and attributions.csv not efficient
     def add_data
       users = File.open(File.join(@folder, users_file), "ab")
       User.where(is_public: true).find_each do |u|
@@ -31,16 +30,15 @@ module Bionomia
       end
       users.close
 
+      #TODO: separating production of occurrences.csv and attributions.csv not efficient
       occurrences = File.open(File.join(@folder, occurrences_file), "ab")
       fields = ["gbifID"] + Occurrence.accepted_fields
-      gbif_ids = Set.new
       Occurrence.select(fields)
                 .includes(:user_occurrences)
                 .find_in_batches(batch_size: 10_000) do |batch|
         batch.each do |o|
-          next if !o.user_occurrences || gbif_ids.include?(o.gbifID)
+          next if !o.user_occurrences
           occurrences << CSV::Row.new(occurrences_header, o.attributes.values).to_s
-          gbif_ids << o.gbifID
         end
       end
       occurrences.close

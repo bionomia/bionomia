@@ -154,18 +154,19 @@ module Bionomia
         :visible,
         :occurrence_id,
         :user_id,
-        :wikidata,
-        :date_born,
-        :date_born_precision,
-        :date_died,
-        :date_died_precision,
-        :eventDate
+        "users.wikidata",
+        "users.date_born",
+        "users.date_born_precision",
+        "users.date_died",
+        "users.date_died_precision",
+        "occurrences.eventDate",
+        "occurrences.eventDate_processed"
       ]
+
       @dataset.collected_before_birth_after_death
               .select(fields)
               .find_each do |o|
                 next if !o.visible
-                next if !o.eventDate
         data = [
           o.occurrence_id,
           o.user_id,
