@@ -88,7 +88,8 @@ module Bionomia
 
       @dataset.user_occurrences
               .where(users: { is_public: true })
-              .select(fields).find_each(batch_size: 10_000) do |o|
+              .or(@dataset.user_occurrences.where.not(users: { wikidata: nil }))
+              .select(fields).find_each(batch_size: 5_000) do |o|
         next if !o.visible
 
         # Add users.csv
