@@ -166,7 +166,8 @@ module Bionomia
             { name: "birthDatePrecision", type: "string", description: "Values are year, month, or day and indicate the precision of birthDate; portions of birthDate should be ignored below that of the birthDatePrecision."},
             { name: "deathDate", type: "date", rdfType: "https://schema.org/deathDate" },
             { name: "deathDatePrecision", type: "string", description: "Values are year, month, or day and indicate the precision of deathDate; portions of deathDate should be ignored below that of the deathDatePrecision."},
-            { name: "eventDate", type: "string", rdfType: "http://rs.tdwg.org/dwc/terms/eventDate" }
+            { name: "eventDate", type: "string", rdfType: "http://rs.tdwg.org/dwc/terms/eventDate" },
+            { name: "year", type: "string", rdfType: "http://rs.tdwg.org/dwc/terms/year" }
 
           ]
         },

@@ -30,7 +30,7 @@ module Bionomia
       end
       users.close
 
-      #TODO: separating production of occurrences.csv and attributions.csv not efficient
+      #TODO: separating production of occurrences.csv and attributions.csv not v. efficient
       occurrences = File.open(File.join(@folder, occurrences_file), "ab")
       fields = ["gbifID"] + Occurrence.accepted_fields
       Occurrence.select(fields)

@@ -161,7 +161,7 @@ module Bionomia
         "users.date_died",
         "users.date_died_precision",
         "occurrences.eventDate",
-        "occurrences.eventDate_processed"
+        "occurrences.year"
       ]
 
       @dataset.collected_before_birth_after_death
@@ -176,7 +176,8 @@ module Bionomia
           o.date_born_precision,
           o.date_died,
           o.date_died_precision,
-          o.eventDate
+          o.eventDate,
+          o.year
         ]
         problems << CSV::Row.new(problems_collector_header, data).to_s
       end
