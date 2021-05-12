@@ -19,7 +19,12 @@
       - if @pagy.count == 0
         %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('user.no_co_collectors_alert')
       - else
-        %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('user.co_collectors_alert')
+        %div{class: "alert alert-info row tiny-margins", role: "alert"}
+          %div{class: "col-12 col-md-9 p-0"}= I18n.t('user.co_collectors_alert')
+          %div{class: "col-12 col-md-3 p-0 text-md-right"}
+            %a{href: url("/#{@viewed_user.identifier}/network.json")}
+              %i{class:"fas fa-file-code text-dark h5 m-0 p-1"}
+              JSON-LD
 
         %div{class:"container-fluid"}
           - @results.in_groups_of(2).each do |group|
