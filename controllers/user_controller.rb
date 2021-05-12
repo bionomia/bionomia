@@ -107,6 +107,29 @@ module Sinatra
             end
           end
 
+          app.get '/:id/network.json' do
+            content_type "application/ld+json", charset: 'utf-8'
+            if !params[:id].is_orcid? && !params[:id].is_wiki_id?
+              halt 404, {}.to_json
+            end
+
+            check_redirect
+            viewed_user = find_user(params[:id])
+
+            if viewed_user.orcid && !viewed_user.is_public?
+              halt 404, {}.to_json
+            end
+
+            cache_control :public, :must_revalidate, :no_cache, :no_store
+            headers.delete("Content-Length")
+            #begin
+            network = ::Bionomia::Network.new({ user: viewed_user, params: params, request: request  })
+            network.jsonld_stream
+            #rescue
+            #  halt 404, {}.to_json
+            #end
+          end
+
           app.get '/:id' do
             check_identifier
             check_redirect
