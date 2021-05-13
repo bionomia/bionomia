@@ -160,6 +160,7 @@ module Bionomia
         schema: {
           fields: [
             { name: "occurrence_id", type: "integer" },
+            { name: "catalogNumber", type: "string", rdfType: "http://rs.tdwg.org/dwc/terms/catalogNumber" },
             { name: "user_id", type: "integer" },
             { name: "wikidata", type: "string" },
             { name: "birthDate", type: "date", rdfType: "https://schema.org/birthDate" },

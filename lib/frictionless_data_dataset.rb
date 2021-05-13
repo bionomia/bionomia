@@ -161,7 +161,8 @@ module Bionomia
         "users.date_died",
         "users.date_died_precision",
         "occurrences.eventDate",
-        "occurrences.year"
+        "occurrences.year",
+        "occurrences.catalogNumber"
       ]
 
       @dataset.collected_before_birth_after_death
@@ -170,6 +171,7 @@ module Bionomia
                 next if !o.visible
         data = [
           o.occurrence_id,
+          o.catalogNumber,
           o.user_id,
           o.wikidata,
           o.date_born,
