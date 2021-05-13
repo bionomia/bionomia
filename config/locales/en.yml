@@ -411,6 +411,14 @@ en:
     metrics: Metrics
     science_enabled: Science Enabled
     member: member
+    current_members_count:
+      unit:
+        one: current member
+        other: current members
+    past_members_count:
+      unit:
+        one: past member
+        other: past members
   profile:
     thanks_title: Thanks Received
     candidates_title: Unclaimed Specimens

@@ -411,6 +411,14 @@ fr:
     metrics: Métrique
     science_enabled: Science Activée
     member: membre
+    current_members_count:
+      unit:
+        one: membre actuel
+        other: membres actuels
+    past_members_count:
+      unit:
+        one: ancien membre
+        other: anciens membres
   profile:
     thanks_title: Remerciements Reçus
     candidates_title: Spécimens non réclamés

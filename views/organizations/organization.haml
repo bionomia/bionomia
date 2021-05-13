@@ -23,6 +23,11 @@
         - else
           = I18n.t('organization.no_previous_members_alert', org_name: @organization.name)
     - else
+      %div{class: "alert alert-info tiny-margins", role: "alert"}
+        - if locals[:active_tab] == "organization-current"
+          #{number_to_human(@pagy.count, units: :'organization.current_members_count', delimiter: ",", precision: 0)}
+        - else
+          #{number_to_human(@pagy.count, units: :'organization.past_members_count', delimiter: ",", precision: 0)}
       - @results.in_groups_of(3).each do |group|
         %div{class: "card-deck"}
           - group.each do |u|

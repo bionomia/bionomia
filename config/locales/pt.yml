@@ -411,6 +411,14 @@ pt:
     metrics: Métricas
     science_enabled: Ciência habilitada
     member: membro
+    current_members_count:
+      unit:
+        one: membro actual
+        other: membros actuais
+    past_members_count:
+      unit:
+        one: membro anterior
+        other: membros anteriores
   profile:
     thanks_title: Agradecimentos recebidos
     candidates_title: Espécimes Não Reivindicados
