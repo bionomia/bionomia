@@ -28,6 +28,10 @@ OptionParser.new do |opts|
     options[:missing] = true
   end
 
+  opts.on("-b", "--bionomia", "Create data package for all of Bionomia") do
+    options[:bionomia] = true
+  end
+
   opts.on("-h", "--help", "Prints this help") do
     puts opts
     exit
@@ -70,4 +74,9 @@ elsif options[:directory] && options[:list]
       puts "Package #{key} not found".red
     end
   end
+elsif options[:directory] && options[:bionomia]
+  puts "Starting dataset for for all of Bionomia...".yellow
+  f = Bionomia::FrictionlessDataBionomia.new(uuid: SecureRandom.uuid, output_directory: options[:directory])
+  f.create_package
+  puts "Package created for all of Bionomia".green
 end
