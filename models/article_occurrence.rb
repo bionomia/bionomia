@@ -1,6 +1,6 @@
 class ArticleOccurrence < ActiveRecord::Base
 
-   self.primary_key = [:article_id, :occurrence_id]
+   self.primary_key = :article_id, :occurrence_id
 
    belongs_to :occurrence
    belongs_to :article
