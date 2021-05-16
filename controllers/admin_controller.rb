@@ -637,6 +637,16 @@ module Sinatra
             haml :'admin/ignored', locals: { active_page: "administration" }
           end
 
+          app.get '/admin/user/:id/citations.csv' do
+            admin_protected!
+            check_redirect
+            @admin_user = find_user(params[:id])
+            params.delete(:id)
+            csv_stream_headers("#{@admin_user.identifier}_citations")
+            io = ::Bionomia::IO.new
+            body io.csv_stream_articles_profile(@admin_user, @admin_user.articles_citing_specimens)
+          end
+
           app.get '/admin/user/:id/citations' do
             admin_protected!
             check_redirect
