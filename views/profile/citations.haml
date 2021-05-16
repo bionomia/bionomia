@@ -13,8 +13,13 @@
 - if @pagy.count == 0
   %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('profile.no_science')
 - else
-  %div{class: "alert alert-info tiny-margins", role: "alert"}
-    #{number_to_human(@pagy.count, units: :'profile.has_science', delimiter: ",", precision: 0)}
+  %div{class: "alert alert-info row tiny-margins", role: "alert"}
+    %div{class: "col-12 col-md-9 p-0"}
+      #{number_to_human(@pagy.count, units: :'profile.has_science', delimiter: ",", precision: 0)}
+    %div{class: "col-12 col-md-3 p-0 text-md-right"}
+      %a{href: url("/profile/citations.csv"), alt:"CSV file download", class:"mr-2"}
+        %i{class:"fas fa-file-csv text-dark h5 m-0 p-1"}
+        CSV
 
   %div{class:"citation-wrapper"}
     - @results.each do |article|

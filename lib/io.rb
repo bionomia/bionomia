@@ -53,6 +53,24 @@ module Bionomia
       end
     end
 
+    def csv_stream_articles_profile(user, articles)
+      Enumerator.new do |y|
+        header = ["doi", "reference", "num_specimens", "URL"]
+        y << CSV::Row.new(header, header, true).to_s
+        if !articles.empty?
+          articles.each do |a|
+            data = [
+              a.doi,
+              (a.citation || "NO TITLE"),
+              a.user_specimen_count(user.id),
+              "https://bionomia.net/profile/citation/#{a.doi}"
+            ]
+            y << CSV::Row.new(header, data).to_s
+          end
+        end
+      end
+    end
+
     def csv_stream_occurrences(occurrences)
       Enumerator.new do |y|
         header = ["action"].concat(Occurrence.attribute_names - ignored_cols)

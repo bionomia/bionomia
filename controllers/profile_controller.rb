@@ -364,6 +364,13 @@ module Sinatra
             haml :'profile/ignored', locals: { active_page: "profile", active_tab: "ignored" }
           end
 
+          app.get '/profile/citations.csv' do
+            protected!
+            csv_stream_headers("citations")
+            io = ::Bionomia::IO.new
+            body io.csv_stream_articles_profile(@user, @user.articles_citing_specimens)
+          end
+
           app.get '/profile/citations' do
             protected!
             page = (params[:page] || 1).to_i
