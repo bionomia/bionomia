@@ -30,7 +30,7 @@
           %div{class: "small"}
             %span{class: "badge badge-light badge-pill citation-correction"}
               #{number_with_delimiter(article.user_specimen_count(@user[:id]))}
-            %a{href: url("/profile/citation/#{article.id}"), class:"ml-2"} specimens used
+            %a{href: url("/profile/citation/#{article.doi}"), class:"ml-2"} specimens used
 
   - if @pagy.pages > 1
     %div{style:"overflow-y:scroll"}

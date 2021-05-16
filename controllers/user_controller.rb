@@ -122,12 +122,12 @@ module Sinatra
 
             cache_control :public, :must_revalidate, :no_cache, :no_store
             headers.delete("Content-Length")
-            #begin
-            network = ::Bionomia::Network.new({ user: viewed_user, params: params, request: request  })
-            network.jsonld_stream
-            #rescue
-            #  halt 404, {}.to_json
-            #end
+            begin
+              network = ::Bionomia::Network.new({ user: viewed_user, params: params, request: request  })
+              network.jsonld_stream
+            rescue
+              halt 404, {}.to_json
+            end
           end
 
           app.get '/:id' do
@@ -224,15 +224,15 @@ module Sinatra
             end
           end
 
-          app.get '/:id/citation/:article_id' do
+          app.get '/:id/citation/*' do
             check_identifier
             check_redirect
             @viewed_user = find_user(params[:id])
             check_user_public
+            article_from_param
 
-            @article = Article.find(params[:article_id]) rescue nil
             if !@article
-              halt 404, hamls(:oops)
+              halt 404, haml(:oops)
             end
 
             begin

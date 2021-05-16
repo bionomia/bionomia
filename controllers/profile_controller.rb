@@ -371,14 +371,9 @@ module Sinatra
             haml :'profile/citations', locals: { active_page: "profile" }
           end
 
-          app.get '/profile/citation/:article_id' do
+          app.get '/profile/citation/*' do
             protected!
-
-            @article = Article.find(params[:article_id]) rescue nil
-            if !@article
-              halt 404
-            end
-
+            article_from_param
             cited_specimens = @user.cited_specimens_by_article(@article.id)
             @total = cited_specimens.count
             if @total == 0
