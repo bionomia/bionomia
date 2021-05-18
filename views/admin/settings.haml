@@ -127,3 +127,19 @@
                     %input{type: :hidden, name: "_method", value: 'DELETE'}
                     %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
                     %input{type: :submit, class:"btn btn-sm btn-outline-danger", value:"Delete"}
+
+      %div{class:"card-deck"}
+        %div{class:"card"}
+          %h5{class:"card-header"}
+            YouTube
+          %div{class:"card-body"}
+            %p{class:"card-text"}
+              Use a YouTube ID for a video to appear in the profile.
+            - if !@admin_user.orcid.nil?
+              %form{action: "/admin/user/#{@admin_user.id}/update", method: :post}
+                %input{type: :hidden, name: "_method", value: 'PUT'}
+                %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
+                %input{type: "text", name: "youtube_id", class:"form-control mb-3", id: "youtube_id", value: "#{@admin_user.youtube_id}"}
+                %input{type: :submit, class:"btn btn-sm btn-outline-success", value:"Update"}
+
+        %div{class:"card border-0"}

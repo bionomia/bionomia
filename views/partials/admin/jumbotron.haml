@@ -86,6 +86,10 @@
       %a{href:"https://doi.org/#{@admin_user.zenodo_concept_doi}"}
         %img{src:"/images/#{@admin_user.zenodo_concept_doi}.svg", alt:"DOI badge"}
 
+  - if @admin_user.youtube_id
+    %div{class:"embed-responsive embed-responsive-16by9 mt-3"}
+      %iframe{src:"https://www.youtube.com/embed/#{@admin_user.youtube_id}", frameborder:"0", allow:"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture", class:"embed-responsive-item rounded align-top m-2", allowfullscreen: true}
+
   - if locals[:active_page] != "settings"
     %div{class:"mt-3 pt-3 border-top"}
       %p{class:"mb-0"}

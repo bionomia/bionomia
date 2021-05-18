@@ -342,6 +342,18 @@ module Sinatra
             end
           end
 
+          app.put '/admin/user/:id/update' do
+            admin_protected!
+            admin_user = User.find(params[:id])
+            if !admin_user.orcid.nil?
+              youtube_id = !params[:youtube_id].empty? ? params[:youtube_id] : nil
+              admin_user.youtube_id = youtube_id
+              admin_user.save
+            end
+            flash.next[:updated] = true
+            redirect "/admin/user/#{admin_user.identifier}/settings"
+          end
+
           app.delete '/admin/user/:id' do
             admin_protected!
             @admin_user = User.find(params[:id]) rescue nil
