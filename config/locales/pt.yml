@@ -449,8 +449,9 @@ pt:
     change_photo: Alterar foto de perfil
     remove: Remover
     cancel: Cancelar
-    upload: Upload
+    update: Atualizar
     settings: Configurações & Integrações
+    youtube: ID do YouTube para que um vídeo apareça em seu perfil.
     no_science: Os dados do seu espécime ainda não foram registrados em downloads do GBIF e usados em novas publicações.
     no_citation_alert: Suas amostras não foram incluídas em um download do GBIF para apoiar este estudo.
     has_science:

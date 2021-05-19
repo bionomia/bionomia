@@ -108,11 +108,12 @@ module Sinatra
 
           app.put '/profile/settings' do
             protected!
-            content_type "application/json", charset: 'utf-8'
-            req = JSON.parse(request.body.read).symbolize_keys
-            @user.wants_mail = req[:wants_mail]
+            youtube_id = params[:youtube_id] && !params[:youtube_id].empty? ? params[:youtube_id] : nil
+            @user.wants_mail = params[:wants_mail] || false
+            @user.youtube_id = youtube_id
             @user.save
-            { message: "ok"}.to_json
+            flash.next[:updated] = true
+            redirect "/profile/settings"
           end
 
           app.get '/profile/specimens' do

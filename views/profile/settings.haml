@@ -8,8 +8,16 @@
   %div{class:"col-12 col-lg-8 mt-2"}
     = haml :'partials/profile/tabs', layout: false, locals: { active_page: nil }
 
-    %div{class:"citation-wrapper mt-3"}
+    %div{class:"citation-wrapper mt-4"}
       %h4= I18n.t('profile.settings')
+
+      - if flash[:updated]
+        %div{class:"alert alert-success alert-dismissible fade show d-block", role: "alert"}
+          %div
+            Your profile was updated.
+          %button{type:"button", class:"close", "data-dismiss":"alert", "aria-label":"Close"}
+            %span{"aria-hidden":"true"} &times;
+
       %div{class:"card-deck"}
 
         %div{class:"card"}
@@ -93,6 +101,17 @@
               %p{class:"card-text"}= I18n.t('profile.email_instructions')
 
       %div{class:"card-deck"}
+        %div{class:"card"}
+          %h5{class:"card-header"}
+            YouTube
+          %div{class:"card-body"}
+            %p{class:"card-text"}= I18n.t('profile.youtube')
+            %form{action: "/profile/settings", method: :post}
+              %input{type: :hidden, name: "_method", value: 'PUT'}
+              %input{type: :hidden, name: "authenticity_token", value:"#{env['rack.session'][:csrf]}"}
+              %input{type: :hidden, name: "wants_mail", value:"#{@user.wants_mail?}"}
+              %input{type: :text, name: "youtube_id", class:"form-control mb-3", id: "youtube_id", value: "#{@user.youtube_id}", placeholder: "w-rOViX3buo"}
+              %input{type: :submit, class:"btn btn-sm btn-outline-success", value:"#{I18n.t('profile.update')}"}
 
         %div{class:"card"}
           %h5{class:"card-header"}= I18n.t('profile.delete_account')
@@ -114,5 +133,3 @@
                       %input{type: :hidden, name: "_method", value: 'DELETE'}
                       %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
                       %input{type: :submit, class:"btn btn-sm btn-outline-danger", value:"#{I18n.t('profile.delete')}"}
-
-        %div{class:"card border-0"}

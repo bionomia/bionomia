@@ -342,7 +342,7 @@ module Sinatra
             end
           end
 
-          app.put '/admin/user/:id/update' do
+          app.put '/admin/user/:id' do
             admin_protected!
             admin_user = User.find(params[:id])
             if !admin_user.orcid.nil?

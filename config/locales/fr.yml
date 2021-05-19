@@ -448,9 +448,10 @@ fr:
     no_thanks_received_alert: Vous n'avez pas encore reçu de remerciements pour avoir attribué un spécimen à d'autres collectionneurs. Avez-vous essayé d'aider les autres?
     change_photo: Changer votre photo
     remove: Enlever
-    cancel: Annuler
-    upload: Télécharger
+    cancel: Annulers
+    update: Réactualiser
     settings: Paramètres et Intégrations
+    youtube: ID YouTube pour qu'une vidéo apparaisse dans votre profil.
     no_science: Vos données de spécimen n'ont pas encore été enregistrées lors des téléchargements du GBIF.
     no_citation_alert: Vos données de spécimen n'ont pas été incluses dans un téléchargement du GBIF à l'appui de cette étude.
     has_science:
