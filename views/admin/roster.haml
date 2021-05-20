@@ -38,6 +38,10 @@
         %th{scope: "col"}
           %a{href: url("/admin/users?order=zenodo_concept_doi&sort=#{sort}")} DOI
         %th{scope: "col"}
+          %a{href: url("/admin/users?order=image_url&sort=#{sort}")} Photo
+        %th{scope: "col"}
+          %a{href: url("/admin/users?order=youtube_id&sort=#{sort}")} Video
+        %th{scope: "col"}
           %a{href: url("/admin/users?order=visited&sort=#{sort}")} Last Login
         %th{scope: "col"}
           %a{href: url("/admin/users?order=created&sort=#{sort}")} Created
@@ -65,6 +69,16 @@
           %td
             - if u.zenodo_concept_doi
               %a{href: "https://doi.org/#{u.zenodo_concept_doi}"} #{u.zenodo_concept_doi}
+          %td
+            - if u.image_url
+              %span{class: "text-success"} true
+            - else
+              false
+          %td
+            - if u.youtube_id
+              %span{class: "text-success"} true
+            - else
+              false
           %td #{u.visited}
           %td #{u.created}
 
