@@ -37,7 +37,10 @@ val occurrences = spark.
     drop(col("license")).
     drop(col("recordedBy")).
     drop(col("identifiedBy")).
+    withColumn("scientificNameDerived", when($"v_scientificName".isNull, $"scientificName").otherwise($"v_scientificName")).
+    drop(col("v_scientificName")).
     drop(col("scientificName")).
+    withColumnRenamed("scientificNameDerived", "scientificName").
     withColumnRenamed("eventDate","eventDate_processed").
     withColumnRenamed("dateIdentified","dateIdentified_processed").
     withColumnRenamed("v_occurrenceID","occurrenceID").
@@ -54,7 +57,6 @@ val occurrences = spark.
     withColumnRenamed("v_catalogNumber","catalogNumber").
     withColumnRenamed("v_recordedBy","recordedBy").
     withColumnRenamed("v_recordedByID","recordedByID").
-    withColumnRenamed("v_scientificName","scientificName").
     withColumnRenamed("v_typeStatus","typeStatus").
     withColumn("hasImage", when($"hasImage" === true, 1).otherwise(0)).
     withColumn("eventDate_processed", to_timestamp($"eventDate_processed")).
