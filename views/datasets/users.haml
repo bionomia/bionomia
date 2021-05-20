@@ -34,7 +34,7 @@
 
       - if @compressed_file_size
         %p{class:"text-right m-0"}
-          %a{href: url("/dataset/#{@dataset.datasetKey}.zip"), alt: "Frictionless Data package"}
+          %a{href: url("/dataset/#{@dataset.datasetKey}/datapackage.json"), alt: "Frictionless Data package"}
             %i{class:"fas fa-file-archive text-dark h5 m-0 p-1"}
             Frictionless Data
           (#{@compressed_file_size} MB)

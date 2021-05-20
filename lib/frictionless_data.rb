@@ -58,8 +58,9 @@ module Bionomia
     def user_resource
       {
         name: "users",
-        path: users_file,
+        path: "https://bionomia.net/dataset/#{@uuid}/#{users_file}.zip",
         format: "csv",
+        compression: "zip",
         mediatype: "text/csv",
         encoding: "utf-8",
         profile: "tabular-data-resource",
@@ -97,8 +98,9 @@ module Bionomia
           })
       {
         name: "occurrences",
-        path: occurrences_file,
+        path: "https://bionomia.net/dataset/#{@uuid}/#{occurrences_file}.zip",
         format: "csv",
+        compression: "zip",
         mediatype: "text/csv",
         encoding: "utf-8",
         profile: "tabular-data-resource",
@@ -112,8 +114,9 @@ module Bionomia
     def attribution_resource
       {
         name: "attributions",
-        path: attributions_file,
+        path: "https://bionomia.net/dataset/#{@uuid}/#{attributions_file}.zip",
         format: "csv",
+        compression: "zip",
         mediatype: "text/csv",
         encoding: "utf-8",
         profile: "tabular-data-resource",
@@ -151,9 +154,10 @@ module Bionomia
     def problem_collector_resource
       {
         name: "problem-collector-dates",
-        path: problem_collectors_file,
+        path: "https://bionomia.net/dataset/#{@uuid}/#{problem_collectors_file}.zip",
         description: "Associated occurrence records whose eventDates are earlier than a collector's birthDate or later than their deathDate.",
         format: "csv",
+        compression: "zip",
         mediatype: "text/csv",
         encoding: "utf-8",
         profile: "tabular-data-resource",
@@ -194,6 +198,8 @@ module Bionomia
     def create_package
       FileUtils.mkdir(@folder) unless File.exists?(@folder)
 
+      flush_existing
+
       add_resources
 
       #Create datapackage.json
@@ -208,18 +214,23 @@ module Bionomia
       #Add problem file
       add_problem_collector_data
 
-      #Zip directory
-      zip_file = File.join(@output_dir, "#{@uuid}.zip")
-      FileUtils.rm zip_file, :force => true if File.file?(zip_file)
-      Zip::File.open(zip_file, Zip::File::CREATE) do |zipfile|
-        zipfile.add("datapackage.json", File.join(@folder, "datapackage.json"))
-        zipfile.add(users_file, File.join(@folder, users_file))
-        zipfile.add(occurrences_file, File.join(@folder, occurrences_file))
-        zipfile.add(attributions_file, File.join(@folder, attributions_file))
-        zipfile.add(problem_collectors_file, File.join(@folder, problem_collectors_file))
+      #Zip each file in place
+      Dir.foreach(@folder) do |f|
+        fn = File.join(@folder, f)
+        next if File.extname(fn) != ".csv"
+        Zip::File.open(fn + ".zip", Zip::File::CREATE) do |zipfile|
+          zipfile.add(File.basename(fn), File.join(@folder, File.basename(fn)))
+        end
+        File.delete(fn)
       end
-      FileUtils.remove_dir(@folder)
       GC.compact
+    end
+
+    def flush_existing
+      Dir.foreach(@folder) do |f|
+        fn = File.join(@folder, f)
+        File.delete(fn) if f != '.' && f != '..'
+      end
     end
 
     def add_resources

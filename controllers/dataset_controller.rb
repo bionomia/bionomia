@@ -22,10 +22,21 @@ module Sinatra
             dataset_stats.to_json
           end
 
-          app.get '/dataset/:id.zip' do
+          app.get '/dataset/:id/datapackage.json' do
+            content_type "application/json", charset: 'utf-8'
+            cache_control :public, :must_revalidate, :no_cache, :no_store
+            file = File.join(app.root, "public", "data", "#{params[:id]}", "datapackage.json")
+            if File.file?(file)
+              send_file(file)
+            else
+              halt 404
+            end
+          end
+
+          app.get '/dataset/:id/:file.csv.zip' do
             content_type "application/zip", charset: 'utf-8'
             cache_control :public, :must_revalidate, :no_cache, :no_store
-            file = File.join(app.root, "public", "data", "#{params[:id]}.zip")
+            file = File.join(app.root, "public", "data", "#{params[:id]}", "#{params[:file]}.csv.zip")
             if File.file?(file)
               send_file(file)
             else
@@ -34,8 +45,16 @@ module Sinatra
           end
 
           app.get '/dataset/:id' do
-            file = File.join(app.root, "public", "data", "#{params[:id]}.zip")
-            @compressed_file_size = (File.size(file).to_f / 2**20).round(2) rescue nil
+            size = 0
+            dir = File.join(app.root, "public", "data", "#{params[:id]}")
+            if Dir.exists?(dir)
+              Dir.foreach(dir) do |f|
+                fn = File.join(dir, f)
+                next if File.extname(fn) != ".zip"
+                size = size + File.size(fn).to_f / 2**20
+              end
+            end
+            @compressed_file_size = size.round(2) if size > 0
             dataset_users
             locals = {
               active_page: "datasets",
