@@ -23,6 +23,32 @@
             "parameter": "RECORDED_BY"
           }
         ]
+      },
+      {
+        "type": "not",
+        "predicate": {
+          "type": "or",
+          "predicates": [
+            {
+              "type": "like",
+              "key": "VERBATIM_SCIENTIFIC_NAME",
+              "value": "%BOLD:%",
+              "matchCase": "true"
+            },
+            {
+              "type": "like",
+              "key": "VERBATIM_SCIENTIFIC_NAME",
+              "value": "%BOLD-%",
+              "matchCase": "true"
+            },
+            {
+              "type": "like",
+              "key": "VERBATIM_SCIENTIFIC_NAME",
+              "value": "%BIOUG%",
+              "matchCase": "true"
+            }
+          ]
+        }
       }
     ]
   }
