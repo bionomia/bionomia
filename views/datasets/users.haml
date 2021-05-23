@@ -34,10 +34,9 @@
 
       - if @compressed_file_size
         %p{class:"text-right m-0"}
-          %a{href: url("/dataset/#{@dataset.datasetKey}/datapackage.json"), alt: "Frictionless Data package"}
-            %i{class:"fas fa-file-archive text-dark h5 m-0 p-1"}
-            Frictionless Data
-          (#{@compressed_file_size} MB)
+          %a{href: url("/dataset/#{@dataset.datasetKey}/datapackage.json"), alt: "Frictionless Data Descriptor"}
+            %img{src:"/images/frictionless.png", alt:"Frictionless Data Descriptor"}
+            Frictionless Data Descriptor
 
       - @results.in_groups_of(3).each do |group|
         %div{class: "card-deck"}
