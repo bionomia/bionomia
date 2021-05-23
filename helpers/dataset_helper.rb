@@ -111,7 +111,7 @@ module Sinatra
                 value: "#{@dataset.datasetKey}"
               }
             ],
-            url: "https://bionomia.net/dataset/#{@dataset.datasetKey}",
+            url: "https://bionomia.net/dataset/#{@dataset.datasetKey}/datapackage.json",
             name: "ATTRIBUTIONS MADE FOR: #{h(@dataset.title)}"
           }
           if @dataset.description
@@ -145,9 +145,9 @@ module Sinatra
             descriptor.merge!(
               {
                 distribution: {
-                  contentUrl: "https://bionomia.net/dataset/#{@dataset.datasetKey}.zip",
+                  contentUrl: "https://bionomia.net/dataset/#{@dataset.datasetKey}/datapackage.json",
                   contentSize: "#{@compressed_file_size} MB",
-                  encodingFormat: "application/zip"
+                  encodingFormat: "https://frictionlessdata.io/specs/"
                 }
               }
             )
