@@ -329,3 +329,123 @@
               }
             ]
           }
+
+%h3{class:"mt-4 mb-3"}= I18n.t('developer.json_ld_occurrence_search')
+
+%p{class:"mb-4"}
+  Search occurrences as JSON-LD documents with Cross-Origin Resource Sharing (CORS) using elements from
+  %a{href: "https://schema.org/"}
+    https://schema.org
+  as type
+  = succeed ". " do
+    %a{href: "https://schema.org/DataFeed"} DataFeed
+
+%dl
+  %dt Base URL
+  %dd{class:"pl-2"} https://bionomia.net/occurrences/search
+
+  %dt &datasetKey=
+  %dd{class:"pl-2"} registered UUID provided by the Global Biodiversity Information Facility (GBIF) (required)
+
+  %dt &occurrenceID=
+  %dd{class:"pl-2"} from the provider (required)
+
+  %dt{class:"mt-3"} Example
+  %dd{class:"pl-2"}
+    https://bionomia.net/occurrences/search?datasetKey=f86a681d-7db8-483b-819a-248def18b70a&occurrenceID=7a1daa39-8d7c-d7c4-968f-799d58b3c7b0
+
+  %dt Response
+  %dd
+    %pre{class:"pre-scrollable bg-dark text-white border rounded p-3"}
+      %code
+        :preserve
+          {
+            <span class="token property">"@context"</span>: {
+              <span class="token property">"@vocab"</span>: <span class="token string">"http://schema.org/"</span>,
+              <span class="token property">"identified"</span>: <span class="token string">"http://rs.tdwg.org/dwc/iri/identifiedBy"</span>,
+              <span class="token property">"recorded"</span>: <span class="token string">"http://rs.tdwg.org/dwc/iri/recordedBy"</span>,
+              <span class="token property">"associatedReferences"</span>: <span class="token string">"http://rs.tdwg.org/dwc/terms/associatedReferences"</span>,
+              <span class="token property">"PreservedSpecimen"</span>: <span class="token string">"http://rs.tdwg.org/dwc/terms/PreservedSpecimen"</span>,
+              <span class="token property">"datasetKey"</span>: <span class="token string">"http://rs.tdwg.org/dwc/terms/datasetKey"</span>,
+              <span class="token property">"occurrenceID"</span>: <span class="token string">"http://rs.tdwg.org/dwc/terms/occurrenceID"</span>,
+              <span class="token property">"dateIdentified"</span>: <span class="token string">"http://rs.tdwg.org/dwc/terms/dateIdentified"</span>,
+              <span class="token property">"decimalLatitude"</span>: <span class="token string">"http://rs.tdwg.org/dwc/terms/decimalLatitude"</span>,
+              <span class="token property">"decimalLongitude"</span>: <span class="token string">"http://rs.tdwg.org/dwc/terms/decimalLongitude"</span>,
+              <span class="token property">"country"</span>: <span class="token string">"http://rs.tdwg.org/dwc/terms/country"</span>,
+              <span class="token property">"countryCode"</span>: <span class="token string">"http://rs.tdwg.org/dwc/terms/countryCode"</span>,
+              <span class="token property">"eventDate"</span>: <span class="token string">"http://rs.tdwg.org/dwc/terms/eventDate"</span>,
+              <span class="token property">"year"</span>: <span class="token string">"http://rs.tdwg.org/dwc/terms/year"</span>,
+              <span class="token property">"kingdom"</span>: <span class="token string">"http://rs.tdwg.org/dwc/terms/kingdom"</span>,
+              <span class="token property">"family"</span>: <span class="token string">"http://rs.tdwg.org/dwc/terms/family"</span>,
+              <span class="token property">"identifiedBy"</span>: <span class="token string">"http://rs.tdwg.org/dwc/terms/identifiedBy"</span>,
+              <span class="token property">"institutionCode"</span>: <span class="token string">"http://rs.tdwg.org/dwc/terms/institutionCode"</span>,
+              <span class="token property">"collectionCode"</span>: <span class="token string">"http://rs.tdwg.org/dwc/terms/collectionCode"</span>,
+              <span class="token property">"catalogNumber"</span>: <span class="token string">"http://rs.tdwg.org/dwc/terms/catalogNumber"</span>,
+              <span class="token property">"recordedBy"</span>: <span class="token string">"http://rs.tdwg.org/dwc/terms/recordedBy"</span>,
+              <span class="token property">"scientificName"</span>: <span class="token string">"http://rs.tdwg.org/dwc/terms/scientificName"</span>,
+              <span class="token property">"typeStatus"</span>: <span class="token string">"http://rs.tdwg.org/dwc/terms/typeStatus"</span>,
+              <span class="token property">"opensearch"</span>: <span class="token string">"http://a9.com/-/spec/opensearch/1.1/"</span>
+            },
+            <span class="token property">"@type"</span>: <span class="token string">"DataFeed"</span>,
+            <span class="token property">"opensearch:totalResults"</span>: <span class="token number">1</span>,
+            <span class="token property">"opensearch:itemsPerPage"</span>: <span class="token number">1</span>,
+            <span class="token property">"name"</span>: <span class="token string">"Bionomia occurrence search results"</span>,
+            <span class="token property">"description"</span>: <span class="token string">"Bionomia occurrence search results expressed as a schema.org JSON-LD DataFeed."</span>,
+            <span class="token property">"license"</span>: <span class="token string">"https://creativecommons.org/publicdomain/zero/1.0/"</span>,
+            <span class="token property">"potentialAction"</span>: {
+              <span class="token property">"@type"</span>: <span class="token string">"SearchAction"</span>,
+              <span class="token property">"target"</span>: <span class="token string">"https://bionomia.net/occurrences/search?datasetKey={datasetKey}&occurrenceID={occurrenceID}"</span>
+            },
+            <span class="token property">"dataFeedElement"</span>: [
+              {
+                <span class="token property">"@type"</span>: <span class="token string">"DataFeedItem"</span>,
+                <span class="token property">"item"</span>: {
+                  <span class="token property">"@type"</span>: <span class="token string">"PreservedSpecimen"</span>,
+                  <span class="token property">"@id"</span>: <span class="token string">"https://bionomia.net/occurrence/1804069383"</span>,
+                  <span class="token property">"sameAs"</span>: <span class="token string">"https://gbif.org/occurrence/1804069383"</span>,
+                  <span class="token property">"recorded"</span>: [
+                    {
+                      <span class="token property">"@type"</span>: <span class="token string">"Person"</span>,
+                      <span class="token property">"@id"</span>: <span class="token string">"https://bionomia.net/Q3446775"</span>,
+                      <span class="token property">"sameAs"</span>: <span class="token string">"http://www.wikidata.org/entity/Q3446775"</span>,
+                      <span class="token property">"givenName"</span>: <span class="token string">"Rudolph Martin"</span>,
+                      <span class="token property">"familyName"</span>: <span class="token string">"Anderson"</span>,
+                      <span class="token property">"name"</span>: <span class="token string">"Rudolph Martin Anderson"</span>,
+                      <span class="token property">"alternateName"</span>: [
+
+                      ]
+                    }
+                  ],
+                  <span class="token property">"identified"</span>: [
+
+                  ],
+                  <span class="token property">"associatedReferences"</span>: [
+                    {
+                      <span class="token property">"@type"</span>: <span class="token string">"ScholarlyArticle"</span>,
+                      <span class="token property">"@id"</span>: <span class="token string">"https://doi.org/10.1016/j.mex.2020.101067"</span>,
+                      <span class="token property">"sameAs"</span>: <span class="token string">"https://doi.org/10.1016/j.mex.2020.101067"</span>,
+                      <span class="token property">"description"</span>: <span class="token string">"Li, X., Li, B., Wang, G., Zhan, X., & Holyoak, M. (2020). Deeply digging the interaction effect in multiple linear regressions using a fractional-power interaction term. MethodsX, 7, 101067. doi:10.1016/j.mex.2020.101067\n"</span>
+                    }
+                  ],
+                  <span class="token property">"datasetKey"</span>: <span class="token string">"f86a681d-7db8-483b-819a-248def18b70a"</span>,
+                  <span class="token property">"occurrenceID"</span>: <span class="token string">"7a1daa39-8d7c-d7c4-968f-799d58b3c7b0"</span>,
+                  <span class="token property">"dateIdentified"</span>: <span class="token symbol">null</span>,
+                  <span class="token property">"decimalLatitude"</span>: <span class="token string">"68.016667"</span>,
+                  <span class="token property">"decimalLongitude"</span>: <span class="token string">"-110.083333"</span>,
+                  <span class="token property">"country"</span>: <span class="token string">"Canada"</span>,
+                  <span class="token property">"countryCode"</span>: <span class="token string">"CA"</span>,
+                  <span class="token property">"eventDate"</span>: <span class="token string">"1915-08-14"</span>,
+                  <span class="token property">"year"</span>: <span class="token symbol">null</span>,
+                  <span class="token property">"kingdom"</span>: <span class="token string">"Animalia"</span>,
+                  <span class="token property">"family"</span>: <span class="token string">"Leporidae"</span>,
+                  <span class="token property">"identifiedBy"</span>: <span class="token symbol">null</span>,
+                  <span class="token property">"institutionCode"</span>: <span class="token string">"CMN"</span>,
+                  <span class="token property">"collectionCode"</span>: <span class="token string">"CMNMA"</span>,
+                  <span class="token property">"catalogNumber"</span>: <span class="token string">"CMNMA 2859"</span>,
+                  <span class="token property">"recordedBy"</span>: <span class="token string">"Anderson, Rudolph M."</span>,
+                  <span class="token property">"scientificName"</span>: <span class="token string">"Lepus arcticus andersoni"</span>,
+                  <span class="token property">"typeStatus"</span>: <span class="token string">"paratype"</span>
+                }
+              }
+            ]
+          }

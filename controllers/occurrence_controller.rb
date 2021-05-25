@@ -7,7 +7,7 @@ module Sinatra
 
         def self.registered(app)
 
-          app.get '/occurrences/search.json' do
+          app.get '/occurrences/search' do
             if !params[:datasetKey] || params[:datasetKey].empty?
               content_type "application/json", charset: 'utf-8'
               halt 404, {}.to_json

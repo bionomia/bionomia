@@ -142,7 +142,8 @@ fr:
   developer:
     search: Rechercher
     autocomplete_widget: Autocomplete Widget
-    json_ld_search: Researcher JSON-LD
+    json_ld_search: Recherche JSON-LD de personnes
+    json_ld_occurrence_search: Recherche JSON-LD d'occurrences
     structured_data: Données Structurées
     raw_data: Données Brutes
     code: Code Informatique

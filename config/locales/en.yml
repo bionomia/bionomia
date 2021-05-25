@@ -142,7 +142,8 @@ en:
   developer:
     search: Search
     autocomplete_widget: Autocomplete Widget
-    json_ld_search: JSON-LD Search
+    json_ld_search: JSON-LD Search for People
+    json_ld_occurrence_search: JSON-LD Search for Occurrences
     structured_data: Structured Data
     raw_data: Raw Data
     code: Code
