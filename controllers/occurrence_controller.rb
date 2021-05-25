@@ -7,7 +7,7 @@ module Sinatra
 
         def self.registered(app)
 
-          app.get '/occurrence/search.json' do
+          app.get '/occurrences/search.json' do
             if !params[:datasetKey] || params[:datasetKey].empty?
               content_type "application/json", charset: 'utf-8'
               halt 404, {}.to_json
@@ -18,27 +18,49 @@ module Sinatra
             end
             content_type "application/ld+json", charset: 'utf-8'
             response = jsonld_occurrence_context
-            begin
-              occurrence = Occurrence.where({ datasetKey: params[:datasetKey], occurrenceID: params[:occurrenceID] })
-                                     .first
-              response["@id"] = "#{Settings.base_url}/occurrence/#{occurrence.id}"
-              response["sameAs"] = "https://gbif.org/occurrence/#{occurrence.id}"
+            response["@context"]["opensearch"] = "http://a9.com/-/spec/opensearch/1.1/"
+
+            occurrences = Occurrence.where({ datasetKey: params[:datasetKey], occurrenceID: params[:occurrenceID] }) rescue []
+            formatted_occurrences = []
+            occurrences.find_each do |occurrence|
+              occ = {}
               occurrence.attributes
                         .reject{|column| Occurrence::IGNORED_COLUMNS_OUTPUT.include?(column)}
-                        .map{|k,v| response[k] = v }
-
-              response["recorded"] = jsonld_occurrence_recordings(occurrence)
-              response["identified"] = jsonld_occurrence_identifications(occurrence)
-              response["associatedReferences"] = jsonld_occurrence_references(occurrence)
-              JSON.pretty_generate(response)
-            rescue
-              halt 404, {}.to_json
+                        .map{|k,v| occ[k] = v }
+              formatted_occurrences << {
+                "@type": "DataFeedItem",
+                item: {
+                  "@type": "PreservedSpecimen",
+                  "@id": "#{Settings.base_url}/occurrence/#{occurrence.id}",
+                  sameAs: "https://gbif.org/occurrence/#{occurrence.id}",
+                  recorded: jsonld_occurrence_recordings(occurrence),
+                  identified: jsonld_occurrence_identifications(occurrence),
+                  associatedReferences: jsonld_occurrence_references(occurrence)
+                }.merge(occ)
+              }
             end
+
+            feed_obj = {
+              "@type": "DataFeed",
+              "opensearch:totalResults": occurrences.count,
+              "opensearch:itemsPerPage": 1,
+              name: "Bionomia occurrence search results",
+              description: "Bionomia occurrence search results expressed as a schema.org JSON-LD DataFeed.",
+              license: "https://creativecommons.org/publicdomain/zero/1.0/",
+              potentialAction: {
+                "@type": "SearchAction",
+                target: "#{Settings.base_url}/occurrences/search?datasetKey={datasetKey}&occurrenceID={occurrenceID}"
+              },
+              dataFeedElement: formatted_occurrences
+            }
+
+            JSON.pretty_generate(response.merge(feed_obj))
           end
 
           app.get '/occurrence/:id.json' do
             content_type "application/ld+json", charset: 'utf-8'
             response = jsonld_occurrence_context
+            response["@type"] = "PreservedSpecimen"
             begin
               occurrence = Occurrence.find(params[:id])
               response["@id"] = "#{Settings.base_url}/occurrence/#{occurrence.id}"

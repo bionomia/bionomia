@@ -25,7 +25,6 @@ module Sinatra
               "associatedReferences" => "http://rs.tdwg.org/dwc/terms/associatedReferences",
               "PreservedSpecimen" => "http://rs.tdwg.org/dwc/terms/PreservedSpecimen",
           }.merge(dwc_contexts)
-          response["@type"] = "PreservedSpecimen"
           response
         end
 
