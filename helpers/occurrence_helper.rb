@@ -24,6 +24,9 @@ module Sinatra
               "recorded" => "http://rs.tdwg.org/dwc/iri/recordedBy",
               "associatedReferences" => "http://rs.tdwg.org/dwc/terms/associatedReferences",
               "PreservedSpecimen" => "http://rs.tdwg.org/dwc/terms/PreservedSpecimen",
+              "creator" => "http://purl.org/dc/terms/creator",
+              "created" => "http://purl.org/dc/terms/created",
+              "modified" => "http://purl.org/dc/terms/modified"
           }.merge(dwc_contexts)
           response
         end
@@ -31,6 +34,14 @@ module Sinatra
         def jsonld_occurrence_recordings(occurrence)
           occurrence.user_recordings.map{|o|
             id_url = o.user.orcid ? "https://orcid.org/#{o.user.orcid}" : "http://www.wikidata.org/entity/#{o.user.wikidata}"
+            creator = {}
+            if !o.claimant.orcid.nil?
+              creator = {
+                "@type": "Person",
+                "@id": "https://orcid.org/#{o.claimant.orcid}",
+                name: o.claimant.fullname
+              }
+            end
             {
                 "@type" => "Person",
                 "@id" => "#{Settings.base_url}/#{o.user.identifier}",
@@ -38,7 +49,10 @@ module Sinatra
                 "givenName" => "#{o.user.given}",
                 "familyName" => "#{o.user.family}",
                 "name" => "#{o.user.fullname}",
-                "alternateName" => o.user.other_names.present? ? o.user.other_names.split("|") : []
+                "alternateName" => o.user.other_names.present? ? o.user.other_names.split("|") : [],
+                "creator" => creator,
+                "created" => o.created.to_time.iso8601,
+                "modified" => !o.updated.nil? ? o.updated.to_time.iso8601 : nil
               }
           }
         end
@@ -46,6 +60,14 @@ module Sinatra
         def jsonld_occurrence_identifications(occurrence)
           occurrence.user_identifications.map{|o|
             id_url = o.user.orcid ? "https://orcid.org/#{o.user.orcid}" : "http://www.wikidata.org/entity/#{o.user.wikidata}"
+            creator = {}
+            if !o.claimant.orcid.nil?
+              creator = {
+                "@type": "Person",
+                "@id": "https://orcid.org/#{o.claimant.orcid}",
+                name: o.claimant.fullname
+              }
+            end
             {
                 "@type" => "Person",
                 "@id" => "#{Settings.base_url}/#{o.user.identifier}",
@@ -53,7 +75,10 @@ module Sinatra
                 "givenName" => "#{o.user.given}",
                 "familyName" => "#{o.user.family}",
                 "name" => "#{o.user.fullname}",
-                "alternateName" => o.user.other_names.present? ? o.user.other_names.split("|") : []
+                "alternateName" => o.user.other_names.present? ? o.user.other_names.split("|") : [],
+                "creator" => creator,
+                "created" => o.created.to_time.iso8601,
+                "modified" => !o.updated.nil? ? o.updated.to_time.iso8601 : nil
               }
           }
         end

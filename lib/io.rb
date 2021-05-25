@@ -238,7 +238,7 @@ module Bionomia
           modified = { modified: o.updated.to_time.iso8601 }
         end
         { "@type": "PreservedSpecimen",
-          "@id": "https://gbif.org/occurrence/#{o.occurrence.id}",
+          "@id": "https://bionomia.net/occurrence/#{o.occurrence.id}",
           sameAs: "https://gbif.org/occurrence/#{o.occurrence.id}"
         }.merge(o.occurrence.attributes.reject {|column| ignored_cols(false).include?(column)})
          .merge(creator)
@@ -266,7 +266,7 @@ module Bionomia
             modified = { modified: o.updated.to_time.iso8601 }
           end
           y << { "@type": "PreservedSpecimen",
-                 "@id": "https://gbif.org/occurrence/#{o.occurrence.id}",
+                 "@id": "https://bionomia.net/occurrence/#{o.occurrence.id}",
                  sameAs: "https://gbif.org/occurrence/#{o.occurrence.id}"
                }.merge(o.occurrence.attributes.reject {|column| ignored_cols(false).include?(column)})
                 .merge(creator)
