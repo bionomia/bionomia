@@ -49,7 +49,7 @@
         curl -LH "Accept: application/ld+json" "#{url("/0000-0001-7618-5230")}"
 
 %div{class:"ml-3"}
-  %h5 Specimen Record
+  %h5 Occurrence Record Using a gbifID
   %div
     %a{href: url("/occurrence/477976412.json")} #{url("/occurrence/477976412.json")}
   %p
@@ -61,11 +61,21 @@
       This same service is used in two
       %a{href: url("/integrations")} browser extensions.
 
-  %h5 Content Negotiation for JSON-LD of an Occurrence
+  %h5 Content Negotiation for JSON-LD of an Occurrence Record Using a gbifID
   %pre{class:"pre-scrollable bg-dark text-white border rounded p-3"}
     %code
       :preserve
         curl -LH "Accept: application/ld+json" "#{url("/occurrence/477976412")}"
+
+%div{class:"ml-3"}
+  %h5 Occurrence Record Using a datasetKey and occurrenceID
+  %div
+    %a{href: url("/dataset/f86a681d-7db8-483b-819a-248def18b70a.json?occurrenceID=7a1daa39-8d7c-d7c4-968f-799d58b3c7b0")} #{url("/dataset/1f86a681d-7db8-483b-819a-248def18b70a.json?occurrenceID=7a1daa39-8d7c-d7c4-968f-799d58b3c7b0")}
+  %p
+    %small{class:"text-muted"}
+      Where
+      %em datasetKey
+      is the registered UUID provided by the Global Biodiversity Information Facility (GBIF).
 
 %h3{class:"mt-4 mb-3"} Raw Data
 

@@ -84,13 +84,13 @@ val missing = occurrences.
 missing.write.mode("append").jdbc(url, "missing", prop)
 
 // Best to drop indices then recreate later
-// ALTER TABLE `occurrences` DROP KEY `typeStatus_idx`, DROP KEY `index_occurrences_on_datasetKey`;
+// ALTER TABLE `occurrences` DROP KEY `typeStatus_idx`, DROP KEY `index_occurrences_on_datasetKey_occurrenceID`;
 
 //write occurrences data to the database
 occurrences.write.mode("append").jdbc(url, "occurrences", prop)
 
 // Recreate indices
-// ALTER TABLE `occurrences` ADD KEY `typeStatus_idx` (`typeStatus`(256)), ADD KEY `index_occurrences_on_datasetKey` (`datasetKey`);
+// ALTER TABLE `occurrences` ADD KEY `typeStatus_idx` (`typeStatus`(256)), ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`, `occurrenceID`(36));
 
 def stringify(c: Column) = concat(lit("["), concat_ws(",", c), lit("]"))
 

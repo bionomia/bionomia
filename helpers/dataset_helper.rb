@@ -82,7 +82,14 @@ module Sinatra
 
         def dataset_stats
           dataset_from_param
-          { people: @dataset.users.count }
+          {
+            title: "#{@dataset.title}",
+            description: "#{@dataset.description}",
+            datasetKey: "#{@dataset.datasetKey}",
+            doi: "#{@dataset.doi}",
+            license: "#{@dataset.license}",
+            people: @dataset.users.count
+          }
         end
 
         def dataset_scribes
