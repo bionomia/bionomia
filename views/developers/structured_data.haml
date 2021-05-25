@@ -70,12 +70,14 @@
 %div{class:"ml-3"}
   %h5 Occurrence Record Using a datasetKey and occurrenceID
   %div
-    %a{href: url("/dataset/f86a681d-7db8-483b-819a-248def18b70a.json?occurrenceID=7a1daa39-8d7c-d7c4-968f-799d58b3c7b0")} #{url("/dataset/1f86a681d-7db8-483b-819a-248def18b70a.json?occurrenceID=7a1daa39-8d7c-d7c4-968f-799d58b3c7b0")}
+    %a{href: url("/occurrence/search.json?datasetKey=f86a681d-7db8-483b-819a-248def18b70a&occurrenceID=7a1daa39-8d7c-d7c4-968f-799d58b3c7b0")} #{url("/occurrence/search.json?datasetKey=1f86a681d-7db8-483b-819a-248def18b70a&occurrenceID=7a1daa39-8d7c-d7c4-968f-799d58b3c7b0")}
   %p
     %small{class:"text-muted"}
       Where
       %em datasetKey
-      is the registered UUID provided by the Global Biodiversity Information Facility (GBIF).
+      (required) is the registered UUID provided by the Global Biodiversity Information Facility (GBIF) and
+      %em occurrenceID
+      (required) is that from the provider.
 
 %h3{class:"mt-4 mb-3"} Raw Data
 

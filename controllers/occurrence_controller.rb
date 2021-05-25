@@ -7,6 +7,35 @@ module Sinatra
 
         def self.registered(app)
 
+          app.get '/occurrence/search.json' do
+            if !params[:datasetKey] || params[:datasetKey].empty?
+              content_type "application/json", charset: 'utf-8'
+              halt 404, {}.to_json
+            end
+            if !params[:occurrenceID] || params[:occurrenceID].empty?
+              content_type "application/json", charset: 'utf-8'
+              halt 404, {}.to_json
+            end
+            content_type "application/ld+json", charset: 'utf-8'
+            response = jsonld_occurrence_context
+            begin
+              occurrence = Occurrence.where({ datasetKey: params[:datasetKey], occurrenceID: params[:occurrenceID] })
+                                     .first
+              response["@id"] = "#{Settings.base_url}/occurrence/#{occurrence.id}"
+              response["sameAs"] = "https://gbif.org/occurrence/#{occurrence.id}"
+              occurrence.attributes
+                        .reject{|column| Occurrence::IGNORED_COLUMNS_OUTPUT.include?(column)}
+                        .map{|k,v| response[k] = v }
+
+              response["recorded"] = jsonld_occurrence_recordings(occurrence)
+              response["identified"] = jsonld_occurrence_identifications(occurrence)
+              response["associatedReferences"] = jsonld_occurrence_references(occurrence)
+              JSON.pretty_generate(response)
+            rescue
+              halt 404, {}.to_json
+            end
+          end
+
           app.get '/occurrence/:id.json' do
             content_type "application/ld+json", charset: 'utf-8'
             response = jsonld_occurrence_context
