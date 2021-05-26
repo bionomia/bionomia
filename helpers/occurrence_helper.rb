@@ -93,6 +93,16 @@ module Sinatra
           }
         end
 
+        def occurrence_api_404
+          if params[:callback]
+            content_type "application/x-javascript", charset: 'utf-8'
+            halt 404, params[:callback] + '(' + {}.to_json + ');'
+          else
+            content_type "application/json", charset: 'utf-8'
+            halt 404, {}.to_json
+          end
+        end
+
       end
     end
   end

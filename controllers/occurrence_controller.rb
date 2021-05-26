@@ -9,14 +9,12 @@ module Sinatra
 
           app.get '/occurrences/search' do
             if !params[:datasetKey] || params[:datasetKey].empty?
-              content_type "application/json", charset: 'utf-8'
-              halt 404, {}.to_json
+              occurrence_api_404
             end
             if !params[:occurrenceID] || params[:occurrenceID].empty?
-              content_type "application/json", charset: 'utf-8'
-              halt 404, {}.to_json
+              occurrence_api_404
             end
-            content_type "application/ld+json", charset: 'utf-8'
+
             response = jsonld_occurrence_context
             response["@context"]["opensearch"] = "http://a9.com/-/spec/opensearch/1.1/"
 
@@ -54,7 +52,13 @@ module Sinatra
               dataFeedElement: formatted_occurrences
             }
 
-            JSON.pretty_generate(response.merge(feed_obj))
+            if params[:callback]
+              content_type "application/x-javascript", charset: 'utf-8'
+              params[:callback] + '(' + JSON.pretty_generate(response.merge(feed_obj)) + ');'
+            else
+              content_type "application/ld+json", charset: 'utf-8'
+              JSON.pretty_generate(response.merge(feed_obj))
+            end
           end
 
           app.get '/occurrence/:id.json' do
