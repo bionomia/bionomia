@@ -19,14 +19,14 @@ module Sinatra
                         .map{|o| ["#{o}", "http://rs.tdwg.org/dwc/terms/#{o}"] if !ignore_cols.include?(o) }
           ]
           response["@context"] = {
-              "@vocab" => "http://schema.org/",
-              "identified" => "http://rs.tdwg.org/dwc/iri/identifiedBy",
-              "recorded" => "http://rs.tdwg.org/dwc/iri/recordedBy",
-              "associatedReferences" => "http://rs.tdwg.org/dwc/terms/associatedReferences",
-              "PreservedSpecimen" => "http://rs.tdwg.org/dwc/terms/PreservedSpecimen",
-              "creator" => "http://purl.org/dc/terms/creator",
-              "created" => "http://purl.org/dc/terms/created",
-              "modified" => "http://purl.org/dc/terms/modified"
+              "@vocab": "http://schema.org/",
+              identified: "http://rs.tdwg.org/dwc/iri/identifiedBy",
+              recorded: "http://rs.tdwg.org/dwc/iri/recordedBy",
+              associatedReferences: "http://rs.tdwg.org/dwc/terms/associatedReferences",
+              PreservedSpecimen: "http://rs.tdwg.org/dwc/terms/PreservedSpecimen",
+              creator: "http://purl.org/dc/terms/creator",
+              created: "http://purl.org/dc/terms/created",
+              modified: "http://purl.org/dc/terms/modified"
           }.merge(dwc_contexts)
           response
         end
@@ -38,21 +38,25 @@ module Sinatra
             if !o.claimant.orcid.nil?
               creator = {
                 "@type": "Person",
-                "@id": "https://orcid.org/#{o.claimant.orcid}",
-                name: o.claimant.fullname
+                "@id": "https://bionomia.net/#{o.claimant.orcid}",
+                sameAs: "https://bionomia.net/#{o.claimant.orcid}",
+                givenName: "#{o.claimant.given}",
+                familyName: "#{o.claimant.family}",
+                name: "#{o.claimant.fullname}",
+                alternateName: o.claimant.other_names.present? ? o.claimant.other_names.split("|") : []
               }
             end
             {
-                "@type" => "Person",
-                "@id" => "#{Settings.base_url}/#{o.user.identifier}",
-                "sameAs" => id_url,
-                "givenName" => "#{o.user.given}",
-                "familyName" => "#{o.user.family}",
-                "name" => "#{o.user.fullname}",
-                "alternateName" => o.user.other_names.present? ? o.user.other_names.split("|") : [],
-                "creator" => creator,
-                "created" => o.created.to_time.iso8601,
-                "modified" => !o.updated.nil? ? o.updated.to_time.iso8601 : nil
+                "@type": "Person",
+                "@id": "#{Settings.base_url}/#{o.user.identifier}",
+                sameAs: id_url,
+                givenName: "#{o.user.given}",
+                familyName: "#{o.user.family}",
+                name: "#{o.user.fullname}",
+                alternateName: o.user.other_names.present? ? o.user.other_names.split("|") : [],
+                creator: creator,
+                created: o.created.to_time.iso8601,
+                modified: !o.updated.nil? ? o.updated.to_time.iso8601 : nil
               }
           }
         end
@@ -64,31 +68,35 @@ module Sinatra
             if !o.claimant.orcid.nil?
               creator = {
                 "@type": "Person",
-                "@id": "https://orcid.org/#{o.claimant.orcid}",
-                name: o.claimant.fullname
+                "@id": "https://bionomia.net/#{o.claimant.orcid}",
+                sameAs: "https://orcid.org/#{o.claimant.orcid}",
+                givenName: "#{o.claimant.given}",
+                familyName: "#{o.claimant.family}",
+                name: "#{o.claimant.fullname}",
+                alternateName: o.claimant.other_names.present? ? o.claimant.other_names.split("|") : []
               }
             end
             {
-                "@type" => "Person",
-                "@id" => "#{Settings.base_url}/#{o.user.identifier}",
-                "sameAs" => id_url,
-                "givenName" => "#{o.user.given}",
-                "familyName" => "#{o.user.family}",
-                "name" => "#{o.user.fullname}",
-                "alternateName" => o.user.other_names.present? ? o.user.other_names.split("|") : [],
-                "creator" => creator,
-                "created" => o.created.to_time.iso8601,
-                "modified" => !o.updated.nil? ? o.updated.to_time.iso8601 : nil
-              }
+              "@type": "Person",
+              "@id": "#{Settings.base_url}/#{o.user.identifier}",
+              sameAs: id_url,
+              givenName: "#{o.user.given}",
+              familyName: "#{o.user.family}",
+              name: "#{o.user.fullname}",
+              alternateName: o.user.other_names.present? ? o.user.other_names.split("|") : [],
+              creator: creator,
+              created: o.created.to_time.iso8601,
+              modified: !o.updated.nil? ? o.updated.to_time.iso8601 : nil
+            }
           }
         end
 
         def jsonld_occurrence_references(occurrence)
           occurrence.articles.map{|a| {
-                "@type" => "ScholarlyArticle",
-                "@id" => "https://doi.org/#{a.doi}",
-                "sameAs" => "https://doi.org/#{a.doi}",
-                "description" => a.citation
+                "@type": "ScholarlyArticle",
+                "@id": "https://doi.org/#{a.doi}",
+                sameAs: "https://doi.org/#{a.doi}",
+                description: a.citation
               }
           }
         end
