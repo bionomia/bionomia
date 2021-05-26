@@ -34,8 +34,7 @@ module Bionomia
           "attribution",
           "bionomia"
         ],
-        image: "https://bionomia.net/images/logo.png",
-        resources: []
+        image: "https://bionomia.net/images/logo.png"
       }
     end
 
@@ -55,6 +54,22 @@ module Bionomia
       "problem_collector_dates.csv"
     end
 
+    def users_resource_size
+      File.size(File.join(@folder, users_file + ".zip")) rescue nil
+    end
+
+    def occurrences_resource_size
+      File.size(File.join(@folder, occurrences_file + ".zip")) rescue nil
+    end
+
+    def attributions_resource_size
+      File.size(File.join(@folder, attributions_file + ".zip")) rescue nil
+    end
+
+    def problem_collectors_resource_size
+      File.size(File.join(@folder, problem_collectors_file + ".zip")) rescue nil
+    end
+
     def user_resource
       {
         name: "users",
@@ -63,6 +78,7 @@ module Bionomia
         compression: "zip",
         mediatype: "text/csv",
         encoding: "utf-8",
+        bytes: users_resource_size,
         profile: "tabular-data-resource",
         schema: {
           fields: [
@@ -103,6 +119,7 @@ module Bionomia
         compression: "zip",
         mediatype: "text/csv",
         encoding: "utf-8",
+        bytes: occurrences_resource_size,
         profile: "tabular-data-resource",
         schema: {
           fields: fields
@@ -119,6 +136,7 @@ module Bionomia
         compression: "zip",
         mediatype: "text/csv",
         encoding: "utf-8",
+        bytes: attributions_resource_size,
         profile: "tabular-data-resource",
         schema: {
           fields: [
@@ -160,6 +178,7 @@ module Bionomia
         compression: "zip",
         mediatype: "text/csv",
         encoding: "utf-8",
+        bytes: problem_collectors_resource_size,
         profile: "tabular-data-resource",
         schema: {
           fields: [
@@ -202,9 +221,6 @@ module Bionomia
 
       add_resources
 
-      #Create datapackage.json
-      File.open(File.join(@folder, "datapackage.json"), 'wb') { |file| file.write(JSON.pretty_generate(@package)) }
-
       #Create empty data files
       create_data_files
 
@@ -224,6 +240,12 @@ module Bionomia
         File.delete(fn)
       end
       GC.compact
+
+      # Add resources again to capture file sizes
+      add_resources
+
+      #Create datapackage.json
+      File.open(File.join(@folder, "datapackage.json"), 'wb') { |file| file.write(JSON.pretty_generate(@package)) }
     end
 
     def flush_existing
@@ -234,6 +256,7 @@ module Bionomia
     end
 
     def add_resources
+      @package[:resources] = []
       @package[:resources] << user_resource
       @package[:resources] << occurrence_resource
       @package[:resources] << attribution_resource
