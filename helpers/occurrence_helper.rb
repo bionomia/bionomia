@@ -39,7 +39,7 @@ module Sinatra
               creator = {
                 "@type": "Person",
                 "@id": "https://bionomia.net/#{o.claimant.orcid}",
-                sameAs: "https://bionomia.net/#{o.claimant.orcid}",
+                sameAs: "https://orcid.org/#{o.claimant.orcid}",
                 givenName: "#{o.claimant.given}",
                 familyName: "#{o.claimant.family}",
                 name: "#{o.claimant.fullname}",
