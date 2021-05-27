@@ -102,10 +102,11 @@ elsif options[:counter]
   Occurrence.counter_culture_fix_counts only: :dataset
   puts "Counters rebuilt".green
 elsif options[:verify]
-  url = "https://api.gbif.org/v1/occurrence/search?limit=0&dataset_key="
   Dataset.where("occurrences_count > 1000").find_each do |d|
     if d.current_occurrences_count < d.occurrences_count
       puts d.datasetKey.red
+    else
+      puts d.datasetKey.green
     end
   end
 end
