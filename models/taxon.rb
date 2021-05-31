@@ -90,4 +90,17 @@ class Taxon < ActiveRecord::Base
               .order("min_eventDate")
   end
 
+  def timeline_identified(start_year: 0, end_year: Time.now.year)
+    Occurrence.select("MIN(occurrences.dateIdentified_processed) AS min_eventDate, MAX(occurrences.dateIdentified_processed) AS max_eventDate, user_occurrences.user_id")
+              .joins(:user_occurrences)
+              .joins(:taxon_occurrence)
+              .where(user_occurrences: { visible: true })
+              .where(user_occurrences: { action: ['identified', 'identified,recorded', 'recorded,identified'] })
+              .where.not(dateIdentified_processed: nil)
+              .where("YEAR(dateIdentified_processed) BETWEEN ? AND ?", start_year, end_year)
+              .where(taxon_occurrence: { taxon_id: id })
+              .group("user_occurrences.user_id")
+              .order("min_eventDate")
+  end
+
 end

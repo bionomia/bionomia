@@ -136,10 +136,14 @@ module Sinatra
           app.get '/taxon/:taxon/visualizations' do
             taxon_from_param
             @action = "collected"
+            if ["identified","collected"].include?(params[:action])
+              @action = params[:action]
+            end
             search_user_taxa
             locals = {
               active_page: "taxa",
-              active_tab: "visualizations"
+              active_tab: "visualizations",
+              active_subtab: @action
             }
             start_year = 0
             end_year = Time.now.year
@@ -149,7 +153,12 @@ module Sinatra
             if params[:end_year] && !params[:end_year].empty?
               end_year = params[:end_year].to_i
             end
-            @timeline = @taxon.timeline_recorded(start_year: start_year, end_year: end_year).map do |t|
+            if @action == "collected"
+              data = @taxon.timeline_recorded(start_year: start_year, end_year: end_year)
+            elsif @action == "identified"
+              data = @taxon.timeline_identified(start_year: start_year, end_year: end_year)
+            end
+              @timeline = data.map do |t|
               u = User.find(t.user_id)
               card = haml :'partials/user/tooltip', layout: false, locals: { user: u, stats: t }
               [ u.identifier,

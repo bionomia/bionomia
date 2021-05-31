@@ -116,6 +116,7 @@
       = I18n.t('general.settings')
 
 = haml :'partials/taxa/tabs', layout:false, locals: { active_tab: locals[:active_tab] }
+= haml :'partials/taxa/people_viz_nav', layout: false, locals: { active_subtab: locals[:active_subtab] }
 
 %h3{class:"mt-3"}= I18n.t('taxa.timeline')
 
@@ -128,6 +129,7 @@
     %div{class:"input-group-prepend"}
       %span{class:"input-group-text"}= I18n.t('taxa.end_year')
     %input{type:"text", class:"form-control", name:"end_year", value:"#{params[:end_year]}"}
+  %input{type: :hidden, name: "action", value: "#{@action}"}
   %input{type: :submit, class:"btn btn-success btn-sm medium-margins align-self-start", value:"#{I18n.t('general.search')}"}
 
 - if @timeline.size == 0
