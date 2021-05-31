@@ -39,8 +39,6 @@
           dataTable.addColumn({ type: 'date', id: 'End' });
           dataTable.addRows(timeLine());
 
-          //dataTable.addRow(["Harry Hoogstraal", null, "Born 1917; Died 1968", new Date(1917, 2, 24), new Date(1986, 2, 24)]);
-
           options = {
             height: dataTable.getNumberOfRows() * rowHeight + 50,
             timeline: {
@@ -119,5 +117,9 @@
 = haml :'partials/taxa/tabs', layout:false, locals: { active_tab: locals[:active_tab] }
 
 %h3{class:"mt-3"}= I18n.t('taxa.timeline')
+
+- if @timeline.size == 0
+  %div{class: "alert alert-warning tiny-margins", role: "alert"}
+    = I18n.t('taxa.none_collected', taxon: h(@taxon.family))
 
 %div{id: "timeline", style:"height:100%", class:"mt-3"}
