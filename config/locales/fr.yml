@@ -567,7 +567,8 @@ fr:
         one: "résultat de la recherche pour"
         other: "résultats de la recherche pour"
     people: Personnes
-    visualizations: Visualizations
+    visualizations: Visualisations
+    timeline: Chronologie
     agent_strings: Chaînes d'agent
     collected: Collectés
     identified: Identifiés

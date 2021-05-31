@@ -142,8 +142,13 @@ module Sinatra
               active_tab: "visualizations"
             }
             @timeline = @taxon.timeline_recorded.map do |t|
-              user = User.find(t.user_id)
-              [ user.identifier, user.fullname, t.min_eventDate.to_s, t.max_eventDate.to_s ]
+              u = User.find(t.user_id)
+              card = haml :'partials/user/tooltip', layout: false, locals: { user: u, stats: t }
+              [ u.identifier,
+                u.fullname,
+                card,
+                t.min_eventDate.to_s,
+                t.max_eventDate.to_s ]
             end
             haml :'taxa/visualizations', locals: locals
           end

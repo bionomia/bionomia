@@ -567,7 +567,8 @@ es:
         one: "resultado de la búsqueda por"
         other: "resultados de la búsqueda por"
     people: Personas
-    visualizations: Visualizations
+    visualizations: Visualizaciones
+    timeline: Cronología
     agent_strings: Cuerdas de agente
     collected: Colectó
     identified: Identificó

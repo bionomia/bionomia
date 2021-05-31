@@ -17,23 +17,20 @@
             startDate = "",
             endDate = "";
         arr = $.map(timeline, function( n, i ) {
-          startDate = new Date(n[2]);
-          endDate = new Date(n[3]);
-          tooltip = "<p style=\"white-space: nowrap;padding:0.5em;\"><strong>" + n[1] + "</strong>";
-          tooltip += "<br>" + startDate.getUTCFullYear();
-          if (startDate.getUTCFullYear() != endDate.getUTCFullYear()) {
-            tooltip += " – " + endDate.getUTCFullYear();
-          }
-          tooltip += "</p>";
-          return [[ n[1], null, tooltip, startDate, endDate ]];
+          startDate = new Date(n[3]);
+          endDate = new Date(n[4]);
+          return [[ n[1], null, n[2], startDate, endDate ]];
         });
         return arr;
       }
 
       function drawVisualizations() {
-        var container = $('#timeline')[0];
-        var chart = new google.visualization.Timeline(container);
-        var dataTable = new google.visualization.DataTable();
+        var container = $('#timeline')[0],
+            chart = new google.visualization.Timeline(container),
+            dataTable = new google.visualization.DataTable(),
+            rowHeight = 41,
+            options = {};
+
         if (timeline.length > 0) {
           dataTable.addColumn({ type: 'string', id: 'Fullname' });
           dataTable.addColumn({ type: 'string', id: 'Bar label' });
@@ -43,6 +40,13 @@
           dataTable.addRows(timeLine());
 
           //dataTable.addRow(["Harry Hoogstraal", null, "Born 1917; Died 1968", new Date(1917, 2, 24), new Date(1986, 2, 24)]);
+
+          options = {
+            height: dataTable.getNumberOfRows() * rowHeight + 50,
+            timeline: {
+              singleColor: '#3A7179'
+            }
+          };
 
           google.visualization.events.addListener(chart, 'onmouseover', function(e) {
             if (e.row !== null) { $('#timeline').css('cursor','pointer'); }
@@ -55,16 +59,6 @@
             }
           });
 
-          // Calculate height
-          var rowHeight = 41;
-          var chartHeight = dataTable.getNumberOfRows() * rowHeight + 50;
-
-          var options = {
-            height: chartHeight,
-            timeline: {
-              singleColor: '#3A7179'
-            }
-          };
           chart.draw(dataTable, options);
         }
       }
@@ -123,5 +117,7 @@
       = I18n.t('general.settings')
 
 = haml :'partials/taxa/tabs', layout:false, locals: { active_tab: locals[:active_tab] }
+
+%h3{class:"mt-3"}= I18n.t('taxa.timeline')
 
 %div{id: "timeline", style:"height:100%", class:"mt-3"}

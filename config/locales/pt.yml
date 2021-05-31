@@ -567,7 +567,8 @@ pt:
         one: "resultado da pesquisa para"
         other: "resultado da pesquisa para"
     people: Pessoas
-    visualizations: Visualizations
+    visualizations: Visualizações
+    timeline: Linha do tempo
     agent_strings: Cadeia de autores
     collected: Coletado
     identified: Identificado
