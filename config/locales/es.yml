@@ -598,6 +598,8 @@ es:
     none_identified: "Nadie ha identificado %{taxon}"
     no_agents: "Ningún agente ha colectado o identificado %{taxon}"
     taxon_string: Familia taxonómica
+    start_year: Año de inicio
+    end_year: Año final
   user:
     caches_rebuilt: Se han reconstruido las memorias caché.
     overview: Descripción general

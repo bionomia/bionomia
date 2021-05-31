@@ -598,6 +598,8 @@ en:
     none_identified: "No one has identified %{taxon}"
     no_agents: "No agents have collected or identified %{taxon}"
     taxon_string: Taxon Family
+    start_year: Start Year
+    end_year: End Year
   user:
     caches_rebuilt: Caches were rebuilt.
     overview: Overview

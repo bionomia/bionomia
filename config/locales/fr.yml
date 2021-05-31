@@ -598,6 +598,8 @@ fr:
     none_identified: "Personne a identifié %{taxon}"
     no_agents: "Acun chaîne d'agent a collecté ou identifié %{taxon}"
     taxon_string: Famille taxonomique
+    start_year: Année de début
+    end_year: Fin d'année
   user:
     caches_rebuilt: Les caches ont été reconstruits.
     overview: Aperçu
