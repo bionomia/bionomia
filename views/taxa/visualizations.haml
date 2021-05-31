@@ -31,7 +31,11 @@
             rowHeight = 41,
             options = {};
 
-        if (timeline.length > 0) {
+        if (timeline.length == 1) {
+          return;
+        }
+
+        if (timeline.length > 1) {
           dataTable.addColumn({ type: 'string', id: 'Fullname' });
           dataTable.addColumn({ type: 'string', id: 'Bar label' });
           dataTable.addColumn({ type: 'string', role: 'tooltip' });
@@ -120,20 +124,28 @@
 
 %h3{class:"mt-3"}= I18n.t('taxa.timeline')
 
-%form{id:"form-taxon-visualization", method: "get", action: "/taxon/#{@taxon.family}/visualizations", "accept-charset" => "UTF-8", class: "form-inline mt-3"}
-  %div{class:"input-group input-group-sm col-2 pl-0"}
-    %div{class:"input-group-prepend"}
-      %span{class:"input-group-text"}= I18n.t('taxa.start_year')
-    %input{type:"text", class:"form-control", name:"start_year", value:"#{params[:start_year]}"}
-  %div{class:"input-group input-group-sm col-2 pl-0"}
-    %div{class:"input-group-prepend"}
-      %span{class:"input-group-text"}= I18n.t('taxa.end_year')
-    %input{type:"text", class:"form-control", name:"end_year", value:"#{params[:end_year]}"}
-  %input{type: :hidden, name: "action", value: "#{@action}"}
-  %input{type: :submit, class:"btn btn-success btn-sm medium-margins align-self-start", value:"#{I18n.t('general.search')}"}
-
 - if @timeline.size == 0
   %div{class: "alert alert-warning tiny-margins", role: "alert"}
     = I18n.t('taxa.none_collected', taxon: h(@taxon.family))
+
+- elsif @timeline.size == 1
+  %ul{class:"list-unstyled"}
+    %li
+      %a{href: "/#{@timeline[0][0]}/specimens?family=#{@taxon.family}&action=#{@action}"}
+        #{@timeline[0][1]}
+      (#{Date.parse(@timeline[0][3]).strftime("%F")} – #{Date.parse(@timeline[0][4]).strftime("%F")})
+
+- else
+  %form{id:"form-taxon-visualization", method: "get", action: "/taxon/#{@taxon.family}/visualizations", "accept-charset" => "UTF-8", class: "form-inline mt-3"}
+    %div{class:"input-group input-group-sm col-2 pl-0"}
+      %div{class:"input-group-prepend"}
+        %span{class:"input-group-text"}= I18n.t('taxa.start_year')
+      %input{type:"text", class:"form-control", name:"start_year", value:"#{params[:start_year]}"}
+    %div{class:"input-group input-group-sm col-2 pl-0"}
+      %div{class:"input-group-prepend"}
+        %span{class:"input-group-text"}= I18n.t('taxa.end_year')
+      %input{type:"text", class:"form-control", name:"end_year", value:"#{params[:end_year]}"}
+    %input{type: :hidden, name: "action", value: "#{@action}"}
+    %input{type: :submit, class:"btn btn-success btn-sm medium-margins align-self-start", value:"#{I18n.t('general.search')}"}
 
 %div{id: "timeline", style:"height:100%;", class:"mt-4"}
