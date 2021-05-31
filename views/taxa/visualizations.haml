@@ -126,7 +126,10 @@
 
 - if @timeline.size == 0
   %div{class: "alert alert-warning tiny-margins", role: "alert"}
-    = I18n.t('taxa.none_collected', taxon: h(@taxon.family))
+    - if @action == "collected"
+      = I18n.t('taxa.none_collected', taxon: h(@taxon.family))
+    - else
+      = I18n.t('taxa.none_identified', taxon: h(@taxon.family))
 
 - elsif @timeline.size == 1
   %ul{class:"list-unstyled"}
