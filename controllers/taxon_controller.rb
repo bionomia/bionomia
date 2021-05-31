@@ -155,8 +155,8 @@ module Sinatra
               [ u.identifier,
                 u.fullname,
                 card,
-                t.min_eventDate.to_s,
-                t.max_eventDate.to_s ]
+                t.min_eventDate.to_time.iso8601,
+                t.max_eventDate.to_time.iso8601 ]
             end
             haml :'taxa/visualizations', locals: locals
           end
