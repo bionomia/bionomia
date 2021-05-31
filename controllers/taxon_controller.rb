@@ -141,7 +141,15 @@ module Sinatra
               active_page: "taxa",
               active_tab: "visualizations"
             }
-            @timeline = @taxon.timeline_recorded.map do |t|
+            start_year = 0
+            end_year = Time.now.year
+            if params[:start_year] && !params[:start_year].empty?
+              start_year = params[:start_year].to_i
+            end
+            if params[:end_year] && !params[:end_year].empty?
+              end_year = params[:end_year].to_i
+            end
+            @timeline = @taxon.timeline_recorded(start_year: start_year, end_year: end_year).map do |t|
               u = User.find(t.user_id)
               card = haml :'partials/user/tooltip', layout: false, locals: { user: u, stats: t }
               [ u.identifier,
