@@ -567,6 +567,7 @@ en:
         one: "search result for"
         other: "search results for"
     people: People
+    visualizations: Visualizations
     agent_strings: Agent Strings
     collected: Collected
     identified: Identified

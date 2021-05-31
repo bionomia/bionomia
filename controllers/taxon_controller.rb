@@ -133,6 +133,21 @@ module Sinatra
             haml :'taxa/agents_unclaimed', locals: locals
           end
 
+          app.get '/taxon/:taxon/visualizations' do
+            taxon_from_param
+            @action = "collected"
+            search_user_taxa
+            locals = {
+              active_page: "taxa",
+              active_tab: "visualizations"
+            }
+            @timeline = @taxon.timeline_recorded.map do |t|
+              user = User.find(t.user_id)
+              [ user.identifier, user.fullname, t.min_eventDate.to_s, t.max_eventDate.to_s ]
+            end
+            haml :'taxa/visualizations', locals: locals
+          end
+
         end
 
       end

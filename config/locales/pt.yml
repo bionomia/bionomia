@@ -567,6 +567,7 @@ pt:
         one: "resultado da pesquisa para"
         other: "resultado da pesquisa para"
     people: Pessoas
+    visualizations: Visualizations
     agent_strings: Cadeia de autores
     collected: Coletado
     identified: Identificado

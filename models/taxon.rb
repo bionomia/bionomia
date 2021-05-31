@@ -77,4 +77,16 @@ class Taxon < ActiveRecord::Base
       .count
   end
 
+  def timeline_recorded
+    Occurrence.select("MIN(occurrences.eventDate_processed) AS min_eventDate, MAX(occurrences.eventDate_processed) AS max_eventDate, user_occurrences.user_id")
+              .joins(:user_occurrences)
+              .joins(:taxon_occurrence)
+              .where(user_occurrences: { visible: true })
+              .where(user_occurrences: { action: ['recorded', 'identified,recorded', 'recorded,identified'] })
+              .where.not(eventDate_processed: nil)
+              .where(taxon_occurrence: { taxon_id: id })
+              .group("user_occurrences.user_id")
+              .order("min_eventDate")
+  end
+
 end

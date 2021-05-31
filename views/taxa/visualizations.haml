@@ -1,0 +1,127 @@
+-content_for :title do
+  #{@taxon.family} Visualizations
+
+- content_for :scripts do
+  %script{src: "/js/application.js"}
+  %script{src: "//www.gstatic.com/charts/loader.js"}
+  %script{src: "/js/jquery.throttledresize.js"}
+
+  :javascript
+    $(function() {
+      Application.init("", "GET", "/taxa");
+
+      var timeline = #{@timeline};
+
+      function timeLine() {
+        var tooltip = "",
+            startDate = "",
+            endDate = "";
+        arr = $.map(timeline, function( n, i ) {
+          startDate = new Date(n[2]);
+          endDate = new Date(n[3]);
+          tooltip = "<p style=\"white-space: nowrap;padding:0.5em;\"><strong>" + n[1] + "</strong>";
+          tooltip += "<br>" + startDate.getUTCFullYear();
+          if (startDate.getUTCFullYear() != endDate.getUTCFullYear()) {
+            tooltip += " – " + endDate.getUTCFullYear();
+          }
+          tooltip += "</p>";
+          return [[ n[1], null, tooltip, startDate, endDate ]];
+        });
+        return arr;
+      }
+
+      function drawVisualizations() {
+        var container = $('#timeline')[0];
+        var chart = new google.visualization.Timeline(container);
+        var dataTable = new google.visualization.DataTable();
+        if (timeline.length > 0) {
+          dataTable.addColumn({ type: 'string', id: 'Fullname' });
+          dataTable.addColumn({ type: 'string', id: 'Bar label' });
+          dataTable.addColumn({ type: 'string', role: 'tooltip' });
+          dataTable.addColumn({ type: 'date', id: 'Start' });
+          dataTable.addColumn({ type: 'date', id: 'End' });
+          dataTable.addRows(timeLine());
+
+          //dataTable.addRow(["Harry Hoogstraal", null, "Born 1917; Died 1968", new Date(1917, 2, 24), new Date(1986, 2, 24)]);
+
+          google.visualization.events.addListener(chart, 'onmouseover', function(e) {
+            if (e.row !== null) { $('#timeline').css('cursor','pointer'); }
+          });
+          google.visualization.events.addListener(chart, 'onmouseout', function() { $('#timeline').css('cursor','default'); });
+          google.visualization.events.addListener(chart, 'select', function() {
+            var sel = chart.getSelection()[0];
+            if (typeof sel.row !== "undefined" && sel.row !== null) {
+              window.location = "/" + timeline[sel.row][0] + "/specimens?action=collected";
+            }
+          });
+
+          // Calculate height
+          var rowHeight = 41;
+          var chartHeight = dataTable.getNumberOfRows() * rowHeight + 50;
+
+          var options = {
+            height: chartHeight,
+            timeline: {
+              singleColor: '#3A7179'
+            }
+          };
+          chart.draw(dataTable, options);
+        }
+      }
+
+      google.charts.load('current', {
+        packages: ['timeline'],
+        mapsApiKey: "#{Settings.google.api_key}"
+      });
+      google.charts.setOnLoadCallback(drawVisualizations);
+
+      $(window).on("throttledresize", function(event) {
+        drawVisualizations();
+      });
+
+    });
+
+-content_for :jumbotron do
+  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
+    %div{class:"mr-auto p-2"}
+      - if @taxon.has_image?
+        %div{class:"media"}
+          %img{src: "/images/taxa/#{@taxon.image.file_name}", alt:"#{@taxon.family}", class:"mr-4"}
+          %div{class:"media-body"}
+            %h1{class:"h2 mt-0"} #{@taxon.family}
+            %p{class: "lead text-muted"}
+              - if @pagy && @pagy.count > 0
+                #{number_to_human(@pagy.count, units: :"taxa.number_#{@action}", delimiter: ",", precision: 0)}
+              - else
+                - if @action == "collected"
+                  = I18n.t('taxa.none_collected', taxon: h(@taxon.family))
+                - else
+                  = I18n.t('taxa.none_identified', taxon: h(@taxon.family))
+        %p{class:"small text-muted mb-0 mt-2"}
+          - if @taxon.image.credit
+            #{@taxon.image.credit}
+            %br
+          - if @taxon.image.licenseURL
+            %a{href: "#{@taxon.image.licenseURL}"}= @taxon.image.licenseURL
+      - else
+        %h1{class:"h2 mt-0"} #{@taxon.family}
+        %p{class: "lead text-muted"}
+          - if @pagy && @pagy.count > 0
+            #{number_to_human(@pagy.count, units: :"taxa.number_#{@action}", delimiter: ",", precision: 0)}
+          - else
+            - if @action == "collected"
+              = I18n.t('taxa.none_collected', taxon: h(@taxon.family))
+            - else
+              = I18n.t('taxa.none_identified', taxon: h(@taxon.family))
+
+    = haml :'partials/taxa/search', layout: false
+
+- if admin_authorized?
+  %div{class:"mt-3 mb-3 pt-3 border-top text-center"}
+    %a{href: url("/admin/taxon/#{@taxon.family}")}
+      %i{class:"fas fa-cog"}
+      = I18n.t('general.settings')
+
+= haml :'partials/taxa/tabs', layout:false, locals: { active_tab: locals[:active_tab] }
+
+%div{id: "timeline", style:"height:100%", class:"mt-3"}
