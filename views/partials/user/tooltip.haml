@@ -5,7 +5,7 @@
         %img{src:"#{profile_image(locals[:user], 'medium')}", alt:"#{locals[:user].fullname}", class:"card-img-profile mr-2", width:48, height:48}
       %div{class:"flex-grow-1"}
         %h5{class:"text-nowrap"}
-          #{locals[:user].fullname_reverse}
+          #{locals[:user].fullname}
         - if locals[:user].wikidata
           %p{class:"text-muted mt-0 mb-0 text-nowrap"}= format_lifespan(locals[:user])
         - if locals[:user].country
@@ -21,7 +21,7 @@
   - else
     %div{class: "card-header"}
       %h5{class:"text-nowrap"}
-        #{locals[:user].fullname_reverse}
+        #{locals[:user].fullname}
       - if locals[:user].wikidata
         %p{class:"text-muted mt-0 mb-0 text-nowrap"}= format_lifespan(locals[:user])
       - if locals[:user].country
