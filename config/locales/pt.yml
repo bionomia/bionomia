@@ -596,6 +596,8 @@ pt:
     none_collected_identified: "Ninguém coletou ou identificou %{taxon}"
     none_collected: "Ninguém coletou %{taxon}"
     none_identified: "Ninguém se identificou %{taxon}"
+    none_collected_timeline: "Ninguém coletou %{taxon} e indicou uma data de coleta"
+    none_identified_timeline: "Ninguém se identificou %{taxon} e indicou uma data de identificação"
     no_agents: "Nenhum agente coletou ou identificou %{taxon}"
     taxon_string: Família Taxon
     start_year: Ano de início

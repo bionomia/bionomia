@@ -596,6 +596,8 @@ es:
     none_collected_identified: "Nadie ha colectado o identificado %{taxon}"
     none_collected: "Nadie ha colectado %{taxon}"
     none_identified: "Nadie ha identificado %{taxon}"
+    none_collected_timeline: "Nadie ha colectado %{taxon} y ha indicado una fecha de colecta"
+    none_identified_timeline: "Nadie ha identificado %{taxon} y ha indicado una fecha de identificación"
     no_agents: "Ningún agente ha colectado o identificado %{taxon}"
     taxon_string: Familia taxonómica
     start_year: Año de inicio

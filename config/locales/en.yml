@@ -596,6 +596,8 @@ en:
     none_collected_identified: "No one has collected or identified %{taxon}"
     none_collected: "No one has collected %{taxon}"
     none_identified: "No one has identified %{taxon}"
+    none_collected_timeline: "No one has collected %{taxon} and indicated a collection date"
+    none_identified_timeline: "No one has identified %{taxon} and indicated a determination date"
     no_agents: "No agents have collected or identified %{taxon}"
     taxon_string: Taxon Family
     start_year: Start Year

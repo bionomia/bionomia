@@ -594,8 +594,10 @@ fr:
     unclaimed: Non Attribuées
     example_families: Exemples aléatoires
     none_collected_identified: "Personne a collecté ou identifié %{taxon}"
-    none_collected: "Personne a collecté %{taxon}"
-    none_identified: "Personne a identifié %{taxon}"
+    none_collected: "Personne n'a collecté %{taxon}"
+    none_identified: "Personne n'a identifié %{taxon}"
+    none_collected_timeline: "Personne n'a collecté %{taxon} et indiqué une date de collecte"
+    none_identified_timeline: "Personne n'a collecté %{taxon} et indiqué une date de détermination"
     no_agents: "Acun chaîne d'agent a collecté ou identifié %{taxon}"
     taxon_string: Famille taxonomique
     start_year: Année de début
