@@ -136,7 +136,10 @@
     %li
       %a{href: "/#{@timeline[0][0]}/specimens?family=#{@taxon.family}&action=#{@action}"}
         #{@timeline[0][1]}
-      (#{Date.parse(@timeline[0][3]).strftime("%F")} – #{Date.parse(@timeline[0][4]).strftime("%F")})
+      %span{class:"ml-2 badge badge-light"}
+        #{number_with_delimiter(@timeline[0][5])}
+      #{I18n.t('card.claimed', count: @timeline[0][5])},
+      #{Date.parse(@timeline[0][3]).strftime("%F")} – #{Date.parse(@timeline[0][4]).strftime("%F")}
 
 - else
   %form{id:"form-taxon-visualization", method: "get", action: "/taxon/#{@taxon.family}/visualizations", "accept-charset" => "UTF-8", class: "form-inline mt-3"}

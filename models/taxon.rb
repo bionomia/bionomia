@@ -78,7 +78,7 @@ class Taxon < ActiveRecord::Base
   end
 
   def timeline_recorded(start_year: 0, end_year: Time.now.year)
-    Occurrence.select("MIN(occurrences.eventDate_processed) AS min_eventDate, MAX(occurrences.eventDate_processed) AS max_eventDate, user_occurrences.user_id")
+    Occurrence.select("MIN(occurrences.eventDate_processed) AS min_eventDate, MAX(occurrences.eventDate_processed) AS max_eventDate, user_occurrences.user_id, COUNT(user_occurrences.occurrence_id) AS total")
               .joins(:user_occurrences)
               .joins(:taxon_occurrence)
               .where(user_occurrences: { visible: true })
@@ -91,7 +91,7 @@ class Taxon < ActiveRecord::Base
   end
 
   def timeline_identified(start_year: 0, end_year: Time.now.year)
-    Occurrence.select("MIN(occurrences.dateIdentified_processed) AS min_eventDate, MAX(occurrences.dateIdentified_processed) AS max_eventDate, user_occurrences.user_id")
+    Occurrence.select("MIN(occurrences.dateIdentified_processed) AS min_eventDate, MAX(occurrences.dateIdentified_processed) AS max_eventDate, user_occurrences.user_id, COUNT(user_occurrences.occurrence_id) AS total")
               .joins(:user_occurrences)
               .joins(:taxon_occurrence)
               .where(user_occurrences: { visible: true })

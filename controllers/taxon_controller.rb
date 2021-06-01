@@ -162,10 +162,11 @@ module Sinatra
               u = User.find(t.user_id)
               card = haml :'partials/user/tooltip', layout: false, locals: { user: u, stats: t }
               [ u.identifier,
-                u.fullname_reverse,
+                u.fullname,
                 card,
                 t.min_eventDate.to_time.iso8601,
-                t.max_eventDate.to_time.iso8601 ]
+                t.max_eventDate.to_time.iso8601,
+                t.total ]
             end
             haml :'taxa/visualizations', locals: locals
           end
