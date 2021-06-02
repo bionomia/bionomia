@@ -79,20 +79,24 @@
       %p{class:"m-3 alert alert-warning"}
         %i{class:"fas fa-lock"}
         = I18n.t('profile.private_message_html', specimens: link_to(I18n.t('profile.specimens'), url("/profile/candidates")), settings: link_to(I18n.t('profile.settings'), url("/profile/settings")))
-    %p{class:"m-0"}
+    %p{class:"m-0 pl-3 pr-3"}
       - if @user.is_public?
-        %a{href: url("/#{@user.orcid}"), class:"mr-2 mb-2"}
+        %a{href: url("/#{@user.orcid}"), class:"mr-2 mb-2 text-nowrap"}
           %i{class:"fas fa-users"}
           = I18n.t('profile.public_profile')
-      %a{href: url("/#{@user.identifier}/refresh-stats.json"), class:"profile-flush mr-2 mb-2"}
+      %a{href: url("/#{@user.identifier}/refresh-stats.json"), class:"profile-flush mr-2 mb-2 text-nowrap"}
         %i{class: "fas fa-sync-alt"}
         = I18n.t('general.refresh_stats')
+      %a{href: url("/#{@user.identifier}/refresh.json"), class:"profile-flush mr-2 mb-2 text-nowrap"}
+        %i{class: "fas fa-sync-alt"}
+        = I18n.t('general.refresh_profile')
+        %i{class:"fab fa-orcid"}
       - if locals[:active_page] != "settings"
-        %a{href: url("/profile/settings"), class:"mb-2"}
+        %a{href: url("/profile/settings"), class:"mb-2 text-nowrap"}
           %i{class:"fas fa-cog"}
           = I18n.t('profile.settings')
       - else
-        %a{href: url("/profile"), class:"mb-2"}
+        %a{href: url("/profile"), class:"mb-2 text-nowrap"}
           %i{class:"fas fa-user"}
           = I18n.t('profile.overview')
 

@@ -85,6 +85,10 @@
         %a{href: url("/help-others/#{@viewed_user.identifier}"), class: "mr-2 mb-2"}
           %i{class:"fas fa-hands-helping"}
           = I18n.t('general.help_attribute')
+      - else
+        %a{href: url("/profile"), class:"mr-2 mb-2"}
+          %i{class:"fas fa-user"}
+          = I18n.t('home.your_profile')
 
       - if ( @viewed_user.is_public? || admin_authorized? ) && locals[:active_page] == "overview"
         %a{href: url("/#{@viewed_user.identifier}/refresh-stats.json"), class:"profile-flush mr-2 mb-2"}

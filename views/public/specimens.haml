@@ -4,10 +4,16 @@
 
 - content_for :scripts do
   %script{src: "/js/application.js"}
-  :javascript
-    $(function() {
-      Application.init();
-    });
+  - if authorized? && @user != @viewed_user
+    :javascript
+      $(function() {
+        Application.init(#{@viewed_user.id}, "PUT", "/help-others", "#{@viewed_user.identifier}");
+      });
+  - else
+    :javascript
+      $(function() {
+        Application.init();
+      });
 
 %div{class:"row"}
   = haml :'partials/user/jumbotron', layout: false
@@ -38,7 +44,7 @@
               %i{class:"fas fa-file-code text-dark h5 m-0 p-1"}
               JSON-LD
 
-        %div{class:"table-responsive-lg"}
+        %div{class:"table-responsive-lg overflow-auto"}
           %table{class:"table table-hover table-sm"}
             %thead{class: "thead-light"}
               %tr
@@ -52,19 +58,28 @@
                 %th{scope: "col"}= I18n.t('specimen.institution')
                 %th{scope: "col"}= I18n.t('specimen.catalog_number')
                 %th{scope: "col"}= I18n.t('specimen.type_status')
+                - if authorized? && @user != @viewed_user
+                  %th{scope: "col", class:"btn-selector-wide"}
+                  %th{scope: "col", class:"btn-selector-wide"}
+                  %th{scope: "col"}= I18n.t('specimen.scribe')
 
             %tbody
               - @results.each do |uo|
                 - o = uo.occurrence
                 %tr
-                  %td
-                    - if uo.action == "recorded"
-                      %img{src:"/images/net-unselected.png", alt:"#{I18n.t('user.collected')}", title:"#{I18n.t('user.collected')}", width:18}
-                    - elsif uo.action == "identified"
-                      %img{src:"/images/microscope-unselected.png", alt:"#{I18n.t('user.identified')}", title:"#{I18n.t('user.identified')}", width:18}
-                    - else
-                      %img{src:"/images/net-unselected.png", alt:"#{I18n.t('user.collected')}", title:"#{I18n.t('user.collected')}", width:18}
-                      %img{src:"/images/microscope-unselected.png", alt:"#{I18n.t('user.identified')}", title:"#{I18n.t('user.identified')}", width:18}
+                  - if authorized? && @user != @viewed_user
+                    - disabled = (@viewed_user.id == uo.created_by) ? true : false
+                    %td{class: "selector"}
+                      = haml :'partials/single_selector_preselected', layout: false, locals: { occurrence: uo, user_id: @viewed_user.id }
+                  - else
+                    %td
+                      - if uo.action == "recorded"
+                        %img{src:"/images/net-unselected.png", alt:"#{I18n.t('user.collected')}", title:"#{I18n.t('user.collected')}", width:18}
+                      - elsif uo.action == "identified"
+                        %img{src:"/images/microscope-unselected.png", alt:"#{I18n.t('user.identified')}", title:"#{I18n.t('user.identified')}", width:18}
+                      - else
+                        %img{src:"/images/net-unselected.png", alt:"#{I18n.t('user.collected')}", title:"#{I18n.t('user.collected')}", width:18}
+                        %img{src:"/images/microscope-unselected.png", alt:"#{I18n.t('user.identified')}", title:"#{I18n.t('user.identified')}", width:18}
                   %td
                     - scientific_name = o.scientificName.nil? ? "not recorded" : o.scientificName
                     %a{href: gbif_occurrence_url(o.id), target:"_blank"}
@@ -79,6 +94,22 @@
                   %td #{h(o.institutionCode)}
                   %td #{h(o.catalogNumber)}
                   %td #{h(o.typeStatus)}
+                  - if authorized? && @user != @viewed_user
+                    %td
+                      %button{type:"button", class:"btn btn-sm btn-outline-warning hide", "data-occurrence-id":"#{uo.user_occurrence_id}", disabled: disabled}
+                        = I18n.t('specimen.not_them')
+                    %td
+                      %button{type:"button", class:"btn btn-sm btn-outline-danger remove", "data-occurrence-id":"#{uo.user_occurrence_id}", disabled: disabled}
+                        = I18n.t('specimen.remove')
+                    %td
+                      - if uo.claimant.is_bot?
+                        #{uo.claimant.fullname}
+                      - elsif uo.claimant.is_public?
+                        %a{href: url("/#{uo.claimant.orcid}")} #{uo.claimant.fullname_reverse}
+                      - elsif !uo.claimant.orcid.nil?
+                        %a{href: "https://orcid.org/#{uo.claimant.orcid}"} #{uo.claimant.fullname_reverse}
+                      - else
+                        #{uo.claimant.fullname_reverse}
 
         - if @pagy.pages > 1
           %div{style:"overflow-y:scroll"}
