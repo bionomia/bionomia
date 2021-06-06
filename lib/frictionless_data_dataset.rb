@@ -6,6 +6,7 @@ module Bionomia
 
     def initialize(uuid:, output_directory:)
       @dataset = Dataset.find_by_datasetKey(uuid) rescue nil
+      @created = Time.now
       raise ArgumentError, 'Dataset not found' if @dataset.nil?
       super
     end
@@ -34,7 +35,7 @@ module Bionomia
         description: "#{@dataset.description}",
         datasetKey: @dataset.datasetKey,
         homepage: "https://bionomia.net/dataset/#{@dataset.datasetKey}",
-        created: Time.now.to_time.iso8601,
+        created: @created.to_time.iso8601,
         sources: [
           {
             title: "#{@dataset.title}",
@@ -187,7 +188,7 @@ module Bionomia
     end
 
     def update_frictionless_created
-      @dataset.frictionless_created_at = Time.now
+      @dataset.frictionless_created_at = @created
       @dataset.save
     end
 

@@ -37,6 +37,8 @@
           %a{href: url("/dataset/#{@dataset.datasetKey}/datapackage.json"), alt: "Frictionless Data Descriptor"}
             %img{src:"/images/frictionless.png", alt:"Frictionless Data Descriptor"}
             Frictionless Data Descriptor
+          - if @dataset.frictionless_created_at
+            (#{@dataset.frictionless_created_at})
 
       - @results.in_groups_of(3).each do |group|
         %div{class: "card-deck"}
