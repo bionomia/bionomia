@@ -25,7 +25,7 @@ module Sinatra
             user = User.create_with(
                           family: family,
                           given: given,
-                          orcid: session_data[:uid],
+                          orcid: orcid,
                           email: email,
                           other_names: other_names,
                           country: country,

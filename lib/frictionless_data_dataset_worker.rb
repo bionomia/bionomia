@@ -8,6 +8,7 @@ module Bionomia
       ActiveRecord::Base.connection_pool.with_connection do
         fd = FrictionlessDataDataset.new(data)
         fd.create_package
+        fd.update_frictionless_created
       end
     end
 

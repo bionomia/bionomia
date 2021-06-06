@@ -186,6 +186,11 @@ module Bionomia
       problems.close
     end
 
+    def update_frictionless_created
+      @dataset.frictionless_created_at = Time.now
+      @dataset.save
+    end
+
   end
 
 end
