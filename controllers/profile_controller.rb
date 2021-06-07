@@ -77,6 +77,16 @@ module Sinatra
             haml :'profile/overview', locals: { active_page: "profile" }
           end
 
+          app.get '/profile.json' do
+            protected!
+            content_type "application/json", charset: 'utf-8'
+            {
+              name: @user.fullname,
+              orcid: @user.orcid,
+              image_url: profile_image(@user, 'thumbnail')
+            }.to_json
+          end
+
           app.post '/profile/image' do
             protected!
             file_name = upload_image(app.root)
