@@ -80,10 +80,12 @@ module Sinatra
           app.get '/profile.json' do
             protected!
             content_type "application/json", charset: 'utf-8'
+            @stats = cache_block("#{@user.identifier}-stats") { user_stats(@user) }
             {
               name: @user.fullname,
               orcid: @user.orcid,
-              image_url: profile_image(@user, 'thumbnail')
+              image_url: profile_image(@user, 'thumbnail'),
+              stats: @stats
             }.to_json
           end
 
