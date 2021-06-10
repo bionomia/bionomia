@@ -84,7 +84,7 @@ module Sinatra
             {
               name: @user.fullname,
               orcid: @user.orcid,
-              image_url: profile_image(@user, 'thumbnail'),
+              image_url: profile_image(@user, 'medium'),
               stats: @stats
             }.to_json
           end

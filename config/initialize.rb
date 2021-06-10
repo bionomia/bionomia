@@ -9,10 +9,14 @@ module Sinatra
           app.use Rack::Locale
           app.use Rack::MethodOverride
 
+          secure = app.environment == :production ? true : false
+
           app.use Rack::Session::Cookie, key: 'rack.session',
                                      path: '/',
                                      secret: Settings.orcid.key,
                                      domain: Settings.cookie_domain,
+                                     httpdonly: true,
+                                     secure: secure,
                                      same_site: :lax
           app.use Rack::Protection::AuthenticityToken
 
