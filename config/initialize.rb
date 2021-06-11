@@ -9,7 +9,13 @@ module Sinatra
           app.use Rack::Locale
           app.use Rack::MethodOverride
 
-          secure = app.environment == :production ? true : false
+          secure = false
+          if app.environment == :production
+            secure = true
+            app.use Rack::Tracker do
+              handler :google_analytics, { tracker: Settings.google.analytics }
+            end
+          end
 
           app.use Rack::Session::Cookie, key: 'rack.session',
                                      path: '/',
@@ -50,12 +56,6 @@ module Sinatra
            end
 
            app.use Sinatra::Bionomia::Model::QueryCache
-
-           if app.environment == :production
-             app.use Rack::Tracker do
-               handler :google_analytics, { tracker: Settings.google.analytics }
-             end
-           end
 
         end
 

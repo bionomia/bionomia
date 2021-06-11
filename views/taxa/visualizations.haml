@@ -7,19 +7,89 @@
   %script{src: "/js/jquery.throttledresize.js"}
 
   :javascript
+    $.fn.outerHTML = function(s) {
+    return (s)
+      ? this.before(s).remove()
+      : jQuery("<p>").append(this.eq(0).clone()).html();
+    }
+
     $(function() {
       Application.init("", "GET", "/taxa");
 
       var timeline = #{@timeline};
 
+      function range(a, b) {
+        if (a === b) {
+          return a.toString();
+        } else {
+          return a + " – " + b;
+        }
+      }
+
+      function popup(html, range) {
+        return $(html).find(".range").text(range).parents(".card").outerHTML();
+      }
+
       function timeLine() {
-        var tooltip = "",
-            startDate = "",
-            endDate = "";
         arr = $.map(timeline, function( n, i ) {
-          startDate = new Date(n[3]);
-          endDate = new Date(n[4]);
-          return [[ n[1], null, n[2], startDate, endDate ]];
+          var startDate = new Date(n[3]);
+          var endDate = new Date(n[4]);
+          var startYear = startDate.getFullYear();
+          var endYear = endDate.getFullYear();
+          var birthDate = (n[5] !== "") ? new Date(n[5]) : "";
+          var deathDate = (n[6] !== "") ? new Date(n[6]) : "";
+          var part = [];
+          if (birthDate && deathDate) {
+            var proper_order = [ birthDate, startDate, endDate, deathDate ];
+            var sorted_order = proper_order.slice().sort(function(a,b) { return a - b; });
+            var birthYear = birthDate.getFullYear();
+            var deathYear = deathDate.getFullYear();
+            if (JSON.stringify(proper_order) === JSON.stringify(sorted_order)) {
+              part.push([ n[1], range(startYear, endYear), popup(n[2], range(startYear, endYear)), 'fill-color:#3a7179;', startDate, endDate ]);
+            } else {
+              if (birthDate >= endDate) {
+                part.push([ n[1], range(startYear, endYear), popup(n[2], range(startYear, endYear)), 'fill-color:#dc3545;', startDate, endDate ]);
+              } else if (deathDate <= startDate) {
+                part.push([ n[1], range(startYear, endYear), popup(n[2], range(startYear, endYear)), 'fill-color:#dc3545;', startDate, endDate ]);
+              } else if (birthDate >= startDate && endDate <= deathDate) {
+                part.push([ n[1], range(startYear, birthYear), popup(n[2], range(startYear, birthYear)), 'fill-color:#dc3545;', startDate, birthDate ]);
+                part.push([ n[1], range(birthYear, endYear), popup(n[2], range(birthYear, endYear)), 'fill-color:#3a7179;', birthDate, endDate ]);
+              } else if (birthDate >= startDate && endDate > deathDate) {
+                part.push([ n[1], range(startYear, birthYear), popup(n[2], range(startYear, birthYear)), 'fill-color:#dc3545;', startDate, birthDate ]);
+                part.push([ n[1], range(birthYear, deathYear), popup(n[2], range(birthYear, deathYear)), 'fill-color:#3a7179;', birthDate, deathDate ]);
+                part.push([ n[1], range(deathYear, endYear), popup(n[2], range(deathYear, endYear)), 'fill-color:#dc3545;', deathDate, endDate ]);
+              } else if (birthDate < startDate && endDate >= deathDate) {
+                part.push([ n[1], range(startYear, deathYear), popup(n[2], range(startYear, deathYear)), 'fill-color:#3a7179;', startDate, deathDate ]);
+                part.push([ n[1], range(deathYear, endYear), popup(n[2], range(deathYear, endYear)), 'fill-color:#dc3545;', deathDate, endDate ]);
+              }
+            }
+          } else if ( !birthDate && !deathDate) {
+            if (endYear - startYear >= 120 ) {
+              part.push([ n[1], range(startYear, endYear), popup(n[2], range(startYear, endYear)), 'fill-color:#dc3545;', startDate, endDate ]);
+            } else {
+              part.push([ n[1], range(startYear, endYear), popup(n[2], range(startYear, endYear)), 'fill-color:#3a7179;', startDate, endDate ]);
+            }
+          } else {
+            if(!deathDate && birthDate >= endDate) {
+              part.push([ n[1], range(startYear, endYear), popup(n[2], range(startYear, endYear)), 'fill-color:#dc3545;', startDate, endDate ]);
+            } else if (!deathDate && birthDate >= startDate) {
+              var birthYear = birthDate.getFullYear();
+              part.push([ n[1], range(startYear, birthYear), popup(n[2], range(startYear, birthYear)), 'fill-color:#dc3545;', startDate, birthDate ]);
+              part.push([ n[1], range(birthYear, endYear), popup(n[2], range(birthYear, endYear)), 'fill-color:#3a7179;', birthDate, endDate ]);
+            } else if (!deathDate && birthDate < startDate) {
+              part.push([ n[1], range(startYear, endYear), popup(n[2], range(startYear, endYear)), 'fill-color:#3a7179;', startDate, endDate ]);
+            }
+            if(!birthDate && deathDate <= startDate) {
+              part.push([ n[1], range(startYear, endYear), popup(n[2], range(startYear, endYear)), 'fill-color:#dc3545;', startDate, endDate ]);
+            } else if (!birthDate && deathDate <= endDate) {
+              var deathYear = deathDate.getFullYear();
+              part.push([ n[1], range(startYear, deathYear), popup(n[2], range(startYear, deathYear)), 'fill-color:#3a7179;', startDate, deathDate ]);
+              part.push([ n[1], range(deathYear, endYear), popup(n[2], range(deathYear, endYear)), 'fill-color:#dc3545;', deathDate, endDate ]);
+            } else if (!birthDate && deathDate > endDate) {
+              part.push([ n[1], range(startYear, endYear), popup(n[2], range(startYear, endYear)), 'fill-color:#3a7179;', startDate, endDate ]);
+            }
+          }
+          return part;
         });
         return arr;
       }
@@ -39,6 +109,7 @@
           dataTable.addColumn({ type: 'string', id: 'Fullname' });
           dataTable.addColumn({ type: 'string', id: 'Bar label' });
           dataTable.addColumn({ type: 'string', role: 'tooltip' });
+          dataTable.addColumn({ type: 'string', role: 'style' });
           dataTable.addColumn({ type: 'date', id: 'Start' });
           dataTable.addColumn({ type: 'date', id: 'End' });
           dataTable.addRows(timeLine());
@@ -46,7 +117,8 @@
           options = {
             height: dataTable.getNumberOfRows() * rowHeight + 50,
             timeline: {
-              singleColor: '#3A7179'
+              groupByRowLabel: true,
+              avoidOverlappingGridLines: false
             }
           };
 
@@ -56,8 +128,11 @@
           google.visualization.events.addListener(chart, 'onmouseout', function() { $('#timeline').css('cursor','default'); });
           google.visualization.events.addListener(chart, 'select', function() {
             var sel = chart.getSelection()[0];
+            var id = $(dataTable.getValue(sel.row, 2)).attr("data-identifier");
+            var start_year = dataTable.getValue(sel.row, 4).getFullYear() - 1;
+            var end_year = dataTable.getValue(sel.row, 5).getFullYear() + 1;
             if (typeof sel.row !== "undefined" && sel.row !== null) {
-              window.location = "/" + timeline[sel.row][0] + "/specimens?action=#{@action}&family=#{@taxon.family}";
+              window.location = "/" + id + "/specimens?action=#{@action}&family=#{@taxon.family}&start_year=" + start_year + "&end_year=" + end_year;
             }
           });
 
@@ -119,7 +194,7 @@
       %i{class:"fas fa-cog"}
       = I18n.t('general.settings')
 
-= haml :'partials/taxa/tabs', layout:false, locals: { active_tab: locals[:active_tab] }
+= haml :'partials/taxa/tabs', layout: false, locals: { active_tab: locals[:active_tab] }
 = haml :'partials/taxa/people_viz_nav', layout: false, locals: { active_subtab: locals[:active_subtab] }
 
 %h3{class:"mt-3"}= I18n.t('taxa.timeline')
@@ -142,16 +217,6 @@
       #{Date.parse(@timeline[0][3]).strftime("%F")} – #{Date.parse(@timeline[0][4]).strftime("%F")}
 
 - else
-  %form{id:"form-taxon-visualization", method: "get", action: "/taxon/#{@taxon.family}/visualizations", "accept-charset" => "UTF-8", class: "form-inline mt-3"}
-    %div{class:"input-group input-group-sm col-4 col-md-3 col-lg-2 pl-0 mb-2"}
-      %div{class:"input-group-prepend"}
-        %span{class:"input-group-text"}= I18n.t('taxa.start_year')
-      %input{type:"text", class:"form-control", name:"start_year", value:"#{params[:start_year]}"}
-    %div{class:"input-group input-group-sm col-4 col-md-3 col-lg-2 pl-0 mb-2"}
-      %div{class:"input-group-prepend"}
-        %span{class:"input-group-text"}= I18n.t('taxa.end_year')
-      %input{type:"text", class:"form-control", name:"end_year", value:"#{params[:end_year]}"}
-    %input{type: :hidden, name: "action", value: "#{@action}"}
-    %input{type: :submit, class:"btn btn-success btn-sm medium-margins align-self-start", value:"#{I18n.t('general.search')}"}
+  = haml :'partials/taxa/timeline_filter', layout:false, locals: params
 
 %div{id: "timeline", style:"height:100%;", class:"mt-4"}

@@ -1,4 +1,4 @@
-%div{class: "card"}
+%div{class: "card", "data-identifier": "#{locals[:user].identifier}"}
   - if locals[:user].image_url
     %div{class: "card-header d-flex"}
       %div
@@ -36,13 +36,10 @@
                 #{v}
 
   %div{class: "card-body"}
-    - range = (locals[:stats].min_eventDate.year == locals[:stats].max_eventDate.year) ? locals[:stats].min_eventDate.year : locals[:stats].min_eventDate.year.to_s + " – " + locals[:stats].max_eventDate.year.to_s
-    %p{class:"card-text mt-2 text-nowrap"} #{range}
+    %p{class:"card-text mt-2 text-nowrap range"}
 
   %div{class: "card-footer d-flex"}
     - if !locals[:user].is_public?
       %div{class: "text-right text-muted mr-2"}
         %i{class:"fas fa-lock"}
     %div{class: "text-left text-muted text-nowrap mr-2"}
-      %span{class:"badge badge-light"} #{number_with_delimiter(locals[:stats][:total])}
-      #{I18n.t('card.claimed', count: locals[:stats][:total])}

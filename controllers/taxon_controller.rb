@@ -147,26 +147,31 @@ module Sinatra
             }
             start_year = 0
             end_year = Time.now.year
+
             if params[:start_year] && !params[:start_year].empty?
               start_year = params[:start_year].to_i
             end
+
             if params[:end_year] && !params[:end_year].empty?
               end_year = params[:end_year].to_i
             end
+
             if @action == "collected"
               data = @taxon.timeline_recorded(start_year: start_year, end_year: end_year)
             elsif @action == "identified"
               data = @taxon.timeline_identified(start_year: start_year, end_year: end_year)
             end
-              @timeline = data.map do |t|
-              u = User.find(t.user_id)
+            @timeline = data.map do |t|
+              u = User.find(t[0])
               card = haml :'partials/user/tooltip', layout: false, locals: { user: u, stats: t }
               [ u.identifier,
                 u.fullname,
                 card,
-                t.min_eventDate.to_time.iso8601,
-                t.max_eventDate.to_time.iso8601,
-                t.total ]
+                t[1].to_time.iso8601,
+                t[2].to_time.iso8601,
+                (u.date_born ? u.date_born.to_time.iso8601 : ""),
+                (u.date_died ? u.date_died.to_time.iso8601 : "")
+               ]
             end
             haml :'taxa/visualizations', locals: locals
           end
