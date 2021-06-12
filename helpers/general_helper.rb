@@ -233,6 +233,10 @@ module Sinatra
             results = results.where(occurrences: { institutionCode: params[:institutionCode] })
           end
 
+          if params[:datasetKey] && !params[:datasetKey].blank?
+            results = results.where(occurrences: { datasetKey: params[:datasetKey] })
+          end
+
           if params[:attributor] && !params[:attributor].blank?
             attributor = find_user(params[:attributor])
             results = results.where(created_by: attributor.id)
@@ -275,6 +279,10 @@ module Sinatra
           family = params[:family] rescue nil
           kingdom = params[:kingdom] rescue nil
           institutionCode = params[:institutionCode] rescue nil
+          dataset = nil
+          if params[:datasetKey]
+            dataset = Dataset.find_by_datasetKey(params[:datasetKey]).title.truncate(45) rescue nil
+          end
           attributor = nil
           if params[:attributor]
             attributor = find_user(params[:attributor]).fullname rescue nil
@@ -286,6 +294,7 @@ module Sinatra
             family: family,
             kingdom: kingdom,
             institutionCode: institutionCode,
+            dataset: dataset,
             attributor: attributor
           }.compact
         end

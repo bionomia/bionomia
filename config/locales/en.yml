@@ -100,6 +100,7 @@ en:
         other: "datasets from GBIF"
     placeholder: Butterflies of Brazil
     people: People
+    visualizations: Visualizations
     scribes: Scribes
     agents: Agents
     agent_strings: Agent Strings
@@ -132,6 +133,9 @@ en:
       unit:
         one: "person claimed or was attributed specimens represented in this dataset"
         other: "people claimed or were attributed specimens represented in this dataset"
+    timeline: Timeline
+    none_collected_timeline: "No one has collected and indicated a collection date"
+    none_identified_timeline: "No one has identified and indicated a determination date"
   date:
     formats:
       month_and_year: "%B %Y"

@@ -1,11 +1,11 @@
-%form{id:"form-taxon-visualization", method: "get", action: "/taxon/#{@taxon.family}/visualizations", "accept-charset" => "UTF-8", class: "form-inline mt-3"}
+%form{id:"form-taxon-visualization", method: "get", action: "#{locals[:url]}", "accept-charset" => "UTF-8", class: "form-inline mt-3"}
   %div{class:"input-group input-group-sm col-4 col-md-3 col-lg-2 pl-0 mb-2"}
     %div{class:"input-group-prepend"}
       %span{class:"input-group-text"}= I18n.t('taxa.start_year')
-    %input{type:"text", class:"form-control", name:"start_year", value:"#{locals[:start_year]}"}
+    %input{type:"text", class:"form-control", name:"start_year", value:"#{locals[:params][:start_year]}"}
   %div{class:"input-group input-group-sm col-4 col-md-3 col-lg-2 pl-0 mb-2"}
     %div{class:"input-group-prepend"}
       %span{class:"input-group-text"}= I18n.t('taxa.end_year')
-    %input{type:"text", class:"form-control", name:"end_year", value:"#{locals[:end_year]}"}
+    %input{type:"text", class:"form-control", name:"end_year", value:"#{locals[:params][:end_year]}"}
   %input{type: :hidden, name: "action", value: "#{@action}"}
   %input{type: :submit, class:"btn btn-success btn-sm medium-margins align-self-start", value:"#{I18n.t('general.search')}"}

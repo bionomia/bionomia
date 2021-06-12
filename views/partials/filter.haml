@@ -3,7 +3,7 @@
     %i{class:"fas fa-filter"}
     #{I18n.t('general.filtered_by')}
     %span{class:"font-weight-bold mr-2"}
-      #{h([@filter[:action], @filter[:country], @filter[:range], @filter[:family], @filter[:kingdom], @filter[:institutionCode], @filter[:attributor]].compact.join(", "))}
+      #{h([@filter[:action], @filter[:country], @filter[:range], @filter[:family], @filter[:kingdom], @filter[:institutionCode], @filter[:attributor], @filter[:dataset]].compact.join(", "))}
     %a{href: url(locals[:url]), class:"text-danger"}
       %i{class:"fas fa-minus-circle"}
       #{I18n.t('general.remove')}

@@ -215,6 +215,32 @@ class Dataset < ActiveRecord::Base
     end
   end
 
+  def timeline_recorded(start_year: 0, end_year: Time.now.year)
+    results = Occurrence.select("MIN(occurrences.eventDate_processed) AS min_eventDate, MAX(occurrences.eventDate_processed) AS max_eventDate, user_occurrences.user_id, user_occurrences.visible")
+                .joins(:user_occurrences)
+                .where(user_occurrences: { action: ['recorded', 'identified,recorded', 'recorded,identified'] })
+                .where("YEAR(eventDate_processed) BETWEEN ? AND ?", start_year, end_year)
+                .where(datasetKey: datasetKey)
+                .group("user_occurrences.user_id", "user_occurrences.visible")
+    results.map do |item|
+      next if !item.visible || !item.min_eventDate || !item.max_eventDate
+      [item.user_id, item.min_eventDate, item.max_eventDate]
+    end.compact.sort_by{|k| k[1]}
+  end
+
+  def timeline_identified(start_year: 0, end_year: Time.now.year)
+    results = Occurrence.select("MIN(occurrences.eventDate_processed) AS min_eventDate, MAX(occurrences.eventDate_processed) AS max_eventDate, user_occurrences.user_id, user_occurrences.visible")
+                .joins(:user_occurrences)
+                .where(user_occurrences: { action: ['identified', 'identified,recorded', 'recorded,identified'] })
+                .where("YEAR(eventDate_processed) BETWEEN ? AND ?", start_year, end_year)
+                .where(datasetKey: datasetKey)
+                .group("user_occurrences.user_id", "user_occurrences.visible")
+    results.map do |item|
+      next if !item.visible || !item.min_eventDate || !item.max_eventDate
+      [item.user_id, item.min_eventDate, item.max_eventDate]
+    end.compact.sort_by{|k| k[1]}
+  end
+
   private
 
   def set_update_time

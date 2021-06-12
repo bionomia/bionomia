@@ -102,6 +102,62 @@ module Sinatra
             haml :'datasets/agents_unclaimed', locals: locals
           end
 
+          app.get '/dataset/:id/visualizations' do
+            dataset_from_param
+
+            @action = "collected"
+            if ["identified","collected"].include?(params[:action])
+              @action = params[:action]
+            end
+
+            locals = {
+              active_page: "datasets",
+              active_tab: "visualizations",
+              active_subtab: @action
+            }
+
+            start_year = 0
+            end_year = Time.now.year
+
+            if params[:start_year] && !params[:start_year].empty?
+              start_year = params[:start_year].to_i
+            end
+
+            if params[:end_year] && !params[:end_year].empty?
+              end_year = params[:end_year].to_i
+            end
+
+            if @action == "collected"
+              data = @dataset.timeline_recorded(start_year: start_year, end_year: end_year)
+            elsif @action == "identified"
+              data = @dataset.timeline_identified(start_year: start_year, end_year: end_year)
+            end
+            if !data.empty?
+              users = {}
+              User.where(id: data.map{|u| u[0]}.uniq).find_each do |u|
+                card = haml :'partials/user/tooltip', layout: false, locals: { user: u }
+                users[u.id] = {
+                  identifier: u.identifier,
+                  fullname: u.fullname,
+                  card: card,
+                  date_born: u.date_born,
+                  date_died: u.date_died
+                }
+              end
+            end
+            @timeline = data.map do |t|
+              [ users[t[0]][:identifier],
+                users[t[0]][:fullname],
+                users[t[0]][:card],
+                t[1].to_time.iso8601,
+                t[2].to_time.iso8601,
+                (users[t[0]][:date_born] ? users[t[0]][:date_born].to_time.iso8601 : ""),
+                (users[t[0]][:date_died] ? users[t[0]][:date_died].to_time.iso8601 : "")
+               ]
+            end
+            haml :'datasets/visualizations', locals: locals
+          end
+
           app.get '/dataset/:id/progress.json' do
             content_type "application/json"
             expires 0, :no_cache, :must_revalidate

@@ -100,6 +100,7 @@ pt:
         other: "conjunto de dados do GBIF"
     placeholder: Borboletas do brasil
     people: Pessoas
+    visualizations: Visualizações
     scribes: Scribes
     agents: Agentes
     agent_strings: Cadeias de agentes
@@ -132,6 +133,9 @@ pt:
       unit:
         one: "pessoa reivindicou ou foi atribuída espécimes representados neste conjunto de dados"
         other: "pessoas reivindicaram ou foram atribuídos espécimes representados neste conjunto de dados"
+    timeline: Linha do tempo
+    none_collected_timeline: "Ninguém coletou e indicou uma data de coleta"
+    none_identified_timeline: "Ninguém se identificou e indicou uma data de identificação"
   date:
     formats:
       month_and_year: "%B %Y"

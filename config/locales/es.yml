@@ -100,6 +100,7 @@ es:
         other: "conjuntos de datos de GBIF"
     placeholder: Mariposas de Brasil
     people: Personas
+    visualizations: Visualizaciones
     scribes: Anotadores
     agents: Agentes
     agent_strings: Cadenas de agente
@@ -132,6 +133,9 @@ es:
       unit:
         one: "una persona ha reclamado o se le han atribuido especímenes representados en este conjunto de datos"
         other: "personas han reclamado o se les han atribuido especímenes representados en este conjunto de datos"
+    timeline: Cronología
+    none_collected_timeline: "Nadie ha colectado y ha indicado una fecha de colecta"
+    none_identified_timeline: "Nadie ha identificado y ha indicado una fecha de identificación"
   date:
     formats:
       month_and_year: "%B %Y"

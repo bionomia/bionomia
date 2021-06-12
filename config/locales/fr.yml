@@ -100,6 +100,7 @@ fr:
         other: "jeux de données de GBIF"
     placeholder: papillons du Brésil
     people: Personnes
+    visualizations: Visualisations
     scribes: Scribes
     agents: Agents
     agent_strings: Chaînes d'Agent
@@ -132,6 +133,9 @@ fr:
       unit:
         one: "personne a réclamé ou a été attribuée des spécimens dans cet ensemble de données"
         other: "personnes ont réclamé ou ont été attribuées des spécimens dans cet ensemble de données"
+    timeline: Chronologie
+    none_collected_timeline: "Personne n'a collecté et indiqué une date de collecte"
+    none_identified_timeline: "Personne n'a collecté et indiqué une date de détermination"
   date:
     formats:
       month_and_year: "%B %Y"
