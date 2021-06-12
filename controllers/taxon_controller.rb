@@ -161,16 +161,27 @@ module Sinatra
             elsif @action == "identified"
               data = @taxon.timeline_identified(start_year: start_year, end_year: end_year)
             end
+            if !data.empty?
+              users = {}
+              User.where(id: data.map{|u| u[0]}.uniq).find_each do |u|
+                card = haml :'partials/user/tooltip', layout: false, locals: { user: u }
+                users[u.id] = {
+                  identifier: u.identifier,
+                  fullname: u.fullname,
+                  card: card,
+                  date_born: u.date_born,
+                  date_died: u.date_died
+                }
+              end
+            end
             @timeline = data.map do |t|
-              u = User.find(t[0])
-              card = haml :'partials/user/tooltip', layout: false, locals: { user: u, stats: t }
-              [ u.identifier,
-                u.fullname,
-                card,
+              [ users[t[0]][:identifier],
+                users[t[0]][:fullname],
+                users[t[0]][:card],
                 t[1].to_time.iso8601,
                 t[2].to_time.iso8601,
-                (u.date_born ? u.date_born.to_time.iso8601 : ""),
-                (u.date_died ? u.date_died.to_time.iso8601 : "")
+                (users[t[0]][:date_born] ? users[t[0]][:date_born].to_time.iso8601 : ""),
+                (users[t[0]][:date_died] ? users[t[0]][:date_died].to_time.iso8601 : "")
                ]
             end
             haml :'taxa/visualizations', locals: locals
