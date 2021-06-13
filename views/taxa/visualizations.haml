@@ -59,11 +59,8 @@
 - elsif @timeline.size == 1
   %ul{class:"list-unstyled"}
     %li
-      %a{href: "/#{@timeline[0][0]}/specimens?family=#{@taxon.family}&action=#{@action}"}
+      %a{href: "/#{@timeline[0][0]}/specimens?family=#{@taxon.family}&action=#{@action}", class:"mr-3"}
         #{@timeline[0][1]}
-      %span{class:"ml-2 badge badge-light"}
-        #{number_with_delimiter(@timeline[0][5])}
-      #{I18n.t('card.claimed', count: @timeline[0][5])},
       #{Date.parse(@timeline[0][3]).strftime("%F")} – #{Date.parse(@timeline[0][4]).strftime("%F")}
 
 - else
