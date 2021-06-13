@@ -77,32 +77,39 @@ class Taxon < ActiveRecord::Base
       .count
   end
 
-  def timeline_recorded(start_year: 0, end_year: Time.now.year)
-    results = Occurrence.select("MIN(occurrences.eventDate_processed) AS min_eventDate, MAX(occurrences.eventDate_processed) AS max_eventDate, user_occurrences.user_id, user_occurrences.visible")
-                .joins(:user_occurrences)
-                .joins(:taxon_occurrence)
-                .where(user_occurrences: { action: ['recorded', 'identified,recorded', 'recorded,identified'] })
-                .where("YEAR(eventDate_processed) BETWEEN ? AND ?", start_year, end_year)
-                .where(taxon_occurrence: { taxon_id: id })
-                .group("user_occurrences.user_id", "user_occurrences.visible")
-    results.map do |item|
-      next if !item.visible || !item.min_eventDate || !item.max_eventDate
-      [item.user_id, item.min_eventDate, item.max_eventDate]
-    end.compact.sort_by{|k| k[1]}
+  def timeline_recorded(start_year: 1000, end_year: Time.now.year)
+    subq = UserOccurrence.from("user_occurrences FORCE INDEX (user_occurrence_idx)")
+                         .select(:user_id, :eventDate_processed, :visible)
+                         .joins(:occurrence)
+                         .joins("INNER JOIN taxon_occurrences ON taxon_occurrences.occurrence_id = user_occurrences.occurrence_id")
+                         .where(user_occurrences: { action: ['recorded', 'identified,recorded', 'recorded,identified'] })
+                         .where(taxon_occurrences: { taxon_id: id })
+                         .where("YEAR(eventDate_processed) BETWEEN ? AND ?", start_year, end_year)
+                         .distinct
+
+    User.select("users.*", "MIN(a.eventDate_processed) AS min_date", "MAX(a.eventDate_processed) AS max_date")
+        .joins("INNER JOIN (#{subq.to_sql}) a ON a.user_id = users.id")
+        .where("a.visible": true)
+        .where.not("a.eventDate_processed": nil)
+        .group(:id)
+        .order("min_date")
   end
 
-  def timeline_identified(start_year: 0, end_year: Time.now.year)
-    results = Occurrence.select("MIN(occurrences.dateIdentified_processed) AS min_eventDate, MAX(occurrences.dateIdentified_processed) AS max_eventDate, user_occurrences.user_id, user_occurrences.visible")
-                .joins(:user_occurrences)
-                .joins(:taxon_occurrence)
-                .where(user_occurrences: { action: ['identified', 'identified,recorded', 'recorded,identified'] })
-                .where("YEAR(dateIdentified_processed) BETWEEN ? AND ?", start_year, end_year)
-                .where(taxon_occurrence: { taxon_id: id })
-                .group("user_occurrences.user_id", "user_occurrences.visible")
-    results.map do |item|
-      next if !item.visible || !item.min_eventDate || !item.max_eventDate
-      [item.user_id, item.min_eventDate, item.max_eventDate]
-    end.compact.sort_by{|k| k[1]}
-  end
+  def timeline_identified(start_year: 1000, end_year: Time.now.year)
+    subq = UserOccurrence.from("user_occurrences FORCE INDEX (user_occurrence_idx)")
+                         .select(:user_id, :dateIdentified_processed, :visible)
+                         .joins(:occurrence)
+                         .joins("INNER JOIN taxon_occurrences ON taxon_occurrences.occurrence_id = user_occurrences.occurrence_id")
+                         .where(user_occurrences: { action: ['identifiede', 'identified,recorded', 'recorded,identified'] })
+                         .where(taxon_occurrences: { taxon_id: id })
+                         .where("YEAR(dateIdentified_processed) BETWEEN ? AND ?", start_year, end_year)
+                         .distinct
 
+    User.select("users.*", "MIN(a.dateIdentified_processed) AS min_date", "MAX(a.dateIdentified_processed) AS max_date")
+        .joins("INNER JOIN (#{subq.to_sql}) a ON a.user_id = users.id")
+        .where("a.visible": true)
+        .where.not("a.dateIdentified_processed": nil)
+        .group(:id)
+        .order("min_date")
+  end
 end

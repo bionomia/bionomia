@@ -116,7 +116,7 @@ module Sinatra
               active_subtab: @action
             }
 
-            start_year = 0
+            start_year = 1000
             end_year = Time.now.year
 
             if params[:start_year] && !params[:start_year].empty?
@@ -128,32 +128,20 @@ module Sinatra
             end
 
             if @action == "collected"
-              data = @dataset.timeline_recorded(start_year: start_year, end_year: end_year)
+              users = @dataset.timeline_recorded(start_year: start_year, end_year: end_year)
             elsif @action == "identified"
-              data = @dataset.timeline_identified(start_year: start_year, end_year: end_year)
+              users = @dataset.timeline_identified(start_year: start_year, end_year: end_year)
             end
-            if !data.empty?
-              users = {}
-              User.where(id: data.map{|u| u[0]}.uniq).find_each do |u|
-                card = haml :'partials/user/tooltip', layout: false, locals: { user: u }
-                users[u.id] = {
-                  identifier: u.identifier,
-                  fullname: u.fullname,
-                  card: card,
-                  date_born: u.date_born,
-                  date_died: u.date_died
-                }
-              end
-            end
-            @timeline = data.map do |t|
-              [ users[t[0]][:identifier],
-                users[t[0]][:fullname],
-                users[t[0]][:card],
-                t[1].to_time.iso8601,
-                t[2].to_time.iso8601,
-                (users[t[0]][:date_born] ? users[t[0]][:date_born].to_time.iso8601 : ""),
-                (users[t[0]][:date_died] ? users[t[0]][:date_died].to_time.iso8601 : "")
-               ]
+            @timeline = users.map do |u|
+              card = haml :'partials/user/tooltip', layout: false, locals: { user: u }
+              [ u.identifier,
+                u.fullname,
+                card,
+                u.min_date.to_time.iso8601,
+                u.max_date.to_time.iso8601,
+                (u.date_born ? u.date_born.to_time.iso8601 : ""),
+                (u.date_died ? u.date_died.to_time.iso8601 : "")
+              ].compact
             end
             haml :'datasets/visualizations', locals: locals
           end
