@@ -69,4 +69,4 @@
 - else
   = haml :'partials/timeline_filter', layout:false, locals: { params: params, url: "/taxon/#{@taxon.family}/visualizations" }
 
-%div{id: "timeline", style:"height:100%;", class:"mt-4"}
+%div{id: "timeline", style:"overflow:auto", class:"mt-4"}

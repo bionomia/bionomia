@@ -28,67 +28,66 @@
       }
 
       function timeLine() {
-        arr = $.map(timeline, function( n, i ) {
-          var startDate = new Date(n[3]);
-          var endDate = new Date(n[4]);
+        var part = [];
+        $.each(timeline, function() {
+          var startDate = new Date(this[3]);
+          var endDate = new Date(this[4]);
           var startYear = startDate.getFullYear();
           var endYear = endDate.getFullYear();
-          var birthDate = (n[5] !== "") ? new Date(n[5]) : "";
-          var deathDate = (n[6] !== "") ? new Date(n[6]) : "";
-          var part = [];
+          var birthDate = (this[5] !== "") ? new Date(this[5]) : "";
+          var deathDate = (this[6] !== "") ? new Date(this[6]) : "";
           if (birthDate && deathDate) {
             var proper_order = [ birthDate, startDate, endDate, deathDate ];
             var sorted_order = proper_order.slice().sort(function(a,b) { return a - b; });
             var birthYear = birthDate.getFullYear();
             var deathYear = deathDate.getFullYear();
             if (JSON.stringify(proper_order) === JSON.stringify(sorted_order)) {
-              part.push([ n[1], range(startYear, endYear), popup(n[2], range(startYear, endYear)), 'fill-color:#3a7179;', startDate, endDate ]);
+              part.push([ this[1], range(startYear, endYear), popup(this[2], range(startYear, endYear)), 'fill-color:#3a7179;', startDate, endDate ]);
             } else {
               if (birthDate >= endDate) {
-                part.push([ n[1], range(startYear, endYear), popup(n[2], range(startYear, endYear)), 'fill-color:#dc3545;', startDate, endDate ]);
+                part.push([ this[1], range(startYear, endYear), popup(this[2], range(startYear, endYear)), 'fill-color:#dc3545;', startDate, endDate ]);
               } else if (deathDate <= startDate) {
-                part.push([ n[1], range(startYear, endYear), popup(n[2], range(startYear, endYear)), 'fill-color:#dc3545;', startDate, endDate ]);
+                part.push([ this[1], range(startYear, endYear), popup(this[2], range(startYear, endYear)), 'fill-color:#dc3545;', startDate, endDate ]);
               } else if (birthDate >= startDate && endDate <= deathDate) {
-                part.push([ n[1], range(startYear, birthYear), popup(n[2], range(startYear, birthYear)), 'fill-color:#dc3545;', startDate, birthDate ]);
-                part.push([ n[1], range(birthYear, endYear), popup(n[2], range(birthYear, endYear)), 'fill-color:#3a7179;', birthDate, endDate ]);
+                part.push([ this[1], range(startYear, birthYear), popup(this[2], range(startYear, birthYear)), 'fill-color:#dc3545;', startDate, birthDate ]);
+                part.push([ this[1], range(birthYear, endYear), popup(this[2], range(birthYear, endYear)), 'fill-color:#3a7179;', birthDate, endDate ]);
               } else if (birthDate >= startDate && endDate > deathDate) {
-                part.push([ n[1], range(startYear, birthYear), popup(n[2], range(startYear, birthYear)), 'fill-color:#dc3545;', startDate, birthDate ]);
-                part.push([ n[1], range(birthYear, deathYear), popup(n[2], range(birthYear, deathYear)), 'fill-color:#3a7179;', birthDate, deathDate ]);
-                part.push([ n[1], range(deathYear, endYear), popup(n[2], range(deathYear, endYear)), 'fill-color:#dc3545;', deathDate, endDate ]);
+                part.push([ this[1], range(startYear, birthYear), popup(this[2], range(startYear, birthYear)), 'fill-color:#dc3545;', startDate, birthDate ]);
+                part.push([ this[1], range(birthYear, deathYear), popup(this[2], range(birthYear, deathYear)), 'fill-color:#3a7179;', birthDate, deathDate ]);
+                part.push([ this[1], range(deathYear, endYear), popup(this[2], range(deathYear, endYear)), 'fill-color:#dc3545;', deathDate, endDate ]);
               } else if (birthDate < startDate && endDate >= deathDate) {
-                part.push([ n[1], range(startYear, deathYear), popup(n[2], range(startYear, deathYear)), 'fill-color:#3a7179;', startDate, deathDate ]);
-                part.push([ n[1], range(deathYear, endYear), popup(n[2], range(deathYear, endYear)), 'fill-color:#dc3545;', deathDate, endDate ]);
+                part.push([ this[1], range(startYear, deathYear), popup(this[2], range(startYear, deathYear)), 'fill-color:#3a7179;', startDate, deathDate ]);
+                part.push([ this[1], range(deathYear, endYear), popup(this[2], range(deathYear, endYear)), 'fill-color:#dc3545;', deathDate, endDate ]);
               }
             }
           } else if ( !birthDate && !deathDate) {
             if (endYear - startYear >= 120 ) {
-              part.push([ n[1], range(startYear, endYear), popup(n[2], range(startYear, endYear)), 'fill-color:#dc3545;', startDate, endDate ]);
+              part.push([ this[1], range(startYear, endYear), popup(this[2], range(startYear, endYear)), 'fill-color:#dc3545;', startDate, endDate ]);
             } else {
-              part.push([ n[1], range(startYear, endYear), popup(n[2], range(startYear, endYear)), 'fill-color:#3a7179;', startDate, endDate ]);
+              part.push([ this[1], range(startYear, endYear), popup(this[2], range(startYear, endYear)), 'fill-color:#3a7179;', startDate, endDate ]);
             }
           } else {
             if(!deathDate && birthDate >= endDate) {
-              part.push([ n[1], range(startYear, endYear), popup(n[2], range(startYear, endYear)), 'fill-color:#dc3545;', startDate, endDate ]);
+              part.push([ this[1], range(startYear, endYear), popup(this[2], range(startYear, endYear)), 'fill-color:#dc3545;', startDate, endDate ]);
             } else if (!deathDate && birthDate >= startDate) {
               var birthYear = birthDate.getFullYear();
-              part.push([ n[1], range(startYear, birthYear), popup(n[2], range(startYear, birthYear)), 'fill-color:#dc3545;', startDate, birthDate ]);
-              part.push([ n[1], range(birthYear, endYear), popup(n[2], range(birthYear, endYear)), 'fill-color:#3a7179;', birthDate, endDate ]);
+              part.push([ this[1], range(startYear, birthYear), popup(this[2], range(startYear, birthYear)), 'fill-color:#dc3545;', startDate, birthDate ]);
+              part.push([ this[1], range(birthYear, endYear), popup(this[2], range(birthYear, endYear)), 'fill-color:#3a7179;', birthDate, endDate ]);
             } else if (!deathDate && birthDate < startDate) {
-              part.push([ n[1], range(startYear, endYear), popup(n[2], range(startYear, endYear)), 'fill-color:#3a7179;', startDate, endDate ]);
+              part.push([ this[1], range(startYear, endYear), popup(this[2], range(startYear, endYear)), 'fill-color:#3a7179;', startDate, endDate ]);
             }
             if(!birthDate && deathDate <= startDate) {
-              part.push([ n[1], range(startYear, endYear), popup(n[2], range(startYear, endYear)), 'fill-color:#dc3545;', startDate, endDate ]);
+              part.push([ this[1], range(startYear, endYear), popup(this[2], range(startYear, endYear)), 'fill-color:#dc3545;', startDate, endDate ]);
             } else if (!birthDate && deathDate <= endDate) {
               var deathYear = deathDate.getFullYear();
-              part.push([ n[1], range(startYear, deathYear), popup(n[2], range(startYear, deathYear)), 'fill-color:#3a7179;', startDate, deathDate ]);
-              part.push([ n[1], range(deathYear, endYear), popup(n[2], range(deathYear, endYear)), 'fill-color:#dc3545;', deathDate, endDate ]);
+              part.push([ this[1], range(startYear, deathYear), popup(this[2], range(startYear, deathYear)), 'fill-color:#3a7179;', startDate, deathDate ]);
+              part.push([ this[1], range(deathYear, endYear), popup(this[2], range(deathYear, endYear)), 'fill-color:#dc3545;', deathDate, endDate ]);
             } else if (!birthDate && deathDate > endDate) {
-              part.push([ n[1], range(startYear, endYear), popup(n[2], range(startYear, endYear)), 'fill-color:#3a7179;', startDate, endDate ]);
+              part.push([ this[1], range(startYear, endYear), popup(this[2], range(startYear, endYear)), 'fill-color:#3a7179;', startDate, endDate ]);
             }
           }
-          return part;
         });
-        return arr;
+        return part;
       }
 
       function drawVisualizations() {
@@ -110,9 +109,8 @@
           dataTable.addColumn({ type: 'date', id: 'Start' });
           dataTable.addColumn({ type: 'date', id: 'End' });
           dataTable.addRows(timeLine());
-
           options = {
-            height: dataTable.getNumberOfRows() * rowHeight + 50,
+            height: (timeline.length * rowHeight) + 50,
             timeline: {
               groupByRowLabel: true,
               avoidOverlappingGridLines: false
