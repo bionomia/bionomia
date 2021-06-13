@@ -50,7 +50,7 @@
 %h3{class:"mt-3"}= I18n.t('taxa.timeline')
 
 - if @timeline.size == 0
-  %div{class: "alert alert-warning tiny-margins", role: "alert"}
+  %div{class: "alert alert-info tiny-margins", role: "alert"}
     - if @action == "collected"
       = I18n.t('taxa.none_collected_timeline', taxon: h(@taxon.family))
     - else

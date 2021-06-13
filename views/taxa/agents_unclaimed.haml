@@ -46,7 +46,7 @@
 = haml :'partials/taxa/agent_nav', layout: false, locals: { active_subtab: locals[:active_subtab] }
 
 - if @results.size == 0
-  %div{class: "alert alert-warning tiny-margins", role: "alert"}= I18n.t('taxa.no_agents', taxon: h(@taxon.family))
+  %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('taxa.no_agents', taxon: h(@taxon.family))
 - else
   %div{class: "row"}
     - @results.in_groups_of(25, false).each do |group|

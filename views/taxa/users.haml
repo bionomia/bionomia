@@ -53,7 +53,7 @@
 = haml :'partials/taxa/people_nav', layout: false, locals: { active_subtab: locals[:active_subtab] }
 
 - if @results.size == 0
-  %div{class: "alert alert-warning tiny-margins", role: "alert"}
+  %div{class: "alert alert-info tiny-margins", role: "alert"}
     - if @action == "collected"
       = I18n.t('taxa.none_collected', taxon: h(@taxon.family))
     - else
