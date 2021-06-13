@@ -31,6 +31,11 @@ describe "Bionomia Dataset Controller" do
     expect(last_response).to be_ok
   end
 
+  it "should allow accessing a dataset visualizations page" do
+    get '/dataset/' + @datasetkey + '/visualizations'
+    expect(last_response).to be_ok
+  end
+
   it "should allow accessing a dataset scribes page" do
     get '/dataset/' + @datasetkey + '/scribes'
     expect(last_response).to be_ok

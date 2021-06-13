@@ -96,6 +96,10 @@ module Bionomia
       puts "Adding datasets..."
       Dataset.find_each do |d|
         sitemap.add "/dataset/#{d.datasetKey}"
+        sitemap.add "/dataset/#{id.datasetKey}/visualizations"
+        sitemap.add "/dataset/#{id.datasetKey}/visualizations?action=identified"
+        sitemap.add "/dataset/#{d.datasetKey}/scribes"
+        sitemap.add "/dataset/#{d.datasetKey}/agents"
       end
     end
 
@@ -111,6 +115,11 @@ module Bionomia
       Taxon.find_each do |t|
         sitemap.add "/taxon/#{t.family}"
         sitemap.add "/taxon/#{t.family}?action=identified"
+        sitemap.add "/taxon/#{t.family}/visualizations"
+        sitemap.add "/taxon/#{t.family}/visualizations?action=identified"
+        sitemap.add "/taxon/#{t.family}/agents"
+        sitemap.add "/taxon/#{t.family}/agents/counts"
+        sitemap.add "/taxon/#{t.family}/agents/unclaimed"
       end
     end
 
