@@ -759,7 +759,10 @@ module Sinatra
             uo.created_by = @user.id
             uo.action = action
             uo.visible = visible
-            uo.save
+            begin
+              uo.save
+            rescue ActiveRecord::RecordNotUnique
+            end
             { message: "ok", id: uo.id }.to_json
           end
 
