@@ -233,6 +233,15 @@ class Dataset < ActiveRecord::Base
         .order("min_date")
   end
 
+  def article_occurrences
+    ArticleOccurrence.joins(:occurrence)
+                     .where(occurrences: { datasetKey: datasetKey })
+  end
+
+  def articles
+    Article.where(id: article_occurrences.select(:article_id).distinct)
+  end
+
   private
 
   def set_update_time

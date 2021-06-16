@@ -187,6 +187,28 @@ module Bionomia
       problems.close
     end
 
+    def add_citation_data
+      citations = File.open(File.join(@folder, citations_file), "ab")
+      @dataset.article_occurrences.find_each do |a|
+        data = [ a.article_id, a.occurrence_id ]
+        citations << CSV::Row.new(citations_header, data).to_s
+      end
+      citations.close
+
+
+      articles = File.open(File.join(@folder, articles_file), "ab")
+      @dataset.articles.find_each do |a|
+        data = [
+          a.id,
+          a.citation,
+          "https://doi.org/#{a.doi}",
+          a.gbif_dois.map{|o| "https://doi.org/#{o}" }.to_s
+        ]
+        articles << CSV::Row.new(articles_header, data).to_s
+      end
+      articles.close
+    end
+
     def update_frictionless_created
       @dataset.frictionless_created_at = @created
       @dataset.save

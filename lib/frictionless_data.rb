@@ -54,6 +54,14 @@ module Bionomia
       "problem_collector_dates.csv"
     end
 
+    def citations_file
+      "citations.csv"
+    end
+
+    def articles_file
+      "articles.csv"
+    end
+
     def users_resource_size
       File.size(File.join(@folder, users_file + ".zip")) rescue nil
     end
@@ -68,6 +76,14 @@ module Bionomia
 
     def problem_collectors_resource_size
       File.size(File.join(@folder, problem_collectors_file + ".zip")) rescue nil
+    end
+
+    def citations_resource_size
+      File.size(File.join(@folder, citations_file + ".zip")) rescue nil
+    end
+
+    def articles_resource_size
+      File.size(File.join(@folder, articles_file + ".zip")) rescue nil
     end
 
     def user_resource
@@ -214,6 +230,64 @@ module Bionomia
       }
     end
 
+    def citation_resource
+      {
+        name: "article-occurrences",
+        path: "https://bionomia.net/dataset/#{@uuid}/#{citations_file}.zip",
+        description: "Citations of articles",
+        format: "csv",
+        compression: "zip",
+        mediatype: "text/csv",
+        encoding: "utf-8",
+        bytes: citations_resource_size,
+        profile: "tabular-data-resource",
+        schema: {
+          fields: [
+            { name: "article_id", type: "integer" },
+            { name: "occurrence_id", type: "integer" }
+          ]
+        },
+        foreignKeys: [
+          {
+            fields: "article_id",
+            reference: {
+              resource: "articles",
+              fields: "id"
+            }
+          },
+          {
+            fields: "occurrence_id",
+            reference: {
+              resource: "occurrences",
+              fields: "gbifID"
+            }
+          }
+        ]
+      }
+    end
+
+    def article_resource
+      {
+        name: "articles",
+        path: "https://bionomia.net/dataset/#{@uuid}/#{articles_file}.zip",
+        format: "csv",
+        compression: "zip",
+        mediatype: "text/csv",
+        encoding: "utf-8",
+        bytes: articles_resource_size,
+        profile: "tabular-data-resource",
+        schema: {
+          fields: [
+            { name: "id", type: "integer" },
+            { name: "reference", type: "string", rdfType: "http://schema.org/name" },
+            { name: "sameAs", type: "string", format: "uri", rdfType: "http://schema.org/sameAs" },
+            { name: "datasets", type: "array", format: "uri", rdfType: "http://schema.org/sameAs" },
+          ]
+        },
+        primaryKey: "id"
+      }
+    end
+
     def create_package
       FileUtils.mkdir(@folder) unless File.exists?(@folder)
 
@@ -229,6 +303,8 @@ module Bionomia
 
       #Add problem file
       add_problem_collector_data
+
+      add_citation_data
 
       #Zip each file in place
       Dir.foreach(@folder) do |f|
@@ -261,6 +337,8 @@ module Bionomia
       @package[:resources] << occurrence_resource
       @package[:resources] << attribution_resource
       @package[:resources] << problem_collector_resource
+      @package[:resources] << citation_resource
+      @package[:resources] << article_resource
     end
 
     def create_data_files
@@ -279,6 +357,14 @@ module Bionomia
       problems = File.open(File.join(@folder, problem_collectors_file), "wb")
       problems << CSV::Row.new(problems_collector_header, problems_collector_header, true).to_s
       problems.close
+
+      citations = File.open(File.join(@folder, citations_file), "wb")
+      citations << CSV::Row.new(citations_header, citations_header, true).to_s
+      citations.close
+
+      articles = File.open(File.join(@folder, articles_file), "wb")
+      articles << CSV::Row.new(articles_header, articles_header, true).to_s
+      articles.close
     end
 
     def users_header
@@ -297,10 +383,21 @@ module Bionomia
       problem_collector_resource[:schema][:fields].map{ |u| u[:name] }
     end
 
+    def citations_header
+      citation_resource[:schema][:fields].map{ |u| u[:name] }
+    end
+
+    def articles_header
+      article_resource[:schema][:fields].map{ |u| u[:name] }
+    end
+
     def add_data
     end
 
     def add_problem_collector_data
+    end
+
+    def add_citation_data
     end
 
   end
