@@ -189,7 +189,7 @@ module Bionomia
 
     def add_citation_data
       citations = File.open(File.join(@folder, citations_file), "ab")
-      @dataset.article_occurrences.find_each do |a|
+      @dataset.article_occurrences.find_each(batch_size: 5_000) do |a|
         data = [ a.article_id, a.occurrence_id ]
         citations << CSV::Row.new(citations_header, data).to_s
       end
