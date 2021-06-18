@@ -13,6 +13,8 @@ class Article < ActiveRecord::Base
   after_update :update_citation, :update_search
   after_destroy :remove_search
 
+  include ActionView::Helpers::SanitizeHelper
+
   def user_specimen_count(user_id)
     article_occurrences.joins(:user_occurrences)
                        .where(user_occurrences: { user_id: user_id, visible: true } )
@@ -101,7 +103,7 @@ class Article < ActiveRecord::Base
         headers: { Accept: "text/x-bibliography" },
         url: "https://doi.org/" + URI.encode_www_form_component(doi)
       )
-      self.update_columns(citation: response)
+      self.update_columns(citation: strip_tags(response))
     rescue
     end
   end
