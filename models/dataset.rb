@@ -239,7 +239,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def articles
-    Article.where(id: article_occurrences.select(:article_id).distinct)
+    Article.joins("INNER JOIN (#{article_occurrences.select(:article_id).distinct.to_sql}) a ON articles.id = a.article_id")
   end
 
   private
