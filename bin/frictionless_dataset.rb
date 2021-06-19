@@ -53,13 +53,10 @@ if options[:directory] && options[:key]
 elsif options[:directory] && ( options[:all] || options[:missing] )
   Dataset.find_each do |d|
     next if !d.has_claim?
-    if options[:missing]
-      file = File.join(options[:directory], "#{d.datasetKey}.zip")
-      next if File.file?(file)
-    end
     puts "Starting #{d.title}...".yellow
     f = Bionomia::FrictionlessDataDataset.new(uuid: d.datasetKey, output_directory: options[:directory])
     f.create_package
+    f.update_frictionless_created
     puts "Package created for #{d.datasetKey}".green
   end
 elsif options[:directory] && options[:list]
@@ -69,6 +66,7 @@ elsif options[:directory] && options[:list]
       puts "Starting #{dataset.title}...".yellow
       f = Bionomia::FrictionlessDataDataset.new(uuid: key, output_directory: options[:directory])
       f.create_package
+      f.update_frictionless_created
       puts "Package created for #{key}".green
     else
       puts "Package #{key} not found".red
