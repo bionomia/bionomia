@@ -250,7 +250,7 @@ fr:
     none: aucun
     identified_from: Identifié à Partir de
     collected_from: Collectés à Partir de
-    dates_identified_collected: Dates Identifiées et Collectées
+    dates_identified_collected: Dates collectées et identifiées
     no_filter_alert: Les scribes Bionomia n'ont pas encore aidé à attribuer des spécimens sous ce filtre.
     not_helped_alert: Les scribes Bionomia n'ont pas encore aidé à attribuer des spécimens.
     upload_message:
@@ -465,7 +465,7 @@ fr:
         other: "publications ont utilisé vos données de spécimen téléchargées du GBIF"
     identified_from: Identifié à Partir de
     collected_from: Collectés à Partir de
-    dates_identified_collected: Dates Collectées et Identifiées
+    dates_identified_collected: Dates collectées et identifiées
     resume: Pour votre CV
     specimens_used: Spécimens Utilisés Dans
     public_availability: Disponibilité Publique

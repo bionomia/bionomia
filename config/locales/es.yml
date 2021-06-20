@@ -250,7 +250,7 @@ es:
     none: ninguna
     identified_from: Identificado de
     collected_from: Colectado de
-    dates_identified_collected: Fechas de identificación y colecta
+    dates_identified_collected: Fechas de colecta y identificación
     no_filter_alert: Los anotadores de Bionomía todavía no han ayudado a atribuir especímenes bajo este filtro.
     not_helped_alert: Los anotadores de Bionomía todavía no han ayudado a atribuir especímenes.
     upload_message:

@@ -65,9 +65,9 @@
 
   %div{class:"row d-flex mt-3"}
     %div{class:"col-10 col-md-6"}
-      = haml :'partials/map_list_identified', layout: false, locals: { path: "/help-others/#{@viewed_user.identifier}" }
-    %div{class:"col-10 col-md-6"}
       = haml :'partials/map_list_collected', layout: false, locals: { path: "/help-others/#{@viewed_user.identifier}" }
+    %div{class:"col-10 col-md-6"}
+      = haml :'partials/map_list_identified', layout: false, locals: { path: "/help-others/#{@viewed_user.identifier}" }
 
 - else
   #map-identified{style:"width: 0%; height: 0%; display: none;"}

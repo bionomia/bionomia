@@ -250,7 +250,7 @@ en:
     none: none
     identified_from: Identified From
     collected_from: Collected From
-    dates_identified_collected: Dates Identified and Collected
+    dates_identified_collected: Dates Collected and Identified
     no_filter_alert: Bionomia scribes have not yet helped attribute specimens under this filter.
     not_helped_alert: Bionomia scribes have not yet helped attribute specimens.
     upload_message:
