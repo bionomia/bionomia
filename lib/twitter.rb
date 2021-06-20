@@ -25,14 +25,14 @@ module Bionomia
       if !user.twitter.nil?
         twitter = "@#{user.twitter}"
       end
-      if !user.top_family_identified.nil?
-        id_statement = "identified #{user.top_family_identified}"
-      end
       if !user.top_family_recorded.nil?
         recorded_statement = "collected #{user.top_family_recorded}"
       end
+      if !user.top_family_identified.nil?
+        id_statement = "identified #{user.top_family_identified}"
+      end
       if !user.top_family_identified.nil? || !user.top_family_recorded.nil?
-        statement = [id_statement,recorded_statement].compact.join(" and ")
+        statement = [recorded_statement, id_statement].compact.join(" and ")
       end
       url = "#{@base_url}/#{user.identifier}"
       message = "#{user.fullname} #{twitter} #{statement} #{url}".split.join(" ")

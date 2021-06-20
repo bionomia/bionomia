@@ -9,7 +9,7 @@
       $(function() {
         var countriesRecorded = #{recorded},
             countriesIdentified = #{identified},
-            dateData = #{@stats[:activity_dates].to_a.unshift(["#{I18n.t('charts.year')}", "#{I18n.t('charts.identified')}", "#{I18n.t('charts.collected')}"])},
+            dateData = #{@stats[:activity_dates].to_a.unshift(["#{I18n.t('charts.year')}", "#{I18n.t('charts.collected')}", "#{I18n.t('charts.identified')}"])},
             recorded_region = "world",
             identified_region = "world",
             recorded_hierarchies = $.map(#{@stats[:countries][:recorded].keys}, function(i) {

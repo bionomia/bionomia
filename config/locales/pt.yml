@@ -63,7 +63,7 @@ pt:
   card:
     collected: "Coletado %{family}"
     identified: "Identificado %{family}"
-    identified_collected: "Identificado %{identified} e coletado %{collected}"
+    identified_collected: "Coletado %{collected} e identificado %{identified}"
     claimed:
       one: espécime reivindicado
       other: espécime reivindicado
@@ -465,7 +465,7 @@ pt:
         other: "publicação fez uso de seus dados de espécimes baixados do GBIF"
     identified_from: Identificado de
     collected_from: Recolhido de
-    dates_identified_collected: Datas identificadas e coletadas
+    dates_identified_collected: Datas coletadas e identificadas
     resume: Para seu currículo
     specimens_used: Espécimes usados em
     public_availability: Disponibilidade Pública
@@ -656,7 +656,7 @@ pt:
     progress: Progresso
     identified_from: Identificado de
     collected_from: Coletado de
-    dates_identified_collected: Datas identificadas e coletadas
+    dates_identified_collected: Datas coletadas e identificadas
     specimens_attributed: espécimes atribuídos
     collected: coletado
     identified: identificado

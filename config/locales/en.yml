@@ -63,7 +63,7 @@ en:
   card:
     collected: "Collected %{family}"
     identified: "Identified %{family}"
-    identified_collected: "Identified %{identified} and collected %{collected}"
+    identified_collected: "Collected %{collected} and identified %{identified}"
     claimed:
       one: specimen claimed
       other: specimens claimed
@@ -465,7 +465,7 @@ en:
         other: "publications made use of your specimen data downloaded from GBIF"
     identified_from: Identified From
     collected_from: Collected From
-    dates_identified_collected: Dates Identified and Collected
+    dates_identified_collected: Dates Collected and Identified
     resume: For Your Resume
     specimens_used: Specimens Used In
     public_availability: Public Availability
@@ -656,7 +656,7 @@ en:
     progress: Progress
     identified_from: Identified From
     collected_from: Collected From
-    dates_identified_collected: Dates Identified and Collected
+    dates_identified_collected: Dates Collected and Identified
     specimens_attributed: specimens attributed
     collected: collected
     identified: identified

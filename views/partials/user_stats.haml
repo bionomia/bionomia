@@ -1,10 +1,3 @@
-- if @stats[:specimens][:identified] > 0
-  %li
-    - if @stats[:countries][:identified].count == 0
-      #{number_to_human(@stats[:specimens][:identified], units: :'user.stats_identified_specimens_nocountry', delimiter: ",", precision: 0)}
-    - else
-      #{number_to_human(@stats[:specimens][:identified], units: :'user.stats_identified_specimens', delimiter: ",", precision: 0)}
-      #{number_to_human(@stats[:countries][:identified].count, units: :'user.stats_identified_countries', delimiter: ",", precision: 0)}
 - if @stats[:specimens][:recorded] > 0
   %li
     - if @stats[:countries][:recorded].count == 0
@@ -12,6 +5,13 @@
     - else
       #{number_to_human(@stats[:specimens][:recorded], units: :'user.stats_collected_specimens', delimiter: ",", precision: 0)}
       #{number_to_human(@stats[:countries][:recorded].count, units: :'user.stats_collected_countries', delimiter: ",", precision: 0)}
+- if @stats[:specimens][:identified] > 0
+  %li
+    - if @stats[:countries][:identified].count == 0
+      #{number_to_human(@stats[:specimens][:identified], units: :'user.stats_identified_specimens_nocountry', delimiter: ",", precision: 0)}
+    - else
+      #{number_to_human(@stats[:specimens][:identified], units: :'user.stats_identified_specimens', delimiter: ",", precision: 0)}
+      #{number_to_human(@stats[:countries][:identified].count, units: :'user.stats_identified_countries', delimiter: ",", precision: 0)}
 - if @stats[:attributions][:helped] > 0
   %li
     #{number_to_human(@stats[:attributions][:number], units: :'user.stats_attributions_specimens', delimiter: ",", precision: 0)}
