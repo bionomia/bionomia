@@ -29,6 +29,8 @@
         %th{scope: "col"}
           %a{href: url("/admin/datasets?order=title&sort=#{sort}")} Name
         %th{scope: "col"}
+          %a{href: url("/admin/datasets?order=created_at&sort=#{sort}")} Created At
+        %th{scope: "col"}
           %a{href: url("/admin/datasets?order=frictionless_created_at&sort=#{sort}")} Frictionless Created At
 
     %tbody
@@ -36,6 +38,8 @@
         %tr
           %td
             %a{href: url("/admin/dataset/#{d.datasetKey}")} #{d.title.truncate(200)}
+          %td
+            #{d.created_at}
           %td
             #{d.frictionless_created_at}
 
