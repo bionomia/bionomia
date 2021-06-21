@@ -100,7 +100,7 @@ class Taxon < ActiveRecord::Base
                          .select(:user_id, :dateIdentified_processed, :visible)
                          .joins(:occurrence)
                          .joins("INNER JOIN taxon_occurrences ON taxon_occurrences.occurrence_id = user_occurrences.occurrence_id")
-                         .where(user_occurrences: { action: ['identifiede', 'identified,recorded', 'recorded,identified'] })
+                         .where(user_occurrences: { action: ['identified', 'identified,recorded', 'recorded,identified'] })
                          .where(taxon_occurrences: { taxon_id: id })
                          .where("YEAR(dateIdentified_processed) BETWEEN ? AND ?", start_year, end_year)
                          .distinct

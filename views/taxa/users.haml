@@ -8,48 +8,16 @@
       Application.init("", "GET", "/taxa");
     });
 
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class:"mr-auto p-2"}
-      - if @taxon.has_image?
-        %div{class:"media"}
-          %img{src: "/images/taxa/#{@taxon.image.file_name}", alt:"#{@taxon.family}", class:"mr-4"}
-          %div{class:"media-body"}
-            %h1{class:"h2 mt-0"} #{@taxon.family}
-            %p{class: "lead text-muted"}
-              - if @pagy && @pagy.count > 0
-                #{number_to_human(@pagy.count, units: :"taxa.number_#{@action}", delimiter: ",", precision: 0)}
-              - else
-                - if @action == "collected"
-                  = I18n.t('taxa.none_collected', taxon: h(@taxon.family))
-                - else
-                  = I18n.t('taxa.none_identified', taxon: h(@taxon.family))
-        %p{class:"small text-muted mb-0 mt-2"}
-          - if @taxon.image.credit
-            #{@taxon.image.credit}
-            %br
-          - if @taxon.image.licenseURL
-            %a{href: "#{@taxon.image.licenseURL}"}= @taxon.image.licenseURL
-      - else
-        %h1{class:"h2 mt-0"} #{@taxon.family}
-        %p{class: "lead text-muted"}
-          - if @pagy && @pagy.count > 0
-            #{number_to_human(@pagy.count, units: :"taxa.number_#{@action}", delimiter: ",", precision: 0)}
-          - else
-            - if @action == "collected"
-              = I18n.t('taxa.none_collected', taxon: h(@taxon.family))
-            - else
-              = I18n.t('taxa.none_identified', taxon: h(@taxon.family))
-
-    = haml :'partials/taxa/search', layout: false
+- content_for :jumbotron do
+  = haml :'partials/taxa/jumbotron', layout:false
 
 - if admin_authorized?
-  %div{class:"mt-3 mb-3 pt-3 border-top text-center"}
+  %div{class:"mt-3 mb-3 pt-3 border-top text-right"}
     %a{href: url("/admin/taxon/#{@taxon.family}")}
       %i{class:"fas fa-cog"}
       = I18n.t('general.settings')
 
-= haml :'partials/taxa/tabs', layout:false, locals: { active_tab: locals[:active_tab] }
+= haml :'partials/taxa/tabs', layout: false, locals: { active_tab: locals[:active_tab] }
 = haml :'partials/taxa/people_nav', layout: false, locals: { active_subtab: locals[:active_subtab] }
 
 - if @results.size == 0
