@@ -167,11 +167,8 @@ elsif options[:duplicates]
   wiki = Bionomia::WikidataSearch.new
   wiki.merge_users
 elsif options[:stats]
-  stats = Class.new
-  stats.extend Sinatra::Bionomia::Helper::UserHelper
   User.joins(:user_occurrences).distinct.find_each do |u|
-    BIONOMIA.cache_clear("blocks/#{u.identifier}-stats")
-    BIONOMIA.cache_put_tag("blocks/#{u.identifier}-stats", stats.user_stats(u))
+    u.flush_caches
     puts "#{u.fullname_reverse}".green
   end
 end

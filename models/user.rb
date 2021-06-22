@@ -770,6 +770,9 @@ class User < ActiveRecord::Base
     return if !::Module::const_get("BIONOMIA")
     BIONOMIA.cache_clear("blocks/#{identifier}-stats")
     BIONOMIA.cache_clear("blocks/#{identifier}-scribe")
+    stats = Class.new
+    stats.extend Sinatra::Bionomia::Helper::UserHelper
+    BIONOMIA.cache_put_tag("blocks/#{identifier}-stats", stats.user_stats(self))
   end
 
   def delete_search

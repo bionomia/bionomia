@@ -78,11 +78,6 @@ module Sinatra
           end
         end
 
-        def clear_caches(user)
-          cache_clear "blocks/#{user.identifier}-stats"
-          cache_clear "blocks/#{user.identifier}-scribe"
-        end
-
         def latest_claims(type = "living")
           user_type = (type == "living") ? { orcid: nil } : { wikidata: nil }
           subq = UserOccurrence.select("user_occurrences.user_id AS user_id, MAX(user_occurrences.created) AS created")
