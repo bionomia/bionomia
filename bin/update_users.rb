@@ -8,8 +8,8 @@ options = {}
 OptionParser.new do |opts|
   opts.banner = "Usage: update_users.rb [options]"
 
-  opts.on("-c", "--country-codes", "Update country codes") do
-    options[:country_codes] = true
+  opts.on("-c", "--cache", "Flush caches for users logged-in last 24 hours") do
+    options[:cache] = true
   end
 
   opts.on("-p", "--poll-orcid", "Poll ORCID for new accounts") do
@@ -91,21 +91,10 @@ if options[:poll_wikidata]
   search.populate_new_users
 end
 
-if options[:country_codes]
-  User.find_each do |user|
-    if !user.country.blank?
-      codes = []
-      user.country.split("|").each do |country|
-        code = I18nData.country_code(country) || IsoCountryCodes.search_by_name(country).first.alpha2 rescue nil
-        codes << code
-      end
-      if !codes.compact.empty?
-        user.country_code = codes.compact.join("|")
-        user.save
-      else
-        puts "#{user.fullname_reverse}".red
-      end
-    end
+if options[:cache]
+  yesterday = DateTime.now - 1.days
+  User.where.not(orcid: nil).where("visited >= '#{yesterday}'").find_each do |u|
+    u.flush_caches
   end
 end
 
