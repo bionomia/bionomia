@@ -8,7 +8,7 @@ options = {}
 OptionParser.new do |opts|
   opts.banner = "Usage: update_users.rb [options]"
 
-  opts.on("-c", "--cache", "Flush caches for users logged-in last 24 hours") do
+  opts.on("-c", "--cache", "Flush caches for users that have received updates to claims/attributions in last day") do
     options[:cache] = true
   end
 
@@ -93,7 +93,10 @@ end
 
 if options[:cache]
   yesterday = DateTime.now - 1.days
-  User.where.not(orcid: nil).where("visited >= '#{yesterday}'").find_each do |u|
+  User.joins(:user_occurrences)
+      .where("user_occurrences.created >= '#{yesterday}'")
+      .distinct
+      .find_each do |u|
     u.flush_caches
   end
 end
