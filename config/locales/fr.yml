@@ -377,7 +377,7 @@ fr:
     type_collected: Spécimens types collectés
     none_died_alert: "Personne trouvé qui est décédé le %{date}"
     none_born_alert: "Personne trouvé qui est né le %{date}"
-    limit_alert: Résultats limités à 50 enregistrements d'holotype ou de paratype
+    limit_alert: Résultats limités à 50 enregistrements d'holotype
     no_types_alert: "Aucun spécimen type trouvé collecté le %{date}"
   oops:
     not_found_title: Pas trouvé

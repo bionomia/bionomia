@@ -377,7 +377,7 @@ es:
     type_collected: Especímenes tipo colectados
     none_died_alert: "No se encontró a nadie que haya muerto en %{date}"
     none_born_alert: "No se encontró a nadie que haya nacido en %{date}"
-    limit_alert: Resultados limitados a 50 registros de especímenes holotipos o paratipos
+    limit_alert: Resultados limitados a 50 registros de especímenes holotipos
     no_types_alert: "No se encontraron especímenes tipo colectados en %{date}"
   oops:
     not_found_title: No encontrado

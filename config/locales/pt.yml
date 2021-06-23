@@ -377,7 +377,7 @@ pt:
     type_collected: Tipo de espécimes coletados
     none_died_alert: "Ninguém encontrado quem morreu em %{date}"
     none_born_alert: "Ninguém encontrado quem morreu em %{date}"
-    limit_alert: Resultados limitados a 50 registros de espécimes de holótipo ou paratipo
+    limit_alert: Resultados limitados a 50 registros de espécimes de holótipo
     no_types_alert: "Nenhum tipo de espécime encontrado coletado em %{date}"
   oops:
     not_found_title: Não encontrado

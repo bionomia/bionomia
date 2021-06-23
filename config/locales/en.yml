@@ -377,7 +377,7 @@ en:
     type_collected: Type Specimens Collected
     none_died_alert: "No one found who died on %{date}"
     none_born_alert: "No one found who was born on %{date}"
-    limit_alert: Results limited to 50 holotype or paratype specimen records
+    limit_alert: Results limited to 50 holotype specimen records
     no_types_alert: "No type specimens found collected on %{date}"
   oops:
     not_found_title: Not found
