@@ -127,7 +127,6 @@ en:
       unit:
         one: "scribe attributed specimens to collectors or determiners represented in this dataset"
         other: "scribes attributed specimens to collectors or determiners represented in this dataset"
-    people: People
     no_users_alert: People have not yet claimed or were attributed specimens represented in this dataset
     users_alert:
       unit:
@@ -141,8 +140,34 @@ en:
       month_and_year: "%B %Y"
       long: "%B %d, %Y"
       year: "%Y"
-    month_names: [~, January, February, March, April, May, June, July, August, September, October, November, December]
-    abbr_month_names: [~, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+    month_names:
+      - null
+      - January
+      - February
+      - March
+      - April
+      - May
+      - June
+      - July
+      - August
+      - September
+      - October
+      - November
+      - December
+    abbr_month_names:
+      - null
+      - Jan
+      - Feb
+      - Mar
+      - Apr
+      - May
+      - Jun
+      - Jul
+      - Aug
+      - Sep
+      - Oct
+      - Nov
+      - Dec
   developer:
     search: Search
     autocomplete_widget: Autocomplete Widget
@@ -155,7 +180,6 @@ en:
     recommended_use: Recommended Use
     title: For Developers
     code_title: "For Developers: Code"
-    code: Code
     parser: Parse Names
     parse_names: Parse Human Names
     parse_names_title: "For Developers: Parse Names"
@@ -187,11 +211,7 @@ en:
     submit: Submit
     upload_csv_instructions: Upload csv with claims
     download_records: Download discovered records
-    download_alert: "Download discovered specimen records, work offline, then upload new claims as a csv. A file containing at most
-    %{num_records} records is generated.
-    If you have many more than this, you may work in batches.
-    This routine does not update underlying specimen data nor does it update existing claims. If existing claims are present in the upload, these will be skipped.
-    Your uploaded csv must use a comma to separate columns each optionally enclosed by quotes."
+    download_alert: "Download discovered specimen records, work offline, then upload new claims as a csv. A file containing at most %{num_records} records is generated. If you have many more than this, you may work in batches. This routine does not update underlying specimen data nor does it update existing claims. If existing claims are present in the upload, these will be skipped. Your uploaded csv must use a comma to separate columns each optionally enclosed by quotes."
     search_dropdown_no_users: "Your search turned up 0 results."
     reset: Reset
     remove: Remove
@@ -387,14 +407,14 @@ en:
   organization:
     organization_title: Organizations
     lede:
-     unit:
-       one: "organization from ORCID accounts and Wikidata entries"
-       other: "organizations from ORCID accounts and Wikidata entries"
+      unit:
+        one: "organization from ORCID accounts and Wikidata entries"
+        other: "organizations from ORCID accounts and Wikidata entries"
     placeholder: Canadian Museum of Nature
     affiliation_none_alert: Publications based on specimens collected or identified by current and previous personnel have not yet been recorded by GBIF
     affiliation_alert: "%{count} publications used specimen data downloaded from GBIF based on specimens collected or identified by current and previous personnel while affiliated with %{org_name}"
     collected_by: "Specimens collected or identified by:"
-    science_enabled: Science Enabled Through Specimens Collected or Identified by Personnel
+    science_enabled: Science Enabled
     impact: Impact on Activities in Other Organizations
     no_metric_alert: "Current and previous personnel have not yet claimed or have been attributed specimens now curated at other organizations while they were affiliated with %{org_name}."
     metric_alert: "Current and previous personnel have claimed or were attributed specimens now curated at the following organizations while affiliated with %{org_name}."
@@ -414,7 +434,6 @@ en:
     current: Current
     previous: Previous
     metrics: Metrics
-    science_enabled: Science Enabled
     member: member
     current_members_count:
       unit:
