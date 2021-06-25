@@ -429,8 +429,8 @@ fr:
     no_search_alert: "Aucune organisme trouvée pour"
     search_alert:
       unit:
-        one: "search result for"
-        other: "search results for"
+        one: "resultado da pesquisa para"
+        other: "resultado da pesquisa para"
     current: Courant
     previous: Précédent
     metrics: Métrique
@@ -648,8 +648,8 @@ fr:
     no_publications: Les publications qui utilisaient des enregistrements de spécimens inclus dans un téléchargement du GBIF n'ont pas encore été enregistrées.
     publication_count:
       unit:
-        one: "publication used specimen data downloaded from GBIF"
-        other: "publications used specimen data downloaded from GBIF"
+        one: "publicação usou dados de amostra baixados do GBIF"
+        other: "publicações usaram dados de espécimes baixados do GBIF"
     no_co_collectors_alert: Les co-collectionneurs n'ont pas encore été enregistrés.
     co_collectors_alert: "A collecté avec:"
     co_collectors: Co-collectionneurs
