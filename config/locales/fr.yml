@@ -429,8 +429,8 @@ fr:
     no_search_alert: "Aucune organisme trouvée pour"
     search_alert:
       unit:
-        one: "résultats de recherche pour"
-        many: "résultat de recherche pour"
+        one: "search result for"
+        other: "search results for"
     current: Courant
     previous: Précédent
     metrics: Métrique
@@ -509,8 +509,8 @@ fr:
     orcid_refreshed: Les données ORCID ont été actualisées.
     public: Public
     private: Privé
-    active: Actif
-    inactive: Inactif
+    active: "Actif"
+    inactive: "Inactif"
     make_public_message: Incluez votre compte dans les profils publics. Vos réclamations seront incluses dans un téléchargement de données en masse, exposées via les extensions Google Chrome et Firefox et un Tweet sera envoyé par @BionomiaTrack.
     no_candidates_alert: Bionomia n'a trouvé aucun spécimen répertorié par GBIF que vous ayez collecté ou identifié.
     ignored_alert: Les spécimens que vous avez marqués comme "Pas moi" apparaîtront ici.
@@ -533,7 +533,7 @@ fr:
     upload_count:
       one: "Un total de 1 enregistrement téléchargé a été traité."
       other: "Au total, %{count} enregistrements téléchargés ont été traités."
-    upload_skipped: "Les liens existants, s'ils étaient présents dans votre téléchargement, ont été ignorés."
+    upload_skipped: Les liens existants, s'ils étaient présents dans votre téléchargement, ont été ignorés.
     upload_view: Afficher
     upload_view_html: "%{view} tous vos liens."
     co_collectors: Co-collectionneurs
@@ -648,8 +648,8 @@ fr:
     no_publications: Les publications qui utilisaient des enregistrements de spécimens inclus dans un téléchargement du GBIF n'ont pas encore été enregistrées.
     publication_count:
       unit:
-        one: "publications a utilisé des données de spécimen téléchargées du GBIF"
-        others: "publication ont utilisé des données de spécimen téléchargées du GBIF"
+        one: "publication used specimen data downloaded from GBIF"
+        other: "publications used specimen data downloaded from GBIF"
     no_co_collectors_alert: Les co-collectionneurs n'ont pas encore été enregistrés.
     co_collectors_alert: "A collecté avec:"
     co_collectors: Co-collectionneurs
