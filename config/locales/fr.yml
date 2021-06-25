@@ -127,7 +127,6 @@ fr:
       unit:
         one: "scribe a attribué des spécimens au collecteurs ou détermineurs représentés dans cet ensemble de données"
         other: "scribes ont attribué des spécimens au collecteurs ou détermineurs représentés dans cet ensemble de données"
-    people: Personnes
     no_users_alert: Des personnes n'ont pas encore réclamé ou ont été attribués des spécimens représentés dans cet ensemble de données
     users_alert:
       unit:
@@ -141,8 +140,34 @@ fr:
       month_and_year: "%B %Y"
       long: "%d %B %Y"
       year: "%Y"
-    month_names: [~, janvier, février, mars, avril, mai, juin, juillet, août, septembre, octobre, november, décembre]
-    abbr_month_names: [~, jan., fév., mar., avr., mai., juin, juil., août, sept., oct., nov., déc.]
+    month_names:
+      - null
+      - janvier
+      - février
+      - mars
+      - avril
+      - mai
+      - juin
+      - juillet
+      - août
+      - septembre
+      - octobre
+      - november
+      - décembre
+    abbr_month_names:
+      - null
+      - jan.
+      - fév.
+      - mar.
+      - avr.
+      - mai.
+      - juin
+      - juil.
+      - août
+      - sept.
+      - oct.
+      - nov.
+      - déc.
   developer:
     search: Rechercher
     autocomplete_widget: Autocomplete Widget
@@ -155,7 +180,6 @@ fr:
     recommended_use: Utilisation recommandée
     title: Pour les Développeurs
     code_title: "Pour les Développeurs: Code Informatique"
-    code: Code Informatique
     parser: Analyser les Noms
     parse_names: Analyser les Noms Humains
     parse_names_title: "Pour les Développeurs: Analyser les Noms"
@@ -187,11 +211,7 @@ fr:
     submit: Soumettre
     upload_csv_instructions: Importer un fichier csv avec des réclamations
     download_records: Téléchargez csv avec des réclamations
-    download_alert: "Download discovered specimen records, work offline, then upload new claims as a csv. A file containing at most
-    %{num_records} records is generated.
-    If you have many more than this, you may work in batches.
-    This routine does not update underlying specimen data nor does it update existing claims. If existing claims are present in the upload, these will be skipped.
-    Your uploaded csv must use a comma to separate columns each optionally enclosed by quotes."
+    download_alert: "Download discovered specimen records, work offline, then upload new claims as a csv. A file containing at most %{num_records} records is generated. If you have many more than this, you may work in batches. This routine does not update underlying specimen data nor does it update existing claims. If existing claims are present in the upload, these will be skipped. Your uploaded csv must use a comma to separate columns each optionally enclosed by quotes."
     search_dropdown_no_users: "Votre recherche a retourné 0 résultats."
     reset: Réinitialiser
     remove: Enlever
@@ -394,7 +414,7 @@ fr:
     affiliation_none_alert: Les publications basées sur des spécimens collectés ou identifiés par le personnel actuel et antérieur n'ont pas encore été enregistrées par GBIF
     affiliation_alert: "%{count} publications used specimen data downloaded from GBIF based on specimens collected or identified by current and previous personnel while affiliated with %{org_name}"
     collected_by: "Spécimens collectés ou identifiés par:"
-    science_enabled: Science Grâce aux Spécimens Collectés ou Identifiés par le Personnel
+    science_enabled: Science Activée
     impact: Impact sur les Activités dans d'Autres Organismes
     no_metric_alert: "Les personnels actuels et antérieurs n'ont pas encore réclamé ou attribué de spécimens conservés dans d'autres organismes alors qu'il était affilié à %{org_name}."
     metric_alert: "Les personnels actuels et antérieurs ont réclamé ou se sont attribué des spécimens maintenant conservés dans les organismes suivantes alors qu'il était affilié à %{org_name}."
@@ -409,12 +429,11 @@ fr:
     no_search_alert: "Aucune organisme trouvée pour"
     search_alert:
       unit:
-        one: "résultats de recherche pour"
-        many: "résultat de recherche pour"
+        one: "resultado da pesquisa para"
+        other: "resultado da pesquisa para"
     current: Courant
     previous: Précédent
     metrics: Métrique
-    science_enabled: Science Activée
     member: membre
     current_members_count:
       unit:
@@ -490,8 +509,8 @@ fr:
     orcid_refreshed: Les données ORCID ont été actualisées.
     public: Public
     private: Privé
-    active: Actif
-    inactive: Inactif
+    active: "Actif"
+    inactive: "Inactif"
     make_public_message: Incluez votre compte dans les profils publics. Vos réclamations seront incluses dans un téléchargement de données en masse, exposées via les extensions Google Chrome et Firefox et un Tweet sera envoyé par @BionomiaTrack.
     no_candidates_alert: Bionomia n'a trouvé aucun spécimen répertorié par GBIF que vous ayez collecté ou identifié.
     ignored_alert: Les spécimens que vous avez marqués comme "Pas moi" apparaîtront ici.
@@ -514,7 +533,7 @@ fr:
     upload_count:
       one: "Un total de 1 enregistrement téléchargé a été traité."
       other: "Au total, %{count} enregistrements téléchargés ont été traités."
-    upload_skipped: "Les liens existants, s'ils étaient présents dans votre téléchargement, ont été ignorés."
+    upload_skipped: Les liens existants, s'ils étaient présents dans votre téléchargement, ont été ignorés.
     upload_view: Afficher
     upload_view_html: "%{view} tous vos liens."
     co_collectors: Co-collectionneurs
@@ -629,8 +648,8 @@ fr:
     no_publications: Les publications qui utilisaient des enregistrements de spécimens inclus dans un téléchargement du GBIF n'ont pas encore été enregistrées.
     publication_count:
       unit:
-        one: "publications a utilisé des données de spécimen téléchargées du GBIF"
-        others: "publication ont utilisé des données de spécimen téléchargées du GBIF"
+        one: "publicação usou dados de amostra baixados do GBIF"
+        other: "publicações usaram dados de espécimes baixados do GBIF"
     no_co_collectors_alert: Les co-collectionneurs n'ont pas encore été enregistrés.
     co_collectors_alert: "A collecté avec:"
     co_collectors: Co-collectionneurs
