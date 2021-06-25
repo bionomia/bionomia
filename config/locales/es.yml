@@ -138,6 +138,7 @@ es:
   date:
     formats:
       month_and_year: "%B %Y"
+      month_and_day: "%d %B"
       long: "%d %B %Y"
       year: "%Y"
     month_names:

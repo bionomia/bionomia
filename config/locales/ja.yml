@@ -122,6 +122,7 @@ ja:
   date:
     formats:
       month_and_year: "%B %Y"
+      month_and_day: "%B %d"
       long: "%B %d, %Y"
       year: "%Y"
     month_names:

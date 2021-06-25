@@ -33,7 +33,7 @@
 
 %div{class:"row"}
   %div{class:"col-12 col-sm-8 col-lg-9"}
-    %h3{class:"ml-2"} #{@date.strftime("%B %-d")}
+    %h3{class:"ml-2"} #{I18n.l(@date.to_date, format: :month_and_day)}
   %div{class:"col-12 col-sm-4 col-lg-3"}
     %div{class:"form-group"}
       %div{id:"datepicker", class:"input-group date", "date-provide":"datepicker"}
