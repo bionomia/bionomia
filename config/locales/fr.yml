@@ -138,7 +138,7 @@ fr:
   date:
     formats:
       month_and_year: "%B %Y"
-      month_and_day: "%d %B"
+      month_and_day: "%B %d"
       long: "%d %B %Y"
       year: "%Y"
     month_names:
