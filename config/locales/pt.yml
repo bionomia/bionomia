@@ -127,7 +127,6 @@ pt:
       unit:
         one: "autor atribuiu espécimes a coletores ou determinantes representados neste conjunto de dados"
         other: "autor atribuiu espécimes a coletores ou determinantes representados neste conjunto de dados"
-    people: Pessoas
     no_users_alert: Pessoas ainda não reivindicaram ou foram atribuídos espécimes representados neste conjunto de dados
     users_alert:
       unit:
@@ -141,21 +140,46 @@ pt:
       month_and_year: "%B %Y"
       long: "%B %d, %Y"
       year: "%Y"
-    month_names: [~, Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro]
-    abbr_month_names: [~, Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez]
+    month_names:
+      - null
+      - Janeiro
+      - Fevereiro
+      - Março
+      - Abril
+      - Maio
+      - Junho
+      - Julho
+      - Agosto
+      - Setembro
+      - Outubro
+      - Novembro
+      - Dezembro
+    abbr_month_names:
+      - null
+      - Jan
+      - Fev
+      - Mar
+      - Abr
+      - Mai
+      - Jun
+      - Jul
+      - Ago
+      - Set
+      - Out
+      - Nov
+      - Dez
   developer:
     search: Search
     autocomplete_widget: Ferramenta de Autocompletação
     json_ld_search: Busca JSON-LD para pessoas
     json_ld_occurrence_search: Busca JSON-LD para ocorrências
     structured_data: Data Estruturada
-    raw_data:  Data Crua
+    raw_data: Data Crua
     code: Código
     reconcile_title: Reconciliar
     recommended_use: Uso Recomendado
     title: Para Desenvolvedores
     code_title: "Para Desenvolvedores: Código"
-    code: Código
     parser: Separar Nomes
     parse_names: Separar Nomes Humanos
     parse_names_title: "Para Desenvolvedores: Separar Nomes"
@@ -187,11 +211,7 @@ pt:
     submit: Submeter
     upload_csv_instructions: Carregar csv com reivindicações
     download_records: Baixar registros descobertos
-    download_alert: "Baixe registros de espécimes descobertos, trabalhe off-line e, em seguida, carregue novas reivindicações como um csv. Um arquivo contendo no máximo
-    %{num_records} registros é gerado.
-    Se você tiver muito mais do que isso, poderá trabalhar em lotes.
-    Esta rotina não atualiza dados de espécimes subjacentes nem atualiza reivindicações existentes. Se reivindicações existentes estiverem presentes no upload, elas serão ignoradas.
-    Seu csv carregado deve usar uma vírgula para separar as colunas, cada uma opcionalmente entre aspas."
+    download_alert: "Baixe registros de espécimes descobertos, trabalhe off-line e, em seguida, carregue novas reivindicações como um csv. Um arquivo contendo no máximo %{num_records} registros é gerado. Se você tiver muito mais do que isso, poderá trabalhar em lotes. Esta rotina não atualiza dados de espécimes subjacentes nem atualiza reivindicações existentes. Se reivindicações existentes estiverem presentes no upload, elas serão ignoradas. Seu csv carregado deve usar uma vírgula para separar as colunas, cada uma opcionalmente entre aspas."
     search_dropdown_no_users: "Sua busca resultou em 0 resultados."
     reset: Restabelecer
     remove: Remover
@@ -387,14 +407,14 @@ pt:
   organization:
     organization_title: Organizações
     lede:
-     unit:
-       one: "organização de contas ORCID e entradas de Wikidata"
-       other: "organizações de contas ORCID e entradas do Wikidata"
+      unit:
+        one: "organização de contas ORCID e entradas de Wikidata"
+        other: "organizações de contas ORCID e entradas do Wikidata"
     placeholder: Canadian Museum of Nature
     affiliation_none_alert: Publicações baseadas em espécimes coletados ou identificados por pessoal atual e anterior ainda não foram registrados pelo GBIF
     affiliation_alert: "%{count} publicações usaram dados de espécimes baixados do GBIF com base em espécimes coletados ou identificados por pessoal atual e anterior enquanto afiliado com %{org_name}"
     collected_by: "Espécimes coletados ou identificados por:"
-    science_enabled: Ciência habilitada por meio de espécimes coletados ou identificados por pessoal
+    science_enabled: Ciência habilitada
     impact: Impacto nas atividades em outras organizações
     no_metric_alert: "Pessoal atual e anterior ainda não reivindicou ou foram atribuídos espécimes agora com curadoria de outras organizações enquanto eram afiliados com %{org_name}."
     metric_alert: "Pessoal atual e anterior reivindicou ou foi atribuído espécimes agora com curadoria nas seguintes organizações enquanto afiliado com %{org_name}."
@@ -414,7 +434,6 @@ pt:
     current: Atual
     previous: Prévio
     metrics: Métricas
-    science_enabled: Ciência habilitada
     member: membro
     current_members_count:
       unit:

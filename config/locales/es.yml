@@ -127,7 +127,6 @@ es:
       unit:
         one: "un anotador ha atribuido especímenes a colectores o identificadores representados en este conjunto de datos"
         other: "anotadores han atribuido especímenes a colectores o identificadores representados en este conjunto de datos"
-    people: Personas
     no_users_alert: Ninguna persona ha reclamado o se le han atribuido especímenes representados en este conjunto de datos
     users_alert:
       unit:
@@ -141,8 +140,34 @@ es:
       month_and_year: "%B %Y"
       long: "%d %B %Y"
       year: "%Y"
-    month_names: [~, enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre]
-    abbr_month_names: [~, ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic]
+    month_names:
+      - null
+      - enero
+      - febrero
+      - marzo
+      - abril
+      - mayo
+      - junio
+      - julio
+      - agosto
+      - septiembre
+      - octubre
+      - noviembre
+      - diciembre
+    abbr_month_names:
+      - null
+      - ene
+      - feb
+      - mar
+      - abr
+      - may
+      - jun
+      - jul
+      - ago
+      - sep
+      - oct
+      - nov
+      - dic
   developer:
     search: Buscar
     autocomplete_widget: Herramienta para autocompletar
@@ -155,7 +180,6 @@ es:
     recommended_use: Uso recomendado
     title: Para desarrolladores
     code_title: "Para desarrolladores: Código"
-    code: Código
     parser: Analizar nombres
     parse_names: Analizar nombres humanos
     parse_names_title: "Para desarrolladores: Analizar nombres"
@@ -187,11 +211,7 @@ es:
     submit: Enviar
     upload_csv_instructions: Enviar csv con adjudicaciones
     download_records: Descargar registros descubiertos
-    download_alert: "Descargue registros de especímenes descubiertos, trabaje desconectado, luego cargue adjudicaciones nuevas como csv. Se ha generado un archivo que contiene al menos
-    %{num_records} registros.
-    Si tiene mucho más que estos, puede trabajar en tandas.
-    Esta rutina no actualiza los datos de los especímenes subyacentes ni actualiza las adjudicaciones existentes. Si hay reclamos existentes en el archivo a cargar, estos se omitirán.
-    Su csv cargado debe usar una coma para separar las columnas, cada una opcionalmente entre comillas."
+    download_alert: "Descargue registros de especímenes descubiertos, trabaje desconectado, luego cargue adjudicaciones nuevas como csv. Se ha generado un archivo que contiene al menos %{num_records} registros. Si tiene mucho más que estos, puede trabajar en tandas. Esta rutina no actualiza los datos de los especímenes subyacentes ni actualiza las adjudicaciones existentes. Si hay reclamos existentes en el archivo a cargar, estos se omitirán. Su csv cargado debe usar una coma para separar las columnas, cada una opcionalmente entre comillas."
     search_dropdown_no_users: "Su búsqueda encontró 0 resultados."
     reset: Reiniciar
     remove: Remover
@@ -387,14 +407,14 @@ es:
   organization:
     organization_title: Organizaciones
     lede:
-     unit:
-       one: "organización en cuentas de ORCID y entradas de Wikidata"
-       other: "organizaciones en cuentas de ORCID y entradas de Wikidata"
+      unit:
+        one: "organización en cuentas de ORCID y entradas de Wikidata"
+        other: "organizaciones en cuentas de ORCID y entradas de Wikidata"
     placeholder: Museo Canadiense de la Naturaleza
     affiliation_none_alert: Publicaciones basadas en especímenes colectados o identificados por personal actual y personal previo todavía no han sido registrados por GBIF
     affiliation_alert: "%{count} publicaciones usaron datos de especímenes descargados de GBIF basados en especímenes colectados o identificados por personal actual y personal previo mientras afiliados a %{org_name}"
     collected_by: "Epecímenes colectados o identificados por:"
-    science_enabled: Ciencia habilitada a través de especímenes colectados o identificados por personal
+    science_enabled: Ciencia habilitada
     impact: Impacto sobre las actividades de otras Organizaciones
     no_metric_alert: "personal actual y previo todavía no han reclamado o les han sido atribuidos especímenes ahora curados en otras organizaciones mientras estaban afiliados a %{org_name}."
     metric_alert: "personal actual y previo han reclamado o les han sido atribuidos especímenes ahora curados en las siguientes organizaciones mientras estaban afiliados a %{org_name}."
@@ -414,7 +434,6 @@ es:
     current: Actual
     previous: Previo
     metrics: Métricas
-    science_enabled: Ciencia habilitada
     member: miembro
     current_members_count:
       unit:
@@ -475,11 +494,11 @@ es:
     delete_account: Eliminar su cuenta
     delete: Eliminar
     permanent_delete: Eliminar su cuenta permanentemente.
-    delete_warning: ¿Está seguro de que quiere eliminar su cuenta? Todas sus asignaciones Y todas las atribuciones que ha hecho a otros serán removidas permanentemente.
+    delete_warning: '¿Está seguro de que quiere eliminar su cuenta? Todas sus asignaciones Y todas las atribuciones que ha hecho a otros serán removidas permanentemente.'
     email_instructions: Recibir notificaciones por correo electrónico sobre nuevos artículos que usaron datos derivados de los especímenes que usted identificó o colectó. Haga su dirección de correo electónico primaria disponible públicamente en su cuenta de ORCID y uego actualice su información de ORCID arriba.
     email_procedure: "Recibir notificaciones sobre nuevos artículos que usaron datos derivados de los especímenes que usted identificó o colectó. Su dirección de correo electónico primaria disponible públicamente, %{email} proviene de su cuenta de ORCID."
     disconnect: Desconectar
-    disconnect_warning: ¿Está seguro de que quiere desconectar su cuenta de Zenodo? Sus datos permanecerán archivados y accesibles pero no se crearán versiones nuevas. Si reconecta su cuenta en otro momento, se creará un nuevo paquete de datos.
+    disconnect_warning: '¿Está seguro de que quiere desconectar su cuenta de Zenodo? Sus datos permanecerán archivados y accesibles pero no se crearán versiones nuevas. Si reconecta su cuenta en otro momento, se creará un nuevo paquete de datos.'
     connect_zenodo: Conecte su cuenta a Zenodo donde se almacenarán versiones instantáneas de sus asignaciones y se generará un DOI de DataCite. Se proveerá una citación para ser incluida en su hoja de vida.
     connect_zenodo_claim: Reclame al menos uno de sus especímenes y vuelva aquí para conectar su cuenta a Zenodo donde se almacenarán versiones instantáneas de sus asignaciones y se generará un DOI de DataCite. Se proveerá una citación para ser incluida en su hoja de vida.
     disconnect_zenodo: Desconectar de Zenodo
