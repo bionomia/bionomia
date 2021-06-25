@@ -1,731 +1,731 @@
 pt:
-  "true": "Sim"
-  "false": "Não"
+  "true": "Si"
+  "false": "No"
   acknowledgments:
-    acknowledgments_title: Agradecimentos
-    taxon_silhouettes: Silhuetas de táxon família
-    translations: Translações
+    acknowledgments_title: Agradecimientos
+    taxon_silhouettes: Siluetas de taxón por familia
+    translations: Traducciones
   admin:
-    change_photo: Mudar foto de perfil
+    change_photo: Cambiar imagen de perfil
   agent:
-    agent_title: Agente de usuário
-    search_title: Busca por agente de usuário
+    agent_title: Personas
+    search_title: Búsqueda por nombre
     lede:
       unit:
-        one: "cadeia de coletores e identificadores de nomes separados da data do especime do GBIF"
-        other: "cadeia de coletores e identificadores de nomes separados da data do especime do GBIF"
-    search_none: "Cadeia de usuário não encontrado %{searched}"
+        one: "cadenas de texto sin procesar para nombres de colector e identificador capturados de los datos de especímenes en GBIF"
+        other: "cadenas de texto sin procesar para nombres de colector e identificador capturados de los datos de especímenes en GBIF"
+    search_none: "No se encontró una cadena de texto para el agente %{searched}"
     search_count:
       unit:
-        one: "resultados de busca para"
-        other: "resultados de busca para"
-    warning: "ATENÇÃO:"
-    warning_statement: Diferente de todas outras URLs neste site, URLs para cadeia de usuários não são confiáveis para conexão pois indicarão resultados diferentes em poucas semanas
-    agent_name_title: "%{agent_name} Espécimes"
-    agent_lede: Uma cadeia não processada de coletores e identificadores de nomes separados na história natural istory specimen data
+        one: "resultado de la búsqueda de"
+        other: "resultado de la búsqueda de"
+    warning: "ADVERTENCIA:"
+    warning_statement: A diferencia de todas las demás URL de este sitio, las URL de las cadenas de agentes no son confiables para la vinculación porque indicarán resultados diferentes cada pocas semanas.
+    agent_name_title: "%{agent_name} especímenes"
+    agent_lede: Una cadena sin procesar de los nombres de colectores e identificadores analizados en datos de datos de historia natural
     found_statement:
       unit:
-        one: "Espécime não encontrado. Nem todas as colunas são mostradas."
-        other: "Espécime ecnontrado. Nem todas as colunas são mostradas."
-    search_html: "Busca por %{agent_link} a pessoas e ajude na atribuição de seus espécimes."
-    example_agents: Amostras aleatórias
+        one: "un espécimen encontrado. No se muestran todas las columnas."
+        other: "especímenes encontrados. No se muestran todas las columnas."
+    search_html: "Búsqueda de %{agent_link} la persona y ayude a atribuir sus especímenes."
+    example_agents: Muestras aleatorias
   article:
-    article_title: Artigo
-    articles_title: Artigos
+    article_title: Artículo
+    articles_title: Artículos
     articles_lede:
       unit:
-        one: "artigo citou downloads do GBIF"
-        other: "artigos que citaram downloads do GBIF"
-    no_claims_alert: Pessoas ainda não reivindicaram ou foram atribuídos espécimes representados nos dados baixados do GBIF em suporte a este artigo
+        one: "artículo que cita descargas de GBIF"
+        other: "artículos que citan descargas de GBIF"
+    no_claims_alert: Nadie ha reclamado o ha recibido atribuciones de especímenes representados en los datos descargados de GBIF en apoyo de este artículo
     claims_alert:
       unit:
-        one: "pessoas coletaram ou identificaram espécimes incluídos na data derivada do GBIF em suporte a este artigo"
-        other: "pessoas coletaram ou identificaram espécimes incluídos na data derivada do GBIF em suporte a este artigo"
-    placeholder: "Evolução e sistemática de..."
-    people: Pessoas
-    agent_strings: Agente de usuário
-    agent_title: Agentes do artigo
+        one: "persona colectó o identificó especímenes incluidos en datos descargados de GBIF en soporte de este artículo"
+        other: "alguien colectó o identificó especímenes incluidos en datos descargados de GBIF en soporte de este artículo"
+    placeholder: "Evolución y sistemática de..."
+    people: Personas
+    agent_strings: Cadenas de agentes
+    agent_title: Agentes de artículo
     alphabetical: Alfabético
-    counts: Contagens
-    unclaimed: Não Reclamado
-    no_agent_strings_alert: Cadeias brutas de coletores e identifcadores de nomes separados em data de espécimes derivadas do GBIF em suporte desse artigo não foram encontrados
+    counts: Conteo
+    unclaimed: Sin reclamar
+    no_agent_strings_alert: No se han encontrado cadenas sin procesar de los nombres de colectores o identificadores analizados en datos de especímenes descargados de GBIF para respaldar este artículo
     agent_strings_alert:
       unit:
-        one: "Cadeias brutas de coletores e identifcadores de nomes separados de especimens derivados do GBIF em suporte desse artigo"
-        other: "raw strings from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article"
-    claims: reivindicações
-    specimens: especimes
-    no_search_alert: "Nenhum artigo encontrado para"
+        one: "cadena sin procesar de los nombres analizados del colector y del identificador en los datos de los especímenes descargados de GBIF en apoyo de este artículo"
+        other: "cadena sin procesar de los nombres analizados del colector y del identificador en los datos de los especímenes descargados de GBIF en apoyo de este artículo"
+    claims: reclamos
+    specimens: especímenes
+    no_search_alert: "No se encontraron artículos para"
     search_alert:
       unit:
-        one: "resultado da pesquisa encontrado para"
-        other: "resultado da pesquisa encontrado para"
+        one: "resultado de la búsqueda por"
+        other: "resultados de la búsqueda por"
   card:
-    collected: "Coletado %{family}"
-    identified: "Identificado %{family}"
-    identified_collected: "Coletado %{collected} e identificado %{identified}"
+    collected: "Colectó %{family}"
+    identified: "Identificó %{family}"
+    identified_collected: "Colectó %{collected} y identificó %{identified}"
     claimed:
-      one: espécime reivindicado
-      other: espécime reivindicado
+      one: espécimen reclamado
+      other: especímenes reclamados
     attributed:
-      one: espécime atribuído
-      other: espécimes atribuído
+      one: espécimen atribuido
+      other: especímenes atribuidos
     helped:
-      one: pessoa ajudada
-      other: pessoa ajudada
+      one: persona ayudada
+      other: personas ayudadas
   charts:
-    year: Ano
-    number_specimens: "# espécimes"
-    identified: Identificado
-    collected: Coletado
-    people: Pessoas
+    year: Año
+    number_specimens: "# especímenes"
+    identified: Identificó
+    collected: Colectó
+    people: Personas
   country:
     country_title: Países
-    lede: De países indicados em contas ORCID e entradas de Wikidata ou registros de espécimes em GBIF
-    intro: De países indicados em contas ORCID e entradas do Wikidata. Pesquise por família de táxons para explorar a especialização.
-    collected_from: "Coletado %{family} de %{country}"
-    identified_from: "Identificado %{family} do %{country}"
-    collected_identified_from: "Coletado or Identificado %{family} do %{country}"
-    no_one_collected_from: "Ninguém coletou %{family} do %{country}"
-    no_one_identified_from: "Ninguém identificou %{family} do %{country}"
-    no_one_collected_identified_from: "Ninguém coletou ou identificou %{family} do %{country}"
-    no_one_message: "Ninguém encontrado do %{country} em contas ORCID ou entradas do Wikidata. Pesquise por família de táxons para explorar a especialização."
+    lede: Países indicados en cuentas de ORCID y entradas de Wikidata o registros de especímenes en GBIF
+    intro: Países indicados en cuentas de ORCID y entradas de Wikidata. Busque por familia taxonómica para explorar experticia.
+    collected_from: "Colectados %{family} de %{country}"
+    identified_from: "Identificados %{family} de %{country}"
+    collected_identified_from: "Colectados o identificados %{family} de %{country}"
+    no_one_collected_from: "Nadie ha colectado %{family} de %{country}"
+    no_one_identified_from: "Nadie ha identificado %{family} de %{country}"
+    no_one_collected_identified_from: "Nadie ha colectado o identificado %{family} de %{country}"
+    no_one_message: "No se encontró a nadie de %{country} en cuentas de ORCID o entradas de Wikidata. Buscar por familia taxonómica para explorar experticia."
   dataset:
-    dataset_title: Conjuto de dados
-    search_title: Pesquisa de conjuntos de dados
-    scribes_title: Scribes
+    dataset_title: Conjuntos de datos
+    search_title: Búsqueda en conjuntos de datos
+    scribes_title: Anotadores
     lede:
       unit:
-        one: "conjunto de dados do GBIF"
-        other: "conjunto de dados do GBIF"
-    placeholder: Borboletas do brasil
-    people: Pessoas
-    visualizations: Visualizações
-    scribes: Scribes
+        one: "conjunto de datos de GBIF"
+        other: "conjuntos de datos de GBIF"
+    placeholder: Mariposas de Brasil
+    people: Personas
+    visualizations: Visualizaciones
+    scribes: Anotadores
     agents: Agentes
-    agent_strings: Cadeias de agentes
-    agent_strings_unclaimed: Cadeias de agente não reclamados
+    agent_strings: Cadenas de agente
+    agent_strings_unclaimed: Cadenas de agente sin reclamar
     alphabetical: Alfabético
-    counts: Contas
-    unclaimed: Não reclamado
-    no_agents_alert: Cadeias brutas de nomes de coletores e determinadores analisados em dados de espécimes incluídos neste conjunto de dados ainda não foram registrados
+    counts: Conteo
+    unclaimed: Sin reclamar
+    no_agents_alert: Aún no se han registrado cadenas sin procesar de los nombres analizados del colector y del identificador en los datos de los especímenes incluidas en este conjunto de datos
     agents_alert:
       unit:
-        one: "cadeia bruta do coletor analisado e nomes determinantes nos dados do espécime incluídos neste conjunto de dados"
-        other: "cadeia bruta do coletor analisado e nomes determinantes nos dados do espécime incluídos neste conjunto de dados"
+        one: "cadena sin procesar de los nombres analizados del colector y del identificador en los datos de los especímenes incluidos en este conjunto de datos"
+        other: "cadena sin procesar de los nombres analizados del colector y del identificador en los datos de los especímenes incluidos en este conjunto de datos"
     agents_alert_unclaimed:
       unit:
-        one: "cadeia bruta do coletor analisado e nomes do determinador em dados de espécime totalmente não atribuídos incluídos neste conjunto de dados"
-        other: "cadeia brutas de nomes de coletores e determinadores analisados em dados de espécimes totalmente não atribuídos incluídos neste conjunto de dados"
-    none_found: "Nenhum conjunto de dados encontrado para %{searched}"
+        one: "cadena sin procesar de los nombres analizados del colector y del identificador en datos de especímenes completamente no atribuidos, incluidos en este conjunto de datos"
+        other: "Cadenas sin procesar de los nombres analizados del colector y del identificador en datos de especímenes completamente no atribuidos, incluidos en este conjunto de datos"
+    none_found: "No se encontraron conjuntos de datos para %{searched}"
     search_found:
       unit:
-        one: "resultado da pesquisa para"
-        other: "resultado da pesquisa para"
-    no_scribes_alert: Escritores ainda não atribuíram espécimes ao coletor ou determinadores representados neste conjunto de dados
+        one: "resultados de búsqueda por"
+        other: "resultados de búsqueda por"
+    no_scribes_alert: Anotadores todavía no han atribuido especímenes a colectores o identificadores representados en este conjunto de datos
     scribes_alert:
       unit:
-        one: "autor atribuiu espécimes a coletores ou determinantes representados neste conjunto de dados"
-        other: "autor atribuiu espécimes a coletores ou determinantes representados neste conjunto de dados"
-    no_users_alert: Pessoas ainda não reivindicaram ou foram atribuídos espécimes representados neste conjunto de dados
+        one: "un anotador ha atribuido especímenes a colectores o identificadores representados en este conjunto de datos"
+        other: "anotadores han atribuido especímenes a colectores o identificadores representados en este conjunto de datos"
+    no_users_alert: Ninguna persona ha reclamado o se le han atribuido especímenes representados en este conjunto de datos
     users_alert:
       unit:
-        one: "pessoa reivindicou ou foi atribuída espécimes representados neste conjunto de dados"
-        other: "pessoas reivindicaram ou foram atribuídos espécimes representados neste conjunto de dados"
-    timeline: Linha do tempo
-    none_collected_timeline: "Ninguém coletou e indicou uma data de coleta"
-    none_identified_timeline: "Ninguém se identificou e indicou uma data de identificação"
+        one: "una persona ha reclamado o se le han atribuido especímenes representados en este conjunto de datos"
+        other: "personas han reclamado o se les han atribuido especímenes representados en este conjunto de datos"
+    timeline: Cronología
+    none_collected_timeline: "Nadie ha colectado y ha indicado una fecha de colecta"
+    none_identified_timeline: "Nadie ha identificado y ha indicado una fecha de identificación"
   date:
     formats:
       month_and_year: "%B %Y"
-      long: "%B %d, %Y"
+      long: "%d %B %Y"
       year: "%Y"
     month_names:
       - null
-      - Janeiro
-      - Fevereiro
-      - Março
-      - Abril
-      - Maio
-      - Junho
-      - Julho
-      - Agosto
-      - Setembro
-      - Outubro
-      - Novembro
-      - Dezembro
+      - enero
+      - febrero
+      - marzo
+      - abril
+      - mayo
+      - junio
+      - julio
+      - agosto
+      - septiembre
+      - octubre
+      - noviembre
+      - diciembre
     abbr_month_names:
       - null
-      - Jan
-      - Fev
-      - Mar
-      - Abr
-      - Mai
-      - Jun
-      - Jul
-      - Ago
-      - Set
-      - Out
-      - Nov
-      - Dez
+      - ene
+      - feb
+      - mar
+      - abr
+      - may
+      - jun
+      - jul
+      - ago
+      - sep
+      - oct
+      - nov
+      - dic
   developer:
-    search: Search
-    autocomplete_widget: Ferramenta de Autocompletação
-    json_ld_search: Busca JSON-LD para pessoas
-    json_ld_occurrence_search: Busca JSON-LD para ocorrências
-    structured_data: Data Estruturada
-    raw_data: Data Crua
+    search: Buscar
+    autocomplete_widget: Herramienta para autocompletar
+    json_ld_search: Búsqueda JSON-LD de personas
+    json_ld_occurrence_search: Búsqueda JSON-LD de registros
+    structured_data: Datos estructurados
+    raw_data: Datos sin procesar
     code: Código
     reconcile_title: Reconciliar
-    recommended_use: Uso Recomendado
-    title: Para Desenvolvedores
-    code_title: "Para Desenvolvedores: Código"
-    parser: Separar Nomes
-    parse_names: Separar Nomes Humanos
-    parse_names_title: "Para Desenvolvedores: Separar Nomes"
-    structured_data_title: "Para Desenvolvedores: Data Estruturada"
+    recommended_use: Uso recomendado
+    title: Para desarrolladores
+    code_title: "Para desarrolladores: Código"
+    parser: Analizar nombres
+    parse_names: Analizar nombres humanos
+    parse_names_title: "Para desarrolladores: Analizar nombres"
+    structured_data_title: "Para desarrolladores: Datos estructurados"
   donate:
-    donate_title: Doe
-    lede: Sua doação única ou periódica ajudará a completar o pipeline de dados e garantir que o crédito seja dado por contribuições feitas para coleções de história natural o mais rápido e perfeitamente possível.
-    campaign: Campanha
-    donor_wall: Parede de doadores
+    donate_title: Donaciones
+    lede: Su donación única o periódica ayudará a completar los protocolos para el procesamiento de los datos y garantizará que se otorgue crédito por las contribuciones realizadas a las colecciones de historia natural de la manera más rápida y fluida posible.
+    campaign: Campaña
+    donor_wall: Muro de Donadores
   donor_wall:
-    donor_wall_title: Parede de doadores
-    lede: Obrigado aos seguintes doadores que estão apoiando a conclusão do pipeline de dados.
+    donor_wall_title: Muro de Donadores
+    lede: Gracias a los siguienetes donadores quienes están apoyando la finalización de los protocolos para el procesamiento de los datos.
   general:
-    search: Busca
-    apply: aplicar
-    help_attribute: Atributo de ajuda
-    refresh_profile: Atualizar
-    refresh_stats: Atualizar status
-    settings: Configurações
-    bulk_assignment: Atribuição em massa
-    collected_all: Todos coletados
-    collected: Coletaods
-    identified_all: Todos Identificados
-    identified: Identificados
+    search: Buscar
+    apply: Aplicar
+    help_attribute: Ayudar a atribuir
+    refresh_profile: Recargar
+    refresh_stats: Recargar estadísticas
+    settings: Configuración
+    bulk_assignment: Asignación masiva
+    collected_all: Colectó todos
+    collected: Colectado
+    identified_all: Identificó todos
+    identified: Identificado
     both: Ambos
-    either: Ou
+    either: Cualquiera de los dos
     per_page: Por página
-    download: Download
-    submit: Submeter
-    upload_csv_instructions: Carregar csv com reivindicações
-    download_records: Baixar registros descobertos
-    download_alert: "Baixe registros de espécimes descobertos, trabalhe off-line e, em seguida, carregue novas reivindicações como um csv. Um arquivo contendo no máximo %{num_records} registros é gerado. Se você tiver muito mais do que isso, poderá trabalhar em lotes. Esta rotina não atualiza dados de espécimes subjacentes nem atualiza reivindicações existentes. Se reivindicações existentes estiverem presentes no upload, elas serão ignoradas. Seu csv carregado deve usar uma vírgula para separar as colunas, cada uma opcionalmente entre aspas."
-    search_dropdown_no_users: "Sua busca resultou em 0 resultados."
-    reset: Restabelecer
+    download: Descargar
+    submit: Enviar
+    upload_csv_instructions: Enviar csv con adjudicaciones
+    download_records: Descargar registros descubiertos
+    download_alert: "Descargue registros de especímenes descubiertos, trabaje desconectado, luego cargue adjudicaciones nuevas como csv. Se ha generado un archivo que contiene al menos %{num_records} registros. Si tiene mucho más que estos, puede trabajar en tandas. Esta rutina no actualiza los datos de los especímenes subyacentes ni actualiza las adjudicaciones existentes. Si hay reclamos existentes en el archivo a cargar, estos se omitirán. Su csv cargado debe usar una coma para separar las columnas, cada una opcionalmente entre comillas."
+    search_dropdown_no_users: "Su búsqueda encontró 0 resultados."
+    reset: Reiniciar
     remove: Remover
     filtered_by: Filtrado por
   help:
-    help_title: Espécimes de atributo de ajuda
-    country_title: Espécimes de atributo de ajuda
-    latest_title: Destinatários mais recentes
-    country_name_title: "Ajude a atribuir espécimes para pessoas de %{country}"
-    country_no_one: "Ninguém encontrado de"
-    advanced_search_title: "Pesquisa e filtro avançados"
-    fix_title: Ajude a corrigir atribuições
-    upload_title: Envio
-    basic_instructions_lede: Instruções básicas para você começar
-    add_someone_lede: "Adicione alguém ainda não descoberto"
-    country_name_lede: De países indicados no ORCID ou Wikidata
-    latest_lede: Junte-se aos autores ajudando a atribuir espécimes
-    country_lede: Junte-se aos autores para reconhecer seus colegas, mentores ou qualquer pessoa que o inspire
-    person: Pessoa
-    progress: Progresso
+    help_title: Ayude a atribuir especímenes
+    country_title: Ayude a atribuir especímenes
+    latest_title: Últimos receptores
+    country_name_title: "Ayude a atribuir especímenes a personas de %{country}"
+    country_no_one: "No se encontraron personas de"
+    advanced_search_title: "Búsqueda avanzada y filtros"
+    fix_title: Ayude a ajustar atribuciones
+    upload_title: Envíe
+    basic_instructions_lede: Instrucciones básicas para comenzar
+    add_someone_lede: "Añadir a alguien que aún no ha sido descubierto"
+    country_name_lede: Países indicados en ORCID o Wikidata
+    latest_lede: Únase al grupo de anotadores ayudando a atribuir especímenes
+    country_lede: Únase al grupo de anotadores reconociendo a sus colegas, mentores, o cualquier persona que le inspire.
+    person: Persona
+    progress: Progreso
     public: Público
-    private: Perfil não é público
-    created: Criado
-    latest_scribe: Autores mais recente
-    latest_claim: Última Reivindicação
-    help_documentation: "Documentação de ajuda"
-    add_someone: "Adicionar alguém"
-    latest_recipients: Recipiente mais recentes
-    new_people: Novas pessoas
-    new_people_title: Pessoas Recentemente Encontradas
-    new_people_lede: Espécimes de atributos para pessoas recentemente descobertas no ORCID ou no Wikidata
+    private: El perfil no es público
+    created: Creado
+    latest_scribe: Último anotador
+    latest_claim: Última adjudicación
+    help_documentation: "Documentación de ayuda"
+    add_someone: "Agregar a alguien"
+    latest_recipients: Últimos receptores
+    new_people: Nuevas personas
+    new_people_title: Personas recientemente encontradas
+    new_people_lede: Atribuya especímenes a personas recientemente descubiertas en ORCID o Wikidata
     by_country: Por país
-    not_ignored_alert: Os autores da Bionomia não sinalizaram que as amostras devem ser ignoradas.
-    agent_string: Agente de usuário
-    taxon_string: Família Taxon
+    not_ignored_alert: Los anotadores de Bionomía no han marcado especímenes para ser ignorados.
+    agent_string: Cadena de agente
+    taxon_string: Familia taxonómica
     kingdom_string: Kingdom
-    dataset: Conjunto de dados
-    datasets: Conjunto de dados
+    dataset: Conjunto de datos
+    datasets: Conjuntos de datos
     agents: Agentes
-    taxa: Famílias Taxonômicas
-    specimens: Espécimes
-    visualizations: Visualizações
-    support: Ajudado por
+    taxa: Familias taxonómicas
+    specimens: Epecímenes
+    visualizations: Visualizaciones
+    support: Con ayuda de
     specialties: Especialidades
     public_profile: Perfil público
-    make_public: Tornar público
-    not_yet: Ainda não
-    viz_none_alert: Autores da Bionomia ainda não ajudaram a atribuir os espécimes.
-    viz_alert: Clique nas regiões do mapa ou nas barras do gráfico para executar um filtro.
-    problems: Problemas descobertos
-    collections_before_birth: "Coleções feitas antes do nascimento:"
-    collections_after_death: "Coleções feitas após a morte:"
-    identifications_before_birth: "Identificações feitas antes do nascimento:"
-    identifications_after_death: "Identificações feitas antes da morte:"
-    view: visualizar
-    none: Nenhum
+    make_public: Hacer público
+    not_yet: Todavía no
+    viz_none_alert: Los anotadores de Bionomía todavía no han ayudado a atribuir especímenes.
+    viz_alert: Haga click en las regiones del mapa o en las barras de la gráfica para ejecutar un filtro.
+    problems: Problemas descubiertos
+    collections_before_birth: "Colectas hechas antes del nacimiento:"
+    collections_after_death: "Colectas hechas después de la muerte:"
+    identifications_before_birth: "Identificaciones hechas antes del nacimiento:"
+    identifications_after_death: "Identificaciones hechas después de la muerte:"
+    view: ver
+    none: ninguna
     identified_from: Identificado de
-    collected_from: Coletado de
-    dates_identified_collected: Datas coletadas e identificadas
-    no_filter_alert: Autores da Bionomia ainda não ajudaram a atribuir espécimes sob este filtro.
-    not_helped_alert: Autores da Bionomia ainda não ajudaram a atribuir os espécimes.
+    collected_from: Colectado de
+    dates_identified_collected: Fechas de colecta y identificación
+    no_filter_alert: Los anotadores de Bionomía todavía no han ayudado a atribuir especímenes bajo este filtro.
+    not_helped_alert: Los anotadores de Bionomía todavía no han ayudado a atribuir especímenes.
     upload_message:
       unit:
-        one: "registro foi tratado. As reivindicações existentes, se presentes em seu upload, foram ignoradas."
-        other: "registros foram tratados. As reivindicações existentes, se presentes em seu upload, foram ignoradas."
-    help_question: "Quer ajudar a atribuir espécimes a %{name}?"
-    try_again: Tente novamente.
-    no_specialities_alert: Autores da Bionomia ainda não ajudaram a atribuir os espécimes.
-    specialties_alert: "Espécimes coletados ou identificados nas seguintes famílias:"
-    co-collectors: Co-coletores
-    no_co_collectors_alert: Co-coletores ainda não foram registrados.
-    co_collectors_alert: "Escolha um co-coletor para ajustar as atribuições feitas para espécimes em comum."
-    co_collector_name: "Espécimes co-coletados com %{name}."
-    switch: Trocar
-    not_co_collector_name: "Espécimes não foram co-coletadas com %{name}."
-    bulk_attribution: Atribuições em massa
-    reclaim_ignored: Reclaim Ignored
-    fix_claims: Atribuições fixas
-    discovered: Descoberto
-    support_alert: Os seguintes autores atribuíram espécimes.
-    advanced_search: Pesquisa avançada & Filtro
-    less_exact: Seja menos exato
-    no_unclaimed: Bionomia não encontrou nenhum espécime não reclamado.
-    close: Fechar
-    add_person: Adicionar uma pessoa
-    add_orcid_wikidata: Adicionar identificador ORCID ou número do Wikidata Q
+        one: "El registro fue procesado. Se omitieron las adjudicaciones existentes, si están presentes en su carga."
+        other: "Los registros fueron procesados. Se omitieron las adjudicaciones existentes, si están presentes en su carga."
+    help_question: "¿Quiere ayudar a atribuirle especímenes a %{name}?"
+    try_again: Intente de nuevo.
+    no_specialities_alert: Los anotadores de Bionomía todavía no han ayudado a atribuir especímenes.
+    specialties_alert: "Colectó o identificó especímenes en las siguientes familias:"
+    co-collectors: Co-colectores
+    no_co_collectors_alert: No se han registrado Co-colectores.
+    co_collectors_alert: "Elija un co-colector para ajustar las atribuciones hechas para especímenes en común."
+    co_collector_name: "Especímenes co-colectados con %{name}."
+    switch: Cambiar
+    not_co_collector_name: "No se encontraron especímenes co-colectados con %{name}."
+    bulk_attribution: Atribuciones en masa
+    reclaim_ignored: Reclamar ignorados
+    fix_claims: Ajustar atribuciones
+    discovered: Descubiertos
+    support_alert: Los siguientes anotadores han atribuido especímenes.
+    advanced_search: Búsqueda avanzada y filtro
+    less_exact: Hacer menos precisa
+    no_unclaimed: Bionomía no encontró especímenes sin reclamar.
+    close: Cerrar
+    add_person: Agregar a una persona
+    add_orcid_wikidata: Agregar identificador de ORCID o número Q de Wikidata
     attribute_count:
-      one: Ajude a atribuir 1 espécime.
-      other: Ajude a atribuir %{count} espécimens.
+      one: Ayude a atribuir 1 espécimen.
+      other: Ayude a atribuir %{count} especímenes.
     specimens_attributed_count:
-      one: espécime atribuído
-      other: espécimes atribuídos
-    download: Download
-    download_label: Download registros descobertos
-    upload_label: Upload csv with claims
-    choose_instructions_html: "Escolha %{coll_img} coletado, %{det_img} identificado, or Ambos."
+      one: espécimen atribuido
+      other: especímenes atribuidos
+    download: Descargar
+    download_label: Descargar registros descubiertos
+    upload_label: Cargar csv con reclamos
+    choose_instructions_html: "Escoger %{coll_img} colectados, %{det_img} identificados, o ambos."
     search_count:
-      one: "1 resultado da pesquisa para %{search}"
-      other: "%{count} resultados da busca por %{search}"
-    make_public_yes: "Sim, torne público"
-    other_scribes: "Outros autores também ajudaram a atribuir %{user_name} espécimes:"
-    no_scribes: "Nenhum outro autores ajudou a atribuir %{user_name} espécimes."
-    make_public_question: "Você gostaria de fazer %{user_name} perfil publicamente disponível?"
-    tweet_message: "Um tweet automatizado de @BionomiaTrack será enviado anunciando o novo perfil."
-    view_public_html: "Ver o público%{href}"
+      one: "1 resultado de la búsqueda por %{search}"
+      other: "%{count} resultados de la búsqueda por %{search}"
+    make_public_yes: "Si, hacer público"
+    other_scribes: "Otros anotadores han ayudado a atribuir especímenes a %{user_name}:"
+    no_scribes: "Ningún otro anotador ha ayudado a atribuir especímenes a %{user_name}."
+    make_public_question: "Quiere hacer público el perfil de %{user_name}?"
+    tweet_message: "Se enviará un trino automatizado desde @BionomiaTrack anunciando el nuevo perfil."
+    view_public_html: "ver el %{href} público"
     view_public_href: "perfil"
-    now_public_html: "Obrigado pela ajuda! O perfil para %{person} agora está visível para o público."
-    do_you_know: Você sabe
-    no_one_found: "Ninguém foi encontrado com o nome %{name}."
-    add_someone_html: "Veja como %{href}."
-    add_someone_href: "adicionar alguém"
+    now_public_html: "¡Gracias por su ayuda! El perfil de %{person} ahora es visible públicamente."
+    do_you_know: Usted conoce a
+    no_one_found: "No se encontró a nadie con el nombre %{name}."
+    add_someone_html: "Vea cómo %{href}."
+    add_someone_href: "agregar a alguien"
     co_collected_count:
-      one: "espécime co-coletado"
-      other: "espécime co-coletado"
+      one: "espécimen co-colectado"
+      other: "especímenes co-colectados"
   home:
-    tagline: Vincule espécimes de história natural a colecionadores do mundo.
-    get_started: Inicie
-    your_profile: Seu perfil
-    sample_profiles: Perfis de amostra
-    orcid_login: Entrar com ORCID
-    orcid_logo: ORCID logo
+    tagline: Enlace especímenes de historia natural a los colectores del mundo.
+    get_started: Comenzar
+    your_profile: Su perfil
+    sample_profiles: Perfiles de ejemplo
+    orcid_login: Registrarse con ORCID
+    orcid_logo: Logo de ORCID
   layout:
-    profiles: Perfis
-    scribes: Autores
-    organizations: Organizações
-    datasets: Conjunto de dados
-    articles: Artigos
+    profiles: Perfiles
+    scribes: Anotadores
+    organizations: Organizaciones
+    datasets: Conjuntos de datos
+    articles: Artículos
     countries: Países
-    taxa: Famílias
-    agent_strings: Cadeia de agentes
-    help_others: Ajude outros
-    help_received: Ajuda recebida
-    people_helped: Pessoas ajudaram
-    toggle_dropdown: Alternar lista suspensa
-    overview: Visão geral
-    specimens: Espécimens
-    discovered: Descobertos
-    science_enabled: Ciência habilitada
-    settings: Configurações
-    administration: Administração
-    logout: Logout
+    taxa: Familias
+    agent_strings: Cadenas de agente
+    help_others: Ayudar a otros
+    help_received: Ayuda recibida
+    people_helped: Personas ayudadas
+    toggle_dropdown: Alternar menú desplegable
+    overview: Visión general
+    specimens: Especímenes
+    discovered: Descubiertos
+    science_enabled: Ciencia habilitada
+    settings: Configuración
+    administration: Administración
+    logout: Salir
     resources: Recursos
-    integrations: Integrações
-    for_developers: Para desenvolvedores
-    for_data_managers: Para gerentes de dados
-    policies: Diretrizes
-    privacy: Política de privacidade
-    terms_service: Termos de serviço
-    on_this_day: Neste dia
-    about: Sobre
-    rationale: Justificativa
+    integrations: Integraciones
+    for_developers: Para desarrolladores
+    for_data_managers: Para manejadores de datos
+    policies: Políticas
+    privacy: Política de privacidad
+    terms_service: Términos del servicio
+    on_this_day: En este día
+    about: Acerca de
+    rationale: Razonamiento
     how_works: Como funciona
-    history: História
-    feedback: Comentários
-    twitter: Bionomia no Twitter
-    support: Doe
-    help: Documentos de ajuda
-    tools: Ferramentas
-    parse: Analisar Nomes
-    reconcile: Reconciliar Nomes
-    acknowledgments: Agradecimentos
-    workshops: Workshops
+    history: Historia
+    feedback: Retroalimentación
+    twitter: Bionomía en Twitter
+    support: Donar
+    help: Documentos de ayuda
+    tools: Herramientas
+    parse: Analizar nombres
+    reconcile: Reconciliar nombres
+    acknowledgments: Agradecimientos
+    workshops: Talleres
   not_authorized:
-    not_authorized: Não autorizado ou sessão encerrada.
+    not_authorized: Sin autorización o la sesión ha terminado.
   occurrence:
-    occurrence_title: Registro de espécime
-    lede: A partir de dados parciais obtidos do GBIF
+    occurrence_title: Registro de especímen
+    lede: De datos parciales obtenidos de GBIF
     record: Registro
     event: Evento
-    identification: Identificação
-    location: Localização
-    has_image: Tem imagem
+    identification: Identificación
+    location: Localidad
+    has_image: Tiene imagen
   offline:
-    message: Bionomia está atualmente offline, atualizando dados do Global Biodiversity Information Facility.
-    warning: "Bionomia estará offline %{datetime_off} por aproximadamente %{duration} para atualizar dados de espécimes do Global Biodiversity Information Facility."
+    message: Bionomía está actualmente fuera de línea, actualizando datos de la Global Biodiversity Information Facility.
+    warning: "Bionomía estará fuera de línea %{datetime_off} por aproximadamente %{duration} para actualizar datos de especímenes de la Global Biodiversity Information Facility."
   on_this_day:
-    global_title: Neste dia
-    born_title: Coletor nasceu neste dia
-    died_title: Coletor morreu neste dia
-    collected_title: Coletor neste dia
-    collector_born: Coletor Nascido
-    collector_died: Coletor Faleceu
-    type_collected: Tipo de espécimes coletados
-    none_died_alert: "Ninguém encontrado quem morreu em %{date}"
-    none_born_alert: "Ninguém encontrado quem morreu em %{date}"
-    limit_alert: Resultados limitados a 50 registros de espécimes de holótipo
-    no_types_alert: "Nenhum tipo de espécime encontrado coletado em %{date}"
+    global_title: En este día
+    born_title: Colector nació en este día
+    died_title: Colector murió en este día
+    collected_title: Colectado en este día
+    collector_born: Colector que nació
+    collector_died: Colector que murió
+    type_collected: Especímenes tipo colectados
+    none_died_alert: "No se encontró a nadie que haya muerto en %{date}"
+    none_born_alert: "No se encontró a nadie que haya nacido en %{date}"
+    limit_alert: Resultados limitados a 50 registros de especímenes holotipos
+    no_types_alert: "No se encontraron especímenes tipo colectados en %{date}"
   oops:
-    not_found_title: Não encontrado
-    not_found: Procuramos em todos os lugares, mas não encontramos essa página.
-    error_title: Erro
-    error: Desculpe, encontramos um erro.
+    not_found_title: No encontrado
+    not_found: Buscamos en todas partes pero no pudimos encontrar esa página.
+    error_title: Error
+    error: Perdón, sufrimos un error.
   organization:
-    organization_title: Organizações
+    organization_title: Organizaciones
     lede:
       unit:
-        one: "organização de contas ORCID e entradas de Wikidata"
-        other: "organizações de contas ORCID e entradas do Wikidata"
-    placeholder: Canadian Museum of Nature
-    affiliation_none_alert: Publicações baseadas em espécimes coletados ou identificados por pessoal atual e anterior ainda não foram registrados pelo GBIF
-    affiliation_alert: "%{count} publicações usaram dados de espécimes baixados do GBIF com base em espécimes coletados ou identificados por pessoal atual e anterior enquanto afiliado com %{org_name}"
-    collected_by: "Espécimes coletados ou identificados por:"
-    science_enabled: Ciência habilitada
-    impact: Impacto nas atividades em outras organizações
-    no_metric_alert: "Pessoal atual e anterior ainda não reivindicou ou foram atribuídos espécimes agora com curadoria de outras organizações enquanto eram afiliados com %{org_name}."
-    metric_alert: "Pessoal atual e anterior reivindicou ou foi atribuído espécimes agora com curadoria nas seguintes organizações enquanto afiliado com %{org_name}."
-    none_collected_alert: "Espécimes coletados ou identificados em %{year} por pessoal e com curadoria de outro lugar ainda não foram reivindicados ou atribuídos."
-    all_years: Todos Anos
-    specimens: espécimes
-    organizations: organizações
-    specimens_identified: Espécimes Identificados
-    specimens_collected: Espécimes Coletados
-    no_current_members_alert: "Membros atuais de %{org_name} ainda não foi gravado."
-    no_previous_members_alert: "Membros anteriores de %{org_name} ainda não foi registrado."
-    no_search_alert: "Nenhuma organização encontrada para"
+        one: "organización en cuentas de ORCID y entradas de Wikidata"
+        other: "organizaciones en cuentas de ORCID y entradas de Wikidata"
+    placeholder: Museo Canadiense de la Naturaleza
+    affiliation_none_alert: Publicaciones basadas en especímenes colectados o identificados por personal actual y personal previo todavía no han sido registrados por GBIF
+    affiliation_alert: "%{count} publicaciones usaron datos de especímenes descargados de GBIF basados en especímenes colectados o identificados por personal actual y personal previo mientras afiliados a %{org_name}"
+    collected_by: "Epecímenes colectados o identificados por:"
+    science_enabled: Ciencia habilitada
+    impact: Impacto sobre las actividades de otras Organizaciones
+    no_metric_alert: "personal actual y previo todavía no han reclamado o les han sido atribuidos especímenes ahora curados en otras organizaciones mientras estaban afiliados a %{org_name}."
+    metric_alert: "personal actual y previo han reclamado o les han sido atribuidos especímenes ahora curados en las siguientes organizaciones mientras estaban afiliados a %{org_name}."
+    none_collected_alert: "Especímenes colectados o identificados en %{year} por personal y curados en otras partes todavía no se han reclamado o atribuido."
+    all_years: Todos los años
+    specimens: especímenes
+    organizations: organizaciones
+    specimens_identified: Especímenes identificados
+    specimens_collected: Especímenes colectados
+    no_current_members_alert: "Miembros actuales de %{org_name} todavía no se han registrado."
+    no_previous_members_alert: "Miembros pasados de %{org_name} todavía no se han registrado."
+    no_search_alert: "No se encontraron organizaciones para"
     search_alert:
       unit:
-        one: "resultado da pesquisa para"
-        other: "resultado da pesquisa para"
-    current: Atual
-    previous: Prévio
+        one: "resultado de la búsqueda para"
+        other: "resultados de la búsqueda para"
+    current: Actual
+    previous: Previo
     metrics: Métricas
-    member: membro
+    member: miembro
     current_members_count:
       unit:
-        one: membro actual
-        other: membros actuais
+        one: miembro actual
+        other: miembros actuales
     past_members_count:
       unit:
-        one: membro anterior
-        other: membros anteriores
+        one: miembro anterior
+        other: miembros anteriores
   profile:
-    thanks_title: Agradecimentos recebidos
-    candidates_title: Espécimes Não Reivindicados
-    ignored_title: Ignorado
-    specimens_title: Espécimes
-    support_title: Ajuda recebida
-    upload_title: Upload
-    helped_title: Pessoas ajudaram
-    citation_title: Citações
-    citations_title: Citações
-    overview: Visão geral
-    specimens: Espécimes
-    people_helped: Pessoas ajudaram
-    science_enabled: Ciência habilitada
-    claimed: Reivindicada
-    discovered: Descoberto
-    upload: Upload
-    ignored: Ignorado
-    help_received: Ajuda recebida
-    helped: Ajudado
-    helped_alert: Você ajudou a atribuir espécimes às seguintes pessoas, com o mais recente mostrado primeiro.
-    not_helped_alert: Você ainda não atribuiu espécimes a ninguém.
-    no_help_alert: Os autores da Bionomia ainda não ajudaram você a reivindicar os espécimes.
-    thanks_alert: Os autores da Bionomia o ajudaram a reivindicar espécimes. Envie-lhes sua apreciação.
-    thanks_received: Agradecimentos recebidos
-    thanks_received_alert: Você recebeu agradecimentos por atribuir espécimes.
-    no_thanks_received_alert: Você ainda não recebeu agradecimentos por atribuir registros de espécimes a outros colecionadores. Você já tentou ajudar outras pessoas?
-    change_photo: Alterar foto de perfil
+    thanks_title: Gracias recibidas
+    candidates_title: Especímenes sin reclamar
+    ignored_title: Ignorados
+    specimens_title: Especímenes
+    support_title: Ayuda recibida
+    upload_title: Cargar
+    helped_title: Personas ayudadas
+    citation_title: Citación
+    citations_title: Citaciones
+    overview: Descripción general
+    specimens: Especímenes
+    people_helped: Personas ayudadas
+    science_enabled: Ciencia habilitada
+    claimed: Reclamados
+    discovered: Descubiertos
+    upload: Cargar
+    ignored: Ignorados
+    help_received: Ayuda recibida
+    helped: Ayudado
+    helped_alert: Usted ayudó a atribuir especímenes a las siguientes personas, con las más recientes mostradas primero.
+    not_helped_alert: Usted todavía no ha atribuido especímenes a nadie.
+    no_help_alert: Los anotadores de Bionomía todavía no le han ayudado a reclamar especímenes.
+    thanks_alert: Los anotadores de Bionomía le han ayudado a reclamar especímenes. Envíeles su apreciación.
+    thanks_received: Gracias recibidas
+    thanks_received_alert: Usted ha recibido gracias por haber atribuido especímenes.
+    no_thanks_received_alert: Usted todavía no ha recibido gracias por haber atribuido registros de especímenes a otros colectores. ¿Ha tratado de ayudar a alguien?
+    change_photo: Cambiar foto de perfil
     remove: Remover
     cancel: Cancelar
-    update: Atualizar
-    settings: Configurações & Integrações
-    youtube: ID do YouTube para que um vídeo apareça em seu perfil.
-    no_science: Os dados do seu espécime ainda não foram registrados em downloads do GBIF e usados em novas publicações.
-    no_citation_alert: Suas amostras não foram incluídas em um download do GBIF para apoiar este estudo.
+    update: Actualizar
+    settings: Configuración e integraciones
+    youtube: ID de YouTube para que aparezca un video en su perfil.
+    no_science: Los datos de sus especímenes aún no se han registrado en descargas de GBIF y usado en publicaciones nuevas.
+    no_citation_alert: Sus especímenes no se incluyeron en una descarga de GBIF en soporte de este estudio.
     has_science:
       unit:
-        one: "publicação fez uso de seus dados de espécimes baixados do GBIF"
-        other: "publicação fez uso de seus dados de espécimes baixados do GBIF"
+        one: "publicación usó los datos de sus especímenes descargados de GBIF"
+        other: "publicaciones usaron los datos de sus especímenes descargados de GBIF"
     identified_from: Identificado de
-    collected_from: Recolhido de
-    dates_identified_collected: Datas coletadas e identificadas
-    resume: Para seu currículo
-    specimens_used: Espécimes usados em
-    public_availability: Disponibilidade Pública
+    collected_from: Colectado en
+    dates_identified_collected: Fechas de colecta y identificación
+    resume: Para su hoja de vida
+    specimens_used: Especímenes usados en
+    public_availability: Disponibilidad pública
     public_profile: Perfil público
-    make_citable: Torne seus dados citáveis
-    email_notifications: Notificações por Email
-    delete_account: Deletar sua conta
-    delete: Delete
-    permanent_delete: Exclua sua conta permanentemente.
-    delete_warning: Tem certeza que deseja deletar sua conta? Todas as suas reivindicações E todas as atribuições que você fez para outros serão removidos permanentemente.
-    email_instructions: Receba notificações por e-mail de novos artigos que usaram dados derivados das amostras que você identificou ou coletou. Disponibilize seu endereço de e-mail principal publicamente em sua conta ORCID e atualize seus dados ORCID acima.
-    email_procedure: "Receba notificações de novas publicações que fizeram uso de dados derivados das amostras que você identificou ou coletou. Seu endereço de e-mail principal disponível publicamente, %{email} vem da sua conta ORCID."
-    disconnect: Disconectar
-    disconnect_warning: Tem certeza de que deseja desconectar sua conta do Zenodo? Seus dados permanecerão arquivados e acessíveis, mas nenhuma nova versão será criada. Se, posteriormente, você reconectar sua conta, um novo pacote de dados será criado.
-    connect_zenodo: Conecte sua conta ao Zenodo, onde snapshots versionados de suas reivindicações serão armazenados e um DataCite DOI atribuído. Uma citação será fornecida para inclusão em seu currículo.
-    connect_zenodo_claim: Reivindique pelo menos um de seus espécimes e volte aqui para conectar sua conta ao Zenodo, onde snapshots versionados de suas reivindicações serão armazenados e um DataCite DOI atribuído. Uma citação será fornecida para inclusão em seu currículo.
-    disconnect_zenodo: Desconecte do Zenodo
-    integrate_zenodo: Integrar ao Zenodo
-    zenodo_linked: Sua conta agora está vinculada e os dados serão enviados em uma hora
-    orcid_updates: Obtenha novas atualizações para seu nome, aliases, palavras-chave, país, educação e emprego publicamente disponíveis de sua conta ORCID.
-    refresh: Atualizar
-    orcid_refreshed: Dados ORCID foram atualizados.
-    public: Publico
+    make_citable: Haga que sus datos sean citables
+    email_notifications: Notificaciones por correo electrónico
+    delete_account: Eliminar su cuenta
+    delete: Eliminar
+    permanent_delete: Eliminar su cuenta permanentemente.
+    delete_warning: '¿Está seguro de que quiere eliminar su cuenta? Todas sus asignaciones Y todas las atribuciones que ha hecho a otros serán removidas permanentemente.'
+    email_instructions: Recibir notificaciones por correo electrónico sobre nuevos artículos que usaron datos derivados de los especímenes que usted identificó o colectó. Haga su dirección de correo electónico primaria disponible públicamente en su cuenta de ORCID y uego actualice su información de ORCID arriba.
+    email_procedure: "Recibir notificaciones sobre nuevos artículos que usaron datos derivados de los especímenes que usted identificó o colectó. Su dirección de correo electónico primaria disponible públicamente, %{email} proviene de su cuenta de ORCID."
+    disconnect: Desconectar
+    disconnect_warning: '¿Está seguro de que quiere desconectar su cuenta de Zenodo? Sus datos permanecerán archivados y accesibles pero no se crearán versiones nuevas. Si reconecta su cuenta en otro momento, se creará un nuevo paquete de datos.'
+    connect_zenodo: Conecte su cuenta a Zenodo donde se almacenarán versiones instantáneas de sus asignaciones y se generará un DOI de DataCite. Se proveerá una citación para ser incluida en su hoja de vida.
+    connect_zenodo_claim: Reclame al menos uno de sus especímenes y vuelva aquí para conectar su cuenta a Zenodo donde se almacenarán versiones instantáneas de sus asignaciones y se generará un DOI de DataCite. Se proveerá una citación para ser incluida en su hoja de vida.
+    disconnect_zenodo: Desconectar de Zenodo
+    integrate_zenodo: Integrar con Zenodo
+    zenodo_linked: Su cuenta ahora está enlazada y los datos serán enviados durante la próxima hora
+    orcid_updates: Obtenga nuevas actualizaciones de su nombre disponible públicamente, alias, palabras clave, país, educación, y empleo desde su cuenta de ORCID.
+    refresh: Actualizar
+    orcid_refreshed: Los datos de ORCID han sido actualizados.
+    public: Público
     private: Privado
     active: "On"
     inactive: "Off"
-    make_public_message: Inclua sua conta em perfis públicos. Suas reivindicações serão incluídas em um download de dados em massa, exposto por meio de extensões do Google Chrome e do Firefox e um tweet será enviado de @BionomiaTrack.
-    no_candidates_alert: Bionomia não encontrou nenhum espécime indexado pelo GBIF que você possa ter coletado ou identificado.
-    ignored_alert: Registros de espécimes que você marcou como "Não sou eu" aparecerão aqui.
-    scribe_not_helped: Este autor Bionomia ainda não o ajudou a reivindicar espécimes.
-    upload_error: Faça upload de uma imagem com menos de 5 MB.
-    bulk_claim: Reclamação em massa
-    advanced_search: Pesquisa avançada & filtro
-    no_specimens_filter: Você ainda não reivindicou nenhuma amostra com este filtro aplicado. Veja seus registros candidatos de espécimes na página Descobertos.
-    no_specimens: Você ainda não reivindicou nenhum espécime. Veja seus registros de espécimes candidatos na página Descobertos.
+    make_public_message: Incluya su cuenta en perfiles públicos. Sus asignaciones se incluirán en una descarga de datos en masa, expuestos a través de extensiones de Google Chrome y Firefox y un trino se enviará desde @BionomiaTrack.
+    no_candidates_alert: Bionomía no encontró especímenes indizados por GBIF que usted pueda haber colectado o identificado.
+    ignored_alert: Los registros de especímenes que usted marcó como "No soy yo" aparecerán aquí.
+    scribe_not_helped: Este anotador de Bionomía aún no le ha ayudado a reclamar especímenes.
+    upload_error: Por favor cargue una imagen de menos de 5MB en tamaño.
+    bulk_claim: Reclamar en masa
+    advanced_search: Búsqueda avanzada y filtro
+    no_specimens_filter: Usted todavía no ha reclamado especímenes bajo este filtro. Vea los registros de sus especímenes candidatos en la página de Descubiertos.
+    no_specimens: Usted todavía no ha reclamado especímenes. Vea los registros de sus especímenes candidatos en la página de Descubiertos.
     candidate_count:
-      one: Encontrado 1 espécime.
-      other: "Encontrado %{count} espécime."
-    latest_helped: "Mais recente em %{time}"
+      one: Un espécimen encontrado.
+      other: "%{count} especímenes encontrados."
+    latest_helped: "Último en %{time}"
     attributed_count:
-      one: "espécime atribuído"
-      other: "espécime atribuído"
-    private_message_html: "Seu perfil é privado. Reivindique suas %{specimens} e torne-as públicas em %{settings} para maximizar a reutilização."
-    no_claims_html: "Reivindique seus espécimes descobertos na guia %{specimens} para construir seu perfil e começar a rastrear suas citações. Reconheça seus colegas, mentores ou qualquer pessoa que o inspire atribuindo espécimes sob %{help_others}."
-    try_again: Tente novamente.
+      one: "espécimen atribuido"
+      other: "especímens atribuidos"
+    private_message_html: "Su perfil es privado. Reclame sus %{specimens} y luego hágalo público %{settings} para maximizar el re-uso."
+    no_claims_html: "Reclame sus especímenes descubiertos bajo la pestaña %{specimens} para construir su perfil y comience a rastrear sus citaciones. Reconozca a sus colegas, mentores, o a cualquier persona que le inspire atribuyéndoles especímenes bajo %{help_others}."
+    try_again: Intente nuevamente.
     upload_count:
-      one: "Um total de 1 registro carregado foi tratado."
-      other: "Um total de %{count} registros foram tratados."
-    upload_skipped: As reivindicações existentes, se presentes em seu upload, foram ignoradas.
-    upload_view: Visualizar
-    upload_view_html: "%{view} todas as suas reivindicações."
-    co_collectors: Co-coletores
-    no_co_collectors_alert: Co-coletores ainda não foram regitrados.
-    co_collectors_alert: "Você coletou com:"
-    co_collector_name: "Espécimes co-coletados com %{name}."
-    switch: Ver os deles
-    not_co_collector_name: "As amostras não foram co-coletadas com %{name}."
+      one: "Se procesó un total de 1 registro cargado."
+      other: "Se procesó un total de %{count} registros cargados."
+    upload_skipped: Reclamos existentes, si estaban presentes en su carga, fueron omitidos.
+    upload_view: Ver
+    upload_view_html: "%{view} todos sus reclamos."
+    co_collectors: Co-colectores
+    no_co_collectors_alert: Aún no se han registrado co-colectores.
+    co_collectors_alert: "Usted ha colectado con:"
+    co_collector_name: "Especímenes co-colectados con %{name}."
+    switch: Vea los de ella/él
+    not_co_collector_name: "No se encontraron especímenes co-colectados con %{name}."
     co_collected_count:
-      one: "espécime co-coletado"
-      other: "espécime co-coletado"
-    zenodo_html: "Your profile is linked to %{zenodo} and your claims are versioned and archived."
+      one: "espécimen co-colectado"
+      other: "especímenes co-colectadoss"
+    zenodo_html: "Su perfil está enlazado a %{zenodo} y se ha creado y archivado una versión de los datos de sus especímenes reclamados."
   roster:
-    roster_title: Perfis Públicos
+    roster_title: Perfiles públicos
     lede:
       unit:
-        one: "pessoa que compartilhou seu perfil"
-        other: "pessoas que compartilham seus perfis e os perfis de outras pessoas que reverenciam"
-    no_one_found: Ninguém foi encontrado pelo nome
+        one: "persona que ha compartido su perfil"
+        other: "personas que han compartido sus perfiles y los perfiles de otros que admiran"
+    no_one_found: No se encontró a nadie por el nombre
     search_result_count:
       unit:
-        one: "resultado da pesquisa para"
-        other: "resultado da pesquisa para"
+        one: "resultado de la búsqueda por"
+        other: "resultados de la búsqueda por"
   specimen:
-    scientific_name: Nome científico
-    collected_by: Coletado Por
-    identified_by: Indentificado Por
-    date_collected: Data da coleta
-    date_identified: Data de identificação
-    institution: Instituição
+    scientific_name: Nombre científico
+    collected_by: Colectado por
+    identified_by: Identificado por
+    date_collected: Fecha de colecta
+    date_identified: Fecha de identificación
+    institution: Institución
     catalog_number: Número de catálogo
-    family: Família
-    type_status: Status do tipo
-    scribe: Autores
-    not_me: Eu não
-    not_them: Eles não
-    not_recorded: não registrado
+    family: Familia
+    type_status: Estatus de tipo
+    scribe: Anotador
+    not_me: No soy yo
+    not_them: No es ella/él
+    not_recorded: sin registrar
     remove: Remover
   scribes:
-    scribes_title: Autores
+    scribes_title: Anotadores
     lede:
       unit:
-        one: "pessoa que atribuiu espécimes de história natural a seus colegas, mentores e modelos de comportamento"
-        other: "pessoas que atribuíram espécimes de história natural a seus colegas, mentores e modelos de comportamento"
+        one: "persona que ha atribuido especímenes de historia natural a sus colegas, mentores, y modelos a seguir"
+        other: "personas que han atribuido especímenes de historia natural a sus colegas, mentores, y modelos a seguir"
   taxa:
     lede:
       unit:
-        one: "Família taxonômica de dados de espécimes em GBIF"
-        other: "Família taxonômica de dados de espécimes em GBIF"
-    search_title: Famílias Taxonômicas
-    none_found: "Nenhuma família taxonômica encontrada para %{searched}"
+        one: "familia taxonómica con datos de especímenes en GBIF"
+        other: "familias taxonómicas con datos de especímenes en GBIF"
+    search_title: Familias taxonómicas
+    none_found: "No se encontró familia taxonómica para %{searched}"
     search_found:
       unit:
-        one: "resultado da pesquisa para"
-        other: "resultado da pesquisa para"
-    people: Pessoas
-    visualizations: Visualizações
-    timeline: Linha do tempo
-    agent_strings: Cadeia de autores
-    collected: Coletado
-    identified: Identificado
+        one: "resultado de la búsqueda por"
+        other: "resultados de la búsqueda por"
+    people: Personas
+    visualizations: Visualizaciones
+    timeline: Cronología
+    agent_strings: Cuerdas de agente
+    collected: Colectó
+    identified: Identificó
     number_collected:
       unit:
-        one: "pessoa coletou espécimes de dados no GBIF"
-        other: "pessoas coletaram espécimes de dados no GBIF"
+        one: "persona colectó especímenes con datos en GBIF"
+        other: "personas colectaron especímenes con datos en GBIF"
     number_identified:
       unit:
-        one: "espécimes identificados por pessoa a partir de dados no GBIF"
-        other: "pessoas identificaram espécimes a partir de dados no GBIF"
+        one: "persona identificó especímenes con datos en GBIF"
+        other: "personas identificaron especímenes con datos en GBIF"
     number_agents:
       unit:
-        one: "cadeia de autores de dados de espécime em GBIF"
-        other: "cadeia de autores de dados de espécime em GBIF"
+        one: "cadena de agente de especímenes con datos en GBIF"
+        other: "cadenas de agente de especímenes con datos en GBIF"
     number_agents_unclaimed:
       unit:
-        one: "cadeia de autores tem registros de espécimes não reclamados de dados em GBIF"
-        other: "acadeia de autores tem registros de espécimes não reclamados de dados em GBIF"
-    no_agents_unclaimed: Nenhum registro de espécime não é reclamado ou atribuído
+        one: "cadena de agente tiene registros de especímenes sin reclamar de datos en GBIF"
+        other: "cadenas de agente tiene registros de especímenes sin reclamar de datos en GBIF"
+    no_agents_unclaimed: No hay registros de especímenes sin reclamar o sin atribuir
     alphabetical: Alfabético
-    counts: Contagem
-    unclaimed: não reclamados
-    example_families: Amostras aleatórias
-    none_collected_identified: "Ninguém coletou ou identificou %{taxon}"
-    none_collected: "Ninguém coletou %{taxon}"
-    none_identified: "Ninguém se identificou %{taxon}"
-    none_collected_timeline: "Ninguém coletou %{taxon} e indicou uma data de coleta"
-    none_identified_timeline: "Ninguém se identificou %{taxon} e indicou uma data de identificação"
-    no_agents: "Nenhum agente coletou ou identificou %{taxon}"
-    taxon_string: Família Taxon
-    start_year: Ano de início
-    end_year: Fim de ano
+    counts: Conteo
+    unclaimed: Sin reclamar
+    example_families: Muestras aleatorias
+    none_collected_identified: "Nadie ha colectado o identificado %{taxon}"
+    none_collected: "Nadie ha colectado %{taxon}"
+    none_identified: "Nadie ha identificado %{taxon}"
+    none_collected_timeline: "Nadie ha colectado %{taxon} y ha indicado una fecha de colecta"
+    none_identified_timeline: "Nadie ha identificado %{taxon} y ha indicado una fecha de identificación"
+    no_agents: "Ningún agente ha colectado o identificado %{taxon}"
+    taxon_string: Familia taxonómica
+    start_year: Año de inicio
+    end_year: Año final
   user:
-    caches_rebuilt: Caches foram reconstruídos.
-    overview: Visão geral
+    caches_rebuilt: Se han reconstruido las memorias caché.
+    overview: Descripción general
     specialties: Especialidades
-    network: Rede
-    deposited_at: Depositado em
-    specimens: Espécimes
-    science_enabled: Ciência habilitada
-    science_enabled_specimens: Ciência habilitada por dados de espécimes
-    helped_by: Ajudado por
-    helped: Pessoas ajudaram
-    no_scribe: Os espécimes não foram atribuídos por um autor.
-    attributions_by: "Atribuições feitas por:"
-    private: O perfil não está disponível publicamente.
+    network: Red
+    deposited_at: Depositado en
+    specimens: Epecímenes
+    science_enabled: Ciencia habilitada
+    science_enabled_specimens: Ciencia habilitada por datos de especímenes
+    helped_by: Ayudado por
+    helped: Personas ayudadas
+    no_scribe: No se han atribuido especímenes por un anotador.
+    attributions_by: "Atribuciones hechas por:"
+    private: El perfil no está disponible públicamente.
     private_with_claims:
       unit:
-        one: "A amostra foi reivindicada ou atribuída, mas este perfil não está disponível publicamente."
-        other: "Os espécimes foram reivindicados ou atribuídos, mas este perfil não está disponível publicamente."
-    no_specimens_cited: As amostras não foram incluídas em downloads do GBIF e citadas neste artigo de pesquisa.
-    specimen_used: Dados de espécime usados em
-    no_publications: Publicações que usaram registros de espécimes incluídos em um download do GBIF ainda não foram registradas.
+        one: "espécimen fue reclamado o atribuido, pero este perfil no está disponible públicamente."
+        other: "especímenes fueron reclamados o atribuidos, pero este perfil no está disponible públicamente."
+    no_specimens_cited: No se han incluido especímenes de descargas de GBIF y citado en este arículo de investigación.
+    specimen_used: Datos de especímenes usados en
+    no_publications: Aún no se han registrado publicaciones que usaron registros de especímenes incluidos en una descarga de GBIF.
     publication_count:
       unit:
-        one: "publicação usou dados de amostra baixados do GBIF"
-        other: "publicações usaram dados de espécimes baixados do GBIF"
-    no_co_collectors_alert: Co-coletores ainda não foram registrados.
-    co_collectors_alert: "Coletou com:"
-    co_collectors: Co-collectores
+        one: "publicación usó registros de especímenes incluidos en una descarga de GBIF"
+        other: "publicaciones usaron registros de especímenes incluidos en una descarga de GBIF"
+    no_co_collectors_alert: Aún no se han registrado co-colectores.
+    co_collectors_alert: "Ha colectado con:"
+    co_collectors: Co-colectores
     identified_for: Identificado para
-    identifications_by: Identificações por
-    no_identifications_by_alert: Identificações feitas aos espécimes coletados ainda não foram registradas.
-    identifications_by_alert: "Coletou espécimes posteriormente identificados por:"
-    no_identified_for_alert: Identificações feitas em outras amostras coletadas ainda não foram registradas.
-    identified_for_alert: "Identificou espécimes coletados por:"
-    comment_alert: Compartilhe uma anedota sobre uma viagem de coleta, evento ou qualquer outra coisa.
-    no_institutions_alert: As instituições ainda não foram registradas.
-    institutions_alert: "Espécimes depositados e com curadoria na seguinte instituição(s):"
-    organizations: organizações
-    specimens_metric: espécimes
-    specimens_identified: Espécimes Identificados
-    specimens_collected: Espécimes coletados
-    no_specialities_alert: Especialidades ainda não foram registradas.
-    specialties_alert: "Amostras coletadas ou identificadas nas seguintes famílias:"
-    families_collected: Famílias coletadas
-    families_identified: Famílias Identificadas
-    no_claims_alert: Reivindicações ou atribuições ainda não foram registradas.
-    no_helped_alert: Atribuições ainda não foram feitas.
-    progress: Progresso
-    identified_from: Identificado de
-    collected_from: Coletado de
-    dates_identified_collected: Datas coletadas e identificadas
-    specimens_attributed: espécimes atribuídos
-    collected: coletado
-    identified: identificado
-    not_all_columns: Nem todas as colunas disponíveis são mostradas.
+    identifications_by: Identificaciones por
+    no_identifications_by_alert: No se han registrado identificaciones hechas a especímenes colectados.
+    identifications_by_alert: "Ha colectado especímenes identificados más tarde por:"
+    no_identified_for_alert: No se han registrado identificaciones hechas a especímenes colectados por otros.
+    identified_for_alert: "Ha identificado especímenes colectados por:"
+    comment_alert: Comparta una anécdota sobre un viaje de colecta, evento, o alguna otra cosa.
+    no_institutions_alert: Aún no se han registrado instituciones.
+    institutions_alert: "Especímenes depositados y curados en la(s) siguiente(s) institución(instituciones):"
+    organizations: organizaciones
+    specimens_metric: especímenes
+    specimens_identified: Especímenes identificados
+    specimens_collected: Especímenes colectados
+    no_specialities_alert: No se han registrado especialidades.
+    specialties_alert: "Colectó o identificó especímenes en las siguientes familias:"
+    families_collected: Familias colectadas
+    families_identified: Familias identificadas
+    no_claims_alert: Aún no se han registrado reclamos o atribuciones.
+    no_helped_alert: Aún no se han hecho atribuciones.
+    progress: Progreso
+    identified_from: Identificó de
+    collected_from: Colectó de
+    dates_identified_collected: Fechas colectadas y identificadas
+    specimens_attributed: especímenes atribuidos
+    collected: colectó
+    identified: identificó
+    not_all_columns: No se muestran todas las columnas disponibles.
     map: Mapa
     list: Lista
-    no_specimens: Espécimes ainda não foram reivindicadas ou atribuídas.
-    no_specimens_filter: Espécimes ainda não foram reivindicadas ou atribuídas a este filtro aplicado.
+    no_specimens: Aún no se han reclamado o atribuido especímenes.
+    no_specimens_filter: Aún no se han reclamado o atribuido especímenes bajo este filtro.
     stats_identified_specimens_nocountry:
       unit:
-        one: "espécime identificado"
-        other: "espécime identificado"
+        one: "especimen identificado"
+        other: "especímenes identificados"
     stats_collected_specimens_nocountry:
       unit:
-        one: "espécime coletado"
-        other: "espécime coletado"
+        one: "especimen colectado"
+        other: "especímenes colectados"
     stats_identified_specimens:
       unit:
-        one: "espécime identificado a partir de pelo menos"
-        other: "espécime identificado a partir de pelo menos"
+        one: "especimen identificado de al menos"
+        other: "especímenes identificados de al menos"
     stats_identified_countries:
       unit:
         one: "país"
         other: "países"
     stats_collected_specimens:
       unit:
-        one: "espécime coletado de pelo menos"
-        other: "espécime coletado de pelo menos"
+        one: "especimen colectado de al menos"
+        other: "especímenes colectados de al menos"
     stats_collected_countries:
       unit:
         one: "país"
         other: "países"
     stats_attributions_specimens:
       unit:
-        one: "espécime atribuído a"
-        other: "espécimes atribuído a"
+        one: "especimen atribuido a"
+        other: "especímenes atribuidos a"
     stats_attributions_people:
       unit:
-        one: "pessoa"
-        other: "pessoas"
+        one: "persona"
+        other: "personas"
     stats_articles_specimens:
       unit:
-        one: "espécime usado em"
-        other: "espécimes usados ​​em"
+        one: "espécimen usado en"
+        other: "especímenes usados en"
     stats_articles_articles:
       unit:
-        one: "trabalho"
-        other: "trabalhos"
+        one: "trabajo"
+        other: "trabajos"
     specimen_icon_count:
-      one: "%{coll_img} coletou ou %{det_img} identificou 1 espécime."
-      other: "%{coll_img} coletou ou %{det_img} identificou %{count} espécimes."
+      one: "%{coll_img} colectados o %{det_img} identificados 1 especimen."
+      other: "%{coll_img} colectados o %{det_img} identificados %{count} especímenes."
   workshops:
-    title: Workshops
+    title: Talleres
