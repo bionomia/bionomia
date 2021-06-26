@@ -1,12 +1,12 @@
 de:
-  "true": "Yes"
-  "false": "No"
+  "true": "Ja"
+  "false": "Nein"
   acknowledgments:
-    acknowledgments_title: Acknowledgments
-    taxon_silhouettes: Taxon Family Silhouettes
-    translations: Translations
+    acknowledgments_title: Danksagungen
+    taxon_silhouettes: Silhouetten taxonischer Familien
+    translations: Übersetzungen
   admin:
-    change_photo: Change profile photo
+    change_photo: Profilbild ändern
   agent:
     agent_title: Agent Strings
     search_title: Agent String Search
@@ -17,79 +17,79 @@ de:
     search_none: "No agent string found for %{searched}"
     search_count:
       unit:
-        one: "search result for"
-        other: "search results for"
-    warning: "WARNING:"
+        one: "Suchergebnis für"
+        other: "Suchergebnisse für"
+    warning: "ACHTUNG:"
     warning_statement: Unlike all other URLs in this site, URLs for agent strings are unreliable for linking because they will point to different results every few weeks
     agent_name_title: "%{agent_name} Specimens"
     agent_lede: A raw string from parsed collector and determiner names in natural history specimen data
     found_statement:
       unit:
-        one: "specimen found. Not all columns are shown."
-        other: "specimens found. Not all columns are shown."
+        one: "Exemplar gefunden. Es werden nicht alle Spalten angezeigt."
+        other: "Exemplare gefunden. Es werden nicht alle Spalten angezeigt."
     search_html: "Search for %{agent_link} the person and help attribute their specimens."
-    example_agents: Random Samples
+    example_agents: Stichproben
   article:
-    article_title: Article
-    articles_title: Articles
+    article_title: Artikel
+    articles_title: Artikel
     articles_lede:
       unit:
-        one: "article cited downloads from GBIF"
-        other: "articles that cited downloads from GBIF"
-    no_claims_alert: People have not yet claimed or were attributed specimens represented in data downloaded from GBIF in support of this article
+        one: "Artikel, der GBIF-Downloads zitiert"
+        other: "Artikel, die GBIF-Downloads zitieren"
+    no_claims_alert: Es wurden noch keine Exemplare beansprucht oder zugeordnet, die in den von GBIF heruntergeladenen Daten zur Unterstützung dieses Artikels dargestellt wurden
     claims_alert:
       unit:
         one: "person collected or identified specimens included in data downloaded from GBIF in support of this article"
         other: "people collected or identified specimens included in data downloaded from GBIF in support of this article"
-    placeholder: "Evolution and systematics of..."
-    people: People
+    placeholder: "Evolution und Systematik von ..."
+    people: Personen
     agent_strings: Agent Strings
     agent_title: Article Agents
-    alphabetical: Alphabetical
+    alphabetical: Alphabetisch
     counts: Counts
     unclaimed: Unclaimed
-    no_agent_strings_alert: Raw strings from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article have not been found
+    no_agent_strings_alert: Es wurden keine Zeichenfolgen von geparsten Sammler- und Bestimmernamen in den von GBIF zur Unterstützung dieses Artikels heruntergeladenen Beispieldaten gefunden
     agent_strings_alert:
       unit:
         one: "raw string from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article"
         other: "raw strings from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article"
-    claims: claims
-    specimens: specimens
-    no_search_alert: "No articles found for"
+    claims: Ansprüche
+    specimens: Exemplare
+    no_search_alert: "Keine Artikel gefunden für"
     search_alert:
       unit:
-        one: "search result found for"
-        other: "search results found for"
+        one: "Suchergebnis gefunden für"
+        other: "Suchergebnisse gefunden für"
   card:
-    collected: "Collected %{family}"
-    identified: "Identified %{family}"
-    identified_collected: "Collected %{collected} and identified %{identified}"
+    collected: "%{family} gesammelt"
+    identified: "%{family} identifiziert"
+    identified_collected: "%{collected} gesammelt und %{identified} identifiziert"
     claimed:
-      one: specimen claimed
-      other: specimens claimed
+      one: Exemplar beansprucht
+      other: Exemplare beansprucht
     attributed:
-      one: specimen attributed
-      other: specimens attributed
+      one: Exemplar zugeordnet
+      other: Exemplare zugeordnet
     helped:
-      one: person helped
-      other: people helped
+      one: Person geholfen
+      other: Personen geholfen
   charts:
-    year: Year
-    number_specimens: "# specimens"
-    identified: Identified
-    collected: Collected
-    people: People
+    year: Jahr
+    number_specimens: "# Exemplare"
+    identified: Identifiziert
+    collected: Gesammelt
+    people: Personen
   country:
-    country_title: Countries
-    lede: From countries stated in ORCID accounts and Wikidata entries or specimen records in GBIF
-    intro: From countries stated in ORCID accounts and Wikidata entries. Search by Taxon Family to explore expertise.
-    collected_from: "Collected %{family} from %{country}"
-    identified_from: "Identified %{family} from %{country}"
-    collected_identified_from: "Collected or identified %{family} from %{country}"
-    no_one_collected_from: "No one collected %{family} from %{country}"
-    no_one_identified_from: "No one identified %{family} from %{country}"
-    no_one_collected_identified_from: "No one collected or identified %{family} from %{country}"
-    no_one_message: "No one found from %{country} in ORCID accounts or Wikidata entries. Search by Taxon Family to explore expertise."
+    country_title: Länder
+    lede: Aus Ländern, die in ORCID-Konten und Wikidata-Einträgen oder in Belegexemplaren in GBIF angegeben sind
+    intro: Aus Ländern, die in ORCID-Konten und Wikidata-Einträgen angegeben sind. Suche nach taxonischen Familien, um Fachwissen zu entdecken.
+    collected_from: "%{family} gesammelt aus %{country}"
+    identified_from: "%{family} identifiziert aus %{country}"
+    collected_identified_from: "%{family} gesammelt oder identifiziert aus %{country}"
+    no_one_collected_from: "Noch hat niemand %{family} aus %{country} gesammelt"
+    no_one_identified_from: "Noch hat niemand %{family} aus %{country} identifiziert"
+    no_one_collected_identified_from: "Noch hat niemand %{family} aus %{country} gesammelt oder identifiziert"
+    no_one_message: "Kein Treffer aus %{country} in ORCID-Konten oder Wikidata-Einträgen. Suche nach taxonischen Familien, um Fachwissen zu entdecken."
   dataset:
     dataset_title: Datasets
     search_title: Datasets Search
