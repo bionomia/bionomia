@@ -291,7 +291,7 @@ de:
     bulk_attribution: Massenattributionen
     reclaim_ignored: Reclaim Ignored
     fix_claims: Zuordnungen korrigieren
-    discovered: Ermittelt
+    discovered: Entdeckt
     support_alert: The following scribes have attributed specimens.
     advanced_search: Erweiterte Suche & Filter
     less_exact: Weniger exakt machen
@@ -330,9 +330,9 @@ de:
   home:
     tagline: Verbinden Sie naturhistorische Exemplare mit den Sammlern der Welt.
     get_started: Los geht's
-    your_profile: Your profile
-    sample_profiles: Sample Profiles
-    orcid_login: Log in with ORCID
+    your_profile: Ihr Profil
+    sample_profiles: Beispielprofile
+    orcid_login: Mit ORCID anmelden
     orcid_logo: ORCID-Logo
   layout:
     profiles: Profile
@@ -350,7 +350,7 @@ de:
     overview: Übersicht
     specimens: Exemplare
     discovered: Entdeckt
-    science_enabled: Wissenschaft ermöglicht
+    science_enabled: Wissenschaft aktiviert
     settings: Einstellungen
     administration: Administration
     logout: Abmelden
@@ -363,7 +363,7 @@ de:
     terms_service: Vertragsbedingungen
     on_this_day: Heute
     about: Über
-    rationale: Rationale
+    rationale: Gründe
     how_works: Wie es funktioniert
     history: Verlauf
     feedback: Feedback
@@ -373,15 +373,15 @@ de:
     tools: Werkzeuge
     parse: Namen analysieren
     reconcile: Namen überprüfen
-    acknowledgments: Acknowledgments
+    acknowledgments: Danksagungen
     workshops: Workshops
   not_authorized:
-    not_authorized: Not authorized or session terminated.
+    not_authorized: Nicht autorisiert oder Sitzung beendet.
   occurrence:
     occurrence_title: Specimen Record
-    lede: From partial data obtained from GBIF
-    record: Record
-    event: Event
+    lede: Aus den von GBIF erhaltenen Teildaten
+    record: Datensatz
+    event: Ereignis
     identification: Identifikation
     location: Ort
     has_image: Hat Abbildung
@@ -501,16 +501,16 @@ de:
     disconnect: Trennen
     disconnect_warning: Sind Sie sicher, dass Sie Ihr Konto von Zenodo trennen möchten? Ihre Daten bleiben archiviert und zugänglich, aber es werden keine neuen Versionen erstellt. Wenn Sie Ihr Konto später erneut verbinden, wird ein neues Datenpaket erstellt.
     connect_zenodo: Verbinden Sie Ihr Konto mit Zenodo, wo versionierte Schnappschüsse Ihrer Ansprüche gespeichert werden und ein DataCite-DOI zugewiesen wird. Eine Zitation wird für die Aufnahme in Ihren Lebenslauf bereitgestellt.
-    connect_zenodo_claim: Claim at least one of your specimens and return here to connect your account to Zenodo where versioned snapshots of your claims will be stored and a DataCite DOI assigned. A citation will be provided for inclusion in your resume.
-    disconnect_zenodo: Disconnect From Zenodo
-    integrate_zenodo: Integrate with Zenodo
-    zenodo_linked: Your account is now linked and data will be pushed within the hour
-    orcid_updates: Pull new updates to your publicly available name, aliases, keywords, country, education, and employment from your ORCID account.
-    refresh: Refresh
-    orcid_refreshed: ORCID data was refreshed.
-    public: Public
-    private: Private
-    active: "On"
+    connect_zenodo_claim: Beanspruchen Sie mindestens eines Ihrer Exemplare und kehren Sie hierher zurück, um Ihr Konto mit Zenodo zu verbinden, wo versionierte Schnappschüsse Ihrer Ansprüche gespeichert werden und ein DataCite-DOI zugewiesen wird. Eine Zitation wird für die Aufnahme in Ihren Lebenslauf bereitgestellt.
+    disconnect_zenodo: Verbindung zu Zenodo trennen
+    integrate_zenodo: Mit Zenodo integrieren
+    zenodo_linked: Ihr Konto ist nun verknüpft und die Daten werden innerhalb einer Stunde übertragen
+    orcid_updates: Erhalten Sie neue Updates zu Ihrem öffentlich zugänglichen Namen, zu Aliasen, Schlüsselwörtern, Land, Ausbildung und Beschäftigung aus Ihrem ORCID-Konto.
+    refresh: Aktualisieren
+    orcid_refreshed: Die ORCID-Daten wurden aktualisiert.
+    public: Öffentlich
+    private: Privat
+    active: "An"
     inactive: "Off"
     make_public_message: Binden Sie Ihr Konto in öffentliche Profile ein. Ihre Ansprüche werden in einen Massendaten-Download aufgenommen, über Google Chrome- und Firefox-Erweiterungen offengelegt und ein Tweet von @BionomiaTrack wird gesendet.
     no_candidates_alert: Bionomia did not find any specimens indexed by GBIF that you may have collected or identified.
@@ -537,8 +537,8 @@ de:
     upload_skipped: Existing claims, if present in your upload, were skipped.
     upload_view: View
     upload_view_html: "%{view} all your claims."
-    co_collectors: Co-collectors
-    no_co_collectors_alert: Co-collectors have not yet been recorded.
+    co_collectors: Co-Sammler
+    no_co_collectors_alert: Co-Sammler wurden noch nicht erfasst.
     co_collectors_alert: "You have collected with:"
     co_collector_name: "Specimens co-collected with %{name}."
     switch: View theirs
@@ -591,19 +591,19 @@ de:
         one: "search result for"
         other: "search results for"
     people: People
-    visualizations: Visualizations
-    timeline: Timeline
+    visualizations: Visualisierungen
+    timeline: Zeitachse
     agent_strings: Agent Strings
-    collected: Collected
-    identified: Identified
+    collected: Gesammelt
+    identified: Identifiziert
     number_collected:
       unit:
-        one: "person collected specimens from data in GBIF"
-        other: "people collected specimens from data in GBIF"
+        one: "Person hat Exemplare aus Daten in GBIF gesammelt"
+        other: "Personen haben Exemplare aus Daten in GBIF gesammelt"
     number_identified:
       unit:
-        one: "person identified specimens from data in GBIF"
-        other: "people identified specimens from data in GBIF"
+        one: "Person hat Exemplare aus Daten in GBIF identifiziert"
+        other: "Personen haben Exemplare aus Daten in GBIF identifiziert"
     number_agents:
       unit:
         one: "agent string from specimen data in GBIF"
@@ -612,11 +612,11 @@ de:
       unit:
         one: "agent string has unclaimed specimen records from data in GBIF"
         other: "agent strings have unclaimed specimen records from data in GBIF"
-    no_agents_unclaimed: No specimen records are unclaimed or unattributed
-    alphabetical: Alphabetical
-    counts: Counts
-    unclaimed: Unclaimed
-    example_families: Random Samples
+    no_agents_unclaimed: Es gibt keine nicht beanspruchten oder nicht zugeordneten Exemplare
+    alphabetical: Alphabetisch
+    counts: Zählung
+    unclaimed: Nicht beansprucht
+    example_families: Zufällige Proben
     none_collected_identified: "%{taxon} wurde noch nicht gesammelt oder identifiziert"
     none_collected: "%{taxon} wurde noch nicht gesammelt"
     none_identified: "%{taxon} wurde noch nicht identifiziert"
@@ -624,50 +624,50 @@ de:
     none_identified_timeline: "%{taxon} wurde nicht gesammelt und es wurde kein Bestimmungsdatum angegeben"
     no_agents: "No agents have collected or identified %{taxon}"
     taxon_string: Taxonomische Familie
-    start_year: Start Year
-    end_year: End Year
+    start_year: Startjahr
+    end_year: Endjahr
   user:
-    caches_rebuilt: Caches were rebuilt.
-    overview: Overview
-    specialties: Specialties
-    network: Network
-    deposited_at: Deposited At
-    specimens: Specimens
-    science_enabled: Science Enabled
-    science_enabled_specimens: Science Enabled by Specimen Data
-    helped_by: Helped By
+    caches_rebuilt: Cache wurde neu erstellt.
+    overview: Übersicht
+    specialties: Besonderheiten
+    network: Netzwerk
+    deposited_at: Abgelegt in
+    specimens: Exemplare
+    science_enabled: Wissenschaft aktiviert
+    science_enabled_specimens: Wissenschaft ermöglicht durch Exemplardaten
+    helped_by: Geholfen durch
     helped: Personen geholfen
     no_scribe: Specimens have not been attributed by a scribe.
-    attributions_by: "Attributions made by:"
-    private: Profile is not publicly available.
+    attributions_by: "Zuordnungen erfolgt durch:"
+    private: Das Profil ist nicht öffentlich zugänglich.
     private_with_claims:
       unit:
-        one: "specimen was claimed or attributed, but this profile is not publicly available."
-        other: "specimens were claimed or attributed, but this profile is not publicly available."
-    no_specimens_cited: Specimens have not been included in downloads from GBIF and cited in this research article.
-    specimen_used: Specimen Data Used In
-    no_publications: Publications that used specimen records included in a download from GBIF have not yet been recorded.
+        one: "Exemplar wurde beansprucht oder zugeordnet, aber dieses Profil ist nicht öffentlich zugänglich."
+        other: "Exemplare wurden beansprucht oder zugeordnet, aber dieses Profil ist nicht öffentlich zugänglich."
+    no_specimens_cited: Exemplare wurden nicht in Downloads von GBIF aufgenommen und in diesem Forschungsartikel zitiert.
+    specimen_used: Exemplardaten verwendet in
+    no_publications: Publikationen, die Exemplare aus einem Download von GBIF verwendet haben, sind noch nicht erfasst.
     publication_count:
       unit:
-        one: "publication used specimen data downloaded from GBIF"
-        other: "publications used specimen data downloaded from GBIF"
-    no_co_collectors_alert: Co-collectors have not yet been recorded.
-    co_collectors_alert: "Has collected with:"
-    co_collectors: Co-collectors
-    identified_for: Identified For
-    identifications_by: Identifications By
-    no_identifications_by_alert: Identifications made to collected specimens have not yet been recorded.
-    identifications_by_alert: "Has collected specimens later identified by:"
-    no_identified_for_alert: Identifications made to others' collected specimens have not yet been recorded.
-    identified_for_alert: "Has identified specimens collected by:"
-    comment_alert: Share an anecdote about a collecting trip, event or anything else.
-    no_institutions_alert: Institutions have not yet been recorded.
-    institutions_alert: "Specimens deposited and curated at the following institution(s):"
-    organizations: organizations
-    specimens_metric: specimens
-    specimens_identified: Specimens Identified
-    specimens_collected: Specimens Collected
-    no_specialities_alert: Specialties have not yet been recorded.
+        one: "Publikation verwendete Exemplardaten, die von GBIF heruntergeladen wurden"
+        other: "Publikationen verwendeten Exemplardaten, die von GBIF heruntergeladen wurden"
+    no_co_collectors_alert: Co-Sammler wurden noch nicht erfasst.
+    co_collectors_alert: "Hat gesammelt mit:"
+    co_collectors: Co-Sammler
+    identified_for: Identifiziert für
+    identifications_by: Identifikationen durch
+    no_identifications_by_alert: Identifizierungen an gesammelten Exemplaren wurden noch nicht erfasst.
+    identifications_by_alert: "Hat Exemplare gesammelt, die später identifiziert wurden durch:"
+    no_identified_for_alert: Identifizierungen von Exemplaren, die von anderen gesammelt wurden, wurden noch nicht erfasst.
+    identified_for_alert: "Hat Exemplare identifiziert, die gesammelt wurden von:"
+    comment_alert: Teilen Sie eine Anekdote über eine Sammelreise, ein Ereignis oder etwas anderes.
+    no_institutions_alert: Institutionen sind noch nicht erfasst worden.
+    institutions_alert: "Exemplare, die in der/den folgenden Institution(en) hinterlegt und kuratiert sind:"
+    organizations: Organisationen
+    specimens_metric: Exemplare
+    specimens_identified: Exemplare identifiziert
+    specimens_collected: Exemplare gesammelt
+    no_specialities_alert: Es wurden noch keine Besonderheiten aufgezeichnet.
     specialties_alert: "Collected or identified specimens in the following Families:"
     families_collected: Families Collected
     families_identified: Families Identified
