@@ -4,7 +4,7 @@ fr:
   acknowledgments:
     acknowledgments_title: Remerciements
     taxon_silhouettes: Silhouettes des Familles Taxonomiques
-    translations: Translations
+    translations: Traductions
   admin:
     change_photo: Changer votre photo
   agent:
@@ -21,7 +21,7 @@ fr:
         other: "résultats pour"
     warning: "AVERTISSEMENT:"
     warning_statement: Contrairement à toutes les autres URL de ce site, les URL des chaînes d'agent ne sont pas fiables car elles pointeront vers des résultats différents toutes les quelques semaines
-    agent_name_title: "%{agent_name} Specimens"
+    agent_name_title: "Spécimens %{agent_name}"
     agent_lede: Une chaîne brute provenant de noms de collecteurs et de détermineurs analysés dans les données de spécimens d'histoire naturelle
     found_statement:
       unit:
@@ -248,7 +248,7 @@ fr:
     not_ignored_alert: Les scribes n'ont pas signalé les spécimens à ignorer
     agent_string: Chaîne d'agent
     taxon_string: Famille taxonomique
-    kingdom_string: Kingdom
+    kingdom_string: Règne
     dataset: Base de données
     datasets: Jeux de données
     agents: Agents
@@ -430,8 +430,8 @@ fr:
     no_search_alert: "Aucune organisme trouvée pour"
     search_alert:
       unit:
-        one: "search result for"
-        other: "search results for"
+        one: "résultats pour"
+        other: "résultats pour"
     current: Courant
     previous: Précédent
     metrics: Métrique
@@ -508,7 +508,7 @@ fr:
     orcid_updates: Tirez de nouvelles mises à jour de votre nom, alias, mots clés, pays, éducation et emploi accessibles au public à partir de votre compte ORCID.
     refresh: Rafraîchir
     orcid_refreshed: Les données ORCID ont été actualisées.
-    public: Public
+    public: Publique
     private: Privé
     active: "Actif"
     inactive: "Inactif"
