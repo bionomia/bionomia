@@ -138,7 +138,7 @@ es:
   date:
     formats:
       month_and_year: "%B %Y"
-      month_and_day: "%B %d"
+      month_and_day: "%d %B"
       long: "%d %B %Y"
       year: "%Y"
     month_names:
@@ -248,7 +248,7 @@ es:
     not_ignored_alert: Los anotadores de Bionomía no han marcado especímenes para ser ignorados.
     agent_string: Cadena de agente
     taxon_string: Familia taxonómica
-    kingdom_string: Kingdom
+    kingdom_string: Reino
     dataset: Conjunto de datos
     datasets: Conjuntos de datos
     agents: Agentes
