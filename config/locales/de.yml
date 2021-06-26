@@ -46,13 +46,13 @@ de:
     agent_strings: Agent Strings
     agent_title: Article Agents
     alphabetical: Alphabetisch
-    counts: Counts
-    unclaimed: Unclaimed
+    counts: Zählung
+    unclaimed: Nicht beansprucht
     no_agent_strings_alert: Es wurden keine Zeichenfolgen von geparsten Sammler- und Bestimmernamen in den von GBIF zur Unterstützung dieses Artikels heruntergeladenen Beispieldaten gefunden
     agent_strings_alert:
       unit:
-        one: "raw string from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article"
-        other: "raw strings from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article"
+        one: "rohe Zeichenfolge aus geparsten Sammler- und Bestimmernamen in Exemplardaten, die zur Unterstützung dieses Artikels von GBIF heruntergeladen wurden"
+        other: "rohe Zeichenfolgen aus geparsten Sammler- und Bestimmernamen in Exemplardaten, die zur Unterstützung dieses Artikels von GBIF heruntergeladen wurden"
     claims: Ansprüche
     specimens: Exemplare
     no_search_alert: "Keine Artikel gefunden für"
@@ -91,37 +91,37 @@ de:
     no_one_collected_identified_from: "Noch hat niemand %{family} aus %{country} gesammelt oder identifiziert"
     no_one_message: "Kein Treffer aus %{country} in ORCID-Konten oder Wikidata-Einträgen. Suche nach taxonischen Familien, um Fachwissen zu entdecken."
   dataset:
-    dataset_title: Datasets
-    search_title: Datasets Search
+    dataset_title: Datensätze
+    search_title: Datensätze suchen
     scribes_title: Scribes
     lede:
       unit:
-        one: "dataset from GBIF"
-        other: "datasets from GBIF"
-    placeholder: Butterflies of Brazil
-    people: People
-    visualizations: Visualizations
+        one: "Datensatz von GBIF"
+        other: "Datensätze von GBIF"
+    placeholder: Schmetterlinge aus Brasilien
+    people: Personen
+    visualizations: Visualisierungen
     scribes: Scribes
     agents: Agents
     agent_strings: Agent Strings
     agent_strings_unclaimed: Unclaimed Agent Strings
-    alphabetical: Alphabetical
-    counts: Counts
-    unclaimed: Unclaimed
-    no_agents_alert: Raw strings from parsed collector and determiner names in specimen data included in this dataset have not yet been recorded
+    alphabetical: Alphabetisch
+    counts: Zählung
+    unclaimed: Nicht beansprucht
+    no_agents_alert: Rohe Zeichenfolgen aus geparsten Sammler- und Bestimmernamen in den in diesem Datensatz enthaltenen Probendaten wurden noch nicht aufgezeichnet
     agents_alert:
       unit:
-        one: "raw string from parsed collector and determiner names in specimen data included in this dataset"
-        other: "raw strings from parsed collector and determiner names in specimen data included in this dataset"
+        one: "rohe Zeichenfolge aus geparsten Sammler- und Bestimmernamen in den in diesem Datensatz enthaltenen Probendaten"
+        other: "rohe Zeichenfolgen aus geparsten Sammler- und Bestimmernamen in den in diesem Datensatz enthaltenen Probendaten"
     agents_alert_unclaimed:
       unit:
-        one: "raw string from parsed collector and determiner names in entirely unattributed specimen data included in this dataset"
-        other: "raw strings from parsed collector and determiner names in entirely unattributed specimen data included in this dataset"
-    none_found: "No datasets found for %{searched}"
+        one: "rohe Zeichenfolge aus geparsten Sammler- und Bestimmernamen in vollständig nicht zugeordneten Exemplardaten, die in diesem Datensatz enthalten sind"
+        other: "rohe Zeichenfolgen aus geparsten Sammler- und Bestimmernamen in vollständig nicht zugeordneten Exemplardaten, die in diesem Datensatz enthalten sind"
+    none_found: "Keine Datensätze für %{searched} gefunden"
     search_found:
       unit:
-        one: "search result for"
-        other: "search results for"
+        one: "Suchergebnis für"
+        other: "Suchergebnisse für"
     no_scribes_alert: Scribes have not yet attributed specimens to collector or determimers represented in this dataset
     scribes_alert:
       unit:
@@ -132,204 +132,204 @@ de:
       unit:
         one: "person claimed or was attributed specimens represented in this dataset"
         other: "people claimed or were attributed specimens represented in this dataset"
-    timeline: Timeline
-    none_collected_timeline: "No one has collected and indicated a collection date"
-    none_identified_timeline: "No one has identified and indicated a determination date"
+    timeline: Zeitleiste
+    none_collected_timeline: "Bisher wurde weder gesammelt noch ein Sammeldatum angegeben"
+    none_identified_timeline: "Bisher wurde weder identifiziert noch ein Identifizierdatum angegeben"
   date:
     formats:
       month_and_year: "%B %Y"
-      month_and_day: "%B %d"
-      long: "%B %d, %Y"
+      month_and_day: "%d. %B"
+      long: "%d. %B %Y"
       year: "%Y"
     month_names:
       - null
-      - January
-      - February
-      - March
+      - Januar
+      - Februar
+      - März
       - April
-      - May
-      - June
-      - July
+      - Mai
+      - Juni
+      - Juli
       - August
       - September
-      - October
+      - Oktober
       - November
-      - December
+      - Dezember
     abbr_month_names:
       - null
       - Jan
       - Feb
-      - Mar
+      - Mär
       - Apr
-      - May
+      - Mai
       - Jun
       - Jul
       - Aug
       - Sep
-      - Oct
+      - Okt
       - Nov
-      - Dec
+      - Dez
   developer:
-    search: Search
-    autocomplete_widget: Autocomplete Widget
-    json_ld_search: JSON-LD Search for People
-    json_ld_occurrence_search: JSON-LD Search for Occurrences
-    structured_data: Structured Data
-    raw_data: Raw Data
+    search: Suche
+    autocomplete_widget: AutoVervollständigen-Widget
+    json_ld_search: JSON-LD-Suche nach Personen
+    json_ld_occurrence_search: JSON-LD-Suche nach Personen für Vorkommnisse
+    structured_data: Strukturierte Daten
+    raw_data: Rohdaten
     code: Code
-    reconcile_title: Reconcile
-    recommended_use: Recommended Use
-    title: For Developers
-    code_title: "For Developers: Code"
-    parser: Parse Names
-    parse_names: Parse Human Names
-    parse_names_title: "For Developers: Parse Names"
-    structured_data_title: "For Developers: Structured Data"
+    reconcile_title: Überprüfen
+    recommended_use: Empfohlene Verwendung
+    title: Für Entwickler
+    code_title: "Für Entwickler: Code"
+    parser: Namen analysieren
+    parse_names: Menschliche Namen analysieren
+    parse_names_title: "Für Entwickler: Namen analysieren"
+    structured_data_title: "Für Entwickler: Strukturierte Daten"
   donate:
-    donate_title: Donate
-    lede: Your one-time or periodic donation will help complete the data pipeline and ensure that credit is given for contributions made to natural history collections as quickly and as seamlessly as possible.
-    campaign: Campaign
-    donor_wall: Donor Wall
+    donate_title: Spenden
+    lede: Ihre einmalige oder regelmäßige Spende hilft, die Datenpipeline zu vervollständigen und sicherzustellen, dass die Beiträge zu den naturkundlichen Sammlungen so schnell und einfach wie möglich gutgeschrieben werden.
+    campaign: Kampagne
+    donor_wall: Spendermauer
   donor_wall:
-    donor_wall_title: Donor Wall
-    lede: Thanks to the following donors who are supporting the completion of the data pipeline.
+    donor_wall_title: Spendermauer
+    lede: Vielen Dank an die folgenden Spender/-innen, die die Fertigstellung der Datenpipeline unterstützen.
   general:
-    search: Search
-    apply: Apply
-    help_attribute: Help Attribute
-    refresh_profile: Refresh
-    refresh_stats: Refresh stats
-    settings: Settings
-    bulk_assignment: Bulk Assignment
-    collected_all: Collected All
-    collected: Collected
-    identified_all: Identified All
-    identified: Identified
-    both: Both
-    either: Either
-    per_page: Per page
-    download: Download
-    submit: Submit
-    upload_csv_instructions: Upload csv with claims
-    download_records: Download discovered records
-    download_alert: "Download discovered specimen records, work offline, then upload new claims as a csv. A file containing at most %{num_records} records is generated. If you have many more than this, you may work in batches. This routine does not update underlying specimen data nor does it update existing claims. If existing claims are present in the upload, these will be skipped. Your uploaded csv must use a comma to separate columns each optionally enclosed by quotes."
-    search_dropdown_no_users: "Your search turned up 0 results."
-    reset: Reset
-    remove: Remove
-    filtered_by: Filtered by
+    search: Suchen
+    apply: Anwenden
+    help_attribute: Zur Zuordnung beitragen
+    refresh_profile: Aktualisieren
+    refresh_stats: Statistiken aktualisieren
+    settings: Einstellungen
+    bulk_assignment: Massenzuordnung
+    collected_all: Alle gesammelt
+    collected: Gesammelt
+    identified_all: Alle identifiziert
+    identified: Identifiziert
+    both: Beide
+    either: Entweder
+    per_page: Pro Seite
+    download: Herunterladen
+    submit: Absenden
+    upload_csv_instructions: Importieren einer CSV-Datei mit Ansprüchen
+    download_records: Entdeckte Datensätze herunterladen
+    download_alert: "Laden Sie Datensätze mit entdeckten Exemplaren herunter, arbeiten Sie offline und laden Sie dann neue Ansprüche als CSV-Datei hoch. Es wird eine Datei erzeugt, die höchstens %{num_records} Datensätze enthält. Wenn Sie viel mehr haben, können Sie in Stapeln arbeiten. Diese Routine aktualisiert weder die zugrundeliegenden Exemplardaten noch bestehende Ansprüche. Wenn vorhandene Ansprüche im Upload vorhanden sind, werden diese übersprungen. Ihre hochgeladene CSV-Datei muss die Spalten mit Kommas trennen, die optional von Anführungszeichen umschlossen werden können."
+    search_dropdown_no_users: "Ihre Suche ergab 0 Treffer."
+    reset: Zurücksetzen
+    remove: Entfernen
+    filtered_by: Gefiltert nach
   help:
-    help_title: Help Attribute Specimens
-    country_title: Help Attribute Specimens
-    latest_title: Latest Recipients
-    country_name_title: "Help Attribute Specimens for People From %{country}"
-    country_no_one: "No one found from"
-    advanced_search_title: "Advanced Search & Filter"
-    fix_title: Help Fix Attributions
-    upload_title: Upload
-    basic_instructions_lede: Basic instructions to get you started
-    add_someone_lede: "Add someone not yet discovered"
-    country_name_lede: From countries stated in ORCID or Wikidata
+    help_title: Zur Zuordnung von Exemplaren beitragen
+    country_title: Zur Zuordnung von Exemplaren beitragen
+    latest_title: Neueste Empfänger
+    country_name_title: "Helfen Sie, Proben für Personen aus %{country} zuzuordnen"
+    country_no_one: "Es wurde niemand gefunden aus"
+    advanced_search_title: "Erweiterte Suche & Filter"
+    fix_title: Helfen Sie bei der Korrektur von Zuordnungen
+    upload_title: Hochladen
+    basic_instructions_lede: Grundlegende Anweisungen für den Einstieg
+    add_someone_lede: "Eine noch nicht entdeckte Person hinzufügen"
+    country_name_lede: Aus in ORCID oder Wikidata angegebenen Ländern
     latest_lede: Join the scribes by helping to attribute specimens
     country_lede: Join the scribes in acknowledging your peers, mentors, or anyone who inspires you
     person: Person
-    progress: Progress
-    public: Public
-    private: Profile is not public
-    created: Created
+    progress: Fortschritt
+    public: Öffentlich
+    private: Profil ist nicht öffentlich
+    created: Erstellt
     latest_scribe: Latest Scribe
-    latest_claim: Latest Claim
-    help_documentation: "Help Documentation"
-    add_someone: "Add Someone"
-    latest_recipients: Latest Recipients
-    new_people: New People
-    new_people_title: Newly Found People
-    new_people_lede: Attribute specimens for recently discovered people in ORCID or Wikidata
-    by_country: By Country
+    latest_claim: Neuester Anspruch
+    help_documentation: "Hilfedokumentation"
+    add_someone: "Jemanden hinzufügen"
+    latest_recipients: Neueste Empfänger
+    new_people: Neue Personen
+    new_people_title: Neu gefundene Personen
+    new_people_lede: Zuordnen von Exemplaren zu neu entdeckten Personen in ORCID oder Wikidata
+    by_country: Nach Land
     not_ignored_alert: Bionomia scribes have not flagged specimens to be ignored.
     agent_string: Agent String
-    taxon_string: Taxon Family
-    kingdom_string: Kingdom
-    dataset: Dataset
-    datasets: Datasets
+    taxon_string: Taxonomische Familie
+    kingdom_string: Königreich
+    dataset: Datensatz
+    datasets: Datensätze
     agents: Agents
-    taxa: Taxonomic Families
-    specimens: Specimens
-    visualizations: Visualizations
-    support: Helped By
-    specialties: Specialties
-    public_profile: Public Profile
-    make_public: Make Public
-    not_yet: Not yet
+    taxa: Taxonomische Familien
+    specimens: Exemplare
+    visualizations: Visualisierungen
+    support: Unterstützt von
+    specialties: Besonderheiten
+    public_profile: Öffentliches Profil
+    make_public: Veröffentlichen
+    not_yet: Noch nicht
     viz_none_alert: Bionomia scribes have not yet helped attribute specimens.
-    viz_alert: Click regions on the map or bars in the chart to execute a filter.
-    problems: Problems Discovered
-    collections_before_birth: "Collections made before birth:"
-    collections_after_death: "Collections made after death:"
-    identifications_before_birth: "Identifications made before birth:"
-    identifications_after_death: "Identifications made after death:"
-    view: view
-    none: none
-    identified_from: Identified From
-    collected_from: Collected From
+    viz_alert: Klicken Sie auf Regionen in der Karte oder Balken im Diagramm, um einen Filter auszuführen.
+    problems: Festgestellte Probleme
+    collections_before_birth: "Sammlungen, die vor der Geburt durchgeführt wurden:"
+    collections_after_death: "Sammlungen, die nach dem Tod durchgeführt wurden:"
+    identifications_before_birth: "Identifizierungen, die vor der Geburt durchgeführt wurden:"
+    identifications_after_death: "Identifizierungen, die nach dem Tod durchgeführt wurden:"
+    view: ansehen
+    none: keine
+    identified_from: Identifiziert von
+    collected_from: Gesammelt von
     dates_identified_collected: Dates Collected and Identified
     no_filter_alert: Bionomia scribes have not yet helped attribute specimens under this filter.
     not_helped_alert: Bionomia scribes have not yet helped attribute specimens.
     upload_message:
       unit:
-        one: "record was handled. Existing claims, if present in your upload, were skipped."
-        other: "records were handled. Existing claims, if present in your upload, were skipped."
-    help_question: "Want to help attribute specimens to %{name}?"
-    try_again: Try again.
+        one: "Datensatz wurde behandelt. Vorhandene Ansprüche, falls in Ihrem Upload vorhanden, wurden übersprungen."
+        other: "Datensätze wurden behandelt. Vorhandene Ansprüche, falls in Ihrem Upload vorhanden, wurden übersprungen."
+    help_question: "Möchten Sie dabei helfen, Proben zu %{name} zuzuordnen?"
+    try_again: Erneut versuchen.
     no_specialities_alert: Bionomia scribes have not yet helped attribute specimens.
     specialties_alert: "Collected or identified specimens in the following Families:"
-    co-collectors: Co-collectors
-    no_co_collectors_alert: Co-collectors have not yet been recorded.
-    co_collectors_alert: "Choose a co-collector to adjust attributions made for specimens in common."
-    co_collector_name: "Specimens co-collected with %{name}."
-    switch: Switch
-    not_co_collector_name: "Specimens have not been co-collected with %{name}."
-    bulk_attribution: Bulk Attributions
+    co-collectors: Co-Sammler
+    no_co_collectors_alert: Es wurden noch keine Co-Sammler erfasst.
+    co_collectors_alert: "Wählen Sie einen Co-Sammler, um die Zuordnungen für gemeinsame Exemplare anzupassen."
+    co_collector_name: "Exemplare, die gemeinsam mit %{name} gesammelt wurden."
+    switch: Wechseln
+    not_co_collector_name: "Exemplare wurden nicht mit %{name} mitgesammelt."
+    bulk_attribution: Massenattributionen
     reclaim_ignored: Reclaim Ignored
-    fix_claims: Fix Attributions
-    discovered: Discovered
+    fix_claims: Zuordnungen korrigieren
+    discovered: Ermittelt
     support_alert: The following scribes have attributed specimens.
-    advanced_search: Advanced Search & Filter
-    less_exact: Make less exact
-    no_unclaimed: Bionomia did not find any unclaimed specimens.
-    close: Close
-    add_person: Add a Person
+    advanced_search: Erweiterte Suche & Filter
+    less_exact: Weniger exakt machen
+    no_unclaimed: Bionomia hat keine nicht-beanspruchten Exemplare gefunden.
+    close: Schließen
+    add_person: Eine Person hinzufügen
     add_orcid_wikidata: Add ORCID Identifier or Wikidata Q Number
     attribute_count:
-      one: Help attribute 1 specimen.
-      other: Help attribute %{count} specimens.
+      one: Helfen Sie bei der Zuordnung von 1 Exemplar.
+      other: Helfen Sie bei der Zuordnung von %{count} Exemplaren.
     specimens_attributed_count:
-      one: specimen attributed
-      other: specimens attributed
-    download: Download
-    download_label: Download discovered records
-    upload_label: Upload csv with claims
+      one: Exemplar zugeordnet
+      other: Exemplare zugeordnet
+    download: Herunterladen
+    download_label: Entdeckte Datensätze herunterladen
+    upload_label: CSV-Datei mit Ansprüchen hochladen
     choose_instructions_html: "Choose %{coll_img} collected, %{det_img} identified, or Both."
     search_count:
-      one: "1 search result for %{search}"
-      other: "%{count} search results for %{search}"
-    make_public_yes: "Yes, Make Public"
+      one: "1 Suchergebnis für %{search}"
+      other: "%{count} Suchergebnisse für %{search}"
+    make_public_yes: "Ja, veröffentlichen"
     other_scribes: "Other scribes have also helped attribute %{user_name}'s specimens:"
     no_scribes: "No other scribes have helped attribute %{user_name}'s specimens."
-    make_public_question: "Would you like to make %{user_name}'s profile publicly available?"
-    tweet_message: "An automated Tweet from @BionomiaTrack will be sent announcing the new profile."
+    make_public_question: "Möchten Sie das Profil von %{user_name} öffentlich zugänglich machen?"
+    tweet_message: "Es wird ein automatischer Tweet von @BionomiaTrack gesendet, der das neue Profil ankündigt."
     view_public_html: "View the public %{href}"
-    view_public_href: "profile"
-    now_public_html: "Thank you for your help! The profile for %{person} is now visible to the public."
-    do_you_know: Do you know
-    no_one_found: "No one found by the name %{name}."
+    view_public_href: "Profil"
+    now_public_html: "Vielen Dank für Ihre Hilfe! Das Profil von %{person} ist jetzt für die Öffentlichkeit sichtbar."
+    do_you_know: Kennen Sie
+    no_one_found: "Es wurde niemand mit dem Namen %{name} gefunden."
     add_someone_html: "See how to %{href}."
-    add_someone_href: "add someone"
+    add_someone_href: "jemanden hinzufügen"
     co_collected_count:
-      one: "co-collected specimen"
-      other: "co-collected specimens"
+      one: "mitgesammeltes Exemplar"
+      other: "mitgesammelte Exemplare"
   home:
-    tagline: Link natural history specimens to the world's collectors.
-    get_started: Get started
+    tagline: Verbinden Sie naturhistorische Exemplare mit den Sammlern der Welt.
+    get_started: Los geht's
     your_profile: Your profile
     sample_profiles: Sample Profiles
     orcid_login: Log in with ORCID
@@ -341,38 +341,38 @@ de:
     datasets: Datasets
     articles: Articles
     countries: Countries
-    taxa: Families
+    taxa: Familien
     agent_strings: Agent Strings
-    help_others: Help Others
-    help_received: Help Received
-    people_helped: People Helped
-    toggle_dropdown: Toggle Dropdown
-    overview: Overview
-    specimens: Specimens
-    discovered: Discovered
-    science_enabled: Science enabled
-    settings: Settings
+    help_others: Anderen helfen
+    help_received: Hilfe erhalten
+    people_helped: Personen geholfen
+    toggle_dropdown: Dropdown umschalten
+    overview: Übersicht
+    specimens: Exemplare
+    discovered: Entdeckt
+    science_enabled: Wissenschaft ermöglicht
+    settings: Einstellungen
     administration: Administration
-    logout: Logout
-    resources: Resources
-    integrations: Integrations
-    for_developers: For Developers
-    for_data_managers: For Data Managers
-    policies: Policies
-    privacy: Privacy Policy
-    terms_service: Terms of Service
-    on_this_day: On This Day
-    about: About
+    logout: Abmelden
+    resources: Ressourcen
+    integrations: Integrationen
+    for_developers: Für Entwickler
+    for_data_managers: Für Daten-Manager
+    policies: Richtlinien
+    privacy: Datenschutzrichtlinie
+    terms_service: Vertragsbedingungen
+    on_this_day: Heute
+    about: Über
     rationale: Rationale
-    how_works: How it Works
-    history: History
+    how_works: Wie es funktioniert
+    history: Verlauf
     feedback: Feedback
-    twitter: Bionomia on Twitter
-    support: Donate
-    help: Help Documents
-    tools: Tools
-    parse: Parse Names
-    reconcile: Reconcile Names
+    twitter: Bionomia auf Twitter
+    support: Spenden
+    help: Hilfedokumentation
+    tools: Werkzeuge
+    parse: Namen analysieren
+    reconcile: Namen überprüfen
     acknowledgments: Acknowledgments
     workshops: Workshops
   not_authorized:
@@ -512,12 +512,12 @@ de:
     private: Private
     active: "On"
     inactive: "Off"
-    make_public_message: Include your account in public Profiles. Your claims will be included in a bulk data download, exposed through Google Chrome and Firefox extensions and a Tweet will be sent from @BionomiaTrack.
+    make_public_message: Binden Sie Ihr Konto in öffentliche Profile ein. Ihre Ansprüche werden in einen Massendaten-Download aufgenommen, über Google Chrome- und Firefox-Erweiterungen offengelegt und ein Tweet von @BionomiaTrack wird gesendet.
     no_candidates_alert: Bionomia did not find any specimens indexed by GBIF that you may have collected or identified.
     ignored_alert: Specimen records you marked as "Not me" will appear here.
     scribe_not_helped: This Bionomia scribe has not yet helped you claim specimens.
     upload_error: Please upload an image less than 5MB in size.
-    bulk_claim: Bulk Claim
+    bulk_claim: Massenansprüche
     advanced_search: Advanced Search & Filter
     no_specimens_filter: You have not yet claimed any specimens with this applied filter. See your candidate specimen records on the Discovered page.
     no_specimens: You have not yet claimed any specimens. See your candidate specimen records on the Discovered page.
