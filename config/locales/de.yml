@@ -46,13 +46,13 @@ de:
     agent_strings: Agent Strings
     agent_title: Article Agents
     alphabetical: Alphabetisch
-    counts: Counts
-    unclaimed: Unclaimed
+    counts: Zählung
+    unclaimed: Nicht beansprucht
     no_agent_strings_alert: Es wurden keine Zeichenfolgen von geparsten Sammler- und Bestimmernamen in den von GBIF zur Unterstützung dieses Artikels heruntergeladenen Beispieldaten gefunden
     agent_strings_alert:
       unit:
-        one: "raw string from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article"
-        other: "raw strings from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article"
+        one: "rohe Zeichenfolge aus geparsten Sammler- und Bestimmernamen in Exemplardaten, die zur Unterstützung dieses Artikels von GBIF heruntergeladen wurden"
+        other: "rohe Zeichenfolgen aus geparsten Sammler- und Bestimmernamen in Exemplardaten, die zur Unterstützung dieses Artikels von GBIF heruntergeladen wurden"
     claims: Ansprüche
     specimens: Exemplare
     no_search_alert: "Keine Artikel gefunden für"
@@ -91,37 +91,37 @@ de:
     no_one_collected_identified_from: "Noch hat niemand %{family} aus %{country} gesammelt oder identifiziert"
     no_one_message: "Kein Treffer aus %{country} in ORCID-Konten oder Wikidata-Einträgen. Suche nach taxonischen Familien, um Fachwissen zu entdecken."
   dataset:
-    dataset_title: Datasets
-    search_title: Datasets Search
+    dataset_title: Datensätze
+    search_title: Datensätze suchen
     scribes_title: Scribes
     lede:
       unit:
-        one: "dataset from GBIF"
-        other: "datasets from GBIF"
-    placeholder: Butterflies of Brazil
-    people: People
-    visualizations: Visualizations
+        one: "Datensatz von GBIF"
+        other: "Datensätze von GBIF"
+    placeholder: Schmetterlinge aus Brasilien
+    people: Personen
+    visualizations: Visualisierungen
     scribes: Scribes
     agents: Agents
     agent_strings: Agent Strings
     agent_strings_unclaimed: Unclaimed Agent Strings
-    alphabetical: Alphabetical
-    counts: Counts
-    unclaimed: Unclaimed
-    no_agents_alert: Raw strings from parsed collector and determiner names in specimen data included in this dataset have not yet been recorded
+    alphabetical: Alphabetisch
+    counts: Zählung
+    unclaimed: Nicht beansprucht
+    no_agents_alert: Rohe Zeichenfolgen aus geparsten Sammler- und Bestimmernamen in den in diesem Datensatz enthaltenen Probendaten wurden noch nicht aufgezeichnet
     agents_alert:
       unit:
-        one: "raw string from parsed collector and determiner names in specimen data included in this dataset"
-        other: "raw strings from parsed collector and determiner names in specimen data included in this dataset"
+        one: "rohe Zeichenfolge aus geparsten Sammler- und Bestimmernamen in den in diesem Datensatz enthaltenen Probendaten"
+        other: "rohe Zeichenfolgen aus geparsten Sammler- und Bestimmernamen in den in diesem Datensatz enthaltenen Probendaten"
     agents_alert_unclaimed:
       unit:
-        one: "raw string from parsed collector and determiner names in entirely unattributed specimen data included in this dataset"
-        other: "raw strings from parsed collector and determiner names in entirely unattributed specimen data included in this dataset"
-    none_found: "No datasets found for %{searched}"
+        one: "rohe Zeichenfolge aus geparsten Sammler- und Bestimmernamen in vollständig nicht zugeordneten Exemplardaten, die in diesem Datensatz enthalten sind"
+        other: "rohe Zeichenfolgen aus geparsten Sammler- und Bestimmernamen in vollständig nicht zugeordneten Exemplardaten, die in diesem Datensatz enthalten sind"
+    none_found: "Keine Datensätze für %{searched} gefunden"
     search_found:
       unit:
-        one: "search result for"
-        other: "search results for"
+        one: "Suchergebnis für"
+        other: "Suchergebnisse für"
     no_scribes_alert: Scribes have not yet attributed specimens to collector or determimers represented in this dataset
     scribes_alert:
       unit:
@@ -132,9 +132,9 @@ de:
       unit:
         one: "person claimed or was attributed specimens represented in this dataset"
         other: "people claimed or were attributed specimens represented in this dataset"
-    timeline: Timeline
-    none_collected_timeline: "No one has collected and indicated a collection date"
-    none_identified_timeline: "No one has identified and indicated a determination date"
+    timeline: Zeitleiste
+    none_collected_timeline: "Bisher wurde weder gesammelt noch ein Sammeldatum angegeben"
+    none_identified_timeline: "Bisher wurde weder identifiziert noch ein Identifizierdatum angegeben"
   date:
     formats:
       month_and_year: "%B %Y"
