@@ -1,5 +1,19 @@
 -content_for :title, I18n.t('acknowledgments.acknowledgments_title')
 
+-content_for :scripts do
+  %script{src: "//crowdin.com/js/crowdjet/crowdjet.js"}
+  :javascript
+    $(function() {
+      var checkExist = setInterval(function() {
+        if ($('#crowdjet-expand-container').children().length > 0) {
+          $('#crowdjet-container').css("position", "relative");
+          $('#crowdjet-expand-container').css("position", "absolute");
+          $('#crowdin-widget').show();
+          clearInterval(checkExist);
+        }
+      }, 1000);
+    });
+
 -content_for :jumbotron do
   %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
     %div{class:"mr-auto p-2"}
@@ -42,3 +56,11 @@
             %i{class:"fab fa-orcid"}
             https://orcid.org/0000-0003-4401-5530
           who translated the interface into Portuguese.
+        %p
+          Want to help translate into other languages? Visit
+          %a{href: "https://translate.bionomia.net"}
+            https://translate.bionomia.net
+          or click the Crowdin widget below.
+        %div{id:"crowdin-widget", style:"position:relative;min-height:5em;padding-bottom:80px;display:none;"}
+          %div{id: "crowdjet-container", "data-project-id": 462580, style:"position:absolute;top:80px;left:0px;"}
+          %div{id: "crowdjet-expand-container", style:"position:absolute;top:0px;left:0px;"}
