@@ -1,6 +1,6 @@
 fr:
-  language: English
-  locale: "en_EN"
+  language: Français
+  locale: "fr_FR"
   "true": "Oui"
   "false": "Non"
   acknowledgments:
