@@ -1,12 +1,12 @@
 ru:
-  "true": "Yes"
-  "false": "No"
+  "true": "Да"
+  "false": "Нет"
   acknowledgments:
-    acknowledgments_title: Acknowledgments
+    acknowledgments_title: Благодарности
     taxon_silhouettes: Taxon Family Silhouettes
-    translations: Translations
+    translations: Переводы
   admin:
-    change_photo: Change profile photo
+    change_photo: Изменить фото профиля
   agent:
     agent_title: Agent Strings
     search_title: Agent String Search
@@ -23,7 +23,7 @@ ru:
         few: "search results for"
         many: "search results for"
         other: "search results for"
-    warning: "WARNING:"
+    warning: "ВНИМАНИЕ:"
     warning_statement: Unlike all other URLs in this site, URLs for agent strings are unreliable for linking because they will point to different results every few weeks
     agent_name_title: "%{agent_name} Specimens"
     agent_lede: A raw string from parsed collector and determiner names in natural history specimen data
@@ -125,7 +125,7 @@ ru:
     visualizations: Visualizations
     scribes: Scribes
     agents: Agents
-    agent_strings: Agent Strings
+    agent_strings: Настройки агента
     agent_strings_unclaimed: Unclaimed Agent Strings
     alphabetical: Alphabetical
     counts: Counts
@@ -175,30 +175,30 @@ ru:
       year: "%Y"
     month_names:
       - null
-      - January
-      - February
-      - March
-      - April
-      - May
-      - June
-      - July
-      - August
-      - September
-      - October
-      - November
-      - December
+      - Январь
+      - Февраль
+      - Март
+      - Апрель
+      - Май
+      - Июнь
+      - Июль
+      - Август
+      - Сентябрь
+      - Октябрь
+      - Ноябрь
+      - Декабрь
     abbr_month_names:
       - null
-      - Jan
-      - Feb
-      - Mar
-      - Apr
-      - May
-      - Jun
-      - Jul
-      - Aug
-      - Sep
-      - Oct
+      - Янв
+      - Фев
+      - Мар
+      - Апр
+      - Май
+      - Июн
+      - Июл
+      - Авг
+      - Сен
+      - Окт
       - Nov
       - Dec
   developer:
@@ -220,7 +220,7 @@ ru:
   donate:
     donate_title: Donate
     lede: Your one-time or periodic donation will help complete the data pipeline and ensure that credit is given for contributions made to natural history collections as quickly and as seamlessly as possible.
-    campaign: Campaign
+    campaign: Кампания
     donor_wall: Donor Wall
   donor_wall:
     donor_wall_title: Donor Wall
@@ -257,7 +257,7 @@ ru:
     country_no_one: "No one found from"
     advanced_search_title: "Advanced Search & Filter"
     fix_title: Help Fix Attributions
-    upload_title: Upload
+    upload_title: Загрузить
     basic_instructions_lede: Basic instructions to get you started
     add_someone_lede: "Add someone not yet discovered"
     country_name_lede: From countries stated in ORCID or Wikidata
@@ -443,7 +443,7 @@ ru:
     limit_alert: Results limited to 50 holotype specimen records
     no_types_alert: "No type specimens found collected on %{date}"
   oops:
-    not_found_title: Not found
+    not_found_title: Не найдено
     not_found: We looked everywhere but could not find that page.
     error_title: Error
     error: Sorry, we experienced an error.
