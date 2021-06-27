@@ -1,6 +1,6 @@
 it:
-  language: English
-  locale: "en_EN"
+  language: Italiano
+  locale: "it_IT"
   "true": "Sì"
   "false": "No"
   acknowledgments:
