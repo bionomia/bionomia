@@ -1,6 +1,6 @@
 fi:
-  language: Suomi
-  locale: "fi_FI"
+  language: English
+  locale: "en_EN"
   "true": "Yes"
   "false": "No"
   acknowledgments:
