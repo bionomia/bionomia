@@ -1,8 +1,8 @@
 ar:
-  language: English
-  locale: "en_EN"
-  "true": "Yes"
-  "false": "No"
+  language: العربية
+  locale: "ar_IQ"
+  "true": "نعم"
+  "false": "لا"
   acknowledgments:
     acknowledgments_title: Acknowledgments
     taxon_silhouettes: Taxon Family Silhouettes
