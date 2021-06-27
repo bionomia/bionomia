@@ -1,6 +1,6 @@
 ru:
-  language: English
-  locale: "en_EN"
+  language: Русский
+  locale: "ru_RU"
   "true": "Да"
   "false": "Нет"
   acknowledgments:
