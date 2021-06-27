@@ -1,6 +1,6 @@
 de:
-  language: Deutsch
-  locale: "de_DE"
+  language: English
+  locale: "en_EN"
   "true": "Ja"
   "false": "Nein"
   acknowledgments:
