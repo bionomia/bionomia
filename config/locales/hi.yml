@@ -1,6 +1,6 @@
 hi:
-  language: English
-  locale: "en_EN"
+  language: हिन्दी
+  locale: "hi_IN"
   "true": "Yes"
   "false": "No"
   acknowledgments:
