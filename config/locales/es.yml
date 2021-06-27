@@ -1,6 +1,6 @@
 es:
-  language: Español
-  locale: "es_ES"
+  language: English
+  locale: "en_EN"
   "true": "Si"
   "false": "No"
   acknowledgments:
