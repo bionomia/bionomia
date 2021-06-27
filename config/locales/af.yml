@@ -1,6 +1,6 @@
 af:
-  language: English
-  locale: "en_EN"
+  language: Afrikaans
+  locale: "af_ZA"
   "true": "Yes"
   "false": "No"
   acknowledgments:
