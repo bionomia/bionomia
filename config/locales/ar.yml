@@ -1,6 +1,6 @@
 ar:
-  language: العربية
-  locale: "ar_IQ"
+  language: English
+  locale: "en_EN"
   "true": "Yes"
   "false": "No"
   acknowledgments:
