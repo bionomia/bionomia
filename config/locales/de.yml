@@ -412,7 +412,7 @@ de:
         one: "Organisation aus ORCID-Konten und Wikidata-Einträgen"
         other: "Organisationen aus ORCID-Konten und Wikidata-Einträgen"
     placeholder: Kanadisches Museum der Natur
-    affiliation_none_alert: Publikationen, die auf Exemplarem basieren, die vom aktuellen und ehemaligen Mitgliedern gesammelt oder identifiziert wurden, sind noch nicht von GBIF erfasst worden
+    affiliation_none_alert: Publikationen, die auf Exemplaren basieren, die vom aktuellen und ehemaligen Mitgliedern gesammelt oder identifiziert wurden, sind noch nicht von GBIF erfasst worden
     affiliation_alert: "%{count} Publikationen haben von GBIF heruntergeladene Exemplardaten verwendet, die auf von aktuellen und ehemaligen Mitgliedern gesammelten oder identifizierten Exemplaren basieren, während sie mit %{org_name} verbunden waren"
     collected_by: "Exemplare gesammelt oder identifiziert von:"
     science_enabled: Wissenschaft aktiviert
@@ -511,15 +511,15 @@ de:
     public: Öffentlich
     private: Privat
     active: "An"
-    inactive: "Off"
+    inactive: "Aus"
     make_public_message: Binden Sie Ihr Konto in öffentliche Profile ein. Ihre Ansprüche werden in einen Massendaten-Download aufgenommen, über Google Chrome- und Firefox-Erweiterungen offengelegt und ein Tweet von @BionomiaTrack wird gesendet.
-    no_candidates_alert: Bionomia did not find any specimens indexed by GBIF that you may have collected or identified.
-    ignored_alert: Specimen records you marked as "Not me" will appear here.
+    no_candidates_alert: Bionomia hat keine von GBIF indizierten Exemplare gefunden, die Sie möglicherweise gesammelt oder identifiziert haben.
+    ignored_alert: Exemplare, die Sie als "Nicht ich" markiert haben, werden hier angezeigt.
     scribe_not_helped: This Bionomia scribe has not yet helped you claim specimens.
-    upload_error: Please upload an image less than 5MB in size.
+    upload_error: Bitte laden Sie ein Bild mit einer Größe von weniger als 5 MB hoch.
     bulk_claim: Massenansprüche
-    advanced_search: Advanced Search & Filter
-    no_specimens_filter: You have not yet claimed any specimens with this applied filter. See your candidate specimen records on the Discovered page.
+    advanced_search: Erweiterte Suche & Filter
+    no_specimens_filter: Sie haben noch keine Exemplare mit diesem angewandten Filter beansprucht. Sehen Sie sich Ihre Exemplar-Datensätze auf der "Entdeckt"-Seite an.
     no_specimens: You have not yet claimed any specimens. See your candidate specimen records on the Discovered page.
     candidate_count:
       one: Found 1 specimen.
@@ -532,15 +532,15 @@ de:
     no_claims_html: "Claim your discovered specimens under the %{specimens} tab to build your profile and start tracking your citations. Acknowledge your peers, mentors, or anyone who inspires you by attributing specimens under %{help_others}."
     try_again: Try again.
     upload_count:
-      one: "A total of 1 uploaded record was handled."
-      other: "A total of %{count} records were handled."
-    upload_skipped: Existing claims, if present in your upload, were skipped.
-    upload_view: View
-    upload_view_html: "%{view} all your claims."
+      one: "Es wurde insgesamt 1 hochgeladener Datensatz verarbeitet."
+      other: "Es wurden insgesamt %{count} hochgeladene Datensätze verarbeitet."
+    upload_skipped: Bestehende Beanspruchungen, falls in Ihrem Upload vorhanden, wurden übersprungen.
+    upload_view: Sehen
+    upload_view_html: "%{view} alle Ihre Ansprüche."
     co_collectors: Co-Sammler
     no_co_collectors_alert: Co-Sammler wurden noch nicht erfasst.
-    co_collectors_alert: "You have collected with:"
-    co_collector_name: "Specimens co-collected with %{name}."
+    co_collectors_alert: "Sie haben gesammelt mit:"
+    co_collector_name: "Exemplare, die gemeinsam mit %{name} gesammelt wurden."
     switch: View theirs
     not_co_collector_name: "Specimens have not been co-collected with %{name}."
     co_collected_count:
