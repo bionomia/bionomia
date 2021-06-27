@@ -93,7 +93,7 @@ pt:
   dataset:
     dataset_title: Conjuto de dados
     search_title: Pesquisa de conjuntos de dados
-    scribes_title: Scribes
+    scribes_title: Autores
     lede:
       unit:
         one: "conjunto de dados do GBIF"
@@ -101,7 +101,7 @@ pt:
     placeholder: Borboletas do brasil
     people: Pessoas
     visualizations: Visualizações
-    scribes: Scribes
+    scribes: Autores
     agents: Agentes
     agent_strings: Cadeias de agentes
     agent_strings_unclaimed: Cadeias de agente não reclamados
@@ -170,7 +170,7 @@ pt:
       - Nov
       - Dez
   developer:
-    search: Search
+    search: Procurar
     autocomplete_widget: Ferramenta de Autocompletação
     json_ld_search: Busca JSON-LD para pessoas
     json_ld_occurrence_search: Busca JSON-LD para ocorrências
@@ -208,7 +208,7 @@ pt:
     both: Ambos
     either: Ou
     per_page: Por página
-    download: Download
+    download: Transferir
     submit: Submeter
     upload_csv_instructions: Carregar csv com reivindicações
     download_records: Baixar registros descobertos
@@ -248,7 +248,7 @@ pt:
     not_ignored_alert: Os autores da Bionomia não sinalizaram que as amostras devem ser ignoradas.
     agent_string: Agente de usuário
     taxon_string: Família Taxon
-    kingdom_string: Kingdom
+    kingdom_string: Reino
     dataset: Conjunto de dados
     datasets: Conjunto de dados
     agents: Agentes
@@ -305,9 +305,9 @@ pt:
     specimens_attributed_count:
       one: espécime atribuído
       other: espécimes atribuídos
-    download: Download
+    download: Transferir
     download_label: Download registros descobertos
-    upload_label: Upload csv with claims
+    upload_label: Carregar ficheiro csv com reclamações
     choose_instructions_html: "Escolha %{coll_img} coletado, %{det_img} identificado, or Ambos."
     search_count:
       one: "1 resultado da pesquisa para %{search}"
@@ -333,7 +333,7 @@ pt:
     your_profile: Seu perfil
     sample_profiles: Perfis de amostra
     orcid_login: Entrar com ORCID
-    orcid_logo: ORCID logo
+    orcid_logo: Logótipo do ORCID
   layout:
     profiles: Perfis
     scribes: Autores
@@ -353,7 +353,7 @@ pt:
     science_enabled: Ciência habilitada
     settings: Configurações
     administration: Administração
-    logout: Logout
+    logout: Terminar sessão
     resources: Recursos
     integrations: Integrações
     for_developers: Para desenvolvedores
@@ -411,7 +411,7 @@ pt:
       unit:
         one: "organização de contas ORCID e entradas de Wikidata"
         other: "organizações de contas ORCID e entradas do Wikidata"
-    placeholder: Canadian Museum of Nature
+    placeholder: Museu Canadiano da Natureza
     affiliation_none_alert: Publicações baseadas em espécimes coletados ou identificados por pessoal atual e anterior ainda não foram registrados pelo GBIF
     affiliation_alert: "%{count} publicações usaram dados de espécimes baixados do GBIF com base em espécimes coletados ou identificados por pessoal atual e anterior enquanto afiliado com %{org_name}"
     collected_by: "Espécimes coletados ou identificados por:"
@@ -450,7 +450,7 @@ pt:
     ignored_title: Ignorado
     specimens_title: Espécimes
     support_title: Ajuda recebida
-    upload_title: Upload
+    upload_title: Carregar
     helped_title: Pessoas ajudaram
     citation_title: Citações
     citations_title: Citações
@@ -460,7 +460,7 @@ pt:
     science_enabled: Ciência habilitada
     claimed: Reivindicada
     discovered: Descoberto
-    upload: Upload
+    upload: Carregar
     ignored: Ignorado
     help_received: Ajuda recebida
     helped: Ajudado
@@ -493,7 +493,7 @@ pt:
     make_citable: Torne seus dados citáveis
     email_notifications: Notificações por Email
     delete_account: Deletar sua conta
-    delete: Delete
+    delete: Eliminar
     permanent_delete: Exclua sua conta permanentemente.
     delete_warning: Tem certeza que deseja deletar sua conta? Todas as suas reivindicações E todas as atribuições que você fez para outros serão removidos permanentemente.
     email_instructions: Receba notificações por e-mail de novos artigos que usaram dados derivados das amostras que você identificou ou coletou. Disponibilize seu endereço de e-mail principal publicamente em sua conta ORCID e atualize seus dados ORCID acima.
@@ -510,8 +510,8 @@ pt:
     orcid_refreshed: Dados ORCID foram atualizados.
     public: Publico
     private: Privado
-    active: "On"
-    inactive: "Off"
+    active: "Activado"
+    inactive: "Desactivado"
     make_public_message: Inclua sua conta em perfis públicos. Suas reivindicações serão incluídas em um download de dados em massa, exposto por meio de extensões do Google Chrome e do Firefox e um tweet será enviado de @BionomiaTrack.
     no_candidates_alert: Bionomia não encontrou nenhum espécime indexado pelo GBIF que você possa ter coletado ou identificado.
     ignored_alert: Registros de espécimes que você marcou como "Não sou eu" aparecerão aqui.
@@ -546,7 +546,7 @@ pt:
     co_collected_count:
       one: "espécime co-coletado"
       other: "espécime co-coletado"
-    zenodo_html: "Your profile is linked to %{zenodo} and your claims are versioned and archived."
+    zenodo_html: "O seu perfil está ligado a %{zenodo} e as suas reclamações são versionadas e arquivadas."
   roster:
     roster_title: Perfis Públicos
     lede:

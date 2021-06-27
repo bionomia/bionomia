@@ -3,7 +3,7 @@ de:
   "false": "Nein"
   acknowledgments:
     acknowledgments_title: Danksagungen
-    taxon_silhouettes: Silhouetten taxonischer Familien
+    taxon_silhouettes: Silhouetten taxonomischer Familien
     translations: Übersetzungen
   admin:
     change_photo: Profilbild ändern
@@ -82,14 +82,14 @@ de:
   country:
     country_title: Länder
     lede: Aus Ländern, die in ORCID-Konten und Wikidata-Einträgen oder in Belegexemplaren in GBIF angegeben sind
-    intro: Aus Ländern, die in ORCID-Konten und Wikidata-Einträgen angegeben sind. Suche nach taxonischen Familien, um Fachwissen zu entdecken.
+    intro: Aus Ländern, die in ORCID-Konten und Wikidata-Einträgen angegeben sind. Suche nach taxonomischen Familien, um Fachwissen zu entdecken.
     collected_from: "%{family} gesammelt aus %{country}"
     identified_from: "%{family} identifiziert aus %{country}"
     collected_identified_from: "%{family} gesammelt oder identifiziert aus %{country}"
     no_one_collected_from: "Noch hat niemand %{family} aus %{country} gesammelt"
     no_one_identified_from: "Noch hat niemand %{family} aus %{country} identifiziert"
     no_one_collected_identified_from: "Noch hat niemand %{family} aus %{country} gesammelt oder identifiziert"
-    no_one_message: "Kein Treffer aus %{country} in ORCID-Konten oder Wikidata-Einträgen. Suche nach taxonischen Familien, um Fachwissen zu entdecken."
+    no_one_message: "Kein Treffer aus %{country} in ORCID-Konten oder Wikidata-Einträgen. Suche nach taxonomischen Familien, um Fachwissen zu entdecken."
   dataset:
     dataset_title: Datensätze
     search_title: Datensätze suchen
@@ -127,7 +127,7 @@ de:
       unit:
         one: "scribe attributed specimens to collectors or determiners represented in this dataset"
         other: "scribes attributed specimens to collectors or determiners represented in this dataset"
-    no_users_alert: People have not yet claimed or were attributed specimens represented in this dataset
+    no_users_alert: Keines der in diesem Datensatz dargestellten Exemplare wurde beansprucht oder einer Person zugeordnet
     users_alert:
       unit:
         one: "person claimed or was attributed specimens represented in this dataset"
@@ -271,7 +271,7 @@ de:
     none: keine
     identified_from: Identifiziert von
     collected_from: Gesammelt von
-    dates_identified_collected: Dates Collected and Identified
+    dates_identified_collected: Datum der Sammlung und Identifizierung
     no_filter_alert: Bionomia scribes have not yet helped attribute specimens under this filter.
     not_helped_alert: Bionomia scribes have not yet helped attribute specimens.
     upload_message:
@@ -291,14 +291,14 @@ de:
     bulk_attribution: Massenattributionen
     reclaim_ignored: Reclaim Ignored
     fix_claims: Zuordnungen korrigieren
-    discovered: Ermittelt
+    discovered: Entdeckt
     support_alert: The following scribes have attributed specimens.
     advanced_search: Erweiterte Suche & Filter
     less_exact: Weniger exakt machen
     no_unclaimed: Bionomia hat keine nicht-beanspruchten Exemplare gefunden.
     close: Schließen
     add_person: Eine Person hinzufügen
-    add_orcid_wikidata: Add ORCID Identifier or Wikidata Q Number
+    add_orcid_wikidata: ORCID-Kennung oder Q-Nummer in Wikidata hinzufügen
     attribute_count:
       one: Helfen Sie bei der Zuordnung von 1 Exemplar.
       other: Helfen Sie bei der Zuordnung von %{count} Exemplaren.
@@ -330,17 +330,17 @@ de:
   home:
     tagline: Verbinden Sie naturhistorische Exemplare mit den Sammlern der Welt.
     get_started: Los geht's
-    your_profile: Your profile
-    sample_profiles: Sample Profiles
-    orcid_login: Log in with ORCID
-    orcid_logo: ORCID logo
+    your_profile: Ihr Profil
+    sample_profiles: Beispielprofile
+    orcid_login: Mit ORCID anmelden
+    orcid_logo: ORCID-Logo
   layout:
-    profiles: Profiles
+    profiles: Profile
     scribes: Scribes
-    organizations: Organizations
-    datasets: Datasets
-    articles: Articles
-    countries: Countries
+    organizations: Organisationen
+    datasets: Datensätze
+    articles: Artikel
+    countries: Länder
     taxa: Familien
     agent_strings: Agent Strings
     help_others: Anderen helfen
@@ -350,7 +350,7 @@ de:
     overview: Übersicht
     specimens: Exemplare
     discovered: Entdeckt
-    science_enabled: Wissenschaft ermöglicht
+    science_enabled: Wissenschaft aktiviert
     settings: Einstellungen
     administration: Administration
     logout: Abmelden
@@ -363,7 +363,7 @@ de:
     terms_service: Vertragsbedingungen
     on_this_day: Heute
     about: Über
-    rationale: Rationale
+    rationale: Gründe
     how_works: Wie es funktioniert
     history: Verlauf
     feedback: Feedback
@@ -373,153 +373,153 @@ de:
     tools: Werkzeuge
     parse: Namen analysieren
     reconcile: Namen überprüfen
-    acknowledgments: Acknowledgments
+    acknowledgments: Danksagungen
     workshops: Workshops
   not_authorized:
-    not_authorized: Not authorized or session terminated.
+    not_authorized: Nicht autorisiert oder Sitzung beendet.
   occurrence:
     occurrence_title: Specimen Record
-    lede: From partial data obtained from GBIF
-    record: Record
-    event: Event
-    identification: Identification
-    location: Location
-    has_image: Has Image
+    lede: Aus den von GBIF erhaltenen Teildaten
+    record: Datensatz
+    event: Ereignis
+    identification: Identifikation
+    location: Ort
+    has_image: Hat Abbildung
   offline:
-    message: Bionomia is currently offline, refreshing data from the Global Biodiversity Information Facility.
-    warning: "Bionomia will be offline %{datetime_off} for approximately %{duration} to refresh specimen data from the Global Biodiversity Information Facility."
+    message: Bionomia ist derzeit offline und aktualisiert die Daten der Global Biodiversity Information Facility.
+    warning: "Bionomia wird am %{datetime_off} für ca. %{duration} offline sein, um die Exemplardaten der Global Biodiversity Information Facility zu aktualisieren."
   on_this_day:
-    global_title: On This Day
-    born_title: Collector Born On This Day
-    died_title: Collector Died On This Day
-    collected_title: Collected On This Day
-    collector_born: Collector Born
-    collector_died: Collector Died
-    type_collected: Type Specimens Collected
-    none_died_alert: "No one found who died on %{date}"
-    none_born_alert: "No one found who was born on %{date}"
-    limit_alert: Results limited to 50 holotype specimen records
-    no_types_alert: "No type specimens found collected on %{date}"
+    global_title: An diesem Tag
+    born_title: An diesem Tag geborener Sammler
+    died_title: An diesem Tag gestorbener Sammler
+    collected_title: An diesem Tag gesammelt
+    collector_born: Sammler geboren
+    collector_died: Sammler gestorben
+    type_collected: Art der gesammelten Exemplare
+    none_died_alert: "Es wurde niemand gefunden, der am %{date} gestorben ist"
+    none_born_alert: "Es wurde niemand gefunden, der am %{date} geboren wurde"
+    limit_alert: Ergebnisse beschränkt auf 50 Holotypus-Exemplar-Datensätze
+    no_types_alert: "Keine Typusexemplare gefunden, die am %{date} gesammelt wurden"
   oops:
-    not_found_title: Not found
-    not_found: We looked everywhere but could not find that page.
-    error_title: Error
-    error: Sorry, we experienced an error.
+    not_found_title: Nicht gefunden
+    not_found: Wir haben überall geschaut, konnten die Seite aber nicht finden.
+    error_title: Fehler
+    error: Entschuldigung, es ist ein Fehler aufgetreten.
   organization:
-    organization_title: Organizations
+    organization_title: Organisationen
     lede:
       unit:
-        one: "organization from ORCID accounts and Wikidata entries"
-        other: "organizations from ORCID accounts and Wikidata entries"
-    placeholder: Canadian Museum of Nature
-    affiliation_none_alert: Publications based on specimens collected or identified by current and previous personnel have not yet been recorded by GBIF
-    affiliation_alert: "%{count} publications used specimen data downloaded from GBIF based on specimens collected or identified by current and previous personnel while affiliated with %{org_name}"
-    collected_by: "Specimens collected or identified by:"
-    science_enabled: Science Enabled
-    impact: Impact on Activities in Other Organizations
-    no_metric_alert: "Current and previous personnel have not yet claimed or have been attributed specimens now curated at other organizations while they were affiliated with %{org_name}."
-    metric_alert: "Current and previous personnel have claimed or were attributed specimens now curated at the following organizations while affiliated with %{org_name}."
-    none_collected_alert: "Specimens collected or identified in %{year} by personnel and curated elsewhere have not yet been claimed or attributed."
-    all_years: All Years
-    specimens: specimens
-    organizations: organizations
-    specimens_identified: Specimens Identified
-    specimens_collected: Specimens Collected
-    no_current_members_alert: "Current members of %{org_name} have not yet been recorded."
-    no_previous_members_alert: "Previous members of %{org_name} have not yet been recorded."
-    no_search_alert: "No organizations found for"
+        one: "Organisation aus ORCID-Konten und Wikidata-Einträgen"
+        other: "Organisationen aus ORCID-Konten und Wikidata-Einträgen"
+    placeholder: Kanadisches Museum der Natur
+    affiliation_none_alert: Publikationen, die auf Exemplaren basieren, die vom aktuellen und ehemaligen Mitgliedern gesammelt oder identifiziert wurden, sind noch nicht von GBIF erfasst worden
+    affiliation_alert: "%{count} Publikationen haben von GBIF heruntergeladene Exemplardaten verwendet, die auf von aktuellen und ehemaligen Mitgliedern gesammelten oder identifizierten Exemplaren basieren, während sie mit %{org_name} verbunden waren"
+    collected_by: "Exemplare gesammelt oder identifiziert von:"
+    science_enabled: Wissenschaft aktiviert
+    impact: Auswirkungen auf Aktivitäten in anderen Organisationen
+    no_metric_alert: "Aktuelle und ehemalige Mitglieder haben noch keine Exemplare beansprucht oder haben Exemplare zugeordnet bekommen, die jetzt bei anderen Organisationen kuratiert werden, während sie mit %{org_name} verbunden waren."
+    metric_alert: "Aktuelle und ehemalige Mitglieder haben Exemplare beansprucht oder haben Exemplare zugeordnet bekommen, die jetzt bei folgenden Organisationen kuratiert werden, während sie mit %{org_name} verbunden waren."
+    none_collected_alert: "Exemplare, die %{year} von Mitgliedern gesammelt oder identifiziert und anderswo kuratiert wurden, sind noch nicht beansprucht oder zugeordnet worden."
+    all_years: Alle Jahre
+    specimens: Exemplare
+    organizations: Organisationen
+    specimens_identified: Identifizierte Exemplare
+    specimens_collected: Gesammelte Exemplare
+    no_current_members_alert: "Aktuelle Mitglieder von %{org_name} wurden noch nicht erfasst."
+    no_previous_members_alert: "Ehemalige Mitglieder von %{org_name} sind noch nicht erfasst worden."
+    no_search_alert: "Keine Organisationen gefunden für"
     search_alert:
       unit:
-        one: "search result for"
-        other: "search results for"
-    current: Current
-    previous: Previous
-    metrics: Metrics
-    member: member
+        one: "Suchergebnis für"
+        other: "Suchergebnisse für"
+    current: Aktuell
+    previous: Vorherige
+    metrics: Metriken
+    member: Mitglied
     current_members_count:
       unit:
-        one: current member
-        other: current members
+        one: aktuelles Mitglied
+        other: aktuelle Mitglieder
     past_members_count:
       unit:
-        one: past member
-        other: past members
+        one: ehemaliges Mitglied
+        other: ehemalige Mitglieder
   profile:
-    thanks_title: Thanks Received
-    candidates_title: Unclaimed Specimens
-    ignored_title: Ignored
-    specimens_title: Specimens
-    support_title: Help Received
-    upload_title: Upload
-    helped_title: People Helped
-    citation_title: Citation
-    citations_title: Citations
-    overview: Overview
-    specimens: Specimens
-    people_helped: People Helped
-    science_enabled: Science Enabled
-    claimed: Claimed
-    discovered: Discovered
-    upload: Upload
-    ignored: Ignored
-    help_received: Help Received
-    helped: Helped
-    helped_alert: You helped attribute specimens to the following people, with the most recent shown first.
-    not_helped_alert: You have not yet attributed specimens to anyone.
+    thanks_title: Erhaltener Dank
+    candidates_title: Nicht beanspruchte Exemplare
+    ignored_title: Ignorierte
+    specimens_title: Exemplare
+    support_title: Erhaltene Hilfe
+    upload_title: Hochladen
+    helped_title: Personen geholfen
+    citation_title: Zitation
+    citations_title: Zitationen
+    overview: Übersicht
+    specimens: Exemplare
+    people_helped: Personen geholfen
+    science_enabled: Wissenschaft aktiviert
+    claimed: Beansprucht
+    discovered: Entdeckt
+    upload: Hochladen
+    ignored: Ignoriert
+    help_received: Hilfe erhalten
+    helped: Geholfen
+    helped_alert: Sie haben geholfen, den folgenden Personen Exemplare zuzuordnen, wobei die neuesten zuerst angezeigt wird.
+    not_helped_alert: Sie haben noch niemandem Exemplare zugeordnet.
     no_help_alert: Bionomia scribes have not yet helped you claim specimens.
     thanks_alert: Bionomia scribes have helped you claim specimens. Send them your appreciation.
-    thanks_received: Thanks Received
-    thanks_received_alert: You have received thanks for attributing specimens.
-    no_thanks_received_alert: You have not yet received thanks for attributing specimen records to other collectors. Have you tried helping others?
-    change_photo: Change profile photo
-    remove: Remove
-    cancel: Cancel
-    update: Update
-    settings: Settings & Integrations
-    youtube: Use a YouTube ID for a video to appear in your profile.
-    no_science: Your specimen data have not yet been recorded in downloads from GBIF and used in new publications.
-    no_citation_alert: Your specimens were not included in a download from GBIF in support of this study.
+    thanks_received: Dank erhalten
+    thanks_received_alert: Sie haben Dank für die Zuordnung von Exemplaren erhalten.
+    no_thanks_received_alert: Sie haben noch keinen Dank für die Zuordnung von Belegexemplaren zu anderen Sammlern erhalten. Haben Sie schon versucht, anderen zu helfen?
+    change_photo: Profilbild ändern
+    remove: Entfernen
+    cancel: Abbrechen
+    update: Aktualisieren
+    settings: Einstellungen & Integrationen
+    youtube: Verwenden Sie eine YouTube-ID, damit ein Video in Ihrem Profil erscheint.
+    no_science: Ihre Exemplardaten wurden noch nicht in Downloads von GBIF erfasst und in neuen Publikationen verwendet.
+    no_citation_alert: Ihre Exemplare waren nicht in einem Download von GBIF zur Unterstützung dieser Studie enthalten.
     has_science:
       unit:
-        one: "publication made use of your specimen data downloaded from GBIF"
-        other: "publications made use of your specimen data downloaded from GBIF"
-    identified_from: Identified From
-    collected_from: Collected From
-    dates_identified_collected: Dates Collected and Identified
-    resume: For Your Resume
-    specimens_used: Specimens Used In
-    public_availability: Public Availability
-    public_profile: Public Profile
-    make_citable: Make Your Data Citable
-    email_notifications: Email Notifications
-    delete_account: Delete Your Account
-    delete: Delete
-    permanent_delete: Permanently delete your account.
-    delete_warning: Are you sure you want to delete your account? All your claims AND all the attributions you have made for others will be permanently removed.
-    email_instructions: Receive email notifications of new papers that made use of data derived from the specimens you identified or collected. Make your primary email address publicly available in your ORCID account and then refresh your ORCID data above.
-    email_procedure: "Receive notification of new publications that made use of data derived from the specimens you identified or collected. Your primary, publicly available email address, %{email} comes from your ORCID account."
-    disconnect: Disconnect
-    disconnect_warning: Are you sure you want to disconnect your account from Zenodo? Your data will remain archived and accessible but no new versions will be created. If you later reconnect your account, a new data package will be created.
-    connect_zenodo: Connect your account to Zenodo where versioned snapshots of your claims will be stored and a DataCite DOI assigned. A citation will be provided for inclusion in your resume.
-    connect_zenodo_claim: Claim at least one of your specimens and return here to connect your account to Zenodo where versioned snapshots of your claims will be stored and a DataCite DOI assigned. A citation will be provided for inclusion in your resume.
-    disconnect_zenodo: Disconnect From Zenodo
-    integrate_zenodo: Integrate with Zenodo
-    zenodo_linked: Your account is now linked and data will be pushed within the hour
-    orcid_updates: Pull new updates to your publicly available name, aliases, keywords, country, education, and employment from your ORCID account.
-    refresh: Refresh
-    orcid_refreshed: ORCID data was refreshed.
-    public: Public
-    private: Private
-    active: "On"
-    inactive: "Off"
+        one: "Publikation nutzte Ihre von GBIF heruntergeladenen Beispieldaten"
+        other: "Publikationen nutzten Ihre von GBIF heruntergeladenen Beispieldaten"
+    identified_from: Identifiziert von
+    collected_from: Gesammelt von
+    dates_identified_collected: Datum der Sammlung und Identifizierung
+    resume: Für Ihren Lebenslauf
+    specimens_used: Exemplare verwendet in
+    public_availability: Öffentliche Verfügbarkeit
+    public_profile: Öffentliches Profil
+    make_citable: Machen Sie Ihre Daten zitierfähig
+    email_notifications: E-Mail-Benachrichtigungen
+    delete_account: Ihr Konto löschen
+    delete: Löschen
+    permanent_delete: Ihr Konto endgültig löschen.
+    delete_warning: Sind Sie sicher, dass Sie Ihr Konto löschen möchten? Alle Ihre Ansprüche UND alle Zuordnungen, die Sie für andere gemacht haben, werden dauerhaft entfernt.
+    email_instructions: Erhalten Sie E-Mail-Benachrichtigungen über neue Veröffentlichungen, die solche Daten verwenden, die von den von Ihnen identifizierten oder gesammelten Exemplaren stammen. Machen Sie Ihre primäre E-Mail-Adresse in Ihrem ORCID-Konto öffentlich zugänglich und aktualisieren Sie dann Ihre ORCID-Daten oben.
+    email_procedure: "Erhalten Sie eine Benachrichtigung über neue Publikationen, die solche Daten verwenden, die von den von Ihnen identifizierten oder gesammelten Exemplaren stammen. Ihre primäre, öffentlich zugängliche E-Mail-Adresse (%{email}) stammt von Ihrem ORCID-Konto."
+    disconnect: Trennen
+    disconnect_warning: Sind Sie sicher, dass Sie Ihr Konto von Zenodo trennen möchten? Ihre Daten bleiben archiviert und zugänglich, aber es werden keine neuen Versionen erstellt. Wenn Sie Ihr Konto später erneut verbinden, wird ein neues Datenpaket erstellt.
+    connect_zenodo: Verbinden Sie Ihr Konto mit Zenodo, wo versionierte Schnappschüsse Ihrer Ansprüche gespeichert werden und ein DataCite-DOI zugewiesen wird. Eine Zitation wird für die Aufnahme in Ihren Lebenslauf bereitgestellt.
+    connect_zenodo_claim: Beanspruchen Sie mindestens eines Ihrer Exemplare und kehren Sie hierher zurück, um Ihr Konto mit Zenodo zu verbinden, wo versionierte Schnappschüsse Ihrer Ansprüche gespeichert werden und ein DataCite-DOI zugewiesen wird. Eine Zitation wird für die Aufnahme in Ihren Lebenslauf bereitgestellt.
+    disconnect_zenodo: Verbindung zu Zenodo trennen
+    integrate_zenodo: Mit Zenodo integrieren
+    zenodo_linked: Ihr Konto ist nun verknüpft und die Daten werden innerhalb einer Stunde übertragen
+    orcid_updates: Erhalten Sie neue Updates zu Ihrem öffentlich zugänglichen Namen, zu Aliasen, Schlüsselwörtern, Land, Ausbildung und Beschäftigung aus Ihrem ORCID-Konto.
+    refresh: Aktualisieren
+    orcid_refreshed: Die ORCID-Daten wurden aktualisiert.
+    public: Öffentlich
+    private: Privat
+    active: "An"
+    inactive: "Aus"
     make_public_message: Binden Sie Ihr Konto in öffentliche Profile ein. Ihre Ansprüche werden in einen Massendaten-Download aufgenommen, über Google Chrome- und Firefox-Erweiterungen offengelegt und ein Tweet von @BionomiaTrack wird gesendet.
-    no_candidates_alert: Bionomia did not find any specimens indexed by GBIF that you may have collected or identified.
-    ignored_alert: Specimen records you marked as "Not me" will appear here.
+    no_candidates_alert: Bionomia hat keine von GBIF indizierten Exemplare gefunden, die Sie möglicherweise gesammelt oder identifiziert haben.
+    ignored_alert: Exemplare, die Sie als "Nicht ich" markiert haben, werden hier angezeigt.
     scribe_not_helped: This Bionomia scribe has not yet helped you claim specimens.
-    upload_error: Please upload an image less than 5MB in size.
+    upload_error: Bitte laden Sie ein Bild mit einer Größe von weniger als 5 MB hoch.
     bulk_claim: Massenansprüche
-    advanced_search: Advanced Search & Filter
-    no_specimens_filter: You have not yet claimed any specimens with this applied filter. See your candidate specimen records on the Discovered page.
+    advanced_search: Erweiterte Suche & Filter
+    no_specimens_filter: Sie haben noch keine Exemplare mit diesem angewandten Filter beansprucht. Sehen Sie sich Ihre Exemplar-Datensätze auf der "Entdeckt"-Seite an.
     no_specimens: You have not yet claimed any specimens. See your candidate specimen records on the Discovered page.
     candidate_count:
       one: Found 1 specimen.
@@ -532,78 +532,78 @@ de:
     no_claims_html: "Claim your discovered specimens under the %{specimens} tab to build your profile and start tracking your citations. Acknowledge your peers, mentors, or anyone who inspires you by attributing specimens under %{help_others}."
     try_again: Try again.
     upload_count:
-      one: "A total of 1 uploaded record was handled."
-      other: "A total of %{count} records were handled."
-    upload_skipped: Existing claims, if present in your upload, were skipped.
-    upload_view: View
-    upload_view_html: "%{view} all your claims."
-    co_collectors: Co-collectors
-    no_co_collectors_alert: Co-collectors have not yet been recorded.
-    co_collectors_alert: "You have collected with:"
-    co_collector_name: "Specimens co-collected with %{name}."
-    switch: View theirs
-    not_co_collector_name: "Specimens have not been co-collected with %{name}."
+      one: "Es wurde insgesamt 1 hochgeladener Datensatz verarbeitet."
+      other: "Es wurden insgesamt %{count} hochgeladene Datensätze verarbeitet."
+    upload_skipped: Bestehende Beanspruchungen, falls in Ihrem Upload vorhanden, wurden übersprungen.
+    upload_view: Sehen
+    upload_view_html: "%{view} alle Ihre Ansprüche."
+    co_collectors: Co-Sammler
+    no_co_collectors_alert: Co-Sammler wurden noch nicht erfasst.
+    co_collectors_alert: "Sie haben gesammelt mit:"
+    co_collector_name: "Exemplare, die gemeinsam mit %{name} gesammelt wurden."
+    switch: Ihre sehen
+    not_co_collector_name: "Exemplare wurden nicht zusammen mit %{name} gesammelt."
     co_collected_count:
-      one: "co-collected specimen"
-      other: "co-collected specimens"
-    zenodo_html: "Your profile is linked to %{zenodo} and your claims are versioned and archived."
+      one: "mitgesammeltes Exemplar"
+      other: "mitgesammelte Exemplare"
+    zenodo_html: "Ihr Profil ist mit %{zenodo} verknüpft, und Ihre Beanspruchungen werden versioniert und archiviert."
   roster:
-    roster_title: Public Profiles
+    roster_title: Öffentliche Profile
     lede:
       unit:
-        one: "person who shared their profile"
-        other: "people who share their profiles and the profiles of others they revere"
-    no_one_found: No one found by the name
+        one: "Person, die ihr Profil geteilt hat"
+        other: "Personen, die ihre Profile sowie die Profile von anderen, die sie verehren, teilen"
+    no_one_found: Es wurde niemand mit dem Namen gefunden
     search_result_count:
       unit:
-        one: "search result for"
-        other: "search results for"
+        one: "Suchergebnis für"
+        other: "Suchergebnisse für"
   specimen:
-    scientific_name: Scientific Name
-    collected_by: Collected By
-    identified_by: Identified By
-    date_collected: Date Collected
-    date_identified: Date Identified
+    scientific_name: Wissenschaftlicher Name
+    collected_by: Gesammelt von
+    identified_by: Identifiziert von
+    date_collected: Sammeldatum
+    date_identified: Identifikationsdatum
     institution: Institution
-    catalog_number: Catalog Number
-    family: Family
-    type_status: Type Status
+    catalog_number: Katalognummer
+    family: Familie
+    type_status: Typ-Status
     scribe: Scribe
-    not_me: Not me
-    not_them: Not them
-    not_recorded: not recorded
-    remove: Remove
+    not_me: Nicht ich
+    not_them: Nicht sie
+    not_recorded: nicht aufgezeichnet
+    remove: Entfernen
   scribes:
     scribes_title: Scribes
     lede:
       unit:
-        one: "person who has attributed natural history specimens to their peers, mentors, and role models"
-        other: "people who have attributed natural history specimens to their peers, mentors, and role models"
+        one: "Person, die naturkundliche Exemplare ihren Kollegen, Mentoren und Vorbildern zugeordnet hat"
+        other: "Personen, die naturkundliche Exemplare ihren Kollegen, Mentoren und Vorbildern zugeordnet haben"
   taxa:
     lede:
       unit:
-        one: "taxonomic Family from specimen data in GBIF"
-        other: "taxonomic Families from specimen data in GBIF"
-    search_title: Taxonomic Families
-    none_found: "No taxonomic Family found for %{searched}"
+        one: "taxonomische Familie aus Exemplardaten in GBIF"
+        other: "taxonomische Familien aus Exemplardaten in GBIF"
+    search_title: Taxonomische Familien
+    none_found: "Keine taxonomische Familie gefunden für %{searched}"
     search_found:
       unit:
-        one: "search result for"
-        other: "search results for"
-    people: People
-    visualizations: Visualizations
-    timeline: Timeline
+        one: "Suchergebnis für"
+        other: "Suchergebnisse für"
+    people: Personen
+    visualizations: Visualisierungen
+    timeline: Zeitachse
     agent_strings: Agent Strings
-    collected: Collected
-    identified: Identified
+    collected: Gesammelt
+    identified: Identifiziert
     number_collected:
       unit:
-        one: "person collected specimens from data in GBIF"
-        other: "people collected specimens from data in GBIF"
+        one: "Person hat Exemplare aus Daten in GBIF gesammelt"
+        other: "Personen haben Exemplare aus Daten in GBIF gesammelt"
     number_identified:
       unit:
-        one: "person identified specimens from data in GBIF"
-        other: "people identified specimens from data in GBIF"
+        one: "Person hat Exemplare aus Daten in GBIF identifiziert"
+        other: "Personen haben Exemplare aus Daten in GBIF identifiziert"
     number_agents:
       unit:
         one: "agent string from specimen data in GBIF"
@@ -612,119 +612,119 @@ de:
       unit:
         one: "agent string has unclaimed specimen records from data in GBIF"
         other: "agent strings have unclaimed specimen records from data in GBIF"
-    no_agents_unclaimed: No specimen records are unclaimed or unattributed
-    alphabetical: Alphabetical
-    counts: Counts
-    unclaimed: Unclaimed
-    example_families: Random Samples
-    none_collected_identified: "No one has collected or identified %{taxon}"
-    none_collected: "No one has collected %{taxon}"
-    none_identified: "No one has identified %{taxon}"
-    none_collected_timeline: "No one has collected %{taxon} and indicated a collection date"
-    none_identified_timeline: "No one has identified %{taxon} and indicated a determination date"
+    no_agents_unclaimed: Es gibt keine nicht beanspruchten oder nicht zugeordneten Exemplare
+    alphabetical: Alphabetisch
+    counts: Zählung
+    unclaimed: Nicht beansprucht
+    example_families: Zufällige Proben
+    none_collected_identified: "%{taxon} wurde noch nicht gesammelt oder identifiziert"
+    none_collected: "%{taxon} wurde noch nicht gesammelt"
+    none_identified: "%{taxon} wurde noch nicht identifiziert"
+    none_collected_timeline: "%{taxon} wurde nicht gesammelt und es wurde kein Sammeldatum angegeben"
+    none_identified_timeline: "%{taxon} wurde nicht gesammelt und es wurde kein Bestimmungsdatum angegeben"
     no_agents: "No agents have collected or identified %{taxon}"
-    taxon_string: Taxon Family
-    start_year: Start Year
-    end_year: End Year
+    taxon_string: Taxonomische Familie
+    start_year: Startjahr
+    end_year: Endjahr
   user:
-    caches_rebuilt: Caches were rebuilt.
-    overview: Overview
-    specialties: Specialties
-    network: Network
-    deposited_at: Deposited At
-    specimens: Specimens
-    science_enabled: Science Enabled
-    science_enabled_specimens: Science Enabled by Specimen Data
-    helped_by: Helped By
-    helped: People Helped
+    caches_rebuilt: Cache wurde neu erstellt.
+    overview: Übersicht
+    specialties: Besonderheiten
+    network: Netzwerk
+    deposited_at: Abgelegt in
+    specimens: Exemplare
+    science_enabled: Wissenschaft aktiviert
+    science_enabled_specimens: Wissenschaft ermöglicht durch Exemplardaten
+    helped_by: Geholfen durch
+    helped: Personen geholfen
     no_scribe: Specimens have not been attributed by a scribe.
-    attributions_by: "Attributions made by:"
-    private: Profile is not publicly available.
+    attributions_by: "Zuordnungen erfolgt durch:"
+    private: Das Profil ist nicht öffentlich zugänglich.
     private_with_claims:
       unit:
-        one: "specimen was claimed or attributed, but this profile is not publicly available."
-        other: "specimens were claimed or attributed, but this profile is not publicly available."
-    no_specimens_cited: Specimens have not been included in downloads from GBIF and cited in this research article.
-    specimen_used: Specimen Data Used In
-    no_publications: Publications that used specimen records included in a download from GBIF have not yet been recorded.
+        one: "Exemplar wurde beansprucht oder zugeordnet, aber dieses Profil ist nicht öffentlich zugänglich."
+        other: "Exemplare wurden beansprucht oder zugeordnet, aber dieses Profil ist nicht öffentlich zugänglich."
+    no_specimens_cited: Exemplare wurden nicht in Downloads von GBIF aufgenommen und in diesem Forschungsartikel zitiert.
+    specimen_used: Exemplardaten verwendet in
+    no_publications: Publikationen, die Exemplare aus einem Download von GBIF verwendet haben, sind noch nicht erfasst.
     publication_count:
       unit:
-        one: "publication used specimen data downloaded from GBIF"
-        other: "publications used specimen data downloaded from GBIF"
-    no_co_collectors_alert: Co-collectors have not yet been recorded.
-    co_collectors_alert: "Has collected with:"
-    co_collectors: Co-collectors
-    identified_for: Identified For
-    identifications_by: Identifications By
-    no_identifications_by_alert: Identifications made to collected specimens have not yet been recorded.
-    identifications_by_alert: "Has collected specimens later identified by:"
-    no_identified_for_alert: Identifications made to others' collected specimens have not yet been recorded.
-    identified_for_alert: "Has identified specimens collected by:"
-    comment_alert: Share an anecdote about a collecting trip, event or anything else.
-    no_institutions_alert: Institutions have not yet been recorded.
-    institutions_alert: "Specimens deposited and curated at the following institution(s):"
-    organizations: organizations
-    specimens_metric: specimens
-    specimens_identified: Specimens Identified
-    specimens_collected: Specimens Collected
-    no_specialities_alert: Specialties have not yet been recorded.
-    specialties_alert: "Collected or identified specimens in the following Families:"
-    families_collected: Families Collected
-    families_identified: Families Identified
-    no_claims_alert: Claims or attributions have not yet been recorded.
-    no_helped_alert: Attributions have not yet been made.
-    progress: Progress
-    identified_from: Identified From
-    collected_from: Collected From
-    dates_identified_collected: Dates Collected and Identified
-    specimens_attributed: specimens attributed
-    collected: collected
-    identified: identified
-    not_all_columns: Not all available columns are shown.
-    map: Map
-    list: List
-    no_specimens: Specimens have not yet been claimed or attributed.
-    no_specimens_filter: Specimens have not yet been claimed or attributed with this applied filter.
+        one: "Publikation verwendete Exemplardaten, die von GBIF heruntergeladen wurden"
+        other: "Publikationen verwendeten Exemplardaten, die von GBIF heruntergeladen wurden"
+    no_co_collectors_alert: Co-Sammler wurden noch nicht erfasst.
+    co_collectors_alert: "Hat gesammelt mit:"
+    co_collectors: Co-Sammler
+    identified_for: Identifiziert für
+    identifications_by: Identifikationen durch
+    no_identifications_by_alert: Identifizierungen an gesammelten Exemplaren wurden noch nicht erfasst.
+    identifications_by_alert: "Hat Exemplare gesammelt, die später identifiziert wurden durch:"
+    no_identified_for_alert: Identifizierungen von Exemplaren, die von anderen gesammelt wurden, wurden noch nicht erfasst.
+    identified_for_alert: "Hat Exemplare identifiziert, die gesammelt wurden von:"
+    comment_alert: Teilen Sie eine Anekdote über eine Sammelreise, ein Ereignis oder etwas anderes.
+    no_institutions_alert: Institutionen sind noch nicht erfasst worden.
+    institutions_alert: "Exemplare, die in der/den folgenden Institution(en) hinterlegt und kuratiert sind:"
+    organizations: Organisationen
+    specimens_metric: Exemplare
+    specimens_identified: Exemplare identifiziert
+    specimens_collected: Exemplare gesammelt
+    no_specialities_alert: Es wurden noch keine Besonderheiten aufgezeichnet.
+    specialties_alert: "Gesammelte oder identifizierte Exemplare in den folgenden Familien:"
+    families_collected: Gesammelte Familien
+    families_identified: Identifizierte Familien
+    no_claims_alert: Beanspruchungen oder Zuordnungen wurden noch nicht erfasst.
+    no_helped_alert: Zuordnungen wurden noch nicht vorgenommen.
+    progress: Fortschritt
+    identified_from: Identifiziert von
+    collected_from: Gesammelt von
+    dates_identified_collected: Datum der Sammlung und Identifizierung
+    specimens_attributed: zugeordnete Exemplare
+    collected: gesammelt
+    identified: identifiziert
+    not_all_columns: Es werden nicht alle verfügbaren Spalten angezeigt.
+    map: Karte
+    list: Liste
+    no_specimens: Exemplare wurden noch nicht beansprucht oder zugeordnet.
+    no_specimens_filter: Exemplare mit diesem angewandten Filter wurden noch nicht beansprucht oder zugeordnet.
     stats_identified_specimens_nocountry:
       unit:
-        one: "specimen identified"
-        other: "specimens identified"
+        one: "Exemplar identifiziert"
+        other: "Exemplare identifiziert"
     stats_collected_specimens_nocountry:
       unit:
-        one: "specimen collected"
-        other: "specimens collected"
+        one: "Exemplar gesammelt"
+        other: "Exemplare gesammelt"
     stats_identified_specimens:
       unit:
-        one: "specimen identified from at least"
-        other: "specimens identified from at least"
+        one: "Exemplar identifiziert von mindestens"
+        other: "Exemplare identifiziert von mindestens"
     stats_identified_countries:
       unit:
-        one: "country"
-        other: "countries"
+        one: "Land"
+        other: "Länder"
     stats_collected_specimens:
       unit:
-        one: "specimen collected from at least"
-        other: "specimens collected from at least"
+        one: "Exemplar gesammelt von mindestens"
+        other: "Exemplare gesammelt von mindestens"
     stats_collected_countries:
       unit:
-        one: "country"
-        other: "countries"
+        one: "Land"
+        other: "Länder"
     stats_attributions_specimens:
       unit:
-        one: "specimen attributed to"
-        other: "specimens attributed to"
+        one: "Exemplar zugeordnet zu"
+        other: "Exemplare zugeordnet zu"
     stats_attributions_people:
       unit:
-        one: "person"
-        other: "people"
+        one: "Person"
+        other: "Personen"
     stats_articles_specimens:
       unit:
-        one: "specimen used in"
-        other: "specimens used in"
+        one: "Exemplar verwendet in"
+        other: "Exemplare verwendet in"
     stats_articles_articles:
       unit:
-        one: "work"
-        other: "works"
+        one: "Werk"
+        other: "Werke"
     specimen_icon_count:
       one: "%{coll_img} collected or %{det_img} identified 1 specimen."
       other: "%{coll_img} collected or %{det_img} identified %{count} specimens."
