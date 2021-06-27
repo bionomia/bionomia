@@ -485,7 +485,7 @@ de:
         other: "Publikationen nutzten Ihre von GBIF heruntergeladenen Beispieldaten"
     identified_from: Identifiziert von
     collected_from: Gesammelt von
-    dates_identified_collected: Datum der Erfassung und Identifizierung
+    dates_identified_collected: Datum der Sammlung und Identifizierung
     resume: Für Ihren Lebenslauf
     specimens_used: Exemplare verwendet in
     public_availability: Öffentliche Verfügbarkeit
@@ -541,44 +541,44 @@ de:
     no_co_collectors_alert: Co-Sammler wurden noch nicht erfasst.
     co_collectors_alert: "Sie haben gesammelt mit:"
     co_collector_name: "Exemplare, die gemeinsam mit %{name} gesammelt wurden."
-    switch: View theirs
-    not_co_collector_name: "Specimens have not been co-collected with %{name}."
+    switch: Ihre sehen
+    not_co_collector_name: "Exemplare wurden nicht zusammen mit %{name} gesammelt."
     co_collected_count:
-      one: "co-collected specimen"
-      other: "co-collected specimens"
-    zenodo_html: "Your profile is linked to %{zenodo} and your claims are versioned and archived."
+      one: "mitgesammeltes Exemplar"
+      other: "mitgesammelte Exemplare"
+    zenodo_html: "Ihr Profil ist mit %{zenodo} verknüpft, und Ihre Beanspruchungen werden versioniert und archiviert."
   roster:
-    roster_title: Public Profiles
+    roster_title: Öffentliche Profile
     lede:
       unit:
-        one: "person who shared their profile"
-        other: "people who share their profiles and the profiles of others they revere"
-    no_one_found: No one found by the name
+        one: "Person, die ihr Profil geteilt hat"
+        other: "Personen, die ihre Profile sowie die Profile von anderen, die sie verehren, teilen"
+    no_one_found: Es wurde niemand mit dem Namen gefunden
     search_result_count:
       unit:
-        one: "search result for"
-        other: "search results for"
+        one: "Suchergebnis für"
+        other: "Suchergebnisse für"
   specimen:
-    scientific_name: Scientific Name
-    collected_by: Collected By
-    identified_by: Identified By
-    date_collected: Date Collected
-    date_identified: Date Identified
+    scientific_name: Wissenschaftlicher Name
+    collected_by: Gesammelt von
+    identified_by: Identifiziert von
+    date_collected: Sammeldatum
+    date_identified: Identifikationsdatum
     institution: Institution
-    catalog_number: Catalog Number
-    family: Family
-    type_status: Type Status
+    catalog_number: Katalognummer
+    family: Familie
+    type_status: Typ-Status
     scribe: Scribe
-    not_me: Not me
-    not_them: Not them
-    not_recorded: not recorded
-    remove: Remove
+    not_me: Nicht ich
+    not_them: Nicht sie
+    not_recorded: nicht aufgezeichnet
+    remove: Entfernen
   scribes:
     scribes_title: Scribes
     lede:
       unit:
-        one: "person who has attributed natural history specimens to their peers, mentors, and role models"
-        other: "people who have attributed natural history specimens to their peers, mentors, and role models"
+        one: "Person, die naturkundliche Exemplare ihren Kollegen, Mentoren und Vorbildern zugeordnet hat"
+        other: "Personen, die naturkundliche Exemplare ihren Kollegen, Mentoren und Vorbildern zugeordnet haben"
   taxa:
     lede:
       unit:
@@ -588,9 +588,9 @@ de:
     none_found: "Keine taxonomische Familie gefunden für %{searched}"
     search_found:
       unit:
-        one: "search result for"
-        other: "search results for"
-    people: People
+        one: "Suchergebnis für"
+        other: "Suchergebnisse für"
+    people: Personen
     visualizations: Visualisierungen
     timeline: Zeitachse
     agent_strings: Agent Strings
@@ -668,63 +668,63 @@ de:
     specimens_identified: Exemplare identifiziert
     specimens_collected: Exemplare gesammelt
     no_specialities_alert: Es wurden noch keine Besonderheiten aufgezeichnet.
-    specialties_alert: "Collected or identified specimens in the following Families:"
-    families_collected: Families Collected
-    families_identified: Families Identified
-    no_claims_alert: Claims or attributions have not yet been recorded.
-    no_helped_alert: Attributions have not yet been made.
-    progress: Progress
-    identified_from: Identified From
-    collected_from: Collected From
-    dates_identified_collected: Dates Collected and Identified
-    specimens_attributed: specimens attributed
-    collected: collected
-    identified: identified
-    not_all_columns: Not all available columns are shown.
-    map: Map
-    list: List
-    no_specimens: Specimens have not yet been claimed or attributed.
-    no_specimens_filter: Specimens have not yet been claimed or attributed with this applied filter.
+    specialties_alert: "Gesammelte oder identifizierte Exemplare in den folgenden Familien:"
+    families_collected: Gesammelte Familien
+    families_identified: Identifizierte Familien
+    no_claims_alert: Beanspruchungen oder Zuordnungen wurden noch nicht erfasst.
+    no_helped_alert: Zuordnungen wurden noch nicht vorgenommen.
+    progress: Fortschritt
+    identified_from: Identifiziert von
+    collected_from: Gesammelt von
+    dates_identified_collected: Datum der Sammlung und Identifizierung
+    specimens_attributed: zugeordnete Exemplare
+    collected: gesammelt
+    identified: identifiziert
+    not_all_columns: Es werden nicht alle verfügbaren Spalten angezeigt.
+    map: Karte
+    list: Liste
+    no_specimens: Exemplare wurden noch nicht beansprucht oder zugeordnet.
+    no_specimens_filter: Exemplare mit diesem angewandten Filter wurden noch nicht beansprucht oder zugeordnet.
     stats_identified_specimens_nocountry:
       unit:
-        one: "specimen identified"
-        other: "specimens identified"
+        one: "Exemplar identifiziert"
+        other: "Exemplare identifiziert"
     stats_collected_specimens_nocountry:
       unit:
-        one: "specimen collected"
-        other: "specimens collected"
+        one: "Exemplar gesammelt"
+        other: "Exemplare gesammelt"
     stats_identified_specimens:
       unit:
-        one: "specimen identified from at least"
-        other: "specimens identified from at least"
+        one: "Exemplar identifiziert von mindestens"
+        other: "Exemplare identifiziert von mindestens"
     stats_identified_countries:
       unit:
-        one: "country"
-        other: "countries"
+        one: "Land"
+        other: "Länder"
     stats_collected_specimens:
       unit:
-        one: "specimen collected from at least"
-        other: "specimens collected from at least"
+        one: "Exemplar gesammelt von mindestens"
+        other: "Exemplare gesammelt von mindestens"
     stats_collected_countries:
       unit:
-        one: "country"
-        other: "countries"
+        one: "Land"
+        other: "Länder"
     stats_attributions_specimens:
       unit:
-        one: "specimen attributed to"
-        other: "specimens attributed to"
+        one: "Exemplar zugeordnet zu"
+        other: "Exemplare zugeordnet zu"
     stats_attributions_people:
       unit:
-        one: "person"
-        other: "people"
+        one: "Person"
+        other: "Personen"
     stats_articles_specimens:
       unit:
-        one: "specimen used in"
-        other: "specimens used in"
+        one: "Exemplar verwendet in"
+        other: "Exemplare verwendet in"
     stats_articles_articles:
       unit:
-        one: "work"
-        other: "works"
+        one: "Werk"
+        other: "Werke"
     specimen_icon_count:
       one: "%{coll_img} collected or %{det_img} identified 1 specimen."
       other: "%{coll_img} collected or %{det_img} identified %{count} specimens."
