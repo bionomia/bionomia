@@ -1,4 +1,6 @@
 el:
+  language: ελληνικά
+  locale: "el_GR"
   "true": "Yes"
   "false": "No"
   acknowledgments:

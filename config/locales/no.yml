@@ -1,4 +1,6 @@
 "no":
+  language: Norsk
+  locale: "nn_NO"
   "true": "Yes"
   "false": "No"
   acknowledgments:

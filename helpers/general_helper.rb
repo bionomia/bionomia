@@ -18,13 +18,15 @@ module Sinatra
         end
 
         def locale
-          locales = {
-            en: "en_US",
-            fr: "fr_FR",
-            es: "es_ES",
-            pt: "pt_PT"
-          }
+          locales = {}
+          I18n.available_locales.each{|locale| locales[locale] = I18n.t('locale') } 
           locales[I18n.locale] || "en_US"
+        end
+
+        def locale_name_pairs
+          I18n.available_locales.map do |locale|
+            [locale.to_s, I18n.t('language', locale: locale)]
+          end
         end
 
         # Used from https://github.com/rack/rack-contrib/blob/master/lib/rack/contrib/locale.rb

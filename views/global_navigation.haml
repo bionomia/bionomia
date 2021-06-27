@@ -63,9 +63,9 @@
               %a{href: "#{Settings.base_url.sub("://", "://en.")}#{request.fullpath}", class:"dropdown-item"} English
             - else
               %a{href: "#{Settings.base_url}#{request.fullpath}", class:"dropdown-item"} English
-            %a{href: "#{Settings.base_url.sub("://", "://es.")}#{request.fullpath}", class:"dropdown-item"} Español
-            %a{href: "#{Settings.base_url.sub("://", "://fr.")}#{request.fullpath}", class:"dropdown-item"} Français
-            %a{href: "#{Settings.base_url.sub("://", "://pt.")}#{request.fullpath}", class:"dropdown-item"} Português
+            - locale_name_pairs.each do |lang|
+              - next if lang[0] == "en"
+              %a{href: "#{Settings.base_url.sub("://", "://#{lang[0]}.")}#{request.fullpath}", class:"dropdown-item"} #{lang[1]}
 
       - if authorized?
         %li{class: "nav-item"}

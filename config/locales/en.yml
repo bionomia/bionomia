@@ -1,4 +1,6 @@
 en:
+  language: English
+  locale: "en_EN"
   "true": "Yes"
   "false": "No"
   acknowledgments:

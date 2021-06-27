@@ -1,4 +1,6 @@
 pt:
+  language: Português
+  locale: "pt_PT"
   "true": "Sim"
   "false": "Não"
   acknowledgments:

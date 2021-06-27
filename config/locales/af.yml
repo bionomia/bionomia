@@ -1,4 +1,6 @@
 af:
+  language: Afrikaans
+  locale: "af_ZA"
   "true": "Yes"
   "false": "No"
   acknowledgments:

@@ -1,4 +1,6 @@
 ro:
+  language: Română
+  locale: "ro_RO"
   "true": "Yes"
   "false": "No"
   acknowledgments:
