@@ -41,7 +41,7 @@ fr:
       unit:
         one: "personne a collecté ou identifié des spécimens inclus dans les données téléchargées du GBIF à l'appui de cet article"
         other: "personnes ont collecté ou identifié des spécimens inclus dans les données téléchargées du GBIF à l'appui de cet article"
-    placeholder: "Evolution and systematics of..."
+    placeholder: "Evolution et systématique de..."
     people: Personnes
     agent_strings: Chaînes d'agent
     agent_title: Agents d'article
@@ -171,7 +171,7 @@ fr:
       - déc.
   developer:
     search: Rechercher
-    autocomplete_widget: Autocomplete Widget
+    autocomplete_widget: Widget Autocomplete
     json_ld_search: Recherche JSON-LD de personnes
     json_ld_occurrence_search: Recherche JSON-LD d'occurrences
     structured_data: Données Structurées
@@ -212,7 +212,7 @@ fr:
     submit: Soumettre
     upload_csv_instructions: Importer un fichier csv avec des réclamations
     download_records: Téléchargez csv avec des réclamations
-    download_alert: "Download discovered specimen records, work offline, then upload new claims as a csv. A file containing at most %{num_records} records is generated. If you have many more than this, you may work in batches. This routine does not update underlying specimen data nor does it update existing claims. If existing claims are present in the upload, these will be skipped. Your uploaded csv must use a comma to separate columns each optionally enclosed by quotes."
+    download_alert: "Téléchargez les enregistrements des spécimens découverts, travaillez hors ligne, puis envoyez les nouvelles demandes au format csv. Le système génère un fichier contenant au maximum %{num_records} enregistrements. Si vous en avez beaucoup plus, vous pouvez travailler par lots. Cette routine ne met pas à jour les données des spécimens sous-jacents ni les demandes existantes. Si des demandes existantes sont présentes dans le téléchargement, elles seront ignorées. Votre fichier csv envoyé doit utiliser une virgule pour séparer les colonnes, chacune d'entre elles étant éventuellement entourée de guillemets."
     search_dropdown_no_users: "Votre recherche a retourné 0 résultats."
     reset: Réinitialiser
     remove: Enlever
@@ -413,7 +413,7 @@ fr:
         other: "organismes des comptes ORCID et des entrées Wikidata"
     placeholder: Musée canadien de la nature
     affiliation_none_alert: Les publications basées sur des spécimens collectés ou identifiés par le personnel actuel et antérieur n'ont pas encore été enregistrées par GBIF
-    affiliation_alert: "%{count} publications used specimen data downloaded from GBIF based on specimens collected or identified by current and previous personnel while affiliated with %{org_name}"
+    affiliation_alert: "%{count} publications ont utilisé des données sur les spécimens téléchargées à partir de GBIF et basées sur des spécimens collectés ou identifiés par le personnel actuel et antérieur lorsqu'il était affilié à %{org_name}"
     collected_by: "Spécimens collectés ou identifiés par:"
     science_enabled: Science Activée
     impact: Impact sur les Activités dans d'Autres Organismes
@@ -649,8 +649,8 @@ fr:
     no_publications: Les publications qui utilisaient des enregistrements de spécimens inclus dans un téléchargement du GBIF n'ont pas encore été enregistrées.
     publication_count:
       unit:
-        one: "publication used specimen data downloaded from GBIF"
-        other: "publications used specimen data downloaded from GBIF"
+        one: "publication a utilisé des données de spécimens téléchargées de GBIF"
+        other: "publications ont utilisé des données de spécimens téléchargées de GBIF"
     no_co_collectors_alert: Les co-collectionneurs n'ont pas encore été enregistrés.
     co_collectors_alert: "A collecté avec:"
     co_collectors: Co-collectionneurs
