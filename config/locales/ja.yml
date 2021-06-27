@@ -1,6 +1,6 @@
 ja:
-  language: English
-  locale: "en_EN"
+  language: 日本語
+  locale: "ja_JP"
   "true": "Yes"
   "false": "No"
   acknowledgments:
