@@ -1,8 +1,8 @@
 el:
-  language: English
-  locale: "en_EN"
-  "true": "Yes"
-  "false": "No"
+  language: Ελληνικά
+  locale: "el_GR"
+  "true": "Ναι"
+  "false": "Όχι"
   acknowledgments:
     acknowledgments_title: Acknowledgments
     taxon_silhouettes: Taxon Family Silhouettes
