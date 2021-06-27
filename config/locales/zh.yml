@@ -1,6 +1,6 @@
 zh-CN:
-  language: English
-  locale: "en_EN"
+  language: 中文
+  locale: "zh_CN"
   "true": "Yes"
   "false": "No"
   acknowledgments:
