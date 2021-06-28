@@ -1,55 +1,60 @@
--content_for :title, "Política de privacidad"
-
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class:"mr-auto p-2"}
-      %h1{class:"h2"} Política de privacidad
-
-%h3 Lo que Bionomía colecta
-
+- content_for :title, "Privacy Policy"
+- content_for :jumbotron do
+%div
+  {class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
+  %div
+    {class:"mr-auto p-2"}
+    %h1
+      {class:"h2"} Pol&#xED;tica de privacidad
+%h3
+  Lo que Bionom&#xED;a colecta
 %p
-  Bionomía requiere cierta información básica en el momento de la creación de una cuenta y esto está completamente limitado a los detalles de acceso público extraídos de su perfil de
-  = succeed "." do
-    %a{href:"https://orcid.org"} ORCID
-  Ver la
-  %a{href:"https://orcid.org/privacy-policy"} Política de privacidad de ORCID
-  para más detalles.
-  Bionomía almacena su nombre completo, sus afiliaciones laborales y educativas, su biografía y su dirección de correo electrónico sólo si ha permitido que estos detalles sean accesibles públicamente desde su perfil de ORCID.
-  Estos detalles se actualizan periódicamente desde su perfil de ORCID y puede activar manualmente una actualización dentro de Bionomía cuando lo desee. Si posteriormente usted restringe el acceso a los detalles que alguna vez estuvieron disponibles en su perfil de ORCID,
-  una actualización en Bionomía eliminará esos detalles restringidos.
-  Ningún otro dato sobre usted se accede, se utiliza ni se almacena de ninguna otra fuente.
-
-%p
-  Si elige archivar versiones de los datos de sus especímenes en
+  Bionom&#xED;a requiere cierta informaci&#xF3;n b&#xE1;sica en el momento de la creaci&#xF3;n de una cuenta y esto est&#xE1; completamente limitado a los detalles de acceso p&#xFA;blico extra&#xED;dos de su perfil de
   = succeed ", " do
-    %a{href:"https://zenodo.org"} Zenodo
-  Bionomía almacena un token de acceso único específico para su cuenta de Zenodo. Este token se utiliza para enviar nuevas versiones de los datos de sus especímenes a su archivo versionado en su nombre. Si desactiva la integración con Zenodo, se elimina el token de acceso.
-
-%h3 Lo que Bionomía no colecta
-
+  %a
+    {href:"https://orcid.org"} ORCID
+  Ver la
+  %a
+    {href:"https://orcid.org/privacy-policy"} Pol&#xED;tica de privacidad de ORCID
+  para m&#xE1;s detalles.
+  See
+  %a
+    {href:"https://orcid.org/privacy-policy"} ORCID's Privacy Policy
+  for more details.
+  Bionom&#xED;a almacena su nombre completo, sus afiliaciones laborales y educativas, su biograf&#xED;a y su direcci&#xF3;n de correo electr&#xF3;nico s&#xF3;lo si ha permitido que estos detalles sean accesibles p&#xFA;blicamente desde su perfil de ORCID.
+  Estos detalles se actualizan peri&#xF3;dicamente desde su perfil de ORCID y puede activar manualmente una actualizaci&#xF3;n dentro de Bionom&#xED;a cuando lo desee. Si posteriormente usted restringe el acceso a los detalles que alguna vez estuvieron disponibles en su perfil de ORCID,
+  una actualizaci&#xF3;n en Bionom&#xED;a eliminar&#xE1; esos detalles restringidos.
+  Ning&#xFA;n otro dato sobre usted se accede, se utiliza ni se almacena de ninguna otra fuente.
 %p
-  Bionomía no recopila información privada, incluyendo la contraseña de su perfil de ORCID.
-  Cualquier información que esté declarada como privada en su perfil de ORCID no es accesible para Bionomía y, en consecuencia, no está disponible para ser almacenada.
-  Si usted es menor de 13 años, no es posible que tenga una cuenta en Bionomía incluso si posee una cuenta de ORCID. Bionomía no recopila a sabiendas información, ni dirige su contenido específicamente a niños menores de 13 años.
-  Si nos enteramos o tenemos motivos para sospechar que un usuario es menor de 13 años, tendremos que cerrar su cuenta en Bionomía. No queremos disuadirlo de aprender, pero esas son las reglas.
-  Por favor vea los
-  %a{href: url("/terms-of-service")} Términos del servicio
-  para obtener información sobre la cancelación de cuentas.
-
-%h3 Cómo Bionomía utiliza su información
-
-%p
-  Los registros de especímenes que atribuya a otras personas, vivas o fallecidas, se compartirán amplia y abiertamente a menos que el usuario vivo al quien los haya atribuido no haya hecho que su perfil sea de acceso público.
-  Las atribuciones de acceso público incluirán su nombre obtenido de su perfil de ORCID, su identificador de ORCID y un sello de fecha para indicar cuándo se realizó la atribución, además de los detalles sobre el registro de los especímenes.
-  Las atribuciones están disponibles abiertamente a través de las API de RESTful y descargas de datos masivas. No se comparte ninguna otra información de su perfil de ORCID a través de estos productos.
-
-%p
-  Si usted hace que su dirección de correo electrónico sea accesible al público a través de su perfil de ORCID, puede suscribirse opcionalmente a las notificaciones por correo electrónico en Bionomía.
-  Su dirección de correo electrónico, si se puede acceder a ella a través de su perfil de ORCID, no se utilizará, excepto si elige suscribirse a alertas sobre nuevas publicaciones que utilizaron datos de sus especímenes.
-
-%h3 Contactando a Bionomía
-
-%p
-  Las preguntas sobre esta declaración de privacidad o prácticas de información deben dirigirse a
+  Si elige archivar versiones de los datos de sus espec&#xED;menes en
   = succeed "." do
-    %a{href: "mailto: bionomia.tracker@gmail.com"} bionomia.tracker@gmail.com
+  %a
+    {href:"https://zenodo.org"} Zenodo
+  Bionom&#xED;a almacena un token de acceso &#xFA;nico espec&#xED;fico para su cuenta de Zenodo. Este token se utiliza para enviar nuevas versiones de los datos de sus espec&#xED;menes a su archivo versionado en su nombre. Si desactiva la integraci&#xF3;n con Zenodo, se elimina el token de acceso.
+%h3
+  Lo que Bionom&#xED;a no colecta
+%p
+  Bionom&#xED;a no recopila informaci&#xF3;n privada, incluyendo la contrase&#xF1;a de su perfil de ORCID.
+  Cualquier informaci&#xF3;n que est&#xE9; declarada como privada en su perfil de ORCID no es accesible para Bionom&#xED;a y, en consecuencia, no est&#xE1; disponible para ser almacenada.
+  Si usted es menor de 13 a&#xF1;os, no es posible que tenga una cuenta en Bionom&#xED;a incluso si posee una cuenta de ORCID. Bionom&#xED;a no recopila a sabiendas informaci&#xF3;n, ni dirige su contenido espec&#xED;ficamente a ni&#xF1;os menores de 13 a&#xF1;os.
+  Si nos enteramos o tenemos motivos para sospechar que un usuario es menor de 13 a&#xF1;os, tendremos que cerrar su cuenta en Bionom&#xED;a. No queremos disuadirlo de aprender, pero esas son las reglas.
+  Por favor vea los
+  %a
+    {href: url("/terms-of-service")} T&#xE9;rminos del servicio
+  para obtener informaci&#xF3;n sobre la cancelaci&#xF3;n de cuentas.
+%h3
+  C&#xF3;mo Bionom&#xED;a utiliza su informaci&#xF3;n
+%p
+  Los registros de espec&#xED;menes que atribuya a otras personas, vivas o fallecidas, se compartir&#xE1;n amplia y abiertamente a menos que el usuario vivo al quien los haya atribuido no haya hecho que su perfil sea de acceso p&#xFA;blico.
+  Las atribuciones de acceso p&#xFA;blico incluir&#xE1;n su nombre obtenido de su perfil de ORCID, su identificador de ORCID y un sello de fecha para indicar cu&#xE1;ndo se realiz&#xF3; la atribuci&#xF3;n, adem&#xE1;s de los detalles sobre el registro de los espec&#xED;menes.
+  Las atribuciones est&#xE1;n disponibles abiertamente a trav&#xE9;s de las API de RESTful y descargas de datos masivas. No se comparte ninguna otra informaci&#xF3;n de su perfil de ORCID a trav&#xE9;s de estos productos.
+%p
+  Si usted hace que su direcci&#xF3;n de correo electr&#xF3;nico sea accesible al p&#xFA;blico a trav&#xE9;s de su perfil de ORCID, puede suscribirse opcionalmente a las notificaciones por correo electr&#xF3;nico en Bionom&#xED;a.
+  Su direcci&#xF3;n de correo electr&#xF3;nico, si se puede acceder a ella a trav&#xE9;s de su perfil de ORCID, no se utilizar&#xE1;, excepto si elige suscribirse a alertas sobre nuevas publicaciones que utilizaron datos de sus espec&#xED;menes.
+%h3
+  Contactando a Bionom&#xED;a
+%p
+  Las preguntas sobre esta declaraci&#xF3;n de privacidad o pr&#xE1;cticas de informaci&#xF3;n deben dirigirse a
+  = succeed ", " do
+  %a
+    {href: "mailto: bionomia.tracker@gmail.com"} bionomia.tracker@gmail.com
