@@ -549,6 +549,8 @@ de:
       one: "mitgesammeltes Exemplar"
       other: "mitgesammelte Exemplare"
     zenodo_html: "Ihr Profil ist mit %{zenodo} verknüpft, und Ihre Beanspruchungen werden versioniert und archiviert."
+    language: Preferred Language
+    language_explanation: Choose your preferred language
   roster:
     roster_title: Öffentliche Profile
     lede:
