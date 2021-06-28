@@ -1,62 +1,72 @@
--content_for :title, "Razonamiento"
-
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class:"mr-auto p-2"}
-      %h1{class:"h2"} Razonamiento
-
-%h3 Un enfoque en las personas
-
+- content_for :title, "Rationale"
+- content_for :jumbotron do
+%div
+  {class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
+  %div
+    {class:"mr-auto p-2"}
+    %h1
+      {class:"h2"} Razonamiento
+%h3
+  Un enfoque en las personas
 %p
-  A pesar de la importancia mundial de las colecciones de historia natural, muchas están en riesgo por estar críticamente subfinanciadas o subvaloradas. Un factor que contribuye a esta negligencia aparente es la falta de un sistema de recompensa profesional que cuantifique e ilustre la amplitud y profundidad de la experticia necesaria para colectar e identificar espécimenes, mantenerlos, digitalizar sus etiquetas, movilizar los datos, y mejorar la calidad de los datos cuando las partes interesadas identifican errores y omisiones. Vea los pensamientos de
-  %a{href: "https://doi.org/10.1525/bio.2011.61.8.8"}
+  A pesar de la importancia mundial de las colecciones de historia natural, muchas est&#xE1;n en riesgo por estar cr&#xED;ticamente subfinanciadas o subvaloradas. Un factor que contribuye a esta negligencia aparente es la falta de un sistema de recompensa profesional que cuantifique e ilustre la amplitud y profundidad de la experticia necesaria para colectar e identificar esp&#xE9;cimenes, mantenerlos, digitalizar sus etiquetas, movilizar los datos, y mejorar la calidad de los datos cuando las partes interesadas identifican errores y omisiones. Vea los pensamientos de
+  %a
+    {href: "https://doi.org/10.1525/bio.2011.61.8.8"}
     McDade
-    %em et al.
+    %em
+      et al.
     2011
-  quienes describen los elementos necesarios para un sistema de recompensa profesional más realista en Biología. Si las personas a lo largo de la cadena de valor en colecciones de historia natural recibieran crédito profesional por sus esfuerzos, idealmente reconocidos por sus administradores y organismos de financiación, éstas priorizarían tareas tradicionalmente no recompensadas y podrían abogar por sí mismas de manera convincente. Métodos adecuados de atribución, tanto a nivel individual como institucional son esenciales.
-
+  quienes describen los elementos necesarios para un sistema de recompensa profesional m&#xE1;s realista en Biolog&#xED;a. Si las personas a lo largo de la cadena de valor en colecciones de historia natural recibieran cr&#xE9;dito profesional por sus esfuerzos, idealmente reconocidos por sus administradores y organismos de financiaci&#xF3;n, &#xE9;stas priorizar&#xED;an tareas tradicionalmente no recompensadas y podr&#xED;an abogar por s&#xED; mismas de manera convincente. M&#xE9;todos adecuados de atribuci&#xF3;n, tanto a nivel individual como institucional son esenciales.
 %p
   La
-  %a{href: "https://gbif.org"} Global Biodiversity Information Facility
+  %a
+    {href: "https://gbif.org"} Global Biodiversity Information Facility
   (GBIF) ha priorizado un enfoque en las personas. El primer elemento planeado en su
-  %a{href: "https://www.gbif.org/document/83029/gbif-implementation-plan-2017-2021-and-annual-work-programme-2017" }Plan de implementación para 2017-2021
+  %a
+    {href: "https://www.gbif.org/document/83029/gbif-implementation-plan-2017-2021-and-annual-work-programme-2017" }Plan de implementaci&#xF3;n para 2017-2021
   y el Programa Anual de Trabajo establece:
-  %div{class: "bd-callout bd-callout-bionomia font-italic"}
-    "1.a.i: Desarrollar mecanismos para apoyar y reflejar las habilidades, conocimientos y experiencia de las contribuciones individuales y organizacionales a la red GBIF, incluida la revisión del sistema de gestión de identidad y la integración de identificadores ORCID ".
-
-%h3 El problema
-
+  %div
+    {class: "bd-callout bd-callout-bionomia font-italic"}
+    "1.a.i: Desarrollar mecanismos para apoyar y reflejar las habilidades, conocimientos y experiencia de las contribuciones individuales y organizacionales a la red GBIF, incluida la revisi&#xF3;n del sistema de gesti&#xF3;n de identidad y la integraci&#xF3;n de identificadores ORCID ".
+%h3
+  El problema
 %p
-  Un cuello de botella que impide la ejecución completa del plan de GBIF es un legado de contenido intratable y basado en texto compartido desde museos de historia natural que registran de manera ambigua a personas u organizaciones implicadas en datos de especímenes, ninguna de las cuales incluye enlaces predeterminados a identificadores ORCID. Contenido típico compartido por los museos de historia natural bajo los términos de Darwin Core
-  %a{href: "http://rs.tdwg.org/dwc/terms/#recordedBy"} recordedBy
+  Un cuello de botella que impide la ejecuci&#xF3;n completa del plan de GBIF es un legado de contenido intratable y basado en texto compartido desde museos de historia natural que registran de manera ambigua a personas u organizaciones implicadas en datos de espec&#xED;menes, ninguna de las cuales incluye enlaces predeterminados a identificadores ORCID. Contenido t&#xED;pico compartido por los museos de historia natural bajo los t&#xE9;rminos de Darwin Core
+  %a
+    {href: "http://rs.tdwg.org/dwc/terms/#recordedBy"} recordedBy
   (colector) e
-  %a{href: "http://rs.tdwg.org/dwc/terms/#identifidBy"} identifiedBy
-  (determinadores o identificadores) carece de estructura y es variable. Puede incluir nombres de personas ordenados o desordenados de diversas maneras, sufrir de insensibilidad a las preferencias culturales, expresar adicionalmente nombres completos o abreviados de organizaciones y expediciones, u otras notas y marcas que colectivamente hacen que la extracción de nombres de personas de estos campos sea extremadamente difícil. La solución completa requiere múltiples enfoques. Un enfoque moderno y progresivo asocia los identificadores de ORCID o Wikidata con las personas mencionadas en los especímenes a medida que se digitalizan las etiquetas. Un enfoque retrospectivo involucra a los historiadores naturales con una interfaz abierta que se utiliza para reclamar especímenes o atribuirlos a otros. Al hacerlo, las personas pueden mostrar rápidamente la amplitud de su experiencia y esfuerzos. Si un número suficiente de personas reclaman sus especímenes y los atribuyen a otros, es posible que, sin saberlo, desarrollemos archivos de autoridad conciliados para ayudar al personal de museos a emplear un enfoque integrado que incorpore búsquedas de nombres de personas sin ambigüedad.
-
-%h3 Métricas sobre las organizaciones
-
-%div{class: "bd-callout bd-callout-bionomia font-italic"}
-  Una sola visita a un museo distante por parte de un estudiante de posgrado para examinar e identificar especímenes puede tener un impacto significativo en su carrera. También lleva consigo su afiliación con su escuela de posgrado.
-
+  %a
+    {href: "http://rs.tdwg.org/dwc/terms/#identifidBy"} identifiedBy
+  (determinadores o identificadores) carece de estructura y es variable. Puede incluir nombres de personas ordenados o desordenados de diversas maneras, sufrir de insensibilidad a las preferencias culturales, expresar adicionalmente nombres completos o abreviados de organizaciones y expediciones, u otras notas y marcas que colectivamente hacen que la extracci&#xF3;n de nombres de personas de estos campos sea extremadamente dif&#xED;cil. La soluci&#xF3;n completa requiere m&#xFA;ltiples enfoques. Un enfoque moderno y progresivo asocia los identificadores de ORCID o Wikidata con las personas mencionadas en los espec&#xED;menes a medida que se digitalizan las etiquetas. Un enfoque retrospectivo involucra a los historiadores naturales con una interfaz abierta que se utiliza para reclamar espec&#xED;menes o atribuirlos a otros. Al hacerlo, las personas pueden mostrar r&#xE1;pidamente la amplitud de su experiencia y esfuerzos. Si un n&#xFA;mero suficiente de personas reclaman sus espec&#xED;menes y los atribuyen a otros, es posible que, sin saberlo, desarrollemos archivos de autoridad conciliados para ayudar al personal de museos a emplear un enfoque integrado que incorpore b&#xFA;squedas de nombres de personas sin ambig&#xFC;edad.
+%h3
+  M&#xE9;tricas sobre las organizaciones
+%div
+  {class: "bd-callout bd-callout-bionomia font-italic"}
+  Una sola visita a un museo distante por parte de un estudiante de posgrado para examinar e identificar espec&#xED;menes puede tener un impacto significativo en su carrera. Tambi&#xE9;n lleva consigo su afiliaci&#xF3;n con su escuela de posgrado.
 %p
-  Las organizaciones luchan por medir el impacto de sus inversiones en la digitalización y distribución de datos de especímenes de historia natural. Una forma de evaluar el alcance organizacional es cuantificar las actividades del personal mencionado en los datos de especímenes compartidos por otras organizaciones. Las donaciones, las visitas curatoriales o de investigación, o la devolución de préstamos con nuevas anotaciones o determinaciones son todas actividades que difunden la experiencia y llevan consigo los intereses de las organizaciones.
+  Las organizaciones luchan por medir el impacto de sus inversiones en la digitalizaci&#xF3;n y distribuci&#xF3;n de datos de espec&#xED;menes de historia natural. Una forma de evaluar el alcance organizacional es cuantificar las actividades del personal mencionado en los datos de espec&#xED;menes compartidos por otras organizaciones. Las donaciones, las visitas curatoriales o de investigaci&#xF3;n, o la devoluci&#xF3;n de pr&#xE9;stamos con nuevas anotaciones o determinaciones son todas actividades que difunden la experiencia y llevan consigo los intereses de las organizaciones.
 %p
-  Cuando usted indica las fechas de inicio y finalización de su educación y empleo pasados ​​y presentes en su cuenta de ORCID, estos detalles se verifican con las fechas y los códigos de las instituciones en los especímenes que usted colectó o identificó. El resultado es una descripción de la esfera de influencia de su organización en las organizaciones asociadas formal o informalmente a través de sus actividades. Aunque la calidad de los datos a menudo necesita mejorar para capturar completamente esta medida de alcance, todos los elementos necesarios están presentes en las cuentas de ORCID y los datos de las colecciones de historia natural compartidos con el Global Biodiversity Information Facility (GBIF). Este enfoque ofrece un nuevo incentivo para que las organizaciones insistan en que los datos de los especímenes se compartan rápida y abiertamente cuando su personal dona especímenes, visita otras colecciones en las que identifican especímenes acumulados y archivados o devuelve especímenes prestadas con nuevas anotaciones o determinaciones. También subraya el reconocimiento de que colecciones de todos los tamaños y especialidades participan en redes nacionales e internacionales de entusiastas y expertos. Bionomía intenta automatizar de forma transparente estos informes para las organizaciones y, al mismo tiempo, muestra la experiencia de los colectores y determinadores de especímenes de historia natural.
-
-%h3 Qué es una Bionomía?
-
+  Cuando usted indica las fechas de inicio y finalizaci&#xF3;n de su educaci&#xF3;n y empleo pasados &#x200B;&#x200B;y presentes en su cuenta de ORCID, estos detalles se verifican con las fechas y los c&#xF3;digos de las instituciones en los espec&#xED;menes que usted colect&#xF3; o identific&#xF3;. El resultado es una descripci&#xF3;n de la esfera de influencia de su organizaci&#xF3;n en las organizaciones asociadas formal o informalmente a trav&#xE9;s de sus actividades. Aunque la calidad de los datos a menudo necesita mejorar para capturar completamente esta medida de alcance, todos los elementos necesarios est&#xE1;n presentes en las cuentas de ORCID y los datos de las colecciones de historia natural compartidos con el Global Biodiversity Information Facility (GBIF). Este enfoque ofrece un nuevo incentivo para que las organizaciones insistan en que los datos de los espec&#xED;menes se compartan r&#xE1;pida y abiertamente cuando su personal dona espec&#xED;menes, visita otras colecciones en las que identifican espec&#xED;menes acumulados y archivados o devuelve espec&#xED;menes prestadas con nuevas anotaciones o determinaciones. Tambi&#xE9;n subraya el reconocimiento de que colecciones de todos los tama&#xF1;os y especialidades participan en redes nacionales e internacionales de entusiastas y expertos. Bionom&#xED;a intenta automatizar de forma transparente estos informes para las organizaciones y, al mismo tiempo, muestra la experiencia de los colectores y determinadores de espec&#xED;menes de historia natural.
+%h3
+  Qu&#xE9; es una Bionom&#xED;a?
 %p
-  %em Bionomía
-  es una palabra exótica e inusual. Es usada ocasionalmente por biólogos de habla hispana y se traduce como
-  %em bionomía
-  \– las leyes de la vida - abarcando la distribución y la ecología. Su primer uso podría haber sido en The Lancet en 1848,
-  %a{href: "https://www.sciencedirect.com/science/article/pii/S014067360272610X"} "Bionomia; Or, the Law of Life"
-  donde ΦΙΛΑΛΗΘΗΣ describe su término recién acuñado como una interacción entre la energía potencial de
-  %em excitabilidad
-  y una manifestación física como
-  %em excitantes.
-  Pero, el autor también evoca un misticismo sutil más allá de un vulgar equilibrio de ecuaciones. También definamos
-  %em Bionomía
-  como reverencia, asombro, agencia, refinamiento, pasaje y la energía de las conexiones.
+  %em
+    Bionom&#xED;a
+  es una palabra ex&#xF3;tica e inusual. Es usada ocasionalmente por bi&#xF3;logos de habla hispana y se traduce como
+  %em
+    bionom&#xED;a
+  \\&#x2013; las leyes de la vida - abarcando la distribuci&#xF3;n y la ecolog&#xED;a. Su primer uso podr&#xED;a haber sido en The Lancet en 1848,
+  %a
+    {href: "https://www.sciencedirect.com/science/article/pii/S014067360272610X"} "Bionomia; Or, the Law of Life"
+  donde &#x3A6;&#x399;&#x39B;&#x391;&#x39B;&#x397;&#x398;&#x397;&#x3A3; describe su t&#xE9;rmino reci&#xE9;n acu&#xF1;ado como una interacci&#xF3;n entre la energ&#xED;a potencial de
+  %em
+    excitabilidad
+  y una manifestaci&#xF3;n f&#xED;sica como
+  %em
+    excitantes.
+  Pero, el autor tambi&#xE9;n evoca un misticismo sutil m&#xE1;s all&#xE1; de un vulgar equilibrio de ecuaciones. Tambi&#xE9;n definamos
+  %em
+    Bionom&#xED;a
+  como reverencia, asombro, agencia, refinamiento, pasaje y la energ&#xED;a de las conexiones.
   Todas estas son buenas palabras para describir la conducta de un historiador natural.
-  El logo es una pluma estilizada, capturada en el acto de firmar su autógrafo en una hoja.
+  El logo es una pluma estilizada, capturada en el acto de firmar su aut&#xF3;grafo en una hoja.
