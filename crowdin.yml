@@ -1,21 +1,3 @@
 files:
   - source: /config/locales/en.yml
     translation: /config/locales/%two_letters_code%.yml
-  - source: /views/about.haml
-    translation: /views/about.%two_letters_code%.haml
-  - source: /views/data_managers.haml
-    translation: /views/data_managers.%two_letters_code%.haml
-  - source: /views/get_started.haml
-    translation: /views/get_started.%two_letters_code%.haml
-  - source: /views/help_docs.haml
-    translation: /views/help_docs.%two_letters_code%.haml
-  - source: /views/history.haml
-    translation: /views/history.%two_letters_code%.haml
-  - source: /views/how_it_works.haml
-    translation: /views/how_it_works.%two_letters_code%.haml
-  - source: /views/integrations.haml
-    translation: /views/integrations.%two_letters_code%.haml
-  - source: /views/privacy.haml
-    translation: /views/privacy.%two_letters_code%.haml
-  - source: /views/terms_service.haml
-    translation: /views/terms_service.%two_letters_code%.haml
