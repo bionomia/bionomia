@@ -1,0 +1,52 @@
+- content_for :title, "Terms of Service"
+- content_for :jumbotron do
+%div
+  {class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
+  %div
+    {class:"mr-auto p-2"}
+    %h1
+      {class:"h2"} Terms of Service
+%h3
+  Account Terms
+%p
+  We have a few simple rules for User Accounts on Bionomia.
+%ul
+  %li
+    You must be a human to create an Account via ORCID's passthrough authentication. Accounts registered by "bots" or other automated methods are not permitted.
+  %li
+    One person may maintain no more than one free Account.
+  %li
+    You must be age 13 or older. Bionomia does not target its Service to children under 13, and we do not permit any Users under 13. If we learn of any User under the age of 13, we will terminate that User&#x2019;s Account immediately. If you are a resident of a country outside the United States, your country&#x2019;s minimum age may be older; in such a case, you are responsible for complying with your country&#x2019;s laws.
+  %li
+    Your login may only be used by one person &#x2014; i.e., a single login through ORCID may not be shared by multiple people.
+  %li
+    You are responsible for all activity that occurs under your Account.
+  %li
+    You are responsible for maintaining the security of your Account and password via ORCID.
+  %li
+    You will promptly notify Bionomia at
+    %a
+      {href: "mailto:bionomia.tracker@gmail.com"} bionomia.tracker@gmail.com
+    if you become aware of any unauthorized use of, or access to, our Service through your Account, including any unauthorized use of your password or Account.
+%h3
+  Acceptable Use
+%p
+  Your use of Bionomia must not violate any applicable laws, including copyright or trademark laws, export control or sanctions laws, or other laws in your jurisdiction. You are responsible for making sure that your use of Bionomia is in compliance with laws and any applicable regulations.
+%h3
+  API Terms
+%p
+  Abuse or excessively frequent requests to Bionomia via the API may result in the temporary or permanent suspension of your Account. Bionomia, in our sole discretion, will determine abuse or excessive usage of the API.
+%h3
+  Cancellation and Termination
+%p
+  It is your responsibility to properly cancel your Account with Bionomia. You can cancel your Account at any time by going into your Settings. The Account screen provides a simple, no questions asked cancellation link. We are not able to cancel Accounts in response to an email.
+  Upon cancellations, your full profile and all attributions made are deleted. This information can not be recovered once your Account is cancelled.
+  Bionomia has the right to suspend or terminate your access to all or any part of the Website at any time, with or without cause, with or without notice, effective immediately.
+  Bionomia reserves the right to refuse service to anyone for any reason at any time.
+%h3
+  Contacting Bionomia
+%p
+  Questions regarding these Terms of Service should be directed to
+  = succeed "." do
+  %a
+    {href: "mailto: bionomia.tracker@gmail.com"} bionomia.tracker@gmail.com
