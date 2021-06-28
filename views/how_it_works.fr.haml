@@ -1,125 +1,158 @@
--content_for :title, "Comment ça Marche"
-
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class:"mr-auto p-2"}
-      %h1{class:"h2"} Comment ça Marche
-
+- content_for :title, "How it Works"
+- content_for :jumbotron do
+%div
+  {class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
+  %div
+    {class:"mr-auto p-2"}
+    %h1
+      {class:"h2"} Comment &#xE7;a Marche
 %p
   Bionomia is developed and maintained by
-  %a{href:"https://orcid.org/0000-0001-7618-5230"}
-    %i{class:"fab fa-orcid"}
+  %a
+    {href:"https://orcid.org/0000-0001-7618-5230"}
+    %i
+      {class:"fab fa-orcid"}
     David P. Shorthouse
   using specimen data periodically downloaded from the
-  %a{href: "https://gbif.org"} Global Biodiversity Information Facility
+  %a
+    {href: "https://gbif.org"} Global Biodiversity Information Facility
   (GBIF) and authentication provided by
   = succeed "." do
-    %a{href: "https://orcid.org" } ORCID
+  %a
+    {href: "https://orcid.org" } ORCID
   It was launched in August 2018 as a submission to the annual
   = succeed "." do
-    %a{href: "https://www.gbif.org/news/1GQURfK5jS4Iq4O06Y0EK4/2018-gbif-ebbe-nielsen-challenge-seeks-open-data-innovations-for-biodiversity"} Ebbe Nielsen Challenge
+  %a
+    {href: "https://www.gbif.org/news/1GQURfK5jS4Iq4O06Y0EK4/2018-gbif-ebbe-nielsen-challenge-seeks-open-data-innovations-for-biodiversity"} Ebbe Nielsen Challenge
   Since then,
-  %a{href: "https://www.wikidata.org"} wikidata identifiers
+  %a
+    {href: "https://www.wikidata.org"} wikidata identifiers
   were integrated to capture the names, birth, and dates of death for deceased biologists to help maximize downstream data integration, engagement, and as a means to discover errors or inconsistencies in natural history specimen data.
-
-%h3 Fonctionnement à l'intérieur
-
+%h3
+  Fonctionnement &#xE0; l'int&#xE9;rieur
 %p
   Names of collectors and determiners are parsed and cleaned using the test-driven
-  %a{href: "https://github.com/dshorthouse/dwc_agent"} dwc_agent ruby gem
+  %a
+    {href: "https://github.com/dshorthouse/dwc_agent"} dwc_agent ruby gem
   available for free integration in other projects. Similarity of people names is scored using a graph theory method outlined by
-  %a{href: "https://orcid.org/0000-0002-7101-9767"} R.D.M. Page
+  %a
+    {href: "https://orcid.org/0000-0002-7101-9767"} R.D.M. Page
   and incorporated as a method in the dwc_agent gem. These scores are used to help expand the search for candidate specimens, presented in order of greatest to least probable. If you declared alternate names in your ORCID account such as a maiden name or if aliases are mentioned in wikidata profiles, these are used to search for candidate specimen records. Processing this large number of specimen records is an intensive though repeatable process using MIT-licensed,
-  %a{href: "https://github.com/bionomia/bionomia"} open source code.
-
-%h4 Intégration avec GBIF
-
-%div{class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
-  %a{href:"https://gbif.org"}
-    %img{class:"mb-3 mr-3", src:"/images/gbif-logo.jpg", alt:"GBIF logo"}
-  %div{class:"media-body"}
+  %a
+    {href: "https://github.com/bionomia/bionomia"} open source code.
+%h4
+  Int&#xE9;gration avec GBIF
+%div
+  {class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
+  %a
+    {href:"https://gbif.org"}
+    %img/
+    {class:"mb-3 mr-3", src:"/images/gbif-logo.jpg", alt:"GBIF logo"}
+  %div
+    {class:"media-body"}
     %p
-      Approximately #{Settings.gbif.download_count}
-      %a{href: "https://doi.org/#{Settings.gbif.download_doi}"} specimen records
+      Approximately %%%#{Settings.gbif.download_count}%%%>
+      %a
+        {href: "https://doi.org/%%%#{Settings.gbif.download_doi}%%%>"} specimen records
       are downloaded from
-      %a{href:"https://gbif.org"} GBIF
+      %a
+        {href:"https://gbif.org"} GBIF
       as a custom format based on Apache Avro. Records with the basisOfRecord PRESERVED_SPECIMEN, FOSSIL_SPECIMEN, MATERIAL_SAMPLE or LIVING_SPECIMEN are selected as well as content in either
-      %a{href: "http://rs.tdwg.org/dwc/terms/#recordedBy"} recordedBy
+      %a
+        {href: "http://rs.tdwg.org/dwc/terms/#recordedBy"} recordedBy
       or
-      %a{href: "http://rs.tdwg.org/dwc/terms/#identifiedBy"} identifiedBy
+      %a
+        {href: "http://rs.tdwg.org/dwc/terms/#identifiedBy"} identifiedBy
       and then
-      %a{href:"https://github.com/bionomia/bionomia/blob/master/spark2.md"} processed.
+      %a
+        {href:"https://github.com/bionomia/bionomia/blob/master/spark2.md"} processed.
     %ul
       %li
         all occurrence data fully refreshed every 2 weeks
       %li
         daily poll for
-        %a{href:"https://www.gbif.org/resource/search?contentType=literature&relevance=GBIF_USED"} cited data download packages
+        %a
+          {href:"https://www.gbif.org/resource/search?contentType=literature=GBIF_USED"} cited data download packages
         (less than 100MB zipped), extracted and linked to attributed specimen records
-
-%h4 Intégration avec Wikidata
-
-%div{class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
-  %a{href:"https://www.wikidata.org"}
-    %img{class:"mb-3 mr-3", src:"/images/wikidata-logo.png", alt:"Wikidata logo"}
-  %div{class:"media-body"}
+%h4
+  Int&#xE9;gration avec Wikidata
+%div
+  {class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
+  %a
+    {href:"https://www.wikidata.org"}
+    %img/
+    {class:"mb-3 mr-3", src:"/images/wikidata-logo.png", alt:"Wikidata logo"}
+  %div
+    {class:"media-body"}
     %p
       Synchrony with
-      %a{href:"https://www.wikidata.org"} wikidata
+      %a
+        {href:"https://www.wikidata.org"} wikidata
       is maintained in several ways. With the exception of the last item on the list below, all automated methods executed via scheduled cron jobs using
-      %a{href:"https://github.com/ruby-rdf/sparql-client"} a ruby gem
+      %a
+        {href:"https://github.com/ruby-rdf/sparql-client"} a ruby gem
       require that people pages on wikidata have death dates as well as a value for any of the properties:
-      %em #{::Bionomia::WikidataSearch::PEOPLE_PROPERTIES.keys.join(", ")}.
-
+      %em
+        #{::Bionomia::WikidataSearch::PEOPLE_PROPERTIES.keys.join(", ")}.
     %ul
       %li
         daily poll for new pages (
-        %a{href:"https://w.wiki/J2a"} SPARQL
+        %a
+          {href:"https://w.wiki/J2a"} SPARQL
         )
       %li
         daily refresh for entries that were modified within previous 24 hours (
         = succeed ", " do
-          %a{href:"https://w.wiki/J2e"} SPARQL
+        %a
+          {href:"https://w.wiki/J2e"} SPARQL
         using 2020-01-01 as example date
         )
       %li
         weekly query for merge events (
         = succeed ", " do
-          %a{href: "https://w.wiki/J2g"} SPARQL
+        %a
+          {href: "https://w.wiki/J2g"} SPARQL
         using 2020-01-01 as example date
         )
       %li
         a Scribe can refresh on demand
-
-    %p{class:"small"}
+    %p
+      {class:"small"}
       Example SPARQL queries above are limited to
-      %em Entomologists of the World (P5370)
+      %em
+        Entomologists of the World (P5370)
       but all the watched properties are used in production
-
-%h4 Intégration avec ORCID
-
-%div{class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
-  %a{href:"https://orcid.org"}
-    %img{class:"mb-3 mr-3", src:"/images/orcid-logo.png", alt:"ORCID logo"}
-  %div{class:"media-body"}
+%h4
+  Int&#xE9;gration avec ORCID
+%div
+  {class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
+  %a
+    {href:"https://orcid.org"}
+    %img/
+    {class:"mb-3 mr-3", src:"/images/orcid-logo.png", alt:"ORCID logo"}
+  %div
+    {class:"media-body"}
     %p
       Synchrony with
-      %a{href: "https://orcid.org"} ORCID
+      %a
+        {href: "https://orcid.org"} ORCID
       is maintained in several ways.
-
     %ul
       %li
         OAuth2 pass-through authentication
       %li
         daily poll for new accounts by querying the API for any of the keywords:
-        %em #{Settings.orcid.keywords.join(", ")}
+        %em
+          #{Settings.orcid.keywords.join(", ")}
       %li
         cache full name, aliases, keywords, employment, and education along with start and end dates
       %li
         incorporate employment and education data using ORCID-supplied
-        %a{href:"https://www.ringgold.com/"} Ringgold
+        %a
+          {href:"https://www.ringgold.com/"} Ringgold
         or
-        %a{href:"https://www.grid.ac/"} GRID
+        %a
+          {href:"https://www.grid.ac/"} GRID
         identifiers for organizations
       %li
         resolution of Ringgold or GRID identifiers against wikidata Q numbers
@@ -127,16 +160,21 @@
         periodic full refresh of ORCID profiles
       %li
         user or a Scribe can refresh on-demand
-
-%h4 Intégration avec Zenodo
-
-%div{class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
-  %a{href:"https://zenodo.org"}
-    %img{class:"mb-3 mr-3", src:"/images/zenodo-logo.png", alt:"Zenodo logo"}
-  %div{class:"media-body"}
+%h4
+  Int&#xE9;gration avec Zenodo
+%div
+  {class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
+  %a
+    {href:"https://zenodo.org"}
+    %img/
+    {class:"mb-3 mr-3", src:"/images/zenodo-logo.png", alt:"Zenodo logo"}
+  %div
+    {class:"media-body"}
     %p
       From the settings panel in your account, you may connect with
-      %a{href:"https://zenodo.org/"} Zenodo
+      %a
+        {href:"https://zenodo.org/"} Zenodo
       in two clicks using your ORCID credentials. Once you make this
-      %em set-it-and-forget-it
+      %em
+        set-it-and-forget-it
       connection, Bionomia pushes your specimen data into this industry-recognized, stable, longterm archive and mints a new DataCite DOI. Your Zenodo token is cached in Bionomia and every week on your behalf, a new version of your specimen data is pushed to the archive when you make new claims. You will also receive a DataCite DOI badge on your Bionomia profile page and a formatted citation for your professional resume. The versioned data packages stored in Zenodo each consist of a csv file and a JSON-LD document, preparing the way for future Linked Data integrations. If you accept DataCite as a trusted organization in your ORCID account, you will receive a new formatted work entry there for your specimen dataset.
