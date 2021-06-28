@@ -6,7 +6,7 @@ module Sinatra
       module OccurrenceHelper
 
         def gbif_occurrence_url(id)
-          lang = (I18n.locale == :en) ? "" : "#{I18n.locale}/"
+          lang = [:fr, :es, :pt].include?(I18n.locale) ? "#{I18n.locale}/" : ""
           "https://gbif.org/#{lang}occurrence/#{id}"
         end
 
