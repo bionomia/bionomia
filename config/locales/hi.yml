@@ -549,6 +549,8 @@ hi:
       one: "co-collected specimen"
       other: "co-collected specimens"
     zenodo_html: "Your profile is linked to %{zenodo} and your claims are versioned and archived."
+    language: Preferred Language
+    language_explanation: Choose your preferred language
   roster:
     roster_title: Public Profiles
     lede:
