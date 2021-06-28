@@ -1,307 +1,429 @@
--content_for :title, "Documentos de ayuda"
-
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class:"mr-auto p-2"}
-      %h1{class:"h2"} Documentos de ayuda
-
-%h3{class:"mt-4 mb-3"} Para usuarios nuevos y configuración de grupo
-
-%div{class:"card", style:"max-width: 505px;"}
-  %a{href: "http://doi.org/10.5281/zenodo.3908726"}
-    %img{src:"/images/leachman_auckland_wmm.png", alt:"Leachman help doc for volunteers", class:"img-fluid mx-auto d-block"}
-  %div{class:"card-body"}
-    %p{class:"citation"}
+- content_for :title, "Help Documents"
+- content_for :jumbotron do
+%div
+  {class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
+  %div
+    {class:"mr-auto p-2"}
+    %h1
+      {class:"h2"} Documentos de ayuda
+%h3
+  {class:"mt-4 mb-3"} Para usuarios nuevos y configuraci&#xF3;n de grupo
+%div
+  {class:"card", style:"max-width: 505px;"}
+  %a
+    {href: "http://doi.org/10.5281/zenodo.3908726"}
+    %img/
+    {src:"/images/leachman_auckland_wmm.png", alt:"Leachman help doc for volunteers", class:"img-fluid mx-auto d-block"}
+  %div
+    {class:"card-body"}
+    %p
+      {class:"citation"}
       Siobhan Leachman. (2020, June 26). Auckland Museum Volunteer Instructions for Bionomia. Zenodo. 26pp. PDF
-      %a{href: "http://doi.org/10.5281/zenodo.3908726"}
+      %a
+        {href: "http://doi.org/10.5281/zenodo.3908726"}
         http://doi.org/10.5281/zenodo.3908726
-
-%h3{class:"mt-4 mb-3"} Tareas enfocadas
-
-%p{class:"mt-4"}
+%h3
+  {class:"mt-4 mb-3"} Tareas enfocadas
+%p
+  {class:"mt-4"}
   La anotadora
-  %a{href: url("/0000-0002-5398-7721")} Siobhan Leachman
+  %a
+    {href: url("/0000-0002-5398-7721")} Siobhan Leachman
   (vea su
   = succeed ")" do
-    %a{href:"https://twitter.com/SiobhanLeachman"} perfil de Twitter
-  también produjo una serie útil de procedimientos paso a paso a través de hilos de trinos. Estos se presentan aquí con ediciones menores como tareas enfocadas.
-
-%div{class:"row mt-4"}
-  %div{class:"col-12 col-md-6 mb-3"}
-    %div{class:"card"}
-      %div{class:"card-header border-bottom"}
-        %h4 Comenzando con ORCID y reclamo de registros de especímenes
-      %div{class:"card-body overflow-auto mt-3", style:"max-height: 300px; min-height: 300px;"}
+  %a
+    {href:"https://twitter.com/SiobhanLeachman"} perfil de Twitter
+  tambi&#xE9;n produjo una serie &#xFA;til de procedimientos paso a paso a trav&#xE9;s de hilos de trinos. Estos se presentan aqu&#xED; con ediciones menores como tareas enfocadas.
+%div
+  {class:"row mt-4"}
+  %div
+    {class:"col-12 col-md-6 mb-3"}
+    %div
+      {class:"card"}
+      %div
+        {class:"card-header border-bottom"}
+        %h4
+          Comenzando con ORCID y reclamo de registros de espec&#xED;menes
+      %div
+        {class:"card-body overflow-auto mt-3", style:"max-height: 300px; min-height: 300px;"}
         %p
-          Primero, usted necesita obtener un identificador ORCID. Con este ientificador usted podrá crear y agregar datos al sitio. Entonces, si no tiene un identificador de ORCID, debe ir a
-          %a{href: "https://orcid.org/register"} https://orcid.org/register
-          y obtener uno. Por favor haga pública alguna información que haya puesto en ORCID, como su empleador, o agregue una de sus publicaciones. Esto asegura que alguien pueda reconocer que se trata de usted.
-          Vea la página
-          %a{href: url("/get-started")} Comenzar
-          para saber qué datos públicos extrae Bionomía de su cuenta de ORCID.
+          Primero, usted necesita obtener un identificador ORCID. Con este ientificador usted podr&#xE1; crear y agregar datos al sitio. Entonces, si no tiene un identificador de ORCID, debe ir a
+          %a
+            {href: "https://orcid.org/register"} https://orcid.org/register
+          y obtener uno. Por favor haga p&#xFA;blica alguna informaci&#xF3;n que haya puesto en ORCID, como su empleador, o agregue una de sus publicaciones. Please make some information you put into ORCID public such as your employer or add one of your publications. Esto asegura que alguien pueda reconocer que se trata de usted.
+          Vea la p&#xE1;gina
+          %a
+            {href: url("/get-started")} Comenzar
+          para saber qu&#xE9; datos p&#xFA;blicos extrae Bionom&#xED;a de su cuenta de ORCID.
         %p
-          Luego, inicie sesión en Bionomía usando su cuenta de ORCID.
-          %img{src:"/images/login.png", at: "Login button", class:"d-block mt-3 mb-3"}
-
-          Lo primero que verá es la página de Descripción general de su perfil.
-          Si ha recolectado especímenes cuyos metadatos se han cargado en GBIF, puede ir a la pestaña
-          %em Epecímenes
+          Luego, inicie sesi&#xF3;n en Bionom&#xED;a usando su cuenta de ORCID.
+          %img/
+          {src:"/images/login.png", at: "Login button", class:"d-block mt-3 mb-3"}
+          Lo primero que ver&#xE1; es la p&#xE1;gina de Descripci&#xF3;n general de su perfil.
+          Si ha recolectado espec&#xED;menes cuyos metadatos se han cargado en GBIF, puede ir a la pesta&#xF1;a
+          %em
+            Epec&#xED;menes
           para reclamarlos.
-          %img{src:"/images/profile-tabs.png", alt: "profile tabs", class:"d-block mt-3 mb-3"}
+          %img/
+          {src:"/images/profile-tabs.png", alt: "profile tabs", class:"d-block mt-3 mb-3"}
         %p
-          Esto vinculará sus especímenes a su identificador de ORCID, enriqueciendo los datos y ayudando a garantizar que obtenga crédito por su trabajo en la recolección o identificación de especímenes.
-          Reclame sus especímenes haciendo click en el botón con una
-          %em red entomológica
-          para aquellos que usted recolectó, el botón con un
-          %em microscopio
-          para aquellos que usted ha identificado, o el botón
-          %em Ambos
+          Esto vincular&#xE1; sus espec&#xED;menes a su identificador de ORCID, enriqueciendo los datos y ayudando a garantizar que obtenga cr&#xE9;dito por su trabajo en la recolecci&#xF3;n o identificaci&#xF3;n de espec&#xED;menes.
+          Reclame sus espec&#xED;menes haciendo click en el bot&#xF3;n con una
+          %em
+            red entomol&#xF3;gica
+          para aquellos que usted recolect&#xF3;, el bot&#xF3;n con un
+          %em
+            microscopio
+          para aquellos que usted ha identificado, o el bot&#xF3;n
+          %em
+            Ambos
           para aquellos en los que usted ha hecho ambas cosas.
-          Si usted no recolectó o identificó uno de los registros candidatos que Bionomía encontró, haga clic en el botón
+          Si usted no recolect&#xF3; o identific&#xF3; uno de los registros candidatos que Bionom&#xED;a encontr&#xF3;, haga clic en el bot&#xF3;n
           = succeed "." do
-            %em No soy yo
-        %p{class:"mt-3 mb-3"}
-          %img{src:"/images/button-selectors.png", alt: "Specimen claiming buttons"}
-          %img{src:"/images/not-me.png", alt: "Not me buttons"}
-
+          %em
+            No soy yo
         %p
-          ¡No entre en pánico si comete un error! Usted puede rectificarlo.
-          Vaya a la subpestaña
-          %em Reclamados
-          para ajustar los registros que indicó como identificados, recolectados o ambos.
-          Vaya a la subpestaña
-          %em Ignorados
-          para reclamar los registros que indicó como "No soy yo".
-
+          {class:"mt-3 mb-3"}
+          %img/
+          {src:"/images/button-selectors.png", alt: "Specimen claiming buttons"}
+          %img/
+          {src:"/images/not-me.png", alt: "Not me buttons"}
         %p
-          Una vez que haya reclamado sus registros de especímenes, vaya a la pestaña
-          = succeed "." do
-            %em Ciencia habilitada
-          Ésta le mostrará qué trabajos han utilizado en sus análisis registros de sus especímenes. Esto depende de que los autores de esos artículos acrediten y citen el DOI de la descarga del conjunto de datos de GBIF que utilizaron.
-
+          \&#xA1;No entre en p&#xE1;nico si comete un error! Usted puede rectificarlo.
+          Vaya a la subpesta&#xF1;a
+          %em
+            Reclamados
+          para ajustar los registros que indic&#xF3; como identificados, recolectados o ambos.
+          Vaya a la subpesta&#xF1;a
+          %em
+            Ignorados
+          para reclamar los registros que indic&#xF3; como "No soy yo".
+        %p
+          Once you have claimed your specimen records, press the
+          %em
+            Science Enabled
+          tab.
+          This will show you what papers have used your specimen records in their analyses. Esto depende de que los autores de esos art&#xED;culos acrediten y citen el DOI de la descarga del conjunto de datos de GBIF que utilizaron.
         %p
           Visite
-          %em Configuración e integraciones
-          para hacer su perfil de Bionomía disponible públicamente.
-          %img{src:"/images/settings-integrations.png", alt:"Settings & Integrations", class:"mt-3 mb-3"}
-          %img{src:"/images/make-public.png", alt:"Make profile public", class:"mt-3 mb-3"}
-
-  %div{class:"col-12 col-md-6 mb-3"}
-    %div{class:"card"}
-      %div{class:"card-header border-bottom"}
-        %h4 Ayudando a otros
-      %div{class:"card-body overflow-auto mt-3", style:"max-height: 300px; min-height: 300px;"}
+          %em
+            Configuraci&#xF3;n e integraciones
+          para hacer su perfil de Bionom&#xED;a disponible p&#xFA;blicamente.
+          %img/
+          {src:"/images/settings-integrations.png", alt:"Settings  Integrations", class:"mt-3 mb-3"}
+          %img/
+          {src:"/images/make-public.png", alt:"Make profile public", class:"mt-3 mb-3"}
+  %div
+    {class:"col-12 col-md-6 mb-3"}
+    %div
+      {class:"card"}
+      %div
+        {class:"card-header border-bottom"}
+        %h4
+          Ayudando a otros
+      %div
+        {class:"card-body overflow-auto mt-3", style:"max-height: 300px; min-height: 300px;"}
         %p
-          Voy a empezar por elegir a alguien a quien ayudar. He iniciado sesión en Bionomia con mi identificador de ORCID y he pulsado el botón
-          %em Ayudar a otros
-          en la esquina superior derecha. Ahora voy a elegir un país. ¡Sí, Nueva Zelanda! Voy a elegir al entomólogo George Howes.
-        %p{class:"mt-3 mb-3"}
-          %img{src:"/images/help-others-link.png", alt:"Help Others button"}
-          %img{src:"/images/countries-help.png", alt:"Countries helping list"}
-          %img{src:"/images/help-new-zealand.png", alt:"Help New Zealand"}
-          %img{src:"/images/george-howes.png", alt:"George Howes"}
+          Voy a empezar por elegir a alguien a quien ayudar. He iniciado sesi&#xF3;n en Bionomia con mi identificador de ORCID y he pulsado el bot&#xF3;n
+          %em
+            Ayudar a otros
+          en la esquina superior derecha. Ahora voy a elegir un pa&#xED;s. &#xA1;S&#xED;, Nueva Zelanda! Voy a elegir al entom&#xF3;logo George Howes.
         %p
-          La razón por la que lo elegí es que comencé un artículo de Wikipedia
+          {class:"mt-3 mb-3"}
+          %img/
+          {src:"/images/help-others-link.png", alt:"Help Others button"}
+          %img/
+          {src:"/images/countries-help.png", alt:"Countries helping list"}
+          %img/
+          {src:"/images/help-new-zealand.png", alt:"Help New Zealand"}
+          %img/
+          {src:"/images/george-howes.png", alt:"George Howes"}
+        %p
+          La raz&#xF3;n por la que lo eleg&#xED; es que comenc&#xE9; un art&#xED;culo de Wikipedia
           = succeed "." do
-            %a{href: "https://en.wikipedia.org/wiki/George_Howes_(entomologist)"} para él
-          Pienso que él fue maravilloso y debería recibir crédito por su trabajo de colecta. Su página de Bionomía se ve así.
-          %img{src:"/images/helping-george-howes.png", alt:"George Howes", class:"d-block mt-3 mb-3"}
-          El primer espécimen fue recolectado por alguien con sus iniciales, en las fechas correctas, se encuentra en una colección de Nueva Zelanda.
-          Estoy segura de que él lo recolectó, así que presiono el botón con la
-          %em red entomológica
-          al lado del espécimen.
-          %img{src:"/images/fenwicki-net.png", alt:"Selecting P. fenwicki", class:"d-block mt-3 mb-3"}
-          Si estuviera segura de que él había recolectado TODOS los 25 especímenes en esta vista, podría haber presionado el botón con la
-          %em red entomológica
-          blanca con fondo negro al comienzo o al final del listado. Esto atribuiría automáticamente todos estos 25 registros de especímenes en masa (pero no más).
-          Incluso puedo aumentar el número de especímenes en la página hasta 250 (en el menú desplegable de la esquina inferior izquierda en la página) y asignarlos todos en un sólo click
-        %p{class:"mt-3 mb-3"}
-          %img{src:"/images/bulk-assignment.png", alt:"Bulk assignment buttons"}
-          %img{src:"/images/per-page-dropdown.png", alt:"Per page dropdown"}
+          %a
+            {href: "https://en.wikipedia.org/wiki/George_Howes_(entomologist)"} para &#xE9;l
+          Pienso que &#xE9;l fue maravilloso y deber&#xED;a recibir cr&#xE9;dito por su trabajo de colecta. Su p&#xE1;gina de Bionom&#xED;a se ve as&#xED;.
+          %img/
+          {src:"/images/helping-george-howes.png", alt:"George Howes", class:"d-block mt-3 mb-3"}
+          El primer esp&#xE9;cimen fue recolectado por alguien con sus iniciales, en las fechas correctas, se encuentra en una colecci&#xF3;n de Nueva Zelanda.
+          I'm confident he collected it. So, I press the
+          %em
+            net
+          button beside the specimen.
+          %img/
+          {src:"/images/fenwicki-net.png", alt:"Selecting P. fenwicki", class:"d-block mt-3 mb-3"}
+          Si estuviera segura de que &#xE9;l hab&#xED;a recolectado TODOS los 25 espec&#xED;menes en esta vista, podr&#xED;a haber presionado el bot&#xF3;n con la
+          %em
+            red entomol&#xF3;gica
+          blanca con fondo negro al comienzo o al final del listado. Esto atribuir&#xED;a autom&#xE1;ticamente todos estos 25 registros de espec&#xED;menes en masa (pero no m&#xE1;s).
+          Incluso puedo aumentar el n&#xFA;mero de espec&#xED;menes en la p&#xE1;gina hasta 250 (en el men&#xFA; desplegable de la esquina inferior izquierda en la p&#xE1;gina) y asignarlos todos en un s&#xF3;lo click
         %p
-          Pero en este caso, un poco más abajo del conjunto, hay especímenes recolectados por "G Howes" en NHMUK.
-          No estoy segura de si éste es NUESTRO George Howes. Si no estoy segura de que sea él, tendré que dejar los especímenes.
-          %img{src:"/images/helping-unsure.png", alt:"Helping unsure", class:"d-block mt-3 mb-3"}
-          Para tratar de averiguar si es George, haré click en el nombre científico del espécimen.
-          Esto abre una nueva pestaña y me lleva a los detalles del espécimen en GBIF. Aquí puedo ver que fue recolectado en el valle de Leith en Dunedin, en 1922 por G. Howes.
-          %img{src:"/images/helping-gbif.png", alt:"Helping GBIF", class:"d-block mt-3 mb-3"}
-          ¡Sí, es nuestro George! Así que reclamaré esos especímenes para él.
-
+          {class:"mt-3 mb-3"}
+          %img/
+          {src:"/images/bulk-assignment.png", alt:"Bulk assignment buttons"}
+          %img/
+          {src:"/images/per-page-dropdown.png", alt:"Per page dropdown"}
         %p
-          PERO todavía hay que tener mucho cuidado. Hay que prestar atención a las fechas. En la página siguiente hay un registro que no es de 1921 o 1922.
-          Hay un espécimen colectado en 1937 - aún mientras nuestro George estaba vivo. Pero tengo dudas con las fechas, así que hago clic para verificar.
-          Ese espécimen NO FUE recolectado por George porque fue recolectado en Bolivia.
-          %img{src:"/images/parvispina-dates.png", alt:"parvispina 1937", class:"d-block mt-3 mb-1"}
-          %img{src:"/images/parvispina-gbif.png", alt:"parvispina 1937", class:"d-block mb-3"}
+          Pero en este caso, un poco m&#xE1;s abajo del conjunto, hay espec&#xED;menes recolectados por "G Howes" en NHMUK.
+          No estoy segura de si &#xE9;ste es NUESTRO George Howes. Si no estoy segura de que sea &#xE9;l, tendr&#xE9; que dejar los espec&#xED;menes.
+          %img/
+          {src:"/images/helping-unsure.png", alt:"Helping unsure", class:"d-block mt-3 mb-3"}
+          Para tratar de averiguar si es George, har&#xE9; click en el nombre cient&#xED;fico del esp&#xE9;cimen.
+          Esto abre una nueva pesta&#xF1;a y me lleva a los detalles del esp&#xE9;cimen en GBIF. Aqu&#xED; puedo ver que fue recolectado en el valle de Leith en Dunedin, en 1922 por G. Howes.
+          %img/
+          {src:"/images/helping-gbif.png", alt:"Helping GBIF", class:"d-block mt-3 mb-3"}
+          \&#xA1;S&#xED;, es nuestro George! As&#xED; que reclamar&#xE9; esos espec&#xED;menes para &#xE9;l.
         %p
-          Más abajo veo especímenes provenientes de FishBase, pero George era entomólogo, así que confirmo que tampoco recolectó esos especímenes y reclamo los especímenes que sí recolectó. Luego presiono el botón de
-          %em No es ella/él
-          para aquellos que él no recolectó ni identificó.
-          %img{src:"/images/fishbase-not-them.png", alt:"parvispina 1937", class:"d-block mt-3 mb-3"}
-
-%div{class:"row mt-4"}
-  %div{class:"col-12 col-md-6 mb-3"}
-    %div{class:"card"}
-      %div{class:"card-header border-bottom"}
-        %h4 Crear un artículo de Wikidata
-      %div{class:"card-body overflow-auto mt-3", style:"max-height: 300px; min-height: 300px;"}
+          PERO todav&#xED;a hay que tener mucho cuidado. Hay que prestar atenci&#xF3;n a las fechas. En la p&#xE1;gina siguiente hay un registro que no es de 1921 o 1922.
+          Hay un esp&#xE9;cimen colectado en 1937 - a&#xFA;n mientras nuestro George estaba vivo. Pero tengo dudas con las fechas, as&#xED; que hago clic para verificar.
+          That specimen WASN'T collected by George. It was collected in Bolivia.
+          %img/
+          {src:"/images/parvispina-dates.png", alt:"parvispina 1937", class:"d-block mt-3 mb-1"}
+          %img/
+          {src:"/images/parvispina-gbif.png", alt:"parvispina 1937", class:"d-block mb-3"}
         %p
-          Una vez que usted domine el arte de atribuir especímenes en Bionomía, es posible que desee intentar incluir colectores más desafiantes como Miss Blackler en Bionomía.
-          Esta es mi área de trabajo favorita, ya que es como una investigación de detective. ¡Y tengo muchos amigos que me pueden ayudar!
-          %blockquote{class:"twitter-tweet"}
-            %p{lang:"en", dir:"ltr"}
-              Entonces, cuando me cruzo con una colectora con el nombre "Señorita xxx" y se sabe muy poco sobre ella, intento incluirla en Wikidata. Como
-              %a{href:"https://twitter.com/idbdeb?ref_src=twsrc%5Etfw"} @idbdeb
-              descubrimos ayer, ¡a menudo hay información sobre ella en algún archivo o publicación en alguna parte!
-              %a{href:"https://t.co/Eoi0rvs8Uh"} https://t.co/Eoi0rvs8Uh
-              %a{href:"https://t.co/fEvLIqsTES"} pic.twitter.com/fEvLIqsTES
-            &mdash; Siobhan (@SiobhanLeachman)
-            %a{href:"https://twitter.com/SiobhanLeachman/status/1256769966335901696?ref_src=twsrc%5Etfw"} Mayo 3, 2020
-          %script{async: true, src:"https://platform.twitter.com/widgets.js", charset:"utf-8"}
+          M&#xE1;s abajo veo espec&#xED;menes provenientes de FishBase, pero George era entom&#xF3;logo, as&#xED; que confirmo que tampoco recolect&#xF3; esos espec&#xED;menes y reclamo los espec&#xED;menes que s&#xED; recolect&#xF3;. I confirm that he didn't collect those specimens either. Luego presiono el bot&#xF3;n de
+          %em
+            No es ella/&#xE9;l
+          para aquellos que &#xE9;l no recolect&#xF3; ni identific&#xF3;.
+          %img/
+          {src:"/images/fishbase-not-them.png", alt:"parvispina 1937", class:"d-block mt-3 mb-3"}
+%div
+  {class:"row mt-4"}
+  %div
+    {class:"col-12 col-md-6 mb-3"}
+    %div
+      {class:"card"}
+      %div
+        {class:"card-header border-bottom"}
+        %h4
+          Crear un art&#xED;culo de Wikidata
+      %div
+        {class:"card-body overflow-auto mt-3", style:"max-height: 300px; min-height: 300px;"}
         %p
-          Me encontré con "Miss Blackler" porque la había visto en el índice de botánicos de
+          Una vez que usted domine el arte de atribuir espec&#xED;menes en Bionom&#xED;a, es posible que desee intentar incluir colectores m&#xE1;s desafiantes como Miss Blackler en Bionom&#xED;a.
+          Esta es mi &#xE1;rea de trabajo favorita, ya que es como una investigaci&#xF3;n de detective. &#xA1;Y tengo muchos amigos que me pueden ayudar!
+          %blockquote
+            {class:"twitter-tweet"}
+            %p
+              {lang:"en", dir:"ltr"}
+              Entonces, cuando me cruzo con una colectora con el nombre "Se&#xF1;orita xxx" y se sabe muy poco sobre ella, intento incluirla en Wikidata. Como
+              %a
+                {href:"https://twitter.com/idbdeb?ref_src=twsrc%5Etfw"} @idbdeb
+              descubrimos ayer, &#xA1;a menudo hay informaci&#xF3;n sobre ella en alg&#xFA;n archivo o publicaci&#xF3;n en alguna parte!
+              %a
+                {href:"https://t.co/Eoi0rvs8Uh"} https://t.co/Eoi0rvs8Uh
+              %a
+                {href:"https://t.co/fEvLIqsTES"} pic.twitter.com/fEvLIqsTES
+            mdash; Siobhan (@SiobhanLeachman)
+            %a
+              {href:"https://twitter.com/SiobhanLeachman/status/1256769966335901696?ref_src=twsrc%5Etfw"} Mayo 3, 2020
+          :javascript
+            {async: true, src:"https://platform.twitter.com/widgets.js", charset:"utf-8"}
+        %p
+          I came across "Miss Blackler" as I had seen her in the
+          %a
+            {href:"https://twitter.com/HarvardHerbaria"} @HarvardHerbaria
+          Index of Botanists.
+          She collected in Oregon and California. Cre&#xE9; un art&#xED;culo de
+          %a
+            {href:"https://twitter.com/wikidata"} @Wikidata
+          para ella y agregu&#xE9; su identificador HUH.
+        %p
+          {class:"mt-3 mb-3"}
+          %img/
+          {src:"/images/huh.png", alt:"Harvard Index of Botanists", class:"mt-3 mb-3"}
+          %img/
+          {src:"/images/wikidata-screen.png", alt:"Wikidata screen capture", class:"mt-3 mb-3"}
+        %p
+          Pero para agregarla a Bionom&#xED;a necesito obtener una fecha de muerte. Y ah&#xED; es donde puede ser complicado. Nuestra "Miss Blackler" recolect&#xF3; en Olimpia y
+          %a
+            {href:"https://twitter.com/metacoretechs"} @metacoretechs
+          encontr&#xF3; una referencia a Lydia Hooper Blackler en el Internet Archive.
+          %img/
+          {src:"/images/blackler-ia.png", alt:"Blackler Internet Archive", class:"d-block mt-3 mb-3"}
+        %p
+          Bas&#xE1;ndome en informaci&#xF3;n que
+          %a
+            {href:"https://twitter.com/idbdeb"} @idbdeb
+          encontr&#xF3;, Lydia Hooper Blackler vivi&#xF3; en Olimpia, permaneci&#xF3; soltera, viaj&#xF3; y vivi&#xF3; en California, donde otros espec&#xED;menes suyos fueron recolectados. %%%= succeed "." do%%%>
+          %a
+            {href:"https://www.ashefamily.info/ashefamily/1874.htm"}https://www.ashefamily.info/ashefamily/1874.htm
+          Como resultado, estoy segura de que &#xE9;sta es nuestra "Miss Blackler". Ella tambi&#xE9;n est&#xE1; en
           = succeed "." do
-            %a{href:"https://twitter.com/HarvardHerbaria"} @HarvardHerbaria
-          Ella colectó en Oregon y California. Creé un artículo de
-          %a{href:"https://twitter.com/wikidata"} @Wikidata
-          para ella y agregué su identificador HUH.
-        %p{class:"mt-3 mb-3"}
-          %img{src:"/images/huh.png", alt:"Harvard Index of Botanists", class:"mt-3 mb-3"}
-          %img{src:"/images/wikidata-screen.png", alt:"Wikidata screen capture", class:"mt-3 mb-3"}
+          %a
+            {href:"https://twitter.com/FindaGrave"} @FindaGrave
+          %img/
+          {src:"/images/find-grave.png", alt:"Find a Grave", class:"d-block mt-3 mb-3"}
+          As&#xED; que ahora actualizo su art&#xED;culo de Wikidata.
+          Agregar&#xE9; toda la informaci&#xF3;n que encontramos, agregar&#xE9; tantas referencias como pueda para que otros investigadores puedan rastrear la informaci&#xF3;n que encontramos.
+          Incluir&#xE9; adem&#xE1;s la fecha de la muerte, pues es un dato importante.
+          %img/
+          {src:"/images/wikidata-death.png", alt:"Wikidata date of death", class:"d-block mt-3 mb-3"}
+          Tambi&#xE9;n encontr&#xE9; una imagen de dominio p&#xFA;blico de Lydia Hooper Blackler a trav&#xE9;s de
+          %a
+            {href:"https://twitter.com/OrHist"} @OrHist
+          = succeed "." do
+          %a
+            {href:"https://digitalcollections.ohs.org/blackler-lydia-hooper"} https://digitalcollections.ohs.org/blackler-lydia-hooper
+          Antes de agregarla a Bionom&#xED;a, descargar&#xE9; esta imagen y la subir&#xE9; a
+          = succeed "." do
+          %a
+            {href:"https://twitter.com/WikiCommons"} @Wikicommons
+          Luego puedo agregar la imagen al art&#xED;culo de Wikidata. This in turn will be pulled into Bionomia when I add her to the site.
+          %img/
+          {src:"/images/blackler-image.png", alt:"Photo of Blackler", class:"d-block mt-3 mb-3"}
         %p
-          Pero para agregarla a Bionomía necesito obtener una fecha de muerte. Y ahí es donde puede ser complicado. Nuestra "Miss Blackler" recolectó en Olimpia y
-          %a{href:"https://twitter.com/metacoretechs"} @metacoretechs
-          encontró una referencia a Lydia Hooper Blackler en el Internet Archive.
-          %img{src:"/images/blackler-ia.png", alt:"Blackler Internet Archive", class:"d-block mt-3 mb-3"}
-
+          Ahora la agrego a Bionom&#xED;a. I take her Wikidata item Q93018256 and go to the site.
+          I press the
+          %em
+            Help Others
+          button top right, and then the
+          %em
+            Add Someone
+          tab. Hago click en el bot&#xF3;n
+          %em
+            Ayudar a otros
+          en la parte superior derecha, y luego hago click en la pesta&#xF1;a
+          = succeed "." do
+          %em
+            Agregar a alguien
+          Agrego el n&#xFA;mero Q del art&#xED;culo de Wikidata y presiono el bot&#xF3;n verde
+          = succeed "." do
+          %em
+            Add
         %p
-          Basándome en información que
-          %a{href:"https://twitter.com/idbdeb"} @idbdeb
-          encontró, Lydia Hooper Blackler vivió en Olimpia, permaneció soltera, viajó y vivió en California, donde otros especímenes suyos fueron recolectados.
-          = succeed "." do
-            %a{href:"https://www.ashefamily.info/ashefamily/1874.htm"}https://www.ashefamily.info/ashefamily/1874.htm
-          Como resultado, estoy segura de que ésta es nuestra "Miss Blackler". Ella también está en
-          = succeed "." do
-            %a{href:"https://twitter.com/FindaGrave"} @FindaGrave
-          %img{src:"/images/find-grave.png", alt:"Find a Grave", class:"d-block mt-3 mb-3"}
-          Así que ahora actualizo su artículo de Wikidata.
-          Agregaré toda la información que encontramos, agregaré tantas referencias como pueda para que otros investigadores puedan rastrear la información que encontramos.
-          Incluiré además la fecha de la muerte, pues es un dato importante.
-          %img{src:"/images/wikidata-death.png", alt:"Wikidata date of death", class:"d-block mt-3 mb-3"}
-          También encontré una imagen de dominio público de Lydia Hooper Blackler a través de
-          %a{href:"https://twitter.com/OrHist"} @OrHist
-          = succeed "." do
-            %a{href:"https://digitalcollections.ohs.org/blackler-lydia-hooper"} https://digitalcollections.ohs.org/blackler-lydia-hooper
-          Antes de agregarla a Bionomía, descargaré esta imagen y la subiré a
-          = succeed "." do
-            %a{href:"https://twitter.com/WikiCommons"} @Wikicommons
-          Luego puedo agregar la imagen al artículo de Wikidata. Toda esta nformación, se incluirá en Bionomía cuando agregue a "Miss Blackler" al sitio.
-          %img{src:"/images/blackler-image.png", alt:"Photo of Blackler", class:"d-block mt-3 mb-3"}
+          {class:"mt-3 mb-3"}
+          %img/
+          {src:"/images/help-others-link.png", alt:"Help others link"}
+          %img/
+          {src:"/images/help-tabs.png", alt:"Helping tabs"}
+          %img/
+          {src:"/images/add-someone.png", alt:"Add someone"}
         %p
-          Ahora la agrego a Bionomía. Tomo su artículo de Wikidata Q93018256 y voy a Bionomía.
-          Hago click en el botón
-          %em Ayudar a otros
-          en la parte superior derecha, y luego hago click en la pestaña
-          = succeed "." do
-            %em Agregar a alguien
-          Agrego el número Q del artículo de Wikidata y presiono el botón verde
-          = succeed "." do
-            %em Add
-        %p{class:"mt-3 mb-3"}
-          %img{src:"/images/help-others-link.png", alt:"Help others link"}
-          %img{src:"/images/help-tabs.png", alt:"Helping tabs"}
-          %img{src:"/images/add-someone.png", alt:"Add someone"}
-        %p
-          Así queda ella agregada en Bionomía. Ahora es solo cuestión de hacer clic en su nombre y luego atribuirle especímenes como hicimos anteriormente para George Howes.
-          %img{src:"/images/help-blackler.png", alt:"Helping Blackler", class:"mt-3 mb-3"}
+          As&#xED; queda ella agregada en Bionom&#xED;a. Ahora es solo cuesti&#xF3;n de hacer clic en su nombre y luego atribuirle espec&#xED;menes como hicimos anteriormente para George Howes.
+          %img/
+          {src:"/images/help-blackler.png", alt:"Helping Blackler", class:"mt-3 mb-3"}
           No se olvide de hacer click en
-          %em Hacer público
-          una vez que haya atribuido algunos especímenes.
-          %img{src:"/images/make-public-button.png", class:"d-block mt-3 mb-3"}
-          Usted no TIENE QUE competar el 100%, cualquier cosa es mejor que nada.
-
-  %div{class:"col-12 col-md-6 mb-3"}
-    %div{class:"card"}
-      %div{class:"card-header border-bottom"}
-        %h4 Cargas para atribuir registros en masa
-      %div{class:"card-body overflow-auto mt-3", style:"max-height: 300px; min-height: 300px;"}
+          %em
+            Hacer p&#xFA;blico
+          una vez que haya atribuido algunos espec&#xED;menes.
+          %img/
+          {src:"/images/make-public-button.png", class:"d-block mt-3 mb-3"}
+          Usted no TIENE QUE competar el 100%, cualquier cosa es mejor que nada. You don't HAVE to get to 100%, anything is better than nothing.
+  %div
+    {class:"col-12 col-md-6 mb-3"}
+    %div
+      {class:"card"}
+      %div
+        {class:"card-header border-bottom"}
+        %h4
+          Cargas para atribuir registros en masa
+      %div
+        {class:"card-body overflow-auto mt-3", style:"max-height: 300px; min-height: 300px;"}
         %p
-          Hoy pensé en compartir un "paso a paso" para cargas en masa.
-          Después de solo un día de hacer esto, siento que necesito práctica adicional.
-          Además, otras personas han mencionado que les gustaría unirse a mí para intentar esto, pero no saben cómo.
-          ¡Así que aquí va!
+          Hoy pens&#xE9; en compartir un "paso a paso" para cargas en masa.
+          Despu&#xE9;s de solo un d&#xED;a de hacer esto, siento que necesito pr&#xE1;ctica adicional.
+          Adem&#xE1;s, otras personas han mencionado que les gustar&#xED;a unirse a m&#xED; para intentar esto, pero no saben c&#xF3;mo.
+          \&#xA1;As&#xED; que aqu&#xED; va!
         %p
-          Primero hay que encontrar una persona con especímenes que necesitan ser atribuidos.
+          Primero hay que encontrar una persona con espec&#xED;menes que necesitan ser atribuidos.
           Voy a elegir al fabuloso Alexander Wetmore.
-          Anteriormente transcribí sus álbumes de fotos con
+          Anteriormente transcrib&#xED; sus &#xE1;lbumes de fotos con
           = succeed "." do
-            %a{href:"https://twitter.com/TranscribeSI"} @TranscribeSI
-          Fue un colector prolífico y necesita un poco de cariño en
+          %a
+            {href:"https://twitter.com/TranscribeSI"} @TranscribeSI
+          Fue un colector prol&#xED;fico y necesita un poco de cari&#xF1;o en
           = succeed "." do
-            %a{href:"https://twitter.com/BionomiaTrack"} @BionomiaTrack
-        %p{class:"mt-3 mb-3"}
-          %img{src:"/images/wetmore-jumbotron.png", alt: "Wetmore overview", class:"align-top"}
+          %a
+            {href:"https://twitter.com/BionomiaTrack"} @BionomiaTrack
         %p
-          Así que voy a la pestaña "Atribuciones en masa" en su página de perfil, y luego presiono el botón azul "Descargar" para descargar un archivo csv.
-        %p{class:"mt-3 mb-3"}
-          %img{src:"/images/wetmore-download.png", alt:"Wetmore download", class:"align-top"}
-          %img{src:"/images/download-buttons.png", alt:"Download buttons", class:"align-top"}
+          {class:"mt-3 mb-3"}
+          %img/
+          {src:"/images/wetmore-jumbotron.png", alt: "Wetmore overview", class:"align-top"}
         %p
-          Esto descarga un archivo csv con datos de especímenes.
+          So I go to the "Bulk Attributions" tab on his profile page. As&#xED; que voy a la pesta&#xF1;a "Atribuciones en masa" en su p&#xE1;gina de perfil, y luego presiono el bot&#xF3;n azul "Descargar" para descargar un archivo csv.
+        %p
+          {class:"mt-3 mb-3"}
+          %img/
+          {src:"/images/wetmore-download.png", alt:"Wetmore download", class:"align-top"}
+          %img/
+          {src:"/images/download-buttons.png", alt:"Download buttons", class:"align-top"}
+        %p
+          Esto descarga un archivo csv con datos de espec&#xED;menes.
           Abro el archivo.
-          Ahora voy a usar Excel, pero usted puede usar algún otro programa.
-          Cuando se abre, el archivo se ve así en Excel.
-        %p{class:"mt-3 mb-3"}
-          %img{src:"/images/excel-download.jpg", alt:"Excel download", class:"align-top"}
+          Ahora voy a usar Excel, pero usted puede usar alg&#xFA;n otro programa.
+          Cuando se abre, el archivo se ve as&#xED; en Excel.
         %p
-          Revisaré las columnas importantes.
+          {class:"mt-3 mb-3"}
+          %img/
+          {src:"/images/excel-download.jpg", alt:"Excel download", class:"align-top"}
+        %p
+          Revisar&#xE9; las columnas importantes.
           La primera es la columna "action".
-          Aquí es donde colocará "recorded" (sin las comillas) si el espécimen fue recolectado por Alexander, o "identified" (sin las comillas) si fue identificado por él.
+          Aqu&#xED; es donde colocar&#xE1; "recorded" (sin las comillas) si el esp&#xE9;cimen fue recolectado por Alexander, o "identified" (sin las comillas) si fue identificado por &#xE9;l.
           Si hizo ambas cosas, agregar "recorded, identified" (sin las comillas).
-          ¡Tenga en cuenta la coma que separa las dos palabras!
-        %p{class:"mt-3 mb-3"}
-          %img{src:"/images/recorded-identified.png", alt:"recorded identified", class:"align-top"}
+          \&#xA1;Tenga en cuenta la coma que separa las dos palabras!
         %p
-          Puede ver si Alexander registró o identificó especímenes verificando las columnas "recordedBy" o "identifiedBy" en la hoja de cálculo.
-        %p{class:"mt-3 mb-3"}
-          %img{src:"/images/recordedby.png", alt:"recordedBy", class:"align-top"}
-          %img{src:"/images/identifiedby.png", alt:"identifiedBy", class:"align-top"}
+          {class:"mt-3 mb-3"}
+          %img/
+          {src:"/images/recorded-identified.png", alt:"recorded identified", class:"align-top"}
+        %p
+          Puede ver si Alexander registr&#xF3; o identific&#xF3; espec&#xED;menes verificando las columnas "recordedBy" o "identifiedBy" en la hoja de c&#xE1;lculo.
+        %p
+          {class:"mt-3 mb-3"}
+          %img/
+          {src:"/images/recordedby.png", alt:"recordedBy", class:"align-top"}
+          %img/
+          {src:"/images/identifiedby.png", alt:"identifiedBy", class:"align-top"}
         %p
           La otra columna que puede ser de utilidad es la columna "Not Me".
-          Si no es su recolector quien recolectó o identificó el espécimen, puede agregar "True" en esta columna.
-        %p{class:"mt-3 mb-3"}
-          %img{src:"/images/notme.png", alt:"Not me", class:"align-top"}
+          Si no es su recolector quien recolect&#xF3; o identific&#xF3; el esp&#xE9;cimen, puede agregar "True" en esta columna.
         %p
-          Una vez que tenga lista su hoja de cálculo con algunas asignaciones agregadas, puede cargarla en Bionomía.
-          Solo voy a hacer algunas para poder mostrarle qué hacer.
-          Asumiré que usted tiene conocimientos básicos de Excel.
+          {class:"mt-3 mb-3"}
+          %img/
+          {src:"/images/notme.png", alt:"Not me", class:"align-top"}
+        %p
+          Una vez que tenga lista su hoja de c&#xE1;lculo con algunas asignaciones agregadas, puede cargarla en Bionom&#xED;a.
+          Solo voy a hacer algunas para poder mostrarle qu&#xE9; hacer.
+          Asumir&#xE9; que usted tiene conocimientos b&#xE1;sicos de Excel.
           Todo lo que voy a hacer es usar ordenar, filtrar y buscar recordedBy.
-        %p{class:"mt-3 mb-3"}
-          %img{src:"/images/sort-filter.png", alt:"Sort and filter", class:"align-top"}
         %p
-          Agregaré "recorded" en la columna "action" a todas esas líneas.
-          Luego, revisaré la columna "identifiedBy" para asegurarme de que no identificó ninguno de los especímenes.
-          Si lo hizo, agregaré una coma e "identified" a esos especímenes que colectó e identificó.
-        %p{class:"mt-3 mb-3"}
-          %img{src:"/images/excel-action.png", alt:"Adding action", class:"align-top"}
+          {class:"mt-3 mb-3"}
+          %img/
+          {src:"/images/sort-filter.png", alt:"Sort and filter", class:"align-top"}
         %p
-          Ahora, obviamente, usted puede seguir trabajando en la hoja de cálculo.
-          Pero yo lo dejaré hasta ahí para poder mostrarle los siguientes pasos.
-          Lo que hago a continuación puede que no sea la mejor manera, pero funciona.
-          Guardo la hoja de cálculo y aparece una advertencia.
+          Agregar&#xE9; "recorded" en la columna "action" a todas esas l&#xED;neas.
+          Luego, revisar&#xE9; la columna "identifiedBy" para asegurarme de que no identific&#xF3; ninguno de los espec&#xED;menes.
+          Si lo hizo, agregar&#xE9; una coma e "identified" a esos espec&#xED;menes que colect&#xF3; e identific&#xF3;.
+        %p
+          {class:"mt-3 mb-3"}
+          %img/
+          {src:"/images/excel-action.png", alt:"Adding action", class:"align-top"}
+        %p
+          Ahora, obviamente, usted puede seguir trabajando en la hoja de c&#xE1;lculo.
+          Pero yo lo dejar&#xE9; hasta ah&#xED; para poder mostrarle los siguientes pasos.
+          Lo que hago a continuaci&#xF3;n puede que no sea la mejor manera, pero funciona.
+          Guardo la hoja de c&#xE1;lculo y aparece una advertencia.
           Presiono "No" en la advertencia y lo guardo como un libro de Excel.
-        %p{class:"mt-3 mb-3"}
-          %img{src:"/images/csv-dialog.jpg", alt:"CSV dialog", class:"align-top"}
-          %img{src:"/images/csv-save-workbook.jpg", alt:"Saving csv as workbook", class:"align-top"}
+        %p
+          {class:"mt-3 mb-3"}
+          %img/
+          {src:"/images/csv-dialog.jpg", alt:"CSV dialog", class:"align-top"}
+          %img/
+          {src:"/images/csv-save-workbook.jpg", alt:"Saving csv as workbook", class:"align-top"}
         %p
           Luego presiono "guardar como" y elijo el formato de archivo CSV UTF-8.
-          Cambiaré el nombre del archivo a Q34558Alex.csv.
-        %p{class:"mt-3 mb-3"}
-          %img{src:"/images/save-utf8.jpg", alt:"Save as UTF-8", class:"align-top"}
+          Cambiar&#xE9; el nombre del archivo a Q34558Alex.csv.
         %p
-          Luego vuelvo a Bionomía - al perfil de Alexander, a la pestaña Atribuciones en masa y presiono "Choose file".
+          {class:"mt-3 mb-3"}
+          %img/
+          {src:"/images/save-utf8.jpg", alt:"Save as UTF-8", class:"align-top"}
+        %p
+          Luego vuelvo a Bionom&#xED;a - al perfil de Alexander, a la pesta&#xF1;a Atribuciones en masa y presiono "Choose file".
           Selecciono el archivo que acabo de renombrar y guardar como archivo csv. Luego presiono enviar.
         %p
-          Así se agregarán los 56 registros que modifiqué.
-          El lote más grande que se puede hacer es 10,000.
-          Así que ya está. ¡Feliz carga de datos en masa!
+          As&#xED; se agregar&#xE1;n los 56 registros que modifiqu&#xE9;.
+          El lote m&#xE1;s grande que se puede hacer es 10,000.
+          As&#xED; que ya est&#xE1;. &#xA1;Feliz carga de datos en masa!
