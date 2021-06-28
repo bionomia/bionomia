@@ -1,143 +1,186 @@
--content_for :title, "Comenzar"
-
--content_for :jumbotron do
-  %div{class: "jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class: "mr-auto p-2"}
-      %h1{class:"h2"} Comenzar
-      %p{class: "lead text-muted"}
-        Cuatro pasos para reclamar los especímenes que recolectó o identificó y para ayudar a reconocer a sus colegas, mentores y organizaciones.
-
-
-%h3 Paso 1: Autenticar vía ORCID
-%div{class:"ml-3 mt-4"}
-  %div{class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
-    %img{src:"/images/orcid-logo.png", alt:"ORCID", class:"mb-3 mr-3"}
-    %div{class:"media-body"}
-      es una organización sin ánimo de lucro que ayuda a crear un mundo en el que todos aquellos que participan en investigación, escolaridad e innovación, estén identificados y conectados de manera única con sus contribuciones y afiliaciones, a lo largo de las disciplinas, las fronteras y el tiempo.
-
-  - if !authorized?
-    %form{action: "/auth/orcid?lang=#{I18n.locale}", method: "POST" }
-      %p
-        %button{class: "btn btn-lg btn-outline-dark"}
-          %i{class:"fab fa-orcid"}
-          = I18n.t('home.orcid_login')
-        %input{type:"hidden", name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
-
-  %p Detalles sugeridos para hacerlos públicamente visibles en su cuenta de ORCID
-
+- content_for :title, "Get Started"
+- content_for :jumbotron do
+%div
+  {class: "jumbotron jumbotron-fluid d-flex flex-wrap"}
+  %div
+    {class: "mr-auto p-2"}
+    %h1
+      {class:"h2"} Comenzar
+    %p
+      {class: "lead text-muted"}
+      Cuatro pasos para reclamar los espec&#xED;menes que recolect&#xF3; o identific&#xF3; y para ayudar a reconocer a sus colegas, mentores y organizaciones.
+%h3
+  Paso 1: Autenticar v&#xED;a ORCID
+%div
+  {class:"ml-3 mt-4"}
+  %div
+    {class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
+    %img/
+    {src:"/images/orcid-logo.png", alt:"ORCID", class:"mb-3 mr-3"}
+    %div
+      {class:"media-body"}
+      es una organizaci&#xF3;n sin &#xE1;nimo de lucro que ayuda a crear un mundo en el que todos aquellos que participan en investigaci&#xF3;n, escolaridad e innovaci&#xF3;n, est&#xE9;n identificados y conectados de manera &#xFA;nica con sus contribuciones y afiliaciones, a lo largo de las disciplinas, las fronteras y el tiempo.
+  - if !authorized? 
+  %form
+    {action: "/auth/orcid?lang=%%%#{I18n.locale}%%%>", method: "POST" }
+    %p
+      %button
+        {class: "btn btn-lg btn-outline-dark"}
+        %i
+          {class:"fab fa-orcid"}
+        = I18n.t('home.orcid_login')
+      %input/
+      {type:"hidden", name:"authenticity_token", value:"%%%#{env['rack.session'][:csrf]}%%%>"}
+  %p
+    Detalles sugeridos para hacerlos p&#xFA;blicamente visibles en su cuenta de ORCID
   %ul
     %li
       Nombre completo
       %small
-        %sup a
+        %sup
+          a
     %li
-      %em También conocido como
+      %em
+        Tambi&#xE9;n conocido como
       (otros nombres)
       %small
-        %sup a,b
+        %sup
+          a,b
     %li
-      Biografía
+      Biograf&#xED;a
       %small
-        %sup a
+        %sup
+          a
     %li
-      País
+      Pa&#xED;s
       %small
-        %sup a
+        %sup
+          a
     %li
       Palabras clave
       %small
-        %sup a
+        %sup
+          a
     %li
       Empleo
       %small
-        %sup a,c
+        %sup
+          a,c
     %li
-      Educación y calificaciones
+      Educaci&#xF3;n y calificaciones
       %small
-        %sup a,c
-
-  %div{class:"bd-callout bd-callout-bionomia"}
+        %sup
+          a,c
+  %div
+    {class:"bd-callout bd-callout-bionomia"}
     %div
       %small
-        %sup a
-        Datos periódicamente y automáticamente actualizados en Bionomía.
+        %sup
+          a
+        Datos peri&#xF3;dicamente y autom&#xE1;ticamente actualizados en Bionom&#xED;a.
     %div
       %small
-        %sup b
-        Nombres alternativos, incluidos los apodos y los apellidos, son útiles para ayudar a Bionomía a encontrar sus especímenes, por ejemplo, Miles Zhang, Y. Miles Zhang y Yuanmeng Zhang son diferentes nombres usados por la misma persona en sus publicaciones.
+        %sup
+          b
+        Nombres alternativos, incluidos los apodos y los apellidos, son &#xFA;tiles para ayudar a Bionom&#xED;a a encontrar sus espec&#xED;menes, por ejemplo, Miles Zhang, Y. Miles Zhang y Yuanmeng Zhang son diferentes nombres usados por la misma persona en sus publicaciones.
     %div
       %small
-        %sup c
-        Si incluye las fechas de inicio y finalización de Empleo y / o Educación y calificaciones, estas se compararán con las fechas de los especímenes que usted recopiló o identificó y ayudarán a sus organizaciones a medir su impacto. Al seleccionar sus organizaciones, asegúrese de que los
-        %strong identificadores de organizaciones
+        %sup
+          c
+        Si incluye las fechas de inicio y finalizaci&#xF3;n de Empleo y / o Educaci&#xF3;n y calificaciones, estas se comparar&#xE1;n con las fechas de los espec&#xED;menes que usted recopil&#xF3; o identific&#xF3; y ayudar&#xE1;n a sus organizaciones a medir su impacto. Al seleccionar sus organizaciones, aseg&#xFA;rese de que los
+        %strong
+          identificadores de organizaciones
         , por ejemplo, Ringgold o GRID han sido capturados en su cuenta de ORCID.
-
-%h3 Paso 2: Visite la pestaña de Especímenes
-%div{class:"ml-3 mt-4"}
-  %img{src:"/images/profile-tabs.es.png", alt:"Bionomia profile tabs", class:"mb-3 img-fluid"}
+%h3
+  Paso 2: Visite la pesta&#xF1;a de Espec&#xED;menes
+%div
+  {class:"ml-3 mt-4"}
+  %img/
+  {src:"/images/profile-tabs.es.png", alt:"Bionomia profile tabs", class:"mb-3 img-fluid"}
   %p
-    Una vez autenticado a través de ORCID, Bionomía primero le muestra una
-    - if !authorized?
-      Descripción general
-    - else
-      %a{href: url("/profile")} Descripción general
-    de su perfil. Obtiene su nombre completo y otros detalles de su cuenta de ORCID (ver arriba), que usted puede actualizar en cualquier momento. Haga clic en la pestaña
-    - if !authorized?
-      Descubiertos
-    - else
-      %a{href: url("/profile/candidates")} Descubiertos
-    para ver una lista de especímenes candidatos. Al igual que una bandeja de entrada de correo electrónico, Bionomía muestra la cantidad de especímenes que esperan acción.
-    Los datos de los especímenes se actualizan completamente desde la
-    %a{href:"https://gbif.org"} Global Biodiversity Information Facility
+    Una vez autenticado a trav&#xE9;s de ORCID, Bionom&#xED;a primero le muestra una
+    - if !authorized? 
+    
+    Descripci&#xF3;n general
+    !!! XML
+    %a
+      {href: url("/profile")} Descripci&#xF3;n general
+    de su perfil. Obtiene su nombre completo y otros detalles de su cuenta de ORCID (ver arriba), que usted puede actualizar en cualquier momento. Haga clic en la pesta&#xF1;a
+    - if !authorized? 
+    
+    Descubiertos
+    !!! XML
+    %a
+      {href: url("/profile/candidates")} Descubiertos
+    para ver una lista de espec&#xED;menes candidatos. Al igual que una bandeja de entrada de correo electr&#xF3;nico, Bionom&#xED;a muestra la cantidad de espec&#xED;menes que esperan acci&#xF3;n.
+    Los datos de los espec&#xED;menes se actualizan completamente desde la
+    %a
+      {href:"https://gbif.org"} Global Biodiversity Information Facility
     cada dos semanas.
-
-%h3 Paso 3: Reclame sus especímenes
-%div{class:"ml-3 mt-4"}
+%h3
+  Paso 3: Reclame sus espec&#xED;menes
+%div
+  {class:"ml-3 mt-4"}
   %p
-    En la página
-    - if !authorized?
-      Descubiertos
-    - else
-      %a{href: url("/profile/candidates")} Descubiertos
-    de su pestaña Especímenes, usted puede reclamar en masa
-    %em todas las filas visibles
-    de especímenes o reclamar una sola fila dando click en:
-    %ul{class:"list-unstyled"}
+    En la p&#xE1;gina
+    - if !authorized? 
+    
+    Descubiertos
+    !!! XML
+    %a
+      {href: url("/profile/candidates")} Descubiertos
+    de su pesta&#xF1;a Espec&#xED;menes, usted puede reclamar en masa
+    %em
+      todas las filas visibles
+    de espec&#xED;menes o reclamar una sola fila dando click en:
+    %ul
+      {class:"list-unstyled"}
       %li
-        %img{src:"/images/net-unselected.png", alt:"Collected icon", width:"18"}
-        para especímenes que usted colectó, o
+        %img/
+        {src:"/images/net-unselected.png", alt:"Collected icon", width:"18"}
+        para espec&#xED;menes que usted colect&#xF3;, o
       %li
-        %img{src:"/images/microscope-unselected.png", alt:"Identified icon", width:"18"}
-        para especímenes que usted identificó, o
+        %img/
+        {src:"/images/microscope-unselected.png", alt:"Identified icon", width:"18"}
+        para espec&#xED;menes que usted identific&#xF3;, o
       %li
         %strong
           Ambos
-        para especímenes que usted colectó e identificó
-    %img{src:"/images/button-selectors.es.png", alt:"Bionomia buttons", class:"mb-3 img-fluid"}
-
+        para espec&#xED;menes que usted colect&#xF3; e identific&#xF3;
+    %img/
+    {src:"/images/button-selectors.es.png", alt:"Bionomia buttons", class:"mb-3 img-fluid"}
   %p
-    Haga click en el botón "No soy yo" para ignorar
-    %em todas las filas visibles
-    o una sola fila de registros de especímenes. ¿Cometió un error? Visite otras páginas en la pestaña Especímenes, como
-    - if !authorized?
-      Reclamados
-    - else
-      %a{href: url("/profile/specimens")} Reclamados
+    Haga click en el bot&#xF3;n "No soy yo" para ignorar
+    %em
+      todas las filas visibles
+    o una sola fila de registros de espec&#xED;menes. &#xBF;Cometi&#xF3; un error? Visite otras p&#xE1;ginas en la pesta&#xF1;a Espec&#xED;menes, como
+    - if !authorized? 
+    
+    Reclamados
+    !!! XML
+    %a
+      {href: url("/profile/specimens")} Reclamados
     o
-    - if !authorized?
-      Ignorados
-    - else
-      %a{href: url("/profile/ignored")} Ignorados
+    - if !authorized? 
+    
+    Ignorados
+    !!! XML
+    %a
+      {href: url("/profile/ignored")} Ignorados
     para arreglar o ajustar sus selecciones.
-  %div{class:"bd-callout bd-callout-bionomia"}
-    ¿Demasiados registros de especímenes o desea ordenar por columnas y / o filtrar por contenido? Haga clic en la página "Reclamar en masa" en la pestaña Especímenes para ver las instrucciones sobre cómo descargar, agregar atribuciones en una hoja de cálculo y luego cargar un archivo csv completo.
-
-%h3 Paso 4: Atribuya especímenes a otros
-%div{class:"ml-3 mt-4"}
+  %div
+    {class:"bd-callout bd-callout-bionomia"}
+    \&#xBF;Demasiados registros de espec&#xED;menes o desea ordenar por columnas y / o filtrar por contenido? Haga clic en la p&#xE1;gina "Reclamar en masa" en la pesta&#xF1;a Espec&#xED;menes para ver las instrucciones sobre c&#xF3;mo descargar, agregar atribuciones en una hoja de c&#xE1;lculo y luego cargar un archivo csv completo.
+%h3
+  Paso 4: Atribuya espec&#xED;menes a otros
+%div
+  {class:"ml-3 mt-4"}
   %p
-    Mientras esté autenticado a través de ORCID, visite
-    - if authorized?
-      %a{href: url("/help-others")} Ayudar a otros
-    - else
-      Ayudar a otros
-    para buscar a sus compañeros, mentores o cualquier persona que le inspire. Atribúyales especímenes de la misma manera en que reclamó sus propios especímenes. Si estas personas también tienen un identificador de ORCID, es posible que le envíen un rápido agradecimiento que aparecerá en la pestaña Gracias recibidas.
+    Mientras est&#xE9; autenticado a trav&#xE9;s de ORCID, visite
+    - if authorized? 
+    %a
+      {href: url("/help-others")} Ayudar a otros
+    !!! XML
+    Ayudar a otros
+    
+    para buscar a sus compa&#xF1;eros, mentores o cualquier persona que le inspire. Atrib&#xFA;yales espec&#xED;menes de la misma manera en que reclam&#xF3; sus propios espec&#xED;menes. Si estas personas tambi&#xE9;n tienen un identificador de ORCID, es posible que le env&#xED;en un r&#xE1;pido agradecimiento que aparecer&#xE1; en la pesta&#xF1;a Gracias recibidas.
