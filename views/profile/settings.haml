@@ -110,9 +110,28 @@
               %input{type: :hidden, name: "_method", value: 'PUT'}
               %input{type: :hidden, name: "authenticity_token", value:"#{env['rack.session'][:csrf]}"}
               %input{type: :hidden, name: "wants_mail", value:"#{@user.wants_mail?}"}
+              %input{type: :hidden, name: "locale", value:"#{@user.locale}"}
               %input{type: :text, name: "youtube_id", class:"form-control mb-3", id: "youtube_id", value: "#{@user.youtube_id}", placeholder: "w-rOViX3buo"}
               %input{type: :submit, class:"btn btn-sm btn-outline-success", value:"#{I18n.t('profile.update')}"}
 
+        %div{class:"card"}
+          %h5{class:"card-header"}
+            #{I18n.t('profile.language')}
+          %div{class:"card-body"}
+            %p{class:"card-text"}= I18n.t('profile.language_explanation')
+            %form{action: "/profile/settings", method: :post}
+              %select{class:"form-select form-select-md d-block mb-3", name: "locale", "aria-label":"#{I18n.t('profile.language')}"}
+                %option= "#{I18n.t('profile.language')}"
+                - locale_name_pairs.each do |lang|
+                  - selected = lang[0].to_s == @user.try(:locale) ? true : false
+                  %option{value: "#{lang[0]}", selected: selected}= "#{lang[1]}"
+              %input{type: :hidden, name: "_method", value: 'PUT'}
+              %input{type: :hidden, name: "authenticity_token", value:"#{env['rack.session'][:csrf]}"}
+              %input{type: :hidden, name: "wants_mail", value:"#{@user.wants_mail?}"}
+              %input{type: :hidden, name: "youtube_id", value: "#{@user.youtube_id}"}
+              %input{type: :submit, class:"btn btn-sm btn-outline-success d-block", value:"#{I18n.t('profile.update')}"}
+
+      %div{class:"card-deck"}
         %div{class:"card"}
           %h5{class:"card-header"}= I18n.t('profile.delete_account')
           %div{class:"card-body"}
@@ -133,3 +152,5 @@
                       %input{type: :hidden, name: "_method", value: 'DELETE'}
                       %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
                       %input{type: :submit, class:"btn btn-sm btn-outline-danger", value:"#{I18n.t('profile.delete')}"}
+
+        %div{class:"card border-0"}

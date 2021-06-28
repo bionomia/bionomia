@@ -40,6 +40,8 @@ class BIONOMIA < Sinatra::Base
     locale = request.host.split('.')[0]
     if I18n.available_locales.include? locale.to_sym
       I18n.locale = locale
+    elsif authorized?
+      user_preferred_locale
     end
   end
 

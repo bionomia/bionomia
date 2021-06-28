@@ -549,6 +549,8 @@ pt:
       one: "espécime co-coletado"
       other: "espécime co-coletado"
     zenodo_html: "O seu perfil está ligado a %{zenodo} e as suas reclamações são versionadas e arquivadas."
+    language: Preferred Language
+    language_explanation: Choose your preferred language
   roster:
     roster_title: Perfis Públicos
     lede:

@@ -19,7 +19,7 @@ module Sinatra
 
         def locale
           locales = {}
-          I18n.available_locales.each{|locale| locales[locale] = I18n.t('locale') } 
+          I18n.available_locales.each{|locale| locales[locale] = I18n.t('locale') }
           locales[I18n.locale] || "en_US"
         end
 
@@ -29,8 +29,13 @@ module Sinatra
           end
         end
 
+        def user_preferred_locale
+          locale = @user.try(:locale) || I18n.locale
+          I18n.locale = locale.to_sym
+        end
+
         # Used from https://github.com/rack/rack-contrib/blob/master/lib/rack/contrib/locale.rb
-        def user_preferred_locale(header)
+        def user_browser_locale(header)
           return if header.nil?
 
           locales = header.gsub(/\s+/, '').split(",").map do |language_tag|
