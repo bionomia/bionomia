@@ -100,7 +100,7 @@ var Profile = (function($, window) {
           method: "PUT",
           url: self.path + "/settings",
           dataType: "json",
-          data: "wants_mail=" + $(this).prop("checked") + "&youtube_id=" + $("#youtube_id").val()
+          data: "wants_mail=" + $(this).prop("checked") + "&youtube_id=" + $("#youtube_id").val() + "&locale=" + $('#locale').val()
         }).done(function(data) {
           location.reload();
         });
