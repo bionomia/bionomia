@@ -64,6 +64,10 @@ OptionParser.new do |opts|
     options[:duplicates] = true
   end
 
+  opts.on("-z", "--missing-wikidata", "Find wikidata entries that were deleted at the source.") do
+    options[:deleted] = true
+  end
+
   opts.on("-s", "--stats", "Rebuild user stats.") do
     options[:stats] = true
   end
@@ -117,6 +121,24 @@ if options[:file]
       puts "#{u.wikidata} deleted. Missing either family name, birth or death date or has an ORCID".red
     else
       update(u)
+    end
+  end
+end
+
+if options[:deleted]
+  puts "Locating deleted wikidata entries that have attributions...".green
+  local = User.joins(:user_occurrences)
+              .where(user_occurrences: { visible: true })
+              .where.not(wikidata: nil)
+              .pluck(:wikidata).uniq
+  wiki = Bionomia::WikidataSearch.new
+  qnumbers = local - wiki.wiki_bionomia_id
+  qnumbers.each do |wikicode|
+    wiki_user = Wikidata::Item.find(wikicode)
+    if wiki_user
+      puts wiki_user.title.green
+    else
+      puts wikicode.red
     end
   end
 end

@@ -32,7 +32,6 @@ module Bionomia
             ?item ?itemLabel
           WHERE {
             ?item wdt:#{property} ?id .
-            ?item wdt:P570 ?date_of_death .
             SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
           }
         )
