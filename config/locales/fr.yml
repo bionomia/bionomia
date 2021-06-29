@@ -550,7 +550,7 @@ fr:
       other: "spécimens co-collectés"
     zenodo_html: "Votre profil est lié à %{zenodo} et vos données sont versionnées et archivées."
     language: Langue préférée
-    language_explanation: Sélectionnez votre langue préférée
+    language_explanation: Choisissez votre langue préférée
   roster:
     roster_title: Profils publics
     lede:

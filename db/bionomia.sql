@@ -48,6 +48,7 @@ CREATE TABLE `datasets` (
   `image_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `frictionless_created_at` timestamp NULL DEFAULT NULL,
   `occurrences_count` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
@@ -64,6 +65,37 @@ CREATE TABLE `messages` (
   `read` tinyint(1) DEFAULT '0',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+CREATE TABLE `missing` (
+  `occurrence_id` bigint NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+CREATE TABLE `missing_occurrences` (
+  `gbifID` bigint UNSIGNED NOT NULL,
+  `datasetKey` binary(36) DEFAULT NULL,
+  `occurrenceID` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `dateIdentified` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `decimalLatitude` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `decimalLongitude` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `country` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `countryCode` varchar(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `eventDate` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `year` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `kingdom` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `family` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `identifiedBy` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `institutionCode` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `collectionCode` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `catalogNumber` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `recordedBy` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `scientificName` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `typeStatus` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `dateIdentified_processed` datetime DEFAULT NULL,
+  `eventDate_processed` datetime DEFAULT NULL,
+  `hasImage` tinyint(1) DEFAULT NULL,
+  `recordedByID` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `identifiedByID` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `occurrences` (
@@ -157,6 +189,7 @@ CREATE TABLE `users` (
   `image_url` text,
   `signature_url` varchar(255) DEFAULT NULL,
   `youtube_id` varchar(255) DEFAULT NULL,
+  `locale` varchar(2) DEFAULT NULL,
   `date_born` date DEFAULT NULL,
   `date_born_precision` varchar(255) DEFAULT NULL,
   `date_died` date DEFAULT NULL,
@@ -226,10 +259,15 @@ ALTER TABLE `messages`
   ADD KEY `index_messages_on_user_id` (`user_id`),
   ADD KEY `index_messages_on_recipient_id` (`recipient_id`);
 
+ALTER TABLE `missing_occurrences`
+  ADD PRIMARY KEY (`gbifID`) USING BTREE,
+  ADD KEY `typeStatus_idx` (`typeStatus`(256)),
+  ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`,`occurrenceID`(36));
+
 ALTER TABLE `occurrences`
   ADD PRIMARY KEY (`gbifID`) USING BTREE,
   ADD KEY `typeStatus_idx` (`typeStatus`(256)),
-  ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`, `occurrenceID`(36));
+  ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`,`occurrenceID`(36));
 
 ALTER TABLE `occurrence_determiners`
   ADD PRIMARY KEY (`agent_id`,`occurrence_id`),

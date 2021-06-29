@@ -549,8 +549,8 @@ es:
       one: "espécimen co-colectado"
       other: "especímenes co-colectadoss"
     zenodo_html: "Su perfil está enlazado a %{zenodo} y se ha creado y archivado una versión de los datos de sus especímenes reclamados."
-    language: Preferred Language
-    language_explanation: Choose your preferred language
+    language: Idioma preferido
+    language_explanation: Elija su idioma preferido
   roster:
     roster_title: Perfiles públicos
     lede:
