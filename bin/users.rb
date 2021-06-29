@@ -68,6 +68,10 @@ OptionParser.new do |opts|
     options[:deleted] = true
   end
 
+  opts.on("-r", "--flagged-deletion", "Find wikidata entries that have been flagged for deletion") do
+    options[:flagged_deletion] = true
+  end
+
   opts.on("-s", "--stats", "Rebuild user stats.") do
     options[:stats] = true
   end
@@ -140,6 +144,23 @@ if options[:deleted]
     else
       puts wikicode.red
     end
+  end
+end
+
+if options[:flagged_deletion]
+  url = "https://www.wikidata.org/wiki/Wikidata:Requests_for_deletions"
+  doc = Nokogiri::HTML(URI.open(url))
+  ids = doc.xpath("//*[@class=\"toctext\"]")
+           .map{|r| r.text if r.text.is_wiki_id?}.compact
+  flagged = ids & User.pluck(:wikidata).compact
+  if flagged.empty?
+    puts "No wikidata entities flagged for deletion.".green
+  else
+    puts "Oh, oh. Something has been flagged for deletion".red
+    sm = Bionomia::SendMail.new({ subject: "ALERT! A wikidata page is flagged for deletion." })
+    body = "A wikidata page(s) has been flagged for deletion at #{url}!\n\n"
+    body += flagged.map{|w| "https://www.wikidata.org/wiki/#{w}"}.join("\n")
+    sm.send_message(email: Settings.gmail.email, body: body)
   end
 end
 

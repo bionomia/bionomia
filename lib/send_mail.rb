@@ -8,7 +8,7 @@ module Bionomia
       Pony.options = {
         charset: 'UTF-8',
         from: settings.gmail.email,
-        subject: subject,
+        subject: (settings.subject || subject),
         via: :smtp,
         via_options: {
           address: 'smtp.gmail.com',
@@ -21,6 +21,13 @@ module Bionomia
       }
     end
 
+    def send_message(email:, body:)
+      Pony.mail(
+        to: email,
+        body: body
+      )
+    end
+
     def send_messages
       users = User.where.not(email: nil)
                   .where(wants_mail: true)
@@ -29,10 +36,8 @@ module Bionomia
         articles = user_articles(user)
         if articles.count > 0
           begin
-            Pony.mail(
-              to: user.email,
-              body: construct_message(user, articles)
-            )
+            body = construct_message(user, articles)
+            send_message(email: user.email, body: body)
           rescue
             puts "Email failed for #{user.email}"
             next
