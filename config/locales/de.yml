@@ -10,20 +10,20 @@ de:
   admin:
     change_photo: Profilbild ändern
   agent:
-    agent_title: Agent Strings
-    search_title: Agent String Search
+    agent_title: Agenten-Strings
+    search_title: Suche nach Agenten-Strings
     lede:
       unit:
         one: "raw string from parsed collector and determiner names in specimen data from GBIF"
         other: "raw strings from parsed collector and determiner names in specimen data from GBIF"
-    search_none: "No agent string found for %{searched}"
+    search_none: "Keine Agenten-Strings gefunden für %{searched}"
     search_count:
       unit:
         one: "Suchergebnis für"
         other: "Suchergebnisse für"
     warning: "ACHTUNG:"
-    warning_statement: Unlike all other URLs in this site, URLs for agent strings are unreliable for linking because they will point to different results every few weeks
-    agent_name_title: "%{agent_name} Specimens"
+    warning_statement: Im Gegensatz zu allen anderen URLs auf dieser Website sind die URLs für Agenten-Strings nicht für eine Verlinkung geeignet, da sie alle paar Wochen auf andere Ergebnisse verweisen werden
+    agent_name_title: "Exemplare von %{agent_name}"
     agent_lede: A raw string from parsed collector and determiner names in natural history specimen data
     found_statement:
       unit:
@@ -45,7 +45,7 @@ de:
         other: "people collected or identified specimens included in data downloaded from GBIF in support of this article"
     placeholder: "Evolution und Systematik von ..."
     people: Personen
-    agent_strings: Agent Strings
+    agent_strings: Agenten-Strings
     agent_title: Article Agents
     alphabetical: Alphabetisch
     counts: Zählung
@@ -105,8 +105,8 @@ de:
     visualizations: Visualisierungen
     scribes: Scribes
     agents: Agents
-    agent_strings: Agent Strings
-    agent_strings_unclaimed: Unclaimed Agent Strings
+    agent_strings: Agenten-Strings
+    agent_strings_unclaimed: Nicht beanspruchte Agenten-Strings
     alphabetical: Alphabetisch
     counts: Zählung
     unclaimed: Nicht beansprucht
@@ -248,7 +248,7 @@ de:
     new_people_lede: Zuordnen von Exemplaren zu neu entdeckten Personen in ORCID oder Wikidata
     by_country: Nach Land
     not_ignored_alert: Bionomia scribes have not flagged specimens to be ignored.
-    agent_string: Agent String
+    agent_string: Agenten-String
     taxon_string: Taxonomische Familie
     kingdom_string: Königreich
     dataset: Datensatz
@@ -344,7 +344,7 @@ de:
     articles: Artikel
     countries: Länder
     taxa: Familien
-    agent_strings: Agent Strings
+    agent_strings: Agenten-Strings
     help_others: Anderen helfen
     help_received: Hilfe erhalten
     people_helped: Personen geholfen
@@ -597,7 +597,7 @@ de:
     people: Personen
     visualizations: Visualisierungen
     timeline: Zeitachse
-    agent_strings: Agent Strings
+    agent_strings: Agenten-Strings
     collected: Gesammelt
     identified: Identifiziert
     number_collected:
@@ -610,8 +610,8 @@ de:
         other: "Personen haben Exemplare aus Daten in GBIF identifiziert"
     number_agents:
       unit:
-        one: "agent string from specimen data in GBIF"
-        other: "agent strings from specimen data in GBIF"
+        one: "Agenten-String von Exemplardaten in GBIF"
+        other: "Agenten-Strings von Exemplardaten in GBIF"
     number_agents_unclaimed:
       unit:
         one: "agent string has unclaimed specimen records from data in GBIF"
