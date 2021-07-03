@@ -55,7 +55,7 @@ de:
       unit:
         one: "Rohstring aus analysierten Sammler- und Bestimmernamen in Exemplardaten, die zur Unterstützung dieses Artikels von GBIF heruntergeladen wurden"
         other: "Rohstrings aus analysierten Sammler- und Bestimmernamen in Exemplardaten, die zur Unterstützung dieses Artikels von GBIF heruntergeladen wurden"
-    claims: Ansprüche
+    claims: Beanspruchungen
     specimens: Exemplare
     no_search_alert: "Keine Artikel gefunden für"
     search_alert:
@@ -212,7 +212,7 @@ de:
     per_page: Pro Seite
     download: Herunterladen
     submit: Absenden
-    upload_csv_instructions: Importieren einer CSV-Datei mit Ansprüchen
+    upload_csv_instructions: CSV-Datei mit Beanspruchungen hochladen
     download_records: Entdeckte Datensätze herunterladen
     download_alert: "Laden Sie Datensätze mit entdeckten Exemplaren herunter, arbeiten Sie offline und laden Sie dann neue Beanspruchungen als CSV-Datei hoch. Es wird eine Datei erzeugt, die höchstens %{num_records} Datensätze enthält. Wenn Sie viel mehr haben, können Sie in Stapeln arbeiten. Diese Routine aktualisiert weder die zugrundeliegenden Exemplardaten noch bestehende Beanspruchungen. Wenn vorhandene Beanspruchungen im Upload vorhanden sind, werden diese übersprungen. In Ihrer CSV-Datei müssen die Spalten mit Kommas getrennt sein, die optional von Anführungszeichen umschlossen werden können."
     search_dropdown_no_users: "Ihre Suche ergab 0 Treffer."
@@ -239,7 +239,7 @@ de:
     private: Profil ist nicht öffentlich
     created: Erstellt
     latest_scribe: Letzter Bearbeiter
-    latest_claim: Neuester Anspruch
+    latest_claim: Neueste Beanspruchung
     help_documentation: "Hilfedokumentation"
     add_someone: "Jemanden hinzufügen"
     latest_recipients: Neueste Empfänger
@@ -278,8 +278,8 @@ de:
     not_helped_alert: Bionomia-Bearbeiter haben bisher nicht bei der Zuordnung von Exemplaren geholfen.
     upload_message:
       unit:
-        one: "Datensatz wurde behandelt. Vorhandene Ansprüche, falls in Ihrem Upload vorhanden, wurden übersprungen."
-        other: "Datensätze wurden behandelt. Vorhandene Ansprüche, falls in Ihrem Upload vorhanden, wurden übersprungen."
+        one: "Datensatz wurde verarbeitet. Vorhandene Beanspruchungen, falls in Ihrem Upload vorhanden, wurden übersprungen."
+        other: "Datensätze wurden verarbeitet. Vorhandene Beanspruchungen, falls in Ihrem Upload vorhanden, wurden übersprungen."
     help_question: "Möchten Sie dabei helfen, Proben zu %{name} zuzuordnen?"
     try_again: Erneut versuchen.
     no_specialities_alert: Bionomia-Bearbeiter haben bisher nicht bei der Zuordnung von Exemplaren geholfen.
@@ -291,13 +291,13 @@ de:
     switch: Wechseln
     not_co_collector_name: "Exemplare wurden nicht mit %{name} mitgesammelt."
     bulk_attribution: Massenattributionen
-    reclaim_ignored: Anspruch ignoriert
+    reclaim_ignored: Erneute Beanspruchung ignoriert
     fix_claims: Zuordnungen korrigieren
     discovered: Entdeckte
     support_alert: Die folgenden Bearbeiter haben Exemplare zugeordnet.
     advanced_search: Erweiterte Suche & Filter
     less_exact: Weniger exakt machen
-    no_unclaimed: Bionomia hat keine nicht-beanspruchten Exemplare gefunden.
+    no_unclaimed: Bionomia hat keine nicht beanspruchten Exemplare gefunden.
     close: Schließen
     add_person: Eine Person hinzufügen
     add_orcid_wikidata: ORCID-Kennung oder Q-Nummer in Wikidata hinzufügen
@@ -309,7 +309,7 @@ de:
       other: Exemplare zugeordnet
     download: Herunterladen
     download_label: Entdeckte Datensätze herunterladen
-    upload_label: CSV-Datei mit Ansprüchen hochladen
+    upload_label: CSV-Datei mit Beanspruchungen hochladen
     choose_instructions_html: "Wählen Sie Gesammelt (%{coll_img}), Identifiziert (%{det_img}) oder beides."
     search_count:
       one: "1 Suchergebnis für %{search}"
@@ -497,13 +497,13 @@ de:
     delete_account: Ihr Konto löschen
     delete: Löschen
     permanent_delete: Ihr Konto endgültig löschen.
-    delete_warning: Sind Sie sicher, dass Sie Ihr Konto löschen möchten? Alle Ihre Ansprüche UND alle Zuordnungen, die Sie für andere gemacht haben, werden dauerhaft entfernt.
+    delete_warning: Sind Sie sicher, dass Sie Ihr Konto löschen möchten? Alle Ihre Beanspruchungen UND alle Zuordnungen, die Sie für andere geleistet haben, werden dauerhaft entfernt.
     email_instructions: Erhalten Sie E-Mail-Benachrichtigungen über neue Veröffentlichungen, die solche Daten verwenden, die von den von Ihnen identifizierten oder gesammelten Exemplaren stammen. Machen Sie Ihre primäre E-Mail-Adresse in Ihrem ORCID-Konto öffentlich zugänglich und aktualisieren Sie dann Ihre ORCID-Daten oben.
     email_procedure: "Erhalten Sie eine Benachrichtigung über neue Publikationen, die solche Daten verwenden, die von den von Ihnen identifizierten oder gesammelten Exemplaren stammen. Ihre primäre, öffentlich zugängliche E-Mail-Adresse (%{email}) stammt von Ihrem ORCID-Konto."
     disconnect: Trennen
     disconnect_warning: Sind Sie sicher, dass Sie Ihr Konto von Zenodo trennen möchten? Ihre Daten bleiben archiviert und zugänglich, aber es werden keine neuen Versionen erstellt. Wenn Sie Ihr Konto später erneut verbinden, wird ein neues Datenpaket erstellt.
-    connect_zenodo: Verbinden Sie Ihr Konto mit Zenodo, wo versionierte Schnappschüsse Ihrer Ansprüche gespeichert werden und ein DataCite-DOI zugewiesen wird. Eine Zitation wird für die Aufnahme in Ihren Lebenslauf bereitgestellt.
-    connect_zenodo_claim: Beanspruchen Sie mindestens eines Ihrer Exemplare und kehren Sie hierher zurück, um Ihr Konto mit Zenodo zu verbinden, wo versionierte Schnappschüsse Ihrer Ansprüche gespeichert werden und ein DataCite-DOI zugewiesen wird. Eine Zitation wird für die Aufnahme in Ihren Lebenslauf bereitgestellt.
+    connect_zenodo: Verknüpfen Sie Ihr Konto mit Zenodo, wo versionierte Schnappschüsse Ihrer Beanspruchungen gespeichert werden und ein DataCite-DOI zugewiesen wird. Eine Zitation wird für die Aufnahme in Ihren Lebenslauf bereitgestellt.
+    connect_zenodo_claim: Beanspruchen Sie mindestens eines Ihrer Exemplare und kehren Sie hierher zurück, um Ihr Konto mit Zenodo zu verknüpfen, wo versionierte Schnappschüsse Ihrer Beanspruchungen gespeichert werden und ein DataCite-DOI zugewiesen wird. Eine Zitation wird für die Aufnahme in Ihren Lebenslauf bereitgestellt.
     disconnect_zenodo: Verbindung zu Zenodo trennen
     integrate_zenodo: Mit Zenodo integrieren
     zenodo_linked: Ihr Konto ist nun verknüpft und die Daten werden innerhalb einer Stunde übertragen
@@ -514,15 +514,15 @@ de:
     private: Privat
     active: "An"
     inactive: "Aus"
-    make_public_message: Binden Sie Ihr Konto in öffentliche Profile ein. Ihre Ansprüche werden in einen Massendaten-Download aufgenommen, über Google Chrome- und Firefox-Erweiterungen offengelegt und ein Tweet von @BionomiaTrack wird gesendet.
+    make_public_message: Binden Sie Ihr Konto in öffentliche Profile ein. Ihre Beanspruchungen werden in einen Massendaten-Download aufgenommen, über Google Chrome- und Firefox-Erweiterungen offengelegt und ein Tweet von @BionomiaTrack wird gesendet.
     no_candidates_alert: Bionomia hat keine von GBIF indizierten Exemplare gefunden, die Sie möglicherweise gesammelt oder identifiziert haben.
     ignored_alert: Exemplare, die Sie als "Nicht ich" markiert haben, werden hier angezeigt.
     scribe_not_helped: Dieser Bionomia-Bearbeiter hat Ihnen noch nicht geholfen, Exemplare zu beanspruchen.
     upload_error: Bitte laden Sie ein Bild mit einer Größe von weniger als 5 MB hoch.
-    bulk_claim: Massenansprüche
+    bulk_claim: Massenbeanspruchung
     advanced_search: Erweiterte Suche & Filter
-    no_specimens_filter: Sie haben noch keine Exemplare mit diesem angewandten Filter beansprucht. Sehen Sie sich Ihre Exemplar-Datensätze auf der "Entdeckt"-Seite an.
-    no_specimens: Sie haben noch keine Exemplare beansprucht. Sehen Sie sich Ihre Kandidaten-Exemplaraufzeichnungen auf der Seite "Entdeckte" an.
+    no_specimens_filter: Sie haben noch keine Exemplare mit diesem angewendeten Filter beansprucht. Sehen Sie sich Ihre Exemplar-Datensätze auf der "Entdeckt"-Seite an.
+    no_specimens: Sie haben noch keine Exemplare beansprucht. Sehen Sie sich Ihre Kandidaten-Exemplaraufzeichnungen auf der "Entdeckt"-Seite an.
     candidate_count:
       one: 1 Exemplar gefunden.
       other: "%{count} Exemplare gefunden."
@@ -538,7 +538,7 @@ de:
       other: "Es wurden insgesamt %{count} hochgeladene Datensätze verarbeitet."
     upload_skipped: Bestehende Beanspruchungen, falls in Ihrem Upload vorhanden, wurden übersprungen.
     upload_view: Sehen
-    upload_view_html: "%{view} alle Ihre Ansprüche."
+    upload_view_html: "%{view} alle Ihre Beanspruchungen."
     co_collectors: Co-Sammler
     no_co_collectors_alert: Co-Sammler wurden noch nicht erfasst.
     co_collectors_alert: "Sie haben gesammelt mit:"
@@ -641,7 +641,7 @@ de:
     science_enabled_specimens: Wissenschaft ermöglicht durch Exemplardaten
     helped_by: Geholfen von
     helped: Personen geholfen
-    no_scribe: Die Exemplare sind nicht durch einen Bearbeiter attribuiert worden.
+    no_scribe: Die Exemplare sind nicht durch einen Bearbeiter zugeordnet worden.
     attributions_by: "Zuordnungen erfolgt durch:"
     private: Das Profil ist nicht öffentlich zugänglich.
     private_with_claims:
@@ -688,7 +688,7 @@ de:
     map: Karte
     list: Liste
     no_specimens: Exemplare wurden noch nicht beansprucht oder zugeordnet.
-    no_specimens_filter: Exemplare mit diesem angewandten Filter wurden noch nicht beansprucht oder zugeordnet.
+    no_specimens_filter: Exemplare mit diesem angewendeten Filter wurden noch nicht beansprucht oder zugeordnet.
     stats_identified_specimens_nocountry:
       unit:
         one: "Exemplar identifiziert"
