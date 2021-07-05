@@ -310,7 +310,7 @@ de:
     download: Herunterladen
     download_label: Entdeckte Datensätze herunterladen
     upload_label: CSV-Datei mit Beanspruchungen hochladen
-    choose_instructions_html: "Wählen Sie Gesammelt (%{coll_img}), Identifiziert (%{det_img}) oder beides."
+    choose_instructions_html: "Wählen Sie Gesammelt %{coll_img}, Identifiziert %{det_img} oder beides."
     search_count:
       one: "1 Suchergebnis für %{search}"
       other: "%{count} Suchergebnisse für %{search}"
@@ -730,7 +730,7 @@ de:
         one: "Werk"
         other: "Werke"
     specimen_icon_count:
-      one: "1 Exemplar gesammelt (%{coll_img}) oder identifiziert (%{det_img})."
-      other: "%{count} Exemplare gesammelt (%{coll_img}) oder identifiziert (%{det_img})."
+      one: "1 Exemplar gesammelt %{coll_img} oder identifiziert %{det_img}."
+      other: "%{count} Exemplare gesammelt %{coll_img} oder identifiziert %{det_img}."
   workshops:
     title: Workshops
