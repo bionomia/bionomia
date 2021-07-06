@@ -90,7 +90,7 @@ missing.write.mode("append").jdbc(url, "missing", prop)
 occurrences.write.mode("append").jdbc(url, "occurrences", prop)
 
 // Recreate indices
-// ALTER TABLE `occurrences` ADD KEY `typeStatus_idx` (`typeStatus`(256)), ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`, `occurrenceID`(36));
+// ALTER TABLE `occurrences` ADD KEY `typeStatus_idx` (`typeStatus`(50)), ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`, `occurrenceID`(36));
 
 def stringify(c: Column) = concat(lit("["), concat_ws(",", c), lit("]"))
 

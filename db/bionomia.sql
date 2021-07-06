@@ -67,37 +67,6 @@ CREATE TABLE `messages` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
-CREATE TABLE `missing` (
-  `occurrence_id` bigint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-CREATE TABLE `missing_occurrences` (
-  `gbifID` bigint UNSIGNED NOT NULL,
-  `datasetKey` binary(36) DEFAULT NULL,
-  `occurrenceID` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `dateIdentified` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `decimalLatitude` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `decimalLongitude` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `country` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `countryCode` varchar(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `eventDate` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `year` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `kingdom` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `family` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `identifiedBy` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `institutionCode` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `collectionCode` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `catalogNumber` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `recordedBy` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `scientificName` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `typeStatus` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `dateIdentified_processed` datetime DEFAULT NULL,
-  `eventDate_processed` datetime DEFAULT NULL,
-  `hasImage` tinyint(1) DEFAULT NULL,
-  `recordedByID` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `identifiedByID` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
 CREATE TABLE `occurrences` (
   `gbifID` bigint UNSIGNED NOT NULL,
   `datasetKey` binary(36) DEFAULT NULL,
@@ -230,7 +199,6 @@ CREATE TABLE `user_organizations` (
   `end_day` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
-
 ALTER TABLE `agents`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `full_name` (`family`,`given`) USING BTREE;
@@ -259,14 +227,9 @@ ALTER TABLE `messages`
   ADD KEY `index_messages_on_user_id` (`user_id`),
   ADD KEY `index_messages_on_recipient_id` (`recipient_id`);
 
-ALTER TABLE `missing_occurrences`
-  ADD PRIMARY KEY (`gbifID`) USING BTREE,
-  ADD KEY `typeStatus_idx` (`typeStatus`(256)),
-  ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`,`occurrenceID`(36));
-
 ALTER TABLE `occurrences`
   ADD PRIMARY KEY (`gbifID`) USING BTREE,
-  ADD KEY `typeStatus_idx` (`typeStatus`(256)),
+  ADD KEY `typeStatus_idx` (`typeStatus`(50)),
   ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`,`occurrenceID`(36));
 
 ALTER TABLE `occurrence_determiners`
@@ -317,7 +280,6 @@ ALTER TABLE `user_organizations`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_idx` (`user_id`),
   ADD KEY `organization_idx` (`organization_id`);
-
 
 ALTER TABLE `agents`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
