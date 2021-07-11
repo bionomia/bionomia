@@ -31,10 +31,10 @@ class TaxonImage < ActiveRecord::Base
        result = JSON.parse(response, symbolize_names: true)
        if result[:result][:same].size > 0
          phylopic_save_image(family, result[:result][:same])
-       elsif result[:result][:subtaxa].size > 0
-         phylopic_save_image(family, result[:result][:subtaxa])
        elsif result[:result][:supertaxa].size > 0
          phylopic_save_image(family, result[:result][:supertaxa])
+       elsif result[:result][:subtaxa].size > 0
+         phylopic_save_image(family, result[:result][:subtaxa])
        end
      end
    end
