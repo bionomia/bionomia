@@ -1,53 +1,55 @@
--content_for :title, "Documents d'Aide"
+- content_for :title, "Help Documents"
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2
+        Help Documents
 
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class:"mr-auto p-2"}
-      %h1{class:"h2"} Documents d'Aide
+%h3.mt-4.mb-3
+  For New Users & Group Settings
 
-%h3{class:"mt-4 mb-3"} For New Users & Group Settings
-
-%div{class:"card", style:"max-width: 505px;"}
+.card{style:"max-width: 505px;"}
   %a{href: "http://doi.org/10.5281/zenodo.3908726"}
-    %img{src:"/images/leachman_auckland_wmm.png", alt:"Leachman help doc for volunteers", class:"img-fluid mx-auto d-block"}
-  %div{class:"card-body"}
-    %p{class:"citation"}
+    %img.img-fluid.mx-auto.d-block{src:"/images/leachman_auckland_wmm.png", alt:"Leachman help doc for volunteers"}
+  .card-body
+    %p.citation
       Siobhan Leachman. (2020, June 26). Auckland Museum Volunteer Instructions for Bionomia. Zenodo. 26pp. PDF
-      %a{href: "http://doi.org/10.5281/zenodo.3908726"}
-        http://doi.org/10.5281/zenodo.3908726
+      = link_to "https://doi.org/10.5281/zenodo.3908726", "https://doi.org/10.5281/zenodo.3908726"
 
-%h3{class:"mt-4 mb-3"} Focused Tasks
+%h3.mt-4.mb-3
+  Focused Tasks
 
-%p{class:"mt-4"}
+%p.mt-4
   Scribe
-  %a{href: url("/0000-0002-5398-7721")} Siobhan Leachman
+  = link_to "Siobhan Leachman", url("/0000-0002-5398-7721")
   (see her
   = succeed ")" do
-    %a{href:"https://twitter.com/SiobhanLeachman"} Twitter feed
+    = link_to "Twitter feed", "https://twitter.com/SiobhanLeachman"
   also produced a helpful series of step-by-step tweet threads. These are reworked with minor edits as focused tasks below.
 
-%div{class:"row mt-4"}
-  %div{class:"col-12 col-md-6 mb-3"}
-    %div{class:"card"}
-      %div{class:"card-header border-bottom"}
-        %h4 Getting Started with ORCID & Claiming Specimen Records
-      %div{class:"card-body overflow-auto mt-3", style:"max-height: 300px; min-height: 300px;"}
+.row.mt-4
+  .col-12.col-md-6.mb-3
+    .card
+      .card-header.border-bottom
+        %h4
+          Getting Started with ORCID & Claiming Specimen Records
+      .card-body.overflow-auto.mt-3{style: "max-height: 300px; min-height: 300px;"}
         %p
           First, you need to get an ORCID identifier. This is because you'll be creating and adding data to the site. So, if you do not have an ORCID, got to
-          %a{href: "https://orcid.org/register"} https://orcid.org/register
+          = link_to "https://orcid.org/register", "https://orcid.org/register"
           and get one. Please make some information you put into ORCID public such as your employer or add one of your publications. This ensures that someone will know who you are.
           See the
-          %a{href: url("/get-started")} Get Started
+          = link_to "Get Started", url("/get-started")
           page to learn what public details Bionomia draws-in from your ORCID account.
         %p
           Then, login to Bionomia using your ORCID account.
-          %img{src:"/images/login.png", at: "Login button", class:"d-block mt-3 mb-3"}
+          %img.d-block.mt-3.mb-3{src:"/images/login.png", at: "Login button"}
 
           You will first be taken to the Overview page in your profile.
           If you have collected specimens whose metadata has been loaded into GBIF, you can go to the
           %em Specimens
           tab to claim them.
-          %img{src:"/images/profile-tabs.png", alt: "profile tabs", class:"d-block mt-3 mb-3"}
+          %img.d-block.mt-3.mb-3{src:"/images/profile-tabs.png", alt: "profile tabs"}
         %p
           This will link your specimens to your ORCID identifier, enriching the data and helping to ensure you get credit for your work at collecting or identifying specimens.
           Claim your specimens by pressing the
@@ -60,7 +62,7 @@
           If you did not collect or identify a candidate record that Bionomia found, click the
           %em Not me
           button.
-        %p{class:"mt-3 mb-3"}
+        %p.mt-3.mb-3
           %img{src:"/images/button-selectors.png", alt: "Specimen claiming buttons"}
           %img{src:"/images/not-me.png", alt: "Not me buttons"}
 
@@ -83,19 +85,20 @@
           Visit
           %em Setting & Integrations
           to make your Bionomia profile publicly available.
-          %img{src:"/images/settings-integrations.png", alt:"Settings & Integrations", class:"mt-3 mb-3"}
-          %img{src:"/images/make-public.png", alt:"Make profile public", class:"mt-3 mb-3"}
+          %img.mt-3.mb-3{src:"/images/settings-integrations.png", alt:"Settings & Integrations"}
+          %img.mt-3.mb-3{src:"/images/make-public.png", alt:"Make profile public"}
 
-  %div{class:"col-12 col-md-6 mb-3"}
-    %div{class:"card"}
-      %div{class:"card-header border-bottom"}
-        %h4 Helping Others
-      %div{class:"card-body overflow-auto mt-3", style:"max-height: 300px; min-height: 300px;"}
+  .col-12.col-md-6.mb-3
+    .card
+      .card-header.border-bottom
+        %h4
+          Helping Others
+      .card-body.overflow-auto.mt-3{style:"max-height: 300px; min-height: 300px;"}
         %p
           So I'm going to start by choosing someone to help. I've logged into Bionomia with my ORCID id & I've pressed
           %em Help Others
           button on the top right. I'm now going to pick a country. Yep, New Zealand! I'm going to pick the entomologist George Howes.
-        %p{class:"mt-3 mb-3"}
+        %p.mt-3.mb-3
           %img{src:"/images/help-others-link.png", alt:"Help Others button"}
           %img{src:"/images/countries-help.png", alt:"Countries helping list"}
           %img{src:"/images/help-new-zealand.png", alt:"Help New Zealand"}
@@ -103,100 +106,101 @@
         %p
           The reason I've chosen him is that I started his
           = succeed "." do
-            %a{href: "https://en.wikipedia.org/wiki/George_Howes_(entomologist)"} Wikipedia article
+            = link_to "Wikipedia article", "https://en.wikipedia.org/wiki/George_Howes_(entomologist)"
           I think he was marvellous and should get credit for his collecting work. His Bionomia page looks like this.
-          %img{src:"/images/helping-george-howes.png", alt:"George Howes", class:"d-block mt-3 mb-3"}
+          %img.d-block.mt-3.mb-3{src:"/images/helping-george-howes.png", alt:"George Howes"}
           The first specimen was collected by someone with his initials, at the correct dates, is held in a New Zealand collection.
           I'm confident he collected it. So, I press the
           %em net
           button beside the specimen.
-          %img{src:"/images/fenwicki-net.png", alt:"Selecting P. fenwicki", class:"d-block mt-3 mb-3"}
+          %img.d-block.mt-3.mb-3{src:"/images/fenwicki-net.png", alt:"Selecting P. fenwicki"}
           If I was confident he had collected ALL 25 specimens in this view, I could have pressed the white
           %em net
           with black background. That would automatically attribute to him in bulk all these 25 specimen records (but no more).
           I can even increase the number of specimens on the page up to 250 (bottom-left dropdown) and bulk assign all of them!
-        %p{class:"mt-3 mb-3"}
+        %p.mt-3.mb-3
           %img{src:"/images/bulk-assignment.png", alt:"Bulk assignment buttons"}
           %img{src:"/images/per-page-dropdown.png", alt:"Per page dropdown"}
         %p
           But in this case some way down the set there are specimens collected by "G Howes" in NHMUK.
           I'm unsure whether this is OUR George Howes. If I'm unsure it is him or not I'll have to leave the specimens.
-          %img{src:"/images/helping-unsure.png", alt:"Helping unsure", class:"d-block mt-3 mb-3"}
+          %img.d-block.mt-3.mb-3{src:"/images/helping-unsure.png", alt:"Helping unsure"}
           To try and work out whether it is George I'll click on the scientific name on the specimen.
           This opens a new tab & takes me to its details in GBIF. Here I can see it's a specimen from the Leith Valley in Dunedin, collected in 1922 by G. Howes.
-          %img{src:"/images/helping-gbif.png", alt:"Helping GBIF", class:"d-block mt-3 mb-3"}
+          %img.d-block.mt-3.mb-3{src:"/images/helping-gbif.png", alt:"Helping GBIF"}
           Yep it's our George! So I'll claim those specimens for him.
 
         %p
           BUT you still have to be very careful. I keep an eye on dates. On the next page I see a page that isn't 1921 or 1922.
           There's a specimen collected in 1937 - still while our George was alive. But again dates - so I click to check.
           That specimen WASN'T collected by George. It was collected in Bolivia.
-          %img{src:"/images/parvispina-dates.png", alt:"parvispina 1937", class:"d-block mt-3 mb-1"}
-          %img{src:"/images/parvispina-gbif.png", alt:"parvispina 1937", class:"d-block mb-3"}
+          %img.d-block.mt-3.mb-1{src:"/images/parvispina-dates.png", alt:"parvispina 1937"}
+          %img.d-block.mb-3{src:"/images/parvispina-gbif.png", alt:"parvispina 1937"}
         %p
           Further down I see specimens coming from FishBase, but George was an entomologist. I confirm that he didn't collect those specimens either. So I claim the specimens he did collect and press the
           %em Not them
           button for the one's he didn't collect or identify.
-          %img{src:"/images/fishbase-not-them.png", alt:"parvispina 1937", class:"d-block mt-3 mb-3"}
+          %img.d-block.mt-3.mb-3{src:"/images/fishbase-not-them.png", alt:"parvispina 1937"}
 
-%div{class:"row mt-4"}
-  %div{class:"col-12 col-md-6 mb-3"}
-    %div{class:"card"}
-      %div{class:"card-header border-bottom"}
-        %h4 Creating a Wikidata Item
-      %div{class:"card-body overflow-auto mt-3", style:"max-height: 300px; min-height: 300px;"}
+.row.mt-4
+  .col-12.col-md-6.mb-3
+    .card
+      .card-header.border-bottom
+        %h4
+          Creating a Wikidata Item
+      .card-body.overflow-auto.mt-3{style: "max-height: 300px; min-height: 300px;"}
         %p
           Once you've mastered the art of attributing specimens in Bionomia you may want to try to get more challenging collectors like Miss Blackler into Bionomia.
           This is my favourite area of work as it's like a detective hunt. And I've got lots of friends to help!
-          %blockquote{class:"twitter-tweet"}
+          %blockquote.twitter-tweet
             %p{lang:"en", dir:"ltr"}
               So when I come across a collector with the name &quot;Miss xxx&quot; and very little else is known about her I try and get her into Wikidata. As
-              %a{href:"https://twitter.com/idbdeb?ref_src=twsrc%5Etfw"} @idbdeb
+              = link_to "@idbdeb", "https://twitter.com/idbdeb?ref_src=twsrc%5Etfw"
               and I discovered yesterday there is often information about her in some archive or publication somewhere!
-              %a{href:"https://t.co/Eoi0rvs8Uh"} https://t.co/Eoi0rvs8Uh
-              %a{href:"https://t.co/fEvLIqsTES"} pic.twitter.com/fEvLIqsTES
+              = link_to "https://t.co/Eoi0rvs8Uh", "https://t.co/Eoi0rvs8Uh"
+              = link_to "https://t.co/fEvLIqsTES", "https://pic.twitter.com/fEvLIqsTES"
             &mdash; Siobhan (@SiobhanLeachman)
-            %a{href:"https://twitter.com/SiobhanLeachman/status/1256769966335901696?ref_src=twsrc%5Etfw"} May 3, 2020
+            = link_to "May 3, 2020", "https://twitter.com/SiobhanLeachman/status/1256769966335901696?ref_src=twsrc%5Etfw"
           %script{async: true, src:"https://platform.twitter.com/widgets.js", charset:"utf-8"}
         %p
           I came across "Miss Blackler" as I had seen her in the
-          %a{href:"https://twitter.com/HarvardHerbaria"} @HarvardHerbaria
+          = link_to "@HarvardHerbaria", "https://twitter.com/HarvardHerbaria"
           Index of Botanists.
           She collected in Oregon and California. I created a
-          %a{href:"https://twitter.com/wikidata"} @Wikidata
+          = link_to "@Wikidata", "https://twitter.com/wikidata"
           item for her and added the HUH identifier.
-        %p{class:"mt-3 mb-3"}
-          %img{src:"/images/huh.png", alt:"Harvard Index of Botanists", class:"mt-3 mb-3"}
-          %img{src:"/images/wikidata-screen.png", alt:"Wikidata screen capture", class:"mt-3 mb-3"}
+        %p.mt-3.mb-3
+          %img.mt-3.mb-3{src:"/images/huh.png", alt:"Harvard Index of Botanists"}
+          %img.mt-3.mb-3{src:"/images/wikidata-screen.png", alt:"Wikidata screen capture"}
         %p
           But to add her to Bionomia I need to get a date of death. And that's where it can get tricky. Our Miss Blackler collected in Olympia and
-          %a{href:"https://twitter.com/metacoretechs"} @metacoretechs
+          = link_to "@metacoretechs", "https://twitter.com/metacoretechs"
           found a reference to a Lydia Hooper Blackler in the Internet Archive.
-          %img{src:"/images/blackler-ia.png", alt:"Blackler Internet Archive", class:"d-block mt-3 mb-3"}
+          %img.d-block.mt-3.mb-3{src:"/images/blackler-ia.png", alt:"Blackler Internet Archive"}
 
         %p
           Based on info
-          %a{href:"https://twitter.com/idbdeb"} @idbdeb
+          = link_to "@idbdeb", "https://twitter.com/idbdeb"
           found, Lydia Hooper Blackler lived in Olympia, remained unmarried, travelled & lived in California, where other specimens of hers were collected,
           = succeed "." do
-            %a{href:"https://www.ashefamily.info/ashefamily/1874.htm"}https://www.ashefamily.info/ashefamily/1874.htm
+            = link_to "https://www.ashefamily.info/ashefamily/1874.htm", "https://www.ashefamily.info/ashefamily/1874.htm"
           As a result I'm confident that this is our "Miss Blackler". She's also in
           = succeed "." do
-            %a{href:"https://twitter.com/FindaGrave"} @FindaGrave
-          %img{src:"/images/find-grave.png", alt:"Find a Grave", class:"d-block mt-3 mb-3"}
+            = link_to "@FindaGrave", "https://twitter.com/FindaGrave"
+          %img.d-block.mt-3.mb-3{src:"/images/find-grave.png", alt:"Find a Grave"}
           So now I update her Wikidata item.
           I'll add as much information as we've found, add as many references as I can so that other researchers can track what we've done.
           I'll include the important date of death.
-          %img{src:"/images/wikidata-death.png", alt:"Wikidata date of death", class:"d-block mt-3 mb-3"}
+          %img.d-block.mt-3.mb-3{src:"/images/wikidata-death.png", alt:"Wikidata date of death"}
           I've also found a public domain image of her via
-          %a{href:"https://twitter.com/OrHist"} @OrHist
+          = link_to "@OrHist", "https://twitter.com/OrHist"
           = succeed "." do
-            %a{href:"https://digitalcollections.ohs.org/blackler-lydia-hooper"} https://digitalcollections.ohs.org/blackler-lydia-hooper
+            = link_to "https://digitalcollections.ohs.org/blackler-lydia-hooper", "https://digitalcollections.ohs.org/blackler-lydia-hooper"
           Before I add her to Bionomia I'll download this and upload it to
           = succeed "." do
-            %a{href:"https://twitter.com/WikiCommons"} @Wikicommons
+            = link_to "@Wikicommons", "https://twitter.com/WikiCommons"
           I can then add it to her Wikidata item. This in turn will be pulled into Bionomia when I add her to the site.
-          %img{src:"/images/blackler-image.png", alt:"Photo of Blackler", class:"d-block mt-3 mb-3"}
+          %img.d-block.mt-3.mb-3{src:"/images/blackler-image.png", alt:"Photo of Blackler"}
         %p
           Now I add her to Bionomia. I take her Wikidata item Q93018256 and go to the site.
           I press the
@@ -206,23 +210,24 @@
           tab. I add the Wikidata Q item number in and press the green
           %em Add
           button.
-        %p{class:"mt-3 mb-3"}
+        %p.mt-3.mb-3
           %img{src:"/images/help-others-link.png", alt:"Help others link"}
           %img{src:"/images/help-tabs.png", alt:"Helping tabs"}
           %img{src:"/images/add-someone.png", alt:"Add someone"}
         %p
           She's then added to Bionomia, it's just a matter of clicking on her and then attributing specimens like we did previously for George Howes.
-          %img{src:"/images/help-blackler.png", alt:"Helping Blackler", class:"mt-3 mb-3"}
+          %img.mt-3.mb-3{src:"/images/help-blackler.png", alt:"Helping Blackler"}
           Don't forget to press
           %em Make Public
-          %img{src:"/images/make-public-button.png", class:"d-block mt-3 mb-3"}
+          %img.d-block.mt-3.mb-3{src:"/images/make-public-button.png"}
           \...once you've attributed a few specimens. You don't HAVE to get to 100%, anything is better than nothing.
 
-  %div{class:"col-12 col-md-6 mb-3"}
-    %div{class:"card"}
-      %div{class:"card-header border-bottom"}
-        %h4 Uploads to Attribute Records in Bulk
-      %div{class:"card-body overflow-auto mt-3", style:"max-height: 300px; min-height: 300px;"}
+  .col-12.col-md-6.mb-3
+    .card
+      .card-header.border-bottom
+        %h4
+          Uploads to Attribute Records in Bulk
+      .card-body.overflow-auto.mt-3{style:"max-height: 300px; min-height: 300px;"}
         %p
           Today I thought I'd share a "how to" for bulk uploads.
           After only a day of doing these I feel like I need the extra practise.
@@ -233,69 +238,69 @@
           I'm going to pick the fabulous Alexander Wetmore.
           I've previously transcribed his photo albums with
           = succeed "." do
-            %a{href:"https://twitter.com/TranscribeSI"} @TranscribeSI
+            = link_to "@TranscribeSI", "https://twitter.com/TranscribeSI"
           He was a prolific collector and needs some
-          %a{href:"https://twitter.com/BionomiaTrack"} @BionomiaTrack
+          = link_to "@BionomiaTrack", "https://twitter.com/BionomiaTrack"
           love.
-        %p{class:"mt-3 mb-3"}
-          %img{src:"/images/wetmore-jumbotron.png", alt: "Wetmore overview", class:"align-top"}
+        %p.mt-3.mb-3
+          %img.align-top{src:"/images/wetmore-jumbotron.png", alt: "Wetmore overview"}
         %p
           So I go to the "Bulk Attributions" tab on his profile page. And then press the blue "Download" csv file button.
-        %p{class:"mt-3 mb-3"}
-          %img{src:"/images/wetmore-download.png", alt:"Wetmore download", class:"align-top"}
-          %img{src:"/images/download-buttons.png", alt:"Download buttons", class:"align-top"}
+        %p.mt-3.mb-3
+          %img.align-top{src:"/images/wetmore-download.png", alt:"Wetmore download"}
+          %img.align-top{src:"/images/download-buttons.png", alt:"Download buttons"}
         %p
           This downloads a csv file of specimen data.
           I open up the file.
           Now I'm going to be using Excel but you may use something else.
           When opened the file looks like this in Excel.
-        %p{class:"mt-3 mb-3"}
-          %img{src:"/images/excel-download.jpg", alt:"Excel download", class:"align-top"}
+        %p.mt-3.mb-3
+          %img.align-top{src:"/images/excel-download.jpg", alt:"Excel download"}
         %p
           I'll go through the important columns.
           The first is the "action" column.
           This is where you'll put "recorded" if the specimen was collected by Alexander, or "identified" if it was identified by him.
           If he did both you add "recorded, identified".
           Note the comma separating the two!
-        %p{class:"mt-3 mb-3"}
-          %img{src:"/images/recorded-identified.png", alt:"recorded identified", class:"align-top"}
+        %p.mt-3.mb-3
+          %img.align-top{src:"/images/recorded-identified.png", alt:"recorded identified"}
         %p
           You can see whether Alexander recorded or identified specimens by checked the "recordedBy" or "identifiedBy" columns in the spreadsheet.
-        %p{class:"mt-3 mb-3"}
-          %img{src:"/images/recordedby.png", alt:"recordedBy", class:"align-top"}
-          %img{src:"/images/identifiedby.png", alt:"identifiedBy", class:"align-top"}
+        %p.mt-3.mb-3
+          %img.align-top{src:"/images/recordedby.png", alt:"recordedBy"}
+          %img.align-top{src:"/images/identifiedby.png", alt:"identifiedBy"}
         %p
           The other column that may be of use is the "Not Me" column.
           If it isn't your collector that either collected or identified the specimen you can add "True" to this column.
-        %p{class:"mt-3 mb-3"}
-          %img{src:"/images/notme.png", alt:"Not me", class:"align-top"}
+        %p.mt-3.mb-3
+          %img.align-top{src:"/images/notme.png", alt:"Not me"}
         %p
           Once you've got your spreadsheet ready with some claims added you can then upload it into Bionomia.
           I'm just going to do a few so I can show you what to do.
           I'm going to assume you have basic Excel skills.
           All I'm going to do is use the sort & filter and search recordedBy.
-        %p{class:"mt-3 mb-3"}
-          %img{src:"/images/sort-filter.png", alt:"Sort and filter", class:"align-top"}
+        %p.mt-3.mb-3
+          %img.align-top{src:"/images/sort-filter.png", alt:"Sort and filter"}
         %p
           I'll add "recorded" in the "action" column to all those lines.
           I'll then check the "identifiedBy" column to make sure he didn't identify any of the specimens.
           If he did I'll add a comma and "identified" to those specimens he also identified.
-        %p{class:"mt-3 mb-3"}
-          %img{src:"/images/excel-action.png", alt:"Adding action", class:"align-top"}
+        %p.mt-3.mb-3
+          %img.align-top{src:"/images/excel-action.png", alt:"Adding action"}
         %p
           Now obviously you can keep on working on the spreadsheet.
           But I'll just leave it there so I can show you the next steps.
           What I do next may not be the best way but it works.
           I save the spreadsheet and a warning pops up.
           I press "No" on the warning and save as an Excel workbook.
-        %p{class:"mt-3 mb-3"}
-          %img{src:"/images/csv-dialog.jpg", alt:"CSV dialog", class:"align-top"}
-          %img{src:"/images/csv-save-workbook.jpg", alt:"Saving csv as workbook", class:"align-top"}
+        %p.mt-3.mb-3
+          %img.align-top{src:"/images/csv-dialog.jpg", alt:"CSV dialog"}
+          %img.align-top{src:"/images/csv-save-workbook.jpg", alt:"Saving csv as workbook"}
         %p
           I then press "save as" and choose the file format CSV UTF-8 format.
           I'll rename the file as Q34558Alex.csv.
-        %p{class:"mt-3 mb-3"}
-          %img{src:"/images/save-utf8.jpg", alt:"Save as UTF-8", class:"align-top"}
+        %p.mt-3.mb-3
+          %img.align-top{src:"/images/save-utf8.jpg", alt:"Save as UTF-8"}
         %p
           Then I go back to Bionomia - Alexander's profile, the Bulk Attributions tab and press "Choose file".
           I choose the file I've just renamed and saved as a csv file. Then I press submit.

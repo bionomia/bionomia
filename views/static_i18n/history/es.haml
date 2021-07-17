@@ -1,16 +1,17 @@
--content_for :title, "Historia"
+- content_for :title, "Historia"
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2
+        Historia
 
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class:"mr-auto p-2"}
-      %h1{class:"h2"} Historia
-
-%div{class:"row mt-4"}
-  %div{class:"col-12 col-xl-6 mb-3"}
-    %div{class:"card"}
-      %div{class:"card-header border-bottom"}
-        %h4 Un cambio de marca
-      %div{class:"card-body mt-3"}
+.row.mt-4
+  .col-12.col-xl-6.mb-3
+    .card
+      .card-header.border-bottom
+        %h4
+          Un cambio de marca
+      .card-body.mt-3
         %p Junio 15, 2020
         %p Amigos,
         %p
@@ -19,11 +20,11 @@
           Parry, T.D., and C.W. Yingling. 2020. Slave Hounds and Abolition in the Americas.
           %em Past & Present
           246: 69–108.
-          %a{href:"https://doi.org/10.1093/pastj/gtz020"} https://doi.org/10.1093/pastj/gtz020
-        %p{class:"clearfix"}
-          %img{src:"/images/bloodhound_logo.png", alt:"Bloodhound Tracker", class:"float-left mr-3"}
+          = link_to "https://doi.org/10.1093/pastj/gtz020", "https://doi.org/10.1093/pastj/gtz020"
+        %p.clearfix
+          %img.float-left.mr-3{src:"/images/bloodhound_logo.png", alt:"Bloodhound Tracker"}
           Estoy horrorizado por los eventos en ese artículo y me avergüenzo de mi ingenuidad. Bloodhound como marca y su logo son imperdonables. Los museos de historia natural del mundo han
-          %a{href:"https://www.nhm.ac.uk/discover/news/2019/july/are-natural-history-museums-inherently-racist.html"} reconocido su papel
+          = link_to "reconocido su papel", "https://www.nhm.ac.uk/discover/news/2019/july/are-natural-history-museums-inherently-racist.html"
           en el colonialismo y la trata transatlántica de esclavos. Rechazo cualquier encubrimiento de este pasado. Todas las personas negras, indígenas y de color deben sentirse cómodas y empoderadas para estar aquí, participar, aprender y liderar.
         %p
           Todos los enlaces de Bloodhound Tracker redirigen a Bionomia. El 1 de diciembre de 2020, el sitio Bloodhound Tracker se eliminará por completo, lo que debería proporcionar tiempo suficiente para que los índices de búsqueda y los sitios actualicen los enlaces y utilicen el nuevo logo.
