@@ -1,13 +1,13 @@
--content_for :title, "Pour les gestionnaires de données"
+-content_for :title, "For Data Managers"
 
 -content_for :jumbotron do
   %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
     %div{class:"mr-auto p-2"}
-      %h1{class:"h2"} Pour les gestionnaires de données
+      %h1{class:"h2"} For Data Managers
 
 %div{class: "container-fluid"}
 
-  %h3 Contexte
+  %h3 Background
   %p
     Bionomia
     %a{href: url("/scribes")} scribes
@@ -21,7 +21,7 @@
 
   %div{class: "row"}
     %div{class: "col-12 col-md-6"}
-      %h3 S'engager Avec Votre Communauté
+      %h3 Engaging With Your Community
 
       %p
         Bionomia scribes are a welcoming, international group of enthusiasts who are driven to help you attribute specimen records to the collectors and determiners represented in your dataset(s). They work tirelessly to enhance entries in
@@ -44,7 +44,7 @@
   %div{class: "row"}
     %div{class: "col-12 col-md-6"}
 
-      %h3 Intégration d'Améliorations
+      %h3 Incorporating Enhancements
 
       %p
         Every few weeks, Bionomia refreshes a subset of the Darwin Core data you publish to
@@ -101,7 +101,7 @@
 
     %div{class:"col-12 col-md-6"}
 
-      %h3 Évaluation de la Qualité des Données
+      %h3 Assessing Data Quality
 
       %p
         In the set of "Help Others" pages where specimen records are attributed to collectors and determiners, there are tabs to Fix and Visualize records.
@@ -109,4 +109,4 @@
         Countries on maps and date ranges on charts can also be clicked to execute dynamic filters.
         In time and as more attributions are made, data quality reports like these on individuals' specimen records may be rolled-up to dataset-level reports.
 
-      = haml_i18n :'partials/developers/reconcile', layout: false
+      = haml_i18n :'reconcile', layout: false

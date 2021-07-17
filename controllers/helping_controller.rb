@@ -57,7 +57,7 @@ module Sinatra
 
           app.get '/help-others/add' do
             protected!
-            haml_i18n :'help/add', locals: { active_page: "add" }
+            haml_i18n :'add', locals: { active_page: "add" }
           end
 
           app.post '/help-others/add' do

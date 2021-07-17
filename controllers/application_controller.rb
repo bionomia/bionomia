@@ -17,7 +17,7 @@ module Sinatra
           end
 
           app.get '/acknowledgments' do
-            haml :acknowledgments, locals: { active_page: "acknowledgments" }
+            haml_i18n :acknowledgments, locals: { active_page: "acknowledgments" }
           end
 
           app.get '/donate' do
