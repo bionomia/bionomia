@@ -1,6 +1,5 @@
--content_for :title, I18n.t('acknowledgments.acknowledgments_title')
-
--content_for :scripts do
+- content_for :title, I18n.t('acknowledgments.acknowledgments_title')
+- content_for :scripts do
   %script{src: "//crowdin.com/js/crowdjet/crowdjet.js"}
   :javascript
     $(function() {
@@ -14,22 +13,24 @@
       }, 1000);
     });
 
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class:"mr-auto p-2"}
-      %h1{class:"h2"}= I18n.t('acknowledgments.acknowledgments_title')
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2
+        = I18n.t('acknowledgments.acknowledgments_title')
 
-%div{class:"row mt-4"}
-  %div{class:"col-12 col-md-6 mb-3"}
-    %div{class:"card"}
-      %div{class:"card-header border-bottom"}
-        %h4= I18n.t('acknowledgments.taxon_silhouettes')
-      %div{class:"card-body mt-3"}
+.row.mt-4
+  .col-12.col-md-6.mb-3
+    .card
+      .card-header.border-bottom
+        %h4
+          = I18n.t('acknowledgments.taxon_silhouettes')
+      .card-body.mt-3
         %p
           Silhouette images of taxonomic Families originate from the amazing
-          %a{href: "http://phylopic.org/"} PhyloPic
+          = link_to "PhyloPic", "http://phylopic.org/"
           developed and maintained by Mike Keesey.
-        %div{class:"text-center"}
+        .text-center
           %a{href: "http://phylopic.org/image/cb9f4a84-068b-4ac4-b0ca-1b6da752817a/"}
             %img{src:"/images/a79e6610-2a32-4797-8281-02e8640f3b57.128.png", alt:"PhyloPic Silhouette", class:"p-2"}
           %a{href: "http://phylopic.org/image/ef34e872-7ba3-4836-bbd3-844351d895c2/"}
@@ -39,14 +40,15 @@
           %a{href: "http://phylopic.org/image/7e3829c6-6587-4df7-a514-29e3f8f2c40d/"}
             %img{src:"/images/7e3829c6-6587-4df7-a514-29e3f8f2c40d.128.png", alt:"Phylopic Silhouette", class:"p-2"}
 
-  %div{class: "col-12 col-md-6 mb-3"}
-    %div{class:"card"}
-      %div{class:"card-header border-bottom"}
-        %h4= I18n.t('acknowledgments.translations')
-      %div{class:"card-body mt-3"}
+  .col-12.col-md-6.mb-3
+    .card
+      .card-header.border-bottom
+        %h4
+          = I18n.t('acknowledgments.translations')
+      .card-body.mt-3
         %p
           Special thanks to
-          %a{href: url('/0000-0002-0851-6883')} Jennifer C. Girón Duque
+          = link_to "Jennifer C. Girón Duque", url('/0000-0002-0851-6883')
           %a{href:"https://orcid.org/0000-0002-0851-6883"}
             %i{class:"fab fa-orcid"}
             https://orcid.org/0000-0002-0851-6883
@@ -56,16 +58,15 @@
             %i{class:"fab fa-orcid"}
             https://orcid.org/0000-0003-4401-5530
           who translated the interface into Portuguese, and
-          %a{href: "https://crowdin.com/profile/patmat99"} Patrick Mates
+          = link_to "Patrick Mates", "https://crowdin.com/profile/patmat99"
           into German through Crowdin.
         %p
-          %div{class:"d-block mb-3"}
+          .d-block.mb-3
             %a{title: "Crowdin",target: "_blank", href: "https://crowdin.com/project/bionomia"}
               %img{src: "https://badges.crowdin.net/bionomia/localized.svg"}
           Want to help translate into other languages? Visit
-          %a{href: "https://translate.bionomia.net"}
-            https://translate.bionomia.net
+          = link_to nil, "https://translate.bionomia.net"
           or click the Crowdin widget below.
-        %div{id:"crowdin-widget", style:"position:relative;min-height:5em;padding-bottom:80px;display:none;"}
-          %div{id: "crowdjet-container", "data-project-id": 462580, style:"position:absolute;top:80px;left:0px;"}
-          %div{id: "crowdjet-expand-container", style:"position:absolute;top:0px;left:0px;"}
+        #crowdin-widget{style:"position:relative;min-height:5em;padding-bottom:80px;display:none;"}
+          #crowdjet-container{"data-project-id": 462580, style:"position:absolute;top:80px;left:0px;"}
+          #crowdjet-expand-container{style:"position:absolute;top:0px;left:0px;"}

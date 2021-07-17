@@ -1,61 +1,63 @@
--content_for :title, "Ayude a atribuir especímenes"
-
--content_for :scripts do
+- content_for :title, "Ayude a atribuir especímenes"
+- content_for :scripts do
   %script{src: "/js/application.js"}
   :javascript
     $(function() {
       Application.init("", "GET", "/help-others");
     });
 
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap alert-warning"}
-    %div{class: "mr-auto p-2"}
-      %h1{class:"h2"} Ayude a atribuir especímenes
-      %p{class: "lead text-muted"} Añadir a alguien que aún no ha sido descubierto
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap.alert-warning
+    .mr-auto.p-2
+      %h1.h2
+        Ayude a atribuir especímenes
+      %p.lead.text-muted
+        Añadir a alguien que aún no ha sido descubierto
     = haml :'partials/help/search', layout: false
 
 = haml :'partials/help/main_tabs', layout: false, locals: { active_main_tab: "add" }
 
-%div{class:"mt-4"}
-  %div{class:"alert alert-info tiny-margins", role:"alert"}
+.mt-4
+  .alert.alert-info.tiny-margins{role: "alert"}
     ¿No pudo encontrar a alguien?
     %ul
       %li
         %strong
           Vivos:
         Pídales crear una cuenta de
-        %a{href: "https://orcid.org/register"} ORCID
+        = link_to "ORCID", "https://orcid.org/register"
         con un nombre disponible públicamente. Si la persona anota una o más palabras clave
-        %span{class: "font-italic"} #{Settings.orcid.keywords.join(", ")}
+        %span.font-italic #{Settings.orcid.keywords.join(", ")}
         en su cuenta de ORCID, Bionomía las agregará el día siguiente.
       %li
         %strong
           Fallecidos:
         Busque en
-        %a{href:"https://www.wikidata.org"} Wikidata
+        = link_to "Wikidata", "https://www.wikidata.org"
         y asegúrese de que tengan fecha de fallecimiento y de que tengan datos de alguna de las propiedades:
-        %span{class: "font-italic"} #{::Bionomia::WikidataSearch::PEOPLE_PROPERTIES.keys.join(", ")}
+        %span.font-italic #{::Bionomia::WikidataSearch::PEOPLE_PROPERTIES.keys.join(", ")}
         \. Bionomía también las agregará el día siguiente.
 
-%h4 Agregar a una persona
+%h4
+  Agregar a una persona
 
-%form{id:"form-user-wrapper", method: "post", action: "/help-others/add", "accept-charset" => "UTF-8", class:"helpers"}
-  %div{class:"d-flex flex-sm-row flex-column mt-3"}
-    %div{class:"form-group"}
-      %label{for: "identifier", class:"font-weight-bold"} Agregar identificador de ORCID o número Q de Wikidata
-      %input{class: "orcid-add", type: :text, name: "identifier", placeholder: "Q1234567", size:"12"}
+%form.hrlpers#form-user-wrapper{method: :post, action: "/help-others/add", "accept-charset": "UTF-8"}
+  .d-flex.flex-sm-row.flex-column.mt-3
+    .form-group
+      %label.font-weight-bold{for: "identifier"} Agregar identificador de ORCID o número Q de Wikidata
+      %input.orcid-add{type: :text, name: "identifier", placeholder: "Q1234567", size:"12"}
       %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
       %input{type: :submit, class:"btn btn-success mt-3", value: "Add"}
 
 - if flash[:new_user]
-  %div{class: "row"}
-    %div{class: "col-sm-8 col-md-6 col-xl-6"}
+  .row
+    .col-sm-8.col-md-6.col-xl-6
       - if !flash[:new_user][:slug].nil?
-        %div{class:"alert alert-success tiny-margins d-block", role: "alert"}
-          %span{class:"font-weight-bold"}
-            %a{href: url("/help-others/#{flash[:new_user][:slug]}")} #{flash[:new_user][:fullname]}
+        .alert.alert-success.tiny-margins.d-block{role: "alert"}
+          %span.font-weight-bold
+            = link_to flash[:new_user][:fullname], url("/help-others/#{flash[:new_user][:slug]}")
           se creó o actualizó.
       - else
-        %div{class:"alert alert-danger tiny-margins d-block", role: "alert"}
-          %span{class:"font-weight-bold"} #{h(flash[:new_user][:fullname])}
+        .alert.alert-danger.tiny-margins.d-block{role: "alert"}
+          %span.font-weight-bold #{h(flash[:new_user][:fullname])}
           no se creó porque el identificador no presenta el formato correcto o en el caso de Wikidata, el elemento no es un humano, no ha fallecido, no se encontró un apellido, o el usuario ya existe con un identificador de ORCID.

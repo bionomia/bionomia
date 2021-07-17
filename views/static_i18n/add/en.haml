@@ -1,61 +1,63 @@
--content_for :title, "Help Attribute Specimens"
-
--content_for :scripts do
+- content_for :title, "Help Attribute Specimens"
+- content_for :scripts do
   %script{src: "/js/application.js"}
   :javascript
     $(function() {
       Application.init("", "GET", "/help-others");
     });
 
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap alert-warning"}
-    %div{class: "mr-auto p-2"}
-      %h1{class:"h2"} Help Attribute Specimens
-      %p{class: "lead text-muted"} Add someone not yet discovered
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap.alert-warning
+    .mr-auto.p-2
+      %h1.h2
+        Help Attribute Specimens
+      %p.lead.text-muted
+        Add someone not yet discovered
     = haml :'partials/help/search', layout: false
 
 = haml :'partials/help/main_tabs', layout: false, locals: { active_main_tab: "add" }
 
-%div{class:"mt-4"}
-  %div{class:"alert alert-info tiny-margins", role:"alert"}
+.mt-4
+  .alert.alert-info.tiny-margins{role: "alert"}
     Couldn't find someone?
     %ul
       %li
         %strong
           Living:
         Ask them to create an
-        %a{href: "https://orcid.org/register"} ORCID account
+        = link_to "ORCID account", "https://orcid.org/register"
         with a publicly available name. If they assign themselves one or more of the keywords
-        %span{class: "font-italic"} #{Settings.orcid.keywords.join(", ")}
+        %span.font-italic #{Settings.orcid.keywords.join(", ")}
         to their ORCID account, Bionomia will add them the following day
       %li
         %strong
           Deceased:
         Search on
-        %a{href:"https://www.wikidata.org"} Wikidata
+        = link_to "Wikidata", "https://www.wikidata.org"
         and ensure they have a death date and there is a value for any of the properties:
-        %span{class: "font-italic"} #{::Bionomia::WikidataSearch::PEOPLE_PROPERTIES.keys.join(", ")}
+        %span.font-italic #{::Bionomia::WikidataSearch::PEOPLE_PROPERTIES.keys.join(", ")}
         \. Bionomia will also add them by the following day.
 
-%h4 Add a Person
+%h4
+  Add a Person
 
-%form{id:"form-user-wrapper", method: "post", action: "/help-others/add", "accept-charset" => "UTF-8", class:"helpers"}
-  %div{class:"d-flex flex-sm-row flex-column mt-3"}
-    %div{class:"form-group"}
-      %label{for: "identifier", class:"font-weight-bold"} Add ORCID Identifier or Wikidata Q Number
-      %input{class: "orcid-add", type: :text, name: "identifier", placeholder: "Q1234567", size:"12"}
+%form.helpers#form-user-wrapper{method: :post, action: "/help-others/add", "accept-charset": "UTF-8"}
+  .d-flex.flex-sm-row.flex-column.mt-3
+    .form-group
+      %label.font-weight-bold{for: "identifier"} Add ORCID Identifier or Wikidata Q Number
+      %input.orcid-add{type: :text, name: "identifier", placeholder: "Q1234567", size:"12"}
       %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
       %input{type: :submit, class:"btn btn-success mt-3", value: "Add"}
 
 - if flash[:new_user]
-  %div{class: "row"}
-    %div{class: "col-sm-8 col-md-6 col-xl-6"}
+  .row
+    .col-sm-8.col-md-6.col-xl-6
       - if !flash[:new_user][:slug].nil?
-        %div{class:"alert alert-success tiny-margins d-block", role: "alert"}
-          %span{class:"font-weight-bold"}
-            %a{href: url("/help-others/#{flash[:new_user][:slug]}")} #{flash[:new_user][:fullname]}
+        .alert.alert-success.tiny-margins.d-block{role: "alert"}
+          %span.font-weight-bold
+            = link_to flash[:new_user][:fullname], url("/help-others/#{flash[:new_user][:slug]}")
           was created or updated.
       - else
-        %div{class:"alert alert-danger tiny-margins d-block", role: "alert"}
-          %span{class:"font-weight-bold"} #{h(flash[:new_user][:fullname])}
+        .alert.alert-danger.tiny-margins.d-block{role: "alert"}
+          %span.font-weight-bold #{h(flash[:new_user][:fullname])}
           not created because the identifier was incorrectly formatted or in the case of wikidata, the item is not a human, is not deceased, a family name was not found, or the user already exists with an ORCID identifier. It could also mean that the identifier was previously removed from Bionomia and cannot now be manually added.
