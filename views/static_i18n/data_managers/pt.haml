@@ -1,73 +1,74 @@
--content_for :title, "For Data Managers"
+- content_for :title, "For Data Managers"
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2
+        For Data Managers
 
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class:"mr-auto p-2"}
-      %h1{class:"h2"} For Data Managers
+.container-fluid
 
-%div{class: "container-fluid"}
-
-  %h3 Background
+  %h3
+    Background
   %p
     Bionomia
-    %a{href: url("/scribes")} scribes
+    = link_to "scribes", url("/scribes")
     attribute specimen records to the collectors and determiners represented in your dataset(s) by linking natural history specimen records you publish to
-    %a{href:"https://gbif.org"} GBIF
+    = link_to "GBIF", "https://gbif.org"
     to their
-    %a{href:"https://www.wikidata.org"} Wikidata
+    = link_to "Wikidata", "https://www.wikidata.org"
     Q numbers or
-    %a{href:"https://orcid.org"} ORCID
+    = link_to "ORCID", "https://orcid.org"
     IDs. People with ORCID IDs also claim records for the specimens they themselves collected or identified. Wikidata and ORCID identifiers have associated resources and services that are unquestionably useful for collections ranging from disambiguating people names to gauging the impact your collection has on the academic community.
 
-  %div{class: "row"}
-    %div{class: "col-12 col-md-6"}
-      %h3 Engaging With Your Community
+  .row
+    .col-12.col-md-6
+      %h3
+        Engaging With Your Community
 
       %p
         Bionomia scribes are a welcoming, international group of enthusiasts who are driven to help you attribute specimen records to the collectors and determiners represented in your dataset(s). They work tirelessly to enhance entries in
-        %a{href:"https://www.wikidata.org"}
-          Wikidata
+        = link_to "Wikidata", "https://www.wikidata.org"
         by adding links and attributes like birth and death dates to deceased natural historians. They are also advocates of
-        %a{href:"https://orcid.org"} ORCID
+        = link_to "ORCID", "https://orcid.org"
         and can help you campaign for its adoption at your institution.
         The easiest way to seek help, guidance, or to appreciate the scope of their activities is to follow
-        %a{href:"https://twitter.com/BionomiaTrack"} @BionomiaTrack
+        = link_to "@BionomiaTrack", "https://twitter.com/BionomiaTrack"
         on Twitter. Come thank the scribes for their efforts and to share in conversations that will lead to rewarding new connections.
 
       %p
-        %img{src:"/images/roundtrip.png", alt: "Data round trip", class: "img-fluid"}
+        %img.img-fluid{src:"/images/roundtrip.png", alt: "Data round trip"}
 
-    %div{class:"col-12 col-md-6"}
-      %a{class: "twitter-timeline", "data-width": 500, "data-height": 750, href:"https://twitter.com/BionomiaTrack?ref_src=twsrc%5Etfw"} Tweets by BionomiaTrack
+    .col-12.col-md-6
+      %a.twitter-timeline{"data-width": 500, "data-height": 750, href:"https://twitter.com/BionomiaTrack?ref_src=twsrc%5Etfw"} Tweets by BionomiaTrack
       %script{async: true, src:"https://platform.twitter.com/widgets.js", charset:"utf-8"}
 
-  %div{class: "row"}
-    %div{class: "col-12 col-md-6"}
+  .row
+    .col-12.col-md-6
 
-      %h3 Incorporating Enhancements
+      %h3
+        Incorporating Enhancements
 
       %p
         Every few weeks, Bionomia refreshes a subset of the Darwin Core data you publish to
         = succeed "." do
-          %a{href: "https://gbif.org"} GBIF
+          = link_to "GBIF", "https://gbif.org"
         See
-        %a{href: url("/how-it-works")} how it works
+        = link_to "how it works", url("/how-it-works")
         for more details.
 
-      %div{class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
+      .media.mb-3.mt-3.d-flex.flex-wrap.flex-column.flex-md-row
         %a{href:"https://frictionlessdata.io/"}
-          %img{class:"mb-3 mr-3", src:"/images/frictionless-color-logo.png", alt:"Frictionless Data"}
-        %div{class:"media-body"}
+          %img.mb-3.mr-3{src:"/images/frictionless-color-logo.png", alt:"Frictionless Data"}
+        .media-body
           %p
             Search for your
-            %a{href: url("/datasets")} dataset(s)
+            = link_to "dataset(s)", url("/datasets")
             and find the link to a
-            %a{href:"https://frictionlessdata.io/"} Frictionless Data
+            = link_to "Frictionless Data", "https://frictionlessdata.io/"
             package. These zipped, UTF-8 encoded relational files are similar to the Darwin Core Archives you produced for GBIF. They differ in that they more efficiently represent
             %em many:many
             relationships. There is also a breadth of
-            %a{href: "https://frictionlessdata.io/software/"}
-              open software libraries
+            = link_to "open software libraries", "https://frictionlessdata.io/software/"
             in many programming languages that read, validate, and process Frictionless Data. You can also extract the zipped package and import the UTF-8 encoded csv files into any spreadsheet software, provided the files are not excessively large.
 
       %p
@@ -81,13 +82,13 @@
         %em datapackage.json
         metadata file contains a "created" timestamp for when the package was last produced. Regeneration of these packages typically occurs once every few weeks but if you would like a more up-to-date version, please
         = succeed "." do
-          %a{href: "https://github.com/bionomia/bionomia/issues"} create a ticket
+          = link_to "create a ticket", "https://github.com/bionomia/bionomia/issues"
         The
         %em users.csv.zip
         file contains a list of unique users that were attributed or have claimed specimen records as their own in your dataset. It also contains their full names, aliases,
-        %a{href:"https://orcid.org"} ORCID
+        = link_to "ORCID", "https://orcid.org"
         IDs or
-        %a{href:"https://www.wikidata.org"} Wikidata
+        = link_to "Wikidata", "https://www.wikidata.org"
         Q numbers plus birth and death dates for the latter.
         The
         %em occurrences.csv.zip
@@ -99,9 +100,10 @@
         %em attributions.csv.zip
         file is a join table for the other two csv files and also contains columns for who made the attribution, their ORCID ID, and a timestamp for when they made the attribution.
 
-    %div{class:"col-12 col-md-6"}
+    .col-12.col-md-6
 
-      %h3 Assessing Data Quality
+      %h3
+        Assessing Data Quality
 
       %p
         In the set of "Help Others" pages where specimen records are attributed to collectors and determiners, there are tabs to Fix and Visualize records.
