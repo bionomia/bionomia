@@ -1,72 +1,64 @@
 - content_for :title, "Rationale"
+
 - content_for :jumbotron do
-%div
-  {class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-  %div
-    {class:"mr-auto p-2"}
-    %h1
-      {class:"h2"} Raisonnement
+  %div.jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    %div.mr-auto.p-2
+      %h1.h2
+        Rationale
+
 %h3
-  Un focus sur les practiciens
+  A Focus on People
+
 %p
   Despite the world-wide importance of natural history collections, many are at risk because they are critically underfunded or undervalued. A contributing factor for this apparent neglect is the lack of a professional reward system that quantifies and illustrates the breadth and depth of expertise required to collect and identify specimens, maintain them, digitize their labels, mobilize the data, and enhance these data as errors and omissions are identified by stakeholders. See thoughts by
-  %a
-    {href: "https://doi.org/10.1525/bio.2011.61.8.8"}
-    McDade
-    %em
-      et al.
-    2011
+  = link_to "McDade et al. 2011", "https://doi.org/10.1525/bio.2011.61.8.8"
   who describe what are the necessary elements for a more realistic professional reward system in Biology. If people throughout the full value-chain in natural history collections received professional credit for their efforts, ideally recognized by their administrators and funding bodies, they would prioritize traditionally unrewarded tasks and could convincingly self-advocate. Proper methods of attribution at both the individual and institutional level are essential.
+
 %p
   The
-  %a
-    {href: "https://gbif.org"} Global Biodiversity Information Facility
+  = link_to "Global Biodiversity Information Facility", "https://gbif.org"
   (GBIF) has prioritized a focus on people. The very first planned item in their
-  %a
-    {href: "https://www.gbif.org/document/83029/gbif-implementation-plan-2017-2021-and-annual-work-programme-2017" }Implementation Plan for 2017-2021
+  = link_to "Implementation Plan for 2017-2021", "https://www.gbif.org/document/83029/gbif-implementation-plan-2017-2021-and-annual-work-programme-2017"
   and Annual Work Programme states:
-  %div
-    {class: "bd-callout bd-callout-bionomia font-italic"}
+  %div.bd-callout.bd-callout-bionomia.font-italic
     "1.a.i: Develop mechanisms to support and reflect the skills, expertise and experience of individual and organizational contributions to the GBIF network, including revision of identity management system and integration of ORCID identifiers".
+
 %h3
-  Le probl&#xE8;me
+  The Problem
+
 %p
   A bottleneck that prevents the full execution of GBIF's plan is a legacy of intractable, text-based content shared from natural history museums that ambiguously record people or organizations implicated in specimen data, none of which include pre-determined links to ORCID identifiers. Typical content shared by natural history museums under the Darwin Core terms
-  %a
-    {href: "http://rs.tdwg.org/dwc/terms/#recordedBy"} recordedBy
+  = link_to "recordedBy", "http://rs.tdwg.org/dwc/terms/#recordedBy"
   (collector) and
-  %a
-    {href: "http://rs.tdwg.org/dwc/terms/#identifidBy"} identifiedBy
+  = link_to "identifiedBy", "http://rs.tdwg.org/dwc/terms/#identifiedBy"
   (determiners or identifiers) is unstructured and variable. It may include variously ordered or unorderd people names, suffer from insensitivity to cultural preferences, additionally express full or abbreviated names of organizations and expeditions, or other notes and markings that collectively make extraction of people names from these fields extremely difficult. The full solution requires multiple approaches. A progressive, modern approach associates ORCID or wikidata identifiers with people mentioned on specimens as labels are digitized. A retrospective approach engages natural historians with an open interface used to claim their specimens or attribute them to others. In so doing, people may quickly showcase their breadth of expertise and efforts. If sufficient numbers of people claim their specimens and attribute them to others, we may unwittingly develop reconciled authority files to help museum staff employ an integrated approach that incorporates look-ups of disambiguated people names.
+
 %h3
-  Mesures sur les organisations
-%div
-  {class: "bd-callout bd-callout-bionomia font-italic"}
+  Metrics on Organizations
+
+%div.bd-callout.bd-callout-bionomia.font-italic
   A single visit to a distant museum by a graduate student to examine and identify specimens can have a significant impact on her career. It also carries with it, her affiliation with her graduate school.
+
 %p
   Organizations struggle to measure the impact of their investments in the digitization and distribution of natural history specimen data. One way to assess organizational reach is to quantify the activities of personnel mentioned in specimen data shared by other organizations. Donations, curatorial or research visits, or the return of loans with new annotations or determinations are all activities that disseminate expertise and carry with them the interests of organizations.
 %p
   When you indicate the start and end dates for your past and present education and employment in your ORCID account, these details are cross-referenced against dates and institution codes in the specimens you collected or identified. The result is a depiction of your organization's sphere of influence on formally or informally partnering organizations through your activities. Although the quality of data often need improvement to fully capture this measure of reach, the necessary elements are all present in ORCID accounts and natural history collections data shared with the Global Biodiversity Information Facility. This approach affords a fresh new incentive for organizations to insist that specimen data be quickly and openly shared when their personnel donate specimens, visit other collections where they identify specimens in a backlog, or return borrowed specimens with new annotations or determinations. It also underscores a recognition that collections of all sizes and specialties participate in national and international networks of enthusiasts and experts. Bionomia attempts to transparently automate these reports for organizations while simultaneously showcasing the expertise of collectors and determiners of natural history specimens.
+
 %h3
-  Qu'est-ce qu'un Bionomia?
+  What is a Bionomia?
+
 %p
-  %em
-    Bionomia
+  %em Bionomia
   is an unusual, exotic word. It is occasionally used by Spanish-speaking biologists and translates to
-  %em
-    bionomy
-  \\&#x2013; the laws of life &#x2013; encompassing distribution and ecology. Its first use could have been in the Lancet in 1848,
-  %a
-    {href: "https://www.sciencedirect.com/science/article/pii/S014067360272610X"} "Bionomia; Or, the Law of Life"
-  wherein &#x3A6;&#x399;&#x39B;&#x391;&#x39B;&#x397;&#x398;&#x397;&#x3A3; describes their newly coined term as an interplay between the potential energy of
-  %em
-    excitability
+  %em bionomy
+  \– the laws of life – encompassing distribution and ecology. Its first use could have been in the Lancet in 1848,
+  = link_to "Bionomia; Or, the Law of Life", "https://www.sciencedirect.com/science/article/pii/S014067360272610X"
+  wherein ΦΙΛΑΛΗΘΗΣ describes their newly coined term as an interplay between the potential energy of
+  %em excitability
   and a physical manifestation as
-  %em
-    excitants.
+  %em excitants.
   But, the author also evokes a subtle mysticism beyond a pedestrian balancing of equations. Let's also define
-  %em
-    Bionomia
+  %em Bionomia
   as reverence, wonder, agency, refinement, passage, and the energetics of connections.
   These are all good words to describe the manner of a natural historian.
   The logo is a stylized quill, caught in the act of signing its autograph on a signature plant leaf.
