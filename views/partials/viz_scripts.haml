@@ -144,6 +144,9 @@
           collectedMap.clearChart();
           identifiedMap.clearChart();
           drawVisualizations();
+          $.each(['collected', 'identified'], function() {
+            $("#map-" + this + "-wrapper").height(collectedMap.container.offsetHeight);
+          });
         });
 
       });
