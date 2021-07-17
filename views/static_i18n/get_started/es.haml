@@ -1,25 +1,27 @@
--content_for :title, "Comenzar"
-
--content_for :jumbotron do
-  %div{class: "jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class: "mr-auto p-2"}
-      %h1{class:"h2"} Comenzar
-      %p{class: "lead text-muted"}
+- content_for :title, "Comenzar"
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2
+        Comenzar
+      %p.lead.text-muted
         Cuatro pasos para reclamar los especímenes que recolectó o identificó y para ayudar a reconocer a sus colegas, mentores y organizaciones.
 
 
-%h3 Paso 1: Autenticar vía ORCID
-%div{class:"ml-3 mt-4"}
-  %div{class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
-    %img{src:"/images/orcid-logo.png", alt:"ORCID", class:"mb-3 mr-3"}
-    %div{class:"media-body"}
+%h3
+  Paso 1: Autenticar vía ORCID
+
+.ml-3.mt-4
+  .media.mb-3.mt-3.d-flex.flex-wrap.flex-column.flex-md-row
+    %img.mb-3.mr-3{src:"/images/orcid-logo.png", alt:"ORCID"}
+    .media-body
       es una organización sin ánimo de lucro que ayuda a crear un mundo en el que todos aquellos que participan en investigación, escolaridad e innovación, estén identificados y conectados de manera única con sus contribuciones y afiliaciones, a lo largo de las disciplinas, las fronteras y el tiempo.
 
   - if !authorized?
-    %form{action: "/auth/orcid?lang=#{I18n.locale}", method: "POST" }
+    %form{action: "/auth/orcid?lang=#{I18n.locale}", method: :post}
       %p
-        %button{class: "btn btn-lg btn-outline-dark"}
-          %i{class:"fab fa-orcid"}
+        %button.btn.btn-lg.btn-outline-dark
+          %i.fab.fa-orcid
           = I18n.t('home.orcid_login')
         %input{type:"hidden", name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
 
@@ -56,7 +58,7 @@
       %small
         %sup a,c
 
-  %div{class:"bd-callout bd-callout-bionomia"}
+  .bd-callout.bd-callout-bionomia
     %div
       %small
         %sup a
@@ -72,37 +74,41 @@
         %strong identificadores de organizaciones
         , por ejemplo, Ringgold o GRID han sido capturados en su cuenta de ORCID.
 
-%h3 Paso 2: Visite la pestaña de Especímenes
-%div{class:"ml-3 mt-4"}
-  %img{src:"/images/profile-tabs.es.png", alt:"Bionomia profile tabs", class:"mb-3 img-fluid"}
+%h3
+  Paso 2: Visite la pestaña de Especímenes
+
+.ml-3.mt-4
+  %img.mb-3.img-fluid{src:"/images/profile-tabs.es.png", alt:"Bionomia profile tabs"}
   %p
     Una vez autenticado a través de ORCID, Bionomía primero le muestra una
     - if !authorized?
       Descripción general
     - else
-      %a{href: url("/profile")} Descripción general
+      = link_to "Descripción general", url("/profile")
     de su perfil. Obtiene su nombre completo y otros detalles de su cuenta de ORCID (ver arriba), que usted puede actualizar en cualquier momento. Haga clic en la pestaña
     - if !authorized?
       Descubiertos
     - else
-      %a{href: url("/profile/candidates")} Descubiertos
+      = link_to "Descubiertos", url("/profile/candidates")
     para ver una lista de especímenes candidatos. Al igual que una bandeja de entrada de correo electrónico, Bionomía muestra la cantidad de especímenes que esperan acción.
     Los datos de los especímenes se actualizan completamente desde la
-    %a{href:"https://gbif.org"} Global Biodiversity Information Facility
+    = link_to "Global Biodiversity Information Facility", "https://gbif.org"
     cada dos semanas.
 
-%h3 Paso 3: Reclame sus especímenes
-%div{class:"ml-3 mt-4"}
+%h3
+  Paso 3: Reclame sus especímenes
+
+.ml-3.mt-4
   %p
     En la página
     - if !authorized?
       Descubiertos
     - else
-      %a{href: url("/profile/candidates")} Descubiertos
+      = link_to "Descubiertos", url("/profile/candidates")
     de su pestaña Especímenes, usted puede reclamar en masa
     %em todas las filas visibles
     de especímenes o reclamar una sola fila dando click en:
-    %ul{class:"list-unstyled"}
+    %ul.list-unstyled
       %li
         %img{src:"/images/net-unselected.png", alt:"Collected icon", width:"18"}
         para especímenes que usted colectó, o
@@ -113,7 +119,7 @@
         %strong
           Ambos
         para especímenes que usted colectó e identificó
-    %img{src:"/images/button-selectors.es.png", alt:"Bionomia buttons", class:"mb-3 img-fluid"}
+    %img.mb-3.img-fluid{src:"/images/button-selectors.es.png", alt:"Bionomia buttons"}
 
   %p
     Haga click en el botón "No soy yo" para ignorar
@@ -122,22 +128,24 @@
     - if !authorized?
       Reclamados
     - else
-      %a{href: url("/profile/specimens")} Reclamados
+      = link_to "Reclamados", url("/profile/specimens")
     o
     - if !authorized?
       Ignorados
     - else
-      %a{href: url("/profile/ignored")} Ignorados
+      = link_to "Ignorados", url("/profile/ignored")
     para arreglar o ajustar sus selecciones.
-  %div{class:"bd-callout bd-callout-bionomia"}
+  .bd-callout.bd-callout-bionomia
     ¿Demasiados registros de especímenes o desea ordenar por columnas y / o filtrar por contenido? Haga clic en la página "Reclamar en masa" en la pestaña Especímenes para ver las instrucciones sobre cómo descargar, agregar atribuciones en una hoja de cálculo y luego cargar un archivo csv completo.
 
-%h3 Paso 4: Atribuya especímenes a otros
-%div{class:"ml-3 mt-4"}
+%h3
+  Paso 4: Atribuya especímenes a otros
+
+.ml-3.mt-4
   %p
     Mientras esté autenticado a través de ORCID, visite
     - if authorized?
-      %a{href: url("/help-others")} Ayudar a otros
+      = link_to "Ayudar a otros", url("/help-others")
     - else
       Ayudar a otros
     para buscar a sus compañeros, mentores o cualquier persona que le inspire. Atribúyales especímenes de la misma manera en que reclamó sus propios especímenes. Si estas personas también tienen un identificador de ORCID, es posible que le envíen un rápido agradecimiento que aparecerá en la pestaña Gracias recibidas.

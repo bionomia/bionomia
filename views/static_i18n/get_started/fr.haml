@@ -1,25 +1,26 @@
--content_for :title, "Commencer"
-
+- content_for :title, "Commencer"
 -content_for :jumbotron do
-  %div{class: "jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class: "mr-auto p-2"}
-      %h1{class:"h2"} Commencer
-      %p{class: "lead text-muted"}
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2
+        Commencer
+      %p.lead.text-muted
         Quatre étapes pour réclamer les spécimens que vous avez collectés ou identifiés et pour aider à reconnaître vos pairs, mentors et organisations.
 
 
-%h3 Étape 1: Authentification via ORCID
-%div{class:"ml-3 mt-4"}
-  %div{class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
-    %img{src:"/images/orcid-logo.png", alt:"ORCID", class:"mb-3 mr-3"}
-    %div{class:"media-body"}
+%h3
+  Étape 1: Authentification via ORCID
+.ml-3.mt-4
+  .media.mb-3.mt-3.d-flex.flex-wrap.flex-column.flex-md-row
+    %img.mb-3.mr-3{src:"/images/orcid-logo.png", alt:"ORCID"}
+    .media-body
       est une organisation à but non lucratif qui aide à créer un monde dans lequel tous ceux qui participent à la recherche, à l'érudition et à l'innovation sont identifiés de manière unique et connectés à leurs contributions et affiliations, à travers les disciplines, les frontières et le temps.
 
   - if !authorized?
-    %form{action: "/auth/orcid?lang=#{I18n.locale}", method: "POST" }
+    %form{action: "/auth/orcid?lang=#{I18n.locale}", method: :post}
       %p
-        %button{class: "btn btn-lg btn-outline-dark"}
-          %i{class:"fab fa-orcid"}
+        %button.btn.btn-lg.btn-outline-dark
+          %i.fab.fa-orcid
           = I18n.t('home.orcid_login')
         %input{type:"hidden", name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
 
@@ -57,7 +58,7 @@
       %small
         %sup a,c
 
-  %div{class:"bd-callout bd-callout-bionomia"}
+  .bd-callout.bd-callout-bionomia
     %div
       %small
         %sup a
@@ -76,37 +77,41 @@
         %em eg
         Ringgold or GRID have been captured in your ORCID account.
 
-%h3 Étape 2: Visitez l'onglet Spécimens
-%div{class:"ml-3 mt-4"}
-  %img{src:"/images/profile-tabs.fr.png", alt:"Bionomia profile tabs", class:"mb-3 img-fluid"}
+%h3
+  Étape 2: Visitez l'onglet Spécimens
+
+.ml-3.mt-4
+  %img.mb-3.img-fluid{src:"/images/profile-tabs.fr.png", alt:"Bionomia profile tabs"}
   %p
     Once authenticated via ORCID, Bionomia first shows you an
     - if !authorized?
       Overview
     - else
-      %a{href: url("/profile")} Overview
+      = link_to "Overview", url("/profile")
     of your profile. It pulls your full name and other details (see above) from your ORCID account, which you may refresh at any time. Click the
     - if !authorized?
       Discovered
     - else
-      %a{href: url("/profile/candidates")} Discovered
+      = link_to "Discovered", url("/profile/candidates")
     tab to see a list of candidate specimens. Much like an email inbox, Bionomia shows the number of specimens that await action.
     Specimen data are fully refreshed from the
     %a{href:"https://gbif.org"} Global Biodiversity Information Facility
     every two weeks.
 
-%h3 Étape 3: Réclamez vos spécimens
-%div{class:"ml-3 mt-4"}
+%h3
+  Étape 3: Réclamez vos spécimens
+
+.ml-3.mt-4
   %p
     Under the
     - if !authorized?
       Discovered
     - else
-      %a{href: url("/profile/candidates")} Discovered
+      = link_to "Discovered", url("/profile/candidates")
     page of your Specimens tab, you may bulk claim
     %em all visible rows
     of specimens or claim single rows by clicking:
-    %ul{class:"list-unstyled"}
+    %ul.list-unstyled
       %li
         %img{src:"/images/net-unselected.png", alt:"Collected icon", width:"18"}
         for specimens you collected or,
@@ -117,7 +122,7 @@
         %strong
           Both
         for specimens you collected & identified
-    %img{src:"/images/button-selectors.png", alt:"Bionomia buttons", class:"mb-3 img-fluid"}
+    %img.mb-3.img-fluid{src:"/images/button-selectors.png", alt:"Bionomia buttons"}
 
   %p
     Click the "Not me" buttons to ignore
@@ -126,22 +131,24 @@
     - if !authorized?
       Claimed
     - else
-      %a{href: url("/profile/specimens")} Claimed
+      = link_to "Claimed", url("/profile/specimens")
     or
     - if !authorized?
       Ignored
     - else
-      %a{href: url("/profile/ignored")} Ignored
+      = link_to "Ignored", url("/profile/ignored")
     to repair or adjust your selections.
-  %div{class:"bd-callout bd-callout-bionomia"}
+  .bd-callout.bd-callout-bionomia
     Too many specimen records or want to sort by columns and/or filter by content? Click the "Bulk Claim" page on your Specimens tab to view instructions on how to download, add claims in a spreadsheet, then upload a completed csv file.
 
-%h3 Étape 4: Attribuer des spécimens à d'autres
-%div{class:"ml-3 mt-4"}
+%h3
+  Étape 4: Attribuer des spécimens à d'autres
+
+.ml-3.mt-4
   %p
     While authenticated via ORCID, visit
     - if authorized?
-      %a{href: url("/help-others")} Help Others
+      = link_to "Help Others", url("/help-others")
     - else
       Help Others
     to search for your peers, mentors, or anyone who inspires you. Attribute specimens to them just as you claimed your own specimens. If they too have an ORCID ID, they may send you a quick thanks and these will appear in your Thanks Received tab.
