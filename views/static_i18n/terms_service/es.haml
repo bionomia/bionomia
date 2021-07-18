@@ -1,13 +1,15 @@
--content_for :title, "Términos del servicio"
+- content_for :title, "Términos del servicio"
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2
+        Términos del servicio
 
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class:"mr-auto p-2"}
-      %h1{class:"h2"} Términos del servicio
+%h3
+  Términos de la cuenta
 
-%h3 Términos de la cuenta
-
-%p Tenemos algunas reglas simples para las cuentas de usuario en Bionomía.
+%p
+  Tenemos algunas reglas simples para las cuentas de usuario en Bionomía.
 
 %ul
   %li Usted debe ser un humano para crear una cuenta a través del paso de autenticación de ORCID. No se permiten cuentas registradas por "bots" u otros métodos automatizados.
@@ -18,20 +20,23 @@
   %li Usted es responsable de mantener la seguridad de su cuenta y contraseña a través de ORCID.
   %li
     Usted notificará de inmediato a Bionomía al correo electrónico
-    %a{href: "mailto:bionomia.tracker@gmail.com"} bionomia.tracker@gmail.com
+    = link_to "bionomia.tracker@gmail.com", "mailto:bionomia.tracker@gmail.com"
     si se da cuenta de cualquier uso o acceso no autorizado a nuestro Servicio a través de su Cuenta, incluido cualquier uso no autorizado de su contraseña o Cuenta.
 
-%h3 Uso aceptable
+%h3
+  Uso aceptable
 
 %p
   Su uso de Bionomía no debe violar ninguna ley aplicable, incluidas las leyes de derechos de autor o marcas registradas, las leyes de control de exportaciones o sanciones, u otras leyes en su jurisdicción. Usted es responsable de asegurarse de que su uso de Bionomía cumpla con las leyes y las regulaciones aplicables.
 
-%h3 Términos de la API
+%h3
+  Términos de la API
 
 %p
   El abuso o las solicitudes excesivamente frecuentes a Bionomía a través de la API pueden resultar en la suspensión temporal o permanente de su Cuenta. Bionomía, exclusivamente a nuestro criterio, determinará el abuso o uso excesivo de la API.
 
-%h3 Cancelación y Terminación
+%h3
+  Cancelación y Terminación
 
 %p
   Es su responsabilidad cancelar correctamente su Cuenta con Bionomía. Puede cancelar su cuenta en cualquier momento ingresando a su configuración. La pantalla Cuenta proporciona un enlace de cancelación simple y sin preguntas. No podemos cancelar cuentas en respuesta a un correo electrónico.
@@ -39,9 +44,10 @@
   Bionomía tiene el derecho de suspender o cancelar su acceso a todo o parte del sitio web en cualquier momento, con o sin causa, con o sin aviso, con efecto inmediato.
   Bionomía se reserva el derecho de rechazar el servicio a cualquier persona por cualquier motivo y en cualquier momento.
 
-%h3 Contactando a Bionomía
+%h3
+  Contactando a Bionomía
 
 %p
   Las preguntas con respecto a estos Términos de servicio deben dirigirse a
   = succeed "." do
-    %a{href: "mailto: bionomia.tracker@gmail.com"} bionomia.tracker@gmail.com
+    = link_to "bionomia.tracker@gmail.com", "mailto:bionomia.tracker@gmail.com"
