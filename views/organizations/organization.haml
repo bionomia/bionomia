@@ -1,38 +1,37 @@
 = haml :'partials/organization/twitter_img', layout: false
 
--content_for :title do
-  #{@organization.name}
+- content_for :title, "#{@organization.name}"
 
--content_for :stylesheets do
+- content_for :stylesheets do
   - if @organization.latitude
     %link{href: "https://unpkg.com/leaflet@1.4.0/dist/leaflet.css", rel: "stylesheet", type: "text/css"}
 
--content_for :scripts do
+- content_for :scripts do
   = haml :'partials/organization/jumbotron_scripts', layout:false
 
-%div{class:"row"}
+.row
   = haml :'partials/organization/jumbotron', layout:false
 
-  %div{class:"col-12 col-lg-8 mt-2"}
+  .col-12.col-lg-8.mt-2
     = haml :'partials/organization/tabs', layout:false, locals: { active_tab: locals[:active_tab] }
 
     - if @pagy.count == 0
-      %div{class: "alert alert-info tiny-margins", role: "alert"}
+      .alert.alert-info.tiny-margins{role: "alert"}
         - if locals[:active_tab] == "organization-current"
           = I18n.t('organization.no_current_members_alert', org_name: @organization.name)
         - else
           = I18n.t('organization.no_previous_members_alert', org_name: @organization.name)
     - else
-      %div{class: "alert alert-info tiny-margins", role: "alert"}
+      .alert.alert-info.tiny-margins{role: "alert"}
         - if locals[:active_tab] == "organization-current"
           #{number_to_human(@pagy.count, units: :'organization.current_members_count', delimiter: ",", precision: 0)}
         - else
           #{number_to_human(@pagy.count, units: :'organization.past_members_count', delimiter: ",", precision: 0)}
       - @results.in_groups_of(3).each do |group|
-        %div{class: "card-deck"}
+        .card-deck
           - group.each do |u|
             - if u.nil?
-              %div{class:"card border-0"}
+              .card.border-0
             - else
               - stats = cache_block("#{u.identifier}-stats") { user_stats(u) }
               = haml :'partials/user/card', layout: false, locals: { user: u, stats: stats }

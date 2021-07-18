@@ -1,48 +1,48 @@
--content_for :title, I18n.t('organization.organization_title')
+- content_for :title, "#{I18n.t('organization.organization_title')}"
 
--content_for :scripts do
+- content_for :scripts do
   %script{src: "/js/application.js"}
   :javascript
     $(function() {
       Application.init();
     });
 
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class:"mr-auto p-2"}
-      %h1{class:"h2"}= I18n.t('organization.organization_title')
-      %p{class: "lead text-muted"}
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2
+        = I18n.t('organization.organization_title')
+      %p.lead.text-muted
         #{number_to_human(Organization.active_user_organizations.count, units: :'organization.lede', delimiter: ",", precision: 0)}
 
     = haml :'partials/organization/search', layout: false
 
 - @results.in_groups_of(3).each do |group|
-  %div{class: "card-deck"}
+  .card-deck
     - group.each do |org|
       - if org.nil?
-        %div{class:"card border-0"}
+        .card.border-0
       - else
-        %div{class: "card card-profile m-3"}
+        .card.card-profile.m-3
           - if org.image_url
-            %div{class: "card-header d-flex"}
+            .card-header.d-flex
               %div
-                %img{src:"#{organization_image(org, 'medium')}", alt:"#{org.name}", class:"mr-2 rounded"}
-              %div{class:"flex-grow-1"}
+                %img.mr-2.rounded{src:"#{organization_image(org, 'medium')}", alt:"#{org.name}"}
+              .flex-grow-1
                 %h5
-                  %a{href: url("/organization/#{org.identifier}")} #{org.name}
-                %p{class:"text-muted"} #{org.address}
+                  = link_to org.name, url("/organization/#{org.identifier}")
+                %p.text-muted #{org.address}
           - else
-            %div{class: "card-header"}
+            .card-header
               %h5
-                %a{href: url("/organization/#{org.identifier}")} #{org.name}
-              %p{class:"text-muted"} #{org.address}
-          %div{class: "card-body"}
-
-          %div{class: "card-footer"}
-            %div{class: "col small text-left text-muted"}
-            %div{class: "col small text-right text-muted"}
+                = link_to org.name, url("/organization/#{org.identifier}")
+              %p.text-muted #{org.address}
+          .card-body
+          .card-footer
+            .col.small.text-left.text-muted
+            .col.small.text-right.text-muted
               - count = org.active_users.count
-              %span{class:"badge badge-light"} #{number_with_delimiter(count)}
+              %span.badge.badge-light #{number_with_delimiter(count)}
               #{I18n.t('organization.member').pluralize(count)}
 
 - if @pagy.pages > 1

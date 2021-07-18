@@ -1,50 +1,49 @@
 = haml :'partials/organization/twitter_img', layout: false
 
--content_for :title do
-  #{@organization.name}
+- content_for :title, "#{@organization.name}"
 
--content_for :stylesheets do
+- content_for :stylesheets do
   - if @organization.latitude
     %link{href: "https://unpkg.com/leaflet@1.4.0/dist/leaflet.css", rel: "stylesheet", type: "text/css"}
 
--content_for :scripts do
+- content_for :scripts do
   %script{src: "https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"}
   = haml :'partials/organization/jumbotron_scripts', layout:false
 
-%div{class:"row"}
+.row
   = haml :'partials/organization/jumbotron', layout:false
 
-  %div{class:"col-12 col-lg-8 mt-2"}
+  .col-12.col-lg-8.mt-2
     = haml :'partials/organization/tabs', layout:false, locals: { active_tab: 'organization-articles' }
 
-    %h4{class:"mt-3"}= I18n.t('organization.science_enabled')
+    %h4.mt-3= I18n.t('organization.science_enabled')
 
     - if @pagy.count == 0
-      %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('organization.affiliation_none_alert')
+      .alert.alert-info.tiny-margins{role: "alert"}= I18n.t('organization.affiliation_none_alert')
     - else
-      %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('organization.affiliation_alert', count: number_with_delimiter(@pagy.count), org_name: @organization.name)
+      .alert.alert-info.tiny-margins{role: "alert"}= I18n.t('organization.affiliation_alert', count: number_with_delimiter(@pagy.count), org_name: @organization.name)
 
-      %div{class:"citation-wrapper"}
+      .citation-wrapper
         - @results.each do |article|
-          %div{class: "card"}
-            %div{class: "card-header"}
-              %p{class: "citation card-title"}
+          .card
+            .card-header
+              %p.citation.card-title
                 #{h(article.citation)}
-                %a{href: "https://doi.org/#{article.doi}"} https://doi.org/#{article.doi}
-            %div{class: "card-body"}
-              %div{"data-badge-popover":"right", "data-badge-type":"donut", "data-doi":"#{article.doi}", "data-hide-no-mentions":"true", class:"altmetric-embed pull-left mr-2 float-left"}
-              %p{class:"card-text text-muted"} #{h(article.abstract)}
-            %div{class: "card-footer d-flex"}
-              %p{class:"m-0 p-0"}
+                = link_to "https://doi.org/#{article.doi}", "https://doi.org/#{article.doi}"
+            .card-body
+              .altmetric-embed.pull-left.mr-2.float-left{"data-badge-popover":"right", "data-badge-type":"donut", "data-doi":"#{article.doi}", "data-hide-no-mentions":"true"}
+              %p.card-text.text-muted #{h(article.abstract)}
+            .card-footer.d-flex
+              %p.m-0.p-0
                 = I18n.t('organization.collected_by')
                 - article.user_ids.split(",").each_with_index do |user_id, index|
                   - user = User.find(user_id)
                   %span
                     - if index != article.user_ids.split(",").size - 1
                       = succeed ", " do
-                        %a{href: url("/#{user.identifier}")} #{user.fullname}
+                        = link_to user.fullname, url("/#{user.identifier}")
                     - else
-                      %a{href: url("/#{user.identifier}")} #{user.fullname}
+                      = link_to user.fullname, url("/#{user.identifier}")
 
       - if @pagy.pages > 1
         %div{style:"overflow-y:scroll"}
