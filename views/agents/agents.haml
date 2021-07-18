@@ -1,6 +1,5 @@
--content_for :title, I18n.t('agent.agent_title')
-
--content_for :scripts do
+- content_for :title, I18n.t('agent.agent_title')
+- content_for :scripts do
   %script{src: "/js/application.js"}
   :javascript
     $(function() {
@@ -8,45 +7,46 @@
     });
 
 -content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class:"mr-auto p-2"}
-      %h1{class:"h2"}= I18n.t('agent.search_title')
-      %p{class: "lead text-muted"}
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2
+        = I18n.t('agent.search_title')
+      %p.lead.text-muted
         #{number_to_human(@count, units: :'agent.lede', delimiter: ",", precision: 0)}
 
     = haml :'partials/agent/search', layout: false
 
 - if params[:q] && !params[:q].empty? && @formatted_results.empty?
-  %div{class: "alert alert-warning tiny-margins mt-0", role: "alert"}
+  .alert.alert-warning.tiny-margins.mt-0{role: "alert"}
     = I18n.t('agent.search_none', searched: h(params[:q]))
 
 - elsif @pagy && @pagy.count > 0
-  %div{class: "alert alert-info tiny-margins mt-0", role: "alert"}
+  .alert.alert-info.tiny-margins.mt-0{role: "alert"}
     #{number_to_human(@pagy.count, units: :'agent.search_count', delimiter: ",", precision: 0)}
-    %span{class: "font-weight-bold"} #{h(params[:q])}
+    %span.font-weight-bold #{h(params[:q])}
 
-  %div{class: "row"}
+  .row
     - @formatted_results.in_groups_of(25, false).each do |group|
-      %div{class: "col-12 col-md-3 mb-3"}
-        %ul{class: "list-unstyled m-2"}
+      .col-12.col-md-3.mb-3
+        %ul.list-unstyled.m-2
           - group.each do |o|
             %li
-              %a{href: url("/agent/#{o[:id]}")} #{o[:fullname_reverse]}
+              = link_to o[:fullname_reverse], url("/agent/#{o[:id]}")
 
   - if @pagy.pages > 1
-    %div{style:"overflow-y:scroll"}
+    .y-scroll
       = pagy_bootstrap_nav(@pagy)
 
 - else
-  %div{class: "alert alert-warning tiny-margins mt-0", role: "alert"}
-    %span{class:"font-weight-bold"}= I18n.t('agent.warning')
+  .alert.alert-warning.tiny-margins.mt-0{role: "alert"}
+    .font-weight-bold= I18n.t('agent.warning')
     = I18n.t('agent.warning_statement')
 
   %h3= I18n.t('agent.example_agents')
-  %div{class: "row"}
+  .row
     - @results.in_groups_of(25, false).each do |group|
-      %div{class: "col-12 col-sm-3 mb-3"}
-        %ul{class: "list-unstyled m-2"}
+      .col-12.col-sm-3.mb-3
+        %ul.list-unstyled.m-2
           - group.each do |a|
             %li
-              %a{href: url("/agent/#{a.id}")} #{a.fullname_reverse}
+              = link_to a.fullname_reverse, url("/agent/#{a.id}")
