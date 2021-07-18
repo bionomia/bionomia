@@ -1,21 +1,23 @@
-%h3 Reconciliar
+%h3
+  Reconciliar
 
-%div{class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
+.media.mb-3.mt-3.d-flex.flex-wrap.flex-column.flex-md-row
   %a{href:"https://openrefine.org/"}
     %img{class:"mb-3 mr-3", src:"/images/openrefine-logo.png", alt:"OpenRefine logo"}
-  %div{class:"media-body"}
-    punto final de reconciliación de
+  .media-body
+    Punto final de reconciliación de
     = succeed ":" do
-      %a{href:"https://openrefine.org/"} OpenRefine
+      = link_to "OpenRefine", "https://openrefine.org/"
     %br
-    %span{class:"font-weight-bold"}
+    %span.font-weight-bold
       https://api.bionomia.net/reconcile
 
-    %h5{class:"mt-3"} Uso recomendado
+    %h5.mt-3
+      Uso recomendado
     %p
       El punto final funciona mejor cuando hay un solo nombre en una columna de persona.
       Otras columnas, como Familia recolectada o identificada y / o fecha de recolección o identificación, pueden usarse opcionalmente para ayudar a ajustar la puntuación de los resultados devueltos.
       Las fechas de nacimiento y muerte (cuando se conocen) se cotejan con la columna de fecha que usted usa.
       Pruebe el punto final de identificación de Bionomía entre otros en el
       = succeed "." do
-        %a{href: "https://reconciliation-api.github.io/testbench/"} Banco de pruebas del servicio de reconciliación
+        = link_to "Banco de pruebas del servicio de reconciliación", "https://reconciliation-api.github.io/testbench/"
