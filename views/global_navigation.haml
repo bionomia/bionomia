@@ -1,75 +1,76 @@
-%nav{class:"navbar navbar-expand-sm navbar-dark bg-dark"}
-  %a{class:"navbar-brand", href: url("/")}
+%nav.navbar.navbar-expand-sm.navbar-dark.bg-dark
+  %a.navbar-brand{href: url("/")}
     %img{src: "/images/logo.png", height:48, width:48, alt: "Bionomia"}
-  %button{class:"navbar-toggler", type:"button", "data-toggle":"collapse", "data-target":"#navbarSupportedContent", "aria-controls":"navbarSupportedContent", "aria-expanded":"false", "aria-label":"Toggle navigation"}
-    %span{class:"navbar-toggler-icon"}
-  %div{class: "collapse navbar-collapse", id:"navbarSupportedContent"}
-    %ul{class: "navbar-nav mr-sm-auto"}
-      %li{class: "nav-item mr-2"}
+  %button.navbar-toggler{type:"button", "data-toggle":"collapse", "data-target":"#navbarSupportedContent", "aria-controls":"navbarSupportedContent", "aria-expanded":"false", "aria-label":"Toggle navigation"}
+    %span.navbar-toggler-icon
+  #navbarSupportedContent.collapse.navbar-collapse
+    %ul.navbar-nav.mr-sm-auto
+      %li.nav-item.mr-2
         %a{href: url("/roster"), class:"nav-link#{locals[:active_page] == "roster" ? " active" : nil}" }
-          %i{class:"fas fa-users"}
-          %span{class:"d-inline-block d-sm-none d-xxl-inline-block"}
+          %i.fas.fa-users
+          %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.profiles')
-      %li{class: "nav-item mr-2"}
+      %li.nav-item.mr-2
         %a{href: url("/scribes"), class: "nav-link#{locals[:active_page] == "scribes" ? " active" : nil}"}
-          %i{class:"fas fa-feather-alt"}
-          %span{class:"d-inline-block d-sm-none d-xxl-inline-block"}
+          %i.fas.fa-feather-alt
+          %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.scribes')
-      %li{class: "nav-item mr-2"}
+      %li.nav-item.mr-2
         %a{href: url("/organizations"), class:"nav-link#{locals[:active_page] == "organizations" ? " active" : nil}" }
-          %i{class:"fas fa-building"}
-          %span{class:"d-inline-block d-sm-none d-xxl-inline-block"}
+          %i.fas.fa-building
+          %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.organizations')
-      %li{class: "nav-item mr-2"}
+      %li.nav-item.mr-2
         %a{href: url("/datasets"), class:"nav-link#{locals[:active_page] == "datasets" ? " active" : nil}" }
-          %i{class:"fas fa-database"}
-          %span{class:"d-inline-block d-sm-none d-xxl-inline-block"}
+          %i.fas.fa-database
+          %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.datasets')
-      %li{class: "nav-item mr-2"}
+      %li.nav-item.mr-2
         %a{href: url("/articles"), class:"nav-link#{locals[:active_page] == "articles" ? " active" : nil}" }
-          %i{class:"fas fa-file-alt"}
-          %span{class:"d-inline-block d-sm-none d-xxl-inline-block"}
+          %i.fas.fa-file-alt
+          %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.articles')
-      %li{class: "nav-item mr-2"}
+      %li.nav-item.mr-2
         %a{href: url("/countries"), class:"nav-link#{locals[:active_page] == "countries" ? " active" : nil}" }
-          %i{class:"fas fa-globe"}
-          %span{class:"d-inline-block d-sm-none d-xxl-inline-block"}
+          %i.fas.fa-globe
+          %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.countries')
-      %li{class: "nav-item mr-2"}
+      %li.nav-item.mr-2
         %a{href: url("/taxa"), class: "nav-link#{locals[:active_page] == "taxa" ? " active" : nil}" }
-          %i{class:"fab fa-pagelines"}
-          %span{class:"d-inline-block d-sm-none d-xxl-inline-block"}
+          %i.fab.fa-pagelines
+          %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.taxa')
-      %li{class: "nav-item mr-2"}
+      %li.nav-item.mr-2
         %a{href: url("/agents"), class: "nav-link#{locals[:active_page] == "agents" ? " active" : nil}" }
-          %i{class:"fas fa-signature"}
-          %span{class:"d-inline-block d-sm-none d-xxl-inline-block"}
+          %i.fas.fa-signature
+          %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.agent_strings')
-    %ul{class: "navbar-nav mr-2"}
+    %ul.navbar-nav.mr-2
       - if authorized?
-        %li{class: "nav-item"}
+        %li.nav-item
           %a{href: url("/help-others"), class: "nav-link#{locals[:active_page] == "help" ? " active" : nil}"}
-            %i{class:"fas fa-hands-helping"}
-            %span{class:"d-inline-block d-sm-none d-md-inline-block"}
+            %i.fas.fa-hands-helping
+            %span.d-inline-block.d-sm-none.d-md-inline-block
               = I18n.t('layout.help_others')
 
-      %li{class: "nav-item mr-2"}
-        %div{class:"btn-group"}
-          %button{class:"btn dropdown-toggle text-white-50", type:"button", "data-toggle": "dropdown", "aria-haspopup": "true", "aria-expanded": "false"}
-            %i{class:"fas fa-language"}
-            %span{class:"sr-only"}= I18n.t('layout.toggle_dropdown')
-          %div{class:"dropdown-menu dropdown-menu-right"}
+      %li.nav-item.mr-2
+        .btn-group
+          %button.btn.dropdown-toggle.text-white-50{type:"button", "data-toggle": "dropdown", "aria-haspopup": "true", "aria-expanded": "false"}
+            %i.fas.fa-language
+            %span.sr-only
+              = I18n.t('layout.toggle_dropdown')
+          .dropdown-menu.dropdown-menu-right
             - if user_browser_locale(env["HTTP_ACCEPT_LANGUAGE"]).to_s != "en" || authorized?
-              %a{href: "#{Settings.base_url.sub("://", "://en.")}#{request.fullpath}", class:"dropdown-item"} English
+              %a.dropdown-item{href: "#{Settings.base_url.sub("://", "://en.")}#{request.fullpath}"} English
             - else
-              %a{href: "#{Settings.base_url}#{request.fullpath}", class:"dropdown-item"} English
+              %a.dropdown-item{href: "#{Settings.base_url}#{request.fullpath}"} English
             - locale_name_pairs.each do |lang|
               - next if lang[0] == "en"
-              %a{href: "#{Settings.base_url.sub("://", "://#{lang[0]}.")}#{request.fullpath}", class:"dropdown-item"} #{lang[1]}
+              %a.dropdown-item{href: "#{Settings.base_url.sub("://", "://#{lang[0]}.")}#{request.fullpath}"} #{lang[1]}
 
       - if authorized?
-        %li{class: "nav-item"}
-          %div{class:"btn-group"}
+        %li.nav-item
+          .btn-group
             %a{class:"btn btn-outline-light#{locals[:active_page] == "profile" ? " active" : " text-muted"}", href: url("/profile"), role:"button"}
               - if @user.image_url
                 - if locals[:active_page] == "profile"
@@ -77,36 +78,37 @@
                 - else
                   %img{src:"#{profile_image(@user, 'thumbnail_grey')}", alt:"#{@user.fullname}"}
               - else
-                %i{class:"fas fa-user", alt:"#{@user.fullname}"}
-            %button{class:"btn btn-outline-light dropdown-toggle", type:"button", "data-toggle": "dropdown", "aria-haspopup": "true", "aria-expanded": "false"}
-              %span{class:"sr-only"}= I18n.t('layout.toggle_dropdown')
-            %div{class:"dropdown-menu dropdown-menu-right"}
-              %a{href: url("/profile"), class:"dropdown-item"}
-                %i{class:"fas fa-user"}
+                %i.fas.fa-user{alt:"#{@user.fullname}"}
+            %button.btn.btn-outline-light.dropdown-toggle{type:"button", "data-toggle": "dropdown", "aria-haspopup": "true", "aria-expanded": "false"}
+              %span.sr-only
+                = I18n.t('layout.toggle_dropdown')
+            .dropdown-menu.dropdown-menu-right
+              %a.dropdown-item{href: url("/profile")}
+                %i.fas.fa-user
                 = I18n.t('layout.overview')
-              %a{href: url("/profile/specimens"), class:"dropdown-item"}
-                %i{class:"fas fa-th"}
+              %a.dropdown-item{href: url("/profile/specimens")}
+                %i.fas.fa-th
                 = I18n.t('layout.specimens')
-              %a{href: url("/profile/helped"), class:"dropdown-item"}
-                %i{class:"fas fa-hands-helping"}
+              %a.dropdown-item{href: url("/profile/helped")}
+                %i.fas.fa-hands-helping
                 = I18n.t('layout.people_helped')
-              %a{href: url("/profile/citations"), class:"dropdown-item"}
-                %i{class:"fas fa-flask"}
+              %a.dropdown-item{href: url("/profile/citations")}
+                %i.fas.fa-flask
                 = I18n.t('layout.science_enabled')
-              %a{href: url("/profile/settings"), class:"dropdown-item"}
-                %i{class:"fas fa-cog"}
+              %a.dropdown-item{href: url("/profile/settings")}
+                %i.fas.fa-cog
                 = I18n.t('layout.settings')
               - if admin_authorized?
-                %a{href: url("/admin"), class:"dropdown-item"}
-                  %i{class:"fas fa-users-cog"}
+                %a.dropdown-item{href: url("/admin")}
+                  %i.fas.fa-users-cog
                   = I18n.t('layout.administration')
-              %a{href: url("/logout"), class: "dropdown-item" }
-                %i{class:"fas fa-sign-out-alt"}
+              %a.dropdown-item{href: url("/logout")}
+                %i.fas.fa-sign-out-alt
                 = I18n.t('layout.logout')
       - else
         %li
-          %form{action: "/auth/orcid?lang=#{I18n.locale}", method: "POST" }
-            %button{class: "btn btn-outline-light connect-orcid-button"}
-              %i{class:"fab fa-orcid"}
+          %form{action: "/auth/orcid?lang=#{I18n.locale}", method: :post }
+            %button.btn.btn-outline-light.connect-orcid-button
+              %i.fab.fa-orcid
               = I18n.t('home.orcid_login')
             %input{type:"hidden", name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}

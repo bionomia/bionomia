@@ -1,9 +1,7 @@
--content_for :title, "Bionomia"
-
--content_for :stylesheets do
+- content_for :title, "Bionomia"
+- content_for :stylesheets do
   %link{href: "/font/LovelyHome.otf", rel:"preload", as:"font", type:"font/otf", crossorigin: true}
   %link{href: "/images/banner.jpg", rel:"preload", as:"image"}
-
 -content_for :scripts do
   %script{src: "/js/application.js"}
   :javascript
@@ -11,30 +9,32 @@
       Application.init("", "GET", "/roster");
     });
 
--content_for :jumbotron do
-  %div{id:"home-jumbotron", class: "jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class:"mr-auto p-2"}
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap#home-jumbotron
+    .mr-auto.p-2
       %h1 Bionomia>
     = haml :'partials/user/search', layout: false
 
-  %p{class:"lead tagline ml-4 mt-3"}= I18n.t('home.tagline')
-  %form{action: "/auth/orcid?lang=#{I18n.locale}", method: "POST"}
-    %p{id: "profile-buttons", class:"ml-4"}
-      %a{href: url("/get-started"), role: "button", class:"btn btn-lg btn-success"}
+  %p.lead.tagline.ml-4.mt-3
+    = I18n.t('home.tagline')
+  %form{action: "/auth/orcid?lang=#{I18n.locale}", method: :post}
+    %p.ml-4#profile-buttons
+      %a.btn.btn-lg.btn-success{href: url("/get-started"), role: "button"}
         #{I18n.t('home.get_started')} »
       - if !authorized?
-        %button{class: "btn btn-lg btn-outline-dark button-login connect-orcid-button"}
-          %i{class:"fab fa-orcid"}
+        %button.btn.btn-lg.btn-outline-dark.button-login.connect-orcid-button
+          %i.fab.fa-orcid
           = I18n.t('home.orcid_login')
         %input{type:"hidden", name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
       - else
-        %a{ href:"/profile", id: "candidates-button", role: "button", class: "btn btn-lg btn-outline-dark" }= I18n.t('home.your_profile')
+        %a.btn.btn-lg.btn-outline-dark#candidates-button{ href:"/profile", role: "button"}= I18n.t('home.your_profile')
 
 - if !@results.empty?
-  %h2{class: "text-center"}= I18n.t('home.sample_profiles')
+  %h2.text-center
+    = I18n.t('home.sample_profiles')
 
   - @results.in_groups_of(3).each do |group|
-    %div{class: "card-deck"}
+    .card-deck
       - group.each do |u|
         - if !u.nil?
           - stats = cache_block("#{u.identifier}-stats") { user_stats(u) }

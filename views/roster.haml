@@ -1,39 +1,39 @@
--content_for :title, I18n.t('roster.roster_title')
-
--content_for :stylesheets do
+- content_for :title, I18n.t('roster.roster_title')
+- content_for :stylesheets do
   %link{rel:"alternate", type:"application/rss+xml", title:"RSS Feed for New User Profiles", href:"/user.rss"}
-
--content_for :scripts do
+- content_for :scripts do
   %script{src: "/js/application.js"}
   :javascript
     $(function() {
       Application.init("", "GET", "/roster");
     });
 
--content_for :jumbotron do
-  %div{id:"roster-jumbotron", class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class:"mr-auto p-2"}
-      %h1{class:"h2"}= I18n.t('roster.roster_title')
-      %p{class:"lead text-muted"}
+- content_for :jumbotron do
+  #roster-jumbotron.jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2
+        = I18n.t('roster.roster_title')
+      %p.lead.text-muted
         #{number_to_human(User.where(is_public: true).count, units: :'roster.lede', delimiter: ",", precision: 0)}
-
     = haml :'partials/user/search', layout: false
 
 - if @pagy.count == 0 && params[:q] && params[:q].present?
-  %div{class: "alert alert-warning tiny-margins", role: "alert"}
+  .alert.alert-warning.tiny-margins{role: "alert"}
     = I18n.t('roster.no_one_found')
-    %span{class: "font-weight-bold"} #{h(params[:q])}
+    %span.font-weight-bold
+      #{h(params[:q])}
 - else
   - if params[:q] && params[:q].present?
-    %div{class: "alert alert-info tiny-margins", role: "alert"}
+    .alert.alert-info.tiny-margins{role: "alert"}
       #{number_to_human(@pagy.count, units: :'roster.search_result_count', delimiter: ",", precision: 0)}
-      %span{class: "font-weight-bold"} #{h(params[:q])}
+      %span.font-weight-bold
+        #{h(params[:q])}
 
   - @results.in_groups_of(3).each do |group|
-    %div{class: "card-deck"}
+    .card-deck
       - group.each do |u|
         - if u.nil?
-          %div{class:"card border-0"}
+          .card.border-0
         - else
           - if params[:q] && params[:q].present?
             - u = User.find(u[:_id])

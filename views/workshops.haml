@@ -1,47 +1,50 @@
--content_for :title, I18n.t('workshops.title')
+- content_for :title, I18n.t('workshops.title')
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2
+        = I18n.t('workshops.title')
 
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class:"mr-auto p-2"}
-      %h1{class:"h2"}= I18n.t('workshops.title')
+%h3.mt-4
+  = I18n.l Date.parse("April 15, 2021"), format: :long
 
-%h3{class:"mt-4"}= I18n.l Date.parse("April 15, 2021"), format: :long
+%h4.mt-4
+  Serie de webinars SiB Colombia - 2021
 
-%h4{class:"mt-4"} Serie de webinars SiB Colombia - 2021
-
-%ul{class:"list-unstyled mt-3"}
+%ul.list-unstyled.mt-3
   %li
-    %i{class:"far fa-file-pdf"}
-    %a{href:"/documents/Giron_Shorthouse_SiBColombia_2021.04.15.pdf"} PDF Slides
+    %i.far.fa-file-pdf
+    = link_to "PDF Slides", "/documents/Giron_Shorthouse_SiBColombia_2021.04.15.pdf"
     (3.7MB)
 
-%div{class:"row"}
-  %div{class:"col-12 col-md-6 embed-responsive embed-responsive-4by3"}
-    %iframe{src:"https://www.youtube.com/embed/kXWXDWz6pEs?start=512", frameborder:"0", allow:"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture", class:"embed-responsive-item p-3", allowfullscreen: true}
+.row
+  .col-12.col-md-6.embed-responsive.embed-responsive-4by3
+    %iframe.embed-responsive-item.p-3{src:"https://www.youtube.com/embed/kXWXDWz6pEs?start=512", frameborder:"0", allow:"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture", allowfullscreen: true}
 
 %hr
 
-%h3{class:"mt-4"}= I18n.l Date.parse("December 1, 2020"), format: :long
+%h3.mt-4
+  = I18n.l Date.parse("December 1, 2020"), format: :long
 
-%h4{class:"mt-4"} The "Who" in Collections: Revealing the Network of Collectors and Determiners of Bat Specimens
+%h4.mt-4 The "Who" in Collections: Revealing the Network of Collectors and Determiners of Bat Specimens
 
-%ul{class:"list-unstyled mt-3"}
+%ul.list-unstyled.mt-3
   %li
-    %i{class:"far fa-file-pdf"}
-    %a{href:"/documents/WorkshopAgenda_Revealing_Who_Bat_Collecting.2020.12.01.pdf"} Background & Agenda
+    %i.far.fa-file-pdf
+    = link_to "Background & Agenda", "/documents/WorkshopAgenda_Revealing_Who_Bat_Collecting.2020.12.01.pdf"
     (280KB)
   %li
-    %i{class:"far fa-file-powerpoint"}
+    %i.far.fa-file-powerpoint
     %a{href:"//www.slideshare.net/DavidShorthouse/the-who-in-collections-revealing-the-network-of-collectors-and-determiners-of-bat-specimens", title:"The Who in Collections: Revealing the Network of Collectors and Determiners of Bat Specimens", target:"_blank"}
       PowerPoint slides
 
-%div{class:"row"}
-  %div{class:"col-12 col-md-6 embed-responsive embed-responsive-4by3"}
-    %iframe{src:"//www.slideshare.net/slideshow/embed_code/key/4Q3YPulKTtgYUe", frameborder:"0", scrolling:"no", class:"embed-responsive-item p-3", allowfullscreen: true}
-  %div{class:"col-12 col-md-6 embed-responsive embed-responsive-4by3"}
-    %iframe{src:"https://www.youtube.com/embed/PL_feKhrwMQ", frameborder:"0", allow:"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture", class:"embed-responsive-item p-3", allowfullscreen: true}
+.row
+  .col-12.col-md-6.embed-responsive.embed-responsive-4by3
+    %iframe.embed-responsive-item.p-3{src:"//www.slideshare.net/slideshow/embed_code/key/4Q3YPulKTtgYUe", frameborder:"0", scrolling:"no", allowfullscreen: true}
+  .col-12.col-md-6.embed-responsive.embed-responsive-4by3
+    %iframe.embed-responsive-item.p-3{src:"https://www.youtube.com/embed/PL_feKhrwMQ", frameborder:"0", allow:"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture", allowfullscreen: true}
 
-%div{class:"row"}
-  %div{class:"col-12 col-md-6 embed-responsive embed-responsive-4by3"}
-    %iframe{src:"https://www.youtube.com/embed/BYvoXKBSGA8", frameborder:"0", allow:"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture", class:"embed-responsive-item p-3", allowfullscreen: true}
-  %div{class:"col-12 col-md-6 embed-responsive embed-responsive-4by3"}
+.row
+  .col-12.col-md-6.embed-responsive.embed-responsive-4by3
+    %iframe.embed-responsive-item.p-3{src:"https://www.youtube.com/embed/BYvoXKBSGA8", frameborder:"0", allow:"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture", allowfullscreen: true}
+  .col-12.col-md-6.embed-responsive.embed-responsive-4by3

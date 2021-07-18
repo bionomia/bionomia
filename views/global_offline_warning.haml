@@ -10,16 +10,16 @@
     }
   });
 
-%div{id:"offline_warning", class:"modal fade", tabindex:"-1", role:"dialog"}
-  %div{class:"modal-dialog alert alert-warning", role:"document"}
-    %div{class:"modal-content"}
-      %div{class:"modal-header"}
-        %h5{class:"modal-title"}
+#offline_warning.modal.fade{tabindex:"-1", role:"dialog"}
+  .modal-dialog.alert.alert-warning{role:"document"}
+    .modal-content
+      .modal-header
+        %h5.modal-title
           %span{"data-nosnippet": true} Offline Warning
-        %button{type:"button", class:"close", "data-dismiss":"modal", "aria-label":"Close"}
+        %button.close{type:"button", "data-dismiss":"modal", "aria-label":"Close"}
           %span{"aria-hidden":"true"} &times;
-      %div{class:"modal-body"}
+      .modal-body
         %p
           %span{"data-nosnippet": true}= I18n.t('offline.warning', datetime_off: Settings.offline_warning.off_datetime, duration: Settings.offline_warning.off_duration)
-      %div{class:"modal-footer"}
-        %button{type:"button", class:"btn btn-secondary", "data-dismiss":"modal"} Close
+      .modal-footer
+        %button.btn.btn-secondary{type:"button", "data-dismiss":"modal"} Close
