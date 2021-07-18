@@ -1,19 +1,20 @@
--content_for :title, I18n.t('donate.donate_title')
+- content_for :title, I18n.t('donate.donate_title')
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2
+        = I18n.t('donate.donate_title')
 
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class:"mr-auto p-2"}
-      %h1{class:"h2"}= I18n.t('donate.donate_title')
-
-%ul{class: "nav nav-tabs pl-2"}
-  %li{class: "nav-item"}
+%ul.nav.nav-tabs.pl-2
+  %li.nav-item
     %a{class: "nav-link#{locals[:active_page] == "donate" ? " active" : nil}", href: "/donate"}= I18n.t('donate.campaign')
-  %li{class: "nav-item"}
+  %li.nav-item
     %a{class: "nav-link#{locals[:active_page] == "wall" ? " active" : nil}", href: "/donate/wall"}= I18n.t('donate.donor_wall')
 
-%p{class:"mt-3"}= I18n.t('donate.lede')
+%p.mt-3
+  = I18n.t('donate.lede')
 
-%div{class:"d-flex justify-content-center"}
-  %div{class:"flex-fill m-3"}
+.d-flex.justify-content-center
+  .flex-fill.m-3
     %script{src:"https://donorbox.org/widget.js", paypalExpress: "false"}
     %iframe{src:"https://donorbox.org/embed/back-to-roots?show_content=true", height:"685px", width:"100%", style:"max-width:100%; min-width:100%; max-height:none!important", seamless:"seamless", name:"donorbox", frameborder:"0", scrolling:"no", allowpaymentrequest: true}
