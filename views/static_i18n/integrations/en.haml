@@ -1,58 +1,60 @@
--content_for :title, "Integrations"
+- content_for :title, "Integrations"
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2
+        Integrations
 
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class:"mr-auto p-2"}
-      %h1{class:"h2"} Integrations
+%h3
+  Browser Add-ons
 
-%h3 Browser Add-ons
-
-%div{class:"row mt-4"}
-  %div{class:"col-12 col-md-6 mb-3"}
-    %div{class:"card"}
-      %div{class:"card-header border-bottom"}
+.row.mt-4
+  .col-12.col-md-6.mb-3
+    .card
+      .card-header.border-bottom
         %h4
-          %img{src:"/images/chrome-icon.png", alt:"Chrome", class:"mr-2"}
+          %img.mr-2{src:"/images/chrome-icon.png", alt:"Chrome"}
           Google Chrome Extension
-      %div{class:"card-body mt-3"}
+      .card-body.mt-3
         %p
-          %a{href: "https://chrome.google.com/webstore/detail/bionomia/aodffghldlgnmhbeflkmokghpncnldcn"}
-            Bionomia Google Chrome Extension
+          = link_to "Bionomia Google Chrome Extension", "https://chrome.google.com/webstore/detail/bionomia/aodffghldlgnmhbeflkmokghpncnldcn"
           modifies Global Biodiversity Information Facility (GBIF) occurrence pages to include links to ORCID accounts and Wikidata pages.
-        %div{class:"text-center"}
+        .text-center
           %a{href: "https://chrome.google.com/webstore/detail/bionomia/aodffghldlgnmhbeflkmokghpncnldcn"}
             %img{src: "/images/chrome_extension_screenshot.png", alt: "Bionomia Google Chrome Extension"}
 
-  %div{class: "col-12 col-md-6 mb-3"}
-    %div{class:"card"}
-      %div{class:"card-header border-bottom"}
+  .col-12.col-md-6.mb-3
+    .card
+      .card-header.border-bottom
         %h4
-          %img{src:"/images/firefox-icon.png", alt:"Firefox", class:"mr-2"}
+          %img.mr-2{src:"/images/firefox-icon.png", alt:"Firefox"}
           Firefox Add-on
-      %div{class:"card-body mt-3"}
+      .card-body.mt-3
         %p
-          %a{href: "https://addons.mozilla.org/en-US/firefox/addon/bionomia/"}
-            Bionomia Firefox Add-on
+          = link_to "Bionomia Firefox Add-on", "https://addons.mozilla.org/en-US/firefox/addon/bionomia/"
           modifies Global Biodiversity Information Facility (GBIF) occurrence pages to include links to ORCID accounts and Wikidata pages.
-        %div{class:"text-center"}
+        .text-center
           %a{href: "https://addons.mozilla.org/en-US/firefox/addon/bionomia/"}
             %img{src: "/images/chrome_extension_screenshot.png", alt: "Bionomia Firefox Addon"}
 
-%h3 Wikidata
+%h3
+  Wikidata
 
 %p
   Bionomia is a property,
-  %a{href:"https://www.wikidata.org/wiki/Property:P6944"} P6944
+  = link_to "P6944", "https://www.wikidata.org/wiki/Property:P6944"
   on wikidata and many natural historians now have this included as links on their pages. See the wikidata entry for
-  %a{href:"https://www.wikidata.org/wiki/Q28030682"} Cynthia Ahearn
+  = link_to "Cynthia Ahearn", "https://www.wikidata.org/wiki/Q28030682"
   by way of example.
 
-%h3 Feeds
+%h3
+  Feeds
 
-%div{class:"ml-3"}
-  %h5 New Public Profiles
+.ml-3
+  %h5
+    New Public Profiles
   %div
-    %a{href: url("/user.rss")} #{url("/user.rss")}
+    = link_to url("/user.rss"), url("/user.rss")
   %p
-    %small{class:"text-muted"}
+    %small.text-muted
       RSS feed of new, public profiles.
