@@ -1,6 +1,6 @@
 fi:
-  language: Suomi
-  locale: "fi_FI"
+  language: English
+  locale: "en_EN"
   "true": "Yes"
   "false": "No"
   acknowledgments:
@@ -489,7 +489,7 @@ fi:
     collected_from: Collected From
     dates_identified_collected: Dates Collected and Identified
     resume: For Your Resume
-    specimens_used: Specimens Used In
+    specimens_used: specimens used
     public_availability: Public Availability
     public_profile: Public Profile
     make_citable: Make Your Data Citable
@@ -551,6 +551,9 @@ fi:
     zenodo_html: "Your profile is linked to %{zenodo} and your claims are versioned and archived."
     language: Preferred Language
     language_explanation: Choose your preferred language
+    updated: Your profile was updated.
+    thanks: Thanks
+    attributed: attributed
   roster:
     roster_title: Public Profiles
     lede:
