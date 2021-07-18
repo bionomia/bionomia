@@ -9,29 +9,30 @@
       Application.init();
     });
 
-%div{class:"row"}
+.row
   = haml :'partials/user/jumbotron', layout: false
-  %div{class:"col-12 col-lg-8 mt-2"}
+  .col-12.col-lg-8.mt-2
     - if @viewed_user.is_public?
       = haml :'partials/user/tabs', layout: false, locals: { active_page: "network" }
       = haml :'partials/user/network_tabs', layout: false, locals: { active_tab: locals[:active_tab] }
 
       - if @pagy.count == 0
-        %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('user.no_co_collectors_alert')
+        .alert.alert-info.tiny-margins{role: "alert"}= I18n.t('user.no_co_collectors_alert')
       - else
-        %div{class: "alert alert-info row tiny-margins", role: "alert"}
-          %div{class: "col-12 col-md-9 p-0"}= I18n.t('user.co_collectors_alert')
-          %div{class: "col-12 col-md-3 p-0 text-md-right"}
+        .alert.alert-info.row.tiny-margins{role: "alert"}
+          .col-12.col-md-9.p-0
+            = I18n.t('user.co_collectors_alert')
+          .col-12.col-md-3.p-0.text-md-right
             %a{href: url("/#{@viewed_user.identifier}/network.json")}
-              %i{class:"fas fa-file-code text-dark h5 m-0 p-1"}
+              %i.fas.fa-file-code.text-dark.h5.m-0.p-1
               JSON-LD
 
-        %div{class:"container-fluid"}
+        .container-fluid
           - @results.in_groups_of(2).each do |group|
-            %div{class: "card-deck"}
+            .card-deck
               - group.each do |u|
                 - if u.nil?
-                  %div{class:"card border-0"}
+                  .card.border-0
                 - else
                   - stats = cache_block("#{u.identifier}-stats") { user_stats(u) }
                   = haml :'partials/user/card', layout: false, locals: { user: u, stats: stats }

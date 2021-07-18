@@ -9,50 +9,49 @@
       Application.init();
     });
 
-%div{class:"row"}
+.row
   = haml :'partials/user/jumbotron', layout: false
-  %div{class:"col-12 col-lg-8 mt-2"}
+  .col-12.col-lg-8.mt-2
     - if @viewed_user.is_public?
       = haml :'partials/user/tabs', layout: false, locals: { active_page: "specimens" }
       = haml :'partials/user/specimens_tabs', layout: false, locals: { active_tab: locals[:active_tab] }
 
       - if @pagy.count == 0
-        %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('user.no_scribe')
+        .alert.alert-info.tiny-margins{role: "alert"}= I18n.t('user.no_scribe')
       - else
-        %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('user.attributions_by')
+        .alert.alert-info.tiny-margins{role: "alert"}= I18n.t('user.attributions_by')
 
-        %div{class:"container-fluid"}
+        .container-fluid
           - @results.in_groups_of(3).each do |group|
-            %div{class: "card-deck"}
+            .card-deck
               - group.each do |u|
                 - if u.nil?
-                  %div{class:"card border-0"}
+                  .card.border-0
                 - else
                   - if u[:user].is_bot?
-                    %div{class: "card my-3"}
-                      %div{class: "card-header"}
+                    .card.my-3
+                      .card-header
                         %h5
                           #{u[:user].fullname}
-                      %div{class: "card-body"}
-                      %div{class: "card-footer d-flex"}
-                        %div{class: "small text-right text-muted mr-2"}
-                          %i{class:"fas fa-lock"}
-                        %div{class: "small text-left text-muted mr-2"}
-                          %span{class:"badge badge-light"}
+                      .card-body
+                      .card-footer.d-flex
+                        .small.text-right.text-muted.mr-2
+                          %i.fas.fa-lock
+                        .small.text-left.text-muted.mr-2
+                          %span.badge.badge-light
                             #{number_with_delimiter(u[:total])}
                           = I18n.t('user.specimens_attributed')
                   - else
-                    %div{class: "card card-profile my-3"}
+                    .card.card-profile.my-3
                       - if u[:user].image_url
-                        %div{class: "card-header d-flex"}
+                        .card-header.d-flex
                           %div
                             %img{src:"#{profile_image(u[:user], 'medium')}", alt:"#{u[:user].fullname}", class:"card-img-profile mr-2"}
-                          %div{class:"flex-grow-1"}
+                          .flex-grow-1
                             %h5
-                              %a{href: url("/#{u[:user].identifier}")}
-                                #{u[:user].fullname_reverse}
+                              = link_to u[:user].fullname_reverse, url("/#{u[:user].identifier}")
                             - if u[:user].country
-                              %p{class:"small text-muted mt-0 mb-0"}
+                              %p.small.text-muted.mt-0.mb-0
                                 - country_codes = u[:user].country_code.split("|") rescue []
                                 - countries = u[:user].country.split("|") rescue []
                                 - countries.each_with_index do |v,i|
@@ -62,12 +61,12 @@
                                     - else
                                       #{v}
                       - else
-                        %div{class: "card-header"}
+                        .card-header
                           %h5
                             %a{href: url("/#{u[:user].identifier}")}
                               #{u[:user].fullname_reverse}
                           - if u[:user].country
-                            %p{class:"small text-muted mt-0 mb-0"}
+                            %p.small.text-muted.mt-0.mb-0
                               - country_codes = u[:user].country_code.split("|") rescue []
                               - countries = u[:user].country.split("|") rescue []
                               - countries.each_with_index do |v,i|
@@ -78,14 +77,13 @@
                                     #{v}
 
 
-                      %div{class: "card-body"}
-
-                      %div{class: "card-footer d-flex"}
+                      .card-body
+                      .card-footer.d-flex
                         - if !u[:user].is_public?
-                          %div{class: "small text-right text-muted mr-2"}
-                            %i{class:"fas fa-lock"}
-                        %div{class: "small text-left text-muted mr-2"}
-                          %span{class:"badge badge-light"}
+                          .small.text-right.text-muted.mr-2
+                            %i.fas.fa-lock
+                        .small.text-left.text-muted.mr-2
+                          %span.badge.badge-light
                             #{number_with_delimiter(u[:total])}
                           = I18n.t('user.specimens_attributed')
 

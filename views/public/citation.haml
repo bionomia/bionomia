@@ -9,29 +9,29 @@
       Application.init();
     });
 
-%div{class:"row"}
+.row
   = haml :'partials/user/jumbotron', layout: false
-  %div{class:"col-12 col-lg-8 mt-2"}
+  .col-12.col-lg-8.mt-2
     - if @viewed_user.is_public?
       = haml :'partials/user/tabs', layout: false, locals: { active_page: "citations" }
 
       - if @pagy.count == 0
-        %div{class: "alert alert-info row tiny-margins", role: "alert"}= I18n.t('user.no_specimens_cited')
+        .alert.alert-info.row.tiny-margins{role: "alert"}= I18n.t('user.no_specimens_cited')
       - else
-        %div{class: "alert alert-info tiny-margins", role: "alert"}
+        .alert.alert-info.tiny-margins{role: "alert"}
           %img{src:"/images/net-unselected.png", alt:"#{I18n.t('specimen.collected')}", title:"#{I18n.t('specimen.collected')}", width:18}
             = I18n.t('user.collected')
           %img{src:"/images/microscope-unselected.png", alt:"#{I18n.t('specimen.identified')}", title:"#{I18n.t('specimen.identified')}", width:18}
             = I18n.t("user.identified")
 
         %h4= I18n.t('user.specimen_used')
-        %p{class: "citation"}
+        %p.citation
           #{@article.citation}
           %a{href: "https://doi.org/#{@article.doi}"} https://doi.org/#{@article.doi}
 
-        %div{class:"table-responsive-lg"}
-          %table{class:"table table-hover table-sm"}
-            %thead{class: "thead-light"}
+        .table-responsive-lg
+          %table.table.table-hover.table-sm
+            %thead.thead-light
               %tr
                 %th{scope: "col", style:"min-width:65px"}
                 %th{scope: "col"}= I18n.t('specimen.scientific_name')
@@ -60,7 +60,7 @@
                     %a{href: gbif_occurrence_url(o.id), target: "_blank" }
                       #{h(scientific_name)}
                     - if o.hasImage?
-                      %i{class:"fas fa-image ml-1", "data-toggle":"popover", "data-gbifid":"#{o.id}"}
+                      %i.fa.fa-image.ml-1{"data-toggle":"popover", "data-gbifid":"#{o.id}"}
                   %td #{h(o.recordedBy)}
                   %td #{h(o.identifiedBy)}
                   %td #{h(o.eventDate || o.year)}

@@ -10,33 +10,33 @@
       Application.init();
     });
 
-%div{class:"row"}
+.row
   = haml :'partials/user/jumbotron', layout: false
-  %div{class:"col-12 col-lg-8 mt-2"}
+  .col-12.col-lg-8.mt-2
     - if @viewed_user.is_public?
       = haml :'partials/user/tabs', layout: false, locals: { active_page: "citations" }
 
       - if @pagy.count == 0
-        %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('user.no_publications')
+        .alert.alert-info.tiny-margins{role: "alert"}= I18n.t('user.no_publications')
       - else
-        %div{class: "alert alert-info tiny-margins", role: "alert"}
+        .alert.alert-info.tiny-margins{role: "alert"}
           #{number_to_human(@stats[:articles][:specimens_cited], units: :'user.stats_articles_specimens', delimiter: ",", precision: 0)}
           #{number_to_human(@stats[:articles][:number], units: :'user.stats_articles_articles', delimiter: ",", precision: 0)}
 
-        %div{class:"citation-wrapper"}
+        .citation-wrapper
           %h4= I18n.t('user.science_enabled_specimens')
           - @results.each do |article|
-            %div{class: "card"}
-              %div{class: "card-header"}
-                %p{class: "citation card-title"}
+            .card
+              .card-header
+                %p.citation.card-title
                   #{h(article.citation)}
                   %a{href: "https://doi.org/#{article.doi}"} https://doi.org/#{article.doi}
-              %div{class: "card-body"}
-                %div{"data-badge-popover":"right", "data-badge-type":"donut", "data-doi":"#{article.doi}", "data-hide-no-mentions":"true", class:"altmetric-embed pull-left mr-2 float-left"}
-                %p{class:"card-text text-muted"} #{h(article.abstract)}
-              %div{class: "card-footer d-flex"}
-                %div{class: "small"}
-                  %span{class: "badge badge-light badge-pill citation-correction"} #{number_with_delimiter(article.user_specimen_count(@viewed_user.id))}
+              .card-body
+                .altmetric-embed.pull-left.mr-2.float-left{"data-badge-popover":"right", "data-badge-type":"donut", "data-doi":"#{article.doi}", "data-hide-no-mentions":"true"}
+                %p.card-text.text-muted #{h(article.abstract)}
+              .card-footer.d-flex
+                .small
+                  %span.badge.badge-light.badge-pill.citation-correction #{number_with_delimiter(article.user_specimen_count(@viewed_user.id))}
                   %a{href: url("/#{@viewed_user.identifier}/citation/#{article.doi}")}
                     = I18n.t('user.specimens_metric')
 

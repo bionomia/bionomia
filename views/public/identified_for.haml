@@ -9,24 +9,24 @@
       Application.init();
     });
 
-%div{class:"row"}
+.row
   = haml :'partials/user/jumbotron', layout: false
-  %div{class:"col-12 col-lg-8 mt-2"}
+  .col-12.col-lg-8.mt-2
     - if @viewed_user.is_public?
       = haml :'partials/user/tabs', layout: false, locals: { active_page: "network" }
       = haml :'partials/user/network_tabs', layout: false, locals: { active_tab: locals[:active_tab] }
 
       - if @pagy.count == 0
-        %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('user.no_identified_for_alert')
+        .alert.alert-info.tiny-margins{role: "alert"}= I18n.t('user.no_identified_for_alert')
       - else
-        %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('user.identified_for_alert')
+        .alert.alert-info.tiny-margins{role: "alert"}= I18n.t('user.identified_for_alert')
 
-        %div{class:"container-fluid"}
+        .container-fluid
           - @results.in_groups_of(2).each do |group|
-            %div{class: "card-deck"}
+            .card-deck
               - group.each do |u|
                 - if u.nil?
-                  %div{class:"card border-0"}
+                  .card.border-0
                 - else
                   - stats = cache_block("#{u.identifier}-stats") { user_stats(u) }
                   = haml :'partials/user/card', layout: false, locals: { user: u, stats: stats }
