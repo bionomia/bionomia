@@ -1,5 +1,4 @@
--content_for :title, I18n.t('country.country_title')
-
+- content_for :title, I18n.t('country.country_title')
 - content_for :scripts do
   %script{src: "/js/jquery.throttledresize.js"}
   %script{src: "/js/geochart-hierarchy.js"}
@@ -36,25 +35,26 @@
       });
     });
 
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class:"mr-auto p-2"}
-      %h1{class:"h2"}= I18n.t('country.country_title')
-      %p{class: "lead text-muted"}= I18n.t('country.lede')
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2
+        = I18n.t('country.country_title')
+      %p.lead.text-muted= I18n.t('country.lede')
 
-%ul{class: "nav nav-pills custom-pills mt-1 mb-3", role:"tablist"}
-  %li{class: "nav-item"}
-    %a{class: "nav-link active", "data-toggle":"tab", href: "#country-map-wrapper"}= I18n.t('user.map')
-  %li{class: "nav-item"}
-    %a{class: "nav-link", "data-toggle":"tab", href: "#country-list"}= I18n.t('user.list')
+%ul.nav.nav-pills.custom-pills.mt-1.mb-3{role:"tablist"}
+  %li.nav-item
+    %a.nav-link.active{"data-toggle":"tab", href: "#country-map-wrapper"}= I18n.t('user.map')
+  %li.nav-item
+    %a.nav-link{"data-toggle":"tab", href: "#country-list"}= I18n.t('user.list')
 
-%div{class:"tab-content"}
-  %div{class:"tab-pane fade show active", id:"country-map-wrapper", role:"tabpanel"}
-    %div{id:"country-map", style:"width: 100%;"}
-  %div{class:"tab-pane fade", id:"country-list", role:"tabpanel"}
+.tab-content
+  #country-map-wrapper.tab-pane.fade.show.active{role:"tabpanel"}
+    #country-map{style:"width: 100%;"}
+  #country-list.tab-pane.fade{role:"tabpanel"}
     - @countries.each do |k,group|
       %h3 #{k}
-      %ul{class:"list-inline"}
+      %ul.list-inline
         - group.each do |country|
-          %li{class:"list-inline-item"}
-            %a{href: url("/country/#{country[0]}"), class:"btn btn-outline-dark btn-sm mb-2"} #{country[1]}
+          %li.list-inline-item
+            %a.btn.btn-outline-dark.btn-sm.mb-2{href: url("/country/#{country[0]}")} #{country[1]}

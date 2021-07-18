@@ -1,34 +1,33 @@
 = haml :'partials/dataset/twitter_img', layout: false
 
--content_for :title do
-  #{@dataset.title} – #{I18n.t('dataset.visualizations')}
+- content_for :title, "#{@dataset.title} – #{I18n.t('dataset.visualizations')}"
 
 = haml :'partials/timeline_viz_scripts', layout: false, locals: { extra_param: "&datasetKey=#{@dataset.datasetKey}" }
 
-%div{class:"row"}
+.row
   = haml :'partials/dataset/jumbotron', layout:false
 
-  %div{class:"col-12 col-lg-8 mt-2"}
+  .col-12.col-lg-8.mt-2
     = haml :'partials/dataset/tabs', layout: false, locals: { active_tab: locals[:active_tab] }
     = haml :'partials/dataset/people_viz_nav', layout: false, locals: { active_subtab: locals[:active_subtab] }
 
-    %h3{class:"mt-3"}= I18n.t('dataset.timeline')
+    %h3.mt-3= I18n.t('dataset.timeline')
 
     - if @timeline.size == 0
-      %div{class: "alert alert-info tiny-margins", role: "alert"}
+      .alert.alert-info.tiny-margins{role: "alert"}
         - if @action == "collected"
           = I18n.t('dataset.none_collected_timeline')
         - else
           = I18n.t('dataset.none_identified_timeline')
 
     - elsif @timeline.size == 1
-      %ul{class:"list-unstyled"}
+      %ul.list-unstyled
         %li
-          %a{href: "/#{@timeline[0][0]}/specimens?datasetKey=#{@dataset.datasetKey}&action=#{@action}", class:"mr-3"}
+          %a.mr-3{href: "/#{@timeline[0][0]}/specimens?datasetKey=#{@dataset.datasetKey}&action=#{@action}"}
             #{@timeline[0][1]}
           #{Date.parse(@timeline[0][3]).strftime("%F")} – #{Date.parse(@timeline[0][4]).strftime("%F")}
 
     - else
       = haml :'partials/timeline_filter', layout:false, locals: { params: params, url: "/dataset/#{@dataset.datasetKey}/visualizations" }
 
-    %div{id: "timeline", style:"overflow:auto;", class:"mt-4"}
+    #timeline.mt-4{style:"overflow:auto;"}

@@ -1,6 +1,4 @@
--content_for :title do
-  #{@country[1]}
-
+- content_for :title, "#{@country[1]}"
 - content_for :scripts do
   %script{src: "/js/application.js"}
   :javascript
@@ -8,49 +6,50 @@
       Application.init();
     });
 
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class:"mr-auto p-2"}
-      %h1{class:"h2"} #{@country[1]}
-      %p{class: "lead text-muted"}
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2
+        #{@country[1]}
+      %p.lead.text-muted
         #{I18n.t('country.lede')}
     = haml :'partials/countries/search', layout: false
 
 - if @results.size == 0
-  %div{class: "alert alert-warning tiny-margins", role: "alert"}
+  .alert.alert-warning.tiny-margins{role: "alert"}
     - if @action || @family
-      %i{class:"fas fa-filter"}
+      %i.fas.fa-filter
       - if @action == "collected"
         = I18n.t('country.no_one_collected_from', family: h(@family), country: @country[1])
       - elsif @action == "identified"
         = I18n.t('country.no_one_identified_from', family: h(@family), country: @country[1])
       - else
         = I18n.t('country.no_one_collected_identified_from', family: h(@family), country: @country[1])
-      %a{href: url("/country/#{@country[0]}"), class:"text-danger ml-2"}
-        %i{class:"fas fa-minus-circle"}
+      %a.text-danger.ml-2{href: url("/country/#{@country[0]}")}
+        %i.fas.fa-minus-circle
         #{I18n.t('general.remove')}
     - else
       #{I18n.t('country.no_one_message', country: @country[1])}
 - else
-  %div{class:"alert alert-info tiny-margins", role: "alert"}
+  .alert.alert-info.tiny-margins{role: "alert"}
     - if @action || @family
-      %i{class:"fas fa-filter"}
+      %i.fas.fa-filter
       - if @action == "collected"
         = I18n.t('country.collected_from', family: h(@family), country: @country[1])
       - elsif @action === "identified"
         = I18n.t('country.identified_from', family: h(@family), country: @country[1])
       - else
         = I18n.t('country.collected_identified_from', family: h(@family), country: @country[1])
-      %a{href: url("/country/#{@country[0]}"), class:"text-danger ml-2"}
-        %i{class:"fas fa-minus-circle"}
+      %a.text-danger.ml-2{href: url("/country/#{@country[0]}")}
+        %i.fas.fa-minus-circle
         #{I18n.t('general.remove')}
     - else
       #{I18n.t('country.intro')}
   - @results.in_groups_of(3).each do |group|
-    %div{class: "card-deck"}
+    .card-deck
       - group.each do |u|
         - if u.nil?
-          %div{class:"card border-0"}
+          .card.border-0
         - else
           - if @action || @family
             - u = User.find(u[:_id])
@@ -58,5 +57,5 @@
           = haml :'partials/user/card', layout: false, locals: { user: u, stats: stats }
 
   - if @pagy.pages > 1
-    %div{style:"overflow-y:scroll"}
+    .y-scroll
       = pagy_bootstrap_nav(@pagy)

@@ -1,28 +1,27 @@
 = haml :'partials/dataset/twitter_img', layout: false
 
--content_for :title do
-  #{@dataset.title} – #{I18n.t('dataset.agents')}
+- content_for :title, "#{@dataset.title} – #{I18n.t('dataset.agents')}"
 
-%div{class:"row"}
+.row
   = haml :'partials/dataset/jumbotron', layout:false
 
-  %div{class:"col-12 col-lg-8 mt-2"}
+  .col-12.col-lg-8.mt-2
     = haml :'partials/dataset/tabs', layout: false, locals: { active_tab: locals[:active_tab] }
     = haml :'partials/dataset/agent_nav', layout: false, locals: { active_subtab: locals[:active_subtab] }
 
     - if @pagy.count == 0
-      %div{class: "alert alert-info tiny-margins", role: "alert"}= I18n.t('dataset.no_agents_alert')
+      .alert.alert-info.tiny-margins{role: "alert"}= I18n.t('dataset.no_agents_alert')
     - else
-      %div{class: "alert alert-info tiny-margins", role: "alert"}
+      .alert.alert-info.tiny-margins{role: "alert"}
         #{number_to_human(@pagy.count, units: :'dataset.agents_alert', delimiter: ",", precision: 0)}
-      %div{class: "row"}
+      .row
         - @results.in_groups_of(25, false).each do |group|
-          %div{class: "col-12 col-sm-3 mb-3"}
-            %ul{class: "list-unstyled m-2"}
+          .col-12.col-sm-3.mb-3
+            %ul.list-unstyled.m-2
               - group.each do |a|
                 %li
-                  %a{href: url("/agent/#{a.id}?datasetKey=#{@dataset.datasetKey}")} #{a.fullname_reverse}
+                  = link_to a.fullname_reverse, url("/agent/#{a.id}?datasetKey=#{@dataset.datasetKey}")
 
       - if @pagy.pages > 1
-        %div{style:"overflow-y:scroll"}
+        .y-scroll
           = pagy_bootstrap_nav(@pagy)
