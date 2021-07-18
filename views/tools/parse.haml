@@ -1,6 +1,5 @@
--content_for :title, I18n.t('layout.parse')
-
--content_for :scripts do
+- content_for :title, I18n.t('layout.parse')
+- content_for :scripts do
   %script{src: "/js/csvExport.min.js"}
   :javascript
     $(function() {
@@ -23,58 +22,59 @@
     });
 
 -content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class:"mr-auto p-2"}
-      %h1{class:"h2"}= I18n.t('layout.parse')
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2
+        = I18n.t('layout.parse')
 
 %p
   Paste list of human names (limited to first 1,000 rows) as typically seen in the Darwin Core terms,
-  %a{href: "https://dwc.tdwg.org/terms/#dwc:recordedBy"} recordedBy
+  = link_to "recordedBy", "https://dwc.tdwg.org/terms/#dwc:recordedBy"
   or
-  %a{href: "https://dwc.tdwg.org/terms/#dwc:identifiedBy"} identifiedBy
+  = link_to "identifiedBy", "https://dwc.tdwg.org/terms/#dwc:identifiedBy"
   where each line is a new entry. See the
-  %a{href: url("/developers/code")} Ruby gem
+  = link_to "Ruby gem", url("/developers/code")
   used for this service and documentation for the
   = succeed "." do
-    %a{href: url("/developers/parse")} API
+    = link_to "API", url("/developers/parse")
   = succeed "." do
     %a{href:"#", id:"try-some"} Try some
 
 %form{action:"/parse", method: :post}
-  %div{class: "form-group"}
-    %textarea{name: "names", class:"form-control", rows: 5}= params[:names]
+  .form-group
+    %textarea.form-control{name: "names", rows: 5}= params[:names]
   %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
-  %button{class:"btn btn-success", type:"submit"}= I18n.t('general.submit')
-  %button{class:"btn btn-warning", type:"reset", id:"reset"}= I18n.t('general.reset')
+  %button.btn.btn-success{type: :submit}= I18n.t('general.submit')
+  %button.btn.btn-warning#reset{type: :reset}= I18n.t('general.reset')
 
 - if !@output.empty?
 
   - klass = @output.size >= 300 ? "warning" : "success"
   %div{class:"alert alert-#{klass} mt-4"}
-    %div{class:"row"}
-      %div{class:"col col-12 col-lg-10"}
+    .row
+      .col.col-12.col-lg-10
         Parsed results are limited to the first 1,000 rows.
-      %div{class:"col col-12 col-lg-2 text-lg-right pr-3"}
+      .col.col-12.col-lg-2.text-lg-right.pr-3
         %a{href:"#", id:"csv-export"}
-          %i{class:"fas fa-file-csv h5 text-dark m-0 p-1"}
+          %i.fas.fa-file-csv.h5.text-dark.m-0.p-1
           CSV
 
-  %div{class:"table-responsive mt-4"}
-    %table{class:"table table-hover table-sm border-bottom", id:"bionomia-parse-results"}
-      %thead{class:"thead-light"}
+  .table-responsive.mt-4
+    %table.table.table-hover.table-sm.border-bottom#bionomia-parse-results
+      %thead.thead-light
         %tr
-          %th{scope:"col", class:"border-right"} Original
+          %th.border-right{scope:"col"} Original
           - (1..@columns).each do |col|
             %th{scope:"col"} Title
             %th{scope:"col"} Appellation
             %th{scope:"col"} Given
             %th{scope:"col"} Particle
             %th{scope:"col"} Family
-            %th{scope:"col", class:"border-right"} Suffix
+            %th.border-right{scope:"col"} Suffix
       %tbody
         - @output.each_with_index do |row, index|
           %tr
-            %th{scope:"row", class:"small border-right font-weight-bold"}
+            %th.small.border-right.font-weight-bold{scope:"row"}
               #{row[index][:original]}
             - row[index][:parsed].each do |col|
               %td #{col[:title]}
@@ -82,11 +82,11 @@
               %td #{col[:given]}
               %td #{col[:particle]}
               %td #{col[:family]}
-              %td{class:"border-right"} #{col[:suffix]}
+              %td.border-right #{col[:suffix]}
             - (1..@columns - row[index][:parsed].size).each do |col|
               %td
               %td
               %td
               %td
               %td
-              %td{class:"border-right"}
+              %td.border-right
