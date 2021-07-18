@@ -11,7 +11,7 @@
   = haml :'partials/agent/jumbotron', layout: false
 
 .alert.alert-warning.tiny-margins.mt-0{role: "alert"}
-  .font-weight-bold= I18n.t('agent.warning')
+  %span.font-weight-bold= I18n.t('agent.warning')
   = I18n.t('agent.warning_statement')
 
 - if @filter.length > 0
