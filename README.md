@@ -5,7 +5,7 @@ Sinatra app to parse people names from structured biodiversity occurrence data, 
 
 ## Translations
 
-Strings of text in the user interface are translatable via [config/locales](config/locales). Large pages of text are fully translatable on [views](views) that have language codes in their file names, eg [views/about.es.haml](views/about.es.haml).
+Strings of text in the user interface are translatable via [config/locales](config/locales). Large pages of text are fully translatable in the [views/static_i18n/](views/static_i18n/) directory.
 
 [![Crowdin](https://badges.crowdin.net/bionomia/localized.svg)](https://crowdin.com/project/bionomia)
 
