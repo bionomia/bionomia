@@ -41,7 +41,7 @@
                     = I18n.t('user.specimens_metric')
 
         - if @pagy.pages > 1
-          %div{style:"overflow-y:scroll"}
+          .y-scroll
             = pagy_bootstrap_nav(@pagy)
 
     - else

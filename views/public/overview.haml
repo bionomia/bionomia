@@ -50,7 +50,7 @@
         %h4= I18n.t('user.dates_identified_collected')
         #chart
       - else
-        #chart{style:"width: 0%; height: 0%; display:none;"}
+        #chart.d-none{style:"width: 0%; height: 0%;"}
 
     - else
       = haml :'partials/user/offline_message', layout: false

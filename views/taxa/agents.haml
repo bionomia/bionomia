@@ -30,5 +30,5 @@
               = link_to a.fullname_reverse, url("/agent/#{a.id}?taxon=#{@taxon.family}")
 
   - if @pagy.pages > 1
-    %div{style:"overflow-y:scroll"}
+    .y-scroll
       = pagy_bootstrap_nav(@pagy)

@@ -1,126 +1,124 @@
--content_for :title, I18n.t('profile.settings')
-
--content_for :scripts do
+- content_for :title, I18n.t('profile.settings')
+- content_for :scripts do
   = haml :'partials/profile/scripts', layout: false, locals: { action_type: "POST" }
 
-%div{class:"row"}
+.row
   = haml :'partials/profile/jumbotron', layout: false, locals: { active_page: "settings" }
-  %div{class:"col-12 col-lg-8 mt-2"}
+  .col-12.col-lg-8.mt-2
     = haml :'partials/profile/tabs', layout: false, locals: { active_page: nil }
 
-    %div{class:"citation-wrapper mt-4"}
+    .citation-wrapper.mt-4
       %h4= I18n.t('profile.settings')
 
       - if flash[:updated]
-        %div{class:"alert alert-success alert-dismissible fade show d-block", role: "alert"}
+        .alert.alert-success.alert-dismissible.fade.show.d-block{role: "alert"}
           %div
-            Your profile was updated.
+            = I18n.t('profile.updated')
           %button{type:"button", class:"close", "data-dismiss":"alert", "aria-label":"Close"}
             %span{"aria-hidden":"true"} &times;
 
-      %div{class:"card-deck"}
-
-        %div{class:"card"}
-          %h5{class:"card-header"}= I18n.t('profile.public_availability')
-          %div{class:"card-body"}
-            %p{class:"card-text"}= I18n.t('profile.make_public_message')
-            %div{class:"row"}
-              %div{class:"col"}
-                %input{type:"checkbox", id: "toggle-public", "data-toggle":"toggle", "data-on":"#{I18n.t('profile.public')}", "data-off":"#{I18n.t('profile.private')}", "data-onstyle": "success", "data-size": "small", "data-width": "90", checked: @user.is_public?, class:"btn-claim", "data-url": "/profile/visibility.json" }
-              %div{class:"col text-right"}
+      .card-deck
+        .card
+          %h5.card-header= I18n.t('profile.public_availability')
+          .card-body
+            %p.card-text= I18n.t('profile.make_public_message')
+            .row
+              .col
+                %input.btn-claim{type:"checkbox", id: "toggle-public", "data-toggle":"toggle", "data-on":"#{I18n.t('profile.public')}", "data-off":"#{I18n.t('profile.private')}", "data-onstyle": "success", "data-size": "small", "data-width": "90", checked: @user.is_public?, "data-url": "/profile/visibility.json" }
+              .col.text-right
                 - if @user.is_public?
                   %a{href: url("/#{@user.orcid}")}
                     = I18n.t('profile.public_profile')
-                    %i{class:"fas fa-users"}
+                    %i.fas.fa-users
 
-        %div{class:"card"}
-          %h5{class:"card-header"}
-            %i{class:"fab fa-orcid"}
+        .card
+          %h5.card-header
+            %i.fab.fa-orcid
             ORCID
-          %div{class:"card-body"}
-            %p{class:"card-text"}= I18n.t('profile.orcid_updates')
+          .card-body
+            %p.card-text= I18n.t('profile.orcid_updates')
             %p
-              %a{href: url("/profile/refresh.json"), role:"button", class:"btn btn-sm btn-outline-success profile-refresh"}
-                %i{class: "fas fa-sync-alt"}
+              %a.btn.btn-sm.btn-outline-success.profile-refresh{href: url("/profile/refresh.json"), role:"button"}
+                %i.fas.fa-sync-alt
                 = I18n.t('profile.refresh')
-                %i{class:"fab fa-orcid"}
+                %i.fab.fa-orcid
 
-            %div{id:"refresh-message", class:"alert alert-success alert-dismissible fade show text-center", role: "alert"}
+            #refresh-message.alert.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}
               = I18n.t('profile.orcid_refreshed')
               %button{type:"button", class:"close", "data-dismiss":"alert", "aria-label":"Close"}
                 %span{"aria-hidden":"true"} &times;
 
-      %div{class:"card-deck"}
-        %div{class:"card"}
-          %h5{class:"card-header"}= I18n.t('profile.make_citable')
-          %div{class:"card-body"}
+      .card-deck
+        .card
+          %h5.card-header= I18n.t('profile.make_citable')
+          .card-body
             - if !@user.made_claim?
-              %p{class:"card-text"}= I18n.t('profile.connect_zenodo_claim')
+              %p.card-text= I18n.t('profile.connect_zenodo_claim')
             - else
               - if @user.zenodo_access_token.empty?
-                %p{class:"card-text"}= I18n.t('profile.connect_zenodo')
-                %form{action: "/auth/zenodo", method: "POST" }
-                  %p{class:"card-text"}
-                    %button{class: "btn btn-sm btn-outline-info"}= I18n.t('profile.integrate_zenodo')
+                %p.card-text= I18n.t('profile.connect_zenodo')
+                %form{action: "/auth/zenodo", method: :post}
+                  %p.card-text
+                    %button.btn.btn-sm.btn-outline-info= I18n.t('profile.integrate_zenodo')
                     %input{type:"hidden", name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
               - else
                 - if @user.zenodo_concept_doi
-                  %p{class:"card-text"}
+                  %p.card-text
                     = I18n.t('profile.zenodo_html', zenodo: link_to("Zenodo", "https://doi.org/#{@user.zenodo_concept_doi}"))
                   %p
                     %a{href:"https://doi.org/#{@user.zenodo_concept_doi}"}
                       %img{src:"/images/#{@user.zenodo_concept_doi}.svg"}
                   %p
-                    %button{type: "button", class:"btn btn-sm btn-outline-danger", "data-toggle": "modal", "data-target": "#zenodoModal"}= I18n.t('profile.disconnect')
+                    %button.btn.btn-sm.btn-outline-danger{type: "button", "data-toggle": "modal", "data-target": "#zenodoModal"}= I18n.t('profile.disconnect')
 
-                  %div{class:"modal fade", id:"zenodoModal", tabindex:"-1", role:"dialog", "aria-labelledby":"zenodoModal", "aria-hidden":"true"}
-                    %div{class:"modal-dialog", role:"document"}
-                      %div{class:"modal-content"}
-                        %div{class:"modal-header"}
-                          %h5{class:"modal-title", id:"zenodoLabel"}= I18n.t('profile.disconnect_zenodo')
-                          %button{type:"button", class:"close", "data-dismiss":"modal", "aria-label":"Close"}
+                  #zenodoModal.modal.fade{tabindex:"-1", role:"dialog", "aria-labelledby":"zenodoModal", "aria-hidden":"true"}
+                    .modal-dialog{role:"document"}
+                      .modal-content
+                        .modal-header
+                          #zenodoLabel.modal-title= I18n.t('profile.disconnect_zenodo')
+                          %button.close{type:"button", "data-dismiss":"modal", "aria-label":"Close"}
                             %span{"aria-hidden":"true"} &times;
-                        %div{class:"modal-body"}= I18n.t('profile.disconnect_warning')
-                        %div{class:"modal-footer"}
-                          %button{type:"button", class:"btn btn-sm btn-outline-secondary", "data-dismiss":"modal"}= I18n.t('profile.cancel')
-                          %button{type:"button", class:"btn btn-sm btn-outline-danger", id:"zenodo-disconnect"}= I18n.t('profile.disconnect')
+                        .modal-body= I18n.t('profile.disconnect_warning')
+                        .modal-footer
+                          %button.btn.btn-sm.btn-outline-secondary{type:"button", class:"", "data-dismiss":"modal"}= I18n.t('profile.cancel')
+                          %button#zenodo-disconnect.btn.btn-sm.btn-outline-danger{type:"button"}= I18n.t('profile.disconnect')
                 - else
-                  %p{class:"card-text"}= I18n.t('profile.connect_zenodo')
-                  %p{class:"alert alert-success"}
-                    %i{class:"fas fa-check-circle"}
+                  %p.card-text= I18n.t('profile.connect_zenodo')
+                  %p.alert.alert-success
+                    %i.fas.fa-check-circle
                     = I18n.t('profile.zenodo_linked')
 
-        %div{class:"card"}
-          %h5{class:"card-header"}= I18n.t('profile.email_notifications')
-          %div{class:"card-body"}
+        .card
+          %h5.card-header= I18n.t('profile.email_notifications')
+          .card-body
             - if @user.email && !@user.email.empty?
-              %p{class:"card-text"}= I18n.t('profile.email_procedure', email: @user.email)
+              %p.card-text= I18n.t('profile.email_procedure', email: @user.email)
               %p
-                %input{type:"checkbox", id: "toggle-mail", "data-toggle":"toggle", "data-on":"#{I18n.t('profile.active')}", "data-off":"#{I18n.t('profile.inactive')}", "data-onstyle": "success", "data-size": "small", checked: @user.wants_mail?, class:"btn-claim" }
+                %input#toggle-mail.btn-claim{type:"checkbox", "data-toggle":"toggle", "data-on":"#{I18n.t('profile.active')}", "data-off":"#{I18n.t('profile.inactive')}", "data-onstyle": "success", "data-size": "small", checked: @user.wants_mail? }
             - else
-              %p{class:"card-text"}= I18n.t('profile.email_instructions')
+              %p.card-text= I18n.t('profile.email_instructions')
 
-      %div{class:"card-deck"}
-        %div{class:"card"}
-          %h5{class:"card-header"}
+      .card-deck
+        .card
+          %h5.card-header
             YouTube
-          %div{class:"card-body"}
-            %p{class:"card-text"}= I18n.t('profile.youtube')
+          .card-body
+            %p.card-text= I18n.t('profile.youtube')
             %form{action: "/profile/settings", method: :post}
               %input{type: :hidden, name: "_method", value: 'PUT'}
               %input{type: :hidden, name: "authenticity_token", value:"#{env['rack.session'][:csrf]}"}
               %input{type: :hidden, name: "wants_mail", value:"#{@user.wants_mail?}"}
               %input{type: :hidden, name: "locale", value:"#{@user.locale}"}
-              %input{type: :text, name: "youtube_id", class:"form-control mb-3", id: "youtube_id", value: "#{@user.youtube_id}", placeholder: "w-rOViX3buo"}
-              %input{type: :submit, class:"btn btn-sm btn-outline-success", value:"#{I18n.t('profile.update')}"}
+              %input#youtube_id.form-control.mb-3{type: :text, name: "youtube_id", value: "#{@user.youtube_id}", placeholder: "w-rOViX3buo"}
+              %input.btn.btn-sm.btn-outline-success{type: :submit, value:"#{I18n.t('profile.update')}"}
 
-        %div{class:"card"}
-          %h5{class:"card-header"}
+        .card
+          %h5.card-header
             #{I18n.t('profile.language')}
-          %div{class:"card-body"}
-            %p{class:"card-text"}= I18n.t('profile.language_explanation')
+          .card-body
+            %p.card-text= I18n.t('profile.language_explanation')
             %form{action: "/profile/settings", method: :post}
-              %select{id: "locale", class:"form-select form-select-md d-block mb-3", name: "locale", "aria-label":"#{I18n.t('profile.language')}"}
+              %select#locale.form-select.form-select-md.d-block.mb-3{name: "locale", "aria-label":"#{I18n.t('profile.language')}"}
                 %option= "#{I18n.t('profile.language')}"
                 - locale_name_pairs.each do |lang|
                   - selected = lang[0].to_s == @user.try(:locale) ? true : false
@@ -129,28 +127,28 @@
               %input{type: :hidden, name: "authenticity_token", value:"#{env['rack.session'][:csrf]}"}
               %input{type: :hidden, name: "wants_mail", value:"#{@user.wants_mail?}"}
               %input{type: :hidden, name: "youtube_id", value: "#{@user.youtube_id}"}
-              %input{type: :submit, class:"btn btn-sm btn-outline-success d-block", value:"#{I18n.t('profile.update')}"}
+              %input.btn.btn-sm.btn-outline-success.d-block{type: :submit, value:"#{I18n.t('profile.update')}"}
 
-      %div{class:"card-deck"}
-        %div{class:"card"}
-          %h5{class:"card-header"}= I18n.t('profile.delete_account')
-          %div{class:"card-body"}
-            %p{class:"card-text"}= I18n.t('profile.permanent_delete')
-            %button{type: "button", class:"btn btn-sm btn-outline-danger", "data-toggle": "modal", "data-target": "#deleteModal"}= I18n.t('profile.delete')
+      .card-deck
+        .card
+          %h5.card-header= I18n.t('profile.delete_account')
+          .card-body
+            %p.card-text= I18n.t('profile.permanent_delete')
+            %button.btn.btn-sm.btn-outline-danger{type: "button", "data-toggle": "modal", "data-target": "#deleteModal"}= I18n.t('profile.delete')
 
-            %div{class:"modal fade", id:"deleteModal", tabindex:"-1", role:"dialog", "aria-labelledby":"deleteModal", "aria-hidden":"true"}
-              %div{class:"modal-dialog", role:"document"}
-                %div{class:"modal-content"}
-                  %div{class:"modal-header"}
-                    %h5{class:"modal-title", id:"deleteLabel"}= I18n.t('profile.delete_account')
-                    %button{type:"button", class:"close", "data-dismiss":"modal", "aria-label":"Close"}
+            #deleteModal.modal.fade{tabindex:"-1", role:"dialog", "aria-labelledby":"deleteModal", "aria-hidden":"true"}
+              .modal-dialog{role:"document"}
+                .modal-content
+                  .modal-header
+                    %h5#deleteLabel.modal-title= I18n.t('profile.delete_account')
+                    %button.close{type:"button", "data-dismiss":"modal", "aria-label":"Close"}
                       %span{"aria-hidden":"true"} &times;
-                  %div{class:"modal-body"}= I18n.t('profile.delete_warning')
-                  %div{class:"modal-footer"}
+                  .modal-body= I18n.t('profile.delete_warning')
+                  .modal-footer
                     %form{action: "/profile/destroy", method: :post}
-                      %button{type:"button", class:"btn btn-sm btn-outline-secondary", "data-dismiss":"modal"}= I18n.t('profile.cancel')
+                      %button.btn.btn-sm.btn-outline-secondary{type:"button", "data-dismiss":"modal"}= I18n.t('profile.cancel')
                       %input{type: :hidden, name: "_method", value: 'DELETE'}
                       %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
-                      %input{type: :submit, class:"btn btn-sm btn-outline-danger", value:"#{I18n.t('profile.delete')}"}
+                      %input.btn.btn-sm.btn-outline-danger{type: :submit, value:"#{I18n.t('profile.delete')}"}
 
-        %div{class:"card border-0"}
+        .card.border-0

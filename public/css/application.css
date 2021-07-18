@@ -192,6 +192,10 @@ table td.selector{
   background-color: rgba(0, 0, 0, 0.075);
 }
 
+.y-scroll{
+  overflow-y:scroll;
+}
+
 #admin-tabs .active{
   background-color:transparent;
   border-bottom-color:#fff3cd;

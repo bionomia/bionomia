@@ -551,6 +551,10 @@ es:
     zenodo_html: "Su perfil está enlazado a %{zenodo} y se ha creado y archivado una versión de los datos de sus especímenes reclamados."
     language: Idioma preferido
     language_explanation: Elija su idioma preferido
+    specimens_used: specimens used
+    updated: Your profile was updated.
+    thanks: Thanks
+    attributed: attributed
   roster:
     roster_title: Perfiles públicos
     lede:

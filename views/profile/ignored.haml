@@ -1,16 +1,16 @@
--content_for :title, I18n.t('profile.ignored_title')
-
--content_for :scripts do
+- content_for :title, I18n.t('profile.ignored_title')
+- content_for :scripts do
   = haml :'partials/profile/scripts', layout: false, locals: { action_type: "PUT" }
 
-%div{class:"row"}
-  %div{class:"col-12 col-lg-4"}
-    %h1{class:"h3"}= @user.fullname
-  %div{class:"col-12 col-lg-8 mt-2"}
+.row
+  .col-12.col-lg-4
+    %h1.h3
+      = @user.fullname
+  .col-12.col-lg-8.mt-2
     = haml :'partials/profile/tabs', layout: false, locals: { active_page: "specimens" }
     = haml :'partials/profile/subtabs_specimens', layout: false, locals: { active_tab: "ignored"}
 
-%div{class: "alert alert-info tiny-margins", role: "alert"}
+.alert.alert-info.tiny-margins{role: "alert"}
   - if @pagy.count == 0
     = I18n.t('profile.ignored_alert')
 

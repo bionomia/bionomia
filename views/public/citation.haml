@@ -70,7 +70,7 @@
                   %td #{h(o.typeStatus)}
 
         - if @pagy.pages > 1
-          %div{style:"overflow-y:scroll"}
+          .y-scroll
             = pagy_bootstrap_nav(@pagy)
 
     - else
