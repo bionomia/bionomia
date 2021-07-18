@@ -1,5 +1,4 @@
--content_for :title do
-  #{@taxon.family} #{I18n.t('taxa.visualizations')}
+- content_for :title, "#{@taxon.family} #{I18n.t('taxa.visualizations')}"
 
 = haml :'partials/timeline_viz_scripts', layout: false, locals: { extra_param: "&family=#{@taxon.family}" }
 
@@ -7,31 +6,32 @@
   = haml :'partials/taxa/jumbotron', layout: false
 
 - if admin_authorized?
-  %div{class:"mt-3 mb-3 pt-3 border-top text-right"}
+  .mt-3.mb-3.pt-3.border-top.text-right
     %a{href: url("/admin/taxon/#{@taxon.family}")}
-      %i{class:"fas fa-cog"}
+      %i.fas.fa-cog
       = I18n.t('general.settings')
 
 = haml :'partials/taxa/tabs', layout: false, locals: { active_tab: locals[:active_tab] }
 = haml :'partials/taxa/people_viz_nav', layout: false, locals: { active_subtab: locals[:active_subtab] }
 
-%h3{class:"mt-3"}= I18n.t('taxa.timeline')
+%h3.mt-3
+  = I18n.t('taxa.timeline')
 
 - if @timeline.size == 0
-  %div{class: "alert alert-info tiny-margins", role: "alert"}
+  .alert.alert-info.tiny-margins{role: "alert"}
     - if @action == "collected"
       = I18n.t('taxa.none_collected_timeline', taxon: h(@taxon.family))
     - else
       = I18n.t('taxa.none_identified_timeline', taxon: h(@taxon.family))
 
 - elsif @timeline.size == 1
-  %ul{class:"list-unstyled"}
+  %ul.list-unstyled
     %li
-      %a{href: "/#{@timeline[0][0]}/specimens?family=#{@taxon.family}&action=#{@action}", class:"mr-3"}
+      %a.mr-3{href: "/#{@timeline[0][0]}/specimens?family=#{@taxon.family}&action=#{@action}"}
         #{@timeline[0][1]}
       #{Date.parse(@timeline[0][3]).strftime("%F")} – #{Date.parse(@timeline[0][4]).strftime("%F")}
 
 - else
   = haml :'partials/timeline_filter', layout:false, locals: { params: params, url: "/taxon/#{@taxon.family}/visualizations" }
 
-%div{id: "timeline", style:"overflow:auto", class:"mt-4"}
+.mt-4#timeline{style:"overflow:auto;"}

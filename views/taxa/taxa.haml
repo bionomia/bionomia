@@ -1,5 +1,4 @@
--content_for :title, I18n.t('taxa.search_title')
-
+- content_for :title, I18n.t('taxa.search_title')
 - content_for :scripts do
   %script{src: "/js/application.js"}
   :javascript
@@ -7,46 +6,47 @@
       Application.init("", "GET", "/taxa");
     });
 
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class:"mr-auto p-2"}
-      %h1{class:"h2"}= I18n.t('taxa.search_title')
-      %p{class: "lead text-muted"}
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2
+        = I18n.t('taxa.search_title')
+      %p.lead.text-muted
         #{number_to_human(@count, units: :'taxa.lede', delimiter: ",", precision: 0)}
     = haml :'partials/taxa/search', layout: false
 
 - if !@pagy
   %h3= I18n.t('taxa.example_families')
-  %div{class: "row"}
+  .row
     - @results.in_groups_of(25, false).each do |group|
-      %div{class: "col-12 col-sm-3 mb-3"}
-        %ul{class: "list-group m-2"}
+      .col-12.col-sm-3.mb-3
+        %ul.list-group.m-2
           - group.each do |t|
-            %li{class:"list-group-item border-0"}
+            %li.list-group-item.border-0
               - image = taxon_image(t.family, 'thumbnail')
               - if !image.nil?
-                %img{src:"#{image}", alt:"#{t.family}", class:"mr-2"}
+                %img.mr-2{src:"#{image}", alt:"#{t.family}"}
               - else
-                %span{style:"width:24px;", class:"d-inline-block mr-2"}
-              %a{href: url("/taxon/#{t.family}")} #{t.family}
+                %span.d-inline-block.mr-2{style:"width:24px;"}
+              = link_to t.family, url("/taxon/#{t.family}")
 
 - if @pagy && @pagy.count == 0
-  %div{class: "alert alert-warning tiny-margins", role: "alert"}= I18n.t('taxa.none_found', searched: h(params[:q]))
+  .alert.alert-warning.tiny-margins{role: "alert"}= I18n.t('taxa.none_found', searched: h(params[:q]))
 - elsif @pagy && @pagy.count > 0
-  %div{class: "alert alert-info tiny-margins", role: "alert"}
+  .alert.alert-info.tiny-margins{role: "alert"}
     #{number_to_human(@pagy.count, units: :'taxa.search_found', delimiter: ",", precision: 0)}
-    %span{class: "font-weight-bold"}
+    %span.font-weight-bold
       #{h(params[:q])}
 
-  %div{class: "row"}
+  .row
     - @taxon_results.in_groups_of(25, false).each do |group|
-      %div{class: "col-12 col-md-3 mb-3"}
-        %ul{class: "list-group m-2"}
+      .col-12.col-md-3.mb-3
+        %ul.list-group.m-2
           - group.each do |o|
-            %li{class:"list-group-item border-0"}
+            %li.list-group-item.border-0
               - image = taxon_image(o[:name], 'thumbnail')
               - if !image.nil?
-                %img{src:"#{image}", alt:"#{o[:name]}", class:"mr-2"}
+                %img.mr-2{src:"#{image}", alt:"#{o[:name]}"}
               - else
-                %span{style:"width:24px;", class:"d-inline-block mr-2"}
-              %a{href: url("/taxon/#{o[:name]}")} #{o[:name]}
+                %span.d-inline-block.mr-2{style:"width:24px;"}
+              = link_to o[:name], url("/taxon/#{o[:name]}")
