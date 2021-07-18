@@ -1,18 +1,19 @@
--content_for :title, "Privacy Policy"
+- content_for :title, "Privacy Policy"
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2
+        Privacy Policy
 
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class:"mr-auto p-2"}
-      %h1{class:"h2"} Privacy Policy
-
-%h3 What Bionomia Collects
+%h3
+  What Bionomia Collects
 
 %p
   Bionomia requires some basic information at the time of account creation and this is entirely limited to publicly-accessible details pulled from your
-  %a{href:"https://orcid.org"} ORCID
+  = link_to "ORCID", "https://orcid.org"
   profile.
   See
-  %a{href:"https://orcid.org/privacy-policy"} ORCID's Privacy Policy
+  = link_to "ORCID's Privacy Policy", "https://orcid.org/privacy-policy"
   for more details.
   Bionomia stores your full name, your employment and educational affiliations, your biography, and your email address only if you have allowed these details to be publicly accessible from your ORCID profile.
   These details are periodically refreshed from your ORCID profile and you may manually trigger an update within Bionomia whenever you wish. If you later restrict access to details that were once accessible in your ORCID profile,
@@ -22,10 +23,11 @@
 %p
   If you elect to archive versions of your specimen data in
   = succeed ", " do
-    %a{href:"https://zenodo.org"} Zenodo
+    = link_to "Zenodo", "https://zenodo.org"
   Bionomia stores a unique access token specific to your Zenodo account. This token is used to push new versions of your specimen data into your versioned archive on your behalf. If you disable the integration with Zenodo, the access token is removed.
 
-%h3 What Bionomia Does Not Collect
+%h3
+  What Bionomia Does Not Collect
 
 %p
   Bionomia does not collect private information, including passwords from your ORCID profile.
@@ -33,10 +35,11 @@
   If you are a child under the age of 13, you may not have an Account on Bionomia even if one was created in ORCID. Bionomia does not knowingly collect information from or direct any of its content specifically to children under 13.
   If we learn or have reason to suspect that you are a User who is under the age of 13, we will have to close your Account. We don't want to discourage you from learning, but those are the rules.
   Please see our
-  %a{href: url("/terms-of-service")} Terms of Service
+  = link_to "Terms of Service", url("/terms-of-service")
   for information about Account termination.
 
-%h3 How Bionomia Uses Your Information
+%h3
+  How Bionomia Uses Your Information
 
 %p
   Specimen records you attribute to other people, living or deceased, will be widely, and openly shared unless the living user you have attributed these to has not made their profile publicly accessible.
@@ -47,9 +50,10 @@
   If you make your email address publicly-accessible via your ORCID profile, you may optionally subscribe to email notifications in Bionomia.
   Your email address, if accessible via your ORCID profile, will not be used except if you choose to subscribe to alerts about new publications that used your specimen data.
 
-%h3 Contacting Bionomia
+%h3
+  Contacting Bionomia
 
 %p
   Questions regarding this privacy statement or information practices should be directed to
   = succeed "." do
-    %a{href: "mailto: bionomia.tracker@gmail.com"} bionomia.tracker@gmail.com
+    = link_to "bionomia.tracker@gmail.com", "mailto:bionomia.tracker@gmail.com"
