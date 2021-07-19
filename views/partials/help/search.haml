@@ -1,18 +1,18 @@
-%div{class:"p-2"}
-  %form{id:"form-helper-wrapper", method: "get", action: "/help-others", "accept-charset" => "UTF-8", class: "form-inline helpers"}
-    %div{class: "form-group w-75"}
+.p-2
+  %form#form-helper-wrapper.form-inline.helpers{method: :get, action: "/help-others", "accept-charset": "UTF-8"}
+    .form-group.w-75
       - username = @viewed_user ? @viewed_user.fullname : "Mary Smith"
-      %input{class: "typeahead help-search", id: "typeahead-user", type: :text, name: "q", placeholder: "#{username}", value: "#{h(params[:q])}", size:"25", autocomplete:"off"}
-    %input{type: :submit, class:"btn btn-success medium-margins", value:"#{I18n.t('general.search')}"}
+      %input#typeahead-user.typeahead.help-search{type: :text, name: "q", placeholder: "#{username}", value: "#{h(params[:q])}", size:"25", autocomplete:"off"}
+    %input.btn.btn-success.medium-margins{type: :submit, value:"#{I18n.t('general.search')}"}
 
-%script{id:"result-template", type:"text/x-handlebars-template"}
-  %div{class:"d-flex"}
+%script#result-template{type:"text/x-handlebars-template"}
+  .d-flex
     %div
-      %img{class:"rounded", src:"{{thumbnail}}"}
-    %div{class:"ml-2 flex-grow-1 small"}
-      %h5{class:"m-0 p-0"} {{fullname_reverse}}
-      %div{class:"m-0 p-0 small muted", style:"line-height:1.2rem"} {{{lifespan}}}
-      %div{class:"m-0 p-0 small", style:"line-height:1.2rem"} {{{description}}}
+      %img.rounded{src:"{{thumbnail}}"}
+    .ml-2.flex-grow-1.small
+      %h5.m-0.p-0 {{fullname_reverse}}
+      .m-0.p-0.small.muted{style:"line-height:1.2rem"} {{{lifespan}}}
+      .m-0.p-0.small{style:"line-height:1.2rem"} {{{description}}}
 
-%script{id:"empty-template", type:"text/x-handlebars-template"}
-  %div{class:"m-2 tt-no-result"}= I18n.t('general.search_dropdown_no_users')
+%script#empty-template{type:"text/x-handlebars-template"}
+  .m-2.tt-no-result= I18n.t('general.search_dropdown_no_users')

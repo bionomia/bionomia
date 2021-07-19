@@ -1,6 +1,6 @@
-%nav{id:"network-nav", class:"navbar navbar-light navbar-expand bg-light overflow-auto"}
-  %ul{class:"navbar-nav"}
-    %li{class:"nav-item"}
+%nav#network-nav.navbar.navbar-light.navbar-expand.bg-light.overflow-auto
+  %ul.navbar-nav
+    %li.nav-item
       %a{class:"nav-link#{locals[:active_tab] == "orcid" ? " active" : nil}", href: url("/help-others/new-people")} ORCID
-    %li{class:"nav-item"}
+    %li.nav-item
       %a{class:"nav-link#{locals[:active_tab] == "wikidata" ? " active" : nil}", href: url("/help-others/new-people/wikidata")} Wikidata
