@@ -1,9 +1,7 @@
--content_for :title, I18n.t('help.help_title')
-
--content_for :stylesheets do
+- content_for :title, I18n.t('help.help_title')
+- content_for :stylesheets do
   %link{href:"/css/bootstrap-datepicker3.standalone.min.css", rel:"stylesheet", type:"text/css"}
-
--content_for :scripts do
+- content_for :scripts do
   %script{src: "/js/application.js"}
   :javascript
     var Filters = { "datasetKey": "#{params[:datasetKey]}", "agent_id": "#{params[:agent_id]}", "taxon_id": "#{params[:taxon_id]}", "kingdom": "#{params[:kingdom]}" };
@@ -11,20 +9,20 @@
       Application.init(#{@viewed_user.id}, "POST", "/help-others", "#{@viewed_user.identifier}");
     });
 
--content_for :jumbotron do
+- content_for :jumbotron do
   = haml :'partials/help/jumbotron', layout: false
 
 - if !authorized?
   %p= I18n.t('help.help_question', name: h(@viewed_user.fullname))
 
-  %form{action: "/auth/orcid?lang=#{I18n.locale}", method: "POST" }
-    %button{class: "btn btn-lg btn-outline-dark"}
-      %i{class:"fab fa-orcid"}
+  %form{action: "/auth/orcid?lang=#{I18n.locale}", method: :post }
+    %button.btn.btn-lg.btn-outline-dark
+      %i.fab.fa-orcid
       = I18n.t('home.orcid_login')
     %input{type:"hidden", name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
 
   - if @viewed_user.is_public?
-    %p{class:"mt-3"}
+    %p.mt-3
       = I18n.t('help.view_public_html', href: link_to(I18n.t('help.view_public_href'), url('/#{@viewed_user.identifier}')))
 
 - else

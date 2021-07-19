@@ -1,6 +1,5 @@
--content_for :title, I18n.t('help.fix_title')
-
--content_for :scripts do
+- content_for :title, I18n.t('help.fix_title')
+- content_for :scripts do
   %script{src: "/js/application.js"}
   :javascript
     $(function() {
@@ -8,13 +7,13 @@
     });
   = haml :'partials/viz_scripts', layout: false, locals: { path: "/help-others/#{@viewed_user.identifier}" }
 
--content_for :jumbotron do
+- content_for :jumbotron do
   = haml :'partials/help/jumbotron', layout: false
 
 = haml :'partials/help/tabs', layout: false, locals: { active_tab: "specimens" }
 = haml :'partials/help/subtabs_fix', layout: false, locals: { active_subtab: "visualizations" }
 
-%div{id: "helper-info", class: "alert alert-info tiny-margins", role: "alert"}
+#helper-info.alert.alert-info.tiny-margins{role: "alert"}
   - if @stats[:specimens][:identified] == 0 && @stats[:specimens][:recorded] == 0
     = I18n.t('help.viz_none_alert')
   - else
@@ -25,7 +24,7 @@
   - if @viewed_user.wikidata && ( @viewed_user.date_born || @viewed_user.date_died )
     %h4= I18n.t('help.problems')
 
-    %ul{class:"mt-3"}
+    %ul.mt-3
       - if @viewed_user.date_born
         %li
           = I18n.t('help.collections_before_birth')
@@ -43,7 +42,7 @@
             %a{href: url("/help-others/#{@viewed_user.identifier}/specimens?action=collected&start_year=#{@viewed_user.date_died.year}&end_year=#{Date.today.year}")}
               (#{count} #{I18n.t('help.view')})
           - else
-            %span{class:"text-success"} (#{I18n.t('help.none')})
+            %span.text-success (#{I18n.t('help.none')})
       - if @viewed_user.date_born
         %li
           = I18n.t('help.identifications_before_birth')
@@ -52,7 +51,7 @@
             %a{href: url("/help-others/#{@viewed_user.identifier}/specimens?action=identified&start_year=0&end_year=#{@viewed_user.date_born.year}")}
               (#{count} #{I18n.t('help.view')})
           - else
-            %span{class:"text-success"} (#{I18n.t('help.none')})
+            %span.text-success (#{I18n.t('help.none')})
       - if @viewed_user.date_died
         %li
           = I18n.t('help.identifications_after_death')
@@ -61,20 +60,20 @@
             %a{href: url("/help-others/#{@viewed_user.identifier}/specimens?action=identified&start_year=#{@viewed_user.date_died.year}&end_year=#{Date.today.year}")}
               (#{count} #{I18n.t('help.view')})
           - else
-            %span{class:"text-success"} (#{I18n.t('help.none')})
+            %span.text-success (#{I18n.t('help.none')})
 
-  %div{class:"row d-flex mt-3"}
-    %div{class:"col-10 col-md-6"}
+  .row.d-flex.mt-3
+    .col-10.col-md-6
       = haml :'partials/map_list_collected', layout: false, locals: { path: "/help-others/#{@viewed_user.identifier}" }
-    %div{class:"col-10 col-md-6"}
+    .col-10.col-md-6
       = haml :'partials/map_list_identified', layout: false, locals: { path: "/help-others/#{@viewed_user.identifier}" }
 
 - else
-  #map-identified{style:"width: 0%; height: 0%; display: none;"}
-  #map-collected{style:"width: 0%; height: 0%; display: none;"}
+  #map-identified.d-none{style:"width: 0%; height: 0%;"}
+  #map-collected.d-none{style:"width: 0%; height: 0%;"}
 
 - if @stats[:activity_dates].length > 0
   %h4= I18n.t('help.dates_identified_collected')
-  %div{id: "chart"}
+  #chart
 - else
-  %div{id: "chart", style:"width: 0%; height: 0%; display:none;"}
+  #chart.d-none{style:"width: 0%; height: 0%;"}

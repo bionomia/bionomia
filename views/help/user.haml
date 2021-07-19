@@ -1,6 +1,4 @@
-- content_for :title do
-  Helping #{@viewed_user.fullname}
-
+- content_for :title, "Helping #{@viewed_user.fullname}"
 - content_for :scripts do
   %script{src: "/js/application.js"}
   :javascript
@@ -14,22 +12,22 @@
 - if !authorized?
   %p= I18n.t('help.help_question', name: h(@viewed_user.fullname))
 
-  %form{action: "/auth/orcid?lang=#{I18n.locale}", method: "POST" }
-    %button{class: "btn btn-lg btn-outline-dark"}
-      %i{class:"fab fa-orcid"}
+  %form{action: "/auth/orcid?lang=#{I18n.locale}", method: :post}
+    %button.btn.btn-lg.btn-outline-dark
+      %i.fab.fa-orcid
       = I18n.t('home.orcid_login')
     %input{type:"hidden", name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
 
   - if @viewed_user.is_public?
-    %p{class:"mt-3"}
+    %p.mt-3
       = I18n.t('help.view_public_html', href: link_to(I18n.t('help.view_public_href'), url("/#{@viewed_user.identifier}")))
 
 - else
   - if flash[:public]
-    %div{class:"alert alert-success alert-dismissible fade show d-block", role: "alert"}
+    .alert.alert-success.alert-dismissible.fade.show.d-block{role: "alert"}
       %div
         = I18n.t('help.now_public_html', person: link_to("#{@viewed_user.fullname}", url("/#{@viewed_user.identifier}")))
-      %button{type:"button", class:"close", "data-dismiss":"alert", "aria-label":"Close"}
+      %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
         %span{"aria-hidden":"true"} &times;
 
   = haml :'partials/help/tabs', layout: false, locals: { active_tab: "discovered" }
@@ -39,31 +37,31 @@
   = haml :'partials/advanced_search_filter', layout: false, locals: { url: "/help-others/#{@viewed_user.identifier}" }
 
   - if @pagy.count == 0
-    %div{class: "alert alert-info tiny-margins row", role: "alert"}
-      %div{class: "col col-12 col-md-8 p-0"}
+    .alert.alert-info.tiny-margins.row{role: "alert"}
+      .col.col-12.col-md-8.p-0
         = I18n.t('help.no_unclaimed')
         - if !@dataset && !@agent && !@taxon && !@kingdom
-          %div{class:"form-check d-inline-flex"}
-            %input{type:"checkbox", class:"form-check-input", id:"relaxed", checked: checked }
-            %label{for:"relaxed", class:"relaxed"}= I18n.t('help.less_exact')
-      %div{class:"col col-12 col-md-4 p-0 text-md-right"}
+          .form-check.d-inline-flex
+            %input#relaxed.form-check-input{type:"checkbox", checked: checked }
+            %label.relaxed{for:"relaxed"}= I18n.t('help.less_exact')
+      .col.col-12.col-md-4.p-0.text-md-right
         %a{href: url("/help-others/#{@viewed_user.identifier}/advanced-search")}
-          %i{class:"fas fa-search-plus"}
+          %i.fas.fa-search-plus
           = I18n.t('help.advanced_search')
   - else
     = haml :'partials/help/fixed_navbar', layout: false
 
-    %div{id: "helper-info", class: "alert alert-info tiny-margins row", role: "alert"}
-      %div{class: "col col-12 col-md-8 p-0"}
+    #helper-info.alert.alert-info.tiny-margins.row{role: "alert"}
+      .col.col-12.col-md-8.p-0
         #{I18n.t('help.attribute_count', count: number_with_delimiter(@total))}
         = haml :'partials/choose_instructions', layout: false
         - if !@dataset && !@agent && !@taxon && !@kingdom
-          %div{class:"form-check d-inline-flex"}
-            %input{type:"checkbox", class:"form-check-input", id:"relaxed", checked: checked }
-            %label{for:"relaxed", class:"relaxed"}= I18n.t('help.less_exact')
-      %div{class:"col col-12 col-md-4 p-0 text-md-right"}
+          .form-check.d-inline-flex
+            %input#relaxed.form-check-input{type:"checkbox", checked: checked }
+            %label.relaxed{for:"relaxed"}= I18n.t('help.less_exact')
+      .col.col-12.col-md-4.p-0.text-md-right
         %a{href: url("/help-others/#{@viewed_user.identifier}/advanced-search")}
-          %i{class:"fas fa-search-plus"}
+          %i.fas.fa-search-plus
           = I18n.t('help.advanced_search')
 
   - if @pagy.count > 0
