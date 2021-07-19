@@ -1,35 +1,36 @@
--content_for :title, I18n.t('developer.code_title')
-
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class:"mr-auto p-2"}
-      %h1{class:"h2"}= I18n.t('developer.title')
+- content_for :title, I18n.t('developer.code_title')
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2
+        = I18n.t('developer.title')
 
 = haml :'partials/developers/tabs', layout:false, locals: { active_tab: locals[:active_tab] }
 
-%h3{class:"mt-4 mb-3"}= I18n.t('developer.code')
+%h3.mt-4.mb-3
+  = I18n.t('developer.code')
 
-%p{class:"mb-4"}
+%p.mb-4
   The MIT-licensed code is available on
   = succeed "." do
-    %a{href: "https://github.com/bionomia/bionomia" } GitHub
+    = link_to "GitHub", "https://github.com/bionomia/bionomia"
   Technologies at play include Apache Spark to group occurrence records by raw entries in recordedBy and identifiedBy and to import into MySQL, Elasticsearch to aid in the searching of people names once parsed and cleaned, Redis to coordinate the processing queues, and Sinatra/ruby for the application layer.
 
 %h3= I18n.t('developer.parser')
 
-%div{class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
+.media.mb-3.mt-3.d-flex.flex-wrap.flex-column.flex-md-row
   %a{href:"https://rubygems.org/gems/dwc_agent"}
-    %img{class:"mb-3 mr-3", src:"/images/ruby_gem.png", alt:"Ruby gem"}
-  %div{class:"media-body"}
-    %p{class:"mb-3"}
+    %img.mb-3.mr-3{src:"/images/ruby_gem.png", alt:"Ruby gem"}
+  .media-body
+    %p.mb-3
       A stand-alone ruby gem,
-      %a{href:"https://rubygems.org/gems/dwc_agent"} dwc_agent
+      = link_to "dwc_agent", "https://rubygems.org/gems/dwc_agent"
       = surround '(', ')' do
-        %a{href:"https://github.com/bionomia/dwc_agent"} code
+        = link_to "code", "https://github.com/bionomia/dwc_agent"
       may be used to parse people names and additionally score given names for structural similarity. It also includes a command-line executable
       %em dwcagent
       that combines parsing and cleaning then produces JSON as output.
-      %pre{class:"pre-scrollable bg-dark text-white border rounded p-3"}
+      %pre.pre-scrollable.bg-dark.text-white.border.rounded.p-3
         %code
           :preserve
             $ gem install dwc_agent

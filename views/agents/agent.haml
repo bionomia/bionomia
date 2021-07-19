@@ -18,7 +18,7 @@
   .alert.alert-warning{role: "alert"}
     %i.fas.fa-filter
     #{I18n.t('general.filtered_by')}
-    .font-weight-bold.mr-2
+    %span.font-weight-bold.mr-2
       #{h([@filter.values].compact.join(", "))}
     %a.text-danger{href: url("/agent/#{@agent.id}")}
       %i.fas.fa-minus-circle

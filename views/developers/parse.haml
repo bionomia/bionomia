@@ -1,40 +1,41 @@
--content_for :title, I18n.t('developer.parse_names_title')
-
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class:"mr-auto p-2"}
-      %h1{class:"h2"}= I18n.t('developer.title')
+- content_for :title, I18n.t('developer.parse_names_title')
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2
+        = I18n.t('developer.title')
 
 = haml :'partials/developers/tabs', layout:false, locals: { active_tab: locals[:active_tab] }
 
-%h3{class:"mt-4 mb-3"}= I18n.t('developer.parse_names')
+%h3.mt-4.mb-3
+  = I18n.t('developer.parse_names')
 
-%p{class:"mb-4"}
+%p.mb-4
   Split, parse and clean human names into their component parts using GET or POST requests. Input from POST requests are limited to 500 lines. See the
-  %a{href: url("/developers/code")} Ruby gem
+  = link_to "Ruby gem", url("/developers/code")
   used in this service.
 
 %dl
   %dt Base URL
-  %dd{class:"pl-2"} https://api.bionomia.net/parse
+  %dd.pl-2 https://api.bionomia.net/parse
 
   %dt ?names=
-  %dd{class:"pl-2"} human name(s); use \r\n as line breaks, all content escaped for GET requests (required)
+  %dd.pl-2 human name(s); use \r\n as line breaks, all content escaped for GET requests (required)
 
-  %dt{class:"mt-3"} Example GET
-  %dd{class:"pl-2"}
+  %dt.mt-3 Example GET
+  %dd.pl-2
     https://api.bionomia.net/parse?names=Henry+Robert+Nicollon+des+Abbayes%3B+Groom+Q%0D%0AMrs.+John+Errol+Chandos+Aberdeen
 
-  %dt{class:"mt-3"} Example POST
+  %dt.mt-3 Example POST
   %dd
-    %pre{class:"pre-scrollable bg-dark text-white border rounded p-3"}
+    %pre.pre-scrollable.bg-dark.text-white.border.rounded.p-3
       %code
         :preserve
           curl -X POST -d $'names=Henry Robert Nicollon des Abbayes; Groom Q\r\nMrs. John Errol Chandos Aberdeen' https://api.bionomia.net/parse
 
   %dt Response
   %dd
-    %pre{class:"pre-scrollable bg-dark text-white border rounded p-3"}
+    %pre.pre-scrollable.bg-dark.text-white.border.rounded.p-3
       %code
         :preserve
           [

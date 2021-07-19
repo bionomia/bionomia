@@ -1,15 +1,15 @@
--content_for :title, I18n.t('developer.structured_data_title')
-
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class:"mr-auto p-2"}
-      %h1{class:"h2"}= I18n.t('developer.title')
+- content_for :title, I18n.t('developer.structured_data_title')
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2
+        = I18n.t('developer.title')
 
 = haml :'partials/developers/tabs', layout:false, locals: { active_tab: locals[:active_tab] }
 
-%h3{class:"mt-4 mb-3"}= I18n.t('developer.structured_data')
+%h3.mt-4.mb-3= I18n.t('developer.structured_data')
 
-%p{class:"mb-4"}
+%p.mb-4
   Bionomia data are exposed as csv or
   %a{href: "https://json-ld.org/"}
     JSON-LD
@@ -18,61 +18,62 @@
     frictionless data
   packages for every dataset.
 
-%div{class:"ml-3"}
+.ml-3
   %h5 User Data from a Public Profile
   %div
-    %a{href: url("/0000-0001-7618-5230/specimens.csv")} #{url("/0000-0001-7618-5230/specimens.csv")}
+    = link_to url("/0000-0001-7618-5230/specimens.csv"), url("/0000-0001-7618-5230/specimens.csv")
   %div
-    %a{href: url("/0000-0001-7618-5230/specimens.json")} #{url("/0000-0001-7618-5230/specimens.json")}
+    = link_to url("/0000-0001-7618-5230/specimens.json"), url("/0000-0001-7618-5230/specimens.json")
   %p
-    %small{class:"text-muted"}
+    %small.text-muted
       Where
       %em 0000-0001-7618-5230
       is a user's ORCID identifier,
-      %a{href: "https://orcid.org/0000-0001-7618-5230"} https://orcid.org/0000-0001-7618-5230
+      = link_to "https://orcid.org/0000-0001-7618-5230", "https://orcid.org/0000-0001-7618-5230"
 
   %div
-    %a{href: url("/Q1035/specimens.csv")} #{url("/Q1035/specimens.csv")}
+    = link_to url("/Q1035/specimens.csv"), url("/Q1035/specimens.csv")
   %div
-    %a{href: url("/Q1035/specimens.json")} #{url("/Q1035/specimens.json")}
+    = link_to url("/Q1035/specimens.json"), url("/Q1035/specimens.json")
+
   %p
-    %small{class:"text-muted"}
+    %small.text-muted
       Where
       %em Q1035
       is a user's Wikidata Q number,
-      %a{href: "https://www.wikidata.org/wiki/Q1035"} https://www.wikidata.org/wiki/Q1035
+      = link_to "https://www.wikidata.org/wiki/Q1035", "https://www.wikidata.org/wiki/Q1035"
 
   %h5 Content Negotiation for JSON-LD of a User
-  %pre{class:"pre-scrollable bg-dark text-white border rounded p-3"}
+  %pre.pre-scrollable.bg-dark.text-white.border.rounded.p-3
     %code
       :preserve
         curl -LH "Accept: application/ld+json" "#{url("/0000-0001-7618-5230")}"
 
-%div{class:"ml-3"}
+.ml-3
   %h5 Occurrence Record for JSON-LD Using a gbifID
   %div
-    %a{href: url("/occurrence/477976412.json")} #{url("/occurrence/477976412.json")}
+    = link_to url("/occurrence/477976412.json"), url("/occurrence/477976412.json")
   %p
-    %small{class:"text-muted"}
+    %small.text-muted
       Where
       %em /occurrence/477976412
       is that provided by the Global Biodiversity Information Facility (GBIF),
-      %a{href: "https://gbif.org/occurrence/477976412"} https://gbif.org/occurrence/477976412.
+      = link_to "https://gbif.org/occurrence/477976412.", "https://gbif.org/occurrence/477976412"
       This same service is used in two
-      %a{href: url("/integrations")} browser extensions.
+      = link_to "browser extensions.", url("/integrations")
 
   %h5 Content Negotiation for JSON-LD of an Occurrence Record Using a gbifID
-  %pre{class:"pre-scrollable bg-dark text-white border rounded p-3"}
+  %pre.pre-scrollable.bg-dark.text-white.border.rounded.p-3
     %code
       :preserve
         curl -LH "Accept: application/ld+json" "#{url("/occurrence/477976412")}"
 
-%h3{class:"mt-4 mb-3"} Raw Data
+%h3.mt-4.mb-3 Raw Data
 
-%div{class:"ml-3"}
+.ml-3
   %h5 List of Public Profiles
   %div
-    %a{href: url("/data/bionomia-public-profiles.csv")} bionomia-public-profiles.csv
+    = link_to "bionomia-public-profiles.csv", url("/data/bionomia-public-profiles.csv")
   %p
-    %smal{class:"text-muted"}
+    %small.text-muted
       Where the above csv includes a header, "Family, Given, wikidata, ORCID, URL"
