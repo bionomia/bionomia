@@ -1,9 +1,9 @@
-%ul{class: "nav nav-tabs"}
-  %li{class: "nav-item"}
+%ul.nav.nav-tabs
+  %li.nav-item
     %a{class: "nav-link#{locals[:active_tab] == "people" ? " active" : nil}", href: url("/dataset/#{@dataset.datasetKey}")}= I18n.t('dataset.people')
-  %li{class: "nav-item"}
+  %li.nav-item
     %a{class: "nav-link#{locals[:active_tab] == "visualizations" ? " active" : nil}", href: url("/dataset/#{@dataset.datasetKey}/visualizations")}= I18n.t('dataset.visualizations')
-  %li{class: "nav-item"}
+  %li.nav-item
     %a{class: "nav-link#{locals[:active_tab] == "scribes" ? " active" : nil}", href: url("/dataset/#{@dataset.datasetKey}/scribes")}= I18n.t('dataset.scribes')
-  %li{class: "nav-item"}
+  %li.nav-item
     %a{class: "nav-link#{locals[:active_tab] == "agents" ? " active" : nil}", href: url("/dataset/#{@dataset.datasetKey}/agents")}= I18n.t('dataset.agent_strings')

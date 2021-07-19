@@ -1,19 +1,19 @@
-%ul{id: "admin-tabs", class: "nav nav-tabs pl-2"}
-  %li{class: "nav-item"}
+%ul#admin-tabs.nav.nav-tabs.pl-2
+  %li.nav-item
     %a{class: "nav-link#{locals[:active_page] == "overview" ? " active" : nil}", href: url("/admin/user/#{@admin_user.identifier}")}
-      %i{class:"fas fa-user"}
+      %i.fas.fa-user
       = I18n.t('profile.overview')
-  %li{class: "nav-item badge-item"}
+  %li.nav-item.badge-item
     %a{class: "nav-link#{locals[:active_page] == "specimens" ? " active" : nil}", href: url("/admin/user/#{@admin_user.identifier}/specimens")}
-      %i{class:"fas fa-th"}
+      %i.fas.fa-th
       = I18n.t('profile.specimens')
-    %span{id:"specimen-counter", class: "badge-notify badge badge-danger badge-pill"}
-  %li{class: "nav-item badge-item"}
+    %span#specimen-counter.badge-notify.badge.badge-danger.badge-pill
+  %li.nav-item.badge-item
     %a{class: "nav-link#{locals[:active_page] == "helped" ? " active" : nil}", href: url("/admin/user/#{@admin_user.identifier}/helped")}
-      %i{class:"fas fa-hands-helping"}
+      %i.fas.fa-hands-helping
       = I18n.t('profile.people_helped')
-    %span{id:"message-counter", class: "badge-notify badge badge-success badge-pill"}
-  %li{class: "nav-item"}
+    %span#message-counter.badge-notify.badge.badge-success.badge-pill
+  %li.nav-item
     %a{class: "nav-link#{locals[:active_page] == "citations" ? " active" : nil}", href: url("/admin/user/#{@admin_user.identifier}/citations")}
-      %i{class:"fas fa-flask"}
+      %i.fas.fa-flask
       = I18n.t('profile.science_enabled')

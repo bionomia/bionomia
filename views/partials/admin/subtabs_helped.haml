@@ -1,6 +1,6 @@
-%nav{id:"helped-nav", class:"navbar navbar-light navbar-expand overflow-auto alert-warning"}
-  %ul{class:"navbar-nav"}
-    %li{class:"nav-item"}
+%nav#helped-nav.navbar.navbar-light.navbar-expand.overflow-auto.alert-warning
+  %ul.navbar-nav
+    %li.nav-item
       %a{class:"nav-link#{locals[:active_tab] == "helped" ? " active" : nil}", href: url("/admin/user/#{@admin_user.identifier}/helped")}= I18n.t('profile.helped')
-    %li{class:"nav-item"}
+    %li.nav-item
       %a{class:"nav-link#{locals[:active_tab] == "messages" ? " active" : nil}", href: url("/admin/user/#{@admin_user.identifier}/messages")}= I18n.t('profile.thanks_received')

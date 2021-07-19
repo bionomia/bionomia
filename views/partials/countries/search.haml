@@ -1,23 +1,23 @@
-%div{class:"p-2 ml-3"}
-  %form{id:"form-taxon-wrapper", method: "get", action: "/country/#{@country[0]}?action=#{@action}", "accept-charset" => "UTF-8", class: "helpers"}
-    %div{class:"row"}
-      %div{class:"col-12 col-sm-8 p-0"}
-        %div{class: "form-group mb-2"}
-          %input{type: :text, class:"typeahead search-taxon", id:"typeahead-taxon", name: "q", placeholder: "#{I18n.t('taxa.taxon_string')}", value: "#{h(params[:q])}", size:"30", autocomplete:"off"}
-        %div{class:"form-group"}
-          %div{class: "form-check form-check-inline"}
+.p-2.ml-3
+  %form#form-taxon-wrapper.helpers{method: :get, action: "/country/#{@country[0]}?action=#{@action}", "accept-charset": "UTF-8"}
+    .row
+      .col-12.col-sm-8.p-0
+        .form-group.mb-2
+          %input#typeahead-taxon.typeahead.search-taxon{type: :text, name: "q", placeholder: "#{I18n.t('taxa.taxon_string')}", value: "#{h(params[:q])}", size:"30", autocomplete:"off"}
+        .form-group
+          .form-check.form-check-inline
             - checked = (@action == "collected") ? "checked" : nil
-            %input{type: :radio, class:"form-check-input", id:"taxon-collected", name: "action", value: "collected", checked: checked}
-            %label{class:"form-check-label", for:"taxon-collected"}= I18n.t('general.collected').downcase
+            %input#taxon-collected.form-check-input{type: :radio, name: "action", value: "collected", checked: checked}
+            %label.form-check-label{for:"taxon-collected"}= I18n.t('general.collected').downcase
 
-          %div{class: "form-check form-check-inline"}
+          .form-check.form-check-inline
             - checked = (@action == "identified") ? "checked" : nil
-            %input{type: :radio, class:"form-check-input", id:"taxon-identified", name: "action", value: "identified", checked: checked}
-            %label{class:"form-check-label", for:"taxon-identified"}= I18n.t('general.identified').downcase
+            %input#taxon-identified.form-check-input{type: :radio, name: "action", value: "identified", checked: checked}
+            %label.form-check-label{for:"taxon-identified"}= I18n.t('general.identified').downcase
 
-          %div{class: "form-check form-check-inline"}
+          .form-check.form-check-inline
             - checked = @action.nil? ? "checked" : nil
-            %input{type: :radio, class:"form-check-input", id:"taxon-either", name: "action", value: "", checked: checked}
-            %label{class:"form-check-label", for:"taxon-either"}= I18n.t('general.either').downcase
-      %div{class:"col-4 p-0"}
-        %input{type: :submit, class:"btn btn-success medium-margins align-self-start", value:"#{I18n.t('general.search')}"}
+            %input#taxon-either.form-check-input{type: :radio, name: "action", value: "", checked: checked}
+            %label.form-check-label{for:"taxon-either"}= I18n.t('general.either').downcase
+      .col-4.p-0
+        %input.btn.btn-success.medium-margins.align-self-start{type: :submit, value:"#{I18n.t('general.search')}"}

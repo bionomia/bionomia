@@ -1,5 +1,5 @@
-%div{class:"p-2"}
-  %form{id:"form-org-wrapper", method: "get", action: "/agents", "accept-charset" => "UTF-8", class: "form-inline helpers"}
-    %div{class: "form-group w-75"}
-      %input{class:"typeahead search-agent", id:"typeahead-agent", type: :text, name: "q", placeholder: "Daniel H. Janzen", value: "#{params[:q]}", size:"25", autocomplete:"off"}
-    %input{type: :submit, class:"btn btn-success medium-margins", value:"#{I18n.t('general.search')}"}
+.p-2
+  %form#form-org-wrapper.form-inline.helpers{method: :get, action: "/agents", "accept-charset": "UTF-8"}
+    .form-group.w-75
+      %input#typeahead-agent.typeahead.search-agent{type: :text, name: "q", placeholder: "Daniel H. Janzen", value: "#{params[:q]}", size:"25", autocomplete:"off"}
+    %input.btn.btn-success.medium-margins{type: :submit, value:"#{I18n.t('general.search')}"}

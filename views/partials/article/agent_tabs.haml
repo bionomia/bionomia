@@ -1,8 +1,8 @@
-%nav{id:"network-nav", class:"navbar navbar-light navbar-expand bg-light overflow-auto"}
-  %ul{class:"navbar-nav"}
-    %li{class:"nav-item"}
+%nav#network-nav.navbar.navbar-light.navbar-expand.bg-light.overflow-auto
+  %ul.navbar-nav
+    %li.nav-item
       %a{class:"nav-link#{locals[:active_subtab] == "default" ? " active" : nil}", href: url("/article/#{@article.doi}/agents")}= I18n.t('article.alphabetical')
-    %li{class:"nav-item"}
+    %li.nav-item
       %a{class:"nav-link#{locals[:active_subtab] == "counts" ? " active" : nil}", href: url("/article/#{@article.doi}/agents/counts")}= I18n.t('article.counts')
-    %li{class:"nav-item"}
+    %li.nav-item
       %a{class:"nav-link#{locals[:active_subtab] == "unclaimed" ? " active" : nil}", href: url("/article/#{@article.doi}/agents/unclaimed")}= I18n.t('article.unclaimed')

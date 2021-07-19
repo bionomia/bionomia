@@ -1,11 +1,11 @@
-%div{class:"modal fade", id:"bot_claims", tabindex:"-1", role:"dialog", "aria-labelledby":"modal_claims_title", "aria-hidden":"true"}
-  %div{class:"modal-dialog modal-dialog-centered modal-lg", role:"document"}
-    %div{class:"modal-content"}
-      %div{class:"modal-header"}
-        %h4{class:"modal-title", id:"modal_claims_longtitle"} Bionomia Bot
-        %button{type:"button", class:"close", "data-dismiss":"modal", "aria-label":"Close"}
+#bot_claims.modal.fade{tabindex:"-1", role:"dialog", "aria-labelledby":"modal_claims_title", "aria-hidden":"true"}
+  .modal-dialog.modal-dialog-centered.modal-lg{role:"document"}
+    .modal-content
+      .modal-header
+        %h4#modal_claims_longtitle.modal-title Bionomia Bot
+        %button.close{type:"button", "data-dismiss":"modal", "aria-label":"Close"}
           %span{"aria-hidden":"true"} &times;
-      %div{class:"modal-body"}
+      .modal-body
         %p
           Bulk attribute specimens collected and/or identified by the agent
           %strong #{locals[:agent].fullname}
@@ -16,21 +16,21 @@
           Examples: { "institutionCode" : "CAN" } or { "scientificName LIKE ?":"Bolbelasmus %"}
 
         - if !locals[:bulk_error].empty?
-          %div{class:"alert alert-danger tiny-margins", role:"alert"}= locals[:bulk_error]
+          .alert.alert-danger.tiny-margins{role:"alert"}= locals[:bulk_error]
 
-        %form{id:"form-wrapper", method: :post, action: "/admin/user/#{locals[:user].identifier}/candidates/agent/#{locals[:agent].id}/bulk-claim", enctype: "multipart/form-data", "accept-charset": "UTF-8", class: "form"}
-          %div{class:"form-group"}
+        %form#form-wrapper.form{method: :post, action: "/admin/user/#{locals[:user].identifier}/candidates/agent/#{locals[:agent].id}/bulk-claim", enctype: "multipart/form-data", "accept-charset": "UTF-8"}
+          .form-group
             %label{for:"bulk-json"} JSON
             %div
-              %input{type:"text", id:"bulk-json", class:"form-control", name:"conditions"}
+              %input#bulk-json.form-control{type:"text", name:"conditions"}
 
-          %div{class:"form-check"}
-            %input{type:"checkbox", id:"ignore", class:"form-check-input", name:"ignore"}
-            %label{for:"ignore", class:"form-check-label"} Bulk Not Them
+          .form-check
+            %input#ignore.form-check-input{type:"checkbox", name:"ignore"}
+            %label.form-check-label{for:"ignore"} Bulk Not Them
 
-          %div{class:"form-group"}
+          .form-group
             %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
-            %button{type:"submit", class:"btn btn-success mt-3"} Submit
+            %button.btn.btn-success.mt-3{type:"submit"} Submit
 
-      %div{class:"modal-footer"}
-        %button{type:"button", class:"btn btn-secondary", "data-dismiss":"modal"} Close
+      .modal-footer
+        %button.btn.btn-secondary{type:"button", "data-dismiss":"modal"} Close
