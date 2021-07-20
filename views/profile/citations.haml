@@ -35,7 +35,7 @@
           .small
             %span.badge.badge-light.badge-pill.citation-correction
               #{number_with_delimiter(article.user_specimen_count(@user[:id]))}
-            = link_to I18n.t('profile.specimens_used'), url("/profile/citation/#{article.doi}")
+            = link_to I18n.t('profile.specimens_used_num'), url("/profile/citation/#{article.doi}")
 
   - if @pagy.pages > 1
     .y-scroll
