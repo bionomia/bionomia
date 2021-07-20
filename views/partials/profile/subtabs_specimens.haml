@@ -1,14 +1,14 @@
-%nav{id:"specimen-nav", class:"navbar navbar-light navbar-expand bg-light overflow-auto"}
-  %ul{class:"navbar-nav"}
-    %li{class:"nav-item"}
+%nav#specimen-nav.navbar.navbar-light.navbar-expand.bg-light.overflow-auto
+  %ul.navbar-nav
+    %li.nav-item
       %a{class:"nav-link#{locals[:active_tab] == "specimens" ? " active" : nil}", href: url("/profile/specimens")}= I18n.t('profile.claimed')
-    %li{class:"nav-item"}
+    %li.nav-item
       %a{class:"nav-link#{locals[:active_tab] == "candidates" ? " active" : nil}", href: url("/profile/candidates")}= I18n.t('profile.discovered')
-    %li{class:"nav-item"}
+    %li.nav-item
       %a{class:"nav-link#{locals[:active_tab] == "upload" ? " active" : nil}", href: url("/profile/upload")}= I18n.t('profile.bulk_claim')
-    %li{class:"nav-item"}
+    %li.nav-item
       %a{class:"nav-link#{locals[:active_tab] == "ignored" ? " active" : nil}", href: url("/profile/ignored")}= I18n.t('profile.ignored')
-    %li{class: "nav-item"}
+    %li.nav-item
       %a{class: "nav-link#{locals[:active_tab] == "co_collectors" ? " active" : nil}", href: url("/profile/co-collectors")}= I18n.t('profile.co_collectors')
-    %li{class: "nav-item"}
+    %li.nav-item
       %a{class: "nav-link#{locals[:active_tab] == "support" ? " active" : nil}", href: url("/profile/support")}= I18n.t('profile.help_received')
