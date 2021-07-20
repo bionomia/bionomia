@@ -1,11 +1,11 @@
-%div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-  %div{class:"mr-auto p-2"}
+.jumbotron.jumbotron-fluid.d-flex.flex-wrap
+  .mr-auto.p-2
     - if @taxon.has_image?
-      %div{class:"media"}
-        %img{src: "/images/taxa/#{@taxon.image.file_name}", alt:"#{@taxon.family}", class:"mr-4"}
-        %div{class:"media-body"}
-          %h1{class:"h2 mt-0"} #{@taxon.family}
-          %p{class: "lead text-muted"}
+      .media
+        %img.mr-4{src: "/images/taxa/#{@taxon.image.file_name}", alt:"#{@taxon.family}"}
+        .media-body
+          %h1.h2.mt-0 #{@taxon.family}
+          %p.lead.text-muted
             - if @pagy && @pagy.count > 0
               #{number_to_human(@pagy.count, units: :"taxa.number_#{@action}", delimiter: ",", precision: 0)}
             - else
@@ -13,15 +13,15 @@
                 = I18n.t('taxa.none_collected', taxon: h(@taxon.family))
               - else
                 = I18n.t('taxa.none_identified', taxon: h(@taxon.family))
-      %p{class:"small text-muted mb-0 mt-2"}
+      %p.small.text-muted.mb-0.mt-2
         - if @taxon.image.credit
           #{@taxon.image.credit}
           %br
         - if @taxon.image.licenseURL
-          %a{href: "#{@taxon.image.licenseURL}"}= @taxon.image.licenseURL
+          = link_to @taxon.image.licenseURL, @taxon.image.licenseURL
     - else
-      %h1{class:"h2 mt-0"} #{@taxon.family}
-      %p{class: "lead text-muted"}
+      %h1.h2.mt-0 #{@taxon.family}
+      %p.lead.text-muted
         - if @pagy && @pagy.count > 0
           #{number_to_human(@pagy.count, units: :"taxa.number_#{@action}", delimiter: ",", precision: 0)}
         - else

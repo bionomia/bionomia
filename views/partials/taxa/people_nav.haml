@@ -1,10 +1,10 @@
-%nav{id:"network-nav", class:"navbar navbar-light navbar-expand bg-light overflow-auto"}
-  %ul{class:"navbar-nav mr-auto"}
-    %li{class:"nav-item"}
+%nav#network-nav.navbar.navbar-light.navbar-expand.bg-light.overflow-auto
+  %ul.navbar-nav.mr-auto
+    %li.nav-item
       %a{class:"nav-link#{locals[:active_subtab] == "collected" ? " active" : nil}", href: url("/taxon/#{@taxon.family}?action=collected")}= I18n.t('taxa.collected')
-    %li{class:"nav-item"}
+    %li.nav-item
       %a{class:"nav-link#{locals[:active_subtab] == "identified" ? " active" : nil}", href: url("/taxon/#{@taxon.family}?action=identified")}= I18n.t('taxa.identified')
-  %ul{class:"navbar-nav"}
-    %li{class:"nav-item"}
-      %i{class:"fas fa-file-csv text-dark h5 m-0 p-1"}
-      %a{href: url("/taxon/#{@taxon.family}/people.csv")}= CSV
+  %ul.navbar-nav
+    %li.nav-item
+      %i.fas.fa-file-csv.text-dark.h5.m-0.p-1
+      = link_to "CSV", url("/taxon/#{@taxon.family}/people.csv")

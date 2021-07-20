@@ -1,6 +1,6 @@
-%nav{id:"network-nav", class:"navbar navbar-light navbar-expand bg-light overflow-auto"}
-  %ul{class:"navbar-nav mr-auto"}
-    %li{class:"nav-item"}
+%nav#network-nav.navbar.navbar-light.navbar-expand.bg-light.overflow-auto
+  %ul.navbar-nav.mr-auto
+    %li.nav-item
       %a{class:"nav-link#{locals[:active_subtab] == "collected" ? " active" : nil}", href: url("/taxon/#{@taxon.family}/visualizations")}= I18n.t('taxa.collected')
-    %li{class:"nav-item"}
+    %li.nav-item
       %a{class:"nav-link#{locals[:active_subtab] == "identified" ? " active" : nil}", href: url("/taxon/#{@taxon.family}/visualizations?action=identified")}= I18n.t('taxa.identified')

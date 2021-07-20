@@ -1,8 +1,8 @@
-%div{class:"table-responsive-lg"}
-  %table{class:"table table-hover table-sm"}
-    %thead{class: "thead-light"}
+.table-responsive-lg
+  %table.table.table-hover.table-sm
+    %thead.thead-light
       %tr
-        %th{scope: "col", class:"selector"}
+        %th.selector{scope: "col"}
           = haml :'partials/bulk_selector_top', layout: false, locals: { klass: "restore-ignored" }
         %th{scope: "col"}= I18n.t('specimen.scientific_name')
         %th{scope: "col"}= I18n.t('specimen.collected_by')
@@ -22,14 +22,14 @@
       - @results.each do |uo|
         - o = uo.occurrence
         %tr
-          %td{class: "selector"}
+          %td.selector
             = haml :'partials/single_selector_preselected', layout: false, locals: { occurrence: uo, klass: "restore-ignored", user_id: user_id }
           %td
             - scientific_name = o.scientificName.nil? ? "#{I18n.t('specimen.not_recorded')}" : o.scientificName
             %a{href: gbif_occurrence_url(o.id), target:"_blank"}
               #{h(scientific_name)}
             - if o.hasImage?
-              %i{class:"fas fa-image ml-1", "data-toggle":"popover", "data-gbifid":"#{o.id}"}
+              %i.fas.fa-image.ml-1{"data-toggle":"popover", "data-gbifid":"#{o.id}"}
           %td #{h(o.recordedBy)}
           %td #{h(o.identifiedBy)}
           %td #{h(o.eventDate || o.year)}
@@ -42,12 +42,12 @@
             - if uo.claimant.is_bot?
               #{uo.claimant.fullname}
             - else
-              %a{href: url("/#{uo.claimant.orcid}")} #{uo.claimant.fullname_reverse}
+              = link_to uo.claimant.fullname_reverse, url("/#{uo.claimant.orcid}")
 
     - if @total > 25
-      %tfoot{class: "thead-light"}
+      %tfoot.thead-light
         %tr
-          %th{scope: "col", class:"selector"}
+          %th.selector{scope: "col"}
             = haml :'partials/bulk_selector_bottom', layout: false, locals: { klass: "restore-ignored" }
           %th{scope: "col"}= I18n.t('specimen.scientific_name')
           %th{scope: "col"}= I18n.t('specimen.collected_by')
@@ -64,5 +64,5 @@
   = haml :'partials/page_size', layout: false
 
 - if @pagy.pages > 1
-  %div{style:"overflow-y:scroll"}
+  .y-scroll
     = pagy_bootstrap_nav(@pagy)
