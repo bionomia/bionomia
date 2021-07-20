@@ -463,7 +463,7 @@ ja:
     collected_from: Collected From
     dates_identified_collected: Dates Collected and Identified
     resume: For Your Resume
-    specimens_used: Specimens Used In
+    specimens_used: specimens used
     public_availability: Public Availability
     public_profile: Public Profile
     make_citable: Make Your Data Citable
@@ -521,7 +521,6 @@ ja:
     zenodo_html: "Your profile is linked to %{zenodo} and your claims are versioned and archived."
     language: Preferred Language
     language_explanation: Choose your preferred language
-    specimens_used: specimens used
     updated: Your profile was updated.
     thanks: Thanks
     attributed: attributed
