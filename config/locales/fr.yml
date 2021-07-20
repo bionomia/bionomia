@@ -489,7 +489,7 @@ fr:
     collected_from: Collectés à Partir de
     dates_identified_collected: Dates collectées et identifiées
     resume: Pour votre CV
-    specimens_used: Spécimens Utilisés Dans
+    specimens_used: specimens used
     public_availability: Disponibilité Publique
     public_profile: Profil Public
     make_citable: Rendez vos Données Exploitables
@@ -551,7 +551,6 @@ fr:
     zenodo_html: "Votre profil est lié à %{zenodo} et vos données sont versionnées et archivées."
     language: Langue préférée
     language_explanation: Choisissez votre langue préférée
-    specimens_used: specimens used
     updated: Your profile was updated.
     thanks: Thanks
     attributed: attributed
