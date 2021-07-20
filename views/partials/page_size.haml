@@ -1,7 +1,7 @@
-%div{class: "btn-group mb-1"}
-  %button{class:"btn btn-light btn-sm dropdown-toggle", type:"button", "data-toggle":"dropdown", "aria-haspopup":"true", "aria-expanded":"false"}= I18n.t('general.per_page')
-  %div{class:"dropdown-menu", "aria-labelledby":"dropdownMenuButton"}
+.btn-group.mb-1
+  %button.btn.btn-light.btn-sm.dropdown-toggle{type:"button", "data-toggle":"dropdown", "aria-haspopup":"true", "aria-expanded":"false"}= I18n.t('general.per_page')
+  .dropdown-menu{"aria-labelledby":"dropdownMenuButton"}
     - path = Rack::Utils.build_nested_query(request.params.except("per"))
     - [25, 50, 100, 250].each do |i|
       - per = (path == "") ? "per=#{i}" : "&per=#{i}"
-      %a{href: "#{request.path}?#{path}#{per}", class: "dropdown-item"} #{i}
+      %a.dropdown-item{href: "#{request.path}?#{path}#{per}"} #{i}

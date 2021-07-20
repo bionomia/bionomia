@@ -1,5 +1,5 @@
-%div{class: "alert alert-info tiny-margins", role: "alert"}
+.alert.alert-info.tiny-margins{role: "alert"}
   = I18n.t('general.download_alert', num_records: number_with_delimiter(Settings.helping_download_limit))
-%div{class:"row"}
-  %div{class:"col-sm-12 col-lg-10 col-xl-8"}
-    %img{src: "/images/candidates-instructions.png", alt: "Instructions for offline claims", class:"rounded img-fluid"}
+.row
+  .col-sm-12.col-lg-10.col-xl-8
+    %img.rounded.img-fluid{src: "/images/candidates-instructions.png", alt: "Instructions for offline claims"}

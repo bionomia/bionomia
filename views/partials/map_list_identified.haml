@@ -1,17 +1,17 @@
 %h4= I18n.t('user.identified_from')
-%ul{class: "nav nav-pills custom-pills mt-3 mb-3", role:"tablist"}
-  %li{class: "nav-item"}
-    %a{class: "nav-link active", "data-toggle":"tab", href: "#map-identified-wrapper"}= I18n.t('user.map')
-  %li{class: "nav-item"}
-    %a{class: "nav-link", "data-toggle":"tab", href: "#list-identified"}= I18n.t('user.list')
+%ul.nav.nav-pills.custom-pills.mt-3.mb-3{role:"tablist"}
+  %li.nav-item
+    %a.nav-link.active{"data-toggle":"tab", href: "#map-identified-wrapper"}= I18n.t('user.map')
+  %li.nav-item
+    %a.nav-link{"data-toggle":"tab", href: "#list-identified"}= I18n.t('user.list')
 
-%div{class:"tab-content"}
-  %div{class:"tab-pane fade show active", id:"map-identified-wrapper", role:"tabpanel", style:"min-height:200px;"}
-    %div{id:"map-identified", style:"width:100%;"}
-  %div{class:"tab-pane fade", id:"list-identified", role:"tabpanel"}
-    %ul{class: "list-group mt-3"}
+.tab-content
+  #map-identified-wrapper.tab-pane.fade.show.active{role:"tabpanel", style:"min-height:200px;"}
+    #map-identified{style:"width:100%;"}
+  #list-identified.tab-pane.fade{role:"tabpanel"}
+    %ul.list-group.mt-3
       - identified = @stats[:countries][:identified].sort_by{|k, v| -v}.map{|a| [ a[0], country_name(a[0]), a[1] ] }
       - identified.each do |country|
-        %li{class: "list-group-item d-flex justify-content-between align-items-center"}
+        %li.list-group-item.d-flex.justify-content-between.align-items-center
           %a{href: "#{locals[:path]}/specimens?action=identified&country_code=#{country[0]}"} #{country[1]}
-          %span{class: "badge badge-light badge-pill"} #{number_with_delimiter(country[2])}
+          %span.badge.badge-light.badge-pill #{number_with_delimiter(country[2])}

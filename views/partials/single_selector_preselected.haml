@@ -1,5 +1,5 @@
 - disabled = (locals[:user_id] && locals[:user_id] == locals[:occurrence].created_by) ? "disabled" : false
-%div{class:"btn-group btn-group-toggle", "data-toggle":"buttons"}
+.btn-group.btn-group-toggle{"data-toggle":"buttons"}
   %label{class:"btn btn-choice btn-light #{disabled} #{active_class(locals[:occurrence].action, "recorded")}"}
     %input{type:"radio", class:"action-radio #{locals[:klass]}", name:"selection-#{locals[:occurrence].user_occurrence_id}", "data-occurrence-id":"#{locals[:occurrence].user_occurrence_id}", "data-action": "recorded", autocomplete:"off", checked: radio_checked(locals[:occurrence].action, "recorded"), disabled: disabled}
       %img{src:"/images/net-unselected.png", alt:"#{I18n.t('general.collected')}", title:"#{I18n.t('general.collected')}", width:18}
