@@ -671,7 +671,6 @@ ar:
     zenodo_html: "Your profile is linked to %{zenodo} and your claims are versioned and archived."
     language: Preferred Language
     language_explanation: Choose your preferred language
-    specimens_used_num: specimens used
     updated: Your profile was updated.
     thanks: Thanks
     attributed: attributed
