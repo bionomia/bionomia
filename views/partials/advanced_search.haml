@@ -1,20 +1,20 @@
-%div{class: "alert alert-info tiny-margins row", role: "alert"}
-  %div{class: "col col-12 col-md-8 p-0"}
-  %div{class:"col col-12 col-md-4 p-0 text-md-right"}
+.alert.alert-info.tiny-margins.row{role: "alert"}
+  .col.col-12.col-md-8.p-0
+  .col.col-12.col-md-4.p-0.text-md-right
     %a{href: url("#{locals[:dest]}")}
-      %i{class:"fas fa-search-minus"}
+      %i.fas.fa-search-minus
       = I18n.t('help.close')
 
-%div{class:"mt-3"}
+.mt-3
   %h4= I18n.t('help.advanced_search_title')
 
-  %form{method: :post, action: "#{locals[:url]}/advanced-search", "accept-charset" => "UTF-8"}
+  %form{method: :post, action: "#{locals[:url]}/advanced-search", "accept-charset": "UTF-8"}
 
-    %div{class: "form-group"}
-      %label{for: "kingdom", class:"font-weight-bold"}= I18n.t("help.kingdom_string")
-      %div{class:"col-8 col-md-4 pl-0"}
+    .form-group
+      %label.font-weight-bold{for: "kingdom"}= I18n.t("help.kingdom_string")
+      .col-8.col-md-4.pl-0
         - if @kingdom.nil?
-          %select{class:"form-control", id:"kingdom", name:"kingdom"}
+          %select#kingdom.form-control{name:"kingdom"}
             %option
             - Taxon::KINGDOMS.each do |kingdom|
               %option #{kingdom}
@@ -22,67 +22,67 @@
         - else
           - q = params.except("id", "authenticity_token", "agent", "dataset", "taxon", "kingdom").to_query
           %span
-            %a{href: url("#{locals[:url]}/advanced-search?#{q}"), class:"text-danger"}
-              %i{class:"fas fa-minus-circle"}
+            %a.text-danger{href: url("#{locals[:url]}/advanced-search?#{q}")}
+              %i.fas.fa-minus-circle
               = I18n.t('general.remove')
           %span
             #{@kingdom}
           %input{type: :hidden, name: "kingdom", value: params[:kingdom]}
 
-    %div{class: "form-group"}
-      %label{for: "typeahead-taxon", class:"font-weight-bold"}= I18n.t('help.taxon_string')
-      %div{class:"col-12 col-md-8 pl-0"}
+    .form-group
+      %label.font-weight-bold{for: "typeahead-taxon"}= I18n.t('help.taxon_string')
+      .col-12.col-md-8.pl-0
         - if @taxon.nil?
-          %input{id: "typeahead-taxon", type: :text, name: "taxon", value: "#{params[:taxon]}", class:"typeahead", autocomplete:"off"}
+          %input#typeahead-taxon.typeahead{type: :text, name: "taxon", value: "#{params[:taxon]}", autocomplete:"off"}
         - else
           - q = params.except("id", "authenticity_token", "agent", "dataset", "taxon", "taxon_id").to_query
           %span
             %a{href: url("#{locals[:url]}/advanced-search?#{q}"), class:"text-danger"}
-              %i{class:"fas fa-minus-circle"}
+              %i.fas.fa-minus-circle
               = I18n.t('general.remove')
           %span
             #{@taxon.family}
           %input{type: :hidden, name: "taxon_id", value: params[:taxon_id]}
 
-    %div{class: "form-group"}
-      %label{for: "typeahead-dataset", class:"font-weight-bold"}= I18n.t("help.dataset")
-      %div{class:"col-12 col-md-8 pl-0"}
+    .form-group
+      %label.font-weight-bold{for: "typeahead-dataset"}= I18n.t("help.dataset")
+      .col-12.col-md-8.pl-0
         - if @dataset.nil?
-          %input{id: "typeahead-dataset", type: :text, name: "dataset", value: "#{params[:dataset]}", class:"typeahead", autocomplete:"off"}
+          %input#typeahead-dataset.typeahead{type: :text, name: "dataset", value: "#{params[:dataset]}", autocomplete:"off"}
         - else
           - q = params.except("id", "authenticity_token", "agent", "dataset", "taxon", "datasetKey").to_query
           %span
-            %a{href: url("#{locals[:url]}/advanced-search?#{q}"), class:"text-danger"}
-              %i{class:"fas fa-minus-circle"}
+            %a.text-danger{href: url("#{locals[:url]}/advanced-search?#{q}")}
+              %i.fas.fa-minus-circle
               = I18n.t('general.remove')
           %span
             #{@dataset.title}
           %input{type: :hidden, name: "datasetKey", value: params[:datasetKey]}
 
-    %div{class: "form-group"}
-      %label{for: "typeahead-agent", class:"font-weight-bold"}= I18n.t('help.agent_string')
-      %div{class:"col-12 col-md-8 pl-0"}
+    .form-group
+      %label.font-weight-bold{for: "typeahead-agent"}= I18n.t('help.agent_string')
+      .col-12.col-md-8.pl-0
         - if @agent.nil?
-          %input{id: "typeahead-agent", type: :text, name: "agent", value: "#{params[:agent]}", class:"typeahead", autocomplete:"off"}
+          %input#typeahead-agent.typeahead{type: :text, name: "agent", value: "#{params[:agent]}", autocomplete:"off"}
         - else
           - q = params.except("id", "authenticity_token", "agent", "dataset", "taxon", "agent_id").to_query
           %span
             %a{href: url("#{locals[:url]}/advanced-search?#{q}"), class:"text-danger"}
-              %i{class:"fas fa-minus-circle"}
+              %i.fas.fa-minus-circle
               = I18n.t('general.remove')
           %span
             #{@agent.fullname_reverse}
           %input{type: :hidden, name: "agent_id", value: params[:agent_id]}
 
     %input{type:"hidden", name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
-    %button{type:"submit", class:"btn btn-success"}= I18n.t('general.search')
+    %button.btn.btn-success{type:"submit"}= I18n.t('general.search')
 
     - if @agent || @dataset || @taxon || @kingdom
       - q = params.except("id", "authenticity_token", "agent", "dataset", "taxon").to_query
-      %a{href: url("#{locals[:dest]}?#{q}"), class:"btn btn-info"}= I18n.t('general.apply')
+      %a.btn.btn-info{href: url("#{locals[:dest]}?#{q}")}= I18n.t('general.apply')
 
 - if params[:dataset] && params[:dataset].size > 0 && !@dataset_results.empty? && params[:agent] && params[:agent].size > 0 && !@agent_results.empty? && params[:taxon] && params[:taxon].size > 0 && !@taxon_results.empty?
-  %p{class:"mt-3"}
+  %p.mt-3
     %a{href: "#datasets"}
       = I18n.t('help.datasets')
     |
@@ -94,82 +94,81 @@
 
 - if params[:dataset] && params[:dataset].size > 0 && !@dataset_results.empty?
   %a{name: "datasets"}
-  %div{class: "alert alert-info tiny-margins", role: "alert"}
+  .alert.alert-info.tiny-margins{role: "alert"}
     Search results for
     = succeed "." do
-      %span{class: "font-weight-bold"} #{h(params[:dataset])}
+      %span.font-weight-bold #{h(params[:dataset])}
     Click dataset card below to add a filter.
 
   - @dataset_results.in_groups_of(3).each do |group|
-    %div{class: "card-deck"}
+    .card-deck
       - group.each do |d|
         - if d.nil?
-          %div{class:"card border-0"}
+          .card.border-0
         - else
           - dataset = Dataset.find(d[:id].to_i) rescue nil
           - if !dataset.nil?
-            %div{class: "card card-profile m-3"}
+            .card.card-profile.m-3
               - if dataset.image_url
-                %div{class: "card-header d-flex"}
+                .card-header.d-flex
                   %div
-                    %img{src:"#{organization_image(dataset, 'medium')}", alt:"#{dataset.title}", class:"mr-2 rounded"}
-                  %div{class:"flex-grow-1"}
+                    %img.mr-2.rounded{src:"#{organization_image(dataset, 'medium')}", alt:"#{dataset.title}"}
+                  .flex-grow-1
                     %h5
-                      %a{href: url("#{locals[:url]}/advanced-search?datasetKey=#{dataset.datasetKey}&agent_id=#{params[:agent_id]}&kingdom=#{params[:kingdom]}&taxon_id=#{params[:taxon_id]}")} #{dataset.title}
-                    %p{class:"text-muted"}
+                      = link_to dataset.title, url("#{locals[:url]}/advanced-search?datasetKey=#{dataset.datasetKey}&agent_id=#{params[:agent_id]}&kingdom=#{params[:kingdom]}&taxon_id=#{params[:taxon_id]}")
+                    %p.text-muted
               - else
-                %div{class: "card-header"}
+                .card-header
                   %h5
-                    %a{href: url("#{locals[:url]}/advanced-search?datasetKey=#{dataset.datasetKey}&agent_id=#{params[:agent_id]}&kingdom=#{params[:kingdom]}&taxon_id=#{params[:taxon_id]}")} #{dataset.title}
-                  %p{class:"text-muted"}
-              %div{class: "card-body"}
-
-              %div{class: "card-footer"}
-                %div{class: "col small text-left text-muted"}
-                %div{class: "col small text-right text-muted"}
+                    = link_to dataset.title, url("#{locals[:url]}/advanced-search?datasetKey=#{dataset.datasetKey}&agent_id=#{params[:agent_id]}&kingdom=#{params[:kingdom]}&taxon_id=#{params[:taxon_id]}")
+                  %p.text-muted
+              .card-body
+              .card-footer
+                .col.small.text-left.text-muted
+                .col.small.text-right.text-muted
                   %a{href: "#{dataset.license}"}
                     %img{src:"#{dataset.license_icon("small")}"}
 
 - elsif params[:dataset] && params[:dataset].size > 0 && @dataset_results.empty?
-  %div{class: "alert alert-warning tiny-margins", role: "alert"}
+  .alert.alert-warning.tiny-margins{role: "alert"}
     = I18n.t('dataset.none_found', searched: h(params[:dataset]))
 
 - if @taxon_results && !@taxon_results.empty?
   %a{name: "taxa"}
-  %div{class: "alert alert-info tiny-margins", role: "alert"}
+  .alert.alert-info.tiny-margins{role: "alert"}
     Search results for
     = succeed "." do
-      %span{class: "font-weight-bold"} #{h(params[:taxon])}
+      %span.font-weight-bold #{h(params[:taxon])}
     Click Family below to add a filter.
 
-  %div{class: "row"}
+  .row
     - @taxon_results.in_groups_of(25, false).each do |group|
-      %div{class: "col-12 col-md-3 mb-3"}
-        %ul{class: "list-unstyled m-2"}
+      .col-12.col-md-3.mb-3
+        %ul.list-unstyled.m-2
           - group.each do |o|
             %li
-              %a{href: url("#{locals[:url]}/advanced-search?datasetKey=#{params[:datasetKey]}&agent_id=#{params[:agent_id]}&kingdom=#{params[:kingdom]}&taxon_id=#{o[:id]}")} #{o[:name]}
+              = link_to o[:name], url("#{locals[:url]}/advanced-search?datasetKey=#{params[:datasetKey]}&agent_id=#{params[:agent_id]}&kingdom=#{params[:kingdom]}&taxon_id=#{o[:id]}")
 
 - elsif params[:taxon] && params[:taxon].size > 0 && @taxon_results.empty?
-  %div{class: "alert alert-warning tiny-margins", role: "alert"}
+  .alert.alert-warning.tiny-margins{role: "alert"}
     = I18n.t('taxa.none_found', searched: h(params[:taxon]))
 
 - if @agent_results && !@agent_results.empty?
   %a{name: "agents"}
-  %div{class: "alert alert-info tiny-margins", role: "alert"}
+  .alert.alert-info.tiny-margins{role: "alert"}
     Search results for
     = succeed "." do
-      %span{class: "font-weight-bold"} #{h(params[:agent])}
+      %span.font-weight-bold #{h(params[:agent])}
     Click agent string below to add a search.
 
-  %div{class: "row"}
+  .row
     - @agent_results.in_groups_of(25, false).each do |group|
-      %div{class: "col-12 col-md-3 mb-3"}
-        %ul{class: "list-unstyled m-2"}
+      .col-12.col-md-3.mb-3
+        %ul.list-unstyled.m-2
           - group.each do |o|
             %li
-              %a{href: url("#{locals[:url]}/advanced-search?datasetKey=#{params[:datasetKey]}&agent_id=#{o[:id]}&kingdom=#{params[:kingdom]}&taxon_id=#{params[:taxon_id]}")} #{o[:fullname_reverse]}
+              = link_to o[:fullname_reverse], url("#{locals[:url]}/advanced-search?datasetKey=#{params[:datasetKey]}&agent_id=#{o[:id]}&kingdom=#{params[:kingdom]}&taxon_id=#{params[:taxon_id]}")
 
 - elsif params[:agent] && params[:agent].size > 0 && @agent_results.empty?
-  %div{class: "alert alert-warning tiny-margins", role: "alert"}
+  .alert.alert-warning.tiny-margins{role: "alert"}
     = I18n.t('agent.search_none', searched: h(params[:agent]))
