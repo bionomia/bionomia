@@ -1,7 +1,7 @@
-%div{class: "alert alert-warning"}
-  %i{class:"fas fa-lock"}
+.alert.alert-warning
+  %i.fas.fa-lock
   = I18n.t('user.private')
   - if @stats
-    %div{class:"mt-2"}
-      %ul{class:"list-unstyled"}
+    .mt-2
+      %ul.list-unstyled
         = haml :'partials/user_stats', layout: false

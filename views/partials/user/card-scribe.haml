@@ -1,14 +1,14 @@
-%div{class: "card card-profile my-3"}
+.card.card-profile.my-3
   - if locals[:user].image_url
-    %div{class: "card-header d-flex"}
+    .card-header.d-flex
       %div
-        %img{src:"#{profile_image(locals[:user], 'medium')}", alt:"#{locals[:user].fullname}", class:"card-img-profile mr-2", width:48, height:48}
-      %div{class:"flex-grow-1"}
+        %img.card-img-profile.mr-2{src:"#{profile_image(locals[:user], 'medium')}", alt:"#{locals[:user].fullname}", width:48, height:48}
+      .flex-grow-1
         %h5
           // Do not use url method here becase caching breaks language-based subdomains
-          %a{href: "/#{locals[:user].identifier}"} #{locals[:user].fullname_reverse}
+          = link_to locals[:user].fullname_reverse, "/#{locals[:user].identifier}"
         - if locals[:user].country
-          %p{class:"small text-muted mt-0 mb-0"}
+          %p.small.text-muted.mt-0.mb-0
             - country_codes = locals[:user].country_code.split("|") rescue []
             - countries = locals[:user].country.split("|") rescue []
             - countries.each_with_index do |v,i|
@@ -18,12 +18,12 @@
                 - else
                   #{v}
   - else
-    %div{class: "card-header"}
+    .card-header
       %h5
         // Do not use url method here becase caching breaks language-based subdomains
-        %a{href: "/#{locals[:user].identifier}"} #{locals[:user].fullname_reverse}
+        = link_to locals[:user].fullname_reverse, "/#{locals[:user].identifier}"
       - if locals[:user].country
-        %p{class:"small text-muted mt-0 mb-0"}
+        %p.small.text-muted.mt-0.mb-0
           - country_codes = locals[:user].country_code.split("|") rescue []
           - countries = locals[:user].country.split("|") rescue []
           - countries.each_with_index do |v,i|
@@ -33,13 +33,12 @@
               - else
                 #{v}
 
-  %div{class: "card-body"}
-
-  %div{class: "card-footer"}
-    %div{class: "small text-muted row"}
-      %div{class:"col-12 col-md-6"}
-        %span{class:"badge badge-light"} #{number_with_delimiter(locals[:stats][:attributions])}
+  .card-body
+  .card-footer
+    .small.text-muted.row
+      .col-12.col-md-6
+        %span.badge.badge-light #{number_with_delimiter(locals[:stats][:attributions])}
         #{I18n.t('card.attributed', count: locals[:stats][:attributions])}
-      %div{class:"col-12 col-md-6 text-md-left text-lg-right"}
-        %span{class:"badge badge-light"} #{number_with_delimiter(locals[:stats][:people])}
+      .col-12.col-md-6.text-md-left.text-lg-right
+        %span.badge.badge-light #{number_with_delimiter(locals[:stats][:people])}
         #{I18n.t('card.helped', count: locals[:stats][:people])}

@@ -1,16 +1,16 @@
-%div{class: "card card-profile my-3"}
+.card.card-profile.my-3
   - if locals[:user].image_url
-    %div{class: "card-header d-flex"}
+    .card-header.d-flex
       %div
-        %img{src:"#{profile_image(locals[:user], 'medium')}", alt:"#{locals[:user].fullname}", class:"card-img-profile mr-2", width:48, height:48}
-      %div{class:"flex-grow-1"}
+        %img.card-img-profile.mr-2{src:"#{profile_image(locals[:user], 'medium')}", alt:"#{locals[:user].fullname}", width:48, height:48}
+      .flex-grow-1
         %h5
           // Do not use url method here because caching breaks language-based subdomains
-          %a{href: "#{locals[:path]}/#{locals[:user].identifier}"} #{locals[:user].fullname_reverse}
+          = link_to locals[:user].fullname_reverse, "#{locals[:path]}/#{locals[:user].identifier}"
         - if locals[:user].wikidata
-          %p{class:"small text-muted mt-0 mb-0"}= format_lifespan(locals[:user])
+          %p.small.text-muted.mt-0.mb-0= format_lifespan(locals[:user])
         - if locals[:user].country
-          %p{class:"small text-muted mt-0 mb-0"}
+          %p.small.text-muted.mt-0.mb-0
             - country_codes = locals[:user].country_code.split("|") rescue []
             - countries = locals[:user].country.split("|") rescue []
             - countries.each_with_index do |v,i|
@@ -20,14 +20,14 @@
                 - else
                   #{v}
   - else
-    %div{class: "card-header"}
+    .card-header
       %h5
         // Do not use url method here because caching breaks language-based subdomains
-        %a{href: "#{locals[:path]}/#{locals[:user].identifier}"} #{locals[:user].fullname_reverse}
+        = link_to locals[:user].fullname_reverse, "#{locals[:path]}/#{locals[:user].identifier}"
       - if locals[:user].wikidata
-        %p{class:"small text-muted mt-0 mb-0"}= format_lifespan(locals[:user])
+        %p.small.text-muted.mt-0.mb-0= format_lifespan(locals[:user])
       - if locals[:user].country
-        %p{class:"small text-muted mt-0 mb-0"}
+        %p.small.text-muted.mt-0.mb-0
           - country_codes = locals[:user].country_code.split("|") rescue []
           - countries = locals[:user].country.split("|") rescue []
           - countries.each_with_index do |v,i|
@@ -37,16 +37,15 @@
               - else
                 #{v}
 
-  %div{class: "card-body"}
-
-  %div{class: "card-footer d-flex"}
+  .card-body
+  .card-footer.d-flex
     - if !locals[:user].is_public?
-      %div{class: "small text-right text-muted mr-2"}
-        %i{class:"fas fa-lock"}
-    %div{class: "small text-left text-muted mr-2"}
+      .small.text-right.text-muted.mr-2
+        %i.fas.fa-lock
+    .small.text-left.text-muted.mr-2
       - count = locals[:user].all_occurrences_count
-      %span{class:"badge badge-light"} #{number_with_delimiter(count)}
+      %span.badge.badge-light #{number_with_delimiter(count)}
       #{I18n.t('card.claimed', count: count)}
-    %div{class: "flex-fill"}
-    %div{class:"progress progress-border flex-fill ml-auto align-self-end"}
-      %div{id:"progress-bar_#{locals[:user].identifier}", class:"progress-bar bg-info", role:"progressbar", style:"width: 0%;", "aria-valuenow":"0", "aria-valuemin":"0", "aria-valuemax":"100"}
+    .flex-fill
+    .progress.progress-border.flex-fill.ml-auto.align-self-end
+      .progress-bar.bg-info{id:"progress-bar_#{locals[:user].identifier}", role:"progressbar", style:"width: 0%;", "aria-valuenow":"0", "aria-valuemin":"0", "aria-valuemax":"100"}

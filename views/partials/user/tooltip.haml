@@ -1,15 +1,15 @@
-%div{class: "card", "data-identifier": "#{locals[:user].identifier}"}
+.card{"data-identifier": "#{locals[:user].identifier}"}
   - if locals[:user].image_url
-    %div{class: "card-header d-flex"}
+    .card-header.d-flex
       %div
-        %img{src:"#{profile_image(locals[:user], 'medium')}", alt:"#{locals[:user].fullname}", class:"card-img-profile mr-2", width:48, height:48}
-      %div{class:"flex-grow-1"}
-        %h5{class:"text-nowrap"}
+        %img.card-img-profile.mr-2{src:"#{profile_image(locals[:user], 'medium')}", alt:"#{locals[:user].fullname}", width:48, height:48}
+      .flex-grow-1
+        %h5.text-nowrap
           #{locals[:user].fullname_reverse}
         - if locals[:user].wikidata
-          %p{class:"text-muted mt-0 mb-0 text-nowrap"}= format_lifespan(locals[:user])
+          %p.text-muted.mt-0.mb-0.text-nowrap= format_lifespan(locals[:user])
         - if locals[:user].country
-          %p{class:"text-muted mt-0 mb-0"}
+          %p.text-muted.mt-0.mb-0
             - country_codes = locals[:user].country_code.split("|") rescue []
             - countries = locals[:user].country.split("|") rescue []
             - countries.each_with_index do |v,i|
@@ -19,13 +19,13 @@
                 - else
                   #{v}
   - else
-    %div{class: "card-header"}
-      %h5{class:"text-nowrap"}
+    .card-header
+      %h5.text-nowrap
         #{locals[:user].fullname_reverse}
       - if locals[:user].wikidata
-        %p{class:"text-muted mt-0 mb-0 text-nowrap"}= format_lifespan(locals[:user])
+        %p.text-muted.mt-0.mb-0.text-nowrap= format_lifespan(locals[:user])
       - if locals[:user].country
-        %p{class:"text-muted mt-0 mb-0"}
+        %p.text-muted.mt-0.mb-0
           - country_codes = locals[:user].country_code.split("|") rescue []
           - countries = locals[:user].country.split("|") rescue []
           - countries.each_with_index do |v,i|
@@ -35,11 +35,10 @@
               - else
                 #{v}
 
-  %div{class: "card-body"}
-    %p{class:"card-text mt-2 text-nowrap range"}
-
-  %div{class: "card-footer d-flex"}
+  .card-body
+    %p.card-text.mt-2.text-nowrap.range
+  .card-footer.d-flex
     - if !locals[:user].is_public?
-      %div{class: "text-right text-muted mr-2"}
-        %i{class:"fas fa-lock"}
-    %div{class: "text-left text-muted text-nowrap mr-2"}
+      .text-right.text-muted.mr-2
+        %i.fas.fa-lock
+    .text-left.text-muted.text-nowrap.mr-2
