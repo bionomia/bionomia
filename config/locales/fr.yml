@@ -551,6 +551,7 @@ fr:
     zenodo_html: "Votre profil est lié à %{zenodo} et vos données sont versionnées et archivées."
     language: Langue préférée
     language_explanation: Choisissez votre langue préférée
+    specimens_used_num: specimens used
     updated: Your profile was updated.
     thanks: Merci
     attributed: attribué
