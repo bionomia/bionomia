@@ -60,7 +60,7 @@
       - if !country_codes[i].nil? && !country_codes[i].empty?
         %p.text-lg-left.p-0.mt-1.mb-1
           %i.fas.fa-globe
-          = link_to country_name(country_codes[i]), url("/country/#{country_codes[i]}"
+          = link_to country_name(country_codes[i]), url("/country/#{country_codes[i]}")
       - else
         %p.text-lg-left.p-0.m-0
           %i.fas.fa-globe
