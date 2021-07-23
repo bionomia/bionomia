@@ -104,6 +104,7 @@ var Application = (function($, window) {
         remote : {
           url : "/"+type+".json?q=%QUERY",
           wildcard : "%QUERY",
+          rateLimitWait: 500,
           transform : function(r) {
             return $.map(r, function (v) { v.type = type; return v; });
           }
