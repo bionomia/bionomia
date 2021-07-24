@@ -32,13 +32,14 @@ if options[:file]
     raise RuntimeError, 'File must be a csv'
   end
   CSV.foreach(options[:file], headers: true, header_converters: :symbol) do |row|
-    user_id = User.find_by_identifier(row[:identifier])
+    user = User.find_by_identifier(row[:identifier])
     ids = UserOccurrence.left_joins(:occurrence)
             .where(occurrences: { id: nil })
-            .where(user_id: user_id)
+            .where(user_id: user.id)
             .pluck(:id)
     if ids.length > 0
       UserOccurrence.where(id: ids).order(id: :desc).delete_all
+      user.flush_caches
       puts row[:identifier].red
     end
   end
