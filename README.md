@@ -105,14 +105,11 @@ Or from scratch:
 Unfortunately, gbifIDs are not persistent. These occasionally disappear through processing at GBIF's end. As a result, claims may no longer point to an existing occurrence record and these must then be purged from the user_occurrences table. The following are a few methods to produce a csv file of affected users and to then delete the orphans:
 
      # csv dump requires approx. 15min for 20M attributions
-     $ RACK_ENV=production ./bin/csv_dump.rb -d ~/Desktop -o
-     $ RACK_ENV=production irb
-     > require "./application"
-     > UserOccurrence.orphaned_count
-     > UserOccurrence.delete_orphaned
+     $ RACK_ENV=production ./bin/orphaned_user_occurrences.rb -d ~/Desktop -o
 
-     > ArticleOccurrence.orphaned_count
-     > ArticleOccurrence.orphaned_delete
+Then use this orphaned.csv file to run through the orphaned records and delete them:
+
+     $ RACK_ENV=production ./bin/orphaned_user_occurrences -f orphaned.csv
 
 To migrate tables, use mydumper and myloader. But for even faster data migration, drop indices before mydumper then recreate indices after myloader. This is especially true for the three largest tables: occurrences, occurrence_recorders, and occurrence_determiners whose indices are (almost) larger than the tables themselves.
 
