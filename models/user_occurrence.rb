@@ -47,17 +47,6 @@ class UserOccurrence < ActiveRecord::Base
      orphaned
    end
 
-   def self.delete_orphaned
-     self.in_batches(of: 25_000) do |batch|
-       ids = batch.left_joins(:occurrence)
-                  .where(occurrences: { id: nil })
-                  .pluck(:id)
-       if ids.length > 0
-         self.where(id: ids).delete_all
-       end
-     end
-   end
-
    def recorded?
      action.include? "recorded"
    end

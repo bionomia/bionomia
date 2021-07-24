@@ -21,10 +21,6 @@ OptionParser.new do |opts|
     options[:profiles] = true
   end
 
-  opts.on("-o", "--orphaned", "Dump orphaned records") do
-    options[:orphaned] = true
-  end
-
   opts.on("-q", "--quickstatements", "Dump list of new wikidata profiles to be used in quickstatements") do
     options[:quickstatements] = true
   end
@@ -96,19 +92,6 @@ if options[:directory]
       csv << ["qid", "P6944"]
       new_qnumbers.each do |w|
         csv << [w, "\"#{w}\""]
-      end
-    end
-  end
-
-  if options[:orphaned]
-    csv_file = File.join(directory, "orphaned.csv")
-    puts "Querying for orphaned records...".green
-    CSV.open(csv_file, 'w') do |csv|
-      csv << ["Identifier", "Name", "Number Orphaned", "Claimants/Attributors"]
-      UserOccurrence.orphaned_user_claims.each do |k,v|
-        user = User.find(k)
-        attributors = v[:claimants].map{|u| User.find(u).fullname}.join("; ")
-        csv << [user.identifier, user.fullname, v[:count], attributors]
       end
     end
   end
