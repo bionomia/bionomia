@@ -67,4 +67,6 @@
           %td #{h(o.catalogNumber)}
           %td #{h(o.typeStatus)}
 
-= pagy_bootstrap_nav(@pagy) if @pagy.pages > 1
+- if @pagy.pages > 1
+  .y-scroll
+    = pagy_bootstrap_nav(@pagy)

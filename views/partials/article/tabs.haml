@@ -1,5 +1,6 @@
-%ul.nav.nav-tabs
-  %li.nav-item
-    %a{class: "nav-link#{locals[:active_tab] == "people" ? " active" : nil}", href: url("/article/#{@article.doi}")}= I18n.t('article.people')
-  %li.nav-item
-    %a{class: "nav-link#{locals[:active_tab] == "agents" ? " active" : nil}", href: url("/article/#{@article.doi}/agents")}= I18n.t('article.agent_strings')
+.y-scroll
+  %ul.nav.nav-tabs.flex-nowrap
+    %li.nav-item
+      %a{class: "text-nowrap nav-link#{locals[:active_tab] == "people" ? " active" : nil}", href: url("/article/#{@article.doi}")}= I18n.t('article.people')
+    %li.nav-item
+      %a{class: "text-nowrap nav-link#{locals[:active_tab] == "agents" ? " active" : nil}", href: url("/article/#{@article.doi}/agents")}= I18n.t('article.agent_strings')

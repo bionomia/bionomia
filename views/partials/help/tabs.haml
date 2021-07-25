@@ -1,10 +1,11 @@
-%ul.nav.nav-tabs.pl-2
-  %li.nav-item.badge-item
-    %a{class: "nav-link#{locals[:active_tab] == "discovered" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}")}= I18n.t('help.discovered')
-    %span#specimen-counter.badge-notify.badge.badge-danger.badge-pill
-  %li.nav-item
-    %a{class: "nav-link#{locals[:active_tab] == "specimens" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/specimens")}= I18n.t('help.fix_claims')
-  %li.nav-item
-    %a{class: "nav-link#{locals[:active_tab] == "ignored" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/ignored")}= I18n.t('help.reclaim_ignored')
-  %li.nav-item
-    %a{class: "nav-link#{locals[:active_tab] == "upload" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/upload")}= I18n.t('help.bulk_attribution')
+.y-scroll
+  %ul.nav.nav-tabs.pl-2.flex-nowrap
+    %li.nav-item.badge-item
+      %a{class: "text-nowrap nav-link#{locals[:active_tab] == "discovered" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}")}= I18n.t('help.discovered')
+      %span#specimen-counter.badge-notify.badge.badge-danger.badge-pill
+    %li.nav-item
+      %a{class: "text-nowrap nav-link#{locals[:active_tab] == "specimens" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/specimens")}= I18n.t('help.fix_claims')
+    %li.nav-item
+      %a{class: "text-nowrap nav-link#{locals[:active_tab] == "ignored" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/ignored")}= I18n.t('help.reclaim_ignored')
+    %li.nav-item
+      %a{class: "text-nowrap nav-link#{locals[:active_tab] == "upload" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/upload")}= I18n.t('help.bulk_attribution')

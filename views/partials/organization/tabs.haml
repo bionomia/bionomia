@@ -1,9 +1,10 @@
-%ul.nav.nav-tabs.mb-3
-  %li.nav-item
-    %a{class: "nav-link#{locals[:active_tab] == "organization-current" ? " active" : nil}", href: url("/organization/#{@organization.identifier}")}= I18n.t('organization.current')
-  %li.nav-item
-    %a{class: "nav-link#{locals[:active_tab] == "organization-past" ? " active" : nil}", href: url("/organization/#{@organization.identifier}/past")}= I18n.t('organization.previous')
-  %li.nav-item
-    %a{class: "nav-link#{locals[:active_tab] == "organization-metrics" ? " active" : nil}", href: url("/organization/#{@organization.identifier}/metrics")}= I18n.t('organization.metrics')
-  %li.nav-item
-    %a{class: "nav-link#{locals[:active_tab] == "organization-articles" ? " active" : nil}", href: url("/organization/#{@organization.identifier}/citations")}= I18n.t('organization.science_enabled')
+.y-scroll
+  %ul.nav.nav-tabs.mb-3.flex-nowrap
+    %li.nav-item
+      %a{class: "text-nowrap nav-link#{locals[:active_tab] == "organization-current" ? " active" : nil}", href: url("/organization/#{@organization.identifier}")}= I18n.t('organization.current')
+    %li.nav-item
+      %a{class: "text-nowrap nav-link#{locals[:active_tab] == "organization-past" ? " active" : nil}", href: url("/organization/#{@organization.identifier}/past")}= I18n.t('organization.previous')
+    %li.nav-item
+      %a{class: "text-nowrap nav-link#{locals[:active_tab] == "organization-metrics" ? " active" : nil}", href: url("/organization/#{@organization.identifier}/metrics")}= I18n.t('organization.metrics')
+    %li.nav-item
+      %a{class: "text-nowrap nav-link#{locals[:active_tab] == "organization-articles" ? " active" : nil}", href: url("/organization/#{@organization.identifier}/citations")}= I18n.t('organization.science_enabled')

@@ -1,7 +1,8 @@
-%ul.nav.nav-tabs
-  %li.nav-item
-    %a{class: "nav-link#{locals[:active_tab] == "people" ? " active" : nil}", href: url("/taxon/#{@taxon.family}")}= I18n.t('taxa.people')
-  %li.nav-item
-    %a{class: "nav-link#{locals[:active_tab] == "visualizations" ? " active" : nil}", href: url("/taxon/#{@taxon.family}/visualizations")}= I18n.t('taxa.visualizations')
-  %li.nav-item
-    %a{class: "nav-link#{locals[:active_tab] == "agents" ? " active" : nil}", href: url("/taxon/#{@taxon.family}/agents")}= I18n.t('taxa.agent_strings')
+.y-scroll
+  %ul.nav.nav-tabs.flex-nowrap
+    %li.nav-item
+      %a{class: "text-nowrap nav-link#{locals[:active_tab] == "people" ? " active" : nil}", href: url("/taxon/#{@taxon.family}")}= I18n.t('taxa.people')
+    %li.nav-item
+      %a{class: "text-nowrap nav-link#{locals[:active_tab] == "visualizations" ? " active" : nil}", href: url("/taxon/#{@taxon.family}/visualizations")}= I18n.t('taxa.visualizations')
+    %li.nav-item
+      %a{class: "text-nowrap nav-link#{locals[:active_tab] == "agents" ? " active" : nil}", href: url("/taxon/#{@taxon.family}/agents")}= I18n.t('taxa.agent_strings')

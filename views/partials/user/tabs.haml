@@ -1,16 +1,17 @@
-%ul.nav.nav-tabs.pl-2
-  %li.nav-item
-    %a{class: "nav-link#{locals[:active_page] == "overview" ? " active" : nil}", href: url("/#{@viewed_user.identifier}")}= I18n.t('user.overview')
-  %li.nav-item
-    %a{class: "nav-link#{locals[:active_page] == "specialties" ? " active" : nil}", href: url("/#{@viewed_user.identifier}/specialties")}= I18n.t('user.specialties')
-  %li.nav-item
-    %a{class: "nav-link#{locals[:active_page] == "network" ? " active" : nil}", href: url("/#{@viewed_user.identifier}/co-collectors")}= I18n.t('user.network')
-  %li.nav-item
-    %a{class: "nav-link#{locals[:active_page] == "deposits" ? " active" : nil}", href: url("/#{@viewed_user.identifier}/deposited-at")}= I18n.t('user.deposited_at')
-  %li.nav-item
-    %a{class: "nav-link#{locals[:active_page] == "specimens" ? " active" : nil}", href: url("/#{@viewed_user.identifier}/specimens")}= I18n.t('user.specimens')
-  %li.nav-item
-    %a{class: "nav-link#{locals[:active_page] == "citations" ? " active" : nil}", href: url("/#{@viewed_user.identifier}/citations")}= I18n.t('user.science_enabled')
-  - if @viewed_user.orcid
+.y-scroll
+  %ul.nav.nav-tabs.pl-2.flex-nowrap
     %li.nav-item
-      %a{class: "nav-link#{locals[:active_page] == "helped" ? " active" : nil}", href: url("/#{@viewed_user.identifier}/helped")}= I18n.t('user.helped')
+      %a{class: "text-nowrap nav-link#{locals[:active_page] == "overview" ? " active" : nil}", href: url("/#{@viewed_user.identifier}")}= I18n.t('user.overview')
+    %li.nav-item
+      %a{class: "text-nowrap nav-link#{locals[:active_page] == "specialties" ? " active" : nil}", href: url("/#{@viewed_user.identifier}/specialties")}= I18n.t('user.specialties')
+    %li.nav-item
+      %a{class: "text-nowrap nav-link#{locals[:active_page] == "network" ? " active" : nil}", href: url("/#{@viewed_user.identifier}/co-collectors")}= I18n.t('user.network')
+    %li.nav-item
+      %a{class: "text-nowrap nav-link#{locals[:active_page] == "deposits" ? " active" : nil}", href: url("/#{@viewed_user.identifier}/deposited-at")}= I18n.t('user.deposited_at')
+    %li.nav-item
+      %a{class: "text-nowrap nav-link#{locals[:active_page] == "specimens" ? " active" : nil}", href: url("/#{@viewed_user.identifier}/specimens")}= I18n.t('user.specimens')
+    %li.nav-item
+      %a{class: "text-nowrap nav-link#{locals[:active_page] == "citations" ? " active" : nil}", href: url("/#{@viewed_user.identifier}/citations")}= I18n.t('user.science_enabled')
+    - if @viewed_user.orcid
+      %li.nav-item
+        %a{class: "text-nowrap nav-link#{locals[:active_page] == "helped" ? " active" : nil}", href: url("/#{@viewed_user.identifier}/helped")}= I18n.t('user.helped')

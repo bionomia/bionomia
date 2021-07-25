@@ -1,7 +1,8 @@
-%ul.nav.nav-tabs.mt-3.mb-3
-  %li.nav-item
-    %a{class: "nav-link#{locals[:active_tab] == "born" ? " active" : nil}", href: url("/on-this-day")}= I18n.t('on_this_day.collector_born')
-  %li.nav-item
-    %a{class: "nav-link#{locals[:active_tab] == "died" ? " active" : nil}", href: url("/on-this-day/died")}= I18n.t('on_this_day.collector_died')
-  %li.nav-item
-    %a{class: "nav-link#{locals[:active_tab] == "specimens" ? " active" : nil}", href: url("/on-this-day/collected")}= I18n.t('on_this_day.type_collected')
+.y-scroll
+  %ul.nav.nav-tabs.mt-3.mb-3.flex-nowrap
+    %li.nav-item
+      %a{class: "text-nowrap nav-link#{locals[:active_tab] == "born" ? " active" : nil}", href: url("/on-this-day")}= I18n.t('on_this_day.collector_born')
+    %li.nav-item
+      %a{class: "text-nowrap nav-link#{locals[:active_tab] == "died" ? " active" : nil}", href: url("/on-this-day/died")}= I18n.t('on_this_day.collector_died')
+    %li.nav-item
+      %a{class: "text-nowrap nav-link#{locals[:active_tab] == "specimens" ? " active" : nil}", href: url("/on-this-day/collected")}= I18n.t('on_this_day.type_collected')
