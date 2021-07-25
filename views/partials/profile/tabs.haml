@@ -1,20 +1,19 @@
-.y-scroll
-  %ul.nav.nav-tabs.pl-2.flex-nowrap
-    %li.nav-item
-      %a{class: "text-nowrap nav-link#{locals[:active_page] == "profile" ? " active" : nil}", href: url("/profile")}
-        %i.fas.fa-user
-        = I18n.t('profile.overview')
-    %li.nav-item.badge-item
-      %a{class: "text-nowrap nav-link#{locals[:active_page] == "specimens" ? " active" : nil}", href: url("/profile/specimens")}
-        %i.fas.fa-th
-        = I18n.t('profile.specimens')
-      %span#specimen-counter.badge-notify.badge.badge-danger.badge-pill
-    %li.nav-item.badge-item
-      %a{class: "text-nowrap nav-link#{locals[:active_page] == "helped" ? " active" : nil}", href: url("/profile/helped")}
-        %i.fas.fa-hands-helping
-        = I18n.t('profile.people_helped')
-      %span#message-counter.badge-notify.badge.badge-success.badge-pill
-    %li.nav-item
-      %a{class: "text-nowrap nav-link#{locals[:active_page] == "citations" ? " active" : nil}", href: url("/profile/citations")}
-        %i.fas.fa-flask
-        = I18n.t('profile.science_enabled')
+%ul.nav.nav-tabs.pl-2
+  %li.nav-item
+    %a{class: "nav-link#{locals[:active_page] == "profile" ? " active" : nil}", href: url("/profile")}
+      %i.fas.fa-user
+      = I18n.t('profile.overview')
+  %li.nav-item.badge-item
+    %a{class: "nav-link#{locals[:active_page] == "specimens" ? " active" : nil}", href: url("/profile/specimens")}
+      %i.fas.fa-th
+      = I18n.t('profile.specimens')
+    %span#specimen-counter.badge-notify.badge.badge-danger.badge-pill
+  %li.nav-item.badge-item
+    %a{class: "nav-link#{locals[:active_page] == "helped" ? " active" : nil}", href: url("/profile/helped")}
+      %i.fas.fa-hands-helping
+      = I18n.t('profile.people_helped')
+    %span#message-counter.badge-notify.badge.badge-success.badge-pill
+  %li.nav-item
+    %a{class: "nav-link#{locals[:active_page] == "citations" ? " active" : nil}", href: url("/profile/citations")}
+      %i.fas.fa-flask
+      = I18n.t('profile.science_enabled')
