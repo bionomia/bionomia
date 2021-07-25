@@ -45,6 +45,7 @@ if options[:directory] && options[:key]
     t1 = Time.now
     f = Bionomia::FrictionlessDataDataset.new(uuid: options[:key], output_directory: options[:directory])
     f.create_package
+    f.update_frictionless_created
     t2 = Time.now
     puts "Package created for #{options[:key]} in #{t2 - t1} seconds".green
   else
@@ -54,20 +55,24 @@ elsif options[:directory] && ( options[:all] || options[:missing] )
   Dataset.find_each do |d|
     next if !d.has_claim?
     puts "Starting #{d.title}...".yellow
+    t1 = Time.now
     f = Bionomia::FrictionlessDataDataset.new(uuid: d.datasetKey, output_directory: options[:directory])
     f.create_package
     f.update_frictionless_created
-    puts "Package created for #{d.datasetKey}".green
+    t2 = Time.now
+    puts "Package created for #{d.datasetKey} in #{t2 - t1} seconds".green
   end
 elsif options[:directory] && options[:list]
   options[:list].each do |key|
     dataset = Dataset.find_by_datasetKey(key) rescue nil
     if dataset
       puts "Starting #{dataset.title}...".yellow
+      t1 = Time.now
       f = Bionomia::FrictionlessDataDataset.new(uuid: key, output_directory: options[:directory])
       f.create_package
       f.update_frictionless_created
-      puts "Package created for #{key}".green
+      t2 = Time.now
+      puts "Package created for #{key} in #{t2 - t1} seconds".green
     else
       puts "Package #{key} not found".red
     end
