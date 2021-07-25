@@ -12,6 +12,7 @@ class Dataset < ActiveRecord::Base
     UserOccurrence.from("user_occurrences FORCE INDEX (user_occurrence_idx)")
                   .joins(:occurrence)
                   .where(occurrences: { datasetKey: datasetKey })
+                  .where(visible: true)
                   .limit(1).exists?
   end
 
