@@ -1,9 +1,10 @@
-%ul.nav.nav-tabs.pl-2
-  %li.nav-item
-    %a{class: "nav-link#{locals[:active_main_tab] == "country" ? " active" : nil}", href: url("/help-others")}= I18n.t('help.by_country')
-  %li.nav-item
-    %a{class: "nav-link#{locals[:active_main_tab] == "new" ? " active" : nil}", href: url("/help-others/new-people")}= I18n.t('help.new_people')
-  %li.nav-item
-    %a{class: "nav-link#{locals[:active_main_tab] == "latest" ? " active" : nil}", href: url("/help-others/progress")}= I18n.t('help.latest_recipients')
-  %li.nav-item
-    %a{class: "nav-link#{locals[:active_main_tab] == "add" ? " active" : nil}", href: url("/help-others/add")}= I18n.t('help.add_someone')
+.y-scroll
+  %ul.nav.nav-tabs.pl-2.flex-nowrap
+    %li.nav-item
+      %a{class: "text-nowrap nav-link#{locals[:active_main_tab] == "country" ? " active" : nil}", href: url("/help-others")}= I18n.t('help.by_country')
+    %li.nav-item
+      %a{class: "text-nowrap nav-link#{locals[:active_main_tab] == "new" ? " active" : nil}", href: url("/help-others/new-people")}= I18n.t('help.new_people')
+    %li.nav-item
+      %a{class: "text-nowrap nav-link#{locals[:active_main_tab] == "latest" ? " active" : nil}", href: url("/help-others/progress")}= I18n.t('help.latest_recipients')
+    %li.nav-item
+      %a{class: "text-nowrap nav-link#{locals[:active_main_tab] == "add" ? " active" : nil}", href: url("/help-others/add")}= I18n.t('help.add_someone')
