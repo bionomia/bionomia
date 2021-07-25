@@ -109,7 +109,7 @@ Unfortunately, gbifIDs are not persistent. These occasionally disappear through 
 
 Then use this orphaned.csv file to run through the orphaned records and delete them:
 
-     $ RACK_ENV=production ./bin/orphaned_user_occurrences -f orphaned.csv
+     $ RACK_ENV=production ./bin/orphaned_user_occurrences.rb -f orphaned.csv
 
 To migrate tables, use mydumper and myloader. But for even faster data migration, drop indices before mydumper then recreate indices after myloader. This is especially true for the three largest tables: occurrences, occurrence_recorders, and occurrence_determiners whose indices are (almost) larger than the tables themselves.
 
