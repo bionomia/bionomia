@@ -43,12 +43,12 @@
       %a.text-muted{href: url("/acknowledgments")}= I18n.t('layout.acknowledgments')
 
 .px-3
-  %ul.list-unstyled.text-small
-    %li.text-center
+  %ul.list-unstyled.text-small.list-group.flex-sm-column.flex-row.list-group-flush
+    %li.text-center.list-group-item.my-0.pt-3.py-sm-0.border-0.bg-transparent
       %a.btn.btn-sm.btn-success{href: url("/donate"), role: "button"}= I18n.t('layout.support')
-    %li.text-center
+    %li.text-center.list-group-item.my-0.py-0.border-0.bg-transparent
       %a.mt-2.twitter{href: "https://twitter.com/BionomiaTrack"}
         %i.fab.fa-twitter
-    %li.text-center
+    %li.text-center.list-group-item.my-0.py-0.border-0.bg-transparent
       %a.mt-2.github{href: "https://github.com/bionomia/bionomia"}
         %i.fab.fa-github
