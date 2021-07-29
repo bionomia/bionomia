@@ -1,3 +1,5 @@
 files:
   - source: /config/locales/en.yml
     translation: /config/locales/%two_letters_code%.yml
+  - source: /views/static_i18n/about/en.haml
+    translation: /views/static_i18n/about/%two_letters_code%.haml
