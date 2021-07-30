@@ -207,7 +207,7 @@ de:
     collected: Gesammelt
     identified_all: Alle identifiziert
     identified: Identifiziert
-    both: Beide
+    both: Beides
     either: Entweder
     per_page: Pro Seite
     download: Herunterladen
@@ -310,7 +310,7 @@ de:
     download: Herunterladen
     download_label: Entdeckte Datensätze herunterladen
     upload_label: CSV-Datei mit Beanspruchungen hochladen
-    choose_instructions_html: "Wählen Sie Gesammelt %{coll_img}, Identifiziert %{det_img} oder beides."
+    choose_instructions_html: "Wählen Sie %{coll_img} Gesammelt, %{det_img} Identifiziert oder Beides."
     search_count:
       one: "1 Suchergebnis für %{search}"
       other: "%{count} Suchergebnisse für %{search}"
@@ -331,7 +331,7 @@ de:
       other: "mitgesammelte Exemplare"
   home:
     tagline: Verbinden Sie naturhistorische Exemplare mit den Sammlern der Welt.
-    get_started: Los geht's
+    get_started: Los geht’s
     your_profile: Ihr Profil
     sample_profiles: Beispielprofile
     orcid_login: Mit ORCID anmelden
@@ -414,7 +414,7 @@ de:
         one: "Organisation aus ORCID-Konten und Wikidata-Einträgen"
         other: "Organisationen aus ORCID-Konten und Wikidata-Einträgen"
     placeholder: Kanadisches Museum der Natur
-    affiliation_none_alert: Publikationen, die auf Exemplaren basieren, die vom aktuellen und ehemaligen Mitgliedern gesammelt oder identifiziert wurden, sind noch nicht von GBIF erfasst worden
+    affiliation_none_alert: Publikationen, die auf Exemplaren basieren, die von aktuellen und ehemaligen Mitgliedern gesammelt oder identifiziert wurden, sind noch nicht von GBIF erfasst worden
     affiliation_alert: "%{count} Publikationen haben von GBIF heruntergeladene Exemplardaten verwendet, die auf von aktuellen und ehemaligen Mitgliedern gesammelten oder identifizierten Exemplaren basieren, während sie mit %{org_name} verbunden waren"
     collected_by: "Exemplare gesammelt oder identifiziert von:"
     science_enabled: Wissenschaftliche Werke
@@ -489,7 +489,7 @@ de:
     collected_from: Gesammelt aus
     dates_identified_collected: Datum der Sammlung und Identifizierung
     resume: Für Ihren Lebenslauf
-    specimens_used: specimens used
+    specimens_used: Exemplare verwendet in
     public_availability: Öffentliche Verfügbarkeit
     public_profile: Öffentliches Profil
     make_citable: Machen Sie Ihre Daten zitierfähig
