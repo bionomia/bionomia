@@ -49,7 +49,7 @@ de:
     agent_title: Artikel-Agenten
     alphabetical: Alphabetisch
     counts: Zählung
-    unclaimed: Nicht beansprucht
+    unclaimed: Unbeansprucht
     no_agent_strings_alert: Es wurden kein Rohstring von analysierten Sammler- und Bestimmernamen in den von GBIF zur Unterstützung dieses Artikels heruntergeladenen Exemplardaten gefunden
     agent_strings_alert:
       unit:
@@ -83,7 +83,7 @@ de:
     people: Personen
   country:
     country_title: Länder
-    lede: Aus Ländern, die in ORCID-Konten und Wikidata-Einträgen oder in Belegexemplaren in GBIF angegeben sind
+    lede: Aus Ländern, die in ORCID-Konten und Wikidata-Einträgen oder in Exemplar-Datensätzen in GBIF angegeben sind
     intro: Aus Ländern, die in ORCID-Konten und Wikidata-Einträgen angegeben sind. Suche nach taxonomischen Familien, um Fachwissen zu entdecken.
     collected_from: "%{family} gesammelt aus %{country}"
     identified_from: "%{family} identifiziert aus %{country}"
@@ -106,10 +106,10 @@ de:
     scribes: Bearbeiter
     agents: Agenten
     agent_strings: Agenten-Strings
-    agent_strings_unclaimed: Nicht beanspruchte Agenten-Strings
+    agent_strings_unclaimed: Unbeanspruchte Agenten-Strings
     alphabetical: Alphabetisch
     counts: Zählung
-    unclaimed: Nicht beansprucht
+    unclaimed: Unbeansprucht
     no_agents_alert: Rohstrings aus analysierten Sammler- und Bestimmernamen in den in diesem Datensatz enthaltenen Exemplardaten wurden noch nicht aufgezeichnet
     agents_alert:
       unit:
@@ -293,11 +293,11 @@ de:
     bulk_attribution: Massenattributionen
     reclaim_ignored: Erneute Beanspruchung ignoriert
     fix_claims: Zuordnungen korrigieren
-    discovered: Entdeckte
+    discovered: Entdeckt
     support_alert: Die folgenden Bearbeiter haben Exemplare zugeordnet.
     advanced_search: Erweiterte Suche & Filter
     less_exact: Weniger exakt machen
-    no_unclaimed: Bionomia hat keine nicht beanspruchten Exemplare gefunden.
+    no_unclaimed: Bionomia hat keine unbeanspruchten Exemplare gefunden.
     close: Schließen
     add_person: Eine Person hinzufügen
     add_orcid_wikidata: ORCID-Kennung oder Q-Nummer in Wikidata hinzufügen
@@ -351,7 +351,7 @@ de:
     toggle_dropdown: Dropdown umschalten
     overview: Übersicht
     specimens: Exemplare
-    discovered: Entdeckte
+    discovered: Entdeckt
     science_enabled: Wissenschaftliche Werke
     settings: Einstellungen
     administration: Administration
@@ -361,8 +361,8 @@ de:
     for_developers: Für Entwickler
     for_data_managers: Für Daten-Manager
     policies: Richtlinien
-    privacy: Datenschutzrichtlinie
-    terms_service: Vertragsbedingungen
+    privacy: Datenschutzbestimmungen
+    terms_service: Nutzungsbedingungen
     on_this_day: An diesem Tag
     about: Über
     rationale: Grundprinzipien
@@ -380,7 +380,7 @@ de:
   not_authorized:
     not_authorized: Nicht autorisiert oder Sitzung beendet.
   occurrence:
-    occurrence_title: Exemplaraufzeichnung
+    occurrence_title: Exemplar-Datensatz
     lede: Aus den von GBIF erhaltenen Teildaten
     record: Datensatz
     event: Ereignis
@@ -447,9 +447,9 @@ de:
         one: ehemaliges Mitglied
         other: ehemalige Mitglieder
   profile:
-    thanks_title: Erhaltener Dank
-    candidates_title: Nicht beanspruchte Exemplare
-    ignored_title: Ignorierte
+    thanks_title: Dank erhalten
+    candidates_title: Unbeanspruchte Exemplare
+    ignored_title: Ignoriert
     specimens_title: Exemplare
     support_title: Erhaltene Hilfe
     upload_title: Hochladen
@@ -461,7 +461,7 @@ de:
     people_helped: Personen geholfen
     science_enabled: Wissenschaftliche Werke
     claimed: Beansprucht
-    discovered: Entdeckte
+    discovered: Entdeckt
     upload: Hochladen
     ignored: Ignoriert
     help_received: Hilfe erhalten
@@ -472,7 +472,7 @@ de:
     thanks_alert: Bionomia-Bearbeiter haben Ihnen geholfen, Exemplare zu beanspruchen. Übermitteln Sie ihnen Ihre Wertschätzung.
     thanks_received: Dank erhalten
     thanks_received_alert: Sie haben Dank für die Zuordnung von Exemplaren erhalten.
-    no_thanks_received_alert: Sie haben noch keinen Dank für die Zuordnung von Belegexemplaren zu anderen Sammlern erhalten. Haben Sie schon versucht, anderen zu helfen?
+    no_thanks_received_alert: Sie haben noch keinen Dank für die Zuordnung von Exemplar-Datensätzen zu anderen Sammlern erhalten. Haben Sie schon versucht, anderen zu helfen?
     change_photo: Profilbild ändern
     remove: Entfernen
     cancel: Abbrechen
@@ -516,13 +516,13 @@ de:
     inactive: "Aus"
     make_public_message: Binden Sie Ihr Konto in öffentliche Profile ein. Ihre Beanspruchungen werden in einen Massendaten-Download aufgenommen, über Google Chrome- und Firefox-Erweiterungen offengelegt und ein Tweet von @BionomiaTrack wird gesendet.
     no_candidates_alert: Bionomia hat keine von GBIF indizierten Exemplare gefunden, die Sie möglicherweise gesammelt oder identifiziert haben.
-    ignored_alert: Exemplare, die Sie als "Nicht ich" markiert haben, werden hier angezeigt.
+    ignored_alert: Exemplar-Datensätze, die Sie als „Nicht ich“ markiert haben, werden hier angezeigt.
     scribe_not_helped: Dieser Bionomia-Bearbeiter hat Ihnen noch nicht geholfen, Exemplare zu beanspruchen.
     upload_error: Bitte laden Sie ein Bild mit einer Größe von weniger als 5 MB hoch.
     bulk_claim: Massenbeanspruchung
     advanced_search: Erweiterte Suche & Filter
-    no_specimens_filter: Sie haben noch keine Exemplare mit diesem angewendeten Filter beansprucht. Sehen Sie sich Ihre Exemplar-Datensätze auf der "Entdeckt"-Seite an.
-    no_specimens: Sie haben noch keine Exemplare beansprucht. Sehen Sie sich Ihre Kandidaten-Exemplaraufzeichnungen auf der "Entdeckt"-Seite an.
+    no_specimens_filter: Sie haben noch keine Exemplare mit diesem angewendeten Filter beansprucht. Sehen Sie sich Ihre infrage kommenden Exemplar-Datensätze auf der „Entdeckt“-Seite an.
+    no_specimens: Sie haben noch keine Exemplare beansprucht. Sehen Sie sich Ihre infrage kommenden Exemplar-Datensätze auf der „Entdeckt“-Seite an.
     candidate_count:
       one: 1 Exemplar gefunden.
       other: "%{count} Exemplare gefunden."
@@ -618,12 +618,12 @@ de:
         other: "Agenten-Strings von Exemplardaten in GBIF"
     number_agents_unclaimed:
       unit:
-        one: "Agenten-String hat nicht beanspruchte Datensätze von Exemplaren aus Daten in GBIF"
-        other: "Agenten-Strings haben nicht beanspruchte Datensätze von Exemplaren aus Daten in GBIF"
-    no_agents_unclaimed: Es gibt keine nicht beanspruchten oder nicht zugeordneten Exemplare
+        one: "Agenten-String hat unbeanspruchte Exemplar-Datensätze aus Daten in GBIF"
+        other: "Agenten-Strings haben unbeanspruchte Exemplar-Datensätze aus Daten in GBIF"
+    no_agents_unclaimed: Es gibt keine unbeanspruchten oder nicht zugeordneten Exemplar-Datensätze
     alphabetical: Alphabetisch
     counts: Zählung
-    unclaimed: Nicht beansprucht
+    unclaimed: Unbeansprucht
     example_families: Zufällige Exemplare
     none_collected_identified: "%{taxon} wurde noch nicht gesammelt oder identifiziert"
     none_collected: "%{taxon} wurde noch nicht gesammelt"
@@ -654,7 +654,7 @@ de:
         other: "Exemplare wurden beansprucht oder zugeordnet, aber dieses Profil ist nicht öffentlich zugänglich."
     no_specimens_cited: Exemplare wurden nicht in Downloads von GBIF aufgenommen und in diesem Forschungsartikel zitiert.
     specimen_used: Exemplardaten verwendet in
-    no_publications: Publikationen, die Exemplare aus einem Download von GBIF verwendet haben, sind noch nicht erfasst.
+    no_publications: Publikationen, die Exemplar-Datensätze aus einem Download von GBIF verwendet haben, sind noch nicht erfasst.
     publication_count:
       unit:
         one: "Publikation verwendete Exemplardaten, die von GBIF heruntergeladen wurden"
