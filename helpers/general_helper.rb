@@ -260,15 +260,15 @@ module Sinatra
         end
 
         def scribes
-          results = UserOccurrence.where.not({ created_by: User::BOT_IDS })
-                                  .where("user_occurrences.user_id != user_occurrences.created_by")
-                                  .group([:user_id, :created_by])
+          attributions = UserOccurrence.group([:user_id, :created_by])
                                   .order("NULL")
-                                  .pluck(:created_by)
-                                  .uniq
-                                  .map{|u| User.find(u)}
-                                  .sort_by{|u| u.family || ""}
-          @pagy, @results  = pagy_array(results, items: 30)
+                                  .pluck(:user_id, :created_by)
+          ids = attributions.map do |a|
+            if a[0] != a[1] && !User::BOT_IDS.include?(a[1])
+              a[1]
+            end
+          end.uniq.compact
+          @pagy, @results = pagy(User.where(id: ids).order(:family))
         end
 
         def create_filter

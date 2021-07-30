@@ -773,6 +773,8 @@ class User < ActiveRecord::Base
     stats = Class.new
     stats.extend Sinatra::Bionomia::Helper::UserHelper
     BIONOMIA.cache_put_tag("blocks/#{identifier}-stats", stats.user_stats(self))
+    BIONOMIA.cache_put_tag("blocks/#{identifier}-scribe", stats.scribe_stats(self))
+    update_search
   end
 
   def delete_search
