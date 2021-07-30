@@ -293,7 +293,7 @@ de:
     bulk_attribution: Massenattributionen
     reclaim_ignored: Erneute Beanspruchung ignoriert
     fix_claims: Zuordnungen korrigieren
-    discovered: Entdeckte
+    discovered: Entdeckt
     support_alert: Die folgenden Bearbeiter haben Exemplare zugeordnet.
     advanced_search: Erweiterte Suche & Filter
     less_exact: Weniger exakt machen
@@ -351,7 +351,7 @@ de:
     toggle_dropdown: Dropdown umschalten
     overview: Übersicht
     specimens: Exemplare
-    discovered: Entdeckte
+    discovered: Entdeckt
     science_enabled: Wissenschaftliche Werke
     settings: Einstellungen
     administration: Administration
@@ -461,7 +461,7 @@ de:
     people_helped: Personen geholfen
     science_enabled: Wissenschaftliche Werke
     claimed: Beansprucht
-    discovered: Entdeckte
+    discovered: Entdeckt
     upload: Hochladen
     ignored: Ignoriert
     help_received: Hilfe erhalten
@@ -521,8 +521,8 @@ de:
     upload_error: Bitte laden Sie ein Bild mit einer Größe von weniger als 5 MB hoch.
     bulk_claim: Massenbeanspruchung
     advanced_search: Erweiterte Suche & Filter
-    no_specimens_filter: Sie haben noch keine Exemplare mit diesem angewendeten Filter beansprucht. Sehen Sie sich Ihre Exemplar-Datensätze auf der "Entdeckt"-Seite an.
-    no_specimens: Sie haben noch keine Exemplare beansprucht. Sehen Sie sich Ihre Kandidaten-Exemplaraufzeichnungen auf der "Entdeckt"-Seite an.
+    no_specimens_filter: Sie haben noch keine Exemplare mit diesem angewendeten Filter beansprucht. Sehen Sie sich Ihre Exemplar-Datensätze auf der „Entdeckt“-Seite an.
+    no_specimens: Sie haben noch keine Exemplare beansprucht. Sehen Sie sich Ihre Kandidaten-Exemplaraufzeichnungen auf der „Entdeckt“-Seite an.
     candidate_count:
       one: 1 Exemplar gefunden.
       other: "%{count} Exemplare gefunden."
