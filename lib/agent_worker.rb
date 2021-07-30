@@ -9,8 +9,8 @@ module Bionomia
       agents = parse(row["agents"])
       agents.each do |a|
         agent = Agent.create_or_find_by({
-          family: a[:family].to_s.strip,
-          given: a[:given].to_s.strip
+          family: a.family.to_s.strip,
+          given: a.given.to_s.strip
         })
         row["gbifIDs_recordedBy"]
           .tr('[]', '')
@@ -33,7 +33,7 @@ module Bionomia
       agents = []
       DwcAgent.parse(raw).each do |n|
         agent = DwcAgent.clean(n)
-        if !agent[:family].nil? && agent[:family].length >= 2
+        if !agent.family.nil? && agent.family.length >= 2
           agents << agent
         end
       end
