@@ -325,7 +325,7 @@ de:
     do_you_know: Kennen Sie
     no_one_found: "Es wurde niemand mit dem Namen %{name} gefunden."
     add_someone_html: "Siehe, wie man %{href}."
-    add_someone_href: "jemanden hinzufügen"
+    add_someone_href: "jemanden hinzufügt"
     co_collected_count:
       one: "mitgesammeltes Exemplar"
       other: "mitgesammelte Exemplare"
