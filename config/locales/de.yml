@@ -578,7 +578,7 @@ de:
     type_status: Typ-Status
     scribe: Bearbeiter
     not_me: Nicht ich
-    not_them: Nicht sie
+    not_them: Nicht er/sie
     not_recorded: nicht aufgezeichnet
     remove: Entfernen
   scribes:
