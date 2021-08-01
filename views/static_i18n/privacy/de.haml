@@ -1,59 +1,59 @@
-- content_for :title, "Privacy Policy"
+- content_for :title, "Datenschutzbestimmungen"
 - content_for :jumbotron do
   .jumbotron.jumbotron-fluid.d-flex.flex-wrap
     .mr-auto.p-2
       %h1.h2
-        Privacy Policy
+        Datenschutzbestimmungen
 
 %h3
-  What Bionomia Collects
+  Was Bionomia erfasst
 
 %p
-  Bionomia requires some basic information at the time of account creation and this is entirely limited to publicly-accessible details pulled from your
-  = link_to "ORCID", "https://orcid.org"
-  profile.
-  See
-  = link_to "ORCID's Privacy Policy", "https://orcid.org/privacy-policy"
-  for more details.
-  Bionomia stores your full name, your employment and educational affiliations, your biography, and your email address only if you have allowed these details to be publicly accessible from your ORCID profile.
-  These details are periodically refreshed from your ORCID profile and you may manually trigger an update within Bionomia whenever you wish. If you later restrict access to details that were once accessible in your ORCID profile,
-  a refresh in Bionomia will likewise remove those restricted details.
-  No other details about you are accessed, used, or stored from any other source.
+  Bionomia benötigt bei der Erstellung eines Kontos einige grundlegende Informationen, die sich ausschließlich auf öffentlich zugängliche Angaben aus Ihrem
+  = succeed "-Profil" do
+    = link_to "ORCID", "https://orcid.org"
+  beschränken.
+  Weitere Einzelheiten finden Sie in den
+  = succeed "." do
+    = link_to "ORCID-Datenschutzbestimmungen", "https://info.orcid.org/de/privacy-policy/"
+  Bionomia speichert Ihren vollständigen Namen, Ihre Beschäftigungs- und Bildungszugehörigkeit, Ihre Biografie und Ihre E-Mail-Adresse nur dann, wenn Sie diese Angaben in Ihrem ORCID-Profil öffentlich zugänglich gemacht haben.
+  Diese Angaben werden in regelmäßigen Abständen von Ihrem ORCID-Profil aktualisiert, und Sie können eine Aktualisierung in Bionomia manuell auslösen, wann immer Sie dies wünschen. Wenn Sie später den Zugriff auf Details einschränken, die einst in Ihrem ORCID-Profil zugänglich waren,
+  werden diese eingeschränkten Details durch eine Aktualisierung in Bionomia ebenfalls entfernt.
+  Es werden keine anderen Informationen über Sie aus anderen Quellen abgerufen, verwendet oder gespeichert.
 
 %p
-  If you elect to archive versions of your specimen data in
-  = succeed ", " do
-    = link_to "Zenodo", "https://zenodo.org"
-  Bionomia stores a unique access token specific to your Zenodo account. This token is used to push new versions of your specimen data into your versioned archive on your behalf. If you disable the integration with Zenodo, the access token is removed.
+  Wenn Sie sich dafür entscheiden, Versionen Ihrer Exemplardaten in
+  = link_to "Zenodo", "https://zenodo.org"
+  zu archivieren, speichert Bionomia ein eindeutiges Zugriffstoken für Ihr Zenodo-Konto. Dieses Token wird verwendet, um in Ihrem Namen neue Versionen Ihrer Exemplardaten in Ihr versioniertes Archiv zu übertragen. Wenn Sie die Integration mit Zenodo deaktivieren, wird das Zugriffstoken entfernt.
 
 %h3
-  What Bionomia Does Not Collect
+  Was Bionomia nicht erfasst
 
 %p
-  Bionomia does not collect private information, including passwords from your ORCID profile.
-  Any information you declare as private in your ORCID profile is not accessible to Bionomia and consequently, is not available to be stored.
-  If you are a child under the age of 13, you may not have an Account on Bionomia even if one was created in ORCID. Bionomia does not knowingly collect information from or direct any of its content specifically to children under 13.
-  If we learn or have reason to suspect that you are a User who is under the age of 13, we will have to close your Account. We don't want to discourage you from learning, but those are the rules.
-  Please see our
-  = link_to "Terms of Service", url("/terms-of-service")
-  for information about Account termination.
+  Bionomia sammelt weder private Informationen noch Passwörter aus Ihrem ORCID-Profil.
+  Alle Informationen, die Sie in Ihrem ORCID-Profil als privat deklarieren, sind für Bionomia nicht zugänglich und können folglich nicht gespeichert werden.
+  Jede Person, die ein Bionomia-Konto erstellen möchte, muss mindestens 13 Jahre alt sein – unabhängig davon, dass sie womöglich bereits ein ORCID-Konto besitzt. Bionomia sammelt nicht wissentlich Informationen von Kindern unter 13 Jahren und richtet seine Inhalte nicht speziell an diese.
+  Wenn wir erfahren oder Grund zu der Annahme haben, dass Sie das 13. Lebensjahr noch nicht vollendet haben, müssen wir Ihr Konto schließen. Wir möchten Sie nicht davon abhalten, Erfahrungen zu sammeln, aber das sind die Regeln.
+  Weitere Informationen über die Schließung von Konten finden Sie in unseren
+  = succeed "." do
+    = link_to "Nutzungsbedingungen", url("/terms-of-service")
 
 %h3
-  How Bionomia Uses Your Information
+  Wie Bionomia Ihre Informationen verwendet
 
 %p
-  Specimen records you attribute to other people, living or deceased, will be widely, and openly shared unless the living user you have attributed these to has not made their profile publicly accessible.
-  Publicly accessible attributions will include your name obtained from your ORCID profile, your ORCID identifier, and a date stamp to indicate when the attribution was made, in addition to details about the specimen record.
-  Attributions are made openly available via RESTful APIs and bulk data downloads. No other information from your ORCID profile is shared via these products.
+  Exemplar-Datensätze, die Sie anderen lebenden oder verstorbenen Personen zuordnen, werden verbreitet und öffentlich zugänglich gemacht; es sei denn, der lebende Nutzer, dem Sie diese zugeordnet haben, hat sein Profil nicht öffentlich zugänglich gemacht.
+  Öffentlich zugängliche Zuschreibungen enthalten – zusätzlich zu den Details des Exemplar-Datensatzes – Ihren Namen aus Ihrem ORCID-Profil, Ihren ORCID-Identifikator und einen Datumsstempel, der angibt, wann die Zuordnung vorgenommen wurde.
+  Die Zuordnungen werden über REST-APIs und Massendaten-Downloads offen zugänglich gemacht. Andere Informationen aus Ihrem ORCID-Profil werden über diese Produkte nicht weitergegeben.
 
 %p
-  If you make your email address publicly-accessible via your ORCID profile, you may optionally subscribe to email notifications in Bionomia.
-  Your email address, if accessible via your ORCID profile, will not be used except if you choose to subscribe to alerts about new publications that used your specimen data.
+  Wenn Sie Ihre E-Mail-Adresse über Ihr ORCID-Profil öffentlich zugänglich machen, können Sie sich optional für E-Mail-Benachrichtigungen in Bionomia anmelden.
+  Ihre E-Mail-Adresse wird, sofern sie über Ihr ORCID-Profil zugänglich ist, nicht verwendet; es sei denn, Sie möchten Benachrichtigungen über neue Veröffentlichungen abonnieren, die Ihre Exemplardaten verwenden.
 
 %h3
-  Contacting Bionomia
+  Kontakt zu Bionomia
 
 %p
-  Questions regarding this privacy statement or information practices should be directed to
+  Fragen zu dieser Datenschutzerklärung oder zu den Informationspraktiken richten Sie bitte an
   = succeed "." do
     = link_to "bionomia.tracker@gmail.com", "mailto:bionomia.tracker@gmail.com"

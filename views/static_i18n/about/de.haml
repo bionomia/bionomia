@@ -1,63 +1,66 @@
-- content_for :title, "Rationale"
+- content_for :title, "Grundprinzipien"
 - content_for :jumbotron do
   .jumbotron.jumbotron-fluid.d-flex.flex-wrap
     .mr-auto.p-2
       %h1.h2
-        Rationale
+        Grundprinzipien
 
 %h3
-  A Focus on People
+  Fokus auf Menschen
 
 %p
-  Despite the world-wide importance of natural history collections, many are at risk because they are critically underfunded or undervalued. A contributing factor for this apparent neglect is the lack of a professional reward system that quantifies and illustrates the breadth and depth of expertise required to collect and identify specimens, maintain them, digitize their labels, mobilize the data, and enhance these data as errors and omissions are identified by stakeholders. See thoughts by
-  = link_to "McDade et al. 2011", "https://doi.org/10.1525/bio.2011.61.8.8"
-  who describe what are the necessary elements for a more realistic professional reward system in Biology. If people throughout the full value-chain in natural history collections received professional credit for their efforts, ideally recognized by their administrators and funding bodies, they would prioritize traditionally unrewarded tasks and could convincingly self-advocate. Proper methods of attribution at both the individual and institutional level are essential.
+  Trotz der weltweiten Bedeutung naturkundlicher Sammlungen sind viele von ihnen gefährdet, weil sie kritisch unterfinanziert sind oder unterbewertet werden. Ein Faktor, der zu dieser offensichtlichen Vernachlässigung beiträgt, ist das Fehlen eines professionellen Entlohnungssystems, das die Breite und Tiefe des Fachwissens quantifiziert und veranschaulicht. Das ist erforderlich, um Exemplare zu sammeln und zu identifizieren, sie zu pflegen, ihre Beschriftungen zu digitalisieren, die Daten zu mobilisieren und diese Daten zu verbessern, wenn Fehler und Auslassungen von Interessengruppen festgestellt werden. Siehe Überlegungen von
+  = succeed "," do
+    = link_to "McDade et al. (2011)", "https://doi.org/10.1525/bio.2011.61.8.8"
+  die beschreiben, welche Elemente für ein realistischeres professionelles Entlohnungssystem in der Biologie erforderlich sind. Wenn die Mitarbeiter in der gesamten Wertschöpfungskette naturhistorischer Sammlungen für ihre Arbeit eine professionelle Anerkennung erhielten, die idealerweise von ihren Verwaltern und Geldgebern anerkannt wird, würden sie traditionell unbelohnten Aufgaben Vorrang einräumen und könnten sich selbst überzeugend für ihre Arbeit einsetzen. Geeignete Methoden der Anerkennung sowohl auf individueller als auch auf institutioneller Ebene sind unerlässlich.
 
 %p
-  The
+  Die
   = link_to "Global Biodiversity Information Facility", "https://gbif.org"
-  (GBIF) has prioritized a focus on people. The very first planned item in their
-  = link_to "Implementation Plan for 2017-2021", "https://www.gbif.org/document/83029/gbif-implementation-plan-2017-2021-and-annual-work-programme-2017"
-  and Annual Work Programme states:
+  (GBIF) hat den Menschen in den Mittelpunkt gestellt. Der allererste geplante Punkt in ihrem
+  = link_to "Umsetzungsplan für 2017–2021", "https://www.gbif.org/document/83029/gbif-implementation-plan-2017-2021-and-annual-work-programme-2017"
+  und ihrem Jahresarbeitsprogramm besagt:
   .bd-callout.bd-callout-bionomia.font-italic
-    "1.a.i: Develop mechanisms to support and reflect the skills, expertise and experience of individual and organizational contributions to the GBIF network, including revision of identity management system and integration of ORCID identifiers".
+    „1.a.i: Entwicklung von Mechanismen zur Unterstützung und Berücksichtigung der Fähigkeiten, des Fachwissens und der Erfahrung von Einzelpersonen und Organisationen, die zum GBIF-Netzwerk beitragen, einschließlich der Überarbeitung des Identitätsmanagementsystems und der Integration von ORCID-Kennungen“
 
 %h3
-  The Problem
+  Das Problem
 
 %p
-  A bottleneck that prevents the full execution of GBIF's plan is a legacy of intractable, text-based content shared from natural history museums that ambiguously record people or organizations implicated in specimen data, none of which include pre-determined links to ORCID identifiers. Typical content shared by natural history museums under the Darwin Core terms
-  = link_to "recordedBy", "http://rs.tdwg.org/dwc/terms/#recordedBy"
-  (collector) and
-  = link_to "identifiedBy", "http://rs.tdwg.org/dwc/terms/#identifiedBy"
-  (determiners or identifiers) is unstructured and variable. It may include variously ordered or unorderd people names, suffer from insensitivity to cultural preferences, additionally express full or abbreviated names of organizations and expeditions, or other notes and markings that collectively make extraction of people names from these fields extremely difficult. The full solution requires multiple approaches. A progressive, modern approach associates ORCID or wikidata identifiers with people mentioned on specimens as labels are digitized. A retrospective approach engages natural historians with an open interface used to claim their specimens or attribute them to others. In so doing, people may quickly showcase their breadth of expertise and efforts. If sufficient numbers of people claim their specimens and attribute them to others, we may unwittingly develop reconciled authority files to help museum staff employ an integrated approach that incorporates look-ups of disambiguated people names.
+  Ein Engpass, der die vollständige Umsetzung des GBIF-Plans verhindert, ist die Tatsache, dass die von Naturkundemuseen weitergegebenen textbasierten Inhalte, in denen Personen oder Organisationen, die an den Exemplardaten beteiligt sind, mehrdeutig erfasst werden, schwer zu bewältigen sind und keine vorher festgelegten Links zu ORCID-Kennungen enthalten. Typische Inhalte, die von Naturkundemuseen unter den Darwin-Core-Begriffen
+  = link_to "recordedBy", "https://dwc.tdwg.org/list/#dwc_recordedBy"
+  (Sammler) und
+  = link_to "identifiedBy", "https://dwc.tdwg.org/list/#dwc_identifiedBy"
+  (Bestimmer oder Identifikatoren) freigegeben werden, sind unstrukturiert und variabel. Sie können unterschiedlich geordnete oder ungeordnete Personennamen enthalten, unter der Unempfindlichkeit gegenüber kulturellen Präferenzen leiden, zusätzlich vollständige oder abgekürzte Namen von Organisationen und Expeditionen oder andere Notizen und Markierungen enthalten, die zusammengenommen die Extraktion von Personennamen aus diesen Feldern extrem schwierig machen. Die vollständige Lösung erfordert mehrere Ansätze. Ein fortschrittlicher, moderner Ansatz verbindet ORCID- oder Wikidata-Kennungen mit Personen, die auf den digitalisierten Etiketten der Exemplare erwähnt werden. Ein retrospektiver Ansatz bindet Naturhistoriker mit einer offenen Schnittstelle ein, über die sie ihre Exemplare angeben oder sie anderen zuordnen können. Auf diese Weise können die Menschen schnell ihr umfangreiches Fachwissen und ihre Bemühungen unter Beweis stellen. Wenn eine ausreichende Anzahl von Personen ihre Exemplare beansprucht und sie anderen zuschreibt, können wir unwissentlich abgestimmte Autoritätsdateien entwickeln, die dem Museumspersonal dabei helfen, einen integrierten Ansatz zu verwenden, der die Suche nach nicht eindeutigen Personennamen einschließt.
 
 %h3
-  Metrics on Organizations
+  Kennzahlen zu Organisationen
 
 .bd-callout.bd-callout-bionomia.font-italic
-  A single visit to a distant museum by a graduate student to examine and identify specimens can have a significant impact on her career. It also carries with it, her affiliation with her graduate school.
+  Ein einziger Besuch einer Doktorandin in einem weit entfernten Museum, um Proben zu untersuchen und zu identifizieren, kann einen bedeutenden Einfluss auf ihre Karriere haben. Er bringt auch ihre Zugehörigkeit zu ihrer Graduiertenschule mit sich.
 
 %p
-  Organizations struggle to measure the impact of their investments in the digitization and distribution of natural history specimen data. One way to assess organizational reach is to quantify the activities of personnel mentioned in specimen data shared by other organizations. Donations, curatorial or research visits, or the return of loans with new annotations or determinations are all activities that disseminate expertise and carry with them the interests of organizations.
+  Organisationen tun sich schwer damit, die Auswirkungen ihrer Investitionen in die Digitalisierung und Verbreitung von naturkundlichen Beispieldaten zu messen. Eine Möglichkeit, die Reichweite einer Organisation zu bewerten, besteht darin, die Aktivitäten des Personals zu quantifizieren, die in den von anderen Organisationen bereitgestellten Exemplardaten erwähnt werden. Schenkungen, Kuratoren- oder Forschungsbesuche oder die Rückgabe von Leihgaben mit neuen Kommentaren oder Bestimmungen sind alles Aktivitäten, die Fachwissen verbreiten und die Interessen der Organisationen mit sich bringen.
 %p
-  When you indicate the start and end dates for your past and present education and employment in your ORCID account, these details are cross-referenced against dates and institution codes in the specimens you collected or identified. The result is a depiction of your organization's sphere of influence on formally or informally partnering organizations through your activities. Although the quality of data often need improvement to fully capture this measure of reach, the necessary elements are all present in ORCID accounts and natural history collections data shared with the Global Biodiversity Information Facility. This approach affords a fresh new incentive for organizations to insist that specimen data be quickly and openly shared when their personnel donate specimens, visit other collections where they identify specimens in a backlog, or return borrowed specimens with new annotations or determinations. It also underscores a recognition that collections of all sizes and specialties participate in national and international networks of enthusiasts and experts. Bionomia attempts to transparently automate these reports for organizations while simultaneously showcasing the expertise of collectors and determiners of natural history specimens.
+  Wenn Sie in Ihrem ORCID-Konto die Anfangs- und Enddaten für Ihre frühere und gegenwärtige Ausbildung und Beschäftigung angeben, werden diese Angaben mit den Daten und Institutionscodes in den von Ihnen gesammelten oder identifizierten Exemplaren abgeglichen. Das Ergebnis ist eine Darstellung des Einflussbereichs Ihrer Organisation auf formelle oder informelle Partnerorganisationen durch Ihre Aktivitäten. Obwohl die Qualität der Daten oft verbesserungswürdig ist, um dieses Maß an Reichweite vollständig zu erfassen, sind die notwendigen Elemente in den ORCID-Konten und den Daten der naturkundlichen Sammlungen, die mit der Global Biodiversity Information Facility geteilt werden, alle vorhanden. Dieser Ansatz bietet einen neuen Anreiz für Organisationen, darauf zu bestehen, dass die Exemplardaten schnell und offen weitergegeben werden, wenn ihre Mitarbeiter Exemplare spenden, andere Sammlungen besuchen, wo sie Exemplare in einem Rückstand identifizieren, oder ausgeliehene Exemplare mit neuen Anmerkungen oder Bestimmungen zurückgeben. Es unterstreicht auch die Erkenntnis, dass Sammlungen aller Größen und Fachrichtungen an nationalen und internationalen Netzwerken von Liebhabern und Experten teilnehmen. Bionomia versucht, diese Berichte für Organisationen transparent zu automatisieren und gleichzeitig das Fachwissen von Sammlern und Bestimmern naturhistorischer Exemplare zu präsentieren.
 
 %h3
-  What is a Bionomia?
+  Was bedeutet „Bionomia“?
 
 %p
   %em Bionomia
-  is an unusual, exotic word. It is occasionally used by Spanish-speaking biologists and translates to
-  %em bionomy
-  \– the laws of life – encompassing distribution and ecology. Its first use could have been in the Lancet in 1848,
+  ist ein ungewöhnliches, exotisches Wort. Es wird gelegentlich von spanischsprachigen Biologen verwendet, bedeutet übersetzt
+  %em Bionomie
+  (die Gesetze des Lebens) und umfasst die Bereiche Verteilung und Ökologie. Seine erste Verwendung dürfte in
+  %em The Lancet
+  aus dem Jahre 1848 gewesen sein –
   = link_to "Bionomia; Or, the Law of Life", "https://www.sciencedirect.com/science/article/pii/S014067360272610X"
-  wherein ΦΙΛΑΛΗΘΗΣ describes their newly coined term as an interplay between the potential energy of
-  %em excitability
-  and a physical manifestation as
-  %em excitants.
-  But, the author also evokes a subtle mysticism beyond a pedestrian balancing of equations. Let's also define
+  –, in dem ΦΙΛΑΛΗΘΗΣ ihren neu geprägten Begriff als ein Zusammenspiel zwischen der potenziellen Energie der
+  %em Erregbarkeit
+  und einer physischen Manifestation als
+  %em Erreger
+  beschreibt. Doch der Autor beschwört auch eine subtile Mystik herauf, die über ein umständliches Abwägen von Gleichungen hinausgeht. Definieren wir
   %em Bionomia
-  as reverence, wonder, agency, refinement, passage, and the energetics of connections.
-  These are all good words to describe the manner of a natural historian.
-  The logo is a stylized quill, caught in the act of signing its autograph on a signature plant leaf.
+  auch als Ehrfurcht, Staunen, Handlungsfähigkeit, Verfeinerung, Durchgang und die Energetik von Verbindungen.
+  Das sind alles gute Worte, um das Verhalten eines Naturhistorikers zu beschreiben.
+  Das Logo ist ein stilisierter Federkiel, der gerade dabei ist, sein Autogramm auf ein Blatt einer Pflanze zu schreiben.

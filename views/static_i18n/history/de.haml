@@ -1,32 +1,36 @@
-- content_for :title, "History"
+- content_for :title, "Geschichte"
 - content_for :jumbotron do
   .jumbotron.jumbotron-fluid.d-flex.flex-wrap
     .mr-auto.p-2
       %h1.h2
-        History
+        Geschichte
 
 .row.mt-4
   .col-12.col-xl-6.mb-3
     .card
       .card-header.border-bottom
         %h4
-          A Rebrand
+          Ein Rebranding
       .card-body.mt-3
-        %p June 15, 2020
-        %p Friends,
+        %p 15. Juni 2020
+        %p Freunde,
         %p
-          I must rebrand Bloodhound Tracker including a new domain name. I stumbled across a paper in June 2020 and I ask that you please set aside about hour or more to read it:
+          ich muss Bloodhound Tracker einen neuen Namen geben, einschließlich eines neuen Domainnamens. Ich bin im Juni 2020 über einen Artikel einer Zeitschrift gestolpert und bitte Sie, sich rund eine Stunde Zeit zu nehmen, um ihn zu lesen:
         %p
-          Parry, T.D., and C.W. Yingling. 2020. Slave Hounds and Abolition in the Americas.
-          %em Past & Present
-          246: 69–108.
+          Parry, T. D. & Yingling, C. W. (2020). Slave Hounds and Abolition in the Americas.
+          = succeed ", " do
+            %em Past & Present
+          = succeed "(1), " do
+            %em 246
+          69–108.
           = link_to "https://doi.org/10.1093/pastj/gtz020", "https://doi.org/10.1093/pastj/gtz020"
         %p.clearfix
           %img.float-left.mr-3{src:"/images/bloodhound_logo.png", alt:"Bloodhound Tracker"}
-          I am horrified by the events in that paper and I am ashamed of my naivety. Bloodhound as a brand and its logo are inexcusable. Natural history museums of the world have
-          = link_to "acknowledged their role", "https://www.nhm.ac.uk/discover/news/2019/july/are-natural-history-museums-inherently-racist.html"
-          in colonialism and the transatlantic slave trade. I reject any whitewashing of this past. All Black and Indigenous People of Colour must feel comfortable and empowered to be here, to participate, to learn, and to lead.
+          Ich bin entsetzt über die Ereignisse in diesem Artikel und schäme mich für meine Naivität. Bloodhound als Marke und ihr Logo sind unentschuldbar. Naturkundemuseen in aller Welt haben sich zu ihrer
+          = succeed "." do
+            = link_to "Rolle im Kolonialismus und im transatlantischen Sklavenhandel bekannt", "https://www.nhm.ac.uk/discover/news/2019/july/are-natural-history-museums-inherently-racist.html"
+          Ich lehne jede Beschönigung dieser Vergangenheit ab. Alle Schwarzen und indigenen People of Colour müssen sich wohl fühlen und die Möglichkeit haben, hier zu sein, teilzunehmen, zu lernen und zu führen.
         %p
-          All links from Bloodhound Tracker redirect to Bionomia. On December 1, 2020, the Bloodhound Tracker site will be entirely eliminated, which ought to provide sufficient time for search indices and sites to update links and to use the new logo.
+          Alle Links von Bloodhound Tracker leiten zu Bionomia weiter. Am 1. Dezember 2020 wird die Bloodhound Tracker-Website vollständig abgeschaltet, so dass Suchmaschinen und Websites genügend Zeit haben, um Links zu aktualisieren und das neue Logo zu verwenden.
         %p
           David P. Shorthouse

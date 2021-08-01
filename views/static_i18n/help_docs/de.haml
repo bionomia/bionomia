@@ -1,145 +1,148 @@
-- content_for :title, "Help Documents"
+- content_for :title, "Hilfedokumentation"
 - content_for :jumbotron do
   .jumbotron.jumbotron-fluid.d-flex.flex-wrap
     .mr-auto.p-2
       %h1.h2
-        Help Documents
+        Hilfedokumentation
 
 %h3.mt-4.mb-3
-  For New Users & Group Settings
+  Für neue Benutzer & Gruppeneinstellungen
 
 .card{style:"max-width: 505px;"}
   %a{href: "http://doi.org/10.5281/zenodo.3908726"}
-    %img.img-fluid.mx-auto.d-block{src:"/images/leachman_auckland_wmm.png", alt:"Leachman help doc for volunteers"}
+    %img.img-fluid.mx-auto.d-block{src:"/images/leachman_auckland_wmm.png", alt:"Leachmans Hilfedokumentation für Freiwillige"}
   .card-body
     %p.citation
-      Siobhan Leachman. (2020, June 26). Auckland Museum Volunteer Instructions for Bionomia. Zenodo. 26pp. PDF
+      Siobhan Leachman. (26. Juni 2020). Auckland Museum Volunteer Instructions for Bionomia. Zenodo. 26 Seiten. PDF (englisch)
       = link_to "https://doi.org/10.5281/zenodo.3908726", "https://doi.org/10.5281/zenodo.3908726"
 
 %h3.mt-4.mb-3
-  Focused Tasks
+  Gezielte Aufgaben
 
 %p.mt-4
-  Scribe
+  Die Bearbeiterin
   = link_to "Siobhan Leachman", url("/0000-0002-5398-7721")
-  (see her
+  (siehe ihren
   = succeed ")" do
-    = link_to "Twitter feed", "https://twitter.com/SiobhanLeachman"
-  also produced a helpful series of step-by-step tweet threads. These are reworked with minor edits as focused tasks below.
+    = link_to "Twitter-Feed", "https://twitter.com/SiobhanLeachman"
+  hat ebenfalls eine hilfreiche Reihe von Schritt-für-Schritt-Tweets verfasst. Diese werden im Folgenden mit geringfügigen Änderungen zu gezielten Aufgaben umgestaltet.
 
 .row.mt-4
   .col-12.col-md-6.mb-3
     .card
       .card-header.border-bottom
         %h4
-          Getting Started with ORCID & Claiming Specimen Records
+          Erste Schritte mit ORCID & Beanspruchen von Exemplar-Datensätzen
       .card-body.overflow-auto.mt-3{style: "max-height: 300px; min-height: 300px;"}
         %p
-          First, you need to get an ORCID identifier. This is because you'll be creating and adding data to the site. So, if you do not have an ORCID, got to
+          Zunächst müssen Sie sich eine ORCID-Kennung zulegen. Dies ist erforderlich, weil Sie Daten erstellen und der Website hinzufügen werden. Wenn Sie also noch kein ORCID haben, rufen Sie
           = link_to "https://orcid.org/register", "https://orcid.org/register"
-          and get one. Please make some information you put into ORCID public such as your employer or add one of your publications. This ensures that someone will know who you are.
-          See the
-          = link_to "Get Started", url("/get-started")
-          page to learn what public details Bionomia draws-in from your ORCID account.
+          auf und führen Sie die Registrierung durch. Bitte machen Sie einige Informationen, die Sie in ORCID eingeben, öffentlich (zum Beispiel Ihren Arbeitgeber) oder fügen Sie eine Ihrer Veröffentlichungen hinzu. Dadurch wird sichergestellt, dass man weiß, wer Sie sind.
+          Auf der Seite
+          = surround "„", "“" do
+            = link_to "Los geht’s", url("/get-started")
+          erfahren Sie, welche öffentlichen Informationen Bionomia von Ihrem ORCID-Konto abruft.
         %p
-          Then, login to Bionomia using your ORCID account.
-          %img.d-block.mt-3.mb-3{src:"/images/login.png", at: "Login button"}
+          Melden Sie sich dann bei Bionomia mit Ihrem ORCID-Konto an.
+          %img.d-block.mt-3.mb-3{src:"/images/login.png", at: "Login-Button"}
 
-          You will first be taken to the Overview page in your profile.
-          If you have collected specimens whose metadata has been loaded into GBIF, you can go to the
-          %em Specimens
-          tab to claim them.
-          %img.d-block.mt-3.mb-3{src:"/images/profile-tabs.png", alt: "profile tabs"}
+          Sie werden zunächst zur Übersichtsseite Ihres Profils weitergeleitet.
+          Wenn Sie Exemplare gesammelt haben, deren Metadaten in GBIF geladen wurden, können Sie diese auf der Registerkarte
+          %em Exemplare
+          beanspruchen.
+          %img.d-block.mt-3.mb-3{src:"/images/profile-tabs.png", alt: "Registerkarten des Profils"}
         %p
-          This will link your specimens to your ORCID identifier, enriching the data and helping to ensure you get credit for your work at collecting or identifying specimens.
-          Claim your specimens by pressing the
-          %em net
-          button for those you have collected, the
-          %em microscope
-          button for those you have identified, or the
-          %em Both
-          button where you have done both.
-          If you did not collect or identify a candidate record that Bionomia found, click the
-          %em Not me
-          button.
+          Dadurch werden Ihre Exemplare mit Ihrem ORCID-Identifikator verknüpft, was die Daten bereichert und dazu beiträgt, dass Ihre Arbeit beim Sammeln oder Identifizieren von Exemplaren anerkannt wird.
+          Beanspruchen Sie Ihre Exemplare, indem Sie auf die Schaltfläche
+          %em Kescher
+          für die von Ihnen gesammelten Exemplare, auf die Schaltfläche
+          %em Mikroskop
+          für die von Ihnen identifizierten Exemplare oder auf
+          %em Beides
+          klicken, wenn Sie beides getan haben.
+          Wenn Sie einen von Bionomia gefundenen Datensatz nicht selbst gesammelt oder identifiziert haben, wählen Sie
+          %em Nicht ich
+          aus.
         %p.mt-3.mb-3
-          %img{src:"/images/button-selectors.png", alt: "Specimen claiming buttons"}
-          %img{src:"/images/not-me.png", alt: "Not me buttons"}
+          %img{src:"/images/button-selectors.png", alt: "Schaltflächen beim Beanspruchen von Exemplaren"}
+          %img{src:"/images/not-me.png", alt: "„Nicht ich“-Schaltflächen"}
 
         %p
-          Don't panic if you make an error! You can rectify it.
-          Go to the
-          %em Claimed
-          subtab to adjust the records you indicated as identified, collected or both.
-          Go to the
-          %em Ignored
-          subtab to reclaim the records you indicated as "Not me".
+          Geraten Sie nicht in Panik, wenn Sie einen Fehler machen! Sie können ihn korrigieren.
+          Gehen Sie zur Unterregisterkarte
+          = succeed "," do
+            %em Beansprucht
+          um die Datensätze anzupassen, die Sie als identifiziert, gesammelt oder beides angegeben haben.
+          Navigieren Sie zur Unterregisterkarte
+          = succeed "," do
+            %em Ignoriert
+          um die Datensätze, die Sie als „Nicht ich“ angegeben haben, neu zu beanspruchen.
 
         %p
-          Once you have claimed your specimen records, press the
-          %em Science Enabled
-          tab.
-          This will show you what papers have used your specimen records in their analyses. This relies on the authors of those papers crediting and citing the download DOI of the GBIF dataset they used.
+          Sobald Sie Ihre Exemplar-Datensätze beansprucht haben, klicken Sie auf die Registerkarte
+          = succeed "." do
+            %em Wissenschaftliche Werke
+          Hier sehen Sie, welche Arbeiten Ihre Exemplar-Datensätze in ihren Analysen verwendet haben. Dies hängt davon ab, ob die Autoren dieser Arbeiten den Download-DOI des von ihnen verwendeten GBIF-Datensatzes angeben.
 
         %p
-          Visit
-          %em Setting & Integrations
-          to make your Bionomia profile publicly available.
-          %img.mt-3.mb-3{src:"/images/settings-integrations.png", alt:"Settings & Integrations"}
-          %img.mt-3.mb-3{src:"/images/make-public.png", alt:"Make profile public"}
+          Besuchen Sie
+          = succeed "," do
+            %em Einstellungen & Integrationen
+          um Ihr Bionomia-Profil öffentlich zugänglich zu machen.
+          %img.mt-3.mb-3{src:"/images/settings-integrations.png", alt:"Einstellungen & Integrationen"}
+          %img.mt-3.mb-3{src:"/images/make-public.png", alt:"Profil öffentlich machen"}
 
   .col-12.col-md-6.mb-3
     .card
       .card-header.border-bottom
         %h4
-          Helping Others
+          Anderen helfen
       .card-body.overflow-auto.mt-3{style:"max-height: 300px; min-height: 300px;"}
         %p
-          So I'm going to start by choosing someone to help. I've logged into Bionomia with my ORCID id & I've pressed
-          %em Help Others
-          button on the top right. I'm now going to pick a country. Yep, New Zealand! I'm going to pick the entomologist George Howes.
+          Ich fange also damit an, jemanden auszuwählen, dem ich helfen kann. Ich habe mich mit meiner ORCID-ID bei Bionomia angemeldet und oben rechts auf die Schaltfläche
+          %em Anderen helfen
+          geklickt. Jetzt wähle ich ein Land aus. Jawohl, Neuseeland! Ich wähle den Entomologen George Howes.
         %p.mt-3.mb-3
-          %img{src:"/images/help-others-link.png", alt:"Help Others button"}
-          %img{src:"/images/countries-help.png", alt:"Countries helping list"}
-          %img{src:"/images/help-new-zealand.png", alt:"Help New Zealand"}
+          %img{src:"/images/help-others-link.png", alt:"„Anderen helfen“-Schaltfläche"}
+          %img{src:"/images/countries-help.png", alt:"Liste der Länder"}
+          %img{src:"/images/help-new-zealand.png", alt:"Neuseeland helfen"}
           %img{src:"/images/george-howes.png", alt:"George Howes"}
         %p
-          The reason I've chosen him is that I started his
-          = succeed "." do
-            = link_to "Wikipedia article", "https://en.wikipedia.org/wiki/George_Howes_(entomologist)"
-          I think he was marvellous and should get credit for his collecting work. His Bionomia page looks like this.
+          Der Grund, warum ich ihn ausgewählt habe, ist, dass ich seinen
+          = link_to "Artikel in der englischsprachigen Wikipedia", "https://en.wikipedia.org/wiki/George_Howes_(entomologist)"
+          begonnen habe. Ich finde, er war großartig und sollte für seine Sammelarbeit gewürdigt werden. Seine Bionomia-Seite sieht wie folgt aus.
           %img.d-block.mt-3.mb-3{src:"/images/helping-george-howes.png", alt:"George Howes"}
-          The first specimen was collected by someone with his initials, at the correct dates, is held in a New Zealand collection.
-          I'm confident he collected it. So, I press the
-          %em net
-          button beside the specimen.
-          %img.d-block.mt-3.mb-3{src:"/images/fenwicki-net.png", alt:"Selecting P. fenwicki"}
-          If I was confident he had collected ALL 25 specimens in this view, I could have pressed the white
-          %em net
-          with black background. That would automatically attribute to him in bulk all these 25 specimen records (but no more).
-          I can even increase the number of specimens on the page up to 250 (bottom-left dropdown) and bulk assign all of them!
+          Das erste Exemplar wurde von jemandem mit seinen Initialen zu einem passenden Zeitpunkt gesammelt und befindet sich in einer neuseeländischen Sammlung.
+          Ich bin mir sicher, dass er es gesammelt hat. Also klicke ich auf den
+          %em Kescher
+          neben dem Exemplar.
+          %img.d-block.mt-3.mb-3{src:"/images/fenwicki-net.png", alt:"P. fenwicki auswählen"}
+          Wenn ich sicher gewesen wäre, dass er ALLE 25 Exemplare in dieser Ansicht gesammelt hatte, hätte ich auf den weißen
+          %em Kescher
+          mit schwarzem Hintergrund klicken können. Das würde ihm automatisch alle 25 Exemplar-Datensätze (nicht mehr, nicht weniger) zuordnen.
+          Ich kann sogar die Anzahl der Exemplare auf der Seite auf bis zu 250 erhöhen (Dropdown-Liste unten links) und dann alle Exemplare einzeln zuordnen!
         %p.mt-3.mb-3
-          %img{src:"/images/bulk-assignment.png", alt:"Bulk assignment buttons"}
-          %img{src:"/images/per-page-dropdown.png", alt:"Per page dropdown"}
+          %img{src:"/images/bulk-assignment.png", alt:"Schaltflächen der Massenzuordnung"}
+          %img{src:"/images/per-page-dropdown.png", alt:"„Pro Seite“-Dropdown"}
         %p
-          But in this case some way down the set there are specimens collected by "G Howes" in NHMUK.
-          I'm unsure whether this is OUR George Howes. If I'm unsure it is him or not I'll have to leave the specimens.
-          %img.d-block.mt-3.mb-3{src:"/images/helping-unsure.png", alt:"Helping unsure"}
-          To try and work out whether it is George I'll click on the scientific name on the specimen.
-          This opens a new tab & takes me to its details in GBIF. Here I can see it's a specimen from the Leith Valley in Dunedin, collected in 1922 by G. Howes.
-          %img.d-block.mt-3.mb-3{src:"/images/helping-gbif.png", alt:"Helping GBIF"}
-          Yep it's our George! So I'll claim those specimens for him.
+          Aber in diesem Fall gibt es ein Stück weiter unten in der Reihe Exemplare, die von „G Howes“ im NHMUK (Naturhistorisches Museum des Vereinigten Königreichs) gesammelt wurden.
+          Ich bin mir nicht sicher, ob es UNSER George Howes ist. Wenn ich mir nicht sicher bin, ob er es ist oder nicht, muss ich die Exemplare liegen lassen.
+          %img.d-block.mt-3.mb-3{src:"/images/helping-unsure.png", alt:"Unsicher"}
+          Um herauszufinden, ob es sich um George handelt, klicke ich auf den wissenschaftlichen Namen des Exemplars.
+          Dies öffnet eine neue Registerkarte und führt mich zu den Details in GBIF. Hier kann ich sehen, dass es sich um ein Exemplar aus dem Leith Valley in Dunedin handelt, das 1922 von G. Howes gesammelt wurde.
+          %img.d-block.mt-3.mb-3{src:"/images/helping-gbif.png", alt:"GBIF helfen"}
+          Jawohl, das ist unser George! Also beanspruche ich diese Exemplare für ihn.
 
         %p
-          BUT you still have to be very careful. I keep an eye on dates. On the next page I see a page that isn't 1921 or 1922.
-          There's a specimen collected in 1937 - still while our George was alive. But again dates - so I click to check.
-          That specimen WASN'T collected by George. It was collected in Bolivia.
+          ABER man muss trotzdem sehr vorsichtig sein. Ich achte auf das Datum. Auf der nächsten Seite sehe ich einen Datensatz, der nicht aus dem Jahr 1921 oder 1922 stammt.
+          Es gibt ein Exemplar, das 1937 gesammelt wurde – noch zu Lebzeiten unseres George. Aber ich habe Zweifel wegen des Datums, also klicke ich zur Überprüfung.
+          Dieses Exemplar wurde NICHT von George gesammelt. Es wurde in Bolivien gesammelt.
           %img.d-block.mt-3.mb-1{src:"/images/parvispina-dates.png", alt:"parvispina 1937"}
           %img.d-block.mb-3{src:"/images/parvispina-gbif.png", alt:"parvispina 1937"}
         %p
-          Further down I see specimens coming from FishBase, but George was an entomologist. I confirm that he didn't collect those specimens either. So I claim the specimens he did collect and press the
-          %em Not them
-          button for the one's he didn't collect or identify.
+          Weiter unten sehe ich Exemplare von FishBase, aber George war Entomologe. Ich bestätige, dass er auch diese Exemplare nicht gesammelt hat. Also beanspruche ich die Exemplare, die er gesammelt hat, und klicke auf
+          %em „Nicht er/sie“
+          bei denjenigen Exemplaren, die er weder gesammelt noch identifiziert hat.
           %img.d-block.mt-3.mb-3{src:"/images/fishbase-not-them.png", alt:"parvispina 1937"}
 
 .row.mt-4
@@ -147,11 +150,11 @@
     .card
       .card-header.border-bottom
         %h4
-          Creating a Wikidata Item
+          Ein Wikidata-Objekt erstellen
       .card-body.overflow-auto.mt-3{style: "max-height: 300px; min-height: 300px;"}
         %p
-          Once you've mastered the art of attributing specimens in Bionomia you may want to try to get more challenging collectors like Miss Blackler into Bionomia.
-          This is my favourite area of work as it's like a detective hunt. And I've got lots of friends to help!
+          Wenn Sie die Kunst der Zuordnung von Exemplaren in Bionomia gemeistert haben, können Sie versuchen, anspruchsvollere Sammler wie Miss Blackler in Bionomia zu finden.
+          Das ist mein Lieblingsarbeitsbereich, denn es ist wie eine Detektivjagd. Und ich habe viele Freunde, die mir dabei helfen!
           %blockquote.twitter-tweet
             %p{lang:"en", dir:"ltr"}
               So when I come across a collector with the name &quot;Miss xxx&quot; and very little else is known about her I try and get her into Wikidata. As
@@ -160,151 +163,151 @@
               = link_to "https://t.co/Eoi0rvs8Uh", "https://t.co/Eoi0rvs8Uh"
               = link_to "https://t.co/fEvLIqsTES", "https://pic.twitter.com/fEvLIqsTES"
             &mdash; Siobhan (@SiobhanLeachman)
-            = link_to "May 3, 2020", "https://twitter.com/SiobhanLeachman/status/1256769966335901696?ref_src=twsrc%5Etfw"
+            = link_to "3. Mai 2020", "https://twitter.com/SiobhanLeachman/status/1256769966335901696?ref_src=twsrc%5Etfw"
           %script{async: true, src:"https://platform.twitter.com/widgets.js", charset:"utf-8"}
         %p
-          I came across "Miss Blackler" as I had seen her in the
+          Ich bin auf „Miss Blackler“ gestoßen, da ich sie im Index of Botanists von
           = link_to "@HarvardHerbaria", "https://twitter.com/HarvardHerbaria"
-          Index of Botanists.
-          She collected in Oregon and California. I created a
+          gesehen hatte.
+          Sie sammelte in Oregon und Kalifornien. Ich habe ein Objekt in
           = link_to "@Wikidata", "https://twitter.com/wikidata"
-          item for her and added the HUH identifier.
+          für sie erstellt und die HUH-Kennung („Harvard University Herbaria“) hinzugefügt.
         %p.mt-3.mb-3
           %img.mt-3.mb-3{src:"/images/huh.png", alt:"Harvard Index of Botanists"}
-          %img.mt-3.mb-3{src:"/images/wikidata-screen.png", alt:"Wikidata screen capture"}
+          %img.mt-3.mb-3{src:"/images/wikidata-screen.png", alt:"Wikidata-Screenshot"}
         %p
-          But to add her to Bionomia I need to get a date of death. And that's where it can get tricky. Our Miss Blackler collected in Olympia and
+          Aber um sie zu Bionomia hinzuzufügen, brauche ich ein Sterbedatum. Und das ist der Punkt, an dem es knifflig werden kann. Unsere Miss Blackler hat in Olympia gesammelt, und
           = link_to "@metacoretechs", "https://twitter.com/metacoretechs"
-          found a reference to a Lydia Hooper Blackler in the Internet Archive.
-          %img.d-block.mt-3.mb-3{src:"/images/blackler-ia.png", alt:"Blackler Internet Archive"}
+          hat im Internet Archive einen Hinweis auf eine gewisse Lydia Hooper Blackler gefunden.
+          %img.d-block.mt-3.mb-3{src:"/images/blackler-ia.png", alt:"Blackler im Internet Archive"}
 
         %p
-          Based on info
+          Nach den Informationen, die
           = link_to "@idbdeb", "https://twitter.com/idbdeb"
-          found, Lydia Hooper Blackler lived in Olympia, remained unmarried, travelled & lived in California, where other specimens of hers were collected,
+          gefunden hat, lebte Lydia Hooper Blackler in Olympia, blieb unverheiratet und reiste und lebte in Kalifornien, wo andere Exemplare von ihr gesammelt wurden –
           = succeed "." do
             = link_to "https://www.ashefamily.info/ashefamily/1874.htm", "https://www.ashefamily.info/ashefamily/1874.htm"
-          As a result I'm confident that this is our "Miss Blackler". She's also in
+          Daher bin ich zuversichtlich, dass dies unsere „Miss Blackler“ ist. Sie ist auch in
           = succeed "." do
             = link_to "@FindaGrave", "https://twitter.com/FindaGrave"
           %img.d-block.mt-3.mb-3{src:"/images/find-grave.png", alt:"Find a Grave"}
-          So now I update her Wikidata item.
-          I'll add as much information as we've found, add as many references as I can so that other researchers can track what we've done.
-          I'll include the important date of death.
-          %img.d-block.mt-3.mb-3{src:"/images/wikidata-death.png", alt:"Wikidata date of death"}
-          I've also found a public domain image of her via
+          Also aktualisiere ich jetzt ihren Wikidata-Eintrag.
+          Ich füge so viele Informationen hinzu, wie wir nur finden konnten, und beziehe so viele Referenzen wie möglich mit ein, damit andere Forscher nachvollziehen können, was wir getan haben.
+          Ich ergänze außerdem das wichtige Sterbedatum.
+          %img.d-block.mt-3.mb-3{src:"/images/wikidata-death.png", alt:"Wikidata Sterbedatum"}
+          Ich habe auch ein gemeinfreies Bild von ihr über
           = link_to "@OrHist", "https://twitter.com/OrHist"
-          = succeed "." do
-            = link_to "https://digitalcollections.ohs.org/blackler-lydia-hooper", "https://digitalcollections.ohs.org/blackler-lydia-hooper"
-          Before I add her to Bionomia I'll download this and upload it to
-          = succeed "." do
-            = link_to "@Wikicommons", "https://twitter.com/WikiCommons"
-          I can then add it to her Wikidata item. This in turn will be pulled into Bionomia when I add her to the site.
-          %img.d-block.mt-3.mb-3{src:"/images/blackler-image.png", alt:"Photo of Blackler"}
+          gefunden:
+          = link_to "https://digitalcollections.ohs.org/blackler-lydia-hooper", "https://digitalcollections.ohs.org/blackler-lydia-hooper"
+          Bevor ich sie zu Bionomia hinzufüge, werde ich es herunterladen und auf
+          = link_to "@Wikicommons", "https://twitter.com/WikiCommons"
+          hochladen. Dann kann ich es zu ihrem Wikidata-Objekt hinzufügen. Dieser wiederum wird in Bionomia eingefügt, wenn ich sie der Site hinzufüge.
+          %img.d-block.mt-3.mb-3{src:"/images/blackler-image.png", alt:"Foto von Blackler"}
         %p
-          Now I add her to Bionomia. I take her Wikidata item Q93018256 and go to the site.
-          I press the
-          %em Help Others
-          button top right, and then the
-          %em Add Someone
-          tab. I add the Wikidata Q item number in and press the green
-          %em Add
-          button.
+          Jetzt füge ich sie zu Bionomia hinzu. Ich nehme ihr Wikidata-Objekt Q93018256 und gehe auf die Site.
+          Ich klicke oben rechts auf die Schaltfläche
+          %em Anderen helfen
+          und dann auf die Registerkarte
+          = succeed "." do
+            %em Jemanden hinzufügen
+          Ich gebe die Q-Nummer des Wikidata-Objekts ein und klicke auf die grüne Schaltfläche
+          = succeed "." do
+            %em Hinzufügen
         %p.mt-3.mb-3
-          %img{src:"/images/help-others-link.png", alt:"Help others link"}
-          %img{src:"/images/help-tabs.png", alt:"Helping tabs"}
-          %img{src:"/images/add-someone.png", alt:"Add someone"}
+          %img{src:"/images/help-others-link.png", alt:"„Anderen helfen“-Link"}
+          %img{src:"/images/help-tabs.png", alt:"Registerkarten der Helfen-Seite"}
+          %img{src:"/images/add-someone.png", alt:"„Jemanden hinzufügen“-Seite"}
         %p
-          She's then added to Bionomia, it's just a matter of clicking on her and then attributing specimens like we did previously for George Howes.
-          %img.mt-3.mb-3{src:"/images/help-blackler.png", alt:"Helping Blackler"}
-          Don't forget to press
-          %em Make Public
+          Sie wird dann zu Bionomia hinzugefügt. Sie müssen nur noch auf sie klicken und dann Exemplare zuordnen, wie wir es zuvor bei George Howes getan haben.
+          %img.mt-3.mb-3{src:"/images/help-blackler.png", alt:"Blackler helfen"}
+          Vergessen Sie nicht, auf
+          %em Veröffentlichen
+          zu klicken, sobald Sie einige Exemplare zugeordnet haben.
           %img.d-block.mt-3.mb-3{src:"/images/make-public-button.png"}
-          \...once you've attributed a few specimens. You don't HAVE to get to 100%, anything is better than nothing.
+          Sie brauchen nicht 100 % zu erreichen, denn auch weniger ist immer noch besser als nichts.
 
   .col-12.col-md-6.mb-3
     .card
       .card-header.border-bottom
         %h4
-          Uploads to Attribute Records in Bulk
+          Uploads für die Massenzuordnung von Datensätzen
       .card-body.overflow-auto.mt-3{style:"max-height: 300px; min-height: 300px;"}
         %p
-          Today I thought I'd share a "how to" for bulk uploads.
-          After only a day of doing these I feel like I need the extra practise.
-          Plus some other folk have mentioned they'd like to join me in attempting this but don't know how.
-          So here it goes!
+          Heute möchte ich Ihnen eine Anleitung für Massenuploads geben.
+          Nach nur einem Tag, an dem ich das gemacht habe, habe ich das Gefühl, dass ich die zusätzliche Übung brauche.
+          Außerdem haben einige andere Leute erwähnt, dass sie das gerne mit mir versuchen würden, aber nicht wissen, wie das geht.
+          Also los geht’s!
         %p
-          First you have to find a person with specimens that need uploading.
-          I'm going to pick the fabulous Alexander Wetmore.
-          I've previously transcribed his photo albums with
+          Zuerst sollten Sie eine Person mit Exemplaren finden, die hochgeladen werden müssen.
+          Ich entscheide mich für den fabelhaften Alexander Wetmore.
+          Ich habe seine Fotoalben bereits mit
+          = link_to "@TranscribeSI", "https://twitter.com/TranscribeSI"
+          transkribiert. Er war ein produktiver Sammler und braucht etwas Liebe von
           = succeed "." do
-            = link_to "@TranscribeSI", "https://twitter.com/TranscribeSI"
-          He was a prolific collector and needs some
-          = link_to "@BionomiaTrack", "https://twitter.com/BionomiaTrack"
-          love.
+            = link_to "@BionomiaTrack", "https://twitter.com/BionomiaTrack"
         %p.mt-3.mb-3
-          %img.align-top{src:"/images/wetmore-jumbotron.png", alt: "Wetmore overview"}
+          %img.align-top{src:"/images/wetmore-jumbotron.png", alt: "Wetmore – Überblick"}
         %p
-          So I go to the "Bulk Attributions" tab on his profile page. And then press the blue "Download" csv file button.
+          Also gehe ich auf die Registerkarte „Massenattributionen“ auf seiner Profilseite und drücke dann auf die blaue Schaltfläche „Herunterladen“.
         %p.mt-3.mb-3
-          %img.align-top{src:"/images/wetmore-download.png", alt:"Wetmore download"}
-          %img.align-top{src:"/images/download-buttons.png", alt:"Download buttons"}
+          %img.align-top{src:"/images/wetmore-download.png", alt:"Wetmore – Download"}
+          %img.align-top{src:"/images/download-buttons.png", alt:"Download-Schaltflächen"}
         %p
-          This downloads a csv file of specimen data.
-          I open up the file.
-          Now I'm going to be using Excel but you may use something else.
-          When opened the file looks like this in Excel.
+          Damit wird eine CSV-Datei mit den Exemplardaten heruntergeladen.
+          Ich öffne die Datei.
+          Ich werde nun Excel verwenden, aber Sie können auch ein anderes Programm benutzen.
+          Wenn die Datei geöffnet wird, sieht sie in Excel so aus.
         %p.mt-3.mb-3
-          %img.align-top{src:"/images/excel-download.jpg", alt:"Excel download"}
+          %img.align-top{src:"/images/excel-download.jpg", alt:"Excel-Download"}
         %p
-          I'll go through the important columns.
-          The first is the "action" column.
-          This is where you'll put "recorded" if the specimen was collected by Alexander, or "identified" if it was identified by him.
-          If he did both you add "recorded, identified".
-          Note the comma separating the two!
+          Ich werde die wichtigsten Spalten durchgehen.
+          Die erste ist die „action“-Spalte.
+          Hier tragen Sie „recorded“ ein, wenn das Exemplar von Alexander gesammelt wurde, oder „identified“, wenn es von ihm identifiziert wurde.
+          Wenn er beides getan hat, fügen Sie „recorded, identified“ hinzu.
+          Beachten Sie das Komma, das die beiden voneinander trennt!
         %p.mt-3.mb-3
-          %img.align-top{src:"/images/recorded-identified.png", alt:"recorded identified"}
+          %img.align-top{src:"/images/recorded-identified.png", alt:"recorded/identified"}
         %p
-          You can see whether Alexander recorded or identified specimens by checked the "recordedBy" or "identifiedBy" columns in the spreadsheet.
+          Sie können sehen, ob Alexander Exemplare erfasst oder identifiziert hat, indem Sie die Spalten „recordedBy“ oder „identifiedBy“ im Tabellenblatt überprüfen.
         %p.mt-3.mb-3
           %img.align-top{src:"/images/recordedby.png", alt:"recordedBy"}
           %img.align-top{src:"/images/identifiedby.png", alt:"identifiedBy"}
         %p
-          The other column that may be of use is the "Not Me" column.
-          If it isn't your collector that either collected or identified the specimen you can add "True" to this column.
+          Die andere Spalte, die von Nutzen sein kann, ist die „Not me“-Spalte.
+          Wenn es nicht Ihr Sammler ist, der das Exemplar entweder gesammelt oder identifiziert hat, können Sie in dieser Spalte „True“ eintragen.
         %p.mt-3.mb-3
           %img.align-top{src:"/images/notme.png", alt:"Not me"}
         %p
-          Once you've got your spreadsheet ready with some claims added you can then upload it into Bionomia.
-          I'm just going to do a few so I can show you what to do.
-          I'm going to assume you have basic Excel skills.
-          All I'm going to do is use the sort & filter and search recordedBy.
+          Sobald Sie Ihr Tabellenblatt mit einigen Beanspruchungen fertiggestellt haben, können Sie es in Bionomia hochladen.
+          Ich werde nur ein paar davon machen, um Ihnen zu zeigen, was zu tun ist.
+          Ich gehe davon aus, dass Sie über grundlegende Excel-Kenntnisse verfügen.
+          Ich werde lediglich die Funktion Sortieren und Filtern verwenden und „recordedBy“ durchsuchen.
         %p.mt-3.mb-3
-          %img.align-top{src:"/images/sort-filter.png", alt:"Sort and filter"}
+          %img.align-top{src:"/images/sort-filter.png", alt:"Sortieren und Filtern"}
         %p
-          I'll add "recorded" in the "action" column to all those lines.
-          I'll then check the "identifiedBy" column to make sure he didn't identify any of the specimens.
-          If he did I'll add a comma and "identified" to those specimens he also identified.
+          Ich füge „recorded“ in der „action“-Spalte zu all diesen Zeilen hinzu.
+          Dann überprüfe ich die Spalte „identifiedBy“, um sicherzustellen, dass er keines der Exemplare identifiziert hat.
+          Falls doch, füge ich bei den Exemplaren, die er ebenfalls identifiziert hat, ein Komma und „identified“ hinzu.
         %p.mt-3.mb-3
-          %img.align-top{src:"/images/excel-action.png", alt:"Adding action"}
+          %img.align-top{src:"/images/excel-action.png", alt:"„action“ hinzufügen"}
         %p
-          Now obviously you can keep on working on the spreadsheet.
-          But I'll just leave it there so I can show you the next steps.
-          What I do next may not be the best way but it works.
-          I save the spreadsheet and a warning pops up.
-          I press "No" on the warning and save as an Excel workbook.
+          Jetzt können Sie natürlich weiter an der Tabelle arbeiten.
+          Aber ich lasse es einfach so stehen, damit ich Ihnen die nächsten Schritte zeigen kann.
+          Was ich als Nächstes mache, ist vielleicht nicht der beste Weg, aber es funktioniert.
+          Ich speichere die Kalkulationstabelle und ein Dialogfenster erscheint.
+          Ich klicke auf „Nein“ und speichere als Excel-Arbeitsmappe.
         %p.mt-3.mb-3
-          %img.align-top{src:"/images/csv-dialog.jpg", alt:"CSV dialog"}
-          %img.align-top{src:"/images/csv-save-workbook.jpg", alt:"Saving csv as workbook"}
+          %img.align-top{src:"/images/csv-dialog.jpg", alt:"CSV-Dialogfenster"}
+          %img.align-top{src:"/images/csv-save-workbook.jpg", alt:"CSV als Arbeitsmappe speichern"}
         %p
-          I then press "save as" and choose the file format CSV UTF-8 format.
-          I'll rename the file as Q34558Alex.csv.
+          Ich klicke dann auf „Speichern unter“ und wähle das Dateiformat „CSV UTF-8 (durch Trennzeichen getrennt) (*.csv)“.
+          Ich benenne die Datei in Q34558Alex.csv um.
         %p.mt-3.mb-3
-          %img.align-top{src:"/images/save-utf8.jpg", alt:"Save as UTF-8"}
+          %img.align-top{src:"/images/save-utf8.jpg", alt:"Als UTF-8 speichern"}
         %p
-          Then I go back to Bionomia - Alexander's profile, the Bulk Attributions tab and press "Choose file".
-          I choose the file I've just renamed and saved as a csv file. Then I press submit.
+          Dann gehe ich zurück zu Bionomia auf Alexanders Profil, zur Registerkarte „Massenattributionen“ und klicke auf „Datei auswählen“.
+          Ich wähle die Datei, die ich gerade umbenannt und als CSV-Datei gespeichert habe. Dann klicke ich auf „Absenden“.
         %p
-          And the 56 records that I've done will be added.
-          The biggest batch you can do is 10,000.
-          So there you go and happy bulk uploading of data!
+          Und die 56 Datensätze, die ich gemacht habe, werden hinzugefügt.
+          Die maximale Anzahl an Datensätzen beträgt übrigens 10.000.
+          Das war’s also auch schon. Viel Spaß beim Hochladen von Massendaten!

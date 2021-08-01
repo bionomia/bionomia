@@ -1,114 +1,118 @@
-- content_for :title, "For Data Managers"
+- content_for :title, "Für Daten-Manager"
 - content_for :jumbotron do
   .jumbotron.jumbotron-fluid.d-flex.flex-wrap
     .mr-auto.p-2
       %h1.h2
-        For Data Managers
+        Für Daten-Manager
 
 %div.container-fluid
 
   %h3
-    Background
+    Hintergrund
   %p
-    Bionomia
-    = link_to "scribes", url("/scribes")
-    attribute specimen records to the collectors and determiners represented in your dataset(s) by linking natural history specimen records you publish to
+    Die
+    = link_to "Bearbeiter", url("/scribes")
+    bei Bionomia ordnen die Belegexemplare den Sammlern und Bestimmern zu, die in Ihrem Datensatz bzw. Ihren Datensätzen vertreten sind, indem sie die Exemplare, die Sie in
     = link_to "GBIF", "https://gbif.org"
-    to their
+    veröffentlichen, mit ihren Q-Nummern in
     = link_to "Wikidata", "https://www.wikidata.org"
-    Q numbers or
-    = link_to "ORCID", "https://orcid.org"
-    IDs. People with ORCID IDs also claim records for the specimens they themselves collected or identified. Wikidata and ORCID identifiers have associated resources and services that are unquestionably useful for collections ranging from disambiguating people names to gauging the impact your collection has on the academic community.
+    oder
+    = succeed "-IDs" do
+      = link_to "ORCID", "https://orcid.org"
+    verknüpfen. Personen mit ORCID-IDs beanspruchen auch Datensätze für die Exemplare, die sie selbst gesammelt oder identifiziert haben. Wikidata- und ORCID-Identifikatoren haben zugehörige Ressourcen und Dienste, die für Sammlungen zweifelsohne nützlich sind – von der eindeutigen Identifizierung von Personennamen bis hin zur Messung des Einflusses Ihrer Sammlung auf die wissenschaftliche Gemeinschaft.
 
   .row
     .col-12.col-md-6
       %h3
-        Engaging With Your Community
+        Engagement in Ihrer Gemeinschaft
 
       %p
-        Bionomia scribes are a welcoming, international group of enthusiasts who are driven to help you attribute specimen records to the collectors and determiners represented in your dataset(s). They work tirelessly to enhance entries in
+        Die Bionomia-Bearbeiter sind eine freundliche, internationale Gruppe von Enthusiasten, die Ihnen dabei helfen wollen, Exemplare den Sammlern und Bestimmern zuzuordnen, die in Ihrem Datensatz bzw. Ihren Datensätzen vertreten sind. Sie arbeiten unermüdlich daran, Einträge in
         = link_to "Wikidata", "https://www.wikidata.org"
-        by adding links and attributes like birth and death dates to deceased natural historians. They are also advocates of
+        zu verbessern, indem sie Links und Attribute wie Geburts- und Sterbedaten zu verstorbenen Naturhistorikern hinzufügen. Sie sind auch Vertreter von
         = link_to "ORCID", "https://orcid.org"
-        and can help you campaign for its adoption at your institution.
-        The easiest way to seek help, guidance, or to appreciate the scope of their activities is to follow
+        und können Ihnen dabei helfen, sich für dessen Einführung in Ihrer Einrichtung einzusetzen.
+        Der einfachste Weg, um Hilfe und Anleitung zu erhalten oder den Umfang ihrer Aktivitäten zu verstehen, ist,
         = link_to "@BionomiaTrack", "https://twitter.com/BionomiaTrack"
-        on Twitter. Come thank the scribes for their efforts and to share in conversations that will lead to rewarding new connections.
+        auf Twitter zu folgen. Nutzen Sie die Gelegenheit, sich bei den Bearbeitern für ihre Arbeit zu bedanken und an Gesprächen teilzunehmen, die zu lohnenden neuen Verbindungen führen werden.
 
       %p
-        %img.img-fluid{src:"/images/roundtrip.png", alt: "Data round trip"}
+        %img.img-fluid{src:"/images/roundtrip.png", alt: "Datenrundreise"}
 
     .col-12.col-md-6
-      %a.twitter-timeline{"data-width": 500, "data-height": 750, href:"https://twitter.com/BionomiaTrack?ref_src=twsrc%5Etfw"} Tweets by BionomiaTrack
+      %a.twitter-timeline{"data-width": 500, "data-height": 750, href:"https://twitter.com/BionomiaTrack?ref_src=twsrc%5Etfw"} Tweets von BionomiaTrack
       %script{async: true, src:"https://platform.twitter.com/widgets.js", charset:"utf-8"}
 
   .row
     .col-12.col-md-6
 
       %h3
-        Incorporating Enhancements
+        Einbindung von Verbesserungen
 
       %p
-        Every few weeks, Bionomia refreshes a subset of the Darwin Core data you publish to
-        = succeed "." do
-          = link_to "GBIF", "https://gbif.org"
-        See
-        = link_to "how it works", url("/how-it-works")
-        for more details.
+        Alle paar Wochen aktualisiert Bionomia eine Teilmenge der Darwin Core-Daten, die Sie in
+        = link_to "GBIF", "https://gbif.org"
+        veröffentlichen. Weitere Einzelheiten finden Sie auf der Seite
+        = surround "„", "“." do
+          = link_to "Wie es funktioniert", url("/how-it-works")
 
       .media.mb-3.mt-3.d-flex.flex-wrap.flex-column.flex-md-row
         %a{href:"https://frictionlessdata.io/"}
           %img.mb-3.mr-3{src:"/images/frictionless-color-logo.png", alt:"Frictionless Data"}
         .media-body
           %p
-            Search for your
-            = link_to "dataset(s)", url("/datasets")
-            and find the link to a
-            = link_to "Frictionless Data", "https://frictionlessdata.io/"
-            package. These zipped, UTF-8 encoded relational files are similar to the Darwin Core Archives you produced for GBIF. They differ in that they more efficiently represent
-            %em many:many
-            relationships. There is also a breadth of
-            = link_to "open software libraries", "https://frictionlessdata.io/software/"
-            in many programming languages that read, validate, and process Frictionless Data. You can also extract the zipped package and import the UTF-8 encoded csv files into any spreadsheet software, provided the files are not excessively large.
+            Suchen Sie nach
+            = link_to "Ihrem Datensatz bzw. Ihren Datensätzen", url("/datasets")
+            und finden Sie den Link zu einem
+            = succeed "-Paket." do
+              = link_to "Frictionless Data", "https://frictionlessdata.io/"
+            Diese gezippten, UTF-8-kodierten, relationalen Dateien ähneln den Darwin Core Archives, die Sie für GBIF erstellt haben. Der Unterschied besteht darin, dass sie
+            = succeed "-Beziehungen" do
+              %em many:many
+            effizienter darstellen. Außerdem gibt es eine Vielzahl
+            = link_to "offener Softwarebibliotheken", "https://frictionlessdata.io/software/"
+            in vielen Programmiersprachen, die Frictionless Data lesen, validieren und verarbeiten können. Sie können das gezippte Paket auch entpacken und die UTF-8-kodierten CSV-Dateien in eine beliebige Tabellenkalkulationssoftware importieren, sofern die Dateien nicht übermäßig groß sind.
 
       %p
-        The packages contain a standard
+        Die Pakete enthalten eine Standard-Metadaten-Datei
         %em datapackage.json
-        metadata file and four zipped csv files:
-        %em users.csv.zip, occurrences.csv.zip, problem_collector_dates.csv.zip,
-        and
+        und vier gezippte CSV-Dateien:
+        %em users.csv.zip, occurrences.csv.zip, problem_collector_dates.csv.zip
+        und
         %em attributions.csv.zip.
-        The
+        Die Metadaten-Datei
         %em datapackage.json
-        metadata file contains a "created" timestamp for when the package was last produced. Regeneration of these packages typically occurs once every few weeks but if you would like a more up-to-date version, please
+        enthält einen „created“-Zeitstempel, der angibt, wann das Paket zuletzt erstellt wurde. Diese Pakete werden in der Regel alle paar Wochen neu erstellt, aber wenn Sie eine aktuellere Version wünschen,
         = succeed "." do
-          = link_to "create a ticket", "https://github.com/bionomia/bionomia/issues"
-        The
+          = link_to "erstellen Sie bitte ein Ticket", "https://github.com/bionomia/bionomia/issues"
+
+        Die Datei
         %em users.csv.zip
-        file contains a list of unique users that were attributed or have claimed specimen records as their own in your dataset. It also contains their full names, aliases,
-        = link_to "ORCID", "https://orcid.org"
-        IDs or
+        enthält eine Liste eindeutiger Benutzer, die Exemplar-Datensätze in Ihrem Datensatz als ihre eigenen beansprucht haben oder ihnen zugeordnet wurden. Sie enthält auch ihre vollständigen Namen, Aliasnamen,
+        = succeed "-IDs" do
+          = link_to "ORCID", "https://orcid.org"
+        oder Q-Nummern in
         = link_to "Wikidata", "https://www.wikidata.org"
-        Q numbers plus birth and death dates for the latter.
-        The
+        sowie Geburts- und Sterbedaten für Letztere.
+        Die Datei
         %em occurrences.csv.zip
-        file contains the subset of Darwin Core fields from your specimen records for which attributions have been made.
-        The
+        enthält die Teilmenge der Darwin Core-Felder aus Ihren Exemplar-Datensätzen, für die Zuordnungen vorgenommen wurden.
+        Die Datei
         %em problem_collector_dates.csv.zip
-        file contains a list of occurrence records whose eventDate is earlier than a collector's birthDate or later than their deathDate.
-        Finally, the
+        enthält eine Liste der Auftretensdatensätze, deren eventDate vor dem birthDate (Geburtsdatum) eines Sammlers oder nach seinem deathDate (Sterbedatum) liegt.
+        Schließlich ist die Datei
         %em attributions.csv.zip
-        file is a join table for the other two csv files and also contains columns for who made the attribution, their ORCID ID, and a timestamp for when they made the attribution.
+        eine Verknüpfungstabelle für die beiden anderen CSV-Dateien und enthält ebenfalls Spalten für die Person, die die Zuordnung vorgenommen hat, ihre ORCID-ID und einen Zeitstempel für den Zeitpunkt, zu dem sie die Zuordnung vorgenommen hat.
 
     .col-12.col-md-6
 
       %h3
-        Assessing Data Quality
+        Bewertung der Datenqualität
 
       %p
-        In the set of "Help Others" pages where specimen records are attributed to collectors and determiners, there are tabs to Fix and Visualize records.
-        Here, a collector's birth and death dates are cross-referenced against those on their specimen records.
-        Countries on maps and date ranges on charts can also be clicked to execute dynamic filters.
-        In time and as more attributions are made, data quality reports like these on individuals' specimen records may be rolled-up to dataset-level reports.
+        Auf den „Anderen helfen“-Seiten, auf denen Exemplar-Datensätze Sammlern und Bestimmern zugeordnet sind, gibt es Registerkarten zur Korrektur und Visualisierung von Datensätzen.
+        Hier werden die Geburts- und Sterbedaten eines Sammlers mit den Daten in seinen Exemplar-Datensätzen abgeglichen.
+        Länder auf Karten und Datumsbereiche auf Diagrammen können ebenfalls angeklickt werden, um dynamische Filter auszuführen.
+        Mit der Zeit und je mehr Zuordnungen vorgenommen werden, können Datenqualitätsberichte wie diese über Exemplar-Datensätze von Einzelpersonen zu Berichten auf Datensatzebene erweitert werden.
 
       = haml_i18n :'reconcile', layout: false

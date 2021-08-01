@@ -1,19 +1,19 @@
-- content_for :title, "Get Started"
+- content_for :title, "Los geht’s"
 - content_for :jumbotron do
   .jumbotron.jumbotron-fluid.d-flex.flex-wrap
     .mr-auto.p-2
       %h1.h2
-        Get Started
+        Los geht’s
       %p.lead.text-muted
-        Four steps to claim the specimens you collected or identified and to help acknowledge your peers, mentors, and organizations.
+        Vier Schritte, um die von Ihnen gesammelten oder identifizierten Exemplare für sich zu beanspruchen und um Ihre Kollegen, Mentoren und Organisationen zu würdigen.
 
 
-%h3 Step 1: Authenticate via ORCID
+%h3 Schritt 1: Authentifizieren Sie sich über ORCID
 .ml-3.mt-4
   .media.mb-3.mt-3.d-flex.flex-wrap.flex-column.flex-md-row
     %img.mb-3.mr-3{src:"/images/orcid-logo.png", alt:"ORCID"}
     .media-body
-      is a nonprofit organization helping create a world in which all who participate in research, scholarship and innovation are uniquely identified and connected to their contributions and affiliations, across disciplines, borders, and time.
+      ist eine gemeinnützige Organisation, die dazu beiträgt, eine Welt zu schaffen, in der alle an Forschung, Wissenschaft und Innovation Beteiligten eindeutig identifiziert und mit ihren Beiträgen und Zugehörigkeiten in Verbindung gebracht werden können – über Disziplinen, Grenzen und Zeit hinweg.
 
   - if !authorized?
     %form{action: "/auth/orcid?lang=#{I18n.locale}", method: "POST" }
@@ -23,130 +23,133 @@
           = I18n.t('home.orcid_login')
         %input{type:"hidden", name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
 
-  %p Suggested details to make publicly visible in your ORCID account
+  %p Folgende Angaben sollten Sie in Ihrem ORCID-Konto öffentlich sichtbar machen:
 
   %ul
     %li
-      Full name
+      Vollständiger Name
       %small
         %sup a
     %li
-      %em Also known as
-      names
+      = succeed "-Namen" do
+        %em Auch-bekannt-als
       %small
-        %sup a,b
+        %sup a b
     %li
-      Biography
+      Biografie
       %small
         %sup a
     %li
-      Country
+      Land
       %small
         %sup a
     %li
-      Keywords
+      Schlüsselwörter
       %small
         %sup a
     %li
-      Employment
+      Beschäftigung
       %small
-        %sup a,c
+        %sup a c
     %li
-      Education and qualifications
+      Ausbildung und Qualifikationen
       %small
-        %sup a,c
+        %sup a c
 
   .bd-callout.bd-callout-bionomia
     %div
       %small
         %sup a
-        Periodically and automatically refreshed in Bionomia.
+        Regelmäßig und automatisch in Bionomia aktualisiert.
     %div
       %small
         %sup b
-        Alternate names, inclusive of nicknames and family names are useful to help Bionomia find your specimens,
-        %em eg
-        Miles Zhang, Y. Miles Zhang, Yuanmeng	Zhang
+        Alternative Namen, einschließlich Spitznamen und Familiennamen, sind nützlich, damit Bionomia Ihre Exemplare finden kann, bspw. Miles Zhang, Y. Miles Zhang, Yuanmeng Zhang.
     %div
       %small
         %sup c
-        If you include start and end dates for Employment and/or Education and qualifications, these are cross-referenced against dates on specimens you collected or identified and help your organizations measure their impact. When selecting your organizations, ensure that their
-        %strong Organization Identifiers
-        %em eg
-        Ringgold or GRID have been captured in your ORCID account.
+        Wenn Sie Anfangs- und Enddaten für die Beschäftigung und/oder Ausbildung und Qualifikationen angeben, werden diese mit den Daten der von Ihnen gesammelten oder identifizierten Exemplare abgeglichen, was Ihren Organisationen hilft, ihre Wirkung zu messen. Stellen Sie bei der Auswahl Ihrer Organisationen sicher, dass deren
+        = succeed "," do
+          %strong Organisationskennungen
+        z. B. Ringgold oder GRID, in Ihrem ORCID-Konto erfasst wurden.
 
 %h3
-  Step 2: Visit the Specimens tab
+  Schritt 2: Besuchen Sie die Registerkarte „Exemplare“
 
 .ml-3.mt-4
-  %img.mb-3.img-fluid{src:"/images/profile-tabs.png", alt:"Bionomia profile tabs"}
+  %img.mb-3.img-fluid{src:"/images/profile-tabs.png", alt:"Profil-Registerkarten auf Bionomia"}
   %p
-    Once authenticated via ORCID, Bionomia first shows you an
+    Nach der Authentifizierung über ORCID zeigt Ihnen Bionomia zunächst eine
     - if !authorized?
-      Overview
+      Übersicht
     - else
-      = link_to "Overview", url("/profile")
-    of your profile. It pulls your full name and other details (see above) from your ORCID account, which you may refresh at any time. Click the
-    - if !authorized?
-      Discovered
-    - else
-      = link_to "Discovered", url("/profile/candidates")
-    tab to see a list of candidate specimens. Much like an email inbox, Bionomia shows the number of specimens that await action.
-    Specimen data are fully refreshed from the
+      = link_to "Übersicht", url("/profile")
+    über Ihr Profil. Sie bezieht Ihren vollständigen Namen und andere Details (siehe oben) aus Ihrem ORCID-Konto, das Sie jederzeit aktualisieren können, ein. Klicken Sie die Registerkarte
+    = surround "„", "“" do
+      - if !authorized?
+        Entdeckt
+      - else
+        = link_to "Entdeckt", url("/profile/candidates")
+    an, um eine Liste der infrage kommenden Exemplare zu sehen. Ähnlich wie ein E-Mail-Posteingang zeigt Bionomia die Anzahl der Exemplare an, die auf eine Bearbeitung warten.
+    Die Daten zu den Exemplaren werden von der
     = link_to "Global Biodiversity Information Facility", "https://gbif.org"
-    every two weeks.
+    alle zwei Wochen vollständig aktualisiert.
 
 %h3
-  Step 3: Claim your specimens
+  Schritt 3: Beanspruchen Sie Ihre Exemplare
 
 .ml-3.mt-4
   %p
-    Under the
-    - if !authorized?
-      Discovered
-    - else
-      = link_to "Discovered", url("/profile/candidates")
-    page of your Specimens tab, you may bulk claim
-    %em all visible rows
-    of specimens or claim single rows by clicking:
+    Auf der Seite
+    = surround "„", "“" do
+      - if !authorized?
+        Entdeckt
+      - else
+        = link_to "Entdeckt", url("/profile/candidates")
+    der Registerkarte „Exemplare“ können Sie
+    %em alle sichtbaren Zeilen
+    von Exemplaren als Massenbeanspruchung oder auch nur einzelne Reihen durch Anklicken anfordern:
     %ul.list-unstyled
       %li
-        %img{src:"/images/net-unselected.png", alt:"Collected icon", width:"18"}
-        for specimens you collected or,
+        %img{src:"/images/net-unselected.png", alt:"„Gesammelt“-Symbol", width:"18"}
+        für von Ihnen gesammelte Exemplare oder
       %li
-        %img{src:"/images/microscope-unselected.png", alt:"Identified icon", width:"18"}
-        for specimens you identified or,
+        %img{src:"/images/microscope-unselected.png", alt:"„Identifiziert“-Symbol", width:"18"}
+        für von Ihnen identifizierte Exemplare oder
       %li
         %strong
-          Both
-        for specimens you collected & identified
-    %img.mb-3.img-fluid{src:"/images/button-selectors.png", alt:"Bionomia buttons"}
+          Beides
+        für von Ihnen gesammelte und identifizierte Exemplare
+    %img.mb-3.img-fluid{src:"/images/button-selectors.png", alt:"Bionomia-Buttons"}
 
   %p
-    Click the "Not me" buttons to ignore
-    %em all visible rows
-    or single rows of specimen records. Make a mistake? Visit other pages in your Specimens tab such as
-    - if !authorized?
-      Claimed
-    - else
-      = link_to "Claimed", url("/profile/specimens"
-    or
-    - if !authorized?
-      Ignored
-    - else
-      = link_to "Ignored", url("/profile/ignored")
-    to repair or adjust your selections.
+    Klicken Sie auf die „Nicht ich“-Schaltflächen, um
+    %em alle sichtbaren Zeilen
+    oder einzelne Zeilen von Exemplar-Datensätzen zu ignorieren. Sie haben sich vertan? Besuchen Sie andere Seiten auf der Registerkarte „Exemplare“, z. B.
+    = surround "„", "“" do
+      - if !authorized?
+        Beansprucht
+      - else
+        = link_to "Beansprucht", url("/profile/specimens")
+    oder
+    = surround "„", "“," do
+      - if !authorized?
+        Ignoriert
+      - else
+        = link_to "Ignoriert", url("/profile/ignored")
+    um Ihre Auswahl zu korrigieren oder anzupassen.
   .bd-callout.bd-callout-bionomia
-    Too many specimen records or want to sort by columns and/or filter by content? Click the "Bulk Claim" page on your Specimens tab to view instructions on how to download, add claims in a spreadsheet, then upload a completed csv file.
+    Sie haben zu viele Exemplar-Datensätze oder möchten nach Spalten sortieren und/oder nach Inhalt filtern? Klicken Sie auf die Seite „Massenbeanspruchung“ auf der Registerkarte „Exemplare“, um Hinweise zum Herunterladen, zum Hinzufügen von Beanspruchungen in einem Tabellenblatt und zum anschließenden Hochladen einer vollständigen CSV-Datei anzuzeigen.
 
 %h3
-  Step 4: Attribute specimens to others
+  Schritt 4: Ordnen Sie Exemplare anderen Personen zu
 
 .ml-3.mt-4
   %p
-    While authenticated via ORCID, visit
-    - if authorized?
-      = link_to "Help Others", url("/help-others")
-    - else
-      Help Others
-    to search for your peers, mentors, or anyone who inspires you. Attribute specimens to them just as you claimed your own specimens. If they too have an ORCID ID, they may send you a quick thanks and these will appear in your Thanks Received tab.
+    Während Sie über ORCID authentifiziert sind, können Sie die Seite
+    = surround "„", "“" do
+      - if authorized?
+        = link_to "Anderen helfen", url("/help-others")
+      - else
+        Anderen helfen
+    besuchen, um nach Ihren Kollegen, Mentoren oder anderen Personen zu suchen, die Sie inspirieren. Weisen Sie ihnen Exemplare zu, so wie Sie Ihre eigenen Exemplare beansprucht haben. Wenn auch sie eine ORCID-ID haben, können sie Ihnen ein kurzes Dankeschön schicken, das auf der Registerkarte „Dank erhalten“ erscheint.

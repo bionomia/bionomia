@@ -1,4 +1,4 @@
-- content_for :title, "Help Attribute Specimens"
+- content_for :title, "Zur Zuordnung von Exemplaren beitragen"
 - content_for :scripts do
   %script{src: "/js/application.js"}
   :javascript
@@ -10,44 +10,44 @@
   .jumbotron.jumbotron-fluid.d-flex.flex-wrap.alert-warning
     .mr-auto.p-2
       %h1.h2
-        Help Attribute Specimens
+        Zur Zuordnung von Exemplaren beitragen
       %p.lead.text-muted
-        Add someone not yet discovered
+        Eine noch nicht entdeckte Person hinzufügen
     = haml :'partials/help/search', layout: false
 
 = haml :'partials/help/main_tabs', layout: false, locals: { active_main_tab: "add" }
 
 .mt-4
   .alert.alert-info.tiny-margins{role: "alert"}
-    Couldn't find someone?
+    Sie konnten jemanden nicht finden?
     %ul
       %li
         %strong
-          Living:
-        Ask them to create an
-        = link_to "ORCID account", "https://orcid.org/register"
-        with a publicly available name. If they assign themselves one or more of the keywords
+          Lebende:
+        Bitten Sie sie, ein
+        = link_to "ORCID-Konto", "https://orcid.org/register"
+        mit einem öffentlich zugänglichen Namen einzurichten. Wenn sie sich selbst eines oder mehrere der Schlüsselwörter
         %span.font-italic #{Settings.orcid.keywords.join(", ")}
-        to their ORCID account, Bionomia will add them the following day
+        in ihrem ORCID-Konto zuordnen, wird Bionomia sie bis zum nächsten Tag hinzufügen.
       %li
         %strong
-          Deceased:
-        Search on
+          Verstorbene:
+        Suchen Sie sie auf
         = link_to "Wikidata", "https://www.wikidata.org"
-        and ensure they have a death date and there is a value for any of the properties:
+        und vergewissern Sie sich, dass sie ein Sterbedatum haben und es einen Wert für eine der Eigenschaften gibt:
         %span.font-italic #{::Bionomia::WikidataSearch::PEOPLE_PROPERTIES.keys.join(", ")}
-        \. Bionomia will also add them by the following day.
+        \. Bionomia fügt auch sie bis zum nächsten Tag hinzu.
 
 %h4
-  Add a Person
+  Eine Person hinzufügen
 
 %form.helpers#form-user-wrapper{method: :post, action: "/help-others/add", "accept-charset": "UTF-8"}
   .d-flex.flex-sm-row.flex-column.mt-3
     .form-group
-      %label.font-weight-bold{for: "identifier"} Add ORCID Identifier or Wikidata Q Number
+      %label.font-weight-bold{for: "identifier"} ORCID-Kennung oder Q-Nummer in Wikidata hinzufügen
       %input.orcid-add{type: :text, name: "identifier", placeholder: "Q1234567", size:"12"}
       %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
-      %input{type: :submit, class:"btn btn-success mt-3", value: "Add"}
+      %input{type: :submit, class:"btn btn-success mt-3", value: "Hinzufügen"}
 
 - if flash[:new_user]
   .row
@@ -56,8 +56,8 @@
         .alert.alert-success.tiny-margins.d-block{role: "alert"}
           %span.font-weight-bold
             = link_to flash[:new_user][:fullname], url("/help-others/#{flash[:new_user][:slug]}")
-          was created or updated.
+          wurde erstellt oder aktualisiert.
       - else
         .alert.alert-danger.tiny-margins.d-block{role: "alert"}
           %span.font-weight-bold #{h(flash[:new_user][:fullname])}
-          not created because the identifier was incorrectly formatted or in the case of wikidata, the item is not a human, is not deceased, a family name was not found, or the user already exists with an ORCID identifier. It could also mean that the identifier was previously removed from Bionomia and cannot now be manually added.
+          wurde nicht erstellt, weil der Identifikator falsch formatiert wurde oder (im Fall von Wikidata) das Objekt kein Mensch ist, nicht verstorben ist, ein Familienname nicht gefunden wurde oder der Benutzer bereits mit einer ORCID-Kennung existiert. Es könnte auch bedeuten, dass der Identifikator zuvor aus Bionomia entfernt wurde und nun nicht manuell hinzugefügt werden kann.
