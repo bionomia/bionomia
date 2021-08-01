@@ -24,6 +24,8 @@
         %tr
           %th{scope: "col"} Taxon
           %th{scope: "col"} Silhouette
+          %th{scope: "col"} Credit
+          %th{scope: "col"} Update
       %tbody
         - @results.each do |taxon|
           %tr
@@ -36,6 +38,13 @@
                   %img{src:"#{image}", alt:"#{taxon.family}"}
               - else
                 #{taxon.has_image?}
+            %td
+              - if taxon.has_image?
+                #{taxon.image.credit}
+            %td
+              %a{href: url("/admin/taxon/#{taxon.family}/process.json"), role:"button", class:"btn btn-sm btn-outline-success taxon-process"}
+                %i{class: "fas fa-sync-alt"}
+                Update
 
   = pagy_bootstrap_nav(@pagy) if @pagy.pages > 1
 
