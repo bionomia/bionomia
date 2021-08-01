@@ -179,7 +179,7 @@ de:
     structured_data: Strukturierte Daten
     raw_data: Rohdaten
     code: Code
-    reconcile_title: Überprüfen
+    reconcile_title: Abgleichen
     recommended_use: Empfohlene Verwendung
     title: Für Entwickler
     code_title: "Für Entwickler: Code"
@@ -374,7 +374,7 @@ de:
     help: Hilfedokumentation
     tools: Werkzeuge
     parse: Namen analysieren
-    reconcile: Namen überprüfen
+    reconcile: Namen abgleichen
     acknowledgments: Danksagungen
     workshops: Workshops
   not_authorized:
