@@ -683,6 +683,7 @@ ro:
     science_enabled: Science Enabled
     science_enabled_specimens: Science Enabled by Specimen Data
     helped_by: Helped By
+    strings: Collector Strings
     helped: People Helped
     no_scribe: Specimens have not been attributed by a scribe.
     attributions_by: "Attributions made by:"

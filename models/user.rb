@@ -852,6 +852,17 @@ class User < ActiveRecord::Base
     users.uniq.sample(5)
   end
 
+  def collector_strings
+    recordings.joins(:occurrence)
+              .select("occurrences.recordedBy")
+              .group("occurrences.recordedBy")
+              .order("NULL")
+              .count
+              .sort_by{|_key, value| value}
+              .reverse
+              .to_h
+  end
+
   private
 
   def family_part

@@ -176,6 +176,36 @@ module Sinatra
             end
           end
 
+          app.get '/:id/strings' do
+            check_identifier
+            check_redirect
+            @viewed_user = find_user(params[:id])
+            check_user_public
+
+            begin
+              @pagy, @results = {}, []
+              @page = (params[:page] || 1).to_i
+              strings = @viewed_user.collector_strings
+              @total = strings.count
+
+              if @page*50 > @total
+                bump_page = @total % 50 != 0 ? 1 : 0
+                @page = @total/50 + bump_page
+              end
+
+              @page = 1 if @page <= 0
+
+              @pagy, @results = pagy_array(strings.to_a, items: 50, page: @page)
+              locals = {
+                active_page: "roster",
+                active_tab: "strings"
+              }
+              haml :'public/strings', locals: locals
+            rescue Pagy::OverflowError
+              halt 404, haml(:oops)
+            end
+          end
+
           app.get '/:id/support' do
             check_identifier
             check_redirect

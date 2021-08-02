@@ -644,6 +644,7 @@ pt:
     science_enabled: Ciência habilitada
     science_enabled_specimens: Ciência habilitada por dados de espécimes
     helped_by: Ajudado por
+    strings: Collector Strings
     helped: Pessoas ajudaram
     no_scribe: Os espécimes não foram atribuídos por um autor.
     attributions_by: "Atribuições feitas por:"

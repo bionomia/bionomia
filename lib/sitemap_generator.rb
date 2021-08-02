@@ -68,6 +68,7 @@ module Bionomia
         sitemap.add "/#{user.identifier}/deposited-at"
         sitemap.add "/#{user.identifier}/citations"
         sitemap.add "/#{user.identifier}/specimens"
+        sitemap.add "/#{user.identifier}/strings"
         sitemap.add "/#{user.identifier}/support"
         if user.orcid
           sitemap.add "/#{user.identifier}/helped"

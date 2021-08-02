@@ -1,0 +1,36 @@
+= haml :'partials/user/twitter_img', layout: false
+
+- content_for(:title, "#{@viewed_user.fullname}")
+
+- content_for :scripts do
+  %script{src: "/js/application.js"}
+  :javascript
+    $(function() {
+      Application.init();
+    });
+
+.row
+  = haml :'partials/user/jumbotron', layout: false
+  .col-12.col-lg-8.mt-2
+    - if @viewed_user.is_public?
+      = haml :'partials/user/tabs', layout: false, locals: { active_page: "specimens" }
+      = haml :'partials/user/specimens_tabs', layout: false, locals: { active_tab: locals[:active_tab] }
+
+      - if @results.empty?
+        .alert.alert-info.tiny-margins{role: "alert"}= I18n.t('user.no_specimens')
+      - else
+        .row
+          - @results.in_groups_of(25, false).each do |group|
+            .col-12.col-lg-6.mb-3
+              %ul.list-group.mt-3
+                - group.each do |k,v|
+                  %li.list-group-item.d-flex.justify-content-between.align-items-center
+                    %span #{k}
+                    %span.badge.badge-light.badge-pill #{number_with_delimiter(v)}
+
+        - if @pagy.pages > 1
+          .y-scroll
+            = pagy_bootstrap_nav(@pagy)
+
+    - else
+      = haml :'partials/user/offline_message', layout: false
