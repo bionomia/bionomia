@@ -22,7 +22,7 @@ module Bionomia
 
     def ignored_cols(keep_gbifID = true)
       if keep_gbifID
-        ["dateIdentified_processed", "eventDate_processed", "hasImage", "recordedByID", "identifiedByID"]
+        ["dateIdentified_processed", "eventDate_processed", "hasImage"]
       else
         Occurrence::IGNORED_COLUMNS_OUTPUT
       end
