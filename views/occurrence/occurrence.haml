@@ -78,6 +78,15 @@
         %dt recordedBy
         %dd
           #{h(@occurrence.recordedBy)}
+        %dd.line-break
+
+        %dt recordedByID
+        %dd
+          #{h(@occurrence.recordedByID)}
+        %dd.line-break
+
+        %dt Attributions
+        %dd
           - if @occurrence.user_recordings.count > 0
             %hr
             .mt-2
@@ -117,6 +126,15 @@
         %dt identifiedBy
         %dd
           #{h(@occurrence.identifiedBy)}
+        %dd.line-break
+
+        %dt identifiedByID
+        %dd
+          #{h(@occurrence.identifiedByID)}
+        %dd.line-break
+
+        %dt Attributions
+        %dd
           - if @occurrence.user_identifications.count > 0
             %hr
             .mt-2

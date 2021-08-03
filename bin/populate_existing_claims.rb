@@ -6,7 +6,7 @@ ARGV << '-h' if ARGV.empty?
 
 options = {}
 OptionParser.new do |opts|
-  opts.banner = "Usage: populate_agents.rb [options]"
+  opts.banner = "Usage: populate_existing_claims.rb [options]"
 
   opts.on("-d", "--directory [directory]", String, "Directory containing csv file(s)") do |directory|
     options[:directory] = directory
@@ -51,24 +51,25 @@ if options[:export]
   CSV.open(options[:export], "wb") do |csv|
     csv << ["identifier", "action", "occurrence_ids"]
     user_ids = UserOccurrence.where(created_by: User::GBIF_AGENT_ID)
-                             .where.not(user_id: User::BOT_IDS) 
                              .pluck(:user_id)
                              .uniq
-
     user_ids.each do |u|
       user = User.find(u) rescue nil
       next if user.nil?
       recorded_ids = UserOccurrence.where(user_id: u)
+                                   .where(created_by: User::GBIF_AGENT_ID)
                                    .where(action: "recorded")
                                    .pluck(:occurrence_id)
       csv << [user.identifier, "recorded", recorded_ids.to_s] if !recorded_ids.empty?
 
       identified_ids = UserOccurrence.where(user_id: u)
+                                     .where(created_by: User::GBIF_AGENT_ID)
                                      .where(action: "identified")
                                      .pluck(:occurrence_id)
       csv << [user.identifier, "identified", identified_ids.to_s] if !identified_ids.empty?
 
       both_ids = UserOccurrence.where(user_id: u)
+                               .where(created_by: User::GBIF_AGENT_ID)
                                .where(action: ["recorded,identified", "identified,recorded"])
                                .pluck(:occurrence_id)
       csv << [user.identifier, "recorded,identified", both_ids.to_s] if !both_ids.empty?
