@@ -44,6 +44,8 @@ if options[:file]
 
   UserOccurrence.where(created_by: User::GBIF_AGENT_ID).delete_all
 
+  all_users = Set.new
+
   CSV.foreach(options[:file], headers: true) do |row|
     if row["identifier"].is_wiki_id?
       d = DestroyedUser.where(identifier: row["identifier"])
@@ -67,6 +69,13 @@ if options[:file]
       import = group.map{|r| [ r.to_i, u.id, row["action"], User::GBIF_AGENT_ID ] }
       UserOccurrence.import [:occurrence_id, :user_id, :action, :created_by], import, batch_size: 1000, validate: false, on_duplicate_key_ignore: true
     end
+
+    all_users.add(u)
+    puts u.identifier.to_s.green
+  end
+
+  puts "Flushing caches...".yellow
+  all_users.each do |u|
     if u.wikidata && !u.is_public?
       u.is_public = true
       u.save
