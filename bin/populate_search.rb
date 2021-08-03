@@ -8,7 +8,7 @@ INDICES = ["agent", "article", "dataset", "organization", "user", "taxon"]
 
 options = {}
 OptionParser.new do |opts|
-  opts.banner = "Usage:populate_search.rb [options]"
+  opts.banner = "Usage: populate_search.rb [options]"
 
   opts.on("-r", "--rebuild", "Rebuild the index") do |a|
     options[:rebuild] = true
