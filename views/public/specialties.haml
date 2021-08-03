@@ -36,7 +36,7 @@
                         %img{src:"#{image}", alt:"#{k}", class:"mr-2"}
                       - else
                         %span.d-inline-block.mr-2{style:"width:24px;"}
-                      %a{href: url("/#{@viewed_user.identifier}/specimens?action=identified&family=#{ERB::Util.url_encode(k)}")} #{k}
+                      = link_to k, url("/#{@viewed_user.identifier}/specimens?action=identified&family=#{ERB::Util.url_encode(k)}")
                     %span.badge.badge-light.badge-pill #{number_with_delimiter(v)}
             - elsif !@families_recorded.empty?
               %h4.d-flex.justify-content-between.mt-0

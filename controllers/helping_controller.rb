@@ -338,6 +338,28 @@ module Sinatra
             haml :'help/specialties', locals: { active_page: "help" }
           end
 
+          app.get '/help-others/:id/strings' do
+            protected!
+            check_identifier
+            check_redirect
+
+            @viewed_user = find_user(@params[:id])
+            @pagy, @results = {}, []
+            @page = (params[:page] || 1).to_i
+            strings = @viewed_user.collector_strings
+            @total = strings.count
+
+            if @page*50 > @total
+              bump_page = @total % 50 != 0 ? 1 : 0
+              @page = @total/50 + bump_page
+            end
+
+            @page = 1 if @page <= 0
+
+            @pagy, @results = pagy_array(strings.to_a, items: 50, page: @page)
+            haml :'help/strings', locals: { active_page: "help" }
+          end
+
           app.get '/help-others/:id/co-collectors' do
             protected!
             check_identifier
