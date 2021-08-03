@@ -251,6 +251,10 @@ module Sinatra
             results = results.where(created_by: attributor.id)
           end
 
+          if params[:recordedBy] && !params[:recordedBy].blank?
+            results = results.where(occurrences: { recordedBy: params[:recordedBy] })
+          end
+
           results
         end
 
@@ -288,6 +292,7 @@ module Sinatra
           family = params[:family] rescue nil
           kingdom = params[:kingdom] rescue nil
           institutionCode = params[:institutionCode] rescue nil
+          recordedBy = params[:recordedBy] rescue nil
           dataset = nil
           if params[:datasetKey]
             dataset = Dataset.find_by_datasetKey(params[:datasetKey]).title.truncate(45) rescue nil
@@ -304,7 +309,8 @@ module Sinatra
             kingdom: kingdom,
             institutionCode: institutionCode,
             dataset: dataset,
-            attributor: attributor
+            attributor: attributor,
+            recordedBy: recordedBy
           }.compact
         end
 
@@ -322,6 +328,20 @@ module Sinatra
           if params[:kingdom] && !params[:kingdom].blank? && Taxon.valid_kingdom?(params[:kingdom])
             @kingdom = params[:kingdom]
           end
+        end
+
+        def filter_options
+          [
+            @filter[:action],
+            @filter[:country],
+            @filter[:range],
+            @filter[:family],
+            @filter[:kingdom],
+            @filter[:institutionCode],
+            @filter[:attributor],
+            @filter[:dataset],
+            @filter[:recordedBy]
+          ]
         end
 
       end
