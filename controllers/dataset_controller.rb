@@ -153,7 +153,8 @@ module Sinatra
             dataset_from_param
             total = @dataset.occurrences_count
             claimed = @dataset.claimed_occurrences_count
-            { claimed: claimed, unclaimed: total - claimed }.to_json
+            unclaimed = (total - claimed < 0) ? 0 : total - claimed
+            { claimed: claimed, unclaimed: unclaimed }.to_json
           end
 
           app.get '/dataset.json' do
