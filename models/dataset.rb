@@ -235,11 +235,9 @@ class Dataset < ActiveRecord::Base
   end
 
   def article_occurrences
-    ArticleOccurrence.joins(:occurrence)
-                     .joins(:user_occurrences)
+    ArticleOccurrence.select(:id, :article_id, :occurrence_id)
+                     .joins(:occurrence)
                      .where(occurrences: { datasetKey: datasetKey })
-                     .where(user_occurrences: { visible: true })
-                     .distinct
   end
 
   private

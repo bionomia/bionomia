@@ -89,10 +89,16 @@ module Bionomia
       gbif_ids = Set.new
       user_ids = Set.new
 
+      iterator = :each
+      if @dataset.occurrences_count > 250_000
+        iterator = :find_each
+      end
+
       @dataset.user_occurrences
               .where(users: { is_public: true })
               .or(@dataset.user_occurrences.where.not(users: { wikidata: nil }))
-              .select(fields).find_each do |o|
+              .select(fields)
+              .send(iterator) do |o|
         next if !o.visible
 
         # Add users.csv
@@ -178,7 +184,7 @@ module Bionomia
         article_ids = Set.new
 
         citations = File.open(File.join(@folder, citations_file), "ab")
-        @dataset.article_occurrences.find_each do |a|
+        @dataset.article_occurrences.find_each(batch_size: 25_000) do |a|
           data = [ a.article_id, a.occurrence_id ]
           citations << CSV::Row.new(citations_header, data).to_s
           article_ids << a.article_id
