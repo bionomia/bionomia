@@ -29,7 +29,9 @@ CREATE TABLE `articles` (
 CREATE TABLE `article_occurrences` (
   `article_id` int NOT NULL,
   `occurrence_id` bigint UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
+PARTITION BY KEY ()
+PARTITIONS 20;
 
 CREATE TABLE `ar_internal_metadata` (
   `key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
@@ -71,6 +73,7 @@ CREATE TABLE `occurrences` (
   `gbifID` bigint UNSIGNED NOT NULL,
   `datasetKey` binary(36) DEFAULT NULL,
   `occurrenceID` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `basisOfRecord` text COLLATE utf8mb4_bin,
   `dateIdentified` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `decimalLatitude` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `decimalLongitude` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
@@ -92,7 +95,7 @@ CREATE TABLE `occurrences` (
   `hasImage` tinyint(1) DEFAULT NULL,
   `recordedByID` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `identifiedByID` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=COMPRESSED;
 
 CREATE TABLE `occurrence_determiners` (
   `occurrence_id` bigint UNSIGNED NOT NULL,
@@ -174,7 +177,7 @@ CREATE TABLE `users` (
   `zenodo_concept_doi` varchar(255) DEFAULT NULL,
   `wants_mail` tinyint(1) NOT NULL DEFAULT '0',
   `mail_last_sent` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 CREATE TABLE `user_occurrences` (
   `id` int NOT NULL,
@@ -185,7 +188,7 @@ CREATE TABLE `user_occurrences` (
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated` timestamp NULL DEFAULT NULL,
   `created_by` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 CREATE TABLE `user_organizations` (
   `id` int NOT NULL,
@@ -198,6 +201,7 @@ CREATE TABLE `user_organizations` (
   `end_month` int DEFAULT NULL,
   `end_day` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
 
 ALTER TABLE `agents`
   ADD PRIMARY KEY (`id`),
@@ -280,6 +284,7 @@ ALTER TABLE `user_organizations`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_idx` (`user_id`),
   ADD KEY `organization_idx` (`organization_id`);
+
 
 ALTER TABLE `agents`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;

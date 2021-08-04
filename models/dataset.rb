@@ -236,11 +236,10 @@ class Dataset < ActiveRecord::Base
 
   def article_occurrences
     ArticleOccurrence.joins(:occurrence)
+                     .joins(:user_occurrences)
                      .where(occurrences: { datasetKey: datasetKey })
-  end
-
-  def articles
-    Article.joins("INNER JOIN (#{article_occurrences.select(:article_id).distinct.to_sql}) a ON articles.id = a.article_id")
+                     .where(user_occurrences: { visible: true })
+                     .distinct
   end
 
   private

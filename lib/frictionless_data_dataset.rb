@@ -59,6 +59,7 @@ module Bionomia
       users = File.open(File.join(@folder, users_file), "ab")
       occurrences = File.open(File.join(@folder, occurrences_file), "ab")
       attributions = File.open(File.join(@folder, attributions_file), "ab")
+      problems = File.open(File.join(@folder, problem_collectors_file), "ab")
 
       fields = [
         "user_occurrences.id",
@@ -81,6 +82,7 @@ module Bionomia
         "claimants_user_occurrences.given AS createdGiven",
         "claimants_user_occurrences.family AS createdFamily",
         "claimants_user_occurrences.orcid AS createdORCID",
+        "occurrences.eventDate_processed"
       ]
       fields.concat((["gbifID"] + Occurrence.accepted_fields).map{|a| "occurrences.#{a} AS occ_#{a}"})
 
@@ -90,7 +92,7 @@ module Bionomia
       @dataset.user_occurrences
               .where(users: { is_public: true })
               .or(@dataset.user_occurrences.where.not(users: { wikidata: nil }))
-              .select(fields).find_each(batch_size: 5_000) do |o|
+              .select(fields).find_each do |o|
         next if !o.visible
 
         # Add users.csv
@@ -135,6 +137,25 @@ module Bionomia
         ]
         attributions << CSV::Row.new(attributions_header, data).to_s
 
+        # Add problems
+        if o.u_wikidata && o.eventDate_processed &&
+          ( o.u_date_born && o.u_date_born > o.eventDate_processed ||
+            o.u_date_died && o.u_date_died < o.eventDate_processed )
+          data = [
+            o.occurrence_id,
+            o.occ_catalogNumber,
+            o.u_id,
+            o.u_wikidata,
+            o.u_date_born,
+            o.u_date_born_precision,
+            o.u_date_died,
+            o.u_date_died_precision,
+            o.occ_eventDate,
+            o.occ_year
+          ]
+          problems << CSV::Row.new(problems_collector_header, data).to_s
+        end
+
         # Skip occurrences if already added to file
         next if gbif_ids.include?(o.occ_gbifID)
 
@@ -147,66 +168,34 @@ module Bionomia
       users.close
       occurrences.close
       attributions.close
-    end
-
-    def add_problem_collector_data
-      problems = File.open(File.join(@folder, problem_collectors_file), "ab")
-      fields = [
-        :id,
-        :visible,
-        :occurrence_id,
-        :user_id,
-        "users.wikidata",
-        "users.date_born",
-        "users.date_born_precision",
-        "users.date_died",
-        "users.date_died_precision",
-        "occurrences.eventDate",
-        "occurrences.year",
-        "occurrences.catalogNumber"
-      ]
-
-      @dataset.collected_before_birth_after_death
-              .select(fields)
-              .find_each do |o|
-                next if !o.visible
-        data = [
-          o.occurrence_id,
-          o.catalogNumber,
-          o.user_id,
-          o.wikidata,
-          o.date_born,
-          o.date_born_precision,
-          o.date_died,
-          o.date_died_precision,
-          o.eventDate,
-          o.year
-        ]
-        problems << CSV::Row.new(problems_collector_header, data).to_s
-      end
       problems.close
     end
 
+    def add_problem_collector_data
+    end
+
     def add_citation_data
-      citations = File.open(File.join(@folder, citations_file), "ab")
-      @dataset.article_occurrences.find_each(batch_size: 5_000) do |a|
-        data = [ a.article_id, a.occurrence_id ]
-        citations << CSV::Row.new(citations_header, data).to_s
-      end
-      citations.close
+        article_ids = Set.new
 
+        citations = File.open(File.join(@folder, citations_file), "ab")
+        @dataset.article_occurrences.find_each do |a|
+          data = [ a.article_id, a.occurrence_id ]
+          citations << CSV::Row.new(citations_header, data).to_s
+          article_ids << a.article_id
+        end
+        citations.close
 
-      articles = File.open(File.join(@folder, articles_file), "ab")
-      @dataset.articles.find_each do |a|
-        data = [
-          a.id,
-          a.citation,
-          "https://doi.org/#{a.doi}",
-          a.gbif_dois.map{|o| "https://doi.org/#{o}" }.to_s
-        ]
-        articles << CSV::Row.new(articles_header, data).to_s
-      end
-      articles.close
+        articles = File.open(File.join(@folder, articles_file), "ab")
+        Article.where(id: article_ids).find_each do |a|
+          data = [
+            a.id,
+            a.citation,
+            "https://doi.org/#{a.doi}",
+            a.gbif_dois.map{|o| "https://doi.org/#{o}" }.to_s
+          ]
+          articles << CSV::Row.new(articles_header, data).to_s
+        end
+        articles.close
     end
 
     def update_frictionless_created
