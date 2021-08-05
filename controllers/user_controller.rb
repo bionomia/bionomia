@@ -70,8 +70,8 @@ module Sinatra
             check_redirect
             viewed_user = find_user(params[:id])
 
-            if viewed_user.orcid && !viewed_user.is_public?
-              halt 404, {}.to_json
+            if !viewed_user.is_public?
+              halt 403, {}.to_json
             end
 
             cache_control :public, :must_revalidate, :no_cache, :no_store
@@ -80,7 +80,7 @@ module Sinatra
               io = ::Bionomia::IO.new({ user: viewed_user, params: params, request: request })
               io.jsonld_stream("paged")
             rescue
-              halt 404, {}.to_json
+              halt 500, {}.to_json
             end
           end
 
@@ -93,8 +93,8 @@ module Sinatra
             check_redirect
             @viewed_user = find_user(params[:id])
 
-            if @viewed_user.orcid && !@viewed_user.is_public?
-              halt 404, [].to_csv
+            if !@viewed_user.is_public?
+              halt 403, [].to_csv
             end
 
             begin
@@ -103,7 +103,7 @@ module Sinatra
               io = ::Bionomia::IO.new
               body io.csv_stream_occurrences(records)
             rescue
-              halt 404, [].to_csv
+              halt 500, [].to_csv
             end
           end
 
@@ -116,8 +116,8 @@ module Sinatra
             check_redirect
             viewed_user = find_user(params[:id])
 
-            if viewed_user.orcid && !viewed_user.is_public?
-              halt 404, {}.to_json
+            if !viewed_user.is_public?
+              halt 403, {}.to_json
             end
 
             cache_control :public, :must_revalidate, :no_cache, :no_store
@@ -126,7 +126,7 @@ module Sinatra
               network = ::Bionomia::Network.new({ user: viewed_user, params: params, request: request  })
               network.jsonld_stream
             rescue
-              halt 404, {}.to_json
+              halt 500, {}.to_json
             end
           end
 
@@ -135,6 +135,7 @@ module Sinatra
             check_redirect
             @viewed_user = find_user(params[:id])
             check_user_public
+
             @stats = cache_block("#{@viewed_user.identifier}-stats") { user_stats(@viewed_user) }
             haml :'public/overview', locals: { active_page: "roster" }
           end
@@ -144,6 +145,7 @@ module Sinatra
             check_redirect
             @viewed_user = find_user(params[:id])
             check_user_public
+
             @families_identified, @families_recorded = [], []
             if @viewed_user.is_public?
               @families_identified = @viewed_user.identified_families
@@ -172,7 +174,7 @@ module Sinatra
               }
               haml :'public/specimens', locals: locals
             rescue Pagy::OverflowError
-              halt 404, haml(:oops)
+              halt 500, haml(:oops)
             end
           end
 
@@ -202,7 +204,7 @@ module Sinatra
               }
               haml :'public/strings', locals: locals
             rescue Pagy::OverflowError
-              halt 404, haml(:oops)
+              halt 500, haml(:oops)
             end
           end
 
@@ -231,7 +233,7 @@ module Sinatra
               }
               haml :'public/support', locals: locals
             rescue Pagy::OverflowError
-              halt 404, haml(:oops)
+              halt 500, haml(:oops)
             end
           end
 
@@ -250,7 +252,7 @@ module Sinatra
               end
               haml :'public/citations', locals: { active_page: "roster" }
             rescue Pagy::OverflowError
-              halt 404, haml(:oops)
+              halt 500, haml(:oops)
             end
           end
 
@@ -273,7 +275,7 @@ module Sinatra
               end
               haml :'public/citation', locals: { active_page: "roster" }
             rescue Pagy::OverflowError
-              halt 404, haml(:oops)
+              halt 500, haml(:oops)
             end
           end
 
@@ -295,7 +297,7 @@ module Sinatra
               }
               haml :'public/co_collectors', locals: locals
             rescue Pagy::OverflowError
-              halt 404, haml(:oops)
+              halt 500, haml(:oops)
             end
           end
 
@@ -317,7 +319,7 @@ module Sinatra
               }
               haml :'public/identified_for', locals: locals
             rescue Pagy::OverflowError
-              halt 404, haml(:oops)
+              halt 500, haml(:oops)
             end
           end
 
@@ -339,7 +341,7 @@ module Sinatra
               }
               haml :'public/identifications_by', locals: locals
             rescue Pagy::OverflowError
-              halt 404, haml(:oops)
+              halt 500, haml(:oops)
             end
           end
 
@@ -348,6 +350,7 @@ module Sinatra
             check_redirect
             @viewed_user = find_user(params[:id])
             check_user_public
+
             @recordings_at, @identifications_at = [], []
             if @viewed_user.is_public?
               @recordings_at = @viewed_user.recordings_deposited_at
@@ -361,6 +364,8 @@ module Sinatra
             check_redirect
             @viewed_user = find_user(params[:id])
             halt 404 if !@viewed_user.orcid
+            check_user_public
+
             @stats = cache_block("#{@viewed_user.identifier}-stats") { user_stats(@viewed_user) }
             page = (params[:page] || 1).to_i
             @pagy, @results = pagy_array(@viewed_user.helped, items: 30, page: page)

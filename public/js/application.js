@@ -778,7 +778,7 @@ var Application = (function($, window) {
       } else if (self.path === "/help-others" && self.identifier) {
         slug = self.path + "/" + self.identifier;
       }
-      if (slug.length > 0) {
+      if (slug.length > 0 && $("#specimen-counter").length) {
         $.ajax({
           method: "GET",
           url: slug + "/candidate-count.json"

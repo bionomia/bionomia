@@ -1,7 +1,7 @@
 describe "Bionomia User Controller" do
 
   before(:each) do
-    @user = User.create!({ given: "John", family: "Smith", other_names: "Jack", orcid: "0000-0001-7618-5230" })
+    @user = User.create!({ given: "John", family: "Smith", other_names: "Jack", orcid: "0000-0001-7618-5230", public: true })
   end
 
   it "should get the user overview page" do

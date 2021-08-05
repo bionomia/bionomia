@@ -80,8 +80,9 @@ module Sinatra
         end
 
         def check_user_public
-          if !@viewed_user && !@viewed_user.is_public?
-            halt 404
+          if @viewed_user && !@viewed_user.is_public?
+            @stats = cache_block("#{@viewed_user.identifier}-stats") { user_stats(@viewed_user) }
+            status 403
           end
         end
 

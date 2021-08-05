@@ -2,7 +2,7 @@
 
 - content_for(:title, "#{@viewed_user.fullname}")
 
-- if @viewed_user.is_public? || admin_authorized?
+- if @viewed_user.is_public?
   - content_for :stylesheets do
     %link{href: "#{Settings.base_url}/#{@viewed_user.identifier}/specimens.json", rel:"alternate", type:"application/ld+json"}
 
