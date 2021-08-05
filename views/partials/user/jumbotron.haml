@@ -89,7 +89,7 @@
           %i.fas.fa-user
           = I18n.t('home.your_profile')
 
-      - if ( @viewed_user.is_public? || admin_authorized? ) && locals[:active_page] == "overview"
+      - if locals[:active_page] == "overview"
         %a.profile-flush.mr-2.mb-2{href: url("/#{@viewed_user.identifier}/refresh-stats.json")}
           %i.fas.fa-sync-alt
           = I18n.t('general.refresh_stats')
