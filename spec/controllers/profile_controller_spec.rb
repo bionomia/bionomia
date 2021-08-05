@@ -13,6 +13,13 @@ describe "Bionomia Profile Controller" do
     expect(last_response).to be_ok
   end
 
+  it 'persists across multiple requests' do
+    request '/profile'
+    request '/profile'
+
+    expect(last_request.env['rack.session']['csrf']).to eq('token')
+  end
+
   it "should allow access to the profile settings page" do
     get '/profile/settings'
     expect(last_response).to be_ok

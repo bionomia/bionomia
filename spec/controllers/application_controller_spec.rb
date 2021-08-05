@@ -110,4 +110,13 @@ describe "Bionomia Application Controller" do
     expect(last_response).to be_ok
   end
 
+  it "should allow accessing the privacy page" do
+    get '/privacy'
+    expect(last_response).to be_ok
+  end
+
+  it "should allow accessing the tersm of service page" do
+    get '/terms-of-service'
+    expect(last_response).to be_ok
+  end
 end
