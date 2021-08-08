@@ -11,8 +11,9 @@ module Bionomia
       identified_by = row["gbifIDs_identifiedBy"].tr('[]', '').split(',')
 
       agents_csv = CSV.open("agents.csv", "a+")
-      occurrence_recorders_csv = CSV.open("occurrence_recorders.csv", "a+")
-      occurrence_determiners_csv = CSV.open("occurrence_determiners.csv", "a+")
+      file_id = rand(1..50)
+      occurrence_recorders_csv = CSV.open("occurrence_recorders_files/occurrence_recorders_#{file_id}.csv", "a+")
+      occurrence_determiners_csv = CSV.open("occurrence_determiners_files/occurrence_determiners_#{file_id}.csv", "a+")
 
       Sidekiq.redis do |conn|
         agents.each do |a|
