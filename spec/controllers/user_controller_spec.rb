@@ -1,7 +1,13 @@
 describe "Bionomia User Controller" do
-
   before(:each) do
-    @user = User.create!({ given: "John", family: "Smith", other_names: "Jack", orcid: "0000-0001-7618-5230", public: true })
+    User.skip_callback(:before, :after)
+    @user = User.create({ given: "John", family: "Smith", other_names: "Jack", is_public: true })
+    @user.update_columns({ orcid: "0000-0001-7618-5230" })
+    env 'rack.session', csrf: 'token', omniauth: OpenStruct.new({ id: @user.id })
+  end
+
+  after(:each) do
+    @user.delete
   end
 
   it "should get the user overview page" do

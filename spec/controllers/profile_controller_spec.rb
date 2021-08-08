@@ -1,11 +1,12 @@
 describe "Bionomia Profile Controller" do
   before(:each) do
-    @user = User.create!({ given: "John", family: "Smith", other_names: "Jack" })
+    User.skip_callback(:before, :after)
+    @user = User.create({ given: "John", family: "Smith", other_names: "Jack" })
     env 'rack.session', csrf: 'token', omniauth: OpenStruct.new({ id: @user.id })
   end
 
   after(:each) do
-    @user.destroy
+    @user.delete
   end
 
   it "should allow access to the profile page" do
