@@ -68,9 +68,19 @@ This creates three large csv files that then need to be imported into MySQL. But
      $ rm occurrence_determiners.csv
      $ mv occurrence_determiners_new.csv occurrence_determiners.csv
 
+     # Split them into pieces
+     $ cd occurrence_determiners_files/
+     $ gsplit -l 5000000 --additional-suffix=.csv ../occurrence_determiners.csv
+     $ rm ../occurrence_determiners.csv
+
      $ sort -u occurrence_recorders.csv > occurrence_recorders_new.csv
      $ rm occurrence_recorders.csv
      $ mv occurrence_recorders_new.csv occurrence_recorders.csv
+
+     # Split them into pieces
+     $ cd occurrence_recorders_files/
+     $ gsplit -l 5000000 --additional-suffix=.csv ../occurrence_recorders.csv
+     $ rm ../occurrence_recorders.csv
 
      mysql> LOAD DATA LOCAL INFILE 'agents.csv' IGNORE INTO TABLE agents FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY '\n';
 
