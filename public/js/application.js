@@ -521,10 +521,10 @@ var Application = (function($, window) {
           method: "GET",
           url: link.attr("href"),
           beforeSend: function(xhr) {
-            link.addClass("disabled").find("i").addClass("fa-spin");
+            link.addClass("disabled").find("i").first().addClass("fa-spin");
           }
         }).done(function(data) {
-          link.find("i").removeClass("fa-spin");
+          link.find("i").first().removeClass("fa-spin");
           $("#refresh-message").alert().show();
           $("#refresh-message").on("closed.bs.alert", function () {
             location.reload();
@@ -542,10 +542,10 @@ var Application = (function($, window) {
             method: "GET",
             url: $(this).attr("href"),
             beforeSend: function(xhr) {
-              link.addClass("disabled").find("i").addClass("fa-spin");
+              link.addClass("disabled").find("i").first().addClass("fa-spin");
             }
         }).done(function(data) {
-          link.find("i").removeClass("fa-spin");
+          link.find("i").first().removeClass("fa-spin");
           $("#flush-message").alert().show();
           $("#flush-message").on("closed.bs.alert", function () {
             location.reload();
@@ -563,10 +563,10 @@ var Application = (function($, window) {
             method: "GET",
             url: button.attr("href"),
             beforeSend: function(xhr) {
-              button.addClass("disabled").find("i").addClass("fa-spin");
+              button.addClass("disabled").find("i").first().addClass("fa-spin");
             }
         }).done(function(data) {
-          button.find("i").removeClass("fa-spin");
+          button.find("i").first().removeClass("fa-spin");
           $(".alert").alert().show();
           $(".alert").on("closed.bs.alert", function () {
             location.reload();
@@ -584,10 +584,10 @@ var Application = (function($, window) {
             method: "GET",
             url: button.attr("href"),
             beforeSend: function(xhr) {
-              button.addClass("disabled").find("i").addClass("fa-spin");
+              button.addClass("disabled").find("i").first().addClass("fa-spin");
             }
         }).done(function(data) {
-          button.find("i").removeClass("fa-spin");
+          button.find("i").first().removeClass("fa-spin");
           $(".alert-gbif").alert().show();
           $(".alert").on("closed.bs.alert", function () {
             location.reload();
@@ -605,10 +605,10 @@ var Application = (function($, window) {
             method: "GET",
             url: button.attr("href"),
             beforeSend: function(xhr) {
-              button.addClass("disabled").find("i").addClass("fa-spin");
+              button.addClass("disabled").find("i").first().addClass("fa-spin");
             }
         }).done(function(data) {
-          button.find("i").removeClass("fa-spin");
+          button.find("i").first().removeClass("fa-spin");
           $(".alert-frictionless").alert().show();
           $(".alert").on("closed.bs.alert", function () {
             location.reload();
@@ -626,7 +626,7 @@ var Application = (function($, window) {
             method: "GET",
             url: button.attr("href"),
             beforeSend: function(xhr) {
-              button.addClass("disabled").find("i").addClass("fa-spin");
+              button.addClass("disabled").find("i").first().addClass("fa-spin");
             }
         }).done(function(data) {
           location.reload();
@@ -643,10 +643,10 @@ var Application = (function($, window) {
             method: "GET",
             url: button.attr("href"),
             beforeSend: function(xhr) {
-              button.addClass("disabled").find("i").addClass("fa-spin");
+              button.addClass("disabled").find("i").first().addClass("fa-spin");
             }
         }).done(function(data) {
-          button.find("i").removeClass("fa-spin");
+          button.find("i").first().removeClass("fa-spin");
           $(".alert-article-process").alert().show();
           $(".alert").on("closed.bs.alert", function () {
             location.reload();
@@ -664,10 +664,10 @@ var Application = (function($, window) {
             method: "GET",
             url: button.attr("href"),
             beforeSend: function(xhr) {
-              button.addClass("disabled").find("i").addClass("fa-spin");
+              button.addClass("disabled").find("i").first().addClass("fa-spin");
             }
         }).done(function(data) {
-          button.find("i").removeClass("fa-spin");
+          button.find("i").first().removeClass("fa-spin");
           if (data == null) {
             $('#taxon-search-result').html("No image found.");
             $(".alert-taxon-process").removeClass("alert-success").addClass("alert-warning");
