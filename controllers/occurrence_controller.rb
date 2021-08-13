@@ -61,7 +61,7 @@ module Sinatra
             end
           end
 
-          app.get '/occurrence/:id.json' do
+          app.get '/occurrence/:id.json(ld)?' do
             content_type "application/ld+json", charset: 'utf-8'
             response = jsonld_occurrence_context
             response["@type"] = "PreservedSpecimen"

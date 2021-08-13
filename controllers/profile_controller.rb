@@ -221,7 +221,7 @@ module Sinatra
             { message: "ok"}.to_json
           end
 
-          app.get '/profile/download.json' do
+          app.get '/profile/download.json(ld)?' do
             protected!
             attachment "#{@user.orcid}.json"
             cache_control :public, :must_revalidate, :no_cache, :no_store

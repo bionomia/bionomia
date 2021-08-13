@@ -424,7 +424,7 @@ module Sinatra
             end
           end
 
-          app.get '/admin/user/:id/specimens.json' do
+          app.get '/admin/user/:id/specimens.json(ld)?' do
             admin_protected!
             content_type "application/ld+json", charset: 'utf-8'
             admin_user = find_user(params[:id])

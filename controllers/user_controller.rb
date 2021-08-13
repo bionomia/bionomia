@@ -61,7 +61,7 @@ module Sinatra
             rss.to_s
           end
 
-          app.get '/:id/specimens.json' do
+          app.get '/:id/specimens.json(ld)?' do
             content_type "application/ld+json", charset: 'utf-8'
             if !params[:id].is_orcid? && !params[:id].is_wiki_id?
               halt 404, {}.to_json
@@ -107,7 +107,7 @@ module Sinatra
             end
           end
 
-          app.get '/:id/network.json' do
+          app.get '/:id/network.json(ld)?' do
             content_type "application/ld+json", charset: 'utf-8'
             if !params[:id].is_orcid? && !params[:id].is_wiki_id?
               halt 404, {}.to_json
