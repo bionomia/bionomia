@@ -27,15 +27,20 @@
         return $(html).find(".range").text(range).parents(".card").outerHTML();
       }
 
+      function parseDateString(s) {
+        var b = s.split(/\D+/);
+        return new Date(b[0], --b[1], b[2]);
+      }
+
       function timeLine() {
         var part = [];
         $.each(timeline, function() {
-          var startDate = new Date(this[3]);
-          var endDate = new Date(this[4]);
+          var startDate = parseDateString(this[3]);
+          var endDate = parseDateString(this[4]);
           var startYear = startDate.getFullYear();
           var endYear = endDate.getFullYear();
-          var birthDate = (this[5] !== "") ? new Date(this[5]) : "";
-          var deathDate = (this[6] !== "") ? new Date(this[6]) : "";
+          var birthDate = (this[5] !== "") ? parseDateString(this[5]) : "";
+          var deathDate = (this[6] !== "") ? parseDateString(this[6]) : "";
           if (birthDate && deathDate) {
             var proper_order = [ birthDate, startDate, endDate, deathDate ];
             var sorted_order = proper_order.slice().sort(function(a,b) { return a - b; });

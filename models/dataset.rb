@@ -201,12 +201,15 @@ class Dataset < ActiveRecord::Base
   end
 
   def timeline_recorded(start_year: 1000, end_year: Time.now.year)
+    start_date = Date.new(start_year, 1, 1)
+    end_date = Date.new(end_year, 12, 31)
+
     subq = UserOccurrence.from("user_occurrences FORCE INDEX (user_occurrence_idx)")
                          .select(:user_id, :eventDate_processed, :visible)
                          .joins(:occurrence)
                          .where(user_occurrences: { action: ['recorded', 'identified,recorded', 'recorded,identified'] })
                          .where(occurrences: { datasetKey: datasetKey})
-                         .where("YEAR(eventDate_processed) BETWEEN ? AND ?", start_year, end_year)
+                         .where("eventDate_processed BETWEEN ? AND ?", start_date, end_date)
                          .distinct
 
     User.select("users.*", "MIN(a.eventDate_processed) AS min_date", "MAX(a.eventDate_processed) AS max_date")
@@ -218,12 +221,15 @@ class Dataset < ActiveRecord::Base
   end
 
   def timeline_identified(start_year: 1000, end_year: Time.now.year)
+    start_date = Date.new(start_year, 1, 1)
+    end_date = Date.new(end_year, 12, 31)
+
     subq = UserOccurrence.from("user_occurrences FORCE INDEX (user_occurrence_idx)")
                          .select(:user_id, :dateIdentified_processed, :visible)
                          .joins(:occurrence)
                          .where(user_occurrences: { action: ['identified', 'identified,recorded', 'recorded,identified'] })
                          .where(occurrences: { datasetKey: datasetKey})
-                         .where("YEAR(dateIdentified_processed) BETWEEN ? AND ?", start_year, end_year)
+                         .where("dateIdentified_processed BETWEEN ? AND ?", start_date, end_date)
                          .distinct
 
     User.select("users.*", "MIN(a.dateIdentified_processed) AS min_date", "MAX(a.dateIdentified_processed) AS max_date")
