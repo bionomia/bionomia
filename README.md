@@ -50,56 +50,11 @@ Unfortunately, gbifIDs are not persistent. These occasionally disappear through 
 
 ### Step 3: Parse & Populate Agents
 
-     $ RACK_ENV=production ./bin/populate_agents.rb --truncate --directory /directory-to-spark-csv-files/
-     # Can start 2+ workers, each with 40 threads to help speed-up processing
-     $ RACK_ENV=production sidekiq -c 40 -q agent -r ./application.rb
-     # For remote client, point to the server REDIS_URL and likewise, adjust MySQL connection strings in config
-     $ REDIS_URL=redis://192.168.2.4:6379 RACK_ENV=production sidekiq -c 40 -q agent -r ./application.rb
-
-     # After execution of all jobs:
-     $ irb
-     $ require "./application"
-     $ redis = Redis.new(url: ENV['REDIS_URL'])
-     $ redis.flushdb
-
-This creates three large csv files that then need to be imported into MySQL. But, first make occurrence_recorders.csv and occurrences_determiners.csv have unique values (but not agents.csv, see later):
-
-     $ sort -u occurrence_determiners.csv > occurrence_determiners_new.csv
-     $ rm occurrence_determiners.csv
-     $ mv occurrence_determiners_new.csv occurrence_determiners.csv
-
-     # Split them into pieces
-     $ cd occurrence_determiners_files/
-     $ gsplit -l 5000000 --additional-suffix=.csv ../occurrence_determiners.csv
-     $ rm ../occurrence_determiners.csv
-
-     $ sort -u occurrence_recorders.csv > occurrence_recorders_new.csv
-     $ rm occurrence_recorders.csv
-     $ mv occurrence_recorders_new.csv occurrence_recorders.csv
-
-     # Split them into pieces
-     $ cd occurrence_recorders_files/
-     $ gsplit -l 5000000 --additional-suffix=.csv ../occurrence_recorders.csv
-     $ rm ../occurrence_recorders.csv
-
-     mysql> LOAD DATA LOCAL INFILE 'agents.csv' IGNORE INTO TABLE agents FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY '\n';
-
-     # Drop the keys on occurrence_recorders to make import faster
-     mysql> ALTER TABLE `occurrence_recorders` DROP PRIMARY KEY, DROP INDEX `occurrence_agent_idx`;
-     $ cd occurrence_recorders_files
-     $ find . -name "*.csv" | parallel -t mysql --user=root --password=****** --database=bionomia --execute=\"LOAD DATA LOCAL INFILE \'{1}\' IGNORE INTO TABLE occurrence_recorders FIELDS TERMINATED BY \',\'\;\"
-     mysql> ALTER TABLE `occurrence_recorders` ADD PRIMARY KEY (`agent_id`,`occurrence_id`), ADD UNIQUE KEY `occurrence_agent_idx` (`occurrence_id`,`agent_id`);
-
-     # Drop the keys on occurrence_determiners to make import faster
-     mysql> ALTER TABLE `occurrence_determiners` DROP PRIMARY KEY, DROP INDEX `occurrence_agent_idx`;
-     $ cd occurrence_determiners_files
-     $ find . -name "*.csv" | parallel -t mysql --user=root --password=****** --database=bionomia --execute=\"LOAD DATA LOCAL INFILE \'{1}\' IGNORE INTO TABLE occurrence_determiners FIELDS TERMINATED BY \',\'\;\"
-     mysql> ALTER TABLE `occurrence_determiners` ADD PRIMARY KEY (`agent_id`,`occurrence_id`), ADD UNIQUE KEY `occurrence_agent_idx` (`occurrence_id`,`agent_id`);
-
-But...because job execution was not perfectly atomic, there will have been some duplicates that were skipped in the LOAD DATA INFILE that must now be reconciled with their floating entries in occurrence_determiners and occurrence_recorders.
-
-     $ awk -F, 'NR==FNR {A[$2,$3]++; next} A[$2,$3]>1'  agents.csv agents.csv > duplicate_agents.csv
-     $ RACK_ENV=production ./bin/fix_orphaned_agent_links.rb -f duplicate_agents.csv
+      $ RACK_ENV=production ./bin/populate_agents.rb --truncate --directory /directory-to-spark-csv-files/
+      # Can start 2+ workers, each with 40 threads to help speed-up processing
+      $ RACK_ENV=production sidekiq -c 40 -q agent -r ./application.rb
+      # For remote client, point to the server REDIS_URL and likewise, adjust MySQL connection strings in config
+      $ REDIS_URL=redis://192.168.2.4:6379 RACK_ENV=production sidekiq -c 40 -q agent -r ./application.rb
 
 ### Step 4: Populate Taxa
 

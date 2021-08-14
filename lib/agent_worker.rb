@@ -7,42 +7,26 @@ module Bionomia
 
     def perform(row)
       agents = parse(row["agents"])
-      recorded_by = row["gbifIDs_recordedBy"].tr('[]', '').split(',')
-      identified_by = row["gbifIDs_identifiedBy"].tr('[]', '').split(',')
-
-      agents_csv = CSV.open("agents.csv", "a+")
-      occurrence_recorders_csv = CSV.open("occurrence_recorders.csv", "a+")
-      occurrence_determiners_csv = CSV.open("occurrence_determiners.csv", "a+")
-
-      Sidekiq.redis do |conn|
-        agents.each do |a|
-          given = a.given.to_s.strip
-          family = a.family.to_s.strip
-          name = [given,family].join("-")
-
-          id = conn.get("agent:#{name}")
-          if !id
-            id = conn.incr("agent:key")
-            conn.set("agent:#{name}", id)
-            agents_csv << [id, family, given]
+      agents.each do |a|
+        agent = Agent.create_or_find_by({
+          family: a.family.to_s.strip,
+          given: a.given.to_s.strip
+        })
+        row["gbifIDs_recordedBy"]
+          .tr('[]', '')
+          .split(',')
+          .in_groups_of(1000, false) do |group|
+            import = group.map{|r| [ r.to_i, agent.id ] }
+            OccurrenceRecorder.import [:occurrence_id, :agent_id], import, batch_size: 1000, validate: false, on_duplicate_key_ignore: true
           end
-          recorded_by.in_groups_of(1000, false) do |group|
-            group.each do |row|
-              occurrence_recorders_csv << [ row, id ]
-            end
+        row["gbifIDs_identifiedBy"]
+          .tr('[]', '')
+          .split(',')
+          .in_groups_of(1000, false) do |group|
+            import = group.map{|r| [ r.to_i, agent.id ] }
+            OccurrenceDeterminer.import [:occurrence_id, :agent_id], import, batch_size: 1000, validate: false, on_duplicate_key_ignore: true
           end
-          identified_by.in_groups_of(1000, false) do |group|
-            group.each do |row|
-              occurrence_determiners_csv << [ row, id ]
-            end
-          end
-
-        end
       end
-
-      agents_csv.close
-      occurrence_recorders_csv.close
-      occurrence_determiners_csv.close
     end
 
     def parse(raw)
