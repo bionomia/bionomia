@@ -257,7 +257,7 @@ es:
     taxa: Familias taxonómicas
     specimens: Epecímenes
     visualizations: Visualizaciones
-    strings: Collector Strings
+    strings: Cadenas de colectores
     support: Con ayuda de
     specialties: Especialidades
     public_profile: Perfil público
@@ -645,7 +645,7 @@ es:
     science_enabled: Ciencia habilitada
     science_enabled_specimens: Ciencia habilitada por datos de especímenes
     helped_by: Ayudado por
-    strings: Collector Strings
+    strings: Cadenas de colectores
     helped: Personas ayudadas
     no_scribe: No se han atribuido especímenes por un anotador.
     attributions_by: "Atribuciones hechas por:"
