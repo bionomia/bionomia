@@ -141,8 +141,8 @@ module Bionomia
 
           # Add problems
           if o.u_wikidata && o.eventDate_processed &&
-            ( o.u_date_born && o.u_date_born > o.eventDate_processed ||
-              o.u_date_died && o.u_date_died < o.eventDate_processed )
+            ( o.u_date_born && o.u_date_born >= o.eventDate_processed ||
+              o.u_date_died && o.u_date_died =< o.eventDate_processed )
             data = [
               o.occurrence_id,
               o.occ_catalogNumber,
