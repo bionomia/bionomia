@@ -124,8 +124,8 @@
           google.visualization.events.addListener(chart, 'select', function() {
             var sel = chart.getSelection()[0];
             var id = $(dataTable.getValue(sel.row, 2)).attr("data-identifier");
-            var start_year = dataTable.getValue(sel.row, 4).getFullYear() - 1;
-            var end_year = dataTable.getValue(sel.row, 5).getFullYear() + 1;
+            var start_year = dataTable.getValue(sel.row, 4).getFullYear();
+            var end_year = dataTable.getValue(sel.row, 5).getFullYear();
             var extra_param = ""
             if (typeof sel.row !== "undefined" && sel.row !== null) {
               window.location = "/" + id + "/specimens?action=#{@action}&start_year=" + start_year + "&end_year=" + end_year + "#{locals[:extra_param]}";

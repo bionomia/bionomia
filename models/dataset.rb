@@ -184,7 +184,7 @@ class Dataset < ActiveRecord::Base
                   .joins(:user)
                   .where(occurrences: { datasetKey: datasetKey })
                   .where(action: ["recorded", "recorded,identified", "identified,recorded"])
-                  .where("users.date_born > occurrences.eventDate_processed OR users.date_died < occurrences.eventDate_processed")
+                  .where("users.date_born >= occurrences.eventDate_processed OR users.date_died =< occurrences.eventDate_processed")
   end
 
   def current_occurrences_count
