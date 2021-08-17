@@ -81,12 +81,14 @@ class Occurrence < ActiveRecord::Base
     user_occurrences.where(visible: true)
                     .where(qry_identified)
                     .includes(:user)
+                    .includes(:claimant)
   end
 
   def user_recordings
     user_occurrences.where(visible: true)
                     .where(qry_recorded)
                     .includes(:user)
+                    .includes(:claimant)
   end
 
   def qry_identified
