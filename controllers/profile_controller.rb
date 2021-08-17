@@ -127,7 +127,8 @@ module Sinatra
             @user.locale = locale
             @user.save
             flash.next[:updated] = true
-            redirect "/profile/settings"
+            canonical_host = request.env['HTTP_HOST'].match(/(?:[a-z]{2}\.)?(.*)$/)
+            redirect "#{request.env['rack.url_scheme']}://#{canonical_host[1]}/profile/settings"
           end
 
           app.get '/profile/specimens' do
