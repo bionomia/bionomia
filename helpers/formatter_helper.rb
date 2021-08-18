@@ -123,8 +123,8 @@ module Sinatra
 
         def format_users
           @results.map{ |n|
-            user = User.find(n[:_source][:id])
-            lifespan = user.wikidata ? format_lifespan(user) : nil
+            user = User.find(n[:_source][:id]) rescue nil
+            lifespan = user && user.wikidata ? format_lifespan(user) : nil
             { id: n[:_source][:id],
               score: n[:_score],
               orcid: n[:_source][:orcid],

@@ -4,6 +4,35 @@
   %script{src: "/js/jquery.throttledresize.js"}
   :javascript
     $(function() {
+
+      function findOne (haystack, arr) {
+        return arr.some(function (v) {
+          return haystack.indexOf(v) >= 0;
+        });
+      }
+
+      $.each(['recorders', 'determiners'], function() {
+        var type = this,
+            attributed_ids = $("p.orcid[data-" + type + "]").map(function() { return $(this).data(type.toString()); }).get();
+
+        $('.agent_' + type).each(function() {
+          var self = this;
+          $.ajax({
+            method: "GET",
+            url: "/user.json?q=" + $(self).text(),
+            dataType: "json"
+          }).done(function(data) {
+            var searched_ids = $.map(data, function(i) { return i.wikidata || i.orcid }),
+                icon = $(self).find("i").removeClass("fa-spinner").removeClass("fa-pulse");
+            if (findOne(searched_ids, attributed_ids)) {
+              icon.addClass("fa-check").addClass("text-success");
+            } else {
+              icon.addClass("fa-question").addClass("text-warning");
+            }
+          });
+        });
+      });
+
       if (!$('#map').length) { return; }
 
       var map;
@@ -138,13 +167,24 @@
         %dd.py-1 #{h(@occurrence.recordedByID)}
         %dd.line-break
 
+        %dt Agent Strings
+        %dd.py-1
+          %hr
+          .mt-2
+            %ul.list-unstyled
+              - @occurrence.recorders.each do |agent_recorder|
+                %li.agent_recorders
+                  #{agent_recorder.fullname}
+                  %i.fas.fa-spinner.fa-pulse
+        %dd.line-break
+
         %dt Attributions
         %dd.py-1
           - if @occurrence.user_recordings.count > 0
             %hr
             .mt-2
               - @occurrence.user_recordings.each do |recorder|
-                %p.orcid.text-lg-left.p-0.mt-1
+                %p.orcid.text-lg-left.p-0.mt-1{"data-recorders": "#{recorder.user.identifier}"}
                   - if recorder.user.orcid
                     #{recorder.user.fullname_reverse}
                     %a{href: "https://orcid.org/#{recorder.user.orcid}"}
@@ -160,6 +200,7 @@
                       %a{href: "https://orcid.org/#{recorder.claimant.orcid}"}
                         %i.fab.fa-orcid
                         https://orcid.org/#{recorder.claimant.orcid}
+        %dd.line-break
 
   .card.mb-4
     .card-header.border-bottom
@@ -190,13 +231,24 @@
         %dd.py-1 #{h(@occurrence.identifiedByID)}
         %dd.line-break
 
+        %dt Agent Strings
+        %dd.py-1
+          %hr
+          .mt-2
+            %ul.list-unstyled
+              - @occurrence.determiners.each do |agent_determiner|
+                %li.agent_determiners
+                  #{agent_determiner.fullname}
+                  %i.fas.fa-spinner.fa-pulse
+        %dd.line-break
+
         %dt Attributions
         %dd.py-1
           - if @occurrence.user_identifications.count > 0
             %hr
             .mt-2
               - @occurrence.user_identifications.each do |determiner|
-                %p.orcid.text-lg-left.p-0.mt-1
+                %p.orcid.text-lg-left.p-0.mt-1{"data-determiners": "#{determiner.user.identifier}"}
                   - if determiner.user.orcid
                     #{determiner.user.fullname_reverse}
                     %a{href: "https://orcid.org/#{determiner.user.orcid}"}
@@ -212,3 +264,4 @@
                       %a{href: "https://orcid.org/#{determiner.claimant.orcid}"}
                         %i.fab.fa-orcid
                         https://orcid.org/#{determiner.claimant.orcid}
+        %dd.line-break

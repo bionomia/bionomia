@@ -100,7 +100,9 @@ module Sinatra
           end
 
           app.get '/occurrence/:id' do
-            @occurrence = Occurrence.find(params[:id]) rescue nil
+            @occurrence = Occurrence.includes(:recorders)
+                                    .includes(:determiners)
+                                    .find(params[:id]) rescue nil
             if @occurrence.nil?
               halt 404
             end
