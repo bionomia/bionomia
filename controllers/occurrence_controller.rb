@@ -106,6 +106,21 @@ module Sinatra
             if @occurrence.nil?
               halt 404
             end
+
+            network = Set.new
+            if authorized?
+              @occurrence.user_recordings.each do |recordings|
+                recordings.user.recorded_with.each do |person|
+                  network.add({
+                    user_id: person.id,
+                    identifier: person.identifier,
+                    familyName: person.family,
+                    fullname: person.fullname })
+                end
+              end
+            end
+            @network = network.to_json
+
             haml :'occurrence/occurrence'
           end
 
