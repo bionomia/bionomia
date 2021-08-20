@@ -62,6 +62,7 @@ module Sinatra
           end
 
           app.get '/occurrence/widget_item' do
+            admin_protected!
             subq = OccurrenceRecorder.select(:occurrence_id, 'count(agent_id) AS agent_count')
                                      .joins(:occurrence)
                                      .where(occurrences: { datasetKey: "1e61b812-b2ec-43d0-bdbb-8534a761f74c" })
@@ -81,6 +82,7 @@ module Sinatra
           end
 
           app.get '/occurrence/widget' do
+            admin_protected!
             haml :'occurrence/widget'
           end
 
