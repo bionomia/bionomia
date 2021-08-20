@@ -187,8 +187,8 @@ module Sinatra
             date_born = user[:date_born]
             date_died = user[:date_died]
           else
-            date_born = Date.parse(user[:date_born])
-            date_died = Date.parse(user[:date_died])
+            date_born = Date.parse(user[:date_born]) rescue nil
+            date_died = Date.parse(user[:date_died]) rescue nil
           end
           if user[:date_born_precision] == "day"
             born = I18n.l date_born, format: :long
