@@ -61,6 +61,29 @@ module Sinatra
             end
           end
 
+          app.get '/occurrence/widget_item' do
+            subq = OccurrenceRecorder.select(:occurrence_id, 'count(agent_id) AS agent_count')
+                                     .joins(:occurrence)
+                                     .where(occurrences: { datasetKey: "1e61b812-b2ec-43d0-bdbb-8534a761f74c" })
+                                     .having("agent_count > 1")
+                                     .group(:occurrence_id)
+                                     .limit(1000)
+
+            occurrence = UserOccurrence.select(:occurrence_id, 'count(user_id) AS user_count', 'a.agent_count AS agent_count')
+                          .joins("INNER JOIN (#{subq.to_sql}) a ON user_occurrences.occurrence_id = a.occurrence_id")
+                          .where("action IN ('recorded', 'identified,recorded', 'recorded,identified')")
+                          .group(:occurrence_id)
+                          .having("user_count <> agent_count")
+                          .order("RAND()")
+                          .limit(1)
+            @occurrence = Occurrence.find(occurrence.first.occurrence_id)
+            haml :'occurrence/widget_item', layout: false
+          end
+
+          app.get '/occurrence/widget' do
+            haml :'occurrence/widget'
+          end
+
           app.get '/occurrence/:id.json(ld)?' do
             content_type "application/ld+json", charset: 'utf-8'
             response = jsonld_occurrence_context

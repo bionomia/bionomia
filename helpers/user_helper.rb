@@ -11,16 +11,17 @@ module Sinatra
           return if !searched_term.present?
 
           page = (params[:page] || 1).to_i
+          limit = (params[:limit] || 30).to_i
 
           client = Elasticsearch::Client.new url: Settings.elastic.server, request_timeout: 5*60, retry_on_failure: true, reload_on_failure: true
           client.transport.reload_connections!
           body = build_name_query(searched_term)
-          from = (page -1) * 30
+          from = (page -1) * limit
 
-          response = client.search index: Settings.elastic.user_index, from: from, size: 30, body: body
+          response = client.search index: Settings.elastic.user_index, from: from, size: limit, body: body
           results = response["hits"].deep_symbolize_keys
 
-          @pagy = Pagy.new(count: results[:total][:value], items: 30, page: page)
+          @pagy = Pagy.new(count: results[:total][:value], items: limit, page: page)
           @results = results[:hits]
         end
 
@@ -34,17 +35,18 @@ module Sinatra
 
           action = "recorded" if action == "collected"
           page = (params[:page] || 1).to_i
+          limit = (params[:limit] || 30).to_i
 
           client = Elasticsearch::Client.new url: Settings.elastic.server, request_timeout: 5*60, retry_on_failure: true, reload_on_failure: true
           client.transport.reload_connections!
           body = build_user_country_query(country_code, action, family)
 
-          from = (page -1) * 30
+          from = (page -1) * limit
 
-          response = client.search index: Settings.elastic.user_index, from: from, size: 30, body: body
+          response = client.search index: Settings.elastic.user_index, from: from, size: limit, body: body
           results = response["hits"].deep_symbolize_keys
 
-          @pagy = Pagy.new(count: results[:total][:value], items: 30, page: page)
+          @pagy = Pagy.new(count: results[:total][:value], items: limit, page: page)
           @results = results[:hits]
         end
 
@@ -57,17 +59,18 @@ module Sinatra
 
           action = "recorded" if action == "collected" || action.nil?
           page = (params[:page] || 1).to_i
+          limit = (params[:limit] || 30).to_i
 
           client = Elasticsearch::Client.new url: Settings.elastic.server, request_timeout: 5*60, retry_on_failure: true, reload_on_failure: true
           client.transport.reload_connections!
           body = build_user_taxon_query(family, action)
 
-          from = (page -1) * 30
+          from = (page -1) * limit
 
-          response = client.search index: Settings.elastic.user_index, from: from, size: 30, body: body
+          response = client.search index: Settings.elastic.user_index, from: from, size: limit, body: body
           results = response["hits"].deep_symbolize_keys
 
-          @pagy = Pagy.new(count: results[:total][:value], items: 30, page: page)
+          @pagy = Pagy.new(count: results[:total][:value], items: limit, page: page)
           @results = results[:hits]
         end
 

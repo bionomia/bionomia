@@ -123,8 +123,7 @@ module Sinatra
 
         def format_users
           @results.map{ |n|
-            user = User.find(n[:_source][:id]) rescue nil
-            lifespan = user && user.wikidata ? format_lifespan(user) : nil
+            lifespan = n[:_source][:wikidata] ? format_lifespan(n[:_source]) : nil
             { id: n[:_source][:id],
               score: n[:_score],
               orcid: n[:_source][:orcid],
@@ -184,22 +183,29 @@ module Sinatra
         end
 
         def format_lifespan(user)
-          if user.date_born_precision == "day"
-            born = I18n.l user.date_born, format: :long
-          elsif user.date_born_precision == "month"
-            born = I18n.l user.date_born, format: :month_and_year
-          elsif user.date_born_precision == "year"
-            born = I18n.l user.date_born, format: :year
+          if user.is_a?(User)
+            date_born = user[:date_born]
+            date_died = user[:date_died]
+          else
+            date_born = Date.parse(user[:date_born])
+            date_died = Date.parse(user[:date_died])
+          end
+          if user[:date_born_precision] == "day"
+            born = I18n.l date_born, format: :long
+          elsif user[:date_born_precision] == "month"
+            born = I18n.l date_born, format: :month_and_year
+          elsif user[:date_born_precision] == "year"
+            born = I18n.l date_born, format: :year
           else
             born = "?"
           end
 
-          if user.date_died_precision == "day"
-            died = I18n.l user.date_died, format: :long
-          elsif user.date_died_precision == "month"
-            died = I18n.l user.date_died, format: :month_and_year
-          elsif user.date_died_precision == "year"
-            died = I18n.l user.date_died, format: :year
+          if user[:date_died_precision] == "day"
+            died = I18n.l date_died, format: :long
+          elsif user[:date_died_precision] == "month"
+            died = I18n.l date_died, format: :month_and_year
+          elsif user[:date_died_precision] == "year"
+            died = I18n.l date_died, format: :year
           else
             died = "?"
           end
