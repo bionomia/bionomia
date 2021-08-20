@@ -229,7 +229,7 @@
         %dd.py-1 #{h(@occurrence.recordedByID)}
         %dd.line-break
 
-        - if authorized?
+        - if is_admin?
           %dt Agent Strings
           %dd.py-1.pr-0
             %hr
@@ -295,7 +295,7 @@
         %dd.py-1 #{h(@occurrence.identifiedByID)}
         %dd.line-break
 
-        - if authorized?
+        - if is_admin?
           %dt Agent Strings
           %dd.py-1.pr-0
             %hr
