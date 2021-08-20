@@ -140,7 +140,9 @@ module Sinatra
                     user_id: person.id,
                     identifier: person.identifier,
                     familyName: person.family,
-                    fullname: person.fullname })
+                    fullname: person.fullname,
+                    fullname_reverse: person.fullname_reverse
+                  })
                 end
               end
             end

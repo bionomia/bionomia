@@ -26,6 +26,7 @@
               action = $(this).attr("data-action"),
               user_id = $(this).attr("data-user-id");
 
+          //TODO: user might be determiner & so need to do a PUT to user_occurrence_id, not POST to occurrence_id
           $.ajax({
             method: "POST",
             url: "/help-others/user-occurrence/" + occurrence_id + ".json",
@@ -52,15 +53,18 @@
         if (found) {
           var url = (found.identifier[0] === "Q") ? "https://www.wikidata.org/wiki/" + found.identifier : "https://orcid.org/" + found.identifier;
           if (found.identifier[0] === "Q") {
-            img = "<img src=\"/images/wikidata_24x24.png\" class=\"px-1\" />";
+            img = "<img src=\"/images/wikidata_24x24.png\" class=\"pr-1\" />";
           } else {
-            img = "<i class=\"fab fa-orcid px-1\"></i>";
+            img = "<i class=\"fab fa-orcid pr-1\"></i>";
           }
           output = "<table class=\"mb-2\">";
           output += "<tbody>";
           output += "<tr>";
+
+          //TODO: if found.identifier exists in linked determinations, have to make microscope icon selected
+
           output += "<td class=\"selector\">" + selector_template({ user_id: found.user_id}) + "</td>";
-          output += "<td><span class=\"d-block pl-3\">" + found.fullname + img + "<a href=\"" + url + "\" target=\"_blank\">" + url + "</a></span></td>";
+          output += "<td><span class=\"d-block pl-2\">" + found.fullname_reverse + "<br>" + img + "<a href=\"" + url + "\" target=\"_blank\">" + url + "</a></span></td>";
           output += "</tr>";
           output += "</tbody>";
           output += "</table>";
@@ -248,7 +252,7 @@
             %hr
             .mt-2
               - @occurrence.user_recordings.each do |recorder|
-                %p.orcid.text-lg-left.p-0.mt-1{"data-recorders": "#{recorder.user.identifier}"}
+                %p.orcid.text-lg-left.p-0.mt-1{"data-user-occurrence-id": "#{recorder.id}", "data-recorders": "#{recorder.user.identifier}"}
                   - if recorder.user.orcid
                     #{recorder.user.fullname_reverse}
                     %a{href: "https://orcid.org/#{recorder.user.orcid}"}
@@ -314,7 +318,7 @@
             %hr
             .mt-2
               - @occurrence.user_identifications.each do |determiner|
-                %p.orcid.text-lg-left.p-0.mt-1{"data-determiners": "#{determiner.user.identifier}"}
+                %p.orcid.text-lg-left.p-0.mt-1{"data-user-occurrence-id": "#{determiner.id}", "data-determiners": "#{determiner.user.identifier}"}
                   - if determiner.user.orcid
                     #{determiner.user.fullname_reverse}
                     %a{href: "https://orcid.org/#{determiner.user.orcid}"}

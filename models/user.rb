@@ -794,8 +794,14 @@ class User < ActiveRecord::Base
     doc = es.get(self)
     id_family = doc["_source"]["identified"].map{|a| a["family"]}.uniq.sample rescue nil
     if id_family
-      client = Elasticsearch::Client.new url: Settings.elastic.server, request_timeout: 5*60, retry_on_failure: true, reload_on_failure: true
-      client.transport.reload_connections!
+      client = Elasticsearch::Client.new(
+        url: Settings.elastic.server,
+        request_timeout: 5*60,
+        retry_on_failure: true,
+        reload_on_failure: true,
+        reload_connections: 1_000,
+        adapter: :typhoeus
+      )
       body = {
         query: {
           function_score: {

@@ -12,7 +12,9 @@ module Bionomia
             url: Settings.elastic.server,
             request_timeout: 5*60,
             retry_on_failure: true,
-            reload_on_failure: true
+            reload_on_failure: true,
+            reload_connections: 1_000,
+            adapter: :typhoeus
     end
 
     def delete_index

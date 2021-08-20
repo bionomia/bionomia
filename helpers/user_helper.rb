@@ -13,8 +13,14 @@ module Sinatra
           page = (params[:page] || 1).to_i
           limit = (params[:limit] || 30).to_i
 
-          client = Elasticsearch::Client.new url: Settings.elastic.server, request_timeout: 5*60, retry_on_failure: true, reload_on_failure: true
-          client.transport.reload_connections!
+          client = Elasticsearch::Client.new(
+            url: Settings.elastic.server,
+            request_timeout: 5*60,
+            retry_on_failure: true,
+            reload_on_failure: true,
+            reload_connections: 1_000,
+            adapter: :typhoeus
+          )
           body = build_name_query(searched_term)
           from = (page -1) * limit
 
@@ -37,8 +43,14 @@ module Sinatra
           page = (params[:page] || 1).to_i
           limit = (params[:limit] || 30).to_i
 
-          client = Elasticsearch::Client.new url: Settings.elastic.server, request_timeout: 5*60, retry_on_failure: true, reload_on_failure: true
-          client.transport.reload_connections!
+          client = Elasticsearch::Client.new(
+            url: Settings.elastic.server,
+            request_timeout: 5*60,
+            retry_on_failure: true,
+            reload_on_failure: true,
+            reload_connections: 1_000,
+            adapter: :typhoeus
+          )
           body = build_user_country_query(country_code, action, family)
 
           from = (page -1) * limit
@@ -61,8 +73,14 @@ module Sinatra
           page = (params[:page] || 1).to_i
           limit = (params[:limit] || 30).to_i
 
-          client = Elasticsearch::Client.new url: Settings.elastic.server, request_timeout: 5*60, retry_on_failure: true, reload_on_failure: true
-          client.transport.reload_connections!
+          client = Elasticsearch::Client.new(
+            url: Settings.elastic.server,
+            request_timeout: 5*60,
+            retry_on_failure: true,
+            reload_on_failure: true,
+            reload_connections: 1_000,
+            adapter: :typhoeus
+          )
           body = build_user_taxon_query(family, action)
 
           from = (page -1) * limit

@@ -52,8 +52,14 @@ module Sinatra
             attachment "#{params[:taxon]}.csv"
             cache_control :no_cache
             headers.delete("Content-Length")
-            client = Elasticsearch::Client.new url: Settings.elastic.server, request_timeout: 5*60, retry_on_failure: true, reload_on_failure: true
-            client.transport.reload_connections!
+            client = Elasticsearch::Client.new(
+              url: Settings.elastic.server,
+              request_timeout: 5*60,
+              retry_on_failure: true,
+              reload_on_failure: true,
+              reload_connections: 1_000,
+              adapter: :typhoeus
+            )
             body = build_user_taxon_query(@taxon.family)
             response = client.search index: Settings.elastic.user_index, body: body, scroll: '5m'
             scroll_id = response['_scroll_id']
