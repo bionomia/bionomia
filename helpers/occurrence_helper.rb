@@ -111,6 +111,22 @@ module Sinatra
           end
         end
 
+        def occurrence_network
+          network = Set.new
+          @occurrence.user_recordings.each do |recordings|
+            recordings.user.recorded_with.each do |person|
+              network.add({
+                user_id: person.id,
+                identifier: person.identifier,
+                familyName: person.family,
+                fullname: person.fullname,
+                fullname_reverse: person.fullname_reverse
+              })
+            end
+          end
+          network
+        end
+
       end
     end
   end

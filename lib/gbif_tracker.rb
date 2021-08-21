@@ -4,7 +4,7 @@ module Bionomia
   class GbifTracker
 
     def initialize(args = {})
-      @url = "https://www.gbif.org/api/resource/search?contentType=literature&literatureType=journal&relevance=GBIF_USED&peerReview=true&limit=200&offset="
+      @url = "https://www.gbif.org/api/resource/search?contentType=literature&literatureType=journal&literatureType=working_paper&relevance=GBIF_USED&peerReview=true&limit=200&offset="
       @package_url = "http://api.gbif.org/v1/occurrence/download/request/"
       args = defaults.merge(args)
       @first_page_only = args[:first_page_only]

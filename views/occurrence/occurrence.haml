@@ -2,114 +2,14 @@
 - content_for :scripts do
   %script{src: "//www.gstatic.com/charts/loader.js"}
   %script{src: "/js/jquery.throttledresize.js"}
+  %script{src: "/js/occurrence_widget.js"}
   :javascript
-    $(function() {
-      var recorders_ids = $("p.orcid[data-recorders]").map(function() { return $(this).data('recorders'); }).get(),
-          determiners_ids = $("p.orcid[data-determiners]").map(function() { return $(this).data('determiners'); }).get(),
-          determiner_data = $("[data-user-id]", "#identified").map(function() { return { user_id: $(this).data('user-id'), user_occurrence_id: $(this).data('user-occurrence-id') }; }).get(),
-          network = #{@network},
-          selector_template = Handlebars.compile($('#selector-template').html());
+    $(function () {
+      var map;
 
-      $.ajaxSetup({
-        headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
-      });
-
-      function findOne (haystack, arr) {
-        return arr.some(function (v) {
-          return haystack.indexOf(v) >= 0;
-        });
-      }
-
-      function activateRadios(ele) {
-        var action_input = $(ele).find("input.action-radio"),
-            occurrence_id = parseInt(action_input.attr("data-occurrence-id"), 10),
-            user_id = parseInt(action_input.attr("data-user-id"), 10),
-            url = "/help-others/user-occurrence/" + occurrence_id + ".json",
-            method = "POST";
-
-        if (determiner_data.map(function(a) { return a.user_id; }).includes(action_input.data("user-id"))) {
-          action_input.end().find("input.action-radio[data-action='identified']").prop('checked', true).parent().addClass("active");
-          var user_occurrence_id = $.grep(determiner_data, function(a) { return a.user_id === user_id; })[0].user_occurrence_id;
-          url = "/help-others/user-occurrence/" + user_occurrence_id + ".json";
-          method = "PUT";
-        }
-
-        action_input.on("change", function() {
-          var row = $(this).parents("tr"),
-              action = $(this).attr("data-action");
-
-          $.ajax({
-            method: method,
-            url: url,
-            dataType: "json",
-            data: JSON.stringify({
-              user_id: user_id,
-              action: action,
-              visible: true
-            }),
-            beforeSend: function(xhr) {
-              $("label", row).addClass("disabled");
-              $("button", row).addClass("disabled");
-            }
-          }).done(function(data) {
-            location.reload();
-          });
-
-        });
-      }
-
-      function matchedPersonHTML(family) {
-        var output = "", img = "";
-        let found = network.find(x => x.familyName === family);
-        if (found) {
-          var url = (found.identifier[0] === "Q") ? "https://www.wikidata.org/wiki/" + found.identifier : "https://orcid.org/" + found.identifier;
-          if (found.identifier[0] === "Q") {
-            img = "<img src=\"/images/wikidata_24x24.png\" class=\"pr-1\" />";
-          } else {
-            img = "<i class=\"fab fa-orcid pr-1\"></i>";
-          }
-          output = "<table class=\"mb-2\">";
-          output += "<tbody>";
-          output += "<tr>";
-          output += "<td class=\"selector\">" + selector_template({ user_id: found.user_id }) + "</td>";
-          output += "<td><span class=\"d-block pl-2\">" + found.fullname_reverse + "<br>" + img + "<a href=\"" + url + "\" target=\"_blank\">" + url + "</a></span></td>";
-          output += "</tr>";
-          output += "</tbody>";
-          output += "</table>";
-        }
-        return output;
-      }
-
-      $.each(['recorders', 'determiners'], function() {
-        var type = this;
-
-        $('.agent_' + type).each(function() {
-          var self = this;
-          $.ajax({
-            method: "GET",
-            url: "/user.json?q=" + $(self).text(),
-            dataType: "json"
-          }).done(function(data) {
-            var searched_ids = $.map(data, function(i) { return i.wikidata || i.orcid }),
-                icon = $(self).find("i").removeClass("fa-spinner").removeClass("fa-pulse");
-            if (findOne(searched_ids, eval(type + "_ids"))) {
-              icon.addClass("fa-check").addClass("text-success");
-            } else {
-              if ($.map(network, function(id) { return id.familyName; }).includes($(self).data("family"))) {
-                icon.remove();
-                $(self).find("span").addClass("font-weight-bold").after(matchedPersonHTML($(self).data("family")));
-                activateRadios($(self));
-              } else {
-                icon.addClass("fa-question").addClass("text-warning");
-              }
-            }
-          });
-        });
-      });
+      OccurrenceWidget.init($('#selector-template'), #{@network});
 
       if (!$('#map').length) { return; }
-
-      var map;
 
       function drawVisualizations() {
         var options = {
@@ -248,7 +148,7 @@
             .mt-2
               %ul.list-unstyled
                 - @occurrence.recorders.each do |agent_recorder|
-                  %li.agent_recorders{"data-family": agent_recorder.family}
+                  %li.agent_recorders
                     %span
                       #{agent_recorder.fullname}
                     %i.fas.fa-spinner.fa-pulse
@@ -314,7 +214,7 @@
             .mt-2
               %ul.list-unstyled
                 - @occurrence.determiners.each do |agent_determiner|
-                  %li.agent_determiners{"data-family": agent_determiner.family}
+                  %li.agent_determiners
                     %span
                       #{agent_determiner.fullname}
                     %i.fas.fa-spinner.fa-pulse

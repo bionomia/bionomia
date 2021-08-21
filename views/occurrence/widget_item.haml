@@ -1,4 +1,4 @@
-.card-deck.occurrence.mt-4
+#occurrence-widget-item.card-deck.occurrence{"data-network": "#{@network}"}
   .card.mb-4
     .card-header.border-bottom
       %h5= I18n.t('occurrence.record')
@@ -99,7 +99,7 @@
             .mt-2
               %ul.list-unstyled
                 - @occurrence.recorders.each do |agent_recorder|
-                  %li.agent_recorders{"data-family": agent_recorder.family}
+                  %li.agent_recorders
                     %span
                       #{agent_recorder.fullname}
                     %i.fas.fa-spinner.fa-pulse
@@ -165,7 +165,7 @@
             .mt-2
               %ul.list-unstyled
                 - @occurrence.determiners.each do |agent_determiner|
-                  %li.agent_determiners{"data-family": agent_determiner.family}
+                  %li.agent_determiners
                     %span
                       #{agent_determiner.fullname}
                     %i.fas.fa-spinner.fa-pulse

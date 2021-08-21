@@ -64,8 +64,6 @@ module Sinatra
           app.get '/occurrence/widget_item' do
             admin_protected!
             subq = OccurrenceRecorder.select(:occurrence_id, 'count(agent_id) AS agent_count')
-                                     #.joins(:occurrence)
-                                     #.where(occurrences: { datasetKey: "1e61b812-b2ec-43d0-bdbb-8534a761f74c" })
                                      .having("agent_count > 1")
                                      .group(:occurrence_id)
                                      .limit(1000)
@@ -78,6 +76,7 @@ module Sinatra
                           .order("RAND()")
                           .limit(1)
             @occurrence = Occurrence.find(occurrence.first.occurrence_id)
+            @network = occurrence_network.to_json
             haml :'occurrence/widget_item', layout: false
           end
 
@@ -132,22 +131,7 @@ module Sinatra
               halt 404
             end
 
-            network = Set.new
-            if authorized?
-              @occurrence.user_recordings.each do |recordings|
-                recordings.user.recorded_with.each do |person|
-                  network.add({
-                    user_id: person.id,
-                    identifier: person.identifier,
-                    familyName: person.family,
-                    fullname: person.fullname,
-                    fullname_reverse: person.fullname_reverse
-                  })
-                end
-              end
-            end
-            @network = network.to_json
-
+            @network = is_admin? ? occurrence_network.to_json : [].to_json
             haml :'occurrence/occurrence'
           end
 

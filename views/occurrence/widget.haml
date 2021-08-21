@@ -1,66 +1,14 @@
 - content_for :title, I18n.t('occurrence.occurrence_title')
+- content_for :stylesheets do
+  :css
+    .carousel-control-prev, .carousel-control-next {
+      background-color: #c0c0c0;
+      width: 3em;
+    }
 - content_for :scripts do
+  %script{src: "/js/occurrence_widget.js"}
   :javascript
     $(function() {
-
-      $.ajaxSetup({
-        headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
-      });
-
-      function findOne (haystack, arr) {
-        return arr.some(function (v) {
-          return haystack.indexOf(v) >= 0;
-        });
-      }
-
-      function activateRadios(ele) {
-        $(ele).find("input.action-radio").on("change", function() {
-          var row = $(this).parents("tr"),
-              occurrence_id = $(this).attr("data-occurrence-id"),
-              action = $(this).attr("data-action"),
-              user_id = $(this).attr("data-user-id");
-
-          $.ajax({
-            method: "POST",
-            url: "/help-others/user-occurrence/" + occurrence_id + ".json",
-            dataType: "json",
-            data: JSON.stringify({
-              user_id: user_id,
-              action: action,
-              visible: true
-            }),
-            beforeSend: function(xhr) {
-              $("label", row).addClass("disabled");
-              $("button", row).addClass("disabled");
-            }
-          }).done(function(data) {
-            //location.reload();
-          });
-
-        });
-      }
-
-      function matchedPersonHTML(family, network) {
-        var output = "", img = "";
-        let found = network.find(x => x.familyName === family);
-        if (found) {
-          var url = (found.identifier[0] === "Q") ? "https://www.wikidata.org/wiki/" + found.identifier : "https://orcid.org/" + found.identifier;
-          if (found.identifier[0] === "Q") {
-            img = "<img src=\"/images/wikidata_24x24.png\" class=\"px-1\" />";
-          } else {
-            img = "<i class=\"fab fa-orcid px-1\"></i>";
-          }
-          output = "<table class=\"mb-2\">";
-          output += "<tbody>";
-          output += "<tr>";
-          output += "<td class=\"selector\">" + selector_template({ user_id: found.user_id}) + "</td>";
-          output += "<td><span class=\"d-block pl-3\">" + found.fullname + img + "<a href=\"" + url + "\" target=\"_blank\">" + url + "</a></span></td>";
-          output += "</tr>";
-          output += "</tbody>";
-          output += "</table>";
-        }
-        return output;
-      }
 
       function loadContent() {
         $.ajax({
@@ -71,46 +19,15 @@
           }
         }).done(function(data) {
           $("#occurrence").html(data);
-          activateContent();
+          var network = $('#occurrence-widget-item').data('network');
+          OccurrenceWidget.init($('#selector-template'), network);
         });
       }
 
-      function activateContent() {
-        var recorders_ids = $("p.orcid[data-recorders]").map(function() { return $(this).data('recorders'); }).get(),
-            determiners_ids = $("p.orcid[data-determiners]").map(function() { return $(this).data('determiners'); }).get(),
-            network = [{}],
-            selector_template = Handlebars.compile($('#selector-template').html());
-
-        $.each(['recorders', 'determiners'], function() {
-          var type = this;
-
-          $('.agent_' + type).each(function() {
-            var self = this;
-            $.ajax({
-              method: "GET",
-              url: "/user.json?limit=5&q=" + $(self).text(),
-              dataType: "json"
-            }).done(function(data) {
-              var searched_ids = $.map(data.slice(0, 4), function(i) { return i.wikidata || i.orcid }),
-                  icon = $(self).find("i").removeClass("fa-spinner").removeClass("fa-pulse");
-              if (findOne(searched_ids, eval(type + "_ids"))) {
-                icon.addClass("fa-check").addClass("text-success");
-              } else {
-                if ($.map(network, function(id) { return id.familyName; }).includes($(self).data("family"))) {
-                  icon.remove();
-                  $(self).find("span").addClass("font-weight-bold").after(matchedPersonHTML($(self).data("family"), network));
-                  activateRadios($(self));
-                } else {
-                  icon.addClass("fa-question").addClass("text-warning");
-                }
-              }
-            });
-          });
-        });
-      }
-
-      $('#carousel').on('slide.bs.carousel', function () {
+      $('#carousel').on('slid.bs.carousel', function () {
+        $(this).find('.carousel-item.active').removeClass('active');
         loadContent();
+        $(this).find('#occurrence').parent().addClass('active');
       });
 
       loadContent();
@@ -122,11 +39,11 @@
       %h1.h2= I18n.t('occurrence.occurrence_title')
       %p.lead.text-muted= I18n.t('occurrence.lede')
 
-#carousel.carousel.slide.carousel-fade{"data-touch": "false", "data-interval": "false"}
+#carousel.carousel.slide.carousel-fade.mt-4{"data-touch": "false", "data-interval": "false"}
   .carousel-inner
-    .carousel-item.active
-      #occurrence
-    .carousel-item
+    .carousel-item.active.px-3
+      #occurrence.px-5
+    .carousel-item.px-5
 
   %a.carousel-control-prev{href: "#carousel", role: "button", "data-slide": "prev"}
     %span.carousel-control-prev-icon{"aria-hidden": "true"}
