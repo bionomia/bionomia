@@ -61,13 +61,17 @@ var OccurrenceWidget = (function($, window) {
           user_id = parseInt(action_input.attr("data-user-id"), 10),
           url = "/help-others/user-occurrence/" + occurrence_id + ".json",
           method = "POST",
-          determiner_data = $("[data-user-id]", "#identified").map(function() { return { user_id: $(this).data('user-id'), user_occurrence_id: $(this).data('user-occurrence-id') }; }).get();
-
-      //TODO: adjust radios for determinations as well, below just works for recordings
+          determiner_data = $("[data-user-id]", "#identified").map(function() { if ($(this).data('user-occurrence-id')) { return { user_id: $(this).data('user-id'), user_occurrence_id: $(this).data('user-occurrence-id') }; } }).get(),
+          recorder_data = $("[data-user-id]", "#recorded").map(function() { if ($(this).data('user-occurrence-id')) { return { user_id: $(this).data('user-id'), user_occurrence_id: $(this).data('user-occurrence-id') }; } }).get();
 
       if (determiner_data.map(function(a) { return a.user_id; }).includes(action_input.data("user-id"))) {
         action_input.end().find("input.action-radio[data-action='identified']").prop('checked', true).parent().addClass("active");
         var user_occurrence_id = $.grep(determiner_data, function(a) { return a.user_id === user_id; })[0].user_occurrence_id;
+        url = "/help-others/user-occurrence/" + user_occurrence_id + ".json";
+        method = "PUT";
+      } else if (recorder_data.map(function(a) { return a.user_id; }).includes(action_input.data("user-id"))) {
+        action_input.end().find("input.action-radio[data-action='recorded']").prop('checked', true).parent().addClass("active");
+        var user_occurrence_id = $.grep(recorder_data, function(a) { return a.user_id === user_id; })[0].user_occurrence_id;
         url = "/help-others/user-occurrence/" + user_occurrence_id + ".json";
         method = "PUT";
       }
