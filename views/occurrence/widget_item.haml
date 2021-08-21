@@ -71,7 +71,7 @@
         #map-wrapper{style:"height: 100%"}
           #map{style: "width:65%;"}
 
-  .card.mb-4
+  #recorded.card.mb-4
     .card-header.border-bottom
       %h5= I18n.t('occurrence.event')
     .card-body.mt-2
@@ -111,7 +111,7 @@
             %hr
             .mt-2
               - @occurrence.user_recordings.each do |recorder|
-                %p.orcid.text-lg-left.p-0.mt-1{"data-recorders": "#{recorder.user.identifier}"}
+                %p.orcid.text-lg-left.p-0.mt-1{"data-user-occurrence-id": "#{recorder.id}", "data-recorders": "#{recorder.user.identifier}", "data-user-id": "#{recorder.user.id}"}
                   - if recorder.user.orcid
                     #{recorder.user.fullname_reverse}
                     %a{href: "https://orcid.org/#{recorder.user.orcid}"}
@@ -129,7 +129,7 @@
                         https://orcid.org/#{recorder.claimant.orcid}
         %dd.line-break
 
-  .card.mb-4
+  #identified.card.mb-4
     .card-header.border-bottom
       %h5= I18n.t('occurrence.identification')
     .card-body.mt-2
@@ -177,7 +177,7 @@
             %hr
             .mt-2
               - @occurrence.user_identifications.each do |determiner|
-                %p.orcid.text-lg-left.p-0.mt-1{"data-determiners": "#{determiner.user.identifier}"}
+                %p.orcid.text-lg-left.p-0.mt-1{"data-user-occurrence-id": "#{determiner.id}", "data-determiners": "#{determiner.user.identifier}", "data-user-id": "#{determiner.user.id  }"}
                   - if determiner.user.orcid
                     #{determiner.user.fullname_reverse}
                     %a{href: "https://orcid.org/#{determiner.user.orcid}"}

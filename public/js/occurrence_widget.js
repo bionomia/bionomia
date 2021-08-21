@@ -63,6 +63,8 @@ var OccurrenceWidget = (function($, window) {
           method = "POST",
           determiner_data = $("[data-user-id]", "#identified").map(function() { return { user_id: $(this).data('user-id'), user_occurrence_id: $(this).data('user-occurrence-id') }; }).get();
 
+      //TODO: adjust radios for determinations as well, below just works for recordings
+
       if (determiner_data.map(function(a) { return a.user_id; }).includes(action_input.data("user-id"))) {
         action_input.end().find("input.action-radio[data-action='identified']").prop('checked', true).parent().addClass("active");
         var user_occurrence_id = $.grep(determiner_data, function(a) { return a.user_id === user_id; })[0].user_occurrence_id;
