@@ -64,8 +64,8 @@ module Sinatra
           app.get '/occurrence/widget_item' do
             admin_protected!
             subq = OccurrenceRecorder.select(:occurrence_id, 'count(agent_id) AS agent_count')
-                                     .joins(:occurrence)
-                                     .where(occurrences: { datasetKey: "1e61b812-b2ec-43d0-bdbb-8534a761f74c" })
+                                     #.joins(:occurrence)
+                                     #.where(occurrences: { datasetKey: "1e61b812-b2ec-43d0-bdbb-8534a761f74c" })
                                      .having("agent_count > 1")
                                      .group(:occurrence_id)
                                      .limit(1000)

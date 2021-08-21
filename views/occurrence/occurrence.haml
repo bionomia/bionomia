@@ -6,6 +6,7 @@
     $(function() {
       var recorders_ids = $("p.orcid[data-recorders]").map(function() { return $(this).data('recorders'); }).get(),
           determiners_ids = $("p.orcid[data-determiners]").map(function() { return $(this).data('determiners'); }).get(),
+          determiner_data = $("[data-user-id]", "#identified").map(function() { return { user_id: $(this).data('user-id'), user_occurrence_id: $(this).data('user-occurrence-id') }; }).get(),
           network = #{@network},
           selector_template = Handlebars.compile($('#selector-template').html());
 
@@ -20,16 +21,26 @@
       }
 
       function activateRadios(ele) {
-        $(ele).find("input.action-radio").on("change", function() {
-          var row = $(this).parents("tr"),
-              occurrence_id = $(this).attr("data-occurrence-id"),
-              action = $(this).attr("data-action"),
-              user_id = $(this).attr("data-user-id");
+        var action_input = $(ele).find("input.action-radio"),
+            occurrence_id = parseInt(action_input.attr("data-occurrence-id"), 10),
+            user_id = parseInt(action_input.attr("data-user-id"), 10),
+            url = "/help-others/user-occurrence/" + occurrence_id + ".json",
+            method = "POST";
 
-          //TODO: user might be determiner & so need to do a PUT to user_occurrence_id, not POST to occurrence_id
+        if (determiner_data.map(function(a) { return a.user_id; }).includes(action_input.data("user-id"))) {
+          action_input.end().find("input.action-radio[data-action='identified']").prop('checked', true).parent().addClass("active");
+          var user_occurrence_id = $.grep(determiner_data, function(a) { return a.user_id === user_id; })[0].user_occurrence_id;
+          url = "/help-others/user-occurrence/" + user_occurrence_id + ".json";
+          method = "PUT";
+        }
+
+        action_input.on("change", function() {
+          var row = $(this).parents("tr"),
+              action = $(this).attr("data-action");
+
           $.ajax({
-            method: "POST",
-            url: "/help-others/user-occurrence/" + occurrence_id + ".json",
+            method: method,
+            url: url,
             dataType: "json",
             data: JSON.stringify({
               user_id: user_id,
@@ -60,10 +71,7 @@
           output = "<table class=\"mb-2\">";
           output += "<tbody>";
           output += "<tr>";
-
-          //TODO: if found.identifier exists in linked determinations, have to make microscope icon selected
-
-          output += "<td class=\"selector\">" + selector_template({ user_id: found.user_id}) + "</td>";
+          output += "<td class=\"selector\">" + selector_template({ user_id: found.user_id }) + "</td>";
           output += "<td><span class=\"d-block pl-2\">" + found.fullname_reverse + "<br>" + img + "<a href=\"" + url + "\" target=\"_blank\">" + url + "</a></span></td>";
           output += "</tr>";
           output += "</tbody>";
@@ -212,7 +220,7 @@
         #map-wrapper{style:"height: 100%"}
           #map{style: "width:65%;"}
 
-  .card.mb-4
+  #recorded.card.mb-4
     .card-header.border-bottom
       %h5= I18n.t('occurrence.event')
     .card-body.mt-2
@@ -252,7 +260,7 @@
             %hr
             .mt-2
               - @occurrence.user_recordings.each do |recorder|
-                %p.orcid.text-lg-left.p-0.mt-1{"data-user-occurrence-id": "#{recorder.id}", "data-recorders": "#{recorder.user.identifier}"}
+                %p.orcid.text-lg-left.p-0.mt-1{"data-user-occurrence-id": "#{recorder.id}", "data-recorders": "#{recorder.user.identifier}", "data-user-id": "#{recorder.user.id}"}
                   - if recorder.user.orcid
                     #{recorder.user.fullname_reverse}
                     %a{href: "https://orcid.org/#{recorder.user.orcid}"}
@@ -270,7 +278,7 @@
                         https://orcid.org/#{recorder.claimant.orcid}
         %dd.line-break
 
-  .card.mb-4
+  #identified.card.mb-4
     .card-header.border-bottom
       %h5= I18n.t('occurrence.identification')
     .card-body.mt-2
@@ -318,7 +326,7 @@
             %hr
             .mt-2
               - @occurrence.user_identifications.each do |determiner|
-                %p.orcid.text-lg-left.p-0.mt-1{"data-user-occurrence-id": "#{determiner.id}", "data-determiners": "#{determiner.user.identifier}"}
+                %p.orcid.text-lg-left.p-0.mt-1{"data-user-occurrence-id": "#{determiner.id}", "data-determiners": "#{determiner.user.identifier}", "data-user-id": "#{determiner.user.id  }"}
                   - if determiner.user.orcid
                     #{determiner.user.fullname_reverse}
                     %a{href: "https://orcid.org/#{determiner.user.orcid}"}
