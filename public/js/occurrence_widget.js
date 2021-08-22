@@ -61,8 +61,8 @@ var OccurrenceWidget = (function($, window) {
           user_id = parseInt(action_input.attr("data-user-id"), 10),
           url = "/help-others/user-occurrence/" + occurrence_id + ".json",
           method = "POST",
-          determiner_data = $("[data-user-id]", "#identified").map(function() { if ($(this).data('user-occurrence-id')) { return { user_id: $(this).data('user-id'), user_occurrence_id: $(this).data('user-occurrence-id') }; } }).get(),
-          recorder_data = $("[data-user-id]", "#recorded").map(function() { if ($(this).data('user-occurrence-id')) { return { user_id: $(this).data('user-id'), user_occurrence_id: $(this).data('user-occurrence-id') }; } }).get();
+          determiner_data = $("[data-user-id]", "#identification").map(function() { if ($(this).data('user-occurrence-id')) { return { user_id: $(this).data('user-id'), user_occurrence_id: $(this).data('user-occurrence-id') }; } }).get(),
+          recorder_data = $("[data-user-id]", "#event").map(function() { if ($(this).data('user-occurrence-id')) { return { user_id: $(this).data('user-id'), user_occurrence_id: $(this).data('user-occurrence-id') }; } }).get();
 
       if (determiner_data.map(function(a) { return a.user_id; }).includes(action_input.data("user-id"))) {
         action_input.end().find("input.action-radio[data-action='identified']").prop('checked', true).parent().addClass("active");

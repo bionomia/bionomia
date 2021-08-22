@@ -1,5 +1,6 @@
 #occurrence-widget-item.card-deck.occurrence{"data-network": "#{@network}"}
-  .card.mb-4
+
+  #record.card.mb-4
     .card-header.border-bottom
       %h5= I18n.t('occurrence.record')
     .card-body.mt-2
@@ -46,7 +47,7 @@
         %dt #{I18n.t('occurrence.has_image')}
         %dd.py-1 #{I18n.t(@occurrence.hasImage.present?.to_s)}
 
-  .card.mb-4
+  #location.card.mb-4
     .card-header.border-bottom
       %h5= I18n.t('occurrence.location')
     .card-body.mt-2
@@ -60,18 +61,18 @@
         %dd.line-break
 
         %dt decimalLatitude
-        %dd.py-1 #{h(@occurrence.decimalLatitude)}
+        %dd.py-1{"data-latitude":"#{@occurrence.decimalLatitude}"} #{h(@occurrence.decimalLatitude)}
         %dd.line-break
 
         %dt decimalLongitude
-        %dd.py-1 #{h(@occurrence.decimalLongitude)}
+        %dd.py-1{"data-longitude":"#{@occurrence.decimalLongitude}"} #{h(@occurrence.decimalLongitude)}
         %dd.line-break
 
       - if @occurrence.decimalLongitude && @occurrence.decimalLatitude
         #map-wrapper{style:"height: 100%"}
           #map{style: "width:65%;"}
 
-  #recorded.card.mb-4
+  #event.card.mb-4
     .card-header.border-bottom
       %h5= I18n.t('occurrence.event')
     .card-body.mt-2
@@ -129,7 +130,7 @@
                         https://orcid.org/#{recorder.claimant.orcid}
         %dd.line-break
 
-  #identified.card.mb-4
+  #identification.card.mb-4
     .card-header.border-bottom
       %h5= I18n.t('occurrence.identification')
     .card-body.mt-2

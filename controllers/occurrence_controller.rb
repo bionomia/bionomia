@@ -70,7 +70,7 @@ module Sinatra
 
             occurrence = UserOccurrence.select(:occurrence_id, 'count(user_id) AS user_count', 'a.agent_count AS agent_count')
                           .joins("INNER JOIN (#{subq.to_sql}) a ON user_occurrences.occurrence_id = a.occurrence_id")
-                          #.where("action IN ('recorded', 'identified,recorded', 'recorded,identified')")
+                          .where("action IN ('recorded', 'identified,recorded', 'recorded,identified')")
                           .group(:occurrence_id)
                           .having("user_count <> agent_count")
                           .order("RAND()")
