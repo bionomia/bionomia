@@ -64,13 +64,13 @@ module Sinatra
           app.get '/occurrence/widget_item' do
             admin_protected!
             subq = OccurrenceRecorder.select(:occurrence_id, 'count(agent_id) AS agent_count')
-                                     .having("agent_count > 4")
+                                     .having("agent_count > 2")
                                      .group(:occurrence_id)
                                      .limit(1000)
 
             occurrence = UserOccurrence.select(:occurrence_id, 'count(user_id) AS user_count', 'a.agent_count AS agent_count')
                           .joins("INNER JOIN (#{subq.to_sql}) a ON user_occurrences.occurrence_id = a.occurrence_id")
-                          .where("action IN ('recorded', 'identified,recorded', 'recorded,identified')")
+                          #.where("action IN ('recorded', 'identified,recorded', 'recorded,identified')")
                           .group(:occurrence_id)
                           .having("user_count <> agent_count")
                           .order("RAND()")
