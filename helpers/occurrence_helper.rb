@@ -118,13 +118,25 @@ module Sinatra
               network.add({
                 user_id: person.id,
                 identifier: person.identifier,
-                familyName: person.family,
                 fullname: person.fullname,
                 fullname_reverse: person.fullname_reverse
               })
             end
           end
           network
+        end
+
+        def user_ignoreds
+          ignored_users = Set.new
+          @occurrence.user_ignoreds.each do |ignored|
+            ignored_users.add({
+              user_id: ignored.user.id,
+              identifier: ignored.user.identifier,
+              fullname: ignored.user.fullname,
+              fullname_reverse: ignored.user.fullname_reverse
+            })
+          end
+          ignored_users
         end
 
       end

@@ -16,7 +16,7 @@
         mapsApiKey: "#{Settings.google.api_key}"
       });
 
-      function drawVisualizations(lat, long, name) {
+      function drawVisualizations(lat, long) {
         var options = {
           displayMode: 'markers',
           colorAxis: { colors: ['white'] },
@@ -24,8 +24,8 @@
         };
 
         var data = google.visualization.arrayToDataTable([
-          ['Lat', 'Long', 'Name'],
-          [lat, long, name]
+          ['Lat', 'Long'],
+          [lat, long]
         ]);
 
         var map = new google.visualization.GeoChart($('#map')[0]);
@@ -42,11 +42,12 @@
         }).done(function(data) {
           $("#occurrence").html(data);
           var network = $('#occurrence-widget-item').data('network');
-          OccurrenceWidget.init($('#selector-template'), network);
+          var ignored = $('#occurrence-widget-item').data('ignored');
+          OccurrenceWidget.init($('#selector-template'), network, ignored);
           if ($('#map').length) {
             var lat = parseFloat($('[data-latitude]', '#location').data('latitude'));
             var long = parseFloat($('[data-longitude]', '#location').data('longitude'));
-            google.charts.setOnLoadCallback(drawVisualizations(lat, long, ''));
+            google.charts.setOnLoadCallback(drawVisualizations(lat, long));
           }
         });
       }

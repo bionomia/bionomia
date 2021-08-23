@@ -77,6 +77,7 @@ module Sinatra
                           .limit(1)
             @occurrence = Occurrence.find(occurrence.first.occurrence_id)
             @network = occurrence_network.to_json
+            @ignored = user_ignoreds.to_json
             haml :'occurrence/widget_item', layout: false
           end
 
@@ -132,6 +133,7 @@ module Sinatra
             end
 
             @network = is_admin? ? occurrence_network.to_json : [].to_json
+            @ignored = is_admin? ? user_ignoreds.to_json : [].to_json
             haml :'occurrence/occurrence'
           end
 

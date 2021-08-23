@@ -7,10 +7,12 @@ var OccurrenceWidget = (function($, window) {
   var _private = {
     template: "",
     network: [],
+    ignored: [],
 
-    init: function(template, network) {
+    init: function(template, network, ignored) {
       this.template = Handlebars.compile(template.html());
       this.network = network;
+      this.ignored = ignored;
       this.ajax_setup();
       this.search_agents();
     },
@@ -37,12 +39,16 @@ var OccurrenceWidget = (function($, window) {
             dataType: "json"
           }).done(function(data) {
             var searched_ids = $.map(data, function(i) { return i.wikidata || i.orcid }),
-                icon = $(agent).find("i").removeClass("fa-spinner").removeClass("fa-pulse");
-            if (self.findOne(searched_ids, eval(type + "_ids"))) {
+                icon = $(agent).find("i").removeClass("fa-spinner").removeClass("fa-pulse"),
+                ignored = $.map(self.ignored, function(i) { return i.identifier; });
+
+            var searched_filtered = searched_ids.filter(item => !ignored.includes(item));
+
+            if (self.findOne(searched_filtered, eval(type + "_ids"))) {
               icon.addClass("fa-check").addClass("text-success");
             } else {
-              let intersection = $.map(self.network, function(id) { return id.identifier; }).filter(x => searched_ids.includes(x));
-              if (intersection.length > 0) {
+              let intersection = $.map(self.network, function(id) { return id.identifier; }).filter(x => searched_filtered.includes(x));
+              if (intersection.length) {
                 icon.remove();
                 $(agent).addClass("border").addClass("p-2").find("span").addClass("font-weight-bold").after(self.matchedPersonHTML(intersection[0]));
                 self.activateRadios($(agent));
@@ -130,8 +136,8 @@ var OccurrenceWidget = (function($, window) {
   };
 
   return {
-    init: function(template, network) {
-      _private.init(template, network);
+    init: function(template, network, ignored) {
+      _private.init(template, network, ignored);
     }
   };
 

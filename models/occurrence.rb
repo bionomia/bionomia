@@ -91,6 +91,12 @@ class Occurrence < ActiveRecord::Base
                     .includes(:claimant)
   end
 
+  def user_ignoreds
+    user_occurrences.where(visible: false)
+                    .includes(:user)
+                    .includes(:claimant)
+  end
+
   def qry_identified
     "user_occurrences.action IN ('identified', 'identified,recorded', 'recorded,identified')"
   end

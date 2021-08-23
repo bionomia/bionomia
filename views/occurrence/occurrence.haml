@@ -7,7 +7,7 @@
     $(function () {
       var map;
 
-      OccurrenceWidget.init($('#selector-template'), #{@network});
+      OccurrenceWidget.init($('#selector-template'), #{@network}, #{@ignored});
 
       if (!$('#map').length) { return; }
 
