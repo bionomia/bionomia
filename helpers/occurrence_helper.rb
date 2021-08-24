@@ -115,11 +115,13 @@ module Sinatra
           network = Set.new
           @occurrence.user_recordings.each do |recordings|
             recordings.user.recorded_with.each do |person|
+              lifespan = person.wikidata ? format_lifespan(person) : nil
               network.add({
                 user_id: person.id,
                 identifier: person.identifier,
                 fullname: person.fullname,
-                fullname_reverse: person.fullname_reverse
+                fullname_reverse: person.fullname_reverse,
+                lifespan: lifespan
               })
             end
           end

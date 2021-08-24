@@ -330,6 +330,8 @@ de:
     co_collected_count:
       one: "mitgesammeltes Exemplar"
       other: "mitgesammelte Exemplare"
+    occurrence_title: Help Others By Specimen Record
+    occurrence: Specimens
   home:
     tagline: Verbinden Sie naturhistorische Exemplare mit den Sammlern der Welt.
     get_started: Los geht’s

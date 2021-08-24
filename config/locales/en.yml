@@ -310,6 +310,8 @@ en:
     co_collected_count:
       one: "co-collected specimen"
       other: "co-collected specimens"
+    occurrence_title: Help Others By Specimen Record
+    occurrence: Specimens
   home:
     tagline: Link natural history specimens to the world's collectors.
     get_started: Get started

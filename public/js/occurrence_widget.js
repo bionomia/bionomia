@@ -52,6 +52,7 @@ var OccurrenceWidget = (function($, window) {
                 icon.remove();
                 $(agent).addClass("border").addClass("p-2").find("span").addClass("font-weight-bold").after(self.matchedPersonHTML(intersection[0]));
                 self.activateRadios($(agent));
+                self.activateNotThem($(agent));
               } else {
                 icon.addClass("fa-question").addClass("text-warning");
               }
@@ -100,9 +101,40 @@ var OccurrenceWidget = (function($, window) {
             $("button", row).addClass("disabled");
           }
         }).done(function(data) {
-          location.reload();
+          if ($('#carousel').length) {
+            $('#carousel').carousel('next');
+          } else {
+            location.reload();
+          }
         });
 
+      });
+    },
+
+    activateNotThem: function(ele) {
+      var action_input = $(ele).find("button.action-not-them"),
+          user_id = parseInt(action_input.attr("data-user-id"), 10),
+          occurrence_id = parseInt(action_input.attr("data-occurrence-id"), 10),
+          url = "/help-others/user-occurrence/" + occurrence_id + ".json"
+
+      action_input.on('click', function() {
+        $.ajax({
+          method: "POST",
+          url: url,
+          data: JSON.stringify({
+            user_id: user_id,
+            visible: 0
+          }),
+          beforeSend: function(xhr) {
+            action_input.addClass("disabled");
+          }
+        }).done(function() {
+          if ($('#carousel').length) {
+            $('#carousel').carousel('next');
+          } else {
+            location.reload();
+          }
+        });
       });
     },
 
@@ -125,8 +157,9 @@ var OccurrenceWidget = (function($, window) {
         output = "<table class=\"mb-2\">";
         output += "<tbody>";
         output += "<tr>";
-        output += "<td class=\"selector\">" + this.template({ user_id: found.user_id }) + "</td>";
-        output += "<td><span class=\"d-block pl-2\">" + found.fullname_reverse + "<br>" + img + "<a href=\"" + url + "\" target=\"_blank\">" + url + "</a></span></td>";
+        var lifespan = (found.identifier[0] === "Q") ? "<br><small class=\"muted\">" + found.lifespan + "</small>" : "";
+        output += "<td class=\"selector text-left\">" + this.template({ user_id: found.user_id }) + "</td>";
+        output += "<td><span class=\"d-block pl-2\">" + found.fullname_reverse + lifespan + "<br>" + img + "<a href=\"" + url + "\">" + url + "</a></span></td>";
         output += "</tr>";
         output += "</tbody>";
         output += "</table>";

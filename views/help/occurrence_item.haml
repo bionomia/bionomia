@@ -1,77 +1,5 @@
 #occurrence-widget-item.card-deck.occurrence{"data-network": "#{@network}", "data-ignored": "#{@ignored}"}
 
-  #record.card.mb-4
-    .card-header.border-bottom
-      %h5= I18n.t('occurrence.record')
-    .card-body.mt-2
-      %dl.dl-horizontal
-        %dt gbifID
-        %dd.py-1
-          %a{href: gbif_occurrence_url(@occurrence.id), target:"_blank"}
-            #{@occurrence.id}
-            %i.fas.fa-external-link-alt
-        %dd.line-break
-
-        %dt datasetKey
-        %dd.py-1
-          - if @occurrence.datasetKey
-            %a{href: "https://gbif.org/dataset/#{@occurrence.datasetKey}", target:"_blank"}
-              #{@occurrence.datasetKey}
-              %i.fas.fa-external-link-alt
-        %dd.line-break
-
-        %dt occurrenceID
-        %dd.py-1
-          - if @occurrence.occurrenceID && @occurrence.occurrenceID[0..3] == "http"
-            %a{href: "#{@occurrence.occurrenceID}", target:"_blank"} #{@occurrence.occurrenceID}
-          - else
-            #{h(@occurrence.occurrenceID)}
-        %dd.line-break
-
-        %dt institutionCode
-        %dd.py-1 #{h(@occurrence.institutionCode)}
-        %dd.line-break
-
-        %dt collectionCode
-        %dd.py-1 #{h(@occurrence.collectionCode)}
-        %dd.line-break
-
-        %dt catalogNumber
-        %dd.py-1 #{h(@occurrence.catalogNumber)}
-        %dd.line-break
-
-        %dt basisOfRecord
-        %dd.py-1 #{h(@occurrence.basisOfRecord)}
-        %dd.line-break
-
-        %dt #{I18n.t('occurrence.has_image')}
-        %dd.py-1 #{I18n.t(@occurrence.hasImage.present?.to_s)}
-
-  #location.card.mb-4
-    .card-header.border-bottom
-      %h5= I18n.t('occurrence.location')
-    .card-body.mt-2
-      %dl.dl-horizontal
-        %dt country
-        %dd.py-1 #{h(@occurrence.country)}
-        %dd.line-break
-
-        %dt countryCode
-        %dd.py-1 #{h(@occurrence.countryCode)}
-        %dd.line-break
-
-        %dt decimalLatitude
-        %dd.py-1{"data-latitude":"#{@occurrence.decimalLatitude}"} #{h(@occurrence.decimalLatitude)}
-        %dd.line-break
-
-        %dt decimalLongitude
-        %dd.py-1{"data-longitude":"#{@occurrence.decimalLongitude}"} #{h(@occurrence.decimalLongitude)}
-        %dd.line-break
-
-      - if @occurrence.decimalLongitude && @occurrence.decimalLatitude
-        #map-wrapper{style:"height: 100%"}
-          #map{style: "width:65%;"}
-
   #event.card.mb-4
     .card-header.border-bottom
       %h5= I18n.t('occurrence.event')
@@ -115,14 +43,17 @@
                 %p.orcid.text-lg-left.p-0.mt-1{"data-user-occurrence-id": "#{recorder.id}", "data-recorders": "#{recorder.user.identifier}", "data-user-id": "#{recorder.user.id}"}
                   - if recorder.user.orcid
                     #{recorder.user.fullname_reverse}
+                    %br
                     %a{href: "https://orcid.org/#{recorder.user.orcid}"}
                       %i.fab.fa-orcid
                       https://orcid.org/#{recorder.user.orcid}
                   - else
                     #{recorder.user.fullname_reverse}
+                    %small.muted.ml-2 #{format_lifespan(recorder.user)}
+                    %br
                     %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD"}
                     = link_to "https://www.wikidata.org/wiki/#{recorder.user.wikidata}", "https://www.wikidata.org/wiki/#{recorder.user.wikidata}"
-                  - if recorder.claimant != recorder.user
+                  - if recorder.claimant != recorder.user && !recorder.claimant.is_bot?
                     %span.d-block.ml-3.text-muted.small
                       Attributed by: #{recorder.claimant.fullname_reverse}
                       %a{href: "https://orcid.org/#{recorder.claimant.orcid}"}
@@ -181,20 +112,67 @@
                 %p.orcid.text-lg-left.p-0.mt-1{"data-user-occurrence-id": "#{determiner.id}", "data-determiners": "#{determiner.user.identifier}", "data-user-id": "#{determiner.user.id  }"}
                   - if determiner.user.orcid
                     #{determiner.user.fullname_reverse}
+                    %br
                     %a{href: "https://orcid.org/#{determiner.user.orcid}"}
                       %i.fab.fa-orcid
                       https://orcid.org/#{determiner.user.orcid}
                   - else
                     #{determiner.user.fullname_reverse}
+                    %small.muted.ml-2 #{format_lifespan(determiner.user)}
+                    %br
                     %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD"}
                     = link_to "https://www.wikidata.org/wiki/#{determiner.user.wikidata}", "https://www.wikidata.org/wiki/#{determiner.user.wikidata}"
-                  - if determiner.claimant != determiner.user
+                  - if determiner.claimant != determiner.user && !determiner.claimant.is_bot?
                     %span.d-block.ml-3.text-muted.small
                       Attributed by: #{determiner.claimant.fullname_reverse}
                       %a{href: "https://orcid.org/#{determiner.claimant.orcid}"}
                         %i.fab.fa-orcid
                         https://orcid.org/#{determiner.claimant.orcid}
         %dd.line-break
+
+  #record.card.mb-4
+    .card-header.border-bottom
+      %h5= I18n.t('occurrence.record')
+    .card-body.mt-2
+      %dl.dl-horizontal
+        %dt gbifID
+        %dd.py-1
+          %a{href: gbif_occurrence_url(@occurrence.id)}
+            #{@occurrence.id}
+        %dd.line-break
+
+        %dt occurrenceID
+        %dd.py-1
+          - if @occurrence.occurrenceID && @occurrence.occurrenceID[0..3] == "http"
+            %a{href: "#{@occurrence.occurrenceID}", target:"_blank"} #{@occurrence.occurrenceID}
+          - else
+            #{h(@occurrence.occurrenceID)}
+        %dd.line-break
+
+        %dt institutionCode
+        %dd.py-1 #{h(@occurrence.institutionCode)}
+        %dd.line-break
+
+        %dt collectionCode
+        %dd.py-1 #{h(@occurrence.collectionCode)}
+        %dd.line-break
+
+        %dt catalogNumber
+        %dd.py-1 #{h(@occurrence.catalogNumber)}
+        %dd.line-break
+
+  #location.card.mb-4
+    .card-header.border-bottom
+      %h5= I18n.t('occurrence.location')
+    .card-body.mt-2
+      %dl.dl-horizontal
+        %dt country
+        %dd.py-1 #{h(@occurrence.country)}
+        %dd.line-break
+
+      - if @occurrence.decimalLongitude && @occurrence.decimalLatitude
+        #map-wrapper{style:"height: 100%"}
+          #map{style: "width:65%;", "data-latitude":"#{@occurrence.decimalLatitude}", "data-longitude":"#{@occurrence.decimalLongitude}"}
 
 %script{id: "selector-template", type: "text/x-handlebars-template"}
   = haml :'partials/single_selector_template', layout: false, locals: { occurrence: @occurrence }

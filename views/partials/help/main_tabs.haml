@@ -3,6 +3,8 @@
     %li.nav-item
       %a{class: "text-nowrap nav-link#{locals[:active_main_tab] == "country" ? " active" : nil}", href: url("/help-others")}= I18n.t('help.by_country')
     %li.nav-item
+      %a{class: "text-nowrap nav-link#{locals[:active_main_tab] == "occurrence" ? " active" : nil}", href: url("/help-others/occurrence")}= I18n.t('help.occurrence')
+    %li.nav-item
       %a{class: "text-nowrap nav-link#{locals[:active_main_tab] == "new" ? " active" : nil}", href: url("/help-others/new-people")}= I18n.t('help.new_people')
     %li.nav-item
       %a{class: "text-nowrap nav-link#{locals[:active_main_tab] == "latest" ? " active" : nil}", href: url("/help-others/progress")}= I18n.t('help.latest_recipients')

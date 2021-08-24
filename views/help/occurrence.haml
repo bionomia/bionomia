@@ -1,10 +1,12 @@
-- content_for :title, I18n.t('occurrence.occurrence_title')
+- content_for :title, I18n.t('help.occurrence_title')
 - content_for :stylesheets do
   :css
     .carousel-control-prev, .carousel-control-next {
       background-color: #c0c0c0;
       width: 3em;
     }
+    .carousel-item{min-height:800px;}
+    hr{margin: 0px;}
 - content_for :scripts do
   %script{src: "//www.gstatic.com/charts/loader.js"}
   %script{src: "/js/occurrence_widget.js"}
@@ -33,28 +35,39 @@
       }
 
       function loadContent() {
+        var occurrence = $('#occurrence');
         $.ajax({
           method: "GET",
-          url: "/occurrence/widget_item",
+          url: "/help-others/occurrence_item",
           dataType: "html",
           beforeSend: function(xhr) {
+            $('#dummy').height(occurrence.height()).width(occurrence.width());
           }
         }).done(function(data) {
-          $("#occurrence").html(data);
+          occurrence.html(data);
           var network = $('#occurrence-widget-item').data('network');
           var ignored = $('#occurrence-widget-item').data('ignored');
           OccurrenceWidget.init($('#selector-template'), network, ignored);
           if ($('#map').length) {
-            var lat = parseFloat($('[data-latitude]', '#location').data('latitude'));
-            var long = parseFloat($('[data-longitude]', '#location').data('longitude'));
+            var lat = parseFloat($('#map').data('latitude'));
+            var long = parseFloat($('#map').data('longitude'));
             google.charts.setOnLoadCallback(drawVisualizations(lat, long));
           }
+
         });
       }
 
+      $(document).bind('keyup', function(e) {
+        if(e.which == 39){
+          $('#carousel').carousel('next');
+        } else if(e.which == 37){
+          $('#carousel').carousel('prev');
+        }
+      });
+
       $('#carousel').on('slid.bs.carousel', function () {
-        $(this).find('.carousel-item.active').removeClass('active');
         loadContent();
+        $(this).find('.carousel-item.active').removeClass('active');
         $(this).find('#occurrence').parent().addClass('active');
       });
 
@@ -62,20 +75,27 @@
     });
 
 - content_for :jumbotron do
-  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap.alert-warning
     .mr-auto.p-2
-      %h1.h2= I18n.t('occurrence.occurrence_title')
-      %p.lead.text-muted= I18n.t('occurrence.lede')
+      %h1.h2= I18n.t('help.country_title')
+      %p.lead.text-muted= I18n.t('help.country_lede')
+    = haml :'partials/help/search', layout: false
 
-#carousel.carousel.slide.carousel-fade.mt-4{"data-touch": "false", "data-interval": "false"}
+= haml :'partials/help/main_tabs', layout: false, locals: { active_main_tab: "occurrence" }
+
+.alert.alert-info.tiny-margins{role: "alert"}
+  Co-collected specimen records. Use the right or left arrow keys on your keyboard or the arrows on the screen to advance a record until you receive one that you may attribute.
+
+#carousel.carousel.slide.carousel-fade.mt-4{"data-touch": "false", "data-interval": "false", "keyboard": true}
   .carousel-inner
     .carousel-item.active.px-3
       #occurrence.px-5
-    .carousel-item.px-5
+    .carousel-item.px-3
+      #dummy.px-5
 
-  %a.carousel-control-prev{href: "#carousel", role: "button", "data-slide": "prev"}
+  %a.carousel-control-prev{href: "#carousel", role: "button", "data-slide": "prev", "data-target": "#carousel"}
     %span.carousel-control-prev-icon{"aria-hidden": "true"}
     %span.sr-only Previous
-  %a.carousel-control-next{href: "#carousel", role: "button", "data-slide": "next"}
+  %a.carousel-control-next{href: "#carousel", role: "button", "data-slide": "next", "data-target": "#carousel"}
     %span.carousel-control-next-icon{"aria-hidden": "true"}
-    %span.sr-only Previous
+    %span.sr-only Next

@@ -330,6 +330,8 @@ fr:
     co_collected_count:
       one: "spécimen co-collecté"
       other: "spécimens co-collectés"
+    occurrence_title: Help Others By Specimen Record
+    occurrence: Specimens
   home:
     tagline: Reliez des spécimens d'histoire naturelle aux collectionneurs du monde.
     get_started: Commencer

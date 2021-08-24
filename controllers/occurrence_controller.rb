@@ -61,31 +61,6 @@ module Sinatra
             end
           end
 
-          app.get '/occurrence/widget_item' do
-            admin_protected!
-            subq = OccurrenceRecorder.select(:occurrence_id, 'count(agent_id) AS agent_count')
-                                     .having("agent_count > 2")
-                                     .group(:occurrence_id)
-                                     .limit(1000)
-
-            occurrence = UserOccurrence.select(:occurrence_id, 'count(user_id) AS user_count', 'a.agent_count AS agent_count')
-                          .joins("INNER JOIN (#{subq.to_sql}) a ON user_occurrences.occurrence_id = a.occurrence_id")
-                          .where("action IN ('recorded', 'identified,recorded', 'recorded,identified')")
-                          .group(:occurrence_id)
-                          .having("user_count <> agent_count")
-                          .order("RAND()")
-                          .limit(1)
-            @occurrence = Occurrence.find(occurrence.first.occurrence_id)
-            @network = occurrence_network.to_json
-            @ignored = user_ignoreds.to_json
-            haml :'occurrence/widget_item', layout: false
-          end
-
-          app.get '/occurrence/widget' do
-            admin_protected!
-            haml :'occurrence/widget'
-          end
-
           app.get '/occurrence/:id.json(ld)?' do
             content_type "application/ld+json", charset: 'utf-8'
             response = jsonld_occurrence_context

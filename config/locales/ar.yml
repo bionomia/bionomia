@@ -414,6 +414,8 @@ ar:
       few: "co-collected specimens"
       many: "co-collected specimens"
       other: "co-collected specimens"
+    occurrence_title: Help Others By Specimen Record
+    occurrence: Specimens
   home:
     tagline: Link natural history specimens to the world's collectors.
     get_started: Get started

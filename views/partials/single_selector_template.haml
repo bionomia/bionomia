@@ -1,9 +1,11 @@
 .btn-group.btn-group-toggle{"data-toggle":"buttons"}
   %label.btn.btn-choice.btn-light
-    %input{type:"radio", name:"selection-#{locals[:occurrence].id}",  class:"action-radio", "data-occurrence-id":"#{locals[:occurrence].id}", "data-action": "recorded", "data-user-id": "{{user_id}}", autocomplete:"off"}
+    %input.action-radio{type:"radio", name:"selection-#{locals[:occurrence].id}", "data-occurrence-id":"#{locals[:occurrence].id}", "data-action": "recorded", "data-user-id": "{{user_id}}", autocomplete:"off"}
       %img{src:"/images/net-unselected.png", alt:"Collected", title:"Collected", width:18}
   %label.btn.btn-choice.btn-light
-    %input{type:"radio", name:"selection-#{locals[:occurrence].id}",  class:"action-radio", "data-occurrence-id":"#{locals[:occurrence].id}", "data-action": "identified", "data-user-id": "{{user_id}}", autocomplete:"off"}
+    %input.action-radio{type:"radio", name:"selection-#{locals[:occurrence].id}", "data-occurrence-id":"#{locals[:occurrence].id}", "data-action": "identified", "data-user-id": "{{user_id}}", autocomplete:"off"}
       %img{src:"/images/microscope-unselected.png", alt:"Identified", title: "Identified",width:18}
   %label.btn.btn-choice.btn-light
-    %input{type:"radio", name:"selection-#{locals[:occurrence].id}",  class:"action-radio", "data-occurrence-id":"#{locals[:occurrence].id}", "data-action": "recorded,identified", "data-user-id": "{{user_id}}", autocomplete:"off"}= I18n.t('general.both')
+    %input.action-radio{type:"radio", name:"selection-#{locals[:occurrence].id}", "data-occurrence-id":"#{locals[:occurrence].id}", "data-action": "recorded,identified", "data-user-id": "{{user_id}}", autocomplete:"off"}= I18n.t('general.both')
+%br
+%button.btn.btn-sm.btn-outline-warning.action-not-them.mt-1{"data-occurrence-id": "#{locals[:occurrence].id}", "data-user-id": "{{user_id}}", type: "button"}= I18n.t('specimen.not_them')

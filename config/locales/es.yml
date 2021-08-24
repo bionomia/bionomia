@@ -330,6 +330,8 @@ es:
     co_collected_count:
       one: "espécimen co-colectado"
       other: "especímenes co-colectados"
+    occurrence_title: Help Others By Specimen Record
+    occurrence: Specimens
   home:
     tagline: Enlace especímenes de historia natural a los colectores del mundo.
     get_started: Comenzar
