@@ -100,6 +100,14 @@ Or from scratch:
 
      $ RACK_ENV=production ./bin/gbif_datasets.rb --populate
 
+### Step 8: Repopulate the occurrence_counts table in support of the help-others specimen widget
+
+     mysql> TRUNCATE TABLE occurrence_counts;
+     mysql> INSERT INTO occurrence_counts (occurrence_id, agent_count, user_count)
+            SELECT DISTINCT a.occurrence_id, a.agent_count, b.user_count FROM
+            (SELECT r.occurrence_id, count(r.agent_id) as agent_count FROM `occurrence_recorders` r group by r.occurrence_id having count(r.agent_id) > 1) a JOIN
+            s(SELECT u.occurrence_id, count(u.user_id) as user_count FROM user_occurrences u where u.action IN ('recorded', 'recorded,identified', 'identified,recorded') group by u.occurrence_id) b ON a.occurrence_id = b.occurrence_id WHERE a.agent_count > b.user_count
+
 ## Successive Data Migrations
 
 Unfortunately, gbifIDs are not persistent. These occasionally disappear through processing at GBIF's end. As a result, claims may no longer point to an existing occurrence record and these must then be purged from the user_occurrences table. The following are a few methods to produce a csv file of affected users and to then delete the orphans:
