@@ -63,6 +63,10 @@
         }
       });
 
+     $('#carousel').on('slide.bs.carousel', function () {
+        $('#occurrence').append('<div style="position:absolute;top:10px;left:100px;z-index:1000;" class="spinner-border text-success" role="status"><span class="sr-only">Loading...</span></div>');
+     });
+
       $('#carousel').on('slid.bs.carousel', function () {
         loadContent();
         $(this).find('.carousel-item.active').removeClass('active');
@@ -84,11 +88,13 @@
 .alert.alert-info.tiny-margins{role: "alert"}= I18n.t('help.occurrence_advance_message')
 
 #carousel.carousel.slide.carousel-fade.mt-4{"data-touch": "false", "data-interval": "false", "keyboard": true}
-  .carousel-inner
+  .carousel-inner{style: "position:relative"}
     .carousel-item.active.pr-3
       #occurrence.pr-5
     .carousel-item.pr-3
       #dummy.pr-5
+        .spinner-border.text-success{style:"position:absolute;top:10px;left:100px;z-index:1000;", role:"status"}
+          %span.sr-only Loading...
 
   %a.carousel-control-next{href: "#carousel", role: "button", "data-slide": "next", "data-target": "#carousel"}
     %span.carousel-control-next-icon{"aria-hidden": "true"}
