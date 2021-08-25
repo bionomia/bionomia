@@ -187,29 +187,20 @@ module Sinatra
           app.get '/help-others/occurrence_item' do
             protected!
 
-            subq = %{
-                    SELECT
-                      r1.occurrence_id, r1.agent_count
-                    FROM
-                      occurrence_counts AS r1
-                    JOIN
-                      (SELECT CEIL(RAND() * (SELECT MAX(id) FROM occurrence_counts)) AS id) AS r2
-                    WHERE
-                      r1.id >= r2.id
-                    AND
-                      r1.agent_count > 1
-                    LIMIT 1
-                  }.squish
+            subq = OccurrenceCount.select(:occurrence_id, :agent_count)
+                                  .joins("INNER JOIN (SELECT CEIL(RAND() * (SELECT MAX(id) FROM occurrence_counts)) AS id) AS b")
+                                  .where("occurrence_counts.id >= b.id")
+                                  .where("occurrence_counts.agent_count > 1")
+                                  .limit(1)
 
             occurrence = UserOccurrence.select(:occurrence_id, 'a.agent_count')
-                                       .joins("INNER JOIN (#{subq}) a ON a.occurrence_id = user_occurrences.occurrence_id")
+                                       .joins("INNER JOIN (#{subq.to_sql}) a ON a.occurrence_id = user_occurrences.occurrence_id")
                                        .where(action: ['recorded', 'recorded,identified', 'identified,recorded'])
                                        .group(:occurrence_id, 'a.agent_count')
                                        .having("count(user_occurrences.user_id) < a.agent_count")
                                        .limit(1)
                                        .unscope(:order)
 
-            #TODO: getting errors here with occurrence_id not found
             @occurrence = Occurrence.find(occurrence.take.occurrence_id)
             @network = occurrence_network.to_json
             @ignored = user_ignoreds.to_json

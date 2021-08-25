@@ -106,7 +106,8 @@ Or from scratch:
      mysql> INSERT INTO occurrence_counts (occurrence_id, agent_count, user_count)
             SELECT DISTINCT a.occurrence_id, a.agent_count, b.user_count FROM
             (SELECT r.occurrence_id, count(r.agent_id) as agent_count FROM `occurrence_recorders` r group by r.occurrence_id having count(r.agent_id) > 1) a JOIN
-            s(SELECT u.occurrence_id, count(u.user_id) as user_count FROM user_occurrences u where u.action IN ('recorded', 'recorded,identified', 'identified,recorded') group by u.occurrence_id) b ON a.occurrence_id = b.occurrence_id WHERE a.agent_count > b.user_count
+            (SELECT u.occurrence_id, count(u.user_id) as user_count FROM user_occurrences u where u.action IN ('recorded', 'recorded,identified', 'identified,recorded') group by u.occurrence_id) b ON a.occurrence_id = b.occurrence_id
+            WHERE a.agent_count > b.user_count
 
 ## Successive Data Migrations
 

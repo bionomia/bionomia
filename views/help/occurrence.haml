@@ -8,10 +8,13 @@
     .carousel-item{min-height:800px;}
     hr{margin: 0px;}
 - content_for :scripts do
+  %script{src: "/js/application.js"}
   %script{src: "//www.gstatic.com/charts/loader.js"}
   %script{src: "/js/occurrence_widget.js"}
   :javascript
     $(function() {
+
+      Application.init();
 
       google.charts.load('current', {
         packages: ['corechart','geochart'],
@@ -53,7 +56,6 @@
             var long = parseFloat($('#map').data('longitude'));
             google.charts.setOnLoadCallback(drawVisualizations(lat, long));
           }
-
         });
       }
 
