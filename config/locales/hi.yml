@@ -332,6 +332,7 @@ hi:
       other: "co-collected specimens"
     occurrence_title: Help Others By Specimen Record
     occurrence: Specimens
+    occurrence_advance_message: Co-collected specimen records. Use the right arrow key on your keyboard or the arrow on the screen to advance a record until you receive one that you may attribute.
   home:
     tagline: Link natural history specimens to the world's collectors.
     get_started: Get started

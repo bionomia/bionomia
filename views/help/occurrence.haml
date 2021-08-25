@@ -60,8 +60,6 @@
       $(document).bind('keyup', function(e) {
         if(e.which == 39){
           $('#carousel').carousel('next');
-        } else if(e.which == 37){
-          $('#carousel').carousel('prev');
         }
       });
 
@@ -83,19 +81,15 @@
 
 = haml :'partials/help/main_tabs', layout: false, locals: { active_main_tab: "occurrence" }
 
-.alert.alert-info.tiny-margins{role: "alert"}
-  Co-collected specimen records. Use the right or left arrow keys on your keyboard or the arrows on the screen to advance a record until you receive one that you may attribute.
+.alert.alert-info.tiny-margins{role: "alert"}= I18n.t('help.occurrence_advance_message')
 
 #carousel.carousel.slide.carousel-fade.mt-4{"data-touch": "false", "data-interval": "false", "keyboard": true}
   .carousel-inner
-    .carousel-item.active.px-3
-      #occurrence.px-5
-    .carousel-item.px-3
-      #dummy.px-5
+    .carousel-item.active.pr-3
+      #occurrence.pr-5
+    .carousel-item.pr-3
+      #dummy.pr-5
 
-  %a.carousel-control-prev{href: "#carousel", role: "button", "data-slide": "prev", "data-target": "#carousel"}
-    %span.carousel-control-prev-icon{"aria-hidden": "true"}
-    %span.sr-only Previous
   %a.carousel-control-next{href: "#carousel", role: "button", "data-slide": "next", "data-target": "#carousel"}
     %span.carousel-control-next-icon{"aria-hidden": "true"}
     %span.sr-only Next
