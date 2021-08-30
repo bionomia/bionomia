@@ -124,7 +124,7 @@ To migrate tables, use mydumper and myloader. But for even faster data migration
 
      $ brew install mydumper
 
-     $ mydumper --user root --password <PASSWORD> --database bionomia --tables-list agents,occurrences,occurrence_recorders,occurrence_determiners,taxa,taxon_occurrences --compress --threads 8 --rows 1000000  --outputdir /Users/dshorthouse/Documents/bionomia_dump
+     $ mydumper --user root --password <PASSWORD> --database bionomia --tables-list agents,occurrences,occurrence_recorders,occurrence_determiners,occurrence_counts,taxa,taxon_occurrences --compress --threads 8 --rows 1000000  --outputdir /Users/dshorthouse/Documents/bionomia_dump
 
      $ apt-get install mydumper
      # Restore tables use nohup into a new database `bionomia_restore`. See https://blogs.oracle.com/jsmyth/apparmor-and-mysql if symlinks might be used in the MySQL data directory to another partition.
@@ -138,6 +138,7 @@ Take site offline and in the bionomia database, remove the tablespaces from the 
       mysql> ALTER TABLE `occurrences` DISCARD TABLESPACE;
       mysql> ALTER TABLE `occurrence_determiners` DISCARD TABLESPACE;
       mysql> ALTER TABLE `occurrence_recorders` DISCARD TABLESPACE;
+      mysql> ALTER TABLE `occurrence_counts` DISCARD TABLESPACE;
       mysql> ALTER TABLE `taxa` DISCARD TABLESPACE;
       mysql> ALTER TABLE `taxon_occurrences` DISCARD TABLESPACE;
 
@@ -147,6 +148,7 @@ Now copy the \*.ibd files for the above 6 tables from the bionomia_restore datab
       mysql> ALTER TABLE `occurrences` IMPORT TABLESPACE;
       mysql> ALTER TABLE `occurrence_determiners` IMPORT TABLESPACE;
       mysql> ALTER TABLE `occurrence_recorders` IMPORT TABLESPACE;
+      mysql> ALTER TABLE `occurrence_counts` IMPORT TABLESPACE;
       mysql> ALTER TABLE `taxa` IMPORT TABLESPACE;
       mysql> ALTER TABLE `taxon_occurrences` IMPORT TABLESPACE;
 
