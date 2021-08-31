@@ -154,6 +154,20 @@ module Bionomia
                   norms: false
                 }
               }
+            },
+            co_collectors: {
+              type: 'nested',
+              properties: {
+                id: { type: 'integer', index: false },
+                orcid: { type: 'keyword', index: false },
+                wikidata: { type: 'keyword', index: false },
+                fullname: {
+                  type: 'text',
+                  analyzer: :fullname_index,
+                  search_analyzer: :fullname_search,
+                  norms: false
+                }
+              }
             }
           }
         }
@@ -190,6 +204,8 @@ module Bionomia
         description = u.keywords.split("|").map(&:strip).join(", ").truncate(50)
       end
       other_names = u.other_names.split("|").map(&:strip) rescue []
+      co_collectors = u.recorded_with
+                       .map{|o| { id: o.id, orcid: o.orcid, wikidata: o.wikidata, fullname: o.fullname } }
       {
         id: u.id,
         orcid: u.orcid,
@@ -206,7 +222,8 @@ module Bionomia
         thumbnail: thumbnail(u),
         description: description,
         identified: u.identified_families_countries,
-        recorded: u.recorded_families_countries
+        recorded: u.recorded_families_countries,
+        co_collectors: co_collectors
       }
     end
 

@@ -20,6 +20,8 @@ class Occurrence < ActiveRecord::Base
   has_one :taxon_occurrence
   has_one :taxon, through: :taxon_occurrence, source: :taxon
 
+  has_one :occurrence_count
+
   belongs_to :dataset, primary_key: :datasetKey, foreign_key: :datasetKey
   counter_culture :dataset
 
