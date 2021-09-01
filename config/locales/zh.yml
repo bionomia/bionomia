@@ -308,6 +308,7 @@ zh-CN:
     add_someone_html: "See how to %{href}."
     add_someone_href: "add someone"
     co_collected_count:
+      one: "co-collected specimen"
       other: "co-collected specimens"
     occurrence_title: Help Others By Specimen Record
     occurrence: Specimens
@@ -521,6 +522,7 @@ zh-CN:
     switch: View theirs
     not_co_collector_name: "Specimens have not been co-collected with %{name}."
     co_collected_count:
+      one: "co-collected specimen"
       other: "co-collected specimens"
     zenodo_html: "Your profile is linked to %{zenodo} and your claims are versioned and archived."
     language: Preferred Language
