@@ -50,7 +50,7 @@ var OccurrenceWidget = (function($, window) {
               let intersection = $.map(self.network, function(id) { return id.identifier; }).filter(x => searched_filtered.includes(x));
               if (intersection.length) {
                 icon.remove();
-                $(agent).addClass("border").addClass("p-2").find("span").addClass("font-weight-bold").after(self.matchedPersonHTML(intersection[0]));
+                $(agent).addClass("border").addClass("my-2").find("span").wrap("<div class=\"p-2\"></div>").parent().after(self.matchedPersonHTML(intersection[0]));
                 self.activateRadios($(agent));
                 self.activateNotThem($(agent));
               } else {
@@ -154,15 +154,11 @@ var OccurrenceWidget = (function($, window) {
         } else {
           img = "<i class=\"fab fa-orcid pr-1\"></i>";
         }
-        output = "<table class=\"mb-2\">";
-        output += "<tbody>";
-        output += "<tr>";
-        var lifespan = (found.identifier[0] === "Q") ? "<br><small class=\"muted\">" + found.lifespan + "</small>" : "";
-        output += "<td class=\"selector text-left\">" + this.template({ user_id: found.user_id }) + "</td>";
-        output += "<td><span class=\"d-block pl-2\">" + found.fullname_reverse + lifespan + "<br>" + img + "<a href=\"" + url + "\">" + url + "</a></span></td>";
-        output += "</tr>";
-        output += "</tbody>";
-        output += "</table>";
+        output = "<div class=\"row m-0 py-2 border-top bg-light\">";
+        var lifespan = (found.identifier[0] === "Q") ? "<small class=\"muted\">" + found.lifespan + "</small><br>" : "";
+        output += "<div class=\"col m-0\"><span class=\"d-block font-weight-bold\">" + found.fullname_reverse + "</span>" + lifespan + img + "<a href=\"" + url + "\">" + url + "</a></div>";
+        output += "<div class=\"col-md-auto m-0 selector text-left\">" + this.template({ user_id: found.user_id }) + "</div>";
+        output += "</div>";
       }
       return output;
     }
