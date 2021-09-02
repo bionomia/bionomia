@@ -64,7 +64,7 @@ elsif options[:directory] && ( options[:all] || options[:missing] )
   Dataset.find_in_batches(batch_size: batch_size) do |batch|
     batch.each do |d|
       next if !d.has_claim?
-      next if options[:skip] && d.occurrence_count > 1_500_000
+      next if options[:skip] && d.occurrences_count > 1_500_000
       puts "Starting #{d.title}...".yellow
       begin
         t1 = Time.now
