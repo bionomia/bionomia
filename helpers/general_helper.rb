@@ -189,16 +189,10 @@ module Sinatra
               results = user.recordings.joins(:occurrence)
               if params[:start_year]
                 start_date = Date.new(params[:start_year].to_i, 1, 1)
-                if start_date > Date.today
-                  halt 404, haml(:oops)
-                end
                 results = results.where("occurrences.eventDate_processed >= ?", start_date)
               end
               if params[:end_year]
                 end_date = Date.new(params[:end_year].to_i, 12, 31)
-                if end_date > Date.today
-                  halt 404, haml(:oops)
-                end
                 results = results.where("occurrences.eventDate_processed <= ?", end_date)
               end
             end
@@ -206,16 +200,10 @@ module Sinatra
               results = user.identifications.joins(:occurrence)
               if params[:start_year]
                 start_date = Date.new(params[:start_year].to_i, 1, 1)
-                if start_date > Date.today
-                  halt 404, haml(:oops)
-                end
                 results = results.where("occurrences.dateIdentified_processed >= ?", start_date)
               end
               if params[:end_year]
                 end_date = Date.new(params[:end_year].to_i, 12, 31)
-                if end_date > Date.today
-                  halt 404, haml(:oops)
-                end
                 results = results.where("occurrences.dateIdentified_processed <= ?", end_date)
               end
             end
