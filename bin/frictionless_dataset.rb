@@ -60,44 +60,38 @@ if options[:directory] && options[:key]
     puts "Package #{options[:key]} not found".red
   end
 elsif options[:directory] && ( options[:all] || options[:missing] )
-  batch_size = 3
-  Dataset.find_in_batches(batch_size: batch_size) do |batch|
-    batch.each do |d|
-      next if !d.has_claim?
-      next if options[:skip] && d.occurrences_count > 1_500_000
-      puts "Starting #{d.title}...".yellow
-      begin
-        t1 = Time.now
-        f = Bionomia::FrictionlessDataDataset.new(uuid: d.datasetKey, output_directory: options[:directory])
-        f.create_package
-        f.update_frictionless_created
-        t2 = Time.now
-        puts "Package created for #{d.datasetKey} in #{t2 - t1} seconds".green
-      rescue
-        puts "Package failed for #{d.datasetKey}".red
-      end
+  Dataset.find_each do |d|
+    next if !d.has_claim?
+    next if options[:skip] && d.occurrences_count > 1_500_000
+    puts "Starting #{d.title}...".yellow
+    begin
+      t1 = Time.now
+      f = Bionomia::FrictionlessDataDataset.new(uuid: d.datasetKey, output_directory: options[:directory])
+      f.create_package
+      f.update_frictionless_created
+      t2 = Time.now
+      puts "Package created for #{d.datasetKey} in #{t2 - t1} seconds".green
+    rescue
+      puts "Package failed for #{d.datasetKey}".red
     end
   end
 elsif options[:directory] && options[:list]
-  batch_size = 3
-  options[:list].each_slice(batch_size) do |batch|
-    batch.each do |key|
-      dataset = Dataset.find_by_datasetKey(key) rescue nil
-      if dataset
-        puts "Starting #{dataset.title}...".yellow
-        begin
-          t1 = Time.now
-          f = Bionomia::FrictionlessDataDataset.new(uuid: key, output_directory: options[:directory])
-          f.create_package
-          f.update_frictionless_created
-          t2 = Time.now
-          puts "Package created for #{key} in #{t2 - t1} seconds".green
-        rescue
-          puts "Package failed for #{d.datasetKey}".red
-        end
-      else
-        puts "Package #{key} not found".red
+  options[:list].each do |key|
+    dataset = Dataset.find_by_datasetKey(key) rescue nil
+    if dataset
+      puts "Starting #{dataset.title}...".yellow
+      begin
+        t1 = Time.now
+        f = Bionomia::FrictionlessDataDataset.new(uuid: key, output_directory: options[:directory])
+        f.create_package
+        f.update_frictionless_created
+        t2 = Time.now
+        puts "Package created for #{key} in #{t2 - t1} seconds".green
+      rescue
+        puts "Package failed for #{d.datasetKey}".red
       end
+    else
+      puts "Package #{key} not found".red
     end
   end
 elsif options[:directory] && options[:bionomia]
