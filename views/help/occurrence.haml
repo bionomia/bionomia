@@ -16,6 +16,10 @@
 
       Application.init();
 
+      var spinner = '<div style="position:absolute;top:10px;left:100px;z-index:1000;" class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>';
+
+      $('#dummy').append(spinner);
+
       google.charts.load('current', {
         packages: ['corechart','geochart'],
         mapsApiKey: "#{Settings.google.api_key}"
@@ -38,7 +42,7 @@
       }
 
       function loadContent() {
-        var occurrence = $('#occurrence');
+        var self = this, occurrence = $('#occurrence');
         $.ajax({
           method: "GET",
           url: "/help-others/occurrence_item",
@@ -56,6 +60,8 @@
             var long = parseFloat($('#map').data('longitude'));
             google.charts.setOnLoadCallback(drawVisualizations(lat, long));
           }
+        }).fail(function(jqXHR, textStatus) {
+          self.loadContent();
         });
       }
 
@@ -66,7 +72,7 @@
       });
 
      $('#carousel').on('slide.bs.carousel', function () {
-        $('#occurrence').append('<div style="position:absolute;top:10px;left:100px;z-index:1000;" class="spinner-border text-success" role="status"><span class="sr-only">Loading...</span></div>');
+        $('#occurrence').append(spinner);
      });
 
       $('#carousel').on('slid.bs.carousel', function () {
@@ -95,8 +101,6 @@
       #occurrence.pr-5
     .carousel-item.pr-3
       #dummy.pr-5
-        .spinner-border.text-success{style:"position:absolute;top:10px;left:100px;z-index:1000;", role:"status"}
-          %span.sr-only Loading...
 
   %a.carousel-control-next{href: "#carousel", role: "button", "data-slide": "next", "data-target": "#carousel"}
     %span.carousel-control-next-icon{"aria-hidden": "true"}
