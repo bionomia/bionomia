@@ -102,8 +102,9 @@ Or from scratch:
 
 ### Step 8: Repopulate the occurrence_counts table in support of the help-others specimen widget
 
-     $ RACK_ENV=production ./bin/populate_occurrence_count.rb -t -a
-     $ RACK_ENV=production ./bin/populate_occurrence_count.rb -u
+     # For best performance, first rebuild the Elasticsearch user index
+     # RACK_ENV=production ./bin/populate_search.rb --index user
+     $ RACK_ENV=production ./bin/populate_occurrence_count.rb -t -a -u
      # Can start 2+ workers, each with 40 threads to help speed-up processing
      $ RACK_ENV=production sidekiq -c 40 -q occurrence_count -r ./application.rb
 

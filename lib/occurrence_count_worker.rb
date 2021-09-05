@@ -7,7 +7,9 @@ module Bionomia
 
     def perform(row)
       occurrence_count = OccurrenceCount.find(row["id"])
-      occurrence_count.update_candidate
+      if !occurrence_count.has_candidate?
+        occurrence_count.delete
+      end
     end
 
   end

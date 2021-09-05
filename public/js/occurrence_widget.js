@@ -35,7 +35,7 @@ var OccurrenceWidget = (function($, window) {
           var agent = this;
           $.ajax({
             method: "GET",
-            url: "/user.json?limit=5&q=" + $(agent).text(),
+            url: "/user.json?limit=3&q=" + $(agent).text(),
             dataType: "json"
           }).done(function(data) {
             var searched_ids = $.map(data, function(i) { return i.wikidata || i.orcid }),

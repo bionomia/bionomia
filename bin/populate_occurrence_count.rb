@@ -16,8 +16,8 @@ OptionParser.new do |opts|
     options[:add] = true
   end
 
-  opts.on("-u", "--update", "Add jobs to queue to update candidate flag") do |a|
-    options[:update] = true
+  opts.on("-j", "--jobs", "Create jobs for the processing queue") do |j|
+    options[:jobs] = true
   end
 
   opts.on("-h", "--help", "Prints this help") do
@@ -51,7 +51,7 @@ if options[:add]
   puts "Done!".green
 end
 
-if options[:update]
+if options[:jobs]
   puts "Creating jobs for the queue...".yellow
   group = []
   OccurrenceCount.find_each do |o|
