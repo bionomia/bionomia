@@ -42,7 +42,7 @@
       }
 
       function loadContent() {
-        var self = this, occurrence = $('#occurrence');
+        var occurrence = $('#occurrence');
         $.ajax({
           method: "GET",
           url: "/help-others/occurrence_item",
@@ -61,7 +61,7 @@
             google.charts.setOnLoadCallback(drawVisualizations(lat, long));
           }
         }).fail(function(jqXHR, textStatus) {
-          self.loadContent();
+          loadContent();
         });
       }
 

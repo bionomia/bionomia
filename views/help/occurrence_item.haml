@@ -170,7 +170,7 @@
         %dd.py-1 #{h(@occurrence.country)}
         %dd.line-break
 
-      - if @occurrence.decimalLongitude && @occurrence.decimalLatitude
+      - if !@occurrence.decimalLongitude.blank? && !@occurrence.decimalLatitude.blank?
         #map-wrapper{style:"height: 100%"}
           #map{style: "width:65%;", "data-latitude":"#{@occurrence.decimalLatitude}", "data-longitude":"#{@occurrence.decimalLongitude}"}
 
