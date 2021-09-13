@@ -27,13 +27,8 @@ OptionParser.new do |opts|
 end.parse!
 
 if options[:truncate]
-  puts "Truncating tables...".yellow
-  tables = [
-    "occurrence_counts"
-  ]
-  tables.each do |table|
-    Occurrence.connection.execute("TRUNCATE TABLE #{table}")
-  end
+  puts "Truncating table...".yellow
+  Occurrence.connection.execute("TRUNCATE TABLE occurrence_counts")
   redis = Redis.new(url: ENV['REDIS_URL'])
   redis.flushdb
   Sidekiq::Stats.new.reset
