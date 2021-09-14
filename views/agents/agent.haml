@@ -35,19 +35,31 @@
         %i.fas.fa-file-csv.text-dark.h5.m-0.p-1
         CSV
 
+- sort = locals[:sort] == "asc" ? "desc" : "asc"
 .table-responsive-lg
   %table.table.table-hover.table-sm
     %thead.thead-light
       %tr
-        %th{scope: "col"}= I18n.t('specimen.scientific_name')
-        %th{scope: "col"}= I18n.t('specimen.collected_by')
-        %th{scope: "col"}= I18n.t('specimen.identified_by')
-        %th{scope: "col"}= I18n.t('specimen.date_collected')
-        %th{scope: "col"}= I18n.t('specimen.date_identified')
-        %th{scope: "col"}= I18n.t('specimen.family')
-        %th{scope: "col"}= I18n.t('specimen.institution')
-        %th{scope: "col"}= I18n.t('specimen.catalog_number')
-        %th{scope: "col"}= I18n.t('specimen.type_status')
+        %th{scope: "col"}
+          %a{href: url("/agent/#{@agent.id}?order=scientificName&sort=#{sort}")}= I18n.t('specimen.scientific_name')
+        %th{scope: "col"}
+          %a{href: url("/agent/#{@agent.id}?order=recordedBy&sort=#{sort}")}= I18n.t('specimen.collected_by')
+        %th{scope: "col"}
+          %a{href: url("/agent/#{@agent.id}?order=identifiedBy&sort=#{sort}")}= I18n.t('specimen.identified_by')
+        %th{scope: "col"}
+          %a{href: url("/agent/#{@agent.id}?order=eventDate&sort=#{sort}")}= I18n.t('specimen.date_collected')
+        %th{scope: "col"}
+          %a{href: url("/agent/#{@agent.id}?order=dateIdentified&sort=#{sort}")}= I18n.t('specimen.date_identified')
+        %th{scope: "col"}
+          %a{href: url("/agent/#{@agent.id}?order=country&sort=#{sort}")}= I18n.t('specimen.country')
+        %th{scope: "col"}
+          %a{href: url("/agent/#{@agent.id}?order=family&sort=#{sort}")}= I18n.t('specimen.family')
+        %th{scope: "col"}
+          %a{href: url("/agent/#{@agent.id}?order=institutionCode&sort=#{sort}")}= I18n.t('specimen.institution')
+        %th{scope: "col"}
+          %a{href: url("/agent/#{@agent.id}?order=catalogNumber&sort=#{sort}")}= I18n.t('specimen.catalog_number')
+        %th{scope: "col"}
+          %a{href: url("/agent/#{@agent.id}?order=typeStatus&sort=#{sort}")}= I18n.t('specimen.type_status')
 
     %tbody
       - @results.each do |o|
@@ -62,6 +74,7 @@
           %td #{h(o.identifiedBy)}
           %td #{h(o.eventDate || o.year)}
           %td #{h(o.dateIdentified)}
+          %td #{h(o.country)}
           %td #{h(o.family)}
           %td #{h(o.institutionCode)}
           %td #{h(o.catalogNumber)}

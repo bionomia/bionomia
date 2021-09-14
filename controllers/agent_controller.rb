@@ -12,6 +12,13 @@ module Sinatra
             page = (params[:page] || 1).to_i
             agent_filter
 
+            sort = params[:sort] || nil
+            order = params[:order] || nil
+            locals = {
+              active_page: "agents",
+              sort: sort, order: order
+            }
+
             begin
               @agent = Agent.find(id)
               occurrences = @agent.occurrences
@@ -21,12 +28,14 @@ module Sinatra
               if params[:taxon]
                 occurrences = occurrences.where({ family: params[:taxon] })
               end
+              if params[:order] && Occurrence.column_names.include?(params[:order]) && ["asc", "desc"].include?(params[:sort])
+                occurrences = occurrences.order("#{params[:order]} #{params[:sort]}")
+              end
               @pagy, @results = pagy(occurrences, page: page)
-
-              haml :'agents/agent', locals: { active_page: "agents" }
+              haml :'agents/agent', locals: locals
             rescue
               status 404
-              haml :oops, locals: { active_page: "agents" }
+              haml :oops, locals: locals
             end
           end
 
