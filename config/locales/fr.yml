@@ -331,7 +331,7 @@ fr:
       one: "spécimen co-collecté"
       other: "spécimens co-collectés"
     occurrence_title: Help Others By Specimen Record
-    occurrence: Specimens
+    occurrence: Spécimens
     occurrence_advance_message: Co-collected specimen records. Use the right arrow key on your keyboard or the arrow on the screen to advance a record until you receive one that you may attribute.
   home:
     tagline: Reliez des spécimens d'histoire naturelle aux collectionneurs du monde.
@@ -578,7 +578,7 @@ fr:
     date_identified: Date identifiée
     institution: Organisme
     catalog_number: Numéro de catalogue
-    country: Country
+    country: Pays
     family: Famille
     type_status: État du type
     scribe: Scribe
