@@ -140,7 +140,7 @@ module Sinatra
 
         def agent_filter
           dataset_name = nil
-          if params[:datasetKey]
+          if params[:datasetKey] && !params[:datasetKey].empty?
             begin
               dataset_name = Dataset.find_by_datasetKey(params[:datasetKey]).title
             rescue
@@ -149,7 +149,7 @@ module Sinatra
           end
 
           taxon_name = nil
-          if params[:taxon]
+          if params[:taxon] && !params[:datasetKey].empty?
             begin
               taxon_name = Taxon.find_by_family(params[:taxon]).family
             rescue

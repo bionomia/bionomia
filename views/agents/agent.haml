@@ -41,25 +41,25 @@
     %thead.thead-light
       %tr
         %th{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=scientificName&sort=#{sort}")}= I18n.t('specimen.scientific_name')
+          %a{href: url("/agent/#{@agent.id}?order=scientificName&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}= I18n.t('specimen.scientific_name')
         %th{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=recordedBy&sort=#{sort}")}= I18n.t('specimen.collected_by')
+          %a{href: url("/agent/#{@agent.id}?order=recordedBy&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}= I18n.t('specimen.collected_by')
         %th{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=identifiedBy&sort=#{sort}")}= I18n.t('specimen.identified_by')
+          %a{href: url("/agent/#{@agent.id}?order=identifiedBy&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}= I18n.t('specimen.identified_by')
         %th{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=eventDate&sort=#{sort}")}= I18n.t('specimen.date_collected')
+          %a{href: url("/agent/#{@agent.id}?order=eventDate&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}= I18n.t('specimen.date_collected')
         %th{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=dateIdentified&sort=#{sort}")}= I18n.t('specimen.date_identified')
+          %a{href: url("/agent/#{@agent.id}?order=dateIdentified&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}= I18n.t('specimen.date_identified')
         %th{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=country&sort=#{sort}")}= I18n.t('specimen.country')
+          %a{href: url("/agent/#{@agent.id}?order=country&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}= I18n.t('specimen.country')
         %th{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=family&sort=#{sort}")}= I18n.t('specimen.family')
+          %a{href: url("/agent/#{@agent.id}?order=family&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}= I18n.t('specimen.family')
         %th{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=institutionCode&sort=#{sort}")}= I18n.t('specimen.institution')
+          %a{href: url("/agent/#{@agent.id}?order=institutionCode&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}= I18n.t('specimen.institution')
         %th{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=catalogNumber&sort=#{sort}")}= I18n.t('specimen.catalog_number')
+          %a{href: url("/agent/#{@agent.id}?order=catalogNumber&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}= I18n.t('specimen.catalog_number')
         %th{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=typeStatus&sort=#{sort}")}= I18n.t('specimen.type_status')
+          %a{href: url("/agent/#{@agent.id}?order=typeStatus&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}= I18n.t('specimen.type_status')
 
     %tbody
       - @results.each do |o|
