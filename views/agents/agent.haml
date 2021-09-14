@@ -40,26 +40,46 @@
   %table.table.table-hover.table-sm
     %thead.thead-light
       %tr
-        %th{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=scientificName&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}= I18n.t('specimen.scientific_name')
-        %th{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=recordedBy&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}= I18n.t('specimen.collected_by')
-        %th{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=identifiedBy&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}= I18n.t('specimen.identified_by')
-        %th{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=eventDate&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}= I18n.t('specimen.date_collected')
-        %th{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=dateIdentified&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}= I18n.t('specimen.date_identified')
-        %th{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=country&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}= I18n.t('specimen.country')
-        %th{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=family&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}= I18n.t('specimen.family')
-        %th{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=institutionCode&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}= I18n.t('specimen.institution')
-        %th{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=catalogNumber&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}= I18n.t('specimen.catalog_number')
-        %th{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=typeStatus&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}= I18n.t('specimen.type_status')
+        %th.text-nowrap{scope: "col"}
+          %a{href: url("/agent/#{@agent.id}?order=scientificName&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}
+            = I18n.t('specimen.scientific_name')
+            = sort_icon("scientificName", sort)
+        %th.text-nowrap{scope: "col"}
+          %a{href: url("/agent/#{@agent.id}?order=recordedBy&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}
+            = I18n.t('specimen.collected_by')
+            = sort_icon("recordedBy", sort)
+        %th.text-nowrap{scope: "col"}
+          %a{href: url("/agent/#{@agent.id}?order=identifiedBy&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}
+            = I18n.t('specimen.identified_by')
+            = sort_icon("identifiedBy", sort)
+        %th.text-nowrap{scope: "col"}
+          %a{href: url("/agent/#{@agent.id}?order=eventDate&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}
+            = I18n.t('specimen.date_collected')
+            = sort_icon("eventDate", sort)
+        %th.text-nowrap{scope: "col"}
+          %a{href: url("/agent/#{@agent.id}?order=dateIdentified&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}
+            = I18n.t('specimen.date_identified')
+            = sort_icon("dateIdentified", sort)
+        %th.text-nowrap{scope: "col"}
+          %a{href: url("/agent/#{@agent.id}?order=country&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}
+            = I18n.t('specimen.country')
+            = sort_icon("country", sort)
+        %th.text-nowrap{scope: "col"}
+          %a{href: url("/agent/#{@agent.id}?order=family&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}
+            = I18n.t('specimen.family')
+            = sort_icon("family", sort)
+        %th.text-nowrap{scope: "col"}
+          %a{href: url("/agent/#{@agent.id}?order=institutionCode&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}
+            = I18n.t('specimen.institution')
+            = sort_icon("institutionCode", sort)
+        %th.text-nowrap{scope: "col"}
+          %a{href: url("/agent/#{@agent.id}?order=catalogNumber&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}
+            = I18n.t('specimen.catalog_number')
+            = sort_icon("catalogNumber", sort)
+        %th.text-nowrap{scope: "col"}
+          %a{href: url("/agent/#{@agent.id}?order=typeStatus&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}
+            = I18n.t('specimen.type_status')
+            = sort_icon("typeStatus", sort)
 
     %tbody
       - @results.each do |o|

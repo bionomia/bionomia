@@ -213,6 +213,19 @@ module Sinatra
           ["&#42; " + born, died + " &dagger;"].join(" &ndash; ")
         end
 
+        def sort_icon(field, direction)
+          sorted_field = params[:order]
+          if field == sorted_field
+            if direction == "asc"
+              "<i class=\"fas fa-sort-down\"></i>"
+            elsif direction == "desc"
+              "<i class=\"fas fa-sort-up\"></i>"
+            end
+          else
+            "<i class=\"fas fa-sort\"></i>"
+          end
+        end
+
       end
     end
   end
