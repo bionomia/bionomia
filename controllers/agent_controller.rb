@@ -19,7 +19,7 @@ module Sinatra
               sort: sort, order: order
             }
 
-            #begin
+            begin
               @agent = Agent.find(id)
               occurrences = @agent.occurrences
               if params[:datasetKey] && !params[:datasetKey].empty?
@@ -33,10 +33,10 @@ module Sinatra
               end
               @pagy, @results = pagy(occurrences, page: page)
               haml :'agents/agent', locals: locals
-            #rescue
-              #status 404
-              #haml :oops, locals: locals
-            #end
+            rescue
+              status 404
+              haml :oops, locals: locals
+            end
           end
 
           app.get '/agent/:id/specimens.csv' do
