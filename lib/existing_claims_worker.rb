@@ -3,7 +3,7 @@
 module Bionomia
   class ExistingClaimsWorker
     include Sidekiq::Worker
-    sidekiq_options queue: :existing_claims
+    sidekiq_options queue: :existing_claims, retry: 0
 
     def perform(row)
       recs = row["gbifIDs_recordedByID"]
@@ -20,7 +20,11 @@ module Bionomia
       row["agentIDs"].split("|").map(&:strip).uniq.each do |id|
         next if id.empty?
         u = get_user(id)
-        next if u.nil? || User::BOT_IDS.include?(u.id)
+        next if !u.nil? && User::BOT_IDS.include?(u.id)
+        if u.nil?
+          raise "user not found"
+          next
+        end
         if !uniq_recs.empty?
           uo = uniq_recs.map{|r| [u.id, r.to_i, "recorded", User::GBIF_AGENT_ID]}
           import_user_occurrences(uo)

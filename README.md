@@ -72,6 +72,10 @@ First, import all users and user_occurrences content from production.
      $ ulimit -n 8192
      $ RACK_ENV=production sidekiq -c 40 -q existing_claims -r ./application.rb
 
+The above workers will produce a sidekiq dead set for all recordedByID, identifiedByID values that could not be resolved, which can then be exported:
+
+     $ RACK_ENV=production ./bin/populate_existing_claims --dead "dead_identifiers.csv"
+
 Export a csv pivot table (for import performance) of all claims made by User::GBIF_AGENT_ID.
 
      $ RACK_ENV=production ./bin/populate_existing_claims.rb --export "gbif_claims.csv"
