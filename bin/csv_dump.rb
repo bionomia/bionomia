@@ -84,7 +84,7 @@ if options[:directory]
 
   if options[:quickstatements]
     csv_file = File.join(directory, "quickstatements.csv")
-    puts "Making new public profiles...".green
+    puts "Dumping new quickstatements...".green
     local = User.where(is_public: true).where.not(wikidata: nil).pluck(:wikidata)
     wiki = Bionomia::WikidataSearch.new
     new_qnumbers = local - wiki.wiki_bionomia_id

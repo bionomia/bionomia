@@ -37,13 +37,14 @@ module Bionomia
         )
     end
 
-    def wikidata_people_query_recent_minus_bionomia(property)
+    def wikidata_people_query_recent_minus_bionomia
       yesterday = Time.now - 86400
+      list = PEOPLE_PROPERTIES.values.map{|a| "wdt:#{a}"}.join("|")
       %Q(
           SELECT DISTINCT
             ?item ?itemLabel
           WHERE {
-            ?item wdt:#{property} ?id .
+            ?item #{list} ?id .
             ?item wdt:P570 ?date_of_death .
             ?item schema:dateModified ?change .
             MINUS { ?item wdt:P6944 ?bionomia . }
@@ -152,27 +153,34 @@ module Bionomia
       )
     end
 
-    def merged_wikidata_people_query(property)
+    def merged_wikidata_people_query
+      week_ago = Time.now - 604800
+      watched_properties = PEOPLE_PROPERTIES.merge("Bionomia ID": "P6944")
+      list = watched_properties.values.map{|a| "wdt:#{a}"}.join("|")
       %Q(
-        SELECT (REPLACE(STR(?item),".*Q","Q") AS ?qid) (REPLACE(STR(?redirect),".*Q","Q") AS ?redirect_toqid)
+        SELECT DISTINCT (REPLACE(STR(?item),".*Q","Q") AS ?qid) (REPLACE(STR(?redirect),".*Q","Q") AS ?redirect_toqid)
         WHERE {
           ?redirect wdt:P31 wd:Q5 .
-          ?redirect wdt:#{property} ?id .
+          ?redirect #{list} ?id .
           ?redirect wdt:P570 ?date_of_death .
           ?item owl:sameAs ?redirect .
+          ?item schema:dateModified ?change .
+          ?redirect schema:dateModified ?change .
           SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en" }
+          FILTER(?change > "#{week_ago.iso8601}"^^xsd:dateTime)
         }
       )
     end
 
-    def wikidata_modified_query(property)
+    def wikidata_modified_query
       yesterday = Time.now - 86400
+      list = PEOPLE_PROPERTIES.values.map{|a| "wdt:#{a}"}.join("|")
       %Q(
-        SELECT (REPLACE(STR(?item),".*Q","Q") AS ?qid)
+        SELECT DISTINCT (REPLACE(STR(?item),".*Q","Q") AS ?qid)
         WHERE {
           ?item wdt:P31 wd:Q5 .
           ?item wdt:P570 ?date_of_death .
-          ?item wdt:#{property} ?id .
+          ?item #{list} ?id .
           ?item schema:dateModified ?change .
           SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en" }
           FILTER(?change > "#{yesterday.iso8601}"^^xsd:dateTime)
@@ -180,20 +188,42 @@ module Bionomia
       )
     end
 
-    def populate_new_users
+    def new_users
       existing = existing_wikicodes + destroyed_users
       new_wikicodes = {}
-      PEOPLE_PROPERTIES.each do |key,property|
-        puts "Polling #{key}...".yellow
-        @sparql.query(wikidata_people_query_recent_minus_bionomia(property))
-               .each_solution do |solution|
-          wikicode = solution.to_h[:item].to_s.match(/Q[0-9]{1,}/).to_s
-          next if existing.include? wikicode
-          new_wikicodes[wikicode] = solution.to_h[:itemLabel].to_s
-        end
+      @sparql.query(wikidata_people_query_recent_minus_bionomia)
+             .each_solution do |solution|
+        wikicode = solution.to_h[:item].to_s.match(/Q[0-9]{1,}/).to_s
+        next if existing.include? wikicode
+        new_wikicodes[wikicode] = solution.to_h[:itemLabel].to_s
       end
+      new_wikicodes
+    end
 
-      new_wikicodes.each do |wikicode, name|
+    def modified_users
+      requires_refresh = []
+      @sparql.query(wikidata_modified_query)
+             .each_solution do |solution|
+        requires_refresh << solution.to_h[:qid].to_s.match(/Q[0-9]{1,}/).to_s
+      end
+      requires_refresh.uniq
+    end
+
+    def merged_users
+      merged_wikicodes = {}
+      @sparql.query(merged_wikidata_people_query)
+             .each_solution do |solution|
+        qid = solution.to_h[:qid].to_s.match(/Q[0-9]{1,}/).to_s
+        merged_wikicodes[qid] =  solution.to_h[:redirect_toqid]
+                                         .to_s
+                                         .match(/Q[0-9]{1,}/)
+                                         .to_s
+      end
+      merged_wikicodes
+    end
+
+    def add_new_users
+      new_users.each do |wikicode, name|
         parsed = DwcAgent.parse(name.dup)[0] rescue nil
         next if parsed.nil? || parsed.family.nil? || parsed.given.nil?
         user_data = wiki_user_data(wikicode)
@@ -229,32 +259,8 @@ module Bionomia
       end
     end
 
-    def recently_modified
-      requires_refresh = []
-      PEOPLE_PROPERTIES.each do |key,property|
-        puts "Updates for #{key}...".yellow
-        @sparql.query(wikidata_modified_query(property))
-               .each_solution do |solution|
-          requires_refresh << solution.to_h[:qid].to_s.match(/Q[0-9]{1,}/).to_s
-        end
-      end
-      requires_refresh.uniq
-    end
-
     def merge_users
-      merged_wikicodes = {}
-      watched_properties = PEOPLE_PROPERTIES.merge("Bionomia ID": "P6944")
-      watched_properties.each do |key,property|
-        puts "Merges for #{key}...".yellow
-        @sparql.query(merged_wikidata_people_query(property))
-               .each_solution do |solution|
-          qid = solution.to_h[:qid].to_s.match(/Q[0-9]{1,}/).to_s
-          merged_wikicodes[qid] =  solution.to_h[:redirect_toqid]
-                                           .to_s
-                                           .match(/Q[0-9]{1,}/)
-                                           .to_s
-        end
-      end
+      merged_wikicodes = merged_users
       qids_to_merge = merged_wikicodes.keys & existing_wikicodes
       qids_to_merge.each do |qid|
         dest_qid = merged_wikicodes[qid]

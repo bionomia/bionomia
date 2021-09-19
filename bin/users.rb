@@ -91,7 +91,7 @@ end
 
 if options[:poll_orcid]
   search = Bionomia::OrcidSearch.new
-  search.populate_new_users
+  search.add_new_users
 end
 
 if options[:poll_wikidata]
@@ -202,7 +202,7 @@ elsif options[:update_orcid]
   end
 elsif options[:modified_wikidata]
   wikidata_lib = Bionomia::WikidataSearch.new
-  wikidata_lib.recently_modified.each do |qid|
+  wikidata_lib.modified_users.each do |qid|
     u = User.find_by_wikidata(qid) rescue nil
     if !u.nil?
       update(u)
