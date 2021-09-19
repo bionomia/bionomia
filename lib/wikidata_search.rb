@@ -260,7 +260,7 @@ module Bionomia
     end
 
     def merge_users
-      merged_wikicodes = merged_users
+      merged_wikicodes = merged_users.dup
       qids_to_merge = merged_wikicodes.keys & existing_wikicodes
       qids_to_merge.each do |qid|
         dest_qid = merged_wikicodes[qid]
