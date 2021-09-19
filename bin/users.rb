@@ -96,7 +96,7 @@ end
 
 if options[:poll_wikidata]
   search = Bionomia::WikidataSearch.new
-  search.populate_new_users
+  search.add_new_users
 end
 
 if options[:cache]
