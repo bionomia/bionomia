@@ -330,9 +330,9 @@ fr:
     co_collected_count:
       one: "spécimen co-collecté"
       other: "spécimens co-collectés"
-    occurrence_title: Help Others By Specimen Record
+    occurrence_title: Aider les autres par enregistrement de spécimens
     occurrence: Spécimens
-    occurrence_advance_message: Co-collected specimen records. Use the right arrow key on your keyboard or the arrow on the screen to advance a record until you receive one that you may attribute.
+    occurrence_advance_message: Registres de spécimens coconstitués. Utilisez la touche fléchée droite de votre clavier ou la flèche de l'écran pour faire avancer un enregistrement jusqu'à ce que vous en receviez une que vous pouvez attribuer.
   home:
     tagline: Reliez des spécimens d'histoire naturelle aux collectionneurs du monde.
     get_started: Commencer
