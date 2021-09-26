@@ -74,7 +74,7 @@ First, import all users and user_occurrences content from production.
 
 The above workers will produce a sidekiq dead set for all recordedByID, identifiedByID values that could not be resolved, which can then be exported:
 
-     $ RACK_ENV=production ./bin/populate_existing_claims --dead "dead_identifiers.csv"
+     $ RACK_ENV=production ./bin/populate_existing_claims.rb --dead "dead_identifiers.csv"
 
 Export a csv pivot table (for import performance) of all claims made by User::GBIF_AGENT_ID.
 
@@ -108,7 +108,7 @@ Or from scratch:
 
      # For best performance, first rebuild the Elasticsearch user index
      # RACK_ENV=production ./bin/populate_search.rb --index user
-     $ RACK_ENV=production ./bin/populate_occurrence_count.rb -t -a -u
+     $ RACK_ENV=production ./bin/populate_occurrence_count.rb -t -a -j
      # Can start 2+ workers, each with 40 threads to help speed-up processing
      $ RACK_ENV=production sidekiq -c 40 -q occurrence_count -r ./application.rb
 
