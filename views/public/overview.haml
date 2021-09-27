@@ -4,7 +4,7 @@
 
 - if @viewed_user.is_public? || authorized?
   - content_for :stylesheets do
-    %link{href: "#{Settings.base_url}/#{@viewed_user.identifier}/specimens.json", rel:"alternate", type:"application/ld+json"}
+    %link{href: "#{Settings.base_url}/#{@viewed_user.identifier}/specimens.jsonld", rel:"alternate", type:"application/ld+json"}
 
   - content_for :scripts do
     %script{src: "/js/application.js"}
