@@ -31,8 +31,8 @@ module Sinatra
                   "@type": "PreservedSpecimen",
                   "@id": "#{Settings.base_url}/occurrence/#{occurrence.id}",
                   sameAs: "https://gbif.org/occurrence/#{occurrence.id}",
-                  recorded: jsonld_occurrence_recordings(occurrence),
-                  identified: jsonld_occurrence_identifications(occurrence),
+                  recorded: jsonld_occurrence_actions(occurrence, "recordings"),
+                  identified: jsonld_occurrence_actions(occurrence, "identifications"),
                   associatedReferences: jsonld_occurrence_references(occurrence)
                 }.merge(occ)
               }
@@ -73,8 +73,8 @@ module Sinatra
                         .reject{|column| Occurrence::IGNORED_COLUMNS_OUTPUT.include?(column)}
                         .map{|k,v| response[k] = v }
 
-              response["recorded"] = jsonld_occurrence_recordings(occurrence)
-              response["identified"] = jsonld_occurrence_identifications(occurrence)
+              response["recorded"] = jsonld_occurrence_actions(occurrence, "recordings")
+              response["identified"] = jsonld_occurrence_actions(occurrence, "identifications")
               response["associatedReferences"] = jsonld_occurrence_references(occurrence)
               JSON.pretty_generate(response)
             rescue

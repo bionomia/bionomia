@@ -24,26 +24,39 @@ module Sinatra
               recorded: "http://rs.tdwg.org/dwc/iri/recordedBy",
               associatedReferences: "http://rs.tdwg.org/dwc/terms/associatedReferences",
               PreservedSpecimen: "http://rs.tdwg.org/dwc/terms/PreservedSpecimen",
-              creator: "http://purl.org/dc/terms/creator",
-              created: "http://purl.org/dc/terms/created",
-              modified: "http://purl.org/dc/terms/modified"
+              oa: "http://www.w3.org/ns/oa#",
+              annotation: "http://www.w3.org/ns/oa#Annotation"
           }.merge(dwc_contexts)
           response
         end
 
-        def jsonld_occurrence_recordings(occurrence)
-          occurrence.user_recordings.map{|o|
+        def jsonld_occurrence_actions(occurrence, type = "identifications")
+          occurrence.send("user_#{type}").map{|o|
             id_url = o.user.orcid ? "https://orcid.org/#{o.user.orcid}" : "http://www.wikidata.org/entity/#{o.user.wikidata}"
-            creator = {}
+            annotation = {}
             if !o.claimant.orcid.nil?
-              creator = {
-                "@type": "Person",
-                "@id": "https://bionomia.net/#{o.claimant.orcid}",
-                sameAs: "https://orcid.org/#{o.claimant.orcid}",
-                givenName: "#{o.claimant.given}",
-                familyName: "#{o.claimant.family}",
-                name: "#{o.claimant.fullname}",
-                alternateName: o.claimant.other_names.present? ? o.claimant.other_names.split("|") : []
+              annotation = {
+                "@type": "oa:Annotation",
+                "@id": "BionomiaLink#{o.id}",
+                "oa:motivation": "identifying",
+                "oa:target": {
+                  "oa:source": "https://gbif.org/occurrence/#{occurrence.id}",
+                  "oa:selector": {
+                    "oa:type": "TextQuoteSelector",
+                    "oa:exact": type == "identifications" ? "Identified by" : "Recorded by"
+                  }
+                },
+                "oa:creator": {
+                  "@type": "Person",
+                  "@id": "#{Settings.base_url}/#{o.claimant.orcid}",
+                  sameAs: "https://orcid.org/#{o.claimant.orcid}",
+                  givenName: "#{o.claimant.given}",
+                  familyName: "#{o.claimant.family}",
+                  name: "#{o.claimant.fullname}",
+                  alternateName: o.claimant.other_names.present? ? o.claimant.other_names.split("|") : []
+                },
+                "oa:created": o.created.to_time.iso8601,
+                "oa:modified": !o.updated.nil? ? o.updated.to_time.iso8601 : nil
               }
             end
             {
@@ -54,40 +67,10 @@ module Sinatra
                 familyName: "#{o.user.family}",
                 name: "#{o.user.fullname}",
                 alternateName: o.user.other_names.present? ? o.user.other_names.split("|") : [],
-                creator: creator,
-                created: o.created.to_time.iso8601,
-                modified: !o.updated.nil? ? o.updated.to_time.iso8601 : nil
+                "@reverse": {
+                  annotation: [ annotation ]
+                }
               }
-          }
-        end
-
-        def jsonld_occurrence_identifications(occurrence)
-          occurrence.user_identifications.map{|o|
-            id_url = o.user.orcid ? "https://orcid.org/#{o.user.orcid}" : "http://www.wikidata.org/entity/#{o.user.wikidata}"
-            creator = {}
-            if !o.claimant.orcid.nil?
-              creator = {
-                "@type": "Person",
-                "@id": "https://bionomia.net/#{o.claimant.orcid}",
-                sameAs: "https://orcid.org/#{o.claimant.orcid}",
-                givenName: "#{o.claimant.given}",
-                familyName: "#{o.claimant.family}",
-                name: "#{o.claimant.fullname}",
-                alternateName: o.claimant.other_names.present? ? o.claimant.other_names.split("|") : []
-              }
-            end
-            {
-              "@type": "Person",
-              "@id": "#{Settings.base_url}/#{o.user.identifier}",
-              sameAs: id_url,
-              givenName: "#{o.user.given}",
-              familyName: "#{o.user.family}",
-              name: "#{o.user.fullname}",
-              alternateName: o.user.other_names.present? ? o.user.other_names.split("|") : [],
-              creator: creator,
-              created: o.created.to_time.iso8601,
-              modified: !o.updated.nil? ? o.updated.to_time.iso8601 : nil
-            }
           }
         end
 
