@@ -63,7 +63,7 @@ module Bionomia
               a.doi,
               (a.citation || "NO TITLE"),
               a.user_specimen_count(user.id),
-              "https://bionomia.net/profile/citation/#{a.doi}"
+              "#{base_url}/profile/citation/#{a.doi}"
             ]
             y << CSV::Row.new(header, data).to_s
           end
@@ -117,9 +117,8 @@ module Bionomia
         recorded: "http://rs.tdwg.org/dwc/iri/recordedBy",
         PreservedSpecimen: "http://rs.tdwg.org/dwc/terms/PreservedSpecimen",
         as: "https://www.w3.org/ns/activitystreams#",
-        creator: "http://purl.org/dc/terms/creator",
-        created: "http://purl.org/dc/terms/created",
-        modified: "http://purl.org/dc/terms/modified"
+        oa: "http://www.w3.org/ns/oa#",
+        annotation: "http://www.w3.org/ns/oa#Annotation"
       }.merge(dwc_contexts)
        .merge({ datasetKey: "http://rs.gbif.org/terms/1.0/datasetKey" })
     end
@@ -132,7 +131,7 @@ module Bionomia
       w.push_key("@type")
       w.push_value("Person")
       w.push_key("@id")
-      w.push_value("https://bionomia.net/#{@user.identifier}")
+      w.push_value("#{base_url}/#{@user.identifier}")
       w.push_key("givenName")
       w.push_value(@user.given)
       w.push_key("familyName")
@@ -223,14 +222,30 @@ module Bionomia
       end
 
       items = results.map do |o|
-        creator = {}
-        modified = { modified: nil }
+        annotation = {}
         if !o.claimant.orcid.nil?
-          creator = {
-            creator: {
-              "@type": "Person",
-              "@id": "https://orcid.org/#{o.claimant.orcid}",
-              name: o.claimant.fullname
+          annotation = {
+            "@reverse": {
+              annotation: [
+                "@type": "oa:Annotation",
+                "@id": "BionomiaLink#{o.id}",
+                "oa:motivation": "identifying",
+                "oa:target": {
+                  "oa:source": "https://gbif.org/occurrence/#{o.occurrence.id}",
+                  "oa:selector": {
+                    "oa:type": "TextQuoteSelector",
+                    "oa:exact": type == "identifications" ? "Identified by" : "Recorded by"
+                  }
+                },
+                "oa:creator": {
+                  "@type": "Person",
+                  "@id": "#{base_url}/#{o.claimant.orcid}",
+                  sameAs: "https://orcid.org/#{o.claimant.orcid}",
+                  name: o.claimant.fullname
+                },
+                "oa:created": o.created.to_time.iso8601,
+                "oa:modified": !o.updated.nil? ? o.updated.to_time.iso8601 : nil
+              ]
             }
           }
         end
@@ -238,12 +253,10 @@ module Bionomia
           modified = { modified: o.updated.to_time.iso8601 }
         end
         { "@type": "PreservedSpecimen",
-          "@id": "https://bionomia.net/occurrence/#{o.occurrence.id}",
+          "@id": "#{base_url}/occurrence/#{o.occurrence.id}",
           sameAs: "https://gbif.org/occurrence/#{o.occurrence.id}"
         }.merge(o.occurrence.attributes.reject {|column| ignored_cols(false).include?(column)})
-         .merge(creator)
-         .merge({ created: o.created.to_time.iso8601 })
-         .merge(modified)
+         .merge(annotation)
       end
       { metadata: metadata, results: items }
     end
@@ -251,27 +264,41 @@ module Bionomia
     def jsonld_occurrences_enum(type = "identifications")
       Enumerator.new do |y|
         @user.send(type).includes(:claimant).find_each do |o|
-          creator = {}
-          modified = { modified: nil }
+          annotation = {}
           if !o.claimant.orcid.nil?
-            creator = {
-              creator: {
-                "@type": "Person",
-                "@id": "https://orcid.org/#{o.claimant.orcid}",
-                name: o.claimant.fullname
+            annotation = {
+              "@reverse": {
+                annotation: [
+                  {
+                    "@type": "oa:Annotation",
+                    "@id": "BionomiaLink#{o.id}",
+                    "oa:motivation": "identifying",
+                    "oa:target": {
+                      "oa:source": "https://gbif.org/occurrence/#{o.occurrence.id}",
+                      "oa:selector": {
+                        "oa:type": "TextQuoteSelector",
+                        "oa:exact": type == "identifications" ? "Identified by" : "Recorded by"
+                      }
+                    },
+                    "oa:creator": {
+                      "@type": "Person",
+                      "@id": "#{base_url}/#{o.claimant.orcid}",
+                      sameAs: "https://orcid.org/#{o.claimant.orcid}",
+                      name: o.claimant.fullname
+                    },
+                    "oa:created": o.created.to_time.iso8601,
+                    "oa:modified": !o.updated.nil? ? o.updated.to_time.iso8601 : nil
+                  }
+                ]
               }
+
             }
           end
-          if !o.updated.nil?
-            modified = { modified: o.updated.to_time.iso8601 }
-          end
           y << { "@type": "PreservedSpecimen",
-                 "@id": "https://bionomia.net/occurrence/#{o.occurrence.id}",
+                 "@id": "#{base_url}/occurrence/#{o.occurrence.id}",
                  sameAs: "https://gbif.org/occurrence/#{o.occurrence.id}"
                }.merge(o.occurrence.attributes.reject {|column| ignored_cols(false).include?(column)})
-                .merge(creator)
-                .merge( { created: o.created.to_time.iso8601 })
-                .merge(modified)
+                .merge(annotation)
         end
       end
     end
