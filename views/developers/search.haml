@@ -370,9 +370,8 @@
               <span class="token property">"recorded"</span>: <span class="token string">"http://rs.tdwg.org/dwc/iri/recordedBy"</span>,
               <span class="token property">"associatedReferences"</span>: <span class="token string">"http://rs.tdwg.org/dwc/terms/associatedReferences"</span>,
               <span class="token property">"PreservedSpecimen"</span>: <span class="token string">"http://rs.tdwg.org/dwc/terms/PreservedSpecimen"</span>,
-              <span class="token property">"creator"</span>: <span class="token string">"http://purl.org/dc/terms/creator"</span>,
-              <span class="token property">"created"</span>: <span class="token string">"http://purl.org/dc/terms/created"</span>,
-              <span class="token property">"modified"</span>: <span class="token string">"http://purl.org/dc/terms/modified"</span>,
+              <span class="token property">"oa"</span>: <span class="token string">"http://www.w3.org/ns/oa#"</span>,
+              <span class="token property">"annotation"</span>: <span class="token string">"http://www.w3.org/ns/oa#Annotation"</span>,
               <span class="token property">"datasetKey"</span>: <span class="token string">"http://rs.tdwg.org/dwc/terms/datasetKey"</span>,
               <span class="token property">"occurrenceID"</span>: <span class="token string">"http://rs.tdwg.org/dwc/terms/occurrenceID"</span>,
               <span class="token property">"dateIdentified"</span>: <span class="token string">"http://rs.tdwg.org/dwc/terms/dateIdentified"</span>,
@@ -420,17 +419,32 @@
                       <span class="token property">"name"</span>: <span class="token string">"Rudolph Martin Anderson"</span>,
                       <span class="token property">"alternateName"</span>: [
                       ],
-                      <span class="token property">creator</span>: {
-                        <span class="token property">"@type"</span>: <span class="token string">"Person"</span>,
-                        <span class="token property">"@id"</span>: <span class="token string">"https://bionomia.net/0000-0001-7618-5230"</span>,
-                        <span class="token property">"sameAs"</span>: <span class="token string">"https://orcid.org/0000-0001-7618-5230"</span>,
-                        <span class="token property">"givenName"</span>: <span class="token string">"David Peter"</span>,
-                        <span class="token property">"familyName"</span>: <span class="token string">"Shorthouse"</span>,
-                        <span class="token property">"name"</span>: <span class="token string">"David Peter Shorthouse"</span>
-                        <span class="token property">"alternateName"</span>: [
-                          <span class="token string">"David P. Shorthouse"</span>,
-                          <span class="token string">"David Shorthouse"</span>,
-                          <span class="token string">"David Peter Shorthouse"</span>
+                      <span class="token property">"@reverse"</span>: {
+                        <span class="token property">"annotation"</span>: [
+                          {
+                            <span class="token property">"@type"</span>: <span class="token string">"oa:Annotation"</span>,
+                            <span class="token property">"@id"</span>: <span class="token string">"BionomiaLink11830272"</span>,
+                            <span class="token property">"oa:motivation"</span>: <span class="token string">"identifying"</span>,
+                            <span class="token property">"oa:target"</span>: {
+                            <span class="token property">"oa:source"</span>: <span class="token string">"https://gbif.org/occurrence/1804069383"</span>,
+                            <span class="token property">"oa:selector"</span>: {
+                              <span class="token property">"oa:type"</span>: <span class="token string">"TextQuoteSelector"</span>,
+                              <span class="token property">"oa:exact"</span>: <span class="token string">"Recorded by"</span>
+                            },
+                            <span class="token property">"oa:creator"</span>: {
+                              <span class="token property">"@type"</span>: <span class="token string">"Person"</span>,
+                              <span class="token property">"@id"</span>: <span class="token string">"https://bionomia.net/0000-0001-7618-5230"</span>,
+                              <span class="token property">"sameAs"</span>: <span class="token string">"https://orcid.org/0000-0001-7618-5230"</span>,
+                              <span class="token property">"givenName"</span>: <span class="token string">"David Peter"</span>,
+                              <span class="token property">"familyName"</span>: <span class="token string">"Shorthouse"</span>,
+                              <span class="token property">"name"</span>: <span class="token string">"David Peter Shorthouse"</span>
+                              <span class="token property">"alternateName"</span>: [
+                                <span class="token string">"David P. Shorthouse"</span>,
+                                <span class="token string">"David Shorthouse"</span>,
+                                <span class="token string">"David Peter Shorthouse"</span>
+                              ]
+                            }
+                          }
                         ]
                       },
                       <span class="token property">created</span>: <span class="token string">"2020-01-20T09:41:03-05:00"</span>,
