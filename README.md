@@ -126,6 +126,7 @@ Then use this orphaned.csv file to run through the orphaned records and delete t
 This misses the ignored attributions, so also execute:
 
      mysql> DELETE user_occurrences FROM user_occurrences LEFT JOIN occurrences ON user_occurrences.occurrence_id = occurrences.gbifID WHERE occurrences.gbifID IS NULL AND user_occurrences.visible = false;
+     mysql> DELETE article_occurrences FROM article_occurrences LEFT JOIN occurrences ON article_occurrences.occurrence_id = occurrences.gbifID WHERE occurrences.gbifID IS NULL;
 
 To migrate tables, use mydumper and myloader. But for even faster data migration, drop indices before mydumper then recreate indices after myloader. This is especially true for the three largest tables: occurrences, occurrence_recorders, and occurrence_determiners whose indices are (almost) larger than the tables themselves.
 

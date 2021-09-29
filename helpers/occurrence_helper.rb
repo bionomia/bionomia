@@ -14,18 +14,16 @@ module Sinatra
           response = {}
           ignore_cols = Occurrence::IGNORED_COLUMNS_OUTPUT
           dwc_contexts = Hash[
-              Occurrence.attribute_names
-                        .reject {|column| ignore_cols.include?(column)}
-                        .map{|o| ["#{o}", "http://rs.tdwg.org/dwc/terms/#{o}"] if !ignore_cols.include?(o) }
+            Occurrence.attribute_names
+                      .reject {|column| ignore_cols.include?(column)}
+                      .map{|o| ["#{o}", "http://rs.tdwg.org/dwc/terms/#{o}"] if !ignore_cols.include?(o) }
           ]
           response["@context"] = {
-              "@vocab": "http://schema.org/",
-              identified: "http://rs.tdwg.org/dwc/iri/identifiedBy",
-              recorded: "http://rs.tdwg.org/dwc/iri/recordedBy",
-              associatedReferences: "http://rs.tdwg.org/dwc/terms/associatedReferences",
-              PreservedSpecimen: "http://rs.tdwg.org/dwc/terms/PreservedSpecimen",
-              oa: "http://www.w3.org/ns/oa#",
-              annotation: "http://www.w3.org/ns/oa#Annotation"
+            "@vocab": "http://schema.org/",
+            identified: "http://rs.tdwg.org/dwc/iri/identifiedBy",
+            recorded: "http://rs.tdwg.org/dwc/iri/recordedBy",
+            associatedReferences: "http://rs.tdwg.org/dwc/terms/associatedReferences",
+            PreservedSpecimen: "http://rs.tdwg.org/dwc/terms/PreservedSpecimen"
           }.merge(dwc_contexts)
           response
         end
@@ -33,54 +31,25 @@ module Sinatra
         def jsonld_occurrence_actions(occurrence, type = "identifications")
           occurrence.send("user_#{type}").map{|o|
             id_url = o.user.orcid ? "https://orcid.org/#{o.user.orcid}" : "http://www.wikidata.org/entity/#{o.user.wikidata}"
-            annotation = {}
-            if !o.claimant.orcid.nil?
-              annotation = {
-                "@type": "oa:Annotation",
-                "@id": "BionomiaLink#{o.id}",
-                "oa:motivation": "identifying",
-                "oa:target": {
-                  "oa:source": "https://gbif.org/occurrence/#{occurrence.id}",
-                  "oa:selector": {
-                    "oa:type": "TextQuoteSelector",
-                    "oa:exact": type == "identifications" ? "Identified by" : "Recorded by"
-                  }
-                },
-                "oa:creator": {
-                  "@type": "Person",
-                  "@id": "#{Settings.base_url}/#{o.claimant.orcid}",
-                  sameAs: "https://orcid.org/#{o.claimant.orcid}",
-                  givenName: "#{o.claimant.given}",
-                  familyName: "#{o.claimant.family}",
-                  name: "#{o.claimant.fullname}",
-                  alternateName: o.claimant.other_names.present? ? o.claimant.other_names.split("|") : []
-                },
-                "oa:created": o.created.to_time.iso8601,
-                "oa:modified": !o.updated.nil? ? o.updated.to_time.iso8601 : nil
-              }
-            end
             {
-                "@type": "Person",
-                "@id": "#{Settings.base_url}/#{o.user.identifier}",
-                sameAs: id_url,
-                givenName: "#{o.user.given}",
-                familyName: "#{o.user.family}",
-                name: "#{o.user.fullname}",
-                alternateName: o.user.other_names.present? ? o.user.other_names.split("|") : [],
-                "@reverse": {
-                  annotation: [ annotation ]
-                }
-              }
+              "@type": "Person",
+              "@id": "#{Settings.base_url}/#{o.user.identifier}",
+              sameAs: id_url,
+              givenName: "#{o.user.given}",
+              familyName: "#{o.user.family}",
+              name: "#{o.user.fullname}",
+              alternateName: o.user.other_names.present? ? o.user.other_names.split("|") : []
+            }
           }
         end
 
         def jsonld_occurrence_references(occurrence)
           occurrence.articles.map{|a| {
-                "@type": "ScholarlyArticle",
-                "@id": "https://doi.org/#{a.doi}",
-                sameAs: "https://doi.org/#{a.doi}",
-                description: a.citation
-              }
+              "@type": "ScholarlyArticle",
+              "@id": "https://doi.org/#{a.doi}",
+              sameAs: "https://doi.org/#{a.doi}",
+              description: a.citation
+            }
           }
         end
 

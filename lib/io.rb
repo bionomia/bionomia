@@ -16,10 +16,6 @@ module Bionomia
       { user: nil, params: {}, request: {} }
     end
 
-    def base_url
-      "#{request.env['rack.url_scheme']}://#{request.env['HTTP_HOST']}"
-    end
-
     def ignored_cols(keep_gbifID = true)
       if keep_gbifID
         ["dateIdentified_processed", "eventDate_processed", "hasImage"]
@@ -63,7 +59,7 @@ module Bionomia
               a.doi,
               (a.citation || "NO TITLE"),
               a.user_specimen_count(user.id),
-              "#{base_url}/profile/citation/#{a.doi}"
+              "#{Settings.base_url}/profile/citation/#{a.doi}"
             ]
             y << CSV::Row.new(header, data).to_s
           end
@@ -116,9 +112,7 @@ module Bionomia
         identified: "http://rs.tdwg.org/dwc/iri/identifiedBy",
         recorded: "http://rs.tdwg.org/dwc/iri/recordedBy",
         PreservedSpecimen: "http://rs.tdwg.org/dwc/terms/PreservedSpecimen",
-        as: "https://www.w3.org/ns/activitystreams#",
-        oa: "http://www.w3.org/ns/oa#",
-        annotation: "http://www.w3.org/ns/oa#Annotation"
+        as: "https://www.w3.org/ns/activitystreams#"
       }.merge(dwc_contexts)
        .merge({ datasetKey: "http://rs.gbif.org/terms/1.0/datasetKey" })
     end
@@ -131,7 +125,7 @@ module Bionomia
       w.push_key("@type")
       w.push_value("Person")
       w.push_key("@id")
-      w.push_value("#{base_url}/#{@user.identifier}")
+      w.push_value("#{Settings.base_url}/#{@user.identifier}")
       w.push_key("givenName")
       w.push_value(@user.given)
       w.push_key("familyName")
@@ -150,9 +144,9 @@ module Bionomia
           prev_url = nil
         else
           if identifications[:metadata][:prev].nil?
-            prev_url = "#{base_url}#{recordings[:metadata][:prev_url]}"
+            prev_url = "#{Settings.base_url}/#{recordings[:metadata][:prev_url]}"
           else
-            prev_url = "#{base_url}#{identifications[:metadata][:prev_url]}"
+            prev_url = "#{Settings.base_url}/#{identifications[:metadata][:prev_url]}"
           end
         end
         w.push_value(prev_url, "as:prev")
@@ -161,7 +155,7 @@ module Bionomia
         if current_stub.nil?
           current_url = nil
         else
-          current_url = "#{base_url}#{current_stub}"
+          current_url = "#{Settings.base_url}/#{current_stub}"
         end
         w.push_value(current_url, "as:current")
 
@@ -169,9 +163,9 @@ module Bionomia
           next_url = nil
         else
           if identifications[:metadata][:next].nil?
-            next_url = "#{base_url}#{recordings[:metadata][:next_url]}"
+            next_url = "#{Settings.base_url}/#{recordings[:metadata][:next_url]}"
           else
-            next_url = "#{base_url}#{identifications[:metadata][:next_url]}"
+            next_url = "#{Settings.base_url}/#{identifications[:metadata][:next_url]}"
           end
         end
         w.push_value(next_url, "as:next")
@@ -222,41 +216,10 @@ module Bionomia
       end
 
       items = results.map do |o|
-        annotation = {}
-        if !o.claimant.orcid.nil?
-          annotation = {
-            "@reverse": {
-              annotation: [
-                "@type": "oa:Annotation",
-                "@id": "BionomiaLink#{o.id}",
-                "oa:motivation": "identifying",
-                "oa:target": {
-                  "oa:source": "https://gbif.org/occurrence/#{o.occurrence.id}",
-                  "oa:selector": {
-                    "oa:type": "TextQuoteSelector",
-                    "oa:exact": type == "identifications" ? "Identified by" : "Recorded by"
-                  }
-                },
-                "oa:creator": {
-                  "@type": "Person",
-                  "@id": "#{base_url}/#{o.claimant.orcid}",
-                  sameAs: "https://orcid.org/#{o.claimant.orcid}",
-                  name: o.claimant.fullname
-                },
-                "oa:created": o.created.to_time.iso8601,
-                "oa:modified": !o.updated.nil? ? o.updated.to_time.iso8601 : nil
-              ]
-            }
-          }
-        end
-        if !o.updated.nil?
-          modified = { modified: o.updated.to_time.iso8601 }
-        end
         { "@type": "PreservedSpecimen",
-          "@id": "#{base_url}/occurrence/#{o.occurrence.id}",
+          "@id": "#{Settings.base_url}/occurrence/#{o.occurrence.id}",
           sameAs: "https://gbif.org/occurrence/#{o.occurrence.id}"
         }.merge(o.occurrence.attributes.reject {|column| ignored_cols(false).include?(column)})
-         .merge(annotation)
       end
       { metadata: metadata, results: items }
     end
@@ -264,41 +227,10 @@ module Bionomia
     def jsonld_occurrences_enum(type = "identifications")
       Enumerator.new do |y|
         @user.send(type).includes(:claimant).find_each do |o|
-          annotation = {}
-          if !o.claimant.orcid.nil?
-            annotation = {
-              "@reverse": {
-                annotation: [
-                  {
-                    "@type": "oa:Annotation",
-                    "@id": "BionomiaLink#{o.id}",
-                    "oa:motivation": "identifying",
-                    "oa:target": {
-                      "oa:source": "https://gbif.org/occurrence/#{o.occurrence.id}",
-                      "oa:selector": {
-                        "oa:type": "TextQuoteSelector",
-                        "oa:exact": type == "identifications" ? "Identified by" : "Recorded by"
-                      }
-                    },
-                    "oa:creator": {
-                      "@type": "Person",
-                      "@id": "#{base_url}/#{o.claimant.orcid}",
-                      sameAs: "https://orcid.org/#{o.claimant.orcid}",
-                      name: o.claimant.fullname
-                    },
-                    "oa:created": o.created.to_time.iso8601,
-                    "oa:modified": !o.updated.nil? ? o.updated.to_time.iso8601 : nil
-                  }
-                ]
-              }
-
-            }
-          end
           y << { "@type": "PreservedSpecimen",
-                 "@id": "#{base_url}/occurrence/#{o.occurrence.id}",
+                 "@id": "#{Settings.base_url}/occurrence/#{o.occurrence.id}",
                  sameAs: "https://gbif.org/occurrence/#{o.occurrence.id}"
                }.merge(o.occurrence.attributes.reject {|column| ignored_cols(false).include?(column)})
-                .merge(annotation)
         end
       end
     end
