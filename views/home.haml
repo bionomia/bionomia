@@ -3,6 +3,11 @@
   %link{href: "/font/LovelyHome.otf", rel:"preload", as:"font", type:"font/otf", crossorigin: true}
   %link{href: "/images/banner.jpg", rel:"preload", as:"image"}
 -content_for :scripts do
+  %script{src: "/js/application.js"}
+  :javascript
+    $(function() {
+      Application.init("", "GET", "/roster");
+    });
   %script{type: "application/ld+json"}
     :plain
       {
@@ -20,11 +25,6 @@
           "query-input": "required name=search_term_string"
         }]
       }
-  %script{src: "/js/application.js"}
-  :javascript
-    $(function() {
-      Application.init("", "GET", "/roster");
-    });
 
 - content_for :jumbotron do
   .jumbotron.jumbotron-fluid.d-flex.flex-wrap#home-jumbotron
