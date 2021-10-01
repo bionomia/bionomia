@@ -13,7 +13,7 @@
     - if content_for?(:twitter_image)
       = yield_content :twitter_image
     - else
-      %meta{name:"twitter:image", content:"#{base_url}/images/screenshot.png"}/
+      %meta{name:"twitter:image", content:"#{Settings.base_url}/images/screenshot.png"}/
     %meta{property:"og:title", content:"#{yield_content(:title)}"}/
     %meta{property:"og:description", content:"#{I18n.t('home.tagline')}"}/
     %meta{property:"og:locale", content:"#{locale}"}/
@@ -22,7 +22,7 @@
     - if content_for?(:og_image)
       = yield_content :og_image
     - else
-      %meta{property:"og:image", content:"#{base_url}/images/screenshot.png"}/
+      %meta{property:"og:image", content:"#{Settings.base_url}/images/screenshot.png"}/
 
     %title= yield_content :title
 
