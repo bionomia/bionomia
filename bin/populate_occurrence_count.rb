@@ -37,12 +37,34 @@ end
 
 if options[:add]
   puts "Building occurrence_counts content...".yellow
-  sql = "INSERT INTO occurrence_counts (occurrence_id, agent_count, user_count)
-         SELECT DISTINCT a.occurrence_id, a.agent_count, b.user_count FROM
-         (SELECT r.occurrence_id, count(r.agent_id) as agent_count FROM `occurrence_recorders` r group by r.occurrence_id having count(r.agent_id) > 1) a JOIN
-         (SELECT u.occurrence_id, count(u.user_id) as user_count FROM user_occurrences u where u.action IN ('recorded', 'recorded,identified', 'identified,recorded') group by u.occurrence_id) b ON a.occurrence_id = b.occurrence_id
-         WHERE a.agent_count > b.user_count"
-  ActiveRecord::Base.connection.execute(sql)
+  limit = 100000
+  max_occurrence_id = OccurrenceRecorder.maximum(:occurrence_id)
+
+  #Over-estimate number of queries to execute, but break out when actual limit reached
+  (max_occurrence_id/limit).times do |i|
+    counter = OccurrenceCount.maximum(:occurrence_id) || 0
+    break if counter >= max_occurrence_id
+    sql = "INSERT INTO occurrence_counts (occurrence_id, agent_count, user_count)
+           SELECT
+            r.occurrence_id,
+            count(DISTINCT r.agent_id) as agent_count,
+            count(DISTINCT u.user_id) as user_count
+           FROM
+            user_occurrences u
+          CROSS JOIN
+            occurrence_recorders r
+          WHERE
+            r.occurrence_id = u.occurrence_id
+          AND
+            u.action IN ('recorded', 'recorded,identified', 'identified,recorded')
+          AND
+            r.occurrence_id > #{counter}
+          GROUP BY
+            u.occurrence_id
+          HAVING agent_count > 2 AND agent_count <> user_count
+          LIMIT #{limit}"
+    ActiveRecord::Base.connection.execute(sql)
+  end
   puts "Done!".green
 end
 
