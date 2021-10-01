@@ -5,8 +5,8 @@ class ArticleOccurrence < ActiveRecord::Base
 
    has_many :user_occurrences, primary_key: :occurrence_id, foreign_key: :occurrence_id
 
+   validates :article_id, presence: true, uniqueness: { scope: :occurrence_id }
    validates :occurrence_id, presence: true
-   validates :article_id, presence: true
 
    def self.orphaned_count
      counter = 0

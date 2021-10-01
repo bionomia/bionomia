@@ -135,7 +135,7 @@ module Bionomia
             dwc.core.read(1000) do |data, errors|
               records = data.map{|a| { article_id: article.id, occurrence_id: a[gbifID].to_i } if a[basisOfRecord] != "HUMAN_OBSERVATION" }
                             .compact
-              ArticleOccurrence.import records, batch_size: 1_000, on_duplicate_key_ignore: true, validate: false
+              ArticleOccurrence.import records, batch_size: 1_000, on_duplicate_key_ignore: true, validate: true
             end
           rescue
             tmp_csv = Tempfile.new(['gbif_csv', '.zip'])
@@ -153,7 +153,7 @@ module Bionomia
                     next if occurrence_id.nil? || row["basisOfRecord"] == "HUMAN_OBSERVATION"
                     items << ArticleOccurrence.new(article_id: article.id, occurrence_id: occurrence_id)
                   end
-                  ArticleOccurrence.import items, batch_size: 10_000, on_duplicate_key_ignore: true, validate: false
+                  ArticleOccurrence.import items, batch_size: 10_000, on_duplicate_key_ignore: true, validate: true
                   File.unlink(csv)
                 end
               end
