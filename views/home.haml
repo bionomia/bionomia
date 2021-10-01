@@ -3,6 +3,21 @@
   %link{href: "/font/LovelyHome.otf", rel:"preload", as:"font", type:"font/otf", crossorigin: true}
   %link{href: "/images/banner.jpg", rel:"preload", as:"image"}
 -content_for :scripts do
+  %script{type: "application/ld+json"}
+    :plain
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "url": "#{Settings.base_url}",
+        "potentialAction": [{
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "#{Settings.base_url}/roster?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }]
+      }
   %script{src: "/js/application.js"}
   :javascript
     $(function() {
