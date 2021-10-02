@@ -13,5 +13,5 @@
       - identified = @stats[:countries][:identified].sort_by{|k, v| -v}.map{|a| [ a[0], country_name(a[0]), a[1] ] }
       - identified.each do |country|
         %li.list-group-item.d-flex.justify-content-between.align-items-center
-          %a{href: "#{locals[:path]}/specimens?action=identified&country_code=#{country[0]}"} #{country[1]}
+          = link_to country[1], "#{locals[:path]}/specimens?action=identified&country_code=#{country[0]}"
           %span.badge.badge-light.badge-pill #{number_with_delimiter(country[2])}
