@@ -31,7 +31,7 @@ module Bionomia
             tokenizer: {
               simple_split: {
                 type: "simple_pattern_split",
-                pattern: " "
+                pattern: "\\.| "
               }
             },
             analyzer: {
