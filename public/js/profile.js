@@ -88,6 +88,11 @@ var Profile = (function($, window) {
                 $('#profile-remove').trigger("click");
               });
             }
+          }).fail(function(data) {
+            $('#profile-image').find("img").remove();
+            $('#image-alert').addClass("show").show().on('close.bs.alert', function() {
+              $('#profile-remove').trigger("click");
+            });    
           });
         }
       });

@@ -199,9 +199,9 @@ module Bionomia
     def document(u)
       description = nil
       if u.description
-        description = u.description.truncate(50)
+        description = u.description.truncate(80)
       elsif u.keywords
-        description = u.keywords.split("|").map(&:strip).join(", ").truncate(50)
+        description = u.keywords.split("|").map(&:strip).join(", ").truncate(80)
       end
       other_names = u.other_names.split("|").map(&:strip) rescue []
       co_collectors = u.recorded_with
