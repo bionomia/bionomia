@@ -1,4 +1,4 @@
-/*global jQuery, window, document, self, encodeURIComponent, Profile, Bootstrap */
+/*global jQuery, window, document, self, encodeURIComponent, Bootstrap */
 
 var Profile = (function($, window) {
 
@@ -67,7 +67,7 @@ var Profile = (function($, window) {
                                    class:"upload-preview"
                                  });
               };
-          }
+          };
           reader.readAsDataURL(e.target.files[0]);
           var data = new FormData();
           data.append('file', $('#user-image')[0].files[0]);
@@ -92,7 +92,7 @@ var Profile = (function($, window) {
             $('#profile-image').find("img").remove();
             $('#image-alert').addClass("show").show().on('close.bs.alert', function() {
               $('#profile-remove').trigger("click");
-            });    
+            });
           });
         }
       });
