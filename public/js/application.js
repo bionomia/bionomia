@@ -1,4 +1,4 @@
-/*global jQuery, window, document, self, encodeURIComponent, Bloodhound, Application */
+/*global jQuery, window, document, self, encodeURIComponent, Bloodhound, Bootstrap, Filter */
 
 Array.prototype.all_unique = function () {
   "use strict";
@@ -733,7 +733,7 @@ var Application = (function($, window) {
     },
 
     wait_loader: function(img) {
-      return new Promise(resolve=>{img.onload = resolve});
+      return new Promise(resolve => { img.onload = resolve; });
     },
 
     carousel_template: function(data, id) {
