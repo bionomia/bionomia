@@ -433,6 +433,7 @@ dl.citation{
   margin-left:-100px;
   left:50%;
   background-color:#fff;
+  opacity:0.8;
 }
 #profile-upload-option span {
   display:block;
