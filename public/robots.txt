@@ -25,6 +25,15 @@ Disallow: /
 User-agent: BLEXBot
 Disallow: /
 
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
 User-agent: *
 Disallow: /*.csv$
 Disallow: /*.json$
