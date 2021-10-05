@@ -188,6 +188,34 @@ module Bionomia
       )
     end
 
+    def wikidata_candidate_deletion_query
+      %Q(
+        SELECT DISTINCT ?item ?itemLabel
+        WHERE {
+          SERVICE wikibase:mwapi {
+            bd:serviceParam wikibase:endpoint "www.wikidata.org".
+            bd:serviceParam wikibase:api "Generator".
+            bd:serviceParam mwapi:generator "links".
+            bd:serviceParam mwapi:titles "Wikidata:Requests for deletions".
+            bd:serviceParam mwapi:gpllimit "max".
+            bd:serviceParam mwapi:gplnamespace "0".
+            ?item wikibase:apiOutputItem mwapi:title.
+          }
+          ?item wdt:P6944 ?id .
+          SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+        }
+      )
+    end
+
+    def users_flagged_deletion
+      flagged = []
+      @sparql.query(wikidata_candidate_deletion_query)
+             .each_solution do |solution|
+               flagged << solution.to_h[:item].to_s
+      end
+      flagged.uniq
+    end
+
     def new_users
       existing = existing_wikicodes + destroyed_users
       new_wikicodes = {}

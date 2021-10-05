@@ -148,17 +148,15 @@ if options[:deleted]
 end
 
 if options[:flagged_deletion]
-  url = "https://www.wikidata.org/wiki/Wikidata:Requests_for_deletions"
-  doc = Nokogiri::HTML(URI.open(url))
-  ids = doc.to_s.scan(/Q\d+/).uniq
-  flagged = ids & User.pluck(:wikidata).compact
+  wiki = Bionomia::WikidataSearch.new
+  flagged = wiki.users_flagged_deletion
   if flagged.empty?
     puts "No wikidata entities flagged for deletion.".green
   else
     puts "Oh, oh. Something may have been flagged for deletion".red
     sm = Bionomia::SendMail.new({ subject: "ALERT! A wikidata page is flagged for deletion." })
-    body = "A wikidata page(s) may have been flagged for deletion at #{url}!\n\n"
-    body += flagged.map{|w| "https://www.wikidata.org/wiki/#{w}"}.join("\n")
+    body = "A wikidata page(s) may have been flagged for deletion!\n\n"
+    body += flagged.join("\n")
     sm.send_message(email: Settings.gmail.email, body: body)
   end
 end
