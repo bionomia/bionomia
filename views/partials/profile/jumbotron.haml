@@ -11,8 +11,9 @@
     });
 
 .col-12.col-lg-4.text-center.sidebar.position-relative
-  .position-absolute
-    %i.fas.fa-user-edit.h5.text-secondary
+  .position-absolute{style:"z-index: 100"}
+    %a{href: "/profile/settings"}
+      %i.fas.fa-user-edit.h5.text-secondary
   #image-alert.alert.alert-danger.alert-dismissible.fade.mt-0{"data-dismiss":"alert", role:"alert"}
     = I18n.t('profile.upload_error')
     %button.close{type:"button", "data-dismis":"alert", "aria-label":"Close"}
