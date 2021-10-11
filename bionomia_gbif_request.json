@@ -25,30 +25,42 @@
         ]
       },
       {
-        "type": "not",
-        "predicate": {
-          "type": "or",
-          "predicates": [
-            {
-              "type": "like",
-              "key": "VERBATIM_SCIENTIFIC_NAME",
-              "value": "*BOLD:*",
-              "matchCase": "true"
-            },
-            {
-              "type": "like",
-              "key": "VERBATIM_SCIENTIFIC_NAME",
-              "value": "*BOLD-*",
-              "matchCase": "true"
-            },
-            {
-              "type": "like",
-              "key": "VERBATIM_SCIENTIFIC_NAME",
-              "value": "*BIOUG*",
-              "matchCase": "true"
+        "type": "or",
+        "predicates": [
+          {
+            "type": "not",
+            "predicate": {
+              "type": "isNotNull",
+              "parameter": "VERBATIM_SCIENTIFIC_NAME"
             }
-          ]
-        }
+          },
+          {
+            "type": "not",
+            "predicate": {
+              "type": "or",
+              "predicates": [
+                {
+                  "type": "like",
+                  "key": "VERBATIM_SCIENTIFIC_NAME",
+                  "value": "*BOLD:*",
+                  "matchCase": "true"
+                },
+                {
+                  "type": "like",
+                  "key": "VERBATIM_SCIENTIFIC_NAME",
+                  "value": "*BOLD-*",
+                  "matchCase": "true"
+                },
+                {
+                  "type": "like",
+                  "key": "VERBATIM_SCIENTIFIC_NAME",
+                  "value": "*BIOUG*",
+                  "matchCase": "true"
+                }
+              ]
+            }
+          }
+        ]
       }
     ]
   }
