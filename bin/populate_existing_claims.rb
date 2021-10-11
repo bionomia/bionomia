@@ -20,10 +20,6 @@ OptionParser.new do |opts|
     options[:export] = directory
   end
 
-  opts.on("-x", "--dead [directory]", String, "Export the deadset of IDs that were not resolved") do |directory|
-    options[:dead] = directory
-  end
-
   opts.on("-h", "--help", "Prints this help") do
     puts opts
     exit
@@ -79,16 +75,4 @@ if options[:export]
       csv << [user.identifier, "recorded,identified", both_ids.to_s] if !both_ids.empty?
     end
   end
-end
-
-if options[:dead]
-  dead = Sidekiq::DeadSet.new
-  CSV.open(options[:dead], "wb") do |csv|
-    dead.each do |d|
-      if d["error_message"] == "user not found"
-        csv << d.args.first.values
-      end
-    end
-  end
-  Sidekiq::Stats.new.reset
 end

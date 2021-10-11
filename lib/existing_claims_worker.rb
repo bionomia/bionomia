@@ -22,7 +22,7 @@ module Bionomia
         u = get_user(id)
         next if !u.nil? && User::BOT_IDS.include?(u.id)
         if u.nil?
-          raise "user not found"
+          #TODO: write to a log file for id that could not be found
           next
         end
         if !uniq_recs.empty?

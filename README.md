@@ -72,10 +72,6 @@ First, import all users and user_occurrences content from production.
      $ ulimit -n 8192
      $ RACK_ENV=production sidekiq -c 40 -q existing_claims -r ./application.rb
 
-The above workers will produce a sidekiq dead set for all recordedByID, identifiedByID values that could not be resolved, which can then be exported:
-
-     $ RACK_ENV=production ./bin/populate_existing_claims.rb --dead "dead_identifiers.csv"
-
 Export a csv pivot table (for import performance) of all claims made by User::GBIF_AGENT_ID.
 
      $ RACK_ENV=production ./bin/populate_existing_claims.rb --export "gbif_claims.csv"
@@ -136,7 +132,7 @@ To migrate tables, use mydumper and myloader. But for even faster data migration
 
      $ apt-get install mydumper
      # Restore tables use nohup into a new database `bionomia_restore`. See https://blogs.oracle.com/jsmyth/apparmor-and-mysql if symlinks might be used in the MySQL data directory to another partition.
-     $ nohup myloader --database bionomia_restore --user bionomia --password <PASSWORD> --threads 2 --queries-per-transaction 100 --compress-protocol --overwrite-tables --directory /home/dshorthouse/bionomia_restore &
+     $ nohup myloader --database bionomia_restore --user bionomia --password <PASSWORD> --threads 2 --queries-per-transaction 100 --compress-protocol --overwrite-tables --verbose 0 --directory /home/dshorthouse/bionomia_restore &
 
 One way to make this even faster is to copy database files from one database to another rather than dropping/truncating and importing, but this has to be done with a bit of care.
 
