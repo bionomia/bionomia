@@ -28,13 +28,14 @@ class OccurrenceCount < ActiveRecord::Base
 
   def collector_network
     collectors = occurrence.user_recordings.pluck(:user_id).uniq
-
     response = client.mget index: Settings.elastic.user_index, body: { ids: collectors }
-
     whole_network = []
-    response["docs"].each do |doc|
-      results = doc["_source"]
-      whole_network << results["co_collectors"].map{|a| a["id"]}
+    begin
+      response["docs"].each do |doc|
+        results = doc["_source"]
+        whole_network << results["co_collectors"].map{|a| a["id"]}
+      end
+    rescue
     end
 
     [collectors, whole_network.flatten.uniq]
