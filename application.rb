@@ -26,7 +26,7 @@ class BIONOMIA < Sinatra::Base
 
   include Pagy::Backend
   include Pagy::Frontend
-  Pagy::VARS[:items] = 30
+  Pagy::DEFAULT[:items] = 30
 
   not_found do
     haml :oops if !content_type

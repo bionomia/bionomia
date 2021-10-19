@@ -8,7 +8,7 @@ module Bionomia
     def perform(row)
       agents = parse(row["agents"])
       agents.each do |a|
-        family = [a.particle.to_s.strip, a.family.to_s.strip].join(" ")
+        family = [a.particle.to_s.strip, a.family.to_s.strip].join(" ").strip
         agent = Agent.create_or_find_by({
           family: family,
           given: a.given.to_s.strip
