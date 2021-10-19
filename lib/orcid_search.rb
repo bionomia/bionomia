@@ -7,7 +7,7 @@ module Bionomia
       @settings = Settings.merge!(opts)
     end
 
-    def populate_new_users(doi = nil)
+    def add_new_users(doi = nil)
       existing = existing_orcids + destroyed_users
       found_orcids = !doi.nil? ? search_orcids_by_doi(doi) : search_orcids_by_keyword
       (found_orcids.to_a - existing).each do |orcid|
