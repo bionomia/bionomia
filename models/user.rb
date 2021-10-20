@@ -32,7 +32,6 @@ class User < ActiveRecord::Base
         src.wikidata = dest_qid
         src.save
         src.reload
-        src.update_wikidata_profile
       else
         src_occurrences = src.user_occurrences.pluck(:occurrence_id)
         dest_occurrences = dest.user_occurrences.pluck(:occurrence_id) rescue []
@@ -45,7 +44,8 @@ class User < ActiveRecord::Base
           dest.save
         end
         dest.update_wikidata_profile
-        src.destroy
+        src.delete
+        src.remove_search
       end
     end
   end
