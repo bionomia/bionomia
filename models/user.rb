@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   def self.merge_wikidata(qid, dest_qid)
     return if DestroyedUser.find_by_identifier(qid)
     transaction do
-      DestroyedUser.create(identifier: qid, redirect_to: dest_qid)
+      DestroyedUser.where(identifier: qid, redirect_to: dest_qid).first_or_create
 
       src = User.default_scoped.find_by_wikidata(qid)
       dest = User.default_scoped.find_by_wikidata(dest_qid)
@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
         src.wikidata = dest_qid
         src.save
         src.reload
+        src.update_wikidata_profile
       else
         src_occurrences = src.user_occurrences.pluck(:occurrence_id)
         dest_occurrences = dest.user_occurrences.pluck(:occurrence_id) rescue []
@@ -45,7 +46,7 @@ class User < ActiveRecord::Base
         end
         dest.update_wikidata_profile
         src.delete
-        src.remove_search
+        src.delete_search
       end
     end
   end
