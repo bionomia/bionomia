@@ -154,6 +154,12 @@ class Organization < ActiveRecord::Base
     update(wiki) if !wiki[:wikidata].nil?
   end
 
+  def update_organization_codes
+    wikidata_lib = Bionomia::WikidataSearch.new
+    codes = wikidata_lib.wiki_organization_codes(wikidata)
+    update(codes)
+  end
+
   private
 
   def add_search

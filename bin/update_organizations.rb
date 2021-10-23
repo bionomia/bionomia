@@ -8,19 +8,23 @@ options = {}
 OptionParser.new do |opts|
   opts.banner = "Usage: update_organizations.rb [options]"
 
-  opts.on("-u", "--update_isni", "Update ISNI data from Ringgold or GRID identifiers") do
+  opts.on("-u", "--update-isni", "Update ISNI data from Ringgold or GRID identifiers") do
     options[:isni] = true
   end
 
-  opts.on("-c", "--update_codes", "Gather and update institutionCodes from Wikidata") do
+  opts.on("-c", "--update-collection-codes", "Gather and update institutionCodes from Wikidata") do
     options[:codes] = true
   end
 
-  opts.on("-f", "--find_wikidata", "Use existing Ringgold or GRID identifiers to find Wikidata identifiers") do
+  opts.on("-f", "--find-wikidata", "Use existing Ringgold, ROR or GRID identifiers to find Wikidata identifiers") do
     options[:find_wikidata] = true
   end
 
-  opts.on("-w", "--update_wikidata", "Update Wikidata data") do
+  opts.on("-o", "--update-organization-codes", "Use existing Wikidata Q number to add or update other organization codes") do
+    options[:org_codes] = true
+  end
+
+  opts.on("-w", "--update-wikidata", "Update Wikidata data") do
     options[:update_wikidata] = true
   end
 
@@ -46,6 +50,14 @@ if options[:codes]
     else
       puts "#{o.name}".red
     end
+    sleep(0.25)
+  end
+end
+
+if options[:org_codes]
+  Organization.where.not(wikidata: nil).find_each do |o|
+    o.update_organization_codes
+    puts "#{o.id}".green
     sleep(0.25)
   end
 end

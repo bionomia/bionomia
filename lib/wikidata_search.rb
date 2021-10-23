@@ -306,6 +306,15 @@ module Bionomia
       { institution_codes: institution_codes.uniq }
     end
 
+    def wiki_organization_codes(qid)
+      data = Wikidata::Item.find(qid)
+      isni = data.properties("P213").first.value rescue nil
+      grid = data.properties("P2427").first.value rescue nil
+      ringgold = data.properties("P3500").first.value rescue nil
+      ror = data.properties("P6782").first.value rescue nil
+      { isni: isni, grid: grid, ringgold: ringgold, ror: ror }
+    end
+
     def institution_wikidata(identifier)
       wikicode, latitude, longitude, image_url, logo_url, website = nil
 
