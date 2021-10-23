@@ -59,6 +59,7 @@ module Bionomia
             isni: { type: 'keyword', index: false },
             ringgold: { type: 'keyword', index: false },
             grid: { type: 'keyword', index: false },
+            ror: { type: 'keyword', index: false },
             wikidata: { type: 'keyword', index: false },
             preferred: { type: 'keyword', index: false }
           }
@@ -81,6 +82,7 @@ module Bionomia
         institution_codes: o.institution_codes,
         isni: o.isni,
         grid: o.grid,
+        ror: o.ror,
         ringgold: o.ringgold,
         wikidata: o.wikidata,
         preferred: o.identifier

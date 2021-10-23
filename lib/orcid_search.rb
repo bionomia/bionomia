@@ -174,12 +174,16 @@ module Bionomia
     def orcid_place(place)
       ringgold = nil
       grid = nil
+      ror = nil
       if place[:organization][:"disambiguated-organization"]
         if place[:organization][:"disambiguated-organization"][:"disambiguation-source"] == "RINGGOLD"
           ringgold = place[:organization][:"disambiguated-organization"][:"disambiguated-organization-identifier"] rescue nil
         end
         if place[:organization][:"disambiguated-organization"][:"disambiguation-source"] == "GRID"
           grid = place[:organization][:"disambiguated-organization"][:"disambiguated-organization-identifier"] rescue nil
+        end
+        if place[:organization][:"disambiguated-organization"][:"disambiguation-source"] == "ROR"
+          ror = place[:organization][:"disambiguated-organization"][:"disambiguated-organization-identifier"] rescue nil
         end
       end
       return {} if ringgold.nil? && grid.nil?
@@ -196,6 +200,7 @@ module Bionomia
         address: address,
         ringgold: ringgold,
         grid: grid,
+        ror: ror,
         wikidata: nil,
         start_year: start_year,
         start_month: start_month,

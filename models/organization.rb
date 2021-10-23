@@ -18,12 +18,13 @@ class Organization < ActiveRecord::Base
 
   def self.find_by_identifier(id)
     self.find_by_wikidata(id) ||
+    self.find_by_ror(id) ||
     self.find_by_ringgold(id) ||
     self.find_by_grid(id)
   end
 
   def identifier
-    wikidata || grid || ringgold
+    wikidata || ror || grid || ringgold
   end
 
   def active_users

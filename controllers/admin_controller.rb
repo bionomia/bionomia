@@ -207,6 +207,7 @@ module Sinatra
             name = params[:name].blank? ? nil : params[:name]
             address = params[:address].blank? ? nil : params[:address]
             isni = params[:isni].blank? ? nil : params[:isni]
+            ror = params[:ror].blank? ? nil : params[:ror]
             grid = params[:grid].blank? ? nil : params[:grid]
             ringgold = params[:ringgold].blank? ? nil : params[:ringgold]
             wikidata = params[:wikidata].blank? ? nil : params[:wikidata]
@@ -216,12 +217,13 @@ module Sinatra
               address: address,
               isni: isni,
               grid: grid,
+              ror: ror,
               ringgold: ringgold,
               wikidata: wikidata,
               institution_codes: institution_codes
             }
             wikidata_lib = ::Bionomia::WikidataSearch.new
-            code = wikidata || grid || ringgold
+            code = wikidata || ror || grid || ringgold
             wiki = wikidata_lib.institution_wikidata(code)
             data.merge!(wiki) if wiki
             @organization.update(data)

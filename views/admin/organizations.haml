@@ -32,6 +32,8 @@
         %th{scope: "col"}
           %a{href: url("/admin/organizations?order=isni&sort=#{sort}")} ISNI
         %th{scope: "col"}
+          %a{href: url("/admin/organizations?order=ror&sort=#{sort}")} ROR
+        %th{scope: "col"}
           %a{href: url("/admin/organizations?order=ringgold&sort=#{sort}")} Ringgold
         %th{scope: "col"}
           %a{href: url("/admin/organizations?order=grid&sort=#{sort}")} GRID
@@ -47,6 +49,9 @@
           %td
             - if !o.isni.blank?
               %a{href:"http://www.isni.org/isni/#{o.isni}"} #{o.isni}
+          %td
+            - if !o.ror.blank?
+              %a{href:"https://ror.org/#{o.ror}"} #{o.ror}
           %td #{o.ringgold}
           %td
             - if !o.grid.blank?

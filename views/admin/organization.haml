@@ -13,9 +13,9 @@
     %h1{class:"h2"} #{@organization.name}
 
 %p{class:"text-right"}
-  %a{href: "https://www.grid.ac/disambiguate"}
+  %a{href: "https://ror.org/search?query=#{Addressable::URI.encode(@organization.name)}", target: "_blank"}
     Search
-  for organization on GRID
+  for organization on ROR
   %br
   %a{href: "https://www.wikidata.org/w/index.php?search=#{Addressable::URI.encode(@organization.name)}", target: "_blank"}
     Search
@@ -43,6 +43,13 @@
       %small{id:"isni-link", class:"form-text text-muted"}
         View known
         %a{href: "http://www.isni.org/isni/#{@organization.isni}", target:"_blank"} ISNI
+  %div{class:"form-group"}
+    %label{for:"ror"} ROR
+    %input{type:"text", class:"form-control", id:"ror", value:"#{@organization.ror}", name:"ror"}
+    - if !@organization.ror.blank?
+      %small{id:"ror-link", class:"form-text text-muted"}
+        View known
+        %a{href: "https://ror.org/#{@organization.ror}", target:"_blank"} ROR
   %div{class:"form-group"}
     %label{for:"ringgold"} Ringgold
     %input{type:"text", class:"form-control", id:"ringgold", value:"#{@organization.ringgold}", name:"ringgold"}

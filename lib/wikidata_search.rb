@@ -61,13 +61,13 @@ module Bionomia
           *
         WHERE {
           VALUES ?identifier {"#{identifier}"} {
-            # institution that includes collection has grid or ringgold
-            ?institution wdt:P3500|wdt:P2427 ?identifier .
+            # institution that includes collection has GRID, ringgold, or ROR
+            ?institution wdt:P3500|wdt:P2427|wdt:P6782 ?identifier .
             # various part of relationships
             ?collection wdt:P195|wdt:P137|wdt:P749|wdt:P361 ?institution .
           } UNION {
-            # collection itself has grid or ringgold
-            ?collection wdt:P3500|wdt:P2427 ?identifier .
+            # collection itself has GRID, ringgold, or ROR identifier
+            ?collection wdt:P3500|wdt:P2427|wdt:P6782 ?identifier .
           }
           # Code(s) for collection
           {
@@ -88,7 +88,7 @@ module Bionomia
         SELECT ?item ?lat ?long ?image_url ?website
         WHERE {
           VALUES ?identifier {"#{identifier}"} {
-            ?item wdt:P3500|wdt:P2427 ?identifier .
+            ?item wdt:P3500|wdt:P2427|wdt:P6782 ?identifier .
           }
           OPTIONAL {
             ?item p:P625 ?statement .
@@ -515,6 +515,7 @@ module Bionomia
         wikidata: org.id,
         ringgold: nil,
         grid: nil,
+        ror: nil,
         address: nil,
         start_day: start_time[:day],
         start_month: start_time[:month],
