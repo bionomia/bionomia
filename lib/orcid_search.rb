@@ -183,7 +183,7 @@ module Bionomia
           grid = place[:organization][:"disambiguated-organization"][:"disambiguated-organization-identifier"] rescue nil
         end
         if place[:organization][:"disambiguated-organization"][:"disambiguation-source"] == "ROR"
-          ror = place[:organization][:"disambiguated-organization"][:"disambiguated-organization-identifier"] rescue nil
+          ror = place[:organization][:"disambiguated-organization"][:"disambiguated-organization-identifier"].sub("https://ror.org/","") rescue nil
         end
       end
       return {} if ringgold.nil? && grid.nil?
