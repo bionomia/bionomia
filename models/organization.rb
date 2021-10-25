@@ -119,7 +119,11 @@ class Organization < ActiveRecord::Base
     wikidata_lib = Bionomia::WikidataSearch.new
     code = wikidata || identifier.to_s
     wiki = wikidata_lib.institution_wikidata(code)
-    update(wiki) if !wiki[:wikidata].nil?
+    if wikidata
+      codes = wikidata_lib.wiki_organization_codes(wikidata)
+      wiki = wiki.merge(codes)
+    end
+    update(wiki)
   end
 
   def update_institution_codes
