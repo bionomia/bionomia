@@ -115,43 +115,17 @@ class Organization < ActiveRecord::Base
            .order(created: :desc)
   end
 
-  def update_isni
-    base_url = "https://orcid.org/orgs/disambiguated/"
-    if !ringgold.nil?
-      path = "RINGGOLD?value=#{ringgold}"
-    elsif !grid.nil?
-      path = "GRID?value=#{grid}"
-    end
-    response = RestClient::Request.execute(
-      method: :get,
-      url: "#{base_url}#{path}",
-      headers: { accept: 'application/json' }
-    )
-    isni = nil
-    begin
-      data = JSON.parse(response, :symbolize_names => true)
-      data[:orgDisambiguatedExternalIdentifiers].each do |ids|
-        next if ids[:identifierType] != "ISNI"
-        isni = ids[:all][0].delete(' ')
-        self.isni = isni
-        save
-      end
-    rescue
-    end
-    isni
+  def update_wikidata
+    wikidata_lib = Bionomia::WikidataSearch.new
+    code = wikidata || identifier.to_s
+    wiki = wikidata_lib.institution_wikidata(code)
+    update(wiki) if !wiki[:wikidata].nil?
   end
 
   def update_institution_codes
     wikidata_lib = Bionomia::WikidataSearch.new
     codes = wikidata_lib.wiki_institution_codes(identifier)
     update(codes) if !codes[:institution_codes].empty?
-  end
-
-  def update_wikidata
-    wikidata_lib = Bionomia::WikidataSearch.new
-    code = wikidata || identifier.to_s
-    wiki = wikidata_lib.institution_wikidata(code)
-    update(wiki) if !wiki[:wikidata].nil?
   end
 
   def update_organization_codes

@@ -8,10 +8,6 @@ options = {}
 OptionParser.new do |opts|
   opts.banner = "Usage: update_organizations.rb [options]"
 
-  opts.on("-u", "--update-isni", "Update ISNI data from Ringgold or GRID identifiers") do
-    options[:isni] = true
-  end
-
   opts.on("-c", "--update-collection-codes", "Gather and update institutionCodes from Wikidata") do
     options[:codes] = true
   end
@@ -33,14 +29,6 @@ OptionParser.new do |opts|
     exit
   end
 end.parse!
-
-if options[:isni]
-  Organization.where.not(isni: nil).find_each do |o|
-    isni = o.update_isni
-    puts "#{o.id}: #{isni}"
-    sleep(0.1)
-  end
-end
 
 if options[:codes]
   Organization.where(institution_codes: nil).find_each do |o|

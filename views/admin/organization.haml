@@ -42,7 +42,7 @@
     - if !@organization.isni.blank?
       %small{id:"isni-link", class:"form-text text-muted"}
         View known
-        %a{href: "http://www.isni.org/isni/#{@organization.isni}", target:"_blank"} ISNI
+        %a{href: "http://www.isni.org/isni/#{@organization.isni.gsub(/[[:space:]]+/, "")}", target:"_blank"} ISNI
   %div{class:"form-group"}
     %label{for:"ror"} ROR
     %input{type:"text", class:"form-control", id:"ror", value:"#{@organization.ror}", name:"ror"}

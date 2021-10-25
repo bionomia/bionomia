@@ -308,7 +308,7 @@ module Bionomia
 
     def wiki_organization_codes(qid)
       data = Wikidata::Item.find(qid)
-      isni = data.properties("P213").first.value rescue nil
+      isni = data.properties("P213").first.value.gsub(/[[:space:]]+/, "") rescue nil
       grid = data.properties("P2427").first.value rescue nil
       ringgold = data.properties("P3500").first.value rescue nil
       ror = data.properties("P6782").first.value rescue nil
