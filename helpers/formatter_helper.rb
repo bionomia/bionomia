@@ -92,7 +92,7 @@ module Sinatra
           elsif size == "social"
             path = "?width=240&height=240"
           elsif size == "large"
-            path = "?width=350&height=200&func=bound"
+            path = "?width=350&height=200"
           end
           if organization.image_url
             img = cloud_img + organization.image_url.sub("https://", "") + path
