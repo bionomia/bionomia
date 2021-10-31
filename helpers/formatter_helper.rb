@@ -58,7 +58,6 @@ module Sinatra
         end
 
         def profile_image(user, size=nil)
-          img = URI(Settings.base_url).host + "/images/photo.png"
           path = "?height=200&org_if_sml=1"
           cloud_img = "https://abekpgaoen.cloudimg.io/v7/"
           if size == "thumbnail"
@@ -76,6 +75,8 @@ module Sinatra
             else
               img = cloud_img + URI(Settings.base_url).host + "/images/users/" + user.image_url + path
             end
+          else
+            img = cloud_img + URI(Settings.base_url).host + "/images/photo.png" + path
           end
           img
         end
