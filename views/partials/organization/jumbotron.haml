@@ -8,7 +8,7 @@
   - if @organization.image_url || @organization.latitude
     - if @organization.image_url
       .m-1
-        %img.rounded.mx-auto.img-fluid{src:"https://abekpgaoen.cloudimg.io/bound/350x200/q100/#{@organization.image_url}", alt:"#{@organization.name}"}
+        %img.rounded.mx-auto.img-fluid{src:"#{organization_image(@organization, "large")}", alt:"#{@organization.name}"}
     - if @organization.latitude
       .m-1.mx-auto{style:"max-width:350px; height:200px;"}
         #mapid.w-100.h-100

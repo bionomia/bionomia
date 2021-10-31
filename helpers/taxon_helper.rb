@@ -70,20 +70,6 @@ module Sinatra
                           .order(Arel.sql("RAND()"))
         end
 
-        def taxon_image(taxon, size=nil)
-          img = nil
-          cloud_img = "https://abekpgaoen.cloudimg.io/v7/"
-          path = "?force_format=jpg&width=64&org_if_sml=1"
-          if size == "thumbnail"
-            path = "?force_format=jpg&width=24&org_if_sml=1"
-          end
-          taxon_image = TaxonImage.find_by_family(taxon) rescue nil
-          if taxon_image
-            img = cloud_img + URI(Settings.base_url).host + "/images/taxa/" + taxon_image.file_name + path
-          end
-          img
-        end
-
       end
     end
   end

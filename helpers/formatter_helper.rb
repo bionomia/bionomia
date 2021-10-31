@@ -89,10 +89,24 @@ module Sinatra
           elsif size == "medium"
             path = "?width=48&height=48"
           elsif size == "social"
-            path = "width=240&height=240"
+            path = "?width=240&height=240"
+          elsif size == "large"
+            path = "?width=350&height=200&func=bound"
           end
           if organization.image_url
             img = cloud_img + organization.image_url.sub("https://", "") + path
+          end
+          img
+        end
+
+        def dataset_image(dataset, size=nil)
+          img = nil
+          cloud_img = "https://abekpgaoen.cloudimg.io/v7/"
+          if size == "large"
+            path = "&width=350&height=200&func=bound&org_if_sml=1"
+          end
+          if dataset.image_url
+            img = cloud_img + dataset.image_url.sub("https://", "").sub("http://", "") + path
           end
           img
         end
@@ -102,6 +116,20 @@ module Sinatra
           cloud_img = "https://abekpgaoen.cloudimg.io/v7/"
           if user.signature_url
             img =  cloud_img + user.signature_url.sub("https://", "") + "?height=80&force_format=jpg&org_if_sml=1"
+          end
+          img
+        end
+
+        def taxon_image(taxon, size=nil)
+          img = nil
+          cloud_img = "https://abekpgaoen.cloudimg.io/v7/"
+          path = "?force_format=jpg&width=64&org_if_sml=1"
+          if size == "thumbnail"
+            path = "?force_format=jpg&width=24&org_if_sml=1"
+          end
+          taxon_image = TaxonImage.find_by_family(taxon) rescue nil
+          if taxon_image
+            img = cloud_img + URI(Settings.base_url).host + "/images/taxa/" + taxon_image.file_name + path
           end
           img
         end
