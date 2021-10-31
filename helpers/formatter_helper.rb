@@ -58,22 +58,23 @@ module Sinatra
         end
 
         def profile_image(user, size=nil)
-          img = Settings.base_url + "/images/photo.png"
-          cloud_img = "https://abekpgaoen.cloudimg.io/height/200/x/"
+          img = URI(Settings.base_url).host + "/images/photo.png"
+          path = "?height=200&org_if_sml=1"
+          cloud_img = "https://abekpgaoen.cloudimg.io/v7/"
           if size == "thumbnail"
-            cloud_img = "https://abekpgaoen.cloudimg.io/crop/24x24/n/"
+            path = "?width=24&height=24"
           elsif size == "thumbnail_grey"
-            cloud_img = "https://abekpgaoen.cloudimg.io/crop/24x24/fgrey/"
+            path = "?width=24&height=24&grey=1"
           elsif size == "medium"
-            cloud_img = "https://abekpgaoen.cloudimg.io/crop/48x48/n/"
+            path = "?width=48&height=48"
           elsif size == "social"
-            cloud_img = "https://abekpgaoen.cloudimg.io/crop/240x240/n/"
+            path = "?width=240&height=240"
           end
           if user.image_url
             if user.wikidata
-              img =  cloud_img + user.image_url
+              img =  cloud_img + user.image_url.sub("https://", "") + path
             else
-              img = cloud_img + Settings.base_url + "/images/users/" + user.image_url
+              img = cloud_img + URI(Settings.base_url).host + "/images/users/" + user.image_url + path
             end
           end
           img
@@ -81,25 +82,26 @@ module Sinatra
 
         def organization_image(organization, size=nil)
           img = nil
-          cloud_img = "https://abekpgaoen.cloudimg.io/height/200/x/"
+          cloud_img = "https://abekpgaoen.cloudimg.io/v7/"
+          path = "?height=200&org_if_sml=1"
           if size == "thumbnail"
-            cloud_img = "https://abekpgaoen.cloudimg.io/crop/24x24/n/"
+            path = "?width=24&height=24"
           elsif size == "medium"
-            cloud_img = "https://abekpgaoen.cloudimg.io/crop/48x48/n/"
+            path = "?width=48&height=48"
           elsif size == "social"
-            cloud_img = "https://abekpgaoen.cloudimg.io/crop/240x240/n/"
+            path = "width=240&height=240"
           end
           if organization.image_url
-            img = cloud_img + organization.image_url
+            img = cloud_img + organization.image_url.sub("https://", "") + path
           end
           img
         end
 
         def signature_image(user)
           img = Settings.base_url + "/images/signature.png"
-          cloud_img = "https://abekpgaoen.cloudimg.io/height/80/x/"
+          cloud_img = "https://abekpgaoen.cloudimg.io/v7/"
           if user.signature_url
-            img =  cloud_img + user.signature_url
+            img =  cloud_img + user.signature_url.sub("https://", "") + "?height=80&force_format=jpg&org_if_sml=1"
           end
           img
         end
