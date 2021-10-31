@@ -6,7 +6,7 @@
 
   - if @dataset.image_url
     .m-1
-      %img.rounded.mx-auto.img-fluid{src:"https://abekpgaoen.cloudimg.io/bound/350x200/q100/#{@dataset.image_url}", style:"max-width:350px;max-height:200px;", alt:"#{@dataset.title}"}
+      %img.rounded.mx-auto.img-fluid{src:"https://abekpgaoen.cloudimg.io/bound/350x200/q100/#{@dataset.image_url}", style:"max-height:200px;", alt:"#{@dataset.title}"}
 
   - if @dataset.description
     %p.text-muted.text-left
