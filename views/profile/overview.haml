@@ -52,9 +52,9 @@
                   %span
                     - image = taxon_image(k, 'thumbnail')
                     - if !image.nil?
-                      %img.mr-2{src:"#{image}", alt:"#{k}"}
+                      %img.mr-2{src:"#{image}", alt:"#{k}", style:"width:24px;max-height:64px;"}
                     - else
-                      %span.d-inline-block.mr-2{style:"width:24px;"}
+                      %span.d-inline-block.mr-2{style:"width:24px;max-height:64px;"}
                     = link_to k, url("/profile/specimens?action=identified&family=#{ERB::Util.url_encode(k)}")
                   %span.badge.badge-light.badge-pill #{number_with_delimiter(v)}
           - elsif !@families_recorded.empty?
@@ -67,9 +67,9 @@
                   %span
                     - image = taxon_image(k, 'thumbnail')
                     - if !image.nil?
-                      %img.mr-2{src:"#{image}", alt:"#{k}"}
+                      %img.mr-2{src:"#{image}", alt:"#{k}", style:"width:24px;max-height:64px;"}
                     - else
-                      %span.d-inline-block.mr-2{style:"width:24px;"}
+                      %span.d-inline-block.mr-2{style:"width:24px;max-height:64px;"}
                     = link_to k, url("/profile/specimens?action=collected&family=#{ERB::Util.url_encode(k)}")
                   %span.badge.badge-light.badge-pill #{number_with_delimiter(v)}
         .col-12.col-lg-6.mb-3
@@ -83,9 +83,9 @@
                   %span
                     - image = taxon_image(k, 'thumbnail')
                     - if !image.nil?
-                      %img.mr-2{src:"#{image}", alt:"#{k}"}
+                      %img.mr-2{src:"#{image}", alt:"#{k}", style:"width:24px;max-height:64px;"}
                     - else
-                      %span.d-inline-block.mr-2{style:"width:24px;"}
+                      %span.d-inline-block.mr-2{style:"width:24px;max-height:64px;"}
                     = link_to k, url("/profile/specimens?action=identified&family=#{ERB::Util.url_encode(k)}")
                   %span.badge.badge-light.badge-pill #{number_with_delimiter(v)}
 
