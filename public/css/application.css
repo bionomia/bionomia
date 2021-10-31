@@ -741,6 +741,7 @@ dl.citation{
 
 .typeahead, .orcid-add,
 .organization-search,
+.dataset-search,
 .tt-query,
 .tt-hint {
   width: 100%;

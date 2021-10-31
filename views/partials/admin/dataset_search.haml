@@ -1,5 +1,5 @@
 %div
-  %form#form-org-wrapper.form-inline.helpers{id:"", method: "get", action: "/admin/datasets/search", "accept-charset" => "UTF-8"}
+  %form#form-org-wrapper.form-inline.helpers{method: "get", action: "/admin/datasets/search", "accept-charset": "UTF-8"}
     .form-group.w-75
       %input#typeahead-dataset.typeahead.dataset-search{type: :text, name: "q", placeholder: "#{I18n.t('dataset.placeholder')}", value: "#{params[:q]}", size:"25", autocomplete:"off"}
     %input.btn.btn-success.medium-margins{type: :submit, value:"#{I18n.t('general.search')}"}
