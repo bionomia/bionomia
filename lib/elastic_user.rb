@@ -168,6 +168,9 @@ module Bionomia
                   norms: false
                 }
               }
+            },
+            rank: {
+              type: 'rank_feature'
             }
           }
         }
@@ -206,6 +209,8 @@ module Bionomia
       other_names = u.other_names.split("|").map(&:strip) rescue []
       co_collectors = u.recorded_with
                        .map{|o| { id: o.id, orcid: o.orcid, wikidata: o.wikidata, fullname: o.fullname } }
+      recorded_countries = u.recorded_families_countries
+      rank = recorded_countries.map{|a| a[:family]}.uniq.compact.count
       {
         id: u.id,
         orcid: u.orcid,
@@ -222,8 +227,9 @@ module Bionomia
         thumbnail: thumbnail(u),
         description: description,
         identified: u.identified_families_countries,
-        recorded: u.recorded_families_countries,
-        co_collectors: co_collectors
+        recorded: recorded_countries,
+        co_collectors: co_collectors,
+        rank: ((rank.nil? || rank == 0) ? nil : rank)
       }
     end
 

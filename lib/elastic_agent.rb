@@ -86,6 +86,9 @@ module Bionomia
               analyzer: :fullname_index,
               search_analyzer: :fullname_search,
               norms: false
+            },
+            rank: {
+              type: 'rank_feature'
             }
           }
         }
@@ -104,7 +107,8 @@ module Bionomia
         id: a.id,
         family: a.family,
         given: a.given,
-        fullname: a.fullname
+        fullname: a.fullname,
+        rank: nil
       }
     end
 
