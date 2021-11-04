@@ -99,16 +99,16 @@ module Bionomia
         schema: {
           fields: [
             { name: "id", type: "integer" },
-            { name: "name", type: "string", rdfType: "http://schema.org/name" },
-            { name: "familyName", type: "string", rdfType: "http://schema.org/familyName" },
-            { name: "givenName", type: "string", rdfType: "http://schema.org/givenName" },
-            { name: "alternateName", type: "array", rdfType: "http://schema.org/alternateName" },
-            { name: "sameAs", type: "string", format: "uri", rdfType: "http://schema.org/sameAs" },
+            { name: "name", type: "string", "skos:exactMatch": "http://schema.org/name" },
+            { name: "familyName", type: "string", "skos:exactMatch": "http://schema.org/familyName" },
+            { name: "givenName", type: "string", "skos:exactMatch": "http://schema.org/givenName" },
+            { name: "alternateName", type: "array", "skos:exactMatch": "http://schema.org/alternateName" },
+            { name: "sameAs", type: "string", format: "uri", "skos:exactMatch": "http://schema.org/sameAs" },
             { name: "orcid", type: "string" },
             { name: "wikidata", type: "string" },
-            { name: "birthDate", type: "date", rdfType: "https://schema.org/birthDate" },
+            { name: "birthDate", type: "date", "skos:exactMatch": "https://schema.org/birthDate" },
             { name: "birthDatePrecision", type: "string", description: "Values are year, month, or day and indicate the precision of birthDate; portions of birthDate should be ignored below that of the birthDatePrecision."},
-            { name: "deathDate", type: "date", rdfType: "https://schema.org/deathDate" },
+            { name: "deathDate", type: "date", "skos:exactMatch": "https://schema.org/deathDate" },
             { name: "deathDatePrecision", type: "string", description: "Values are year, month, or day and indicate the precision of deathDate; portions of deathDate should be ignored below that of the deathDatePrecision."}
           ]
         },
@@ -119,13 +119,13 @@ module Bionomia
     def occurrence_resource
       fields = [
         { name: "gbifID", type: "integer" },
-        { name: "datasetKey", type: "string", format: "uuid", rdfType: "http://rs.gbif.org/terms/1.0/datasetKey" }
+        { name: "datasetKey", type: "string", format: "uuid", "skos:exactMatch": "http://rs.gbif.org/terms/1.0/datasetKey" }
       ]
       accepted_fields = Occurrence.accepted_fields - ["datasetKey"]
       fields.concat(accepted_fields.map{|o| {
               name: "#{o}",
               type: "string",
-              rdfType: "http://rs.tdwg.org/dwc/terms/#{o}"
+              "skos:exactMatch": "http://rs.tdwg.org/dwc/terms/#{o}"
             }.compact
           })
       {
@@ -158,9 +158,9 @@ module Bionomia
           fields: [
             { name: "user_id", type: "integer" },
             { name: "occurrence_id", type: "integer" },
-            { name: "identifiedBy", type: "string", format: "uri", rdfType: "http://rs.tdwg.org/dwc/iri/identifiedBy" },
-            { name: "recordedBy", type: "string", format: "uri", rdfType: "http://rs.tdwg.org/dwc/iri/recordedBy" },
-            { name: "createdBy", type: "string", rdfType: "http://schema.org/name" },
+            { name: "identifiedBy", type: "string", format: "uri", "skos:exactMatch": "http://rs.tdwg.org/dwc/iri/identifiedBy" },
+            { name: "recordedBy", type: "string", format: "uri", "skos:exactMatch": "http://rs.tdwg.org/dwc/iri/recordedBy" },
+            { name: "createdBy", type: "string", "skos:exactMatch": "http://schema.org/name" },
             { name: "createdByURI", type: "string", format: "uri" },
             { name: "createdDateTime", type: "datetime", format: "any" },
             { name: "modifiedDateTime", type: "datetime", format: "any" }
@@ -199,15 +199,15 @@ module Bionomia
         schema: {
           fields: [
             { name: "occurrence_id", type: "integer" },
-            { name: "catalogNumber", type: "string", rdfType: "http://rs.tdwg.org/dwc/terms/catalogNumber" },
+            { name: "catalogNumber", type: "string", "skos:exactMatch": "http://rs.tdwg.org/dwc/terms/catalogNumber" },
             { name: "user_id", type: "integer" },
             { name: "wikidata", type: "string" },
-            { name: "birthDate", type: "date", rdfType: "https://schema.org/birthDate" },
+            { name: "birthDate", type: "date", "skos:exactMatch": "https://schema.org/birthDate" },
             { name: "birthDatePrecision", type: "string", description: "Values are year, month, or day and indicate the precision of birthDate; portions of birthDate should be ignored below that of the birthDatePrecision."},
-            { name: "deathDate", type: "date", rdfType: "https://schema.org/deathDate" },
+            { name: "deathDate", type: "date", "skos:exactMatch": "https://schema.org/deathDate" },
             { name: "deathDatePrecision", type: "string", description: "Values are year, month, or day and indicate the precision of deathDate; portions of deathDate should be ignored below that of the deathDatePrecision."},
-            { name: "eventDate", type: "string", rdfType: "http://rs.tdwg.org/dwc/terms/eventDate" },
-            { name: "year", type: "string", rdfType: "http://rs.tdwg.org/dwc/terms/year" }
+            { name: "eventDate", type: "string", "skos:exactMatch": "http://rs.tdwg.org/dwc/terms/eventDate" },
+            { name: "year", type: "string", "skos:exactMatch": "http://rs.tdwg.org/dwc/terms/year" }
 
           ]
         },
@@ -279,9 +279,9 @@ module Bionomia
         schema: {
           fields: [
             { name: "id", type: "integer" },
-            { name: "reference", type: "string", rdfType: "http://schema.org/name" },
-            { name: "sameAs", type: "string", format: "uri", rdfType: "http://schema.org/sameAs" },
-            { name: "datasets", type: "array", format: "uri", rdfType: "http://schema.org/sameAs" },
+            { name: "reference", type: "string", "skos:exactMatch": "http://schema.org/name" },
+            { name: "sameAs", type: "string", format: "uri", "skos:exactMatch": "http://schema.org/sameAs" },
+            { name: "datasets", type: "array", format: "uri", "skos:exactMatch": "http://schema.org/sameAs" },
           ]
         },
         primaryKey: "id"
