@@ -23,7 +23,12 @@ module Sinatra
                   }
                 ]
               }
-            }
+            },
+            sort: [
+              "_score",
+              { family: { order: :asc } },
+              { given: { order: :asc } }
+            ]
           }
         end
 

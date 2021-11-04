@@ -57,6 +57,7 @@ module Bionomia
             id: { type: 'integer', index: false },
             family: {
               type: 'text',
+              fielddata: true,
               analyzer: :name_part_index,
               norms: false,
               fields: {
@@ -70,6 +71,7 @@ module Bionomia
             },
             given: {
               type: 'text',
+              fielddata: true,
               analyzer: :name_part_index,
               norms: false,
               fields: {
