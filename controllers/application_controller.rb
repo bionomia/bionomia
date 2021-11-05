@@ -42,12 +42,13 @@ module Sinatra
           end
 
           app.get '/developers' do
-            file = File.join(app.root, "public", "data", "bionomia-public-claims.csv.gz")
-            @compressed_file_size = (File.size(file).to_f / 2**20).round(2) rescue nil
             haml :'developers/search', locals: { active_tab: "search" }
           end
 
           app.get '/developers/structured-data' do
+            file = File.join(app.root, "public", "data", "bionomia-public-claims.csv.gz")
+            @compressed_file_size = (File.size(file).to_f / 2**20).round(2) rescue nil
+            @modified_time = File.mtime(file) rescue nil
             haml :'developers/structured_data', locals: { active_tab: "structured_data" }
           end
 
