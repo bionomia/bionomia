@@ -41,14 +41,18 @@ if options[:directory]
     pbar = ProgressBar.create(title: "Claims Dump", total: UserOccurrence.count, autofinish: false, format: '%t %b>> %i| %e')
     CSV.open(csv_file, 'w') do |csv|
       csv << ["Subject", "Predicate", "Object"]
-      UserOccurrence.includes(:user).where(visible: true).where.not(action: nil).where(users: { is_public: true }).find_each do |o|
+      UserOccurrence.includes(:user)
+                    .where(visible: true)
+                    .where.not(action: nil)
+                    .where(users: { is_public: true })
+                    .find_each do |o|
         o.action.split(",").each do |item|
           if item.strip == "recorded"
             action = "http://rs.tdwg.org/dwc/iri/recordedBy"
           elsif item.strip == "identified"
             action = "http://rs.tdwg.org/dwc/iri/identifiedBy"
           end
-          id_url = o.user.orcid ? "https://orcid.org/#{o.user.orcid}" : "https://www.wikidata.org/wiki/#{o.user.wikidata}"
+          id_url = o.user.orcid ? "https://orcid.org/#{o.user.orcid}" : "http://www.wikidata.org/entity/#{o.user.wikidata}"
           csv << ["https://gbif.org/occurrence/#{o.occurrence_id}", action, id_url]
         end
         pbar.increment
