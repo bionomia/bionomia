@@ -170,6 +170,7 @@ if options[:tweet]
   users = User.joins(:user_occurrences)
               .where.not(wikidata: nil)
               .where(is_public: true)
+              .where.not(image_url: nil)
               .where(date_born_precision: "day")
               .where("MONTH(date_born) = ? and DAY(date_born) = ?", @date.month, @date.day)
               .order(Arel.sql("RAND()"))
