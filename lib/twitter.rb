@@ -39,5 +39,15 @@ module Bionomia
       @client.update(message)
     end
 
+    def birthday_tweet(user)
+      return if user.nil? || user.class.name != "User"
+      collected = user.top_family_recorded
+      return if collected.nil? || collected == ""
+      url = "#{@base_url}/#{user.identifier}"
+      statement = "(#{user.date_born} – #{user.date_died}) collected #{collected} and was born #OTD"
+      message = "#{user.fullname} #{statement} #{url}".split.join(" ")
+      @client.update(message)
+    end
+
   end
 end

@@ -76,6 +76,10 @@ OptionParser.new do |opts|
     options[:stats] = true
   end
 
+  opts.on("-t", "--tweet", "Tweet a user born today") do
+    options[:tweet] = true
+  end
+
   opts.on("-h", "--help", "Prints this help") do
     puts opts
     exit
@@ -159,6 +163,22 @@ if options[:flagged_deletion]
     body += flagged.join("\n")
     sm.send_message(email: Settings.gmail.email, body: body)
   end
+end
+
+if options[:tweet]
+  @date = DateTime.now
+  users = User.joins(:user_occurrences)
+              .where.not(wikidata: nil)
+              .where(is_public: true)
+              .where(date_born_precision: "day")
+              .where("MONTH(date_born) = ? and DAY(date_born) = ?", @date.month, @date.day)
+              .order(Arel.sql("RAND()"))
+              .limit(1)
+  if users.count > 0
+    t = Bionomia::Twitter.new
+    t.birthday_tweet(users.first)
+  end
+
 end
 
 if options[:wikidata]
