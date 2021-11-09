@@ -50,5 +50,15 @@ module Bionomia
       @client.update(message)
     end
 
+    def holotype_tweet(o)
+      return if o.nil? || o.class.name != "Occurrence"
+      collectors = o.users.map{|u| u.fullname}.first(2).to_sentence
+      country = !o.country.blank? ? "in #{o.country}" : nil
+      family = !o.family.blank? ? "#{o.family.upcase}:" : nil
+      statement = "#{collectors} collected the holotype #{family} #{o.scientificName} #{country} #TypeToday"
+      message = "#{statement} https://gbif.org/occurrence/#{o.gbifID}"
+      @client.update(message)
+    end
+
   end
 end

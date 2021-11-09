@@ -6,7 +6,7 @@ ARGV << '-h' if ARGV.empty?
 
 options = {}
 OptionParser.new do |opts|
-  opts.banner = "Usage: update_users.rb [options]"
+  opts.banner = "Usage: users.rb [options]"
 
   opts.on("-c", "--cache", "Flush caches for users that have received updates to claims/attributions in last day") do
     options[:cache] = true
@@ -74,10 +74,6 @@ OptionParser.new do |opts|
 
   opts.on("-s", "--stats", "Rebuild user stats.") do
     options[:stats] = true
-  end
-
-  opts.on("-t", "--tweet", "Tweet a user born today") do
-    options[:tweet] = true
   end
 
   opts.on("-h", "--help", "Prints this help") do
@@ -163,23 +159,6 @@ if options[:flagged_deletion]
     body += flagged.join("\n")
     sm.send_message(email: Settings.gmail.email, body: body)
   end
-end
-
-if options[:tweet]
-  @date = DateTime.now
-  users = User.joins(:user_occurrences)
-              .where.not(wikidata: nil)
-              .where(is_public: true)
-              .where.not(image_url: nil)
-              .where(date_born_precision: "day")
-              .where("MONTH(date_born) = ? and DAY(date_born) = ?", @date.month, @date.day)
-              .order(Arel.sql("RAND()"))
-              .limit(1)
-  if users.count > 0
-    t = Bionomia::Twitter.new
-    t.birthday_tweet(users.first)
-  end
-
 end
 
 if options[:wikidata]

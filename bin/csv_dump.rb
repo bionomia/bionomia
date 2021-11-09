@@ -7,7 +7,7 @@ ARGV << '-h' if ARGV.empty?
 
 options = {}
 OptionParser.new do |opts|
-  opts.banner = "Usage: csv-dump.rb [options]"
+  opts.banner = "Usage: csv_dump.rb [options]"
 
   opts.on("-d", "--directory [directory]", String, "Directory to dump csv file(s)") do |directory|
     options[:directory] = directory
