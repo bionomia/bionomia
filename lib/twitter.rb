@@ -45,7 +45,7 @@ module Bionomia
       return if collected.nil? || collected == ""
       url = "#{@base_url}/#{user.identifier}"
       keywords = user.keywords.split("|").map(&:strip).first(3).to_sentence rescue nil
-      statement = "(#{user.date_born} – #{user.date_died}) #{keywords} collected #{collected} and was born #OnThisDay"
+      statement = "(#{user.date_born} – #{user.date_died}) #{keywords} collected #{collected} and was born #BornOnThisDay"
       message = "#{user.fullname} #{statement} #{url}".split.join(" ")
       @client.update(message)
     end
@@ -55,7 +55,7 @@ module Bionomia
       collectors = o.users.map{|u| u.fullname}.first(2).to_sentence
       country = !o.country.blank? ? "in #{o.country}" : nil
       family = !o.family.blank? ? "#{o.family.upcase}:" : nil
-      statement = "#{collectors} collected the holotype #{family} #{o.scientificName} #{country} #TypeToday"
+      statement = "#{collectors} collected the holotype #{family} #{o.scientificName} #{country} #TypeSpecimenToday"
       message = "#{statement} https://gbif.org/occurrence/#{o.gbifID}"
       @client.update(message)
     end
