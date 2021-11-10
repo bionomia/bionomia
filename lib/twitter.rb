@@ -45,7 +45,7 @@ module Bionomia
       return if collected.nil? || collected == ""
       url = "#{@base_url}/#{user.identifier}"
       keywords = user.keywords.split("|").map(&:strip).first(3).to_sentence rescue nil
-      statement = "(#{user.date_born} – #{user.date_died}) #{keywords} collected #{collected} and was born #BornOnThisDay"
+      statement = "(#{user.date_born} – #{user.date_died}) #{keywords} collected #{collected} and was #BornOnThisDay"
       message = "#{user.fullname} #{statement} #{url}".split.join(" ")
       @client.update(message)
     end
