@@ -27,11 +27,10 @@ CREATE TABLE `articles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `article_occurrences` (
-  `article_id` int NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `article_id` mediumint UNSIGNED NOT NULL,
   `occurrence_id` bigint UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
-PARTITION BY KEY ()
-PARTITIONS 20;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin KEY_BLOCK_SIZE=8 ROW_FORMAT=COMPRESSED;
 
 CREATE TABLE `ar_internal_metadata` (
   `key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
@@ -43,10 +42,10 @@ CREATE TABLE `ar_internal_metadata` (
 CREATE TABLE `datasets` (
   `id` bigint NOT NULL,
   `datasetKey` binary(36) NOT NULL,
-  `title` text COLLATE utf8mb4_bin,
-  `description` text COLLATE utf8mb4_bin,
-  `doi` tinytext COLLATE utf8mb4_bin,
-  `license` tinytext COLLATE utf8mb4_bin,
+  `title` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `doi` tinytext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `license` tinytext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `image_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -73,7 +72,7 @@ CREATE TABLE `occurrences` (
   `gbifID` bigint UNSIGNED NOT NULL,
   `datasetKey` binary(36) DEFAULT NULL,
   `occurrenceID` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `basisOfRecord` text COLLATE utf8mb4_bin,
+  `basisOfRecord` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `dateIdentified` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `decimalLatitude` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `decimalLongitude` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
@@ -97,6 +96,13 @@ CREATE TABLE `occurrences` (
   `identifiedByID` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=COMPRESSED;
 
+CREATE TABLE `occurrence_counts` (
+  `id` bigint NOT NULL,
+  `occurrence_id` bigint NOT NULL,
+  `agent_count` int NOT NULL,
+  `user_count` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
 CREATE TABLE `occurrence_determiners` (
   `occurrence_id` bigint UNSIGNED NOT NULL,
   `agent_id` int NOT NULL
@@ -112,6 +118,7 @@ CREATE TABLE `organizations` (
   `isni` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `ringgold` int DEFAULT NULL,
   `grid` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `ror` varchar(9) COLLATE utf8mb4_bin DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `institution_codes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
@@ -156,7 +163,7 @@ CREATE TABLE `users` (
   `country` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `country_code` varchar(50) DEFAULT NULL,
   `keywords` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `description` text,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `twitter` varchar(50) DEFAULT NULL,
   `image_url` text,
   `signature_url` varchar(255) DEFAULT NULL,
@@ -212,8 +219,9 @@ ALTER TABLE `articles`
   ADD UNIQUE KEY `doi_idx` (`doi`);
 
 ALTER TABLE `article_occurrences`
-  ADD PRIMARY KEY (`article_id`,`occurrence_id`),
-  ADD UNIQUE KEY `occurrence_article_idx` (`occurrence_id`,`article_id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `article_occurrence_idx` (`occurrence_id`,`article_id`),
+  ADD KEY `article_idx` (`article_id`);
 
 ALTER TABLE `ar_internal_metadata`
   ADD PRIMARY KEY (`key`);
@@ -236,6 +244,10 @@ ALTER TABLE `occurrences`
   ADD KEY `typeStatus_idx` (`typeStatus`(50)),
   ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`,`occurrenceID`(36));
 
+ALTER TABLE `occurrence_counts`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `occurrence_id` (`occurrence_id`);
+
 ALTER TABLE `occurrence_determiners`
   ADD PRIMARY KEY (`agent_id`,`occurrence_id`),
   ADD UNIQUE KEY `occurrence_agent_idx` (`occurrence_id`,`agent_id`);
@@ -249,7 +261,8 @@ ALTER TABLE `organizations`
   ADD KEY `ringgold_idx` (`ringgold`),
   ADD KEY `grid_idx` (`grid`),
   ADD KEY `isni_idx` (`isni`),
-  ADD KEY `wikidata` (`wikidata`);
+  ADD KEY `wikidata` (`wikidata`),
+  ADD KEY `index_organizations_on_ror` (`ror`);
 
 ALTER TABLE `schema_migrations`
   ADD UNIQUE KEY `unique_schema_migrations` (`version`);
@@ -275,10 +288,10 @@ ALTER TABLE `users`
 
 ALTER TABLE `user_occurrences`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `user_occurrence_idx` (`occurrence_id`,`user_id`),
   ADD KEY `created_by_idx` (`created_by`),
-  ADD KEY `user_created_by_idx` (`user_id`,`created_by`) USING BTREE,
   ADD KEY `user_created_idx` (`user_id`,`created`),
-  ADD KEY `user_occurrence_idx` (`occurrence_id`,`user_id`) USING BTREE;
+  ADD KEY `user_created_by_idx` (`user_id`,`created_by`) USING BTREE;
 
 ALTER TABLE `user_organizations`
   ADD PRIMARY KEY (`id`),
@@ -292,6 +305,9 @@ ALTER TABLE `agents`
 ALTER TABLE `articles`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
+ALTER TABLE `article_occurrences`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
 ALTER TABLE `datasets`
   MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
 
@@ -299,6 +315,9 @@ ALTER TABLE `destroyed_users`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `messages`
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `occurrence_counts`
   MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `organizations`
