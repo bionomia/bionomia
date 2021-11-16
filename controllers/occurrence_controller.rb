@@ -84,19 +84,9 @@ module Sinatra
 
           app.get '/occurrence/:id/still_images.json' do
             content_type "application/json", charset: 'utf-8'
-            begin
-              response = RestClient::Request.execute(
-                method: :get,
-                url: "https://api.gbif.org/v1/occurrence/#{params[:id]}"
-              )
-              result = JSON.parse(response, :symbolize_names => true)
-              api = "https://api.gbif.org/v1/image/unsafe/"
-              result[:media].map{|a| { original: api + CGI.escape(a[:identifier]), small: "#{api}fit-in/250x/#{CGI.escape(a[:identifier])}", large: "#{api}fit-in/750x/#{CGI.escape(a[:identifier])}" } if a[:type] == "StillImage"}
-                            .compact
-                            .to_json
-            rescue
-              [].to_json
-            end
+            Occurrence.find(params[:id])
+                      .images
+                      .to_json
           end
 
           app.get '/occurrence/:id' do

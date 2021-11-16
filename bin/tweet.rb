@@ -44,12 +44,13 @@ if options[:holotype]
                         .where(hasImage: true)
                         .where(typeStatus: ["HOLOTYPE", "holotype"])
                         .where("MONTH(eventDate_processed) = ? and DAY(eventdate_processed) = ?", @date.month, @date.day)
-                        .where.not(users: {orcid: nil})
+                        .where.not(users: { orcid: nil })
                         .where(user_occurrences: { action: ["recorded", "recorded,identified", "identified,recorded"]})
                         .order(Arel.sql("RAND()"))
                         .limit(1)
   if !holotypes.nil?
     t = Bionomia::Twitter.new
-    t.holotype_tweet(holotypes[0])
+    images = holotypes[0].images.first(2).map{|i| File.new(URI.parse(i[:large]).open) } rescue []
+    t.holotype_tweet(holotypes[0], images)
   end
 end

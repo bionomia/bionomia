@@ -40,6 +40,11 @@ class String
   def zoobank_from_url
     ::Bionomia::Identifier.extract_zoobank_regex.match(self)[0] rescue nil
   end
+
+  def library_congress_from_url
+    ::Bionomia::Identifier.extract_library_congress_regex.match(self)[0] rescue nil
+  end
+
 end
 
 module Bionomia
@@ -93,6 +98,10 @@ module Bionomia
 
       def extract_zoobank_regex
         /(?<=zoobank.org\/Authors\/)(.*)/
+      end
+
+      def extract_library_congress_regex
+        /(?<=id.loc.gov\/authorities\/names\/)(.*)/
       end
 
     end

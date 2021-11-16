@@ -48,6 +48,12 @@ describe "Identifier library" do
     expect(url.zoobank_from_url).to eq id
   end
 
+  it "extracty a Library of Congress Authority ID with value n91033477" do
+    url = "http://id.loc.gov/authorities/names/n91033477"
+    id = "n91033477"
+    expect(url.library_congress_from_url).to eq id
+  end
+
   it "determines that https://orcid.org/0000-0002-4519-8167 is a valid ORCID" do
     url = "https://orcid.org/0000-0002-4519-8167"
     expect(url.orcid_from_url.is_orcid?).to be true

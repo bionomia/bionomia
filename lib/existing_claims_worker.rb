@@ -77,6 +77,13 @@ module Bionomia
           user = get_wiki_user(wikidata)
         end
       end
+      if id.library_congress_from_url
+        w = ::Bionomia::WikidataSearch.new
+        wikidata = w.wiki_by_property('congress', id.library_congress_from_url)[:wikidata] rescue nil
+        if wikidata
+          user = get_wiki_user(wikidata)
+        end
+      end
       user
     end
 

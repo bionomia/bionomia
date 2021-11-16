@@ -135,7 +135,8 @@ module Bionomia
         viaf: "P214",
         ipni: "P586",
         bhl: "P4081",
-        zoobank: "P2006"
+        zoobank: "P2006",
+        congress: "P244"
       }
       property = properties[prop.downcase.to_sym]
       return if property.nil?

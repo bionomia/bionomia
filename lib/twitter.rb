@@ -50,7 +50,7 @@ module Bionomia
       @client.update(message)
     end
 
-    def holotype_tweet(o)
+    def holotype_tweet(o, images = [])
       return if o.nil? || o.class.name != "Occurrence"
       collectors = o.users
                     .map{|u| [u.fullname, "https://bionomia.net/#{u.identifier}", (!u.twitter.blank? ? "@#{u.twitter}" : nil)].compact.join(" ")}
@@ -60,7 +60,11 @@ module Bionomia
       family = !o.family.blank? ? "#{o.family.upcase}:" : nil
       statement = "#{collectors} collected the holotype #{family} #{o.scientificName} #{country}"
       message = "#{statement} https://gbif.org/occurrence/#{o.gbifID} #TypeSpecimenToday"
-      @client.update(message)
+      if !images.empty?
+        @client.update(message)
+      else
+        @client.update_with_media(message, images)
+      end
     end
 
   end
