@@ -60,10 +60,14 @@ module Bionomia
       family = !o.family.blank? ? "#{o.family.upcase}:" : nil
       statement = "#{collectors} collected the holotype #{family} #{o.scientificName} #{country}"
       message = "#{statement} https://gbif.org/occurrence/#{o.gbifID} #TypeSpecimenToday"
-      if !images.empty?
+      if images.empty?
         @client.update(message)
       else
-        @client.update_with_media(message, images)
+        begin
+          @client.update_with_media(message, images)
+        rescue
+          @client.update(message)
+        end
       end
     end
 

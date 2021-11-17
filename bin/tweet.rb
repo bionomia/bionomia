@@ -22,6 +22,14 @@ OptionParser.new do |opts|
   end
 end.parse!
 
+def download_image(uri)
+  file = Tempfile.new
+  File.open(file, 'wb') do |output|
+    output.write RestClient.get(uri)
+  end
+  file
+end
+
 if options[:born]
   @date = DateTime.now
   users = User.joins(:user_occurrences)
@@ -50,7 +58,8 @@ if options[:holotype]
                         .limit(1)
   if !holotypes.nil?
     t = Bionomia::Twitter.new
-    images = holotypes[0].images.first(2).map{|i| File.new(URI.parse(i[:large]).open) } rescue []
+    images = holotypes[0].images.first(2).map{|i| download_image(i[:large]) } rescue []
     t.holotype_tweet(holotypes[0], images)
+    images.each{|i| i.unlink}
   end
 end
