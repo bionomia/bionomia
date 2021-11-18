@@ -62,6 +62,10 @@ class Occurrence < ActiveRecord::Base
     [long, lat]
   end
 
+  def interpretedCountry(lang = :en)
+    I18nData.countries(lang)[countryCode]
+  end
+
   def agents
     {
       determiners: determiners.map{|d| {

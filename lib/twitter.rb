@@ -56,7 +56,7 @@ module Bionomia
                     .map{|u| [u.fullname, "https://bionomia.net/#{u.identifier}", (!u.twitter.blank? ? "@#{u.twitter}" : nil)].compact.join(" ")}
                     .first(2)
                     .to_sentence
-      country = !o.country.blank? ? "in #{o.country}" : nil
+      country = !o.interpretedCountry.nil? ? "in #{o.interpretedCountry}" : nil
       family = !o.family.blank? ? "#{o.family.upcase}:" : nil
       statement = "#{collectors} collected the holotype #{family} #{o.scientificName} #{country}"
       message = "#{statement} https://gbif.org/occurrence/#{o.gbifID} #TypeSpecimenToday"
