@@ -6,6 +6,9 @@ module Sinatra
       module Initialize
 
         def self.registered(app)
+
+          app.before { set_session }
+
           self.module_parent
               .constants.reject!{|c| c == :Initialize}
               .sort

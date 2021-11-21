@@ -15,6 +15,7 @@ class BIONOMIA < Sinatra::Base
   register Sinatra::I18nSupport
   register Sinatra::Cacher
   register Sinatra::Flash
+  register Sinatra::Namespace
   register Sinatra::OutputBuffer
   register Sinatra::Bionomia::Config::Initialize
   register Sinatra::Bionomia::Helper::Initialize

@@ -61,45 +61,49 @@ module Sinatra
             end
           end
 
-          app.get '/occurrence/:id.json(ld)?' do
-            content_type "application/ld+json", charset: 'utf-8'
-            response = jsonld_occurrence_context
-            response["@type"] = "PreservedSpecimen"
-            begin
-              occurrence = Occurrence.find(params[:id])
-              response["@id"] = "#{Settings.base_url}/occurrence/#{occurrence.id}"
-              response["sameAs"] = "https://gbif.org/occurrence/#{occurrence.id}"
-              occurrence.attributes
-                        .reject{|column| Occurrence::IGNORED_COLUMNS_OUTPUT.include?(column)}
-                        .map{|k,v| response[k] = v }
+          app.namespace '/occurrence' do
 
-              response["recorded"] = jsonld_occurrence_actions(occurrence, "recordings")
-              response["identified"] = jsonld_occurrence_actions(occurrence, "identifications")
-              response["associatedReferences"] = jsonld_occurrence_references(occurrence)
-              JSON.pretty_generate(response)
-            rescue
-              halt 404, {}.to_json
-            end
-          end
+            get '/:id.json(ld)?' do
+              content_type "application/ld+json", charset: 'utf-8'
+              response = jsonld_occurrence_context
+              response["@type"] = "PreservedSpecimen"
+              begin
+                occurrence = Occurrence.find(params[:id])
+                response["@id"] = "#{Settings.base_url}/occurrence/#{occurrence.id}"
+                response["sameAs"] = "https://gbif.org/occurrence/#{occurrence.id}"
+                occurrence.attributes
+                          .reject{|column| Occurrence::IGNORED_COLUMNS_OUTPUT.include?(column)}
+                          .map{|k,v| response[k] = v }
 
-          app.get '/occurrence/:id/still_images.json' do
-            content_type "application/json", charset: 'utf-8'
-            Occurrence.find(params[:id])
-                      .images
-                      .to_json
-          end
-
-          app.get '/occurrence/:id' do
-            @occurrence = Occurrence.includes(:recorders)
-                                    .includes(:determiners)
-                                    .find(params[:id]) rescue nil
-            if @occurrence.nil?
-              halt 404
+                response["recorded"] = jsonld_occurrence_actions(occurrence, "recordings")
+                response["identified"] = jsonld_occurrence_actions(occurrence, "identifications")
+                response["associatedReferences"] = jsonld_occurrence_references(occurrence)
+                JSON.pretty_generate(response)
+              rescue
+                halt 404, {}.to_json
+              end
             end
 
-            @network = is_admin? ? occurrence_network.to_json : [].to_json
-            @ignored = is_admin? ? user_ignoreds.to_json : [].to_json
-            haml :'occurrence/occurrence'
+            get '/:id/still_images.json' do
+              content_type "application/json", charset: 'utf-8'
+              Occurrence.find(params[:id])
+                        .images
+                        .to_json
+            end
+
+            get '/:id' do
+              @occurrence = Occurrence.includes(:recorders)
+                                      .includes(:determiners)
+                                      .find(params[:id]) rescue nil
+              if @occurrence.nil?
+                halt 404
+              end
+
+              @network = is_admin? ? occurrence_network.to_json : [].to_json
+              @ignored = is_admin? ? user_ignoreds.to_json : [].to_json
+              haml :'occurrence/occurrence'
+            end
+
           end
 
         end
