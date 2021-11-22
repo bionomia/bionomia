@@ -9,7 +9,7 @@ class Occurrence < ActiveRecord::Base
   has_many :recorders, through: :occurrence_recorders, source: :agent
 
   has_many :user_occurrences
-  has_many :users, through: :user_occurrences, source: :user
+  has_many :users, -> { where(user_occurrences: { visible: true }) }, through: :user_occurrences, source: :user
 
   has_many :claims, class_name: "UserOccurrence"
   has_many :claimants, through: :claims, primary_key: :created_by, class_name: "User"
