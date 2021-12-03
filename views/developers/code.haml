@@ -18,26 +18,27 @@
 
 %h3= I18n.t('developer.parser')
 
-.media.mb-3.mt-3.d-flex.flex-wrap.flex-column.flex-md-row
-  %a{href:"https://rubygems.org/gems/dwc_agent"}
-    %img.mb-3.mr-3{src:"/images/ruby_gem.png", alt:"Ruby gem"}
-  .media-body
-    %p.mb-3
-      A stand-alone ruby gem,
-      = link_to "dwc_agent", "https://rubygems.org/gems/dwc_agent"
-      may be used to parse people names and additionally score given names for structural similarity. It also includes a command-line executable
-      %em dwcagent
-      that combines parsing and cleaning then produces JSON as output.
-      %pre.pre-scrollable.bg-dark.text-white.border.rounded.p-3
-        %code
-          :preserve
-            $ gem install dwc_agent
-            $ irb
-            > parsed = DwcAgent.parse "Lepschi BJ; Albrecht DE"
-              <span class="token property">=> [#&lt;Name family="BJ" given="Lepschi"&gt;, #&lt;Name family="DE" given="Albrecht"&gt;]</span>
-            > DwcAgent.clean parsed[0]
-              <span class="token property">=> #&lt;Name family="Lepschi" given="B.J."&gt;</span>
-            > DwcAgent.similarity_score "J.R.", "Jill R."
-              <span class="token property">=> 2</span>
-            $ dwcagent "Lepschi BJ; Albrecht DE"
-            <span class="token property">[{"family":"Lepschi","given":"B.J.","suffix":null,"particle":null,"dropping_particle":null,"nick":null,"appellation":null,"title":null},{"family":"Albrecht","given":"D.E.","suffix":null,"particle":null,"dropping_particle":null,"nick":null,"appellation":null,"title":null}]</span>
+.mt-3
+  .media
+    %a{href:"https://rubygems.org/gems/dwc_agent"}
+      %img.mb-3.mr-3{src:"/images/ruby_gem.png", alt:"Ruby gem"}
+    .media-body
+      %p.mb-3
+        A stand-alone ruby gem,
+        = link_to "dwc_agent", "https://rubygems.org/gems/dwc_agent"
+        may be used to parse people names and additionally score given names for structural similarity. It also includes a command-line executable
+        %em dwcagent
+        that combines parsing and cleaning then produces JSON as output.
+  %pre.pre-scrollable.bg-dark.text-white.border.rounded.p-3
+    %code
+      :preserve
+        $ gem install dwc_agent
+        $ irb
+        > parsed = DwcAgent.parse "Lepschi BJ; Albrecht DE"
+          <span class="token property">=> [#&lt;Name family="BJ" given="Lepschi"&gt;, #&lt;Name family="DE" given="Albrecht"&gt;]</span>
+        > DwcAgent.clean parsed[0]
+          <span class="token property">=> #&lt;Name family="Lepschi" given="B.J."&gt;</span>
+        > DwcAgent.similarity_score "J.R.", "Jill R."
+          <span class="token property">=> 2</span>
+        $ dwcagent "Lepschi BJ; Albrecht DE"
+        <span class="token property">[{"family":"Lepschi","given":"B.J.","suffix":null,"particle":null,"dropping_particle":null,"nick":null,"appellation":null,"title":null},{"family":"Albrecht","given":"D.E.","suffix":null,"particle":null,"dropping_particle":null,"nick":null,"appellation":null,"title":null}]</span>
