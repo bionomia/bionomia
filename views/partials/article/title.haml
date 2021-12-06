@@ -1,0 +1,21 @@
+.card.border-none.mb-3
+  .card-header
+    %p.citation.card-title
+      #{h(@article.citation)}
+      = link_to "https://doi.org/#{@article.doi}", "https://doi.org/#{@article.doi}"
+  .card-body
+    .altmetric-embed.pull-left.mr-2.float-left{"data-badge-popover":"right", "data-badge-type":"donut", "data-doi":"#{@article.doi}", "data-hide-no-mentions":"true"}
+    %p.card-text.text-muted #{h(@article.abstract)}
+  .card-footer.d-flex
+    .col.small.text-left.text-muted
+      %span.badge.badge-light.badge-pill.citation-correction #{number_with_delimiter(@article.claimed_specimen_count)}
+      #{'claim'.pluralize(@article.claimed_specimen_count)}
+    .col.small.text-right.text-muted
+      %span.badge.badge-light.badge-pill.citation-correction #{number_with_delimiter(@article.article_occurrences.count)}
+      #{'specimen'.pluralize(@article.article_occurrences.count)}
+
+- if admin_authorized?
+  .m-2.text-center
+    %a.text-nowrap{href: url("/admin/article/#{@article.id}")}
+      %i.fas.fa-cog
+      = I18n.t('general.settings')

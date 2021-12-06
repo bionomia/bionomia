@@ -23,7 +23,7 @@
         %img{src:"/images/#{@dataset.doi}.svg"}
 
   - if admin_authorized?
-    .mt-3.pt-3.border-top
-      %a{href: url("/admin/dataset/#{@dataset.datasetKey}")}
+    .m-2.text-center
+      %a.text-nowrap{href: url("/admin/dataset/#{@dataset.datasetKey}")}
         %i.fas.fa-cog
         = I18n.t('general.settings')

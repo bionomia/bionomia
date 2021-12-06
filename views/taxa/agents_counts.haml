@@ -9,12 +9,6 @@
 - content_for :jumbotron do
   = haml :'partials/taxa/jumbotron_agents', layout: false
 
-- if admin_authorized?
-  .mt-3.mb-3.pt-3.border-top.text-right
-    %a{href: url("/admin/taxon/#{@taxon.family}")}
-      %i.fas.fa-cog
-      = I18n.t('general.settings')
-
 = haml :'partials/taxa/tabs', layout: false, locals: { active_tab: locals[:active_tab] }
 = haml :'partials/taxa/agent_nav', layout: false, locals: { active_subtab: locals[:active_subtab] }
 

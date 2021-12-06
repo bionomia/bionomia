@@ -2,35 +2,15 @@
 - content_for :scripts do
   %script{src: "https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"}
 
--content_for :jumbotron do
+- content_for :jumbotron do
   .jumbotron.jumbotron-fluid.d-flex.flex-wrap
     .mr-auto.p-2
-      %h1.h2= I18n.t('article.article_title')
+      %h1.h2
+        = I18n.t('article.article_title')
     = haml :'partials/article/search', layout: false
 
-.card.border-none.mb-3
-  .card-header
-    %p.citation.card-title
-      #{h(@article.citation)}
-      = link_to "https://doi.org/#{@article.doi}", "https://doi.org/#{@article.doi}"
-  .card-body
-    .altmetric-embed.pull-left.mr-2.float-left{"data-badge-popover":"right", "data-badge-type":"donut", "data-doi":"#{@article.doi}", "data-hide-no-mentions":"true"}
-    %p.card-text.text-muted #{h(@article.abstract)}
-  .card-footer.d-flex
-    .col.small.text-left.text-muted
-      %span.badge.badge-light.badge-pill.citation-correction #{number_with_delimiter(@article.claimed_specimen_count)}
-      #{'claim'.pluralize(@article.claimed_specimen_count)}
-    .col.small.text-right.text-muted
-      %span.badge.badge-light.badge-pill.citation-correction #{number_with_delimiter(@article.article_occurrences.count)}
-      #{'specimen'.pluralize(@article.article_occurrences.count)}
-
-- if admin_authorized?
-  .mt-3.mb-3.pt-3.border-top.text-center
-    %a{href: url("/admin/article/#{@article.id}")}
-      %i.fas.fa-cog
-      = I18n.t('general.settings')
-
-= haml :'partials/article/tabs', layout:false, locals: { active_tab: locals[:active_tab] }
+= haml :'partials/article/title', layout: false
+= haml :'partials/article/tabs', layout: false, locals: { active_tab: locals[:active_tab] }
 = haml :'partials/article/agent_tabs', layout: false, locals: { active_subtab: locals[:active_subtab] }
 
 - if @pagy.count == 0

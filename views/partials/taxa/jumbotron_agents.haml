@@ -24,3 +24,9 @@
         - else
           = I18n.t('taxa.no_agents', taxon: h(@taxon.family))
   = haml :'partials/taxa/search', layout: false
+
+- if admin_authorized?
+  .m-2.text-center
+    %a.text-nowrap{href: url("/admin/taxon/#{@taxon.family}")}
+      %i.fas.fa-cog
+      = I18n.t('general.settings')

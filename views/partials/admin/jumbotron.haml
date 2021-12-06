@@ -94,16 +94,16 @@
     .mt-3.pt-3.border-top
       %p.mb-0
         - if @admin_user.is_public?
-          %a.mr-2{href: url("/#{@admin_user.identifier}")}
+          %a.mr-2.text-nowrap{href: url("/#{@admin_user.identifier}")}
             %i.fas.fa-user
             = I18n.t('profile.public_profile')
         - else
           %i.fas.fa-lock
           %span.mr-2 Private Profile
-        %a{href: url("/#{@admin_user.identifier}/refresh-stats.json"), class:"profile-flush mr-2 mb-2"}
+        %a.mr-2.mb-2.profile-flush.text-nowrap{href: url("/#{@admin_user.identifier}/refresh-stats.json")}
           %i.fas.fa-sync-alt
           = I18n.t('general.refresh_stats')
-        %a.profile-flush.mr-2.mb-2{href: url("/#{@admin_user.identifier}/refresh.json")}
+        %a.profile-flush.mr-2.mb-2.text-nowrap{href: url("/#{@admin_user.identifier}/refresh.json")}
           %i.fas.fa-sync-alt
           = I18n.t('general.refresh_profile')
           - if @admin_user.orcid
@@ -111,7 +111,7 @@
           - else
             %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD", width:"18px"}
       %p.mb-0
-        %a{href: url("/admin/user/#{@admin_user.identifier}/settings")}
+        %a.text-nowrap{href: url("/admin/user/#{@admin_user.identifier}/settings")}
           %i.fas.fa-cog
           = I18n.t('profile.settings')
       %ul.list-inline.mt-2
