@@ -30,7 +30,7 @@ module Sinatra
               haml :'admin/articles', locals: { active_page: "administration" }
             end
 
-            get  '/article/:id/process.json' do
+            get '/article/:id/process.json' do
               content_type "application/json", charset: 'utf-8'
               vars = {
                 article_id: params[:id]
@@ -48,7 +48,7 @@ module Sinatra
               haml :'admin/article', locals: { active_page: "administration" }
             end
 
-            app.post '/admin/article/:id' do
+            post '/article/:id' do
               @article = Article.find(params[:id]) rescue nil
               if @article.nil?
                 halt 404
@@ -59,7 +59,7 @@ module Sinatra
               redirect "/admin/article/#{@article.id}"
             end
 
-            app.delete '/admin/article/:id' do
+            delete '/article/:id' do
               article = Article.find(params[:id]) rescue nil
               if article.nil?
                 halt 404
@@ -109,7 +109,7 @@ module Sinatra
               haml :'admin/dataset', locals: { active_page: "administration" }
             end
 
-            app.post '/admin/dataset/:id' do
+            post '/dataset/:id' do
               @dataset = Dataset.find(params[:id]) rescue nil
               if @dataset.nil?
                 halt 404
@@ -131,7 +131,7 @@ module Sinatra
               redirect "/admin/dataset/#{@dataset.datasetKey}"
             end
 
-            app.delete '/admin/dataset/:id' do
+            delete '/dataset/:id' do
               dataset = Dataset.find(params[:id]) rescue nil
               if dataset.nil?
                 halt 404
@@ -181,7 +181,7 @@ module Sinatra
               haml :'admin/organization', locals: { active_page: "administration" }
             end
 
-            app.post '/admin/organization/:id' do
+            post '/organization/:id' do
               @organization = Organization.find(params[:id]) rescue nil
               if @organization.nil?
                 halt 404
@@ -213,7 +213,7 @@ module Sinatra
               redirect "/admin/organization/#{params[:id]}"
             end
 
-            app.delete '/admin/organization/:id' do
+            delete '/organization/:id' do
               organization = Organization.find(params[:id]) rescue nil
               if organization.nil?
                 halt 404
@@ -275,7 +275,7 @@ module Sinatra
               haml :'admin/overview', locals: { active_page: "administration" }
             end
 
-            app.put '/admin/user/:id/deceased' do
+            put '/user/:id/deceased' do
               admin_user = User.find(params[:id])
               if !admin_user.orcid.nil?
                 old_orcid = admin_user.orcid.dup
@@ -317,7 +317,7 @@ module Sinatra
               end
             end
 
-            app.put '/admin/user/:id' do
+            put '/user/:id' do
               admin_user = User.find(params[:id])
               if !admin_user.orcid.nil?
                 youtube_id = !params[:youtube_id].empty? ? params[:youtube_id] : nil
@@ -328,7 +328,7 @@ module Sinatra
               redirect "/admin/user/#{admin_user.identifier}/settings"
             end
 
-            app.delete '/admin/user/:id' do
+            delete '/user/:id' do
               @admin_user = User.find(params[:id]) rescue nil
               if @admin_user.nil?
                 halt 404
@@ -340,7 +340,7 @@ module Sinatra
               redirect '/admin/users'
             end
 
-            app.post '/admin/user/:id/image' do
+            post '/user/:id/image' do
               @admin_user = find_user(params[:id])
               file_name = upload_image(app.root)
               if file_name
@@ -353,7 +353,7 @@ module Sinatra
               end
             end
 
-            app.delete '/admin/user/:id/image' do
+            delete '/user/:id/image' do
               @admin_user = find_user(params[:id])
               if @admin_user.image_url
                 FileUtils.rm(File.join(app.root, "public", "images", "users", @admin_user.image_url)) rescue nil
@@ -519,8 +519,7 @@ module Sinatra
               haml :'admin/candidates', locals: locals
             end
 
-            app.post '/admin/user/:id/advanced-search' do
-
+            post '/user/:id/advanced-search' do
               @admin_user = find_user(params[:id])
 
               @agent_results = []
@@ -576,7 +575,7 @@ module Sinatra
               { count: count }.to_json
             end
 
-            app.post '/admin/user/:id/candidates/agent/:agent_id/bulk-claim' do
+            post '/user/:id/candidates/agent/:agent_id/bulk-claim' do
               check_redirect
               user = find_user(params[:id])
               agent = Agent.find(params[:agent_id])
@@ -648,15 +647,7 @@ module Sinatra
               haml :'admin/citation', locals: { active_page: "administration" }
             end
 
-            get '/user/:id/refresh.json' do
-              content_type "application/json", charset: 'utf-8'
-              admin_user = find_user(params[:id])
-              admin_user.update_profile
-              admin_user.flush_caches
-              { message: "ok" }.to_json
-            end
-
-            app.put '/admin/user/:id/visibility.json' do
+            put '/user/:id/visibility.json' do
               content_type "application/json", charset: 'utf-8'
               req = JSON.parse(request.body.read).symbolize_keys
               admin_user = find_user(params[:id])
@@ -674,7 +665,7 @@ module Sinatra
               { message: "ok" }.to_json
             end
 
-            app.post '/admin/user-occurrence/bulk.json' do
+            post '/user-occurrence/bulk.json' do
               content_type "application/json", charset: 'utf-8'
               req = JSON.parse(request.body.read).symbolize_keys
               action = req[:action] rescue nil
@@ -697,7 +688,7 @@ module Sinatra
               { message: "ok" }.to_json
             end
 
-            app.post '/admin/user-occurrence/:occurrence_id.json' do
+            post '/user-occurrence/:occurrence_id.json' do
               content_type "application/json", charset: 'utf-8'
               req = JSON.parse(request.body.read).symbolize_keys
               action = req[:action] rescue nil
@@ -715,7 +706,7 @@ module Sinatra
               { message: "ok", id: uo.id }.to_json
             end
 
-            app.put '/admin/user-occurrence/bulk.json' do
+            put '/user-occurrence/bulk.json' do
               content_type "application/json", charset: 'utf-8'
               req = JSON.parse(request.body.read).symbolize_keys
               occurrence_ids = req[:occurrence_ids].split(",")
@@ -726,7 +717,7 @@ module Sinatra
               { message: "ok" }.to_json
             end
 
-            app.put '/admin/user-occurrence/:id.json' do
+            put '/user-occurrence/:id.json' do
               content_type "application/json", charset: 'utf-8'
               req = JSON.parse(request.body.read).symbolize_keys
               uo = UserOccurrence.find_by(id: params[:id].to_i, user_id: req[:user_id].to_i)
@@ -737,7 +728,7 @@ module Sinatra
               { message: "ok" }.to_json
             end
 
-            app.delete '/admin/user-occurrence/bulk.json' do
+            delete '/user-occurrence/bulk.json' do
               content_type "application/json", charset: 'utf-8'
               req = JSON.parse(request.body.read).symbolize_keys
               ids = req[:ids].split(",")
@@ -746,7 +737,7 @@ module Sinatra
               { message: "ok" }.to_json
             end
 
-            app.delete '/admin/user-occurrence/:id.json' do
+            delete '/user-occurrence/:id.json' do
               content_type "application/json", charset: 'utf-8'
               req = JSON.parse(request.body.read).symbolize_keys
               UserOccurrence.where(id: params[:id].to_i, user_id: req[:user_id].to_i)

@@ -391,7 +391,6 @@ module Sinatra
             content_type "application/json", charset: 'utf-8'
             user = find_user(params[:id])
             user.update_profile
-            user.flush_caches
             { message: "ok" }.to_json
           end
 

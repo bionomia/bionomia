@@ -67,7 +67,7 @@
           %div{class:"card-body"}
             %p{class:"card-text"} Pull new updates to name, aliases, keywords, country, education, and employment from the ORCID account or other items if from Wikidata.
             %p
-              %a{ href: url("/admin/user/#{@admin_user.identifier}/refresh.json"), role:"button", class:"btn btn-sm btn-outline-success profile-refresh"}
+              %a{ href: url("/#{@admin_user.identifier}/refresh.json"), role:"button", class:"btn btn-sm btn-outline-success profile-refresh"}
                 %i{class: "fas fa-sync-alt"}
                 Refresh
                 - if @admin_user.orcid
