@@ -38,7 +38,6 @@ module Sinatra
               organization = user.current_organization.as_json.symbolize_keys rescue nil
               user.update(visited: Time.now)
               session[:omniauth] = OpenStruct.new({ id: user.id })
-              user.flush_caches
               redirect '/profile'
             end
 
@@ -105,7 +104,6 @@ module Sinatra
               end
               @user.image_url = nil
               @user.save
-              @user.flush_caches
               { message: "ok" }.to_json
             end
 
@@ -420,12 +418,10 @@ module Sinatra
             get '/refresh.json' do
               content_type "application/json", charset: 'utf-8'
               @user.update_profile
-              @user.flush_caches
               { message: "ok" }.to_json
             end
 
             delete '/destroy' do
-              @user.flush_caches
               @user.destroy
               session.clear
               redirect '/'

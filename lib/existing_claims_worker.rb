@@ -37,7 +37,6 @@ module Bionomia
           uo = both.map{|r| [u.id, r.to_i, "recorded,identified", User::GBIF_AGENT_ID]}
           import_user_occurrences(uo)
         end
-        u.flush_caches
       end
     end
 

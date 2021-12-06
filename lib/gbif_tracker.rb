@@ -41,10 +41,6 @@ module Bionomia
       flush_irrelevant_entries(article_id: article.id)
       article.processed = true
       article.save
-
-      article.claimants.each do |user|
-        user.flush_caches
-      end
     end
 
     def process_articles
