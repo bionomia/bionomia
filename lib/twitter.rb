@@ -53,6 +53,7 @@ module Bionomia
     def holotype_tweet(o, images = [])
       return if o.nil? || o.class.name != "Occurrence"
       collectors = o.users
+                    .where(user_occurrences: { action: ["recorded", "recorded,identified", "identified,recorded"]})
                     .map{|u| [u.fullname, "https://bionomia.net/#{u.identifier}", (!u.twitter.blank? ? "@#{u.twitter}" : nil)].compact.join(" ")}
                     .first(2)
                     .to_sentence
