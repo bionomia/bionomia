@@ -34,6 +34,7 @@
       :preserve
         $ gem install dwc_agent
         $ irb
+        > require 'dwc_agent'
         > parsed = DwcAgent.parse "Lepschi BJ; Albrecht DE"
           <span class="token property">=> [#&lt;Name family="BJ" given="Lepschi"&gt;, #&lt;Name family="DE" given="Albrecht"&gt;]</span>
         > DwcAgent.clean parsed[0]
