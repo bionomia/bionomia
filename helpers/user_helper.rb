@@ -179,10 +179,10 @@ module Sinatra
           end
 
           r = user.recorded_bins
-          r.each{|k,v| r[k] = [0,v]}
+          r.each{|k,v| r[k] = [v,0]}
 
           i = user.identified_bins
-          i.each {|k,v| i[k] = [v,0]}
+          i.each {|k,v| i[k] = [0,v]}
 
           activity_dates = r.merge(i) do |k, first_val, second_val|
             [[first_val[0], second_val[0]].max, [first_val[1], second_val[1]].max]

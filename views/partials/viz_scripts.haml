@@ -105,7 +105,7 @@
           google.visualization.events.addListener(chart, 'select', function(e) {
             var sel = chart.getSelection()[0];
             if (typeof sel.row !== "undefined" && sel.row !== null) {
-              var yr = chartData.getValue(sel.row, 0), action = (sel.column === 1) ? "identified" : "collected";
+              var yr = chartData.getValue(sel.row, 0), action = (sel.column === 1) ? "collected" : "identified";
               window.location = "#{locals[:path]}/specimens?action=" + action + "&start_year=" + yr + "&end_year=" + (parseInt(yr, 10)+5);
             }
           });
