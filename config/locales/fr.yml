@@ -688,8 +688,8 @@ fr:
     progress: Progrès
     identified_from: Identifié à Partir de
     collected_from: Collectés à Partir de
-    dates_collected: Dates Collected
-    dates_identified: Dates Identified
+    dates_collected: Dates collectées
+    dates_identified: Dates identifiées
     specimens_attributed: spécimens attribués
     collected: collecté
     identified: identifié
