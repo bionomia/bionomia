@@ -688,8 +688,8 @@ de:
     progress: Fortschritt
     identified_from: Identifiziert aus
     collected_from: Gesammelt aus
-    dates_collected: Dates Collected
-    dates_identified: Dates Identified
+    dates_collected: Datum der Sammlung
+    dates_identified: Datum der Identifizierung
     specimens_attributed: zugeordnete Exemplare
     collected: gesammelt
     identified: identifiziert
