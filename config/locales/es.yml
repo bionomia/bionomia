@@ -688,8 +688,8 @@ es:
     progress: Progreso
     identified_from: Identificó de
     collected_from: Colectó de
-    dates_collected: Dates Collected
-    dates_identified: Dates Identified
+    dates_collected: Fechas colectadas
+    dates_identified: Fechas identificadas
     specimens_attributed: especímenes atribuidos
     collected: colectó
     identified: identificó
