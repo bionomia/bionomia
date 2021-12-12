@@ -555,7 +555,7 @@ pt:
     language_explanation: Choose your preferred language
     specimens_used_num: specimens used
     updated: Your profile was updated.
-    thanks: Thanks
+    thanks: Obrigado
     attributed: attributed
   roster:
     roster_title: Perfis Públicos
@@ -688,8 +688,8 @@ pt:
     progress: Progresso
     identified_from: Identificado de
     collected_from: Coletado de
-    dates_collected: Dates Collected
-    dates_identified: Dates Identified
+    dates_collected: Datas coletadas
+    dates_identified: Datas identificadas
     specimens_attributed: espécimes atribuídos
     collected: coletado
     identified: identificado
