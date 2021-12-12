@@ -274,7 +274,6 @@ de:
     none: keine
     identified_from: Identifiziert aus
     collected_from: Gesammelt aus
-    dates_identified_collected: Datum der Sammlung und Identifizierung
     no_filter_alert: Bionomia-Bearbeiter haben bisher nicht dabei geholfen, Exemplare unter diesem Filter zuzuordnen.
     not_helped_alert: Bionomia-Bearbeiter haben bisher nicht bei der Zuordnung von Exemplaren geholfen.
     upload_message:
@@ -491,7 +490,6 @@ de:
         other: "Publikationen nutzten Ihre von GBIF heruntergeladenen Beispieldaten"
     identified_from: Identifiziert aus
     collected_from: Gesammelt aus
-    dates_identified_collected: Datum der Sammlung und Identifizierung
     resume: Für Ihren Lebenslauf
     specimens_used: Exemplare verwendet in
     public_availability: Öffentliche Verfügbarkeit
@@ -690,7 +688,8 @@ de:
     progress: Fortschritt
     identified_from: Identifiziert aus
     collected_from: Gesammelt aus
-    dates_identified_collected: Datum der Sammlung und Identifizierung
+    dates_collected: Datum der Sammlung
+    dates_identified: Datum der Identifizierung
     specimens_attributed: zugeordnete Exemplare
     collected: gesammelt
     identified: identifiziert

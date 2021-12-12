@@ -178,16 +178,6 @@ module Sinatra
             end
           end
 
-          r = user.recorded_bins
-          r.each{|k,v| r[k] = [v,0]}
-
-          i = user.identified_bins
-          i.each {|k,v| i[k] = [0,v]}
-
-          activity_dates = r.merge(i) do |k, first_val, second_val|
-            [[first_val[0], second_val[0]].max, [first_val[1], second_val[1]].max]
-          end
-
           {
             specimens: {
               total: user.all_occurrences_count,
@@ -208,10 +198,12 @@ module Sinatra
               specimens_cited: cited.map(&:second).reduce(:+),
               number: cited.count
             },
-            activity_dates: activity_dates
-                  .delete_if{|k,v| k > Date.today.year || k <= 1700 || v == [0,0] }
-                  .sort
-                  .map{|k,v| v.flatten.unshift(k.to_s) }
+            recorded_bins: user.recorded_bins
+                               .delete_if{|k,v| k > Date.today.year || k <= 1700 || v == 0}
+                               .map{|k,v| [k.to_s, v]},
+            identified_bins: user.identified_bins
+                                 .delete_if{|k,v| k > Date.today.year || k <= 1700 || v == 0}
+                                 .map{|k,v| [k.to_s, v]}
           }
         end
 

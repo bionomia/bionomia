@@ -274,7 +274,6 @@ pt:
     none: Nenhum
     identified_from: Identificado de
     collected_from: Coletado de
-    dates_identified_collected: Datas coletadas e identificadas
     no_filter_alert: Autores da Bionomia ainda não ajudaram a atribuir espécimes sob este filtro.
     not_helped_alert: Autores da Bionomia ainda não ajudaram a atribuir os espécimes.
     upload_message:
@@ -491,7 +490,6 @@ pt:
         other: "publicação fez uso de seus dados de espécimes baixados do GBIF"
     identified_from: Identificado de
     collected_from: Recolhido de
-    dates_identified_collected: Datas coletadas e identificadas
     resume: Para seu currículo
     specimens_used: specimens used
     public_availability: Disponibilidade Pública
@@ -690,7 +688,8 @@ pt:
     progress: Progresso
     identified_from: Identificado de
     collected_from: Coletado de
-    dates_identified_collected: Datas coletadas e identificadas
+    dates_collected: Datas coletadas
+    dates_identified: Datas identificadas
     specimens_attributed: espécimes atribuídos
     collected: coletado
     identified: identificado

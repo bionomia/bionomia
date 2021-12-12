@@ -7,19 +7,18 @@
     - identified = @stats[:countries][:identified].to_a.map{|a| [ a[0], country_name(a[0]), a[1] ] }.unshift(["Country", "Country Name", "#{I18n.t('charts.identified')}"])
     :javascript
       $(function() {
-        if (!$('#chart').length) { return; }
+        if (!$('#chart-collected').length && !$('#chart-identified').length) { return; }
         var countriesRecorded = #{recorded},
             countriesIdentified = #{identified},
-            dateData = #{@stats[:activity_dates].to_a.unshift(["#{I18n.t('charts.year')}", "#{I18n.t('charts.collected')}", "#{I18n.t('charts.identified')}"])},
-            recorded_region = "world",
-            identified_region = "world",
+            recordedData = #{@stats[:recorded_bins].to_a.unshift(["#{I18n.t('charts.year')}", "#{I18n.t('charts.collected')}"])},
+            identifiedData = #{@stats[:identified_bins].to_a.unshift(["#{I18n.t('charts.year')}", "#{I18n.t('charts.identified')}"])},
             recorded_hierarchies = $.map(#{@stats[:countries][:recorded].keys}, function(i) {
               return [ancestors(GeoChartHierarchy, i)];
             }).filter(function (el) { return el; }),
             identified_hierarchies = $.map(#{@stats[:countries][:identified].keys}, function(i) {
               return [ancestors(GeoChartHierarchy, i)];
             }).filter(function (el) { return el; }),
-            collectedMap, identifiedMap;
+            collectedMap, identifiedMap, collectedChart, identifiedChart;
 
         function ancestors(array, id) {
           if (typeof array != 'undefined') {
@@ -59,83 +58,158 @@
           return result;
         }
 
-        function drawVisualizations() {
-          var chartData = google.visualization.arrayToDataTable(dateData),
-              chart = new google.visualization.ColumnChart($('#chart')[0]),
-              chartOptions = {
-                title: '',
-                hAxis: {
-                  title: "#{I18n.t('charts.year')}",
-                  format: '0000',
-                  titleTextStyle: {
-                    italic: false,
-                    fontSize: 18,
-                    bold: true
-                  }
-                },
-                vAxis: {
-                  title: "#{I18n.t('charts.number_specimens')}",
-                  titleTextStyle: {
-                    italic: false,
-                    fontSize: 18,
-                    bold: true
-                  }
-                },
-                colors: ['#B9D4D8', '#3A7179'],
-                chartArea: {
-                  right: 130,
-                  left: 60,
+        function chartOptions(type) {
+          var color = (type == "collected") ? '#B9D4D8' : '#3A7179';
+          var options = {
+              title: '',
+              legend: { position: 'none' },
+              hAxis: {
+                title: "#{I18n.t('charts.year')}",
+                format: '0000',
+                titleTextStyle: {
+                  italic: false,
+                  fontSize: 18,
+                  bold: true
                 }
               },
-              mapOptions = {
-                chartArea: { left: 0, top: 0, width: "100%", height: "100%" },
-                colorAxis: { colors: ['#B9D4D8', '#3A7179'] },
-                legend: 'none'
-              };
+              vAxis: {
+                title: "#{I18n.t('charts.number_specimens')}",
+                titleTextStyle: {
+                  italic: false,
+                  fontSize: 18,
+                  bold: true
+                }
+              },
+              colors: [color],
+              chartArea: {
+                right: 130,
+                left: 60,
+              }
+            };
+          return options;
+        }
+
+        function mapOptions() {
+          return {
+            chartArea: { left: 0, top: 0, width: "100%", height: "100%" },
+            colorAxis: { colors: ['#B9D4D8', '#3A7179'] },
+            legend: 'none'
+          };
+        }
+
+        function drawCollectedMap() {
+          var region = "world";
 
           collectedMap = new google.visualization.GeoChart($('#map-collected')[0]);
-          identifiedMap = new google.visualization.GeoChart($('#map-identified')[0]);
 
-          google.visualization.events.addListener(chart, 'onmouseover', function(e) {
-            if (e.row !== null) { $('#chart').css('cursor','pointer'); }
-          });
-          google.visualization.events.addListener(chart, 'onmouseout', function(e) {
-            $('#chart').css('cursor','default');
-          });
-          google.visualization.events.addListener(chart, 'select', function(e) {
-            var sel = chart.getSelection()[0];
-            if (typeof sel.row !== "undefined" && sel.row !== null) {
-              var yr = chartData.getValue(sel.row, 0), action = (sel.column === 1) ? "collected" : "identified";
-              window.location = "#{locals[:path]}/specimens?action=" + action + "&start_year=" + yr + "&end_year=" + (parseInt(yr, 10)+5);
-            }
+          google.visualization.events.addListener(collectedMap, 'regionClick', function(e) {
+            window.location = "#{locals[:path]}/specimens?action=collected&country_code=" + e.region;
           });
 
-          $.each([collectedMap, identifiedMap], function() {
-            var label = (this === collectedMap) ? "collected" : "identified";
-            google.visualization.events.addListener(this, 'regionClick', function(e) {
-              window.location = "#{locals[:path]}/specimens?action=" + label + "&country_code=" + e.region;
-            });
+          google.visualization.events.addListener(collectedMap, 'ready', function(e) {
+            $("#map-collected-wrapper").height(collectedMap.container.offsetHeight);
           });
-
-          if (dateData.length > 1) {
-            chart.draw(chartData, chartOptions);
-          }
 
           if (countriesRecorded.length > 1) {
             var intx = intersection(recorded_hierarchies);
-            recorded_region = intx[intx.length - 1];
-            collectedMap.draw(google.visualization.arrayToDataTable(countriesRecorded), $.extend(mapOptions, { "region": recorded_region }));
+            region = intx[intx.length - 1];
+            collectedMap.draw(google.visualization.arrayToDataTable(countriesRecorded), $.extend(mapOptions(), { "region": region }));
           } else {
-            collectedMap.draw(google.visualization.arrayToDataTable([["None"]]), $.extend(mapOptions, { "region": recorded_region }));
+            collectedMap.draw(google.visualization.arrayToDataTable([["None"]]), $.extend(mapOptions(), { "region": region }));
           }
+        }
+
+        function drawIdentifiedMap() {
+          var region = "world";
+
+          identifiedMap = new google.visualization.GeoChart($('#map-identified')[0]);
+
+          google.visualization.events.addListener(identifiedMap, 'regionClick', function(e) {
+            window.location = "#{locals[:path]}/specimens?action=identified&country_code=" + e.region;
+          });
+
+          google.visualization.events.addListener(identifiedMap, 'ready', function(e) {
+            $("#map-identified-wrapper").height(identifiedMap.container.offsetHeight);
+          });
 
           if (countriesIdentified.length > 1) {
             var intx = intersection(identified_hierarchies);
-            identified_region = intx[intx.length - 1];
-            identifiedMap.draw(google.visualization.arrayToDataTable(countriesIdentified), $.extend(mapOptions, { "region": identified_region }));
+            region = intx[intx.length - 1];
+            identifiedMap.draw(google.visualization.arrayToDataTable(countriesIdentified), $.extend(mapOptions(), { "region": region }));
           } else {
-            identifiedMap.draw(google.visualization.arrayToDataTable([["None"]]), $.extend(mapOptions, { "region": identified_region }));
+            identifiedMap.draw(google.visualization.arrayToDataTable([["None"]]), $.extend(mapOptions(), { "region": region }));
           }
+        }
+
+        function drawCollectedChart() {
+          var div = $('#chart-collected'),
+              data = google.visualization.arrayToDataTable(recordedData);
+
+          collectedChart = new google.visualization.ColumnChart(div[0]);
+
+          google.visualization.events.addListener(collectedChart, 'onmouseover', function(e) {
+            if (e.row !== null) { div.css('cursor','pointer'); }
+          });
+          google.visualization.events.addListener(collectedChart, 'onmouseout', function(e) {
+            div.css('cursor','default');
+          });
+          google.visualization.events.addListener(collectedChart, 'select', function(e) {
+            var sel = collectedChart.getSelection()[0];
+            if (typeof sel.row !== "undefined" && sel.row !== null) {
+              var yr = data.getValue(sel.row, 0);
+              window.location = "#{locals[:path]}/specimens?action=collected&start_year=" + yr + "&end_year=" + (parseInt(yr, 10)+5);
+            }
+          });
+
+          if (recordedData.length > 1) {
+            collectedChart.draw(data, chartOptions('collected'));
+          }
+        }
+
+        function drawIdentifiedChart() {
+          var div = $('#chart-identified'),
+              data = google.visualization.arrayToDataTable(identifiedData);
+
+          identifiedChart = new google.visualization.ColumnChart(div[0]);
+
+          google.visualization.events.addListener(identifiedChart, 'onmouseover', function(e) {
+            if (e.row !== null) { div.css('cursor','pointer'); }
+          });
+          google.visualization.events.addListener(identifiedChart, 'onmouseout', function(e) {
+            div.css('cursor','default');
+          });
+          google.visualization.events.addListener(identifiedChart, 'select', function(e) {
+            var sel = identifiedChart.getSelection()[0];
+            if (typeof sel.row !== "undefined" && sel.row !== null) {
+              var yr = data.getValue(sel.row, 0);
+              window.location = "#{locals[:path]}/specimens?action=identified&start_year=" + yr + "&end_year=" + (parseInt(yr, 10)+5);
+            }
+          });
+
+          if (identifiedData.length > 1) {
+            identifiedChart.draw(data, chartOptions('identified'));
+          }
+        }
+
+        function clearAll() {
+          collectedMap.clearChart();
+          identifiedMap.clearChart();
+          collectedChart.clearChart();
+          identifiedChart.clearChart();
+        }
+
+        function drawVisualizations() {
+          drawCollectedMap();
+          drawIdentifiedMap();
+          drawCollectedChart();
+          drawIdentifiedChart();
+          $(window).on("throttledresize", function(event) {
+            clearAll();
+            drawCollectedMap();
+            drawIdentifiedMap();
+            drawCollectedChart();
+            drawIdentifiedChart();
+          });
         }
 
         google.charts.load('current', {
@@ -143,14 +217,5 @@
           mapsApiKey: "#{Settings.google.api_key}"
         });
         google.charts.setOnLoadCallback(drawVisualizations);
-
-        $(window).on("throttledresize", function(event) {
-          collectedMap.clearChart();
-          identifiedMap.clearChart();
-          drawVisualizations();
-          $.each(['collected', 'identified'], function() {
-            $("#map-" + this + "-wrapper").height(collectedMap.container.offsetHeight);
-          });
-        });
 
       });

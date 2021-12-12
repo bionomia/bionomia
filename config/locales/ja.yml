@@ -258,7 +258,6 @@ ja:
     none: none
     identified_from: Identified From
     collected_from: Collected From
-    dates_identified_collected: Dates Collected and Identified
     no_filter_alert: Bionomia scribes have not yet helped attribute specimens under this filter.
     not_helped_alert: Bionomia scribes have not yet helped attribute specimens.
     upload_message:
@@ -465,7 +464,6 @@ ja:
         other: "publications made use of your specimen data downloaded from GBIF"
     identified_from: Identified From
     collected_from: Collected From
-    dates_identified_collected: Dates Collected and Identified
     resume: For Your Resume
     specimens_used: specimens used
     public_availability: Public Availability
@@ -649,7 +647,8 @@ ja:
     progress: Progress
     identified_from: Identified From
     collected_from: Collected From
-    dates_identified_collected: Dates Collected and Identified
+    dates_collected: Dates Collected
+    dates_identified: Dates Identified
     specimens_attributed: specimens attributed
     collected: collected
     identified: identified

@@ -274,7 +274,6 @@ es:
     none: ninguna
     identified_from: Identificado de
     collected_from: Colectado de
-    dates_identified_collected: Fechas de colecta y identificación
     no_filter_alert: Los anotadores de Bionomía todavía no han ayudado a atribuir especímenes bajo este filtro.
     not_helped_alert: Los anotadores de Bionomía todavía no han ayudado a atribuir especímenes.
     upload_message:
@@ -491,7 +490,6 @@ es:
         other: "publicaciones usaron los datos de sus especímenes descargados de GBIF"
     identified_from: Identificado de
     collected_from: Colectado en
-    dates_identified_collected: Fechas de colecta y identificación
     resume: Para su hoja de vida
     specimens_used: specimens used
     public_availability: Disponibilidad pública
@@ -690,7 +688,8 @@ es:
     progress: Progreso
     identified_from: Identificó de
     collected_from: Colectó de
-    dates_identified_collected: Fechas colectadas y identificadas
+    dates_collected: Fechas colectadas
+    dates_identified: Fechas identificadas
     specimens_attributed: especímenes atribuidos
     collected: colectó
     identified: identificó

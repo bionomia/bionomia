@@ -69,11 +69,18 @@
       = haml :'partials/map_list_identified', layout: false, locals: { path: "/help-others/#{@viewed_user.identifier}" }
 
 - else
+
   #map-identified.d-none{style:"width: 0%; height: 0%;"}
   #map-collected.d-none{style:"width: 0%; height: 0%;"}
 
-- if @stats[:activity_dates].length > 0
-  %h4= I18n.t('help.dates_identified_collected')
-  #chart
+- if @stats[:recorded_bins] && @stats[:recorded_bins].length > 0
+  %h4= I18n.t('user.dates_collected')
+  #chart-collected
 - else
-  #chart.d-none{style:"width: 0%; height: 0%;"}
+  #chart-collected.d-none{style:"width: 0%; height: 0%;"}
+
+- if @stats[:identified_bins] && @stats[:identified_bins].length > 0
+  %h4= I18n.t('user.dates_identified')
+  #chart-identified
+- else
+  #chart-identified.d-none{style:"width: 0%; height: 0%;"}

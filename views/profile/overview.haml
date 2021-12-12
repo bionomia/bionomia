@@ -34,11 +34,17 @@
         #map-collected.d-none{style:"width: 0%; height: 0%;"}
         #map-identified.d-none{style:"width: 0%; height: 0%;"}
 
-      - if @stats[:activity_dates].length > 0
-        %h4= I18n.t('profile.dates_identified_collected')
-        #chart
+      - if @stats[:recorded_bins] && @stats[:recorded_bins].length > 0
+        %h4= I18n.t('user.dates_collected')
+        #chart-collected
       - else
-        #chart.d-none{style:"width: 0%; height: 0%;"}
+        #chart-collected.d-none{style:"width: 0%; height: 0%;"}
+
+      - if @stats[:identified_bins] && @stats[:identified_bins].length > 0
+        %h4= I18n.t('user.dates_identified')
+        #chart-identified
+      - else
+        #chart-identified.d-none{style:"width: 0%; height: 0%;"}
 
       .row.mt-4
         .col-12.col-lg-6.mb-3
