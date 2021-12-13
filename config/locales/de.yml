@@ -696,7 +696,7 @@ de:
     not_all_columns: Es werden nicht alle verfügbaren Spalten angezeigt.
     map: Karte
     list: Liste
-    chart: Chart
+    chart: Diagramm
     no_specimens: Exemplare wurden noch nicht beansprucht oder zugeordnet.
     no_specimens_filter: Exemplare mit diesem angewendeten Filter wurden noch nicht beansprucht oder zugeordnet.
     stats_identified_specimens_nocountry:
