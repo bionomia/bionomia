@@ -696,7 +696,7 @@ fr:
     not_all_columns: Toutes les colonnes disponibles ne sont pas affichées.
     map: Carte
     list: Liste
-    chart: Chart
+    chart: Graphique
     no_specimens: Les spécimens n'ont pas encore été réclamés ou attribués.
     no_specimens_filter: Les spécimens n'ont pas encore été réclamés ou attribués avec ce filtre appliqué.
     stats_identified_specimens_nocountry:
