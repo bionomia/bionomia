@@ -778,6 +778,7 @@ ru:
     not_all_columns: Not all available columns are shown.
     map: Map
     list: List
+    chart: Chart
     no_specimens: Specimens have not yet been claimed or attributed.
     no_specimens_filter: Specimens have not yet been claimed or attributed with this applied filter.
     stats_identified_specimens_nocountry:

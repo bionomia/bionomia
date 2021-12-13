@@ -35,14 +35,12 @@
         #map-identified.d-none{style:"width: 0%; height: 0%;"}
 
       - if @stats[:recorded_bins] && @stats[:recorded_bins].length > 0
-        %h4= I18n.t('user.dates_collected')
-        #chart-collected
+        = haml :'partials/chart_list_collected', layout: false, locals: { path: "/profile" }
       - else
         #chart-collected.d-none{style:"width: 0%; height: 0%;"}
 
       - if @stats[:identified_bins] && @stats[:identified_bins].length > 0
-        %h4= I18n.t('user.dates_identified')
-        #chart-identified
+        = haml :'partials/chart_list_identified', layout: false, locals: { path: "/profile" }
       - else
         #chart-identified.d-none{style:"width: 0%; height: 0%;"}
 

@@ -1,0 +1,16 @@
+%h4= I18n.t('user.dates_collected')
+%ul.nav.nav-pills.custom-pills.mt-3{role:"tablist"}
+  %li.nav-item
+    %a.nav-link.active{"data-toggle":"tab", href: "#chart-collected-wrapper"}= I18n.t('user.chart')
+  %li.nav-item
+    %a.nav-link{"data-toggle":"tab", href: "#chart-list-collected"}= I18n.t('user.list')
+
+.tab-content.mb-3
+  #chart-collected-wrapper.tab-pane.fade.show.active{role:"tabpanel"}
+    #chart-collected
+  #chart-list-collected.tab-pane.fade.col-12.col-lg-6{role:"tabpanel"}
+    %ul.list-group.mt-3
+      - @stats[:recorded_bins].each do |bin|
+        %li.list-group-item.d-flex.justify-content-between.align-items-center
+          = link_to "#{bin[0]} – #{bin[0].to_i + 5}", "#{locals[:path]}/specimens?action=collected&start_year=#{bin[0]}&end_year=#{bin[0].to_i + 5}"
+          %span.badge.badge-light.badge-pill #{number_with_delimiter(bin[1])}

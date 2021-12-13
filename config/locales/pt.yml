@@ -696,6 +696,7 @@ pt:
     not_all_columns: Nem todas as colunas disponíveis são mostradas.
     map: Mapa
     list: Lista
+    chart: Chart
     no_specimens: Espécimes ainda não foram reivindicadas ou atribuídas.
     no_specimens_filter: Espécimes ainda não foram reivindicadas ou atribuídas a este filtro aplicado.
     stats_identified_specimens_nocountry:
