@@ -10,7 +10,9 @@
     #chart-identified
   #chart-list-identified.tab-pane.fade.col-12.col-lg-6{role:"tabpanel"}
     %ul.list-group.mt-3
+      - current_year = DateTime.now.year
       - @stats[:identified_bins].each do |bin|
         %li.list-group-item.d-flex.justify-content-between.align-items-center
-          = link_to "#{bin[0]} – #{bin[0].to_i + 5}", "#{locals[:path]}/specimens?action=identified&start_year=#{bin[0]}&end_year=#{bin[0].to_i + 5}"
+          - end_year = ((bin[0].to_i + 5) >= current_year) ? current_year : bin[0].to_i + 5
+          = link_to "#{bin[0]} – #{end_year}", "#{locals[:path]}/specimens?action=identified&start_year=#{bin[0]}&end_year=#{end_year}"
           %span.badge.badge-light.badge-pill #{number_with_delimiter(bin[1])}
