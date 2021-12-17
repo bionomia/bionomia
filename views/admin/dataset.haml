@@ -1,83 +1,81 @@
--content_for :title do
+- content_for :title do
   #{@dataset.title}
-
--content_for :scripts do
+- content_for :scripts do
   %script{src:"/js/application.js"}
   :javascript
     $(function() {
       Application.init(#{@user.id}, "POST", "/admin");
     });
-
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid alert-warning"}
-    %h1{class:"h2"} #{@dataset.title}
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.alert-warning
+    %h1.h2 #{@dataset.title}
 
 - if flash[:updated]
-  %div{class:"alert alert-success alert-dismissible fade show d-block", role: "alert"}
+  .alert.alert-success.alert-dismissible.fade.show.d-block{role: "alert"}
     %div
       Dataset metadata was updated.
-    %button{type:"button", class:"close", "data-dismiss":"alert", "aria-label":"Close"}
+    %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
       %span{"aria-hidden":"true"} &times;
 
-%form{id:"form-org-wrapper", method: "POST", action: "/admin/dataset/#{@dataset.id}", "accept-charset" => "UTF-8", class: "helpers"}
+%form.helpers#form-org-wrapper{method: "POST", action: "/admin/dataset/#{@dataset.id}", "accept-charset": "UTF-8"}
 
-  %div{class:"form-group"}
+  .form-group
     %label{for:"title"} Title
-    %input{type:"text", class:"form-control", id:"name", value:"#{@dataset.title}", name:"title"}
-  %div{class:"form-group"}
+    %input.form-control#name{type:"text", value:"#{@dataset.title}", name:"title"}
+  .form-group
     %label{for:"doi"} DOI
-    %input{type:"text", class:"form-control", id:"address", value:"#{@dataset.doi}", name:"doi"}
-  %div{class:"form-group"}
+    %input.form-control#address{type:"text", value:"#{@dataset.doi}", name:"doi"}
+  .form-group
     %label{for:"licence"} License
-    %input{type:"text", class:"form-control", id:"license", value:"#{@dataset.license}", name:"license"}
-  %div{class:"form-group"}
+    %input.form-control#license{type:"text", value:"#{@dataset.license}", name:"license"}
+  .form-group
     %label{for:"image_url"} Logo
-    %input{type:"text", class:"form-control", id:"logo", value:"#{@dataset.image_url}", name:"image_url"}
-  %div{class:"form-group"}
+    %input.form-control#logo{type:"text", value:"#{@dataset.image_url}", name:"image_url"}
+  .form-group
     %label{for:"description"} Description
-    %textarea{type:"text", class:"form-control", id:"description", name:"description"}= "#{@dataset.description}"
-    %small{id:"dataset-link", class:"form-text text-muted"}
+    %textarea.form-control#description{type:"text", name:"description"}= "#{@dataset.description}"
+    %small.form-text.text-muted#dataset-link
       %a{href: "https://gbif.org/dataset/#{@dataset.datasetKey}"}
         %img{src: "/images/gbif_40x40.png", alt:"GBIF", width:"18px"}
       %a{href: "https://gbif.org/dataset/#{@dataset.datasetKey}", target:"_blank"} https://gbif.org/dataset/#{@dataset.datasetKey}
 
   %p
-    %a{href: url("/admin/dataset/refresh.json?datasetKey=#{@dataset.datasetKey}"), role:"button", class:"btn btn-sm btn-outline-success dataset-refresh mt-3"}
-      %i{class: "fas fa-sync-alt"}
+    %a.btn.btn-sm.btn-outline-success.dataset-refresh.mt-3{href: url("/admin/dataset/refresh.json?datasetKey=#{@dataset.datasetKey}"), role:"button"}
+      %i.fas.fa-sync-alt
       Refresh
       %img{src: "/images/gbif_40x40.png", alt:"GBIF", width:"18px"}
-    %a{href: url("/admin/dataset/frictionless.json?datasetKey=#{@dataset.datasetKey}"), role:"button", class:"btn btn-sm btn-outline-success dataset-frictionless mt-3"}
-      %i{class: "fas fa-sync-alt"}
+    %a.btn.btn-sm.btn-outline-success.dataset-frictionless.mt-3{href: url("/admin/dataset/frictionless.json?datasetKey=#{@dataset.datasetKey}"), role:"button"}
+      %i.fas.fa-sync-alt
       Rebuild
-      %i{class: "fas fa-file-archive"}
+      %i.fas.fa-file-archive
 
-  %div{class:"alert alert-gbif alert-success alert-dismissible fade show text-center", role: "alert"}
+  .alert.alert-gbif.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}
     Data from GBIF was refreshed.
-    %button{type:"button", class:"close", "data-dismiss":"alert", "aria-label":"Close"}
+    %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
       %span{"aria-hidden":"true"} &times;
 
-  %div{class:"alert alert-frictionless alert-success alert-dismissible fade show text-center", role: "alert"}
+  .alert.alert-frictionless.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}
     Fricitonless data package is being rebuilt.
-    %button{type:"button", class:"close", "data-dismiss":"alert", "aria-label":"Close"}
+    %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
       %span{"aria-hidden":"true"} &times;
 
-  %button{type:"submit", class:"btn btn-success"} Submit
-  %button{type: "button", class:"btn btn-danger", "data-toggle": "modal", "data-target": "#deleteModal"} Delete
+  %button.btn.btn-success{type:"submit"} Submit
+  %button.btn.btn-danger{type: "button", "data-toggle": "modal", "data-target": "#deleteModal"} Delete
 
   %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
 
-%div{class:"modal fade", id:"deleteModal", tabindex:"-1", role:"dialog", "aria-labelledby":"deleteModal", "aria-hidden":"true"}
-  %div{class:"modal-dialog", role:"document"}
-    %div{class:"modal-content"}
-      %div{class:"modal-header"}
-        %h5{class:"modal-title", id:"deleteLabel"} Delete Account
-        %button{type:"button", class:"close", "data-dismiss":"modal", "aria-label":"Close"}
+.modal.fade#deleteModal{tabindex:"-1", role:"dialog", "aria-labelledby":"deleteModal", "aria-hidden":"true"}
+  .modal-dialog{role:"document"}
+    .modal-content
+      .modal-header
+        %h5.modal-title#deleteLabel Delete Account
+        %button.close{type:"button", "data-dismiss":"modal", "aria-label":"Close"}
           %span{"aria-hidden":"true"} &times;
-      %div{class:"modal-body"}
+      .modal-body
         Are you sure you want to delete this dataset?
-      %div{class:"modal-footer"}
+      .modal-footer
         %form{action: "/admin/dataset/#{@dataset.id}", method: :post}
-          %button{type:"button", class:"btn btn-sm btn-outline-secondary", "data-dismiss":"modal"} Cancel
+          %button.btn.btn-sm.btn-outline-secondary{type:"button", "data-dismiss":"modal"} Cancel
           %input{type: :hidden, name: "_method", value: 'DELETE'}
           %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
-          %input{type: :submit, class:"btn btn-sm btn-outline-danger", value:"Delete"}
+          %input.btn.btn-sm.btn-outline-danger{type: :submit, value:"Delete"}

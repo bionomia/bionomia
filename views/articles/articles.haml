@@ -7,7 +7,7 @@
       Application.init("", "GET", "/articles");
     });
 
--content_for :jumbotron do
+- content_for :jumbotron do
   .jumbotron.jumbotron-fluid.d-flex.flex-wrap
     .mr-auto.p-2
       %h1.h2
@@ -18,7 +18,7 @@
     = haml :'partials/article/search', layout: false
 
 - @results.each do |article|
-  .card.card-profile.mb-3
+  .card.mb-3
     .card-header
       %p.citation.card-title
         = link_to h(article.citation), url("/article/#{article.doi}")

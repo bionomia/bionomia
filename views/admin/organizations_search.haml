@@ -1,52 +1,49 @@
--content_for :title do
+- content_for :title do
   Organizations
-
--content_for :scripts do
+- content_for :scripts do
   %script{src: "/js/application.js"}
   :javascript
     $(function() {
       Application.init(#{@user.id}, "POST", "/admin");
     });
-
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid alert-warning d-flex flex-wrap"}
-    %div{class:"mr-auto"}
-      %h1{class:"h2"} Organizations
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.alert-warning.d-flex.flex-wrap
+    .mr-auto
+      %h1.h2 Organizations
     = haml :'partials/admin/organization_search', layout: false
 
 - if @results.size == 0
-  %div{class: "alert alert-warning tiny-margins", role: "alert"}
+  .alert.alert-warning.tiny-margins{role: "alert"}
     No organizations found.
 - else
   - @results.in_groups_of(3).each do |group|
-    %div{class: "card-deck"}
+    .card-deck
       - group.each do |o|
         - if o.nil?
-          %div{class:"card border-0"}
+          .card.border-0
         - else
           - org = Organization.find(o[:_id].to_i)
           - if !o.nil?
-            %div{class: "card card-profile m-3"}
+            .card.card-profile.m-3
               - if org.image_url
-                %div{class: "card-header d-flex"}
+                .card-header.d-flex
                   %div
-                    %img{src:"#{organization_image(org, 'medium')}", alt:"#{org.name}", class:"mr-2 rounded"}
-                  %div{class:"flex-grow-1"}
+                    %img.mr-2.rounded{src:"#{organization_image(org, 'medium')}", alt:"#{org.name}"}
+                  .flex-grow-1
                     %h5
                       %a{href: url("/admin/organization/#{org.id}")} #{org.name}
-                    %p{class:"text-muted"} #{org.address}
+                    %p.text-muted #{org.address}
               - else
-                %div{class: "card-header"}
+                .card-header
                   %h5
                     %a{href: url("/admin/organization/#{org.id}")} #{org.name}
-                  %p{class:"text-muted"} #{org.address}
-              %div{class: "card-body"}
-
-              %div{class: "card-footer"}
-                %div{class: "col small text-left text-muted"}
-                %div{class: "col small text-right text-muted"}
+                  %p.text-muted #{org.address}
+              .card-body
+              .card-footer
+                .col.small.text-left.text-muted
+                .col.small.text-right.text-muted
                   - count = org.active_users.count
-                  %span{class:"badge badge-light"} #{number_with_delimiter(count)}
+                  %span.badge.badge-light #{number_with_delimiter(count)}
                   #{'member'.pluralize(count)}
 
 

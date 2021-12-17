@@ -349,13 +349,15 @@ dl.dl-horizontal dd.line-break {
   .occurrence .card { -ms-flex: 0 0 47.7%; flex: 0 0 47.7%; }
 }
 
+.card-profile {
+  -webkit-box-shadow: 0 3px 5px rgba(0,0,0,.2);
+     -moz-box-shadow: 0 3px 5px rgba(0,0,0,.2);
+          box-shadow: 0 3px 5px rgba(0,0,0,.2);
+}
 .card-profile:hover {
   background-color:#f8f9fa;
   cursor:pointer;
-  border: 1px solid rgba(0,0,0,.175);
-  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-          box-shadow: 0 5px 10px rgba(0,0,0,.2);
+  border: 1px solid rgba(31, 112, 44, 0.3);
 }
 
 /* CALLOUTS */

@@ -1,15 +1,15 @@
--content_for :title do
+- content_for :title do
   Statistics
 
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid alert-warning d-flex flex-wrap"}
-    %div{class:"mr-auto"}
-      %h1{class:"h2"} Statistics
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.alert-warning.d-flex.flex-wrap
+    .mr-auto
+      %h1.h2 Statistics
 
 %h4 Active Database Connections
 
-%ul{class:"list-group mt-3"}
+%ul.list-group.mt-3
   - ActiveRecord::Base.connection_pool.stat.each do |k,v|
-    %li{class:"list-group-item d-flex justify-content-between align-items-center"}
+    %li.list-group-item.d-flex.justify-content-between.align-items-center
       #{k}
-      %span{class:"badge badge-success badge-pill"} #{v}
+      %span.badge.badge-success.badge-pill #{v}

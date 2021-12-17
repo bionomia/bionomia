@@ -1,31 +1,29 @@
--content_for :title do
+- content_for :title do
   All Accounts
-
--content_for :scripts do
+- content_for :scripts do
   %script{src: "https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"}
   %script{src: "/js/application.js"}
   :javascript
     $(function() {
       Application.init("", "POST", "/admin");
     });
-
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid alert-warning d-flex flex-wrap"}
-    %div{class:"mr-auto"}
-      %h1{class:"h2"} All People
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.alert-warning.d-flex.flex-wrap
+    .mr-auto
+      %h1.h2 All People
     = haml :'partials/admin/user_search', layout: false
 
 - if flash[:destroyed]
-  %div{class:"alert alert-danger alert-dismissible fade show d-block", role: "alert"}
+  .alert.alert-danger.alert-dismissible.fade.show.d-block{role: "alert"}
     %div
       #{flash[:destroyed]} was destroyed and all claims, attributions, and messages were deleted.
-    %button{type:"button", class:"close", "data-dismiss":"alert", "aria-label":"Close"}
+    %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
       %span{"aria-hidden":"true"} &times;
 
 - sort = locals[:sort] == "asc" ? "desc" : "asc"
-%div{class:"table-responsive-lg"}
-  %table{class:"table table-hover table-sm"}
-    %thead{class: "thead-light"}
+.table-responsive-lg
+  %table.table.table-hover.table-sm
+    %thead.thead-light
       %tr
         %th{scope: "col"}
           %a{href: url("/admin/users?order=family&sort=#{sort}")} Person
@@ -51,19 +49,19 @@
         %tr
           %td
             - if u.orcid
-              %i{class:"fab fa-orcid"}
+              %i.fab.fa-orcid
             - else
               %img{src: "/images/wikidata_16x16.png", alt:"Wikidata iD"}
             %a{href: url("/admin/user/#{u.identifier}")} #{u.fullname_reverse}
           %td #{u.country}
           %td
             - if u.is_public?
-              %span{class: "text-success"} #{u.is_public}
+              %span.text-success #{u.is_public}
             - else
               #{u.is_public}
           %td
             - if u.wants_mail?
-              %span{class: "text-success"} #{u.wants_mail}
+              %span.text-success #{u.wants_mail}
             - else
               #{u.wants_mail}
           %td
@@ -71,12 +69,12 @@
               %a{href: "https://doi.org/#{u.zenodo_concept_doi}"} #{u.zenodo_concept_doi}
           %td
             - if u.image_url
-              %span{class: "text-success"} true
+              %span.text-success true
             - else
               false
           %td
             - if u.youtube_id
-              %span{class: "text-success"} true
+              %span.text-success true
             - else
               false
           %td #{u.visited}

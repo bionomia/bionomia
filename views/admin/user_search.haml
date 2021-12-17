@@ -1,7 +1,7 @@
--content_for :title do
+- content_for :title do
   Search Accounts
 
--content_for :scripts do
+- content_for :scripts do
   %script{src: "/js/application.js"}
   %script{src: "/js/progress-bar.js"}
   :javascript
@@ -15,25 +15,25 @@
       $.each(ids, function(key, id) { ProgressBar.init(id); });
     });
 
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid alert-warning d-flex flex-wrap"}
-    %div{class:"mr-auto"}
-      %h1{class:"h2"} Search Accounts
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.alert-warning.d-flex.flex-wrap
+    .mr-auto
+      %h1.h2 Search Accounts
     = haml :'partials/admin/user_search', layout: false
 
 - if @results.size == 0
-  %div{class: "alert alert-warning tiny-margins", role: "alert"}
+  .alert.alert-warning.tiny-margins{role: "alert"}
     No users found.
 - else
-  %div{class: "alert alert-info tiny-margins", role: "alert"}
+  .alert.alert-info.tiny-margins{role: "alert"}
     #{@pagy.count} search results for
-    %span{class: "font-weight-bold"} #{h(params[:q])}
+    %span.font-weight-bold #{h(params[:q])}
 
   - @results.in_groups_of(3).each do |group|
-    %div{class: "card-deck"}
+    .card-deck
       - group.each do |user|
         - if user.nil?
-          %div{class:"card border-0"}
+          .card.border-0
         - else
           = haml :'partials/user/card_dynamic', layout: false, locals: { user: User.find(user[:_id]), path: "/admin/user" }
 

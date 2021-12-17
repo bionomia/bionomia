@@ -1,7 +1,7 @@
--content_for :title do
+- content_for :title do
   #{@admin_user.fullname} Candidate Specimens
 
--content_for :scripts do
+- content_for :scripts do
   %script{src:"/js/application.js"}
   %script{src:"/js/profile.js"}
   :javascript
@@ -14,12 +14,12 @@
       }
     });
 
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid alert-warning"}
-    %div{class:"row"}
-      %div{class:"col-12 col-lg-4 alert-warning mb-2"}
-        %h1{class:"h3"}= @admin_user.fullname
-      %div{class:"col-12 col-lg-8 mt-2"}
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.alert-warning
+    .row
+      .col-12.col-lg-4.alert-warning.mb-2
+        %h1.h3= @admin_user.fullname
+      .col-12.col-lg-8.mt-2
         = haml :'partials/admin/user_tabs', layout: false, locals: { active_page: "specimens" }
         = haml :'partials/admin/subtabs_specimens', layout: false, locals: { active_tab: "candidates"}
 
@@ -29,24 +29,24 @@
 = haml :'partials/advanced_search_filter', layout: false, locals: { url: "/admin/user/#{@admin_user.identifier}/candidates" }
 
 - if @results.size == 0
-  %div{class: "alert alert-info row tiny-margins", role:"alert"}
-    %div{class: "col col-12 col-md-8 p-0"}
+  .alert.alert-info.row.tiny-margins{role:"alert"}
+    .col.col-12.col-md-8.p-0
       Bionomia did not find any specimens indexed by
       %a{href:"https://gbif.org"} GBIF
       that were collected or identified
 
-      %div{class:"form-check d-inline-flex"}
+      .form-check.d-inline-flex
         - checked = params[:relaxed] == "1" ? "checked" : nil
-        %input{type:"checkbox", class:"form-check-input", id:"relaxed", checked: checked }
-        %label{for:"relaxed", class:"relaxed"} Make less exact
-    %div{class:"col col-12 col-md-4 p-0 text-md-right"}
+        %input.form-check-input#relaxed{type:"checkbox", checked: checked }
+        %label.relaxed{for:"relaxed"} Make less exact
+    .col.col-12.col-md-4.p-0.text-md-right
       %a{href: url("/admin/user/#{@admin_user.identifier}/advanced-search")}
-        %i{class:"fas fa-search-plus"}
+        %i.fas.fa-search-plus
         Advanced Search & Filter
 - else
   = haml :'partials/admin/fixed_navbar', layout: false
-  %div{id: "helper-info", class: "alert alert-info row candidates-alert tiny-margins", role: "alert"}
-    %div{class: "col col-12 col-md-8 p-0"}
+  #helper-info.alert.alert-info.row.candidates-alert.tiny-margins{role: "alert"}
+    .col.col-12.col-md-8.p-0
       Bionomia found #{number_with_delimiter(@total, delimeter: ",")} specimens.
       - if @agent
         Attribute with the
@@ -58,14 +58,14 @@
       %img{src:"/images/microscope-unselected.png", alt:"Collected", title:"Collected", width:18}
       identified, or Both.
       - if !@dataset && !@agent && !@taxon
-        %div{class:"form-check d-inline-flex"}
+        .form-check.d-inline-flex
           - checked = params[:relaxed] == "1" ? "checked" : nil
-          %input{type:"checkbox", class:"form-check-input", id:"relaxed", checked: checked }
-          %label{for:"relaxed", class:"relaxed"} Make less exact
+          %input.form-check-input#relaxed{type:"checkbox", checked: checked }
+          %label.relaxed{for:"relaxed"} Make less exact
 
-    %div{class:"col col-12 col-md-4 p-0 text-md-right"}
+    .col.col-12.col-md-4.p-0.text-md-right
       %a{href: url("/admin/user/#{@admin_user.identifier}/advanced-search")}
-        %i{class:"fas fa-search-plus"}
+        %i.fas.fa-search-plus
         Advanced Search & Filter
 
   = haml :'partials/tables/candidates', layout: false, locals: { user_scope: "other" }

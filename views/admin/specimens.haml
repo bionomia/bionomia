@@ -1,7 +1,7 @@
--content_for :title do
+- content_for :title do
   #{@admin_user.fullname} Specimens
 
--content_for :scripts do
+- content_for :scripts do
   %script{src:"/js/application.js"}
   %script{src:"/js/profile.js"}
   :javascript
@@ -10,25 +10,25 @@
       Profile.init("/admin/user/#{@admin_user.identifier}");
     });
 
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid alert-warning"}
-    %div{class:"row"}
-      %div{class:"col-12 col-lg-4 alert-warning mb-2"}
-        %h1{class:"h3"}= @admin_user.fullname
-      %div{class:"col-12 col-lg-8 mt-2"}
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.alert-warning
+    .row
+      .col-12.col-lg-4.alert-warning.mb-2
+        %h1.h3= @admin_user.fullname
+      .col-12.col-lg-8.mt-2
         = haml :'partials/admin/user_tabs', layout: false, locals: { active_page: "specimens" }
         = haml :'partials/admin/subtabs_specimens', layout: false, locals: { active_tab: "specimens"}
 
 = haml :'partials/filter', layout: false, locals: { url: "/admin/user/#{@admin_user.identifier}/specimens" }
 
 - if @pagy.count == 0
-  %div{class: "alert alert-info tiny-margins", role: "alert"}
+  .alert.alert-info.tiny-margins{role: "alert"}
     Specimens have not yet been claimed.
 
 - else
   = haml :'partials/admin/fixed_navbar', layout: false
-  %div{id: "helper-info", class: "alert alert-info row tiny-margins", role: "alert"}
-    %div{class: "col-12 col-md-8 p-0"}
+  #helper-info.alert.alert-info.row.tiny-margins{role: "alert"}
+    .col-12.col-md-8.p-0
       - if @filter.length > 0
         #{@admin_user.fullname} has claimed #{number_with_delimiter(@pagy.count)} specimens with this filter.
       - else
@@ -38,12 +38,12 @@
       collected,
       %img{src:"/images/microscope-unselected.png", alt:"Collected", title:"Collected", width:18}
       identified, or Both.
-    %div{class: "col-12 col-md-4 p-0 text-md-right"}
+    .col-12.col-md-4.p-0.text-md-right
       %a{href: url("/admin/user/#{@admin_user.identifier}/specimens.csv"), class:"mr-2"}
-        %i{class:"fas fa-file-csv text-dark h5 m-0 p-1"}
+        %i.fas.fa-file-csv.text-dark.h5.m-0.p-1
         CSV
       %a{href: url("/admin/user/#{@admin_user.identifier}/specimens.jsonld")}
-        %i{class:"fas fa-file-code text-dark h5 m-0 p-1"}
+        %i.fas.fa-file-code.text-dark.h5.m-0.p-1
         JSON-LD
 
   = haml :'partials/tables/specimens', layout: false

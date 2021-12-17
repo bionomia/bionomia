@@ -1,7 +1,7 @@
--content_for :title do
+- content_for :title do
   #{@admin_user.fullname} Help Received
 
--content_for :scripts do
+- content_for :scripts do
   %script{src:"/js/application.js"}
   %script{src:"/js/profile.js"}
   :javascript
@@ -10,37 +10,37 @@
       Profile.init("/admin/user/#{@admin_user.identifier}");
     });
 
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid alert-warning"}
-    %div{class:"row"}
-      %div{class:"col-12 col-lg-4 alert-warning mb-2"}
-        %h1{class:"h3"}= @admin_user.fullname
-      %div{class:"col-12 col-lg-8 mt-2"}
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.alert-warning
+    .row
+      .col-12.col-lg-4.alert-warning.mb-2
+        %h1.h3= @admin_user.fullname
+      .col-12.col-lg-8.mt-2
         = haml :'partials/admin/user_tabs', layout: false, locals: { active_page: "specimens" }
         = haml :'partials/admin/subtabs_specimens', layout: false, locals: { active_tab: "support"}
 
 - if @pagy.count == 0
-  %div{class: "alert alert-info tiny-margins", role: "alert"}
+  .alert.alert-info.tiny-margins{role: "alert"}
     Bionomia scribes have not yet helped claim specimens.
 
 - else
   = haml :'partials/admin/fixed_navbar', layout: false
 
-  %div{class: "alert alert-info tiny-margins", role: "alert"}
+  .alert.alert-info.tiny-margins{role: "alert"}
     Bionomia scribes have helped claim specimens.
 
   - @results.in_groups_of(3).each do |group|
-    %div{class: "card-deck"}
+    .card-deck
       - group.each do |u|
         - if u.nil?
-          %div{class:"card border-0"}
+          .card.border-0
         - else
-          %div{class: "card card-profile my-3"}
+          .card.card-profile.my-3
             - if u[:user].image_url
-              %div{class: "card-header d-flex"}
+              .card-header.d-flex
                 %div
-                  %img{src:"#{profile_image(u[:user], 'medium')}", alt:"#{u[:user].fullname}", class:"card-img-profile mr-2"}
-                %div{class:"flex-grow-1"}
+                  %img.card-img-profile.mr-2{src:"#{profile_image(u[:user], 'medium')}", alt:"#{u[:user].fullname}"}
+                .flex-grow-1
                   %h5
                     %a{href: url("/admin/user/#{@admin_user.identifier}/support/#{u[:user].identifier}")}
                       - if u[:user].is_bot?
@@ -48,9 +48,9 @@
                       - else
                         #{u[:user].fullname_reverse}
                   - if u[:user].country
-                    %p{class:"small text-muted mt-0 mb-0"} #{u[:user].country.split("|").join("; ")}
+                    %p.small.text-muted.mt-0.mb-0 #{u[:user].country.split("|").join("; ")}
             - else
-              %div{class: "card-header"}
+              .card-header
                 %h5
                   %a{href: url("/admin/user/#{@admin_user.identifier}/support/#{u[:user].identifier}")}
                     - if u[:user].is_bot?
@@ -58,16 +58,15 @@
                     - else
                       #{u[:user].fullname_reverse}
                 - if u[:user].country
-                  %p{class:"small text-muted mt-0 mb-0"} #{u[:user].country.split("|").join("; ")}
+                  %p.small.text-muted.mt-0.mb-0 #{u[:user].country.split("|").join("; ")}
 
-            %div{class: "card-body"}
-
-            %div{class: "card-footer d-flex"}
+            .card-body
+            .card-footer.d-flex
               - if !u[:user].is_public?
-                %div{class: "small text-right text-muted mr-2"}
-                  %i{class:"fas fa-lock"}
-              %div{class: "small text-left text-muted mr-2"}
-                %span{class:"badge badge-light"}
+                .small.text-right.text-muted.mr-2
+                  %i.fas.fa-lock
+              .small.text-left.text-muted.mr-2
+                %span.badge.badge-light
                   #{number_with_delimiter(u[:total])}
                 %a{href: url("/admin/user/#{@admin_user.identifier}/support/#{u[:user].identifier}")}
                   #{'specimen'.pluralize(u[:total])} attributed

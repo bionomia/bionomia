@@ -1,64 +1,64 @@
--content_for :title do
+- content_for :title do
   #{@taxon.family}
 
--content_for :scripts do
+- content_for :scripts do
   %script{src:"/js/application.js"}
   :javascript
     $(function() {
       Application.init(#{@user.id}, "POST", "/admin");
     });
 
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid alert-warning"}
-    %h1{class:"h2"} #{@taxon.family}
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.alert-warning
+    %h1.h2 #{@taxon.family}
 
 - if flash[:updated]
-  %div{class:"alert alert-success alert-dismissible fade show d-block", role: "alert"}
+  .alert.alert-success.alert-dismissible.fade.show.d-block{role: "alert"}
     %div
       Taxon metadata was updated.
-    %button{type:"button", class:"close", "data-dismiss":"alert", "aria-label":"Close"}
+    %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
       %span{"aria-hidden":"true"} &times;
 
-%form{id:"form-org-wrapper", method: "POST", action: "/admin/taxon/#{@taxon.family}", "accept-charset" => "UTF-8", class: "helpers"}
+%form#form-org-wrapper.helpers{method: "POST", action: "/admin/taxon/#{@taxon.family}", "accept-charset": "UTF-8"}
 
-  %div{class: "card"}
-    %div{class: "card-body mt-3"}
-      %dl{class: "row"}
-        %dt{class: "col-sm-2"} Silhouette:
-        %dd{class: "col-sm-10"}
+  .card
+    .card-body.mt-3
+      %dl.row
+        %dt.col-sm-2 Silhouette:
+        %dd.col-sm-10
           - if @taxon.has_image?
             %img{src:"/images/taxa/#{@taxon.image.file_name}"}
           - else
             None
-        %dt{class: "col-sm-2"} Credit:
-        %dd{class: "col-sm-10"}
+        %dt.col-sm-2 Credit:
+        %dd.col-sm-10
           - if @taxon.has_image?
             #{@taxon.image.credit}
           - else
             N/A
-        %dt{class: "col-sm-2"} License:
-        %dd{class: "col-sm-10"}
+        %dt.col-sm-2 License:
+        %dd.col-sm-10
           - if @taxon.has_image?
             #{@taxon.image.licenseURL}
           - else
             N/A
-        %dt{class: "col-sm-2"} URL:
-        %dd{class: "col-sm-10"}
+        %dt.col-sm-2 URL:
+        %dd.col-sm-10
           - if @taxon.has_image?
             %a{href:"http://phylopic.org/image/#{@taxon.image.file_name.split(".").first}/", target:"_blank"}
               http://phylopic.org/image/#{@taxon.image.file_name.split(".").first}/
           - else
             N/A
-        %dt{class: "col-sm-2"} Update:
-        %dd{class: "col-sm-10"}
-          %a{href: url("/admin/taxon/#{@taxon.family}/process.json"), role:"button", class:"btn btn-sm btn-outline-success taxon-process"}
-            %i{class: "fas fa-sync-alt"}
+        %dt.col-sm-2 Update:
+        %dd.col-sm-10
+          %a.btn.btn-sm.btn-outline-success.taxon-process{href: url("/admin/taxon/#{@taxon.family}/process.json"), role:"button"}
+            %i.fas.fa-sync-alt
             Update
 
-          %div{class:"alert alert-taxon-process alert-success alert-dismissible fade show text-center", role: "alert"}
+          .alert.alert-taxon-process.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}
             Taxon silhouette was searched and processed.
-            %span{id:"taxon-search-result"}
-            %button{type:"button", class:"close", "data-dismiss":"alert", "aria-label":"Close"}
+            %span#taxon-search-result
+            %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
               %span{"aria-hidden":"true"} &times;
 
       %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}

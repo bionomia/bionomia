@@ -1,7 +1,7 @@
--content_for :title do
+- content_for :title do
   #{@admin_user.fullname} Overview
 
--content_for :scripts do
+- content_for :scripts do
   %script{src:"/js/application.js"}
   %script{src:"/js/profile.js"}
   %script{src: "/js/progress-bar.js"}
@@ -13,32 +13,32 @@
     });
   = haml :'partials/viz_scripts', layout: false, locals: { path: "/admin/user/#{@admin_user.identifier}" }
 
-%div{class:"row"}
+.row
   = haml :'partials/admin/jumbotron', layout: false
-  %div{id:"tabs-column", class:"col-12 col-lg-8 mt-2"}
+  .col-12.col-lg-8.mt-2#tabs-column
     = haml :'partials/admin/user_tabs', layout: false, locals: { active_page: "overview" }
 
-    %div{class:"mt-3"}
+    .mt-3
       - if @stats[:specimens][:identified] == 0 && @stats[:specimens][:recorded] == 0 && @stats[:attributions][:helped] == 0
-        %div{class: "alert alert-info tiny-margins", role: "alert"}
+        .alert.alert-info.tiny-margins{role: "alert"}
           Specimens not yet claimed or attributed.
       - else
-        %div{class: "d-flex flex-row mt-3 alert alert-info justify-content-between", role: "alert"}
+        .d-flex.flex-row.mt-3.alert.alert-info.justify-content-between{role: "alert"}
           %div
-            %ul{class:"list-unstyled"}
+            %ul.list-unstyled
               = haml :'partials/user_stats', layout: false
 
           - if @stats[:specimens][:recorded] > 0 || @stats[:specimens][:identified] > 0
-            %div{class:"col-4 col-md-2"}
+            .col-4.col-md-2
               = I18n.t('user.progress')
-              %div{class:"progress progress-border"}
-                %div{id:"progress-bar_#{@admin_user.identifier}", class:"progress-bar bg-info", role:"progressbar", style:"width: 0%;", "aria-valuenow":"0", "aria-valuemin":"0", "aria-valuemax":"100"}
+              .progress.progress-border
+                .progress-bar.bg-info{id:"progress-bar_#{@admin_user.identifier}", role:"progressbar", style:"width: 0%;", "aria-valuenow":"0", "aria-valuemin":"0", "aria-valuemax":"100"}
 
       - if @stats[:specimens][:identified] > 0 || @stats[:specimens][:recorded] > 0
-        %div{class:"row d-flex mt-3"}
-          %div{class:"col-10 col-md-6"}
+        .row.d-flex.mt-3
+          .col-10.col-md-6
             = haml :'partials/map_list_collected', layout: false, locals: { path: "/admin/user/#{@admin_user.identifier}" }
-          %div{class:"col-10 col-md-6"}
+          .col-10.col-md-6
             = haml :'partials/map_list_identified', layout: false, locals: { path: "/admin/user/#{@admin_user.identifier}" }
       - else
         #map-collected{style:"width: 0%; height: 0%; display: none;"}
@@ -54,64 +54,64 @@
       - else
         #chart-identified.d-none{style:"width: 0%; height: 0%;"}
 
-      %div{class: "row mt-4"}
-        %div{class: "col-12 col-lg-6 mb-3"}
+      .row.mt-4
+        .col-12.col-lg-6.mb-3
           - if @families_recorded.empty? && !@families_identified.empty?
-            %h4{class: "d-flex justify-content-between mt-0"}
+            %h4.d-flex.justify-content-between.mt-0
               = I18n.t('user.families_identified')
-              %span{class: "badge badge-light badge-secondary"} #{number_with_delimiter(@families_identified.count)}
-            %ul{class: "list-group mt-3 truncate"}
+              %span.badge.badge-light.badge-secondary #{number_with_delimiter(@families_identified.count)}
+            %ul.list-group.mt-3.truncate
               - @families_identified.each do |k,v|
-                %li{class: "list-group-item d-flex justify-content-between align-items-center"}
+                %li.list-group-item.d-flex.justify-content-between.align-items-center
                   %span
                     - image = taxon_image(k, 'thumbnail')
                     - if !image.nil?
-                      %img{src:"#{image}", alt:"#{k}", class:"mr-2", style:"width:24px;max-height:64px;"}
+                      %img.mr-2{src:"#{image}", alt:"#{k}", style:"width:24px;max-height:64px;"}
                     - else
-                      %span{style:"width:24px;max-height:64px;", class:"d-inline-block mr-2"}
+                      %span.d-inline-block.mr-2{style:"width:24px;max-height:64px;"}
                     %a{href: url("/admin/user/#{@admin_user.identifier}/specimens?action=identified&family=#{ERB::Util.url_encode(k)}")} #{k}
-                  %span{class: "badge badge-light badge-pill"} #{number_with_delimiter(v)}
+                  %span.badge.badge-light.badge-pill #{number_with_delimiter(v)}
           - elsif !@families_recorded.empty?
-            %h4{class: "d-flex justify-content-between mt-0"}
+            %h4.d-flex.justify-content-between.mt-0
               = I18n.t('user.families_collected')
-              %span{class: "badge badge-light badge-secondary"} #{number_with_delimiter(@families_recorded.count)}
-            %ul{class: "list-group mt-3 truncate"}
+              %span.badge.badge-light.badge-secondary #{number_with_delimiter(@families_recorded.count)}
+            %ul.list-group.mt-3.truncate
               - @families_recorded.each do |k,v|
-                %li{class: "list-group-item d-flex justify-content-between align-items-center"}
+                %li.list-group-item.d-flex.justify-content-between.align-items-center
                   %span
                     - image = taxon_image(k, 'thumbnail')
                     - if !image.nil?
-                      %img{src:"#{image}", alt:"#{k}", class:"mr-2", style:"width:24px;max-height:64px;"}
+                      %img.mr-2{src:"#{image}", alt:"#{k}", style:"width:24px;max-height:64px;"}
                     - else
-                      %span{style:"width:24px;max-height:64px;", class:"d-inline-block mr-2"}
+                      %span.d-inline-block.mr-2{style:"width:24px;max-height:64px;"}
                     %a{href: url("/admin/user/#{@admin_user.identifier}/specimens?action=collected&family=#{ERB::Util.url_encode(k)}")} #{k}
-                  %span{class: "badge badge-light badge-pill"} #{number_with_delimiter(v)}
-        %div{class: "col-12 col-lg-6 mb-3"}
+                  %span.badge.badge-light.badge-pill #{number_with_delimiter(v)}
+        .col-12.col-lg-6.mb-3
           - if !@families_recorded.empty? && !@families_identified.empty?
-            %h4{class: "d-flex justify-content-between mt-0"}
+            %h4.d-flex.justify-content-between.mt-0
               = I18n.t('user.families_identified')
-              %span{class: "badge badge-light badge-secondary"} #{number_with_delimiter(@families_identified.count)}
-            %ul{class: "list-group mt-3 truncate"}
+              %span.badge.badge-light.badge-secondary #{number_with_delimiter(@families_identified.count)}
+            %ul.list-group.mt-3.truncate
               - @families_identified.each do |k,v|
-                %li{class: "list-group-item d-flex justify-content-between align-items-center"}
+                %li.list-group-item.d-flex.justify-content-between.align-items-center
                   %span
                     - image = taxon_image(k, 'thumbnail')
                     - if !image.nil?
-                      %img{src:"#{image}", alt:"#{k}", class:"mr-2", style:"width:24px;max-height:64px;"}
+                      %img.mr-2{src:"#{image}", alt:"#{k}", style:"width:24px;max-height:64px;"}
                     - else
-                      %span{style:"width:24px;max-height:64px;", class:"d-inline-block mr-2"}
+                      %span.d-inline-block.mr-2{style:"width:24px;max-height:64px;"}
                     %a{href: url("/admin/user/#{@admin_user.identifier}/specimens?action=identified&family=#{ERB::Util.url_encode(k)}")} #{k}
-                  %span{class: "badge badge-light badge-pill"} #{number_with_delimiter(v)}
+                  %span.badge.badge-light.badge-pill #{number_with_delimiter(v)}
 
       - if @admin_user.zenodo_concept_doi
         %h4 Data Package
-        %p{class:"citation"}
+        %p.citation
           #{@admin_user.fullname_reverse}. #{DateTime.now.year}. Natural history specimens collected and/or identified and deposited. [Data set]. Zenodo.
           %a{href: "https://doi.org/#{@admin_user.zenodo_concept_doi}"}
             https://doi.org/#{@admin_user.zenodo_concept_doi}
         %h4 HTML
-        %div{class:"alert alert-secondary"}
-          %pre{class:"p-0 m-0"}
+        .alert.alert-secondary
+          %pre.p-0.m-0
             &lt;a href="https://doi.org/#{@admin_user.zenodo_concept_doi}"&gt;&lt;img src="https://zenodo.org/badge/DOI/#{@admin_user.zenodo_concept_doi}.svg" alt="DOI"&gt;&lt;/a&gt;
         %a{href:"https://doi.org/#{@admin_user.zenodo_concept_doi}"}
           %img{src:"/images/#{@admin_user.zenodo_concept_doi}.svg"}

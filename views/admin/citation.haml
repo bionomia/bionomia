@@ -1,49 +1,48 @@
--content_for :title do
+- content_for :title do
   #{@admin_user.fullname} Cited Specimens
 
--content_for :scripts do
+- content_for :scripts do
   %script{src:"/js/application.js"}
   %script{src:"/js/profile.js"}
   :javascript
     $(function() {
-
       Application.init(#{@admin_user.id}, "PUT", "/admin", "#{@admin_user.identifier}");
       Profile.init("/admin/user/#{@admin_user.identifier}");
     });
 
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid alert-warning"}
-    %div{class:"row"}
-      %div{class:"col-12 col-lg-4 alert-warning mb-2"}
-        %h1{class:"h3"}= @admin_user.fullname
-      %div{class:"col-12 col-lg-8 mt-2"}
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.alert-warning
+    .row
+      .col-12.col-lg-4.alert-warning.mb-2
+        %h1.h3= @admin_user.fullname
+      .col-12.col-lg-8.mt-2
         = haml :'partials/admin/user_tabs', layout: false, locals: { active_page: "citations" }
 
 - if @pagy.count == 0
-  %div{class: "alert alert-info tiny-margins", role: "alert"}
+  .alert.alert-info.tiny-margins{role: "alert"}
     Specimens were not used for this study.
 
 - else
   %h4 Specimens Used In
-  %p{class: "citation"}
+  %p.citation
     #{h(@article.citation)}
     %a{href: "https://doi.org/#{@article.doi}"} https://doi.org/#{@article.doi}
 
   = haml :'partials/admin/fixed_navbar', layout: false
-  %div{id: "helper-info", class: "alert alert-info row tiny-margins", role: "alert"}
-    %div{class: "col col-12"}
+  #helper-info.alert.alert-info.row.tiny-margins{role: "alert"}
+    .col.col-12
       Choose
       %img{src:"/images/net-unselected.png", alt:"Collected", title:"Collected", width:18}
       collected,
       %img{src:"/images/microscope-unselected.png", alt:"Collected", title:"Collected", width:18}
       identified, or Both to
-      %span{class:"font-weight-bold"} adjust claims.
+      %span.font-weight-bold adjust claims.
 
-  %div{class:"table-responsive-lg"}
-    %table{class:"table table-hover table-sm"}
-      %thead{class: "thead-light"}
+  .table-responsive-lg
+    %table.table.table-hover.table-sm
+      %thead.thead-light
         %tr
-          %th{scope: "col", class:"selector"}
+          %th.selector{scope: "col"}
             = haml :'partials/bulk_selector_top', layout: false
           %th{scope: "col"} Scientific Name
           %th{scope: "col"} Collected By
@@ -59,14 +58,14 @@
         - @results.each do |uo|
           - o = uo.occurrence
           %tr
-            %td{class: "selector"}
+            %td.selector
               = haml :'partials/single_selector_preselected', layout: false, locals: { occurrence: uo, user_id: nil }
             %td
               - scientific_name = o.scientificName.nil? ? "not recorded" : o.scientificName
               %a{href: gbif_occurrence_url(o.id), target:"_blank"}
                 #{h(scientific_name)}
               - if o.hasImage?
-                %i{class:"fas fa-image ml-1", "data-toggle":"popover", "data-gbifid":"#{o.id}"}
+                %i.fas.fa-image.ml-1{"data-toggle":"popover", "data-gbifid":"#{o.id}"}
             %td #{h(o.recordedBy)}
             %td #{h(o.identifiedBy)}
             %td #{h(o.eventDate || o.year)}
@@ -75,12 +74,12 @@
             %td #{h(o.catalogNumber)}
             %td #{h(o.typeStatus)}
             %td
-              %button{type:"button", class:"btn btn-sm btn-danger remove", "data-occurrence-id":"#{uo.user_occurrence_id}"} Remove
+              %button.btn.btn-sm.btn-danger.remove{type:"button", "data-occurrence-id":"#{uo.user_occurrence_id}"} Remove
 
       - if @total > 25
-        %tfoot{class: "thead-light"}
+        %tfoot.thead-light
           %tr
-            %th{scope: "col", class:"selector"}
+            %th.selector{scope: "col"}
               = haml :'partials/bulk_selector_bottom', layout: false
             %th{scope: "col"} Scientific Name
             %th{scope: "col"} Collected By

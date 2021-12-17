@@ -1,7 +1,6 @@
--content_for :title do
+- content_for :title do
   #{@admin_user.fullname} Ignored Specimens
-
--content_for :scripts do
+- content_for :scripts do
   %script{src:"/js/application.js"}
   %script{src:"/js/profile.js"}
   :javascript
@@ -9,23 +8,22 @@
       Application.init(#{@admin_user.id}, "PUT", "/admin", "#{@admin_user.identifier}");
       Profile.init("/admin/user/#{@admin_user.identifier}");
     });
-
--content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid alert-warning"}
-    %div{class:"row"}
-      %div{class:"col-12 col-lg-4 alert-warning mb-2"}
-        %h1{class:"h3"}= @admin_user.fullname
-      %div{class:"col-12 col-lg-8 mt-2"}
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.alert-warning
+    .row
+      .col-12.col-lg-4.alert-warning.mb-2
+        %h1.h3= @admin_user.fullname
+      .col-12.col-lg-8.mt-2
         = haml :'partials/admin/user_tabs', layout: false, locals: { active_page: "specimens" }
         = haml :'partials/admin/subtabs_specimens', layout: false, locals: { active_tab: "ignored"}
 
 - if @pagy.count == 0
-  %div{class: "alert alert-info tiny-margins", role: "alert"}
+  .alert.alert-info.tiny-margins{role: "alert"}
     Specimens have not been ignored.
 
 - else
   = haml :'partials/admin/fixed_navbar', layout: false
-  %div{id: "helper-info", class: "alert alert-info tiny-margins", role: "alert"}
+  #helper-info.alert.alert-info.tiny-margins{role: "alert"}
     Choose
     %img{src:"/images/net-unselected.png", alt:"Collected", title:"Collected", width:18}
     collected,
