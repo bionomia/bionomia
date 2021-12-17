@@ -330,7 +330,7 @@ pt:
       one: "espécime co-coletado"
       other: "espécime co-coletado"
     occurrence_title: Help Others By Specimen Record
-    occurrence: Specimens
+    occurrence: Espécimes
     occurrence_advance_message: Co-collected specimen records. Use the right arrow key on your keyboard or the arrow on the screen to advance a record until you receive one that you may attribute.
   home:
     tagline: Vincule espécimes de história natural a colecionadores do mundo.
@@ -696,7 +696,7 @@ pt:
     not_all_columns: Nem todas as colunas disponíveis são mostradas.
     map: Mapa
     list: Lista
-    chart: Chart
+    chart: Gráficos
     no_specimens: Espécimes ainda não foram reivindicadas ou atribuídas.
     no_specimens_filter: Espécimes ainda não foram reivindicadas ou atribuídas a este filtro aplicado.
     stats_identified_specimens_nocountry:
