@@ -56,31 +56,6 @@
 
       .card-deck
         .card
-          %h5.card-header
-            - if @admin_user.orcid
-              %i.fab.fa-orcid
-              ORCID
-            - else
-              %img{src:"/images/wikidata_24x24.png", alt: "Wikidata"}
-              Wikidata
-          .card-body
-            %p.card-text Pull new updates to name, aliases, keywords, country, education, and employment from the ORCID account or other items if from Wikidata.
-            %p
-              %a.btn.btn-sm.btn-outline-success.profile-flush{href: url("/#{@admin_user.identifier}/refresh.json"), role:"button"}
-                %i.fas.fa-sync-alt
-                Refresh
-                - if @admin_user.orcid
-                  %i.fab.fa-orcid
-                - else
-                  %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD", width:"18px"}
-
-            #refresh-message.alert.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}
-              - source = @admin_user.orcid ? "ORCID" : "Wikidata"
-              Data from #{source} were refreshed.
-              %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
-                %span{"aria-hidden":"true"} &times;
-
-        .card
           %h5.card-header Email Notifications
           .card-body
             %p.card-text
@@ -90,7 +65,6 @@
               - else
                 Not subscribed.
 
-      .card-deck
         .card
           %h5.card-header
             YouTube
@@ -104,6 +78,7 @@
                 %input.form-control.mb-3#youtube_id{type: "text", name: "youtube_id", value: "#{@admin_user.youtube_id}"}
                 %input.btn.btn-sm.btn-outline-success{type: :submit, value:"Update"}
 
+      .card-deck
         .card
           %h5.card-header
             Deceased Redirect
@@ -117,7 +92,6 @@
                 %input.form-control.mb-3#wikidata{type: "text", name: "wikidata"}
                 %input.btn.btn-sm.btn-outline-success{type: :submit, value:"Update"}
 
-      .card-deck
         .card
           %h5.card-header
             Delete Account
@@ -140,5 +114,3 @@
                     %input{type: :hidden, name: "_method", value: 'DELETE'}
                     %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
                     %input.btn.btn-sm.btn-outline-danger{type: :submit, value:"Delete"}
-
-        .card.border-0

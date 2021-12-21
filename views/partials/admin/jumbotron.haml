@@ -90,44 +90,48 @@
     .embed-responsive.embed-responsive-16by9.mt-3
       %iframe.embed-responsive-item.rounded.align-top.m-2{src:"https://www.youtube.com/embed/#{@admin_user.youtube_id}", frameborder:"0", allow:"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture", allowfullscreen: true}
 
-  - if locals[:active_page] != "settings"
-    .mt-3.pt-3.border-top
-      %p.mb-0
-        - if @admin_user.is_public?
-          %a.mr-2.text-nowrap{href: url("/#{@admin_user.identifier}")}
-            %i.fas.fa-user
-            = I18n.t('profile.public_profile')
+  .mt-3.pt-3.border-top
+    %p.mb-0
+      - if @admin_user.is_public?
+        %a.mr-2.text-nowrap{href: url("/#{@admin_user.identifier}")}
+          %i.fas.fa-user
+          = I18n.t('profile.public_profile')
+      - else
+        %i.fas.fa-lock
+        %span.mr-2 Private Profile
+      %a.profile-flush.mr-2.mb-2.text-nowrap{href: url("/#{@admin_user.identifier}/refresh-stats.json")}
+        %i.fas.fa-sync-alt
+        = I18n.t('general.refresh_stats')
+      %a.profile-flush.mr-2.mb-2.text-nowrap{href: url("/#{@admin_user.identifier}/refresh.json")}
+        %i.fas.fa-sync-alt
+        = I18n.t('general.refresh_profile')
+        - if @admin_user.orcid
+          %i.fab.fa-orcid
         - else
-          %i.fas.fa-lock
-          %span.mr-2 Private Profile
-        %a.mr-2.mb-2.profile-flush.text-nowrap{href: url("/#{@admin_user.identifier}/refresh-stats.json")}
-          %i.fas.fa-sync-alt
-          = I18n.t('general.refresh_stats')
-        %a.profile-flush.mr-2.mb-2.text-nowrap{href: url("/#{@admin_user.identifier}/refresh.json")}
-          %i.fas.fa-sync-alt
-          = I18n.t('general.refresh_profile')
-          - if @admin_user.orcid
-            %i.fab.fa-orcid
-          - else
-            %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD", width:"18px"}
-      %p.mb-0
+          %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD", width:"18px"}
+    %p.mb-0
+      - if locals[:active_page] == "settings"
+        %a.mb-2.text-nowrap{href: url("/admin/user/#{@admin_user.identifier}")}
+          %i.fas.fa-user
+          = I18n.t('profile.overview')
+      - else
         %a.text-nowrap{href: url("/admin/user/#{@admin_user.identifier}/settings")}
           %i.fas.fa-cog
           = I18n.t('profile.settings')
-      %ul.list-inline.mt-2
-        - if @admin_user.orcid
-          %li.list-inline-item
-            Visited:
-            - if @admin_user.visited
-              #{@admin_user.visited.to_date}
-            - else
-              %span.font-italic never
-        - if @admin_user.created
-          %li.list-inline-item Created: #{@admin_user.created.to_date}
-        - if @admin_user.updated
-          %li.list-inline-item Updated: #{@admin_user.updated.to_date}
+    %ul.list-inline.mt-2
+      - if @admin_user.orcid
+        %li.list-inline-item
+          Visited:
+          - if @admin_user.visited
+            #{@admin_user.visited.to_date}
+          - else
+            %span.font-italic never
+      - if @admin_user.created
+        %li.list-inline-item Created: #{@admin_user.created.to_date}
+      - if @admin_user.updated
+        %li.list-inline-item Updated: #{@admin_user.updated.to_date}
 
-    #flush-message.alert.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}
-      = I18n.t("user.caches_rebuilt")
-      %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
-        %span{"aria-hidden":"true"} &times;
+  #flush-message.alert.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}
+    = I18n.t("user.caches_rebuilt")
+    %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
+      %span{"aria-hidden":"true"} &times;
