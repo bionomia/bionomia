@@ -8,7 +8,7 @@
   = haml :'partials/viz_scripts', layout: false, locals: { path: "/help-others/#{@viewed_user.identifier}" }
 
 - content_for :jumbotron do
-  = haml :'partials/help/jumbotron', layout: false
+  = haml :'partials/help/jumbotron', layout: false, locals: { active_subtab: "visualizations" }
 
 = haml :'partials/help/tabs', layout: false, locals: { active_tab: "specimens" }
 = haml :'partials/help/subtabs_fix', layout: false, locals: { active_subtab: "visualizations" }

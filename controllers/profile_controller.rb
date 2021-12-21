@@ -415,12 +415,6 @@ module Sinatra
               { message: "ok", occurrence_id: params[:occurrence_id] }.to_json
             end
 
-            get '/refresh.json' do
-              content_type "application/json", charset: 'utf-8'
-              @user.update_profile
-              { message: "ok" }.to_json
-            end
-
             delete '/destroy' do
               @user.destroy
               session.clear

@@ -41,13 +41,6 @@ module Sinatra
               { count: count }.to_json
             end
 
-            get '/:id/refresh.json' do
-              content_type "application/json", charset: 'utf-8'
-              user = find_user(params[:id])
-              user.update_profile
-              { message: "ok" }.to_json
-            end
-
             get '/progress' do
               latest_claims("living")
               haml :'help/progress', locals: { active_page: "help", active_tab: "orcid" }

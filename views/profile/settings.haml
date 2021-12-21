@@ -32,24 +32,6 @@
                     %i.fas.fa-users
 
         .card
-          %h5.card-header
-            %i.fab.fa-orcid
-            ORCID
-          .card-body
-            %p.card-text= I18n.t('profile.orcid_updates')
-            %p
-              %a.btn.btn-sm.btn-outline-success.profile-refresh{href: url("/profile/refresh.json"), role:"button"}
-                %i.fas.fa-sync-alt
-                = I18n.t('profile.refresh')
-                %i.fab.fa-orcid
-
-            #refresh-message.alert.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}
-              = I18n.t('profile.orcid_refreshed')
-              %button{type:"button", class:"close", "data-dismiss":"alert", "aria-label":"Close"}
-                %span{"aria-hidden":"true"} &times;
-
-      .card-deck
-        .card
           %h5.card-header= I18n.t('profile.make_citable')
           .card-body
             - if !@user.made_claim?
@@ -88,6 +70,7 @@
                     %i.fas.fa-check-circle
                     = I18n.t('profile.zenodo_linked')
 
+      .card-deck
         .card
           %h5.card-header= I18n.t('profile.email_notifications')
           .card-body
@@ -98,7 +81,6 @@
             - else
               %p.card-text= I18n.t('profile.email_instructions')
 
-      .card-deck
         .card
           %h5.card-header
             YouTube
@@ -112,6 +94,7 @@
               %input#youtube_id.form-control.mb-3{type: :text, name: "youtube_id", value: "#{@user.youtube_id}", placeholder: "w-rOViX3buo"}
               %input.btn.btn-sm.btn-outline-success{type: :submit, value:"#{I18n.t('profile.update')}"}
 
+      .card-deck
         .card
           %h5.card-header
             #{I18n.t('profile.language')}
@@ -129,7 +112,6 @@
               %input{type: :hidden, name: "youtube_id", value: "#{@user.youtube_id}"}
               %input.btn.btn-sm.btn-outline-success.d-block{type: :submit, value:"#{I18n.t('profile.update')}"}
 
-      .card-deck
         .card
           %h5.card-header= I18n.t('profile.delete_account')
           .card-body
@@ -150,5 +132,3 @@
                       %input{type: :hidden, name: "_method", value: 'DELETE'}
                       %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
                       %input.btn.btn-sm.btn-outline-danger{type: :submit, value:"#{I18n.t('profile.delete')}"}
-
-        .card.border-0

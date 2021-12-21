@@ -93,7 +93,7 @@
     - if authorized?
       .text-center.border-top.mt-3.pt-3
         - if @viewed_user.is_public?
-          %a{href: url("/#{@viewed_user.identifier}"), class:"mr-2 mb-2"}
+          %a.mr-2.mb-2{href: url("/#{@viewed_user.identifier}")}
             %i.fas.fa-user
             = I18n.t('help.public_profile')
 
@@ -107,7 +107,12 @@
             %i.fas.fa-unlock
             = I18n.t('help.make_public')
 
-        %a{href: url("/help-others/#{@viewed_user.identifier}/refresh.json"), class:"mr-2 profile-refresh"}
+        - if locals[:active_subtab] == "visualizations"
+          %a.profile-flush.mr-2.mb-2.text-nowrap{href: url("/#{@viewed_user.identifier}/refresh-stats.json")}
+            %i.fas.fa-sync-alt
+            = I18n.t('general.refresh_stats')
+
+        %a.profile-flush.mr-2.mb-2.text-nowrap{href: url("/#{@viewed_user.identifier}/refresh.json")}
           %i.fas.fa-sync-alt
           = I18n.t('general.refresh_profile')
           - if @viewed_user.orcid
@@ -116,15 +121,14 @@
             %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD", width:"18px"}
 
         - if admin_authorized?
-          %a{href: url("/admin/user/#{@viewed_user.identifier}/settings"), class:"mb-2"}
+          %a.mb-2{href: url("/admin/user/#{@viewed_user.identifier}/settings")}
             %i.fas.fa-cog
             = I18n.t('general.settings')
 
-      #refresh-message.alert.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}
-        - source = @viewed_user.orcid ? "ORCID" : "Wikidata"
-        Demographics from #{source} were refreshed.
-        %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
-          %span{"aria-hidden":"true"} &times;
+        #flush-message.alert.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}
+          = I18n.t("user.caches_rebuilt")
+          %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
+            %span{"aria-hidden":"true"} &times;
 
   .w-100.w-sm-75.w-lg-50.w-xl-25.ml-auto
     - if authorized?

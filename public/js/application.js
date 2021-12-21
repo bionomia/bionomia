@@ -512,27 +512,6 @@ var Application = (function($, window) {
     activate_refresh: function(){
       var self = this;
 
-      $("a.profile-refresh").on("click", function(e) {
-        var link = $(this);
-
-        e.stopPropagation();
-        e.preventDefault();
-        $.ajax({
-          method: "GET",
-          url: link.attr("href"),
-          beforeSend: function(xhr) {
-            link.addClass("disabled").find("i").first().addClass("fa-spin");
-          }
-        }).done(function(data) {
-          link.find("i").first().removeClass("fa-spin");
-          $("#refresh-message").alert().show();
-          $("#refresh-message").on("closed.bs.alert", function () {
-            location.reload();
-          });
-        });
-        return false;
-      });
-
       $("a.profile-flush").on("click", function(e) {
         var link = $(this);
 
