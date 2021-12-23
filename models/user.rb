@@ -45,6 +45,7 @@ class User < ActiveRecord::Base
           dest.save
         end
         dest.update_wikidata_profile
+        src.user_occurrences.reload.delete_all
         src.delete
         src.delete_search
       end
