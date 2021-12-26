@@ -35,7 +35,7 @@
         - image = taxon_image(locals[:stats][:specimens][:top_family_recorded], 'thumbnail')
         - if !image.nil?
           .flex
-            %img.mr-2{src:"#{image}&bright=30", alt:"#{locals[:stats][:specimens][:top_family_recorded]}", style:"width:24px;max-height:64px;"}
+            %img.mr-2{src:"#{image}", alt:"#{locals[:stats][:specimens][:top_family_recorded]}", style:"width:24px;max-height:64px;"}
   - else
     .card-header.d-flex
       .flex-grow-1
@@ -58,7 +58,7 @@
         - image = taxon_image(locals[:stats][:specimens][:top_family_recorded], 'thumbnail')
         - if !image.nil?
           .flex
-            %img.mr-2{src:"#{image}&bright=30", alt:"#{locals[:stats][:specimens][:top_family_recorded]}", style:"width:24px;max-height:64px;"}
+            %img.mr-2{src:"#{image}", alt:"#{locals[:stats][:specimens][:top_family_recorded]}", style:"width:24px;max-height:64px;"}
 
   .card-body
     %p.card-text.mt-2 #{statement}
