@@ -15,7 +15,6 @@
     - if @viewed_user.is_public?
       = haml :'partials/user/tabs', layout: false, locals: { active_page: "helped" }
 
-
       - if @pagy.count == 0
         .alert.alert-info.tiny-margins{role: "alert"}= I18n.t('user.no_helped_alert')
       - else
