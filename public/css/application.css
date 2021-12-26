@@ -542,13 +542,17 @@ dl.citation{
   }
 }
 
+@media(max-width: 700px) {
+  .card-deck{display:block;}
+}
+
 @media(max-width: 767px) {
   .form-inline .form-group {
     margin-bottom:0.25rem;
   }
 }
 
-@media(max-width: 575px) {
+@media(max-width: 576px) {
   .button-login{display:inline-block;}
 }
 

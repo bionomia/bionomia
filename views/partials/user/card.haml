@@ -31,23 +31,34 @@
                   #{country_name(country_codes[i])}
                 - else
                   #{v}
+      - if locals[:stats][:specimens][:top_family_recorded]
+        - image = taxon_image(locals[:stats][:specimens][:top_family_recorded], 'thumbnail')
+        - if !image.nil?
+          .flex
+            %img.mr-2{src:"#{image}", alt:"#{locals[:stats][:specimens][:top_family_recorded]}", style:"width:24px;max-height:64px;"}
   - else
-    .card-header
-      %h5
-        // Do not use url method here becase caching breaks language-based subdomains
-        %a{href: "/#{locals[:user].identifier}"} #{locals[:user].fullname_reverse}
-      - if locals[:user].wikidata
-        %p.small.text-muted.mt-0.mb-0= format_lifespan(locals[:user])
-      - if locals[:user].country
-        %p.small.text-muted.mt-0.mb-0
-          - country_codes = locals[:user].country_code.split("|") rescue []
-          - countries = locals[:user].country.split("|") rescue []
-          - countries.each_with_index do |v,i|
-            = succeed (countries[i+1]) ? '; ' : '' do
-              - if !country_codes[i].nil? && !country_codes[i].empty?
-                #{country_name(country_codes[i])}
-              - else
-                #{v}
+    .card-header.d-flex
+      .flex-grow-1
+        %h5
+          // Do not use url method here becase caching breaks language-based subdomains
+          %a{href: "/#{locals[:user].identifier}"} #{locals[:user].fullname_reverse}
+        - if locals[:user].wikidata
+          %p.small.text-muted.mt-0.mb-0= format_lifespan(locals[:user])
+        - if locals[:user].country
+          %p.small.text-muted.mt-0.mb-0
+            - country_codes = locals[:user].country_code.split("|") rescue []
+            - countries = locals[:user].country.split("|") rescue []
+            - countries.each_with_index do |v,i|
+              = succeed (countries[i+1]) ? '; ' : '' do
+                - if !country_codes[i].nil? && !country_codes[i].empty?
+                  #{country_name(country_codes[i])}
+                - else
+                  #{v}
+      - if locals[:stats][:specimens][:top_family_recorded]
+        - image = taxon_image(locals[:stats][:specimens][:top_family_recorded], 'thumbnail')
+        - if !image.nil?
+          .flex
+            %img.mr-2{src:"#{image}", alt:"#{locals[:stats][:specimens][:top_family_recorded]}", style:"width:24px;max-height:64px;"}
 
   .card-body
     %p.card-text.mt-2 #{statement}
