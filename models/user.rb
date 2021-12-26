@@ -774,11 +774,9 @@ class User < ActiveRecord::Base
   def flush_caches
     return if !::Module::const_get("BIONOMIA")
     BIONOMIA.cache_clear("blocks/#{identifier}-stats")
-    BIONOMIA.cache_clear("blocks/#{identifier}-scribe")
     stats = Class.new
     stats.extend Sinatra::Bionomia::Helper::UserHelper
     BIONOMIA.cache_put_tag("blocks/#{identifier}-stats", stats.user_stats(self))
-    BIONOMIA.cache_put_tag("blocks/#{identifier}-scribe", stats.scribe_stats(self))
     update_search
   end
 

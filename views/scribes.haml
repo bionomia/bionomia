@@ -20,7 +20,7 @@
       - if u.nil?
         .card.border-0
       - else
-        - stats = cache_block("#{u.identifier}-scribe") { scribe_stats(u) }
+        - stats = cache_block("#{u.identifier}-stats") { user_stats(u) }
         = haml :'partials/user/card-scribe', layout: false, locals: { user: u, stats: stats }
 
 - if @pagy.pages > 1

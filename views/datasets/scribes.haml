@@ -9,10 +9,10 @@
     });
 
 .row
-  = haml :'partials/dataset/jumbotron', layout:false
+  = haml :'partials/dataset/jumbotron', layout: false
 
   .col-12.col-lg-8.mt-2
-    = haml :'partials/dataset/tabs', layout:false, locals: { active_tab: locals[:active_tab] }
+    = haml :'partials/dataset/tabs', layout: false, locals: { active_tab: locals[:active_tab] }
 
     - if @pagy.count == 0
       .alert.alert-info.tiny-margins{role: "alert"}= I18n.t('dataset.no_scribes_alert')
@@ -26,7 +26,7 @@
             - if u.nil?
               .card.border-0
             - else
-              - stats = cache_block("#{u.identifier}-scribe") { scribe_stats(u) }
+              - stats = cache_block("#{u.identifier}-stats") { user_stats(u) }
               = haml :'partials/user/card-scribe', layout: false, locals: { user: u, stats: stats }
 
       - if @pagy.pages > 1

@@ -188,14 +188,14 @@ module Sinatra
             },
             attributions: {
               helped: helped.count,
-              number: helped.values.reduce(:+)
+              number: helped.values.reduce(:+) || 0
             },
             countries: {
               identified: countries_identified,
               recorded: countries_recorded
             },
             articles: {
-              specimens_cited: cited.map(&:second).reduce(:+),
+              specimens_cited: cited.map(&:second).reduce(:+) || 0,
               number: cited.count
             },
             recorded_bins: user.recorded_bins
@@ -204,13 +204,6 @@ module Sinatra
             identified_bins: user.identified_bins
                                  .delete_if{|k,v| k > Date.today.year || k <= 1700 || v == 0}
                                  .map{|k,v| [k.to_s, v]}
-          }
-        end
-
-        def scribe_stats(user)
-          {
-            attributions: user.claims_given.count,
-            people: user.helped_count
           }
         end
 

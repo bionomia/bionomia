@@ -37,8 +37,8 @@
   .card-footer
     .small.text-muted.row
       .col-12.col-md-6
-        %span.badge.badge-light #{number_with_delimiter(locals[:stats][:attributions])}
-        #{I18n.t('card.attributed', count: locals[:stats][:attributions])}
+        %span.badge.badge-light #{number_with_delimiter(locals[:stats][:attributions][:number])}
+        #{I18n.t('card.attributed', count: locals[:stats][:attributions][:number])}
       .col-12.col-md-6.text-md-left.text-lg-right
-        %span.badge.badge-light #{number_with_delimiter(locals[:stats][:people])}
-        #{I18n.t('card.helped', count: locals[:stats][:people])}
+        %span.badge.badge-light #{number_with_delimiter(locals[:stats][:attributions][:helped])}
+        #{I18n.t('card.helped', count: locals[:stats][:attributions][:helped])}
