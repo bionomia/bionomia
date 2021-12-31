@@ -47,6 +47,9 @@ class User < ActiveRecord::Base
         dest.update_wikidata_profile
         dest.flush_caches
         src.user_occurrences.reload.delete_all
+        if ::Module::const_get("BIONOMIA")
+          BIONOMIA.cache_clear("blocks/#{src.identifier}-stats")
+        end
         src.delete
         src.delete_search
       end
