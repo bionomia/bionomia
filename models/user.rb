@@ -38,13 +38,14 @@ class User < ActiveRecord::Base
         dest_occurrences = dest.user_occurrences.pluck(:occurrence_id) rescue []
         (src_occurrences - dest_occurrences).in_groups_of(500, false) do |group|
           src.user_occurrences.where(occurrence_id: group)
-                              .update_all({ user_id: dest.id})
+                              .update_all({ user_id: dest.id })
         end
         if src.is_public?
           dest.is_public = true
           dest.save
         end
         dest.update_wikidata_profile
+        dest.flush_caches
         src.user_occurrences.reload.delete_all
         src.delete
         src.delete_search
