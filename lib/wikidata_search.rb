@@ -162,11 +162,10 @@ module Bionomia
         SELECT DISTINCT (REPLACE(STR(?item),".*Q","Q") AS ?qid) (REPLACE(STR(?redirect),".*Q","Q") AS ?redirect_toqid)
         WHERE {
           ?redirect wdt:P31 wd:Q5 .
-          ?redirect #{list} ?id .
           ?redirect wdt:P570 ?date_of_death .
+          ?redirect #{list} ?id .
           ?item owl:sameAs ?redirect .
           ?item schema:dateModified ?change .
-          ?redirect schema:dateModified ?change .
           SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en" }
           FILTER(?change > "#{week_ago.iso8601}"^^xsd:dateTime)
         }
