@@ -576,6 +576,7 @@ fi:
     date_identified: Date Identified
     institution: Institution
     catalog_number: Catalog Number
+    basis_record: Basis Of Record
     country: Country
     family: Family
     type_status: Type Status

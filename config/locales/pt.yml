@@ -576,6 +576,7 @@ pt:
     date_identified: Data de identificação
     institution: Instituição
     catalog_number: Número de catálogo
+    basis_record: Basis Of Record
     country: País
     family: Família
     type_status: Status do tipo

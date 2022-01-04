@@ -29,19 +29,21 @@
           #{@article.citation}
           %a{href: "https://doi.org/#{@article.doi}"} https://doi.org/#{@article.doi}
 
-        .table-responsive-lg
+        .table-responsive-lg.overflow-auto
           %table.table.table-hover.table-sm
             %thead.thead-light
               %tr
-                %th{scope: "col", style:"min-width:65px"}
-                %th{scope: "col"}= I18n.t('specimen.scientific_name')
-                %th{scope: "col"}= I18n.t('specimen.collected_by')
-                %th{scope: "col"}= I18n.t('specimen.identified_by')
-                %th{scope: "col"}= I18n.t('specimen.date_collected')
-                %th{scope: "col"}= I18n.t('specimen.date_identified')
-                %th{scope: "col"}= I18n.t('specimen.institution')
-                %th{scope: "col"}= I18n.t('specimen.catalog_number')
-                %th{scope: "col"}= I18n.t('specimen.type_status')
+                %th.text-nowrap{scope: "col", style:"min-width:65px"}
+                %th.text-nowrap{scope: "col"}= I18n.t('specimen.scientific_name')
+                %th.text-nowrap{scope: "col"}= I18n.t('specimen.collected_by')
+                %th.text-nowrap{scope: "col"}= I18n.t('specimen.identified_by')
+                %th.text-nowrap{scope: "col"}= I18n.t('specimen.date_collected')
+                %th.text-nowrap{scope: "col"}= I18n.t('specimen.date_identified')
+                %th.text-nowrap{scope: "col"}= I18n.t('specimen.family')
+                %th.text-nowrap{scope: "col"}= I18n.t('specimen.institution')
+                %th.text-nowrap{scope: "col"}= I18n.t('specimen.catalog_number')
+                %th.text-nowrap{scope: "col"}= I18n.t('specimen.type_status')
+                %th.text-nowrap{scope: "col"}= I18n.t('specimen.basis_record')
 
             %tbody
               - @results.each do |uo|
@@ -65,9 +67,11 @@
                   %td #{h(o.identifiedBy)}
                   %td #{h(o.eventDate || o.year)}
                   %td #{h(o.dateIdentified)}
+                  %td #{h(o.family)}
                   %td #{h(o.institutionCode)}
                   %td #{h(o.catalogNumber)}
                   %td #{h(o.typeStatus)}
+                  %td #{h(o.basisOfRecord)}
 
         - if @pagy.pages > 1
           .y-scroll

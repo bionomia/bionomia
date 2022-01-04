@@ -22,22 +22,23 @@
   #helper-info.alert.alert-info.tiny-margins{role: "alert"}
     = haml :'partials/choose_instructions', layout: false
 
-  .table-responsive-lg
+  .table-responsive-lg.overflow-auto
     %table.table.table-hover.table-sm
       %thead.thead-light
         %tr
-          %th.selector{scope: "col"}
+          %th.text-nowrap.selector{scope: "col"}
             = haml :'partials/bulk_selector_top', layout: false
-          %th{scope: "col"}= I18n.t('specimen.scientific_name')
-          %th{scope: "col"}= I18n.t('specimen.collected_by')
-          %th{scope: "col"}= I18n.t('specimen.identified_by')
-          %th{scope: "col"}= I18n.t('specimen.date_collected')
-          %th{scope: "col"}= I18n.t('specimen.date_identified')
-          %th{scope: "col"}= I18n.t('specimen.family')
-          %th{scope: "col"}= I18n.t('specimen.institution')
-          %th{scope: "col"}= I18n.t('specimen.catalog_number')
-          %th{scope: "col"}= I18n.t('specimen.type_status')
-          %th.btn-selector-wide{scope: "col"}
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.scientific_name')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.collected_by')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.identified_by')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.date_collected')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.date_identified')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.family')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.institution')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.catalog_number')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.type_status')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.basis_record')
+          %th.text-nowrap.btn-selector-wide{scope: "col"}
             %button.btn.btn-sm.btn-warning.hide-all{type:"button", name:"notme-all"}= I18n.t('specimen.not_them')
           %th{scope: "col", class:"btn-selector-wide"}
             %button.btn.btn-sm.btn-danger.remove-all{type:"button", name:"remove-all"}= I18n.t('specimen.remove')
@@ -64,6 +65,7 @@
             %td #{h(o.institutionCode)}
             %td #{h(o.catalogNumber)}
             %td #{h(o.typeStatus)}
+            %td #{h(o.basisOfRecord)}
             %td
               %button.btn.btn-sm.btn-outline-warning.hide{type:"button", "data-occurrence-id":"#{uo.user_occurrence_id}", disabled: disabled}
                 = I18n.t('specimen.not_them')
@@ -83,22 +85,23 @@
       - if @total > 25
         %tfoot.thead-light
           %tr
-            %th.selector{scope: "col"}
+            %th.text-nowrap.selector{scope: "col"}
               = haml :'partials/bulk_selector_bottom', layout: false
-            %th{scope: "col"}= I18n.t('specimen.scientific_name')
-            %th{scope: "col"}= I18n.t('specimen.collected_by')
-            %th{scope: "col"}= I18n.t('specimen.identified_by')
-            %th{scope: "col"}= I18n.t('specimen.date_collected')
-            %th{scope: "col"}= I18n.t('specimen.date_identified')
-            %th{scope: "col"}= I18n.t('specimen.family')
-            %th{scope: "col"}= I18n.t('specimen.institution')
-            %th{scope: "col"}= I18n.t('specimen.catalog_number')
-            %th{scope: "col"}= I18n.t('specimen.type_status')
-            %th
+            %th.text-nowrap{scope: "col"}= I18n.t('specimen.scientific_name')
+            %th.text-nowrap{scope: "col"}= I18n.t('specimen.collected_by')
+            %th.text-nowrap{scope: "col"}= I18n.t('specimen.identified_by')
+            %th.text-nowrap{scope: "col"}= I18n.t('specimen.date_collected')
+            %th.text-nowrap{scope: "col"}= I18n.t('specimen.date_identified')
+            %th.text-nowrap{scope: "col"}= I18n.t('specimen.family')
+            %th.text-nowrap{scope: "col"}= I18n.t('specimen.institution')
+            %th.text-nowrap{scope: "col"}= I18n.t('specimen.catalog_number')
+            %th.text-nowrap{scope: "col"}= I18n.t('specimen.type_status')
+            %th.text-nowrap{scope: "col"}= I18n.t('specimen.basis_record')
+            %th.text-nowrap
               %button.btn.btn-sm.btn-warning.hide-all{type:"button", name:"notme-all"}= I18n.t('specimen.not_them')
-            %th
+            %th.text-nowrap
               %button.btn.btn-sm.btn-danger.remove-all{type:"button", name:"remove-all"}= I18n.t('specimen.remove')
-            %th{scope: "col"}= I18n.t('specimen.scribe')
+            %th.text-nowrap{scope: "col"}= I18n.t('specimen.scribe')
 
   - if @total > 25
     = haml :'partials/page_size', layout: false

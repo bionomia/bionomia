@@ -25,23 +25,24 @@
   #helper-info.alert.alert-info.tiny-margins{role: "alert"}
     = haml :'partials/choose_instructions', layout: false
 
-  .table-responsive-lg
+  .table-responsive-lg.overflow-auto
     %table.table.table-hover.table-sm
       %thead.thead-light
         %tr
-          %th.selector{scope: "col"}
+          %th.text-nowrap.selector{scope: "col"}
             = haml :'partials/bulk_selector_top', layout: false
-          %th{scope: "col"}= I18n.t('specimen.scientific_name')
-          %th{scope: "col"}= I18n.t('specimen.collected_by')
-          %th{scope: "col"}= I18n.t('specimen.identified_by')
-          %th{scope: "col"}= I18n.t('specimen.date_collected')
-          %th{scope: "col"}= I18n.t('specimen.date_identified')
-          %th{scope: "col"}= I18n.t('specimen.family')
-          %th{scope: "col"}= I18n.t('specimen.institution')
-          %th{scope: "col"}= I18n.t('specimen.catalog_number')
-          %th{scope: "col"}= I18n.t('specimen.type_status')
-          %th{scope: "col"}= I18n.t('specimen.scribe')
-          %th.btn-selector-wide{scope: "col"}
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.scientific_name')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.collected_by')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.identified_by')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.date_collected')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.date_identified')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.family')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.institution')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.catalog_number')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.type_status')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.basis_record')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.scribe')
+          %th.text-nowrap.btn-selector-wide{scope: "col"}
 
       %tbody
         - @results.each do |uo|
@@ -63,6 +64,7 @@
             %td #{h(o.institutionCode)}
             %td #{h(o.catalogNumber)}
             %td #{h(o.typeStatus)}
+            %td #{h(o.basisOfRecord)}
             %td
               - if uo.claimant.is_bot?
                 #{uo.claimant.fullname}
@@ -76,19 +78,20 @@
       - if @total > 25
         %tfoot.thead-light
           %tr
-            %th.selector{scope: "col"}
+            %th.text-nowrap.selector{scope: "col"}
               = haml :'partials/bulk_selector_bottom', layout: false
-            %th{scope: "col"}= I18n.t('specimen.scientific_name')
-            %th{scope: "col"}= I18n.t('specimen.collected_by')
-            %th{scope: "col"}= I18n.t('specimen.identified_by')
-            %th{scope: "col"}= I18n.t('specimen.date_collected')
-            %th{scope: "col"}= I18n.t('specimen.date_identified')
-            %th{scope: "col"}= I18n.t('specimen.family')
-            %th{scope: "col"}= I18n.t('specimen.institution')
-            %th{scope: "col"}= I18n.t('specimen.catalog_number')
-            %th{scope: "col"}= I18n.t('specimen.type_status')
-            %th{scope: "col"}= I18n.t('specimen.scribe')
-            %th
+            %th.text-nowrap{scope: "col"}= I18n.t('specimen.scientific_name')
+            %th.text-nowrap{scope: "col"}= I18n.t('specimen.collected_by')
+            %th.text-nowrap{scope: "col"}= I18n.t('specimen.identified_by')
+            %th.text-nowrap{scope: "col"}= I18n.t('specimen.date_collected')
+            %th.text-nowrap{scope: "col"}= I18n.t('specimen.date_identified')
+            %th.text-nowrap{scope: "col"}= I18n.t('specimen.family')
+            %th.text-nowrap{scope: "col"}= I18n.t('specimen.institution')
+            %th.text-nowrap{scope: "col"}= I18n.t('specimen.catalog_number')
+            %th.text-nowrap{scope: "col"}= I18n.t('specimen.type_status')
+            %th.text-nowrap{scope: "col"}= I18n.t('specimen.basis_record')
+            %th.text-nowrap{scope: "col"}= I18n.t('specimen.scribe')
+            %th.text-nowrap
 
   - if @total > 25
     = haml :'partials/page_size', layout: false

@@ -63,18 +63,18 @@
     %table.table.table-hover.table-sm.border-bottom#bionomia-parse-results
       %thead.thead-light
         %tr
-          %th.border-right{scope:"col"} Original
+          %th.text-nowrap.border-right{scope:"col"} Original
           - (1..@columns).each do |col|
-            %th{scope:"col"} Title
-            %th{scope:"col"} Appellation
-            %th{scope:"col"} Given
-            %th{scope:"col"} Particle
-            %th{scope:"col"} Family
-            %th.border-right{scope:"col"} Suffix
+            %th.text-nowrap{scope:"col"} Title
+            %th.text-nowrap{scope:"col"} Appellation
+            %th.text-nowrap{scope:"col"} Given
+            %th.text-nowrap{scope:"col"} Particle
+            %th.text-nowrap{scope:"col"} Family
+            %th.text-nowrap.border-right{scope:"col"} Suffix
       %tbody
         - @output.each_with_index do |row, index|
           %tr
-            %th.small.border-right.font-weight-bold{scope:"row"}
+            %td.text-nowrap.small.border-right.font-weight-bold{scope:"row"}
               #{row[index][:original]}
             - row[index][:parsed].each do |col|
               %td #{col.title}

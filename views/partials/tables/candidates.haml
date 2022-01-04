@@ -1,19 +1,20 @@
-.table-responsive-lg
+.table-responsive-lg.overflow-auto
   %table.table.table-hover.table-sm
     %thead.thead-light
       %tr
-        %th.selector{scope: "col"}
+        %th.text-nowrap.selector{scope: "col"}
           = haml :'partials/bulk_selector_top', layout: false
-        %th{scope: "col"}= I18n.t('specimen.scientific_name')
-        %th{scope: "col"}= I18n.t('specimen.collected_by')
-        %th{scope: "col"}= I18n.t('specimen.identified_by')
-        %th{scope: "col"}= I18n.t('specimen.date_collected')
-        %th{scope: "col"}= I18n.t('specimen.date_identified')
-        %th{scope: "col"}= I18n.t('specimen.family')
-        %th{scope: "col"}= I18n.t('specimen.institution')
-        %th{scope: "col"}= I18n.t('specimen.catalog_number')
-        %th{scope: "col"}= I18n.t('specimen.type_status')
-        %th{scope: "col", class:"btn-selector-wide"}
+        %th.text-nowrap{scope: "col"}= I18n.t('specimen.scientific_name')
+        %th.text-nowrap{scope: "col"}= I18n.t('specimen.collected_by')
+        %th.text-nowrap{scope: "col"}= I18n.t('specimen.identified_by')
+        %th.text-nowrap{scope: "col"}= I18n.t('specimen.date_collected')
+        %th.text-nowrap{scope: "col"}= I18n.t('specimen.date_identified')
+        %th.text-nowrap{scope: "col"}= I18n.t('specimen.family')
+        %th.text-nowrap{scope: "col"}= I18n.t('specimen.institution')
+        %th.text-nowrap{scope: "col"}= I18n.t('specimen.catalog_number')
+        %th.text-nowrap{scope: "col"}= I18n.t('specimen.type_status')
+        %th.text-nowrap{scope: "col"}= I18n.t('specimen.basis_record')
+        %th.text-nowrap{scope: "col", class:"btn-selector-wide"}
           - if @searched_user.nil?
             %button.btn.btn-sm.btn-warning.hide-all{type:"button", name:"notme-all"}
               - if locals[:user_scope] == "self"
@@ -40,6 +41,7 @@
           %td #{h(o.institutionCode)}
           %td #{h(o.catalogNumber)}
           %td #{h(o.typeStatus)}
+          %td #{h(o.basisOfRecord)}
           %td
             - if @searched_user.nil?
               %button.btn.btn-sm.btn-outline-warning.hide{type:"button", "data-occurrence-id":"#{o.id}"}
@@ -51,18 +53,19 @@
     - if @total > 25
       %tfoot.thead-light
         %tr
-          %th.selector{scope: "col"}
+          %th.text-nowrap.selector{scope: "col"}
             = haml :'partials/bulk_selector_bottom', layout: false
-          %th{scope: "col"}= I18n.t('specimen.scientific_name')
-          %th{scope: "col"}= I18n.t('specimen.collected_by')
-          %th{scope: "col"}= I18n.t('specimen.identified_by')
-          %th{scope: "col"}= I18n.t('specimen.date_collected')
-          %th{scope: "col"}= I18n.t('specimen.date_identified')
-          %th{scope: "col"}= I18n.t('specimen.family')
-          %th{scope: "col"}= I18n.t('specimen.institution')
-          %th{scope: "col"}= I18n.t('specimen.catalog_number')
-          %th{scope: "col"}= I18n.t('specimen.type_status')
-          %th{scope: "col"}
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.scientific_name')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.collected_by')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.identified_by')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.date_collected')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.date_identified')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.family')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.institution')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.catalog_number')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.type_status')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.basis_record')
+          %th.text-nowrap{scope: "col"}
             - if @searched_user.nil?
               %button.btn.btn-sm.btn-warning.hide-all{type:"button", name:"notme-all"}
                 - if locals[:user_scope] == "self"
