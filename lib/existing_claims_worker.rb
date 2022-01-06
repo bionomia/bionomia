@@ -102,16 +102,21 @@ module Bionomia
       if !destroyed.nil? && !destroyed.redirect_to.nil?
         user = User.find_by_identifier(destroyed.redirect_to)
       else
-        user = User.create_with({ wikidata: id })
-                   .find_or_create_by({ wikidata: id })
-        if !user.valid_wikicontent?
-          user.delete_search
-          user.delete
+        w = ::Bionomia::WikidataSearch.new
+        if w.wiki_user_data(id)[:date_died].nil?
           user = nil
-        elsif user.valid_wikicontent? && !user.is_public?
-          user.is_public = true
-          user.made_public = Time.now
-          user.save
+        else
+          user = User.create_with({ wikidata: id })
+                     .find_or_create_by({ wikidata: id })
+          if !user.valid_wikicontent?
+            user.delete_search
+            user.delete
+            user = nil
+          elsif user.valid_wikicontent? && !user.is_public?
+            user.is_public = true
+            user.made_public = Time.now
+            user.save
+          end
         end
       end
       user

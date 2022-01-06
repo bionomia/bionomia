@@ -9,7 +9,8 @@ module Bionomia
       "Entomologists of the World": "P5370",
       "ZooBank Author ID": "P2006",
       "BHL Creator ID": "P4081",
-      "Stuttgart Database of Scientific Illustrators ID": "P2349"
+      "Stuttgart Database of Scientific Illustrators ID": "P2349",
+      "Zürich Herbaria collector ID": "P10168"
     }
 
     def initialize
