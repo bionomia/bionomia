@@ -576,7 +576,7 @@ fr:
     date_identified: Date identifiée
     institution: Organisme
     catalog_number: Numéro de catalogue
-    basis_record: Basis Of Record
+    basis_record: Type d'occurrence
     country: Pays
     family: Famille
     type_status: État du type
