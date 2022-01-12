@@ -158,7 +158,7 @@ module Sinatra
 
         def user_stats(user)
           counts = user.country_counts
-          cited = user.cited_specimens_counts
+          cited = user.cited_specimens
           helped = user.helped_counts
 
           identified_count = counts.values.reduce(0) {
@@ -195,8 +195,8 @@ module Sinatra
               recorded: countries_recorded
             },
             articles: {
-              specimens_cited: cited.map(&:second).reduce(:+) || 0,
-              number: cited.count
+              specimens_cited: cited.select(:occurrence_id).distinct.count,
+              number: cited.select(:article_id).distinct.count
             },
             recorded_bins: user.recorded_bins
                                .delete_if{|k,v| k > Date.today.year || k <= 1700 || v == 0}
