@@ -21,6 +21,10 @@ module Bionomia
                 min_gram: 1,
                 max_gram: 50
               },
+              synonym: {
+                type: "synonym",
+                synonyms_path: "synonyms.txt"
+              }
             },
             normalizer: {
               taxa: {
@@ -38,7 +42,7 @@ module Bionomia
               name_part_index: {
                 type: "custom",
                 tokenizer: "keyword",
-                filter: ["lowercase", "asciifolding", "german_normalization"]
+                filter: ["lowercase", "asciifolding", "german_normalization", :synonym]
               },
               name_part_search: {
                 type: "custom",
