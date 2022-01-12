@@ -42,6 +42,11 @@ module Bionomia
               name_part_index: {
                 type: "custom",
                 tokenizer: "keyword",
+                filter: ["lowercase", "asciifolding", "german_normalization"]
+              },
+              given_name_index: {
+                type: "custom",
+                tokenizer: "keyword",
                 filter: ["lowercase", "asciifolding", "german_normalization", :synonym]
               },
               name_part_search: {
@@ -90,7 +95,7 @@ module Bionomia
             given: {
               type: 'text',
               fielddata: true,
-              analyzer: :name_part_index,
+              analyzer: :given_name_index,
               norms: false,
               fields: {
                 edge: {
