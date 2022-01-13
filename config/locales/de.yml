@@ -290,6 +290,14 @@ de:
     co_collector_name: "Exemplare, die gemeinsam mit %{name} gesammelt wurden."
     switch: Wechseln
     not_co_collector_name: "Exemplare wurden nicht mit %{name} mitgesammelt."
+    identifications_by: Identifications By
+    no_determiners_alert: Determiners have not yet been recorded.
+    determiners_alert: "Choose a determiner to adjust attributions made for specimens identified by them."
+    determiner_name: "Specimens identified by %{name}."
+    not_determiner_name: "Specimens have not been identified by %{name}."
+    identified_by_count:
+      one: "identified specimen"
+      other: "identified specimens"
     bulk_attribution: Massenattributionen
     reclaim_ignored: Erneute Beanspruchung ignoriert
     fix_claims: Zuordnungen korrigieren
@@ -550,6 +558,14 @@ de:
     co_collected_count:
       one: "mitgesammeltes Exemplar"
       other: "mitgesammelte Exemplare"
+    identifications_by: Identifications By
+    no_determiners_alert: Determiners have not yet been recorded.
+    determiners_alert: "Your specimens have been identified by:"
+    determiner_name: "Specimens identified by %{name}."
+    not_determiner_name: "Specimens have not been identified by %{name}."
+    identified_by_count:
+      one: "identified specimen"
+      other: "identified specimens"
     zenodo_html: "Ihr Profil ist mit %{zenodo} verknüpft, und Ihre Beanspruchungen werden versioniert und archiviert."
     language: Bevorzugte Sprache
     language_explanation: Wählen Sie Ihre bevorzugte Sprache

@@ -1,14 +1,16 @@
 %nav#helped-nav.navbar.navbar-light.navbar-expand.bg-light.overflow-auto
   %ul.navbar-nav
     %li.nav-item
-      %a{class:"nav-link#{locals[:active_subtab] == "specimens" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/specimens")}= I18n.t('help.specimens')
+      %a{class:"text-nowrap nav-link#{locals[:active_subtab] == "specimens" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/specimens")}= I18n.t('help.specimens')
     %li.nav-item
-      %a{class:"nav-link#{locals[:active_subtab] == "visualizations" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/visualizations")}= I18n.t('help.visualizations')
+      %a{class:"text-nowrap nav-link#{locals[:active_subtab] == "visualizations" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/visualizations")}= I18n.t('help.visualizations')
     %li.nav-item
-      %a{class:"nav-link#{locals[:active_subtab] == "specialties" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/specialties")}= I18n.t('help.specialties')
+      %a{class:"text-nowrap nav-link#{locals[:active_subtab] == "specialties" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/specialties")}= I18n.t('help.specialties')
     %li.nav-item
-      %a{class:"nav-link#{locals[:active_subtab] == "co_collectors" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/co-collectors")}= I18n.t('help.co-collectors')
+      %a{class:"text-nowrap nav-link#{locals[:active_subtab] == "co_collectors" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/co-collectors")}= I18n.t('help.co-collectors')
     %li.nav-item
-      %a{class:"nav-link#{locals[:active_subtab] == "strings" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/strings")}= I18n.t('help.strings')
+      %a{class:"text-nowrap nav-link#{locals[:active_subtab] == "determiners" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/determiners")}= I18n.t('help.identifications_by')
     %li.nav-item
-      %a{class:"nav-link#{locals[:active_subtab] == "support" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/support")}= I18n.t('help.support')
+      %a{class:"text-nowrap nav-link#{locals[:active_subtab] == "strings" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/strings")}= I18n.t('help.strings')
+    %li.nav-item
+      %a{class:"text-nowrap nav-link#{locals[:active_subtab] == "support" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/support")}= I18n.t('help.support')

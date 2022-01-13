@@ -404,6 +404,29 @@ module Sinatra
               haml :'profile/co_collector_specimens', locals: { active_page: "profile", active_tab: "co_collectors" }
             end
 
+            get '/determiners' do
+              page = (params[:page] || 1).to_i
+              @pagy, @results = pagy(@user.identified_by, page: page)
+              haml :'profile/determiners', locals: { active_page: "profile", active_tab: "determiners" }
+            end
+
+            get '/determiner/:id' do
+              @determiner = find_user(@params[:id])
+
+              @page = (params[:page] || 1).to_i
+              identifications = @user.identifications_by(@determiner)
+              @total = identifications.count
+
+              if @page*search_size > @total
+                bump_page = @total % search_size.to_i != 0 ? 1 : 0
+                @page = @total/search_size.to_i + bump_page
+              end
+
+              @page = 1 if @page <= 0
+              @pagy, @results = pagy(identifications, items: search_size, page: @page)
+              haml :'profile/identified_by_specimens', locals: { active_page: "profile", active_tab: "determiners" }
+            end
+
             post '/message.json' do
               content_type "application/json", charset: 'utf-8'
               req = JSON.parse(request.body.read).symbolize_keys

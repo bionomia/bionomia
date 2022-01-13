@@ -276,6 +276,13 @@ class User < ActiveRecord::Base
     recordings.where(occurrence_id: co_claims)
   end
 
+  def identifications_by(determiner)
+    determinations = determiner.visible_user_occurrences
+                               .select(:occurrence_id)
+                               .where(determiner.qry_identified)
+    recordings.where(occurrence_id: determinations)
+  end
+
   def claims_given
     claims.where(visible: true).where.not(user: self)
   end

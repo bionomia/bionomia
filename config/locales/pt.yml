@@ -290,6 +290,14 @@ pt:
     co_collector_name: "Espécimes co-coletados com %{name}."
     switch: Trocar
     not_co_collector_name: "Espécimes não foram co-coletadas com %{name}."
+    identifications_by: Identifications By
+    no_determiners_alert: Determiners have not yet been recorded.
+    determiners_alert: "Choose a determiner to adjust attributions made for specimens identified by them."
+    determiner_name: "Specimens identified by %{name}."
+    not_determiner_name: "Specimens have not been identified by %{name}."
+    identified_by_count:
+      one: "identified specimen"
+      other: "identified specimens"
     bulk_attribution: Atribuições em massa
     reclaim_ignored: Reclaim Ignored
     fix_claims: Atribuições fixas
@@ -550,6 +558,14 @@ pt:
     co_collected_count:
       one: "espécime co-coletado"
       other: "espécime co-coletado"
+    identifications_by: Identifications By
+    no_determiners_alert: Determiners have not yet been recorded.
+    determiners_alert: "Your specimens have been identified by:"
+    determiner_name: "Specimens identified by %{name}."
+    not_determiner_name: "Specimens have not been identified by %{name}."
+    identified_by_count:
+      one: "identified specimen"
+      other: "identified specimens"
     zenodo_html: "O seu perfil está ligado a %{zenodo} e as suas reclamações são versionadas e arquivadas."
     language: Preferred Language
     language_explanation: Choose your preferred language

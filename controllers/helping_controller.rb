@@ -398,6 +398,45 @@ module Sinatra
               haml :'help/co_collector_specimens', locals: { active_page: "help" }
             end
 
+            get '/:id/determiners' do
+              check_identifier
+              check_redirect
+
+              @viewed_user = find_user(@params[:id])
+              begin
+                page = (params[:page] || 1).to_i
+                @pagy, @results = pagy(@viewed_user.identified_by, page: page)
+                haml :'help/determiners', locals: { active_page: "help" }
+              rescue Pagy::OverflowError
+                halt 404, haml(:oops)
+              end
+            end
+
+            get '/:id/determiner/:id2' do
+              check_identifier
+              check_redirect
+
+              @viewed_user = find_user(@params[:id])
+              @determiner = find_user(@params[:id2])
+
+              if @viewed_user == @user
+                redirect "/profile/determiner/#{@determiner.identifier}", 301
+              end
+
+              @page = (params[:page] || 1).to_i
+              determinations = @viewed_user.identifications_by(@determiner)
+              @total = determinations.count
+
+              if @page*search_size > @total
+                bump_page = @total % search_size.to_i != 0 ? 1 : 0
+                @page = @total/search_size.to_i + bump_page
+              end
+
+              @page = 1 if @page <= 0
+              @pagy, @results = pagy(determinations, items: search_size, page: @page)
+              haml :'help/identified_by_specimens', locals: { active_page: "help" }
+            end
+
             get '/:id/ignored' do
               check_identifier
               check_redirect
