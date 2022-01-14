@@ -11,6 +11,8 @@
     %li.nav-item
       %a{class:"text-nowrap nav-link#{locals[:active_tab] == "co_collectors" ? " active" : nil}", href: url("/profile/co-collectors")}= I18n.t('profile.co_collectors')
     %li.nav-item
-      %a{class:"text-nowrap nav-link#{locals[:active_tab] == "determiners" ? " active" : nil}", href: url("/profile/determiners")}= I18n.t('profile.identifications_by')
+      %a{class:"text-nowrap nav-link#{locals[:active_tab] == "identified_for" ? " active" : nil}", href: url("/profile/identified-for")}= I18n.t('profile.identified_for')
+    %li.nav-item
+      %a{class:"text-nowrap nav-link#{locals[:active_tab] == "determiners" ? " active" : nil}", href: url("/profile/identifications-by")}= I18n.t('profile.identifications_by')
     %li.nav-item
       %a{class:"text-nowrap nav-link#{locals[:active_tab] == "support" ? " active" : nil}", href: url("/profile/support")}= I18n.t('profile.help_received')

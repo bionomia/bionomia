@@ -398,7 +398,46 @@ module Sinatra
               haml :'help/co_collector_specimens', locals: { active_page: "help" }
             end
 
-            get '/:id/determiners' do
+            get '/:id/identified-for' do
+              check_identifier
+              check_redirect
+
+              @viewed_user = find_user(@params[:id])
+              begin
+                page = (params[:page] || 1).to_i
+                @pagy, @results = pagy(@viewed_user.identified_for, page: page)
+                haml :'help/identified_for', locals: { active_page: "help" }
+              rescue Pagy::OverflowError
+                halt 404, haml(:oops)
+              end
+            end
+
+            get '/:id/identified-for/:id2' do
+              check_identifier
+              check_redirect
+
+              @viewed_user = find_user(@params[:id])
+              @collector = find_user(@params[:id2])
+
+              if @viewed_user == @user
+                redirect "/profile/identified-for/#{@collector.identifier}", 301
+              end
+
+              @page = (params[:page] || 1).to_i
+              specimens = @viewed_user.identifications_for(@collector)
+              @total = specimens.count
+
+              if @page*search_size > @total
+                bump_page = @total % search_size.to_i != 0 ? 1 : 0
+                @page = @total/search_size.to_i + bump_page
+              end
+
+              @page = 1 if @page <= 0
+              @pagy, @results = pagy(specimens, items: search_size, page: @page)
+              haml :'help/identified_for_specimens', locals: { active_page: "help" }
+            end
+
+            get '/:id/identifications-by' do
               check_identifier
               check_redirect
 
@@ -406,13 +445,13 @@ module Sinatra
               begin
                 page = (params[:page] || 1).to_i
                 @pagy, @results = pagy(@viewed_user.identified_by, page: page)
-                haml :'help/determiners', locals: { active_page: "help" }
+                haml :'help/identifications_by', locals: { active_page: "help" }
               rescue Pagy::OverflowError
                 halt 404, haml(:oops)
               end
             end
 
-            get '/:id/determiner/:id2' do
+            get '/:id/identifications-by/:id2' do
               check_identifier
               check_redirect
 
@@ -420,7 +459,7 @@ module Sinatra
               @determiner = find_user(@params[:id2])
 
               if @viewed_user == @user
-                redirect "/profile/determiner/#{@determiner.identifier}", 301
+                redirect "/profile/identifications-by/#{@determiner.identifier}", 301
               end
 
               @page = (params[:page] || 1).to_i
@@ -434,7 +473,7 @@ module Sinatra
 
               @page = 1 if @page <= 0
               @pagy, @results = pagy(determinations, items: search_size, page: @page)
-              haml :'help/identified_by_specimens', locals: { active_page: "help" }
+              haml :'help/identifications_by_specimens', locals: { active_page: "help" }
             end
 
             get '/:id/ignored' do

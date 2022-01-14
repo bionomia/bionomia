@@ -1,0 +1,74 @@
+.table-responsive-lg.overflow-auto
+  %table.table.table-hover.table-sm
+    %thead.thead-light
+      %tr
+        %th.text-nowrap.selector{scope: "col"}
+          = haml :'partials/bulk_selector_top', layout: false
+        %th.text-nowrap{scope: "col"}= I18n.t('specimen.scientific_name')
+        %th.text-nowrap{scope: "col"}= I18n.t('specimen.collected_by')
+        %th.text-nowrap{scope: "col"}= I18n.t('specimen.identified_by')
+        %th.text-nowrap{scope: "col"}= I18n.t('specimen.date_collected')
+        %th.text-nowrap{scope: "col"}= I18n.t('specimen.date_identified')
+        %th.text-nowrap{scope: "col"}= I18n.t('specimen.family')
+        %th.text-nowrap{scope: "col"}= I18n.t('specimen.institution')
+        %th.text-nowrap{scope: "col"}= I18n.t('specimen.catalog_number')
+        %th.text-nowrap{scope: "col"}= I18n.t('specimen.type_status')
+        %th.text-nowrap{scope: "col"}= I18n.t('specimen.basis_record')
+        %th.text-nowrap{scope: "col"}= I18n.t('specimen.scribe')
+        %th.text-nowrap.btn-selector-wide{scope: "col"}
+
+    %tbody
+      - @results.each do |uo|
+        - o = uo.occurrence
+        %tr
+          %td{class: "selector"}
+            = haml :'partials/single_selector_preselected', layout: false, locals: { occurrence: uo, user_id: @viewed_user.id }
+          %td
+            - scientific_name = o.scientificName.nil? ? "not recorded" : o.scientificName
+            %a{href: gbif_occurrence_url(o.id), target:"_blank"}
+              #{h(scientific_name)}
+            - if o.hasImage?
+              %i.fas.fa-image.ml-1{"data-toggle":"popover", "data-gbifid":"#{o.id}"}
+          %td #{h(o.recordedBy)}
+          %td #{h(o.identifiedBy)}
+          %td #{h(o.eventDate || o.year)}
+          %td #{h(o.dateIdentified)}
+          %td #{h(o.family)}
+          %td #{h(o.institutionCode)}
+          %td #{h(o.catalogNumber)}
+          %td #{h(o.typeStatus)}
+          %td #{h(o.basisOfRecord)}
+          %td
+            - if uo.claimant.is_bot?
+              #{uo.claimant.fullname}
+            - elsif uo.claimant.is_public?
+              = link_to uo.claimant.fullname_reverse, url("/#{uo.claimant.orcid}")
+            - else
+              = link_to uo.claimant.fullname_reverse, "https://orcid.org/#{uo.claimant.orcid}"
+          %td
+            %button.btn.btn-sm.btn-outline-warning.hide{type:"button", "data-occurrence-id":"#{uo.user_occurrence_id}"}= I18n.t('specimen.not_them')
+
+    - if @total > 25
+      %tfoot.thead-light
+        %tr
+          %th.text-nowrap.selector{scope: "col"}
+            = haml :'partials/bulk_selector_bottom', layout: false
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.scientific_name')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.collected_by')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.identified_by')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.date_collected')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.date_identified')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.family')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.institution')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.catalog_number')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.type_status')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.basis_record')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.scribe')
+          %th.text-nowrap
+
+- if @total > 25
+  = haml :'partials/page_size', layout: false
+
+- if @pagy.pages > 1
+  .y-scroll
+    = pagy_bootstrap_nav(@pagy)

@@ -404,13 +404,36 @@ module Sinatra
               haml :'profile/co_collector_specimens', locals: { active_page: "profile", active_tab: "co_collectors" }
             end
 
-            get '/determiners' do
+            get '/identified-for' do
               page = (params[:page] || 1).to_i
-              @pagy, @results = pagy(@user.identified_by, page: page)
-              haml :'profile/determiners', locals: { active_page: "profile", active_tab: "determiners" }
+              @pagy, @results = pagy(@user.identified_for, page: page)
+              haml :'profile/identified_for', locals: { active_page: "profile", active_tab: "identified_for" }
             end
 
-            get '/determiner/:id' do
+            get '/identified-for/:id' do
+              @collector = find_user(@params[:id])
+
+              @page = (params[:page] || 1).to_i
+              specimens = @user.identifications_for(@collector)
+              @total = specimens.count
+
+              if @page*search_size > @total
+                bump_page = @total % search_size.to_i != 0 ? 1 : 0
+                @page = @total/search_size.to_i + bump_page
+              end
+
+              @page = 1 if @page <= 0
+              @pagy, @results = pagy(specimens, items: search_size, page: @page)
+              haml :'profile/identified_for_specimens', locals: { active_page: "profile", active_tab: "identified_for" }
+            end
+
+            get '/identifications-by' do
+              page = (params[:page] || 1).to_i
+              @pagy, @results = pagy(@user.identified_by, page: page)
+              haml :'profile/identifications_by', locals: { active_page: "profile", active_tab: "determiners" }
+            end
+
+            get '/identifications-by/:id' do
               @determiner = find_user(@params[:id])
 
               @page = (params[:page] || 1).to_i
@@ -424,7 +447,7 @@ module Sinatra
 
               @page = 1 if @page <= 0
               @pagy, @results = pagy(identifications, items: search_size, page: @page)
-              haml :'profile/identified_by_specimens', locals: { active_page: "profile", active_tab: "determiners" }
+              haml :'profile/identifications_by_specimens', locals: { active_page: "profile", active_tab: "determiners" }
             end
 
             post '/message.json' do

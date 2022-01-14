@@ -10,12 +10,12 @@
   = haml :'partials/help/jumbotron', layout: false
 
 = haml :'partials/help/tabs', layout: false, locals: { active_tab: "specimens" }
-= haml :'partials/help/subtabs_fix', layout: false, locals: { active_subtab: "determiners" }
+= haml :'partials/help/subtabs_fix', layout: false, locals: { active_subtab: "identified_for" }
 
 - if @pagy.count == 0
-  .alert.alert-info.tiny-margins{role: "alert"}= I18n.t('help.no_determiners_alert')
+  .alert.alert-info.tiny-margins{role: "alert"}= I18n.t('help.no_identified_for_alert')
 - else
-  .alert.alert-info.tiny-margins{role: "alert"}= I18n.t('help.determiners_alert')
+  .alert.alert-info.tiny-margins{role: "alert"}= I18n.t('help.identified_for_alert')
 
   - @results.in_groups_of(3).each do |group|
     .card-deck
@@ -30,7 +30,7 @@
                   %img.card-img-profile.mr-2{src:"#{profile_image(u, 'medium')}", alt:"#{u.fullname}"}
                 .flex-grow-1
                   %h5
-                    = link_to u.fullname_reverse, url("/help-others/#{@viewed_user.identifier}/determiner/#{u.identifier}")
+                    = link_to u.fullname_reverse, url("/help-others/#{@viewed_user.identifier}/identified-for/#{u.identifier}")
                   - if u.wikidata
                     %p.small.text-muted.mt-0.mb-0= format_lifespan(u)
                   - if u.country
@@ -46,7 +46,7 @@
             - else
               .card-header
                 %h5
-                  = link_to u.fullname_reverse, url("/help-others/#{@viewed_user.identifier}/determiner/#{u.identifier}")
+                  = link_to u.fullname_reverse, url("/help-others/#{@viewed_user.identifier}/identified-for/#{u.identifier}")
                 - if u.wikidata
                   %p.small.text-muted.mt-0.mb-0= format_lifespan(u)
                 - if u.country
@@ -66,8 +66,8 @@
                 .small.text-right.text-muted.mr-2
                   %i.fas.fa-lock
               .small.text-left.text-muted.mr-2
-                %span.badge.badge-light #{number_with_delimiter(@viewed_user.identifications_by(u).count, delimiter: ",")}
-                #{I18n.t('help.identified_by_count', count: @viewed_user.identifications_by(u).count)}
+                %span.badge.badge-light #{number_with_delimiter(@viewed_user.identifications_for(u).count, delimiter: ",")}
+                #{I18n.t('help.identified_for_count', count: @viewed_user.identifications_for(u).count)}
 
   - if @pagy.pages > 1
     .y-scroll

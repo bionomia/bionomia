@@ -9,7 +9,9 @@
     %li.nav-item
       %a{class:"text-nowrap nav-link#{locals[:active_subtab] == "co_collectors" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/co-collectors")}= I18n.t('help.co-collectors')
     %li.nav-item
-      %a{class:"text-nowrap nav-link#{locals[:active_subtab] == "determiners" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/determiners")}= I18n.t('help.identifications_by')
+      %a{class:"text-nowrap nav-link#{locals[:active_subtab] == "identified_for" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/identified-for")}= I18n.t('help.identified_for')
+    %li.nav-item
+      %a{class:"text-nowrap nav-link#{locals[:active_subtab] == "determiners" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/identifications-by")}= I18n.t('help.identifications_by')
     %li.nav-item
       %a{class:"text-nowrap nav-link#{locals[:active_subtab] == "strings" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/strings")}= I18n.t('help.strings')
     %li.nav-item

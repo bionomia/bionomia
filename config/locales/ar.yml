@@ -358,11 +358,19 @@ ar:
     co_collector_name: "Specimens co-collected with %{name}."
     switch: Switch
     not_co_collector_name: "Specimens have not been co-collected with %{name}."
+    identified_for: Identified For
+    no_identified_for_alert: Recipients of determinations have not yet been recorded.
+    identified_for_alert: "Choose a collector to adjust attributions made for specimens collected by them."
+    identified_for_name: "Specimens collected by %{name} and identified by %{other_name}."
+    not_identified_for_name: "Specimens have not been collected by %{name} and identified by %{other_name}."
+    identified_for_count:
+      one: "collected specimen"
+      other: "collected specimens"
     identifications_by: Identifications By
     no_determiners_alert: Determiners have not yet been recorded.
     determiners_alert: "Choose a determiner to adjust attributions made for specimens identified by them."
-    determiner_name: "Specimens identified by %{name}."
-    not_determiner_name: "Specimens have not been identified by %{name}."
+    determiner_name: "Specimens identified by %{name} and collected by %{other_name}."
+    not_determiner_name: "Specimens have not been identified by %{name} and collected by %{other_name}."
     identified_by_count:
       one: "identified specimen"
       other: "identified specimens"
@@ -678,11 +686,19 @@ ar:
       few: "co-collected specimens"
       many: "co-collected specimens"
       other: "co-collected specimens"
+    identified_for: Identified For
+    no_identified_for_alert: Recipients of your determinations have not yet been recorded.
+    identified_for_alert: "Choose a collector to adjust attributions made for specimens collected by them and identified by you."
+    identified_for_name: "Specimens collected by %{name} and identified by you."
+    not_identified_for_name: "Specimens have not been collected by %{name} and identified by you."
+    identified_for_count:
+      one: "collected specimen"
+      other: "collected specimens"
     identifications_by: Identifications By
-    no_determiners_alert: Determiners have not yet been recorded.
+    no_determiners_alert: Determiners of your collected specimens have not yet been recorded.
     determiners_alert: "Your specimens have been identified by:"
     determiner_name: "Specimens identified by %{name}."
-    not_determiner_name: "Specimens have not been identified by %{name}."
+    not_determiner_name: "Specimens you collected have not been identified by %{name}."
     identified_by_count:
       one: "identified specimen"
       other: "identified specimens"
