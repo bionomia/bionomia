@@ -20,6 +20,7 @@
     %tbody
       - @results.each do |uo|
         - o = uo.occurrence
+        - disabled = (@viewed_user.id == uo.created_by) ? true : false
         %tr
           %td{class: "selector"}
             = haml :'partials/single_selector_preselected', layout: false, locals: { occurrence: uo, user_id: @viewed_user.id }
@@ -46,7 +47,8 @@
             - else
               = link_to uo.claimant.fullname_reverse, "https://orcid.org/#{uo.claimant.orcid}"
           %td
-            %button.btn.btn-sm.btn-outline-warning.hide{type:"button", "data-occurrence-id":"#{uo.user_occurrence_id}"}= I18n.t('specimen.not_them')
+            %button.btn.btn-sm.btn-outline-warning.hide{type:"button", "data-occurrence-id":"#{uo.user_occurrence_id}", disabled: disabled}
+              = I18n.t('specimen.not_them')
 
     - if @total > 25
       %tfoot.thead-light
