@@ -19,23 +19,28 @@ jobs:
       MYSQL_PASSWORD: password
       MYSQL_HOST: 127.0.0.1
       MYSQL_DATABASE: bionomia_test
+      MYSQL_PORT: 3306
     strategy:
       matrix:
         ruby-version: ['2.7.1']
     services:
-      db:
+      mysql:
         image: mysql:5.7
         env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_USERNAME: ${{ env.MYSQL_USERNAME }}
           MYSQL_PASSWORD: ${{ env.MYSQL_PASSWORD }}
           MYSQL_ROOT_PASSWORD: ${{ env.MYSQL_PASSWORD }}
           MYSQL_HOST: ${{ env.MYSQL_HOST }}
           MYSQL_PORT: ${{ env.MYSQL_PORT }}
           MYSQL_DATABASE: ${{ env.MYSQL_DATABASE }}
+        ports:
+          - 3306
         options: >-
           --health-cmd="mysqladmin ping"
           --health-interval=10s
           --health-timeout=5s
+          --health-retries=3
           --health-retries=5
     steps:
     - uses: actions/checkout@v2
