@@ -17,9 +17,6 @@ jobs:
       MYSQL_PASSWORD: password
       MYSQL_HOST: localhost
       MYSQL_DATABASE: bionomia_test
-    strategy:
-      matrix:
-        ruby-version: ['${{ env.RUBY_VERSION }}']
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby
