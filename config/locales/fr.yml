@@ -290,22 +290,22 @@ fr:
     co_collector_name: "Spécimens co-collectés avec %{name}."
     switch: Changer de place
     not_co_collector_name: "Spécimens not pas été co-collectés avec %{name}."
-    identified_for: Identified For
-    no_identified_for_alert: Recipients of determinations have not yet been recorded.
-    identified_for_alert: "Choose a collector to adjust attributions made for specimens collected by them."
-    identified_for_name: "Specimens collected by %{name} and identified by %{other_name}."
-    not_identified_for_name: "Specimens have not been collected by %{name} and identified by %{other_name}."
+    identified_for: Identifié par
+    no_identified_for_alert: Les réclamations ou attributions n'ont pas encore été enregistrées.
+    identified_for_alert: "Choisissez un co-collectionneur pour ajuster les attributions faites pour les spécimens en commun."
+    identified_for_name: "Spécimens collectés par %{name} et identifiés par %{other_name}."
+    not_identified_for_name: "Les spécimens n'ont pas été collectés par %{name} et identifiés par %{other_name}."
     identified_for_count:
-      one: "collected specimen"
-      other: "collected specimens"
-    identifications_by: Identifications By
-    no_determiners_alert: Determiners have not yet been recorded.
-    determiners_alert: "Choose a determiner to adjust attributions made for specimens identified by them."
-    determiner_name: "Specimens identified by %{name} and collected by %{other_name}."
-    not_determiner_name: "Specimens have not been identified by %{name} and collected by %{other_name}."
+      one: "spécimen collecté"
+      other: "spécimens collectés"
+    identifications_by: Identifications Par
+    no_determiners_alert: Les détermineurs n'ont pas encore été enregistrés.
+    determiners_alert: "Choisissez un détermineur pour ajuster les attributions."
+    determiner_name: "Spécimens identifiés par %{name} et collectés par %{other_name}."
+    not_determiner_name: "Les spécimens n'ont pas été identifiés par %{name} et collectés par %{other_name}."
     identified_by_count:
-      one: "identified specimen"
-      other: "identified specimens"
+      one: "spécimen identifié"
+      other: "spécimens identifiés"
     bulk_attribution: Attribution en masse
     reclaim_ignored: Récupérer ignoré
     fix_claims: Corriger les attributions
@@ -566,22 +566,22 @@ fr:
     co_collected_count:
       one: "spécimen co-collecté"
       other: "spécimens co-collectés"
-    identified_for: Identified For
-    no_identified_for_alert: Recipients of your determinations have not yet been recorded.
-    identified_for_alert: "Choose a collector to adjust attributions made for specimens collected by them and identified by you."
-    identified_for_name: "Specimens collected by %{name} and identified by you."
-    not_identified_for_name: "Specimens have not been collected by %{name} and identified by you."
+    identified_for: Identifié Pour
+    no_identified_for_alert: Les bénéficiaires de vos déterminations n'ont pas encore été enregistrés.
+    identified_for_alert: "Choisissez un collecteur pour ajuster les attributions faites pour les spécimens recueillis par eux et identifiés par vous."
+    identified_for_name: "Spécimens collectés par %{name} et identifiés par vous."
+    not_identified_for_name: "Les spécimens n'ont pas été collectés par %{name} et identifiés par vous."
     identified_for_count:
-      one: "collected specimen"
-      other: "collected specimens"
-    identifications_by: Identifications By
-    no_determiners_alert: Determiners of your collected specimens have not yet been recorded.
-    determiners_alert: "Your specimens have been identified by:"
-    determiner_name: "Specimens identified by %{name}."
-    not_determiner_name: "Specimens you collected have not been identified by %{name}."
+      one: "spécimen collecté"
+      other: "spécimens collectés"
+    identifications_by: Identifications Par
+    no_determiners_alert: Les détermineurs de vos spécimens collectés n'ont pas encore été enregistrés.
+    determiners_alert: "Vos spécimens ont été identifiés par :"
+    determiner_name: "Spécimens identifiés par %{name}."
+    not_determiner_name: "Les spécimens que vous avez collectés n'ont pas été identifiés par %{name}."
     identified_by_count:
-      one: "identified specimen"
-      other: "identified specimens"
+      one: "spécimen identifié"
+      other: "spécimens identifiés"
     zenodo_html: "Votre profil est lié à %{zenodo} et vos données sont versionnées et archivées."
     language: Langue préférée
     language_explanation: Choisissez votre langue préférée
