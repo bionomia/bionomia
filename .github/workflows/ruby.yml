@@ -17,39 +17,27 @@ jobs:
     env:
       MYSQL_USERNAME: root
       MYSQL_PASSWORD: password
-      MYSQL_HOST: 127.0.0.1
+      MYSQL_HOST: localhost
       MYSQL_DATABASE: bionomia_test
-      MYSQL_PORT: 3306
     strategy:
       matrix:
-        ruby-version: ['2.7.1']
-    services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_USERNAME: ${{ env.MYSQL_USERNAME }}
-          MYSQL_PASSWORD: ${{ env.MYSQL_PASSWORD }}
-          MYSQL_ROOT_PASSWORD: ${{ env.MYSQL_PASSWORD }}
-          MYSQL_HOST: ${{ env.MYSQL_HOST }}
-          MYSQL_PORT: ${{ env.MYSQL_PORT }}
-          MYSQL_DATABASE: ${{ env.MYSQL_DATABASE }}
-        ports:
-          - 3306
-        options: >-
-          --health-cmd="mysqladmin ping"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
-          --health-retries=5
+        ruby-version: ['${{ env.RUBY_VERSION }}']
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby
       uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
       with:
-        ruby-version: ${{ matrix.ruby-version }}
+        ruby-version: ${{ env.RUBY_VERSION }}
         bundler-cache: true
-    - name: Setup Database
+    - name: Set up database
+      uses: mirromutth/mysql-action@v1.1
+      with:
+        mysql version: '5.7'
+        mysql database: '${{ env.MYSQL_DATABASE }}'
+        mysql root password: ${{ env.MYSQL_PASSWORD }}
+        mysql user: '${{ env.MYSQL_USERNAME }}'
+        mysql password: ${{ env.MYSQL_PASSWORD }}
+    - name: Setup Database Config
       run: |
           cp config/settings/test.yml.sample config/settings/test.yml
           sed -i 's/MYSQL_HOST/${{ env.MYSQL_HOST }}/g' config/settings/test.yml
