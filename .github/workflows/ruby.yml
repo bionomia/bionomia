@@ -14,6 +14,11 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: password
+      MYSQL_HOST: 127.0.0.1
+      MYSQL_DATABASE: bionomia_test
     strategy:
       matrix:
         ruby-version: ['2.7.1']
@@ -21,14 +26,12 @@ jobs:
       db:
         image: mysql:5.7
         env:
-          MYSQL_USERNAME: root
-          MYSQL_PASSWORD: password
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_HOST: 127.0.0.1
-          MYSQL_PORT: 3307
-          MYSQL_DATABASE: bionomia_test
-        ports:
-          - 3307:3306
+          MYSQL_USERNAME: ${{ env.MYSQL_USERNAME }}
+          MYSQL_PASSWORD: ${{ env.MYSQL_PASSWORD }}
+          MYSQL_ROOT_PASSWORD: ${{ env.MYSQL_PASSWORD }}
+          MYSQL_HOST: ${{ env.MYSQL_HOST }}
+          MYSQL_PORT: ${{ env.MYSQL_PORT }}
+          MYSQL_DATABASE: ${{ env.MYSQL_DATABASE }}
         options: >-
           --health-cmd="mysqladmin ping"
           --health-interval=10s
@@ -44,9 +47,9 @@ jobs:
     - name: Setup Database
       run: |
           cp config/settings/test.yml.sample config/settings/test.yml
-          sed -i 's/MYSQL_HOST/${{ jobs.test.services.db.env.MYSQL_HOST }}/g' config/settings/test.yml
-          sed -i 's/MYSQL_USERNAME/${{ jobs.test.services.db.env.MYSQL_USERNAME }}/g' config/settings/test.yml
-          sed -i 's/MYSQL_PASSWORD/${{ jobs.test.services.db.env.MYSQL_PASSWORD }}/g' config/settings/test.yml
-          sed -i 's/MYSQL_DATABASE/${{ jobs.test.services.db.env.MYSQL_DATABASE }}/g' config/settings/test.yml
+          sed -i 's/MYSQL_HOST/${{ env.MYSQL_HOST }}/g' config/settings/test.yml
+          sed -i 's/MYSQL_USERNAME/${{ env.MYSQL_USERNAME }}/g' config/settings/test.yml
+          sed -i 's/MYSQL_PASSWORD/${{ env.MYSQL_PASSWORD }}/g' config/settings/test.yml
+          sed -i 's/MYSQL_DATABASE/${{ env.MYSQL_DATABASE }}/g' config/settings/test.yml
     - name: Run tests
       run: bundle exec rake
