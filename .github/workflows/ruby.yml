@@ -1,11 +1,9 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-# This workflow will download a prebuilt Ruby version, install dependencies and run tests with Rake
-# For more information see: https://github.com/marketplace/actions/setup-ruby-jruby-and-truffleruby
+name: Bionomia
 
-name: Ruby
+env:
+  RUBY_VERSION: 2.7.1
+  BUNDLER_VERSION: 2.2.0
+  RACK_ENV: test
 
 on:
   push:
@@ -15,21 +13,40 @@ on:
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
         ruby-version: ['2.7.1']
-
+    services:
+      db:
+        image: mysql:5.7
+        env:
+          MYSQL_USERNAME: root
+          MYSQL_PASSWORD: password
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_HOST: 127.0.0.1
+          MYSQL_PORT: 3307
+          MYSQL_DATABASE: bionomia_test
+        ports:
+          - 3307:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby
-    # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
-    # change this to (see https://github.com/ruby/setup-ruby#versioning):
-    # uses: ruby/setup-ruby@v1
       uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
       with:
         ruby-version: ${{ matrix.ruby-version }}
-        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+        bundler-cache: true
+    - name: Setup Database
+      run: |
+          cp config/settings/test.yml.sample config/settings/test.yml
+          sed -i 's/MYSQL_HOST/${{ services.db.env.MYSQL_HOST }}/g' config/settings/test.yml
+          sed -i 's/MYSQL_USERNAME/${{ services.db.env.MYSQL_USERNAME }}/g' config/settings/test.yml
+          sed -i 's/MYSQL_PASSWORD/${{ services.db.env.MYSQL_PASSWORD }}/g' config/settings/test.yml
+          sed -i 's/MYSQL_DATABASE/${{ services.db.env.MYSQL_DATABASE }}/g' config/settings/test.yml
     - name: Run tests
       run: bundle exec rake
