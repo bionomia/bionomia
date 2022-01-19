@@ -14,7 +14,7 @@ jobs:
       BUNDLER_VERSION: 2.2.0
       RACK_ENV: test
       MYSQL_USERNAME: root
-      MYSQL_PASSWORD: password
+      MYSQL_PASSWORD: root
       MYSQL_HOST: localhost
       MYSQL_DATABASE: bionomia_test
     steps:
@@ -24,18 +24,10 @@ jobs:
       with:
         ruby-version: ${{ env.RUBY_VERSION }}
         bundler-cache: true
-    - name: Set up database
-      uses: mirromutth/mysql-action@v1.1
-      with:
-        mysql version: '5.7'
-        mysql database: '${{ env.MYSQL_DATABASE }}'
-        mysql root password: ${{ env.MYSQL_PASSWORD }}
-        mysql user: '${{ env.MYSQL_USERNAME }}'
-        mysql password: ${{ env.MYSQL_PASSWORD }}
-    - name: Shutdown & start database
+    - name: Set up MySQL
       run: |
-          sudo service mysql stop
-          sudo service mysql start
+        sudo /etc/init.d/mysql start
+        mysql -e 'CREATE DATABASE ${{ env.MYSQL_DATABASEE }};' -u${{ env.MYSQL_USERNAME }} -p${{ env.MYSQL_PASSWORD }}
     - name: Setup Database Config
       run: |
           cp config/settings/test.yml.sample config/settings/test.yml
