@@ -32,8 +32,10 @@ jobs:
         mysql root password: ${{ env.MYSQL_PASSWORD }}
         mysql user: '${{ env.MYSQL_USERNAME }}'
         mysql password: ${{ env.MYSQL_PASSWORD }}
-    - name: Shutdown Ubuntu MySQL (SUDO)
-      run: sudo service mysql stop
+    - name: Shutdown & start database
+      run: |
+          sudo service mysql stop
+          sudo service mysql start
     - name: Setup Database Config
       run: |
           cp config/settings/test.yml.sample config/settings/test.yml
