@@ -44,9 +44,9 @@ jobs:
     - name: Setup Database
       run: |
           cp config/settings/test.yml.sample config/settings/test.yml
-          sed -i 's/MYSQL_HOST/${{ services.db.env.MYSQL_HOST }}/g' config/settings/test.yml
-          sed -i 's/MYSQL_USERNAME/${{ services.db.env.MYSQL_USERNAME }}/g' config/settings/test.yml
-          sed -i 's/MYSQL_PASSWORD/${{ services.db.env.MYSQL_PASSWORD }}/g' config/settings/test.yml
-          sed -i 's/MYSQL_DATABASE/${{ services.db.env.MYSQL_DATABASE }}/g' config/settings/test.yml
+          sed -i 's/MYSQL_HOST/${{ jobs.test.services.db.env.MYSQL_HOST }}/g' config/settings/test.yml
+          sed -i 's/MYSQL_USERNAME/${{ jobs.test.services.db.env.MYSQL_USERNAME }}/g' config/settings/test.yml
+          sed -i 's/MYSQL_PASSWORD/${{ jobs.test.services.db.env.MYSQL_PASSWORD }}/g' config/settings/test.yml
+          sed -i 's/MYSQL_DATABASE/${{ jobs.test.services.db.env.MYSQL_DATABASE }}/g' config/settings/test.yml
     - name: Run tests
       run: bundle exec rake
