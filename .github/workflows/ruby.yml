@@ -1,10 +1,5 @@
 name: Bionomia
 
-env:
-  RUBY_VERSION: 2.7.1
-  BUNDLER_VERSION: 2.2.0
-  RACK_ENV: test
-
 on:
   push:
     branches: [ master ]
@@ -15,6 +10,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
+      RUBY_VERSION: 2.7.1
+      BUNDLER_VERSION: 2.2.0
+      RACK_ENV: test
       MYSQL_USERNAME: root
       MYSQL_PASSWORD: password
       MYSQL_HOST: localhost
