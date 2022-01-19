@@ -1,14 +1,14 @@
 zh-CN:
   language: 中文
   locale: "zh_CN"
-  "true": "Yes"
+  "true": "是的"
   "false": "No"
   acknowledgments:
-    acknowledgments_title: Acknowledgments
+    acknowledgments_title: 鸣谢
     taxon_silhouettes: Taxon Family Silhouettes
-    translations: Translations
+    translations: 翻译
   admin:
-    change_photo: Change profile photo
+    change_photo: 更换头像
   agent:
     agent_title: Agent Strings
     search_title: Agent String Search
