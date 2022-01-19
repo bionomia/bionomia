@@ -1,8 +1,8 @@
 adapter: mysql2
-host: localhost
-username: root
-password:
-database: bionomia
+host: MYSQL_HOST
+username: MYSQL_USERNAME
+password: MYSQL_PASSWORD
+database: MYSQL_DATABASE
 reconnect: true
 pool: 40
 timeout: 5000
