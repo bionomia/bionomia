@@ -49,15 +49,12 @@ jobs:
       with:
         stack-version: 7.15.2
     - name: Create Elasticsearch synonyms.txt
-      uses: 1arp/create-a-file-action@0.2
-      with:
-        path: '/usr/share/elasticsearch/config'
-        file: 'synonyms.txt'
-        content: |
-          aaron => erin, ron, ronnie
+      run: |
+          sudo mkdir -p "/usr/share/elasticsearch/config" && sudo touch "/usr/share/elasticsearch/config/synonyms.txt"
+          sudo chmod -R 777 "/usr/share/elasticsearch"
+          [ -f /usr/share/elasticsearch/config/synonyms.txt ] && echo "Synonyms file exists." || echo "Synonyms file does not exist."
     - name: Creates Elasticsearch indices
       run: |
-          [ -f /usr/share/elasticsearch/config/synonyms.txt ] && echo "Synonyms file exists." || echo "Synonyms file does not exist."
           RACK_ENV=test bundle exec rake elastic:create:all
     - name: Run tests
       run: RACK_ENV=test bundle exec rake
