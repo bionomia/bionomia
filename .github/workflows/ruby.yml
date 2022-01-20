@@ -50,7 +50,7 @@ jobs:
         stack-version: 7.6.0
     - name: Creates Elasticsearch indices
       run: |
-          touch /usr/share/elasticsearch/config/synonyms.txt
+          sudo touch /usr/share/elasticsearch/config/synonyms.txt
           RACK_ENV=test bundle exec rake elastic:create:all
     - name: Run tests
       run: RACK_ENV=test bundle exec rake
