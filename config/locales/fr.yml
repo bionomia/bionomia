@@ -79,7 +79,7 @@ fr:
     year: An
     number_specimens: "# spécimens"
     identified: Identifiés
-    collected: collectés
+    collected: Collectés
     people: Personnes
   country:
     country_title: Pays
@@ -100,7 +100,7 @@ fr:
       unit:
         one: "jeu de données de GBIF"
         other: "jeux de données de GBIF"
-    placeholder: papillons du Brésil
+    placeholder: Papillons du Brésil
     people: Personnes
     visualizations: Visualisations
     scribes: Scribes
@@ -247,7 +247,7 @@ fr:
     new_people_title: Personnes Nouvellement Trouvées
     new_people_lede: Attribuer des spécimens aux personnes récemment découvertes dans ORCID ou Wikidata
     by_country: Par Pays
-    not_ignored_alert: Les scribes n'ont pas signalé les spécimens à ignorer
+    not_ignored_alert: Les scribes n'ont pas signalé les spécimens à ignorer.
     agent_string: Chaîne d'agent
     taxon_string: Famille taxonomique
     kingdom_string: Règne
@@ -425,7 +425,7 @@ fr:
     not_found_title: Pas trouvé
     not_found: Désolé, cette page n'a pas été trouvée
     error_title: Erreur
-    error: Désolé, nous avons rencontré une erreur
+    error: Désolé, nous avons rencontré une erreur.
   organization:
     organization_title: Organismes
     lede:
@@ -507,7 +507,7 @@ fr:
     identified_from: Identifié à Partir de
     collected_from: Collectés à Partir de
     resume: Pour votre CV
-    specimens_used: specimens used
+    specimens_used: Spécimens utilisés dans
     public_availability: Disponibilité Publique
     public_profile: Profil Public
     make_citable: Rendez vos Données Exploitables
