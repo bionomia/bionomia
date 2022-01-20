@@ -175,10 +175,10 @@ zh-CN:
     donate_title: 赞助
     lede: Your one-time or periodic donation will help complete the data pipeline and ensure that credit is given for contributions made to natural history collections as quickly and as seamlessly as possible.
     campaign: Campaign
-    donor_wall: Donor Wall
+    donor_wall: 感恩墙
   donor_wall:
-    donor_wall_title: Donor Wall
-    lede: Thanks to the following donors who are supporting the completion of the data pipeline.
+    donor_wall_title: 感恩墙
+    lede: 感谢以下捐助者支持data pipeline的完成。
   general:
     search: 搜索
     apply: Apply
@@ -193,9 +193,9 @@ zh-CN:
     identified: Identified
     both: Both
     either: Either
-    per_page: Per page
+    per_page: 每页
     download: 下载
-    submit: Submit
+    submit: 提交
     upload_csv_instructions: Upload csv with claims
     download_records: Download discovered records
     download_alert: "Download discovered specimen records, work offline, then upload new claims as a csv. A file containing at most %{num_records} records is generated. If you have many more than this, you may work in batches. This routine does not update underlying specimen data nor does it update existing claims. If existing claims are present in the upload, these will be skipped. Your uploaded csv must use a comma to separate columns each optionally enclosed by quotes."
