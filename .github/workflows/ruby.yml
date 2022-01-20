@@ -48,9 +48,15 @@ jobs:
       uses: elastic/elastic-github-actions/elasticsearch@master
       with:
         stack-version: 7.15.2
+    - name: Create Elasticsearch synonyms.txt
+      uses: 1arp/create-a-file-action@0.2
+        with:
+          path: '/usr/share/elasticsearch/config'
+          file: 'synonyms.txt'
+          content: |
+            aaron => erin, ron, ronnie
     - name: Creates Elasticsearch indices
       run: |
-          sudo touch /etc/elasticsearch/synonyms.txt
           RACK_ENV=test bundle exec rake elastic:create:all
     - name: Run tests
       run: RACK_ENV=test bundle exec rake
