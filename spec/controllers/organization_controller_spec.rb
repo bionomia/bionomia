@@ -3,7 +3,7 @@ describe "Bionomia Organization Controller" do
   before(:each) do
     @wikidata = "Q12345"
     @organization = Organization.new({ name: "My Museum", wikidata: @wikidata })
-    @organization.skip_callbacks
+    @organization.skip_callbacks = true
     @organization.save
   end
 

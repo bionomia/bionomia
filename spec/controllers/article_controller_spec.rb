@@ -4,7 +4,7 @@ describe "Bionomia Article Controller" do
     gbif_dois = ["10.0001/1", "10.0001/2"]
     gbif_downloadkeys = ["123x", "123y"]
     @article = Article.new({ doi: @doi, gbif_dois: gbif_dois, gbif_downloadkeys: gbif_downloadkeys })
-    @article.skip_callbacks
+    @article.skip_callbacks = true
     @article.save
   end
 
