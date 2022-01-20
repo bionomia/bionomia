@@ -44,6 +44,19 @@ end
  end
 end
 
+namespace :elastic do
+  namespace :create do
+    task(:all) do
+      INDICES = ["agent", "article", "dataset", "organization", "user", "taxon"]
+      INDICES.each do |index_name|
+        index = Object.const_get("Bionomia::Elastic#{index_name.capitalize}").new
+        index.delete_index
+        index.create_index
+      end
+    end
+  end
+end
+
 namespace :db do
 
   desc "Migrate the database"
