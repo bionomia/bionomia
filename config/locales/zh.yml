@@ -656,13 +656,13 @@ zh-CN:
     co_collectors: Co-collectors
     identified_for: Identified For
     identifications_by: Identifications By
-    no_identifications_by_alert: Identifications made to collected specimens have not yet been recorded.
+    no_identifications_by_alert: 对采集标本的鉴定尚未记录在案。
     identifications_by_alert: "Has collected specimens later identified by:"
-    no_identified_for_alert: Identifications made to others' collected specimens have not yet been recorded.
+    no_identified_for_alert: 对他人采集标本的鉴定尚未记录在案。
     identified_for_alert: "Has identified specimens collected by:"
-    comment_alert: Share an anecdote about a collecting trip, event or anything else.
-    no_institutions_alert: Institutions have not yet been recorded.
-    institutions_alert: "Specimens deposited and curated at the following institution(s):"
+    comment_alert: 分享一个有关采集历程、事件或任何其它事情的趣闻。
+    no_institutions_alert: 尚未记录的机构。
+    institutions_alert: "在下列机构存放和管理的标本："
     organizations: organizations
     specimens_metric: specimens
     specimens_identified: Specimens Identified
