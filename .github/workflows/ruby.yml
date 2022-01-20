@@ -36,7 +36,7 @@ jobs:
           sed -i 's/MYSQL_DATABASE/${{ env.MYSQL_DATABASE }}/g' config/settings/test.yml
     - name: Create database and import data
       run: |
-          RACK_ENV=test bundle exec rake db:create
+          RACK_ENV=test bundle exec rake db:create:all
           RACK_ENV=test bundle exec rake db:schema:load
     - name: Run tests
       run: RACK_ENV=test bundle exec rake
