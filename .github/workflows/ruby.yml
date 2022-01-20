@@ -57,6 +57,7 @@ jobs:
           aaron => erin, ron, ronnie
     - name: Creates Elasticsearch indices
       run: |
+          [ -f /usr/share/elasticsearch/config/synonyms.txt ] && echo "Synonyms file exists." || echo "Synonyms file does not exist."
           RACK_ENV=test bundle exec rake elastic:create:all
     - name: Run tests
       run: RACK_ENV=test bundle exec rake
