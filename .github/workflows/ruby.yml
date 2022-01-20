@@ -48,7 +48,6 @@ jobs:
       uses: elastic/elastic-github-actions/elasticsearch@master
       with:
         stack-version: 7.6.0
-    - name: Creates Elasticsearch indices
       run: |
           sudo mkdir -p "/usr/share/elasticsearch/config" && sudo touch "/usr/share/elasticsearch/config/synonyms.txt"
           RACK_ENV=test bundle exec rake elastic:create:all
