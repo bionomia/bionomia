@@ -34,11 +34,11 @@ zh-CN:
     articles_lede:
       unit:
         other: "articles that cited downloads from GBIF"
-    no_claims_alert: People have not yet claimed or were attributed specimens represented in data downloaded from GBIF in support of this article
+    no_claims_alert: 人们还没有从GBIF下载的数据中找到支持本文的样本
     claims_alert:
       unit:
-        other: "people collected or identified specimens included in data downloaded from GBIF in support of this article"
-    placeholder: "Evolution and systematics of..."
+        other: "人们从GBIF下载的数据中收集或识别支持本文的样本"
+    placeholder: "进化和系统学..."
     people: People
     agent_strings: Agent Strings
     agent_title: Article Agents
