@@ -34,7 +34,7 @@ zh-CN:
     articles_lede:
       unit:
         other: "articles that cited downloads from GBIF"
-    no_claims_alert: 人们还没有从GBIF下载的数据中找到支持本文的样本
+    no_claims_alert: 还没有人宣称从GBIF下载的数据中归纳出了支持本文的样本
     claims_alert:
       unit:
         other: "人们从GBIF下载的数据中收集或识别支持本文的样本"
