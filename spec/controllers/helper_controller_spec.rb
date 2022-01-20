@@ -1,7 +1,9 @@
 describe "Bionomia Helper Controller" do
   before(:each) do
     User.skip_callback(:before, :after)
-    @user = User.create({ given: "John", family: "Smith", other_names: "Jack" })
+    @user = User.new({ given: "John", family: "Smith", other_names: "Jack" })
+    @user.skip_callbacks = true
+    @user.save
     env 'rack.session', csrf: 'token', omniauth: OpenStruct.new({ id: @user.id })
   end
 

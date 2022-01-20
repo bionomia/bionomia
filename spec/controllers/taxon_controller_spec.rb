@@ -12,11 +12,6 @@ describe "Bionomia Taxon Controller" do
     expect(last_response).to be_ok
   end
 
-  it "should allow accessing a taxon visualizations page" do
-    get '/taxon/' + @taxon.family + '/visualizations'
-    expect(last_response).to be_ok
-  end
-
   it "should allow accessing a taxon agents page" do
     get '/taxon/' + @taxon.family + '/agents'
     expect(last_response).to be_ok
