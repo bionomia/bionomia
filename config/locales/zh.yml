@@ -613,7 +613,7 @@ zh-CN:
     number_agents_unclaimed:
       unit:
         other: "agent strings have unclaimed specimen records from data in GBIF"
-    no_agents_unclaimed: No specimen records are unclaimed or unattributed
+    no_agents_unclaimed: 没有任何未申报或未指定的样本记录
     alphabetical: Alphabetical
     counts: Counts
     unclaimed: Unclaimed
@@ -647,10 +647,10 @@ zh-CN:
         other: "specimens were claimed or attributed, but this profile is not publicly available."
     no_specimens_cited: Specimens have not been included in downloads from GBIF and cited in this research article.
     specimen_used: Specimen Data Used In
-    no_publications: Publications that used specimen records included in a download from GBIF have not yet been recorded.
+    no_publications: 使用包括了从GBIF下载的样本记录的出版物尚未记录在案。
     publication_count:
       unit:
-        other: "publications used specimen data downloaded from GBIF"
+        other: "使用了从GBIF下载的样本数据的出版物"
     no_co_collectors_alert: Co-collectors have not yet been recorded.
     co_collectors_alert: "Has collected with:"
     co_collectors: Co-collectors
