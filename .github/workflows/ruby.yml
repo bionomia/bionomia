@@ -47,11 +47,11 @@ jobs:
     - name: Runs Elasticsearch
       uses: elastic/elastic-github-actions/elasticsearch@master
       with:
-        stack-version: 7.6.0
+        stack-version: 7.15.2
     - name: Creates Elasticsearch indices
       run: |
           sudo mkdir -p "/usr/share/elasticsearch/config" && sudo touch "/usr/share/elasticsearch/config/synonyms.txt"
-          chmod 777 /usr/share/elastic/config/synonyms.txt
+          chmod 777 /usr/share/elasticsearch/config/synonyms.txt
           RACK_ENV=test bundle exec rake elastic:create:all
     - name: Run tests
       run: RACK_ENV=test bundle exec rake
