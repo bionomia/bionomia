@@ -1,7 +1,8 @@
 describe "Bionomia User Controller" do
   before(:each) do
-    User.skip_callback(:before, :after)
-    @user = User.create({ given: "John", family: "Smith", other_names: "Jack", is_public: true })
+    @user = User.new({ given: "John", family: "Smith", other_names: "Jack", is_public: true })
+    @user.skip_callbacks
+    @user.save
     @user.update_columns({ orcid: "0000-0001-7618-5230" })
     env 'rack.session', csrf: 'token', omniauth: OpenStruct.new({ id: @user.id })
   end

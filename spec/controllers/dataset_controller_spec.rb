@@ -3,7 +3,9 @@ describe "Bionomia Dataset Controller" do
   before(:each) do
     @datasetkey = "826f67d2-f762-11e1-a439-00145eb45e9a"
     @occurrence = Occurrence.create({ gbifID: 1, datasetKey: @datasetKey })
-    @dataset = Dataset.create!({ datasetKey: @datasetkey })
+    @dataset = Dataset.new({ datasetKey: @datasetkey })
+    @dataset.skip_callbacks
+    @dataset.save
   end
 
   after(:each) do

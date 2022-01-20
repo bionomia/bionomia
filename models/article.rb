@@ -1,4 +1,6 @@
 class Article < ActiveRecord::Base
+  attr_accessor :skip_callbacks
+
   has_many :article_occurrences
   has_many :occurrences, through: :article_occurrences, source: :occurrence
 
@@ -9,9 +11,9 @@ class Article < ActiveRecord::Base
   serialize :gbif_dois, Array
   serialize :gbif_downloadkeys, Array
 
-  after_create :update_citation, :add_search
-  after_update :update_citation, :update_search
-  after_destroy :remove_search
+  after_create :update_citation, :add_search, unless: :skip_callbacks
+  after_update :update_citation, :update_search, unless: :skip_callbacks
+  after_destroy :remove_search, unless: :skip_callbacks
 
   include ActionView::Helpers::SanitizeHelper
 

@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  attr_accessor :skip_callbacks
 
   BOT_IDS = [1,2]
 
@@ -16,10 +17,10 @@ class User < ActiveRecord::Base
   has_many :messages_sent, class_name: "Message", foreign_key: :user_id, dependent: :delete_all
 
   before_update :set_update_time
-  after_create :update_profile, :add_search
-  after_update :update_search
+  after_create :update_profile, :add_search, unless: :skip_callbacks
+  after_update :update_search, unless: :skip_callbacks
   before_destroy :create_destroyed_user
-  after_destroy :remove_search
+  after_destroy :remove_search, unless: :skip_callbacks
 
   def self.merge_wikidata(qid, dest_qid)
     return if DestroyedUser.find_by_identifier(qid)

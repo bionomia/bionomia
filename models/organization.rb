@@ -1,12 +1,14 @@
 class Organization < ActiveRecord::Base
+  attr_accessor :skip_callbacks
+
   serialize :institution_codes, Array
 
   has_many :user_organizations
   has_many :users, through: :user_organizations, source: :user
 
-  after_create :add_search
-  after_update :update_search
-  after_destroy :remove_search
+  after_create :add_search, unless: :skip_callbacks
+  after_update :update_search, unless: :skip_callbacks
+  after_destroy :remove_search, unless: :skip_callbacks
 
   METRICS_YEAR_RANGE = (2005..DateTime.now.year)
 

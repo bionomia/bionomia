@@ -1,12 +1,14 @@
 class Dataset < ActiveRecord::Base
+  attr_accessor :skip_callbacks
+
   has_many :occurrences, primary_key: :datasetKey, foreign_key: :datasetKey
 
   validates :datasetKey, presence: true
 
   before_update :set_update_time
-  after_create :add_search
-  after_update :update_search, :fix_occurrences_count
-  after_destroy :remove_search
+  after_create :add_search, unless: :skip_callbacks
+  after_update :update_search, :fix_occurrences_count, unless: :skip_callbacks
+  after_destroy :remove_search, unless: :skip_callbacks
 
   def has_claim?
     UserOccurrence.from("user_occurrences FORCE INDEX (user_occurrence_idx)")

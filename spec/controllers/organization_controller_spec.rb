@@ -2,7 +2,9 @@ describe "Bionomia Organization Controller" do
 
   before(:each) do
     @wikidata = "Q12345"
-    @organization = Organization.create!({ name: "My Museum", wikidata: @wikidata })
+    @organization = Organization.new({ name: "My Museum", wikidata: @wikidata })
+    @organization.skip_callbacks
+    @organization.save
   end
 
   after(:each) do

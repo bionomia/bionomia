@@ -1,7 +1,8 @@
 describe "Bionomia Administration Controller" do
   before(:each) do
-    User.skip_callback(:before, :after)
-    @user = User.create({ given: "John", family: "Smith", other_names: "Jack", is_admin: true })
+    @user = User.new({ given: "John", family: "Smith", other_names: "Jack", is_admin: true })
+    @user.skip_callbacks
+    @user.save
     env 'rack.session', csrf: 'token', omniauth: OpenStruct.new({ id: @user.id })
   end
 

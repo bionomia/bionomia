@@ -38,23 +38,5 @@ jobs:
       run: |
           RACK_ENV=test bundle exec rake db:create:all
           RACK_ENV=test bundle exec rake db:schema:load
-    - name: Configure sysctl limits
-      run: |
-          sudo swapoff -a
-          sudo sysctl -w vm.swappiness=1
-          sudo sysctl -w fs.file-max=262144
-          sudo sysctl -w vm.max_map_count=262144
-    - name: Runs Elasticsearch
-      uses: elastic/elastic-github-actions/elasticsearch@master
-      with:
-        stack-version: 7.15.2
-    - name: Create Elasticsearch synonyms.txt
-      run: |
-          sudo mkdir -p "/usr/share/elasticsearch/config" && sudo touch "/usr/share/elasticsearch/config/synonyms.txt"
-          sudo chmod -R 777 "/usr/share/elasticsearch"
-          [ -f /usr/share/elasticsearch/config/synonyms.txt ] && echo "Synonyms file exists." || echo "Synonyms file does not exist."
-    - name: Creates Elasticsearch indices
-      run: |
-          RACK_ENV=test bundle exec rake elastic:create:all
     - name: Run tests
       run: RACK_ENV=test bundle exec rake
