@@ -5,7 +5,7 @@ zh-CN:
   "false": "No"
   acknowledgments:
     acknowledgments_title: 鸣谢
-    taxon_silhouettes: Taxon Family Silhouettes
+    taxon_silhouettes: 科属分类概况
     translations: 翻译
   admin:
     change_photo: 更换头像
@@ -79,19 +79,19 @@ zh-CN:
     identified_from: "Identified %{family} from %{country}"
     collected_identified_from: "Collected or identified %{family} from %{country}"
     no_one_collected_from: "No one collected %{family} from %{country}"
-    no_one_identified_from: "No one identified %{family} from %{country}"
-    no_one_collected_identified_from: "No one collected or identified %{family} from %{country}"
+    no_one_identified_from: "没有来自 %{country} 的 %{family} 的鉴定"
+    no_one_collected_identified_from: "没有来自 %{country} 的 %{family} 的收集或鉴定"
     no_one_message: "从ORCID账户或维基数据（Wikidata）条目中没有找到来自 %{country} 的结果。按科属（Taxon Family）搜索专业知识。"
   dataset:
-    dataset_title: Datasets
-    search_title: Datasets Search
+    dataset_title: 数据集
+    search_title: 数据集查询
     scribes_title: Scribes
     lede:
       unit:
-        other: "datasets from GBIF"
-    placeholder: Butterflies of Brazil
+        other: "来自 GBIF 的数据集"
+    placeholder: 巴西的蝴蝶
     people: People
-    visualizations: Visualizations
+    visualizations: 可视化
     scribes: Scribes
     agents: Agents
     agent_strings: Agent Strings
@@ -106,10 +106,10 @@ zh-CN:
     agents_alert_unclaimed:
       unit:
         other: "raw strings from parsed collector and determiner names in entirely unattributed specimen data included in this dataset"
-    none_found: "No datasets found for %{searched}"
+    none_found: "没有找到%{searched} 的数据集"
     search_found:
       unit:
-        other: "search results for"
+        other: "搜索结果"
     no_scribes_alert: Scribes have not yet attributed specimens to collector or determimers represented in this dataset
     scribes_alert:
       unit:
@@ -173,7 +173,7 @@ zh-CN:
     structured_data_title: "面向开发人员：结构化数据"
   donate:
     donate_title: 赞助
-    lede: Your one-time or periodic donation will help complete the data pipeline and ensure that credit is given for contributions made to natural history collections as quickly and as seamlessly as possible.
+    lede: 您的一次性或定期捐赠将有助于数据管道（data pipeline）的完成，并确保尽可能快速、无缝地捐赠与自然博物收藏。
     campaign: Campaign
     donor_wall: 感恩墙
   donor_wall:
