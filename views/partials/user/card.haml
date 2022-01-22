@@ -62,10 +62,13 @@
 
   .card-body
     %p.card-text.mt-2 #{statement}
-  .card-footer.d-flex
-    - if !locals[:user].is_public?
-      .small.text-right.text-muted.mr-2
+  .card-footer.d-flex.justify-content-between.small
+    .text-left.text-muted.mr-2
+      - if !locals[:user].is_public?
         %i.fas.fa-lock
-    .small.text-left.text-muted.mr-2
       %span.badge.badge-light #{number_with_delimiter(locals[:stats][:specimens][:total])}
       #{I18n.t('card.claimed', count: locals[:stats][:specimens][:total])}
+    - if locals[:user].zenodo_doi
+      .text-right.ml-2.doi-badge
+        %a{href:"https://doi.org/#{locals[:user].zenodo_concept_doi}"}
+          %img{src:"/images/#{locals[:user].zenodo_concept_doi}.svg", alt:"DOI badge"}
