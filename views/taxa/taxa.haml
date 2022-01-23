@@ -25,7 +25,7 @@
             %li.list-group-item.border-0
               - image = taxon_image(t.family, 'thumbnail')
               - if !image.nil?
-                %img.mr-2{src:"#{image}", alt:"#{t.family}", loading:"lazy", style:"width:24px;max-height:64px;"}
+                %img.mr-2{src:"#{image}", alt:"#{t.family}", loading:"lazy", width:24, style:"max-height:64px;"}
               - else
                 %span.d-inline-block.mr-2{style:"width:24px;"}
               = link_to t.family, url("/taxon/#{t.family}")
@@ -46,7 +46,7 @@
             %li.list-group-item.border-0
               - image = taxon_image(o[:name], 'thumbnail')
               - if !image.nil?
-                %img.mr-2{src:"#{image}", alt:"#{o[:name]}", loading:"lazy", style:"width:24px;max-height:64px;"}
+                %img.mr-2{src:"#{image}", alt:"#{o[:name]}", loading:"lazy", width:24, style:"max-height:64px;"}
               - else
                 %span.d-inline-block.mr-2{style:"width:24px;"}
               = link_to o[:name], url("/taxon/#{o[:name]}")

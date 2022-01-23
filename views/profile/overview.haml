@@ -56,7 +56,7 @@
                   %span
                     - image = taxon_image(k, 'thumbnail')
                     - if !image.nil?
-                      %img.mr-2{src:"#{image}", alt:"#{k}", style:"width:24px;max-height:64px;", loading:"lazy"}
+                      %img.mr-2{src:"#{image}", alt:"#{k}", style:"max-height:64px;", width:24, loading:"lazy"}
                     - else
                       %span.d-inline-block.mr-2{style:"width:24px;max-height:64px;"}
                     = link_to k, url("/profile/specimens?action=identified&family=#{ERB::Util.url_encode(k)}")
@@ -71,7 +71,7 @@
                   %span
                     - image = taxon_image(k, 'thumbnail')
                     - if !image.nil?
-                      %img.mr-2{src:"#{image}", alt:"#{k}", style:"width:24px;max-height:64px;", loading:"lazy"}
+                      %img.mr-2{src:"#{image}", alt:"#{k}", style:"max-height:64px;", width:24, loading:"lazy"}
                     - else
                       %span.d-inline-block.mr-2{style:"width:24px;max-height:64px;"}
                     = link_to k, url("/profile/specimens?action=collected&family=#{ERB::Util.url_encode(k)}")
@@ -87,7 +87,7 @@
                   %span
                     - image = taxon_image(k, 'thumbnail')
                     - if !image.nil?
-                      %img.mr-2{src:"#{image}", alt:"#{k}", style:"width:24px;max-height:64px;", loading:"lazy"}
+                      %img.mr-2{src:"#{image}", alt:"#{k}", style:"max-height:64px;", width:24, loading:"lazy"}
                     - else
                       %span.d-inline-block.mr-2{style:"width:24px;max-height:64px;"}
                     = link_to k, url("/profile/specimens?action=identified&family=#{ERB::Util.url_encode(k)}")
