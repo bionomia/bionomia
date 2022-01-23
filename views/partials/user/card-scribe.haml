@@ -2,7 +2,7 @@
   - if locals[:user].image_url
     .card-header.d-flex
       %div
-        %img.card-img-profile.mr-2{src:"#{profile_image(locals[:user], 'medium')}", alt:"#{locals[:user].fullname}", width:48, height:48}
+        %img.card-img-profile.mr-2{src:"#{profile_image(locals[:user], 'medium')}", alt:"#{locals[:user].fullname}", width:48, height:48, loading:"lazy"}
       .flex-grow-1
         %h5
           // Do not use url method here becase caching breaks language-based subdomains
