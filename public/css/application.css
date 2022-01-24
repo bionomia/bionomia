@@ -1,12 +1,12 @@
 @font-face {
   font-family: "LovelyHome";
-  src: url("/font/LovelyHome.eot"); /* IE9 Compat Modes */
-  src: url("/font/LovelyHome.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-    url("/font/LovelyHome.otf") format("opentype"), /* Open Type Font */
-    url("/font/LovelyHome.svg") format("svg"), /* Legacy iOS */
-    url("/font/LovelyHome.ttf") format("truetype"), /* Safari, Android, iOS */
-    url("/font/LovelyHome.woff") format("woff"), /* Modern Browsers */
-    url("/font/LovelyHome.woff2") format("woff2"); /* Modern Browsers */
+  src: url("/font/subset-LovelyHome.eot"); /* IE9 Compat Modes */
+  src: url("/font/subset-LovelyHome.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("/font/subset-LovelyHome.otf") format("opentype"), /* Open Type Font */
+    url("/font/subset-LovelyHome.svg") format("svg"), /* Legacy iOS */
+    url("/font/subset-LovelyHome.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("/font/subset-LovelyHome.woff") format("woff"), /* Modern Browsers */
+    url("/font/subset-LovelyHome.woff2") format("woff2"); /* Modern Browsers */
   font-weight: normal;
   font-style: normal;
   font-display: swap;
