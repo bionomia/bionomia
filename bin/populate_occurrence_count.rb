@@ -78,5 +78,8 @@ if options[:jobs]
     puts o.id.to_s.green
     group = []
   end
+  if group.size > 0
+    Sidekiq::Client.push_bulk({ 'class' => Bionomia::OccurrenceCountWorker, 'args' => group })
+  end
   puts "Done!".green
 end

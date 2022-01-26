@@ -51,6 +51,9 @@ if options[:directory]
       Sidekiq::Client.push_bulk({ 'class' => Bionomia::AgentWorker, 'args' => group })
       group = []
     end
+    if group.size > 0
+      Sidekiq::Client.push_bulk({ 'class' => Bionomia::AgentWorker, 'args' => group })
+    end
     puts file.green
   end
 

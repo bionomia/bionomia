@@ -65,6 +65,7 @@ class Dataset < ActiveRecord::Base
                   .joins(:occurrence)
                   .where(occurrences: { datasetKey: datasetKey })
                   .where(user_occurrences: { visible: true })
+                  .distinct
                   .count
   end
 
