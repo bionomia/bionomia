@@ -53,8 +53,8 @@ pt:
     no_agent_strings_alert: Cadeias brutas de coletores e identifcadores de nomes separados em data de espécimes derivadas do GBIF em suporte desse artigo não foram encontrados
     agent_strings_alert:
       unit:
-        one: "Cadeias brutas de coletores e identifcadores de nomes separados de especimens derivados do GBIF em suporte desse artigo"
-        other: "raw strings from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article"
+        one: "cadeia bruta de coletores e identifcadores de nomes separados de especimens derivados do GBIF em suporte desse artigo"
+        other: "cadeias brutas de coletores e identifcadores de nomes separados de especimens derivados do GBIF em suporte desse artigo"
     claims: reivindicações
     specimens: especimes
     no_search_alert: "Nenhum artigo encontrado para"
@@ -117,8 +117,8 @@ pt:
         other: "cadeia bruta do coletor analisado e nomes determinantes nos dados do espécime incluídos neste conjunto de dados"
     agents_alert_unclaimed:
       unit:
-        one: "raw string from parsed collector and determiner names in unattributed specimen data included in this dataset"
-        other: "raw strings from parsed collector and determiner names in unattributed specimen data included in this dataset"
+        one: "cadeia bruta do coletor analisado e nomes do determinador em dados de espécime não atribuídos incluídos neste conjunto de dados"
+        other: "cadeias brutas de nomes de coletores e determinadores analisados em dados de espécimes não atribuídos incluídos neste conjunto de da"
     none_found: "Nenhum conjunto de dados encontrado para %{searched}"
     search_found:
       unit:
