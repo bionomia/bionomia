@@ -117,8 +117,8 @@ es:
         other: "cadena sin procesar de los nombres analizados del colector y del identificador en los datos de los especímenes incluidos en este conjunto de datos"
     agents_alert_unclaimed:
       unit:
-        one: "raw string from parsed collector and determiner names in unattributed specimen data included in this dataset"
-        other: "raw strings from parsed collector and determiner names in unattributed specimen data included in this dataset"
+        one: "cadena sin procesar de los nombres analizados del colector y del identificador en datos de especímenes no atribuidos, incluidos en este conjunto de datos"
+        other: "cadenas sin procesar de los nombres analizados del colector y del identificador en datos de especímenes no atribuidos, incluidos en este conjunto de datos"
     none_found: "No se encontraron conjuntos de datos para %{searched}"
     search_found:
       unit:
@@ -304,8 +304,8 @@ es:
     determiner_name: "Specimens identified by %{name} and collected by %{other_name}."
     not_determiner_name: "Specimens have not been identified by %{name} and collected by %{other_name}."
     identified_by_count:
-      one: "identified specimen"
-      other: "identified specimens"
+      one: "espécimen identificado"
+      other: "especímenes identificados"
     bulk_attribution: Atribuciones en masa
     reclaim_ignored: Reclamar ignorados
     fix_claims: Ajustar atribuciones
@@ -577,7 +577,7 @@ es:
     identifications_by: Identificaciones por
     no_determiners_alert: Determiners of your collected specimens have not yet been recorded.
     determiners_alert: "Your specimens have been identified by:"
-    determiner_name: "Specimens identified by %{name}."
+    determiner_name: "Especimenes identificados por %{name}."
     not_determiner_name: "Specimens you collected have not been identified by %{name}."
     identified_by_count:
       one: "identified specimen"
