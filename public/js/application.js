@@ -329,7 +329,7 @@ var Application = (function($, window) {
                 if (self.method === "POST" || input.hasClass("restore-ignored")) {
                   $(".table tbody tr").fadeOut(250).promise().done(function() {
                     $(this).remove();
-                    $(".table tbody").append("<tr><td colspan=\"10\">" + self.spinner + "</td></tr>");
+                    $(".table tbody").append("<tr><td colspan=\"12\">" + self.spinner + "</td></tr>");
                     location.reload();
                   });
                 } else {
@@ -369,7 +369,7 @@ var Application = (function($, window) {
                   input.parents("tr").fadeOut(250).promise().done(function() {
                     $(this).remove();
                     if ($("input.action-radio").length <= 6) {
-                      $(".table tbody").append("<tr><td colspan=\"10\">" + self.spinner + "</td></tr>");
+                      $(".table tbody").append("<tr><td colspan=\"12\">" + self.spinner + "</td></tr>");
                       location.reload();
                     }
                   });
@@ -427,7 +427,7 @@ var Application = (function($, window) {
         }).done(function(data) {
           $(".table tbody tr").fadeOut(250).promise().done(function() {
             $(this).remove();
-            $(".table tbody").append("<tr><td colspan=\"10\">" + self.spinner + "</td></tr>");
+            $(".table tbody").append("<tr><td colspan=\"12\">" + self.spinner + "</td></tr>");
             location.reload();
           });
         });
@@ -457,7 +457,7 @@ var Application = (function($, window) {
         }).done(function(data) {
           $(".table tbody tr").fadeOut(250).promise().done(function() {
             $(this).remove();
-            $(".table tbody").append("<tr><td colspan=\"10\">" + self.spinner + "</td></tr>");
+            $(".table tbody").append("<tr><td colspan=\"12\">" + self.spinner + "</td></tr>");
             location.reload();
           });
         });
