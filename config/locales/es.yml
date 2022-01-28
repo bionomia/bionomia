@@ -117,8 +117,8 @@ es:
         other: "cadena sin procesar de los nombres analizados del colector y del identificador en los datos de los especímenes incluidos en este conjunto de datos"
     agents_alert_unclaimed:
       unit:
-        one: "cadena sin procesar de los nombres analizados del colector y del identificador en datos de especímenes completamente no atribuidos, incluidos en este conjunto de datos"
-        other: "Cadenas sin procesar de los nombres analizados del colector y del identificador en datos de especímenes completamente no atribuidos, incluidos en este conjunto de datos"
+        one: "cadena sin procesar de los nombres analizados del colector y del identificador en datos de especímenes no atribuidos, incluidos en este conjunto de datos"
+        other: "Cadenas sin procesar de los nombres analizados del colector y del identificador en datos de especímenes no atribuidos, incluidos en este conjunto de datos"
     none_found: "No se encontraron conjuntos de datos para %{searched}"
     search_found:
       unit:

@@ -141,10 +141,10 @@ ru:
         other: "raw strings from parsed collector and determiner names in specimen data included in this dataset"
     agents_alert_unclaimed:
       unit:
-        one: "raw string from parsed collector and determiner names in entirely unattributed specimen data included in this dataset"
-        few: "raw strings from parsed collector and determiner names in entirely unattributed specimen data included in this dataset"
-        many: "raw strings from parsed collector and determiner names in entirely unattributed specimen data included in this dataset"
-        other: "raw strings from parsed collector and determiner names in entirely unattributed specimen data included in this dataset"
+        one: "raw string from parsed collector and determiner names in unattributed specimen data included in this dataset"
+        few: "raw strings from parsed collector and determiner names in unattributed specimen data included in this dataset"
+        many: "raw strings from parsed collector and determiner names in unattributed specimen data included in this dataset"
+        other: "raw strings from parsed collector and determiner names in unattributed specimen data included in this dataset"
     none_found: "No datasets found for %{searched}"
     search_found:
       unit:
