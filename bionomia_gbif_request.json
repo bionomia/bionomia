@@ -9,7 +9,7 @@
       {
         "type": "in",
         "key": "BASIS_OF_RECORD",
-        "values": [ "UNKNOWN", "LIVING_SPECIMEN", "FOSSIL_SPECIMEN", "PRESERVED_SPECIMEN", "MATERIAL_SAMPLE" ]
+        "values": [ "OCCURRENCE", "LIVING_SPECIMEN", "FOSSIL_SPECIMEN", "PRESERVED_SPECIMEN", "MATERIAL_SAMPLE" ]
       },
       {
         "type": "or",

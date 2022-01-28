@@ -86,7 +86,7 @@ module Bionomia
 
     def wikidata_institution_wiki_query(identifier)
       %Q(
-        SELECT ?item ?lat ?long ?image_url ?website
+        SELECT ?item ?itemLabel ?lat ?long ?image_url ?website
         WHERE {
           VALUES ?identifier {"#{identifier}"} {
             ?item wdt:P3500|wdt:P2427|wdt:P6782 ?identifier .
@@ -317,10 +317,11 @@ module Bionomia
     end
 
     def institution_wikidata(identifier)
-      wikicode, latitude, longitude, image_url, logo_url, website = nil
+      name, wikicode, latitude, longitude, image_url, logo_url, website = nil
 
       if identifier.match(/Q[0-9]{1,}/)
         data = Wikidata::Item.find(identifier)
+        name = data.title
         wikicode = identifier
         latitude = data.properties("P625").first.latitude.to_f rescue nil
         longitude = data.properties("P625").first.longitude.to_f rescue nil
@@ -332,6 +333,7 @@ module Bionomia
         response = @sparql.query(wikidata_institution_wiki_query(identifier))
                           .first
         if response
+          name = response[:itemLabel].to_s if !response[:itemLabel].nil?
           wikicode = response[:item].to_s.match(/Q[0-9]{1,}/).to_s
           latitude = response[:lat].to_f if !response[:lat].nil?
           longitude = response[:long].to_f if !response[:long].nil?
@@ -340,6 +342,7 @@ module Bionomia
         end
       end
       {
+        name: name,
         wikidata: wikicode,
         latitude: latitude,
         longitude: longitude,
