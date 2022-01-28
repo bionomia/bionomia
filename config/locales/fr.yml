@@ -117,8 +117,8 @@ fr:
         other: "chaînes brutes des noms de collecteur et de détermineur incluses dans cet ensemble de données"
     agents_alert_unclaimed:
       unit:
-        one: "raw string from parsed collector and determiner names in unattributed specimen data included in this dataset"
-        other: "raw strings from parsed collector and determiner names in unattributed specimen data included in this dataset"
+        one: "chaîne brute des noms de collecteur et de détermineur non attribuées mais incluses dans cet ensemble de données"
+        other: "chaînes brutes des noms de collecteur et de détermineur non attribuées mais incluses dans cet ensemble de données"
     none_found: "Aucun jeu de données trouvé pour %{searched}"
     search_found:
       unit:
