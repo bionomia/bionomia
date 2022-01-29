@@ -29,6 +29,10 @@
 %form.helpers#form-org-wrapper{method: "POST", action: "/admin/organization/#{@organization.id}", "accept-charset": "UTF-8"}
 
   .form-group
+    %label{for:"affiliates"} Number of affiliates
+    - color = (@organization.user_organizations.count == 0) ? "text-danger" : ""
+    %input.form-control-plaintext#affiliates{type:"text", value: "#{@organization.user_organizations.count}", name:"affiliates", readonly: true, class:"#{color}"}
+  .form-group
     %label{for:"name"} Name
     %input.form-control#name{type:"text", value:"#{@organization.name}", name:"name"}
   .form-group

@@ -42,7 +42,7 @@
               .card-footer
                 .col.small.text-left.text-muted
                 .col.small.text-right.text-muted
-                  - count = org.active_users.count
+                  - count = org.user_organizations.count
                   %span.badge.badge-light #{number_with_delimiter(count)}
                   #{'member'.pluralize(count)}
 

@@ -86,13 +86,13 @@ module Sinatra
           cloud_img = "https://abekpgaoen.cloudimg.io/v7/"
           path = "?height=200&org_if_sml=1"
           if size == "thumbnail"
-            path = "?width=24&height=24"
+            path = "?width=24&height=24&force_format=jpg"
           elsif size == "medium"
-            path = "?width=48&height=48"
+            path = "?width=48&height=48&force_format=jpg"
           elsif size == "social"
-            path = "?width=240&height=240"
+            path = "?width=240&height=240&force_format=jpg"
           elsif size == "large"
-            path = "?width=350&height=200"
+            path = "?width=350&height=200&force_format=jpg"
           end
           if organization.image_url
             img = cloud_img + organization.image_url.sub("https://", "") + path

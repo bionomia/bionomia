@@ -26,6 +26,7 @@
       %tr
         %th{scope: "col"}
           %a{href: url("/admin/organizations?order=name&sort=#{sort}")} Name
+        %th{scope: "col"} Affiliates
         %th{scope: "col"} Address
         %th{scope: "col"}
           %a{href: url("/admin/organizations?order=isni&sort=#{sort}")} ISNI
@@ -43,6 +44,7 @@
         %tr
           %td
             %a{href: url("/admin/organization/#{o.id}")} #{o.name}
+          %td #{o.user_organizations.count}
           %td #{o.address}
           %td
             - if !o.isni.blank?
