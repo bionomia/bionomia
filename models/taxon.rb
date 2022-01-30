@@ -68,13 +68,22 @@ class Taxon < ActiveRecord::Base
   end
 
   def agent_counts_unclaimed
-    occurrence_determiners_union_recorders
-      .joins("LEFT JOIN user_occurrences ON occurrence_recorders.occurrence_id = user_occurrences.occurrence_id")
-      .joins(:agent)
-      .where(user_occurrences: { occurrence_id: nil })
-      .group(:agent_id)
-      .order(Arel.sql("count(*) desc"))
-      .count
+    determiners = OccurrenceDeterminer
+                    .joins("INNER JOIN taxon_occurrences ON occurrence_determiners.occurrence_id = taxon_occurrences.occurrence_id")
+                    .joins("LEFT OUTER JOIN user_occurrences ON taxon_occurrences.occurrence_id = user_occurrences.occurrence_id AND user_occurrences.action IN ('identified', 'identified,recorded', 'recorded,identified')")
+                    .where(taxon_occurrences: { taxon_id: id })
+                    .where(user_occurrences: { occurrence_id: nil })
+                    .distinct
+    recorders = OccurrenceRecorder
+                    .joins("INNER JOIN taxon_occurrences ON occurrence_recorders.occurrence_id = taxon_occurrences.occurrence_id")
+                    .joins("LEFT OUTER JOIN user_occurrences ON taxon_occurrences.occurrence_id = user_occurrences.occurrence_id AND user_occurrences.action IN ('recorded', 'identified,recorded', 'recorded,identified')")
+                    .where(taxon_occurrences: { taxon_id: id })
+                    .where(user_occurrences: { occurrence_id: nil })
+                    .distinct
+    recorders.union_all(determiners)
+             .select(:agent_id, "count(*) AS count_all")
+             .group(:agent_id)
+             .order(count_all: :desc)
   end
 
   def timeline_recorded(start_year: 1000, end_year: Time.now.year)

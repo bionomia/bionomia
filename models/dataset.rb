@@ -133,9 +133,9 @@ class Dataset < ActiveRecord::Base
                     .where(user_occurrences: { occurrence_id: nil })
                     .distinct
     recorders.union_all(determiners)
+             .select(:agent_id, "count(*) AS count_all")
              .group(:agent_id)
-             .order(Arel.sql("count(*) desc"))
-             .count
+             .order(count_all: :desc)
   end
 
   def scribes
