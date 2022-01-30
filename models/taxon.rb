@@ -60,11 +60,18 @@ class Taxon < ActiveRecord::Base
   end
 
   def agent_counts
-    occurrence_determiners_union_recorders
-      .joins(:agent)
-      .group(:agent_id)
-      .order(Arel.sql("count(*) desc"))
-      .count
+    determiners = OccurrenceDeterminer
+                    .joins("INNER JOIN taxon_occurrences ON occurrence_determiners.occurrence_id = taxon_occurrences.occurrence_id")
+                    .where(taxon_occurrences: { taxon_id: id })
+                    .distinct
+    recorders = OccurrenceRecorder
+                    .joins("INNER JOIN taxon_occurrences ON occurrence_recorders.occurrence_id = taxon_occurrences.occurrence_id")
+                    .where(taxon_occurrences: { taxon_id: id })
+                    .distinct
+    recorders.union_all(determiners)
+             .select(:agent_id, "count(*) AS count_all")
+             .group(:agent_id)
+             .order(count_all: :desc)
   end
 
   def agent_counts_unclaimed

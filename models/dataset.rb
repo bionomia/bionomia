@@ -90,34 +90,16 @@ class Dataset < ActiveRecord::Base
     determiners = OccurrenceDeterminer
                     .joins(:occurrence)
                     .where(occurrences: { datasetKey: datasetKey })
-    recorders = OccurrenceRecorder
-                    .joins(:occurrence)
-                    .where(occurrences: { datasetKey: datasetKey })
-    recorders.union(determiners)
-             .joins(:agent)
-             .group(:agent_id)
-             .order(Arel.sql("count(*) desc"))
-             .count
-  end
-
-  def agents_occurrence_count
-    determiners = OccurrenceDeterminer
-                    .select(:agent_id)
-                    .joins(:occurrence)
-                    .where(occurrences: { datasetKey: datasetKey })
                     .distinct
     recorders = OccurrenceRecorder
-                    .select(:agent_id)
                     .joins(:occurrence)
                     .where(occurrences: { datasetKey: datasetKey })
                     .distinct
     recorders.union_all(determiners)
-             .unscope(:order)
-             .select(:agent_id)
-             .distinct
-             .count
+             .select(:agent_id, "count(*) AS count_all")
+             .group(:agent_id)
+             .order(count_all: :desc)
   end
-
 
   def agents_occurrence_unclaimed_counts
     determiners = OccurrenceDeterminer
