@@ -69,31 +69,29 @@ class Article < ActiveRecord::Base
     recorders = OccurrenceRecorder
                     .joins("INNER JOIN article_occurrences ON article_occurrences.occurrence_id = occurrence_recorders.occurrence_id")
                     .where(article_occurrences: { article_id: id })
-    recorders.union(determiners)
-             .joins(:agent)
+    recorders.union_all(determiners)
+             .select(:agent_id, "count(*) AS count_all")
              .group(:agent_id)
-             .order(Arel.sql("count(*) desc"))
-             .count
+             .order(count_all: :desc)
   end
 
   def agents_occurrence_counts_unclaimed
     determiners = OccurrenceDeterminer
                     .joins("INNER JOIN article_occurrences ON occurrence_determiners.occurrence_id = article_occurrences.occurrence_id")
-                    .joins("LEFT JOIN user_occurrences ON occurrence_determiners.occurrence_id = user_occurrences.occurrence_id")
+                    .joins("LEFT OUTER JOIN user_occurrences ON occurrence_determiners.occurrence_id = user_occurrences.occurrence_id AND user_occurrences.action IN ('identified', 'identified,recorded', 'recorded,identified')")
                     .where(article_occurrences: { article_id: id })
                     .where(user_occurrences: { occurrence_id: nil })
                     .distinct
     recorders = OccurrenceRecorder
                     .joins("INNER JOIN article_occurrences ON occurrence_recorders.occurrence_id = article_occurrences.occurrence_id")
-                    .joins("LEFT JOIN user_occurrences ON occurrence_recorders.occurrence_id = user_occurrences.occurrence_id")
+                    .joins("LEFT OUTER JOIN user_occurrences ON occurrence_recorders.occurrence_id = user_occurrences.occurrence_id AND user_occurrences.action IN ('recorded', 'identified,recorded', 'recorded,identified')")
                     .where(article_occurrences: { article_id: id })
                     .where(user_occurrences: { occurrence_id: nil })
                     .distinct
     recorders.union(determiners)
-             .joins(:agent)
+             .select(:agent_id, "count(*) AS count_all")
              .group(:agent_id)
-             .order(Arel.sql("count(*) desc"))
-             .count
+             .order(count_all: :desc)
   end
 
   private

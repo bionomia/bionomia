@@ -23,10 +23,9 @@
       .col-12.col-sm-3.mb-3
         %ul.list-unstyled.m-2
           - group.each do |a|
-            - agent = Agent.find(a[0])
             %li
-              = link_to agent.fullname_reverse, url("/agent/#{agent.id}")
-              %span.badge.badge-light #{number_with_delimiter(a[1])}
+              = link_to a.agent.fullname_reverse, url("/agent/#{a.agent.id}")
+              %span.badge.badge-light #{number_with_delimiter(a.count_all)}
 
   - if @pagy.pages > 1
     .y-scroll
