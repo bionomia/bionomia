@@ -3,7 +3,7 @@ class Organization < ActiveRecord::Base
 
   serialize :institution_codes, Array
 
-  has_many :user_organizations
+  has_many :user_organizations, dependent: :delete_all
   has_many :users, through: :user_organizations, source: :user
 
   after_create :add_search, unless: :skip_callbacks

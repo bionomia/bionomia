@@ -48,7 +48,7 @@
           %td #{o.address}
           %td
             - if !o.isni.blank?
-              %a{href:"http://www.isni.org/isni/#{o.isni}"} #{o.isni}
+              %a{href:"http://www.isni.org/isni/#{o.isni.delete(' ')}"} #{o.isni}
           %td
             - if !o.ror.blank?
               %a{href:"https://ror.org/#{o.ror}"} #{o.ror}
