@@ -88,7 +88,7 @@ class Article < ActiveRecord::Base
                     .where(article_occurrences: { article_id: id })
                     .where(user_occurrences: { occurrence_id: nil })
                     .distinct
-    recorders.union(determiners)
+    recorders.union_all(determiners)
              .select(:agent_id, "count(*) AS count_all")
              .group(:agent_id)
              .order(count_all: :desc)
