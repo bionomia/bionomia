@@ -45,11 +45,11 @@
       - else
         %a.btn.btn-lg.btn-outline-dark#candidates-button{ href:"/profile", role: "button"}= I18n.t('home.your_profile')
 
-- if !@results.empty?
-  %h2.text-center
-    = I18n.t('home.sample_profiles')
+%h2.text-center
+  = I18n.t('home.sample_profiles')
 
-  - @results.in_groups_of(3).each do |group|
+- cache_fragment('homepage_profiles') do
+  - example_profiles.in_groups_of(3).each do |group|
     .card-deck
       - group.each do |u|
         - if !u.nil?

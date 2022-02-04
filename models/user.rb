@@ -58,7 +58,17 @@ class User < ActiveRecord::Base
   end
 
   def self.find_by_identifier(id)
-    self.find_by_orcid(id) || self.find_by_wikidata(id) || self.find(id) || nil rescue nil
+    begin
+      if id.is_orcid?
+        self.find_by_orcid(id)
+      elsif id.is_wiki_id?
+        self.find_by_wikidata(id)
+      else
+        self.find(id)
+      end
+    rescue
+      nil
+    end
   end
 
   def is_public?

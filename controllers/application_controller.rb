@@ -8,7 +8,6 @@ module Sinatra
         def self.registered(app)
 
           app.get '/' do
-            example_profiles
             haml :home, locals: { active_page: "home" }
           end
 

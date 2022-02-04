@@ -107,16 +107,16 @@ module Sinatra
         end
 
         def example_profiles
-          @results = User.where(is_public: true)
-                         .where.not(image_url: nil)
-                         .where.not(orcid: nil)
-                         .limit(3)
-                         .order(Arel.sql("RAND()"))
-                         .union_all(User.where(is_public: true)
-                                        .where.not(image_url: nil)
-                                        .where.not(wikidata: nil)
-                                        .limit(3)
-                                        .order(Arel.sql("RAND()")))
+          User.where(is_public: true)
+              .where.not(image_url: nil)
+              .where.not(orcid: nil)
+              .limit(3)
+              .order(Arel.sql("RAND()"))
+              .union_all(User.where(is_public: true)
+                             .where.not(image_url: nil)
+                             .where.not(wikidata: nil)
+                             .limit(3)
+                             .order(Arel.sql("RAND()")))
         end
 
         def occurrences_by_score(id_scores, user)
