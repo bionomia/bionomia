@@ -107,7 +107,7 @@ if options[:cache]
       .find_each do |u|
     u.flush_caches
   end
-  BIONOMIA.cache_clear("fragments/homepage_profiles")
+  BIONOMIA.cache_clear("fragments/")
 end
 
 if options[:file]
