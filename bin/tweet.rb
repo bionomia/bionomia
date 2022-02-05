@@ -31,13 +31,13 @@ def download_image(uri)
 end
 
 if options[:born]
-  @date = DateTime.now
+  date = DateTime.now
   users = User.joins(:user_occurrences)
               .where.not(wikidata: nil)
               .where(is_public: true)
               .where.not(image_url: nil)
               .where(date_born_precision: "day")
-              .where("MONTH(date_born) = ? and DAY(date_born) = ?", @date.month, @date.day)
+              .where("MONTH(date_born) = ? and DAY(date_born) = ?", date.month, date.day)
               .order(Arel.sql("RAND()"))
               .limit(1)
   if !users.nil?
@@ -47,11 +47,11 @@ if options[:born]
 end
 
 if options[:holotype]
-  @date = DateTime.now
+  date = DateTime.now
   holotypes = Occurrence.joins(:users)
                         .where(hasImage: true)
                         .where(typeStatus: ["HOLOTYPE", "holotype"])
-                        .where("MONTH(eventDate_processed) = ? and DAY(eventdate_processed) = ?", @date.month, @date.day)
+                        .where("MONTH(eventDate_processed) = ? and DAY(eventdate_processed) = ?", date.month, date.day)
                         .where.not(users: { orcid: nil })
                         .where(user_occurrences: { action: ["recorded", "recorded,identified", "identified,recorded"]})
                         .order(Arel.sql("RAND()"))
