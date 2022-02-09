@@ -233,6 +233,10 @@ div.list-header{
 /* Fix Google Chart cursor flickering */
 svg > g > g:not([column-id]):last-child { pointer-events: none }
 
+#map-collected path:not([fill^="#f5f5f5"]):hover, #map-identified path:not([fill^="#f5f5f5"]):hover {
+  cursor:pointer;
+}
+
 .twitter {
   background-color:#4099ff;
   color:#fff;
