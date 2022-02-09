@@ -103,7 +103,7 @@ module Sinatra
                               .distinct
                               .limit(100)
 
-          @pagy, @results = pagy_arel(qry, items: 20)
+          @pagy, @results = pagy(qry, items: 20)
         end
 
         def example_profiles
