@@ -179,6 +179,7 @@ module Sinatra
             end
 
             get '/helped' do
+              # When MySQL 8, use pagy_arel
               @pagy, @results = pagy(@user.latest_helped, items: 15)
               haml :'profile/helped', locals: { active_page: "profile" }
             end
