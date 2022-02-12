@@ -51,7 +51,7 @@ module Sinatra
         def candidate_agents(user)
           return [] if user.fullname.is_orcid?
 
-          cutoff_score = 60
+          cutoff_score = 65
 
           agents = search_agents(user.fullname)
           full_names = [user.fullname.dup]
