@@ -220,8 +220,8 @@ module Bionomia
       other_names = u.other_names.split("|").map(&:strip) rescue []
       co_collectors = u.recorded_with
                        .map{|o| { id: o.id, orcid: o.orcid, wikidata: o.wikidata, fullname: o.fullname } }
-      recorded_countries = u.recorded_families_countries
-      rank = recorded_countries.map{|a| a[:family]}.uniq.compact.count
+      family_countries = u.families_countries
+      rank = family_countries[:recorded].map{|a| a[:family]}.uniq.compact.count
       {
         id: u.id,
         orcid: u.orcid,
@@ -237,8 +237,8 @@ module Bionomia
         date_died_precision: u.date_died_precision,
         thumbnail: thumbnail(u),
         description: description,
-        identified: u.identified_families_countries,
-        recorded: recorded_countries,
+        identified: family_countries[:identified].to_a,
+        recorded: family_countries[:recorded].to_a,
         co_collectors: co_collectors,
         rank: ((rank.nil? || rank == 0) ? nil : rank)
       }

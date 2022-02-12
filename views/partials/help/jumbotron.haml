@@ -1,3 +1,4 @@
+%script{src: "/js/disambiguation-alert.js"}
 %script{src: "/js/jquery.collapser.min.js"}
 :javascript
   $(function() {
@@ -7,6 +8,7 @@
       showText: '[Show more...]',
       hideText: '[Hide]'
     });
+    DisambiguateSearch.init("#{@viewed_user.fullname}", "#{@viewed_user.identifier}");
   });
 
 .jumbotron.jumbotron-fluid.d-flex.flex-wrap.alert-warning

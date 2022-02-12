@@ -449,24 +449,22 @@ class User < ActiveRecord::Base
       .count
   end
 
-  def identified_families_countries
+  def families_countries
+    output = { recorded: Set.new, identified: Set.new}
     visible_user_occurrences
       .joins(:occurrence)
-      .where(qry_identified)
-      .pluck(:family, :countryCode)
-      .uniq
-      .compact
-      .map{|a| { family: a[0], country: a[1] }}
-  end
-
-  def recorded_families_countries
-    visible_user_occurrences
-      .joins(:occurrence)
-      .where(qry_recorded)
-      .pluck(:family, :countryCode)
-      .uniq
-      .compact
-      .map{|a| { family: a[0], country: a[1] }}
+      .where(qry_identified_or_recorded)
+      .pluck(:action, :family, :countryCode)
+      .each do |a|
+        if !a[1].nil?
+          if a[0].include?("recorded")
+            output[:recorded] << { family: a[1], country: a[2] }
+          elsif a[0].include?("identified")
+            output[:identified] << { family: a[1], country: a[2] }
+          end
+        end
+      end
+    output
   end
 
   def recorded_bins(years = 5)
