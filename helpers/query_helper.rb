@@ -16,7 +16,7 @@ module Sinatra
                     analyzer:   :fullname_index,
                     fields:     [
                       "family^3",
-                      "given^2",
+                      "given",
                       "fullname^5",
                       "other_names",
                       "*.edge"
