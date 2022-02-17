@@ -124,7 +124,7 @@ module Sinatra
             agents.delete_if{|a| remove_agents.include?(a[:id]) || a[:score] < cutoff_score }
           end
 
-          # Remove agent is score is half the cut-off
+          # Remove agent if score is half the cut-off
           agents.delete_if{|a| a[:score] < 0.5*cutoff_score}
 
           agents.pluck(:id)
