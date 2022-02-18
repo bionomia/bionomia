@@ -140,7 +140,7 @@ module Bionomia
           attributions << CSV::Row.new(attributions_header, data).to_s
 
           # Add problems
-          if o.u_wikidata && o.eventDate_processed &&
+          if recorded_uri && o.u_wikidata && o.eventDate_processed &&
             ( o.u_date_born && o.u_date_born >= o.eventDate_processed ||
               o.u_date_died && o.u_date_died <= o.eventDate_processed )
             data = [
