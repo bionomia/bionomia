@@ -171,14 +171,27 @@
                     #{recorder.user.fullname_reverse}
                     %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD"}
                     = link_to "https://www.wikidata.org/wiki/#{recorder.user.wikidata}", "https://www.wikidata.org/wiki/#{recorder.user.wikidata}"
-                  - if recorder.claimant != recorder.user && !recorder.claimant.is_bot?
-                    %span.d-block.ml-3.text-muted.small
+                  %span.d-block.ml-3.text-muted.small
+                    - if recorder.claimant != recorder.user && !recorder.claimant.is_bot?
                       Attributed by: #{recorder.claimant.fullname_reverse}
                       %a{href: "https://orcid.org/#{recorder.claimant.orcid}"}
                         %i.fab.fa-orcid
                         https://orcid.org/#{recorder.claimant.orcid}
-                    %span.d-block.ml-3.text-muted.small
+                    - elsif recorder.claimant == recorder.user && !recorder.claimant.is_bot?
+                      Claimed by: #{recorder.claimant.fullname_reverse}
+                      %a{href: "https://orcid.org/#{recorder.claimant.orcid}"}
+                        %i.fab.fa-orcid
+                        https://orcid.org/#{recorder.claimant.orcid}
+                    - elsif recorder.claimant.is_bot?
+                      Attributed by: Bionomia Bot or from source
+                  %span.d-block.ml-3.text-muted.small
+                    - if recorder.claimant != recorder.user && !recorder.claimant.is_bot?
                       Attributed on: #{recorder.updated || recorder.created}
+                    - elsif recorder.claimant == recorder.user && !recorder.claimant.is_bot?
+                      Claimed on: #{recorder.updated || recorder.created}
+                    - elsif recorder.claimant.is_bot?
+                      Attributed or refreshed on: #{recorder.updated || recorder.created}
+
         %dd.line-break
 
   #identification.card.mb-4
@@ -239,14 +252,26 @@
                     #{determiner.user.fullname_reverse}
                     %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD"}
                     = link_to "https://www.wikidata.org/wiki/#{determiner.user.wikidata}", "https://www.wikidata.org/wiki/#{determiner.user.wikidata}"
-                  - if determiner.claimant != determiner.user && !determiner.claimant.is_bot?
-                    %span.d-block.ml-3.text-muted.small
+                  %span.d-block.ml-3.text-muted.small
+                    - if determiner.claimant != determiner.user && !determiner.claimant.is_bot?
                       Attributed by: #{determiner.claimant.fullname_reverse}
                       %a{href: "https://orcid.org/#{determiner.claimant.orcid}"}
                         %i.fab.fa-orcid
                         https://orcid.org/#{determiner.claimant.orcid}
-                    %span.d-block.ml-3.text-muted.small
+                    - elsif determiner.claimant == determiner.user && !determiner.claimant.is_bot?
+                      Claimed by: #{determiner.claimant.fullname_reverse}
+                      %a{href: "https://orcid.org/#{determiner.claimant.orcid}"}
+                        %i.fab.fa-orcid
+                        https://orcid.org/#{determiner.claimant.orcid}
+                    - elsif determiner.claimant.is_bot?
+                      Attributed by: Bionomia Bot or from source
+                  %span.d-block.ml-3.text-muted.small
+                    - if determiner.claimant != determiner.user && !determiner.claimant.is_bot?
                       Attributed on: #{determiner.updated || determiner.created}
+                    - elsif determiner.claimant == determiner.user && !determiner.claimant.is_bot?
+                      Claimed on: #{determiner.updated || determiner.created}
+                    - elsif determiner.claimant.is_bot?
+                      Attributed or refreshed on: #{determiner.updated || determiner.created}
         %dd.line-break
 
 %script{id: "selector-template", type: "text/x-handlebars-template"}
