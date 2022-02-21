@@ -177,6 +177,8 @@
                       %a{href: "https://orcid.org/#{recorder.claimant.orcid}"}
                         %i.fab.fa-orcid
                         https://orcid.org/#{recorder.claimant.orcid}
+                    %span.d-block.ml-3.text-muted.small
+                      Attributed on: #{recorder.updated || recorder.created}
         %dd.line-break
 
   #identification.card.mb-4
@@ -243,6 +245,8 @@
                       %a{href: "https://orcid.org/#{determiner.claimant.orcid}"}
                         %i.fab.fa-orcid
                         https://orcid.org/#{determiner.claimant.orcid}
+                    %span.d-block.ml-3.text-muted.small
+                      Attributed on: #{determiner.updated || determiner.created}
         %dd.line-break
 
 %script{id: "selector-template", type: "text/x-handlebars-template"}
