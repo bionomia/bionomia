@@ -2,8 +2,6 @@ class OccurrenceCount < ActiveRecord::Base
   belongs_to :occurrence
 
   def has_candidate?
-    client.transport.reload_connections!
-
     collectors, whole_network = collector_network
 
     return false if whole_network.size < 2

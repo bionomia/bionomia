@@ -7,7 +7,6 @@ module Bionomia
     def initialize(opts = {})
       super
       @settings = { index: Settings.elastic.taxon_index }.merge(opts)
-      client.transport.reload_connections!
     end
 
     def create_index
