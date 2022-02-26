@@ -1,4 +1,5 @@
 require 'bundler'
+require 'bundler/setup'
 require 'ostruct'
 require 'logger'
 require 'mysql2'
