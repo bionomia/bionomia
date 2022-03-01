@@ -27,8 +27,8 @@ OptionParser.new do |opts|
 end.parse!
 
 if options[:file]
-  mime_type = `file --mime -b "#{options[:file]}"`.chomp
-  if !mime_type.include?("text/plain") && !mime_type.include?("application/csv")
+  mime_type = `file --mime-type -b "#{options[:file]}"`.chomp
+  if !["text/plain", "application/csv", "text/csv"].include?(mime_type)
     raise RuntimeError, 'File must be a csv'
   end
   CSV.foreach(options[:file], headers: true, header_converters: :symbol) do |row|
