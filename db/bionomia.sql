@@ -47,6 +47,7 @@ CREATE TABLE `datasets` (
   `doi` tinytext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `license` tinytext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `image_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `dataset_type` varchar(25) COLLATE utf8mb4_bin DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL,
   `frictionless_created_at` timestamp NULL DEFAULT NULL,

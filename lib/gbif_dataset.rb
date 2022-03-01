@@ -8,7 +8,7 @@ module Bionomia
 
     def update_all
       Dataset.find_each do |d|
-        datasets.process_dataset(d.datasetKey)
+        self.process_dataset(d.datasetKey)
         puts d.datasetKey.green
       end
     end
@@ -28,6 +28,7 @@ module Bionomia
         dataset.doi = response[:doi] || nil
         dataset.license = response[:license] || nil
         dataset.image_url = response[:logoUrl] || nil
+        dataset.dataset_type = response[:type] || nil
         dataset.save
       rescue
       end
