@@ -14,17 +14,17 @@ zh-CN:
       decimal_units:
         format: "%n %u"
         units:
-          billion: 十亿
-          million: 百万
-          quadrillion: 千兆
-          thousand: 千
-          trillion: 兆
+          billion: Billion
+          million: Million
+          quadrillion: Quadrillion
+          thousand: Thousand
+          trillion: Trillion
           unit: ''
       format:
         delimiter: ''
-        precision: 1
-        significant: false
-        strip_insignificant_zeros: false
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
   acknowledgments:
     acknowledgments_title: 鸣谢
     taxon_silhouettes: 科属分类概况
