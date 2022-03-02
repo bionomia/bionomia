@@ -14,11 +14,11 @@ af:
       decimal_units:
         format: "%n %u"
         units:
-          billion: miljard
-          million: miljoen
-          quadrillion: biljard
-          thousand: duisend
-          trillion: biljoen
+          billion: Billion
+          million: Million
+          quadrillion: Quadrillion
+          thousand: Thousand
+          trillion: Trillion
           unit: ''
       format:
         delimiter: ''
