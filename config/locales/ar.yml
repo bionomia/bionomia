@@ -14,11 +14,11 @@ ar:
       decimal_units:
         format: "%n %u"
         units:
-          billion: مليار
-          million: مليون
-          quadrillion: كدريليون
-          thousand: ألفّ
-          trillion: تريليون
+          billion: 'مليار'
+          million: 'مليون'
+          quadrillion: 'كدريليون'
+          thousand: 'ألفّ'
+          trillion: 'تريليون'
           unit: ''
       format:
         delimiter: ''

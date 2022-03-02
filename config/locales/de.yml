@@ -14,19 +14,11 @@ de:
       decimal_units:
         format: "%n %u"
         units:
-          billion:
-            one: Milliarde
-            other: Milliarden
-          million:
-            one: Million
-            other: Millionen
-          quadrillion:
-            one: Billiarde
-            other: Billiarden
+          billion: Milliarden
+          million: Millionen
+          quadrillion: Billiarden
           thousand: Tausend
-          trillion:
-            one: Billion
-            other: Billionen
+          trillion: Billionen
           unit: ''
       format:
         delimiter: ''

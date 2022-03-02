@@ -14,31 +14,11 @@ ru:
       decimal_units:
         format: "%n %u"
         units:
-          billion:
-            one: миллиард
-            few: миллиардов
-            many: миллиардов
-            other: миллиардов
-          million:
-            one: миллион
-            few: миллионов
-            many: миллионов
-            other: миллионов
-          quadrillion:
-            one: квадриллион
-            few: квадриллионов
-            many: квадриллионов
-            other: квадриллионов
-          thousand:
-            one: тысяча
-            few: тысяч
-            many: тысяч
-            other: тысяч
-          trillion:
-            one: триллион
-            few: триллионов
-            many: триллионов
-            other: триллионов
+          billion: Billion
+          million: Million
+          quadrillion: Quadrillion
+          thousand: Thousand
+          trillion: Trillion
           unit: ''
       format:
         delimiter: ''
