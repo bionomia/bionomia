@@ -5,24 +5,20 @@ es:
   "false": "No"
   number:
     format:
-      delimiter: "."
+      delimiter: ","
       precision: 3
-      separator: ","
+      separator: "."
       significant: false
       strip_insignificant_zeros: false
     human:
       decimal_units:
         format: "%n %u"
         units:
-          billion: mil millones
-          million:
-            one: millón
-            other: millones
-          quadrillion: mil billones
-          thousand: mil
-          trillion:
-            one: billón
-            other: billones
+          billion: Billion
+          million: Million
+          quadrillion: Quadrillion
+          thousand: Thousand
+          trillion: Trillion
           unit: ''
       format:
         delimiter: ''
@@ -617,7 +613,7 @@ es:
     attributed: atribuido
   roster:
     roster_title: Perfiles públicos
-    lede: "%{count} personas que han compartido sus perfiles y los perfiles de otros que admiran"
+    lede: "%{count} people who share their profiles and the profiles of others they revere"
     no_one_found: No se encontró a nadie por el nombre
     search_result_count:
       unit:
@@ -642,7 +638,7 @@ es:
     remove: Remover
   scribes:
     scribes_title: Anotadores
-    lede: "%{scribe_count} personas que han atribuido %{attribution_count} especímenes de historia natural a %{recipient_count} de sus colegas, mentores, y modelos a seguir"
+    lede: "%{scribe_count} people who have attributed %{attribution_count} natural history specimens to %{recipient_count} of their peers, mentors, and role models"
   taxa:
     lede:
       unit:

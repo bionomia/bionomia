@@ -22,9 +22,9 @@ zh-CN:
           unit: ''
       format:
         delimiter: ''
-        precision: 1
-        significant: false
-        strip_insignificant_zeros: false
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
   acknowledgments:
     acknowledgments_title: 鸣谢
     taxon_silhouettes: 科属分类概况

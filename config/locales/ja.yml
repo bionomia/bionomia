@@ -14,11 +14,11 @@ ja:
       decimal_units:
         format: "%n %u"
         units:
-          billion: 十億
-          million: 百万
-          quadrillion: 千兆
-          thousand: 千
-          trillion: 兆
+          billion: Billion
+          million: Million
+          quadrillion: Quadrillion
+          thousand: Thousand
+          trillion: Trillion
           unit: ''
       format:
         delimiter: ''
