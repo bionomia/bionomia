@@ -89,6 +89,13 @@ def update(u)
   puts "#{u.fullname_reverse}".green
 end
 
+def rebuild_stats
+  BIONOMIA.cache_clear("blocks/scribe-stats")
+  stats = Class.new
+  stats.extend Sinatra::Bionomia::Helper::GeneralHelper
+  BIONOMIA.cache_put_tag("blocks/scribe-stats", stats.scribe_stats)
+end
+
 if options[:poll_orcid]
   search = Bionomia::OrcidSearch.new
   search.add_new_users
@@ -108,6 +115,7 @@ if options[:cache]
     u.flush_caches
   end
   BIONOMIA.cache_clear("fragments/")
+  rebuild_stats
 end
 
 if options[:file]

@@ -3,6 +3,28 @@ fr:
   locale: "fr_FR"
   "true": "Oui"
   "false": "Non"
+  number:
+    format:
+      delimiter: " "
+      precision: 3
+      separator: ","
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion: milliards
+          million: millions
+          quadrillion: million de milliards
+          thousand: milliers
+          trillion: billions
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
   acknowledgments:
     acknowledgments_title: Remerciements
     taxon_silhouettes: Silhouettes des Familles Taxonomiques
@@ -591,10 +613,7 @@ fr:
     attributed: attribué
   roster:
     roster_title: Profils publics
-    lede:
-      unit:
-        one: "personne qui partage leur profil"
-        other: "personnes qui partagent leurs profils et les profils des autres qu'ils vénèrent"
+    lede: "%{count} personnes qui partagent leurs profils et les profils des autres qu'ils vénèrent"
     no_one_found: Personne trouvé par le nom
     search_result_count:
       unit:
@@ -619,10 +638,7 @@ fr:
     remove: Enlever
   scribes:
     scribes_title: Scribes
-    lede:
-      unit:
-        one: "personne qui a attribué des spécimens d'histoire naturelle à leurs pairs, mentors et modèles"
-        other: "personnes qui ont attribué des spécimens d'histoire naturelle à leurs pairs, mentors et modèles"
+    lede: "%{scribe_count} personnes qui ont attribué %{attribution_count} de spécimens d'histoire naturelle à %{recipient_count} de leurs pairs, mentors et modèles"
   taxa:
     lede:
       unit:

@@ -3,6 +3,32 @@ es:
   locale: "es_ES"
   "true": "Si"
   "false": "No"
+  number:
+    format:
+      delimiter: "."
+      precision: 3
+      separator: ","
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion: mil millones
+          million:
+            one: millón
+            other: millones
+          quadrillion: mil billones
+          thousand: mil
+          trillion:
+            one: billón
+            other: billones
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
   acknowledgments:
     acknowledgments_title: Agradecimientos
     taxon_silhouettes: Siluetas de taxón por familia
@@ -591,10 +617,7 @@ es:
     attributed: atribuido
   roster:
     roster_title: Perfiles públicos
-    lede:
-      unit:
-        one: "persona que ha compartido su perfil"
-        other: "personas que han compartido sus perfiles y los perfiles de otros que admiran"
+    lede: "%{count} personas que han compartido sus perfiles y los perfiles de otros que admiran"
     no_one_found: No se encontró a nadie por el nombre
     search_result_count:
       unit:
@@ -619,10 +642,7 @@ es:
     remove: Remover
   scribes:
     scribes_title: Anotadores
-    lede:
-      unit:
-        one: "persona que ha atribuido especímenes de historia natural a sus colegas, mentores, y modelos a seguir"
-        other: "personas que han atribuido especímenes de historia natural a sus colegas, mentores, y modelos a seguir"
+    lede: "%{scribe_count} personas que han atribuido %{attribution_count} especímenes de historia natural a %{recipient_count} de sus colegas, mentores, y modelos a seguir"
   taxa:
     lede:
       unit:

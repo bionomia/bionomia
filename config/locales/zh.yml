@@ -3,6 +3,28 @@ zh-CN:
   locale: "zh_CN"
   "true": "是的"
   "false": "No"
+  number:
+    format:
+      delimiter: ","
+      precision: 3
+      separator: "."
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion: 十亿
+          million: 百万
+          quadrillion: 千兆
+          thousand: 千
+          trillion: 兆
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 1
+        significant: false
+        strip_insignificant_zeros: false
   acknowledgments:
     acknowledgments_title: 鸣谢
     taxon_silhouettes: 科属分类概况
@@ -557,9 +579,7 @@ zh-CN:
     attributed: attributed
   roster:
     roster_title: Public Profiles
-    lede:
-      unit:
-        other: "people who share their profiles and the profiles of others they revere"
+    lede: "%{count} people who share their profiles and the profiles of others they revere"
     no_one_found: No one found by the name
     search_result_count:
       unit:
@@ -583,9 +603,7 @@ zh-CN:
     remove: Remove
   scribes:
     scribes_title: Scribes
-    lede:
-      unit:
-        other: "people who have attributed natural history specimens to their peers, mentors, and role models"
+    lede: "%{scribe_count} people who have attributed %{attribution_count} natural history specimens to %{recipient_count} of their peers, mentors, and role models"
   taxa:
     lede:
       unit:

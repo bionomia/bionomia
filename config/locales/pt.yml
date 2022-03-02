@@ -3,6 +3,36 @@ pt:
   locale: "pt_PT"
   "true": "Sim"
   "false": "Não"
+  number:
+    format:
+      delimiter: "."
+      precision: 3
+      separator: ","
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion:
+            one: mil milhões
+            other: mil milhões
+          million:
+            one: milhão
+            other: milhões
+          quadrillion:
+            one: mil biliões
+            other: mil biliões
+          thousand: mil
+          trillion:
+            one: bilião
+            other: biliões
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 1
+        significant: true
+        strip_insignificant_zeros: true
   acknowledgments:
     acknowledgments_title: Agradecimentos
     taxon_silhouettes: Silhuetas de táxon família
@@ -591,10 +621,7 @@ pt:
     attributed: attributed
   roster:
     roster_title: Perfis Públicos
-    lede:
-      unit:
-        one: "pessoa que compartilhou seu perfil"
-        other: "pessoas que compartilham seus perfis e os perfis de outras pessoas que reverenciam"
+    lede: "%{count} pessoas que compartilham seus perfis e os perfis de outras pessoas que reverenciam"
     no_one_found: Ninguém foi encontrado pelo nome
     search_result_count:
       unit:
@@ -619,10 +646,7 @@ pt:
     remove: Remover
   scribes:
     scribes_title: Autores
-    lede:
-      unit:
-        one: "pessoa que atribuiu espécimes de história natural a seus colegas, mentores e modelos de comportamento"
-        other: "pessoas que atribuíram espécimes de história natural a seus colegas, mentores e modelos de comportamento"
+    lede: "%{scribe_count} pessoas que atribuíram %{attribution_count} espécimes de história natural a %{recipient_count} de seus colegas, mentores e modelos de comportamento"
   taxa:
     lede:
       unit:

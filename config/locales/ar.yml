@@ -3,6 +3,28 @@ ar:
   locale: "ar_IQ"
   "true": "نعم"
   "false": "لا"
+  number:
+    format:
+      delimiter: ","
+      precision: 3
+      separator: "."
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion: مليار
+          million: مليون
+          quadrillion: كدريليون
+          thousand: ألفّ
+          trillion: تريليون
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
   acknowledgments:
     acknowledgments_title: Acknowledgments
     taxon_silhouettes: Taxon Family Silhouettes
@@ -727,14 +749,7 @@ ar:
     attributed: attributed
   roster:
     roster_title: Public Profiles
-    lede:
-      unit:
-        zero: "people who share their profiles and the profiles of others they revere"
-        one: "person who shared their profile"
-        two: "people who share their profiles and the profiles of others they revere"
-        few: "people who share their profiles and the profiles of others they revere"
-        many: "people who share their profiles and the profiles of others they revere"
-        other: "people who share their profiles and the profiles of others they revere"
+    lede: "%{count} people who share their profiles and the profiles of others they revere"
     no_one_found: No one found by the name
     search_result_count:
       unit:
@@ -763,14 +778,7 @@ ar:
     remove: Remove
   scribes:
     scribes_title: Scribes
-    lede:
-      unit:
-        zero: "people who have attributed natural history specimens to their peers, mentors, and role models"
-        one: "person who has attributed natural history specimens to their peers, mentors, and role models"
-        two: "people who have attributed natural history specimens to their peers, mentors, and role models"
-        few: "people who have attributed natural history specimens to their peers, mentors, and role models"
-        many: "people who have attributed natural history specimens to their peers, mentors, and role models"
-        other: "people who have attributed natural history specimens to their peers, mentors, and role models"
+    lede: "%{scribe_count} people who have attributed %{attribution_count} natural history specimens to %{recipient_count} of their peers, mentors, and role models"
   taxa:
     lede:
       unit:

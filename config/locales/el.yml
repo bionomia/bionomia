@@ -591,10 +591,7 @@ el:
     attributed: attributed
   roster:
     roster_title: Public Profiles
-    lede:
-      unit:
-        one: "person who shared their profile"
-        other: "people who share their profiles and the profiles of others they revere"
+    lede: "%{count} people who share their profiles and the profiles of others they revere"
     no_one_found: No one found by the name
     search_result_count:
       unit:
@@ -619,10 +616,7 @@ el:
     remove: Remove
   scribes:
     scribes_title: Scribes
-    lede:
-      unit:
-        one: "person who has attributed natural history specimens to their peers, mentors, and role models"
-        other: "people who have attributed natural history specimens to their peers, mentors, and role models"
+    lede: "%{scribe_count} people who have attributed %{attribution_count} natural history specimens to %{recipient_count} of their peers, mentors, and role models"
   taxa:
     lede:
       unit:

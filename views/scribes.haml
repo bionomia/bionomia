@@ -12,7 +12,7 @@
       %h1.h2
         = I18n.t('scribes.scribes_title')
       %p.lead.text-muted
-        #{number_to_human(@pagy.count, units: :'scribes.lede', delimiter: ",", precision: 0)}
+        = I18n.t('scribes.lede', scribe_count: number_with_delimiter(@scribe_stats[:scribe_count], units: {}), attribution_count: number_to_human(@scribe_stats[:attribution_count]), recipient_count: number_with_delimiter(@scribe_stats[:recipient_count]))
 
 - @results.in_groups_of(3).each do |group|
   .card-deck

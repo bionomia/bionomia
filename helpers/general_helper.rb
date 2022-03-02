@@ -259,16 +259,17 @@ module Sinatra
           @pagy, @results = pagy(data, items: 100)
         end
 
-        def scribes
-          attributions = UserOccurrence.group([:user_id, :created_by])
-                                  .order("NULL")
-                                  .pluck(:user_id, :created_by)
-          ids = attributions.map do |a|
-            if a[0] != a[1] && !User::BOT_IDS.include?(a[1])
-              a[1]
-            end
-          end.uniq.compact
-          @pagy, @results = pagy(User.where(id: ids).order(:family))
+        def scribe_stats
+          attributions = UserOccurrence.where("created_by <> user_id")
+                                            .where.not(created_by: User::BOT_IDS)
+                                            .where(visible: true)
+          scribe_ids = attributions.pluck(:created_by).uniq.compact
+          {
+            scribe_ids: scribe_ids,
+            scribe_count: scribe_ids.count,
+            attribution_count: attributions.count,
+            recipient_count: attributions.select(:user_id).distinct.count
+          }
         end
 
         def create_filter

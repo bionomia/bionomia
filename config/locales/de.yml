@@ -3,6 +3,36 @@ de:
   locale: "de_DE"
   "true": "Ja"
   "false": "Nein"
+  number:
+    format:
+      delimiter: "."
+      precision: 2
+      separator: ","
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion:
+            one: Milliarde
+            other: Milliarden
+          million:
+            one: Million
+            other: Millionen
+          quadrillion:
+            one: Billiarde
+            other: Billiarden
+          thousand: Tausend
+          trillion:
+            one: Billion
+            other: Billionen
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
   acknowledgments:
     acknowledgments_title: Danksagungen
     taxon_silhouettes: Silhouetten taxonomischer Familien
@@ -591,10 +621,7 @@ de:
     attributed: zugeordnet
   roster:
     roster_title: Öffentliche Profile
-    lede:
-      unit:
-        one: "Person, die ihr Profil geteilt hat"
-        other: "Personen, die ihre Profile sowie die Profile von anderen, die sie verehren, teilen"
+    lede: "%{count} Personen, die ihre Profile sowie die Profile von anderen, die sie verehren, teilen"
     no_one_found: Es wurde niemand mit dem Namen gefunden
     search_result_count:
       unit:
@@ -619,10 +646,7 @@ de:
     remove: Entfernen
   scribes:
     scribes_title: Bearbeiter
-    lede:
-      unit:
-        one: "Person, die naturkundliche Exemplare ihren Kollegen, Mentoren und Vorbildern zugeordnet hat"
-        other: "Personen, die naturkundliche Exemplare ihren Kollegen, Mentoren und Vorbildern zugeordnet haben"
+    lede: "%{scribe_count} Personen, die %{attribution_count} naturkundliche Exemplare %{recipient_count} ihren Kollegen, Mentoren und Vorbildern zugeordnet haben"
   taxa:
     lede:
       unit:

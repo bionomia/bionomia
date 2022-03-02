@@ -14,7 +14,7 @@
       %h1.h2
         = I18n.t('roster.roster_title')
       %p.lead.text-muted
-        #{number_to_human(User.where(is_public: true).count, units: :'roster.lede', delimiter: ",", precision: 0)}
+        = I18n.t('roster.lede', count: number_with_delimiter(User.where(is_public: true).count))
     = haml :'partials/user/search', layout: false
 
 - if @pagy.count == 0 && params[:q] && params[:q].present?
