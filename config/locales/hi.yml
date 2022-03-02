@@ -1,8 +1,8 @@
 hi:
   language: हिन्दी
   locale: "hi_IN"
-  "true": "Yes"
-  "false": "No"
+  "true": "हाँ"
+  "false": "नहीं"
   number:
     format:
       delimiter: ","
