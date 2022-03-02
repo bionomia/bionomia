@@ -14,11 +14,11 @@ el:
       decimal_units:
         format: "%n %u"
         units:
-          billion: Billion
-          million: Million
-          quadrillion: Quadrillion
-          thousand: Thousand
-          trillion: Trillion
+          billion: δισεκατομμύριο
+          million: εκατομμύριο
+          quadrillion: τετράκις εκατομμύριο
+          thousand: χίλια
+          trillion: τρισεκατομμύριο
           unit: ''
       format:
         delimiter: ''
