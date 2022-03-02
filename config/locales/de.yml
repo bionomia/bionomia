@@ -14,11 +14,11 @@ de:
       decimal_units:
         format: "%n %u"
         units:
-          billion: Billion
-          million: Million
-          quadrillion: Quadrillion
-          thousand: Thousand
-          trillion: Trillion
+          billion: Milliarden
+          million: Millionen
+          quadrillion: Billiarden
+          thousand: Tausend
+          trillion: Billionen
           unit: ''
       format:
         delimiter: ''
@@ -613,7 +613,7 @@ de:
     attributed: zugeordnet
   roster:
     roster_title: Öffentliche Profile
-    lede: "%{count} people who share their profiles and the profiles of others they revere"
+    lede: "%{count} Personen, die ihre Profile sowie die Profile von anderen, die sie verehren, teilen"
     no_one_found: Es wurde niemand mit dem Namen gefunden
     search_result_count:
       unit:
@@ -638,7 +638,7 @@ de:
     remove: Entfernen
   scribes:
     scribes_title: Bearbeiter
-    lede: "%{scribe_count} people who have attributed %{attribution_count} natural history specimens to %{recipient_count} of their peers, mentors, and role models"
+    lede: "%{scribe_count} Personen, die %{attribution_count} naturkundliche Exemplare %{recipient_count} ihren Kollegen, Mentoren und Vorbildern zugeordnet haben"
   taxa:
     lede:
       unit:
