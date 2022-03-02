@@ -5,32 +5,24 @@ pt:
   "false": "Não"
   number:
     format:
-      delimiter: "."
+      delimiter: ","
       precision: 3
-      separator: ","
+      separator: "."
       significant: false
       strip_insignificant_zeros: false
     human:
       decimal_units:
         format: "%n %u"
         units:
-          billion:
-            one: mil milhões
-            other: mil milhões
-          million:
-            one: milhão
-            other: milhões
-          quadrillion:
-            one: mil biliões
-            other: mil biliões
-          thousand: mil
-          trillion:
-            one: bilião
-            other: biliões
+          billion: Billion
+          million: Million
+          quadrillion: Quadrillion
+          thousand: Thousand
+          trillion: Trillion
           unit: ''
       format:
         delimiter: ''
-        precision: 1
+        precision: 3
         significant: true
         strip_insignificant_zeros: true
   acknowledgments:
@@ -621,7 +613,7 @@ pt:
     attributed: attributed
   roster:
     roster_title: Perfis Públicos
-    lede: "%{count} pessoas que compartilham seus perfis e os perfis de outras pessoas que reverenciam"
+    lede: "%{count} people who share their profiles and the profiles of others they revere"
     no_one_found: Ninguém foi encontrado pelo nome
     search_result_count:
       unit:
@@ -646,7 +638,7 @@ pt:
     remove: Remover
   scribes:
     scribes_title: Autores
-    lede: "%{scribe_count} pessoas que atribuíram %{attribution_count} espécimes de história natural a %{recipient_count} de seus colegas, mentores e modelos de comportamento"
+    lede: "%{scribe_count} people who have attributed %{attribution_count} natural history specimens to %{recipient_count} of their peers, mentors, and role models"
   taxa:
     lede:
       unit:
