@@ -1,8 +1,8 @@
 "no":
   language: Norsk
   locale: "nn_NO"
-  "true": "Yes"
-  "false": "No"
+  "true": "Ja"
+  "false": "Nei"
   number:
     format:
       delimiter: ","
@@ -14,11 +14,11 @@
       decimal_units:
         format: "%n %u"
         units:
-          billion: Billion
-          million: Million
-          quadrillion: Quadrillion
-          thousand: Thousand
-          trillion: Trillion
+          billion: milliarder
+          million: millioner
+          quadrillion: kvadrillioner
+          thousand: tusen
+          trillion: billioner
           unit: ''
       format:
         delimiter: ''
