@@ -418,7 +418,7 @@ fr:
     reconcile: Réconcilier les noms
     acknowledgments: Remerciements
     workshops: Ateliers
-    stats: Statistics
+    stats: Statistiques
   not_authorized:
     not_authorized: Non autorisé ou session terminée.
   occurrence:
@@ -641,12 +641,12 @@ fr:
     scribes_title: Scribes
     lede: "%{scribe_count} personnes qui ont attribué %{attribution_count} de spécimens d'histoire naturelle à %{recipient_count} de leurs pairs, mentors et modèles"
   statistics:
-    title: Statistics
-    claims: Cumulative Self Claims
-    attributions: Cumulative Attributions
-    rejected: Cumulative Rejected Candidates
-    profiles: Cumulative Profiles Imported
-    month: Month
+    title: Statistiques
+    claims: Auto-réclamations cumulées
+    attributions: Attributions cumulées
+    rejected: Candidats rejetés cumulés
+    profiles: Profils cumulatifs importés
+    month: Mois
   taxa:
     lede:
       unit:
