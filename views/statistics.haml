@@ -36,7 +36,7 @@
             };
         data.addColumn('date', '#{I18n.t('statistics.month')}');
         data.addColumn('number', '#{I18n.t('statistics.claims')}');
-        data.addRows($.map(#{@claims}, function(a) { return [ [ new Date(a[0], a[1]), a[2] ] ]; }));
+        data.addRows($.map(#{@claims}, function(a) { return [ [ new Date(a[0], a[1] - 1), a[2] ] ]; }));
         chart.draw(data, options);
       }
 
@@ -62,7 +62,7 @@
             };
         data.addColumn('date', '#{I18n.t('statistics.month')}');
         data.addColumn('number', '#{I18n.t('statistics.attributions')}');
-        data.addRows($.map(#{@attributions}, function(a) { return [ [ new Date(a[0], a[1]), a[2] ] ]; }));
+        data.addRows($.map(#{@attributions}, function(a) { return [ [ new Date(a[0], a[1] - 1), a[2] ] ]; }));
         chart.draw(data, options);
       }
 
@@ -88,7 +88,7 @@
             };
         data.addColumn('date', '#{I18n.t('statistics.month')}');
         data.addColumn('number', '#{I18n.t('statistics.rejected')}');
-        data.addRows($.map(#{@rejected}, function(a) { return [ [ new Date(a[0], a[1]), a[2] ] ]; }));
+        data.addRows($.map(#{@rejected}, function(a) { return [ [ new Date(a[0], a[1] - 1), a[2] ] ]; }));
         chart.draw(data, options);
       }
 
@@ -122,7 +122,7 @@
         data.addColumn('date', '#{I18n.t('statistics.month')}');
         data.addColumn('number', 'Wikidata');
         data.addColumn('number', 'ORCID');
-        data.addRows($.map(#{@profiles}, function(a) { return [ [ new Date(a[0], a[1]), a[2], a[3] ] ]; }));
+        data.addRows($.map(#{@profiles}, function(a) { return [ [ new Date(a[0], a[1] - 1), a[2], a[3] ] ]; }));
         chart.draw(data, options);
       }
 
