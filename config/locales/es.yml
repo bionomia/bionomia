@@ -418,7 +418,7 @@ es:
     reconcile: Reconciliar nombres
     acknowledgments: Agradecimientos
     workshops: Talleres
-    stats: Statistics
+    stats: Estadísticas
   not_authorized:
     not_authorized: Sin autorización o la sesión ha terminado.
   occurrence:
@@ -641,12 +641,12 @@ es:
     scribes_title: Anotadores
     lede: "%{scribe_count} personas que han atribuido %{attribution_count} especímenes de historia natural a %{recipient_count} de sus colegas, mentores, y modelos a seguir"
   statistics:
-    title: Statistics
+    title: Estadísticas
     claims: Cumulative Self Claims
     attributions: Cumulative Attributions
     rejected: Cumulative Rejected Candidates
     profiles: Cumulative Profiles Imported
-    month: Month
+    month: Mes
   taxa:
     lede:
       unit:

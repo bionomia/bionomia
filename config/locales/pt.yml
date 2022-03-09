@@ -5,9 +5,9 @@ pt:
   "false": "Não"
   number:
     format:
-      delimiter: ","
+      delimiter: "."
       precision: 3
-      separator: "."
+      separator: ","
       significant: false
       strip_insignificant_zeros: false
     human:
@@ -22,7 +22,7 @@ pt:
           unit: ''
       format:
         delimiter: ''
-        precision: 3
+        precision: 1
         significant: true
         strip_insignificant_zeros: true
   acknowledgments:
@@ -418,7 +418,7 @@ pt:
     reconcile: Reconciliar Nomes
     acknowledgments: Agradecimentos
     workshops: Workshops
-    stats: Statistics
+    stats: Estatísticas
   not_authorized:
     not_authorized: Não autorizado ou sessão encerrada.
   occurrence:
@@ -641,12 +641,12 @@ pt:
     scribes_title: Autores
     lede: "%{scribe_count} pessoas que atribuíram %{attribution_count} espécimes de história natural a %{recipient_count} de seus colegas, mentores e modelos de comportamento"
   statistics:
-    title: Statistics
+    title: Estatísticas
     claims: Cumulative Self Claims
     attributions: Cumulative Attributions
     rejected: Cumulative Rejected Candidates
     profiles: Cumulative Profiles Imported
-    month: Month
+    month: Mês
   taxa:
     lede:
       unit:
