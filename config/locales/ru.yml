@@ -5,9 +5,9 @@ ru:
   "false": "Нет"
   number:
     format:
-      delimiter: ","
+      delimiter: " "
       precision: 3
-      separator: "."
+      separator: ","
       significant: false
       strip_insignificant_zeros: false
     human:
@@ -22,7 +22,7 @@ ru:
           unit: ''
       format:
         delimiter: ''
-        precision: 3
+        precision: 1
         significant: true
         strip_insignificant_zeros: true
   acknowledgments:
