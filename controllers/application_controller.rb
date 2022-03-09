@@ -121,6 +121,14 @@ module Sinatra
             haml :'on_this_day/collected', locals: { active_tab: "specimens" }
           end
 
+          app.get '/statistics' do
+            @claims = cache_block("stats-claims") { stats_claims }
+            @attributions = cache_block("stats-attributions") { stats_attributions }
+            @rejected = cache_block("stats-rejected") { stats_rejected }
+            @profiles = cache_block("stats-profiles") { stats_profiles }
+            haml :'statistics'
+          end
+
           app.get '/parse' do
             @output = []
             haml :'tools/parse'

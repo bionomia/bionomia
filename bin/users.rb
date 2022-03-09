@@ -72,10 +72,6 @@ OptionParser.new do |opts|
     options[:flagged_deletion] = true
   end
 
-  opts.on("-s", "--stats", "Rebuild user stats.") do
-    options[:stats] = true
-  end
-
   opts.on("-h", "--help", "Prints this help") do
     puts opts
     exit
@@ -218,9 +214,4 @@ elsif options[:modified_wikidata]
 elsif options[:duplicates]
   wiki = Bionomia::WikidataSearch.new
   wiki.merge_users
-elsif options[:stats]
-  User.joins(:user_occurrences).distinct.find_each do |u|
-    u.flush_caches
-    puts "#{u.fullname_reverse}".green
-  end
 end

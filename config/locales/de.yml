@@ -418,6 +418,7 @@ de:
     reconcile: Namen abgleichen
     acknowledgments: Danksagungen
     workshops: Workshops
+    stats: Statistics
   not_authorized:
     not_authorized: Nicht autorisiert oder Sitzung beendet.
   occurrence:
@@ -639,6 +640,13 @@ de:
   scribes:
     scribes_title: Bearbeiter
     lede: "%{scribe_count} Personen, die %{attribution_count} naturkundliche Exemplare %{recipient_count} ihren Kollegen, Mentoren und Vorbildern zugeordnet haben"
+  statistics:
+    title: Statistics
+    claims: Cumulative Self Claims
+    attributions: Cumulative Attributions
+    rejected: Cumulative Rejected Candidates
+    profiles: Cumulative Profiles Created
+    month: Month
   taxa:
     lede:
       unit:

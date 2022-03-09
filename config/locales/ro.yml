@@ -441,6 +441,7 @@ ro:
     reconcile: Reconcile Names
     acknowledgments: Acknowledgments
     workshops: Workshops
+    stats: Statistics
   not_authorized:
     not_authorized: Not authorized or session terminated.
   occurrence:
@@ -674,6 +675,13 @@ ro:
   scribes:
     scribes_title: Scribes
     lede: "%{scribe_count} people who have attributed %{attribution_count} natural history specimens to %{recipient_count} of their peers, mentors, and role models"
+  statistics:
+    title: Statistics
+    claims: Cumulative Self Claims
+    attributions: Cumulative Attributions
+    rejected: Cumulative Rejected Candidates
+    profiles: Cumulative Profiles Created
+    month: Month
   taxa:
     lede:
       unit:

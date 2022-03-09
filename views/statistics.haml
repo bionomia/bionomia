@@ -1,0 +1,171 @@
+- content_for :title, I18n.t('statistics.title')
+- content_for :scripts do
+  %script{src: "//www.gstatic.com/charts/loader.js"}
+  %script{src: "/js/jquery.throttledresize.js"}
+  :javascript
+    $(function() {
+
+      function range(min, max) {
+        var len = max - min + 1;
+        var arr = new Array(len);
+        for (var i=0; i<len; i++) {
+          arr[i] = min + i;
+        }
+        return arr;
+      }
+
+      function drawClaims() {
+        var chart = new google.visualization.LineChart($('#claims')[0]),
+            data = new google.visualization.DataTable(),
+            options = {
+              animation: {
+                startup: true,
+                duration: 1000
+              },
+              curveType: 'function',
+              lineWidth: 4,
+              legend: {
+                position: 'none'
+              },
+              colors: ['#3A7179'],
+              hAxis: {
+                title: '#{I18n.t('statistics.month')}',
+                format: 'MMM y',
+                ticks: $.map(range(Math.min(...$.map(#{@claims}, function(a) { return a[0]; })), new Date().getFullYear()), function(a) { return [ new Date(a, 0) ]; })
+              }
+            };
+        data.addColumn('date', '#{I18n.t('statistics.month')}');
+        data.addColumn('number', '#{I18n.t('statistics.claims')}');
+        data.addRows($.map(#{@claims}, function(a) { return [ [ new Date(a[0], a[1]), a[2] ] ]; }));
+        chart.draw(data, options);
+      }
+
+      function drawAttributions() {
+        var chart = new google.visualization.LineChart($('#attributions')[0]),
+            data = new google.visualization.DataTable(),
+            options = {
+              animation: {
+                startup: true,
+                duration: 1000
+              },
+              curveType: 'function',
+              lineWidth: 4,
+              legend: {
+                position: 'none'
+              },
+              colors: ['#3A7179'],
+              hAxis: {
+                title: '#{I18n.t('statistics.month')}',
+                format: 'MMM y',
+                ticks: $.map(range(Math.min(...$.map(#{@attributions}, function(a) { return a[0]; })), new Date().getFullYear()), function(a) { return [ new Date(a, 0) ]; })
+              }
+            };
+        data.addColumn('date', '#{I18n.t('statistics.month')}');
+        data.addColumn('number', '#{I18n.t('statistics.attributions')}');
+        data.addRows($.map(#{@attributions}, function(a) { return [ [ new Date(a[0], a[1]), a[2] ] ]; }));
+        chart.draw(data, options);
+      }
+
+      function drawRejected() {
+        var chart = new google.visualization.LineChart($('#rejected')[0]),
+            data = new google.visualization.DataTable(),
+            options = {
+              animation: {
+                startup: true,
+                duration: 1000
+              },
+              curveType: 'function',
+              lineWidth: 4,
+              legend: {
+                position: 'none'
+              },
+              colors: ['#3A7179'],
+              hAxis: {
+                title: '#{I18n.t('statistics.month')}',
+                format: 'MMM y',
+                ticks: $.map(range(Math.min(...$.map(#{@rejected}, function(a) { return a[0]; })), new Date().getFullYear()), function(a) { return [ new Date(a, 0) ]; })
+              }
+            };
+        data.addColumn('date', '#{I18n.t('statistics.month')}');
+        data.addColumn('number', '#{I18n.t('statistics.rejected')}');
+        data.addRows($.map(#{@rejected}, function(a) { return [ [ new Date(a[0], a[1]), a[2] ] ]; }));
+        chart.draw(data, options);
+      }
+
+      function drawProfiles() {
+        var chart = new google.visualization.LineChart($('#profiles')[0]),
+            data = new google.visualization.DataTable(),
+            options = {
+              animation: {
+                startup: true,
+                duration: 1000
+              },
+              legend: {
+                position: 'top'
+              },
+              curveType: 'function',
+              lineWidth: 4,
+              colors: ['#3A7179', '#adcb54'],
+              hAxis: {
+                title: '#{I18n.t('statistics.month')}',
+                format: 'MMM y',
+                ticks: $.map(range(Math.min(...$.map(#{@profiles}, function(a) { return a[0]; })), new Date().getFullYear()), function(a) { return [ new Date(a, 0) ]; })
+              },
+              vAxis: {
+                minValue: 0,
+                viewWindowMode: 'explicit',
+                viewWindow: {
+                  min: 0
+                }
+              }
+            };
+        data.addColumn('date', '#{I18n.t('statistics.month')}');
+        data.addColumn('number', 'Wikidata');
+        data.addColumn('number', 'ORCID');
+        data.addRows($.map(#{@profiles}, function(a) { return [ [ new Date(a[0], a[1]), a[2], a[3] ] ]; }));
+        chart.draw(data, options);
+      }
+
+      function drawVisualizations() {
+        drawClaims();
+        drawAttributions();
+        drawRejected();
+        drawProfiles();
+        $(window).on("throttledresize", function(event) {
+          drawClaims();
+          drawAttributions();
+          drawRejected();
+          drawProfiles();
+        });
+      }
+
+      google.charts.load('current', {
+        packages: ['corechart'],
+        mapsApiKey: "#{Settings.google.api_key}"
+      });
+      google.charts.setOnLoadCallback(drawVisualizations);
+    });
+
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2
+        = I18n.t('statistics.title')
+
+.row
+  .col-12.col-lg-6
+    %h3.mt-3= I18n.t('statistics.claims')
+    #claims.mb-3{style:"height:250px"}
+
+  .col-12.col-lg-6
+    %h3.mt-3= I18n.t('statistics.attributions')
+    #attributions.mb-3{style:"height:250px"}
+
+.row
+  .col-12.col-lg-6
+    %h3.mt-3= I18n.t('statistics.rejected')
+    #rejected.mb-3{style:"height:250px"}
+
+  .col-12.col-lg-6
+    %h3.mt-3= I18n.t('statistics.profiles')
+    #profiles.mb-3{style:"height:250px"}

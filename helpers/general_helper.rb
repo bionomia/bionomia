@@ -261,8 +261,8 @@ module Sinatra
 
         def scribe_stats
           attributions = UserOccurrence.where("created_by <> user_id")
-                                            .where.not(created_by: User::BOT_IDS)
-                                            .where(visible: true)
+                                       .where.not(created_by: User::BOT_IDS)
+                                       .where(visible: true)
           scribe_ids = attributions.pluck(:created_by).uniq.compact
           {
             scribe_ids: scribe_ids,
