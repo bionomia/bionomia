@@ -126,6 +126,8 @@ module Sinatra
             @attributions = cache_block("stats-attributions") { stats_attributions }
             @rejected = cache_block("stats-rejected") { stats_rejected }
             @profiles = cache_block("stats-profiles") { stats_profiles }
+            @orcid = stats_orcid
+            @wikidata = stats_wikidata
             haml :'statistics'
           end
 

@@ -169,3 +169,30 @@
   .col-12.col-lg-6
     %h3.mt-3= I18n.t('statistics.profiles')
     #profiles.mb-3{style:"height:250px"}
+
+.row
+  .col-12.col-lg-6.mt-2
+    .card
+      .card-header.border-bottom
+        %h4
+          %i.fab.fa-orcid
+          ORCID Profiles
+      .card-body.mt-2
+        %ul.list-unstyled.m-0
+          %li Total: #{number_with_delimiter(@orcid.total)}
+          %li Visited Once: #{number_with_delimiter(@orcid.visited)}
+          %li Made Public: #{number_with_delimiter(@orcid.public)}
+          %li Archives Made to Zenodo: #{number_with_delimiter(@orcid.doi)}
+
+  .col-12.col-lg-6.mt-2
+    .card
+      .card-header.border-bottom
+        %h4
+          %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD"}
+          Wikidata Profiles
+      .card-body.mt-2
+        %ul.list-unstyled.m-0
+          %li Total: #{number_with_delimiter(@wikidata.total)}
+          %li Made Public: #{number_with_delimiter(@wikidata.public)}
+          %li &nbsp;
+          %li &nbsp;
