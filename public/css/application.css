@@ -283,6 +283,22 @@ svg > g > g:not([column-id]):last-child { pointer-events: none }
   line-height:42px;
 }
 
+.crowdin {
+  background-color:#2f333f;
+  color:#fff;
+  width:42px;
+  height:42px;
+  border-radius:100px;
+  font-size:23px;
+  display:inline-block;
+  text-align:center;
+}
+
+.crowdin:hover {
+  color:#fff;
+  background-color:#02414b;
+}
+
 .fa-orcid{
   color:#A6CE39;
 }

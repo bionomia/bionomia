@@ -46,11 +46,12 @@
 
 .px-3
   %ul.list-unstyled.text-small.list-group.flex-md-column.flex-row.list-group-flush
-    %li.text-center.list-group-item.my-0.pt-3.py-md-0.border-0.bg-transparent
-      %a.btn.btn-sm.btn-success{href: url("/donate"), role: "button"}= I18n.t('layout.support')
+    %li.text-center.list-group-item.my-0.py-0.border-0.bg-transparent
+      %a.mt-2.github{href: "https://github.com/bionomia/bionomia"}
+        %i.fab.fa-github
     %li.text-center.list-group-item.my-0.py-0.border-0.bg-transparent
       %a.mt-2.twitter{href: "https://twitter.com/BionomiaTrack"}
         %i.fab.fa-twitter
     %li.text-center.list-group-item.my-0.py-0.border-0.bg-transparent
-      %a.mt-2.github{href: "https://github.com/bionomia/bionomia"}
-        %i.fab.fa-github
+      %a.mt-2.crowdin{href: "https://translate.bionomia.net/"}
+        %img{src: "/images/crowdin.svg", alt: "Crowdin"}
