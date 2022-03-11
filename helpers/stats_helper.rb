@@ -58,6 +58,11 @@ module Sinatra
               .first
         end
 
+        def stats_datasets
+          Dataset.select("COUNT(*) AS total, SUM(IF(frictionless_created_at, 1, 0)) AS frictionless")
+                 .first
+        end
+
       end
     end
   end

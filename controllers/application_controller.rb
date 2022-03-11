@@ -128,6 +128,7 @@ module Sinatra
             @profiles = cache_block("stats-profiles") { stats_profiles }
             @orcid = stats_orcid
             @wikidata = stats_wikidata
+            @datasets = stats_datasets
             haml :'statistics'
           end
 

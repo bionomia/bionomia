@@ -171,7 +171,7 @@
     #profiles.mb-3{style:"height:250px"}
 
 .row
-  .col-12.col-lg-6.mt-2
+  .col-12.col-lg-4.mt-2
     .card
       .card-header.border-bottom
         %h4
@@ -184,7 +184,7 @@
           %li Made Public: #{number_with_delimiter(@orcid.public)}
           %li Archives Made to Zenodo: #{number_with_delimiter(@orcid.doi)}
 
-  .col-12.col-lg-6.mt-2
+  .col-12.col-lg-4.mt-2
     .card
       .card-header.border-bottom
         %h4
@@ -196,3 +196,13 @@
           %li Made Public: #{number_with_delimiter(@wikidata.public)}
           %li &nbsp;
           %li &nbsp;
+
+  .col-12.col-lg-4.mt-2
+    .card
+      .card-header.border-bottom
+        %h4
+          Datasets
+      .card-body.mt-2
+        %ul.list-unstyled.m-0
+          %li Total: #{number_with_delimiter(@datasets.total)}
+          %li With Claims/Attributions: #{number_with_delimiter(@datasets.frictionless)}
