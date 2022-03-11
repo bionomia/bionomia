@@ -642,7 +642,7 @@ el:
     lede: "%{scribe_count} people who have attributed %{attribution_count} natural history specimens to %{recipient_count} of their peers, mentors, and role models"
   statistics:
     title: Statistics
-    claims: Cumulative Self Claims
+    claims: Cumulative Claims
     attributions: Cumulative Attributions
     rejected: Cumulative Rejected Candidates
     profiles: Cumulative Profiles Imported

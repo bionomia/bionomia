@@ -642,7 +642,7 @@ de:
     lede: "%{scribe_count} Personen, die %{attribution_count} naturkundliche Exemplare %{recipient_count} ihren Kollegen, Mentoren und Vorbildern zugeordnet haben"
   statistics:
     title: Statistiken
-    claims: Cumulative Self Claims
+    claims: Cumulative Claims
     attributions: Cumulative Attributions
     rejected: Cumulative Rejected Candidates
     profiles: Cumulative Profiles Imported

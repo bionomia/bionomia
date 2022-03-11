@@ -155,19 +155,23 @@
 .row
   .col-12.col-lg-6
     %h3.mt-3= I18n.t('statistics.claims')
+    %p Specimen records claimed by people with an ORCID ID who collected and/or identified them.
     #claims.mb-3{style:"height:250px"}
 
   .col-12.col-lg-6
     %h3.mt-3= I18n.t('statistics.attributions')
+    %p Specimen records attributed to others by people with an ORCID ID.
     #attributions.mb-3{style:"height:250px"}
 
 .row
   .col-12.col-lg-6
     %h3.mt-3= I18n.t('statistics.rejected')
+    %p Specimen records marked as "Not me" or "Not them".
     #rejected.mb-3{style:"height:250px"}
 
   .col-12.col-lg-6
     %h3.mt-3= I18n.t('statistics.profiles')
+    %p Profiles imported through automation or created by people with an ORCID ID.
     #profiles.mb-3{style:"height:250px"}
 
 .row

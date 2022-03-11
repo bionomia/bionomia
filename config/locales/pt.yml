@@ -642,7 +642,7 @@ pt:
     lede: "%{scribe_count} pessoas que atribuíram %{attribution_count} espécimes de história natural a %{recipient_count} de seus colegas, mentores e modelos de comportamento"
   statistics:
     title: Estatísticas
-    claims: Cumulative Self Claims
+    claims: Cumulative Claims
     attributions: Cumulative Attributions
     rejected: Cumulative Rejected Candidates
     profiles: Cumulative Profiles Imported
