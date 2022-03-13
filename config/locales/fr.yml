@@ -642,7 +642,7 @@ fr:
     lede: "%{scribe_count} personnes qui ont attribué %{attribution_count} de spécimens d'histoire naturelle à %{recipient_count} de leurs pairs, mentors et modèles"
   statistics:
     title: Statistiques
-    claims: Cumulative Claims
+    claims: Réclamations cumulées
     attributions: Attributions cumulées
     rejected: Candidats rejetés cumulés
     profiles: Profils cumulatifs importés
