@@ -178,7 +178,7 @@
   .col-12.col-lg-4.mt-2
     .card
       .card-header.border-bottom
-        %h4
+        %h4.m-0
           %i.fab.fa-orcid
           ORCID Profiles
       .card-body.mt-2
@@ -191,7 +191,7 @@
   .col-12.col-lg-4.mt-2
     .card
       .card-header.border-bottom
-        %h4
+        %h4.m-0
           %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD"}
           Wikidata Profiles
       .card-body.mt-2
@@ -204,9 +204,12 @@
   .col-12.col-lg-4.mt-2
     .card
       .card-header.border-bottom
-        %h4
+        %h4.m-0
+          %i.fas.fa-database.text-secondary
           Datasets
       .card-body.mt-2
         %ul.list-unstyled.m-0
           %li Total: #{number_with_delimiter(@datasets.total)}
           %li With Claims/Attributions: #{number_with_delimiter(@datasets.frictionless)}
+          %li &nbsp;
+          %li &nbsp;
