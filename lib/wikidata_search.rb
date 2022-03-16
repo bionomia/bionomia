@@ -137,6 +137,7 @@ module Bionomia
         ipni: "P586",
         bhl: "P4081",
         zoobank: "P2006",
+        isni: "P213",
         congress: "P244"
       }
       property = properties[prop.downcase.to_sym]
