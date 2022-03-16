@@ -27,6 +27,10 @@ module Sinatra
           data.map{|d| [d.year, d.month, total += d.sum] }
         end
 
+        def stats_attribution_count_from_source
+          UserOccurrence.where(created_by: User::GBIF_AGENT_ID).count
+        end
+
         def stats_rejected
           data = UserOccurrence.select("YEAR(created) AS year, MONTH(created) AS month, count(*) AS sum")
                                .where.not(created_by: User::BOT_IDS)

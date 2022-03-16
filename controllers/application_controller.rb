@@ -129,6 +129,7 @@ module Sinatra
             @orcid = stats_orcid
             @wikidata = stats_wikidata
             @datasets = stats_datasets
+            @dataset_attributions = stats_attribution_count_from_source
             haml :'statistics'
           end
 

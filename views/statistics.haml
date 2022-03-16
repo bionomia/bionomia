@@ -44,6 +44,8 @@
         var chart = new google.visualization.LineChart($('#attributions')[0]),
             data = new google.visualization.DataTable(),
             options = {
+              title: "+#{number_with_delimiter(@dataset_attributions)} made via recordedByID/identifiedByID",
+              titlePosition: 'in',
               animation: {
                 startup: true,
                 duration: 1000
