@@ -30,7 +30,7 @@ module Bionomia
     def wikidata_people_query(property)
       %Q(
           SELECT DISTINCT
-            ?item ?itemLabel
+            ?item ?id ?itemLabel
           WHERE {
             ?item wdt:#{property} ?id .
             SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
@@ -113,7 +113,7 @@ module Bionomia
 
     def wikidata_by_orcid_query(orcid)
       %Q(
-        SELECT ?item ?itemLabel ?twitter ?youtube_id
+        SELECT ?item ?itemLabel ?bionomia_id ?twitter ?youtube_id
         WHERE {
           VALUES ?orcid {"#{orcid}"} {
             ?item wdt:P496 ?orcid .
@@ -123,6 +123,9 @@ module Bionomia
           }
           OPTIONAL {
             ?item wdt:P1651 ?youtube_id .
+          }
+          OPTIONAL {
+            ?item wdt:P6944 ?bionomia_id .
           }
           SERVICE wikibase:label {
             bd:serviceParam wikibase:language "en" .
@@ -543,6 +546,8 @@ module Bionomia
     def wiki_user_by_orcid(orcid)
       data = {}
       @sparql.query(wikidata_by_orcid_query(orcid)).each_solution do |solution|
+        data[:qid] = solution[:item].value.split("/").last rescue nil
+        data[:bionomia_id] = solution[:bionomia_id].value rescue nil
         data[:twitter] = solution[:twitter].value rescue nil
         data[:youtube_id] = solution[:youtube_id].value rescue nil
       end
@@ -550,11 +555,11 @@ module Bionomia
     end
 
     def wiki_bionomia_id
-      qnumbers = []
+      ids = []
       @sparql.query(wikidata_people_query("P6944")).each_solution do |solution|
-        qnumbers << solution.to_h[:item].to_s.match(/Q[0-9]{1,}/).to_s
+        ids << solution.to_h[:id].to_s
       end
-      qnumbers.uniq
+      ids.uniq
     end
 
     def wiki_by_property(property, identifier)

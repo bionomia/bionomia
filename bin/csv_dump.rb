@@ -98,6 +98,22 @@ if options[:directory]
         csv << [w, "\"#{w}\""]
       end
     end
+    local = User.where(is_public: true).where.not(orcid: nil).pluck(:orcid)
+    wiki = Bionomia::WikidataSearch.new
+    new_orcid_numbers = local - wiki.wiki_bionomia_id
+    missing_items = []
+    CSV.open(csv_file, 'a') do |csv|
+      new_orcid_numbers.each do |o|
+        item = wiki.wiki_user_by_orcid(o)
+        if item && item[:qid] && !item[:bionomia_id]
+          csv << [item[:qid], "\"#{o}\""]
+        end
+        if item && !item[:qid]
+          missing_items << [o]
+        end
+      end
+    end
+    puts missing_items
   end
 
 end
