@@ -46,7 +46,7 @@
                       - if u[:user].image_url
                         .card-header.d-flex
                           %div
-                            %img{src:"#{profile_image(u[:user], 'medium')}", alt:"#{u[:user].fullname}", class:"card-img-profile mr-2"}
+                            %img.card-img-profile.mr-2{src:"#{profile_image(u[:user], 'medium')}", alt:"#{u[:user].fullname}", width:48, height:48, loading:"lazy"}
                           .flex-grow-1
                             %h5
                               = link_to u[:user].fullname_reverse, url("/#{u[:user].identifier}")

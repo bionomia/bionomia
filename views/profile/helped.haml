@@ -32,7 +32,7 @@
             - if u.image_url
               .card-header.d-flex
                 %div
-                  %img.card-img-profile.mr-2{src:"#{profile_image(u, 'medium')}", alt:"#{u.fullname}"}
+                  %img.card-img-profile.mr-2{src:"#{profile_image(u, 'medium')}", alt:"#{u.fullname}", width:48, height:48, loading:"lazy"}
                 .flex-grow-1
                   %h5
                     = link_to u.fullname_reverse, url("/help-others/#{u.identifier}/specimens?attributor=#{@user.identifier}")
