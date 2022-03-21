@@ -39,7 +39,7 @@
             - if u[:user].image_url
               .card-header.d-flex
                 %div
-                  %img.card-img-profile.mr-2{src:"#{profile_image(u[:user], 'medium')}", alt:"#{u[:user].fullname}"}
+                  %img.card-img-profile.mr-2{src:"#{profile_image(u[:user], 'medium')}", alt:"#{u[:user].fullname}", width:48, height:48, loading:"lazy"}
                 .flex-grow-1
                   %h5
                     %a{href: url("/admin/user/#{@admin_user.identifier}/support/#{u[:user].identifier}")}
