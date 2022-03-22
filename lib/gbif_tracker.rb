@@ -4,8 +4,8 @@ module Bionomia
   class GbifTracker
 
     def initialize(args = {})
-      @url = "https://www.gbif.org/api/resource/search?contentType=literature&literatureType=journal&literatureType=working_paper&relevance=GBIF_USED&peerReview=true&limit=200&offset="
-      @package_url = "http://api.gbif.org/v1/occurrence/download/request/"
+      @url = "#{Settings.gbif.api}literature/search?contentType=literature&literatureType=journal&literatureType=working_paper&relevance=GBIF_USED&peerReview=true&limit=200&offset="
+      @package_url = "#{Settings.gbif.api}occurrence/download/request/"
       args = defaults.merge(args)
       @first_page_only = args[:first_page_only]
       @max_size = args[:max_size]
@@ -26,7 +26,7 @@ module Bionomia
       begin
         response = RestClient::Request.execute(
           method: :get,
-          url: "https://www.gbif.org/api/occurrence/download/#{key}"
+          url: "#{Settings.gbif.api}occurrence/download/#{key}"
         )
         result = JSON.parse(response, :symbolize_names => true)
         result[:size]
@@ -74,9 +74,9 @@ module Bionomia
                   yielder << {
                     doi: result[:identifiers][:doi],
                     abstract: result[:abstract],
-                    gbif_dois: result[:_gbifDOIs].map{ |d| d.sub("doi:","") },
+                    gbif_dois: result[:tags].map{ |d| d.sub("gbifDOI:","") if d[0..7] == "gbifDOI:" }.compact,
                     gbif_downloadkeys: result[:gbifDownloadKey],
-                    created: result[:created]
+                    created: result[:added]
                   }
                 end
               rescue

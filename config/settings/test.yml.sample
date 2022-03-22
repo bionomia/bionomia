@@ -53,3 +53,4 @@ twitter:
 gbif:
   download_count: '99M'
   download_doi: '10.15468/00000'
+  api: 'https://api.gbif.org/v1/'
