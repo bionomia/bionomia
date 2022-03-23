@@ -28,7 +28,7 @@ it:
   acknowledgments:
     acknowledgments_title: Acknowledgments
     taxon_silhouettes: Taxon Family Silhouettes
-    translations: Translations
+    translations: Traduzioni
   admin:
     change_photo: Change profile photo
   agent:
@@ -54,8 +54,8 @@ it:
     search_html: "Search for %{agent_link} the person and help attribute their specimens."
     example_agents: Random Samples
   article:
-    article_title: Article
-    articles_title: Articles
+    article_title: Articolo
+    articles_title: Articoli
     articles_lede:
       unit:
         one: "article cited downloads from GBIF"
@@ -104,7 +104,7 @@ it:
     collected: Collected
     people: People
   country:
-    country_title: Countries
+    country_title: Paesi
     lede: From countries stated in ORCID accounts and Wikidata entries or specimen records in GBIF
     intro: From countries stated in ORCID accounts and Wikidata entries. Search by Taxon Family to explore expertise.
     collected_from: "Collected %{family} from %{country}"
