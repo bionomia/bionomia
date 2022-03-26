@@ -419,6 +419,7 @@ es:
     acknowledgments: Agradecimientos
     workshops: Talleres
     stats: Estadísticas
+    downloads: Downloads
   not_authorized:
     not_authorized: Sin autorización o la sesión ha terminado.
   occurrence:

@@ -419,6 +419,7 @@ fr:
     acknowledgments: Remerciements
     workshops: Ateliers
     stats: Statistiques
+    downloads: Downloads
   not_authorized:
     not_authorized: Non autorisé ou session terminée.
   occurrence:

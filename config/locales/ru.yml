@@ -465,6 +465,7 @@ ru:
     acknowledgments: Acknowledgments
     workshops: Workshops
     stats: Statistics
+    downloads: Downloads
   not_authorized:
     not_authorized: Not authorized or session terminated.
   occurrence:
