@@ -9,60 +9,46 @@
 - content_for :jumbotron do
   = haml :'partials/help/jumbotron', layout: false
 
-- if !authorized?
-  %p= I18n.t('help.help_question', name: h(@viewed_user.fullname))
+- if flash[:public]
+  .alert.alert-success.alert-dismissible.fade.show.d-block{role: "alert"}
+    %div
+      = I18n.t('help.now_public_html', person: link_to("#{@viewed_user.fullname}", url("/#{@viewed_user.identifier}")))
+    %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
+      %span{"aria-hidden":"true"} &times;
 
-  %form{action: "/auth/orcid?lang=#{I18n.locale}", method: :post}
-    %button.btn.btn-lg.btn-outline-dark
-      %i.fab.fa-orcid
-      = I18n.t('home.orcid_login')
-    %input{type:"hidden", name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
+= haml :'partials/help/tabs', layout: false, locals: { active_tab: "discovered" }
 
-  - if @viewed_user.is_public?
-    %p.mt-3
-      = I18n.t('help.view_public_html', href: link_to(I18n.t('help.view_public_href'), url("/#{@viewed_user.identifier}")))
+- checked = params[:relaxed] == "1" ? "checked" : nil
 
+= haml :'partials/advanced_search_filter', layout: false, locals: { url: "/help-others/#{@viewed_user.identifier}" }
+
+- if @pagy.count == 0
+  .alert.alert-info.tiny-margins.row{role: "alert"}
+    .col.col-12.col-md-8.p-0
+      = I18n.t('help.no_unclaimed')
+      - if !@dataset && !@agent && !@taxon && !@kingdom
+        .form-check.d-inline-flex
+          %input#relaxed.form-check-input{type:"checkbox", checked: checked }
+          %label.relaxed{for:"relaxed"}= I18n.t('help.less_exact')
+    .col.col-12.col-md-4.p-0.text-md-right
+      %a{href: url("/help-others/#{@viewed_user.identifier}/advanced-search")}
+        %i.fas.fa-search-plus
+        = I18n.t('help.advanced_search')
 - else
-  - if flash[:public]
-    .alert.alert-success.alert-dismissible.fade.show.d-block{role: "alert"}
-      %div
-        = I18n.t('help.now_public_html', person: link_to("#{@viewed_user.fullname}", url("/#{@viewed_user.identifier}")))
-      %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
-        %span{"aria-hidden":"true"} &times;
+  = haml :'partials/help/fixed_navbar', layout: false
 
-  = haml :'partials/help/tabs', layout: false, locals: { active_tab: "discovered" }
+  #helper-info.alert.alert-info.tiny-margins.row{role: "alert"}
+    .col.col-12.col-md-8.p-0
+      #{I18n.t('help.attribute_count', count: number_with_delimiter(@total))}
+      = haml :'partials/choose_instructions', layout: false
+      - if !@dataset && !@agent && !@taxon && !@kingdom
+        .form-check.d-inline-flex
+          %input#relaxed.form-check-input{type:"checkbox", checked: checked }
+          %label.relaxed{for:"relaxed"}= I18n.t('help.less_exact')
+    .col.col-12.col-md-4.p-0.text-md-right
+      %a{href: url("/help-others/#{@viewed_user.identifier}/advanced-search")}
+        %i.fas.fa-search-plus
+        = I18n.t('help.advanced_search')
 
-  - checked = params[:relaxed] == "1" ? "checked" : nil
-
-  = haml :'partials/advanced_search_filter', layout: false, locals: { url: "/help-others/#{@viewed_user.identifier}" }
-
-  - if @pagy.count == 0
-    .alert.alert-info.tiny-margins.row{role: "alert"}
-      .col.col-12.col-md-8.p-0
-        = I18n.t('help.no_unclaimed')
-        - if !@dataset && !@agent && !@taxon && !@kingdom
-          .form-check.d-inline-flex
-            %input#relaxed.form-check-input{type:"checkbox", checked: checked }
-            %label.relaxed{for:"relaxed"}= I18n.t('help.less_exact')
-      .col.col-12.col-md-4.p-0.text-md-right
-        %a{href: url("/help-others/#{@viewed_user.identifier}/advanced-search")}
-          %i.fas.fa-search-plus
-          = I18n.t('help.advanced_search')
-  - else
-    = haml :'partials/help/fixed_navbar', layout: false
-
-    #helper-info.alert.alert-info.tiny-margins.row{role: "alert"}
-      .col.col-12.col-md-8.p-0
-        #{I18n.t('help.attribute_count', count: number_with_delimiter(@total))}
-        = haml :'partials/choose_instructions', layout: false
-        - if !@dataset && !@agent && !@taxon && !@kingdom
-          .form-check.d-inline-flex
-            %input#relaxed.form-check-input{type:"checkbox", checked: checked }
-            %label.relaxed{for:"relaxed"}= I18n.t('help.less_exact')
-      .col.col-12.col-md-4.p-0.text-md-right
-        %a{href: url("/help-others/#{@viewed_user.identifier}/advanced-search")}
-          %i.fas.fa-search-plus
-          = I18n.t('help.advanced_search')
-
-  - if @pagy.count > 0
-    = haml :'partials/tables/candidates', layout: false, locals: { user_scope: "other" }
+- if @pagy.count > 0
+  = haml :'partials/tables/candidates', layout: false, locals: { user_scope: "other" }
