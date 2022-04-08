@@ -26,10 +26,11 @@
             = haml :'partials/single_selector_preselected', layout: false, locals: { occurrence: uo, user_id: @viewed_user.id }
           %td
             - scientific_name = o.scientificName.nil? ? "not recorded" : o.scientificName
-            %a{href: gbif_occurrence_url(o.id), target:"_blank"}
-              #{h(scientific_name)}
+            %a{href: gbif_occurrence_url(o.id), target:"_blank"}= h(scientific_name)
+            %a{href: "/occurrence/#{o.id}"}
+              %i.fas.fa-feather.text-muted
             - if o.hasImage?
-              %i.fas.fa-image.ml-1{"data-toggle":"popover", "data-gbifid":"#{o.id}"}
+              %i.fas.fa-image.ml-1.text-muted{"data-toggle":"popover", "data-gbifid":"#{o.id}"}
           %td #{h(o.recordedBy)}
           %td #{h(o.identifiedBy)}
           %td #{h(o.eventDate || o.year)}

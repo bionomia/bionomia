@@ -31,8 +31,11 @@ button.hide, button.remove, button.hide-all, button.remove-all {
 .btn-outline-light:hover{
   color:#212529 !important;
 }
-a, .page-link{
+a, .page-link {
   color:#1F712C;
+}
+i.fa-feather{
+  color:#318b3f !important;
 }
 a:hover, .page-link:hover{
   color:#003309;
