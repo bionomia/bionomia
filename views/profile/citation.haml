@@ -13,8 +13,13 @@
   .alert.alert-info.tiny-margins{role: "alert"}= I18n.t('profile.no_citation_alert')
 - else
   .alert.alert-info.row.tiny-margins{role: "alert"}
-    .col.col-12
+    .col-12.col-md-9.p-0
       = haml :'partials/choose_instructions', layout: false
+    .col-12.col-md-3.p-0.text-md-right
+      %a.mr-2{href: url("/profile/citation/#{@article.doi}.csv"), alt:"CSV file download"}
+        %i.fas.fa-file-csv.text-dark.h5.m-0.p-1
+        CSV
+
 
   %h4= I18n.t('profile.specimens_used')
   %p.citation

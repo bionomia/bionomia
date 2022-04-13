@@ -363,6 +363,13 @@ module Sinatra
               haml :'profile/citations', locals: { active_page: "profile" }
             end
 
+            get '/citation/*.csv' do
+              article_from_param
+              csv_stream_headers("citations-#{@article.id}")
+              io = ::Bionomia::IO.new
+              body io.csv_stream_article_specimen_profile(@user, @user.cited_specimens_by_article(@article.id), @article)
+            end
+
             get '/citation/*' do
               article_from_param
               cited_specimens = @user.cited_specimens_by_article(@article.id)

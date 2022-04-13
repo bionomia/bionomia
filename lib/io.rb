@@ -67,6 +67,25 @@ module Bionomia
       end
     end
 
+    def csv_stream_article_specimen_profile(user, occurrences, article)
+      Enumerator.new do |y|
+        header = Occurrence.attribute_names - ignored_cols
+        header.unshift "used_in_doi"
+        y << CSV::Row.new(header, header, true).to_s
+        if !occurrences.empty?
+          occurrences.find_each do |o|
+            attributes = o.occurrence.attributes
+            ignored_cols.each do |col|
+              attributes.delete(col)
+            end
+            data = attributes.values
+            data.unshift article.doi
+            y << CSV::Row.new(header, data).to_s
+          end
+        end
+      end
+    end
+
     def csv_stream_occurrences(occurrences)
       Enumerator.new do |y|
         header = ["action"].concat(Occurrence.attribute_names - ignored_cols)
