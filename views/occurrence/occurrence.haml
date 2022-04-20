@@ -1,5 +1,6 @@
 - content_for :title, I18n.t('occurrence.occurrence_title')
 - content_for :scripts do
+  %script{src: "/js/application.js"}
   %script{src: "//www.gstatic.com/charts/loader.js"}
   %script{src: "/js/jquery.throttledresize.js"}
   %script{src: "/js/occurrence_widget.js"}
@@ -7,6 +8,7 @@
     $(function () {
       var map;
 
+      Application.init();
       OccurrenceWidget.init($('#selector-template'), #{@network}, #{@ignored});
 
       if (!$('#map').length) { return; }
@@ -20,7 +22,7 @@
 
         var data = google.visualization.arrayToDataTable([
           ['Lat', 'Long', 'Name'],
-          [#{@occurrence.decimalLatitude}, #{@occurrence.decimalLongitude}, "#{@occurrence.scientificName}"]
+          [#{@occurrence.decimalLatitude.to_f}, #{@occurrence.decimalLongitude.to_f}, "#{@occurrence.scientificName}"]
         ]);
 
         map = new google.visualization.GeoChart($('#map')[0]);
@@ -93,8 +95,18 @@
         %dd.py-1 #{h(@occurrence.basisOfRecord)}
         %dd.line-break
 
+        %dt license
+        %dd.py-1
+          - if @occurrence.license && @occurrence.license[0..3] == "http"
+            %a{href: "#{@occurrence.license}", target:"_blank"} #{@occurrence.license}
+          - else
+            #{h(@occurrence.license)}
+        %dd.line-break
+
         %dt #{I18n.t('occurrence.has_image')}
-        %dd.py-1 #{I18n.t(@occurrence.hasImage.present?.to_s)}
+        %dd.py-1
+          #{I18n.t(@occurrence.hasImage.present?.to_s)}
+          %i.fas.fa-image.ml-1.text-muted{"data-toggle":"popover", "data-gbifid":"#{@occurrence.id}"}
 
   #location.card.mb-4
     .card-header.border-bottom

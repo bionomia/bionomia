@@ -34,7 +34,6 @@ val occurrences = spark.
     option("treatEmptyValuesAsNulls", "true").
     option("ignoreLeadingWhiteSpace", "true").
     load("occurrence.avro").
-    drop(col("license")).
     drop(col("recordedBy")).
     drop(col("identifiedBy")).
     withColumn("scientificNameDerived", when($"v_scientificName".isNull, $"scientificName").otherwise($"v_scientificName")).

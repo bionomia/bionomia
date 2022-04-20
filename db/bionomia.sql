@@ -32,13 +32,6 @@ CREATE TABLE `article_occurrences` (
   `occurrence_id` bigint UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin KEY_BLOCK_SIZE=8 ROW_FORMAT=COMPRESSED;
 
-CREATE TABLE `ar_internal_metadata` (
-  `key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `created_at` datetime(6) NOT NULL,
-  `updated_at` datetime(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
 CREATE TABLE `datasets` (
   `id` bigint NOT NULL,
   `datasetKey` binary(36) NOT NULL,
@@ -72,6 +65,7 @@ CREATE TABLE `messages` (
 CREATE TABLE `occurrences` (
   `gbifID` bigint UNSIGNED NOT NULL,
   `datasetKey` binary(36) DEFAULT NULL,
+  `license` varchar(125) COLLATE utf8mb4_bin DEFAULT NULL,
   `occurrenceID` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `basisOfRecord` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `dateIdentified` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
@@ -223,9 +217,6 @@ ALTER TABLE `article_occurrences`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `article_occurrence_idx` (`occurrence_id`,`article_id`),
   ADD KEY `article_idx` (`article_id`);
-
-ALTER TABLE `ar_internal_metadata`
-  ADD PRIMARY KEY (`key`);
 
 ALTER TABLE `datasets`
   ADD PRIMARY KEY (`id`),
