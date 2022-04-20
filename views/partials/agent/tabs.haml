@@ -1,0 +1,5 @@
+%ul.nav.nav-tabs.pl-2
+  %li.nav-item.badge-item
+    %a{class: "nav-link#{locals[:active_tab] == "random" ? " active" : nil}", href: url("/agents")}= I18n.t('agent.example_agents')
+  %li.nav-item
+    %a{class: "nav-link#{locals[:active_tab] == "gbifid" ? " active" : nil}", href: url("/agents/gbifID")}= I18n.t('agent.gbifid')

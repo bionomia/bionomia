@@ -1,0 +1,82 @@
+- content_for :title, I18n.t('agent.gbifid_title')
+- content_for :scripts do
+  %script{src: "/js/application.js"}
+  %script{src: "/js/csvExport.min.js"}
+  :javascript
+    $(function() {
+      Application.init("", "GET", "/agents");
+
+      var ele = $("#bionomia-gbifid-results"),
+          textarea = $('textarea[name="gbifids"]'),
+          sample = "#{@gbifIDs.join("\\n")}";
+      $("#csv-export").on("click", function(e) {
+        e.preventDefault();
+        ele.csvExport({ title: ele.attr("id") + ".csv" });
+        return false;
+      });
+      $("#try-some").on("click", function(e) {
+        e.preventDefault();
+        textarea.val(sample);
+        return false;
+      });
+      $("#reset").on("click", function(e) {
+        textarea.val('').text('');
+      });
+    });
+
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2
+        = I18n.t('agent.gbifid_title')
+      %p.lead.text-muted
+        = I18n.t('agent.gbifid_instructions')
+
+    = haml :'partials/agent/search', layout: false
+
+= haml :'partials/agent/tabs', layout: false, locals: { active_tab: "gbifid" }
+
+.alert.alert-success.mt-4.mb-4
+  One gbifID per line, limit 50,000 rows. See the
+  %a{href: "https://www.gbif.org/occurrence/search?basis_of_record=MATERIAL_SAMPLE&basis_of_record=PRESERVED_SPECIMEN&basis_of_record=FOSSIL_SPECIMEN&basis_of_record=LIVING_SPECIMEN&occurrence_status=present", target:"_blank"} occurrence search
+  on the Global Biodiversity Information Facility (GBIF).
+  = succeed "." do
+    %a{href:"#", id:"try-some"} Try some
+
+%form{action:"/agents/gbifID", method: :post}
+  .form-group
+    %textarea.form-control{name: "gbifids", rows: 5}= params[:gbifids]
+  %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
+  %button.btn.btn-success{type: :submit}= I18n.t('general.submit')
+  %button.btn.btn-warning#reset{type: :reset}= I18n.t('general.reset')
+
+- if !params[:gbifids].empty? && @output.empty?
+  .alert.alert-warning.mt-4.mb-4
+    No results found.
+
+- if !@output.empty?
+  .alert.mt-4.mb-0.text-right.text-muted
+    Results are limited to the first 50,000 rows.
+    %a{href:"#", id:"csv-export"}
+      %i.fas.fa-file-csv.h5.text-dark.m-0.p-1
+      CSV
+
+  .table-responsive.mt-0
+    %table.table.table-hover.table-sm.border-bottom#bionomia-gbifid-results
+      %thead.thead-light
+        %tr
+          %th.text-nowrap{scope: "col"} Name
+          %th.text-nowrap{scope:"col"} Family
+          %th.text-nowrap{scope:"col"} Given
+          %th.text-nowrap{scope:"col"} Count in recordedBy
+      %tbody
+        - @output.each do |k,v|
+          - agent = Agent.find(k) rescue nil
+          - if !agent.nil?
+            %tr
+              %td
+                %a{href: "/agent/#{agent.id}" }
+                  #{agent.fullname}
+              %td #{agent.family}
+              %td #{agent.given}
+              %td #{v}

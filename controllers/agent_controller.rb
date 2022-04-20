@@ -18,6 +18,29 @@ module Sinatra
             haml :'agents/agents', locals: { active_page: "agents" }
           end
 
+          app.get '/agents/gbifID' do
+            @gbifIDs = UserOccurrence.where(visible: true)
+                                     .limit(20)
+                                     .pluck(:occurrence_id)
+            @output = []
+            haml :'agents/gbifid', locals: { active_page: "agents" }
+          end
+
+          app.post '/agents/gbifID' do
+            @gbifIDs = UserOccurrence.where(visible: true)
+                                     .limit(20)
+                                     .pluck(:occurrence_id)
+            lines = params[:gbifids].split("\r\n")[0..50_000]
+            agent_ids = []
+            lines.in_groups_of(100, false).each do |group|
+              ids = OccurrenceRecorder.where(occurrence_id: group)
+                                .pluck(:agent_id)
+              agent_ids.push(*ids)
+            end
+            @output = agent_ids.tally.sort_by{|_, count| -count }
+            haml :'agents/gbifid', locals: { active_page: "agents" }
+          end
+
           app.namespace '/agent' do
 
             get '/:id' do

@@ -52,7 +52,10 @@ el:
         one: "specimen found. Not all columns are shown."
         other: "specimens found. Not all columns are shown."
     search_html: "Search for %{agent_link} the person and help attribute their specimens."
-    example_agents: Random Samples
+    example_agents: Random Samples or Results
+    gbifid: From gbifIDs
+    gbifid_title: Agent Strings from gbifIDs
+    gbifid_instructions: Paste a list of occurrence-based gbifIDs and receive a summary list of parsed agent strings from recordedBy.
   article:
     article_title: Article
     articles_title: Articles

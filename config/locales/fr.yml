@@ -52,7 +52,10 @@ fr:
         one: "spécimen trouvé. Toutes les colonnes ne sont pas affichées."
         other: "spécimens trouvés. Toutes les colonnes ne sont pas affichées."
     search_html: "Recherchez %{agent_link} la personne et aidez à attribuer ces spécimens."
-    example_agents: Exemples aléatoires
+    example_agents: Random Samples or Results
+    gbifid: From gbifIDs
+    gbifid_title: Agent Strings from gbifIDs
+    gbifid_instructions: Paste a list of occurrence-based gbifIDs and receive a summary list of parsed agent strings from recordedBy.
   article:
     article_title: Article
     articles_title: Articles

@@ -27,7 +27,7 @@
       %h1.h2
         = I18n.t('layout.parse')
 
-%p
+.alert.alert-success.mt-2.mb-4
   Paste list of human names (limited to first 1,000 rows) as typically seen in the Darwin Core terms,
   = link_to "recordedBy", "https://dwc.tdwg.org/terms/#dwc:recordedBy"
   or
@@ -49,17 +49,13 @@
 
 - if !@output.empty?
 
-  - klass = @output.size >= 300 ? "warning" : "success"
-  %div{class:"alert alert-#{klass} mt-4"}
-    .row
-      .col.col-12.col-lg-10
-        Parsed results are limited to the first 1,000 rows.
-      .col.col-12.col-lg-2.text-lg-right.pr-3
-        %a{href:"#", id:"csv-export"}
-          %i.fas.fa-file-csv.h5.text-dark.m-0.p-1
-          CSV
+  .alert.mt-4.mb-0.text-right.text-muted
+    Parsed results are limited to the first 1,000 rows.
+    %a{href:"#", id:"csv-export"}
+      %i.fas.fa-file-csv.h5.text-dark.m-0.p-1
+      CSV
 
-  .table-responsive.mt-4
+  .table-responsive.mt-0
     %table.table.table-hover.table-sm.border-bottom#bionomia-parse-results
       %thead.thead-light
         %tr
