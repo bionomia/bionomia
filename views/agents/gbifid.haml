@@ -50,7 +50,7 @@
   %button.btn.btn-success{type: :submit}= I18n.t('general.submit')
   %button.btn.btn-warning#reset{type: :reset}= I18n.t('general.reset')
 
-- if !params[:gbifids].empty? && @output.empty?
+- if params[:gbifids] && !params[:gbifids].empty? && @output.empty?
   .alert.alert-warning.mt-4.mb-4
     No results found.
 
