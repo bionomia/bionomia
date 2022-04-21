@@ -470,6 +470,7 @@ module Sinatra
             end
 
             delete '/destroy' do
+              BIONOMIA.cache_clear("blocks/#{@user.identifier}-stats")
               @user.destroy
               session.clear
               redirect '/'

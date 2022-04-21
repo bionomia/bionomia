@@ -334,8 +334,8 @@ module Sinatra
                 halt 404
               end
               name = @admin_user.fullname.dup
+              BIONOMIA.cache_clear("blocks/#{@admin_user.identifier}-stats")
               @admin_user.destroy
-              @admin_user.flush_caches
               flash.next[:destroyed] = name
               redirect '/admin/users'
             end
