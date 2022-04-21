@@ -65,9 +65,9 @@
     %table.table.table-hover.table-sm.border-bottom#bionomia-gbifid-results
       %thead.thead-light
         %tr
-          %th.text-nowrap{scope:"col"} Name
-          %th.text-nowrap{scope:"col"} Family
-          %th.text-nowrap{scope:"col"} Given
+          %th.text-nowrap{scope:"col"} Parsed Agent String
+          %th.text-nowrap{scope:"col"} Possible Family Name
+          %th.text-nowrap{scope:"col"} Possible Given Name or Initials
           %th.text-nowrap{scope:"col"} Count in recordedBy
       %tbody
         - @output.each do |k,v|
