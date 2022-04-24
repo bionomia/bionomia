@@ -11,6 +11,6 @@
     - @countries.each do |k, group|
       %h3 #{k}
       %ul.list-inline
-        - group.each do |country|
+        - group.sort_by{|a,b| b}.each do |country|
           %li.list-inline-item
             %a.btn.btn-outline-dark.btn-sm.mb-2{href: url("/help-others/country/#{country[0]}")} #{country_name(country[0])}

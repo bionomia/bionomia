@@ -65,7 +65,7 @@ CREATE TABLE `messages` (
 CREATE TABLE `occurrences` (
   `gbifID` bigint UNSIGNED NOT NULL,
   `datasetKey` binary(36) DEFAULT NULL,
-  `license` varchar(125) COLLATE utf8mb4_bin DEFAULT NULL,
+  `license` varchar(25) COLLATE utf8mb4_bin DEFAULT NULL,
   `occurrenceID` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `basisOfRecord` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `dateIdentified` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
