@@ -22,7 +22,7 @@
 
         var data = google.visualization.arrayToDataTable([
           ['Lat', 'Long', 'Name'],
-          [#{@occurrence.decimalLatitude.to_f}, #{@occurrence.decimalLongitude.to_f}, "#{@occurrence.scientificName}"]
+          [#{format_coordinate(@occurrence.decimalLatitude)}, #{format_coordinate(@occurrence.decimalLongitude)}, "#{@occurrence.scientificName}"]
         ]);
 
         map = new google.visualization.GeoChart($('#map')[0]);
@@ -106,7 +106,8 @@
         %dt #{I18n.t('occurrence.has_image')}
         %dd.py-1
           #{I18n.t(@occurrence.hasImage.present?.to_s)}
-          %i.fas.fa-image.ml-1.text-muted{"data-toggle":"popover", "data-gbifid":"#{@occurrence.id}"}
+          - if @occurrence.hasImage?
+            %i.fas.fa-image.ml-1.text-muted{"data-toggle":"popover", "data-gbifid":"#{@occurrence.id}"}
 
   #location.card.mb-4
     .card-header.border-bottom

@@ -257,6 +257,14 @@ module Sinatra
           end
         end
 
+        def format_coordinate(coord)
+          sign = 1
+          if coord =~ /[ws]/i
+            sign = -1
+          end
+          coord.to_f * sign
+        end
+
       end
     end
   end
