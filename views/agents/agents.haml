@@ -19,7 +19,7 @@
 = haml :'partials/agent/tabs', layout: false, locals: { active_tab: "random" }
 
 - if params[:q] && !params[:q].empty? && @formatted_results.empty?
-  .alert.alert-warning.tiny-margins.mt-0{role: "alert"}
+  .alert.alert-warning.tiny-margins.mt-3{role: "alert"}
     = I18n.t('agent.search_none', searched: h(params[:q]))
 
 - elsif @pagy && @pagy.count > 0
