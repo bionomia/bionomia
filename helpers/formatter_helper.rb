@@ -265,6 +265,18 @@ module Sinatra
           coord.to_f * sign
         end
 
+        def format_license(license)
+          if license == "CC_BY_4_0"
+            "<a href=\"https://creativecommons.org/licenses/by/4.0/legalcode\">https://creativecommons.org/licenses/by/4.0/legalcode</a>"
+          elsif license == "CC_BY_NC_4_0"
+            "<a href=\"https://creativecommons.org/licenses/by-nc/4.0/legalcode\">https://creativecommons.org/licenses/by-nc/4.0/legalcode</a>"
+          elsif license == "CC0_1_0"
+            "<a href=\"https://creativecommons.org/publicdomain/zero/1.0/legalcode\">https://creativecommons.org/publicdomain/zero/1.0/legalcode</a>"
+          else
+            license
+          end
+        end
+
       end
     end
   end

@@ -97,10 +97,7 @@
 
         %dt license
         %dd.py-1
-          - if @occurrence.license && @occurrence.license[0..3] == "http"
-            %a{href: "#{@occurrence.license}", target:"_blank"} #{@occurrence.license}
-          - else
-            #{h(@occurrence.license)}
+          = format_license(@occurrence.license)
         %dd.line-break
 
         %dt #{I18n.t('occurrence.has_image')}
