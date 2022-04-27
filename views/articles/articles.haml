@@ -21,7 +21,12 @@
   .card.mb-3
     .card-header
       %p.citation.card-title
-        = link_to h(article.citation), url("/article/#{article.doi}")
+        #{h(article.citation)}
+        = link_to "https://doi.org/#{article.doi}", "https://doi.org/#{article.doi}"
+      %p
+        %a{href: "/article/#{article.doi}"}
+          %i{class:"fas fa-users"}
+          = I18n.t('article.people')
     .card-body
       .altmetric-embed.pull-left.mr-2.float-left{"data-badge-popover":"right", "data-badge-type":"donut", "data-doi":"#{article.doi}", "data-hide-no-mentions":"true"}
       %p.card-text.text-muted #{h(article.abstract)}

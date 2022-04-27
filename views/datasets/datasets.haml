@@ -40,7 +40,7 @@
             .col.small.text-left.text-muted
             .col.small.text-right.text-muted
               %a{href: "#{dataset.license}"}
-                %img{src:"#{dataset.license_icon("small")}"}
+                %img{src:"#{dataset.license_icon("small")}", alt: ""}
 
 - if @pagy.pages > 1
   .y-scroll
