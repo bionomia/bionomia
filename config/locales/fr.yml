@@ -55,7 +55,7 @@ fr:
     example_agents: Random Samples or Results
     gbifid: From gbifIDs
     gbifid_title: Agent Strings from gbifIDs
-    gbifid_instructions: Paste a list of occurrence-based gbifIDs and receive a summary list of parsed agent strings from recordedBy.
+    gbifid_instructions: Collez une liste de gbifID basés sur les occurrences et recevez une liste des chaînes d'agent analysées à partir de recordedBy.
   article:
     article_title: Article
     articles_title: Articles
@@ -73,7 +73,7 @@ fr:
     agent_strings: Chaînes d'agent
     agent_title: Agents d'article
     alphabetical: Alphabétique
-    counts: Compte
+    counts: Comptes
     unclaimed: Non Attribuées
     no_agent_strings_alert: Les chaînes brutes des noms de collecteur et de détermineur analysés dans les données de spécimen téléchargées à partir du GBIF à l'appui de cet article n'ont pas été trouvées
     agent_strings_alert:
@@ -298,7 +298,7 @@ fr:
     view: vue
     none: aucun
     identified_from: Identifié à Partir de
-    collected_from: Collectés à Partir de
+    collected_from: Collecté à partir de
     no_filter_alert: Les scribes Bionomia n'ont pas encore aidé à attribuer des spécimens sous ce filtre.
     not_helped_alert: Les scribes Bionomia n'ont pas encore aidé à attribuer des spécimens.
     upload_message:
@@ -323,7 +323,7 @@ fr:
     identified_for_count:
       one: "spécimen collecté"
       other: "spécimens collectés"
-    identifications_by: Identifications Par
+    identifications_by: Identifications par
     no_determiners_alert: Les détermineurs n'ont pas encore été enregistrés.
     determiners_alert: "Choisissez un détermineur pour ajuster les attributions."
     determiner_name: "Spécimens identifiés par %{name} et collectés par %{other_name}."
@@ -341,7 +341,7 @@ fr:
     no_unclaimed: Bionomia n'a trouvé aucun spécimen non réclamé.
     close: Fermer
     add_person: Ajouter une personne
-    add_orcid_wikidata: Ajouter un identifiant ORCID ou un numéro Wikidata Q
+    add_orcid_wikidata: Ajouter un identifiant ORCID ou un numéro Q Wikidata
     attribute_count:
       one: Aidez à attriber 1 spécimen.
       other: Aidez à attribuer %{count} spécimens.
@@ -370,7 +370,7 @@ fr:
     co_collected_count:
       one: "spécimen co-collecté"
       other: "spécimens co-collectés"
-    occurrence_title: Aider les autres par enregistrement de spécimens
+    occurrence_title: Aidez les autres par spécimen d'enregistrement
     occurrence: Spécimens
     occurrence_advance_message: Registres de spécimens coconstitués. Utilisez la touche fléchée droite de votre clavier ou la flèche de l'écran pour faire avancer un enregistrement jusqu'à ce que vous en receviez une que vous pouvez attribuer.
   home:
@@ -445,7 +445,7 @@ fr:
     collector_died: Collectionneur mort
     type_collected: Spécimens types collectés
     none_died_alert: "Personne trouvé qui est décédé le %{date}"
-    none_born_alert: "Personne trouvé qui est né le %{date}"
+    none_born_alert: "Personne n'a trouvé qui est né le %{date}"
     limit_alert: Résultats limités à 50 enregistrements d'holotype
     no_types_alert: "Aucun spécimen type trouvé collecté le %{date}"
   oops:
@@ -480,7 +480,7 @@ fr:
       unit:
         one: "résultats pour"
         other: "résultats pour"
-    current: Courant
+    current: Actuel
     previous: Précédent
     metrics: Métrique
     member: membre
@@ -535,8 +535,8 @@ fr:
     collected_from: Collectés à Partir de
     resume: Pour votre CV
     specimens_used: Spécimens utilisés dans
-    public_availability: Disponibilité Publique
-    public_profile: Profil Public
+    public_availability: Disponibilité publique
+    public_profile: Profil public
     make_citable: Rendez vos Données Exploitables
     email_notifications: Notifications Par Courriel
     delete_account: Supprimer Votre Compte
@@ -549,7 +549,7 @@ fr:
     disconnect_warning: Voulez-vous vraiment déconnecter votre compte de Zenodo? Vos données resteront archivées et accessibles mais aucune nouvelle version ne sera créée. Si vous reconnectez votre compte ultérieurement, un nouveau package de données sera créé.
     connect_zenodo: Connectez votre compte à Zenodo où les versions de vos réclamations seront stockées et un DOI DataCite attribué. Une citation sera fournie pour inclusion dans votre CV.
     connect_zenodo_claim: Réclamez au moins un de vos spécimens et revenez ici pour connecter votre compte à Zenodo où les versions de vos réclamations seront stockées et un DOI DataCite attribué. Une citation sera fournie pour inclusion dans votre CV.
-    disconnect_zenodo: Déconnectez Zenodo
+    disconnect_zenodo: Se déconnecter de Zenodo
     integrate_zenodo: Intégration avec Zenodo
     zenodo_linked: Votre compte est maintenant lié et les données seront transmises dans l'heure
     orcid_updates: Tirez de nouvelles mises à jour de votre nom, alias, mots clés, pays, éducation et emploi accessibles au public à partir de votre compte ORCID.
@@ -557,7 +557,7 @@ fr:
     orcid_refreshed: Les données ORCID ont été actualisées.
     public: Publique
     private: Privé
-    active: "Actif"
+    active: "Allumé"
     inactive: "Inactif"
     make_public_message: Incluez votre compte dans les profils publics. Vos réclamations seront incluses dans un téléchargement de données en masse, exposées via les extensions Google Chrome et Firefox et un Tweet sera envoyé par @BionomiaTrack.
     no_candidates_alert: Bionomia n'a trouvé aucun spécimen répertorié par GBIF que vous ayez collecté ou identifié.
@@ -648,7 +648,7 @@ fr:
     title: Statistiques
     claims: Réclamations cumulées
     attributions: Attributions cumulées
-    rejected: Candidats rejetés cumulés
+    rejected: Candidats refusés cumulés
     profiles: Profils cumulatifs importés
     month: Mois
   taxa:
@@ -719,7 +719,7 @@ fr:
         other: "spécimens aient été attribués, mais ce profil n'est pas accessible au public."
     no_specimens_cited: Les spécimens n'ont pas été inclus dans les téléchargements du GBIF et cités dans cet article de recherche.
     specimen_used: Données des Spécimens Utilisées Dans
-    no_publications: Les publications qui utilisaient des enregistrements de spécimens inclus dans un téléchargement du GBIF n'ont pas encore été enregistrées.
+    no_publications: Les publications qui utilisaient des fiches spécimens incluses dans un téléchargement à partir du GBIF n'ont pas encore été enregistrées.
     publication_count:
       unit:
         one: "publication a utilisé des données de spécimens téléchargées de GBIF"
@@ -739,7 +739,7 @@ fr:
     organizations: organismes
     specimens_metric: spécimens
     specimens_identified: Spécimens Identifiés
-    specimens_collected: Spécimens Collectés
+    specimens_collected: Spécimens collectés
     no_specialities_alert: Les spécialités n'ont pas encore été enregistrées.
     specialties_alert: "Spécimens collectés ou identifiés dans les familles suivantes:"
     families_collected: Familles Recueillies
