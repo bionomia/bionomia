@@ -154,7 +154,7 @@ fr:
       unit:
         one: "scribe a attribué des spécimens au collecteurs ou détermineurs représentés dans cet ensemble de données"
         other: "scribes ont attribué des spécimens au collecteurs ou détermineurs représentés dans cet ensemble de données"
-    no_users_alert: Des personnes n'ont pas encore réclamé ou ont été attribués des spécimens représentés dans cet ensemble de données
+    no_users_alert: Personne n'a réclamé ou n'a été attribué de spécimens dans cet ensemble de données
     users_alert:
       unit:
         one: "personne a réclamé ou a été attribuée des spécimens dans cet ensemble de données"
