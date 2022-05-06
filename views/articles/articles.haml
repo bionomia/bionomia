@@ -21,7 +21,10 @@
   .card.mb-3
     .card-header
       %p.citation.card-title
-        #{h(article.citation)}
+        - if !article.citation
+          [NO TITLE AVAILABLE]
+        - else
+          #{h(article.citation)}
         = link_to "https://doi.org/#{article.doi}", "https://doi.org/#{article.doi}"
       %p
         %a{href: "/article/#{article.doi}"}

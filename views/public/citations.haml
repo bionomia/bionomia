@@ -29,7 +29,10 @@
             .card
               .card-header
                 %p.citation.card-title
-                  #{h(article.citation)}
+                  - if article.citation.nil?
+                    [NO TITLE AVAILABLE]
+                  - else
+                    #{h(article.citation)}
                   %a{href: "https://doi.org/#{article.doi}"} https://doi.org/#{article.doi}
               .card-body
                 .altmetric-embed.pull-left.mr-2.float-left{"data-badge-popover":"right", "data-badge-type":"donut", "data-doi":"#{article.doi}", "data-hide-no-mentions":"true"}
