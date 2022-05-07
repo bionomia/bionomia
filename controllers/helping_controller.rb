@@ -238,7 +238,7 @@ module Sinatra
               @agent_results = []
               @dataset_results = []
               @taxon_results = []
-              @agent, @dataset, @taxon, @kingdom = nil
+              @agent, @dataset, @taxon, @kingdom, @country_code = nil
 
               if params[:datasetKey] && !params[:datasetKey].blank?
                 @dataset = Dataset.find_by_datasetKey(params[:datasetKey]) rescue nil
@@ -263,6 +263,10 @@ module Sinatra
 
               if params[:kingdom] && !params[:kingdom].blank? && Taxon.valid_kingdom?(params[:kingdom])
                 @kingdom = params[:kingdom]
+              end
+
+              if params[:country_code] && !params[:country_code].blank?
+                @country_code = params[:country_code]
               end
 
               haml :'help/advanced_search', locals: { active_page: "help" }

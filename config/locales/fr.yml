@@ -277,6 +277,7 @@ fr:
     taxon_string: Famille taxonomique
     kingdom_string: Règne
     dataset: Base de données
+    country: Country
     datasets: Jeux de données
     agents: Agents
     taxa: Familles taxonomiques

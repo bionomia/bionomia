@@ -74,10 +74,29 @@
             #{@agent.fullname_reverse}
           %input{type: :hidden, name: "agent_id", value: params[:agent_id]}
 
+    .form-group
+      %label.font-weight-bold{for: "country_code"}= I18n.t("help.country")
+      .col-8.col-md-4.pl-0
+        - if @country_code.nil?
+          %select#country.form-control{name:"country_code"}
+            %option
+            - I18nData.countries(I18n.locale).sort_by{|a| a[1]}.each do |country|
+              %option{label: "#{country[1]}"} #{country[0]}
+
+        - else
+          - q = params.except("id", "authenticity_token", "agent", "dataset", "taxon", "country_code").to_query
+          %span
+            %a.text-danger{href: url("#{locals[:url]}/advanced-search?#{q}")}
+              %i.fas.fa-minus-circle
+              = I18n.t('general.remove')
+          %span
+            #{I18nData.countries(I18n.locale).slice(@country_code.upcase).flatten.last}
+          %input{type: :hidden, name: "country_code", value: params[:country_code]}
+
     %input{type:"hidden", name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
     %button.btn.btn-success{type:"submit"}= I18n.t('general.search')
 
-    - if @agent || @dataset || @taxon || @kingdom
+    - if @agent || @dataset || @taxon || @kingdom || @country_code
       - q = params.except("id", "authenticity_token", "agent", "dataset", "taxon").to_query
       %a.btn.btn-info{href: url("#{locals[:dest]}?#{q}")}= I18n.t('general.apply')
 

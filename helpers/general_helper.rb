@@ -139,6 +139,10 @@ module Sinatra
             occurrences = occurrences.where(occurrences: { kingdom: @kingdom })
           end
 
+          if @country_code
+            occurrences = occurrences.where(occurrences: { countryCode: @country_code })
+          end
+
           occurrences.pluck(:agent_id, :typeStatus, :occurrence_id)
                      .sort_by{|o| [ scores.fetch(o[0]), o[1].nil? ? "" : o[1] ] }
                      .reverse
@@ -305,7 +309,7 @@ module Sinatra
         end
 
         def filter_instances
-          @dataset, @agent, @taxon, @kingdom = nil
+          @dataset, @agent, @taxon, @kingdom, @country_code = nil
           if params[:datasetKey] && !params[:datasetKey].blank?
             @dataset = Dataset.find_by_datasetKey(params[:datasetKey]) rescue nil
           end
@@ -317,6 +321,9 @@ module Sinatra
           end
           if params[:kingdom] && !params[:kingdom].blank? && Taxon.valid_kingdom?(params[:kingdom])
             @kingdom = params[:kingdom]
+          end
+          if params[:country_code] && !params[:country_code].blank?
+            @country_code = params[:country_code]
           end
         end
 

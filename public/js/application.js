@@ -243,18 +243,33 @@ var Application = (function($, window) {
     },
 
     activate_dropdowns: function() {
-      var self = this;
-      $("#kingdom").on("change", function() {
-        var agent_id = (typeof Filters !== "undefined") ? Filters.agent_id : "";
-        var datasetKey = (typeof Filters !== "undefined") ? Filters.datasetKey : "";
-        var taxon_id = (typeof Filters !== "undefined") ? Filters.taxon_id : "";
-        var kingdom = (typeof Filters !== "undefined") ? Filters.kingdom : "";
+      var self = this,
+          agent_id = "",
+          datasetKey = "",
+          taxon_id = "",
+          kingdom = "",
+          country_code = "";
+
+      $("#kingdom, #country").on("change", function() {
+        if (typeof Filters !== "undefined") {
+          agent_id = Filters.agent_id;
+          datasetKey = Filters.datasetKey;
+          taxon_id = Filters.taxon_id;
+          kingdom = Filters.kingdom;
+          country_code = Filters.country_code;
+        }
+        if(this.id == "country") {
+          country_code = this.value;
+        }
+        if(this.id == "kingdom") {
+          kingdom = this.value;
+        }
         if (self.path === "/help-others") {
-          window.location.href = "/help-others/" + self.identifier + "/advanced-search?agent_id=" + agent_id +"&taxon_id=" + taxon_id + "&datasetKey=" + datasetKey + "&kingdom=" + this.value;
+          window.location.href = "/help-others/" + self.identifier + "/advanced-search?agent_id=" + agent_id +"&taxon_id=" + taxon_id + "&datasetKey=" + datasetKey + "&kingdom=" + kingdom + "&country_code=" + country_code;
         } else if (self.path === "/profile") {
-          window.location.href = "/profile/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datasetKey + "&taxon_id=" + taxon_id + "&kingdom=" + this.value;
+          window.location.href = "/profile/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datasetKey + "&taxon_id=" + taxon_id + "&kingdom=" + kingdom + "&country_code=" + country_code;
         } else if (self.path === "/admin") {
-          window.location.href = "/admin/user/"+self.identifier+"/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datasetKey + "&taxon_id=" + taxon_id + "&kingdom=" + this.value;
+          window.location.href = "/admin/user/"+self.identifier+"/advanced-search?agent_id=" + agent_id + "&datasetKey=" + datasetKey + "&taxon_id=" + taxon_id + "&kingdom=" + kingdom + "&country_code=" + country_code;
         }
       });
     },

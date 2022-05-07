@@ -309,6 +309,7 @@ ru:
     taxon_string: Taxon Family
     kingdom_string: Kingdom
     dataset: Dataset
+    country: Country
     datasets: Datasets
     agents: Agents
     taxa: Taxonomic Families

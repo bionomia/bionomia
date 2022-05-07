@@ -277,6 +277,7 @@ pt:
     taxon_string: Família Taxon
     kingdom_string: Reino
     dataset: Conjunto de dados
+    country: Country
     datasets: Conjunto de dados
     agents: Agentes
     taxa: Famílias Taxonômicas
