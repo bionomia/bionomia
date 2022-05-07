@@ -69,9 +69,12 @@
           %th.text-nowrap{scope:"col"} Possible Family Name
           %th.text-nowrap{scope:"col"} Possible Given Name or Initials
           %th.text-nowrap{scope:"col"} Count in recordedBy
+          %th.text-nowrap{scope:"col"} Year Range
+          %th{scope:"col"} Families
+          %th{scope:"col"} Institution Codes
       %tbody
-        - @output.each do |k,v|
-          - agent = Agent.find(k) rescue nil
+        - @output.each do |a|
+          - agent = Agent.find(a[:agent_id]) rescue nil
           - if !agent.nil?
             %tr
               %td
@@ -79,4 +82,7 @@
                   #{agent.fullname}
               %td #{agent.family}
               %td #{agent.given}
-              %td #{v}
+              %td #{a[:count]}
+              %td #{a[:event_range]}
+              %td #{a[:families]}
+              %td #{a[:institution_codes]}

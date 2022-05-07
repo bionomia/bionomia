@@ -31,13 +31,25 @@ module Sinatra
                                      .limit(20)
                                      .pluck(:occurrence_id)
             lines = params[:gbifids].split("\r\n")[0..50_000]
-            agent_ids = []
+            agent_data = {}
             lines.in_groups_of(100, false).each do |group|
-              ids = OccurrenceRecorder.where(occurrence_id: group)
-                                .pluck(:agent_id)
-              agent_ids.push(*ids)
+              cols = OccurrenceRecorder
+                            .joins(:occurrence)
+                            .where(occurrence_id: group)
+                            .pluck(:agent_id, :year, :family, :institutionCode)
+              cols.each do |col|
+                agent_data[col[0]] = [] if !agent_data.key?(col[0])
+                agent_data[col[0]] << [col[1], col[2], col[3]]
+              end
             end
-            @output = agent_ids.tally.sort_by{|_, count| -count }
+            @output = agent_data.map{|k,v|
+              {
+                agent_id: k,
+                count: v.count,
+                event_range: v.map{|a| a[0]}.compact.uniq.minmax.join("–"),
+                families: v.map{|a| a[1]}.compact.uniq.sort.join(" | "),
+                institution_codes: v.map{|a| a[2]}.compact.uniq.sort.join(" | ") }
+            }.sort_by{|a| -a[:count]}
             haml :'agents/gbifid', locals: { active_page: "agents" }
           end
 
