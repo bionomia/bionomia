@@ -110,6 +110,13 @@ if options[:cache]
       .find_each do |u|
     u.flush_caches
   end
+  User.joins(:claims)
+      .where.not(id: User::BOT_IDS)
+      .where("user_occurrences.created >= '#{yesterday}'")
+      .distinct
+      .find_each do |u|
+    u.flush_caches
+  end
   BIONOMIA.cache_clear("fragments/")
   rebuild_stats
 end
