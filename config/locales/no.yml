@@ -30,7 +30,7 @@
     taxon_silhouettes: Taxon Family Silhouettes
     translations: Translations
   admin:
-    change_photo: Change profile photo
+    change_photo: Bytt profilbilde
   agent:
     agent_title: Agent Strings
     search_title: Agent String Search
@@ -43,7 +43,7 @@
       unit:
         one: "search result for"
         other: "search results for"
-    warning: "WARNING:"
+    warning: "ADVARSEL:"
     warning_statement: Unlike all other URLs in this site, URLs for agent strings are unreliable for linking because they will point to different results every few weeks
     agent_name_title: "%{agent_name} Specimens"
     agent_lede: A raw string from parsed collector and determiner names in natural history specimen data
@@ -53,7 +53,7 @@
         other: "specimens found. Not all columns are shown."
     search_html: "Search for %{agent_link} the person and help attribute their specimens."
     example_agents: Random Samples or Results
-    gbifid: From gbifIDs
+    gbifid: Fra gbifIDs
     gbifid_title: Agent Strings from gbifIDs
     gbifid_instructions: Paste a list of occurrence-based gbifIDs and receive a summary list of parsed agent strings from recordedBy.
   article:
@@ -72,8 +72,8 @@
     people: People
     agent_strings: Agent Strings
     agent_title: Article Agents
-    alphabetical: Alphabetical
-    counts: Counts
+    alphabetical: Alfabetisk
+    counts: Antall
     unclaimed: Unclaimed
     no_agent_strings_alert: Raw strings from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article have not been found
     agent_strings_alert:
@@ -81,7 +81,7 @@
         one: "raw string from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article"
         other: "raw strings from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article"
     claims: claims
-    specimens: specimens
+    specimens: objekter
     no_search_alert: "No articles found for"
     search_alert:
       unit:
@@ -101,13 +101,13 @@
       one: person helped
       other: people helped
   charts:
-    year: Year
-    number_specimens: "# specimens"
+    year: år
+    number_specimens: "# objekter"
     identified: Identified
     collected: Collected
     people: People
   country:
-    country_title: Countries
+    country_title: Land
     lede: From countries stated in ORCID accounts and Wikidata entries or specimen records in GBIF
     intro: From countries stated in ORCID accounts and Wikidata entries. Search by Taxon Family to explore expertise.
     collected_from: "Collected %{family} from %{country}"
@@ -133,7 +133,7 @@
     agent_strings: Agent Strings
     agent_strings_unclaimed: Unclaimed Agent Strings
     alphabetical: Alphabetical
-    counts: Counts
+    counts: Antall
     unclaimed: Unclaimed
     no_agents_alert: Raw strings from parsed collector and determiner names in specimen data included in this dataset have not yet been recorded
     agents_alert:
@@ -159,7 +159,7 @@
       unit:
         one: "person claimed or was attributed specimens represented in this dataset"
         other: "people claimed or were attributed specimens represented in this dataset"
-    timeline: Timeline
+    timeline: Tidslinje
     none_collected_timeline: "No one has collected and indicated a collection date"
     none_identified_timeline: "No one has identified and indicated a determination date"
   date:
@@ -170,43 +170,43 @@
       year: "%Y"
     month_names:
       - null
-      - January
-      - February
-      - March
-      - April
-      - May
-      - June
-      - July
-      - August
-      - September
-      - October
-      - November
-      - December
+      - januar
+      - februar
+      - mars
+      - april
+      - mai
+      - juni
+      - juli
+      - august
+      - september
+      - oktober
+      - november
+      - desember
     abbr_month_names:
       - null
-      - Jan
-      - Feb
-      - Mar
-      - Apr
-      - May
-      - Jun
-      - Jul
-      - Aug
-      - Sep
-      - Oct
-      - Nov
-      - Dec
+      - jan
+      - feb
+      - mar
+      - apr
+      - mai
+      - jun
+      - jul
+      - aug
+      - sep
+      - okt
+      - nov
+      - des
   developer:
-    search: Search
+    search: Søk
     autocomplete_widget: Autocomplete Widget
     json_ld_search: JSON-LD Search for People
     json_ld_occurrence_search: JSON-LD Search for Occurrences
     structured_data: Structured Data
     raw_data: Raw Data
-    code: Code
+    code: Kode
     reconcile_title: Reconcile
     recommended_use: Recommended Use
-    title: For Developers
+    title: For utviklere
     code_title: "For Developers: Code"
     parser: Parse Names
     parse_names: Parse Human Names
@@ -226,7 +226,7 @@
     help_attribute: Help Attribute
     refresh_profile: Refresh
     refresh_stats: Refresh stats
-    settings: Settings
+    settings: Innstillinger
     bulk_assignment: Bulk Assignment
     collected_all: Collected All
     collected: Collected
@@ -275,8 +275,8 @@
     not_ignored_alert: Bionomia scribes have not flagged specimens to be ignored.
     agent_string: Agent String
     taxon_string: Taxon Family
-    kingdom_string: Kingdom
-    dataset: Dataset
+    kingdom_string: Rike
+    dataset: Datasett
     country: Country
     datasets: Datasets
     agents: Agents
@@ -288,7 +288,7 @@
     specialties: Specialties
     public_profile: Public Profile
     make_public: Make Public
-    not_yet: Not yet
+    not_yet: Ikke ennå
     viz_none_alert: Bionomia scribes have not yet helped attribute specimens.
     viz_alert: Click regions on the map or bars in the chart to execute a filter.
     problems: Problems Discovered
@@ -297,7 +297,7 @@
     identifications_before_birth: "Identifications made before birth:"
     identifications_after_death: "Identifications made after death:"
     view: view
-    none: none
+    none: ingen
     identified_from: Identified From
     collected_from: Collected From
     no_filter_alert: Bionomia scribes have not yet helped attribute specimens under this filter.
@@ -307,7 +307,7 @@
         one: "record was handled. Existing claims, if present in your upload, were skipped."
         other: "records were handled. Existing claims, if present in your upload, were skipped."
     help_question: "Want to help attribute specimens to %{name}?"
-    try_again: Try again.
+    try_again: Prøv igjen.
     no_specialities_alert: Bionomia scribes have not yet helped attribute specimens.
     specialties_alert: "Collected or identified specimens in the following Families:"
     co-collectors: Co-collectors
@@ -379,27 +379,27 @@
     get_started: Get started
     your_profile: Your profile
     sample_profiles: Sample Profiles
-    orcid_login: Log in with ORCID
+    orcid_login: Logg inn med ORCID
     orcid_logo: ORCID logo
   layout:
     profiles: Profiles
     scribes: Scribes
     organizations: Organizations
-    datasets: Datasets
+    datasets: Datasett
     articles: Articles
-    countries: Countries
-    taxa: Families
+    countries: Land
+    taxa: Familier
     agent_strings: Agent Strings
     help_others: Help Others
     help_received: Help Received
     people_helped: People Helped
     toggle_dropdown: Toggle Dropdown
-    overview: Overview
-    specimens: Specimens
+    overview: Oversikt
+    specimens: Objekter
     discovered: Discovered
     science_enabled: Science enabled
-    settings: Settings
-    administration: Administration
+    settings: Innstillinger
+    administration: Administrasjon
     logout: Logout
     resources: Resources
     integrations: Integrations
@@ -409,7 +409,7 @@
     privacy: Privacy Policy
     terms_service: Terms of Service
     on_this_day: On This Day
-    about: About
+    about: Om
     rationale: Rationale
     how_works: How it Works
     history: History
@@ -431,9 +431,9 @@
     lede: From partial data obtained from GBIF
     record: Record
     event: Event
-    identification: Identification
-    location: Location
-    has_image: Has Image
+    identification: Identifikasjon
+    location: Sted
+    has_image: Har bilde
   offline:
     message: Bionomia is currently offline, refreshing data from the Global Biodiversity Information Facility.
     warning: "Bionomia will be offline %{datetime_off} for approximately %{duration} to refresh specimen data from the Global Biodiversity Information Facility."
@@ -452,10 +452,10 @@
   oops:
     not_found_title: Not found
     not_found: We looked everywhere but could not find that page.
-    error_title: Error
+    error_title: Feil
     error: Sorry, we experienced an error.
   organization:
-    organization_title: Organizations
+    organization_title: Organisasjoner
     lede:
       unit:
         one: "organization from ORCID accounts and Wikidata entries"
@@ -482,9 +482,9 @@
         one: "search result for"
         other: "search results for"
     current: Current
-    previous: Previous
+    previous: Forrige
     metrics: Metrics
-    member: member
+    member: medlem
     current_members_count:
       unit:
         one: current member
@@ -497,14 +497,14 @@
     thanks_title: Thanks Received
     candidates_title: Unclaimed Specimens
     ignored_title: Ignored
-    specimens_title: Specimens
+    specimens_title: Objekter
     support_title: Help Received
     upload_title: Upload
     helped_title: People Helped
     citation_title: Citation
     citations_title: Citations
     overview: Overview
-    specimens: Specimens
+    specimens: Objekter
     people_helped: People Helped
     science_enabled: Science Enabled
     claimed: Claimed
@@ -522,7 +522,7 @@
     no_thanks_received_alert: You have not yet received thanks for attributing specimen records to other collectors. Have you tried helping others?
     change_photo: Change profile photo
     remove: Remove
-    cancel: Cancel
+    cancel: Avbryt
     update: Update
     settings: Settings & Integrations
     youtube: Use a YouTube ID for a video to appear in your profile.
@@ -537,7 +537,7 @@
     resume: For Your Resume
     specimens_used: specimens used
     public_availability: Public Availability
-    public_profile: Public Profile
+    public_profile: Offentlig profil
     make_citable: Make Your Data Citable
     email_notifications: Email Notifications
     delete_account: Delete Your Account
@@ -556,8 +556,8 @@
     orcid_updates: Pull new updates to your publicly available name, aliases, keywords, country, education, and employment from your ORCID account.
     refresh: Refresh
     orcid_refreshed: ORCID data was refreshed.
-    public: Public
-    private: Private
+    public: Offentlig
+    private: Privat
     active: "On"
     inactive: "Off"
     make_public_message: Include your account in public Profiles. Your claims will be included in a bulk data download, exposed through Google Chrome and Firefox extensions and a Tweet will be sent from @BionomiaTrack.
@@ -578,7 +578,7 @@
       other: "specimens attributed"
     private_message_html: "Your profile is private. Claim your %{specimens} and then make it public in %{settings} to maximize reuse."
     no_claims_html: "Claim your discovered specimens under the %{specimens} tab to build your profile and start tracking your citations. Acknowledge your peers, mentors, or anyone who inspires you by attributing specimens under %{help_others}."
-    try_again: Try again.
+    try_again: Prøv igjen.
     upload_count:
       one: "A total of 1 uploaded record was handled."
       other: "A total of %{count} records were handled."
@@ -615,7 +615,7 @@
     language_explanation: Choose your preferred language
     specimens_used_num: specimens used
     updated: Your profile was updated.
-    thanks: Thanks
+    thanks: Takk
     attributed: attributed
   roster:
     roster_title: Public Profiles
@@ -631,16 +631,16 @@
     identified_by: Identified By
     date_collected: Date Collected
     date_identified: Date Identified
-    institution: Institution
-    catalog_number: Catalog Number
+    institution: Institusjon
+    catalog_number: Katalog nummer
     basis_record: Basis Of Record
-    country: Country
-    family: Family
+    country: Land
+    family: Familie
     type_status: Type Status
     scribe: Scribe
-    not_me: Not me
-    not_them: Not them
-    not_recorded: not recorded
+    not_me: Ikke meg
+    not_them: Ikke dem
+    not_recorded: ikke registrert
     remove: Remove
   scribes:
     scribes_title: Scribes
@@ -651,21 +651,21 @@
     attributions: Cumulative Attributions
     rejected: Cumulative Rejected Candidates
     profiles: Cumulative Profiles Imported
-    month: Month
+    month: Måned
   taxa:
     lede:
       unit:
         one: "taxonomic Family from specimen data in GBIF"
         other: "taxonomic Families from specimen data in GBIF"
-    search_title: Taxonomic Families
-    none_found: "No taxonomic Family found for %{searched}"
+    search_title: Taksonomiske familier
+    none_found: "Ingen taksonomisk familie funnet for %{searched}"
     search_found:
       unit:
         one: "search result for"
         other: "search results for"
     people: People
     visualizations: Visualizations
-    timeline: Timeline
+    timeline: Tidslinje
     agent_strings: Agent Strings
     collected: Collected
     identified: Identified
@@ -703,9 +703,9 @@
     caches_rebuilt: Caches were rebuilt.
     overview: Overview
     specialties: Specialties
-    network: Network
+    network: Nettverk
     deposited_at: Deposited At
-    specimens: Specimens
+    specimens: Objekter
     science_enabled: Science Enabled
     science_enabled_specimens: Science Enabled by Specimen Data
     helped_by: Helped By
@@ -737,8 +737,8 @@
     comment_alert: Share an anecdote about a collecting trip, event or anything else.
     no_institutions_alert: Institutions have not yet been recorded.
     institutions_alert: "Specimens deposited and curated at the following institution(s):"
-    organizations: organizations
-    specimens_metric: specimens
+    organizations: organisasjoner
+    specimens_metric: objekter
     specimens_identified: Specimens Identified
     specimens_collected: Specimens Collected
     no_specialities_alert: Specialties have not yet been recorded.
@@ -775,16 +775,16 @@
         other: "specimens identified from at least"
     stats_identified_countries:
       unit:
-        one: "country"
-        other: "countries"
+        one: "land"
+        other: "land"
     stats_collected_specimens:
       unit:
         one: "specimen collected from at least"
         other: "specimens collected from at least"
     stats_collected_countries:
       unit:
-        one: "country"
-        other: "countries"
+        one: "land"
+        other: "land"
     stats_attributions_specimens:
       unit:
         one: "specimen attributed to"
