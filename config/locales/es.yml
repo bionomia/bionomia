@@ -53,7 +53,7 @@ es:
         other: "especímenes encontrados. No se muestran todas las columnas."
     search_html: "Búsqueda de %{agent_link} la persona y ayude a atribuir sus especímenes."
     example_agents: Random Samples or Results
-    gbifid: From gbifIDs
+    gbifid: De gbifIDs
     gbifid_title: Agent Strings from gbifIDs
     gbifid_instructions: Paste a list of occurrence-based gbifIDs and receive a summary list of parsed agent strings from recordedBy.
   article:
@@ -277,7 +277,7 @@ es:
     taxon_string: Familia taxonómica
     kingdom_string: Reino
     dataset: Conjunto de datos
-    country: Country
+    country: País
     datasets: Conjuntos de datos
     agents: Agentes
     taxa: Familias taxonómicas
