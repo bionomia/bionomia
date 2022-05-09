@@ -53,7 +53,7 @@ fr:
         other: "spécimens trouvés. Toutes les colonnes ne sont pas affichées."
     search_html: "Recherchez %{agent_link} la personne et aidez à attribuer ces spécimens."
     example_agents: Random Samples or Results
-    gbifid: From gbifIDs
+    gbifid: À partir des gbifID
     gbifid_title: Agent Strings from gbifIDs
     gbifid_instructions: Collez une liste de gbifID basés sur les occurrences et recevez une liste des chaînes d'agent analysées à partir de recordedBy.
   article:
@@ -277,7 +277,7 @@ fr:
     taxon_string: Famille taxonomique
     kingdom_string: Règne
     dataset: Base de données
-    country: Country
+    country: Pays
     datasets: Jeux de données
     agents: Agents
     taxa: Familles taxonomiques
