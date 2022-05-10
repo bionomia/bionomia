@@ -29,20 +29,21 @@
   - @results.each do |d|
     - article = Article.find(d[:_id].to_i) rescue nil
     - if !article.nil?
-      .card.card-profile.mb-3
-        .card-header
-          %p.citation.card-title
-            = link_to h(article.citation), url("/article/#{article.doi}")
-        .card-body
-          .altmetric-embed.pull-left.mr-2.float-left{"data-badge-popover":"right", "data-badge-type":"donut", "data-doi":"#{article.doi}", "data-hide-no-mentions":"true"}
-          %p.card-text.text-muted #{h(article.abstract)}
-        .card-footer.d-flex
-          .col.small.text-left.text-muted
-            %span.badge.badge-light.badge-pill.citation-correction #{number_with_delimiter(article.claimed_specimen_count)}
-            = I18n.t('article.claims')
-          .col.small.text-right.text-muted
-            %span.badge.badge-light.badge-pill.citation-correction #{number_with_delimiter(article.article_occurrences.count)}
-            = I18n.t('article.specimens')
+      %p.citation.mt-2.mb-1
+        - if !article.citation
+          [NO TITLE AVAILABLE]
+        - else
+          #{h(article.citation)}
+        = link_to "https://doi.org/#{article.doi}", "https://doi.org/#{article.doi}"
+        .small.text-muted.pl-4.ml-2
+          %span.mr-2
+            %a{href: "/article/#{article.doi}"}
+              %i{class:"fas fa-users"}
+              = I18n.t('article.people')
+          %span.badge.badge-light.badge-pill.citation-correction #{number_with_delimiter(article.claimed_specimen_count)}
+          %span.text-muted= I18n.t('article.claims')
+          %span.badge.badge-light.badge-pill.citation-correction #{number_with_delimiter(article.article_occurrences.count)}
+          %span.text-muted= I18n.t('article.specimens')
 
   - if @pagy.pages > 1
     .y-scroll

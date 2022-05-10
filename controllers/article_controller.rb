@@ -9,13 +9,16 @@ module Sinatra
 
           app.get '/articles' do
             articles = Article.where(processed: true).order(created: :desc)
-            @pagy, @results = pagy(articles, items: 10)
+            @pagy, @results = pagy(articles, items: 25)
             haml :'articles/articles', locals: { active_page: "articles" }
           end
 
           app.namespace '/article' do
 
             get '/search' do
+              if params.has_key?("q") && params[:q].blank?
+                redirect "/articles"
+              end
               search_article
               haml :'articles/search', locals: { active_page: "articles" }
             end
