@@ -11,7 +11,7 @@
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.profiles')
       %li.nav-item.mr-2
-        %a{href: url("/scribes"), class: "nav-link#{locals[:active_page] == "scribes" ? " active" : nil}", "arial-label": "#{I18n.t('layout.scribes')}"}
+        %a{href: url("/scribes"), class: "nav-link#{locals[:active_page] == "scribes" ? " active" : nil}", "aria-label": "#{I18n.t('layout.scribes')}"}
           %i.fas.fa-feather-alt
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.scribes')

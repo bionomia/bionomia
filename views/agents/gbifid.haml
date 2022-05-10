@@ -70,8 +70,8 @@
           %th.text-nowrap{scope:"col"} Possible Given Name or Initials
           %th.text-nowrap{scope:"col"} Count in recordedBy
           %th.text-nowrap{scope:"col"} Year Range
-          %th{scope:"col"} Families
-          %th{scope:"col"} Institution Codes
+          %th.text-nowrap{scope:"col"} Families
+          %th.text-nowrap{scope:"col"} Institution Codes
       %tbody
         - @output.each do |a|
           - agent = Agent.find(a[:agent_id]) rescue nil
