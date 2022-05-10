@@ -2,7 +2,8 @@
   .card-header
     %p.citation.card-title
       - if @article.citation.nil?
-        [NO TITLE AVAILABLE]
+        %span.text-muted
+          [NO TITLE AVAILABLE]
       - else
         #{h(@article.citation)}
       = link_to "https://doi.org/#{@article.doi}", "https://doi.org/#{@article.doi}"

@@ -27,7 +27,8 @@
         %h4= I18n.t('user.specimen_used')
         %p.citation
           - if @article.citation.nil?
-            [NO TITLE AVAILABLE]
+            %span.text-muted
+              [NO TITLE AVAILABLE]
           - else
             #{@article.citation}
           %a{href: "https://doi.org/#{@article.doi}"} https://doi.org/#{@article.doi}

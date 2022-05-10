@@ -24,7 +24,8 @@
   %h4= I18n.t('profile.specimens_used')
   %p.citation
     - if @article.citation.nil?
-      [NO TITLE AVAILABLE]
+      %span.text-muted
+        [NO TITLE AVAILABLE]
     - else
       #{@article.citation}
     = link_to "https://doi.org/#{@article.doi}", "https://doi.org/#{@article.doi}"

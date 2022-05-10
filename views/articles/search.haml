@@ -31,7 +31,8 @@
     - if !article.nil?
       %p.citation.mt-2.mb-1
         - if !article.citation
-          [NO TITLE AVAILABLE]
+          %span.text-muted
+            [NO TITLE AVAILABLE]
         - else
           #{h(article.citation)}
         = link_to "https://doi.org/#{article.doi}", "https://doi.org/#{article.doi}"
