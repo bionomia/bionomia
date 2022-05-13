@@ -5,47 +5,47 @@
     %span.navbar-toggler-icon
   #navbarSupportedContent.collapse.navbar-collapse
     %ul.navbar-nav.mr-sm-auto
-      %li.nav-item.mr-2
+      %li.nav-item
         %a{href: url("/roster"), class:"nav-link#{locals[:active_page] == "roster" ? " active" : nil}", "aria-label": "#{I18n.t('layout.profiles')}" }
           %i.fas.fa-users
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.profiles')
-      %li.nav-item.mr-2
+      %li.nav-item
         %a{href: url("/scribes"), class: "nav-link#{locals[:active_page] == "scribes" ? " active" : nil}", "aria-label": "#{I18n.t('layout.scribes')}"}
           %i.fas.fa-feather-alt
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.scribes')
-      %li.nav-item.mr-2
+      %li.nav-item
         %a{href: url("/organizations"), class:"nav-link#{locals[:active_page] == "organizations" ? " active" : nil}", "aria-label": "#{I18n.t('layout.organizations')}" }
           %i.fas.fa-building
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.organizations')
-      %li.nav-item.mr-2
+      %li.nav-item
         %a{href: url("/datasets"), class:"nav-link#{locals[:active_page] == "datasets" ? " active" : nil}", "aria-label": "#{I18n.t('layout.datasets')}" }
           %i.fas.fa-database
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.datasets')
-      %li.nav-item.mr-2
+      %li.nav-item
         %a{href: url("/articles"), class:"nav-link#{locals[:active_page] == "articles" ? " active" : nil}", "aria-label": "#{I18n.t('layout.articles')}" }
           %i.fas.fa-file-alt
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.articles')
-      %li.nav-item.mr-2
+      %li.nav-item
         %a{href: url("/countries"), class:"nav-link#{locals[:active_page] == "countries" ? " active" : nil}", "aria-label": "#{I18n.t('layout.countries')}" }
           %i.fas.fa-globe
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.countries')
-      %li.nav-item.mr-2
+      %li.nav-item
         %a{href: url("/taxa"), class: "nav-link#{locals[:active_page] == "taxa" ? " active" : nil}", "aria-label": "#{I18n.t('layout.taxa')}" }
           %i.fab.fa-pagelines
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.taxa')
-      %li.nav-item.mr-2
+      %li.nav-item
         %a{href: url("/agents"), class: "nav-link#{locals[:active_page] == "agents" ? " active" : nil}", "aria-label": "#{I18n.t('layout.agent_strings')}" }
           %i.fas.fa-signature
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.agent_strings')
-    %ul.navbar-nav.mr-2
+    %ul.navbar-nav
       - if authorized?
         %li.nav-item
           %a{href: url("/help-others"), class: "nav-link#{locals[:active_page] == "help" ? " active" : nil}", "aria-label": "#{I18n.t('layout.help_others')}"}
@@ -53,7 +53,7 @@
             %span.d-inline-block.d-sm-none.d-md-inline-block
               = I18n.t('layout.help_others')
 
-      %li.nav-item.mr-2
+      %li.nav-item
         .btn-group
           %button.btn.dropdown-toggle.text-white-50{type:"button", "data-toggle": "dropdown", "aria-haspopup": "true", "aria-expanded": "false"}
             %i.fas.fa-language
