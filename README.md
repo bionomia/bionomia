@@ -131,7 +131,6 @@ To migrate tables, use mydumper and myloader. But for even faster data migration
      $ mydumper --user root --password <PASSWORD> --database bionomia --tables-list agents,occurrences,occurrence_recorders,occurrence_determiners,occurrence_counts,taxa,taxon_occurrences --compress --threads 8 --rows 1000000  --outputdir /Users/dshorthouse/Documents/bionomia_dump
 
      $ apt-get install mydumper
-     # Restore tables use nohup into a new database `bionomia_restore`. See https://blogs.oracle.com/jsmyth/apparmor-and-mysql if symlinks might be used in the MySQL data directory to another partition.
      $ nohup myloader --database bionomia_restore --user bionomia --password <PASSWORD> --threads 2 --queries-per-transaction 100 --compress-protocol --overwrite-tables --verbose 0 --directory /home/dshorthouse/bionomia_restore &
 
 One way to make this even faster is to copy database files from one database to another rather than dropping/truncating and importing, but this has to be done with a bit of care.
