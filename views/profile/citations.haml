@@ -37,9 +37,10 @@
           %p.card-text.text-muted #{h(article.abstract)}
         .card-footer.d-flex
           .small
-            %span.badge.badge-light.badge-pill.citation-correction
-              #{number_with_delimiter(article.user_specimen_count(@user[:id]))}
-            = link_to I18n.t('profile.specimens_used_num'), url("/profile/citation/#{article.doi}")
+            %span.badge.badge-light.badge-pill.citation-correction #{number_with_delimiter(article.user_specimen_count(@user[:id]))}
+            %a{href: url("/profile/citation/#{article.doi}")}
+              = I18n.t('user.specimens_metric')
+
 
   - if @pagy.pages > 1
     .y-scroll
