@@ -1,4 +1,11 @@
 - content_for :title, "Help Documents"
+- content_for :scripts do
+  %script{src:"/js/application.js"}
+  :javascript
+    $(function() {
+      Application.init();
+    });
+
 - content_for :jumbotron do
   .jumbotron.jumbotron-fluid.d-flex.flex-wrap
     .mr-auto.p-2
@@ -87,6 +94,9 @@
           to make your Bionomia profile publicly available.
           %img.mt-3.mb-3{src:"/images/settings-integrations.png", alt:"Settings & Integrations"}
           %img.mt-3.mb-3{src:"/images/make-public.png", alt:"Make profile public"}
+      .card-footer.text-right
+        %a.expand-collapse{href: "#"}
+          %i.fas.fa-angle-double-down.mt-3
 
   .col-12.col-md-6.mb-3
     .card
@@ -141,6 +151,9 @@
           %em Not them
           button for the one's he didn't collect or identify.
           %img.d-block.mt-3.mb-3{src:"/images/fishbase-not-them.png", alt:"parvispina 1937"}
+      .card-footer.text-right
+        %a.expand-collapse{href: "#"}
+          %i.fas.fa-angle-double-down.mt-3
 
 .row.mt-4
   .col-12.col-md-6.mb-3
@@ -221,6 +234,9 @@
           %em Make Public
           %img.d-block.mt-3.mb-3{src:"/images/make-public-button.png"}
           \...once you've attributed a few specimens. You don't HAVE to get to 100%, anything is better than nothing.
+      .card-footer.text-right
+        %a.expand-collapse{href: "#"}
+          %i.fas.fa-angle-double-down.mt-3
 
   .col-12.col-md-6.mb-3
     .card
@@ -308,3 +324,6 @@
           And the 56 records that I've done will be added.
           The biggest batch you can do is 10,000.
           So there you go and happy bulk uploading of data!
+      .card-footer.text-right
+        %a.expand-collapse{href: "#"}
+          %i.fas.fa-angle-double-down.mt-3

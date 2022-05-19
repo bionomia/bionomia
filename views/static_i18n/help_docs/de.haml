@@ -1,4 +1,11 @@
 - content_for :title, "Hilfedokumentation"
+- content_for :scripts do
+  %script{src:"/js/application.js"}
+  :javascript
+    $(function() {
+      Application.init();
+    });
+
 - content_for :jumbotron do
   .jumbotron.jumbotron-fluid.d-flex.flex-wrap
     .mr-auto.p-2
@@ -91,6 +98,9 @@
           um Ihr Bionomia-Profil öffentlich zugänglich zu machen.
           %img.mt-3.mb-3{src:"/images/settings-integrations.png", alt:"Einstellungen & Integrationen"}
           %img.mt-3.mb-3{src:"/images/make-public.png", alt:"Profil öffentlich machen"}
+      .card-footer.text-right
+        %a.expand-collapse{href: "#"}
+          %i.fas.fa-angle-double-down.mt-3
 
   .col-12.col-md-6.mb-3
     .card
@@ -144,6 +154,9 @@
           %em „Nicht er/sie“
           bei denjenigen Exemplaren, die er weder gesammelt noch identifiziert hat.
           %img.d-block.mt-3.mb-3{src:"/images/fishbase-not-them.png", alt:"parvispina 1937"}
+      .card-footer.text-right
+        %a.expand-collapse{href: "#"}
+          %i.fas.fa-angle-double-down.mt-3
 
 .row.mt-4
   .col-12.col-md-6.mb-3
@@ -225,6 +238,9 @@
           zu klicken, sobald Sie einige Exemplare zugeordnet haben.
           %img.d-block.mt-3.mb-3{src:"/images/make-public-button.png"}
           Sie brauchen nicht 100 % zu erreichen, denn auch weniger ist immer noch besser als nichts.
+      .card-footer.text-right
+        %a.expand-collapse{href: "#"}
+          %i.fas.fa-angle-double-down.mt-3
 
   .col-12.col-md-6.mb-3
     .card
@@ -311,3 +327,6 @@
           Und die 56 Datensätze, die ich gemacht habe, werden hinzugefügt.
           Die maximale Anzahl an Datensätzen beträgt übrigens 10.000.
           Das war’s also auch schon. Viel Spaß beim Hochladen von Massendaten!
+      .card-footer.text-right
+        %a.expand-collapse{href: "#"}
+          %i.fas.fa-angle-double-down.mt-3

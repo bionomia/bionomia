@@ -861,3 +861,22 @@ dl.col{
 #form-org-wrapper .twitter-typeahead, #form-user-wrapper .twitter-typeahead, #form-helper-wrapper .twitter-typeahead, #form-taxon-wrapper .twitter-typeahead {
   width:100%;
 }
+
+@media print {
+  body {
+     min-width: 992px !important;
+   }
+   .container {
+     min-width: 992px !important;
+   }
+   .col-md-6 {
+     min-width: 992px !important;
+   }
+   .overflow-auto {
+     min-height: 100% !important;
+     max-height: 100% !important;
+   }
+   footer {
+     display:none;
+   }
+}

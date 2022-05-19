@@ -250,6 +250,19 @@ var Application = (function($, window) {
           kingdom = "",
           country_code = "";
 
+      $("a.expand-collapse").on("click", function(e) {
+        var child = $(this).children().first();
+        e.stopPropagation();
+        e.preventDefault();
+        if(child.hasClass("fa-angle-double-down")) {
+          child.removeClass("fa-angle-double-down").addClass("fa-angle-double-up");
+          $(this).parent().prev().css({"max-height":"100%"});
+        } else {
+          child.removeClass("fa-angle-double-up").addClass("fa-angle-double-down");
+          $(this).parent().prev().css({"max-height":"300px"});
+        }
+      });
+
       $("#kingdom, #country").on("change", function() {
         if (typeof Filters !== "undefined") {
           agent_id = Filters.agent_id;

@@ -1,4 +1,11 @@
 - content_for :title, "Documentos de ayuda"
+- content_for :scripts do
+  %script{src:"/js/application.js"}
+  :javascript
+    $(function() {
+      Application.init();
+    });
+
 - content_for :jumbotron do
   .jumbotron.jumbotron-fluid.d-flex.flex-wrap
     .mr-auto.p-2
@@ -87,6 +94,9 @@
           para hacer su perfil de Bionomía disponible públicamente.
           %img.mt-3.mb-3{src:"/images/settings-integrations.png", alt:"Settings & Integrations"}
           %img.mt-3.mb-3{src:"/images/make-public.png", alt:"Make profile public"}
+      .card-footer.text-right
+        %a.expand-collapse{href: "#"}
+          %i.fas.fa-angle-double-down.mt-3
 
   .col-12.col-md-6.mb-3
     .card
@@ -141,6 +151,9 @@
           %em No es ella/él
           para aquellos que él no recolectó ni identificó.
           %img.d-block.mt-3.mb-3{src:"/images/fishbase-not-them.png", alt:"parvispina 1937"}
+      .card-footer.text-right
+        %a.expand-collapse{href: "#"}
+          %i.fas.fa-angle-double-down.mt-3
 
 .row.mt-4
   .col-12.col-md-6.mb-3
@@ -223,6 +236,9 @@
           una vez que haya atribuido algunos especímenes.
           %img.d-block.mt-3.mb-3{src:"/images/make-public-button.png"}
           Usted no TIENE QUE competar el 100%, cualquier cosa es mejor que nada.
+      .card-footer.text-right
+        %a.expand-collapse{href: "#"}
+          %i.fas.fa-angle-double-down.mt-3
 
   .col-12.col-md-6.mb-3
     .card
@@ -310,3 +326,6 @@
           Así se agregarán los 56 registros que modifiqué.
           El lote más grande que se puede hacer es 10,000.
           Así que ya está. ¡Feliz carga de datos en masa!
+      .card-footer.text-right
+        %a.expand-collapse{href: "#"}
+          %i.fas.fa-angle-double-down.mt-3
