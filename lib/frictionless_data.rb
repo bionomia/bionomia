@@ -315,7 +315,6 @@ module Bionomia
         end
         File.delete(fn)
       end
-      GC.compact
 
       # Add resources again to capture file sizes
       add_resources
