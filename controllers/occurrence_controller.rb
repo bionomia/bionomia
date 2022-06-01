@@ -34,7 +34,10 @@ module Sinatra
                   recorded: jsonld_occurrence_actions(occurrence, "recordings"),
                   identified: jsonld_occurrence_actions(occurrence, "identifications"),
                   associatedReferences: jsonld_occurrence_references(occurrence)
-                }.merge(occ)
+                }.merge(occ).merge({
+                  datasetKey: "http://rs.gbif.org/terms/1.0/datasetKey",
+                  license: "http://purl.org/dc/terms/license"
+                 })
               }
             end
 
@@ -75,6 +78,7 @@ module Sinatra
                           .reject{|column| Occurrence::IGNORED_COLUMNS_OUTPUT.include?(column)}
                           .map{|k,v| response[k] = v }
 
+                response["license"] = occurrence.license_uri
                 response["recorded"] = jsonld_occurrence_actions(occurrence, "recordings")
                 response["identified"] = jsonld_occurrence_actions(occurrence, "identifications")
                 response["associatedReferences"] = jsonld_occurrence_references(occurrence)

@@ -28,7 +28,10 @@ module Sinatra
             recorded: "http://rs.tdwg.org/dwc/iri/recordedBy",
             associatedReferences: "http://rs.tdwg.org/dwc/terms/associatedReferences",
             PreservedSpecimen: "http://rs.tdwg.org/dwc/terms/PreservedSpecimen"
-          }.merge(dwc_contexts)
+          }.merge(dwc_contexts).merge({
+            datasetKey: "http://rs.gbif.org/terms/1.0/datasetKey",
+            license: "http://purl.org/dc/terms/license"
+           })
           response
         end
 

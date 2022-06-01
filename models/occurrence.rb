@@ -36,10 +36,6 @@ class Occurrence < ActiveRecord::Base
     "hasImage"
   ]
 
-  def self.enqueue(o)
-    Sidekiq::Client.enqueue(Bionomia::OccurrenceWorker, o)
-  end
-
   def self.accepted_fields
     Occurrence.column_names - Occurrence::IGNORED_COLUMNS_OUTPUT
   end
@@ -50,6 +46,16 @@ class Occurrence < ActiveRecord::Base
 
   def uri
     "https://gbif.org/occurrence/#{id}"
+  end
+
+  def license_uri
+    if license == "CC_BY_4_0"
+      "https://creativecommons.org/licenses/by/4.0/legalcode"
+    elsif license == "CC_BY_NC_4_0"
+      "https://creativecommons.org/licenses/by-nc/4.0/legalcode"
+    elsif license == "CC0_1_0"
+      "https://creativecommons.org/publicdomain/zero/1.0/legalcode"
+    end
   end
 
   def coordinates

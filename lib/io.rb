@@ -137,7 +137,10 @@ module Bionomia
         PreservedSpecimen: "http://rs.tdwg.org/dwc/terms/PreservedSpecimen",
         as: "https://www.w3.org/ns/activitystreams#"
       }.merge(dwc_contexts)
-       .merge({ datasetKey: "http://rs.gbif.org/terms/1.0/datasetKey" })
+       .merge({
+         datasetKey: "http://rs.gbif.org/terms/1.0/datasetKey",
+         license: "http://purl.org/dc/terms/license"
+        })
     end
 
     def jsonld_stream(scope = "paged")
@@ -243,6 +246,7 @@ module Bionomia
           "@id": "#{Settings.base_url}/occurrence/#{o.occurrence.id}",
           sameAs: "#{o.occurrence.uri}"
         }.merge(o.occurrence.attributes.reject {|column| ignored_cols(false).include?(column)})
+        .merge({ license: o.occurrence.license_uri })
       end
       { metadata: metadata, results: items }
     end
@@ -254,6 +258,7 @@ module Bionomia
                  "@id": "#{Settings.base_url}/occurrence/#{o.occurrence.id}",
                  sameAs: "#{o.occurrence.uri}"
                }.merge(o.occurrence.attributes.reject {|column| ignored_cols(false).include?(column)})
+               .merge({ license: o.occurrence.license_uri })
         end
       end
     end
