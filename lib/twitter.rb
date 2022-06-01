@@ -60,7 +60,7 @@ module Bionomia
       country = !o.interpretedCountry.nil? ? "in #{o.interpretedCountry}" : nil
       family = !o.family.blank? ? "#{o.family.upcase}:" : nil
       statement = "#{collectors} collected the holotype #{family} #{o.scientificName} #{country}"
-      message = "#{statement} o.uri #TypeSpecimenToday"
+      message = "#{statement} #{o.uri} #TypeSpecimenToday"
       if images.empty?
         @client.update(message)
       else
