@@ -30,7 +30,7 @@ module Sinatra
                 item: {
                   "@type": "PreservedSpecimen",
                   "@id": "#{Settings.base_url}/occurrence/#{occurrence.id}",
-                  sameAs: "https://gbif.org/occurrence/#{occurrence.id}",
+                  sameAs: "#{occurrence.uri}",
                   recorded: jsonld_occurrence_actions(occurrence, "recordings"),
                   identified: jsonld_occurrence_actions(occurrence, "identifications"),
                   associatedReferences: jsonld_occurrence_references(occurrence)
@@ -70,7 +70,7 @@ module Sinatra
               begin
                 occurrence = Occurrence.find(params[:id])
                 response["@id"] = "#{Settings.base_url}/occurrence/#{occurrence.id}"
-                response["sameAs"] = "https://gbif.org/occurrence/#{occurrence.id}"
+                response["sameAs"] = "#{occurrence.uri}"
                 occurrence.attributes
                           .reject{|column| Occurrence::IGNORED_COLUMNS_OUTPUT.include?(column)}
                           .map{|k,v| response[k] = v }

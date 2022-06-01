@@ -128,6 +128,10 @@ module Bionomia
                                     .map{|o| ["#{o}", "http://rs.tdwg.org/dwc/terms/#{o}"] if !ignored_cols(false).include?(o)}]
       {
         "@vocab": "http://schema.org/",
+        sameAs: {
+          "@id": "sameAs",
+          "@type": "@id"
+        },
         identified: "http://rs.tdwg.org/dwc/iri/identifiedBy",
         recorded: "http://rs.tdwg.org/dwc/iri/recordedBy",
         PreservedSpecimen: "http://rs.tdwg.org/dwc/terms/PreservedSpecimen",
@@ -237,7 +241,7 @@ module Bionomia
       items = results.map do |o|
         { "@type": "PreservedSpecimen",
           "@id": "#{Settings.base_url}/occurrence/#{o.occurrence.id}",
-          sameAs: "https://gbif.org/occurrence/#{o.occurrence.id}"
+          sameAs: "#{o.occurrence.uri}"
         }.merge(o.occurrence.attributes.reject {|column| ignored_cols(false).include?(column)})
       end
       { metadata: metadata, results: items }
@@ -248,7 +252,7 @@ module Bionomia
         @user.send(type).includes(:claimant).find_each do |o|
           y << { "@type": "PreservedSpecimen",
                  "@id": "#{Settings.base_url}/occurrence/#{o.occurrence.id}",
-                 sameAs: "https://gbif.org/occurrence/#{o.occurrence.id}"
+                 sameAs: "#{o.occurrence.uri}"
                }.merge(o.occurrence.attributes.reject {|column| ignored_cols(false).include?(column)})
         end
       end

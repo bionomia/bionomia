@@ -48,6 +48,10 @@ class Occurrence < ActiveRecord::Base
     hasImage
   end
 
+  def uri
+    "https://gbif.org/occurrence/#{id}"
+  end
+
   def coordinates
     lat = decimalLatitude.to_f
     long = decimalLongitude.to_f

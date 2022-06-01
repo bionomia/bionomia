@@ -52,8 +52,7 @@ if options[:directory]
           elsif item.strip == "identified"
             action = "http://rs.tdwg.org/dwc/iri/identifiedBy"
           end
-          id_url = o.user.orcid ? "https://orcid.org/#{o.user.orcid}" : "http://www.wikidata.org/entity/#{o.user.wikidata}"
-          csv << ["https://gbif.org/occurrence/#{o.occurrence_id}", action, id_url]
+          csv << ["https://gbif.org/occurrence/#{o.occurrence_id}", action, o.user.uri]
         end
         pbar.increment
       end

@@ -20,6 +20,10 @@ module Sinatra
           ]
           response["@context"] = {
             "@vocab": "http://schema.org/",
+            sameAs: {
+              "@id": "sameAs",
+              "@type": "@id"
+            },
             identified: "http://rs.tdwg.org/dwc/iri/identifiedBy",
             recorded: "http://rs.tdwg.org/dwc/iri/recordedBy",
             associatedReferences: "http://rs.tdwg.org/dwc/terms/associatedReferences",

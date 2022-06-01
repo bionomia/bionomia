@@ -29,6 +29,10 @@ module Bionomia
     def jsonld_context
       {
         "@vocab": "http://schema.org/",
+        sameAs: {
+          "@id": "sameAs",
+          "@type": "@id"
+        },
         "co-collector": "http://www.wikidata.org/entity/Q81546212"
       }
     end
