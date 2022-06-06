@@ -97,8 +97,8 @@ module Bionomia
       puts "Adding datasets..."
       Dataset.find_each do |d|
         sitemap.add "/dataset/#{d.datasetKey}"
-        sitemap.add "/dataset/#{id.datasetKey}/visualizations"
-        sitemap.add "/dataset/#{id.datasetKey}/visualizations?action=identified"
+        sitemap.add "/dataset/#{d.datasetKey}/visualizations"
+        sitemap.add "/dataset/#{d.datasetKey}/visualizations?action=identified"
         sitemap.add "/dataset/#{d.datasetKey}/scribes"
         sitemap.add "/dataset/#{d.datasetKey}/agents"
       end
