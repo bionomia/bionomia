@@ -120,34 +120,38 @@ module Sinatra
               wiki_search = ::Bionomia::WikidataSearch.new
               user_data = wiki_search.wiki_user_data(params[:identifier])
 
-              date_died = user_data[:date_died]
-              date_born = user_data[:date_born]
-              date_died_precision = user_data[:date_died_precision]
-              date_born_precision = user_data[:date_born_precision]
-              if  !(
-                    ( !date_died.nil? && !date_died_precision.nil? ) ||
-                    ( !date_born.nil? && !date_born_precision.nil? && Date.today.year - date_born.year >= 120 )
-                  )
+              if user_data.nil?
                 flash.next[:new_user] = { fullname: params[:identifier], slug: nil }
-              # We have a user with that ORCID so switch to wikidata
-              elsif user_data[:orcid] && User.where(orcid: user_data[:orcid]).exists?
-                user = User.find_by_orcid(user_data[:orcid])
-                user.orcid = nil
-                user.wikidata = params[:identifier]
-                user.save
-                user.reload
-                user.update_profile
-                user.flush_caches
-                DestroyedUser.create(identifier: user_data[:orcid], redirect_to: params[:identifier])
-                flash.next[:new_user] = { fullname: user.fullname, slug: user.wikidata }
               else
-                new_user = User.find_or_create_by({ wikidata: params[:identifier] })
-                if !new_user.valid_wikicontent?
+                date_died = user_data[:date_died]
+                date_born = user_data[:date_born]
+                date_died_precision = user_data[:date_died_precision]
+                date_born_precision = user_data[:date_born_precision]
+                if  !(
+                      ( !date_died.nil? && !date_died_precision.nil? ) ||
+                      ( !date_born.nil? && !date_born_precision.nil? && Date.today.year - date_born.year >= 120 )
+                    )
                   flash.next[:new_user] = { fullname: params[:identifier], slug: nil }
-                  new_user.delete_search
-                  new_user.delete
+                # We have a user with that ORCID so switch to wikidata
+                elsif user_data[:orcid] && User.where(orcid: user_data[:orcid]).exists?
+                  user = User.find_by_orcid(user_data[:orcid])
+                  user.orcid = nil
+                  user.wikidata = params[:identifier]
+                  user.save
+                  user.reload
+                  user.update_profile
+                  user.flush_caches
+                  DestroyedUser.create(identifier: user_data[:orcid], redirect_to: params[:identifier])
+                  flash.next[:new_user] = { fullname: user.fullname, slug: user.wikidata }
                 else
-                  flash.next[:new_user] = { fullname: new_user.fullname, slug: new_user.wikidata }
+                  new_user = User.find_or_create_by({ wikidata: params[:identifier] })
+                  if !new_user.valid_wikicontent?
+                    flash.next[:new_user] = { fullname: params[:identifier], slug: nil }
+                    new_user.delete_search
+                    new_user.delete
+                  else
+                    flash.next[:new_user] = { fullname: new_user.fullname, slug: new_user.wikidata }
+                  end
                 end
               end
             else
