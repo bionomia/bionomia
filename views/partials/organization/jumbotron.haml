@@ -18,8 +18,20 @@
         %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD"}
       %a{href: "https://www.wikidata.org/wiki/#{@organization.wikidata}"} https://www.wikidata.org/wiki/#{@organization.wikidata}
 
-  - if admin_authorized?
+  - if locals[:active_tab] == "organization-current" && ((authorized? && @organization.wikidata) || admin_authorized?)
     .mt-3.pt-3.border-top
-      %a{href: url("/admin/organization/#{@organization.id}")}
-        %i.fas.fa-cog
-        = I18n.t('general.settings')
+      - if @organization.wikidata
+        %a.profile-flush.mr-2.mb-2.text-nowrap{href: url("/organization/#{@organization.id}/refresh.json")}
+          %i.fas.fa-sync-alt
+          = I18n.t('general.refresh_profile')
+          %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD", width:"18px"}
+
+      - if admin_authorized?
+        %a.mr-2.mb-2.text-nowrap{href: url("/admin/organization/#{@organization.id}")}
+          %i.fas.fa-cog
+          = I18n.t('general.settings')
+
+    #flush-message.alert.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}
+      = I18n.t("user.caches_rebuilt")
+      %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
+        %span{"aria-hidden":"true"} &times;

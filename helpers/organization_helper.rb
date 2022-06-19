@@ -75,6 +75,21 @@ module Sinatra
           @organization.articles
         end
 
+        def find_organization(id)
+          if id.is_wiki_id?
+            organization = Organization.find_by_wikidata(id)
+          else
+            organization = Organization.find(id) rescue nil
+          end
+          if request && request.url.match(/.json$/)
+            halt 404, {}.to_json if organization.nil?
+          else
+            halt 404 if organization.nil?
+          end
+
+          organization
+        end
+
       end
     end
   end

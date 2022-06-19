@@ -70,7 +70,7 @@ First, import all users and user_occurrences content from production.
      # Can start 2+ workers, each with 40 threads to help speed-up processing
      # might need to increase ulimit
      $ ulimit -n 8192
-     $ RACK_ENV=production sidekiq -c 40 -q existing_claims -r ./application.rb
+     $ RACK_ENV=production sidekiq -c 2 -q existing_claims -r ./application.rb
 
 Export a csv pivot table (for import performance) of all claims made by User::GBIF_AGENT_ID.
 
