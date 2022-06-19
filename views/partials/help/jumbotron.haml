@@ -57,14 +57,15 @@
 
     - if !@viewed_user.country.blank?
       %p.text-center.p-0.mt-1.mb-1
-        %i.fas.fa-globe
         - country_codes = @viewed_user.country_code.split("|") rescue []
         - countries = @viewed_user.country.split("|") rescue []
         - countries.each_with_index do |v,i|
-          = succeed (countries[i+1]) ? ', ' : '' do
+          %span.mr-1.text-nowrap
             - if !country_codes[i].nil? && !country_codes[i].empty?
-              #{country_name(country_codes[i])}
+              %i.fas.fa-globe
+              = link_to country_name(country_codes[i]), url("/country/#{country_codes[i]}")
             - else
+              %i.fas.fa-globe
               #{v}
 
     - if authorized? && !@viewed_user.is_public? && !@viewed_user.wikidata.nil?

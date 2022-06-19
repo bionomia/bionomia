@@ -65,17 +65,17 @@
       #{@admin_user.current_organization.address}
 
   - if !@admin_user.country.blank?
-    - country_codes = @admin_user.country_code.split("|") rescue []
-    - countries = @admin_user.country.split("|") rescue []
-    - countries.each_with_index do |v,i|
-      - if !country_codes[i].nil? && !country_codes[i].empty?
-        %p.text-lg-left.p-0.mt-1.mb-1
-          %i.fas.fa-globe
-          = link_to country_name(country_codes[i]), url("/country/#{country_codes[i]}")
-      - else
-        %p.text-lg-left.p-0.m-0
-          %i.fas.fa-globe
-          #{v}
+    %p.text-lg-left.p-0.mt-1.mb-1
+      - country_codes = @admin_user.country_code.split("|") rescue []
+      - countries = @admin_user.country.split("|") rescue []
+      - countries.each_with_index do |v,i|
+        %span.mr-1.text-nowrap
+          - if !country_codes[i].nil? && !country_codes[i].empty?
+            %i.fas.fa-globe
+            = link_to country_name(country_codes[i]), url("/country/#{country_codes[i]}")
+          - else
+            %i.fas.fa-globe
+            #{v}
 
   - if @admin_user.zenodo_doi
     %p.citation.text-lg-left.mt-3.small
