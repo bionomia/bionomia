@@ -18,10 +18,10 @@
         %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD"}
       %a{href: "https://www.wikidata.org/wiki/#{@organization.wikidata}"} https://www.wikidata.org/wiki/#{@organization.wikidata}
 
-  - if locals[:active_tab] == "organization-current" && ((authorized? && @organization.wikidata) || admin_authorized?)
+  - if (authorized? && @organization.wikidata) || admin_authorized?
     .mt-3.pt-3.border-top
       - if @organization.wikidata
-        %a.profile-flush.mr-2.mb-2.text-nowrap{href: url("/organization/#{@organization.id}/refresh.json")}
+        %a.profile-flush.mr-2.mb-2.text-nowrap{href: url("/organization/#{@organization.identifier}/refresh.json")}
           %i.fas.fa-sync-alt
           = I18n.t('general.refresh_profile')
           %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD", width:"18px"}

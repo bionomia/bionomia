@@ -71,6 +71,7 @@ module Sinatra
 
             get '/:id/refresh.json' do
               content_type "application/json", charset: 'utf-8'
+              protected!
               organization = find_organization(params[:id])
               organization.update_wikidata
               { message: "ok" }.to_json

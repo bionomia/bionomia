@@ -148,6 +148,14 @@ module Sinatra
               haml :'datasets/visualizations', locals: locals
             end
 
+            get '/:id/refresh.json' do
+              content_type "application/json", charset: 'utf-8'
+              protected!
+              dataset = ::Bionomia::GbifDataset.new
+              dataset.process_dataset(params[:id])
+              { message: "ok" }.to_json
+            end
+
             get '/:id/progress.json' do
               content_type "application/json"
               expires 0, :no_cache, :must_revalidate

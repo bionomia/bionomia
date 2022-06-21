@@ -22,8 +22,19 @@
       %a{href: "https://doi.org/#{@dataset.doi}"}
         %img{src:"/images/#{@dataset.doi}.svg", alt: ""}
 
-  - if admin_authorized?
-    .m-2.text-center
-      %a.text-nowrap{href: url("/admin/dataset/#{@dataset.datasetKey}")}
-        %i.fas.fa-cog
-        = I18n.t('general.settings')
+  - if authorized?
+    .mt-3.pt-3.border-top
+      %a.profile-flush.mr-2.mb-2.text-nowrap{href: url("/dataset/#{@dataset.datasetKey}/refresh.json")}
+        %i.fas.fa-sync-alt
+        = I18n.t('general.refresh_profile')
+        %img{src: "/images/gbif_24x24.png", alt:"GBIF", width:"18px"}
+
+      - if admin_authorized?
+        %a.mr-2.mb-2.text-nowrap{href: url("/admin/dataset/#{@dataset.datasetKey}")}
+          %i.fas.fa-cog
+          = I18n.t('general.settings')
+
+    #flush-message.alert.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}
+      = I18n.t("user.caches_rebuilt")
+      %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
+        %span{"aria-hidden":"true"} &times;

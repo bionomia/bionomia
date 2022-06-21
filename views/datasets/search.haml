@@ -25,12 +25,15 @@
 
   - @results.in_groups_of(3).each do |group|
     .card-deck
+
       - group.each do |d|
         - if d.nil?
           .card.border-0
         - else
           - dataset = Dataset.find(d[:_id].to_i) rescue nil
-          - if !dataset.nil?
+          - if dataset.nil?
+            .card.border-0
+          - else
             .card.card-profile.m-3
               - if dataset.image_url
                 .card-header.d-flex
