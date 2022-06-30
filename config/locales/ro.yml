@@ -184,7 +184,7 @@ ro:
       month_and_day: "%B %d"
       long: "%B %d, %Y"
       year: "%Y"
-      century: "%C. century"
+      century: "secolul %C"
     month_names:
       - null
       - January
