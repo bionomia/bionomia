@@ -377,36 +377,25 @@ module Bionomia
     end
 
     def wiki_date_precision(wiki_user, property)
-      date = nil
-      precision = nil
-      date = Date.parse(wiki_user.properties(property)
-                 .compact
-                 .map{|a| a.value.time if a.precision_key == :day}
-                 .compact.first) rescue nil
-      if !date.nil?
-        precision = "day"
+      precision_dates = wiki_user.properties(property)
+                            .compact
+                            .map{|a| { precision: a.precision_key, date: a.value.time } } rescue []
+      day = precision_dates.map{|d| Date.parse(d[:date]) if d[:precision] == :day}.first rescue nil
+      month = precision_dates.map{|d| Date.parse(d[:date][1..7] + "-01") if d[:precision] == :month}.compact.first rescue nil
+      year = precision_dates.map{|d| Date.parse(d[:date][1..4] + "-01-01") if d[:precision] == :year}.compact.first rescue nil
+      century = precision_dates.map{|d| Date.parse(d[:date][1..4] + "-01-01") if d[:precision] == :century}.compact.first rescue nil
+
+      if day
+        [day, "day"]
+      elsif month
+        [month, "month"]
+      elsif year
+        [year, "year"]
+      elsif century
+        [century, "century"]
       else
-        wiki_date = wiki_user.properties(property)
-                             .compact
-                             .map{|a| a.value.time if a.precision_key == :month}
-                             .compact
-                             .first rescue nil
-        if !wiki_date.nil?
-          date = Date.parse(wiki_date[1..7] + "-01")
-          precision = "month"
-        else
-          wiki_date = wiki_user.properties(property)
-                               .compact
-                               .map{|a| a.value.time if a.precision_key == :year}
-                               .compact
-                               .first rescue nil
-          if !wiki_date.nil?
-            date = Date.parse(wiki_date[1..4] + "-01-01")
-            precision = "year"
-          end
-        end
+        [nil, nil]
       end
-      [date, precision]
     end
 
     def wiki_user_data(wikicode)

@@ -227,6 +227,8 @@ module Sinatra
             born = I18n.l date_born, format: :month_and_year
           elsif user[:date_born_precision] == "year"
             born = I18n.l date_born, format: :year
+          elsif user[:date_born_precision] == "century"
+            born = I18n.l date_born, format: :century
           else
             born = "?"
           end
@@ -237,6 +239,8 @@ module Sinatra
             died = I18n.l date_died, format: :month_and_year
           elsif user[:date_died_precision] == "year"
             died = I18n.l date_died, format: :year
+          elsif user[:date_died_precision] == "century"
+            died = I18n.l date_died, format: :century
           else
             died = "?"
           end

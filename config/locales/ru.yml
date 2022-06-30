@@ -200,6 +200,7 @@ ru:
       month_and_day: "%B %d"
       long: "%B %d, %Y"
       year: "%Y"
+      century: "%C век"
     month_names:
       - null
       - Январь

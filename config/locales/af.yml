@@ -168,6 +168,7 @@ af:
       month_and_day: "%B %d"
       long: "%B %d, %Y"
       year: "%Y"
+      century: "%C. eeu"
     month_names:
       - null
       - January

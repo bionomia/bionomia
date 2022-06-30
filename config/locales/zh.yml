@@ -152,6 +152,7 @@ zh-CN:
       month_and_day: "%B %d"
       long: "%B %d, %Y"
       year: "%Y"
+      century: "%C 世纪"
     month_names:
       - null
       - 一月

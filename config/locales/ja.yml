@@ -152,6 +152,7 @@ ja:
       month_and_day: "%B %d"
       long: "%B %d, %Y"
       year: "%Y"
+      century: "%C. 世紀"
     month_names:
       - null
       - January
