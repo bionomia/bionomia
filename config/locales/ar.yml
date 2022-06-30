@@ -232,7 +232,7 @@ ar:
       month_and_day: "%B %d"
       long: "%B %d, %Y"
       year: "%Y"
-      century: "%C. لقرن"
+      century: "%C. century"
     month_names:
       - null
       - January
