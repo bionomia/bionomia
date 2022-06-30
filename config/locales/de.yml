@@ -168,7 +168,7 @@ de:
       month_and_day: "%d. %B"
       long: "%d. %B %Y"
       year: "%Y"
-      century: "%C. century"
+      century: "%C. Jahrhundert"
     month_names:
       - null
       - Januar
