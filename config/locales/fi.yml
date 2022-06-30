@@ -168,7 +168,7 @@ fi:
       month_and_day: "%B %d"
       long: "%B %d, %Y"
       year: "%Y"
-      century: "%C. century"
+      century: "%C. vuosisata"
     month_names:
       - null
       - January
