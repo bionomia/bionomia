@@ -168,7 +168,7 @@ el:
       month_and_day: "%B %d"
       long: "%B %d, %Y"
       year: "%Y"
-      century: "%C. αιώνας"
+      century: "%C. century"
     month_names:
       - null
       - January
