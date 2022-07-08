@@ -37,7 +37,7 @@ end
 
 if options[:add]
   puts "Building occurrence_counts content...".yellow
-  limit = 100000
+  limit = 50000
   max_occurrence_id = OccurrenceRecorder.maximum(:occurrence_id)
 
   #Over-estimate number of queries to execute, but break out when actual limit reached
@@ -64,6 +64,7 @@ if options[:add]
           HAVING agent_count > 2 AND agent_count <> user_count
           LIMIT #{limit}"
     ActiveRecord::Base.connection.execute(sql)
+    break if counter == OccurrenceCount.maximum(:occurrence_id)
   end
   puts "Done!".green
 end
