@@ -40,7 +40,7 @@ if options[:directory]
     puts "Making public claimed occurrences...".green
     pbar = ProgressBar.create(title: "Claims Dump", total: UserOccurrence.count, autofinish: false, format: '%t %b>> %i| %e')
     CSV.open(csv_file, 'w') do |csv|
-      csv << ["Subject", "Predicate", "Object"]
+      csv << ["Object", "Predicate", "Subject"]
       UserOccurrence.includes(:user)
                     .where(visible: true)
                     .where.not(action: nil)
@@ -78,9 +78,19 @@ if options[:directory]
     puts "Making public profiles...".green
     users = User.where(is_public: true)
     CSV.open(csv_file, 'w') do |csv|
-      csv << ["Family", "Given", "wikidata", "ORCID", "URL"]
+      csv << ["Family", "Given", "Particle", "OtherNames", "Country", "Keywords", "wikidata", "ORCID", "URL"]
       users.find_each do |u|
-        csv << [u.family, u.given, u.wikidata, u.orcid, Settings.base_url + "/" + u.identifier]
+        csv << [
+          u.family,
+          u.given,
+          u.particle,
+          u.other_names,
+          u.country,
+          u.keywords,
+          u.wikidata,
+          u.orcid,
+          Settings.base_url + "/" + u.identifier
+        ]
       end
     end
   end

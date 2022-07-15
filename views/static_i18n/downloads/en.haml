@@ -10,7 +10,7 @@
   = link_to "bionomia-public-profiles.csv", url("/data/bionomia-public-profiles.csv")
 %p
   %small.text-muted
-    Includes a header, "Family, Given, wikidata, ORCID, URL"
+    Includes a header, "Family, Given, Particle, OtherNames, Country, Keywords, wikidata, ORCID, URL"
 
 - if @compressed_file_size
   %h3 Attributions Made to Public Profiles
@@ -19,6 +19,6 @@
     (#{@compressed_file_size}MB, updated #{@modified_time})
   %p
     %small.text-muted
-      Includes a header, "Subject, Predicate, Object" and each row resembles:
+      Includes a header, "Object, Predicate, Subject" and each row resembles:
       %br
       https://gbif.org/occurrence/1801358422, http://rs.tdwg.org/dwc/iri/identifiedBy, https://orcid.org/0000-0001-9008-0611
