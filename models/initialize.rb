@@ -22,6 +22,8 @@ module Sinatra
           hash[:default_env] = config
           db_configs = ActiveRecord::DatabaseConfigurations.new hash
 
+          ActiveRecord.use_yaml_unsafe_load = true
+
           ActiveRecord::Base.configurations = db_configs
           ActiveRecord::Base.establish_connection
 
