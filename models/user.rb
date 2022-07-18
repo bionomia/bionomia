@@ -738,11 +738,11 @@ class User < ActiveRecord::Base
   end
 
   def update_affiliation(org)
-    return if org[:wikidata].nil? && org[:grid].nil? && org[:ringgold].nil? && org[:ror].nil?
+    return if org[:wikidata].nil? && org[:ror].nil? && org[:grid].nil? && org[:ringgold].nil?
     return if !org[:wikidata].nil? && org[:wikidata] == org[:name]
 
     if !org[:ror].nil?
-      organization = Organization.find_by_ror(org[:ror].to_i)
+      organization = Organization.find_by_ror(org[:ror])
     elsif !org[:grid].nil?
       organization = Organization.find_by_grid(org[:grid])
     elsif !org[:ringgold].nil?
