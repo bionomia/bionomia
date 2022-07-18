@@ -186,7 +186,7 @@ module Bionomia
           ror = place[:organization][:"disambiguated-organization"][:"disambiguated-organization-identifier"].sub("https://ror.org/","") rescue nil
         end
       end
-      return {} if ringgold.nil? && grid.nil?
+      return {} if ringgold.nil? && grid.nil? && ror.nil?
       name = place[:organization][:name].strip
       address = place[:organization][:address].values.compact.join(", ").strip rescue nil
       start_year = place[:"start-date"][:year][:value].to_i rescue nil
