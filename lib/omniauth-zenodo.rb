@@ -10,7 +10,6 @@ module OmniAuth
 
       option :authorize_options, [:response_type,
                                   :redirect_uri,
-                                  :client_id,
                                   :scope,
                                   :state]
 
@@ -21,7 +20,6 @@ module OmniAuth
         @options.client_options.site          = site
         @options.client_options.authorize_url = authorize_url
         @options.client_options.token_url     = token_url
-        @options.client_options.client_id     = client_id
       end
 
       def authorize_params
@@ -32,7 +30,6 @@ module OmniAuth
             end
           end
 
-          params[:client_id] ||= client_id
           params[:redirect_uri] ||= redirect_uri
           params[:response_type] = 'code' if params[:response_type].nil?
           params[:scope] ||= scope
@@ -67,10 +64,6 @@ module OmniAuth
 
       def scope
         'deposit:write deposit:actions'
-      end
-
-      def client_id
-        Settings.zenodo.client_id
       end
 
       def state

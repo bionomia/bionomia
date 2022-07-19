@@ -44,6 +44,10 @@ module Sinatra
               :authorize_params => {
                 :redirect_uri => Settings.base_url + '/auth/zenodo/callback'
               },
+              :token_params => {
+                :client_id => Settings.zenodo.key,
+                :client_secret => Settings.zenodo.secret
+              },
               :client_options => {
                 :site => Settings.zenodo.site,
                 :authorize_url => Settings.zenodo.authorize_url,
