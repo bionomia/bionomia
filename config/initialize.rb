@@ -42,7 +42,6 @@ module Sinatra
             provider :zenodo, Settings.zenodo.key, Settings.zenodo.secret,
               :sandbox => Settings.zenodo.sandbox,
               :authorize_params => {
-                :client_id => Settings.zenodo.key,
                 :redirect_uri => Settings.base_url + '/auth/zenodo/callback'
               },
               :client_options => {
