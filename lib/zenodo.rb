@@ -75,7 +75,8 @@ module Bionomia
 
     # Have to store this again otherwise can no longer use the old one
     def refresh_token
-      @access_token = access_token.refresh!
+      params = { client_id: @settings.zenodo.key, client_secret: @settings.zenodo.secret }
+      @access_token = access_token.refresh(params)
       @access_token.to_hash.deep_symbolize_keys
     end
 
