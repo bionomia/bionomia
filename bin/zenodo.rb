@@ -149,6 +149,7 @@ if options[:refresh]
     begin
       u.zenodo_access_token = z.refresh_token
       u.save
+      puts "#{u.fullname_reverse} (id=#{u.id})".green
     rescue
       puts "#{u.fullname_reverse} (id=#{u.id}) token failed".red
     end
