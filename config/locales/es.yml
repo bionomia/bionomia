@@ -526,7 +526,7 @@ es:
     cancel: Cancelar
     update: Actualizar
     settings: Configuración e integraciones
-    youtube: ID de YouTube para que aparezca un video en su perfil (por ejemplo, uxRERDmfAcw).
+    youtube: Use a YouTube ID for a video to appear in your profile (eg uxRERDmfAcw).
     no_science: Los datos de sus especímenes aún no se han registrado en descargas de GBIF y usado en publicaciones nuevas.
     no_citation_alert: Sus especímenes no se incluyeron en una descarga de GBIF en soporte de este estudio.
     has_science:
