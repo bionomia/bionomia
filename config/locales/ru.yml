@@ -580,7 +580,7 @@ ru:
     cancel: Cancel
     update: Update
     settings: Settings & Integrations
-    youtube: Use a YouTube ID for a video to appear in your profile.
+    youtube: Use a YouTube ID for a video to appear in your profile (eg uxRERDmfAcw).
     no_science: Your specimen data have not yet been recorded in downloads from GBIF and used in new publications.
     no_citation_alert: Your specimens were not included in a download from GBIF in support of this study.
     has_science:

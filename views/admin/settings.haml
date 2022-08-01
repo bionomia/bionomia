@@ -70,7 +70,7 @@
             YouTube
           .card-body
             %p.card-text
-              Use a YouTube ID for a video to appear in the profile.
+              Use a YouTube ID for a video to appear in the profile (eg uxRERDmfAcw).
             - if !@admin_user.orcid.nil?
               %form{action: "/admin/user/#{@admin_user.id}", method: :post}
                 %input{type: :hidden, name: "_method", value: 'PUT'}

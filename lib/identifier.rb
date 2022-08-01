@@ -13,6 +13,10 @@ class String
     ::Bionomia::Identifier.is_doi_regex.match?(self)
   end
 
+  def is_youtube_id?
+    ::Bionomia::Identifier.is_youtube_id_regex.match?(self)
+  end
+
   def orcid_from_url
     ::Bionomia::Identifier.extract_orcid_regex.match(self)[0] rescue nil
   end
@@ -61,6 +65,10 @@ module Bionomia
 
       def is_doi_regex
         /^10.\d{4,9}\/[-._;()\/:<>A-Z0-9]+$/i
+      end
+
+      def is_youtube_id_regex
+        /^[A-Z_]{11}$/i
       end
 
       def orcid_valid_checksum(orcid_string)

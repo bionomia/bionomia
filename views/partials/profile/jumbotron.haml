@@ -78,8 +78,7 @@
         %img{src:"/images/#{@user.zenodo_concept_doi}.svg", alt:"DOI badge"}
 
   - if @user.youtube_id
-    .embed-responsive.embed-responsive-16by9.mt-3
-      %iframe.embed-responsive-item.rounded.align-top.m-2{src:"https://www.youtube.com/embed/#{@user.youtube_id}", frameborder:"0", allow:"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture", allowfullscreen: true}
+    = haml :'youtube', layout: false, locals: { youtube_id: @user.youtube_id }
 
   .mt-3.pt-3.border-top
     - if !@user.is_public?
