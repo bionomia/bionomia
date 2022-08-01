@@ -526,7 +526,7 @@ es:
     cancel: Cancelar
     update: Actualizar
     settings: Configuración e integraciones
-    youtube: Use a YouTube ID for a video to appear in your profile (eg uxRERDmfAcw).
+    youtube: ID de YouTube para que aparezca un video en su perfil (por ejemplo, uxRERDmfAcw).
     no_science: Los datos de sus especímenes aún no se han registrado en descargas de GBIF y usado en publicaciones nuevas.
     no_citation_alert: Sus especímenes no se incluyeron en una descarga de GBIF en soporte de este estudio.
     has_science:
@@ -602,7 +602,7 @@ es:
     not_identified_for_name: "Specimens have not been collected by %{name} and identified by you."
     identified_for_count:
       one: "collected specimen"
-      other: "collected specimens"
+      other: "especímenes colectados"
     identifications_by: Identificaciones por
     no_determiners_alert: Determiners of your collected specimens have not yet been recorded.
     determiners_alert: "Your specimens have been identified by:"
@@ -649,7 +649,7 @@ es:
   statistics:
     title: Estadísticas
     claims: Cumulative Claims
-    attributions: Cumulative Attributions
+    attributions: Atribuciones acumulativas
     rejected: Cumulative Rejected Candidates
     profiles: Cumulative Profiles Imported
     month: Mes
