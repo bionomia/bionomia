@@ -69,9 +69,19 @@ describe "Identifier library" do
     expect(url.orcid_from_url.is_orcid?).to be true
   end
 
-  it "determines that https://orcid.org/0000-0002-6662-846X is an ivalid ORCID" do
+  it "determines that https://orcid.org/0000-0002-6662-846X is an invalid ORCID" do
     url = "https://orcid.org/0000-0002-6662-846X"
     expect(url.orcid_from_url.is_orcid?).to be false
+  end
+
+  it "determines that A_0aadf4h_O is a valid Youtube ID" do
+    id = "A_0aadf4h_O"
+    expect(id.is_youtube_id?).to be true
+  end
+
+  it "determines that A_0aadf4h_OA is an invalid Youtube ID" do
+    id = "A_0aadf4h_OA"
+    expect(id.is_youtube_id?).to be false
   end
 
 end

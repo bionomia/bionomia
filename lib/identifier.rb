@@ -68,7 +68,7 @@ module Bionomia
       end
 
       def is_youtube_id_regex
-        /^[A-Z_]{11}$/i
+        /^[A-Z0-9_]{11}$/i
       end
 
       def orcid_valid_checksum(orcid_string)
