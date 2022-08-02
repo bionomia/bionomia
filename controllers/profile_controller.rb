@@ -546,8 +546,8 @@ module Sinatra
             delete '/user-occurrence/bulk.json' do
               content_type "application/json", charset: 'utf-8'
               req = JSON.parse(request.body.read).symbolize_keys
-              ids = req[:ids].split(",")
-              UserOccurrence.where({ id: ids, user_id: @user.id })
+              occurrence_ids = req[:occurrence_ids].split(",")
+              UserOccurrence.where({ id: occurrence_ids, user_id: @user.id })
                             .delete_all
               { message: "ok" }.to_json
             end

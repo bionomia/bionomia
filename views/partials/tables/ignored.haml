@@ -14,6 +14,8 @@
         %th.text-nowrap{scope: "col"}= I18n.t('specimen.catalog_number')
         %th.text-nowrap{scope: "col"}= I18n.t('specimen.type_status')
         %th.text-nowrap{scope: "col"}= I18n.t('specimen.basis_record')
+        %th{scope: "col", class:"btn-selector-wide"}
+          %button.btn.btn-sm.btn-danger.remove-all{type:"button", name:"remove-all"}= I18n.t('specimen.remove')
         %th.text-nowrap{scope: "col"}= I18n.t('specimen.scribe')
 
     %tbody
@@ -22,6 +24,7 @@
       - user_id = @admin_user ? @admin_user.id : nil
       - @results.each do |uo|
         - o = uo.occurrence
+        - disabled = (user_id == uo.created_by) ? true : false
         %tr
           %td.selector
             = haml :'partials/single_selector_preselected', layout: false, locals: { occurrence: uo, klass: "restore-ignored", user_id: user_id }
@@ -41,6 +44,9 @@
           %td #{h(o.catalogNumber)}
           %td #{h(o.typeStatus)}
           %td #{h(o.basisOfRecord)}
+          %td
+            %button.btn.btn-sm.btn-outline-danger.remove{type:"button", "data-occurrence-id":"#{uo.user_occurrence_id}", disabled: disabled}
+              = I18n.t('specimen.remove')
           %td
             - if uo.claimant.is_bot?
               #{uo.claimant.fullname}
@@ -62,6 +68,8 @@
           %th.text-nowrap{scope: "col"}= I18n.t('specimen.catalog_number')
           %th.text-nowrap{scope: "col"}= I18n.t('specimen.type_status')
           %th.text-nowrap{scope: "col"}= I18n.t('specimen.basis_record')
+          %th.text-nowrap
+            %button.btn.btn-sm.btn-danger.remove-all{type:"button", name:"remove-all"}= I18n.t('specimen.remove')
           %th.text-nowrap{scope: "col"}= I18n.t('specimen.scribe')
 
 - if @total > 25
