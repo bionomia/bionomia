@@ -10,6 +10,7 @@ module Sinatra
                                .where.not(created_by: User::BOT_IDS)
                                .where(visible: true)
                                .where("created_by = user_id")
+                               .where("created < DATE_SUB(CURRENT_DATE, INTERVAL DAYOFMONTH(CURRENT_DATE)-1 DAY)")
                                .group("YEAR(created), MONTH(created)")
                                .order("YEAR(created), MONTH(created)")
           total = 0
@@ -21,6 +22,7 @@ module Sinatra
                                .where.not(created_by: User::BOT_IDS)
                                .where(visible: true)
                                .where("created_by <> user_id")
+                               .where("created < DATE_SUB(CURRENT_DATE, INTERVAL DAYOFMONTH(CURRENT_DATE)-1 DAY)")
                                .group("YEAR(created), MONTH(created)")
                                .order("YEAR(created), MONTH(created)")
           total = 0
@@ -35,6 +37,7 @@ module Sinatra
           data = UserOccurrence.select("YEAR(created) AS year, MONTH(created) AS month, count(*) AS sum")
                                .where.not(created_by: User::BOT_IDS)
                                .where(visible: false)
+                               .where("created < DATE_SUB(CURRENT_DATE, INTERVAL DAYOFMONTH(CURRENT_DATE)-1 DAY)")
                                .group("YEAR(created), MONTH(created)")
                                .order("YEAR(created), MONTH(created)")
           total = 0
