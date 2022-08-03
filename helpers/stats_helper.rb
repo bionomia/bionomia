@@ -46,6 +46,7 @@ module Sinatra
 
         def stats_profiles
           data = User.select("YEAR(created) AS year, MONTH(created) AS month, count(wikidata) AS wikidata_sum, count(orcid) AS orcid_sum")
+                     .where("created < DATE_SUB(CURRENT_DATE, INTERVAL DAYOFMONTH(CURRENT_DATE)-1 DAY)")
                      .group("YEAR(created), MONTH(created)")
                      .order("YEAR(created), MONTH(created)")
           wikidata_total = 0
