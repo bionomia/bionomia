@@ -54,7 +54,7 @@ es:
     search_html: "Búsqueda de %{agent_link} la persona y ayude a atribuir sus especímenes."
     example_agents: Random Samples or Results
     gbifid: De gbifIDs
-    gbifid_title: Agent Strings from gbifIDs
+    gbifid_title: Cadenas de agentes de gbifIDs
     gbifid_instructions: Paste a list of occurrence-based gbifIDs and receive a summary list of parsed agent strings from recordedBy.
   article:
     article_title: Artículo
@@ -379,7 +379,7 @@ es:
     tagline: Enlace especímenes de historia natural a los colectores del mundo.
     get_started: Comenzar
     your_profile: Su perfil
-    sample_profiles: Today's Featured Collectors
+    sample_profiles: Colectores destacados de hoy
     orcid_login: Registrarse con ORCID
     orcid_logo: Logo de ORCID
   layout:
@@ -610,7 +610,7 @@ es:
     not_determiner_name: "Specimens you collected have not been identified by %{name}."
     identified_by_count:
       one: "identified specimen"
-      other: "identified specimens"
+      other: "especímenes identificados"
     zenodo_html: "Su perfil está enlazado a %{zenodo} y se ha creado y archivado una versión de los datos de sus especímenes reclamados."
     language: Idioma preferido
     language_explanation: Elija su idioma preferido
