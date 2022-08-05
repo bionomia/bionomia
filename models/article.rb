@@ -103,7 +103,10 @@ class Article < ActiveRecord::Base
         headers: { Accept: "text/x-bibliography" },
         url: "https://doi.org/" + URI.encode_www_form_component(doi)
       )
-      self.update_columns(citation: strip_tags(response))
+      if !response.body.nil?
+        citation = strip_tags(response).sub("https://doi.org/" + doi,"").strip
+        self.update_columns(citation: citation)
+      end
     rescue
     end
   end

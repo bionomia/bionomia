@@ -15,7 +15,7 @@ $ curl -i --user davidpshorthouse:***password*** -H "Content-Type:application/js
 On a Mac with Homebrew:
 
 ```bash
-$ spark-shell --jars /usr/local/opt/mysql-connector-java/libexec/mysql-connector-java-8.0.20.jar --packages org.apache.spark:spark-avro_2.12:3.0.0 --driver-memory 12G
+$ spark-shell --jars /usr/local/opt/mysql-connector-java/libexec/mysql-connector-java-8.0.30.jar --packages org.apache.spark:spark-avro_2.12:3.3.0 --driver-memory 12G
 ```
 
 ```scala
