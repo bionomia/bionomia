@@ -13,7 +13,7 @@ module Sinatra
           if app.environment == :production
             secure = true
             app.use Rack::Tracker do
-              handler :google_analytics, { tracker: Settings.google.analytics }
+              handler :google_global, { trackers: [ { id: Settings.google.analytics } ] }
             end
           end
 
