@@ -379,7 +379,7 @@ pt:
     tagline: Vincule espécimes de história natural a colecionadores do mundo.
     get_started: Inicie
     your_profile: Seu perfil
-    sample_profiles: Perfis de amostra
+    sample_profiles: Coletores em destaque de hoje
     orcid_login: Entrar com ORCID
     orcid_logo: Logótipo do ORCID
   layout:
@@ -422,7 +422,7 @@ pt:
     parse: Analisar Nomes
     reconcile: Reconciliar Nomes
     acknowledgments: Agradecimentos
-    workshops: Workshops
+    workshops: Oficinas
     stats: Estatísticas
     downloads: Transferências
   not_authorized:
@@ -806,4 +806,4 @@ pt:
       one: "%{coll_img} coletou ou %{det_img} identificou 1 espécime."
       other: "%{coll_img} coletou ou %{det_img} identificou %{count} espécimes."
   workshops:
-    title: Workshops
+    title: Oficinas
