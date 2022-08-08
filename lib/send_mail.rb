@@ -62,7 +62,7 @@ module Bionomia
     end
 
     def format_article(article)
-      "#{article[:citation]} https://doi.org/#{article[:doi]}"
+      "#{article[:citation]} https://doi.org/#{article[:doi]}. [Your records: https://bionomia.net/profile/citation/#{article[:doi]}]"
     end
 
     def closing
