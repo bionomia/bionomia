@@ -53,8 +53,8 @@ de:
         other: "Exemplare gefunden. Es werden nicht alle Spalten angezeigt."
     search_html: "Suche nach %{agent_link} der Person und helfen Sie bei der Zuordnung ihrer Exemplare."
     example_agents: Random Samples or Results
-    gbifid: From gbifIDs
-    gbifid_title: Agent Strings from gbifIDs
+    gbifid: Von gbifIDs
+    gbifid_title: Agenten-Strings von gbifIDs
     gbifid_instructions: Paste a list of occurrence-based gbifIDs and receive a summary list of parsed agent strings from recordedBy.
   article:
     article_title: Artikel
@@ -379,7 +379,7 @@ de:
     tagline: Verbinden Sie naturhistorische Exemplare mit den Sammlern der Welt.
     get_started: Los geht’s
     your_profile: Ihr Profil
-    sample_profiles: Beispielprofile
+    sample_profiles: Die heutigen vorgestellten Sammler
     orcid_login: Mit ORCID anmelden
     orcid_logo: ORCID-Logo
   layout:
