@@ -43,7 +43,8 @@ class Dataset < ActiveRecord::Base
   end
 
   def users_count
-    UserOccurrence.where(occurrences: { datasetKey: datasetKey })
+    UserOccurrence.joins(:occurrence)
+                  .where(occurrences: { datasetKey: datasetKey })
                   .pluck(:user_id, :visible)
                   .map{|a| a[0] if a[1]}.compact.uniq.count
   end
