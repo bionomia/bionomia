@@ -42,6 +42,12 @@ class Dataset < ActiveRecord::Base
         .where("a.visible": true)
   end
 
+  def users_count
+    UserOccurrence.where(occurrences: { datasetKey: datasetKey })
+                  .pluck(:user_id, :visible)
+                  .map{|a| a[0] if a[1]}.compact.uniq.count
+  end
+
   def user_ids
     users.select(:id)
   end

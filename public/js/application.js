@@ -1,27 +1,27 @@
-/*global jQuery, window, document, self, encodeURIComponent, Bloodhound, Bootstrap, Filter */
+/*global jQuery, window, document, self, encodeURIComponent, Bloodhound, Bootstrap, Filters, Handlebars */
 
 Array.prototype.all_unique = function () {
   "use strict";
+
   return this.filter(function (value, index, self) {
     return self.indexOf(value) === index;
   });
 };
 
 jQuery.fn.preventDoubleSubmission = function() {
-  $(this).on('submit',function(e){
-    var $form = $(this);
+  $(this).on('submit', function(e){
+    var form = $(this);
 
-    if ($form.data('submitted') === true) {
+    if (form.data('submitted') === true) {
       e.preventDefault();
     } else {
-      $form.data('submitted', true);
+      form.data('submitted', true);
     }
   });
   return this;
 };
 
 var Application = (function($, window) {
-
   "use strict";
 
   var _private = {
@@ -723,7 +723,7 @@ var Application = (function($, window) {
               .html(self.carousel_template(data, $(obj).attr("data-gbifid")))
               .find("img").each(function() {
                 var item = $(this);
-                self.wait_loader(item[0]).then(()=>{
+                self.wait_loader(item[0]).then(function() {
                   if(item[0].naturalHeight > 300) {
                     item.mlens({
                       imgSrc:item.attr("data-big"),
@@ -740,7 +740,7 @@ var Application = (function($, window) {
     },
 
     wait_loader: function(img) {
-      return new Promise(resolve => { img.onload = resolve; });
+      return new Promise(function(resolve) { img.onload = resolve; });
     },
 
     carousel_template: function(data, id) {

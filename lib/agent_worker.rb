@@ -9,9 +9,10 @@ module Bionomia
       agents = parse(row["agents"])
       agents.each do |a|
         family = [a.particle.to_s.strip, a.family.to_s.strip].join(" ").squeeze(" ").strip
+        given = a.given.to_s.squeeze(" ").strip
         agent = Agent.create_or_find_by({
           family: family,
-          given: a.given.to_s.squeeze(" ").strip
+          given: given
         })
         row["gbifIDs_recordedBy"]
           .tr('[]', '')
