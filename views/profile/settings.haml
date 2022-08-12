@@ -101,7 +101,7 @@
           .card-body
             %p.card-text= I18n.t('profile.language_explanation')
             %form{action: "/profile/settings", method: :post}
-              %select#locale.form-select.form-select-md.d-block.mb-3{name: "locale", "aria-label":"#{I18n.t('profile.language')}"}
+              %select#locale.form-control.form-select.form-select-md.d-block.mb-3{name: "locale", "aria-label":"#{I18n.t('profile.language')}"}
                 %option{value: ""}= "#{I18n.t('profile.language')}"
                 - locale_name_pairs.each do |lang|
                   - selected = lang[0].to_s == @user.try(:locale) ? true : false
