@@ -38,7 +38,11 @@ module Sinatra
               organization = user.current_organization.as_json.symbolize_keys rescue nil
               user.update(visited: Time.now)
               session[:omniauth] = OpenStruct.new({ id: user.id })
-              redirect '/profile'
+              if request.env['omniauth.origin']
+                redirect request.env['omniauth.origin']
+              else
+                redirect '/profile'
+              end
             end
 
             get '/zenodo/callback' do
