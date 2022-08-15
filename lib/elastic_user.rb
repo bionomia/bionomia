@@ -69,8 +69,8 @@ module Bionomia
         mappings: {
           properties: {
             id: { type: 'integer', index: false },
-            orcid: { type: 'keyword', index: false },
-            wikidata: { type: 'keyword', index: false },
+            orcid: { type: 'keyword' },
+            wikidata: { type: 'keyword' },
             thumbnail: { type: 'keyword', index: false },
             description: { type: 'text', index: false },
             family: {
