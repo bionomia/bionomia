@@ -48,8 +48,11 @@
   - if !@viewed_user.current_organization.nil?
     %p.text-lg-left.p-0.mt-1.mb-1
       - path = @viewed_user.current_organization.identifier
-      = succeed "," do
-        %i.fas.fa-building
+      %i.fas.fa-building
+      - if @viewed_user.current_organization.address
+        = succeed "," do
+          = link_to @viewed_user.current_organization.name, url("/organization/#{path}")
+      - else
         = link_to @viewed_user.current_organization.name, url("/organization/#{path}")
       #{@viewed_user.current_organization.address}
 

@@ -52,7 +52,10 @@
     %p.text-lg-left.p-0.mt-1.mb-1
       - path = @user.current_organization.identifier
       %i.fas.fa-building
-      = succeed "," do
+      - if @user.current_organization.address
+        = succeed ", " do
+          = link_to @user.current_organization.name, url("/organization/#{path}")
+      - else
         = link_to @user.current_organization.name, url("/organization/#{path}")
       #{@user.current_organization.address}
 
