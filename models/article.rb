@@ -100,7 +100,7 @@ class Article < ActiveRecord::Base
     begin
       response = RestClient::Request.execute(
         method: :get,
-        headers: { Accept: "text/x-bibliography" },
+        headers: { Accept: "text/x-bibliography; style=american-journal-of-botany" },
         url: "https://doi.org/" + URI.encode_www_form_component(doi)
       )
       if !response.body.nil?
