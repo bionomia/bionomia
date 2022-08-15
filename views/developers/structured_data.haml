@@ -20,6 +20,18 @@
 
 .ml-3
   %h5 User Data from a Public Profile
+  %h6 Basic User Profile
+  %div
+    = link_to url(Settings.api_url + "/0000-0001-7618-5230.jsonld"), url(Settings.api_url + "/0000-0001-7618-5230.jsonld")
+  %div
+    = link_to url(Settings.api_url + "/Q1035.jsonld"), url(Settings.api_url + "/Q1035.jsonld")
+  %p
+    %small.text-muted
+      Where
+      %em 0000-0001-7618-5230
+      is a user's ORCID identifier,
+      = link_to "https://orcid.org/0000-0001-7618-5230", "https://orcid.org/0000-0001-7618-5230"
+  %h6 Specimens
   %div
     = link_to url("/0000-0001-7618-5230/specimens.csv"), url("/0000-0001-7618-5230/specimens.csv")
   %div
