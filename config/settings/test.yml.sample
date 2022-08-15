@@ -8,6 +8,7 @@ pool: 40
 timeout: 5000
 helping_download_limit: 10000
 base_url: 'https://bionomia.local'
+api_url: 'https://api.bionomia.local'
 cookie_domain: '.bionomia.local'
 offline_warning:
   off_datetime:

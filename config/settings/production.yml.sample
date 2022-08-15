@@ -8,6 +8,7 @@ pool: 40
 timeout: 5000
 helping_download_limit: 10000
 base_url: 'https://bionomia.net'
+api_url: 'https://api.bionomia.net'
 cookie_domain: '.bionomia.net'
 offline_warning:
   off_datetime:
