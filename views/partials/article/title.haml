@@ -12,11 +12,11 @@
     %p.card-text.text-muted #{h(@article.abstract)}
   .card-footer.d-flex
     .col.small.text-left.text-muted
-      %span.badge.badge-light.badge-pill.citation-correction #{number_with_delimiter(@article.claimed_specimen_count)}
-      #{'claim'.pluralize(@article.claimed_specimen_count)}
+      %span.badge.badge-light.badge-pill.citation-correction #{number_with_delimiter(@stats[:claimed_count])}
+      #{'claim'.pluralize(@stats[:claimed_count])}
     .col.small.text-right.text-muted
-      %span.badge.badge-light.badge-pill.citation-correction #{number_with_delimiter(@article.article_occurrences.count)}
-      #{'specimen'.pluralize(@article.article_occurrences.count)}
+      %span.badge.badge-light.badge-pill.citation-correction #{number_with_delimiter(@stats[:occurrence_count])}
+      #{'specimen'.pluralize(@stats[:occurrence_count])}
 
 - if admin_authorized?
   .m-2.text-center

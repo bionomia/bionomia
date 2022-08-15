@@ -109,6 +109,9 @@ class Article < ActiveRecord::Base
       end
     rescue
     end
+    stats = Class.new
+    stats.extend Sinatra::Bionomia::Helper::ArticleHelper
+    BIONOMIA.cache_put_tag("blocks/article-#{id}-stats", stats.article_stats(self))
   end
 
   def add_search

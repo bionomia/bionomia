@@ -59,6 +59,7 @@ module Sinatra
                 active_page: "articles",
                 active_tab: "people"
               }
+              @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
               haml :'articles/users', locals: locals
             end
 

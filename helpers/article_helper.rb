@@ -61,6 +61,13 @@ module Sinatra
           @pagy, @results = pagy_array(@article.agents_occurrence_counts_unclaimed.to_a, items: 75)
         end
 
+        def article_stats(article)
+          {
+            claimed_count: article.claimed_specimen_count,
+            occurrence_count: article.article_occurrences.count
+          }
+        end
+
       end
     end
   end
