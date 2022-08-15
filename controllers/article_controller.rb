@@ -30,6 +30,7 @@ module Sinatra
                 active_tab: "agents",
                 active_subtab: "counts"
               }
+              @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
               haml :'articles/agents_counts', locals: locals
             end
 
@@ -40,6 +41,7 @@ module Sinatra
                 active_tab: "agents",
                 active_subtab: "unclaimed"
               }
+              @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
               haml :'articles/agents_unclaimed', locals: locals
             end
 
@@ -50,6 +52,7 @@ module Sinatra
                 active_tab: "agents",
                 active_subtab: "default"
               }
+              @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
               haml :'articles/agents', locals: locals
             end
 

@@ -41,9 +41,10 @@
             %a{href: "/article/#{article.doi}"}
               %i{class:"fas fa-users"}
               = I18n.t('article.people')
-          %span.badge.badge-light.badge-pill.citation-correction #{number_with_delimiter(article.claimed_specimen_count)}
+          - stats = cache_block("article-#{article.id}-stats") { article_stats(article) }
+          %span.badge.badge-light.badge-pill.citation-correction #{number_with_delimiter(stats[:claimed_count])}
           %span.text-muted= I18n.t('article.claims')
-          %span.badge.badge-light.badge-pill.citation-correction #{number_with_delimiter(article.article_occurrences.count)}
+          %span.badge.badge-light.badge-pill.citation-correction #{number_with_delimiter(stats[:occurrence_count])}
           %span.text-muted= I18n.t('article.specimens')
 
   - if @pagy.pages > 1
