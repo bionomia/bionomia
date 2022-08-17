@@ -155,12 +155,17 @@ module Sinatra
         def format_users
           @results.map{ |n|
             lifespan = n[:_source][:wikidata] ? format_lifespan(n[:_source]) : nil
+            uri = n[:_source][:wikidata] \
+                  ? "http://www.wikidata.org/entity/#{n[:_source][:wikidata]}" \
+                  : "https://orcid.org/#{n[:_source][:orcid]}"
             { id: n[:_source][:id],
               score: n[:_score],
               orcid: n[:_source][:orcid],
               wikidata: n[:_source][:wikidata],
+              uri: uri,
               fullname: n[:_source][:fullname],
               fullname_reverse: n[:_source][:fullname_reverse],
+              other_names: n[:_source][:other_names],
               thumbnail: n[:_source][:thumbnail],
               lifespan: lifespan,
               description: n[:_source][:description]
