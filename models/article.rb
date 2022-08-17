@@ -12,7 +12,7 @@ class Article < ActiveRecord::Base
   serialize :gbif_downloadkeys, Array
 
   after_create :update_citation, :add_search, unless: :skip_callbacks
-  after_update :update_citation, :update_search, unless: :skip_callbacks
+  after_update :update_citation, :update_search, :flush_cache, unless: :skip_callbacks
   after_destroy :remove_search, unless: :skip_callbacks
 
   include ActionView::Helpers::SanitizeHelper
@@ -94,6 +94,13 @@ class Article < ActiveRecord::Base
              .order(count_all: :desc)
   end
 
+  def flush_cache
+    return if !::Module::const_get("BIONOMIA")
+    stats = Class.new
+    stats.extend Sinatra::Bionomia::Helper::ArticleHelper
+    BIONOMIA.cache_put_tag("blocks/article-#{id}-stats", stats.article_stats(self))
+  end
+
   private
 
   def update_citation
@@ -109,9 +116,6 @@ class Article < ActiveRecord::Base
       end
     rescue
     end
-    stats = Class.new
-    stats.extend Sinatra::Bionomia::Helper::ArticleHelper
-    BIONOMIA.cache_put_tag("blocks/article-#{id}-stats", stats.article_stats(self))
   end
 
   def add_search

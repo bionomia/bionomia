@@ -20,6 +20,10 @@ OptionParser.new do |opts|
     options[:process] = true
   end
 
+  opts.on("-c", "--flush-caches", "Loop through processed articles and flush their caches") do
+    options[:caches] = true
+  end
+
   opts.on("-i", "--article_id [article_id]", Integer, "Submit unprocessed article id, download all its data packages and import") do |article_id|
     options[:article_id] = article_id
   end
@@ -66,4 +70,11 @@ if options[:email]
   sm = Bionomia::SendMail.new
   sm.send_messages
   sm.mark_articles_sent
+end
+
+if options[:caches]
+  Article.where(processed: true).find_each do |a|
+    a.flush_cache
+    puts "#{a.id}".green
+  end
 end
