@@ -35,6 +35,7 @@
       %span.text-muted= I18n.t('article.claims')
       %span.badge.badge-light.badge-pill.citation-correction #{number_with_delimiter(stats[:occurrence_count])}
       %span.text-muted= I18n.t('article.specimens')
+      %span.altmetric-embed.ml-2{"data-badge-popover":"right", "data-badge-type":"4", "data-doi":"#{article.doi}", "data-hide-no-mentions":"true"}
 
 - if @pagy.pages > 1
   .y-scroll
