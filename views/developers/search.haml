@@ -15,7 +15,7 @@
 
 %dl
   %dt Base URL
-  %dd.pl-2 https://api.bionomia.net/user.json
+  %dd.pl-2= "#{Settings.api_url}/user.json"
 
   %dt ?q=
   %dd.pl-2 part of a human name (required)
@@ -228,7 +228,7 @@
 
 %dl
   %dt Base URL
-  %dd.pl-2 https://api.bionomia.net/users/search
+  %dd.pl-2= "#{Settings.api_url}/users/search"
 
   %dt ?q=
   %dd.pl-2 single human name (required)
@@ -253,7 +253,7 @@
 
   %dt.mt-3 Example
   %dd.pl-2
-    https://api.bionomia.net/users/search?q=smith&families_collected=scarabaeidae&strict=true
+    #{Settings.api_url}/users/search?q=smith&families_collected=scarabaeidae&strict=true
 
   %dt Response
   %dd
@@ -343,7 +343,7 @@
 
 %dl
   %dt Base URL
-  %dd.pl-2 https://bionomia.net/occurrences/search
+  %dd.pl-2= "#{Settings.api_url}/occurrences/search"
 
   %dt &datasetKey=
   %dd.pl-2 registered UUID provided by the Global Biodiversity Information Facility (GBIF) (required)
@@ -356,7 +356,7 @@
 
   %dt.mt-3 Example
   %dd.pl-2
-    https://bionomia.net/occurrences/search?datasetKey=f86a681d-7db8-483b-819a-248def18b70a&occurrenceID=7a1daa39-8d7c-d7c4-968f-799d58b3c7b0
+    #{Settings.api_url}/occurrences/search?datasetKey=f86a681d-7db8-483b-819a-248def18b70a&occurrenceID=7a1daa39-8d7c-d7c4-968f-799d58b3c7b0
 
   %dt Response
   %dd
