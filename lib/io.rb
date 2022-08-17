@@ -170,9 +170,9 @@ module Bionomia
           prev_url = nil
         else
           if identifications[:metadata][:prev].nil?
-            prev_url = "#{Settings.base_url}#{recordings[:metadata][:prev_url]}"
+            prev_url = "#{Settings.api_url}#{recordings[:metadata][:prev_url]}"
           else
-            prev_url = "#{Settings.base_url}#{identifications[:metadata][:prev_url]}"
+            prev_url = "#{Settings.api_url}#{identifications[:metadata][:prev_url]}"
           end
         end
         w.push_value(prev_url, "as:prev")
@@ -181,7 +181,7 @@ module Bionomia
         if current_stub.nil?
           current_url = nil
         else
-          current_url = "#{Settings.base_url}/#{current_stub}"
+          current_url = "#{Settings.api_url}#{current_stub}"
         end
         w.push_value(current_url, "as:current")
 
@@ -189,9 +189,9 @@ module Bionomia
           next_url = nil
         else
           if identifications[:metadata][:next].nil?
-            next_url = "#{Settings.base_url}#{recordings[:metadata][:next_url]}"
+            next_url = "#{Settings.api_url}#{recordings[:metadata][:next_url]}"
           else
-            next_url = "#{Settings.base_url}#{identifications[:metadata][:next_url]}"
+            next_url = "#{Settings.api_url}#{identifications[:metadata][:next_url]}"
           end
         end
         w.push_value(next_url, "as:next")
