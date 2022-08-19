@@ -6,9 +6,14 @@ module Bionomia
     sidekiq_options queue: :agent
 
     def perform(row)
-      agents = parse(row["agents"])
+      agents = DwcAgent.parse(row["agents"])
+                       .map{|a| DwcAgent.clean(a)}.compact.uniq
       agents.each do |a|
-        family = [a.particle.to_s.strip, a.family.to_s.strip].join(" ").squeeze(" ").strip
+        next if !a.family || a.family.length < 2
+
+        family = [a.particle.to_s.strip, a.family.to_s.strip].join(" ")
+                                                             .squeeze(" ")
+                                                             .strip
         given = a.given.to_s.squeeze(" ").strip
         agent = Agent.create_or_find_by({
           family: family,
@@ -29,17 +34,6 @@ module Bionomia
             OccurrenceDeterminer.import [:occurrence_id, :agent_id], import, batch_size: 1000, validate: false, on_duplicate_key_ignore: true
           end
       end
-    end
-
-    def parse(raw)
-      agents = []
-      DwcAgent.parse(raw).each do |n|
-        agent = DwcAgent.clean(n)
-        if !agent.family.nil? && agent.family.length >= 2
-          agents << agent
-        end
-      end
-      agents.uniq
     end
 
   end
