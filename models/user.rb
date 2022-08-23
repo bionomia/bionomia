@@ -808,43 +808,17 @@ class User < ActiveRecord::Base
 
   def who_might_know
     return [] if !orcid
-    users = []
 
-    #Ten identified same family
     es = ::Bionomia::ElasticUser.new
     doc = es.get(self)
+
+    #Co-collectors
+    users = doc["_source"]["co_collectors"].map{|a| { identifier: a["orcid"] || a["wikidata"], fullname: a["fullname"] }} rescue []
+
+    #Identified same family
     id_family = doc["_source"]["identified"].map{|a| a["family"]}.uniq.sample rescue nil
     if id_family
-      client = Elasticsearch::Client.new(
-        url: Settings.elastic.server,
-        request_timeout: 5*60,
-        retry_on_failure: true,
-        reload_on_failure: true,
-        reload_connections: 1_000,
-        adapter: :typhoeus
-      )
-      body = {
-        query: {
-          function_score: {
-            random_score: {
-              seed: Time.now.to_i
-            },
-            query: {
-              nested: {
-                path: "identified",
-                query: {
-                  bool: {
-                    must: [
-                      { term: { "identified.family": { value: id_family } } }
-                    ]
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-      response = client.search index: Settings.elastic.user_index, body: body, size: 10, scroll: "1m"
+      response = es.by_identified(family: id_family)
       response["hits"]["hits"].each do |a|
         next if a["_source"]["orcid"] == orcid
         users << {
@@ -854,16 +828,7 @@ class User < ActiveRecord::Base
       end
     end
 
-    #Ten co-collectors
-    User.uncached do
-      recorded_with.limit(10)
-                   .order(Arel.sql("RAND()"))
-                   .find_each do |u|
-        users << { identifier: u.identifier, fullname: u.fullname }
-      end
-    end
-
-    #Ten from same organization past/present
+    #From same organization past/present
     User.uncached do
       User.joins(:user_organizations)
           .where.not(id: id)

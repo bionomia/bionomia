@@ -243,5 +243,30 @@ module Bionomia
       }
     end
 
+    def by_identified(family:, size: 10)
+      body = {
+        query: {
+          function_score: {
+            random_score: {
+              seed: Time.now.to_i
+            },
+            query: {
+              nested: {
+                path: "identified",
+                query: {
+                  bool: {
+                    must: [
+                      { term: { "identified.family": { value: family } } }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      client.search index: @settings[:index], body: body, size: size, scroll: "1m"
+    end
+
   end
 end
