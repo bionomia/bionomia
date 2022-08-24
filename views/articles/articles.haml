@@ -13,7 +13,7 @@
       %h1.h2
         = I18n.t('article.articles_title')
       %p.lead.text-muted
-        #{number_to_human(Article.count, units: :'article.articles_lede', delimiter: ",", precision: 0)}
+        #{number_to_human(@pagy.count, units: :'article.articles_lede', delimiter: ",", precision: 0)}
 
     = haml :'partials/article/search', layout: false
 
