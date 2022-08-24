@@ -584,7 +584,7 @@ af:
       one: "A total of 1 uploaded record was handled."
       other: "A total of %{count} records were handled."
     upload_skipped: Existing claims, if present in your upload, were skipped.
-    upload_view: View
+    upload_view: Swedish
     upload_view_html: "%{view} all your claims."
     co_collectors: Co-collectors
     no_co_collectors_alert: Co-collectors have not yet been recorded.
