@@ -8,7 +8,9 @@ module Sinatra
         def self.registered(app)
 
           app.get '/articles' do
-            articles = Article.where(processed: true).order(created: :desc)
+            articles = Article.where(processed: true)
+                              .where.not(citation: nil)
+                              .order(created: :desc)
             @pagy, @results = pagy(articles, items: 25)
             haml :'articles/articles', locals: { active_page: "articles" }
           end
