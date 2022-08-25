@@ -227,6 +227,11 @@ module Sinatra
               body io.csv_stream_occurrences(records)
             end
 
+            get '/who-might-know.json' do
+              content_type "application/json", charset: 'utf-8'
+              @user.who_might_know.to_json
+            end
+
             get '/candidate-count.json' do
               content_type "application/json", charset: 'utf-8'
               return { count: 0}.to_json if @user.family.nil?

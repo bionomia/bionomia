@@ -688,9 +688,25 @@ var Application = (function($, window) {
       });
 
       $("a.help-refresh").on("click", function(e) {
+        var button = $(this), friends;
+
         e.stopPropagation();
         e.preventDefault();
-        location.reload();
+
+        $.ajax({
+            method: "GET",
+            url: button.attr("href"),
+            beforeSend: function(xhr) {
+              button.addClass("disabled").find("i").first().addClass("fa-spin");
+            }
+        }).done(function(data) {
+          button.find("i").first().removeClass("fa-spin");
+          friends = $.map(data, function(i) {
+            return "<a href=\"/help-others/" + i.identifier + "\">" + i.fullname + "</a>";
+          });
+          $("#friends").html(friends.join(", "));
+        });
+        return false;
       });
 
     },

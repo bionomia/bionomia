@@ -68,10 +68,11 @@
     .alert.alert-info.tiny-margins{role: "alert"}
       %i.fas.fa-user-friends.mr-2
       = I18n.t('help.do_you_know')
-      - @friends.each_with_index do |u, i|
-        = succeed (@friends.count > i+1) ? ", " : "" do
-          = link_to u[:fullname], url("/help-others/#{u[:identifier]}")
-      %a.help-refresh.ml-2{href:"#"}
+      %span#friends
+        - @friends.each_with_index do |u, i|
+          = succeed (@friends.count > i+1) ? ", " : "" do
+            = link_to u[:fullname], url("/help-others/#{u[:identifier]}")
+      %a.help-refresh.ml-2{href: url('/profile/who-might-know.json')}
         %i.fas.fa-sync-alt
         = I18n.t('profile.refresh')
 
