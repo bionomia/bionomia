@@ -2,7 +2,6 @@
   #{@taxon.family}
 
 - content_for :scripts do
-  %script{src:"/js/application.js"}
   :javascript
     $(function() {
       Application.init(#{@user.id}, "POST", "/admin");

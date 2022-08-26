@@ -2,7 +2,6 @@
 - content_for :stylesheets do
   %link{href: "/font/subset-LovelyHome.otf", rel:"preload", as:"font", type:"font/otf", crossorigin: true}
 - content_for :scripts do
-  %script{src: "/js/application.js"}
   :javascript
     $(function() {
       Application.init("", "GET", "/roster");

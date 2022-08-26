@@ -1,7 +1,6 @@
 - content_for :title, I18n.t('help.new_people')
 - content_for :scripts do
   %script{src: "/js/progress-bar.js"}
-  %script{src: "/js/application.js"}
   :javascript
     $(function() {
       var ids = $.map($('.progress-bar'), function(obj) { return $(obj).attr("id").split("_").pop(); });

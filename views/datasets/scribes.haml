@@ -2,7 +2,6 @@
 
 - content_for :title, "#{@dataset.title} – #{I18n.t('dataset.scribes_title')}"
 - content_for :scripts do
-  %script{src: "/js/application.js"}
   :javascript
     $(function() {
       Application.init();

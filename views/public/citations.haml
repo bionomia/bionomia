@@ -3,7 +3,6 @@
 - content_for(:title, "#{@viewed_user.fullname}")
 
 - content_for :scripts do
-  %script{src: "/js/application.js"}
   %script{src: "//d1bxh8uas1mnw7.cloudfront.net/assets/embed.js", defer:true}
   :javascript
     $(function() {

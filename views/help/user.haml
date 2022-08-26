@@ -1,6 +1,5 @@
 - content_for :title, "Helping #{@viewed_user.fullname}"
 - content_for :scripts do
-  %script{src: "/js/application.js"}
   :javascript
     $(function() {
       Application.init(#{@viewed_user.id}, "POST", "/help-others", "#{@viewed_user.identifier}");

@@ -1,6 +1,5 @@
 - content_for :title, I18n.t('taxa.search_title')
 - content_for :scripts do
-  %script{src: "/js/application.js"}
   :javascript
     $(function() {
       Application.init("", "GET", "/taxa");

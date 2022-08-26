@@ -7,7 +7,6 @@
     %link{href: "#{Settings.api_url}/#{@viewed_user.identifier}.jsonld", rel:"alternate", type:"application/ld+json"}
 
   - content_for :scripts do
-    %script{src: "/js/application.js"}
     %script{src: "/js/progress-bar.js"}
     :javascript
       $(function() {

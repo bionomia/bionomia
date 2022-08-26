@@ -1,6 +1,5 @@
 - content_for :title, "Ayude a atribuir especímenes"
 - content_for :scripts do
-  %script{src: "/js/application.js"}
   :javascript
     $(function() {
       Application.init("", "GET", "/help-others");

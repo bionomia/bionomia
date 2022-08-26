@@ -2,7 +2,6 @@
 - content_for :stylesheets do
   %link{href:"/css/bootstrap-datepicker3.standalone.min.css", rel:"stylesheet", type:"text/css"}
 - content_for :scripts do
-  %script{src: "/js/application.js"}
   :javascript
     var Filters = { "datasetKey": "#{params[:datasetKey]}", "agent_id": "#{params[:agent_id]}", "taxon_id": "#{params[:taxon_id]}", "kingdom": "#{params[:kingdom]}", "country_code": "#{params[:country_code]}" };
     $(function() {

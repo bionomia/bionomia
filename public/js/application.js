@@ -43,6 +43,7 @@ var Application = (function($, window) {
       this.profile_cards();
       this.bloodhound();
       this.typeahead();
+      this.tooltips();
       this.activate_dropdowns();
       this.activate_radios();
       this.activate_switch();
@@ -240,6 +241,17 @@ var Application = (function($, window) {
               window.location.href = window.location.pathname + "?q=" + datum.name;
             }
           });
+    },
+
+    tooltips: function() {
+      $('[data-toggle="tooltip"]').tooltip();
+      $('[data-toggle="tooltip"]', 'nav').on("mouseover", function() {
+        if ($(this).find("span").is(":visible")) {
+          $(this).tooltip('hide');
+        } else {
+          $(this).tooltip('show');
+        }
+      });
     },
 
     activate_dropdowns: function() {
