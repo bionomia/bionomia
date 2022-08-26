@@ -1,6 +1,11 @@
 = haml :'partials/dataset/twitter_img', layout: false
 
 - content_for :title, "#{@dataset.title} – #{I18n.t('dataset.agent_strings_unclaimed')}"
+- content_for :scripts do
+  :javascript
+    $(function() {
+      Application.init();
+    });
 
 .row
   = haml :'partials/dataset/jumbotron', layout:false

@@ -1,6 +1,10 @@
 - content_for :title do
   Statistics
-
+- content_for :scripts do
+  :javascript
+    $(function() {
+      Application.init();
+    });
 - content_for :jumbotron do
   .jumbotron.jumbotron-fluid.alert-warning.d-flex.flex-wrap
     .mr-auto

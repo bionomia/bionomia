@@ -8,6 +8,8 @@
     $(function() {
       var countries = #{countries}, map;
 
+      Application.init();
+
       google.charts.load('current', {
         packages: ['geochart'],
         mapsApiKey: "#{Settings.google.api_key}"

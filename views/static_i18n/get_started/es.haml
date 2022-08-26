@@ -1,4 +1,9 @@
 - content_for :title, "Comenzar"
+- content_for :scripts do
+  :javascript
+    $(function() {
+      Application.init();
+    });
 - content_for :jumbotron do
   .jumbotron.jumbotron-fluid.d-flex.flex-wrap
     .mr-auto.p-2

@@ -1,6 +1,10 @@
 - content_for :title do
   Administration
-
+- content_for :scripts do
+  :javascript
+    $(function() {
+      Application.init();
+    });
 - content_for :jumbotron do
   .jumbotron.jumbotron-fluid.alert-warning
     %h1.h2 Administration

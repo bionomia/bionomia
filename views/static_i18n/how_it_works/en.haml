@@ -1,6 +1,10 @@
--content_for :title, "How it Works"
-
--content_for :jumbotron do
+- content_for :title, "How it Works"
+- content_for :scripts do
+  :javascript
+    $(function() {
+      Application.init();
+    });
+- content_for :jumbotron do
   %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
     %div{class:"mr-auto p-2"}
       %h1{class:"h2"} How it Works
