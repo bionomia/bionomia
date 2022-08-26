@@ -245,12 +245,12 @@ var Application = (function($, window) {
 
     tooltips: function() {
       $('[data-toggle="tooltip"]').tooltip();
-      $('[data-toggle="tooltip"]', 'nav').on("mouseover", function() {
+      $('[data-toggle="tooltip"]', 'nav').on("mouseenter", function() {
         if ($(this).find("span").is(":visible")) {
           $(this).tooltip('hide');
-        } else {
-          $(this).tooltip('show');
         }
+      }).on("focus", function() {
+        $(this).tooltip('hide');
       });
     },
 
