@@ -569,6 +569,7 @@ var Application = (function($, window) {
           $("#flush-message").on("closed.bs.alert", function () {
             location.reload();
           });
+          setTimeout(function() { location.reload(); }, 2500);
         });
         return false;
       });
@@ -590,6 +591,7 @@ var Application = (function($, window) {
           $(".alert").on("closed.bs.alert", function () {
             location.reload();
           });
+          setTimeout(function() { location.reload(); }, 2500);
         });
         return false;
       });
@@ -611,6 +613,7 @@ var Application = (function($, window) {
           $(".alert").on("closed.bs.alert", function () {
             location.reload();
           });
+          setTimeout(function() { location.reload(); }, 2500);
         });
         return false;
       });
@@ -632,6 +635,7 @@ var Application = (function($, window) {
           $(".alert").on("closed.bs.alert", function () {
             location.reload();
           });
+          setTimeout(function() { location.reload(); }, 2500);
         });
         return false;
       });
@@ -670,6 +674,7 @@ var Application = (function($, window) {
           $(".alert").on("closed.bs.alert", function () {
             location.reload();
           });
+          setTimeout(function() { location.reload(); }, 2500);
         });
         return false;
       });
@@ -695,6 +700,7 @@ var Application = (function($, window) {
           $(".alert").on("closed.bs.alert", function () {
             location.reload();
           });
+          setTimeout(function() { location.reload(); }, 2500);
         });
         return false;
       });

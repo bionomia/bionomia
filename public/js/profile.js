@@ -87,6 +87,7 @@ var Profile = (function($, window) {
               $('#image-alert').addClass("show").show().on('close.bs.alert', function() {
                 $('#profile-remove').trigger("click");
               });
+              setTimeout(function() { location.reload(); }, 2500);
             }
           }).fail(function(data) {
             $('#profile-image').find("img").remove();
