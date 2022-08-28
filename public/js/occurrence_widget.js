@@ -150,7 +150,7 @@ var OccurrenceWidget = (function($, window) {
       if (found) {
         var url = (found.identifier[0] === "Q") ? "https://www.wikidata.org/wiki/" + found.identifier : "https://orcid.org/" + found.identifier;
         if (found.identifier[0] === "Q") {
-          img = "<img src=\"/images/wikidata_24x24.png\" class=\"pr-1\" />";
+          img = "<img src=\"/images/wikidata_24x15.svg\" class=\"pr-1\" />";
         } else {
           img = "<i class=\"fab fa-orcid pr-1\"></i>";
         }

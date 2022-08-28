@@ -53,7 +53,7 @@
         https://orcid.org/#{@admin_user.orcid}
     - else
       %a{href: "https://www.wikidata.org/wiki/#{@admin_user.wikidata}"}
-        %img{src: "/images/wikidata_16x16.png", alt:"WIkidata iD"}
+        %img{src: "/images/wikidata_18x12.svg", alt:"WIkidata iD"}
           = link_to "https://www.wikidata.org/wiki/#{@admin_user.wikidata}", "https://www.wikidata.org/wiki/#{@admin_user.wikidata}"
 
   - if !@admin_user.current_organization.nil?
@@ -110,7 +110,7 @@
         - if @admin_user.orcid
           %i.fab.fa-orcid
         - else
-          %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD", width:"18px"}
+          %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD", width:"18px"}
     %p.mb-0
       - if locals[:active_page] == "settings"
         %a.mb-2.text-nowrap{href: url("/admin/user/#{@admin_user.identifier}")}

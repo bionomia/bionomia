@@ -67,12 +67,12 @@
     - if !@organization.wikidata.blank?
       %small.form-text.text-muted#ringgold-link
         %a{href: "https://www.wikidata.org/wiki/#{@organization.wikidata}"}
-          %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD"}
+          %img{src: "/images/wikidata_16x10.svg", alt:"Wikidata iD"}
         %a{href: "https://www.wikidata.org/wiki/#{@organization.wikidata}", target:"_blank"} https://www.wikidata.org/wiki/#{@organization.wikidata}
       %a.btn.btn-sm.btn-outline-success.organization-refresh{href: url("/admin/organization/#{@organization.id}/refresh.json"), role:"button"}
         %i.fas.fa-sync-alt
         Refresh
-        %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD", width:"18px"}
+        %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD", width:"18px"}
 
       .alert.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}
         Data from Wikidata was refreshed.

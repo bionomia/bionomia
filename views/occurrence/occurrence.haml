@@ -178,7 +178,7 @@
                       https://orcid.org/#{recorder.user.orcid}
                   - else
                     #{recorder.user.fullname_reverse}
-                    %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD"}
+                    %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD"}
                     = link_to "https://www.wikidata.org/wiki/#{recorder.user.wikidata}", "https://www.wikidata.org/wiki/#{recorder.user.wikidata}"
                   %span.d-block.ml-3.text-muted.small
                     - if recorder.claimant != recorder.user && !recorder.claimant.is_bot?
@@ -259,7 +259,7 @@
                       https://orcid.org/#{determiner.user.orcid}
                   - else
                     #{determiner.user.fullname_reverse}
-                    %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD"}
+                    %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD"}
                     = link_to "https://www.wikidata.org/wiki/#{determiner.user.wikidata}", "https://www.wikidata.org/wiki/#{determiner.user.wikidata}"
                   %span.d-block.ml-3.text-muted.small
                     - if determiner.claimant != determiner.user && !determiner.claimant.is_bot?

@@ -44,7 +44,7 @@
           %i.fab.fa-orcid
           https://orcid.org/#{@viewed_user.orcid}
       - else
-        %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD"}
+        %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD"}
         = link_to "https://www.wikidata.org/wiki/#{@viewed_user.wikidata}", "https://www.wikidata.org/wiki/#{@viewed_user.wikidata}"
 
     - org = @viewed_user.current_organization
@@ -121,7 +121,7 @@
           - if @viewed_user.orcid
             %i.fab.fa-orcid
           - else
-            %img{src: "/images/wikidata_24x24.png", alt:"Wikidata iD", width:"18px"}
+            %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD", width:"18px"}
 
         - if admin_authorized?
           %a.mb-2{href: url("/admin/user/#{@viewed_user.identifier}/settings")}

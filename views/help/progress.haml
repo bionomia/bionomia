@@ -36,7 +36,7 @@
             - if claim.user.orcid
               %i.fab.fa-orcid
             - else
-              %img{src: "/images/wikidata_16x16.png", alt:"Wikidata iD"}
+              %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD"}
             %a{href: url("/help-others/#{claim.user.identifier}")} #{claim.user.fullname_reverse}
             - if !claim.user.is_public?
               %i.fas.fa-lock.text-muted.ml-2
