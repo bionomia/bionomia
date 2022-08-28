@@ -35,14 +35,14 @@
     %textarea.form-control#description{type:"text", name:"description"}= "#{@dataset.description}"
     %small.form-text.text-muted#dataset-link
       %a{href: "https://gbif.org/dataset/#{@dataset.datasetKey}"}
-        %img{src: "/images/gbif_40x40.png", alt:"GBIF", width:"18px"}
+        %img{src: "/images/gbif_18x18.svg", alt:"GBIF", width:"18px"}
       %a{href: "https://gbif.org/dataset/#{@dataset.datasetKey}", target:"_blank"} https://gbif.org/dataset/#{@dataset.datasetKey}
 
   %p
     %a.btn.btn-sm.btn-outline-success.dataset-refresh.mt-3{href: url("/admin/dataset/refresh.json?datasetKey=#{@dataset.datasetKey}"), role:"button"}
       %i.fas.fa-sync-alt
       Refresh
-      %img{src: "/images/gbif_40x40.png", alt:"GBIF", width:"18px"}
+      %img{src: "/images/gbif_18x18.svg", alt:"GBIF", width:"18px"}
     %a.btn.btn-sm.btn-outline-success.dataset-frictionless.mt-3{href: url("/admin/dataset/frictionless.json?datasetKey=#{@dataset.datasetKey}"), role:"button"}
       %i.fas.fa-sync-alt
       Rebuild
