@@ -213,6 +213,7 @@ fr:
     parse_names: Analyser les Noms Humains
     parse_names_title: "Pour les Développeurs: Analyser les Noms"
     structured_data_title: "For Developers: Données Structurées"
+    search_title: "For Developers: Search"
   donate:
     donate_title: Faire un don
     lede: Votre don unique ou périodique contribuera à compléter le pipeline de données et à garantir que le crédit est accordé aux contributions faites aux collections d'histoire naturelle le plus rapidement et le plus facilement possible.
@@ -246,6 +247,9 @@ fr:
     remove: Enlever
     filtered_by: Filtré par
   help:
+    ignored_title: "Help Reclaim Ignored for %{name}"
+    upload_user_title: "Bulk Upload for %{name}"
+    help_user_title: "Help Attribute Specimens for %{name}"
     help_title: Aider à attribuer des spécimens
     country_title: Aider à attribuer des spécimens
     latest_title: Derniers Bénéficiaires
@@ -700,6 +704,10 @@ fr:
     taxon_string: Famille taxonomique
     start_year: Année de début
     end_year: Fin d'année
+    user_title: "%{taxon} Collectors or Determiners"
+    agent_count_title: "%{taxon} Agent Counts"
+    agent_unclaimed_title: "%{taxon} Agent Unclaimed"
+    agents_title: "%{taxon} Agents"
   user:
     caches_rebuilt: Les caches ont été reconstruits.
     overview: Aperçu

@@ -213,6 +213,7 @@ de:
     parse_names: Menschliche Namen analysieren
     parse_names_title: "Für Entwickler: Namen analysieren"
     structured_data_title: "Für Entwickler: Strukturierte Daten"
+    search_title: "For Developers: Search"
   donate:
     donate_title: Spenden
     lede: Ihre einmalige oder regelmäßige Spende hilft, die Datenpipeline zu vervollständigen und sicherzustellen, dass die Beiträge zu den naturkundlichen Sammlungen so schnell und einfach wie möglich gutgeschrieben werden.
@@ -246,6 +247,9 @@ de:
     remove: Entfernen
     filtered_by: Gefiltert nach
   help:
+    ignored_title: "Help Reclaim Ignored for %{name}"
+    upload_user_title: "Bulk Upload for %{name}"
+    help_user_title: "Help Attribute Specimens for %{name}"
     help_title: Zur Zuordnung von Exemplaren beitragen
     country_title: Zur Zuordnung von Exemplaren beitragen
     latest_title: Neueste Empfänger
@@ -700,6 +704,10 @@ de:
     taxon_string: Taxonomische Familie
     start_year: Startjahr
     end_year: Endjahr
+    user_title: "%{taxon} Collectors or Determiners"
+    agent_count_title: "%{taxon} Agent Counts"
+    agent_unclaimed_title: "%{taxon} Agent Unclaimed"
+    agents_title: "%{taxon} Agents"
   user:
     caches_rebuilt: Cache wurde neu erstellt.
     overview: Übersicht

@@ -1,6 +1,6 @@
 = haml :'partials/dataset/twitter_img', layout: false
 
-- content_for :title, "#{@dataset.title} – #{I18n.t('dataset.agents')}"
+- content_for :title, "#{@dataset.title}: #{I18n.t('dataset.agents')}"
 - content_for :scripts do
   :javascript
     $(function() {

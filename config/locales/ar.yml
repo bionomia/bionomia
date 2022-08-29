@@ -277,6 +277,7 @@ ar:
     parse_names: Parse Human Names
     parse_names_title: "For Developers: Parse Names"
     structured_data_title: "For Developers: Structured Data"
+    search_title: "For Developers: Search"
   donate:
     donate_title: Donate
     lede: Your one-time or periodic donation will help complete the data pipeline and ensure that credit is given for contributions made to natural history collections as quickly and as seamlessly as possible.
@@ -310,6 +311,9 @@ ar:
     remove: Remove
     filtered_by: Filtered by
   help:
+    ignored_title: "Help Reclaim Ignored for %{name}"
+    upload_user_title: "Bulk Upload for %{name}"
+    help_user_title: "Help Attribute Specimens for %{name}"
     help_title: Help Attribute Specimens
     country_title: Help Attribute Specimens
     latest_title: Latest Recipients
@@ -864,6 +868,10 @@ ar:
     taxon_string: Taxon Family
     start_year: Start Year
     end_year: End Year
+    user_title: "%{taxon} Collectors or Determiners"
+    agent_count_title: "%{taxon} Agent Counts"
+    agent_unclaimed_title: "%{taxon} Agent Unclaimed"
+    agents_title: "%{taxon} Agents"
   user:
     caches_rebuilt: Caches were rebuilt.
     overview: Overview

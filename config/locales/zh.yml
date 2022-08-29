@@ -197,6 +197,7 @@ zh-CN:
     parse_names: Parse Human Names
     parse_names_title: "For Developers: Parse Names"
     structured_data_title: "面向开发人员：结构化数据"
+    search_title: "For Developers: Search"
   donate:
     donate_title: 赞助
     lede: 您的一次性或定期捐赠将有助于数据管道（data pipeline）的完成，并确保尽可能快速、无缝地捐赠与自然博物收藏。
@@ -230,6 +231,9 @@ zh-CN:
     remove: Remove
     filtered_by: Filtered by
   help:
+    ignored_title: "Help Reclaim Ignored for %{name}"
+    upload_user_title: "Bulk Upload for %{name}"
+    help_user_title: "Help Attribute Specimens for %{name}"
     help_title: Help Attribute Specimens
     country_title: Help Attribute Specimens
     latest_title: Latest Recipients
@@ -659,6 +663,10 @@ zh-CN:
     taxon_string: Taxon Family
     start_year: Start Year
     end_year: End Year
+    user_title: "%{taxon} Collectors or Determiners"
+    agent_count_title: "%{taxon} Agent Counts"
+    agent_unclaimed_title: "%{taxon} Agent Unclaimed"
+    agents_title: "%{taxon} Agents"
   user:
     caches_rebuilt: Caches were rebuilt.
     overview: Overview

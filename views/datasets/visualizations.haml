@@ -1,6 +1,6 @@
 = haml :'partials/dataset/twitter_img', layout: false
 
-- content_for :title, "#{@dataset.title} – #{I18n.t('dataset.visualizations')}"
+- content_for :title, "#{@dataset.title}: #{I18n.t('dataset.visualizations')}"
 
 = haml :'partials/timeline_viz_scripts', layout: false, locals: { extra_param: "&datasetKey=#{@dataset.datasetKey}" }
 

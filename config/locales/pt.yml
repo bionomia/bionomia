@@ -213,6 +213,7 @@ pt:
     parse_names: Separar Nomes Humanos
     parse_names_title: "Para Desenvolvedores: Separar Nomes"
     structured_data_title: "Para Desenvolvedores: Data Estruturada"
+    search_title: "For Developers: Search"
   donate:
     donate_title: Doe
     lede: Sua doação única ou periódica ajudará a completar o pipeline de dados e garantir que o crédito seja dado por contribuições feitas para coleções de história natural o mais rápido e perfeitamente possível.
@@ -246,6 +247,9 @@ pt:
     remove: Remover
     filtered_by: Filtrado por
   help:
+    ignored_title: "Help Reclaim Ignored for %{name}"
+    upload_user_title: "Bulk Upload for %{name}"
+    help_user_title: "Help Attribute Specimens for %{name}"
     help_title: Espécimes de atributo de ajuda
     country_title: Espécimes de atributo de ajuda
     latest_title: Destinatários mais recentes
@@ -700,6 +704,10 @@ pt:
     taxon_string: Família Taxon
     start_year: Ano de início
     end_year: Fim de ano
+    user_title: "%{taxon} Collectors or Determiners"
+    agent_count_title: "%{taxon} Agent Counts"
+    agent_unclaimed_title: "%{taxon} Agent Unclaimed"
+    agents_title: "%{taxon} Agents"
   user:
     caches_rebuilt: Caches foram reconstruídos.
     overview: Visão geral

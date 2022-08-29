@@ -213,6 +213,7 @@ es:
     parse_names: Analizar nombres humanos
     parse_names_title: "Para desarrolladores: Analizar nombres"
     structured_data_title: "Para desarrolladores: Datos estructurados"
+    search_title: "For Developers: Search"
   donate:
     donate_title: Donaciones
     lede: Su donación única o periódica ayudará a completar los protocolos para el procesamiento de los datos y garantizará que se otorgue crédito por las contribuciones realizadas a las colecciones de historia natural de la manera más rápida y fluida posible.
@@ -246,6 +247,9 @@ es:
     remove: Remover
     filtered_by: Filtrado por
   help:
+    ignored_title: "Help Reclaim Ignored for %{name}"
+    upload_user_title: "Bulk Upload for %{name}"
+    help_user_title: "Help Attribute Specimens for %{name}"
     help_title: Ayude a atribuir especímenes
     country_title: Ayude a atribuir especímenes
     latest_title: Últimos receptores
@@ -700,6 +704,10 @@ es:
     taxon_string: Familia taxonómica
     start_year: Año de inicio
     end_year: Año final
+    user_title: "%{taxon} Collectors or Determiners"
+    agent_count_title: "%{taxon} Agent Counts"
+    agent_unclaimed_title: "%{taxon} Agent Unclaimed"
+    agents_title: "%{taxon} Agents"
   user:
     caches_rebuilt: Se han reconstruido las memorias caché.
     overview: Descripción general
