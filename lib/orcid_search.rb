@@ -98,12 +98,16 @@ module Bionomia
     end
 
     def account_data(orcid)
-      response = RestClient::Request.execute(
-        method: :get,
-        url: "#{@settings.orcid.api_url}#{orcid}",
-        headers: { accept: 'application/orcid+json' }
-      )
-      data = JSON.parse(response, :symbolize_names => true)
+      begin
+        response = RestClient::Request.execute(
+          method: :get,
+          url: "#{@settings.orcid.api_url}#{orcid}",
+          headers: { accept: 'application/orcid+json' }
+        )
+        data = JSON.parse(response, :symbolize_names => true)
+      rescue
+        return {}
+      end
 
       family = data[:person][:name][:"family-name"][:value].strip rescue nil
       given = data[:person][:name][:"given-names"][:value].strip rescue nil

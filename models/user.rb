@@ -705,21 +705,25 @@ class User < ActiveRecord::Base
   def update_orcid_profile
     orcid_lib = Bionomia::OrcidSearch.new
     data = orcid_lib.account_data(orcid)
-    data[:organizations].each do |org|
-      update_affiliation(org)
-    end
-    begin
-      wikidata_lib = Bionomia::WikidataSearch.new
-      wiki_data = wikidata_lib.wiki_user_by_orcid(orcid)
-      if !wiki_data[:twitter].nil?
-        data[:twitter] = wiki_data[:twitter]
+    if data.blank?
+      destroy
+    else
+      data[:organizations].each do |org|
+        update_affiliation(org)
       end
-      if !wiki_data[:youtube_id].nil?
-        data[:youtube_id] = wiki_data[:youtube_id]
+      begin
+        wikidata_lib = Bionomia::WikidataSearch.new
+        wiki_data = wikidata_lib.wiki_user_by_orcid(orcid)
+        if !wiki_data[:twitter].nil?
+          data[:twitter] = wiki_data[:twitter]
+        end
+        if !wiki_data[:youtube_id].nil?
+          data[:youtube_id] = wiki_data[:youtube_id]
+        end
+      rescue
       end
-    rescue
+      update(data.except!(:organizations))
     end
-    update(data.except!(:organizations))
   end
 
   def update_wikidata_profile

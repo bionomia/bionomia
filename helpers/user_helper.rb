@@ -115,7 +115,11 @@ module Sinatra
               flash.next[:new_user] = { fullname: params[:identifier], slug: nil }
             elsif params[:identifier].is_orcid?
               new_user = User.find_or_create_by({ orcid: params[:identifier] })
-              flash.next[:new_user] = { fullname: new_user.fullname, slug: new_user.orcid }
+              if new_user.nil?
+                flash.next[:new_user] = { fullname: params[:identifier], slug: nil }
+              else
+                flash.next[:new_user] = { fullname: new_user.fullname, slug: new_user.orcid }
+              end
             elsif params[:identifier].is_wiki_id?
               wiki_search = ::Bionomia::WikidataSearch.new
               user_data = wiki_search.wiki_user_data(params[:identifier])
