@@ -207,13 +207,13 @@ fr:
     code: Code Informatique
     reconcile_title: Réconcilier
     recommended_use: Utilisation recommandée
-    title: Pour les Développeurs
-    code_title: "Pour les Développeurs: Code Informatique"
+    title: Pour les informaticiens
+    code_title: "Pour les informaticiens: Code Informatique"
     parser: Analyser les Noms
     parse_names: Analyser les Noms Humains
-    parse_names_title: "Pour les Développeurs: Analyser les Noms"
-    structured_data_title: "For Developers: Données Structurées"
-    search_title: "For Developers: Search"
+    parse_names_title: "Pour les informaticiens: Analyser les Noms"
+    structured_data_title: "Pour les informaticiens: Données Structurées"
+    search_title: "Pour les informaticiens: Chercher"
   donate:
     donate_title: Faire un don
     lede: Votre don unique ou périodique contribuera à compléter le pipeline de données et à garantir que le crédit est accordé aux contributions faites aux collections d'histoire naturelle le plus rapidement et le plus facilement possible.
@@ -247,9 +247,9 @@ fr:
     remove: Enlever
     filtered_by: Filtré par
   help:
-    ignored_title: "Help Reclaim Ignored for %{name}"
-    upload_user_title: "Bulk Upload for %{name}"
-    help_user_title: "Help Attribute Specimens for %{name}"
+    ignored_title: "Aide a récupéré pour %{name}"
+    upload_user_title: "Téléchargement en bloc pour %{name}"
+    help_user_title: "Aidez à attribuer des spécimens à %{name}"
     help_title: Aider à attribuer des spécimens
     country_title: Aider à attribuer des spécimens
     latest_title: Derniers Bénéficiaires
@@ -704,10 +704,10 @@ fr:
     taxon_string: Famille taxonomique
     start_year: Année de début
     end_year: Fin d'année
-    user_title: "%{taxon} Collectors or Determiners"
-    agent_count_title: "%{taxon} Agent Counts"
-    agent_unclaimed_title: "%{taxon} Agent Unclaimed"
-    agents_title: "%{taxon} Agents"
+    user_title: "Collectionneurs ou détermineurs pour %{taxon}"
+    agent_count_title: "Nombre d'agents pour %{taxon}"
+    agent_unclaimed_title: "Agent non réclamé pour %{taxon}"
+    agents_title: "Agents pour %{taxon}"
   user:
     caches_rebuilt: Les caches ont été reconstruits.
     overview: Aperçu
