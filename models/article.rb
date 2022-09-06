@@ -11,6 +11,9 @@ class Article < ActiveRecord::Base
   serialize :gbif_dois, Array
   serialize :gbif_downloadkeys, Array
 
+  serialize :gbif_dois_json, JSON
+  serialize :gbif_downloadkeys_json, JSON
+
   after_create :update_citation, :add_search, unless: :skip_callbacks
   after_update :update_citation, :update_search, :flush_cache, unless: :skip_callbacks
   after_destroy :remove_search, unless: :skip_callbacks
