@@ -191,12 +191,12 @@ GEM
     nokogiri (1.13.8)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
-    oauth2 (2.0.7)
+    oauth2 (2.0.8)
       faraday (>= 0.17.3, < 3.0)
       jwt (>= 1.0, < 3.0)
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
-      rash_alt (>= 0.4, < 1)
+      snaky_hash (~> 2.0)
       version_gem (~> 1.1)
     oj (3.13.21)
     omniauth (2.1.0)
@@ -211,7 +211,7 @@ GEM
       ruby_dig (~> 0.0.2)
     pagy (5.10.1)
       activesupport
-    pairing_heap (0.3.0)
+    pairing_heap (1.0.0)
     parallel (1.22.1)
     passenger (6.0.14)
       rack
@@ -240,8 +240,6 @@ GEM
     rails-html-sanitizer (1.4.3)
       loofah (~> 2.3)
     rake (13.0.6)
-    rash_alt (0.4.12)
-      hashie (>= 3.4)
     rdf (3.2.9)
       link_header (~> 0.0, >= 0.0.8)
     redis (4.8.0)
@@ -306,6 +304,9 @@ GEM
       sinatra (>= 1.0)
     sitemap_generator (6.3.0)
       builder (~> 3.0)
+    snaky_hash (2.0.0)
+      hashie
+      version_gem (~> 1.1)
     sparql-client (3.2.1)
       net-http-persistent (~> 4.0, >= 4.0.1)
       rdf (~> 3.2, >= 3.2.6)
@@ -369,7 +370,7 @@ DEPENDENCIES
   mysql2
   namae
   nokogiri
-  oauth2 (= 2.0.7)
+  oauth2
   oj
   omniauth-orcid
   pagy
