@@ -8,11 +8,8 @@ class Article < ActiveRecord::Base
   validates :gbif_dois, presence: true
   validates :gbif_downloadkeys, presence: true
 
-  serialize :gbif_dois, Array
-  serialize :gbif_downloadkeys, Array
-
-  serialize :gbif_dois_json, JSON
-  serialize :gbif_downloadkeys_json, JSON
+  serialize :gbif_dois, JSON
+  serialize :gbif_downloadkeys, JSON
 
   after_create :update_citation, :add_search, unless: :skip_callbacks
   after_update :update_citation, :update_search, :flush_cache, unless: :skip_callbacks
