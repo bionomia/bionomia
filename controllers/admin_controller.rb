@@ -53,7 +53,7 @@ module Sinatra
               if @article.nil?
                 halt 404
               end
-              data = { doi: @article.doi }
+              data = { doi: @article.doi }.merge(params).except("authenticity_token")
               @article.update(data)
               flash.next[:updated] = true
               redirect "/admin/article/#{@article.id}"
