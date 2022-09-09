@@ -96,6 +96,7 @@ module Bionomia
         rows = mysql2.query(query, stream: true, cache_rows: false)
         puts "Creating gbifID list...".yellow
         tmp_csv = Tempfile.new(['frictionless', '.csv'])
+        puts "Tempfile at #{tmp_csv.path}".yellow
         CSV.open(tmp_csv.path, 'w') do |csv|
           rows.each { |row| csv << row }
         end
