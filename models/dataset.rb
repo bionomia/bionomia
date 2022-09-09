@@ -32,6 +32,10 @@ class Dataset < ActiveRecord::Base
     determiner.exists? || recorder.exists?
   end
 
+  def is_large?
+    occurrences_count > 1_000_000
+  end
+
   def users
     subq = UserOccurrence.select(:user_id, :visible)
                          .from("user_occurrences FORCE INDEX (user_occurrence_idx)")

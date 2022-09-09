@@ -89,13 +89,20 @@ module Bionomia
       gbif_ids = Set.new
       user_ids = Set.new
 
-      Occurrence.joins(:user_occurrences)
-                .where(datasetKey: @dataset.datasetKey)
-                .pluck("user_occurrences.id")
-                .in_groups_of(1_000, false).each do |group|
+      if @dataset.is_large?
+        query = Occurrence.select(:gbifID).where(datasetKey: @dataset.datasetKey).to_sql
+        mysql2 = ActiveRecord::Base.connection.instance_variable_get(:@connection)
+        occurrence_ids = mysql2.query(query, stream: true, cache_rows: false).to_a
+      else
+        occurrence_ids = Occurrence.joins(:user_occurrences)
+                            .where(datasetKey: @dataset.datasetKey)
+                            .pluck("user_occurrences.id")
+      end
 
+      occurrence_ids.in_groups_of(1_000, false).each do |group|
+        qualifier = @dataset.is_large? ? { occurrence_id: group.flatten} : { id: group }
         @dataset.user_occurrences
-                .where(user_occurrences: { id: group })
+                .where(user_occurrences: qualifier)
                 .where(users: { is_public: true })
                 .select(fields).each do |o|
 
