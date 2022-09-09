@@ -89,12 +89,16 @@ module Bionomia
       gbif_ids = Set.new
       user_ids = Set.new
 
-      @dataset.user_occurrences
-              .where(users: { is_public: true })
-              .or(@dataset.user_occurrences.where.not(users: { wikidata: nil }))
-              .select(fields)
-              .find_in_batches(batch_size: 25_000) do |batch|
-        batch.each do |o|
+      Occurrence.joins(:user_occurrences)
+                .where(datasetKey: @dataset.datasetKey)
+                .pluck("user_occurrences.id")
+                .in_groups_of(1_000, false).each do |group|
+
+        @dataset.user_occurrences
+                .where(user_occurrences: { id: group })
+                .where(users: { is_public: true })
+                .select(fields).each do |o|
+
           next if !o.visible
 
           # Add users.csv
