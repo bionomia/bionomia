@@ -301,9 +301,7 @@ module Bionomia
       #Add data files
       add_data
 
-      #Add problem file
-      add_problem_collector_data
-
+      #Add citation data
       add_citation_data
 
       #Zip each file in place
@@ -391,9 +389,6 @@ module Bionomia
     end
 
     def add_data
-    end
-
-    def add_problem_collector_data
     end
 
     def add_citation_data

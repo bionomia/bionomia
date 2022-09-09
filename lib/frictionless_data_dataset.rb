@@ -55,13 +55,8 @@ module Bionomia
       }
     end
 
-    def add_data
-      users = File.open(File.join(@folder, users_file), "ab")
-      occurrences = File.open(File.join(@folder, occurrences_file), "ab")
-      attributions = File.open(File.join(@folder, attributions_file), "ab")
-      problems = File.open(File.join(@folder, problem_collectors_file), "ab")
-
-      fields = [
+    def fields
+      [
         "user_occurrences.id",
         "user_occurrences.user_id",
         "user_occurrences.occurrence_id",
@@ -83,22 +78,53 @@ module Bionomia
         "claimants_user_occurrences.family AS createdFamily",
         "claimants_user_occurrences.orcid AS createdORCID",
         "occurrences.eventDate_processed"
-      ]
-      fields.concat((["gbifID"] + Occurrence.accepted_fields).map{|a| "occurrences.#{a} AS occ_#{a}"})
+      ].concat((["gbifID"] + Occurrence.accepted_fields).map{|a| "occurrences.#{a} AS occ_#{a}"})
+    end
 
-      gbif_ids = Set.new
-      user_ids = Set.new
+    def add_data
+      @users = File.open(File.join(@folder, users_file), "ab")
+      @occurrences = File.open(File.join(@folder, occurrences_file), "ab")
+      @attributions = File.open(File.join(@folder, attributions_file), "ab")
+      @problems = File.open(File.join(@folder, problem_collectors_file), "ab")
+
+      @gbif_ids = Set.new
+      @user_ids = Set.new
 
       if @dataset.is_large?
         query = Occurrence.select(:gbifID).where(datasetKey: @dataset.datasetKey).to_sql
         mysql2 = ActiveRecord::Base.connection.instance_variable_get(:@connection)
-        occurrence_ids = mysql2.query(query, stream: true, cache_rows: false).to_a
+        rows = mysql2.query(query, stream: true, cache_rows: false)
+        puts "Creating gbifID list...".yellow
+        tmp_csv = Tempfile.new(['frictionless', '.csv'])
+        CSV.open(tmp_csv.path, 'w') do |csv|
+          rows.each { |row| csv << row }
+        end
+        #WARNING: requires GNU parallel to split CSV files
+        system("sort -n #{tmp_csv.path} > #{tmp_csv.path}.tmp && mv #{tmp_csv.path}.tmp #{tmp_csv.path} > /dev/null 2>&1")
+        puts "Splitting files...".yellow
+        system("cat #{tmp_csv.path} | parallel --pipe -N 500000 'cat > #{tmp_csv.path}-{#}.csv' > /dev/null 2>&1")
+        tmp_csv.close
+        all_files = Dir.glob(File.dirname(tmp_csv) + "/**/#{File.basename(tmp_csv.path)}*.csv")
+        puts "Starting to write...".yellow
+        all_files.each do |csv|
+          write_to_files(CSV.read(csv).flatten)
+          File.unlink(csv)
+        end
+        tmp_csv.unlink
       else
         occurrence_ids = Occurrence.joins(:user_occurrences)
                             .where(datasetKey: @dataset.datasetKey)
                             .pluck("user_occurrences.id")
+        write_to_files(occurrence_ids)
       end
 
+      @users.close
+      @occurrences.close
+      @attributions.close
+      @problems.close
+    end
+
+    def write_to_files(occurrence_ids)
       occurrence_ids.in_groups_of(1_000, false).each do |group|
         qualifier = @dataset.is_large? ? { occurrence_id: group.flatten} : { id: group }
         @dataset.user_occurrences
@@ -109,7 +135,7 @@ module Bionomia
           next if !o.visible
 
           # Add users.csv
-          if !user_ids.include?(o.u_id)
+          if !@user_ids.include?(o.u_id)
             aliases = o.u_other_names.split("|").to_s if !o.u_other_names.blank?
             uri = !o.u_orcid.nil? ? "https://orcid.org/#{o.u_orcid}" : "http://www.wikidata.org/entity/#{o.u_wikidata}"
             data = [
@@ -126,8 +152,8 @@ module Bionomia
               o.u_date_died,
               o.u_date_died_precision
             ]
-            users << CSV::Row.new(users_header, data).to_s
-            user_ids << o.u_id
+            @users << CSV::Row.new(users_header, data).to_s
+            @user_ids << o.u_id
           end
 
           # Add attributions.csv
@@ -148,7 +174,7 @@ module Bionomia
             created_date_time,
             modified_date_time
           ]
-          attributions << CSV::Row.new(attributions_header, data).to_s
+          @attributions << CSV::Row.new(attributions_header, data).to_s
 
           # Add problems
           if recorded_uri && o.u_wikidata && o.eventDate_processed &&
@@ -166,26 +192,18 @@ module Bionomia
               o.occ_eventDate,
               o.occ_year
             ]
-            problems << CSV::Row.new(problems_collector_header, data).to_s
+            @problems << CSV::Row.new(problems_collector_header, data).to_s
           end
 
           # Skip occurrences if already added to file
-          next if gbif_ids.include?(o.occ_gbifID)
+          next if @gbif_ids.include?(o.occ_gbifID)
 
           # Add occurrences.csv
           data = o.attributes.select{|k,v| k.start_with?("occ_")}.values
-          occurrences << CSV::Row.new(occurrences_header, data).to_s
-          gbif_ids << o.occ_gbifID
+          @occurrences << CSV::Row.new(occurrences_header, data).to_s
+          @gbif_ids << o.occ_gbifID
         end
       end
-
-      users.close
-      occurrences.close
-      attributions.close
-      problems.close
-    end
-
-    def add_problem_collector_data
     end
 
     def add_citation_data
@@ -215,6 +233,7 @@ module Bionomia
     end
 
     def update_frictionless_created
+      @dataset.skip_callbacks = true
       @dataset.frictionless_created_at = @created
       @dataset.save
     end
