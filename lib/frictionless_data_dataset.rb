@@ -86,9 +86,12 @@ module Bionomia
       @occurrences = File.open(File.join(@folder, occurrences_file), "ab")
       @attributions = File.open(File.join(@folder, attributions_file), "ab")
       @problems = File.open(File.join(@folder, problem_collectors_file), "ab")
+      @citations = File.open(File.join(@folder, citations_file), "ab")
+      @articles = File.open(File.join(@folder, articles_file), "ab")
 
       @gbif_ids = Set.new
       @user_ids = Set.new
+      @article_ids = Set.new
 
       if @dataset.is_large?
         query = Occurrence.select(:gbifID).where(datasetKey: @dataset.datasetKey).to_sql
@@ -120,10 +123,22 @@ module Bionomia
         write_to_files(occurrence_ids)
       end
 
+      Article.where(id: @article_ids).find_each do |a|
+        data = [
+          a.id,
+          a.citation,
+          "https://doi.org/#{a.doi}",
+          a.gbif_dois.map{|o| "https://doi.org/#{o}" }.to_s
+        ]
+        @articles << CSV::Row.new(articles_header, data).to_s
+      end
+
       @users.close
       @occurrences.close
       @attributions.close
       @problems.close
+      @citations.close
+      @articles.close
     end
 
     def write_to_files(occurrence_ids)
@@ -204,34 +219,24 @@ module Bionomia
           data = o.attributes.select{|k,v| k.start_with?("occ_")}.values
           @occurrences << CSV::Row.new(occurrences_header, data).to_s
           @gbif_ids << o.occ_gbifID
+
         end
+
+        # Add citations and articles
+        @dataset.user_occurrences
+                .joins(:article_occurrences)
+                .where(user_occurrences: qualifier)
+                .select("article_occurrences.article_id", "user_occurrences.occurrence_id", "user_occurrences.visible")
+                .distinct.each do |o|
+
+          next if !o.visible
+
+          data = [ o.article_id, o.occurrence_id ]
+          @citations << CSV::Row.new(citations_header, data).to_s
+          @article_ids << o.article_id
+        end
+
       end
-    end
-
-    def add_citation_data
-        article_ids = Set.new
-
-        citations = File.open(File.join(@folder, citations_file), "ab")
-        @dataset.article_occurrences.find_in_batches(batch_size: 25_000) do |batch|
-          batch.each do |a|
-            data = [ a.article_id, a.occurrence_id ]
-            citations << CSV::Row.new(citations_header, data).to_s
-            article_ids << a.article_id
-          end
-        end
-        citations.close
-
-        articles = File.open(File.join(@folder, articles_file), "ab")
-        Article.where(id: article_ids).find_each do |a|
-          data = [
-            a.id,
-            a.citation,
-            "https://doi.org/#{a.doi}",
-            a.gbif_dois.map{|o| "https://doi.org/#{o}" }.to_s
-          ]
-          articles << CSV::Row.new(articles_header, data).to_s
-        end
-        articles.close
     end
 
     def update_frictionless_created

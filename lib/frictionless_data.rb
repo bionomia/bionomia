@@ -301,9 +301,6 @@ module Bionomia
       #Add data files
       add_data
 
-      #Add citation data
-      add_citation_data
-
       #Zip each file in place
       Dir.foreach(@folder) do |f|
         fn = File.join(@folder, f)
@@ -390,9 +387,6 @@ module Bionomia
     end
 
     def add_data
-    end
-
-    def add_citation_data
     end
 
   end
