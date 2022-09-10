@@ -95,23 +95,24 @@ module Bionomia
         mysql2 = ActiveRecord::Base.connection.instance_variable_get(:@connection)
         rows = mysql2.query(query, stream: true, cache_rows: false)
         puts "Creating gbifID list...".yellow
-        tmp_csv = Tempfile.new(['frictionless', '.csv'])
+        tmp_csv = File.new(File.join(@folder, "frictionless_tmp.csv"), "ab")
+        tmp_csv.close
         puts "Tempfile at #{tmp_csv.path}".yellow
         CSV.open(tmp_csv.path, 'w') do |csv|
           rows.each { |row| csv << row }
         end
         #WARNING: requires GNU parallel to split CSV files
+        #Hmmm...renaming the file here might mess with the unlink
         system("sort -n #{tmp_csv.path} > #{tmp_csv.path}.tmp && mv #{tmp_csv.path}.tmp #{tmp_csv.path} > /dev/null 2>&1")
         puts "Splitting files...".yellow
-        system("cat #{tmp_csv.path} | parallel --pipe -N 500000 'cat > #{tmp_csv.path}-{#}.csv' > /dev/null 2>&1")
-        tmp_csv.close
+        system("cat #{tmp_csv.path} | parallel --pipe -N 250000 'cat > #{tmp_csv.path}-{#}.csv' > /dev/null 2>&1")
         all_files = Dir.glob(File.dirname(tmp_csv) + "/**/#{File.basename(tmp_csv.path)}*.csv")
         puts "Starting to write...".yellow
         all_files.each do |csv|
           write_to_files(CSV.read(csv).flatten)
           File.unlink(csv)
         end
-        tmp_csv.unlink
+        File.unlink(tmp_csv.path)
       else
         occurrence_ids = Occurrence.joins(:user_occurrences)
                             .where(datasetKey: @dataset.datasetKey)
@@ -127,7 +128,7 @@ module Bionomia
 
     def write_to_files(occurrence_ids)
       occurrence_ids.in_groups_of(1_000, false).each do |group|
-        qualifier = @dataset.is_large? ? { occurrence_id: group.flatten} : { id: group }
+        qualifier = @dataset.is_large? ? { occurrence_id: group } : { id: group }
         @dataset.user_occurrences
                 .where(user_occurrences: qualifier)
                 .where(users: { is_public: true })

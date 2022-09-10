@@ -308,6 +308,7 @@ module Bionomia
       Dir.foreach(@folder) do |f|
         fn = File.join(@folder, f)
         next if File.extname(fn) != ".csv"
+        next if File.basename(fn, ".csv")[0,12] == "frictionless"
         Zip::File.open(fn + ".zip", Zip::File::CREATE) do |zipfile|
           zipfile.add(File.basename(fn), File.join(@folder, File.basename(fn)))
         end

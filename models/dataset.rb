@@ -33,7 +33,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def is_large?
-    occurrences_count > 1_000_000
+    occurrences_count > 1_500_000
   end
 
   def users

@@ -62,7 +62,7 @@ if options[:directory] && options[:key]
 elsif options[:directory] && ( options[:all] || options[:missing] )
   Dataset.find_each do |d|
     next if !d.has_claim?
-    next if options[:skip] && d.occurrences_count > 1_500_000
+    next if options[:skip] && d.is_large?
     puts "Starting #{d.title}...".yellow
     begin
       t1 = Time.now
