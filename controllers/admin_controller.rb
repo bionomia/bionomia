@@ -85,7 +85,7 @@ module Sinatra
 
               vars = {
                 uuid: params[:datasetKey],
-                output_directory: File.join(File.dirname(__FILE__), "..", "public", "data")
+                output_directory: File.join(app.root, "public", "data")
               }
 
               ::Bionomia::FrictionlessDataDatasetWorker.perform_async(vars)
