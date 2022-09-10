@@ -42,7 +42,7 @@
         .card
           %h5.card-header Citable Claims
           .card-body
-            - if !@admin_user.zenodo_access_token.empty?
+            - if !@admin_user.zenodo_access_token.nil?
               %p.card-text
                 User has created a link to Zenodo
             - else

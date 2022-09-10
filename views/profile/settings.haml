@@ -37,7 +37,7 @@
             - if !@user.made_claim?
               %p.card-text= I18n.t('profile.connect_zenodo_claim')
             - else
-              - if @user.zenodo_access_token.empty?
+              - if @user.zenodo_access_token.nil?
                 %p.card-text= I18n.t('profile.connect_zenodo')
                 %form{action: "/auth/zenodo", method: :post}
                   %p.card-text
