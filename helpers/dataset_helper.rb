@@ -51,16 +51,18 @@ module Sinatra
         end
 
         def dataset_users
-          dataset_from_param
           begin
-            @pagy, @results = pagy(@dataset.users.order(:family))
+            if @dataset.is_large?
+              @pagy, @results = pagy_countless(@dataset.users.order(:family))
+            else
+              @pagy, @results = pagy(@dataset.users.order(:family))
+            end
           rescue Pagy::OverflowError
             halt 404
           end
         end
 
         def dataset_agents
-          dataset_from_param
           begin
             @pagy, @results = pagy_array(@dataset.agents.to_a, items: 75)
           rescue Pagy::OverflowError
@@ -69,7 +71,6 @@ module Sinatra
         end
 
         def dataset_agents_counts
-          dataset_from_param
           begin
             @pagy, @results = pagy_array(@dataset.agents_occurrence_counts.to_a, items: 75)
           rescue Pagy::OverflowError
@@ -78,7 +79,6 @@ module Sinatra
         end
 
         def dataset_agents_unclaimed_counts
-          dataset_from_param
           begin
             @pagy, @results = pagy_array(@dataset.agents_occurrence_unclaimed_counts.to_a, items: 75)
           rescue Pagy::OverflowError
@@ -99,7 +99,6 @@ module Sinatra
         end
 
         def dataset_scribes
-          dataset_from_param
           begin
             @pagy, @results = pagy(@dataset.scribes.order(:family))
           rescue Pagy::OverflowError

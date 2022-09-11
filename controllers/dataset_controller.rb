@@ -47,16 +47,18 @@ module Sinatra
             end
 
             get '/:id' do
-              size = 0
+              @frictionless_exists = false
               dir = File.join(app.root, "public", "data", "#{params[:id]}")
               if Dir.exists?(dir)
                 Dir.foreach(dir) do |f|
                   fn = File.join(dir, f)
                   next if File.extname(fn) != ".zip"
-                  size = size + File.size(fn).to_f / 2**20
+                  @frictionless_exists = true
+                  break
                 end
               end
-              @compressed_file_size = size.round(2) if size > 0
+
+              dataset_from_param
               dataset_users
               locals = {
                 active_page: "datasets",
@@ -66,6 +68,10 @@ module Sinatra
             end
 
             get '/:id/scribes' do
+              dataset_from_param
+              if @dataset.is_large?
+                halt 404
+              end
               dataset_scribes
               locals = {
                 active_page: "datasets",
@@ -75,6 +81,10 @@ module Sinatra
             end
 
             get '/:id/agents' do
+              dataset_from_param
+              if @dataset.is_large?
+                halt 404
+              end
               dataset_agents
               locals = {
                 active_page: "datasets",
@@ -85,6 +95,10 @@ module Sinatra
             end
 
             get '/:id/agents/counts' do
+              dataset_from_param
+              if @dataset.is_large?
+                halt 404
+              end
               dataset_agents_counts
               locals = {
                 active_page: "datasets",
@@ -95,6 +109,10 @@ module Sinatra
             end
 
             get '/:id/agents/unclaimed' do
+              dataset_from_param
+              if @dataset.is_large?
+                halt 404
+              end
               dataset_agents_unclaimed_counts
               locals = {
                 active_page: "datasets",
@@ -106,7 +124,9 @@ module Sinatra
 
             get '/:id/visualizations' do
               dataset_from_param
-
+              if @dataset.is_large?
+                halt 404
+              end
               @action = "collected"
               if ["identified","collected"].include?(params[:action])
                 @action = params[:action]

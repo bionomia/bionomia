@@ -22,14 +22,18 @@
     - else
       .d-flex.flex-row.mt-3.alert.alert-info.justify-content-between{role: "alert"}
         %div
-          #{number_to_human(@pagy.count, units: :'dataset.users_alert', delimiter: ",", precision: 0)}
+          - if @pagy.count.nil?
+            %em
+              = I18n.t('dataset.not_all_features')
+          - else
+            #{number_to_human(@pagy.count, units: :'dataset.users_alert', delimiter: ",", precision: 0)}
 
         .col-4.col-md-2
           = I18n.t('user.progress')
           .progress.progress-border
             .progress-bar.bg-info{id:"progress-bar_#{@dataset.datasetKey}", role:"progressbar", style:"width: 0%;", "aria-valuenow":"0", "aria-valuemin":"0", "aria-valuemax":"100"}
 
-      - if @compressed_file_size
+      - if @frictionless_exists
         %p{class:"text-right m-0"}
           %button.btn.btn-sm.btn-light{title: "Frictionless Data", "data-toggle": "popover", "data-content": "<ul class=\"list-unstyled\"><li class=\"mb-2\"><a href=\"" + url("/dataset/#{@dataset.datasetKey}/datapackage.json") + "\">Descriptor</a> (JSON)</li><li><a href=\"" + url("/dataset/#{@dataset.datasetKey}/users.csv.zip") + "\">People</a> (csv, zip)</li><li><a href=\"" + url("/dataset/#{@dataset.datasetKey}/attributions.csv.zip") + "\">Attributions</a> (csv, zip)</li><li><a href=\"" + url("/dataset/#{@dataset.datasetKey}/occurrences.csv.zip") + "\">Occurrences</a> (csv, zip)</li><li><a href=\"" + url("/dataset/#{@dataset.datasetKey}/problem_collector_dates.csv.zip") + "\">Problem collector dates</a> (csv, zip)</li><li><a href=\"" + url("/dataset/#{@dataset.datasetKey}/citations.csv.zip") + "\">Specimen citations</a> (csv, zip)</li><li><a href=\"" + url("/dataset/#{@dataset.datasetKey}/articles.csv.zip") + "\">Articles</a> (csv, zip)</li></ul><div><small>Created #{@dataset.frictionless_created_at}</small></div>", "data-trigger": "click", "data-placement": "bottom"}
             %img{src:"/images/frictionless.png", alt:"Frictionless Data"}

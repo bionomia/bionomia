@@ -162,6 +162,7 @@ de:
     timeline: Zeitleiste
     none_collected_timeline: "Bisher wurde weder gesammelt noch ein Sammeldatum angegeben"
     none_identified_timeline: "Bisher wurde weder identifiziert noch ein Identifizierdatum angegeben"
+    not_all_features: Large dataset, not all features are available.
   date:
     formats:
       month_and_year: "%B %Y"

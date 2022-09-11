@@ -162,6 +162,7 @@ fr:
     timeline: Chronologie
     none_collected_timeline: "Personne n'a collecté et indiqué une date de collecte"
     none_identified_timeline: "Personne n'a collecté et indiqué une date de détermination"
+    not_all_features: Large dataset, not all features are available.
   date:
     formats:
       month_and_year: "%B %Y"

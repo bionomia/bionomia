@@ -162,6 +162,7 @@ es:
     timeline: Cronología
     none_collected_timeline: "Nadie ha colectado y ha indicado una fecha de colecta"
     none_identified_timeline: "Nadie ha identificado y ha indicado una fecha de identificación"
+    not_all_features: Large dataset, not all features are available.
   date:
     formats:
       month_and_year: "%B %Y"
