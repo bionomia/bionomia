@@ -80,7 +80,8 @@
           %span{"aria-hidden":"true"} &times;
   .form-group
     %label{for:"institution_codes"} Institution Codes
-    %textarea.form-control#institution_codes{type:"text", name:"institution_codes"}= "#{@organization.institution_codes.join("|")}"
+    - codes = @organization.institution_codes ? @organization.institution_codes.join("|") : nil
+    %textarea.form-control#institution_codes{type:"text", name:"institution_codes"}= "#{codes}"
     %small.form-text.text-muted
       Use pipe-separated values.
   %button.btn.btn-success{type: "submit"} Submit
