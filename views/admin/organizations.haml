@@ -18,46 +18,61 @@
     %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
       %span{"aria-hidden":"true"} &times;
 
-- sort = locals[:sort] == "asc" ? "desc" : "asc"
-.table-responsive-lg
-  %table.table.table-hover.table-sm
-    %thead.thead-light
-      %tr
-        %th{scope: "col"}
-          %a{href: url("/admin/organizations?order=name&sort=#{sort}")} Name
-        %th{scope: "col"} Affiliates
-        %th{scope: "col"} Address
-        %th{scope: "col"}
-          %a{href: url("/admin/organizations?order=isni&sort=#{sort}")} ISNI
-        %th{scope: "col"}
-          %a{href: url("/admin/organizations?order=ror&sort=#{sort}")} ROR
-        %th{scope: "col"}
-          %a{href: url("/admin/organizations?order=ringgold&sort=#{sort}")} Ringgold
-        %th{scope: "col"}
-          %a{href: url("/admin/organizations?order=grid&sort=#{sort}")} GRID
-        %th{scope: "col"}
-          %a{href: url("/admin/organizations?order=wikidata&sort=#{sort}")} Wikidata
+- if flash[:merged]
+  .alert.alert-danger.alert-dismissible.fade.show.d-block{role: "alert"}
+    %div
+      #{flash[:merged]}
+    %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
+      %span{"aria-hidden":"true"} &times;
 
-    %tbody
-      - @results.each do |o|
+%form{method: :post, action: url("/admin/organizations/merge")}
+  %input{type: :hidden, name: "_method", value: 'PUT'}
+  %input{type: :hidden, name: "authenticity_token", value:"#{env['rack.session'][:csrf]}"}
+
+  - sort = locals[:sort] == "asc" ? "desc" : "asc"
+  .table-responsive-lg
+    %table.table.table-hover.table-sm
+      %thead.thead-light
         %tr
-          %td
-            %a{href: url("/admin/organization/#{o.id}")} #{o.name}
-          %td #{o.user_organizations.count}
-          %td #{o.address}
-          %td
-            - if !o.isni.blank?
-              %a{href:"http://www.isni.org/isni/#{o.isni.delete(' ')}"} #{o.isni}
-          %td
-            - if !o.ror.blank?
-              %a{href:"https://ror.org/#{o.ror}"} #{o.ror}
-          %td #{o.ringgold}
-          %td
-            - if !o.grid.blank?
-              %a{href: "https://www.grid.ac/institutes/#{o.grid}"} #{o.grid}
-          %td
-            - if !o.wikidata.blank?
-              %a{href: "https://www.wikidata.org/wiki/#{o.wikidata}"} #{o.wikidata}
+          %th.text-center{scope: "col"}
+            %input.btn.btn-sm.btn-danger{value: "Merge", style:"width:60px", type: :submit}
+          %th{scope: "col"}
+            %a{href: url("/admin/organizations?order=name&sort=#{sort}")} Name
+          %th{scope: "col"} Affiliates
+          %th{scope: "col"} Address
+          %th{scope: "col"}
+            %a{href: url("/admin/organizations?order=isni&sort=#{sort}")} ISNI
+          %th{scope: "col"}
+            %a{href: url("/admin/organizations?order=ror&sort=#{sort}")} ROR
+          %th{scope: "col"}
+            %a{href: url("/admin/organizations?order=ringgold&sort=#{sort}")} Ringgold
+          %th{scope: "col"}
+            %a{href: url("/admin/organizations?order=grid&sort=#{sort}")} GRID
+          %th{scope: "col"}
+            %a{href: url("/admin/organizations?order=wikidata&sort=#{sort}")} Wikidata
 
+      %tbody
+        - @results.each do |o|
+          %tr
+            %td.text-center
+              .form-group.form-check
+                %input.form-check-input{type: "checkbox", name: "merge-#{o.id}"}
+            %td
+              %a{href: url("/admin/organization/#{o.id}")} #{o.name}
+            %td #{o.user_organizations.count}
+            %td #{o.address}
+            %td
+              - if !o.isni.blank?
+                %a{href:"http://www.isni.org/isni/#{o.isni.delete(' ')}"} #{o.isni}
+            %td
+              - if !o.ror.blank?
+                %a{href:"https://ror.org/#{o.ror}"} #{o.ror}
+            %td #{o.ringgold}
+            %td
+              - if !o.grid.blank?
+                %a{href: "https://www.grid.ac/institutes/#{o.grid}"} #{o.grid}
+            %td
+              - if !o.wikidata.blank?
+                %a{href: "https://www.wikidata.org/wiki/#{o.wikidata}"} #{o.wikidata}
 
 = pagy_bootstrap_nav(@pagy) if @pagy.pages > 1

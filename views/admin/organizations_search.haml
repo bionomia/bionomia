@@ -15,35 +15,48 @@
   .alert.alert-warning.tiny-margins{role: "alert"}
     No organizations found.
 - else
-  - @results.in_groups_of(3).each do |group|
-    .card-deck
-      - group.each do |o|
-        - if o.nil?
-          .card.border-0
-        - else
-          - org = Organization.find(o[:_id].to_i)
-          - if !o.nil?
-            .card.card-profile.m-3
-              - if org.image_url
-                .card-header.d-flex
-                  %div
-                    %img.mr-2.rounded{src:"#{organization_image(org, 'medium')}", alt:"#{org.name}"}
-                  .flex-grow-1
-                    %h5
-                      %a{href: url("/admin/organization/#{org.id}")} #{org.name}
-                    %p.text-muted #{org.address}
-              - else
-                .card-header
-                  %h5
-                    %a{href: url("/admin/organization/#{org.id}")} #{org.name}
-                  %p.text-muted #{org.address}
-              .card-body
-              .card-footer
-                .col.small.text-left.text-muted
-                .col.small.text-right.text-muted
-                  - count = org.user_organizations.count
-                  %span.badge.badge-light #{number_with_delimiter(count)}
-                  #{'member'.pluralize(count)}
+  %form{method: :post, action: url("/admin/organizations/merge")}
+    %input{type: :hidden, name: "_method", value: 'PUT'}
+    %input{type: :hidden, name: "authenticity_token", value:"#{env['rack.session'][:csrf]}"}
 
+    .table-responsive-lg
+      %table.table.table-hover.table-sm
+        %thead.thead-light
+          %tr
+            %th.text-center{scope: "col"}
+              %input.btn.btn-sm.btn-danger{value: "Merge", style:"width:60px", type: :submit}
+            %th{scope: "col"} Name
+            %th{scope: "col"} Affiliates
+            %th{scope: "col"} Address
+            %th{scope: "col"} ISNI
+            %th{scope: "col"} ROR
+            %th{scope: "col"} Ringgold
+            %th{scope: "col"} GRID
+            %th{scope: "col"} Wikidata
+
+        %tbody
+          - @results.each do |o|
+            - o = Organization.find(o[:_id].to_i)
+            %tr
+              %td.text-center
+                .form-group.form-check
+                  %input.form-check-input{type: "checkbox", name: "merge-#{o.id}"}
+              %td
+                %a{href: url("/admin/organization/#{o.id}")} #{o.name}
+              %td #{o.user_organizations.count}
+              %td #{o.address}
+              %td
+                - if !o.isni.blank?
+                  %a{href:"http://www.isni.org/isni/#{o.isni.delete(' ')}"} #{o.isni}
+              %td
+                - if !o.ror.blank?
+                  %a{href:"https://ror.org/#{o.ror}"} #{o.ror}
+              %td #{o.ringgold}
+              %td
+                - if !o.grid.blank?
+                  %a{href: "https://www.grid.ac/institutes/#{o.grid}"} #{o.grid}
+              %td
+                - if !o.wikidata.blank?
+                  %a{href: "https://www.wikidata.org/wiki/#{o.wikidata}"} #{o.wikidata}
 
   = pagy_bootstrap_nav(@pagy) if @pagy && @pagy.pages > 1

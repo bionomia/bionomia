@@ -25,6 +25,48 @@ class Organization < ActiveRecord::Base
     self.find_by_grid(id)
   end
 
+  def self.merge(ids)
+    ids = ids.map(&:to_i)
+    orgs = self.joins(:user_organizations)
+               .where(id: ids)
+               .group(:isni, :ringgold, :grid, :ror, :wikidata, :address, :institution_codes, :name, :id)
+               .select(:isni, :ringgold, :grid, :ror, :wikidata, :address, :institution_codes, :name, :id, "COUNT(user_organizations.user_id) AS user_count")
+               .order("user_count DESC")
+
+    isni = orgs.map(&:isni).uniq.compact
+    ringgold = orgs.map(&:ringgold).uniq.compact
+    grid = orgs.map(&:grid).uniq.compact
+    ror = orgs.map(&:ror).uniq.compact
+    wikidata = orgs.map(&:wikidata).uniq.compact
+    address = orgs.map(&:address).uniq.compact
+    institution_codes = orgs.map(&:institution_codes).uniq.compact
+
+    if isni.size > 1 || ringgold.size > 1 || grid.size > 1 || ror.size > 1 || wikidata.size > 1
+      raise StandardError.new "Organizations cannot be merged until identifiers are resolved."
+    end
+
+    destination = orgs.first
+    org = Organization.find(destination.id)
+    org.isni = isni.first
+    org.ringgold = ringgold.first
+    org.grid = grid.first
+    org.ror = ror.first
+    org.wikidata = wikidata.first
+    org.address = address.first
+    org.institution_codes = institution_codes.flatten.uniq
+    org.save
+    org.update_wikidata
+
+    organizations = orgs.dup
+
+    Organization.where(id: ids - [destination.id]).find_each do |o|
+      o.user_organizations.update_all(organization_id: destination.id)
+      o.destroy
+    end
+
+    organizations
+  end
+
   def identifier
     wikidata || ror || grid || ringgold
   end
