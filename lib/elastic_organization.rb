@@ -22,10 +22,15 @@ module Bionomia
               },
             },
             analyzer: {
-              organization_analyzer: {
+              organization_search: {
                 type: "custom",
                 tokenizer: "standard",
                 filter: ["lowercase", "asciifolding", :autocomplete]
+              },
+              organization_index: {
+                type: "custom",
+                tokenizer: "standard",
+                filter: ["lowercase", "asciifolding"]
               },
               institution_codes: {
                 type: "custom",
@@ -40,8 +45,8 @@ module Bionomia
             id: { type: 'integer', index: false },
             name: {
               type: 'text',
-              search_analyzer: :standard,
-              analyzer: :organization_analyzer,
+              search_analyzer: :organization_search,
+              analyzer: :organization_index,
               norms: false
             },
             address: {
