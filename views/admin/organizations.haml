@@ -11,6 +11,11 @@
       %h1.h2 Organizations
     = haml :'partials/admin/organization_search', layout: false
 
+%p.text-right
+  %a{href: url("/admin/organizations/duplicates")}
+    View
+  candidate duplicates.
+
 - if flash[:destroyed]
   .alert.alert-danger.alert-dismissible.fade.show.d-block{role: "alert"}
     %div

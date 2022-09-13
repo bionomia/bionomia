@@ -39,6 +39,16 @@ module Sinatra
           @pagy, @results = pagy(data)
         end
 
+        def organizations_duplicates
+          dups = Organization.select(:grid).group(:grid).having("count(*) > 1").pluck(:grid).compact
+          if params[:order] && Organization.column_names.include?(params[:order]) && ["asc", "desc"].include?(params[:sort])
+            data = Organization.where(grid: dups).order("#{params[:order]} #{params[:sort]}")
+          else
+            data = Organization.where(grid: dups).order(:grid)
+          end
+          @pagy, @results = pagy(data)
+        end
+
         def organization_redirect(path = "")
           @organization = Organization.find_by_identifier(params[:id]) rescue nil
           if @organization.nil?

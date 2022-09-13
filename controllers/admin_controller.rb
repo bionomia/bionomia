@@ -164,6 +164,12 @@ module Sinatra
               haml :'admin/organizations_search', locals: locals
             end
 
+            get '/organizations/duplicates' do
+              organizations_duplicates
+              locals = { active_page: "administration" }
+              haml :'admin/organizations', locals: locals
+            end
+
             put '/organizations/merge' do
               ids = params.keys.map{|k| k.split("merge-").last if k.match?(/merge/) }.compact
               redirect "/admin/organizations" if ids.empty? || ids.size < 2
@@ -173,7 +179,7 @@ module Sinatra
               rescue Exception => e
                 flash.next[:error] = e.message
               end
-              redirect "/admin/organizations"
+              redirect back
             end
 
             get '/organization/:organization_id/refresh.json' do
