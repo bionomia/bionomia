@@ -44,6 +44,6 @@ if options[:index]
     index.import
     index.refresh_index
   else
-    puts "Accepted values are #{accepted_list.join(", ")}"
+    puts "Accepted values are #{INDICES.join(", ")}"
   end
 end

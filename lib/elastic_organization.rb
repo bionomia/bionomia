@@ -52,7 +52,7 @@ module Bionomia
             address: {
               type: 'text',
               search_analyzer: :standard,
-              analyzer: :organization_analyzer,
+              analyzer: :organization_index,
               norms: false
             },
             institution_codes: {
