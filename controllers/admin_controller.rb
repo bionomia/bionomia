@@ -169,9 +169,9 @@ module Sinatra
               redirect "/admin/organizations" if ids.empty? || ids.size < 2
               begin
                 orgs = Organization.merge(ids)
-                flash.next[:merged] = "#{orgs.map(&:name).join(", ")} were merged."
+                flash.next[:success] = "#{orgs.map(&:name).join(", ")} were merged."
               rescue Exception => e
-                flash.next[:merged] = e.message
+                flash.next[:error] = e.message
               end
               redirect "/admin/organizations"
             end

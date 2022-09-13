@@ -18,10 +18,11 @@
     %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
       %span{"aria-hidden":"true"} &times;
 
-- if flash[:merged]
-  .alert.alert-danger.alert-dismissible.fade.show.d-block{role: "alert"}
+- if flash[:error] || flash[:success]
+  - alert_type = flash[:error] ? "danger" : "success"
+  .alert.alert-dismissible.fade.show.d-block{role: "alert", class:"alert-#{alert_type}"}
     %div
-      #{flash[:merged]}
+      #{flash[:error] || flash[:success]}
     %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
       %span{"aria-hidden":"true"} &times;
 
