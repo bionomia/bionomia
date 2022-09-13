@@ -17,7 +17,7 @@ module Bionomia
               autocomplete: {
                 type: "edgeNGram",
                 side: "front",
-                min_gram: 1,
+                min_gram: 4,
                 max_gram: 50
               },
             },
