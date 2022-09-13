@@ -165,7 +165,11 @@ module Sinatra
             end
 
             get '/organizations/duplicates' do
-              organizations_duplicates
+              identifier = params[:identifier] ? params[:identifier] : "grid"
+              if identifier && !Organization.attribute_names.include?(identifier)
+                halt 404
+              end
+              organizations_duplicates(attribute: identifier)
               locals = { active_page: "administration" }
               haml :'admin/organizations', locals: locals
             end

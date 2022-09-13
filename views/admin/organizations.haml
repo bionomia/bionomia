@@ -12,9 +12,12 @@
     = haml :'partials/admin/organization_search', layout: false
 
 %p.text-right
-  %a{href: url("/admin/organizations/duplicates")}
-    View
-  candidate duplicates.
+  View candidate duplicates:
+  %a{href: url("/admin/organizations/duplicates?identifier=isni")} ISNI
+  %a{href: url("/admin/organizations/duplicates?identifier=ror")} RoR
+  %a{href: url("/admin/organizations/duplicates?identifier=ringgold")} Ringgold
+  %a{href: url("/admin/organizations/duplicates?identifier=grid")} GRID
+  %a{href: url("/admin/organizations/duplicates?identifier=wikidata")} Wikidata
 
 - if flash[:destroyed]
   .alert.alert-danger.alert-dismissible.fade.show.d-block{role: "alert"}

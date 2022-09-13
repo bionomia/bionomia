@@ -11,6 +11,14 @@
       %h1.h2 Organizations
     = haml :'partials/admin/organization_search', layout: false
 
+%p.text-right
+  View candidate duplicates:
+  %a{href: url("/admin/organizations/duplicates?identifier=isni")} ISNI
+  %a{href: url("/admin/organizations/duplicates?identifier=ror")} RoR
+  %a{href: url("/admin/organizations/duplicates?identifier=ringgold")} Ringgold
+  %a{href: url("/admin/organizations/duplicates?identifier=grid")} GRID
+  %a{href: url("/admin/organizations/duplicates?identifier=wikidata")} Wikidata
+
 - if flash[:error] || flash[:success]
   - alert_type = flash[:error] ? "danger" : "success"
   .alert.alert-dismissible.fade.show.d-block{role: "alert", class:"alert-#{alert_type}"}

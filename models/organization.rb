@@ -29,8 +29,8 @@ class Organization < ActiveRecord::Base
     ids = ids.map(&:to_i)
     orgs = self.joins(:user_organizations)
                .where(id: ids)
-               .group(:isni, :ringgold, :grid, :ror, :wikidata, :address, :institution_codes, :name, :id)
-               .select(:isni, :ringgold, :grid, :ror, :wikidata, :address, :institution_codes, :name, :id, "COUNT(user_organizations.user_id) AS user_count")
+               .group(:isni, :ringgold, :grid, :ror, :wikidata, :address, :institution_codes, :id)
+               .select(:isni, :ringgold, :grid, :ror, :wikidata, :address, :institution_codes, :id, "COUNT(user_organizations.user_id) AS user_count")
                .order("user_count DESC")
 
     isni = orgs.map(&:isni).uniq.compact

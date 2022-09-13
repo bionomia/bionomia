@@ -39,12 +39,16 @@ module Sinatra
           @pagy, @results = pagy(data)
         end
 
-        def organizations_duplicates
-          dups = Organization.select(:grid).group(:grid).having("count(*) > 1").pluck(:grid).compact
+        def organizations_duplicates(attribute: "grid")
+          dups = Organization.select(attribute.to_sym)
+                             .group(attribute.to_sym)
+                             .having("count(*) > 1")
+                             .pluck(attribute.to_sym)
+                             .compact
           if params[:order] && Organization.column_names.include?(params[:order]) && ["asc", "desc"].include?(params[:sort])
-            data = Organization.where(grid: dups).order("#{params[:order]} #{params[:sort]}")
+            data = Organization.where("#{attribute}": dups).order("#{params[:order]} #{params[:sort]}")
           else
-            data = Organization.where(grid: dups).order(:grid)
+            data = Organization.where("#{attribute}": dups).order(attribute.to_sym)
           end
           @pagy, @results = pagy(data)
         end
