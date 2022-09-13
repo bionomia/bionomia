@@ -11,6 +11,14 @@
       %h1.h2 Organizations
     = haml :'partials/admin/organization_search', layout: false
 
+- if flash[:error] || flash[:success]
+  - alert_type = flash[:error] ? "danger" : "success"
+  .alert.alert-dismissible.fade.show.d-block{role: "alert", class:"alert-#{alert_type}"}
+    %div
+      #{flash[:error] || flash[:success]}
+    %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
+      %span{"aria-hidden":"true"} &times;
+
 - if @results.size == 0
   .alert.alert-warning.tiny-margins{role: "alert"}
     No organizations found.
