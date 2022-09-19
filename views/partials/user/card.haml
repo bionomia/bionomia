@@ -14,7 +14,7 @@
   - if locals[:user].image_url
     .card-header.d-flex
       %div
-        %img.card-img-profile.mr-2{src:"#{profile_image(locals[:user], 'medium')}", alt:"#{locals[:user].fullname}", loading:"lazy", width:48, height:48}
+        %img.card-img-profile.mr-2{src:"#{profile_image(locals[:user], 'medium')}", alt:"#{locals[:user].fullname}", width:48, height:48, loading:"lazy"}
       .flex-grow-1
         %h5
           // Do not use url method here because caching breaks language-based subdomains
@@ -35,7 +35,7 @@
         - image = taxon_image(locals[:stats][:specimens][:top_family_recorded], 'thumbnail')
         - if !image.nil?
           .flex
-            %img.mr-2{src:"#{image}", alt:"#{locals[:stats][:specimens][:top_family_recorded]}", loading:"lazy", style:"width:24px;max-height:64px;opacity:0.5", width:24}
+            %img.mr-2.card-img-taxon{src:"#{image}", alt:"#{locals[:stats][:specimens][:top_family_recorded]}", width:24, loading:"lazy"}
   - else
     .card-header.d-flex
       .flex-grow-1
@@ -58,7 +58,7 @@
         - image = taxon_image(locals[:stats][:specimens][:top_family_recorded], 'thumbnail')
         - if !image.nil?
           .flex
-            %img.mr-2{src:"#{image}", alt:"#{locals[:stats][:specimens][:top_family_recorded]}", loading:"lazy", style:"width:24px;max-height:64px;opacity:0.5", width:24}
+            %img.mr-2.card-img-taxon{src:"#{image}", alt:"#{locals[:stats][:specimens][:top_family_recorded]}", width:24, loading:"lazy"}
 
   .card-body
     %p.card-text.mt-2 #{statement}
