@@ -11,11 +11,19 @@ module Sinatra
         end
 
         def call(env)
-          response = nil
-          ActiveRecord::Base.cache do
-            response = @app.call(env)
+          if is_static_file?(env)
+            @app.call(env)
+          else
+            response = nil
+            ActiveRecord::Base.cache do
+              response = @app.call(env)
+            end
+            response
           end
-          response
+        end
+
+        def is_static_file?(env)
+          env['PATH_INFO'] =~ /\.[a-z]{2,4}$/
         end
 
       end
