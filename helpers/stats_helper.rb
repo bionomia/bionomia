@@ -66,6 +66,10 @@ module Sinatra
               .first
         end
 
+        def stats_wikidata_merged
+          DestroyedUser.where("identifier LIKE 'Q%'").count
+        end
+
         def stats_datasets
           Dataset.select("COUNT(*) AS total, SUM(IF(frictionless_created_at, 1, 0)) AS frictionless")
                  .first

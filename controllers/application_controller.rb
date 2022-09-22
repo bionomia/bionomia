@@ -131,7 +131,9 @@ module Sinatra
             @rejected = cache_block("stats-rejected") { stats_rejected }
             @profiles = cache_block("stats-profiles") { stats_profiles }
             @orcid = stats_orcid
-            @wikidata = stats_wikidata
+            @wikidata = stats_wikidata.attributes
+                                      .symbolize_keys
+                                      .merge({ merged: stats_wikidata_merged })
             @datasets = stats_datasets
             @dataset_attributions = stats_attribution_count_from_source
             haml :'statistics'

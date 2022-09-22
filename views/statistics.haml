@@ -200,9 +200,9 @@
           Wikidata Profiles
       .card-body.mt-2
         %ul.list-unstyled.m-0
-          %li Total: #{number_with_delimiter(@wikidata.total)}
-          %li Made Public: #{number_with_delimiter(@wikidata.public)}
-          %li &nbsp;
+          %li Total: #{number_with_delimiter(@wikidata[:total])}
+          %li Made Public: #{number_with_delimiter(@wikidata[:public])}
+          %li Merged: #{number_with_delimiter(@wikidata[:merged])}
           %li &nbsp;
 
   .col-12.col-lg-4.mt-2
