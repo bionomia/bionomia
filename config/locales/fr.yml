@@ -162,7 +162,7 @@ fr:
     timeline: Chronologie
     none_collected_timeline: "Personne n'a collecté et indiqué une date de collecte"
     none_identified_timeline: "Personne n'a collecté et indiqué une date de détermination"
-    not_all_features: Large dataset, not all features are available.
+    not_all_features: Grand jeu de données, toutes les fonctionnalités ne sont pas disponibles.
   date:
     formats:
       month_and_year: "%B %Y"
@@ -257,7 +257,7 @@ fr:
     country_name_title: "Aidez à attribuer des spécimens aux personnes du %{country}"
     country_no_one: "Personne trouvé de"
     advanced_search_title: "Recherche avancée et filtre"
-    fix_title: Aide à corriger les attributions
+    fix_title: Aider à corriger les attributions
     upload_title: Télécharger
     basic_instructions_lede: Instructions de base pour vous aider à démarrer
     add_someone_lede: "Ajouter quelqu'un pas encore découvert"
