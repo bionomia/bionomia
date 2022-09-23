@@ -30,6 +30,34 @@ module Sinatra
               haml :'admin/articles', locals: { active_page: "administration" }
             end
 
+            post '/article/add' do
+              if !params || !params[:doi].is_doi?
+                redirect "/admin/articles"
+              end
+
+              doi = params[:doi].dup
+              article = Article.find_by_doi(doi)
+              if article
+                redirect "/admin/article/#{article.id}"
+              end
+
+              params = {
+                max_size: 100_000_000,
+                first_page_only: true
+              }
+              tracker = ::Bionomia::GbifTracker.new(params)
+              tracker.by_doi(doi)
+              tracker.create_package_records
+              Article.uncached do
+                article = Article.find_by_doi(doi)
+              end
+              if article
+                redirect "/admin/article/#{article.id}"
+              else
+                redirect "/admin/articles"
+              end
+            end
+
             get '/article/:id/process.json' do
               content_type "application/json", charset: 'utf-8'
               vars = {

@@ -12,6 +12,10 @@ module Bionomia
       Zip.on_exists_proc = true
     end
 
+    def by_doi(doi)
+      @url = "#{Settings.gbif.api}literature/search?doi=#{doi}&offset="
+    end
+
     def create_package_records
       citation_downloads_enum.each do |item|
         begin

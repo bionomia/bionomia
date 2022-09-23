@@ -9,13 +9,22 @@
   .jumbotron.jumbotron-fluid.alert-warning
     %h1.h2= I18n.t('article.articles_title')
 
-%p
-  %a.btn.btn-outline-success{href: url("/admin/articles/check-new.json"), id: "articles-check", role: "button"}
-    %i.fas.fa-sync-alt
-    Check New
+.d-flex.justify-content-between.mb-3
+  .flex-column
+    %form.helpers.form-inline{method: :post, action: "/admin/article/add", "accept-charset": "UTF-8"}
+      .form-group.row
+        %label.col-form-label.col-sm-3.font-weight-bold{for: "doi"} Add By DOI
+        .col-sm-9
+          %input.orcid-add{type: :text, name: "doi", placeholder: "10.0000/0000", size:"25"}
+        %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
+      %input.ml-2{type: :submit, class:"btn btn-success", value: "Add"}
 
-  %a.btn.btn-outline-success{href: "https://www.gbif.org/resource/search?contentType=literature&relevance=GBIF_USED", role: "button"}
-    View latest
+  .flex-column
+    %a.btn.btn-outline-success{href: url("/admin/articles/check-new.json"), id: "articles-check", role: "button"}
+      %i.fas.fa-sync-alt
+      Check New
+    %a.btn.btn-outline-success{href: "https://www.gbif.org/resource/search?contentType=literature&relevance=GBIF_USED", role: "button"}
+      View latest
 
 - if flash[:destroyed]
   .alert.alert-danger.alert-dismissible.fade.show.d-block{role: "alert"}
