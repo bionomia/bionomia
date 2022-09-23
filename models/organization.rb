@@ -165,6 +165,7 @@ class Organization < ActiveRecord::Base
     wiki = wikidata_lib.institution_wikidata(code)
     if wikidata
       codes = wikidata_lib.wiki_organization_codes(wikidata)
+      codes[:ringgold] = ringold || codes[:ringgold]
       wiki = wiki.merge(codes)
     end
     update(wiki)
