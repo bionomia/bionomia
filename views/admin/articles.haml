@@ -11,19 +11,18 @@
 
 .d-flex.justify-content-between.mb-3
   .flex-column
-    %form.helpers.form-inline{method: :post, action: "/admin/article/add", "accept-charset": "UTF-8"}
+    %form.helpers.form-inline.mt-0{method: :post, action: "/admin/article/add", "accept-charset": "UTF-8"}
       .form-group.row
         %label.col-form-label.col-sm-3.font-weight-bold{for: "doi"} Add By DOI
-        .col-sm-9
+        .col-6.col-md-9
           %input.orcid-add{type: :text, name: "doi", placeholder: "10.0000/0000", size:"25"}
         %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
       %input.ml-2{type: :submit, class:"btn btn-success", value: "Add"}
-
-  .flex-column
-    %a.btn.btn-outline-success{href: url("/admin/articles/check-new.json"), id: "articles-check", role: "button"}
+  .flex-column.ml-3
+    %a.btn.btn-outline-success.mb-2{href: url("/admin/articles/check-new.json"), id: "articles-check", role: "button"}
       %i.fas.fa-sync-alt
       Check New
-    %a.btn.btn-outline-success{href: "https://www.gbif.org/resource/search?contentType=literature&relevance=GBIF_USED", role: "button"}
+    %a.btn.btn-outline-success.mb-2{href: "https://www.gbif.org/resource/search?contentType=literature&relevance=GBIF_USED", role: "button"}
       View latest
 
 - if flash[:destroyed]
