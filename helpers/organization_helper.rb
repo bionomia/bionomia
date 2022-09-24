@@ -41,6 +41,7 @@ module Sinatra
 
         def organizations_duplicates(attribute: "grid")
           dups = Organization.select(attribute.to_sym)
+                             .where.not("#{attribute}": [nil, ""])
                              .group(attribute.to_sym)
                              .having("count(*) > 1")
                              .pluck(attribute.to_sym)
