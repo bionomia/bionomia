@@ -54,6 +54,7 @@ module Sinatra
               if article
                 redirect "/admin/article/#{article.id}"
               else
+                flash.next[:none_found] = doi
                 redirect "/admin/articles"
               end
             end

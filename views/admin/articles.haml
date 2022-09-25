@@ -32,6 +32,14 @@
     %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
       %span{"aria-hidden":"true"} &times;
 
+- if flash[:none_found]
+  .alert.alert-warning.alert-dismissible.fade.show.d-block{role: "alert"}
+    %div
+      Article not created. It may not have recorded GBIF download DOIs.
+      %a{href: "https://api.gbif.org/v1/literature/search?doi=#{flash[:none_found]}", target:"_blank"} See API call.
+    %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
+      %span{"aria-hidden":"true"} &times;
+
 - if @pagy.count == 0
   .alert.alert-info.tiny-margins{role: "alert"}
     Articles have not yet been recorded.
