@@ -54,7 +54,7 @@ if options[:directory] && options[:key]
       t2 = Time.now
       puts "Package created for #{options[:key]} in #{t2 - t1} seconds".green
     rescue
-      puts "Package failed for #{d.datasetKey}".red
+      puts "Package failed for #{dataset.datasetKey}".red
     end
   else
     puts "Package #{options[:key]} not found".red
