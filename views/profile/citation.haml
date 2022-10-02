@@ -58,7 +58,7 @@
               %a{href: gbif_occurrence_url(o.id), target:"_blank"}= h(scientific_name)
               %a{href: "/occurrence/#{o.id}"}
                 %i.fas.fa-feather.text-muted
-              - if o.hasImage?
+              - if o.has_image?
                 %i.fas.fa-image.ml-1.text-muted{"data-toggle":"popover", "data-gbifid":"#{o.id}"}
 
             %td #{h(o.recordedBy)}

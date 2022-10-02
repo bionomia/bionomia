@@ -102,7 +102,7 @@
         %dt #{I18n.t('occurrence.has_image')}
         %dd.py-1
           #{I18n.t(@occurrence.hasImage.present?.to_s)}
-          - if @occurrence.hasImage?
+          - if @occurrence.has_image?
             %i.fas.fa-image.ml-1.text-muted{"data-toggle":"popover", "data-gbifid":"#{@occurrence.id}"}
 
   #location.card.mb-4

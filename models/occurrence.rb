@@ -40,7 +40,7 @@ class Occurrence < ActiveRecord::Base
     Occurrence.column_names - Occurrence::IGNORED_COLUMNS_OUTPUT
   end
 
-  def hasImage?
+  def has_image?
     hasImage
   end
 
