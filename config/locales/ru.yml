@@ -150,6 +150,8 @@ ru:
     identifiers_alert:
       unit:
         one: "dataset with content in dwc:recordedByID or dwc:identifiedByID"
+        few: "datasets with content in dwc:recordedByID or dwc:identifiedByID"
+        many: "datasets with content in dwc:recordedByID or dwc:identifiedByID"
         other: "datasets with content in dwc:recordedByID or dwc:identifiedByID"
     placeholder: Butterflies of Brazil
     people: People

@@ -116,7 +116,6 @@ zh-CN:
         other: "来自 GBIF 的数据集"
     identifiers_alert:
       unit:
-        one: "dataset with content in dwc:recordedByID or dwc:identifiedByID"
         other: "datasets with content in dwc:recordedByID or dwc:identifiedByID"
     placeholder: 巴西的蝴蝶
     people: People
