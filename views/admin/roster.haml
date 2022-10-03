@@ -24,24 +24,42 @@
   %table.table.table-hover.table-sm
     %thead.thead-light
       %tr
-        %th{scope: "col"}
-          %a{href: url("/admin/users?order=family&sort=#{sort}")} Person
-        %th{scope: "col"}
-          %a{href: url("/admin/users?order=country&sort=#{sort}")} Country
-        %th{scope: "col"}
-          %a{href: url("/admin/users?order=is_public&sort=#{sort}")} Public
-        %th{scope: "col"}
-          %a{href: url("/admin/users?order=wants_mail&sort=#{sort}")} Email
-        %th{scope: "col"}
-          %a{href: url("/admin/users?order=zenodo_concept_doi&sort=#{sort}")} DOI
-        %th{scope: "col"}
-          %a{href: url("/admin/users?order=image_url&sort=#{sort}")} Photo
-        %th{scope: "col"}
-          %a{href: url("/admin/users?order=youtube_id&sort=#{sort}")} Video
-        %th{scope: "col"}
-          %a{href: url("/admin/users?order=visited&sort=#{sort}")} Last Login
-        %th{scope: "col"}
-          %a{href: url("/admin/users?order=created&sort=#{sort}")} Created
+        %th.text-nowrap{scope: "col"}
+          %a{href: url("/admin/users?order=family&sort=#{sort}")}
+            Person
+            = sort_icon("family", sort)
+        %th.text-nowrap{scope: "col"}
+          %a{href: url("/admin/users?order=country&sort=#{sort}")}
+            Country
+            = sort_icon("country", sort)
+        %th.text-nowrap{scope: "col"}
+          %a{href: url("/admin/users?order=is_public&sort=#{sort}")}
+            Public
+            = sort_icon("is_public", sort)
+        %th.text-nowrap{scope: "col"}
+          %a{href: url("/admin/users?order=wants_mail&sort=#{sort}")}
+            Email
+            = sort_icon("wants_mail", sort)
+        %th.text-nowrap{scope: "col"}
+          %a{href: url("/admin/users?order=zenodo_concept_doi&sort=#{sort}")}
+            DOI
+            = sort_icon("zenodo_concept_doi", sort)
+        %th.text-nowrap{scope: "col"}
+          %a{href: url("/admin/users?order=image_url&sort=#{sort}")}
+            Photo
+            = sort_icon("image_url", sort)
+        %th.text-nowrap{scope: "col"}
+          %a{href: url("/admin/users?order=youtube_id&sort=#{sort}")}
+            Video
+            = sort_icon("youtube_id", sort)
+        %th.text-nowrap{scope: "col"}
+          %a{href: url("/admin/users?order=visited&sort=#{sort}")}
+            Last Login
+            = sort_icon("visited", sort)
+        %th.text-nowrap{scope: "col"}
+          %a{href: url("/admin/users?order=created&sort=#{sort}")}
+            Created
+            = sort_icon("created", sort)
 
     %tbody
       - @results.each do |u|

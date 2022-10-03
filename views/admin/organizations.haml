@@ -46,19 +46,31 @@
           %th.text-center{scope: "col"}
             %input.btn.btn-sm.btn-danger{value: "Merge", style:"width:60px", type: :submit}
           %th{scope: "col"}
-            %a{href: url("/admin/organizations?order=name&sort=#{sort}")} Name
+            %a{href: url("/admin/organizations?order=name&sort=#{sort}")}
+              Name
+              = sort_icon("name", sort)
           %th{scope: "col"} Affiliates
           %th{scope: "col"} Address
           %th{scope: "col"}
-            %a{href: url("/admin/organizations?order=isni&sort=#{sort}")} ISNI
+            %a{href: url("/admin/organizations?order=isni&sort=#{sort}")}
+              ISNI
+              = sort_icon("isni", sort)
           %th{scope: "col"}
-            %a{href: url("/admin/organizations?order=ror&sort=#{sort}")} ROR
+            %a{href: url("/admin/organizations?order=ror&sort=#{sort}")}
+              ROR
+              = sort_icon("ror", sort)
           %th{scope: "col"}
-            %a{href: url("/admin/organizations?order=ringgold&sort=#{sort}")} Ringgold
+            %a{href: url("/admin/organizations?order=ringgold&sort=#{sort}")}
+              Ringgold
+              = sort_icon("ringgold", sort)
           %th{scope: "col"}
-            %a{href: url("/admin/organizations?order=grid&sort=#{sort}")} GRID
+            %a{href: url("/admin/organizations?order=grid&sort=#{sort}")}
+              GRID
+              = sort_icon("grid", sort)
           %th{scope: "col"}
-            %a{href: url("/admin/organizations?order=wikidata&sort=#{sort}")} Wikidata
+            %a{href: url("/admin/organizations?order=wikidata&sort=#{sort}")}
+              Wikidata
+              = sort_icon("wikidata", sort)
 
       %tbody
         - @results.each do |o|
