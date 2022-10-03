@@ -125,6 +125,10 @@ es:
       unit:
         one: "conjunto de datos de GBIF"
         other: "conjuntos de datos de GBIF"
+    identifiers_alert:
+      unit:
+        one: "dataset with content in dwc:recordedByID or dwc:identifiedByID"
+        other: "datasets with content in dwc:recordedByID or dwc:identifiedByID"
     placeholder: Mariposas de Brasil
     people: Personas
     visualizations: Visualizaciones

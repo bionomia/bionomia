@@ -40,6 +40,8 @@ module Sinatra
         def datasets
           if params[:order] && Dataset.column_names.include?(params[:order]) && ["asc", "desc"].include?(params[:sort])
             data = Dataset.order("#{params[:order]} #{params[:sort]}")
+          elsif params[:has_identifiers] && params[:has_identifiers] == "true"
+            data = Dataset.where.not(source_attribution_count: 0).order(:title)
           else
             data = Dataset.order(:title)
           end

@@ -125,6 +125,10 @@ fr:
       unit:
         one: "jeu de données de GBIF"
         other: "jeux de données de GBIF"
+    identifiers_alert:
+      unit:
+        one: "dataset with content in dwc:recordedByID or dwc:identifiedByID"
+        other: "datasets with content in dwc:recordedByID or dwc:identifiedByID"
     placeholder: Papillons du Brésil
     people: Personnes
     visualizations: Visualisations

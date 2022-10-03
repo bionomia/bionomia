@@ -125,6 +125,10 @@ pt:
       unit:
         one: "conjunto de dados do GBIF"
         other: "conjunto de dados do GBIF"
+    identifiers_alert:
+      unit:
+        one: "dataset with content in dwc:recordedByID or dwc:identifiedByID"
+        other: "datasets with content in dwc:recordedByID or dwc:identifiedByID"
     placeholder: Borboletas do brasil
     people: Pessoas
     visualizations: Visualizações

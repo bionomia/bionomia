@@ -125,6 +125,10 @@ de:
       unit:
         one: "Datensatz von GBIF"
         other: "Datensätze von GBIF"
+    identifiers_alert:
+      unit:
+        one: "dataset with content in dwc:recordedByID or dwc:identifiedByID"
+        other: "datasets with content in dwc:recordedByID or dwc:identifiedByID"
     placeholder: Schmetterlinge aus Brasilien
     people: Personen
     visualizations: Darstellung

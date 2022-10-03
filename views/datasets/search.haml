@@ -15,12 +15,22 @@
     = haml :'partials/dataset/search', layout: false
 
 - if @pagy && @pagy.count == 0
-  .alert.alert-warning.tiny-margins{role: "alert"}= I18n.t('dataset.none_found', searched: h(params[:q]))
+  .alert.alert-warning.tiny-margins.d-flex.flex-wrap{role: "alert"}
+    %div
+      = I18n.t('dataset.none_found', searched: h(params[:q]))
+    .ml-auto.text-right
+      %a.text-danger{href: url("/datasets")}
+        %i.fas.fa-minus-circle
+        #{I18n.t('general.remove')}
 - elsif @pagy && @pagy.count > 0
-  .alert.alert-info.tiny-margins{role: "alert"}
-    #{number_to_human(@pagy.count, units: :'dataset.search_found', delimiter: ",", precision: 0)}
-    %span.font-weight-bold
-      #{h(params[:q])}
+  .alert.alert-info.tiny-margins.d-flex.flex-wrap{role: "alert"}
+    %div
+      #{number_to_human(@pagy.count, units: :'dataset.search_found', delimiter: ",", precision: 0)}
+      %span #{h(params[:q])}
+    .ml-auto.text-right
+      %a.text-danger{href: url("/datasets")}
+        %i.fas.fa-minus-circle
+        #{I18n.t('general.remove')}
 
   - @results.in_groups_of(3).each do |group|
     .card-deck

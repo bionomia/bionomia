@@ -14,6 +14,19 @@
         #{number_to_human(Dataset.count, units: :'dataset.lede', delimiter: ",", precision: 0)}
     = haml :'partials/dataset/search', layout: false
 
+- if params[:has_identifiers] && params[:has_identifiers] == "true"
+  .alert.alert-info.tiny-margins.d-flex.flex-wrap{role: "alert"}
+    %div
+      #{number_to_human(@pagy.count, units: :'dataset.identifiers_alert', delimiter: ",", precision: 0)}
+    .ml-auto.text-right
+      %a.text-danger{href: url("/datasets")}
+        %i.fas.fa-minus-circle
+        #{I18n.t('general.remove')}
+- else
+  %p.text-right
+    %i.fas.fa-filter
+    = link_to "has dwc:recordedByID or dwc:identifiedByID", url("/datasets?has_identifiers=true")
+
 - @results.in_groups_of(3).each do |group|
   .card-deck
     - group.each do |dataset|

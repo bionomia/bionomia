@@ -71,7 +71,7 @@ module Sinatra
         end
 
         def stats_datasets
-          Dataset.select("COUNT(*) AS total, SUM(IF(frictionless_created_at, 1, 0)) AS frictionless")
+          Dataset.select("COUNT(*) AS total, SUM(IF(frictionless_created_at, 1, 0)) AS frictionless, SUM(IF(source_attribution_count, 1, 0)) AS identifiers")
                  .first
         end
 

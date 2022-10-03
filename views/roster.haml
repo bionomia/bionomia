@@ -17,16 +17,24 @@
     = haml :'partials/user/search', layout: false
 
 - if @pagy.count == 0 && params[:q] && params[:q].present?
-  .alert.alert-warning.tiny-margins{role: "alert"}
-    = I18n.t('roster.no_one_found')
-    %span.font-weight-bold
-      #{h(params[:q])}
+  .alert.alert-warning.tiny-margins.d-flex.flex-wrap{role: "alert"}
+    %div
+      = I18n.t('roster.no_one_found')
+      %span #{h(params[:q])}
+    .ml-auto.text-right
+      %a.text-danger{href: url("/roster")}
+        %i.fas.fa-minus-circle
+        #{I18n.t('general.remove')}
 - else
   - if params[:q] && params[:q].present?
-    .alert.alert-info.tiny-margins{role: "alert"}
-      #{number_to_human(@pagy.count, units: :'roster.search_result_count', delimiter: ",", precision: 0)}
-      %span.font-weight-bold
-        #{h(params[:q])}
+    .alert.alert-info.tiny-margins.d-flex.flex-wrap{role: "alert"}
+      %div
+        #{number_to_human(@pagy.count, units: :'roster.search_result_count', delimiter: ",", precision: 0)}
+        %span #{h(params[:q])}
+      .ml-auto.text-right
+        %a.text-danger{href: url("/roster")}
+          %i.fas.fa-minus-circle
+          #{I18n.t('general.remove')}
 
   - @results.in_groups_of(3).each do |group|
     .card-deck

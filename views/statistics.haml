@@ -215,5 +215,7 @@
         %ul.list-unstyled.m-0
           %li Total: #{number_with_delimiter(@datasets.total)}
           %li With Claims/Attributions: #{number_with_delimiter(@datasets.frictionless)}
-          %li &nbsp;
+          %li
+            With dwc:recordedByID / dwc:identifiedByID:
+            = link_to number_with_delimiter(@datasets.identifiers), url("/datasets?has_identifiers=true")
           %li &nbsp;
