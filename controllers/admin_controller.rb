@@ -542,6 +542,8 @@ module Sinatra
               check_redirect
               occurrence_ids = []
               @page = (params[:page] || 1).to_i
+              @sort = params[:sort] || nil
+              @order = params[:order] || nil
 
               @admin_user = find_user(params[:id])
 

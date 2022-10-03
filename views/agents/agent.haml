@@ -35,52 +35,53 @@
         CSV
 
 - sort = locals[:sort] == "asc" ? "desc" : "asc"
+- qry = Rack::Utils.build_nested_query(request.GET.except("order", "sort").merge({sort: sort}))
 .table-responsive-lg.overflow-auto
   %table.table.table-hover.table-sm
     %thead.thead-light
       %tr
         %th.text-nowrap{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=scientificName&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}
+          %a{href: url("/agent/#{@agent.id}?order=scientificName&#{qry}")}
             = I18n.t('specimen.scientific_name')
             = sort_icon("scientificName", sort)
         %th.text-nowrap{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=recordedBy&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}
+          %a{href: url("/agent/#{@agent.id}?order=recordedBy&#{qry}")}
             = I18n.t('specimen.collected_by')
             = sort_icon("recordedBy", sort)
         %th.text-nowrap{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=identifiedBy&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}
+          %a{href: url("/agent/#{@agent.id}?order=identifiedBy&#{qry}")}
             = I18n.t('specimen.identified_by')
             = sort_icon("identifiedBy", sort)
         %th.text-nowrap{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=eventDate&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}
+          %a{href: url("/agent/#{@agent.id}?order=eventDate&#{qry}")}
             = I18n.t('specimen.date_collected')
             = sort_icon("eventDate", sort)
         %th.text-nowrap{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=dateIdentified&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}
+          %a{href: url("/agent/#{@agent.id}?order=dateIdentified&#{qry}")}
             = I18n.t('specimen.date_identified')
             = sort_icon("dateIdentified", sort)
         %th.text-nowrap{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=country&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}
+          %a{href: url("/agent/#{@agent.id}?order=country&#{qry}")}
             = I18n.t('specimen.country')
             = sort_icon("country", sort)
         %th.text-nowrap{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=family&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}
+          %a{href: url("/agent/#{@agent.id}?order=family&#{qry}")}
             = I18n.t('specimen.family')
             = sort_icon("family", sort)
         %th.text-nowrap{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=institutionCode&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}
+          %a{href: url("/agent/#{@agent.id}?order=institutionCode&#{qry}")}
             = I18n.t('specimen.institution')
             = sort_icon("institutionCode", sort)
         %th.text-nowrap{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=catalogNumber&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}
+          %a{href: url("/agent/#{@agent.id}?order=catalogNumber&#{qry}")}
             = I18n.t('specimen.catalog_number')
             = sort_icon("catalogNumber", sort)
         %th.text-nowrap{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=typeStatus&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}
+          %a{href: url("/agent/#{@agent.id}?order=typeStatus&#{qry}")}
             = I18n.t('specimen.type_status')
             = sort_icon("typeStatus", sort)
         %th.text-nowrap{scope: "col"}
-          %a{href: url("/agent/#{@agent.id}?order=basisOfRecord&sort=#{sort}&datasetKey=#{params[:datasetKey]}&taxon=#{params[:taxon]}")}
+          %a{href: url("/agent/#{@agent.id}?order=basisOfRecord&#{qry}")}
             = I18n.t('specimen.basis_record')
             = sort_icon("basisOfRecord", sort)
 

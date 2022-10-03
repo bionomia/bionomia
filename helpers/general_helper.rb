@@ -143,10 +143,15 @@ module Sinatra
             occurrences = occurrences.where(occurrences: { countryCode: @country_code })
           end
 
-          occurrences.pluck(:agent_id, :typeStatus, :occurrence_id)
-                     .sort_by{|o| [ scores.fetch(o[0]), o[1].nil? ? "" : o[1] ] }
-                     .reverse
-                     .map(&:last)
+          if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
+            occurrences = occurrences.order("#{@order} #{@sort}")
+            occurrences.pluck(:occurrence_id)
+          else
+            occurrences.pluck(:agent_id, :typeStatus, :occurrence_id)
+                       .sort_by{|o| [ scores.fetch(o[0]), o[1].nil? ? "" : o[1] ] }
+                       .reverse
+                       .map(&:last)
+          end
         end
 
         def occurrences_by_agent_ids(agent_ids = [])

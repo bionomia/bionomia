@@ -268,6 +268,8 @@ module Sinatra
             get '/candidates' do
               occurrence_ids = []
               @page = (params[:page] || 1).to_i
+              @sort = params[:sort] || nil
+              @order = params[:order] || nil
 
               if @user.family.nil?
                 @results = []
