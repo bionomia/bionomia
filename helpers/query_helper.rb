@@ -63,10 +63,24 @@ module Sinatra
         def build_dataset_query(search)
           {
             query: {
-              multi_match: {
-                query: search,
-                type: :best_fields,
-                fields: ["top_institution_codes^5", "title^3", "description"]
+              function_score: {
+                query: {
+                  multi_match: {
+                    query: search,
+                    type: :best_fields,
+                    fields: ["top_institution_codes^5", "title^3", "description"]
+                  }
+                },
+                functions: [
+                  {
+                    filter: { match: { kind: "OCCURRENCE" } },
+                    weight: 5
+                  },
+                  {
+                    filter: { match: { kind: "CHECKLIST" } },
+                    weight: 1
+                  }
+                ]
               }
             }
           }
