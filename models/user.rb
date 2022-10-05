@@ -120,7 +120,7 @@ class User < ActiveRecord::Base
   end
 
   def initials
-    given.gsub(/([[:upper:]])[[:lower:]]+/, '\1.').gsub(/\s+/, '')
+    given.gsub(/([[:upper:]])[[:lower:]]+/, '\1.').gsub(/\s+/, '') rescue nil
   end
 
   def valid_wikicontent?

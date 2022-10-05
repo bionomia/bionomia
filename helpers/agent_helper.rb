@@ -97,6 +97,7 @@ module Sinatra
             end
           end
 
+          given_names = given_names.compact
           given_names.sort_by!(&:length).reverse!.uniq!
           full_names.uniq!
 
