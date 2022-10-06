@@ -30,6 +30,8 @@
         %dd.col-sm-10
           - if @article.processed
             %span.text-success #{@article.processed}
+          - elsif !@article.processed && @article.process_status == 1
+            %span.text-warning Processing...
           - else
             .form-check
               %input.form-check-input#processed{type: "checkbox", name: "processed"}

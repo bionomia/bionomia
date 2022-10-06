@@ -41,8 +41,11 @@ module Bionomia
 
     def process_article(article_id)
       article = Article.find(article_id)
+      article.process_status = 1
+      article.save
       process_data_packages(article)
       flush_irrelevant_entries(article_id: article.id)
+      article.process_status = 2
       article.processed = true
       article.save
       article.claimants.each do |user|
@@ -52,8 +55,11 @@ module Bionomia
 
     def process_articles
       Article.where(processed: [false, nil]).find_each do |article|
+        article.process_status = 1
+        article.save
         process_data_packages(article)
         flush_irrelevant_entries(article_id: article.id)
+        article.process_status = 2
         article.processed = true
         article.save
         article.claimants.each do |user|
