@@ -22,7 +22,8 @@ class Organization < ActiveRecord::Base
     self.find_by_wikidata(id) ||
     self.find_by_ror(id) ||
     self.find_by_ringgold(id) ||
-    self.find_by_grid(id)
+    self.find_by_grid(id) ||
+    self.find_by_isni(id)
   end
 
   def self.merge(ids)
@@ -68,7 +69,7 @@ class Organization < ActiveRecord::Base
   end
 
   def identifier
-    wikidata || ror || grid || ringgold
+    wikidata || ror || grid || ringgold || isni
   end
 
   def active_users
@@ -174,6 +175,7 @@ class Organization < ActiveRecord::Base
   def update_institution_codes
     wikidata_lib = Bionomia::WikidataSearch.new
     codes = wikidata_lib.wiki_institution_codes(identifier)
+    codes[:institution_codes].push(*institution_codes).uniq!
     update(codes) if !codes[:institution_codes].empty?
   end
 

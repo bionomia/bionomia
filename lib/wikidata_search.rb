@@ -62,13 +62,17 @@ module Bionomia
           *
         WHERE {
           VALUES ?identifier {"#{identifier}"} {
-            # institution that includes collection has GRID, ringgold, or ROR
-            ?institution wdt:P3500|wdt:P2427|wdt:P6782 ?identifier .
+            # institution that includes collection has GRID, ringgold, ROR, or ISNI
+            ?institution wdt:P3500|wdt:P2427|wdt:P6782|wdt:P213 ?identifier .
             # various part of relationships
             ?collection wdt:P195|wdt:P137|wdt:P749|wdt:P361 ?institution .
           } UNION {
-            # collection itself has GRID, ringgold, or ROR identifier
-            ?collection wdt:P3500|wdt:P2427|wdt:P6782 ?identifier .
+            # collection itself has GRID, ringgold, ROR, or ISNI identifier
+            ?collection wdt:P3500|wdt:P2427|wdt:P6782|wdt:P213 ?identifier .
+          } UNION {
+            # Use the QID if it was passed in
+            BIND( wd:#{identifier} as ?institution)
+            ?collection wdt:P195|wdt:P137|wdt:P749|wdt:P361 ?institution .
           }
           # Code(s) for collection
           {
@@ -308,7 +312,7 @@ module Bionomia
              .each_solution do |solution|
         institution_codes << solution.code.to_s
       end
-      { institution_codes: institution_codes.uniq }
+      { institution_codes: institution_codes.compact.uniq }
     end
 
     def wiki_organization_codes(qid)

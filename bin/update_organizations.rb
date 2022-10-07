@@ -31,7 +31,7 @@ OptionParser.new do |opts|
 end.parse!
 
 if options[:codes]
-  Organization.where(institution_codes: nil).find_each do |o|
+  Organization.find_each do |o|
     codes = o.update_institution_codes
     if !codes.empty?
       puts "#{o.name}: #{o.institution_codes}".green
