@@ -587,8 +587,30 @@ var Application = (function($, window) {
             }
         }).done(function(data) {
           button.find("i").first().removeClass("fa-spin");
-          $(".alert").alert().show();
-          $(".alert").on("closed.bs.alert", function () {
+          $("#organization-refresh").alert().show();
+          $("#organization-refresh").on("closed.bs.alert", function () {
+            location.reload();
+          });
+          setTimeout(function() { location.reload(); }, 2500);
+        });
+        return false;
+      });
+
+      $("a.codes-refresh").on("click", function(e) {
+        var button = $(this);
+
+        e.stopPropagation();
+        e.preventDefault();
+        $.ajax({
+            method: "GET",
+            url: button.attr("href"),
+            beforeSend: function(xhr) {
+              button.addClass("disabled").find("i").first().addClass("fa-spin");
+            }
+        }).done(function(data) {
+          button.find("i").first().removeClass("fa-spin");
+          $("#organization-codes-refresh").alert().show();
+          $("#organization-codes-refresh").on("closed.bs.alert", function () {
             location.reload();
           });
           setTimeout(function() { location.reload(); }, 2500);

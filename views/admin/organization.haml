@@ -74,7 +74,7 @@
         Refresh
         %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD", width:"18px"}
 
-      .alert.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}
+      #organization-refresh.alert.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}
         Data from Wikidata was refreshed.
         %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
           %span{"aria-hidden":"true"} &times;
@@ -84,6 +84,15 @@
     %textarea.form-control#institution_codes{type:"text", name:"institution_codes"}= "#{codes}"
     %small.form-text.text-muted
       Use pipe-separated values.
+    %a.btn.btn-sm.btn-outline-success.codes-refresh{href: url("/admin/organization/#{@organization.id}/codes.json"), role:"button"}
+      %i.fas.fa-sync-alt
+      Refresh
+
+    #organization-codes-refresh.alert.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}
+      Data from Wikidata was refreshed.
+      %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
+        %span{"aria-hidden":"true"} &times;
+
   %button.btn.btn-success{type: "submit"} Submit
   %button.btn.btn-danger{type: "button", "data-toggle": "modal", "data-target": "#deleteModal"} Delete
   %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}

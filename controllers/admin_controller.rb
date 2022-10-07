@@ -215,11 +215,17 @@ module Sinatra
               redirect back
             end
 
-            get '/organization/:organization_id/refresh.json' do
+            get '/organization/:id/refresh.json' do
               content_type "application/json", charset: 'utf-8'
-
-              organization = Organization.find(params[:organization_id])
+              organization = Organization.find(params[:id])
               organization.update_wikidata
+              { message: "ok" }.to_json
+            end
+
+            get '/organization/:id/codes.json' do
+              content_type "application/json", charset: 'utf-8'
+              organization = Organization.find(params[:id])
+              organization.update_institution_codes
               { message: "ok" }.to_json
             end
 
