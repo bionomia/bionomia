@@ -73,6 +73,9 @@
               = sort_icon("wikidata", sort)
 
       %tbody
+        - if @results.empty?
+          %tr
+            %td{colspan: "9"} No records found.
         - @results.each do |o|
           %tr
             %td.text-center
