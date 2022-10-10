@@ -13,11 +13,26 @@
 
 %p.text-right
   View candidate duplicates:
-  %a{href: url("/admin/organizations/duplicates?identifier=isni")} ISNI
-  %a{href: url("/admin/organizations/duplicates?identifier=ror")} RoR
-  %a{href: url("/admin/organizations/duplicates?identifier=ringgold")} Ringgold
-  %a{href: url("/admin/organizations/duplicates?identifier=grid")} GRID
-  %a{href: url("/admin/organizations/duplicates?identifier=wikidata")} Wikidata
+  - if !params[:identifier] || params[:identifier] != "isni"
+    %a{href: url("/admin/organizations/duplicates?identifier=isni")} ISNI
+  - else
+    ISNI
+  - if !params[:identifier] || params[:identifier] != "ror"
+    %a{href: url("/admin/organizations/duplicates?identifier=ror")} RoR
+  - else
+    RoR
+  - if !params[:identifier] || params[:identifier] != "ringgold"
+    %a{href: url("/admin/organizations/duplicates?identifier=ringgold")} Ringgold
+  - else
+    Ringgold
+  - if !params[:identifier] || params[:identifier] != "grid"
+    %a{href: url("/admin/organizations/duplicates?identifier=grid")} GRID
+  - else
+    GRID
+  - if !params[:identifier] || params[:identifier] != "wikidata"
+    %a{href: url("/admin/organizations/duplicates?identifier=wikidata")} Wikidata
+  - else
+    Wikidata
 
 - if flash[:destroyed]
   .alert.alert-danger.alert-dismissible.fade.show.d-block{role: "alert"}
