@@ -23,6 +23,11 @@ describe "Bionomia Dataset Controller" do
     expect(last_response).to be_ok
   end
 
+  it "should filter the datasets list by those with identifiers" do
+    get '/datasets?has_identifiers=true'
+    expect(last_response).to be_ok
+  end
+
   it "should allow accessing the datasets json page" do
     get '/dataset.json'
     expect(last_response).to be_ok
