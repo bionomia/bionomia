@@ -7,7 +7,9 @@ module Bionomia
 
     def perform(row)
       agents = DwcAgent.parse(row["agents"])
-                       .map{|a| DwcAgent.clean(a)}.compact.uniq
+                       .map{|a| DwcAgent.clean(a)}
+                       .compact
+                       .uniq
       agents.each do |a|
         next if !a.family || a.family.length < 2
 

@@ -261,7 +261,7 @@ module Bionomia
 
     def add_new_users
       new_users.each do |wikicode, name|
-        parsed = DwcAgent.parse(name.dup)[0] rescue nil
+        parsed = Namae.parse(name.dup)[0] rescue nil
         next if parsed.nil? || parsed.family.nil? || parsed.given.nil?
         user_data = wiki_user_data(wikicode)
         date_died = user_data[:date_died]
@@ -412,7 +412,7 @@ module Bionomia
         return
       end
 
-      parsed = DwcAgent.parse(wiki_user.dup.title)[0] rescue nil
+      parsed = Namae.parse(wiki_user.dup.title)[0] rescue nil
 
       family = parsed.family rescue nil
       given = parsed.given rescue nil
