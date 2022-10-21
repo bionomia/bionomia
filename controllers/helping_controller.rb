@@ -61,14 +61,14 @@ module Sinatra
             end
 
             get '/new-people' do
-              users = User.where.not(orcid: nil).order(created: :desc).limit(100)
-              @pagy, @results = pagy(users, items: 20)
+              users = User.where.not(orcid: nil).order(created: :desc).limit(25)
+              @pagy, @results = pagy(users, items: 25)
               haml :'help/new_people', locals: { active_page: "help", active_tab: "orcid" }
             end
 
             get '/new-people/wikidata' do
-              users = User.where.not(wikidata: nil).order(created: :desc).limit(100)
-              @pagy, @results = pagy(users, items: 20)
+              users = User.where.not(wikidata: nil).order(created: :desc).limit(25)
+              @pagy, @results = pagy(users, items: 25)
               haml :'help/new_people', locals: { active_page: "help", active_tab: "wikidata" }
             end
 

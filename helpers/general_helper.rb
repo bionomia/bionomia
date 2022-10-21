@@ -101,9 +101,9 @@ module Sinatra
                               .where.not(users: user_type)
                               .order(created: :desc)
                               .distinct
-                              .limit(100)
+                              .limit(25)
 
-          @pagy, @results = pagy(qry, items: 20)
+          @pagy, @results = pagy(qry, items: 25)
         end
 
         def example_profiles
