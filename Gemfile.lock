@@ -101,12 +101,12 @@ GEM
     dwc_agent (3.0.1.5)
       namae (~> 1)
       namecase (~> 2)
-    elasticsearch (7.17.1)
-      elasticsearch-api (= 7.17.1)
-      elasticsearch-transport (= 7.17.1)
-    elasticsearch-api (7.17.1)
+    elasticsearch (7.17.7)
+      elasticsearch-api (= 7.17.7)
+      elasticsearch-transport (= 7.17.7)
+    elasticsearch-api (7.17.7)
       multi_json
-    elasticsearch-transport (7.17.1)
+    elasticsearch-transport (7.17.7)
       faraday (~> 1)
       multi_json
     equalizer (0.0.11)
@@ -268,7 +268,7 @@ GEM
     rspec-expectations (3.11.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.11.0)
-    rspec-mocks (3.11.1)
+    rspec-mocks (3.11.2)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.11.0)
     rspec-support (3.11.1)
@@ -318,7 +318,7 @@ GEM
     stream (0.5.5)
     sucker_punch (3.1.0)
       concurrent-ruby (~> 1.0)
-    temple (0.8.2)
+    temple (0.9.1)
     thin (1.8.1)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
@@ -418,4 +418,4 @@ RUBY VERSION
    ruby 2.7.1p83
 
 BUNDLED WITH
-   2.2.16
+   2.3.19
