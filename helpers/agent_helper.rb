@@ -49,7 +49,7 @@ module Sinatra
         end
 
         def candidate_agents(user)
-          return [] if user.fullname.is_orcid?
+          return [] if user.fullname && user.fullname.is_orcid?
 
           cutoff_score = 65
 
@@ -73,7 +73,7 @@ module Sinatra
           if !user.other_names.empty?
             user.other_names.split("|").first(10).each do |other_name|
               #Attempt to ignore botanist abbreviation or naked family name, often as "other" name in wikidata
-              next if user.family.include?(other_name.gsub(".",""))
+              next if user.family && user.family.include?(other_name.gsub(".",""))
 
               #Attempt to tack on family name because single given name often in ORCID
               if !other_name.include?(" ")
@@ -106,7 +106,7 @@ module Sinatra
 
             agents.each do |a|
               # Boost the matches to a family-only name
-              if full_names.map(&:downcase).include?(a[:fullname].downcase)
+              if full_names.compact.map(&:downcase).include?(a[:fullname].downcase)
                 a[:score] += cutoff_score
               else
                 # Add to list of agent names to remove if the given names are not similar
