@@ -7,7 +7,8 @@ module Bionomia
     def perform(data)
       ActiveRecord::Base.connection_pool.with_connection do
         gt = GbifTracker.new({ first_page_only: true })
-        gt.process_article(data[:article_id])
+        article = Article.find(data[:article_id])
+        gt.process_article(article)
       end
     end
 
