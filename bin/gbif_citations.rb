@@ -59,7 +59,8 @@ end
 if options[:process]
   tracker.process_articles
 elsif options[:article_id]
-  tracker.process_article(options[:article_id])
+  article = Article.find(options[:article_id])
+  tracker.process_article(article)
 end
 
 if options[:delete]
