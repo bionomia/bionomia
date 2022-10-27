@@ -51,6 +51,8 @@ module Bionomia
       sitemap.add '/privacy'
       sitemap.add '/reconcile'
       sitemap.add '/roster'
+      sitemap.add '/roster/gallery'
+      sitemap.add '/roster/signatures'
       sitemap.add '/scribes'
       sitemap.add '/terms-of-service'
       sitemap.add '/taxa'
