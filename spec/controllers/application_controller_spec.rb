@@ -10,6 +10,16 @@ describe "Bionomia Application Controller" do
     expect(last_response).to be_ok
   end
 
+  it "should allow accessing the public gallery" do
+    get '/roster/gallery'
+    expect(last_response).to be_ok
+  end
+
+  it "should allow accessing the public signatures" do
+    get '/roster/signatures'
+    expect(last_response).to be_ok
+  end
+
   it "should allow accessing the acknowledgments page" do
     get '/acknowledgments'
     expect(last_response).to be_ok
