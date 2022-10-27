@@ -635,6 +635,9 @@ hi:
       unit:
         one: "search result for"
         other: "search results for"
+    list: List
+    gallery: Gallery
+    signatures: Signatures
   specimen:
     scientific_name: Scientific Name
     collected_by: Collected By
