@@ -635,6 +635,9 @@ fr:
       unit:
         one: "résultat pour"
         other: "résultats pour"
+    list: List
+    gallery: Gallery
+    signatures: Signatures
   specimen:
     scientific_name: Nom scientifique
     collected_by: Collecté par

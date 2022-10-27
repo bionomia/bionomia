@@ -256,18 +256,6 @@ module Sinatra
           results
         end
 
-        def roster
-          @pagy, @results = pagy(User.where(is_public: true).order(:family))
-        end
-
-        def admin_roster
-          data = User.order(visited: :desc, family: :asc)
-          if params[:order] && User.column_names.include?(params[:order]) && ["asc", "desc"].include?(params[:sort])
-            data = User.order("#{params[:order]} #{params[:sort]}")
-          end
-          @pagy, @results = pagy(data, items: 100)
-        end
-
         def scribe_stats
           attributions = UserOccurrence.where("created_by <> user_id")
                                        .where.not(created_by: User::BOT_IDS)

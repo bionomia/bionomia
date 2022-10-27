@@ -180,7 +180,17 @@ module Sinatra
             else
               roster
             end
-            haml :roster, locals: { active_page: "roster" }
+            haml :'roster/roster', locals: { active_page: "roster", active_tab: "list" }
+          end
+
+          app.get '/roster/gallery' do
+            roster_gallery
+            haml :'roster/gallery', locals: { active_page: "roster", active_tab: "gallery" }
+          end
+
+          app.get '/roster/signatures' do
+            roster_signatures
+            haml :'roster/signatures', locals: { active_page: "roster", active_tab: "signatures" }
           end
 
           app.get '/offline' do

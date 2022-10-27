@@ -16,6 +16,8 @@
         = I18n.t('roster.lede', count: number_with_delimiter(User.where(is_public: true).count))
     = haml :'partials/user/search', layout: false
 
+= haml :'partials/roster/pills', layout: false, locals: locals
+
 - if @pagy.count == 0 && params[:q] && params[:q].present?
   .alert.alert-warning.tiny-margins.d-flex.flex-wrap{role: "alert"}
     %div
