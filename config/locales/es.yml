@@ -52,7 +52,7 @@ es:
         one: "un espécimen encontrado. No se muestran todas las columnas."
         other: "especímenes encontrados. No se muestran todas las columnas."
     search_html: "Búsqueda de %{agent_link} la persona y ayude a atribuir sus especímenes."
-    example_agents: Random Samples or Results
+    example_agents: Muestras o resultados aleatorios
     gbifid: De gbifIDs
     gbifid_title: Cadenas de agentes de gbifIDs
     gbifid_instructions: Paste a list of occurrence-based gbifIDs and receive a summary list of parsed agent strings from recordedBy.
@@ -333,7 +333,7 @@ es:
     not_identified_for_name: "Specimens have not been collected by %{name} and identified by %{other_name}."
     identified_for_count:
       one: "collected specimen"
-      other: "collected specimens"
+      other: "especímenes colectados"
     identifications_by: Identificaciones por
     no_determiners_alert: Determiners have not yet been recorded.
     determiners_alert: "Choose a determiner to adjust attributions made for specimens identified by them."
