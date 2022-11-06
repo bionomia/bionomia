@@ -15,7 +15,7 @@ module Bionomia
           analysis: {
             filter: {
               autocomplete: {
-                type: "edgeNGram",
+                type: "edge_ngram",
                 side: "front",
                 min_gram: 1,
                 max_gram: 50
