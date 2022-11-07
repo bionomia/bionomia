@@ -55,6 +55,7 @@ module Sinatra
 
           agents = search_agents(user.fullname)
           full_names = [user.fullname.dup]
+          family_names = [user.family.dup]
           given_names = [user.given.dup]
 
           full_names << user.family.dup
@@ -83,11 +84,12 @@ module Sinatra
               full_names << other_name
               agents.concat search_agents(other_name)
 
-              parsed_other_name = DwcAgent.parse(other_name)[0] rescue nil
+              parsed_other_name = Namae.parse(other_name)[0] rescue nil
 
               if !parsed_other_name.nil? && !parsed_other_name.given.nil?
                 abbreviated_name = [parsed_other_name.initials[0..-3], parsed_other_name.family].join(" ")
                 full_names << abbreviated_name
+                family_names << parsed_other_name.family
                 agents.concat search_agents(abbreviated_name)
                 given = parsed_other_name.given
                 given_names << given
@@ -97,9 +99,10 @@ module Sinatra
             end
           end
 
+          full_names.uniq!
+          family_names.uniq!
           given_names = given_names.compact
           given_names.sort_by!(&:length).reverse!.uniq!
-          full_names.uniq!
 
           if !params.has_key?(:relaxed) || params[:relaxed] == "0"
             remove_agents = []
@@ -112,6 +115,9 @@ module Sinatra
                 # Add to list of agent names to remove if the given names are not similar
                 scores = given_names.map{ |g| DwcAgent.similarity_score(g.downcase, a[:given].downcase) }
                 remove_agents << a[:id] if scores.include?(0)
+
+                # Add to list of agent names to remove if the family names are not in the known list
+                remove_agents << a[:id] if !family_names.include?(a[:family])
               end
             end
 
