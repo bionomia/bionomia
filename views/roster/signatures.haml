@@ -22,9 +22,10 @@
       - if u.nil?
         .card.border-0
       - else
-        .card.m-3
-          %a{href: url("/#{u.identifier}")}
-            %img{class: "card-img-top", src: signature_image(u), alt: "#{u.fullname}"}
+        .card.card-profile.m-3
+          .card-header.p-0
+            %a{href: url("/#{u.identifier}")}
+              %img{class: "card-img-top", src: signature_image(u), alt: "#{u.fullname}"}
           .card-body
             %p.card-text.text-center.mb-1
               %a{href: url("/#{u.identifier}")}= u.fullname

@@ -19,7 +19,7 @@ module Sinatra
         def roster_signatures
           users = User.where(is_public: true)
                       .where.not(signature_url: nil)
-                      .order(:family)
+                      .order(:date_born)
           @pagy, @results = pagy(users)
         end
 
