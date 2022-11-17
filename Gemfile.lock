@@ -94,7 +94,7 @@ GEM
     dwc-archive (1.1.6)
       biodiversity (~> 5.5.2)
       nokogiri (~> 1.11)
-    dwc_agent (3.0.1.5)
+    dwc_agent (3.0.2.0)
       namae (~> 1)
       namecase (~> 2)
     elasticsearch (7.17.7)
