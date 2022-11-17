@@ -1,5 +1,12 @@
 # encoding: utf-8
 class String
+
+  def is_num?
+    !!Integer(self)
+    rescue ArgumentError, TypeError
+    false
+  end
+
   def is_orcid?
     ::Bionomia::Identifier.is_orcid_regex.match?(self) &&
     ::Bionomia::Identifier.orcid_valid_checksum(self)

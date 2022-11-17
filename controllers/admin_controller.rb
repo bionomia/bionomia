@@ -281,6 +281,14 @@ module Sinatra
             end
 
             get '/stats' do
+              @health = {}
+              indices = ["agent", "article", "dataset", "organization", "user", "taxon"]
+              indices.each do |index|
+                es = Object.const_get("Bionomia::Elastic#{index.capitalize}").new
+                @health[index] = { documents: es.count }.merge es.health
+                es.stats
+              end
+
               haml :'admin/stats', locals: { active_page: "administration" }
             end
 

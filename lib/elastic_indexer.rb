@@ -17,6 +17,35 @@ module Bionomia
             adapter: :typhoeus
     end
 
+    def cluster_health
+      response = client.cat.health format: 'json', v: true
+      response[0]
+    end
+
+    def cluster_stats
+      client.cluster.stats
+    end
+
+    def health
+      response = client.cluster.health index: @settings[:index], level: "indices", local: true
+      response["indices"][@settings[:index]]
+    end
+
+    def stats
+      response = client.indices.stats index: @settings[:index]
+      response["indices"][@settings[:index]]
+    end
+
+    def disk_usage
+      usage = client.indices.disk_usage index: @settings[:index], run_expensive_tasks: true
+      usage[@settings[:index]]["store_size"]
+    end
+
+    def count
+      response = client.count index: @settings[:index]
+      response["count"]
+    end
+
     def delete_index
       if client.indices.exists index: @settings[:index]
         client.indices.delete index: @settings[:index]
