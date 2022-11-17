@@ -29,6 +29,7 @@ if options[:rebuild]
     index = Object.const_get("Bionomia::Elastic#{index_name.capitalize}").new
     index.delete_index
     index.create_index
+    index.refresh_index
     puts "Importing #{index_name}s..."
     index.import
     index.refresh_index
@@ -40,6 +41,7 @@ if options[:index]
     index = Object.const_get("Bionomia::Elastic#{options[:index].capitalize}").new
     index.delete_index
     index.create_index
+    index.refresh_index
     puts "Importing #{options[:index]}s..."
     index.import
     index.refresh_index
