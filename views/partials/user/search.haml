@@ -8,13 +8,13 @@
       %button.btn.btn-success.dropdown-toggle.dropdown-toggle-split{type: :button, "data-toggle": :dropdown}
         %span.sr-only Toggle Dropdown
       .dropdown-menu
-        .form-check.justify-content-start.pl-2
+        .form-check.justify-content-start.ml-2
           - if params[:is_public]
             %input#is_public.form-check-input{type: :checkbox, name: "is_public", checked: true}
           - else
             %input#is_public.form-check-input{type: :checkbox, name: "is_public"}
           %label.form-check-label{for: "is_public"}= I18n.t('general.is_public')
-        .form-check.justify-content-start.pl-2
+        .form-check.justify-content-start.ml-2
           - if params[:has_occurrences]
             %input#has_occurrences.form-check-input{type: :checkbox, name: "has_occurrences", checked: true}
           - else
