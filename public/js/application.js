@@ -262,6 +262,10 @@ var Application = (function($, window) {
           kingdom = "",
           country_code = "";
 
+      $(".form-check-label").on("click", function(e) {
+        e.stopPropagation();
+      });
+
       $("a.expand-collapse").on("click", function(e) {
         var child = $(this).children().first();
         e.stopPropagation();

@@ -3,7 +3,23 @@
     .form-group.w-75
       - username = @viewed_user ? @viewed_user.fullname : "Mary Smith"
       %input#typeahead-user.typeahead.help-search{type: :text, name: "q", placeholder: "#{username}", value: "#{h(params[:q])}", size:"25", autocomplete:"off"}
-    %input.btn.btn-success.medium-margins{type: :submit, value:"#{I18n.t('general.search')}"}
+    .btn-group
+      %input.btn.btn-success.medium-margins.mr-0{type: :submit, value:"#{I18n.t('general.search')}"}
+      %button.btn.btn-success.dropdown-toggle.dropdown-toggle-split{type: :button, "data-toggle": :dropdown}
+        %span.sr-only Toggle Dropdown
+      .dropdown-menu
+        .form-check.justify-content-start.pl-2
+          - if params[:is_public]
+            %input#is_public.form-check-input{type: :checkbox, name: "is_public", checked: true}
+          - else
+            %input#is_public.form-check-input{type: :checkbox, name: "is_public"}
+          %label.form-check-label{for: "is_public"} is public
+        .form-check.justify-content-start.pl-2
+          - if params[:has_occurrences]
+            %input#has_occurrences.form-check-input{type: :checkbox, name: "has_occurrences", checked: true}
+          - else
+            %input#has_occurrences.form-check-input{type: :checkbox, name: "has_occurrences"}
+          %label.form-check-label{for: "has_occurrences"} has specimens
 
 %script#result-template{type:"text/x-handlebars-template"}
   .d-flex

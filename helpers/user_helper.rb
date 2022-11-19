@@ -16,12 +16,12 @@ module Sinatra
           has_occurrences = params[:has_occurrences] || ""
 
           opts = {}
-          if is_public.downcase == "true"
+          if is_public.downcase == "true" || is_public.downcase == "on"
             opts[:is_public] = true
           elsif is_public.downcase == "false"
             opts[:is_public] = false
           end
-          if has_occurrences.downcase == "true"
+          if has_occurrences.downcase == "true" || has_occurrences.downcase == "on"
             opts[:has_occurrences] = true
           elsif has_occurrences.downcase == "false"
             opts[:has_occurrences] = false
