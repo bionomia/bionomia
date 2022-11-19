@@ -564,7 +564,7 @@ dl.citation{
 .token.regex, .token.string, .token.variable {
   color: #7ec699;
 }
-.token.number {
+.token.number, .token.boolean {
   color: #f08d49;
 }
 
