@@ -5,37 +5,57 @@ module Sinatra
     module Helper
       module QueryHelper
 
-        def build_name_query(search)
-          {
-            query: {
-              bool: {
-                must: [
-                  multi_match: {
-                    query:      search,
-                    type:       :cross_fields,
-                    analyzer:   :fullname_index,
-                    fields:     [
-                      "family^3",
-                      "given",
-                      "fullname^5",
-                      "other_names",
-                      "*.edge"
-                    ],
-                  }
-                ],
-                should: [
-                  rank_feature: {
-                    field: "rank"
-                  }
-                ]
-              }
-            },
-            sort: [
-              "_score",
-              { family: { order: :asc } },
-              { given: { order: :asc } }
-            ]
-          }
+        def build_name_query(search, opts = {})
+          qry = {
+              query: {
+                bool: {
+                  must: [
+                    {
+                      multi_match: {
+                        query:      search,
+                        type:       :cross_fields,
+                        analyzer:   :fullname_index,
+                        fields:     [
+                          "family^3",
+                          "given",
+                          "fullname^5",
+                          "other_names",
+                          "*.edge"
+                        ],
+                      }
+                    }
+                  ],
+                  should: [
+                    rank_feature: {
+                      field: "rank"
+                    }
+                  ],
+                  filter: []
+                }
+              },
+              sort: [
+                "_score",
+                { family: { order: :asc } },
+                { given: { order: :asc } }
+              ]
+            }
+          if opts.has_key? :is_public
+            qry[:query][:bool][:filter] << { term: { is_public: opts[:is_public] } }
+          end
+          if opts.has_key? :has_occurrences
+            if opts[:has_occurrences]
+              qry[:query][:bool][:filter] << { bool: { should: [
+                  { nested: { path: "recorded", query: { exists: { field: "recorded.family" } } } },
+                  { nested: { path: "identified", query: { exists: { field: "identified.family" } } } }
+                ]} }
+            else
+              qry[:query][:bool][:filter] << { bool: { must_not: [
+                  { nested: { path: "recorded", query: { exists: { field: "recorded.family" } } } },
+                  { nested: { path: "identified", query: { exists: { field: "identified.family" } } } }
+                ]} }
+            end
+          end
+          qry
         end
 
         def build_organization_query(search)

@@ -168,7 +168,8 @@ module Sinatra
               other_names: n[:_source][:other_names],
               thumbnail: n[:_source][:thumbnail],
               lifespan: lifespan,
-              description: n[:_source][:description]
+              description: n[:_source][:description],
+              is_public: n[:_source][:is_public]
             }
           }
         end

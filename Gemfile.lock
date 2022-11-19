@@ -245,7 +245,7 @@ GEM
       link_header (~> 0.0, >= 0.0.8)
     redis (5.0.5)
       redis-client (>= 0.9.0)
-    redis-client (0.11.1)
+    redis-client (0.11.2)
       connection_pool
     require_all (3.0.0)
     rest-client (2.1.0)

@@ -73,6 +73,7 @@ module Bionomia
             wikidata: { type: 'keyword' },
             thumbnail: { type: 'keyword', index: false },
             description: { type: 'text', index: false },
+            is_public: { type: 'boolean' },
             family: {
               type: 'text',
               fielddata: true,
@@ -236,6 +237,7 @@ module Bionomia
         date_died_precision: u.date_died_precision,
         thumbnail: thumbnail(u),
         description: description,
+        is_public: u.is_public,
         identified: family_countries[:identified].to_a,
         recorded: family_countries[:recorded].to_a,
         co_collectors: co_collectors,

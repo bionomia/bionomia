@@ -12,6 +12,20 @@ module Sinatra
 
           page = (params[:page] || 1).to_i
           limit = (params[:limit] || 30).to_i
+          is_public = params[:is_public] || ""
+          has_occurrences = params[:has_occurrences] || ""
+
+          opts = {}
+          if is_public.downcase == "true"
+            opts[:is_public] = true
+          elsif is_public.downcase == "false"
+            opts[:is_public] = false
+          end
+          if has_occurrences.downcase == "true"
+            opts[:has_occurrences] = true
+          elsif has_occurrences.downcase == "false"
+            opts[:has_occurrences] = false
+          end
 
           client = Elasticsearch::Client.new(
             url: Settings.elastic.server,
@@ -21,7 +35,7 @@ module Sinatra
             reload_connections: 1_000,
             adapter: :typhoeus
           )
-          body = build_name_query(searched_term)
+          body = build_name_query(searched_term, opts)
           from = (page -1) * limit
 
           response = client.search index: Settings.elastic.user_index, from: from, size: limit, body: body
