@@ -5,7 +5,7 @@ module Sinatra
     module Helper
       module QueryHelper
 
-        def build_name_query(search, opts = {})
+        def build_name_query(search, obj = {})
           qry = {
               query: {
                 bool: {
@@ -39,21 +39,11 @@ module Sinatra
                 { given: { order: :asc } }
               ]
             }
-          if opts.has_key? :is_public
-            qry[:query][:bool][:filter] << { term: { is_public: opts[:is_public] } }
+          if obj.has_key? :is_public
+            qry[:query][:bool][:filter] << { term: { is_public: obj[:is_public] } }
           end
-          if opts.has_key? :has_occurrences
-            if opts[:has_occurrences]
-              qry[:query][:bool][:filter] << { bool: { should: [
-                  { nested: { path: "recorded", query: { exists: { field: "recorded.family" } } } },
-                  { nested: { path: "identified", query: { exists: { field: "identified.family" } } } }
-                ]} }
-            else
-              qry[:query][:bool][:filter] << { bool: { must_not: [
-                  { nested: { path: "recorded", query: { exists: { field: "recorded.family" } } } },
-                  { nested: { path: "identified", query: { exists: { field: "identified.family" } } } }
-                ]} }
-            end
+          if obj.has_key? :has_occurrences
+            qry[:query][:bool][:filter] << { term: { has_occurrences: obj[:has_occurrences] } }
           end
           qry
         end

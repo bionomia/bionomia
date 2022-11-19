@@ -74,6 +74,7 @@ module Bionomia
             thumbnail: { type: 'keyword', index: false },
             description: { type: 'text', index: false },
             is_public: { type: 'boolean' },
+            has_occurrences: { type: 'boolean' },
             family: {
               type: 'text',
               fielddata: true,
@@ -238,6 +239,7 @@ module Bionomia
         thumbnail: thumbnail(u),
         description: description,
         is_public: u.is_public,
+        has_occurrences: (u.has_recordings? || u.has_identifications?),
         identified: family_countries[:identified].to_a,
         recorded: family_countries[:recorded].to_a,
         co_collectors: co_collectors,
