@@ -13,13 +13,13 @@
             %input#is_public.form-check-input{type: :checkbox, name: "is_public", checked: true}
           - else
             %input#is_public.form-check-input{type: :checkbox, name: "is_public"}
-          %label.form-check-label{for: "is_public"} is public
+          %label.form-check-label{for: "is_public"}= I18n.t('general.is_public')
         .form-check.justify-content-start.pl-2
           - if params[:has_occurrences]
             %input#has_occurrences.form-check-input{type: :checkbox, name: "has_occurrences", checked: true}
           - else
             %input#has_occurrences.form-check-input{type: :checkbox, name: "has_occurrences"}
-          %label.form-check-label{for: "has_occurrences"} has specimens
+          %label.form-check-label{for: "has_occurrences"}= I18n.t('general.has_occurrences')
 
 %script#result-template{type:"text/x-handlebars-template"}
   .d-flex

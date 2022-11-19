@@ -251,6 +251,8 @@ fr:
     reset: Réinitialiser
     remove: Enlever
     filtered_by: Filtré par
+    is_public: is public
+    has_occurrences: has specimens
   help:
     ignored_title: "Aide a récupéré pour %{name}"
     upload_user_title: "Téléchargement en bloc pour %{name}"

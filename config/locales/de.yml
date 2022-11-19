@@ -251,6 +251,8 @@ de:
     reset: Zurücksetzen
     remove: Entfernen
     filtered_by: Gefiltert nach
+    is_public: is public
+    has_occurrences: has specimens
   help:
     ignored_title: "Help Reclaim Ignored for %{name}"
     upload_user_title: "Bulk Upload for %{name}"
