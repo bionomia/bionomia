@@ -1,6 +1,10 @@
 # encoding: utf-8
 class String
 
+  def transliterate
+    I18n.transliterate self
+  end
+
   def is_num?
     !!Integer(self)
     rescue ArgumentError, TypeError

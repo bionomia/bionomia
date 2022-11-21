@@ -109,15 +109,15 @@ module Sinatra
 
             agents.each do |a|
               # Boost the matches to a family-only name
-              if full_names.compact.map(&:downcase).include?(a[:fullname].downcase)
+              if full_names.compact.map{|n| n.transliterate.downcase}.include?(a[:fullname].transliterate.downcase)
                 a[:score] += cutoff_score
               else
                 # Add to list of agent names to remove if the given names are not similar
-                scores = given_names.map{ |g| DwcAgent.similarity_score(g.downcase, a[:given].downcase) }
+                scores = given_names.map{ |g| DwcAgent.similarity_score(g.transliterate.downcase, a[:given].transliterate.downcase) }
                 remove_agents << a[:id] if scores.include?(0)
 
                 # Add to list of agent names to remove if the family names are not in the known list
-                remove_agents << a[:id] if !family_names.include?(a[:family])
+                remove_agents << a[:id] if !family_names.map{|n| n.transliterate.downcase}.include?(a[:family].transliterate.downcase)
               end
             end
 
