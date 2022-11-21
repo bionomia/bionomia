@@ -127,8 +127,8 @@ fr:
         other: "jeux de données de GBIF"
     identifiers_alert:
       unit:
-        one: "dataset with content in dwc:recordedByID or dwc:identifiedByID"
-        other: "datasets with content in dwc:recordedByID or dwc:identifiedByID"
+        one: "jeu de données avec le contenu dans dwc:recordedByID ou dwc:identifiedByID"
+        other: "jeux de données avec le contenu dans dwc:recordedByID ou dwc:identifiedByID"
     placeholder: Papillons du Brésil
     people: Personnes
     visualizations: Visualisations
@@ -251,8 +251,8 @@ fr:
     reset: Réinitialiser
     remove: Enlever
     filtered_by: Filtré par
-    is_public: is public
-    has_occurrences: has specimens
+    is_public: est publique
+    has_occurrences: a des spécimens
   help:
     ignored_title: "Aide a récupéré pour %{name}"
     upload_user_title: "Téléchargement en bloc pour %{name}"
