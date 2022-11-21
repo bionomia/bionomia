@@ -637,9 +637,9 @@ de:
       unit:
         one: "Suchergebnis für"
         other: "Suchergebnisse für"
-    list: List
-    gallery: Gallery
-    signatures: Signatures
+    list: Liste
+    gallery: Galerie
+    signatures: Unterschriften
   specimen:
     scientific_name: Wissenschaftlicher Name
     collected_by: Gesammelt von
