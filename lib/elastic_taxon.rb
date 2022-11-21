@@ -12,6 +12,10 @@ module Bionomia
     def create_index
       config = {
         settings: {
+          index: {
+            number_of_replicas: 0,
+            auto_expand_replicas: false
+          },
           analysis: {
             filter: {
               autocomplete: {
