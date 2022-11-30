@@ -20,9 +20,9 @@
   .card-deck
     - group.each do |u|
       - if u.nil?
-        .card.border-0
+        .card.card-flex.border-0
       - else
-        .card.card-profile.m-3
+        .card.card-flex.card-profile.m-3
           .card-header.p-0
             %a{href: url("/#{u.identifier}")}
               %img{class: "card-img-top", src: profile_image(u, "social"), alt: "#{u.fullname}"}
