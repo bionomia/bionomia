@@ -251,7 +251,7 @@ es:
     reset: Reiniciar
     remove: Remover
     filtered_by: Filtrado por
-    is_public: is public
+    is_public: es público
     has_occurrences: has specimens
   help:
     ignored_title: "Help Reclaim Ignored for %{name}"
@@ -637,8 +637,8 @@ es:
       unit:
         one: "resultado de la búsqueda por"
         other: "resultados de la búsqueda por"
-    list: List
-    gallery: Gallery
+    list: Lista
+    gallery: Galería
     signatures: Signatures
   specimen:
     scientific_name: Nombre científico
