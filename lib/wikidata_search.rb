@@ -183,19 +183,12 @@ module Bionomia
 
     def wikidata_modified_query
       yesterday = Time.now - 86400
-      list = PEOPLE_PROPERTIES.values.map{|a| "wdt:#{a}"}.join("|")
       %Q(
         SELECT DISTINCT (REPLACE(STR(?item),".*Q","Q") AS ?qid)
         WHERE {
           ?item wdt:P31 wd:Q5 .
-          ?item #{list} ?id .
+          ?item wdt:P6944 ?bionomia_id .
           ?item schema:dateModified ?change .
-          OPTIONAL {
-            ?item wdt:P570 ?date_of_death .
-          }
-          OPTIONAL {
-            ?item wdt:P6944 ?bionomia_id .
-          }
           SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en" }
           FILTER(?change > "#{yesterday.iso8601}"^^xsd:dateTime)
         }
