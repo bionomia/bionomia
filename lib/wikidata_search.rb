@@ -188,9 +188,14 @@ module Bionomia
         SELECT DISTINCT (REPLACE(STR(?item),".*Q","Q") AS ?qid)
         WHERE {
           ?item wdt:P31 wd:Q5 .
-          ?item wdt:P570 ?date_of_death .
           ?item #{list} ?id .
           ?item schema:dateModified ?change .
+          OPTIONAL {
+            ?item wdt:P570 ?date_of_death .
+          }
+          OPTIONAL {
+            ?item wdt:P6944 ?bionomia_id .
+          }
           SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en" }
           FILTER(?change > "#{yesterday.iso8601}"^^xsd:dateTime)
         }
