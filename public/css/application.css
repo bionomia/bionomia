@@ -372,6 +372,7 @@ dl.dl-horizontal dd.line-break {
   padding-top:0px;
 }
 .occurrence .card { -ms-flex: 0 0 96%; flex: 0 0 96%;}
+
 @media(min-width: 1200px) {
   .occurrence .card { -ms-flex: 0 0 47.7%; flex: 0 0 47.7%; }
 }
