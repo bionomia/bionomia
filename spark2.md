@@ -10,12 +10,12 @@ $ curl -i --user davidpshorthouse:***password*** -H "Content-Type:application/js
 
 - Create the database using the [schema in /db](db/bionomia.sql)
 - Ensure that MySQL has utf8mb4 collation. See [https://mathiasbynens.be/notes/mysql-utf8mb4](https://mathiasbynens.be/notes/mysql-utf8mb4) to set server connection
-- Get the mysql-connector-java (Connector/J) from [https://dev.mysql.com/downloads/connector/j/8.0.html](https://dev.mysql.com/downloads/connector/j/8.0.html).
+- Get the mysql-connector-j (Connector/J) from [https://dev.mysql.com/downloads/connector/j/8.0.html](https://dev.mysql.com/downloads/connector/j/8.0.html).
 
 On a Mac with Homebrew:
 
 ```bash
-$ spark-shell --jars /usr/local/opt/mysql-connector-java/libexec/mysql-connector-java-8.0.30.jar --packages org.apache.spark:spark-avro_2.12:3.3.0 --driver-memory 12G
+$ spark-shell --jars /usr/local/opt/mysql-connector-java/libexec/mysql-connector-j-8.0.31.jar --packages org.apache.spark:spark-avro_2.12:3.3.1 --driver-memory 12G
 ```
 
 ```scala
@@ -24,6 +24,9 @@ import org.apache.spark.sql.Column
 import org.apache.spark.sql.types._
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.avro._
+
+# Prevent warnings
+spark.conf.set("spark.sql.debug.maxToStringFields", 1000)
 
 # Deal with really old dates
 spark.sql("SET spark.sql.legacy.avro.datetimeRebaseModeInWrite=CORRECTED")
