@@ -55,6 +55,7 @@ GEM
       activesupport (>= 4.2)
     crass (1.0.6)
     daemons (1.4.1)
+    date (3.3.1)
     deep_merge (1.2.2)
     diff-lcs (1.5.0)
     domain_name (0.5.20190701)
@@ -191,11 +192,12 @@ GEM
     naught (1.1.0)
     net-http-persistent (4.0.1)
       connection_pool (~> 2.2)
-    net-imap (0.3.1)
+    net-imap (0.3.2)
+      date
       net-protocol
     net-pop (0.1.2)
       net-protocol
-    net-protocol (0.2.0)
+    net-protocol (0.2.1)
       timeout
     net-smtp (0.3.3)
       net-protocol
@@ -278,7 +280,7 @@ GEM
     rspec-expectations (3.12.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
-    rspec-mocks (3.12.0)
+    rspec-mocks (3.12.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
     rspec-support (3.12.0)
