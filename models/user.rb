@@ -335,6 +335,12 @@ class User < ActiveRecord::Base
                 .order("MAX(user_occurrences.created) desc")
   end
 
+  def latest_helped_ids
+    claims_given.order(created: :desc)
+                .pluck(:user_id)
+                .uniq
+  end
+
   def claims_received
     visible_occurrences.where.not(created_by: self).order(created: :desc)
   end

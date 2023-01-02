@@ -29,7 +29,7 @@ import org.apache.spark.sql.avro._
 spark.conf.set("spark.sql.debug.maxToStringFields", 1000)
 
 # Deal with really old dates
-spark.sql("SET spark.sql.legacy.avro.datetimeRebaseModeInWrite=CORRECTED")
+spark.sql("SET spark.sql.avro.datetimeRebaseModeInWrite=CORRECTED")
 
 val occurrences = spark.
     read.

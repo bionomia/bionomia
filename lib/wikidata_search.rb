@@ -381,23 +381,33 @@ module Bionomia
       { year: year, month: month, day: day }
     end
 
-    def wiki_date_precision(wiki_user, property)
-      precision_dates = wiki_user.properties(property)
-                            .compact
-                            .map{|a| { precision: a.precision_key, date: a.value.time } } rescue []
-      day = precision_dates.map{|d| Date.parse(d[:date]) if d[:precision] == :day}.first rescue nil
-      month = precision_dates.map{|d| Date.parse(d[:date][1..7] + "-01") if d[:precision] == :month}.compact.first rescue nil
-      year = precision_dates.map{|d| Date.parse(d[:date][1..4] + "-01-01") if d[:precision] == :year}.compact.first rescue nil
-      century = precision_dates.map{|d| Date.parse(d[:date][1..4] + "-01-01") if d[:precision] == :century}.compact.first rescue nil
+    def rank_score(rank)
+      case rank
+      when "preferred"
+        2
+      when "normal"
+        1
+      when "deprecated"
+        -1
+      else
+        0
+      end
+    end
 
-      if day
-        [day, "day"]
-      elsif month
-        [month, "month"]
-      elsif year
-        [year, "year"]
-      elsif century
-        [century, "century"]
+    def wiki_date_precision(wiki_user, property)
+      data = wiki_user.properties(property)
+                      .map{|a| { precision: a.precision_key, date: a.value.time, rank: rank_score(a.property.rank) } }
+                      .sort_by{|v| -v[:rank] }
+                      .first rescue { precision: nil }
+      case data[:precision]
+      when :day
+        [Date.parse(data[:date]), "day"]
+      when :month
+        [Date.parse(data[:date][1..7] + "-01"), "month"]
+      when :year
+        [Date.parse(data[:date][1..4] + "-01-01"), "year"]
+      when :century
+        [Date.parse(data[:date][1..4] + "-01-01"), "century"]
       else
         [nil, nil]
       end
