@@ -42,10 +42,10 @@ if options[:directory]
     CSV.open(csv_file, 'w') do |csv|
       csv << ["Object", "Predicate", "Subject"]
       UserOccurrence.includes(:user)
-                    .where(visible: true)
-                    .where.not(action: nil)
-                    .where(users: { is_public: true })
-                    .find_each do |o|
+                    .find_each(batch_size: 10_000) do |o|
+        next if !o.visible
+        next if o.action.nil?
+        next if !o.user.is_public?
         o.action.split(",").each do |item|
           if item.strip == "recorded"
             action = "http://rs.tdwg.org/dwc/iri/recordedBy"
