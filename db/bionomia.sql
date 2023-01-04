@@ -23,7 +23,7 @@ CREATE TABLE `articles` (
   `gbif_downloadkeys` text COLLATE utf8mb4_bin,
   `processed` tinyint(1) DEFAULT NULL,
   `process_status` int DEFAULT '0',
-  `mail_sent` tinyint UNSIGNED NOT NULL DEFAULT '0',
+  `mail_sent` tinyint(1) NOT NULL DEFAULT '0',
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
@@ -66,43 +66,10 @@ CREATE TABLE `messages` (
   `id` bigint NOT NULL,
   `user_id` int UNSIGNED NOT NULL,
   `recipient_id` int UNSIGNED NOT NULL,
-  `read` tinyint UNSIGNED DEFAULT '0',
+  `read` tinyint(1) DEFAULT '0',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-CREATE TABLE `missing` (
-  `occurrence_id` bigint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-CREATE TABLE `missing_occurrences` (
-  `gbifID` bigint UNSIGNED NOT NULL,
-  `datasetKey` binary(36) DEFAULT NULL,
-  `license` varchar(25) COLLATE utf8mb4_bin DEFAULT NULL,
-  `occurrenceID` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `basisOfRecord` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `dateIdentified` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `decimalLatitude` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `decimalLongitude` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `country` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `countryCode` varchar(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `eventDate` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `year` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `kingdom` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `family` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `identifiedBy` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `institutionCode` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `collectionCode` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `catalogNumber` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `recordedBy` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `scientificName` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `typeStatus` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `dateIdentified_processed` datetime DEFAULT NULL,
-  `eventDate_processed` datetime DEFAULT NULL,
-  `hasImage` tinyint(1) DEFAULT NULL,
-  `recordedByID` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `identifiedByID` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=COMPRESSED;
 
 CREATE TABLE `occurrences` (
   `gbifID` bigint UNSIGNED NOT NULL,
@@ -155,10 +122,10 @@ CREATE TABLE `organizations` (
   `isni` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `ringgold` int DEFAULT NULL,
   `grid` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `ror` varchar(9) COLLATE utf8mb4_bin DEFAULT NULL,
+  `ror` varchar(9) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `institution_codes` text COLLATE utf8mb4_bin,
+  `institution_codes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `wikidata` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `latitude` float DEFAULT NULL,
   `longitude` float DEFAULT NULL,
@@ -198,12 +165,12 @@ CREATE TABLE `users` (
   `email` varchar(255) DEFAULT NULL,
   `other_names` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `country` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `country_code` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `country_code` varchar(100) DEFAULT NULL,
   `keywords` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `twitter` varchar(50) DEFAULT NULL,
   `image_url` text,
-  `signature_url` varchar(255) DEFAULT NULL,
+  `signature_url` text,
   `youtube_id` varchar(255) DEFAULT NULL,
   `locale` varchar(2) DEFAULT NULL,
   `date_born` date DEFAULT NULL,
@@ -275,16 +242,6 @@ ALTER TABLE `messages`
   ADD PRIMARY KEY (`id`),
   ADD KEY `index_messages_on_user_id` (`user_id`),
   ADD KEY `index_messages_on_recipient_id` (`recipient_id`);
-
-ALTER TABLE `missing`
-  ADD UNIQUE KEY `occurrence_id_idx` (`occurrence_id`);
-
-ALTER TABLE `missing_occurrences`
-  ADD PRIMARY KEY (`gbifID`) USING BTREE,
-  ADD KEY `typeStatus_idx` (`typeStatus`(50)),
-  ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`,`occurrenceID`(36)),
-  ADD KEY `catalog_number_idx` (`catalogNumber`(100)),
-  ADD KEY `idx_datasetKey_catalogNumber` (`datasetKey`,`catalogNumber`(125));
 
 ALTER TABLE `occurrences`
   ADD PRIMARY KEY (`gbifID`) USING BTREE,
