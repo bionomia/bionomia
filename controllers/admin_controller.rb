@@ -528,8 +528,7 @@ module Sinatra
               check_redirect
               @admin_user = find_user(params[:id])
 
-              # When MySQL 8, use pagy_arel
-              @pagy, @results = pagy(@admin_user.latest_helped, items: 15)
+              @pagy, @results = pagy_arel(@admin_user.latest_helped, items: 15)
               haml :'admin/helped', locals: { active_page: "administration" }
             end
 
