@@ -399,6 +399,8 @@ module Bionomia
                       .map{|a| { precision: a.precision_key, date: a.value.time, rank: rank_score(a.property.rank) } }
                       .sort_by{|v| -v[:rank] }
                       .first rescue { precision: nil }
+      return [nil, nil] if data.nil? || data.empty?
+
       case data[:precision]
       when :day
         [Date.parse(data[:date]), "day"]
