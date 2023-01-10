@@ -536,7 +536,7 @@ module Sinatra
               check_redirect
               @admin_user = find_user(params[:id])
 
-              @pagy, @results = pagy(@admin_user.latest_messages_by_senders)
+              @pagy, @results = pagy_arel(@admin_user.latest_messages_by_senders)
               haml :'admin/messages', locals: { active_page: "administration" }
             end
 
