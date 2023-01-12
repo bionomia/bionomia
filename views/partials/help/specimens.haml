@@ -20,6 +20,7 @@
     %tbody
       - @results.each do |uo|
         - o = uo.occurrence
+        - next if o.nil?
         - disabled = (@viewed_user.id == uo.created_by) ? true : false
         %tr
           %td{class: "selector"}

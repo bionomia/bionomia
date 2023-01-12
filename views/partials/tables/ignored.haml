@@ -24,6 +24,7 @@
       - user_id = @admin_user ? @admin_user.id : nil
       - @results.each do |uo|
         - o = uo.occurrence
+        - next if o.nil?
         - disabled = (user_id == uo.created_by) ? true : false
         %tr
           %td.selector

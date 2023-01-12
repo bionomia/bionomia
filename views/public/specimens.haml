@@ -66,6 +66,7 @@
             %tbody
               - @results.each do |uo|
                 - o = uo.occurrence
+                - next if o.nil?
                 %tr
                   - if authorized? && @user != @viewed_user
                     - disabled = (@viewed_user.id == uo.created_by) ? true : false

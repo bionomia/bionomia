@@ -19,6 +19,7 @@
     %tbody
       - @results.each do |uo|
         - o = uo.occurrence
+        - next if o.nil?
         %tr
           %td.selector
             = haml :'partials/single_selector_preselected', layout: false, locals: { occurrence: uo }

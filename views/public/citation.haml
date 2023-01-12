@@ -51,6 +51,7 @@
             %tbody
               - @results.each do |uo|
                 - o = uo.occurrence
+                - next if o.nil?
                 %tr
                   %td
                     - if uo.action == "recorded"

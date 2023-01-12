@@ -100,7 +100,7 @@ module Sinatra
                                       .includes(:determiners)
                                       .find(params[:id]) rescue nil
               if @occurrence.nil?
-                halt 404
+                redirect "https://gbif.org/occurrence/#{params[:id]}"
               end
 
               @network = is_admin? ? occurrence_network.to_json : [].to_json
