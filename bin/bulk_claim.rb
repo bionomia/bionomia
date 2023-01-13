@@ -40,7 +40,7 @@ end.parse!
 
 if options[:file]
   mime_type = `file --mime -b "#{options[:file]}"`.chomp
-  raise RuntimeError, 'File must be a csv' if !mime_type.include?("text/plain") && !mime_type.include?("application/csv")
+  raise RuntimeError, 'File must be a csv' if !mime_type.include?("text/csv")
 
   UserOccurrence.where(created_by: User::GBIF_AGENT_ID).delete_all
 
