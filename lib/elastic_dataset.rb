@@ -59,7 +59,7 @@ module Bionomia
               analyzer: :institution_codes,
               norms: false
             },
-            top_institution_codes: {
+            top_collection_codes: {
               type: 'text',
               analyzer: :institution_codes,
               norms: false
