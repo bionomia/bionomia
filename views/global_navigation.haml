@@ -86,7 +86,7 @@
               %span.sr-only
                 = I18n.t('layout.toggle_dropdown')
             .dropdown-menu.dropdown-menu-right
-              %a.dropdown-item{href: url("/profile"), "arial-label": "#{I18n.t('layout.overview')}"}
+              %a.dropdown-item{href: url("/profile"), "aria-label": "#{I18n.t('layout.overview')}"}
                 %i.fas.fa-user
                 = I18n.t('layout.overview')
               %a.dropdown-item{href: url("/profile/specimens"), "aria-label": "#{I18n.t('layout.specimens')}"}

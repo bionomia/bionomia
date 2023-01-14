@@ -95,7 +95,7 @@
     %a#css-tab.nav-link{href:"#css", "data-toggle":"tab", role:"tab", "aria-controls":"css", "aria-selected": false} CSS
 
 .tab-content
-  #javascript.tab-pane.fade.show.active.mt-3{role:"tabpanel", "arial-labelledby":"javascript-tab"}
+  #javascript.tab-pane.fade.show.active.mt-3{role:"tabpanel", "aria-labelledby":"javascript-tab"}
     %pre.bg-light.border.rounded.p-3
       :escaped
         // jQuery, typeahead.js and handlebars.js from a CDN
@@ -148,7 +148,7 @@
           });
         </script>
 
-  #html.tab-pane.fade.show.mt-3{role:"tabpanel", "arial-labelledby":"html-tab"}
+  #html.tab-pane.fade.show.mt-3{role:"tabpanel", "aria-labelledby":"html-tab"}
     %pre.bg-light.border.rounded.p-3
       :escaped
         <div id="collector-search" class="m-2">
@@ -174,7 +174,7 @@
           <div class='m-2 tt-no-result'>Your search turned up 0 results.</div>
         </script>
 
-  #css.tab-pane.fade.show.mt-3{role:"tabpanel", "arial-labelledby":"css-tab"}
+  #css.tab-pane.fade.show.mt-3{role:"tabpanel", "aria-labelledby":"css-tab"}
     %pre.bg-light.border.rounded.p-3
       :escaped
         /* Bootstrap from a CDN */
