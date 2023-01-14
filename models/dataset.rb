@@ -162,8 +162,13 @@ class Dataset < ActiveRecord::Base
     occurrences.pluck(:institutionCode).compact.uniq.sort
   end
 
+  def collection_codes
+    occurrences.pluck(:collectionCode).compact.uniq.sort
+  end
+
   def top_institution_codes
     occurrences.limit(1_500_000).pluck(:institutionCode)
+               .compact
                .tally
                .sort_by{|k,v| -v}
                .first(4)
@@ -173,6 +178,7 @@ class Dataset < ActiveRecord::Base
 
   def top_collection_codes
     occurrences.limit(1_500_000).pluck(:collectionCode)
+               .compact
                .tally
                .sort_by{|k,v| -v}
                .first(4)
