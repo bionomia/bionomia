@@ -59,6 +59,11 @@ module Bionomia
               analyzer: :institution_codes,
               norms: false
             },
+            top_institution_codes: {
+              type: 'text',
+              analyzer: :institution_codes,
+              norms: false
+            },
             kind: {
               type: 'text',
               analyzer: :institution_codes,
@@ -82,6 +87,7 @@ module Bionomia
         datasetkey: d.datasetKey,
         title: d.title,
         description: d.description,
+        top_collection_codes: d.top_collection_codes,
         top_institution_codes: d.top_institution_codes,
         kind: d.dataset_type
       }

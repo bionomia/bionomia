@@ -78,7 +78,7 @@ module Sinatra
                   multi_match: {
                     query: search,
                     type: :best_fields,
-                    fields: ["top_institution_codes^5", "title^3", "description"]
+                    fields: ["top_collection_codes^5", "top_institution_codes^3", "title^3", "description"]
                   }
                 },
                 functions: [

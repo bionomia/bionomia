@@ -176,6 +176,20 @@ class Dataset < ActiveRecord::Base
     end
   end
 
+  def top_collection_codes
+    codes = occurrences.pluck(:collectionCode)
+               .inject(Hash.new(0)) { |total, e| total[e] += 1 ;total}
+    if codes.size < 5 && codes.values.sum > 10_000
+        codes.sort_by{|k,v| v}
+             .reverse
+             .first(4)
+             .to_h
+             .keys rescue []
+    else
+      []
+    end
+  end
+
   def collected_before_birth_after_death
     UserOccurrence.joins(:occurrence)
                   .joins(:user)

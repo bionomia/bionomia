@@ -108,6 +108,10 @@ Or from scratch:
      # Can start 2+ workers, each with 40 threads to help speed-up processing
      $ RACK_ENV=production bundle exec sidekiq -c 40 -q occurrence_count -r ./application.rb
 
+### Step 9: Rebuild the Frictionless Data Packages
+
+    $ RACK_ENV=production bundle exec ./bin/frictionless_dataset.rb -d /var/www/bionomia/public/data -s -a
+
 ## Successive Data Migrations
 
 Unfortunately, gbifIDs are not persistent. These occasionally disappear through processing at GBIF's end. As a result, claims may no longer point to an existing occurrence record and these must then be purged from the user_occurrences table. The following are a few methods to produce a csv file of affected users and to then delete the orphans:
