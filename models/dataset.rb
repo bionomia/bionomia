@@ -163,31 +163,21 @@ class Dataset < ActiveRecord::Base
   end
 
   def top_institution_codes
-    codes = occurrences.pluck(:institutionCode)
-               .inject(Hash.new(0)) { |total, e| total[e] += 1 ;total}
-    if codes.size < 5 && codes.values.sum > 10_000
-        codes.sort_by{|k,v| v}
-             .reverse
-             .first(4)
-             .to_h
-             .keys rescue []
-    else
-      []
-    end
+    occurrences.limit(1_500_000).pluck(:institutionCode)
+               .tally
+               .sort_by{|k,v| -v}
+               .first(4)
+               .to_h
+               .keys rescue []
   end
 
   def top_collection_codes
-    codes = occurrences.pluck(:collectionCode)
-               .inject(Hash.new(0)) { |total, e| total[e] += 1 ;total}
-    if codes.size < 5 && codes.values.sum > 10_000
-        codes.sort_by{|k,v| v}
-             .reverse
-             .first(4)
-             .to_h
-             .keys rescue []
-    else
-      []
-    end
+    occurrences.limit(1_500_000).pluck(:collectionCode)
+               .tally
+               .sort_by{|k,v| -v}
+               .first(4)
+               .to_h
+               .keys rescue []
   end
 
   def collected_before_birth_after_death
