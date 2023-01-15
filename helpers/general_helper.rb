@@ -88,22 +88,21 @@ module Sinatra
 
         def latest_claims(type = "living")
           user_type = (type == "living") ? { orcid: nil } : { wikidata: nil }
+          month = DateTime.now - 31.days
           subq = UserOccurrence.select("user_occurrences.user_id AS user_id, MAX(user_occurrences.created) AS created")
-                                .group("user_occurrences.user_id")
-                                .order("NULL")
+                               .where("user_occurrences.created >= '#{month}'")
+                               .group("user_occurrences.user_id")
+                               .order("created DESC")
 
-          qry = UserOccurrence.select(:user_id, :created_by, :created)
+          @results = UserOccurrence.select(:user_id, :created_by, :created)
                               .joins(:user)
                               .joins("INNER JOIN (#{subq.to_sql}) sub ON sub.user_id = user_occurrences.user_id AND sub.created = user_occurrences.created")
                               .preload(:user, :claimant)
                               .where("user_occurrences.user_id != user_occurrences.created_by")
                               .where.not(created_by: User::BOT_IDS)
                               .where.not(users: user_type)
-                              .order(created: :desc)
                               .distinct
                               .limit(25)
-
-          @pagy, @results = pagy(qry, items: 25)
         end
 
         def example_profiles

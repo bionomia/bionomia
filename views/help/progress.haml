@@ -50,7 +50,3 @@
               = link_to claim.claimant.fullname_reverse, url("/#{claim.claimant.orcid}")
           %td
             #{claim.created}
-
-- if @pagy.pages > 1
-  .y-scroll
-    = pagy_bootstrap_nav(@pagy)
