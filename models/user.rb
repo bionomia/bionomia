@@ -80,7 +80,7 @@ class User < ActiveRecord::Base
   end
 
   def made_claim?
-    visible_user_occurrences.count > 0
+    visible_user_occurrences.any?
   end
 
   def wants_mail?
@@ -136,11 +136,11 @@ class User < ActiveRecord::Base
   end
 
   def has_recordings?
-    recordings.exists?
+    recordings.any?
   end
 
   def has_identifications?
-    identifications.exists?
+    identifications.any?
   end
 
   def visible_user_occurrences

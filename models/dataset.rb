@@ -14,8 +14,7 @@ class Dataset < ActiveRecord::Base
     UserOccurrence.from("user_occurrences FORCE INDEX (user_occurrence_idx)")
                   .joins(:occurrence)
                   .where(occurrences: { datasetKey: datasetKey })
-                  .where(visible: true)
-                  .limit(1).exists?
+                  .where(visible: true).any?
   end
 
   alias_method :has_user?, :has_claim?
@@ -24,12 +23,12 @@ class Dataset < ActiveRecord::Base
     determiner = OccurrenceDeterminer
                     .select(:agent_id)
                     .joins(:occurrence)
-                    .where(occurrences: { datasetKey: datasetKey }).limit(1)
+                    .where(occurrences: { datasetKey: datasetKey }).any?
     recorder = OccurrenceRecorder
                     .select(:agent_id)
                     .joins(:occurrence)
-                    .where(occurrences: { datasetKey: datasetKey }).limit(1)
-    determiner.exists? || recorder.exists?
+                    .where(occurrences: { datasetKey: datasetKey }).any?
+    determiner || recorder
   end
 
   def is_large?

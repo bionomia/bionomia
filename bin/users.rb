@@ -104,17 +104,11 @@ end
 
 if options[:cache]
   yesterday = DateTime.now - 1.days
-  User.joins(:user_occurrences)
-      .where("user_occurrences.created >= '#{yesterday}'")
-      .distinct
-      .find_each do |u|
-    u.flush_caches
-  end
-  User.joins(:claims)
-      .where.not(id: User::BOT_IDS)
-      .where("user_occurrences.created >= '#{yesterday}'")
-      .distinct
-      .find_each do |u|
+  ids = UserOccurrence.where("created >= '#{yesterday}'")
+                      .where.not(created_by: User::BOT_IDS)
+                      .pluck(:user_id, :created_by)
+                      .flatten.uniq
+  User.where(id: ids).find_each do |u|
     u.flush_caches
   end
   BIONOMIA.cache_clear("fragments/")
