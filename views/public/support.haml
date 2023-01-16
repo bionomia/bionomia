@@ -20,50 +20,34 @@
       - else
         .alert.alert-info.tiny-margins{role: "alert"}= I18n.t('user.attributions_by')
 
-        .container-fluid
-          - @results.in_groups_of(3).each do |group|
-            .card-deck
-              - group.each do |u|
-                - if u.nil?
-                  .card.border-0
+        - @results.in_groups_of(2).each do |group|
+          .card-deck
+            - group.each do |u|
+              - if u.nil?
+                .card.border-0
+              - else
+                - if u[:user].is_bot?
+                  .card.my-3
+                    .card-header
+                      %h5
+                        #{u[:user].fullname}
+                    .card-body
+                    .card-footer.d-flex
+                      .small.text-right.text-muted.mr-2
+                        %i.fas.fa-lock
+                      .small.text-left.text-muted.mr-2
+                        %span.badge.badge-light
+                          #{number_with_delimiter(u[:total])}
+                        = I18n.t('user.specimens_attributed')
                 - else
-                  - if u[:user].is_bot?
-                    .card.my-3
-                      .card-header
-                        %h5
-                          #{u[:user].fullname}
-                      .card-body
-                      .card-footer.d-flex
-                        .small.text-right.text-muted.mr-2
-                          %i.fas.fa-lock
-                        .small.text-left.text-muted.mr-2
-                          %span.badge.badge-light
-                            #{number_with_delimiter(u[:total])}
-                          = I18n.t('user.specimens_attributed')
-                  - else
-                    .card.card-profile.my-3
-                      - if u[:user].image_url
-                        .card-header.d-flex
-                          %div
-                            %img.card-img-profile.mr-2{src:"#{profile_image(u[:user], 'medium')}", alt:"#{u[:user].fullname}", width:48, height:48, loading:"lazy"}
-                          .flex-grow-1
-                            %h5
-                              = link_to u[:user].fullname_reverse, url("/#{u[:user].identifier}")
-                            - if u[:user].country
-                              %p.small.text-muted.mt-0.mb-0
-                                - country_codes = u[:user].country_code.split("|") rescue []
-                                - countries = u[:user].country.split("|") rescue []
-                                - countries.each_with_index do |v,i|
-                                  = succeed (countries[i+1]) ? '; ' : '' do
-                                    - if !country_codes[i].nil? && !country_codes[i].empty?
-                                      #{country_name(country_codes[i])}
-                                    - else
-                                      #{v}
-                      - else
-                        .card-header
+                  .card.card-profile.my-3
+                    - if u[:user].image_url
+                      .card-header.d-flex
+                        %div
+                          %img.card-img-profile.mr-2{src:"#{profile_image(u[:user], 'medium')}", alt:"#{u[:user].fullname}", width:48, height:48, loading:"lazy"}
+                        .flex-grow-1
                           %h5
-                            %a{href: url("/#{u[:user].identifier}")}
-                              #{u[:user].fullname_reverse}
+                            = link_to u[:user].fullname_reverse, url("/#{u[:user].identifier}")
                           - if u[:user].country
                             %p.small.text-muted.mt-0.mb-0
                               - country_codes = u[:user].country_code.split("|") rescue []
@@ -74,15 +58,30 @@
                                     #{country_name(country_codes[i])}
                                   - else
                                     #{v}
-                      .card-body
-                      .card-footer.d-flex
-                        - if !u[:user].is_public?
-                          .small.text-right.text-muted.mr-2
-                            %i.fas.fa-lock
-                        .small.text-left.text-muted.mr-2
-                          %span.badge.badge-light
-                            #{number_with_delimiter(u[:total])}
-                          = I18n.t('user.specimens_attributed')
+                    - else
+                      .card-header
+                        %h5
+                          %a{href: url("/#{u[:user].identifier}")}
+                            #{u[:user].fullname_reverse}
+                        - if u[:user].country
+                          %p.small.text-muted.mt-0.mb-0
+                            - country_codes = u[:user].country_code.split("|") rescue []
+                            - countries = u[:user].country.split("|") rescue []
+                            - countries.each_with_index do |v,i|
+                              = succeed (countries[i+1]) ? '; ' : '' do
+                                - if !country_codes[i].nil? && !country_codes[i].empty?
+                                  #{country_name(country_codes[i])}
+                                - else
+                                  #{v}
+                    .card-body
+                    .card-footer.d-flex
+                      - if !u[:user].is_public?
+                        .small.text-right.text-muted.mr-2
+                          %i.fas.fa-lock
+                      .small.text-left.text-muted.mr-2
+                        %span.badge.badge-light
+                          #{number_with_delimiter(u[:total])}
+                        = I18n.t('user.specimens_attributed')
 
         - if @pagy.pages > 1
           .y-scroll

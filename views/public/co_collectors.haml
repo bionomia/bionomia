@@ -26,15 +26,13 @@
               %i.fas.fa-file-code.text-dark.h5.m-0.p-1
               JSON-LD
 
-        .container-fluid
-          - @results.in_groups_of(2).each do |group|
-            .card-deck
-              - group.each do |u|
-                - if u.nil?
-                  .card.border-0
-                - else
-                  - stats = cache_block("#{u.identifier}-stats") { user_stats(u) }
-                  = haml :'partials/user/card', layout: false, locals: { user: u, stats: stats }
+        .card-deck
+          - group.each do |u|
+            - if u.nil?
+              .card.border-0
+            - else
+              - stats = cache_block("#{u.identifier}-stats") { user_stats(u) }
+              = haml :'partials/user/card', layout: false, locals: { user: u, stats: stats }
 
         - if @pagy.pages > 1
           .y-scroll
