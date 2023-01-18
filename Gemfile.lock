@@ -236,7 +236,7 @@ GEM
       mail (>= 2.0)
     public_suffix (5.0.1)
     racc (1.6.2)
-    rack (2.2.5)
+    rack (2.2.6.2)
     rack-contrib (2.3.0)
       rack (~> 2.0)
     rack-protection (3.0.5)
