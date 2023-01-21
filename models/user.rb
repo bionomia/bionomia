@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   GBIF_AGENT_ID = 2
 
   serialize :zenodo_access_token, JSON
+  serialize :wiki_sitelinks, JSON
 
   has_many :user_occurrences, dependent: :delete_all
   has_many :occurrences, -> { distinct }, through: :user_occurrences, source: :occurrence

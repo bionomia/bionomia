@@ -510,6 +510,7 @@ module Bionomia
         date_born_precision: date_born_precision,
         date_died: date_died,
         date_died_precision: date_died_precision,
+        wiki_sitelinks: wiki_user.sitelinks,
         organizations: organizations
       }
     end

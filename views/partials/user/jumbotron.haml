@@ -45,6 +45,24 @@
       %a{href: "https://www.wikidata.org/wiki/#{@viewed_user.wikidata}", itemprop:"sameAs"}
         https://www.wikidata.org/wiki/#{@viewed_user.wikidata}
 
+  - if !@viewed_user.wiki_sitelinks.nil? && @viewed_user.wiki_sitelinks["#{I18n.locale}wiki"]
+    %p.orcid.text-lg-left.p-0.mt-0.mb-1
+      - wiki_url = "https://#{I18n.locale}.wikipedia.org/wiki/#{@viewed_user.wiki_sitelinks["#{I18n.locale}wiki"]["title"].gsub(/\s/, "_")}"
+      %a{href: "#{wiki_url}", "data-toggle": "modal", "data-target": "#wiki_content" }
+        %i.fab.fa-wikipedia-w
+        #{wiki_url}
+      #wiki_content.modal.fade
+        .modal-dialog.modal-dialog-centered.modal-dialog-scrollable.modal-xl{style: "height:100%"}
+          .modal-content{style: "height:90%"}
+            .modal-header
+              %h5.modal-title #{@viewed_user.wiki_sitelinks["#{I18n.locale}wiki"]["title"]}
+              %button.close{type: "button", "data-dismiss": "modal", "aria-label": "#{I18n.t('help.close')}"}
+                %span{"aria-hidden": true} &times;
+            .modal-body{style: "height:100%;"}
+              %iframe{src: "#{wiki_url}", frameborder: 0, width: "100%", height: "100%"}
+            .modal-footer
+              %button.btn.btn-secondary{type: "button", "data-dismiss": "modal"}= I18n.t('help.close')
+
   - if !@viewed_user.current_organization.nil?
     %p.text-lg-left.p-0.mt-1.mb-1
       - path = @viewed_user.current_organization.identifier
