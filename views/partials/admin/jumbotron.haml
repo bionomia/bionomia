@@ -59,9 +59,11 @@
   - if !@admin_user.wiki_sitelinks.nil? && @admin_user.wiki_sitelinks["#{I18n.locale}wiki"]
     %p.orcid.text-lg-left.p-0.mt-0.mb-1
       - wiki_url = "https://#{I18n.locale}.wikipedia.org/wiki/#{@admin_user.wiki_sitelinks["#{I18n.locale}wiki"]["title"].gsub(/\s/, "_")}"
-      %a{href: "#{wiki_url}", "data-toggle": "modal", "data-target": "#wiki_content" }
+      %a{href: "#{wiki_url}" }
         %i.fab.fa-wikipedia-w
         #{wiki_url}
+      %a{href: "#", "data-toggle": "modal", "data-target": "#wiki_content"}
+        [#{I18n.t("profile.upload_view")}]
       #wiki_content.modal.fade
         .modal-dialog.modal-dialog-centered.modal-dialog-scrollable.modal-xl{style: "height:100%"}
           .modal-content{style: "height:90%"}
