@@ -727,6 +727,9 @@ class User < ActiveRecord::Base
         if !wiki_data[:youtube_id].nil?
           data[:youtube_id] = wiki_data[:youtube_id]
         end
+        if !wiki_data[:wiki_sitelinks].nil?
+          data[:wiki_sitelinks] = wiki_data[:wiki_sitelinks]
+        end
       rescue
       end
       update(data.except!(:organizations))

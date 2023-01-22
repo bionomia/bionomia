@@ -117,22 +117,10 @@ module Bionomia
 
     def wikidata_by_orcid_query(orcid)
       %Q(
-        SELECT ?item ?itemLabel ?bionomia_id ?twitter ?youtube_id
+        SELECT (REPLACE(STR(?item),".*Q","Q") AS ?qid)
         WHERE {
           VALUES ?orcid {"#{orcid}"} {
             ?item wdt:P496 ?orcid .
-          }
-          OPTIONAL {
-            ?item wdt:P2002 ?twitter .
-          }
-          OPTIONAL {
-            ?item wdt:P1651 ?youtube_id .
-          }
-          OPTIONAL {
-            ?item wdt:P6944 ?bionomia_id .
-          }
-          SERVICE wikibase:label {
-            bd:serviceParam wikibase:language "en" .
           }
         }
       )
@@ -558,11 +546,14 @@ module Bionomia
 
     def wiki_user_by_orcid(orcid)
       data = {}
-      @sparql.query(wikidata_by_orcid_query(orcid)).each_solution do |solution|
-        data[:qid] = solution[:item].value.split("/").last rescue nil
-        data[:bionomia_id] = solution[:bionomia_id].value rescue nil
-        data[:twitter] = solution[:twitter].value rescue nil
-        data[:youtube_id] = solution[:youtube_id].value rescue nil
+      wikicode = @sparql.query(wikidata_by_orcid_query(orcid)).first[:qid].value rescue nil
+      if wikicode
+        wiki_user = Wikidata::Item.find(wikicode)
+        data[:qid] = wikicode
+        data[:bionomia_id] = wiki_user.properties("P6944").first.value rescue nil
+        data[:twitter] = wiki_user.properties("P2002").first.value rescue nil
+        data[:youtube_id] = wiki_user.properties("P1651").first.value rescue nil
+        data[:wiki_sitelinks] = wiki_user.sitelinks
       end
       data
     end
