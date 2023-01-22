@@ -134,7 +134,6 @@ module Sinatra
             check_identifier
             check_redirect
             @viewed_user = find_user(params[:id])
-            check_user_public
 
             @stats = cache_block("#{@viewed_user.identifier}-stats") { user_stats(@viewed_user) }
             haml :'public/overview', locals: { active_page: "roster" }
