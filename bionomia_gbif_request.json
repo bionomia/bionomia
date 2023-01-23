@@ -1,7 +1,7 @@
 {
   "creator": "davidpshorthouse",
+  "notificationAddresses": ["davidpshorthouse@gmail.com"],
   "sendNotification": true,
-  "notification_address": ["davidpshorthouse@gmail.com"],
   "format": "BIONOMIA",
   "predicate": {
     "type": "and",
