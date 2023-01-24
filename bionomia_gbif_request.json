@@ -43,19 +43,19 @@
                   "type": "like",
                   "key": "VERBATIM_SCIENTIFIC_NAME",
                   "value": "*BOLD:*",
-                  "matchCase": "true"
+                  "matchCase": true
                 },
                 {
                   "type": "like",
                   "key": "VERBATIM_SCIENTIFIC_NAME",
                   "value": "*BOLD-*",
-                  "matchCase": "true"
+                  "matchCase": true
                 },
                 {
                   "type": "like",
                   "key": "VERBATIM_SCIENTIFIC_NAME",
                   "value": "*BIOUG*",
-                  "matchCase": "true"
+                  "matchCase": true
                 }
               ]
             }
