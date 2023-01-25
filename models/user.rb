@@ -144,6 +144,10 @@ class User < ActiveRecord::Base
     identifications.any?
   end
 
+  def has_specimens?
+    has_recordings? || has_identifications?
+  end
+
   def visible_user_occurrences
     user_occurrences.where(visible: true)
   end
