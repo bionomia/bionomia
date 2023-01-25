@@ -22,9 +22,12 @@ module Sinatra
 
           app.get '/country/:country_code' do
             country_code = params[:country_code]
+            @country = I18nData.countries(I18n.locale).slice(country_code.upcase).flatten
+            if @country.empty?
+              halt 404, haml(:oops)
+            end
             @results = []
             begin
-              @country = I18nData.countries(I18n.locale).slice(country_code.upcase).flatten
               @action = params[:action] if ["identified","collected"].include?(params[:action])
               @family = params[:q].present? ? params[:q] : nil
 

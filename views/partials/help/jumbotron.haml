@@ -81,10 +81,10 @@
         - countries = @viewed_user.country.split("|") rescue []
         - countries.each_with_index do |v,i|
           %span.mr-1.text-nowrap
-            - if !country_codes[i].nil? && !country_codes[i].empty?
+            - if !country_codes[i].nil? && !country_codes[i].empty? && !country_name(country_codes[i]).nil?
               %i.fas.fa-globe
               = link_to country_name(country_codes[i]), url("/country/#{country_codes[i]}")
-            - else
+            - elsif v.presence
               %i.fas.fa-globe
               #{v}
 
