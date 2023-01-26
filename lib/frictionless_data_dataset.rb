@@ -66,6 +66,7 @@ module Bionomia
         "user_occurrences.updated AS modifiedDateTime",
         "users.id AS u_id",
         "users.given AS u_given",
+        "users.particle AS u_particle",
         "users.family AS u_family",
         "users.date_born_precision AS u_date_born_precision",
         "users.date_died_precision AS u_date_died_precision",
@@ -157,8 +158,9 @@ module Bionomia
             uri = !o.u_orcid.nil? ? "https://orcid.org/#{o.u_orcid}" : "http://www.wikidata.org/entity/#{o.u_wikidata}"
             data = [
               o.u_id,
-              [o.u_given, o.u_family].join(" "),
+              [o.u_given, o.u_particle, o.u_family].compact_blank.join(" "),
               o.u_family,
+              o.u_particle,
               o.u_given,
               aliases,
               uri,
