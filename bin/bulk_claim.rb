@@ -52,7 +52,7 @@ if options[:file]
       if d.exists?
         redirect = d.where.not(redirect_to: nil).first
         next if redirect.nil?
-        u = User.find_by_wikidata(redirect.redirect_to)
+        u = User.find_by_identifier(redirect.redirect_to)
       else
         u = User.find_or_create_by({ wikidata: row["identifier"] })
         if u.wikidata && !u.valid_wikicontent?
@@ -62,7 +62,14 @@ if options[:file]
         end
       end
     elsif row["identifier"].is_orcid?
-      u = User.find_or_create_by({ orcid: row["identifier"] })
+      d = DestroyedUser.where(identifier: row["identifier"])
+      if d.exists?
+        redirect = d.where.not(redirect_to: nil).first
+        next if redirect.nil?
+        u = User.find_by_identifier(redirect.redirect_to)
+      else
+        u = User.find_or_create_by({ orcid: row["identifier"] })
+      end
     end
     next if User::BOT_IDS.include?(u.id)
     row["occurrence_ids"].tr('[]', '').split(',').in_groups_of(1_000, false) do |group|
