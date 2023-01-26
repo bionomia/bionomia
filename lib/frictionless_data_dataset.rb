@@ -89,6 +89,8 @@ module Bionomia
       @problems = File.open(File.join(@folder, problem_collectors_file), "ab")
       @citations = File.open(File.join(@folder, citations_file), "ab")
       @articles = File.open(File.join(@folder, articles_file), "ab")
+      @missing_attributions = File.open(File.join(@folder, missing_attributions_file), "ab")
+
 
       @gbif_ids = Set.new
       @user_ids = Set.new
@@ -140,6 +142,7 @@ module Bionomia
       @problems.close
       @citations.close
       @articles.close
+      @missing_attributions.close
     end
 
     def write_to_files(occurrence_ids)
@@ -212,6 +215,29 @@ module Bionomia
               o.occ_year
             ]
             @problems << CSV::Row.new(problems_collector_header, data).to_s
+          end
+
+          # Add missing_attributions.csv
+          uri = !o.u_orcid.nil? ? "https://orcid.org/#{o.u_orcid}" : "http://www.wikidata.org/entity/#{o.u_wikidata}"
+          if (o.action.include?("recorded") && !o.occ_recordedByID.split('|').map(|e| {e.strip}).include?(uri)) ||
+            (o.action.include?("identified") && !o.occ_identifiedByID.split('|').map(|e| {e.strip}).include?(uri))
+            identified_uri = o.action.include?("identified") ? uri : nil
+            recorded_uri = o.action.include?("recorded") ? uri : nil
+            created_name = [o.createdGiven, o.createdFamily].join(" ")
+            created_orcid = !o.createdORCID.blank? ? "https://orcid.org/#{o.createdORCID}" : nil
+            created_date_time = o.createdDateTime.to_time.iso8601
+            modified_date_time = !o.modifiedDateTime.blank? ? o.modifiedDateTime.to_time.iso8601 : nil
+            data = [
+              o.user_id,
+              o.occurrence_id,
+              identified_uri,
+              recorded_uri,
+              created_name,
+              created_orcid,
+              created_date_time,
+              modified_date_time
+            ]
+            @missing_attributions << CSV::Row.new(missing_attributions_header, data).to_s
           end
 
           # Skip occurrences if already added to file

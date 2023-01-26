@@ -62,6 +62,10 @@ module Bionomia
       "articles.csv"
     end
 
+    def missing_attributions_file
+      "missing_attributions_file.csv"
+    end
+
     def users_resource_size
       File.size(File.join(@folder, users_file + ".zip")) rescue nil
     end
@@ -84,6 +88,10 @@ module Bionomia
 
     def articles_resource_size
       File.size(File.join(@folder, articles_file + ".zip")) rescue nil
+    end
+
+    def missing_attributions_resource_size
+      File.size(File.join(@folder, missing_attributions_file + ".zip")) rescue nil
     end
 
     def user_resource
@@ -289,6 +297,48 @@ module Bionomia
       }
     end
 
+    def missing_attributions_resource
+      {
+        name: "missing_attributions",
+        path: "https://bionomia.net/dataset/#{@uuid}/#{missing_attributions_file}.zip",
+        description: "Attributions missing at the source",
+        format: "csv",
+        compression: "zip",
+        mediatype: "text/csv",
+        encoding: "utf-8",
+        bytes: missing_attributions_resource_size,
+        profile: "tabular-data-resource",
+        schema: {
+          fields: [
+            { name: "user_id", type: "integer" },
+            { name: "occurrence_id", type: "integer" },
+            { name: "identifiedBy", type: "string", format: "uri", "skos:exactMatch": "http://rs.tdwg.org/dwc/iri/identifiedBy" },
+            { name: "recordedBy", type: "string", format: "uri", "skos:exactMatch": "http://rs.tdwg.org/dwc/iri/recordedBy" },
+            { name: "createdBy", type: "string", "skos:exactMatch": "http://schema.org/name" },
+            { name: "createdByURI", type: "string", format: "uri" },
+            { name: "createdDateTime", type: "datetime", format: "any" },
+            { name: "modifiedDateTime", type: "datetime", format: "any" }
+          ]
+        },
+        foreignKeys: [
+          {
+            fields: "user_id",
+            reference: {
+              resource: "users",
+              fields: "id"
+            }
+          },
+          {
+            fields: "occurrence_id",
+            reference: {
+              resource: "occurrences",
+              fields: "gbifID"
+            }
+          }
+        ]
+      }
+    end
+
     def create_package
       FileUtils.mkdir(@folder) unless File.exists?(@folder)
 
@@ -335,6 +385,7 @@ module Bionomia
       @package[:resources] << problem_collector_resource
       @package[:resources] << citation_resource
       @package[:resources] << article_resource
+      @package[:resources] << missing_attributions_resource
     end
 
     def create_data_files
@@ -361,6 +412,10 @@ module Bionomia
       articles = File.open(File.join(@folder, articles_file), "wb")
       articles << CSV::Row.new(articles_header, articles_header, true).to_s
       articles.close
+
+      missing_attributions = File.open(File.join(@folder, missing_attributions_file), "wb")
+      missing_attributions << CSV::Row.new(missing_attributions_header, missing_attributions_header, true).to_s
+      missing_attributions.close
     end
 
     def users_header
@@ -385,6 +440,10 @@ module Bionomia
 
     def articles_header
       article_resource[:schema][:fields].map{ |u| u[:name] }
+    end
+
+    def missing_attributions_header
+      missing_attributions_resource[:schema][:fields].map{ |u| u[:name] }
     end
 
     def add_data
