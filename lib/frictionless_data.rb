@@ -101,6 +101,7 @@ module Bionomia
             { name: "id", type: "integer" },
             { name: "name", type: "string", "skos:exactMatch": "http://schema.org/name" },
             { name: "familyName", type: "string", "skos:exactMatch": "http://schema.org/familyName" },
+            { name: "particle", type: "string" },
             { name: "givenName", type: "string", "skos:exactMatch": "http://schema.org/givenName" },
             { name: "alternateName", type: "array", "skos:exactMatch": "http://schema.org/alternateName" },
             { name: "sameAs", type: "string", format: "uri", "skos:exactMatch": "http://schema.org/sameAs" },
