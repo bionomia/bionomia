@@ -218,9 +218,9 @@ module Bionomia
           end
 
           # Add missing_attributions.csv
-          uri = !o.u_orcid.nil? ? "https://orcid.org/#{o.u_orcid}" : "http://www.wikidata.org/entity/#{o.u_wikidata}"
-          if (o.action.include?("recorded") && !o.occ_recordedByID.split('|').map(|e| {e.strip}).include?(uri)) ||
-            (o.action.include?("identified") && !o.occ_identifiedByID.split('|').map(|e| {e.strip}).include?(uri))
+          uri = o.u_orcid.nil? ? "http://www.wikidata.org/entity/#{o.u_wikidata}" : "https://orcid.org/#{o.u_orcid}"
+          if (o.action.include?("recorded") && !o.occ_recordedByID.include?(uri)) ||
+            (o.action.include?("identified") && !o.occ_identifiedByID.include?(uri))
             identified_uri = o.action.include?("identified") ? uri : nil
             recorded_uri = o.action.include?("recorded") ? uri : nil
             created_name = [o.createdGiven, o.createdFamily].join(" ")
