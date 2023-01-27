@@ -141,6 +141,16 @@ One way to make this even faster is to copy database files from one database to 
 
 Take site offline and in the bionomia database, remove the tablespaces from the tables that will be overwritten. Before removing, it's a good idea to keep the \*.ibd files on-hand in the event something bad happens and they need to be restored.
 
+In the source database:
+
+      mysql> FLUSH TABLES `agents`, `occurrences`, `occurrence_determiners`, `occurrence_recorders`, `occurrence_counts`, `taxa`, `taxon_occurrences` FOR EXPORT;
+
+Now copy the \*.ibd, and \*.cfg files for the above 6 tables from the bionomia_restore database into the bionomia database data directory, reset the permissions.
+
+      mysql> UNLOCK TABLES;
+
+In the destination database:
+
       mysql> ALTER TABLE `agents` DISCARD TABLESPACE;
       mysql> ALTER TABLE `occurrences` DISCARD TABLESPACE;
       mysql> ALTER TABLE `occurrence_determiners` DISCARD TABLESPACE;
@@ -148,8 +158,6 @@ Take site offline and in the bionomia database, remove the tablespaces from the 
       mysql> ALTER TABLE `occurrence_counts` DISCARD TABLESPACE;
       mysql> ALTER TABLE `taxa` DISCARD TABLESPACE;
       mysql> ALTER TABLE `taxon_occurrences` DISCARD TABLESPACE;
-
-Now copy the \*.ibd files for the above 6 tables from the bionomia_restore database into the bionomia database data directory, reset the permissions, then import the tablespaces:
 
       mysql> ALTER TABLE `agents` IMPORT TABLESPACE;
       mysql> ALTER TABLE `occurrences` IMPORT TABLESPACE;
