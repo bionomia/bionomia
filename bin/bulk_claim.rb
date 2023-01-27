@@ -42,47 +42,43 @@ if options[:file]
   mime_type = `file --mime -b "#{options[:file]}"`.chomp
   raise RuntimeError, 'File must be a csv' if !mime_type.include?("text/csv")
 
-  UserOccurrence.where(created_by: User::GBIF_AGENT_ID).delete_all
+  UserOccurrence.where(created_by: User::GBIF_AGENT_ID)
+                .find_in_batches(batch_size: 10_000) do |batch|
+                  UserOccurrence.where(id: batch.pluck(:id)).delete_all
+  end
 
   all_users = Set.new
 
   CSV.foreach(options[:file], headers: true) do |row|
-    if row["identifier"].is_wiki_id?
-      d = DestroyedUser.where(identifier: row["identifier"])
-      if d.exists?
-        redirect = d.where.not(redirect_to: nil).first
-        next if redirect.nil?
-        u = User.find_by_identifier(redirect.redirect_to)
-      else
+    d = DestroyedUser.active_user_identifier(row["identifier"])
+    if !d.nil?
+      u = User.find_by_identifier(d).id rescue nil
+    else
+      if row["identifier"].is_wiki_id?
         u = User.find_or_create_by({ wikidata: row["identifier"] })
         if u.wikidata && !u.valid_wikicontent?
           u.delete_search
           u.delete
           next
         end
-      end
-    elsif row["identifier"].is_orcid?
-      d = DestroyedUser.where(identifier: row["identifier"])
-      if d.exists?
-        redirect = d.where.not(redirect_to: nil).first
-        next if redirect.nil?
-        u = User.find_by_identifier(redirect.redirect_to)
-      else
+      elsif row["identifier"].is_orcid?
         u = User.find_or_create_by({ orcid: row["identifier"] })
       end
     end
-    next if User::BOT_IDS.include?(u.id)
-    row["occurrence_ids"].tr('[]', '').split(',').in_groups_of(1_000, false) do |group|
+
+    next if u.nil? || User::BOT_IDS.include?(u.id)
+    row["occurrence_ids"].tr('[]', '').split(',').in_groups_of(5_000, false) do |group|
       import = group.map{|r| [ r.to_i, u.id, row["action"], User::GBIF_AGENT_ID ] }
-      UserOccurrence.import [:occurrence_id, :user_id, :action, :created_by], import, batch_size: 1000, validate: false, on_duplicate_key_ignore: true
+      UserOccurrence.import [:occurrence_id, :user_id, :action, :created_by], import, batch_size: 5000, validate: false, on_duplicate_key_ignore: true
     end
 
-    all_users.add(u)
+    all_users.add(u.id)
     puts u.identifier.to_s.green
   end
 
   puts "Flushing caches...".yellow
-  all_users.each do |u|
+  all_users.each do |id|
+    u = User.find(id)
     if u.wikidata && !u.is_public?
       u.is_public = true
       u.save
