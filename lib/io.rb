@@ -89,6 +89,7 @@ module Bionomia
     def csv_stream_occurrences(occurrences)
       Enumerator.new do |y|
         header = ["action"].concat(Occurrence.attribute_names - ignored_cols)
+                           .concat(["BIONOMIAcreatedBy", "BIONOMIAcreatedByURI", "BIONOMIAcreated"])
         y << CSV::Row.new(header, header, true).to_s
         if !occurrences.empty?
           occurrences.find_each do |o|
@@ -97,6 +98,7 @@ module Bionomia
               attributes.delete(col)
             end
             data = [o.action].concat(attributes.values)
+                             .concat([o.claimant.fullname_reverse, o.claimant.uri, o.created])
             y << CSV::Row.new(header, data).to_s
           end
         end
