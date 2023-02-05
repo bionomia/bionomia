@@ -3,6 +3,8 @@ class Dataset < ActiveRecord::Base
 
   has_many :occurrences, primary_key: :datasetKey, foreign_key: :datasetKey
 
+  alias_attribute :uuid, :datasetKey
+
   validates :datasetKey, presence: true
 
   before_update :set_update_time

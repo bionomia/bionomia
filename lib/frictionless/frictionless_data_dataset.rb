@@ -1,58 +1,13 @@
 # encoding: utf-8
-require_relative "frictionless_data"
 
 module Bionomia
-  class FrictionlessDataDataset < FrictionlessData
+  class FrictionlessDataDataset
 
     def initialize(uuid:, output_directory:)
       @dataset = Dataset.find_by_datasetKey(uuid) rescue nil
       @created = Time.now
       raise ArgumentError, 'Dataset not found' if @dataset.nil?
       super
-    end
-
-    def descriptor
-      license_name = ""
-      if @dataset.license.include?("/zero/1.0/")
-        license_name = "public-domain-dedication"
-      elsif @dataset.license.include?("/by/4.0/")
-        license_name = "cc-by-4.0"
-      elsif @dataset.license.include?("/by-nc/4.0/")
-        license_name = "cc-by-nc-4.0"
-      end
-
-      {
-        name: "bionomia-attributions",
-        id: @uuid,
-        licenses: [
-          {
-            name: license_name,
-            path: @dataset.license
-          }
-        ],
-        profile: "tabular-data-package",
-        title: "ATTRIBUTIONS MADE FOR: #{@dataset.title}",
-        description: "#{@dataset.description}",
-        datasetKey: @dataset.datasetKey,
-        homepage: "https://bionomia.net/dataset/#{@dataset.datasetKey}",
-        created: @created.to_time.iso8601,
-        sources: [
-          {
-            title: "#{@dataset.title}",
-            path: "https://doi.org/#{@dataset.doi}"
-          }
-        ],
-        keywords: [
-          "specimen",
-          "museum",
-          "collection",
-          "credit",
-          "attribution",
-          "bionomia"
-        ],
-        image: "https://bionomia.net/images/logo.png",
-        resources: []
-      }
     end
 
     def fields
@@ -241,11 +196,6 @@ module Bionomia
       end
     end
 
-    def update_frictionless_created
-      @dataset.skip_callbacks = true
-      @dataset.frictionless_created_at = @created
-      @dataset.save
-    end
 
   end
 

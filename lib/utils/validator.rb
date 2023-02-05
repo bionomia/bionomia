@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 module Bionomia
-  module AgentUtility
+  module Validator
 
     def self.valid_year(year)
       return if year.presence.nil?

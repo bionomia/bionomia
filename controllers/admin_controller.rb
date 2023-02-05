@@ -117,7 +117,7 @@ module Sinatra
                 output_directory: File.join(app.root, "public", "data")
               }
 
-              ::Bionomia::FrictionlessDataDatasetWorker.perform_async(vars)
+              ::Bionomia::FrictionlessWorker.perform_async(vars)
               { message: "ok" }.to_json
             end
 

@@ -633,7 +633,7 @@ class User < ActiveRecord::Base
     else
       conditions.gsub!('=>', ':')
 
-      if !Bionomia::AgentUtility.valid_json?(conditions)
+      if !Bionomia::Validator.valid_json?(conditions)
         raise ArgumentError, "Conditions argument was not valid JSON"
       end
 

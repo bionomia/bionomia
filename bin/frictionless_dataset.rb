@@ -32,10 +32,6 @@ OptionParser.new do |opts|
     options[:missing] = true
   end
 
-  opts.on("-b", "--bionomia", "Create data package for all of Bionomia") do
-    options[:bionomia] = true
-  end
-
   opts.on("-h", "--help", "Prints this help") do
     puts opts
     exit
@@ -43,14 +39,12 @@ OptionParser.new do |opts|
 end.parse!
 
 if options[:directory] && options[:key]
-  dataset = Dataset.find_by_datasetKey(options[:key]) rescue nil
   if dataset
     begin
       puts "Starting #{dataset.title}...".yellow
       t1 = Time.now
-      f = Bionomia::FrictionlessDataDataset.new(uuid: options[:key], output_directory: options[:directory])
-      f.create_package
-      f.update_frictionless_created
+      f = Bionomia::FrictionlessGenerator.new(dataset: dataset, output_directory: options[:directory])
+      f.create
       t2 = Time.now
       puts "Package created for #{options[:key]} in #{t2 - t1} seconds".green
     rescue
@@ -66,9 +60,8 @@ elsif options[:directory] && ( options[:all] || options[:missing] )
     puts "Starting #{d.title}...".yellow
     begin
       t1 = Time.now
-      f = Bionomia::FrictionlessDataDataset.new(uuid: d.datasetKey, output_directory: options[:directory])
-      f.create_package
-      f.update_frictionless_created
+      f = Bionomia::FrictionlessGenerator.new(dataset: d, output_directory: options[:directory])
+      f.create
       t2 = Time.now
       puts "Package created for #{d.datasetKey} in #{t2 - t1} seconds".green
     rescue
@@ -82,9 +75,8 @@ elsif options[:directory] && options[:list]
       puts "Starting #{dataset.title}...".yellow
       begin
         t1 = Time.now
-        f = Bionomia::FrictionlessDataDataset.new(uuid: key, output_directory: options[:directory])
-        f.create_package
-        f.update_frictionless_created
+        f = Bionomia::FrictionlessGenerator.new(dataset: d, output_directory: options[:directory])
+        f.create
         t2 = Time.now
         puts "Package created for #{key} in #{t2 - t1} seconds".green
       rescue
@@ -94,9 +86,4 @@ elsif options[:directory] && options[:list]
       puts "Package #{key} not found".red
     end
   end
-elsif options[:directory] && options[:bionomia]
-  puts "Starting dataset for for all of Bionomia...".yellow
-  f = Bionomia::FrictionlessDataBionomia.new(uuid: SecureRandom.uuid, output_directory: options[:directory])
-  f.create_package
-  puts "Package created for all of Bionomia".green
 end

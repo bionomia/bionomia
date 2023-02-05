@@ -51,7 +51,7 @@ class Agent < ActiveRecord::Base
 
   def determinations_year_range
     years = determinations.pluck(:dateIdentified)
-                          .map{ |d| Bionomia::AgentUtility.valid_year(d) }
+                          .map{ |d| Bionomia::Validator.valid_year(d) }
                           .compact
                           .minmax rescue [nil,nil]
     years[0] = years[1] if years[0].nil?
@@ -61,7 +61,7 @@ class Agent < ActiveRecord::Base
 
   def recordings_year_range
     years = recordings.pluck(:eventDate, :year)
-                      .map{ |d| Bionomia::AgentUtility.valid_year(d.compact.reject(&:empty?).first) }
+                      .map{ |d| Bionomia::Validator.valid_year(d.compact.reject(&:empty?).first) }
                       .compact
                       .minmax rescue [nil,nil]
     years[0] = years[1] if years[0].nil?
