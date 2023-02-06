@@ -7,7 +7,7 @@
 require_relative "frictionless_table"
 
 module Bionomia
-  class FrictionlessTableMissing < FrictionlessTable
+  class FrictionlessTableMissingAttribution < FrictionlessTable
 
     def initialize(**args)
       super(**args)
@@ -15,7 +15,7 @@ module Bionomia
 
     def resource
       {
-        name: "missing",
+        name: "missing-attributions",
         format: "csv",
         mediatype: "text/csv",
         encoding: "utf-8",
