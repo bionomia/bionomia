@@ -4,6 +4,10 @@ require_relative "frictionless_table"
 module Bionomia
   class FrictionlessTableProblemCollector < FrictionlessTable
 
+    def initialize(**args)
+      super(**args)
+    end
+
     def resource
       {
         name: "problem-collector-dates",
@@ -51,8 +55,36 @@ module Bionomia
     end
 
     def write_table_rows
+      @occurrence_files.each do |csv|
+        occurrence_ids = CSV.read(csv).flatten
+        occurrence_ids.in_groups_of(5_000, false).each do |group|
+          UserOccurrence.joins(:occurrence, :user)
+                        .includes(:occurrence, :user)
+                        .where(visible: true)
+                        .where(occurrence_id: group).each do |uo|
+              next if uo.action == "identified"
+              next if !uo.user.wikidata
+              next if !uo.occurrence.eventDate_processed
+              if ( uo.user.date_born && uo.user.date_born >= uo.occurrence.eventDate_processed ) ||
+                ( uo.user.date_died && uo.user.date_died <= uo.occurrence.eventDate_processed )
+                data = [
+                  uo.occurrence.id,
+                  uo.occurrence.catalogNumber,
+                  uo.user.id,
+                  uo.user.wikidata,
+                  uo.user.date_born,
+                  uo.user.date_born_precision,
+                  uo.user.date_died,
+                  uo.user.date_died_precision,
+                  uo.occurrence.eventDate,
+                  uo.occurrence.year
+                ]
+                @csv_handle << CSV::Row.new(header, data).to_s
+              end
+          end
+        end
+      end
     end
 
   end
-
 end

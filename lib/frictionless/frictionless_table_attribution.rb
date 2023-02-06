@@ -4,6 +4,10 @@ require_relative "frictionless_table"
 module Bionomia
   class FrictionlessTableAttribution < FrictionlessTable
 
+    def initialize(**args)
+      super(**args)
+    end
+
     def resource
       {
         name: "attributions",
@@ -47,6 +51,37 @@ module Bionomia
     end
 
     def write_table_rows
+      @occurrence_files.each do |csv|
+        occurrence_ids = CSV.read(csv).flatten
+        occurrence_ids.in_groups_of(5_000, false).each do |group|
+          UserOccurrence.joins(:user, :claimant)
+                        .includes(:user, :claimant)
+                        .where(occurrence_id: group)
+                        .where(visible: true)
+                        .each do |uo|
+
+              uri = uo.user.uri
+              identified_uri = uo.action.include?("identified") ? uri : nil
+              recorded_uri = uo.action.include?("recorded") ? uri : nil
+              created_name = uo.claimant.fullname
+              created_orcid = uo.claimant.orcid
+              created_date_time = uo.created.to_time.iso8601
+              modified_date_time = !uo.updated.blank? ? uo.updated.to_time.iso8601 : nil
+
+              data = [
+                uo.user_id,
+                uo.occurrence_id,
+                identified_uri,
+                recorded_uri,
+                created_name,
+                created_orcid,
+                created_date_time,
+                modified_date_time
+              ]
+              @csv_handle << CSV::Row.new(header, data).to_s
+          end
+        end
+      end
     end
 
   end

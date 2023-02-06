@@ -17,7 +17,6 @@ module Bionomia
     def initialize(occurrence_files: nil, csv_handle: nil)
       @occurrence_files = occurrence_files
       @csv_handle = csv_handle
-      @set = Set.new
     end
 
     # Child class should have a resource method

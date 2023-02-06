@@ -63,6 +63,7 @@ module Bionomia
       flush_occurrence_files
       write_descriptor
       update_created_at
+      puts "Completed in #{Time.now - @created} seconds".green
     end
 
     def create_folder
@@ -78,7 +79,12 @@ module Bionomia
 
     def create_occurrence_files
       puts "Creating files of occurrence_ids...".yellow
-      query = Occurrence.select(:gbifID).where(datasetKey: @dataset.uuid).to_sql
+      query = Occurrence.select(:gbifID)
+                        .joins(:user_occurrences)
+                        .where(datasetKey: @dataset.uuid)
+                        .where(user_occurrences: { visible: true })
+                        .distinct
+                        .to_sql
       mysql2 = ActiveRecord::Base.connection.instance_variable_get(:@connection)
       rows = mysql2.query(query, stream: true, cache_rows: false)
       tmp_csv = File.new(File.join(@folder, "frictionless_tmp.csv"), "ab")
@@ -118,6 +124,7 @@ module Bionomia
 
         File.delete(file_path)
       end
+      @created = Time.now
     end
 
     def write_descriptor

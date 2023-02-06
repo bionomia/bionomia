@@ -4,6 +4,11 @@ require_relative "frictionless_table"
 module Bionomia
   class FrictionlessTableUser < FrictionlessTable
 
+    def initialize(**args)
+      super(**args)
+      @set = Set.new
+    end
+
     def resource
       {
         name: "users",
@@ -37,15 +42,19 @@ module Bionomia
     end
 
     def write_table_rows
-=begin
-      header = resource[:schema][:fields].map{ |u| u[:name] }
-      user_set = Set.new
-      User.joins(user_occurrences: :occurrence)
-          .where(occurrences: { datasetKey: dataset.uuid })
-          .find_each(batch_size: 10_000) do |user|
-            user_set.add(user)
+      @occurrence_files.each do |csv|
+        occurrence_ids = CSV.read(csv).flatten
+        occurrence_ids.in_groups_of(1_000, false).each do |group|
+          User.joins(:user_occurrences)
+              .where(user_occurrences: { occurrence_id: group, visible: true })
+              .each do |user|
+                @set.add(user)
+          end
+        end
       end
-      user_set.each do |user|
+
+      @set.each do |user|
+        next if !user.is_public?
         aliases = user.other_names.split("|").to_s if user.other_names
         data = [
           user.id,
@@ -62,9 +71,8 @@ module Bionomia
           user.date_died,
           user.date_died_precision
         ]
-        csv_handle << CSV::Row.new(header, data).to_s
+        @csv_handle << CSV::Row.new(header, data).to_s
       end
-=end
     end
 
   end
