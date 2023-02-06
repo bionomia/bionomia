@@ -44,7 +44,7 @@ module Bionomia
       accepted_fields = ["gbifID"] + Occurrence.accepted_fields
       @occurrence_files.each do |csv|
         occurrence_ids = CSV.read(csv).flatten
-        occurrence_ids.in_groups_of(5_000, false).each do |group|
+        occurrence_ids.in_groups_of(1_000, false).each do |group|
           Occurrence.where(id: group).each do |o|
             data = o.attributes
                     .select{|k,v| accepted_fields.include?(k) }

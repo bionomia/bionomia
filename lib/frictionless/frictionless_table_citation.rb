@@ -48,7 +48,7 @@ module Bionomia
     def write_table_rows
       @occurrence_files.each do |csv|
         occurrence_ids = CSV.read(csv).flatten
-        occurrence_ids.in_groups_of(5_000, false).each do |group|
+        occurrence_ids.in_groups_of(1_000, false).each do |group|
           ArticleOccurrence.where(occurrence_id: group)
             .each do |ao|
               data = [ ao.article_id, ao.occurrence_id ]

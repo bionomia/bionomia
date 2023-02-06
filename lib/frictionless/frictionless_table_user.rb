@@ -47,6 +47,7 @@ module Bionomia
         occurrence_ids.in_groups_of(1_000, false).each do |group|
           User.joins(:user_occurrences)
               .where(user_occurrences: { occurrence_id: group, visible: true })
+              .where(is_public: true)
               .each do |user|
                 @set.add(user)
           end
@@ -54,7 +55,6 @@ module Bionomia
       end
 
       @set.each do |user|
-        next if !user.is_public?
         aliases = user.other_names.split("|").to_s if user.other_names
         data = [
           user.id,
