@@ -77,7 +77,7 @@ module Bionomia
       end
     end
 
-    # Creates a bunch of csv files containing gbifIDs in groups of 250,000 and
+    # Creates a bunch of csv files containing gbifIDs in groups of 100,000 and
     # makes an instance, @occurrence_files that each FrictionlessTable child class may use.
     # This is a bit bizarre, but is more performant than heaps of
     # expensive activerecord objects that each require these same gbifIDs
@@ -110,6 +110,9 @@ module Bionomia
     # Use the parallel gem to create the csv files and then zip them up
     def create_tables
       Parallel.each(FrictionlessTable.descendants, in_threads: 3) do |_class|
+        # Hard-coded skipping of FrictionlessTableMissingAttribution if there are no attributions made at the source
+        next if _class == FrictionlessTableMissingAttribution && !@dataset.has_local_attributions?
+
         obj = _class.new
         file_path = File.join(@folder, obj.file)
 
@@ -132,6 +135,9 @@ module Bionomia
     def write_descriptor
       desc = descriptor
       Parallel.each(FrictionlessTable.descendants, in_threads: 3) do |_class|
+        # Hard-coded skipping of FrictionlessTableMissingAttribution if there are no attributions made at the source
+        next if _class == FrictionlessTableMissingAttribution && !@dataset.has_local_attributions?
+
         obj = _class.new
         resource = obj.resource
         resource[:path] = "https://bionomia.net/dataset/#{@dataset.uuid}/#{obj.file}.zip"

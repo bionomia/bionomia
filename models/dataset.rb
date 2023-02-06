@@ -21,6 +21,10 @@ class Dataset < ActiveRecord::Base
 
   alias_method :has_user?, :has_claim?
 
+  def has_local_attributions?
+    source_attribution_count > 0
+  end
+
   def has_agent?
     determiner = OccurrenceDeterminer
                     .select(:agent_id)

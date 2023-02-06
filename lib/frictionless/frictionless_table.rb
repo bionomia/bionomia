@@ -32,7 +32,9 @@ module Bionomia
     def file
     end
 
-    # Child class should have a write_table_rows
+    # Child class should have a write_table_rows method
+    # that uses the array of @occurrence_files csv paths to gather gbifIDs
+    # and @csv_handle to write a row
     def write_table_rows
     end
 

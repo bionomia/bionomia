@@ -1,8 +1,8 @@
 # encoding: utf-8
 
-# Many thanks to Michal Torma, https://github.com/MichalTorma and Rukaya Johaadien, https://github.com/rukayaj
+# Thanks to Michal Torma, https://github.com/MichalTorma and Rukaya Johaadien, https://github.com/rukayaj
 # Who were the genesis of this idea & wrote some code during a Mobilise COST Action workshop end-January 2023 in Oslo, Norway
-# See also https://github.com/bionomia/bionomia/pull/250
+# See also https://github.com/bionomia/bionomia/pull/250 but closed without pulling
 
 require_relative "frictionless_table"
 
@@ -55,6 +55,7 @@ module Bionomia
       "missing_attributions.csv"
     end
 
+    # Note: not perfect because this checks that *both* recordedByID and identifiedByID are NULL
     def write_table_rows
       @occurrence_files.each do |csv|
         occurrence_ids = CSV.read(csv).flatten
