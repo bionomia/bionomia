@@ -84,7 +84,7 @@ module Bionomia
     def document(d)
       {
         id: d.id,
-        datasetkey: d.datasetKey,
+        datasetkey: d.uuid,
         title: d.title,
         description: d.description,
         top_collection_codes: d.top_collection_codes,

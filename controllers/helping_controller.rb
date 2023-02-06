@@ -246,7 +246,7 @@ module Sinatra
               @agent, @dataset, @taxon, @kingdom, @country_code = nil
 
               if params[:datasetKey] && !params[:datasetKey].blank?
-                @dataset = Dataset.find_by_datasetKey(params[:datasetKey]) rescue nil
+                @dataset = Dataset.find_by_uuid(params[:datasetKey]) rescue nil
               elsif params[:dataset]
                 search_dataset
                 @dataset_results = format_datasets

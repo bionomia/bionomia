@@ -1,11 +1,11 @@
 .y-scroll
   %ul.nav.nav-tabs.flex-nowrap
     %li.nav-item
-      %a{class: "text-nowrap nav-link#{locals[:active_tab] == "people" ? " active" : nil}", href: url("/dataset/#{@dataset.datasetKey}")}= I18n.t('dataset.people')
+      %a{class: "text-nowrap nav-link#{locals[:active_tab] == "people" ? " active" : nil}", href: url("/dataset/#{@dataset.uuid}")}= I18n.t('dataset.people')
     - if !@dataset.is_large?
       %li.nav-item
-        %a{class: "text-nowrap nav-link#{locals[:active_tab] == "visualizations" ? " active" : nil}", href: url("/dataset/#{@dataset.datasetKey}/visualizations")}= I18n.t('dataset.visualizations')
+        %a{class: "text-nowrap nav-link#{locals[:active_tab] == "visualizations" ? " active" : nil}", href: url("/dataset/#{@dataset.uuid}/visualizations")}= I18n.t('dataset.visualizations')
       %li.nav-item
-        %a{class: "text-nowrap nav-link#{locals[:active_tab] == "scribes" ? " active" : nil}", href: url("/dataset/#{@dataset.datasetKey}/scribes")}= I18n.t('dataset.scribes')
+        %a{class: "text-nowrap nav-link#{locals[:active_tab] == "scribes" ? " active" : nil}", href: url("/dataset/#{@dataset.uuid}/scribes")}= I18n.t('dataset.scribes')
       %li.nav-item
-        %a{class: "text-nowrap nav-link#{locals[:active_tab] == "agents" ? " active" : nil}", href: url("/dataset/#{@dataset.datasetKey}/agents")}= I18n.t('dataset.agent_strings')
+        %a{class: "text-nowrap nav-link#{locals[:active_tab] == "agents" ? " active" : nil}", href: url("/dataset/#{@dataset.uuid}/agents")}= I18n.t('dataset.agent_strings')

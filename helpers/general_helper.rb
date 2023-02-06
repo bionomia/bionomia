@@ -284,7 +284,7 @@ module Sinatra
           recordedBy = params[:recordedBy] rescue nil
           dataset = nil
           if params[:datasetKey]
-            dataset = Dataset.find_by_datasetKey(params[:datasetKey]).title.truncate(45) rescue nil
+            dataset = Dataset.find_by_uuid(params[:datasetKey]).title.truncate(45) rescue nil
           end
           attributor = nil
           if params[:attributor]
@@ -306,7 +306,7 @@ module Sinatra
         def filter_instances
           @dataset, @agent, @taxon, @kingdom, @country_code = nil
           if params[:datasetKey] && !params[:datasetKey].blank?
-            @dataset = Dataset.find_by_datasetKey(params[:datasetKey]) rescue nil
+            @dataset = Dataset.find_by_uuid(params[:datasetKey]) rescue nil
           end
           if params[:agent_id] && !params[:agent_id].blank?
             @agent = Agent.find(params[:agent_id]) rescue nil

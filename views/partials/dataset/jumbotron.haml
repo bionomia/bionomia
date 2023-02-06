@@ -2,7 +2,7 @@
   %h1.mt-3.h2 #{h(@dataset.title)}
 
   %p
-    = link_to "https://gbif.org/dataset/#{@dataset.datasetKey}", "https://gbif.org/dataset/#{@dataset.datasetKey}"
+    = link_to "https://gbif.org/dataset/#{@dataset.uuid}", "https://gbif.org/dataset/#{@dataset.uuid}"
 
   - if @dataset.image_url
     .m-1
@@ -24,13 +24,13 @@
 
   - if authorized?
     .mt-3.pt-3.border-top
-      %a.profile-flush.mr-2.mb-2.text-nowrap{href: url("/dataset/#{@dataset.datasetKey}/refresh.json")}
+      %a.profile-flush.mr-2.mb-2.text-nowrap{href: url("/dataset/#{@dataset.uuid}/refresh.json")}
         %i.fas.fa-sync-alt
         = I18n.t('general.refresh_profile')
         %img{src: "/images/gbif_18x18.svg", alt:"GBIF", width:"18px"}
 
       - if admin_authorized?
-        %a.mr-2.mb-2.text-nowrap{href: url("/admin/dataset/#{@dataset.datasetKey}")}
+        %a.mr-2.mb-2.text-nowrap{href: url("/admin/dataset/#{@dataset.uuid}")}
           %i.fas.fa-cog
           = I18n.t('general.settings')
 

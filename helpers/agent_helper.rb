@@ -149,7 +149,7 @@ module Sinatra
           dataset_name = nil
           if params[:datasetKey] && !params[:datasetKey].blank?
             begin
-              dataset_name = Dataset.find_by_datasetKey(params[:datasetKey]).title
+              dataset_name = Dataset.find_by_uuid(params[:datasetKey]).title
             rescue
               halt 404
             end

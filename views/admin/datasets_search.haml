@@ -37,12 +37,12 @@
                     %img.mr-2.rounded{src:"https://abekpgaoen.cloudimg.io/crop/48x48/n/#{dataset.image_url}", style:"max-width:48px;max-height:48px;", alt:"#{dataset.title}"}
                   .flex-grow-1
                     %h5
-                      %a{href: url("/admin/dataset/#{dataset.datasetKey}")} #{dataset.title}
+                      %a{href: url("/admin/dataset/#{dataset.uuid}")} #{dataset.title}
                     %p{class:"text-muted"}
               - else
                 .card-header
                   %h5
-                    %a{href: url("/admin/dataset/#{dataset.datasetKey}")} #{dataset.title}
+                    %a{href: url("/admin/dataset/#{dataset.uuid}")} #{dataset.title}
                   %p.text-muted
               .card-body
 

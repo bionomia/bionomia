@@ -134,12 +134,12 @@
                     %img.mr-2.rounded{src:"https://abekpgaoen.cloudimg.io/crop/48x48/n/#{dataset.image_url}", style:"max-width:48px;max-height:48px;", alt:"#{dataset.title}"}
                   .flex-grow-1
                     %h5
-                      = link_to dataset.title, url("#{locals[:url]}/advanced-search?datasetKey=#{dataset.datasetKey}&agent_id=#{params[:agent_id]}&kingdom=#{params[:kingdom]}&taxon_id=#{params[:taxon_id]}")
+                      = link_to dataset.title, url("#{locals[:url]}/advanced-search?datasetKey=#{dataset.uuid}&agent_id=#{params[:agent_id]}&kingdom=#{params[:kingdom]}&taxon_id=#{params[:taxon_id]}")
                     %p.text-muted
               - else
                 .card-header
                   %h5
-                    = link_to dataset.title, url("#{locals[:url]}/advanced-search?datasetKey=#{dataset.datasetKey}&agent_id=#{params[:agent_id]}&kingdom=#{params[:kingdom]}&taxon_id=#{params[:taxon_id]}")
+                    = link_to dataset.title, url("#{locals[:url]}/advanced-search?datasetKey=#{dataset.uuid}&agent_id=#{params[:agent_id]}&kingdom=#{params[:kingdom]}&taxon_id=#{params[:taxon_id]}")
                   %p.text-muted
               .card-body
               .card-footer

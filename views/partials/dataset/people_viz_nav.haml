@@ -1,6 +1,6 @@
 %nav#network-nav.navbar.navbar-light.navbar-expand.bg-light.overflow-auto
   %ul.navbar-nav.mr-auto
     %li.nav-item
-      %a{class:"nav-link#{locals[:active_subtab] == "collected" ? " active" : nil}", href: url("/dataset/#{@dataset.datasetKey}/visualizations")}= I18n.t('taxa.collected')
+      %a{class:"nav-link#{locals[:active_subtab] == "collected" ? " active" : nil}", href: url("/dataset/#{@dataset.uuid}/visualizations")}= I18n.t('taxa.collected')
     %li.nav-item
-      %a{class:"nav-link#{locals[:active_subtab] == "identified" ? " active" : nil}", href: url("/dataset/#{@dataset.datasetKey}/visualizations?action=identified")}= I18n.t('taxa.identified')
+      %a{class:"nav-link#{locals[:active_subtab] == "identified" ? " active" : nil}", href: url("/dataset/#{@dataset.uuid}/visualizations?action=identified")}= I18n.t('taxa.identified')

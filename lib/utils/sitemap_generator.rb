@@ -98,12 +98,12 @@ module Bionomia
     def add_datasets
       puts "Adding datasets..."
       Dataset.find_each do |d|
-        sitemap.add "/dataset/#{d.datasetKey}"
+        sitemap.add "/dataset/#{d.uuid}"
         next if d.is_large?
-        sitemap.add "/dataset/#{d.datasetKey}/visualizations"
-        sitemap.add "/dataset/#{d.datasetKey}/visualizations?action=identified"
-        sitemap.add "/dataset/#{d.datasetKey}/scribes"
-        sitemap.add "/dataset/#{d.datasetKey}/agents"
+        sitemap.add "/dataset/#{d.uuid}/visualizations"
+        sitemap.add "/dataset/#{d.uuid}/visualizations?action=identified"
+        sitemap.add "/dataset/#{d.uuid}/scribes"
+        sitemap.add "/dataset/#{d.uuid}/agents"
       end
     end
 

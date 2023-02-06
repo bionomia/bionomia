@@ -25,7 +25,7 @@
             %ul.list-unstyled.m-2
               - group.each do |a|
                 %li
-                  = link_to a.fullname_reverse, url("/agent/#{a.id}?datasetKey=#{@dataset.datasetKey}")
+                  = link_to a.fullname_reverse, url("/agent/#{a.id}?datasetKey=#{@dataset.uuid}")
 
       - if @pagy.pages > 1
         .y-scroll

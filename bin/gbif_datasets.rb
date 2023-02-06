@@ -65,7 +65,7 @@ elsif options[:flush]
   occurrence_keys = Occurrence.select(:datasetKey).distinct.pluck(:datasetKey).compact
   dataset_keys = Dataset.select(:datasetKey).distinct.pluck(:datasetKey)
   (dataset_keys - occurrence_keys).each do |d|
-    Dataset.find_by_datasetKey(d).destroy
+    Dataset.find_by_uuid(d).destroy
     puts d.red
   end
 elsif options[:datasetkey]
@@ -73,22 +73,22 @@ elsif options[:datasetkey]
 elsif options[:remove]
   Dataset.find_each do |d|
     next if d.has_agent?
-    puts d.datasetKey.red
+    puts d.uuid.red
     d.destroy
   end
 elsif options[:counter]
   puts "Updating occurrence counts...".yellow
   Occurrence.counter_culture_fix_counts only: :dataset
-  sql = "update datasets INNER JOIN (SELECT count(*) as sum, o.datasetKey FROM `occurrences` o JOIN `user_occurrences` u ON u.occurrence_id = o.gbifID where u.created_by = 2 group by o.datasetKey ) a ON datasets.datasetKey = a.datasetKey set datasets.source_attribution_count = a.sum"
+  sql = "UPDATE datasets INNER JOIN (SELECT count(*) as sum, o.datasetKey FROM `occurrences` o JOIN `user_occurrences` u ON u.occurrence_id = o.gbifID where u.created_by = 2 group by o.datasetKey ) a ON datasets.datasetKey = a.datasetKey set datasets.source_attribution_count = a.sum"
   puts "Updating source attributions counts...".yellow
   ActiveRecord::Base.connection.execute(sql)
   puts "Counters rebuilt".green
 elsif options[:verify]
   Dataset.where("occurrences_count > 1000").find_each do |d|
     if d.current_occurrences_count < d.occurrences_count
-      puts d.datasetKey.red
+      puts d.uuid.red
     else
-      puts d.datasetKey.green
+      puts d.uuid.green
     end
   end
 end

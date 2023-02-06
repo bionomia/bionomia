@@ -1,8 +1,8 @@
 %nav#network-nav.navbar.navbar-light.navbar-expand.bg-light.overflow-auto
   %ul.navbar-nav
     %li.nav-item
-      %a{class:"nav-link#{locals[:active_subtab] == "default" ? " active" : nil}", href: url("/dataset/#{@dataset.datasetKey}/agents")}= I18n.t('dataset.alphabetical')
+      %a{class:"nav-link#{locals[:active_subtab] == "default" ? " active" : nil}", href: url("/dataset/#{@dataset.uuid}/agents")}= I18n.t('dataset.alphabetical')
     %li.nav-item
-      %a{class:"nav-link#{locals[:active_subtab] == "counts" ? " active" : nil}", href: url("/dataset/#{@dataset.datasetKey}/agents/counts")}= I18n.t('dataset.counts')
+      %a{class:"nav-link#{locals[:active_subtab] == "counts" ? " active" : nil}", href: url("/dataset/#{@dataset.uuid}/agents/counts")}= I18n.t('dataset.counts')
     %li.nav-item
-      %a{class:"nav-link#{locals[:active_subtab] == "unclaimed" ? " active" : nil}", href: url("/dataset/#{@dataset.datasetKey}/agents/unclaimed")}= I18n.t('dataset.unclaimed')
+      %a{class:"nav-link#{locals[:active_subtab] == "unclaimed" ? " active" : nil}", href: url("/dataset/#{@dataset.uuid}/agents/unclaimed")}= I18n.t('dataset.unclaimed')

@@ -48,7 +48,7 @@
       - @results.each do |d|
         %tr
           %td
-            %a{href: url("/admin/dataset/#{d.datasetKey}")} #{d.title.truncate(175)}
+            %a{href: url("/admin/dataset/#{d.uuid}")} #{d.title.truncate(175)}
           %td
             #{number_with_delimiter(d.occurrences_count)}
           %td

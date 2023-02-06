@@ -2,7 +2,7 @@
 
 - content_for :title, "#{@dataset.title}: #{I18n.t('dataset.visualizations')}"
 
-= haml :'partials/timeline_viz_scripts', layout: false, locals: { extra_param: "&datasetKey=#{@dataset.datasetKey}" }
+= haml :'partials/timeline_viz_scripts', layout: false, locals: { extra_param: "&datasetKey=#{@dataset.uuid}" }
 
 .row
   = haml :'partials/dataset/jumbotron', layout:false
@@ -23,11 +23,11 @@
     - elsif @timeline.size == 1
       %ul.list-unstyled
         %li
-          %a.mr-3{href: "/#{@timeline[0][0]}/specimens?datasetKey=#{@dataset.datasetKey}&action=#{@action}"}
+          %a.mr-3{href: "/#{@timeline[0][0]}/specimens?datasetKey=#{@dataset.uuid}&action=#{@action}"}
             #{@timeline[0][1]}
           #{Date.parse(@timeline[0][3]).strftime("%F")} – #{Date.parse(@timeline[0][4]).strftime("%F")}
 
     - else
-      = haml :'partials/timeline_filter', layout:false, locals: { params: params, url: "/dataset/#{@dataset.datasetKey}/visualizations" }
+      = haml :'partials/timeline_filter', layout:false, locals: { params: params, url: "/dataset/#{@dataset.uuid}/visualizations" }
 
     #timeline.mt-4{style:"overflow:auto;"}

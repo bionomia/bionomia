@@ -8,7 +8,7 @@ module Bionomia
 
     def update_all
       Dataset.find_each do |d|
-        self.process_dataset(d.datasetKey)
+        self.process_dataset(d.uuid)
         puts d.datasetKey.green
       end
     end

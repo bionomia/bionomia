@@ -40,12 +40,12 @@
                 %img.mr-2.rounded{src:"https://abekpgaoen.cloudimg.io/crop/48x48/n/#{dataset.image_url}", width:48, height:48, alt:"#{dataset.title}", loading:"lazy"}
               .flex-grow-1
                 %h5
-                  = link_to dataset.title, url("/dataset/#{dataset.datasetKey}")
+                  = link_to dataset.title, url("/dataset/#{dataset.uuid}")
                 %p.text-muted
           - else
             .card-header
               %h5
-                = link_to dataset.title, url("/dataset/#{dataset.datasetKey}")
+                = link_to dataset.title, url("/dataset/#{dataset.uuid}")
               %p.text-muted
           .card-body
           .card-footer

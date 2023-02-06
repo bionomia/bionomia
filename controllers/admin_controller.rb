@@ -130,7 +130,7 @@ module Sinatra
             end
 
             get '/dataset/:id' do
-              @dataset = Dataset.find_by_datasetKey(params[:id]) rescue nil
+              @dataset = Dataset.find_by_uuid(params[:id]) rescue nil
               if @dataset.nil?
                 halt 404
               end
@@ -594,7 +594,7 @@ module Sinatra
               @agent, @dataset, @taxon, @kingdom, @country_code = nil
 
               if params[:datasetKey] && !params[:datasetKey].blank?
-                @dataset = Dataset.find_by_datasetKey(params[:datasetKey]) rescue nil
+                @dataset = Dataset.find_by_uuid(params[:datasetKey]) rescue nil
               elsif params[:dataset]
                 search_dataset
                 @dataset_results = format_datasets
