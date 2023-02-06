@@ -77,6 +77,10 @@ module Bionomia
       end
     end
 
+    # Creates a bunch of csv files containing gbifIDs in groups of 250,000 and
+    # makes an instance, @occurrence_files that each FrictionlessTable child class may use.
+    # This is a bit bizarre, but is more performant than heaps of
+    # expensive activerecord objects that each require these same gbifIDs
     def create_occurrence_files
       query = Occurrence.select(:gbifID)
                         .joins(:user_occurrences)
@@ -103,14 +107,15 @@ module Bionomia
       end
     end
 
+    # Use the parallel gem to create the csv files and then zip them up
     def create_tables
       Parallel.each(FrictionlessTable.descendants, in_threads: 3) do |_class|
         obj = _class.new
-        header = obj.resource[:schema][:fields].map{ |u| u[:name] }
         file_path = File.join(@folder, obj.file)
 
         file = File.open(file_path, "wb")
-        file << CSV::Row.new(header, header, true).to_s
+        file << CSV::Row.new(obj.header, obj.header, true).to_s
+        # Pass the array of occurrence_files containing gbifIDs and the file handle to each class
         obj = _class.new(occurrence_files: @occurrence_files, csv_handle: file)
         puts "writing #{obj.class.name}"
         obj.write_table_rows
