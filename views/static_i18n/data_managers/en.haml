@@ -79,10 +79,10 @@
       %p
         The packages contain a standard
         %em datapackage.json
-        metadata file and six zipped csv files:
-        %em users.csv.zip, occurrences.csv.zip, problem_collector_dates.csv.zip, citations.csv.zip, articles.csv.zip,
+        metadata file and seven zipped csv files:
+        %em users.csv.zip, occurrences.csv.zip, problem_collector_dates.csv.zip, citations.csv.zip, articles.csv.zip, attributions.csv.zip
         and
-        %em attributions.csv.zip.
+        %em missing_attributions.csv.zip.
         The
         %em datapackage.json
         metadata file contains a "created" timestamp for when the package was last produced. Regeneration of these packages typically occurs once every few weeks but if you would like a more up-to-date version, please
@@ -102,9 +102,12 @@
         The
         %em problem_collector_dates.csv.zip
         file contains a list of occurrence records whose eventDate is earlier than a collector's birthDate or later than their deathDate.
-        Finally, the
+        The
         %em attributions.csv.zip
         file is a join table for the other two csv files and also contains columns for who made the attribution, their ORCID ID, and a timestamp for when they made the attribution.
+        Finally, the
+        %em missing_attributions.csv.zip
+        file contains attributions made in Bionomia but not present in a data source's identifiedByID and recordedByID data fields.
 
     .col-12.col-md-6
 
