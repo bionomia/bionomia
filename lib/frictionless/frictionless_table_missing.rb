@@ -1,8 +1,13 @@
 # encoding: utf-8
+
+# Many thanks to Michal Torma, https://github.com/MichalTorma and Rukaya Johaadien, https://github.com/rukayaj
+# Who were the genesis of this idea & wrote some code during a Mobilise COST Action workshop end-January 2023 in Oslo, Norway
+# See also https://github.com/bionomia/bionomia/pull/250
+
 require_relative "frictionless_table"
 
 module Bionomia
-  class FrictionlessTableAttribution < FrictionlessTable
+  class FrictionlessTableMissing < FrictionlessTable
 
     def initialize(**args)
       super(**args)
@@ -10,7 +15,7 @@ module Bionomia
 
     def resource
       {
-        name: "attributions",
+        name: "missing",
         format: "csv",
         mediatype: "text/csv",
         encoding: "utf-8",
@@ -47,19 +52,20 @@ module Bionomia
     end
 
     def file
-      "attributions.csv"
+      "missing_attributions.csv"
     end
 
     def write_table_rows
       @occurrence_files.each do |csv|
         occurrence_ids = CSV.read(csv).flatten
         occurrence_ids.in_groups_of(1_000, false).each do |group|
-          UserOccurrence.joins(:user, :claimant)
-                        .includes(:user, :claimant)
+          UserOccurrence.joins(:user, :claimant, :occurrence)
+                        .includes(:user, :claimant, :occurrence)
                         .where(occurrence_id: group)
+                        .where.not(created_by: User::GBIF_AGENT_ID)
                         .where(visible: true)
+                        .where(occurrence: { recordedByID: nil, identifiedByID: nil })
                         .each do |uo|
-
               uri = uo.user.uri
               identified_uri = uo.action.include?("identified") ? uri : nil
               recorded_uri = uo.action.include?("recorded") ? uri : nil
