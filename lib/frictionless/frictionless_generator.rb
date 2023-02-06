@@ -104,8 +104,7 @@ module Bionomia
     end
 
     def create_tables
-      # Can we parallelize this?
-      FrictionlessTable.descendants.each do |_class|
+      Parallel.each(FrictionlessTable.descendants, in_threads: 3) do |_class|
         obj = _class.new
         header = obj.resource[:schema][:fields].map{ |u| u[:name] }
         file_path = File.join(@folder, obj.file)
@@ -113,7 +112,7 @@ module Bionomia
         file = File.open(file_path, "wb")
         file << CSV::Row.new(header, header, true).to_s
         obj = _class.new(occurrence_files: @occurrence_files, csv_handle: file)
-        puts "Writing #{obj.class.name}"
+        puts "writing #{obj.class.name}"
         obj.write_table_rows
         file.close
 
@@ -127,7 +126,7 @@ module Bionomia
 
     def write_descriptor
       desc = descriptor
-      FrictionlessTable.descendants.each do |_class|
+      Parallel.each(FrictionlessTable.descendants, in_threads: 3) do |_class|
         obj = _class.new
         resource = obj.resource
         resource[:path] = "https://bionomia.net/dataset/#{@dataset.uuid}/#{obj.file}.zip"

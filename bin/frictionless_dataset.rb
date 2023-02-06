@@ -8,7 +8,7 @@ options = {}
 OptionParser.new do |opts|
   opts.banner = "Usage: frictionless_dataset.rb [options]. Create frictionless datasets."
 
-  opts.on("-k", "--key [key]", String, "Create a datataset from a specific key") do |key|
+  opts.on("-k", "--key [key]", String, "Create a datataset from a specific uuid") do |key|
     options[:key] = key
   end
 
@@ -39,13 +39,14 @@ OptionParser.new do |opts|
 end.parse!
 
 if options[:directory] && options[:key]
+  dataset = Dataset.find_by_uuid(options[:key]) rescue nil
   if dataset
     begin
       puts "Starting #{dataset.title}...".yellow
       f = Bionomia::FrictionlessGenerator.new(dataset: dataset, output_directory: options[:directory])
       f.create
     rescue
-      puts "Package failed for #{dataset.datasetKey}".red
+      puts "Package failed for #{dataset.uuid}".red
     end
   else
     puts "Package #{options[:key]} not found".red
@@ -59,19 +60,19 @@ elsif options[:directory] && ( options[:all] || options[:missing] )
       f = Bionomia::FrictionlessGenerator.new(dataset: d, output_directory: options[:directory])
       f.create
     rescue
-      puts "Package failed for #{d.datasetKey}".red
+      puts "Package failed for #{d.uuid}".red
     end
   end
 elsif options[:directory] && options[:list]
   options[:list].each do |key|
-    dataset = Dataset.find_by_datasetKey(key) rescue nil
+    dataset = Dataset.find_by_uuid(key) rescue nil
     if dataset
       puts "Starting #{dataset.title}...".yellow
       begin
         f = Bionomia::FrictionlessGenerator.new(dataset: d, output_directory: options[:directory])
         f.create
       rescue
-        puts "Package failed for #{d.datasetKey}".red
+        puts "Package failed for #{d.uuid}".red
       end
     else
       puts "Package #{key} not found".red
