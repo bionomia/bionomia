@@ -78,7 +78,6 @@ module Bionomia
     end
 
     def create_occurrence_files
-      puts "Creating files of occurrence_ids...".yellow
       query = Occurrence.select(:gbifID)
                         .joins(:user_occurrences)
                         .where(datasetKey: @dataset.uuid)
@@ -114,7 +113,7 @@ module Bionomia
         file = File.open(file_path, "wb")
         file << CSV::Row.new(header, header, true).to_s
         obj = _class.new(occurrence_files: @occurrence_files, csv_handle: file)
-        puts "Writing #{obj.class.name}...".yellow
+        puts "Writing #{obj.class.name}"
         obj.write_table_rows
         file.close
 
@@ -124,7 +123,6 @@ module Bionomia
 
         File.delete(file_path)
       end
-      @created = Time.now
     end
 
     def write_descriptor

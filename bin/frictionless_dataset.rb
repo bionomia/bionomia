@@ -42,11 +42,8 @@ if options[:directory] && options[:key]
   if dataset
     begin
       puts "Starting #{dataset.title}...".yellow
-      t1 = Time.now
       f = Bionomia::FrictionlessGenerator.new(dataset: dataset, output_directory: options[:directory])
       f.create
-      t2 = Time.now
-      puts "Package created for #{options[:key]} in #{t2 - t1} seconds".green
     rescue
       puts "Package failed for #{dataset.datasetKey}".red
     end
@@ -59,11 +56,8 @@ elsif options[:directory] && ( options[:all] || options[:missing] )
     next if options[:skip] && d.is_large?
     puts "Starting #{d.title}...".yellow
     begin
-      t1 = Time.now
       f = Bionomia::FrictionlessGenerator.new(dataset: d, output_directory: options[:directory])
       f.create
-      t2 = Time.now
-      puts "Package created for #{d.datasetKey} in #{t2 - t1} seconds".green
     rescue
       puts "Package failed for #{d.datasetKey}".red
     end
@@ -74,11 +68,8 @@ elsif options[:directory] && options[:list]
     if dataset
       puts "Starting #{dataset.title}...".yellow
       begin
-        t1 = Time.now
         f = Bionomia::FrictionlessGenerator.new(dataset: d, output_directory: options[:directory])
         f.create
-        t2 = Time.now
-        puts "Package created for #{key} in #{t2 - t1} seconds".green
       rescue
         puts "Package failed for #{d.datasetKey}".red
       end
