@@ -69,10 +69,10 @@ elsif options[:directory] && options[:list]
     if dataset
       puts "Starting #{dataset.title}...".yellow
       begin
-        f = Bionomia::FrictionlessGenerator.new(dataset: d, output_directory: options[:directory])
+        f = Bionomia::FrictionlessGenerator.new(dataset: dataset, output_directory: options[:directory])
         f.create
       rescue
-        puts "Package failed for #{d.uuid}".red
+        puts "Package failed for #{dataset.uuid}".red
       end
     else
       puts "Package #{key} not found".red
