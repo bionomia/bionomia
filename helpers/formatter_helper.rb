@@ -135,6 +135,14 @@ module Sinatra
           img
         end
 
+        def format_frictionless_links(links)
+          content = []
+          links.sort{|a, b| b[:name] <=> a[:name] }.each do |link|
+            content << "<li><a href=\"#{link[:path]}\">#{link[:name].titleize}</a> (csv, zip)</li>"
+          end
+          content.join
+        end
+
         def format_agent(n)
           { id: n[:_source][:id],
             score: n[:_score],

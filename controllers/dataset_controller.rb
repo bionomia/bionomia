@@ -47,19 +47,16 @@ module Sinatra
             end
 
             get '/:id' do
-              @frictionless_exists = false
-              dir = File.join(app.root, "public", "data", "#{params[:id]}")
-              if Dir.exists?(dir)
-                Dir.foreach(dir) do |f|
-                  fn = File.join(dir, f)
-                  next if File.extname(fn) != ".zip"
-                  @frictionless_exists = true
-                  break
-                end
-              end
-
               dataset_from_param
               dataset_users
+
+              @frictionless_data = nil
+              file = File.join(app.root, "public", "data", "#{@dataset.uuid}", "datapackage.json")
+              if File.file?(file)
+                data_hash = JSON.parse(File.read(file), symbolize_names: true)
+                @frictionless_data = data_hash[:resources].map{|d| d.slice(:name, :path, :bytes) }
+              end
+
               locals = {
                 active_page: "datasets",
                 active_tab: "people"
