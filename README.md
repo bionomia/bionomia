@@ -40,11 +40,11 @@ There are occasional hiccups at either the data publisher's end or at GBIF. BEFO
 
 ### Step 1:  Import Data
 
-See the Apache Spark recipes [here](spark.md) and [here](spark2.md) for quickly importing into MySQL the occurrence csv from a DwC Archive downloaded from [GBIF](https://www.gbif.org) or from a custom [Bionomia download](spark2.md). Apache Spark is used to produce the necessary source csv files for the "Parse & Populate Agents" and "Populate Taxa" steps below.
+See the Apache Spark recipes [here](spark.md) for quickly importing into MySQL the occurrence csv from a DwC Archive downloaded from [GBIF](https://www.gbif.org) from a custom Bionomia download. Apache Spark is used to produce the necessary source csv files for the "Parse & Populate Agents" and "Populate Taxa" steps below.
 
 ### Step 2: Check for Dramatic Changes in gbifIDs
 
-Unfortunately, gbifIDs are not persistent. These occasionally disappear through processing at GBIF's end. As a result, claims may no longer point to existing occurrence records. The following produces a csv file for how many claims and attributions will be orphaned. An alternative, more efficient process is found in an Apache Spark [script](spark2.md).
+Unfortunately, gbifIDs are not persistent. These occasionally disappear through processing at GBIF's end. As a result, claims may no longer point to existing occurrence records. The following produces a csv file for how many claims and attributions will be orphaned. An alternative, more efficient process is found in an Apache Spark [script](spark.md).
 
       $ RACK_ENV=production bundle exec ./bin/csv_dump.rb -d ~/Desktop -o
 
