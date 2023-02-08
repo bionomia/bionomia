@@ -86,7 +86,6 @@ module Bionomia
                         .joins(:user_occurrences)
                         .where(datasetKey: @dataset.uuid)
                         .where(user_occurrences: { visible: true })
-                        .distinct
                         .to_sql
       mysql2 = ActiveRecord::Base.connection.instance_variable_get(:@connection)
       rows = mysql2.query(query, stream: true, cache_rows: false)
@@ -95,7 +94,7 @@ module Bionomia
         rows.each { |row| csv << row }
       end
       tmp_csv.close
-      system("sort -n #{tmp_csv.path} > #{tmp_csv.path}.tmp && mv #{tmp_csv.path}.tmp #{tmp_csv.path} > /dev/null 2>&1")
+      system("sort -n #{tmp_csv.path} | uniq > #{tmp_csv.path}.tmp && mv #{tmp_csv.path}.tmp #{tmp_csv.path} > /dev/null 2>&1")
       system("cat #{tmp_csv.path} | parallel --pipe -N 100000 'cat > #{tmp_csv.path}-{#}.csv' > /dev/null 2>&1")
       @occurrence_files = Dir.glob(File.dirname(tmp_csv) + "/**/#{File.basename(tmp_csv.path)}*.csv")
       File.unlink(tmp_csv.path)
