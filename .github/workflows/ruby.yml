@@ -10,8 +10,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      RUBY_VERSION: 2.7.1
-      BUNDLER_VERSION: 2.2.0
+      RUBY_VERSION: 3.2.1
+      BUNDLER_VERSION: 2.4.6
       RACK_ENV: test
       MYSQL_USERNAME: root
       MYSQL_PASSWORD: root

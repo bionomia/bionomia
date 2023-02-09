@@ -67,7 +67,7 @@ module Bionomia
     end
 
     def create_folder
-      FileUtils.mkdir(@folder) unless File.exists?(@folder)
+      FileUtils.mkdir(@folder) unless File.exist?(@folder)
     end
 
     def flush_folder
