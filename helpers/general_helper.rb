@@ -6,7 +6,7 @@ module Sinatra
       module GeneralHelper
 
         def haml_i18n(template, *args)
-          if File.exists? "views/static_i18n/#{template}/#{I18n.locale.to_s}.haml"
+          if File.exist? "views/static_i18n/#{template}/#{I18n.locale.to_s}.haml"
             haml("static_i18n/#{template}/#{I18n.locale}".to_sym, *args)
           else
             haml("static_i18n/#{template}/en".to_sym, *args)
