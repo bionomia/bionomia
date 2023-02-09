@@ -52,9 +52,9 @@
         %i.fab.fa-orcid
         https://orcid.org/#{@admin_user.orcid}
     - else
-      %a{href: "https://www.wikidata.org/wiki/#{@admin_user.wikidata}"}
+      %a{href: "http://www.wikidata.org/entity/#{@admin_user.wikidata}"}
         %img{src: "/images/wikidata_18x12.svg", alt:"WIkidata iD"}
-          = link_to "https://www.wikidata.org/wiki/#{@admin_user.wikidata}", "https://www.wikidata.org/wiki/#{@admin_user.wikidata}"
+          = link_to "http://www.wikidata.org/entity/#{@admin_user.wikidata}", "http://www.wikidata.org/entity/#{@admin_user.wikidata}"
 
   - if !@admin_user.wiki_sitelinks.nil? && @admin_user.wiki_sitelinks["#{I18n.locale}wiki"]
     %p.orcid.text-lg-left.p-0.mt-0.mb-1

@@ -73,6 +73,6 @@
                   %a{href: "https://www.grid.ac/institutes/#{o.grid}"} #{o.grid}
               %td
                 - if !o.wikidata.blank?
-                  %a{href: "https://www.wikidata.org/wiki/#{o.wikidata}"} #{o.wikidata}
+                  %a{href: "http://www.wikidata.org/entity/#{o.wikidata}"} #{o.wikidata}
 
   = pagy_bootstrap_nav(@pagy) if @pagy && @pagy.pages > 1

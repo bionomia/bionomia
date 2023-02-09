@@ -148,7 +148,7 @@ var OccurrenceWidget = (function($, window) {
       var output = "", img = "";
       let found = this.network.find(x => x.identifier === id);
       if (found) {
-        var url = (found.identifier[0] === "Q") ? "https://www.wikidata.org/wiki/" + found.identifier : "https://orcid.org/" + found.identifier;
+        var url = (found.identifier[0] === "Q") ? "http://www.wikidata.org/entity/" + found.identifier : "https://orcid.org/" + found.identifier;
         if (found.identifier[0] === "Q") {
           img = "<img src=\"/images/wikidata_24x15.svg\" class=\"pr-1\" />";
         } else {

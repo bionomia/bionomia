@@ -14,9 +14,9 @@
         #mapid.w-100.h-100
   - if @organization.wikidata
     %p
-      %a{href: "https://www.wikidata.org/wiki/#{@organization.wikidata}"}
+      %a{href: "http://www.wikidata.org/entity/#{@organization.wikidata}"}
         %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD"}
-      %a{href: "https://www.wikidata.org/wiki/#{@organization.wikidata}"} https://www.wikidata.org/wiki/#{@organization.wikidata}
+      %a{href: "http://www.wikidata.org/entity/#{@organization.wikidata}"} http://www.wikidata.org/entity/#{@organization.wikidata}
 
   - if (authorized? && @organization.wikidata) || admin_authorized?
     .mt-3.pt-3.border-top

@@ -42,8 +42,8 @@
         https://orcid.org/#{@viewed_user.orcid}
     - else
       %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD"}
-      %a{href: "https://www.wikidata.org/wiki/#{@viewed_user.wikidata}", itemprop:"sameAs"}
-        https://www.wikidata.org/wiki/#{@viewed_user.wikidata}
+      %a{href: "http://www.wikidata.org/entity/#{@viewed_user.wikidata}", itemprop:"sameAs"}
+        http://www.wikidata.org/entity/#{@viewed_user.wikidata}
 
   - if !@viewed_user.wiki_sitelinks.nil? && @viewed_user.wiki_sitelinks["#{I18n.locale}wiki"]
     %p.orcid.text-lg-left.p-0.mt-0.mb-1

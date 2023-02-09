@@ -45,7 +45,7 @@
           https://orcid.org/#{@viewed_user.orcid}
       - else
         %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD"}
-        = link_to "https://www.wikidata.org/wiki/#{@viewed_user.wikidata}", "https://www.wikidata.org/wiki/#{@viewed_user.wikidata}"
+        = link_to "http://www.wikidata.org/entity/#{@viewed_user.wikidata}", "http://www.wikidata.org/entity/#{@viewed_user.wikidata}"
 
     - if !@viewed_user.wiki_sitelinks.nil? && @viewed_user.wiki_sitelinks["#{I18n.locale}wiki"]
       %p.orcid.text-center.p-0.mt-0.mb-1

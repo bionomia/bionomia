@@ -66,9 +66,9 @@
     %input.form-control#wikidata{type:"text", value:"#{@organization.wikidata}", name:"wikidata"}
     - if !@organization.wikidata.blank?
       %small.form-text.text-muted#ringgold-link
-        %a{href: "https://www.wikidata.org/wiki/#{@organization.wikidata}"}
+        %a{href: "http://www.wikidata.org/entity/#{@organization.wikidata}"}
           %img{src: "/images/wikidata_16x10.svg", alt:"Wikidata iD"}
-        %a{href: "https://www.wikidata.org/wiki/#{@organization.wikidata}", target:"_blank"} https://www.wikidata.org/wiki/#{@organization.wikidata}
+        %a{href: "http://www.wikidata.org/entity/#{@organization.wikidata}", target:"_blank"} http://www.wikidata.org/entity/#{@organization.wikidata}
       %a.btn.btn-sm.btn-outline-success.organization-refresh{href: url("/admin/organization/#{@organization.id}/refresh.json"), role:"button"}
         %i.fas.fa-sync-alt
         Refresh
