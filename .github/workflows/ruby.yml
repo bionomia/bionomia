@@ -9,6 +9,9 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: ['3.2']
     env:
       RUBY_VERSION: 3.2.1
       BUNDLER_VERSION: 2.4.6
@@ -18,9 +21,9 @@ jobs:
       MYSQL_HOST: localhost
       MYSQL_DATABASE: bionomia_test
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Set up Ruby
-      uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
+      uses: ruby/setup-ruby@ee2113536afb7f793eed4ce60e8d3b26db912da4
       with:
         ruby-version: ${{ env.RUBY_VERSION }}
         bundler-cache: true
