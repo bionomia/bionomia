@@ -11,7 +11,7 @@ Strings of text in the user interface are translatable via [config/locales](conf
 
 ## Requirements
 
-1. ruby 2.7.1+
+1. ruby 3.2.1+
 2. Elasticsearch 7.5.0+
 3. MySQL 8.0.21
 4. Redis 4.0.9+
