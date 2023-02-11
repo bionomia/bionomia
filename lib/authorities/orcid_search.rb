@@ -132,6 +132,7 @@ module Bionomia
                       .join("|") rescue nil
       country = data[:person][:addresses][:address]
                 .map{|o| I18nData.countries(:en)[o[:country][:value]]}
+                .first(5)
                 .join("|") rescue nil
 
       organizations = []
