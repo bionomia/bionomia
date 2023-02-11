@@ -67,19 +67,23 @@ module Bionomia
         start = 0
 
         loop do
-          orcid_search_url = "#{@settings.orcid.api_url}search?q=#{keyword_parameter}&start=#{start}&rows=200"
+          if start >= 10_000
+            #ORCID has a limit
+            raise StopIteration
+          end
+          orcid_search_url = "#{@settings.orcid.api_url}search?q=#{keyword_parameter}&start=#{start}&rows=300"
           response = RestClient::Request.execute(
             method: :get,
             url: orcid_search_url,
             headers: { accept: 'application/orcid+json' }
           )
-          results = JSON.parse(response, :symbolize_names => true)[:result] rescue []
+          results = JSON.parse(response, symbolize_names: true)[:result] rescue []
           if results && results.size > 0
             results.map { |item| yielder << item[:"orcid-identifier"][:path] }
           else
             raise StopIteration
           end
-          start += 200
+          start += 300
         end
       end.lazy
     end

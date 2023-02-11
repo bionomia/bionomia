@@ -59,7 +59,7 @@ gem 'sucker_punch'
 gem 'thin'
 gem 'twitter'
 gem 'typhoeus'
-gem 'wikidata-client', git: 'https://github.com/dshorthouse/wikidata-client.git', branch: 'bump-dependencies', require: 'wikidata'
+gem 'wikidata-client', git: 'https://github.com/dshorthouse/wikidata-client.git', branch: 'bump-dependencies'
 
 group :production do
   gem 'passenger'
