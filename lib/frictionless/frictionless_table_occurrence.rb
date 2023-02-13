@@ -12,9 +12,17 @@ module Bionomia
       accepted_fields = ["gbifID"] + Occurrence.accepted_fields
       fields = accepted_fields.map do |o|
         if o == "gbifID"
-          { name: "gbifID", type: "integer" }
+          { 
+            name: "gbifID",
+            type: "integer"
+          }
         elsif o == "datasetKey"
-          { name: "datasetKey", type: "string", format: "uuid", "skos:exactMatch": "http://rs.gbif.org/terms/1.0/datasetKey" }
+          { 
+            name: "datasetKey",
+            type: "string",
+            format: "uuid",
+            "skos:exactMatch": "http://rs.gbif.org/terms/1.0/datasetKey"
+          }
         else
           {
             name: "#{o}",

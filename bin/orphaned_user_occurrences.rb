@@ -50,13 +50,23 @@ if options[:orphaned] && options[:directory]
   raise "Directory not found" unless File.directory?(directory)
 
   csv_file = File.join(directory, "orphaned.csv")
-  puts "Querying for orphaned records...".green
+  puts "Querying for orphaned records...".yellow
+  OrphanedUserOccurrence.rebuild
+  puts "Writing to file...".yellow
   CSV.open(csv_file, 'w') do |csv|
     csv << ["Identifier", "Name", "Number Orphaned", "Claimants/Attributors"]
-    UserOccurrence.orphaned_user_claims.each do |k,v|
-      user = User.find(k)
-      attributors = v[:claimants].map{|u| User.find(u).fullname}.join("; ")
-      csv << [user.identifier, user.fullname, v[:count], attributors]
+    OrphanedUserOccurrence.select(:user_id, "COUNT(*) AS num", "JSON_ARRAYAGG(created_by) AS user_ids")
+                          .group(:user_id)
+                          .each do |item|
+      user = User.find(item[:user_id])
+      attributors = item[:user_ids].tr('[]', '')
+                      .split(',')
+                      .uniq
+                      .map{|u| User.find(u).fullname}
+                      .uniq
+                      .join("; ")
+      csv << [user.identifier, user.fullname, item[:num], attributors]
     end
   end
+  puts "Done".green
 end

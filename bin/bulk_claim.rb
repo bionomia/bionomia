@@ -43,8 +43,8 @@ if options[:file]
   raise RuntimeError, 'File must be a csv' if !mime_type.include?("text/csv")
 
   UserOccurrence.where(created_by: User::GBIF_AGENT_ID)
-                .find_in_batches(batch_size: 10_000) do |batch|
-                  UserOccurrence.where(id: batch.pluck(:id)).delete_all
+                .in_batches(batch_size: 10_000) do |batch|
+                  batch.delete_all
   end
 
   all_users = Set.new

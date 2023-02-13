@@ -6,6 +6,7 @@ class UserOccurrence < ActiveRecord::Base
    has_one :user, foreign_key: :id, primary_key: :user_id
    has_one :occurrence, foreign_key: :gbifID, primary_key: :occurrence_id
    has_one :taxon_occurrence, foreign_key: :occurrence_id, primary_key: :occurrence_id
+   has_one :orphaned_user_occurrence, foreign_key: :occurrence_id, primary_key: :occurrence_id
 
    has_many :shared_user_occurrences, -> (object){ where("id != ? AND visible = true", object.id) }, class_name: "UserOccurrence", foreign_key: :occurrence_id, primary_key: :occurrence_id
    has_many :article_occurrences, primary_key: :occurrence_id, foreign_key: :occurrence_id

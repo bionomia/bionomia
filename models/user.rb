@@ -716,6 +716,7 @@ class User < ActiveRecord::Base
   def update_orcid_profile
     orcid_lib = Bionomia::OrcidSearch.new
     data = orcid_lib.account_data(orcid)
+
     if data.blank?
       destroy
     else
