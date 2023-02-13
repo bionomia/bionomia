@@ -19,8 +19,8 @@ CREATE TABLE `articles` (
   `doi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `citation` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `abstract` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `gbif_dois` text COLLATE utf8mb4_bin,
-  `gbif_downloadkeys` text COLLATE utf8mb4_bin,
+  `gbif_dois` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `gbif_downloadkeys` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `processed` tinyint(1) DEFAULT NULL,
   `process_status` int DEFAULT '0',
   `mail_sent` tinyint(1) NOT NULL DEFAULT '0',
@@ -48,7 +48,7 @@ CREATE TABLE `datasets` (
   `doi` tinytext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `license` tinytext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `image_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `dataset_type` varchar(25) COLLATE utf8mb4_bin DEFAULT NULL,
+  `dataset_type` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL,
   `frictionless_created_at` timestamp NULL DEFAULT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE `messages` (
   `user_id` int UNSIGNED NOT NULL,
   `recipient_id` int UNSIGNED NOT NULL,
   `read` tinyint(1) DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
@@ -133,6 +133,15 @@ CREATE TABLE `organizations` (
   `website` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
+CREATE TABLE `orphaned_user_occurrences` (
+  `id` bigint NOT NULL,
+  `occurrence_id` bigint NOT NULL,
+  `user_id` int NOT NULL,
+  `created_by` int NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
 CREATE TABLE `schema_migrations` (
   `version` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
@@ -187,7 +196,8 @@ CREATE TABLE `users` (
   `zenodo_doi` varchar(255) DEFAULT NULL,
   `zenodo_concept_doi` varchar(255) DEFAULT NULL,
   `wants_mail` tinyint(1) NOT NULL DEFAULT '0',
-  `mail_last_sent` timestamp NULL DEFAULT NULL
+  `mail_last_sent` timestamp NULL DEFAULT NULL,
+  `wiki_sitelinks` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 CREATE TABLE `user_occurrences` (
@@ -224,7 +234,7 @@ ALTER TABLE `articles`
 
 ALTER TABLE `article_occurrences`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `article_occurrence_idx` (`occurrence_id`,`article_id`),
+  ADD UNIQUE KEY `occurrence_article_idx` (`occurrence_id`,`article_id`),
   ADD KEY `article_idx` (`article_id`);
 
 ALTER TABLE `ar_internal_metadata`
@@ -267,6 +277,10 @@ ALTER TABLE `organizations`
   ADD KEY `isni_idx` (`isni`),
   ADD KEY `wikidata` (`wikidata`),
   ADD KEY `index_organizations_on_ror` (`ror`);
+
+ALTER TABLE `orphaned_user_occurrences`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `index_orphaned_user_occurrences_on_occurrence_id` (`occurrence_id`);
 
 ALTER TABLE `schema_migrations`
   ADD UNIQUE KEY `unique_schema_migrations` (`version`);
@@ -326,6 +340,9 @@ ALTER TABLE `occurrence_counts`
 
 ALTER TABLE `organizations`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `orphaned_user_occurrences`
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `taxa`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
