@@ -50,4 +50,4 @@
         = I18n.t('help.advanced_search')
 
 - if @pagy.count > 0
-  = haml :'partials/tables/candidates', layout: false, locals: { user_scope: "other" }
+  = haml :'partials/tables/candidates', layout: false, locals: { user_scope: "other", user: @viewed_user }

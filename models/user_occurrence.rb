@@ -23,31 +23,6 @@ class UserOccurrence < ActiveRecord::Base
      ["identified","recorded","identified,recorded","recorded,identified"]
    end
 
-   def self.orphaned_count
-     self.left_joins(:occurrence)
-         .where(occurrences: { id: nil })
-         .where(visible: true)
-         .count
-   end
-
-   def self.orphaned_user_claims
-     orphaned = {}
-     self.in_batches(of: 25_000) do |batch|
-       missing = batch.left_joins(:occurrence)
-                      .where(occurrences: { id: nil })
-                      .pluck(:user_id, :created_by, :visible)
-       if missing.length > 0
-         missing.each do |item|
-           next if !item[2]
-           orphaned[item[0]] = { count: 0, claimants: [] } unless orphaned.key?(item[0])
-           orphaned[item[0]][:count] += 1
-           orphaned[item[0]][:claimants].push(item[1]) unless orphaned[item[0]][:claimants].include?(item[1])
-         end
-       end
-     end
-     orphaned
-   end
-
    def recorded?
      action.include? "recorded"
    end

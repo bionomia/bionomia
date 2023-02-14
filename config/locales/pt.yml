@@ -657,6 +657,7 @@ pt:
     not_them: Eles não
     not_recorded: não registrado
     remove: Remover
+    mismatch: Mismatch with lifespan
   scribes:
     scribes_title: Autores
     lede: "%{scribe_count} pessoas que atribuíram %{attribution_count} espécimes de história natural a %{recipient_count} de seus colegas, mentores e modelos de comportamento"

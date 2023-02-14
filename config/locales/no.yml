@@ -657,6 +657,7 @@
     not_them: Ikke dem
     not_recorded: ikke registrert
     remove: Remove
+    mismatch: Mismatch with lifespan
   scribes:
     scribes_title: Scribes
     lede: "%{scribe_count} people who have attributed %{attribution_count} natural history specimens to %{recipient_count} of their peers, mentors, and role models"

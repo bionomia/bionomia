@@ -657,6 +657,7 @@ es:
     not_them: No es ella/él
     not_recorded: sin registrar
     remove: Remover
+    mismatch: Mismatch with lifespan
   scribes:
     scribes_title: Anotadores
     lede: "%{scribe_count} personas que han atribuido %{attribution_count} especímenes de historia natural a %{recipient_count} de sus colegas, mentores, y modelos a seguir"

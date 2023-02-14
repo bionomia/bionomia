@@ -657,6 +657,7 @@ fr:
     not_them: Pas eux
     not_recorded: pas enregistré
     remove: Enlever
+    mismatch: Mismatch with lifespan
   scribes:
     scribes_title: Scribes
     lede: "%{scribe_count} personnes qui ont attribué %{attribution_count} de spécimens d'histoire naturelle à %{recipient_count} de leurs pairs, mentors et modèles"

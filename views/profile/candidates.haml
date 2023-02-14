@@ -41,4 +41,4 @@
         %i.fas.fa-search-plus
         #{I18n.t('profile.advanced_search')}
 
-  = haml :'partials/tables/candidates', layout: false, locals: { user_scope: "self" }
+  = haml :'partials/tables/candidates', layout: false, locals: { user_scope: "self", user: @user }

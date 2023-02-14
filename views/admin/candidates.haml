@@ -67,4 +67,4 @@
         %i.fas.fa-search-plus
         Advanced Search & Filter
 
-  = haml :'partials/tables/candidates', layout: false, locals: { user_scope: "other" }
+  = haml :'partials/tables/candidates', layout: false, locals: { user_scope: "other", user: @admin_user }

@@ -657,6 +657,7 @@ de:
     not_them: Nicht er/sie
     not_recorded: nicht aufgezeichnet
     remove: Entfernen
+    mismatch: Mismatch with lifespan
   scribes:
     scribes_title: Bearbeiter
     lede: "%{scribe_count} Personen, die %{attribution_count} naturkundliche Exemplare %{recipient_count} ihren Kollegen, Mentoren und Vorbildern zugeordnet haben"
