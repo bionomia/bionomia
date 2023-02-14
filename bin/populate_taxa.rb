@@ -16,14 +16,6 @@ OptionParser.new do |opts|
     options[:directory] = directory
   end
 
-  opts.on("-p", "--phylopic", "Add any new silhouettes from Phylopic") do
-    options[:phylopic] = true
-  end
-
-  opts.on("-f", "--family [family]", String, "Limit adding new pic from Phylopic to a Family") do |family|
-    options[:family] = family
-  end
-
   opts.on("-h", "--help", "Prints this help") do
     puts opts
     exit
@@ -62,13 +54,5 @@ if options[:directory]
       Sidekiq::Client.push_bulk({ 'class' => Bionomia::TaxonWorker, 'args' => group })
     end
     puts file.green
-  end
-end
-
-if options[:phylopic]
-  if options[:family]
-    TaxonImage.phylopic_search(options[:family])
-  else
-    TaxonImage.phylopic_search_all
   end
 end

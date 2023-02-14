@@ -44,8 +44,8 @@
         %dt.col-sm-2 URL:
         %dd.col-sm-10
           - if @taxon.has_image?
-            %a{href:"http://phylopic.org/image/#{@taxon.image.file_name.split(".").first}/", target:"_blank"}
-              http://phylopic.org/image/#{@taxon.image.file_name.split(".").first}/
+            %a{href:"https://www.phylopic.org/images/#{@taxon.image.file_name.split(".").first}/", target:"_blank"}
+              https://www.phylopic.org/images/#{@taxon.image.file_name.split(".").first}/
           - else
             N/A
         %dt.col-sm-2 Update:

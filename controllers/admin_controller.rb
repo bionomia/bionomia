@@ -310,7 +310,8 @@ module Sinatra
             get '/taxon/:taxon/process.json' do
               content_type "application/json", charset: 'utf-8'
               taxon_from_param
-              TaxonImage.phylopic_search(@taxon.family)
+              phylo = ::Bionomia::Phylopic.new
+              phylo.upsert(family: @taxon.family)
               TaxonImage.find_by_family(@taxon.family).to_json
             end
 
