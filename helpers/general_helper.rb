@@ -347,7 +347,7 @@ module Sinatra
 
         def identifiedBy_has_warning?(user, occurrence)
           return if !user.date_born || !occurrence.identifiedBy || !occurrence.dateIdentified_processed
-          return if !occurrence.recordedBy.downcase.include?(user.family.downcase)
+          return if !occurrence.identifiedBy.downcase.include?(user.family.downcase)
           if ( user.date_born >= occurrence.dateIdentified_processed ) ||
             ( user.date_died <= occurrence.dateIdentified_processed )
             return true
