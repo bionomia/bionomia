@@ -62,9 +62,9 @@
       %a{href: "#{wiki_url}" }
         %i.fab.fa-wikipedia-w
         #{wiki_url}
-      %a{href: "#", "data-toggle": "modal", "data-target": "#wiki_content"}
+      %a{href: "#", "data-toggle": "modal", "data-target": "#wiki_content", "data-keyboard": "true", "data-focus": "true"}
         [#{I18n.t("profile.upload_view")}]
-    #wiki_content.modal.fade
+    #wiki_content.modal.fade{tabindex: "-1"}
       .modal-dialog.modal-dialog-centered.modal-dialog-scrollable.modal-xl{style: "height:100%"}
         .modal-content{style: "height:90%"}
           .modal-header
