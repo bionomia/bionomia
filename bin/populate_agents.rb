@@ -31,8 +31,6 @@ if options[:truncate]
   tables.each do |table|
     Occurrence.connection.execute("TRUNCATE TABLE #{table}")
   end
-  redis = Redis.new(url: ENV['REDIS_URL'])
-  redis.flushdb
   Sidekiq::Stats.new.reset
 end
 

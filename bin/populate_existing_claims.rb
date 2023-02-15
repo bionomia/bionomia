@@ -27,8 +27,6 @@ OptionParser.new do |opts|
 end.parse!
 
 if options[:truncate]
-  redis = Redis.new(url: ENV['REDIS_URL'])
-  redis.flushdb
   Sidekiq::Stats.new.reset
   UserOccurrence.where(created_by: User::GBIF_AGENT_ID).delete_all
 end
