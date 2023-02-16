@@ -27,7 +27,7 @@ module Sinatra
               halt 404, haml(:oops)
             end
             @results = []
- #           begin
+            begin
               @profile_type = "orcid"
               @action = params[:action] if ["identified","collected"].include?(params[:action])
               @family = params[:q].present? ? params[:q] : nil
@@ -41,10 +41,10 @@ module Sinatra
                 @pagy, @results = pagy(users, items: 30)
               end
               haml :'countries/country', locals: { active_page: "countries", active_tab: @profile_type }
-#            rescue
-#              status 404
-#              haml :oops
-#            end
+            rescue
+              status 404
+              haml :oops
+            end
           end
 
           app.get '/country/:country_code/wikidata' do
@@ -54,7 +54,7 @@ module Sinatra
               halt 404, haml(:oops)
             end
             @results = []
-#            begin
+            begin
               @profile_type = "wikidata"
               @action = params[:action] if ["identified","collected"].include?(params[:action])
               @family = params[:q].present? ? params[:q] : nil
@@ -68,10 +68,10 @@ module Sinatra
                 @pagy, @results = pagy(users, items: 30)
               end
               haml :'countries/country', locals: { active_page: "countries", active_tab: @profile_type }
-#            rescue
-#              status 404
-#              haml :oops
-#            end
+            rescue
+              status 404
+              haml :oops
+            end
           end
 
         end
