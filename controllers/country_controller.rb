@@ -27,7 +27,8 @@ module Sinatra
               halt 404, haml(:oops)
             end
             @results = []
-            begin
+ #           begin
+              @profile_type = "orcid"
               @action = params[:action] if ["identified","collected"].include?(params[:action])
               @family = params[:q].present? ? params[:q] : nil
 
@@ -35,14 +36,42 @@ module Sinatra
                 search_user_country
               else
                 users = User.where("country_code LIKE ?", "%#{country_code}%")
+                            .where.not(orcid: nil)
                             .order(:family)
                 @pagy, @results = pagy(users, items: 30)
               end
-              haml :'countries/country', locals: { active_page: "countries" }
-            rescue
-              status 404
-              haml :oops
+              haml :'countries/country', locals: { active_page: "countries", active_tab: @profile_type }
+#            rescue
+#              status 404
+#              haml :oops
+#            end
+          end
+
+          app.get '/country/:country_code/wikidata' do
+            country_code = params[:country_code]
+            @country = I18nData.countries(I18n.locale).slice(country_code.upcase).flatten
+            if @country.empty?
+              halt 404, haml(:oops)
             end
+            @results = []
+#            begin
+              @profile_type = "wikidata"
+              @action = params[:action] if ["identified","collected"].include?(params[:action])
+              @family = params[:q].present? ? params[:q] : nil
+
+              if @action || @family
+                search_user_country
+              else
+                users = User.where("country_code LIKE ?", "%#{country_code}%")
+                            .where.not(wikidata: nil)
+                            .order(:family)
+                @pagy, @results = pagy(users, items: 30)
+              end
+              haml :'countries/country', locals: { active_page: "countries", active_tab: @profile_type }
+#            rescue
+#              status 404
+#              haml :oops
+#            end
           end
 
         end

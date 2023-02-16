@@ -1,5 +1,6 @@
 .p-2.ml-3
-  %form#form-taxon-wrapper.helpers{method: :get, action: "/country/#{@country[0]}?action=#{@action}", "accept-charset": "UTF-8"}
+  - path = (@profile_type == "wikidata") ? "/wikidata" : ""
+  %form#form-taxon-wrapper.helpers{method: :get, action: "/country/#{@country[0]}#{path}?action=#{@action}", "accept-charset": "UTF-8"}
     .row
       .col-12.col-sm-8.p-0
         .form-group.mb-2

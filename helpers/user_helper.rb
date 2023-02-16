@@ -65,8 +65,7 @@ module Sinatra
             reload_connections: 1_000,
             adapter: :typhoeus
           )
-          body = build_user_country_query(country_code, action, family)
-
+          body = build_user_country_query(country_code, action, family, @profile_type)
           from = (page -1) * limit
 
           response = client.search index: Settings.elastic.user_index, from: from, size: limit, body: body

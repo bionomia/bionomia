@@ -108,55 +108,22 @@ module Sinatra
           }
         end
 
-        def build_user_country_query(countryCode, type = nil, family = nil)
-          if !type.nil?
-            qry = {
-              sort: [
-                { "family.keyword": "asc" }
-              ],
-              query: {
-                nested: {
-                  path: type,
-                  query: {
-                    bool: {
-                      must: [
-                        { term: { "#{type}.country": { value: countryCode } } }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-            if family
-              qry[:query][:nested][:query][:bool][:must] << { term: { "#{type}.family": { value: family } } }
-            end
-          else
+        def build_user_country_query(countryCode, action = nil, family = nil, profile_type = "id")
+          if !action.nil?
             qry = {
               sort: [
                 { "family.keyword": "asc" }
               ],
               query: {
                 bool: {
-                  should: [
-                    {
-                      nested: {
-                        path: "recorded",
+                  must: [
+                    { exists: { field: profile_type } },
+                    { nested: {
+                        path: action,
                         query: {
                           bool: {
                             must: [
-                              { term: { "recorded.country": { value: countryCode } } }
-                            ]
-                          }
-                        }
-                      }
-                    },
-                    {
-                      nested: {
-                        path: "identified",
-                        query: {
-                          bool: {
-                            must: [
-                              { term: { "identified.country": { value: countryCode } } }
+                              { term: { "#{action}.country": { value: countryCode } } }
                             ]
                           }
                         }
@@ -167,11 +134,56 @@ module Sinatra
               }
             }
             if family
-              qry[:query][:bool][:should][0][:nested][:query][:bool][:must] << { term: { "recorded.family": { value: family } } }
-              qry[:query][:bool][:should][1][:nested][:query][:bool][:must] << { term: { "identified.family": { value: family } } }
+              qry[:query][:bool][:must][1][:nested][:query][:bool][:must] << { term: { "#{action}.family": { value: family } } }
+            end
+          else
+            qry = {
+              sort: [
+                { "family.keyword": "asc" }
+              ],
+              query: {
+                bool: {
+                  must: [
+                    { exists: { field: profile_type } },
+                    {
+                      bool: {
+                        should: [
+                          {
+                            nested: {
+                              path: "recorded",
+                              query: {
+                                bool: {
+                                  must: [
+                                    { term: { "recorded.country": { value: countryCode } } }
+                                  ]
+                                }
+                              }
+                            }
+                          },
+                          {
+                            nested: {
+                              path: "identified",
+                              query: {
+                                bool: {
+                                  must: [
+                                    { term: { "identified.country": { value: countryCode } } }
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+            if family
+              qry[:query][:bool][:must][1][:bool][:should][0][:nested][:query][:bool][:must] << { term: { "recorded.family": { value: family } } }
+              qry[:query][:bool][:must][1][:bool][:should][1][:nested][:query][:bool][:must] << { term: { "identified.family": { value: family } } }
             end
           end
-
           qry
         end
 

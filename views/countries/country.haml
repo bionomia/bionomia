@@ -14,6 +14,9 @@
         #{I18n.t('country.lede')}
     = haml :'partials/countries/search', layout: false
 
+= haml :'partials/countries/pills', layout: false, locals: locals
+
+- path = (@profile_type == "wikidata") ? "/wikidata" : ""
 - if @results.size == 0
   .alert.alert-warning.tiny-margins{role: "alert"}
     - if @action || @family
@@ -24,14 +27,14 @@
         = I18n.t('country.no_one_identified_from', family: h(@family), country: @country[1])
       - else
         = I18n.t('country.no_one_collected_identified_from', family: h(@family), country: @country[1])
-      %a.text-danger.ml-2{href: url("/country/#{@country[0]}")}
+      %a.text-danger.ml-2{href: url("/country/#{@country[0]}#{path}")}
         %i.fas.fa-minus-circle
         #{I18n.t('general.remove')}
     - else
       #{I18n.t('country.no_one_message', country: @country[1])}
 - else
-  .alert.alert-info.tiny-margins{role: "alert"}
-    - if @action || @family
+  - if @action || @family
+    .alert.alert-info.tiny-margins{role: "alert"}
       %i.fas.fa-filter
       - if @action == "collected"
         = I18n.t('country.collected_from', family: h(@family), country: @country[1])
@@ -39,11 +42,10 @@
         = I18n.t('country.identified_from', family: h(@family), country: @country[1])
       - else
         = I18n.t('country.collected_identified_from', family: h(@family), country: @country[1])
-      %a.text-danger.ml-2{href: url("/country/#{@country[0]}")}
+      %a.text-danger.ml-2{href: url("/country/#{@country[0]}#{path}")}
         %i.fas.fa-minus-circle
         #{I18n.t('general.remove')}
-    - else
-      #{I18n.t('country.intro')}
+
   - @results.in_groups_of(3).each do |group|
     .card-deck
       - group.each do |u|
@@ -51,7 +53,7 @@
           .card.border-0
         - else
           - if @action || @family
-            - u = User.find(u[:_id])
+            - u = User.find(u[:_id]) rescue User.find(4)
           - stats = cache_block("#{u.identifier}-stats") { user_stats(u) }
           = haml :'partials/user/card', layout: false, locals: { user: u, stats: stats }
 
