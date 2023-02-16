@@ -92,6 +92,7 @@ module Bionomia
       puts "Adding countries..."
       I18nData.countries(:en).keys.each do |code|
         sitemap.add "/country/#{code}"
+        sitemap.add "/country/#{code}/wikidata"
       end
     end
 
