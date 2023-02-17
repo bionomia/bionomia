@@ -79,17 +79,18 @@
       %p
         The packages contain a standard
         %em datapackage.json
-        metadata file and six or seven zipped csv files:
+        metadata file and up to eight zipped csv files:
         %em users.csv.zip, occurrences.csv.zip, problem_collector_dates.csv.zip, citations.csv.zip, articles.csv.zip, attributions.csv.zip
         and
-        %em missing_attributions.csv.zip
-        (optional).
+        %em missing_attributions.csv.zip, unresolved_users.csv.zip
+        (both optional).
+      %p
         The
         %em datapackage.json
         metadata file contains a "created" timestamp for when the package was last produced. Regeneration of these packages typically occurs once every few weeks but if you would like a more up-to-date version, please
         = succeed "." do
           = link_to "create a ticket", "https://github.com/bionomia/bionomia/issues"
-
+      %p
         The
         %em users.csv.zip
         file contains a list of unique users that were attributed or have claimed specimen records as their own in your dataset. It also contains their full names, aliases,
@@ -106,9 +107,13 @@
         The
         %em attributions.csv.zip
         file is a join table for the other two csv files and also contains columns for who made the attribution, their ORCID ID, and a timestamp for when they made the attribution.
-        Finally, the
+        The optional
         %em missing_attributions.csv.zip
-        file contains attributions made in Bionomia but not present in a data source's identifiedByID and recordedByID data fields. This file is not generated if no attributions have yet been made at the source.
+        file contains attributions made in Bionomia but not present in a data source's identifiedByID and recordedByID data fields.
+        The other optional
+        %em unresolved_users.csv.zip
+        file contains recordedBy and recordedByID when the latter could not be resolved via ORCID or wikidata and therefore not included in Bionomia.
+        These latter two files are not generated if no attributions have yet been made at the source.
 
     .col-12.col-md-6
 

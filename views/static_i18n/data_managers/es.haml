@@ -86,11 +86,13 @@
         %em users.csv.zip, occurrences.csv.zip, problem_collector_dates.csv.zip, citations.csv.zip, articles.csv.zip,
         y
         %em attributions.csv.zip.
+      %p
         El archivo de metadatos
         %em datapackage.json
         contiene una marca de tiempo "created" de cuando el paquete se produjo por última vez. La regeneración de estos paquetes suele ocurrir una vez cada pocas semanas, pero si desea una versión más actualizada, por favor
         = succeed "." do
           = link_to "cree un tiquete", "https://github.com/bionomia/bionomia/issues"
+      %p
         El archivo
         %em users.csv.zip
         contiene una lista de usuarios únicos a los que se les atribuyeron, o que reclamaron como propios registros de especímenes en el conjunto de datos que usted ha compartido. También contiene los nombres completos, alias, identificadores de
