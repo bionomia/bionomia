@@ -116,7 +116,7 @@ fr:
     no_one_collected_from: "Personne a collecté %{family} de %{country}"
     no_one_identified_from: "Personne a identifié %{family} de %{country}"
     no_one_collected_identified_from: "Personne a collecté ou identifié %{family} de %{country}"
-    no_one_message: "Personne ne se trouve au %{country} dans les comptes ORCID ou les entrées Wikidata. Recherche par famille taxonomique pour explorer l'expertise."
+    no_one_message: "Personne ne se trouve au %{country}. Recherche par famille taxonomique pour explorer l'expertise."
   dataset:
     dataset_title: Jeux de données
     search_title: Recherche de Jeux de Données

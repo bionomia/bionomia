@@ -126,7 +126,7 @@ ro:
     no_one_collected_from: "No one collected %{family} from %{country}"
     no_one_identified_from: "No one identified %{family} from %{country}"
     no_one_collected_identified_from: "No one collected or identified %{family} from %{country}"
-    no_one_message: "No one found from %{country} in ORCID accounts or Wikidata entries. Search by Taxon Family to explore expertise."
+    no_one_message: "No one found from %{country}. Search by Taxon Family to explore expertise."
   dataset:
     dataset_title: Datasets
     search_title: Datasets Search
