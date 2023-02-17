@@ -109,8 +109,11 @@ module Bionomia
     # Use the parallel gem to create the csv files and then zip them up
     def create_tables
       Parallel.each(FrictionlessTable.subclasses, in_threads: 3) do |_class|
-        # Hard-coded skipping of FrictionlessTableMissingAttribution if there are no attributions made at the source
-        next if _class == FrictionlessTableMissingAttribution && !@dataset.has_local_attributions?
+ 
+        # Hard-coded skipping if there are no attributions made at the source
+        if !@dataset.has_local_attributions?
+          next if _class == FrictionlessTableUnresolvedUser || _class == FrictionlessTableMissingAttribution
+        end
 
         obj = _class.new
         file_path = File.join(@folder, obj.file)
@@ -134,8 +137,11 @@ module Bionomia
     def write_descriptor
       desc = descriptor
       Parallel.each(FrictionlessTable.subclasses, in_threads: 3) do |_class|
-        # Hard-coded skipping of FrictionlessTableMissingAttribution if there are no attributions made at the source
-        next if _class == FrictionlessTableMissingAttribution && !@dataset.has_local_attributions?
+
+        # Hard-coded skipping if there are no attributions made at the source
+        if !@dataset.has_local_attributions?
+          next if _class == FrictionlessTableUnresolvedUser || _class == FrictionlessTableMissingAttribution
+        end
 
         obj = _class.new
         resource = obj.resource

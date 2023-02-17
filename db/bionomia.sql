@@ -7,12 +7,11 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
-
 CREATE TABLE `agents` (
   `id` int NOT NULL,
   `family` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
   `given` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=COMPRESSED;
 
 CREATE TABLE `articles` (
   `id` int NOT NULL,
@@ -110,12 +109,12 @@ CREATE TABLE `occurrence_counts` (
 CREATE TABLE `occurrence_determiners` (
   `occurrence_id` bigint UNSIGNED NOT NULL,
   `agent_id` int UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=COMPRESSED;
 
 CREATE TABLE `occurrence_recorders` (
   `occurrence_id` bigint UNSIGNED NOT NULL,
   `agent_id` int UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=COMPRESSED;
 
 CREATE TABLE `organizations` (
   `id` int NOT NULL,
@@ -162,7 +161,7 @@ CREATE TABLE `taxon_images` (
 CREATE TABLE `taxon_occurrences` (
   `occurrence_id` bigint UNSIGNED NOT NULL,
   `taxon_id` int UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=COMPRESSED;
 
 CREATE TABLE `users` (
   `id` int NOT NULL,
