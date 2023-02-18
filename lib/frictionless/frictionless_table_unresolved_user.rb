@@ -43,7 +43,7 @@ module Bionomia
       Occurrence.find(row[0]).datasetKey
     end
 
-    def occurrence_files_alt
+    def occurrence_files
       query = Occurrence.select(:gbifID)
                         .where(datasetKey: datasetKey)
                         .where.not(recordedByID: nil).to_sql
@@ -54,7 +54,6 @@ module Bionomia
         rows.each { |row| csv << row }
       end
       tmp_csv.close
-
       system("sort -n #{tmp_csv.path} | uniq > #{tmp_csv.path}.tmp && mv #{tmp_csv.path}.tmp #{tmp_csv.path} > /dev/null 2>&1")
       system("cat #{tmp_csv.path} | parallel --pipe -N 100000 'cat > #{tmp_csv.path}-{#}.csv' > /dev/null 2>&1")
       File.unlink(tmp_csv.path)
@@ -62,7 +61,6 @@ module Bionomia
     end
 
     def write_table_rows
-      occurrence_files = occurrence_files_alt
       occurrence_files.each do |csv|
         occurrence_ids = CSV.read(csv).flatten
         occurrence_ids.in_groups_of(1_000, false).each do |group|
@@ -71,8 +69,6 @@ module Bionomia
             @csv_handle << CSV::Row.new(header, data).to_s
           end
         end
-      end
-      occurrence_files.each do |csv|
         File.unlink(csv)
       end
     end

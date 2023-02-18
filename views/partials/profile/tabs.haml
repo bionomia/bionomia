@@ -7,7 +7,7 @@
     %a{class: "nav-link#{locals[:active_page] == "specimens" ? " active" : nil}", href: url("/profile/specimens")}
       %i.fas.fa-th
       = I18n.t('profile.specimens')
-    %span#specimen-counter.badge-notify.badge.badge-danger.badge-pill
+    %span#specimen-counter.badge-notify.badge.badge-success.badge-pill
   %li.nav-item.badge-item
     %a{class: "nav-link#{locals[:active_page] == "helped" ? " active" : nil}", href: url("/profile/helped")}
       %i.fas.fa-hands-helping

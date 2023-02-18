@@ -54,7 +54,7 @@ module Sinatra
         end
 
         def country_name(code)
-            I18nData.countries(I18n.locale)[code] || nil
+          I18nData.countries(I18n.locale)[code] || nil
         end
 
         def profile_image(user, size=nil)
