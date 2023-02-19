@@ -12,7 +12,7 @@ module Sinatra
         end
 
         def protected!
-          return if authorized?
+          return if authorized? && !banned?
           halt 401, haml(:not_authorized)
         end
 
@@ -39,6 +39,18 @@ module Sinatra
 
         def is_admin?
           @user && @user.is_admin? ? true : false
+        end
+
+        def banned?
+          destroyed_user = DestroyedUser.find_by_identifier(@user.identifier)
+          (destroyed_user && destroyed_user.redirect_to.blank?) ? true : false
+        end
+
+        def check_banned(identifier)
+          destroyed_user = DestroyedUser.find_by_identifier(identifier)
+          if !destroyed_user.nil? && destroyed_user.redirect_to.blank?
+            halt 410, haml(:oops)
+          end
         end
 
       end

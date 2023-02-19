@@ -17,6 +17,8 @@ module Sinatra
             get '/orcid/callback' do
               session_data = request.env['omniauth.auth'].deep_symbolize_keys
               orcid = session_data[:uid]
+              check_banned(orcid)
+
               family = session_data[:info][:last_name] rescue nil
               given = session_data[:info][:first_name] rescue nil
               email = session_data[:info][:email] rescue nil

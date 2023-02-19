@@ -73,11 +73,11 @@ module Sinatra
         def check_redirect
           destroyed_user = DestroyedUser.find_by_identifier(params[:id])
           if !destroyed_user.nil?
-            if !destroyed_user.redirect_to.blank?
+            if destroyed_user.redirect_to.blank?
+              halt 410, haml(:oops)
+            else
               dest = request.path.sub(params[:id], destroyed_user.redirect_to)
               redirect "#{dest}", 301
-            else
-              halt 410, haml(:oops)
             end
           end
         end
