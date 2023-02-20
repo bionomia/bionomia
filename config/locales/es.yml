@@ -116,7 +116,7 @@ es:
     no_one_collected_from: "Nadie ha colectado %{family} de %{country}"
     no_one_identified_from: "Nadie ha identificado %{family} de %{country}"
     no_one_collected_identified_from: "Nadie ha colectado o identificado %{family} de %{country}"
-    no_one_message: "No se encontró a nadie de %{country}. Buscar por familia taxonómica para explorar experticia."
+    no_one_message: "No one found from %{country}. Search by Taxon Family to explore expertise."
   dataset:
     dataset_title: Conjuntos de datos
     search_title: Búsqueda en conjuntos de datos
