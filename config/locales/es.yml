@@ -203,8 +203,8 @@ es:
       - nov
       - dic
   denied:
-    title: Denied
-    not_allowed: Access is denied.
+    title: Denegado
+    not_allowed: Acceso denegado.
   developer:
     search: Buscar
     autocomplete_widget: Herramienta para autocompletar

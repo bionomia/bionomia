@@ -203,8 +203,8 @@ fr:
       - nov.
       - déc.
   denied:
-    title: Denied
-    not_allowed: Access is denied.
+    title: Refusé
+    not_allowed: Accès refusé.
   developer:
     search: Rechercher
     autocomplete_widget: Widget Autocomplete
