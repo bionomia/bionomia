@@ -52,7 +52,7 @@ pt:
         one: "Espécime não encontrado. Nem todas as colunas são mostradas."
         other: "Espécime ecnontrado. Nem todas as colunas são mostradas."
     search_html: "Busca por %{agent_link} a pessoas e ajude na atribuição de seus espécimes."
-    example_agents: Random Samples or Results
+    example_agents: Amostras ou resultados aleatórios
     gbifid: De gbifIDs
     gbifid_title: Agent Strings from gbifIDs
     gbifid_instructions: Paste a list of occurrence-based gbifIDs and receive a summary list of parsed agent strings from recordedBy.
@@ -116,7 +116,7 @@ pt:
     no_one_collected_from: "Ninguém coletou %{family} do %{country}"
     no_one_identified_from: "Ninguém identificou %{family} do %{country}"
     no_one_collected_identified_from: "Ninguém coletou ou identificou %{family} do %{country}"
-    no_one_message: "No one found from %{country}. Search by Taxon Family to explore expertise."
+    no_one_message: "Ninguém encontrado do %{country}. Pesquise por família de táxons para explorar a especialização."
   dataset:
     dataset_title: Conjuto de dados
     search_title: Pesquisa de conjuntos de dados
@@ -251,8 +251,8 @@ pt:
     reset: Restabelecer
     remove: Remover
     filtered_by: Filtrado por
-    is_public: is public
-    has_occurrences: has specimens
+    is_public: é público
+    has_occurrences: tem espécimes
   help:
     ignored_title: "Help Reclaim Ignored for %{name}"
     upload_user_title: "Bulk Upload for %{name}"
@@ -637,9 +637,9 @@ pt:
       unit:
         one: "resultado da pesquisa para"
         other: "resultado da pesquisa para"
-    list: List
-    gallery: Gallery
-    signatures: Signatures
+    list: Lista
+    gallery: Galeria
+    signatures: Assinaturas
   specimen:
     scientific_name: Nome científico
     collected_by: Coletado Por
@@ -657,7 +657,7 @@ pt:
     not_them: Eles não
     not_recorded: não registrado
     remove: Remover
-    mismatch: Mismatch with lifespan
+    mismatch: Incompatibilidade com vida útil
   scribes:
     scribes_title: Autores
     lede: "%{scribe_count} pessoas que atribuíram %{attribution_count} espécimes de história natural a %{recipient_count} de seus colegas, mentores e modelos de comportamento"

@@ -116,7 +116,7 @@ es:
     no_one_collected_from: "Nadie ha colectado %{family} de %{country}"
     no_one_identified_from: "Nadie ha identificado %{family} de %{country}"
     no_one_collected_identified_from: "Nadie ha colectado o identificado %{family} de %{country}"
-    no_one_message: "No one found from %{country}. Search by Taxon Family to explore expertise."
+    no_one_message: "No se encontró a nadie de %{country}. Buscar por familia taxonómica para explorar experticia."
   dataset:
     dataset_title: Conjuntos de datos
     search_title: Búsqueda en conjuntos de datos
@@ -127,8 +127,8 @@ es:
         other: "conjuntos de datos de GBIF"
     identifiers_alert:
       unit:
-        one: "dataset with content in dwc:recordedByID or dwc:identifiedByID"
-        other: "datasets with content in dwc:recordedByID or dwc:identifiedByID"
+        one: "conjuntos de datos con contenido en dwc:recordedByID o dwc:identifiedByID"
+        other: "conjuntos de datos con contenido en dwc:recordedByID o dwc:identifiedByID"
     placeholder: Mariposas de Brasil
     people: Personas
     visualizations: Visualizaciones
@@ -620,7 +620,7 @@ es:
     determiner_name: "Especimenes identificados por %{name}."
     not_determiner_name: "Specimens you collected have not been identified by %{name}."
     identified_by_count:
-      one: "identified specimen"
+      one: "espécimen identificado"
       other: "especímenes identificados"
     zenodo_html: "Su perfil está enlazado a %{zenodo} y se ha creado y archivado una versión de los datos de sus especímenes reclamados."
     language: Idioma preferido
@@ -639,7 +639,7 @@ es:
         other: "resultados de la búsqueda por"
     list: Lista
     gallery: Galería
-    signatures: Signatures
+    signatures: Firmas
   specimen:
     scientific_name: Nombre científico
     collected_by: Colectado por
@@ -657,7 +657,7 @@ es:
     not_them: No es ella/él
     not_recorded: sin registrar
     remove: Remover
-    mismatch: Mismatch with lifespan
+    mismatch: Desajuste con la vida útil
   scribes:
     scribes_title: Anotadores
     lede: "%{scribe_count} personas que han atribuido %{attribution_count} especímenes de historia natural a %{recipient_count} de sus colegas, mentores, y modelos a seguir"
