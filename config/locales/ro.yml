@@ -219,6 +219,9 @@ ro:
       - Oct
       - Nov
       - Dec
+  denied:
+    title: Denied
+    not_allowed: Access is denied.
   developer:
     search: Search
     autocomplete_widget: Autocomplete Widget

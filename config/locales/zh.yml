@@ -185,6 +185,9 @@ zh-CN:
       - 十月
       - 十一月
       - 十二月
+  denied:
+    title: Denied
+    not_allowed: Access is denied.
   developer:
     search: 搜索
     autocomplete_widget: Autocomplete Widget

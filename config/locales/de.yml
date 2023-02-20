@@ -202,6 +202,9 @@ de:
       - Okt
       - Nov
       - Dez
+  denied:
+    title: Denied
+    not_allowed: Access is denied.
   developer:
     search: Suche
     autocomplete_widget: AutoVervollständigen-Widget
