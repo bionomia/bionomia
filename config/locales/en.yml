@@ -177,6 +177,9 @@ en:
       century: "%C. century"
     month_names: [~, January, February, March, April, May, June, July, August, September, October, November, December]
     abbr_month_names: [~, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+  denied:
+    title: Denied
+    not_allowed: Access is denied.
   developer:
     search: Search
     autocomplete_widget: Autocomplete Widget

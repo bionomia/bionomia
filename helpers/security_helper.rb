@@ -49,7 +49,7 @@ module Sinatra
         def check_banned(identifier)
           destroyed_user = DestroyedUser.find_by_identifier(identifier)
           if !destroyed_user.nil? && destroyed_user.redirect_to.blank?
-            halt 410, haml(:oops)
+            halt 401, haml(:denied)
           end
         end
 
