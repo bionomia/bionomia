@@ -47,6 +47,7 @@ module Bionomia
       elsif id.orcid_from_url && id.orcid_from_url.is_orcid?
         user = get_orcid_user(id.orcid_from_url) rescue nil
       elsif id.viaf_from_url
+        #TODO: how to cache this & all look-ups below?
         wikidata = wiki.wiki_by_property('viaf', id.viaf_from_url)[:wikidata] rescue nil
         user = get_wiki_user(wikidata) if wikidata
       elsif id.isni_from_url
@@ -69,6 +70,7 @@ module Bionomia
     end
 
     def get_orcid_user(id)
+      return nil if DestroyedUser.is_banned?(id)
       d = DestroyedUser.active_user_identifier(id)
       if !d.nil?
         user = User.find_by_identifier(d)
@@ -80,6 +82,7 @@ module Bionomia
     end
 
     def get_wiki_user(id)
+      return nil if DestroyedUser.is_banned?(id)
       d = DestroyedUser.active_user_identifier(id)
       if !d.nil?
         user = User.find_by_identifier(d)

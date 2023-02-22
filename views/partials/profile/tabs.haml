@@ -12,7 +12,7 @@
     %a{class: "nav-link#{locals[:active_page] == "helped" ? " active" : nil}", href: url("/profile/helped")}
       %i.fas.fa-hands-helping
       = I18n.t('profile.people_helped')
-    %span#message-counter.badge-notify.badge.badge-success.badge-pill
+    %span#message-counter.badge-notify.badge.badge-info.badge-pill
   %li.nav-item
     %a{class: "nav-link#{locals[:active_page] == "citations" ? " active" : nil}", href: url("/profile/citations")}
       %i.fas.fa-flask
