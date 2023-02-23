@@ -10,10 +10,10 @@
       });
     });
 
-.col-12.col-lg-4.text-center.sidebar.alert-warning.pt-1.pb-3
+.col-12.col-lg-4.text-center.sidebar.alert-warning.pt-0.pb-3
   %form#form-wrapper.form{method: :post, action: "/", enctype: "multipart/form-data", "accept-charset": "UTF-8"}
     - bg_class = @admin_user.image_url ? "" : "profile-image-bg"
-    #profile-image.image-placeholder.mx-auto.d-block.align-self-center.align-items-center.m-2{class:"#{bg_class}"}
+    #profile-image.image-placeholder.mx-auto.d-block.align-self-center.align-items-center.mb-2{class:"#{bg_class}"}
       %img.rounded.mx-auto.d-block.img-fluid.align-top.m-2{src:"#{profile_image(@admin_user)}", alt:"#{@admin_user.fullname}"}
       - if locals[:active_page] == "settings"
         %span
@@ -26,6 +26,10 @@
           %li#profile-remove.list-group-item.profile-upload-option-list= I18n.t('profile.remove')
           %li#profile-cancel.list-group-item.profile-upload-option-list= I18n.t('profile.cancel')
 
+  - if @admin_user.signature_url
+    #signature-image.mx-auto.d-block.align-self-center.align-items-center.mb-2
+      %img.mx-auto.d-block.img-fluid{src:"#{signature_image(@admin_user)}", itemprop:"image"}
+
   %h1.mt-2.h2= @admin_user.fullname
 
   - if !@admin_user.other_names.blank?
@@ -37,10 +41,6 @@
   - if !@admin_user.keywords.blank?
     %p.text-center.text-muted.font-italic.p-0.mt-1.mb-1
       #{@admin_user.keywords.split("|").join(", ")}
-
-  - if @admin_user.signature_url
-    #signature-image.mx-auto.d-block.align-self-center.align-items-center
-      %img.mx-auto.d-block.img-fluid{src:"#{signature_image(@admin_user)}", itemprop:"image"}
 
   - if !@admin_user.description.nil?
     %p.text-lg-left.p-0.mt-3.mb-1

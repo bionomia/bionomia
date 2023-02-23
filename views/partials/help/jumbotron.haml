@@ -15,10 +15,10 @@
   .jumbotron.jumbotron-fluid.d-flex.flex-wrap.bg-white.px-0
     .w-100.w-lg-25
       - if @viewed_user.image_url
-        #profile-image.mx-auto.d-block.align-self-center.align-items-center
+        #profile-image.mx-auto.d-block.align-self-center.align-items-center.mb-2
           %img.rounded.mx-auto.d-block.img-fluid.align-top.m-2{src:"#{profile_image(@viewed_user)}", alt:"#{@viewed_user.fullname}"}
       - if @viewed_user.signature_url
-        #signature-image.mx-auto.d-block.align-self-center.align-items-center
+        #signature-image.mx-auto.d-block.align-self-center.align-items-center.mb-2
           %img.mx-auto.d-block.img-fluid{src:"#{signature_image(@viewed_user)}", itemprop:"image", alt:"#{@viewed_user.fullname} signature"}
 
     .w-100.w-lg-50
@@ -155,6 +155,5 @@
               %span{"aria-hidden":"true"} &times;
 
     .w-100.w-sm-75.w-lg-50.w-xl-25.ml-auto
-      - if authorized?
-        = haml :'partials/help/search', layout: false
+      = haml :'partials/help/search', layout: false
     .mr-auto
