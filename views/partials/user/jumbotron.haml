@@ -15,7 +15,7 @@
     #profile-image.mx-auto.d-block.align-self-center.align-items-center
       %img.rounded.mx-auto.d-block.img-fluid.align-top.m-2{src:"#{profile_image(@viewed_user)}", itemprop:"image", alt:"#{@viewed_user.fullname}"}
 
-  %h1.mt-2.h2{itemprop: "name"} #{@viewed_user.fullname}
+  %h1.h2{itemprop: "name"} #{@viewed_user.fullname}
 
   - if !@viewed_user.other_names.blank?
     %p.text-center.text-muted.p-0.mt-1.mb-1.truncate #{@viewed_user.other_names.split("|").join("; ")}

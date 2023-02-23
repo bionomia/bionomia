@@ -84,7 +84,7 @@ elsif options[:counter]
   ActiveRecord::Base.connection.execute(sql)
   puts "Counters rebuilt".green
 elsif options[:verify]
-  Dataset.where("occurrences_count > 1000").find_each do |d|
+  Dataset.where("occurrences_count > 1000").where(dataset_type: "OCCURRENCE").find_each do |d|
     if d.current_occurrences_count < d.occurrences_count
       puts d.uuid.red
     else

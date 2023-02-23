@@ -11,149 +11,150 @@
     DisambiguateSearch.init("#{@viewed_user.fullname}", "#{@viewed_user.identifier}");
   });
 
-.jumbotron.jumbotron-fluid.d-flex.flex-wrap.bg-white
-  .w-100.w-lg-25
-    - if @viewed_user.image_url
-      #profile-image.mx-auto.d-block.align-self-center.align-items-center
-        %img.rounded.mx-auto.d-block.img-fluid.m-2{src:"#{profile_image(@viewed_user)}", alt:"#{@viewed_user.fullname}"}
-    - if @viewed_user.signature_url
-      #signature-image.mx-auto.d-block.align-self-center.align-items-center
-        %img.mx-auto.d-block.img-fluid{src:"#{signature_image(@viewed_user)}", itemprop:"image", alt:"#{@viewed_user.fullname} signature"}
+.container-fluid
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap.bg-white.px-0
+    .w-100.w-lg-25
+      - if @viewed_user.image_url
+        #profile-image.mx-auto.d-block.align-self-center.align-items-center
+          %img.rounded.mx-auto.d-block.img-fluid.align-top.m-2{src:"#{profile_image(@viewed_user)}", alt:"#{@viewed_user.fullname}"}
+      - if @viewed_user.signature_url
+        #signature-image.mx-auto.d-block.align-self-center.align-items-center
+          %img.mx-auto.d-block.img-fluid{src:"#{signature_image(@viewed_user)}", itemprop:"image", alt:"#{@viewed_user.fullname} signature"}
 
-  .w-100.w-lg-50
-    %h1.mt-2.h2.text-center{itemprop: "name"}= @viewed_user.fullname
+    .w-100.w-lg-50
+      %h1.h2.text-center{itemprop: "name"}= @viewed_user.fullname
 
-    - if !@viewed_user.other_names.blank?
-      %p.text-center.text-muted.p-0.mt-1.mb-1.truncate #{@viewed_user.other_names.split("|").join("; ")}
+      - if !@viewed_user.other_names.blank?
+        %p.text-center.text-muted.p-0.mt-1.mb-1.truncate #{@viewed_user.other_names.split("|").join("; ")}
 
-    - if @viewed_user.wikidata
-      %p.text-center.text-muted.p-0.mt-1.mb-1= format_lifespan(@viewed_user)
+      - if @viewed_user.wikidata
+        %p.text-center.text-muted.p-0.mt-1.mb-1= format_lifespan(@viewed_user)
 
-    - if !@viewed_user.keywords.blank?
-      %p.text-center.text-muted.font-italic.p-0.mt-1.mb-1
-        #{@viewed_user.keywords.split("|").join(", ")}
+      - if !@viewed_user.keywords.blank?
+        %p.text-center.text-muted.font-italic.p-0.mt-1.mb-1
+          #{@viewed_user.keywords.split("|").join(", ")}
 
-    - if !@viewed_user.description.nil?
-      - layout_class = (@viewed_user.description.length > 100) ? "text-lg-left" : "text-center"
-      %p{class: "#{layout_class} p-0 mt-3 mb-1"}
-        #{h(@viewed_user.description.truncate(255))}
+      - if !@viewed_user.description.nil?
+        - layout_class = (@viewed_user.description.length > 100) ? "text-lg-left" : "text-center"
+        %p{class: "#{layout_class} p-0 mt-3 mb-1"}
+          #{h(@viewed_user.description.truncate(255))}
 
-    %p.orcid.text-center.p-0.mt-3.mb-1
-      - if @viewed_user.orcid
-        %a{href: "https://orcid.org/#{@viewed_user.orcid}"}
-          %i.fab.fa-orcid
-          https://orcid.org/#{@viewed_user.orcid}
-      - else
-        %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD"}
-        = link_to "http://www.wikidata.org/entity/#{@viewed_user.wikidata}", "http://www.wikidata.org/entity/#{@viewed_user.wikidata}"
-
-    - if !@viewed_user.wiki_sitelinks.nil? && @viewed_user.wiki_sitelinks["#{I18n.locale}wiki"]
-      %p.orcid.text-center.p-0.mt-0.mb-1
-        - wiki_url = "https://#{I18n.locale}.wikipedia.org/wiki/#{@viewed_user.wiki_sitelinks["#{I18n.locale}wiki"]["title"].gsub(/\s/, "_")}"
-        %a{href: "#{wiki_url}"}
-          %i.fab.fa-wikipedia-w
-          #{wiki_url}
-        %a{href: "#", "data-toggle": "modal", "data-target": "#wiki_content", "data-keyboard": "true", "data-focus": "true"}
-          [#{I18n.t("profile.upload_view")}]
-      #wiki_content.modal.fade{tabindex: "-1"}
-        .modal-dialog.modal-dialog-centered.modal-dialog-scrollable.modal-xl{style: "height:100%"}
-          .modal-content{style: "height:90%"}
-            .modal-header
-              %h5.modal-title #{@viewed_user.wiki_sitelinks["#{I18n.locale}wiki"]["title"]}
-              %button.close{type: "button", "data-dismiss": "modal", "aria-label": "#{I18n.t('help.close')}"}
-                %span{"aria-hidden": true} &times;
-            .modal-body.h-100.w-100
-              %iframe.h-100.w-100.border-0{src: "#{wiki_url}"}
-            .modal-footer
-              %button.btn.btn-secondary{type: "button", "data-dismiss": "modal"}= I18n.t('help.close')
-
-    - org = @viewed_user.current_organization
-    - if !org.nil?
-      %p.text-center.p-0.mt-1.mb-1
-        = succeed "," do
-          %i.fas.fa-building
-          = link_to org.name, url("/organization/#{org.identifier}")
-        #{org.address}
-
-    - if !@viewed_user.country.blank?
-      %p.text-center.p-0.mt-1.mb-1
-        - country_codes = @viewed_user.country_code.split("|") rescue []
-        - countries = @viewed_user.country.split("|") rescue []
-        - countries.each_with_index do |v,i|
-          %span.mr-1.text-nowrap
-            - if !country_codes[i].nil? && !country_codes[i].empty? && !country_name(country_codes[i]).nil?
-              %i.fas.fa-globe
-              = link_to country_name(country_codes[i]), url("/country/#{country_codes[i]}")
-            - elsif v.presence
-              %i.fas.fa-globe
-              #{v}
-
-    - if authorized? && !@viewed_user.is_public? && !@viewed_user.wikidata.nil?
-      #helperPublicModal.modal.fade.text-left{tabindex:"-1", role:"dialog", "aria-labelledby":"helperPublicModal", "aria-hidden":"true"}
-        .modal-dialog{role:"document"}
-          .modal-content
-            .modal-header
-              %h5#helperPublicLabel.modal-title
-                %i.fas.fa-unlock
-                = I18n.t('help.make_public')
-              %button.close{type:"button", "data-dismiss":"modal", "aria-label":"Close"}
-                %span{"aria-hidden":"true"} &times;
-            .modal-body
-              %p
-                = I18n.t('help.make_public_question', user_name: "#{@viewed_user.fullname}")
-                = I18n.t('help.tweet_message')
-              %p#helpers-list.d-none= I18n.t('help.other_scribes', user_name: "#{@viewed_user.fullname}")
-              %ul
-              %p#helpers-list-none.d-none= I18n.t('help.no_scribes', user_name: "#{@viewed_user.fullname}")
-
-            .modal-footer
-              %form#visibility-form{action: "/help-others/#{@viewed_user.identifier}/visibility", method: :post}
-                %button.btn.btn-sm.btn-outline-secondary{type:"button", "data-dismiss":"modal"}= I18n.t('help.not_yet')
-                %input{type: :hidden, name: "_method", value: 'PUT'}
-                %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
-                %input.btn.btn-sm.btn-outline-success{type: :submit, value:"#{I18n.t('help.make_public_yes')}"}
-
-    - if authorized?
-      .text-center.border-top.mt-3.pt-3
-        - if @viewed_user.is_public?
-          %a.mr-2.mb-2{href: url("/#{@viewed_user.identifier}")}
-            %i.fas.fa-user
-            = I18n.t('help.public_profile')
-
-        - if !@viewed_user.is_public? && !@viewed_user.orcid.nil?
-          %span.mr-2
-            %i.fas.fa-lock
-            = I18n.t('help.private')
-
-        - if !@viewed_user.is_public? && !@viewed_user.wikidata.nil?
-          %a.mr-2.mb-2{href:"#", "data-toggle": "modal", "data-target": "#helperPublicModal"}
-            %i.fas.fa-unlock
-            = I18n.t('help.make_public')
-
-        - if locals[:active_subtab] == "visualizations"
-          %a.profile-flush.mr-2.mb-2.text-nowrap{href: url("/#{@viewed_user.identifier}/refresh-stats.json")}
-            %i.fas.fa-sync-alt
-            = I18n.t('general.refresh_stats')
-
-        %a.profile-flush.mr-2.mb-2.text-nowrap{href: url("/#{@viewed_user.identifier}/refresh.json")}
-          %i.fas.fa-sync-alt
-          = I18n.t('general.refresh_profile')
-          - if @viewed_user.orcid
+      %p.orcid.text-center.p-0.mt-3.mb-1
+        - if @viewed_user.orcid
+          %a{href: "https://orcid.org/#{@viewed_user.orcid}"}
             %i.fab.fa-orcid
-          - else
-            %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD", width:"18px"}
+            https://orcid.org/#{@viewed_user.orcid}
+        - else
+          %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD"}
+          = link_to "http://www.wikidata.org/entity/#{@viewed_user.wikidata}", "http://www.wikidata.org/entity/#{@viewed_user.wikidata}"
 
-        - if admin_authorized?
-          %a.mb-2{href: url("/admin/user/#{@viewed_user.identifier}/settings")}
-            %i.fas.fa-cog
-            = I18n.t('general.settings')
+      - if !@viewed_user.wiki_sitelinks.nil? && @viewed_user.wiki_sitelinks["#{I18n.locale}wiki"]
+        %p.orcid.text-center.p-0.mt-0.mb-1
+          - wiki_url = "https://#{I18n.locale}.wikipedia.org/wiki/#{@viewed_user.wiki_sitelinks["#{I18n.locale}wiki"]["title"].gsub(/\s/, "_")}"
+          %a{href: "#{wiki_url}"}
+            %i.fab.fa-wikipedia-w
+            #{wiki_url}
+          %a{href: "#", "data-toggle": "modal", "data-target": "#wiki_content", "data-keyboard": "true", "data-focus": "true"}
+            [#{I18n.t("profile.upload_view")}]
+        #wiki_content.modal.fade{tabindex: "-1"}
+          .modal-dialog.modal-dialog-centered.modal-dialog-scrollable.modal-xl{style: "height:100%"}
+            .modal-content{style: "height:90%"}
+              .modal-header
+                %h5.modal-title #{@viewed_user.wiki_sitelinks["#{I18n.locale}wiki"]["title"]}
+                %button.close{type: "button", "data-dismiss": "modal", "aria-label": "#{I18n.t('help.close')}"}
+                  %span{"aria-hidden": true} &times;
+              .modal-body.h-100.w-100
+                %iframe.h-100.w-100.border-0{src: "#{wiki_url}"}
+              .modal-footer
+                %button.btn.btn-secondary{type: "button", "data-dismiss": "modal"}= I18n.t('help.close')
 
-        #flush-message.alert.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}
-          = I18n.t("user.caches_rebuilt")
-          %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
-            %span{"aria-hidden":"true"} &times;
+      - org = @viewed_user.current_organization
+      - if !org.nil?
+        %p.text-center.p-0.mt-1.mb-1
+          = succeed "," do
+            %i.fas.fa-building
+            = link_to org.name, url("/organization/#{org.identifier}")
+          #{org.address}
 
-  .w-100.w-sm-75.w-lg-50.w-xl-25.ml-auto
-    - if authorized?
-      = haml :'partials/help/search', layout: false
-  .mr-auto
+      - if !@viewed_user.country.blank?
+        %p.text-center.p-0.mt-1.mb-1
+          - country_codes = @viewed_user.country_code.split("|") rescue []
+          - countries = @viewed_user.country.split("|") rescue []
+          - countries.each_with_index do |v,i|
+            %span.mr-1.text-nowrap
+              - if !country_codes[i].nil? && !country_codes[i].empty? && !country_name(country_codes[i]).nil?
+                %i.fas.fa-globe
+                = link_to country_name(country_codes[i]), url("/country/#{country_codes[i]}")
+              - elsif v.presence
+                %i.fas.fa-globe
+                #{v}
+
+      - if authorized? && !@viewed_user.is_public? && !@viewed_user.wikidata.nil?
+        #helperPublicModal.modal.fade.text-left{tabindex:"-1", role:"dialog", "aria-labelledby":"helperPublicModal", "aria-hidden":"true"}
+          .modal-dialog{role:"document"}
+            .modal-content
+              .modal-header
+                %h5#helperPublicLabel.modal-title
+                  %i.fas.fa-unlock
+                  = I18n.t('help.make_public')
+                %button.close{type:"button", "data-dismiss":"modal", "aria-label":"Close"}
+                  %span{"aria-hidden":"true"} &times;
+              .modal-body
+                %p
+                  = I18n.t('help.make_public_question', user_name: "#{@viewed_user.fullname}")
+                  = I18n.t('help.tweet_message')
+                %p#helpers-list.d-none= I18n.t('help.other_scribes', user_name: "#{@viewed_user.fullname}")
+                %ul
+                %p#helpers-list-none.d-none= I18n.t('help.no_scribes', user_name: "#{@viewed_user.fullname}")
+
+              .modal-footer
+                %form#visibility-form{action: "/help-others/#{@viewed_user.identifier}/visibility", method: :post}
+                  %button.btn.btn-sm.btn-outline-secondary{type:"button", "data-dismiss":"modal"}= I18n.t('help.not_yet')
+                  %input{type: :hidden, name: "_method", value: 'PUT'}
+                  %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
+                  %input.btn.btn-sm.btn-outline-success{type: :submit, value:"#{I18n.t('help.make_public_yes')}"}
+
+      - if authorized?
+        .text-center.border-top.mt-3.pt-3
+          - if @viewed_user.is_public?
+            %a.mr-2.mb-2{href: url("/#{@viewed_user.identifier}")}
+              %i.fas.fa-user
+              = I18n.t('help.public_profile')
+
+          - if !@viewed_user.is_public? && !@viewed_user.orcid.nil?
+            %span.mr-2
+              %i.fas.fa-lock
+              = I18n.t('help.private')
+
+          - if !@viewed_user.is_public? && !@viewed_user.wikidata.nil?
+            %a.mr-2.mb-2{href:"#", "data-toggle": "modal", "data-target": "#helperPublicModal"}
+              %i.fas.fa-unlock
+              = I18n.t('help.make_public')
+
+          - if locals[:active_subtab] == "visualizations"
+            %a.profile-flush.mr-2.mb-2.text-nowrap{href: url("/#{@viewed_user.identifier}/refresh-stats.json")}
+              %i.fas.fa-sync-alt
+              = I18n.t('general.refresh_stats')
+
+          %a.profile-flush.mr-2.mb-2.text-nowrap{href: url("/#{@viewed_user.identifier}/refresh.json")}
+            %i.fas.fa-sync-alt
+            = I18n.t('general.refresh_profile')
+            - if @viewed_user.orcid
+              %i.fab.fa-orcid
+            - else
+              %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD", width:"18px"}
+
+          - if admin_authorized?
+            %a.mb-2{href: url("/admin/user/#{@viewed_user.identifier}/settings")}
+              %i.fas.fa-cog
+              = I18n.t('general.settings')
+
+          #flush-message.alert.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}
+            = I18n.t("user.caches_rebuilt")
+            %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
+              %span{"aria-hidden":"true"} &times;
+
+    .w-100.w-sm-75.w-lg-50.w-xl-25.ml-auto
+      - if authorized?
+        = haml :'partials/help/search', layout: false
+    .mr-auto

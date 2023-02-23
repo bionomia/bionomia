@@ -30,7 +30,7 @@
           %li#profile-remove.list-group-item.profile-upload-option-list= I18n.t('profile.remove')
           %li#profile-cancel.list-group-item.profile-upload-option-list= I18n.t('profile.cancel')
 
-  %h1.mt-2.h2= @user.fullname
+  %h1.h2= @user.fullname
 
   - if !@user.other_names.blank?
     %p.text-center.text-muted.p-0.mt-1.mb-1 #{@user.other_names.split("|").join("; ")}
