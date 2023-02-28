@@ -114,6 +114,7 @@ module Sinatra
               .where.not(image_url: nil)
               .where.not(orcid: nil)
               .where(user_occurrences: { visible: true })
+              .distinct
               .limit(3)
               .order(Arel.sql("RAND()"))
               .union_all(User.joins(:user_occurrences)
@@ -121,6 +122,7 @@ module Sinatra
                              .where.not(image_url: nil)
                              .where.not(wikidata: nil)
                              .where(user_occurrences: { visible: true })
+                             .distinct
                              .limit(3)
                              .order(Arel.sql("RAND()")))
         end

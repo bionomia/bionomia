@@ -861,12 +861,10 @@ class User < ActiveRecord::Base
 
   def collector_strings
     recordings.joins(:occurrence)
-              .select("occurrences.recordedBy")
-              .group("occurrences.recordedBy")
-              .order("NULL")
-              .count
-              .sort_by{|_key, value| value}
-              .reverse
+              .pluck(:recordedBy)
+              .compact
+              .tally
+              .sort_by {|k, v| -v}
               .to_h
   end
 
