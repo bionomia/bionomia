@@ -109,14 +109,18 @@ module Sinatra
         end
 
         def example_profiles
-          User.where(is_public: true)
+          User.joins(:user_occurrences)
+              .where(is_public: true)
               .where.not(image_url: nil)
               .where.not(orcid: nil)
+              .where(user_occurrences: { visible: true })
               .limit(3)
               .order(Arel.sql("RAND()"))
-              .union_all(User.where(is_public: true)
+              .union_all(User.joins(:user_occurrences)
+                             .where(is_public: true)
                              .where.not(image_url: nil)
                              .where.not(wikidata: nil)
+                             .where(user_occurrences: { visible: true })
                              .limit(3)
                              .order(Arel.sql("RAND()")))
         end

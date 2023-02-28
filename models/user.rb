@@ -327,10 +327,7 @@ class User < ActiveRecord::Base
   end
 
   def helped
-    claims_given.order(created: :desc)
-                .pluck(:user_id)
-                .uniq
-                .map{|u| User.find(u)}
+    User.where(id: claims_given.select(:user_id).distinct)
   end
 
   def latest_helped
@@ -375,18 +372,17 @@ class User < ActiveRecord::Base
   end
 
   def helped_by
-    visible_user_occurrences
-      .where.not(created_by: self)
-      .pluck(:created_by)
-      .uniq
-      .map{|u| User.find(u)}
+    subq = visible_user_occurrences.select(:created_by)
+                                   .where.not(created_by: self)
+                                   .distinct
+    User.where(id: subq)
   end
 
   def helped_by_counts
     visible_user_occurrences
       .where.not(created_by: self)
       .pluck(:created_by)
-      .inject(Hash.new(0)) { |total, e| total[e] += 1 ;total}
+      .tally
       .map{|u, total| { user: User.find(u), total: total }}
   end
 
@@ -585,19 +581,19 @@ class User < ActiveRecord::Base
   end
 
   def recordings_deposited_at
-    codes = recordings.pluck(:institutionCode).compact
-    Hash.new(0).tap{ |h| codes.each { |f| h[f] += 1 } }
-               .sort_by {|_key, value| value}
-               .reverse
-               .to_h
+    recordings.pluck(:institutionCode)
+              .compact
+              .tally
+              .sort_by {|k, v| -v}
+              .to_h
   end
 
   def identifications_deposited_at
-    codes = identifications.pluck(:institutionCode).compact
-    Hash.new(0).tap{ |h| codes.each { |f| h[f] += 1 } }
-               .sort_by {|_key, value| value}
-               .reverse
-               .to_h
+    identifications.pluck(:institutionCode)
+                   .compact
+                   .tally
+                   .sort_by {|k, v| -v}
+                   .to_h
   end
 
   def current_organization
