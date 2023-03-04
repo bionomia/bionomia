@@ -10,6 +10,8 @@
         if (!$('#chart-collected').length && !$('#chart-identified').length) { return; }
         var countriesRecorded = #{recorded},
             countriesIdentified = #{identified},
+            recorded_countryCodes = #{@stats[:countries][:recorded].keys},
+            identified_countryCodes = #{@stats[:countries][:recorded].keys},
             recordedData = #{@stats[:recorded_bins].to_a.unshift(["#{I18n.t('charts.year')}", "#{I18n.t('charts.collected')}"])},
             identifiedData = #{@stats[:identified_bins].to_a.unshift(["#{I18n.t('charts.year')}", "#{I18n.t('charts.identified')}"])},
             recorded_hierarchies = $.map(#{@stats[:countries][:recorded].keys}, function(i) {
@@ -103,7 +105,12 @@
           collectedMap = new google.visualization.GeoChart($('#map-collected')[0]);
 
           google.visualization.events.addListener(collectedMap, 'regionClick', function(e) {
-            window.location = "#{locals[:path]}/specimens?action=collected&country_code=" + e.region;
+            var clicked = e.region.split("-")[0];
+            if (recorded_countryCodes.includes(clicked)) {
+              window.location = "#{locals[:path]}/specimens?action=collected&country_code=" + clicked;
+            } else {
+              return;   
+            }
           });
 
           google.visualization.events.addListener(collectedMap, 'ready', function(e) {
@@ -125,7 +132,12 @@
           identifiedMap = new google.visualization.GeoChart($('#map-identified')[0]);
 
           google.visualization.events.addListener(identifiedMap, 'regionClick', function(e) {
-            window.location = "#{locals[:path]}/specimens?action=identified&country_code=" + e.region;
+            var clicked = e.region.split("-")[0];
+            if (identified_countryCodes.includes(clicked)) {
+              window.location = "#{locals[:path]}/specimens?action=identified&country_code=" + clicked;
+            } else {
+              return;   
+            }
           });
 
           google.visualization.events.addListener(identifiedMap, 'ready', function(e) {
