@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
         self.find_by_orcid(id)
       elsif id.is_wiki_id?
         self.find_by_wikidata(id)
-      else
+      elsif id.is_integer?
         self.find(id)
       end
     rescue

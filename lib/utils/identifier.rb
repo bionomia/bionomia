@@ -11,6 +11,10 @@ class String
     false
   end
 
+  def is_integer?
+    self.to_i.to_s == self
+  end
+
   def is_orcid?
     ::Bionomia::Identifier.is_orcid_regex.match?(self) &&
     ::Bionomia::Identifier.orcid_valid_checksum(self)

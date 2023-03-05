@@ -110,7 +110,7 @@ module Sinatra
             user = User.find_by_orcid(id)
           elsif id.is_wiki_id?
             user = User.find_by_wikidata(id)
-          else
+          elsif id.is_integer?
             user = User.find(id) rescue nil
           end
           if request && request.url.match(/.json$/)
