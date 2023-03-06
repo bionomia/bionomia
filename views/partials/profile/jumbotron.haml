@@ -78,7 +78,7 @@
       = link_to "https://doi.org/#{@user.zenodo_concept_doi}", "https://doi.org/#{@user.zenodo_concept_doi}"
     %p
       %a{href:"https://doi.org/#{@user.zenodo_concept_doi}"}
-        %img{src:"/images/#{@user.zenodo_concept_doi}.svg", alt:"DOI badge"}
+        %img{src:"/images/#{@user.zenodo_concept_doi}.svg", alt:"DOI badge", height:"20px"}
 
   - if @user.youtube_id
     = haml :'youtube', layout: false, locals: { youtube_id: @user.youtube_id }
