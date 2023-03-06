@@ -1,9 +1,9 @@
 %h4= I18n.t('user.collected_from')
 %ul.nav.nav-pills.custom-pills.mt-3.mb-3{role:"tablist"}
-  %li.nav-item
-    %a.nav-link.active{"data-toggle":"tab", href: "#map-collected-wrapper"}= I18n.t('user.map')
-  %li.nav-item
-    %a.nav-link{"data-toggle":"tab", href: "#list-collected"}= I18n.t('user.list')
+  %li.nav-item{role:"presentation"}
+    %a.nav-link.active{"data-toggle":"tab", href: "#map-collected-wrapper", role:"tab"}= I18n.t('user.map')
+  %li.nav-item{role:"presentation"}
+    %a.nav-link{"data-toggle":"tab", href: "#list-collected", role:"tab"}= I18n.t('user.list')
 
 .tab-content
   #map-collected-wrapper.tab-pane.fade.show.active{role:"tabpanel", style:"min-height:200px;"}

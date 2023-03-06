@@ -13,11 +13,11 @@
 .col-12.col-lg-4.text-center.sidebar{itemscope: true, itemtype: "http://schema.org/Person"}
   - if @viewed_user.image_url
     #profile-image.mx-auto.d-block.align-self-center.align-items-center.mb-2
-      %img.rounded.mx-auto.d-block.img-fluid.align-top.m-2{src:"#{profile_image(@viewed_user)}", itemprop:"image", alt:"#{@viewed_user.fullname}"}
+      %img.rounded.mx-auto.d-block.img-fluid.align-top.m-2{src:"#{profile_image(@viewed_user)}", itemprop:"image", alt:"#{@viewed_user.fullname}", height:"200px"}
 
   - if @viewed_user.signature_url
     #signature-image.mx-auto.d-block.align-self-center.align-items-center.mb-2
-      %img.mx-auto.d-block.img-fluid{src:"#{signature_image(@viewed_user)}", itemprop:"image", alt:"#{@viewed_user.fullname} signature"}
+      %img.mx-auto.d-block.img-fluid{src:"#{signature_image(@viewed_user)}", itemprop:"image", alt:"#{@viewed_user.fullname} signature", height:"80px"}
 
   %h1.h2{itemprop: "name"} #{@viewed_user.fullname}
 

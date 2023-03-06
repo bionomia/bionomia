@@ -1,9 +1,9 @@
 %h4= I18n.t('user.dates_identified')
 %ul.nav.nav-pills.custom-pills.mt-3{role:"tablist"}
-  %li.nav-item
-    %a.nav-link.active{"data-toggle":"tab", href: "#chart-identified-wrapper"}= I18n.t('user.chart')
-  %li.nav-item
-    %a.nav-link{"data-toggle":"tab", href: "#chart-list-identified"}= I18n.t('user.list')
+  %li.nav-item{role:"presentation"}
+    %a.nav-link.active{"data-toggle":"tab", href: "#chart-identified-wrapper", role:"tab"}= I18n.t('user.chart')
+  %li.nav-item{role:"presentation"}
+    %a.nav-link{"data-toggle":"tab", href: "#chart-list-identified", role:"tab"}= I18n.t('user.list')
 
 .tab-content.mb-3
   #chart-identified-wrapper.tab-pane.fade.show.active{role:"tabpanel", style:"min-height:200px;"}
