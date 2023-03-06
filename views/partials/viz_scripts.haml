@@ -1,8 +1,8 @@
 - if @stats && @stats[:specimens] && ( @stats[:specimens][:identified] > 0 || @stats[:specimens][:recorded] > 0 )
   - content_for :scripts do
-    %script{src: "/js/geochart-hierarchy.js"}
-    %script{src: "//www.gstatic.com/charts/loader.js"}
-    %script{src: "/js/jquery.throttledresize.js"}
+    %script{src: "/js/geochart-hierarchy.js", defer: true}
+    %script{src: "//www.gstatic.com/charts/loader.js", defer: true}
+    %script{src: "/js/jquery.throttledresize.js", defer: true}
     - recorded = @stats[:countries][:recorded].to_a.map{|a| [ a[0], country_name(a[0]), a[1] ] }.unshift(["Country", "Country Name", "#{I18n.t('charts.collected')}"])
     - identified = @stats[:countries][:identified].to_a.map{|a| [ a[0], country_name(a[0]), a[1] ] }.unshift(["Country", "Country Name", "#{I18n.t('charts.identified')}"])
     :javascript

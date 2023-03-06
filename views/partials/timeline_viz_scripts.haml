@@ -1,6 +1,6 @@
 - content_for :scripts do
-  %script{src: "//www.gstatic.com/charts/loader.js"}
-  %script{src: "/js/jquery.throttledresize.js"}
+  %script{src: "//www.gstatic.com/charts/loader.js", defer: true}
+  %script{src: "/js/jquery.throttledresize.js", defer: true}
 
   :javascript
     $.fn.outerHTML = function(s) {
