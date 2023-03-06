@@ -77,36 +77,36 @@
             %a{class:"btn btn-outline-light#{locals[:active_page] == "profile" ? " active" : " text-muted"}", href: url("/profile"), role:"button"}
               - if @user.image_url
                 - if locals[:active_page] == "profile"
-                  %img{src:"#{profile_image(@user, 'thumbnail')}", alt:"#{@user.fullname}"}
+                  %img{src:"#{profile_image(@user, 'thumbnail')}", alt:"#{@user.fullname}", width: "24px", height:"24px"}
                 - else
-                  %img{src:"#{profile_image(@user, 'thumbnail_grey')}", alt:"#{@user.fullname}"}
+                  %img{src:"#{profile_image(@user, 'thumbnail_grey')}", alt:"#{@user.fullname}", width: "24px", height:"24px"}
               - else
-                %i.fas.fa-user{alt:"#{@user.fullname}"}
+                %i.fas.fa-user.fa-fw{alt:"#{@user.fullname}"}
             %button.btn.btn-outline-light.dropdown-toggle{type:"button", "data-toggle": "dropdown", "aria-haspopup": "true", "aria-expanded": "false"}
               %span.sr-only
                 = I18n.t('layout.toggle_dropdown')
             .dropdown-menu.dropdown-menu-right
               %a.dropdown-item{href: url("/profile"), "aria-label": "#{I18n.t('layout.overview')}"}
-                %i.fas.fa-user
+                %i.fas.fa-user.fa-fw
                 = I18n.t('layout.overview')
               %a.dropdown-item{href: url("/profile/specimens"), "aria-label": "#{I18n.t('layout.specimens')}"}
-                %i.fas.fa-th
+                %i.fas.fa-th.fa-fw
                 = I18n.t('layout.specimens')
               %a.dropdown-item{href: url("/profile/helped"), "aria-label": "#{I18n.t('layout.people_helped')}"}
-                %i.fas.fa-hands-helping
+                %i.fas.fa-hands-helping.fa-fw
                 = I18n.t('layout.people_helped')
               %a.dropdown-item{href: url("/profile/citations"), "aria-label": "#{I18n.t('layout.science_enabled')}"}
-                %i.fas.fa-flask
+                %i.fas.fa-flask.fa-fw
                 = I18n.t('layout.science_enabled')
               %a.dropdown-item{href: url("/profile/settings"), "aria-label": "#{I18n.t('layout.settings')}"}
-                %i.fas.fa-cog
+                %i.fas.fa-cog.fa-fw
                 = I18n.t('layout.settings')
               - if admin_authorized?
                 %a.dropdown-item{href: url("/admin"), "aria-label": "#{I18n.t('layout.administration')}"}
-                  %i.fas.fa-users-cog
+                  %i.fas.fa-users-cog.fa-fw
                   = I18n.t('layout.administration')
               %a.dropdown-item{href: url("/logout"), "aria-label": "#{I18n.t('layout.logout')}"}
-                %i.fas.fa-sign-out-alt
+                %i.fas.fa-sign-out-alt.fa-fw
                 = I18n.t('layout.logout')
       - else
         %li

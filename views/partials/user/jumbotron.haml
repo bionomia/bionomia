@@ -38,7 +38,7 @@
   %p.orcid.text-lg-left.p-0.mt-3.mb-1
     - if @viewed_user.orcid
       %a{href: "https://orcid.org/#{@viewed_user.orcid}", itemprop:"sameAs"}
-        %i.fab.fa-orcid
+        %i.fab.fa-orcid.fa-fw
         https://orcid.org/#{@viewed_user.orcid}
     - else
       %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD"}
@@ -49,7 +49,7 @@
     %p.orcid.text-lg-left.p-0.mt-0.mb-1
       - wiki_url = "https://#{I18n.locale}.wikipedia.org/wiki/#{@viewed_user.wiki_sitelinks["#{I18n.locale}wiki"]["title"].gsub(/\s/, "_")}"
       %a{href: "#{wiki_url}"}
-        %i.fab.fa-wikipedia-w
+        %i.fab.fa-wikipedia-w.fa-fw
         #{wiki_url}
       %a{href: "#", "data-toggle": "modal", "data-target": "#wiki_content", "data-keyboard": "true", "data-focus": "true"}
         [#{I18n.t("profile.upload_view")}]
@@ -68,7 +68,7 @@
   - if !@viewed_user.current_organization.nil?
     %p.text-lg-left.p-0.mt-1.mb-1
       - path = @viewed_user.current_organization.identifier
-      %i.fas.fa-building
+      %i.fas.fa-building.fa-fw
       - if @viewed_user.current_organization.address
         = succeed "," do
           = link_to @viewed_user.current_organization.name, url("/organization/#{path}")
@@ -83,10 +83,10 @@
       - countries.each_with_index do |v,i|
         %span.mr-1.text-nowrap
           - if !country_codes[i].nil? && !country_codes[i].empty? && !country_name(country_codes[i]).nil?
-            %i.fas.fa-globe
+            %i.fas.fa-globe.fa-fw
             = link_to country_name(country_codes[i]), url("/country/#{country_codes[i]}")
           - elsif v.presence
-            %i.fas.fa-globe
+            %i.fas.fa-globe.fa-fw
             #{v}
 
   - if @viewed_user.zenodo_doi

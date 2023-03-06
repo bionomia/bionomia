@@ -45,13 +45,13 @@
 
   %p.orcid.text-lg-left.p-0.mt-3.mb-1
     %a{href: "https://orcid.org/#{@user.orcid}"}
-      %i.fab.fa-orcid
+      %i.fab.fa-orcid.fa-fw
       https://orcid.org/#{@user.orcid}
 
   - if !@user.current_organization.nil?
     %p.text-lg-left.p-0.mt-1.mb-1
       - path = @user.current_organization.identifier
-      %i.fas.fa-building
+      %i.fas.fa-building.fa-fw
       - if @user.current_organization.address
         = succeed ", " do
           = link_to @user.current_organization.name, url("/organization/#{path}")
@@ -66,10 +66,10 @@
       - countries.each_with_index do |v,i|
         %span.mr-1.text-nowrap
           - if !country_codes[i].nil? && !country_codes[i].empty?  && !country_name(country_codes[i]).nil?
-            %i.fas.fa-globe
+            %i.fas.fa-globe.fa-fw
             = link_to country_name(country_codes[i]), url("/country/#{country_codes[i]}")
           - elsif v.presence
-            %i.fas.fa-globe
+            %i.fas.fa-globe.fa-fw
             #{v}
 
   - if @user.zenodo_doi
