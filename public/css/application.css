@@ -34,6 +34,10 @@ button.hide, button.remove, button.hide-all, button.remove-all {
 a, .page-link {
   color:#1F712C;
 }
+i {
+  display: inline-block;
+  width: 20px;
+}
 i.fa-feather{
   color:#318b3f !important;
 }

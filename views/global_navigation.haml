@@ -10,56 +10,56 @@
     %ul.navbar-nav.mr-sm-auto
       %li.nav-item
         %a{href: url("/roster"), class:"nav-link#{locals[:active_page] == "roster" ? " active" : nil}", "aria-label": "#{I18n.t('layout.profiles')}", "data-toggle": "tooltip", title: I18n.t('layout.profiles') }
-          %i.fas.fa-users
+          %i.fas.fa-users.fa-fw
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.profiles')
       %li.nav-item
         %a{href: url("/scribes"), class: "nav-link#{locals[:active_page] == "scribes" ? " active" : nil}", "aria-label": "#{I18n.t('layout.scribes')}", "data-toggle": "tooltip", title: I18n.t('layout.scribes')}
-          %i.fas.fa-feather-alt
+          %i.fas.fa-feather-alt.fa-fw
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.scribes')
       %li.nav-item
         %a{href: url("/organizations"), class:"nav-link#{locals[:active_page] == "organizations" ? " active" : nil}", "aria-label": "#{I18n.t('layout.organizations')}", "data-toggle": "tooltip", title: I18n.t('layout.organizations') }
-          %i.fas.fa-building
+          %i.fas.fa-building.fa-fw
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.organizations')
       %li.nav-item
         %a{href: url("/datasets"), class:"nav-link#{locals[:active_page] == "datasets" ? " active" : nil}", "aria-label": "#{I18n.t('layout.datasets')}", "data-toggle": "tooltip", title: I18n.t('layout.datasets') }
-          %i.fas.fa-database
+          %i.fas.fa-database.fa-fw
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.datasets')
       %li.nav-item
         %a{href: url("/articles"), class:"nav-link#{locals[:active_page] == "articles" ? " active" : nil}", "aria-label": "#{I18n.t('layout.articles')}", "data-toggle": "tooltip", title: I18n.t('layout.articles') }
-          %i.fas.fa-file-alt
+          %i.fas.fa-file-alt.fa-fw
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.articles')
       %li.nav-item
         %a{href: url("/countries"), class:"nav-link#{locals[:active_page] == "countries" ? " active" : nil}", "aria-label": "#{I18n.t('layout.countries')}", "data-toggle": "tooltip", title: I18n.t('layout.countries') }
-          %i.fas.fa-globe
+          %i.fas.fa-globe.fa-fw
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.countries')
       %li.nav-item
         %a{href: url("/taxa"), class: "nav-link#{locals[:active_page] == "taxa" ? " active" : nil}", "aria-label": "#{I18n.t('layout.taxa')}", "data-toggle": "tooltip", title: I18n.t('layout.taxa') }
-          %i.fab.fa-pagelines
+          %i.fab.fa-pagelines.fa-fw
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.taxa')
       %li.nav-item
         %a{href: url("/agents"), class: "nav-link#{locals[:active_page] == "agents" ? " active" : nil}", "aria-label": "#{I18n.t('layout.agent_strings')}", "data-toggle": "tooltip", title: I18n.t('layout.agent_strings') }
-          %i.fas.fa-signature
+          %i.fas.fa-signature.fa-fw
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.agent_strings')
     %ul.navbar-nav
       - if authorized?
         %li.nav-item
           %a{href: url("/help-others"), class: "nav-link#{locals[:active_page] == "help" ? " active" : nil}", "aria-label": "#{I18n.t('layout.help_others')}", "data-toggle": "tooltip", title: I18n.t('layout.help_others')}
-            %i.fas.fa-hands-helping
+            %i.fas.fa-hands-helping.fa-fw
             %span.d-inline-block.d-sm-none.d-md-inline-block
               = I18n.t('layout.help_others')
 
       %li.nav-item
         .btn-group
           %button.btn.dropdown-toggle.text-white-50{type:"button", "data-toggle": "dropdown", "aria-haspopup": "true", "aria-expanded": "false"}
-            %i.fas.fa-language
+            %i.fas.fa-language.fa-fw
             %span.sr-only
               = I18n.t('layout.toggle_dropdown')
           .dropdown-menu.dropdown-menu-right
