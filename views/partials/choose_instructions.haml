@@ -1,3 +1,3 @@
 - coll_img = "%img{src:'/images/net-unselected.png', alt:'#{I18n.t('general.collected')}', title:'#{I18n.t('general.collected')}', width:18}"
 - det_img = "%img{src:'/images/microscope-unselected.png', alt:'#{I18n.t('general.identified')}', title:'#{I18n.t('general.identified')}', width:18}"
-#{I18n.t('help.choose_instructions_html', coll_img: haml(coll_img, layout: false), det_img: haml(det_img, layout: false))}
+= I18n.t('help.choose_instructions_html', coll_img: haml(coll_img, layout: false), det_img: haml(det_img, layout: false))

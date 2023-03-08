@@ -12,10 +12,10 @@
 
 - if @pagy.count == 0
   .alert.alert-warning{role: "alert"}
-    #{I18n.t('profile.not_identified_for_name', { name: @collector.fullname })}
+    = I18n.t('profile.not_identified_for_name', name: @collector.fullname)
 - else
   .alert.alert-warning{role: "alert"}
-    #{I18n.t('profile.identified_for_name', { name: @collector.fullname })}
+    = I18n.t('profile.identified_for_name', name: @collector.fullname)
 
   #helper-info.alert.alert-info.tiny-margins{role: "alert"}
     = haml :'partials/choose_instructions', layout: false

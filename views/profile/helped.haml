@@ -80,7 +80,7 @@
                   #{number_with_delimiter(m[:attribution_count])}
                 #{I18n.t('profile.attributed_count', count: m[:attribution_count])}
               .small.ml-auto.text-muted
-                #{I18n.t('profile.latest_helped', time: m[:created])}
+                = I18n.t('profile.latest_helped', time: m[:created])
 
   - if @pagy.pages > 1
     .y-scroll

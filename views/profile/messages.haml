@@ -70,7 +70,7 @@
                 %span.text-danger
                   %i.fas.fa-heart
               .small.ml-auto.text-muted
-                #{I18n.t('profile.latest_helped', time: m[:latest])}
+                = I18n.t('profile.latest_helped', time: m[:latest])
 
   - if @pagy.pages > 1
     .y-scroll

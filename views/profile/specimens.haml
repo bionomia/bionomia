@@ -15,9 +15,9 @@
 - if @pagy.count == 0
   .alert.alert-info.tiny-margins{role: "alert"}
     - if @filter.length > 0
-      #{I18n.t('profile.no_specimens_filter')}
+      = I18n.t('profile.no_specimens_filter')
     - else
-      #{I18n.t('profile.no_specimens')}
+      = I18n.t('profile.no_specimens')
 - else
   .alert.alert-info.row.tiny-margins{role: "alert"}
     .col-12.col-md-9.p-0

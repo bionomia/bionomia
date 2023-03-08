@@ -1,9 +1,9 @@
 - if @filter.length > 0
   .alert.alert-warning{role: "alert"}
     %i.fas.fa-filter
-    #{I18n.t('general.filtered_by')}
+    = I18n.t('general.filtered_by')
     %span.font-weight-bold.mr-2
-      #{h(filter_options.compact.join(", "))}
+      = h(filter_options.compact.join(", "))
     %a{href: url(locals[:url]), class:"text-danger"}
       %i.fas.fa-minus-circle
-      #{I18n.t('general.remove')}
+      = I18n.t('general.remove')

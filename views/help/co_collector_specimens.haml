@@ -13,11 +13,11 @@
 
 - if @pagy.count == 0
   .alert.alert-warning{role: "alert"}
-    #{I18n.t('help.not_co_collector_name', { name: @co_collector.fullname })}
+    = I18n.t('help.not_co_collector_name', name: @co_collector.fullname)
 - else
   = haml :'partials/help/fixed_navbar', layout: false
   .alert.alert-warning{role: "alert"}
-    #{I18n.t('help.co_collector_name', { name: @co_collector.fullname })}
+    = I18n.t('help.co_collector_name', name: @co_collector.fullname)
     %span
       %i.fas.fa-random
       = link_to I18n.t('help.switch'), url("/help-others/#{@co_collector.identifier}/co-collector/#{@viewed_user.identifier}")

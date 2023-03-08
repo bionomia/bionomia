@@ -64,7 +64,7 @@
                 %span.badge.badge-light
                   #{number_with_delimiter(u[:total])}
                 %a{href: url("/help-others/#{@viewed_user.identifier}/specimens?attributor=#{u[:user].identifier}")}
-                  #{I18n.t('help.specimens_attributed_count', count: u[:total])}
+                  = I18n.t('help.specimens_attributed_count', count: u[:total])
 
   - if @total > 25
     = haml :'partials/page_size', layout: false

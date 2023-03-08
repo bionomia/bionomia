@@ -65,7 +65,7 @@
                   %i.fas.fa-lock
               .small.text-left.text-muted.mr-2
                 %span.badge.badge-light #{number_with_delimiter(@user.identifications_by(u).count, delimiter: ",")}
-                #{I18n.t('profile.identified_by_count', count: @user.identifications_by(u).count)}
+                = I18n.t('profile.identified_by_count', count: @user.identifications_by(u).count)
 
   - if @pagy.pages > 1
     .y-scroll
