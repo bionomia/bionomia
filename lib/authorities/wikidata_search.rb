@@ -27,6 +27,14 @@ module Bionomia
       end
     end
 
+    def name_parser
+      options = {
+        prefer_comma_as_separator: true,
+        title: DwcAgent::TITLE
+      }
+      Namae::Parser.new(options)
+    end
+
     def wikidata_people_query(property)
       %Q(
           SELECT DISTINCT
@@ -247,7 +255,7 @@ module Bionomia
 
     def add_new_users
       new_users.each do |wikicode, name|
-        parsed = Namae.parse(name.dup)[0] rescue nil
+        parsed = name_parser.parse(name.dup)[0] rescue nil
         if parsed.nil?
           parsed = DwcAgent.parse(name.dup)[0] rescue nil
         end
@@ -415,7 +423,7 @@ module Bionomia
 
       name = wiki_user.dup.title
 
-      parsed = Namae.parse(name)[0] rescue nil
+      parsed = name_parser.parse(name)[0] rescue nil
       if parsed.nil?
         parsed = DwcAgent.parse(name)[0] rescue nil
       end
