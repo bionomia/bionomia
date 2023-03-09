@@ -71,7 +71,7 @@ module Bionomia
 
     class << self
       def is_orcid_regex
-        /^0000-000(1-[5-9]|2-[0-9]|3-[0-4])\d{3}-\d{3}[\dX]$/
+        /^(0000-000(1-[5-9]|2-[0-9]|3-[0-4])\d{3}-\d{3}[\dX])|(0009-00[0,1]\d-\d{4}-\d{3}[\dX])$/
       end
 
       def is_wiki_regex
