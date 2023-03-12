@@ -43,7 +43,7 @@
               %i.fas.fa-file-code.text-dark.h5.m-0.p-1
               JSON-LD
 
-        %div{class:"table-responsive-lg overflow-auto#{(authorized? && @user != @viewed_user) ? " alert-warning" : ""}"}
+        .table-responsive-lg.overflow-auto
           %table.table.table-hover.table-sm
             %thead.thead-light
               %tr
@@ -90,8 +90,14 @@
                       %i.fas.fa-image.ml-1.text-muted{"data-toggle":"popover", "data-gbifid":"#{o.id}"}
                   %td #{h(o.recordedBy)}
                   %td #{h(o.identifiedBy)}
-                  %td #{h(o.eventDate || o.year)}
-                  %td #{h(o.dateIdentified)}
+                  %td
+                    #{h(o.eventDate || o.year)}
+                    - if authorized? && @user != @viewed_user && recordedBy_has_warning?(@viewed_user, o)
+                      %i.fas.fa-exclamation-triangle.text-warning{"data-toggle":"tooltip", title: "#{I18n.t('specimen.mismatch')}"}
+                  %td
+                    #{h(o.dateIdentified)}
+                    - if authorized? && @user != @viewed_user && identifiedBy_has_warning?(@viewed_user, o)
+                      %i.fas.fa-exclamation-triangle.text-warning{"data-toggle":"tooltip", title: "#{I18n.t('specimen.mismatch')}"}
                   %td #{h(o.family)}
                   %td #{h(o.institutionCode)}
                   %td #{h(o.catalogNumber)}
