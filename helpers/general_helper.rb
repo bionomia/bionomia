@@ -152,8 +152,8 @@ module Sinatra
           end
 
           if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
-            if @order == "eventDate" || "dateIdentified"
-              @order = @order + "_processed"
+            if @order == "eventDate" || @order == "dateIdentified"
+              @order = "#{@order}_processed"
             end
             occurrences = occurrences.order("#{@order} #{@sort}")
             occurrences.pluck(:occurrence_id)
