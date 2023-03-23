@@ -35,8 +35,7 @@ module Sinatra
             inflect.irregular 'person', 'people'
           end
 
-          app.before { ActiveRecord::Base.verify_active_connections! if ActiveRecord::Base.respond_to?(:verify_active_connections!) }
-          app.after { ActiveRecord::Base.clear_active_connections! }
+          app.after { ActiveRecord::Base.connection_handler.clear_active_connections!(:all) }
         end
 
       end
