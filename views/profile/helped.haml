@@ -5,7 +5,7 @@
   :javascript
     $(function() {
       var ids = $.map($('.progress-bar'), function(obj) { return $(obj).attr("id").split("_").pop(); });
-      $.each(ids, function(key, id) { ProgressBar.init(id); });
+      ProgressBar.forEachParallel(ids, ProgressBar.init, 10);
     });
 
 .row
