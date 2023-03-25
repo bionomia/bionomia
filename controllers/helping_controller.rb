@@ -292,6 +292,8 @@ module Sinatra
               @viewed_user = find_user(params[:id])
 
               @page = (params[:page] || 1).to_i
+              @order = params[:order] || nil
+              @sort = params[:sort] || nil
               @total = specimen_filters(@viewed_user).count
 
               if @page*search_size > @total
@@ -303,7 +305,18 @@ module Sinatra
 
               create_filter
 
-              @pagy, @results = pagy(specimen_filters(@viewed_user).order(created: :desc), items: search_size, page: @page)
+              occurrences = specimen_filters(@viewed_user)
+
+              if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
+                if @order == "eventDate" || @order == "dateIdentified"
+                  occurrences = occurrences.order("occurrences.#{@order}_processed": "#{@sort}")
+                end
+                occurrences = occurrences.order("occurrences.#{@order}": "#{@sort}")
+              else
+                occurrences = occurrences.order(created: :desc)
+              end
+
+              @pagy, @results = pagy(occurrences, items: search_size, page: @page)
               haml :'help/specimens', locals: { active_page: "help" }
             end
 
