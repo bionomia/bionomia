@@ -11,6 +11,27 @@
         = I18n.t('workshops.title')
 
 %h3.mt-4
+  = I18n.l Date.parse("March 24, 2023"), format: :long
+
+%h4.mt-4
+  Supporting inclusive and sustainable research infrastructure for systematics (SISRIS)
+%p
+  %img{src: "/images/sisris.jpg", alt: "SISRIS logo", class:"img-fluid pull-left float-left mr-2", width: "150px", height: "150px"}
+  Supported by a conference grant from the US National Science Foundation to Dr. Andrea Weeks (George Mason University; Ted R. Bradley Herbarium), and Drs. Shawn Zeringue-Krosnick and Twanelle Majors (Tennessee Tech University; Hollister Herbarium). It supports two US-based workshops and symposia at the 2023 annual meetings of the 
+  %a{href: "https://www.sebiologists.org/asb-2023.html"} Association of Southeastern Biologists
+  and
+  = succeed "." do
+    %a{href: "https://2023.botanyconference.org/"} Botany 2023
+  The purpose of the work is to share new practices that improve attribution of natural history specimens and highlight research advances in systematics that can be made as a consequence of improved people-data within biodiversity informatics databases.
+  %ul.list-inline.clearfix
+    %li.list-inline-item
+      %a{href: "https://github.com/aweeks3/SISRIS"}
+        Agenda
+    %li.list-inline-item
+      %a{href: "https://doi.org/10.5281/zenodo.7767332"}
+        Documents
+
+%h3.mt-4
   = I18n.l Date.parse("April 12, 2022"), format: :long
 
 %h4.mt-4
