@@ -75,7 +75,7 @@
           - @article.gbif_dois.each do |doi|
             %a.badge.badge-light.citation-correction{href: "https://doi.org/#{doi}"} #{doi}
 
-      .altmetric-embed.mb-4{"data-badge-popover":"right", "data-badge-type":"donut", "data-doi":"#{@article.doi}", "data-hide-no-mentions":"true"}
+      .altmetric-embed.mb-4{"data-badge-popover":"right", "data-badge-type":"donut", "data-doi":"#{@article.doi}", "data-hide-no-mentions":"true", style:"width:64px; height:64px"}
 
       %button.btn.btn-success{type:"submit"} Update
       %button.btn.btn-danger{type: "button", "data-toggle": "modal", "data-target": "#deleteModal"} Delete

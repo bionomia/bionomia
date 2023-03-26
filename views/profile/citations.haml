@@ -33,7 +33,7 @@
               #{h(article.citation)}
             = link_to "https://doi.org/#{article.doi}", "https://doi.org/#{article.doi}"
         .card-body
-          .altmetric-embed.pull-left.mr-2.float-left{"data-badge-popover":"right", "data-badge-type":"donut", "data-doi":"#{article.doi}", "data-hide-no-mentions":"true"}
+          .altmetric-embed.pull-left.mr-2.float-left{"data-badge-popover":"right", "data-badge-type":"donut", "data-doi":"#{article.doi}", "data-hide-no-mentions":"true", style:"width:64px; height:64px"}
           %p.card-text.text-muted #{h(article.abstract)}
         .card-footer.d-flex
           .small
