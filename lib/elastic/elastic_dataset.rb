@@ -42,7 +42,7 @@ module Bionomia
         mappings: {
           properties: {
             id: { type: 'integer', index: false },
-            datasetkey: { type: 'keyword', index: false },
+            datasetkey: { type: 'keyword' },
             title: {
               type: 'text',
               search_analyzer: :standard,
@@ -68,7 +68,8 @@ module Bionomia
               type: 'text',
               analyzer: :institution_codes,
               norms: false
-            }
+            },
+            user_count: { type: 'integer', index: false }
           }
         }
       }
@@ -89,7 +90,8 @@ module Bionomia
         description: d.description,
         top_collection_codes: d.top_collection_codes,
         top_institution_codes: d.top_institution_codes,
-        kind: d.dataset_type
+        kind: d.dataset_type,
+        users_count: d.users_count
       }
     end
 

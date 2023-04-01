@@ -24,6 +24,16 @@ module Sinatra
               dataset_stats.to_json
             end
 
+            get '/:id/badge.svg' do
+              content_type "image/svg+xml", charset: 'utf-8'
+              @doc = search_dataset_by_uuid(params[:id])
+              if @doc.nil?
+                haml :dataset_badge_svg_404, layout: false
+              else
+                haml :dataset_badge_svg, layout: false
+              end
+            end
+
             get '/:id/datapackage.json' do
               content_type "application/json", charset: 'utf-8'
               cache_control :public, :must_revalidate, :no_cache, :no_store
