@@ -36,6 +36,10 @@ OptionParser.new do |opts|
     options[:counter] = true
   end
 
+  opts.on("-b", "--badge", "Rebuild badge counter for recently attributed records") do
+    options[:badge] = true
+  end
+
   opts.on("-v", "--verify", "Verify that dataset record counts are less than or equal to current count on GBIF") do
     options[:verify] = true
   end
@@ -47,6 +51,21 @@ OptionParser.new do |opts|
 end.parse!
 
 datasets = Bionomia::GbifDataset.new
+
+if options[:badge]
+  ago = DateTime.now - 2.days
+  puts "Looking for recently attributed datasets...".yellow
+  datasetkeys = Occurrence.joins(:user_occurrences)
+                          .where("user_occurrences.created >= '#{ago}'")
+                          .pluck(:datasetKey)
+                          .flatten
+                          .uniq
+  Dataset.where(uuid: datasetkeys).find_each do |d|
+    d.refresh_search
+    puts d.uuid.green
+  end
+  puts "Done!".green
+end
 
 if options[:populate]
   keys = Occurrence.select(:datasetKey).distinct.pluck(:datasetKey).compact

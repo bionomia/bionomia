@@ -80,6 +80,10 @@ Finally, import the bulk claims on production (will create users & make public i
 
      $ RACK_ENV=production bundle exec ./bin/bulk_claim.rb --file "gbif_claims.csv"
 
+The above recreates the caches and so cached file permissions may need to be set prior to its execution. The above also deletes records that originated from the source, which sometimes is extremely show to execute. One way to speed this up is to do:
+
+     mysql> DELETE FROM user_occurrences WHERE created_by = 2 ORDER BY id DESC;
+
 ### Step 6: Populate Search in Elasticsearch
 
      $ RACK_ENV=production bundle exec ./bin/populate_search.rb --index agent

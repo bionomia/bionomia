@@ -41,6 +41,10 @@ class Dataset < ActiveRecord::Base
     occurrences_count > 1_500_000
   end
 
+  def refresh_search
+    update_search
+  end
+
   def users
     subq = UserOccurrence.select(:user_id, :visible)
                          .from("user_occurrences FORCE INDEX (user_occurrence_idx)")

@@ -83,6 +83,7 @@ val missing = occurrences.
     distinct
 
 //write to "missing" table then do additional querying there
+//such as make a unique list of datasetKeys whose caches later need flushing
 missing.write.mode("append").jdbc(url, "missing", prop)
 
 // Best to drop indices then recreate later
