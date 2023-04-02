@@ -26,6 +26,7 @@
     %img{src: "/dataset/#{@dataset.uuid}/badge.svg", alt: "Click to get badge html", width:"200", height:"20"}
     %a{href: "#", "data-toggle": "modal", "data-target": "#badge_content", "data-keyboard": "true", "data-focus": "true"}
       %i.fas.fa-info-circle{"data-toggle":"tooltip", title: "#{I18n.t('dataset.badge_tooltip')}"}
+      Code
   #badge_content.modal.fade{tabindex: "-1"}
     .modal-dialog.modal-dialog-centered.modal-dialog-scrollable.modal-xl{style: "height:100%"}
       .modal-content{style: "height:60%"}
