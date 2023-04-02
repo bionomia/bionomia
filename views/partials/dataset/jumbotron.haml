@@ -40,6 +40,8 @@
                 &lt;a href="https://bionomia.net/dataset/#{@dataset.uuid}"&gt;
                   &lt;img src="https://api.bionomia.net/dataset/#{@dataset.uuid}/badge.svg" alt="Bionomia dataset badge" width="200" height="20"&gt;
                 &lt;/a&gt;
+          %p.small.text-left
+            Badge has a 24hr cache and counters are rebuilt once a day as needed.
         .modal-footer
           %button.btn.btn-secondary{type: "button", "data-dismiss": "modal"}= I18n.t('help.close')
 
