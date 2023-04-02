@@ -23,7 +23,7 @@
         %img{src:"/images/#{@dataset.doi}.svg", alt: ""}
 
   %p.mb-1
-    %img{src: "https://api.bionomia.net/dataset/#{@dataset.uuid}/badge.svg", alt: "Click to get badge html", width:"200", height:"20"}
+    %img{src: "https://api.bionomia.net/dataset/#{@dataset.uuid}/badge.svg", alt: "Click to get badge html", width:"210", height:"20"}
     %a{href: "#", "data-toggle": "modal", "data-target": "#badge_content", "data-keyboard": "true", "data-focus": "true"}
       %i.fas.fa-info-circle{"data-toggle":"tooltip", title: "#{I18n.t('dataset.badge_tooltip')}"}
       Code
@@ -39,7 +39,7 @@
             %code
               :preserve
                 &lt;a href="https://bionomia.net/dataset/#{@dataset.uuid}"&gt;
-                  &lt;img src="https://api.bionomia.net/dataset/#{@dataset.uuid}/badge.svg" alt="Bionomia dataset badge" width="200" height="20"&gt;
+                  &lt;img src="https://api.bionomia.net/dataset/#{@dataset.uuid}/badge.svg" alt="Bionomia dataset badge" width="210" height="20"&gt;
                 &lt;/a&gt;
           %p.small.text-left
             Badge has a 24hr cache and counters are rebuilt once a day as needed.
