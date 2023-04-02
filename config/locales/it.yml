@@ -167,6 +167,8 @@ it:
     none_collected_timeline: "No one has collected and indicated a collection date"
     none_identified_timeline: "No one has identified and indicated a determination date"
     not_all_features: Large dataset, not all features are available.
+    badge_tooltip: Click to obtain HTML for this badge.
+    badge_modal: Bionomia Dataset Badge
   date:
     formats:
       month_and_year: "%B %Y"

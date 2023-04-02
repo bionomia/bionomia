@@ -167,6 +167,8 @@ pt:
     none_collected_timeline: "Ninguém coletou e indicou uma data de coleta"
     none_identified_timeline: "Ninguém se identificou e indicou uma data de identificação"
     not_all_features: Large dataset, not all features are available.
+    badge_tooltip: Click to obtain HTML for this badge.
+    badge_modal: Bionomia Dataset Badge
   date:
     formats:
       month_and_year: "%B %Y"
