@@ -13,34 +13,35 @@
       #{h(Sanitize.fragment(@dataset.description))}
 
   - if @dataset.license && @dataset.license_icon
-    %p
+    %p.mb-1
       %a{href: "#{@dataset.license}"}
         %img{src:"#{@dataset.license_icon}", alt: ""}
 
   - if @dataset.doi
-    %p
+    %p.mb-1
       %a{href: "https://doi.org/#{@dataset.doi}"}
         %img{src:"/images/#{@dataset.doi}.svg", alt: ""}
-    %p
-      %img{src: "/dataset/#{@dataset.uuid}/badge.svg", alt: "Click to get badge html"}
-      %a{href: "#", "data-toggle": "modal", "data-target": "#badge_content", "data-keyboard": "true", "data-focus": "true"}
-        %i.fas.fa-info-circle{"data-toggle":"tooltip", title: "#{I18n.t('dataset.badge_tooltip')}"}
-    #badge_content.modal.fade{tabindex: "-1"}
-      .modal-dialog.modal-dialog-centered.modal-dialog-scrollable.modal-xl{style: "height:100%"}
-        .modal-content{style: "height:60%"}
-          .modal-header
-            %h5.modal-title= I18n.t('dataset.badge_modal')
-            %button.close{type: "button", "data-dismiss": "modal", "aria-label": "#{I18n.t('help.close')}"}
-              %span{"aria-hidden": true} &times;
-          .modal-body.h-100.w-100
-            %pre.pre-scrollable.text-left
-              %code
-                :preserve
-                  &lt;a href="https://bionomia.net/dataset/#{@dataset.uuid}"&gt;
-                    &lt;img src="https://api.bionomia.net/dataset/#{@dataset.uuid}/badge.svg" alt="Bionomia dataset badge"&gt;
-                  &lt;/a&gt;
-          .modal-footer
-            %button.btn.btn-secondary{type: "button", "data-dismiss": "modal"}= I18n.t('help.close')
+
+  %p.mb-1
+    %img{src: "/dataset/#{@dataset.uuid}/badge.svg", alt: "Click to get badge html"}
+    %a{href: "#", "data-toggle": "modal", "data-target": "#badge_content", "data-keyboard": "true", "data-focus": "true"}
+      %i.fas.fa-info-circle{"data-toggle":"tooltip", title: "#{I18n.t('dataset.badge_tooltip')}"}
+  #badge_content.modal.fade{tabindex: "-1"}
+    .modal-dialog.modal-dialog-centered.modal-dialog-scrollable.modal-xl{style: "height:100%"}
+      .modal-content{style: "height:60%"}
+        .modal-header
+          %h5.modal-title= I18n.t('dataset.badge_modal')
+          %button.close{type: "button", "data-dismiss": "modal", "aria-label": "#{I18n.t('help.close')}"}
+            %span{"aria-hidden": true} &times;
+        .modal-body.h-100.w-100
+          %pre.pre-scrollable.text-left
+            %code
+              :preserve
+                &lt;a href="https://bionomia.net/dataset/#{@dataset.uuid}"&gt;
+                  &lt;img src="https://api.bionomia.net/dataset/#{@dataset.uuid}/badge.svg" alt="Bionomia dataset badge"&gt;
+                &lt;/a&gt;
+        .modal-footer
+          %button.btn.btn-secondary{type: "button", "data-dismiss": "modal"}= I18n.t('help.close')
 
   - if authorized?
     .mt-3.pt-3.border-top
