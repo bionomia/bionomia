@@ -349,7 +349,7 @@ module Sinatra
           return if !user.date_born || !occurrence.recordedBy || !occurrence.eventDate_processed
           return if !occurrence.recordedBy.downcase.include?(user.family.downcase)
           if ( user.date_born >= occurrence.eventDate_processed ) ||
-            ( user.date_died <= occurrence.eventDate_processed )
+            ( user.date_died && user.date_died <= occurrence.eventDate_processed )
             return true
           end
         end
@@ -358,7 +358,7 @@ module Sinatra
           return if !user.date_born || !occurrence.identifiedBy || !occurrence.dateIdentified_processed
           return if !occurrence.identifiedBy.downcase.include?(user.family.downcase)
           if ( user.date_born >= occurrence.dateIdentified_processed ) ||
-            ( user.date_died <= occurrence.dateIdentified_processed )
+            ( user.date_died && user.date_died <= occurrence.dateIdentified_processed )
             return true
           end
         end
