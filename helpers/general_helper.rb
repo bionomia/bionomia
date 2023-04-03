@@ -348,7 +348,7 @@ module Sinatra
         def recordedBy_has_warning?(user, occurrence)
           return if !user.date_born || !occurrence.recordedBy || !occurrence.eventDate_processed
           return if !occurrence.recordedBy.downcase.include?(user.family.downcase)
-          if ( user.date_born >= occurrence.eventDate_processed ) ||
+          if ( user.date_born && user.date_born >= occurrence.eventDate_processed ) ||
             ( user.date_died && user.date_died <= occurrence.eventDate_processed )
             return true
           end
@@ -357,7 +357,7 @@ module Sinatra
         def identifiedBy_has_warning?(user, occurrence)
           return if !user.date_born || !occurrence.identifiedBy || !occurrence.dateIdentified_processed
           return if !occurrence.identifiedBy.downcase.include?(user.family.downcase)
-          if ( user.date_born >= occurrence.dateIdentified_processed ) ||
+          if ( user.date_born && user.date_born >= occurrence.dateIdentified_processed ) ||
             ( user.date_died && user.date_died <= occurrence.dateIdentified_processed )
             return true
           end
