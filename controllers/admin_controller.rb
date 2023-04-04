@@ -126,6 +126,8 @@ module Sinatra
 
               dataset = ::Bionomia::GbifDataset.new
               dataset.process_dataset(params[:datasetKey])
+              @dataset = Dataset.find_by_uuid(params[:datasetKey])
+              @dataset.refresh_search
               { message: "ok" }.to_json
             end
 
