@@ -50,8 +50,8 @@ class Dataset < ActiveRecord::Base
                          .from("user_occurrences FORCE INDEX (user_occurrence_idx)")
                          .joins(:occurrence)
                          .where(occurrences: { datasetKey: datasetKey })
-                         .distinct
-    User.joins("INNER JOIN (#{subq.to_sql}) a ON a.user_id = users.id")
+                         .distinct.to_sql
+    User.joins("INNER JOIN (#{subq}) a ON a.user_id = users.id")
         .where("a.visible": true)
   end
 
@@ -147,8 +147,8 @@ class Dataset < ActiveRecord::Base
                          .where(occurrences: { datasetKey: datasetKey })
                          .where.not(created_by: User::BOT_IDS)
                          .where("user_occurrences.user_id != user_occurrences.created_by")
-                         .distinct
-    User.joins("INNER JOIN (#{subq.to_sql}) a ON a.created_by = users.id")
+                         .distinct.to_sql
+    User.joins("INNER JOIN (#{subq}) a ON a.created_by = users.id")
         .where("a.visible": true)
   end
 

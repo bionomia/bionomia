@@ -40,7 +40,7 @@ if options[:directory]
     puts "Making public claimed occurrences...".green
     pbar = ProgressBar.create(title: "Claims Dump", total: UserOccurrence.count, autofinish: false, format: '%t %b>> %i| %e')
     CSV.open(csv_file, 'w') do |csv|
-      csv << ["Object", "Predicate", "Subject"]
+      csv << ["Subject", "Predicate", "Object"]
       UserOccurrence.includes(:user)
                     .find_each(batch_size: 10_000) do |o|
         next if !o.visible
