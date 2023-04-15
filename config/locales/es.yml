@@ -576,7 +576,7 @@ es:
     private: Privado
     active: "En"
     inactive: "Apagado"
-    make_public_message: Incluya su cuenta en perfiles públicos. Sus asignaciones se incluirán en una descarga de datos en masa, expuestos a través de extensiones de Google Chrome y Firefox y un trino se enviará desde @BionomiaTrack.
+    make_public_message: Include your account in public Profiles. Your claims will be included in a bulk data download, exposed through Google Chrome and Firefox extensions.
     no_candidates_alert: Bionomía no encontró especímenes indizados por GBIF que usted pueda haber colectado o identificado.
     ignored_alert: Los registros de especímenes que usted marcó como "No soy yo" aparecerán aquí.
     scribe_not_helped: Este anotador de Bionomía aún no le ha ayudado a reclamar especímenes.
