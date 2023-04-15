@@ -568,10 +568,6 @@ module Sinatra
                 @viewed_user.update({ is_public: true, made_public: Time.now })
                 @viewed_user.update_profile
                 @viewed_user.flush_caches
-                if !Settings.twitter.consumer_key.blank?
-                  vars = { user_id: @viewed_user.id }
-                  ::Bionomia::TwitterWorker.perform_async(vars)
-                end
                 flash.next[:public] = true
                 redirect "/help-others/#{@viewed_user.identifier}"
               end

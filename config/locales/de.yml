@@ -377,7 +377,6 @@ de:
     other_scribes: "Andere Bearbeiter haben ebenfalls geholfen, die Exemplare von %{user_name} zuzuordnen:"
     no_scribes: "Es haben keine anderen Bearbeiter bei der Zuordnung der Exemplare von %{user_name} geholfen."
     make_public_question: "Möchten Sie das Profil von %{user_name} öffentlich zugänglich machen?"
-    tweet_message: "Es wird ein automatischer Tweet von @BionomiaTrack gesendet, der das neue Profil ankündigt."
     view_public_html: "Anzeigen des öffentlichen %{href}"
     view_public_href: "Profil"
     now_public_html: "Vielen Dank für Ihre Hilfe! Das Profil von %{person} ist jetzt für die Öffentlichkeit sichtbar."
@@ -577,7 +576,7 @@ de:
     private: Privat
     active: "An"
     inactive: "Aus"
-    make_public_message: Binden Sie Ihr Konto in öffentliche Profile ein. Ihre Beanspruchungen werden in einen Massendaten-Download aufgenommen, über Google Chrome- und Firefox-Erweiterungen offengelegt und ein Tweet von @BionomiaTrack wird gesendet.
+    make_public_message: Binden Sie Ihr Konto in öffentliche Profile ein. Ihre Beanspruchungen werden in einen Massendaten-Download aufgenommen, über Google Chrome- und Firefox-Erweiterungen offengelegt.
     no_candidates_alert: Bionomia hat keine von GBIF indizierten Exemplare gefunden, die Sie möglicherweise gesammelt oder identifiziert haben.
     ignored_alert: Exemplar-Datensätze, die Sie als „Nicht ich“ markiert haben, werden hier angezeigt.
     scribe_not_helped: Dieser Bionomia-Bearbeiter hat Ihnen noch nicht geholfen, Exemplare zu beanspruchen.

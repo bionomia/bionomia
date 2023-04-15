@@ -100,7 +100,6 @@
               .modal-body
                 %p
                   = I18n.t('help.make_public_question', user_name: "#{@viewed_user.fullname}")
-                  = I18n.t('help.tweet_message')
                 %p#helpers-list.d-none= I18n.t('help.other_scribes', user_name: "#{@viewed_user.fullname}")
                 %ul
                 %p#helpers-list-none.d-none= I18n.t('help.no_scribes', user_name: "#{@viewed_user.fullname}")

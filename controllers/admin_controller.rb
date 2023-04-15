@@ -727,10 +727,6 @@ module Sinatra
               admin_user.is_public = req[:is_public]
               if req[:is_public]
                 admin_user.made_public = Time.now
-                if !Settings.twitter.consumer_key.blank?
-                  vars = { user_id: admin_user.id }
-                  ::Bionomia::TwitterWorker.perform_async(vars)
-                end
               end
               admin_user.save
               admin_user.update_profile

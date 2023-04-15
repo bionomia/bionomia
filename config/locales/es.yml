@@ -377,7 +377,6 @@ es:
     other_scribes: "Otros anotadores han ayudado a atribuir especímenes a %{user_name}:"
     no_scribes: "Ningún otro anotador ha ayudado a atribuir especímenes a %{user_name}."
     make_public_question: "Quiere hacer público el perfil de %{user_name}?"
-    tweet_message: "Se enviará un trino automatizado desde @BionomiaTrack anunciando el nuevo perfil."
     view_public_html: "ver el %{href} público"
     view_public_href: "perfil"
     now_public_html: "¡Gracias por su ayuda! El perfil de %{person} ahora es visible públicamente."

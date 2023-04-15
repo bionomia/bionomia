@@ -377,7 +377,6 @@ pt:
     other_scribes: "Outros autores também ajudaram a atribuir %{user_name} espécimes:"
     no_scribes: "Nenhum outro autores ajudou a atribuir %{user_name} espécimes."
     make_public_question: "Você gostaria de fazer %{user_name} perfil publicamente disponível?"
-    tweet_message: "Um tweet automatizado de @BionomiaTrack será enviado anunciando o novo perfil."
     view_public_html: "Ver o público%{href}"
     view_public_href: "perfil"
     now_public_html: "Obrigado pela ajuda! O perfil para %{person} agora está visível para o público."
@@ -577,7 +576,7 @@ pt:
     private: Privado
     active: "Activado"
     inactive: "Desactivado"
-    make_public_message: Inclua sua conta em perfis públicos. Suas reivindicações serão incluídas em um download de dados em massa, exposto por meio de extensões do Google Chrome e do Firefox e um tweet será enviado de @BionomiaTrack.
+    make_public_message: Inclua sua conta em perfis públicos. Suas reivindicações serão incluídas em um download de dados em massa, exposto por meio de extensões do Google Chrome e do Firefox.
     no_candidates_alert: Bionomia não encontrou nenhum espécime indexado pelo GBIF que você possa ter coletado ou identificado.
     ignored_alert: Registros de espécimes que você marcou como "Não sou eu" aparecerão aqui.
     scribe_not_helped: Este autor Bionomia ainda não o ajudou a reivindicar espécimes.

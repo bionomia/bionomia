@@ -423,7 +423,6 @@ ru:
     other_scribes: "Other scribes have also helped attribute %{user_name}'s specimens:"
     no_scribes: "No other scribes have helped attribute %{user_name}'s specimens."
     make_public_question: "Would you like to make %{user_name}'s profile publicly available?"
-    tweet_message: "An automated Tweet from @BionomiaTrack will be sent announcing the new profile."
     view_public_html: "View the public %{href}"
     view_public_href: "profile"
     now_public_html: "Thank you for your help! The profile for %{person} is now visible to the public."
@@ -635,7 +634,7 @@ ru:
     private: Private
     active: "On"
     inactive: "Off"
-    make_public_message: Include your account in public Profiles. Your claims will be included in a bulk data download, exposed through Google Chrome and Firefox extensions and a Tweet will be sent from @BionomiaTrack.
+    make_public_message: Include your account in public Profiles. Your claims will be included in a bulk data download, exposed through Google Chrome and Firefox extensions.
     no_candidates_alert: Bionomia did not find any specimens indexed by GBIF that you may have collected or identified.
     ignored_alert: Specimen records you marked as "Not me" will appear here.
     scribe_not_helped: This Bionomia scribe has not yet helped you claim specimens.

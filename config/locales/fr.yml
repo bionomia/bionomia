@@ -377,7 +377,6 @@ fr:
     other_scribes: "D'autres scribes ont également aidé à attribuer les spécimens de %{user_name}:"
     no_scribes: "Aucun autre scribe n'a aidé à attribuer les spécimens de %{user_name}"
     make_public_question: "Souhaitez-vous rendre le profil de %{user_name} accessible au public?"
-    tweet_message: "Un Tweet automatisé de @BionomiaTrack sera envoyé pour annoncer le nouveau profil."
     view_public_html: "Voir le %{href} public"
     view_public_href: "profil"
     now_public_html: "Merci de votre aide! Le profil de %{person} est maintenant accessible au public."
@@ -577,7 +576,7 @@ fr:
     private: Privé
     active: "Allumé"
     inactive: "Inactif"
-    make_public_message: Incluez votre compte dans les profils publics. Vos réclamations seront incluses dans un téléchargement de données en masse, exposées via les extensions Google Chrome et Firefox et un Tweet sera envoyé par @BionomiaTrack.
+    make_public_message: Incluez votre compte dans les profils publics. Vos réclamations seront incluses dans un téléchargement de données en masse, exposées via les extensions Google Chrome et Firefox.
     no_candidates_alert: Bionomia n'a trouvé aucun spécimen répertorié par GBIF que vous ayez collecté ou identifié.
     ignored_alert: Les spécimens que vous avez marqués comme "Pas moi" apparaîtront ici.
     scribe_not_helped: Cette scribe Bionomia ne vous a pas encore aidé à récupérer des spécimens.

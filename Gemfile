@@ -56,7 +56,6 @@ gem 'sitemap_generator'
 gem 'sparql-client'
 gem 'sucker_punch'
 gem 'thin'
-gem 'twitter'
 gem 'typhoeus'
 gem 'wikidata-client', git: 'https://github.com/dshorthouse/wikidata-client.git', branch: 'bump-dependencies'
 
