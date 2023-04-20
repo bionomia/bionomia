@@ -576,7 +576,7 @@ pt:
     private: Privado
     active: "Activado"
     inactive: "Desactivado"
-    make_public_message: Include your account in public Profiles. Your claims will be included in a bulk data download, exposed through Google Chrome and Firefox extensions.
+    make_public_message: Inclua sua conta em perfis públicos. Suas reivindicações serão incluídas em um download de dados em massa, exposto por meio de extensões do Google Chrome e do Firefox.
     no_candidates_alert: Bionomia não encontrou nenhum espécime indexado pelo GBIF que você possa ter coletado ou identificado.
     ignored_alert: Registros de espécimes que você marcou como "Não sou eu" aparecerão aqui.
     scribe_not_helped: Este autor Bionomia ainda não o ajudou a reivindicar espécimes.
