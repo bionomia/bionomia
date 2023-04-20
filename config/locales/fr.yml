@@ -167,8 +167,8 @@ fr:
     none_collected_timeline: "Personne n'a collecté et indiqué une date de collecte"
     none_identified_timeline: "Personne n'a collecté et indiqué une date de détermination"
     not_all_features: Grand jeu de données, toutes les fonctionnalités ne sont pas disponibles.
-    badge_tooltip: Click to obtain HTML for this badge.
-    badge_modal: Bionomia Dataset Badge
+    badge_tooltip: Cliquez pour obtenir le code HTML de ce badge.
+    badge_modal: Badge du jeu de données Bionomia
   date:
     formats:
       month_and_year: "%B %Y"
@@ -576,7 +576,7 @@ fr:
     private: Privé
     active: "Allumé"
     inactive: "Inactif"
-    make_public_message: Include your account in public Profiles. Your claims will be included in a bulk data download, exposed through Google Chrome and Firefox extensions.
+    make_public_message: Incluez votre compte dans les profils publics. Vos réclamations seront incluses dans un téléchargement de données en masse, exposées via les extensions Google Chrome et Firefox.
     no_candidates_alert: Bionomia n'a trouvé aucun spécimen répertorié par GBIF que vous ayez collecté ou identifié.
     ignored_alert: Les spécimens que vous avez marqués comme "Pas moi" apparaîtront ici.
     scribe_not_helped: Cette scribe Bionomia ne vous a pas encore aidé à récupérer des spécimens.
