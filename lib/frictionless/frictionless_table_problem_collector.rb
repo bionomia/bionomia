@@ -65,8 +65,16 @@ module Bionomia
               next if uo.action == "identified"
               next if !uo.user.wikidata
               next if !uo.occurrence.eventDate_processed
+
+              date_died = uo.user.date_died
+              if (uo.user.date_died && uo.user.date_died_precision == "year")
+                date_died = "#{uo.user.date_died.year}-12-31".to_date rescue nil
+              end
+              if (uo.user.date_died && uo.user.date_died_precision == "month")
+                date_died = "#{uo.user.date_died.year}-#{uo.user.date_died.month}-28".to_date rescue nil
+              end
               if ( uo.user.date_born && uo.user.date_born >= uo.occurrence.eventDate_processed ) ||
-                ( uo.user.date_died && uo.user.date_died <= uo.occurrence.eventDate_processed )
+                ( date_died && date_died <= uo.occurrence.eventDate_processed )
                 data = [
                   uo.occurrence.id,
                   uo.occurrence.catalogNumber,

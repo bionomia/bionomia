@@ -53,7 +53,7 @@ end.parse!
 datasets = Bionomia::GbifDataset.new
 
 if options[:badge]
-  ago = DateTime.now - 2.days
+  ago = DateTime.now - 1.day
   puts "Looking for recently attributed datasets...".yellow
   datasetkeys = Occurrence.joins(:user_occurrences)
                           .where("user_occurrences.created >= '#{ago}'")

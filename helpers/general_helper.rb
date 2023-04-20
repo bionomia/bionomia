@@ -348,8 +348,15 @@ module Sinatra
         def recordedBy_has_warning?(user, occurrence)
           return if !user.date_born || !occurrence.recordedBy || !occurrence.eventDate_processed
           return if !occurrence.recordedBy.downcase.include?(user.family.downcase)
+          date_died = user.date_died
+          if (user.date_died && user.date_died_precision == "year")
+            date_died = "#{user.date_died.year}-12-31".to_date rescue nil
+          end
+          if (user.date_died && user.date_died_precision == "month")
+            date_died = "#{user.date_died.year}-#{user.date_died.month}-28".to_date rescue nil
+          end
           if ( user.date_born && user.date_born >= occurrence.eventDate_processed ) ||
-            ( user.date_died && user.date_died <= occurrence.eventDate_processed )
+            ( date_died && date_died <= occurrence.eventDate_processed )
             return true
           end
         end
@@ -357,8 +364,15 @@ module Sinatra
         def identifiedBy_has_warning?(user, occurrence)
           return if !user.date_born || !occurrence.identifiedBy || !occurrence.dateIdentified_processed
           return if !occurrence.identifiedBy.downcase.include?(user.family.downcase)
+          date_died = user.date_died
+          if (user.date_died && user.date_died_precision == "year")
+            date_died = "#{user.date_died.year}-12-31".to_date rescue nil
+          end
+          if (user.date_died && user.date_died_precision == "month")
+            date_died = "#{user.date_died.year}-#{user.date_died.month}-28".to_date rescue nil
+          end
           if ( user.date_born && user.date_born >= occurrence.dateIdentified_processed ) ||
-            ( user.date_died && user.date_died <= occurrence.dateIdentified_processed )
+            ( date_died && date_died <= occurrence.dateIdentified_processed )
             return true
           end
         end
