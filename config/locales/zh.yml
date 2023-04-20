@@ -547,7 +547,7 @@ zh-CN:
     private: Private
     active: "On"
     inactive: "Off"
-    make_public_message: Include your account in public Profiles. Your claims will be included in a bulk data download, exposed through Google Chrome and Firefox extensions.
+    make_public_message: 包括您在公开的个人档案中的账户。您的请求将包含在批量数据下载中，通过谷歌Chrome和Firefox扩展显示。
     no_candidates_alert: Bionomia did not find any specimens indexed by GBIF that you may have collected or identified.
     ignored_alert: Specimen records you marked as "Not me" will appear here.
     scribe_not_helped: This Bionomia scribe has not yet helped you claim specimens.

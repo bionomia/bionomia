@@ -167,8 +167,8 @@ fr:
     none_collected_timeline: "Personne n'a collecté et indiqué une date de collecte"
     none_identified_timeline: "Personne n'a collecté et indiqué une date de détermination"
     not_all_features: Grand jeu de données, toutes les fonctionnalités ne sont pas disponibles.
-    badge_tooltip: Click to obtain HTML for this badge.
-    badge_modal: Bionomia Dataset Badge
+    badge_tooltip: Cliquez pour obtenir le code HTML de ce badge.
+    badge_modal: Badge du jeu de données Bionomia
   date:
     formats:
       month_and_year: "%B %Y"
