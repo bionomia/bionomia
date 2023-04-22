@@ -168,7 +168,7 @@ es:
     none_identified_timeline: "Nadie ha identificado y ha indicado una fecha de identificación"
     not_all_features: Large dataset, not all features are available.
     badge_tooltip: Click to obtain HTML for this badge.
-    badge_modal: Bionomia Dataset Badge
+    badge_modal: Insignia de datos de Bionomia
   date:
     formats:
       month_and_year: "%B %Y"
@@ -652,7 +652,7 @@ es:
     date_identified: Fecha de identificación
     institution: Institución
     catalog_number: Número de catálogo
-    basis_record: Basis Of Record
+    basis_record: Base del Registro
     country: País
     family: Familia
     type_status: Estatus de tipo
