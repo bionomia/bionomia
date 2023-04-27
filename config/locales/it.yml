@@ -114,7 +114,7 @@ it:
     identified_from: "%{family} identificati da %{country}"
     collected_identified_from: "%{family} campionati o identificati da %{country}"
     no_one_collected_from: "Nessuno ha campionato %{family} in %{country}"
-    no_one_identified_from: "No one identified %{family} from %{country}"
+    no_one_identified_from: "Nessun ha identificato %{family} da %{country}"
     no_one_collected_identified_from: "No one collected or identified %{family} from %{country}"
     no_one_message: "No one found from %{country}. Search by Taxon Family to explore expertise."
   dataset:
@@ -233,7 +233,7 @@ it:
     donor_wall_title: Donor Wall
     lede: Thanks to the following donors who are supporting the completion of the data pipeline.
   general:
-    search: Search
+    search: Cerca
     apply: Apply
     help_attribute: Help Attribute
     refresh_profile: Refresh
@@ -285,7 +285,7 @@ it:
     help_documentation: "Help Documentation"
     add_someone: "Add Someone"
     latest_recipients: Latest Recipients
-    new_people: New People
+    new_people: Nuove persone
     new_people_title: Newly Found People
     new_people_lede: Attribute specimens for recently discovered people in ORCID or Wikidata
     by_country: By Country
@@ -299,24 +299,24 @@ it:
     agents: Agents
     taxa: Taxonomic Families
     specimens: Specimens
-    visualizations: Visualizations
+    visualizations: Visualizzazioni
     strings: Collector Strings
     support: Helped By
-    specialties: Specialties
-    public_profile: Public Profile
-    make_public: Make Public
-    not_yet: Not yet
+    specialties: Specialità
+    public_profile: Profilo Pubblico
+    make_public: Rendi pubblico
+    not_yet: Non ancora
     viz_none_alert: Bionomia scribes have not yet helped attribute specimens.
-    viz_alert: Click regions on the map or bars in the chart to execute a filter.
-    problems: Problems Discovered
-    collections_before_birth: "Collections made before birth:"
-    collections_after_death: "Collections made after death:"
+    viz_alert: Fare clic su regioni sulla mappa o sulle barre nel grafico per eseguire un filtro.
+    problems: Problema identificato
+    collections_before_birth: "Campionamenti fatti prima della nascita:"
+    collections_after_death: "Campionamenti fatti dopo la morte:"
     identifications_before_birth: "Identifications made before birth:"
     identifications_after_death: "Identifications made after death:"
-    view: view
-    none: none
-    identified_from: Identified From
-    collected_from: Collected From
+    view: visualizzazione
+    none: nessuno
+    identified_from: Identificato Da
+    collected_from: Campionato Da
     no_filter_alert: Bionomia scribes have not yet helped attribute specimens under this filter.
     not_helped_alert: Bionomia scribes have not yet helped attribute specimens.
     upload_message:
@@ -331,15 +331,15 @@ it:
     no_co_collectors_alert: Co-collectors have not yet been recorded.
     co_collectors_alert: "Choose a co-collector to adjust attributions made for specimens in common."
     co_collector_name: "Specimens co-collected with %{name}."
-    switch: Switch
+    switch: Inverti
     not_co_collector_name: "Specimens have not been co-collected with %{name}."
     identified_for: Identified For
     no_identified_for_alert: Recipients of determinations have not yet been recorded.
     identified_for_alert: "Choose a collector to adjust attributions made for specimens collected by them."
-    identified_for_name: "Specimens collected by %{name} and identified by %{other_name}."
-    not_identified_for_name: "Specimens have not been collected by %{name} and identified by %{other_name}."
+    identified_for_name: "Esemplari raccolti da %{name} ed identificati da %{other_name}."
+    not_identified_for_name: "Gli esemplari non sono stati raccolti da %{name} e identificati da %{other_name}."
     identified_for_count:
-      one: "collected specimen"
+      one: "esemplari raccolti"
       other: "collected specimens"
     identifications_by: Identifications By
     no_determiners_alert: Determiners have not yet been recorded.
