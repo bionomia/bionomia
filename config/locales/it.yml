@@ -26,11 +26,11 @@ it:
         significant: true
         strip_insignificant_zeros: true
   acknowledgments:
-    acknowledgments_title: Acknowledgments
+    acknowledgments_title: Ringraziamenti
     taxon_silhouettes: Taxon Family Silhouettes
     translations: Traduzioni
   admin:
-    change_photo: Change profile photo
+    change_photo: Cambia l'immagine del profilo
   agent:
     agent_title: Agent Strings
     search_title: Agent String Search
@@ -41,7 +41,7 @@ it:
     search_none: "No agent string found for %{searched}"
     search_count:
       unit:
-        one: "search result for"
+        one: "risultati della ricerca per"
         other: "search results for"
     warning: "ATTENZIONE:"
     warning_statement: Unlike all other URLs in this site, URLs for agent strings are unreliable for linking because they will point to different results every few weeks
@@ -49,11 +49,11 @@ it:
     agent_lede: A raw string from parsed collector and determiner names in natural history specimen data
     found_statement:
       unit:
-        one: "specimen found. Not all columns are shown."
+        one: "esemplare trovato. Non tutte le colonne sono mostrate."
         other: "specimens found. Not all columns are shown."
     search_html: "Search for %{agent_link} the person and help attribute their specimens."
-    example_agents: Random Samples or Results
-    gbifid: From gbifIDs
+    example_agents: Campioni o risultati casuali
+    gbifid: Dai gbifID
     gbifid_title: Agent Strings from gbifIDs
     gbifid_instructions: Paste a list of occurrence-based gbifIDs and receive a summary list of parsed agent strings from recordedBy.
   article:
@@ -68,11 +68,11 @@ it:
       unit:
         one: "person collected or identified specimens included in data downloaded from GBIF in support of this article"
         other: "people collected or identified specimens included in data downloaded from GBIF in support of this article"
-    placeholder: "Evolution and systematics of..."
-    people: People
+    placeholder: "Evoluzione e sistematica di..."
+    people: Persone
     agent_strings: Agent Strings
     agent_title: Article Agents
-    alphabetical: Alphabetical
+    alphabetical: Ordine alfabetico
     counts: Counts
     unclaimed: Unclaimed
     no_agent_strings_alert: Raw strings from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article have not been found
@@ -81,7 +81,7 @@ it:
         one: "raw string from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article"
         other: "raw strings from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article"
     claims: claims
-    specimens: specimens
+    specimens: esemplari
     no_search_alert: "No articles found for"
     search_alert:
       unit:
@@ -110,10 +110,10 @@ it:
     country_title: Paesi
     lede: From countries stated in ORCID accounts and Wikidata entries or specimen records in GBIF
     intro: From countries stated in ORCID accounts and Wikidata entries. Search by Taxon Family to explore expertise.
-    collected_from: "Collected %{family} from %{country}"
-    identified_from: "Identified %{family} from %{country}"
-    collected_identified_from: "Collected or identified %{family} from %{country}"
-    no_one_collected_from: "No one collected %{family} from %{country}"
+    collected_from: "%{family} campionati da %{country}"
+    identified_from: "%{family} identificati da %{country}"
+    collected_identified_from: "%{family} campionati o identificati da %{country}"
+    no_one_collected_from: "Nessuno ha campionato %{family} in %{country}"
     no_one_identified_from: "No one identified %{family} from %{country}"
     no_one_collected_identified_from: "No one collected or identified %{family} from %{country}"
     no_one_message: "No one found from %{country}. Search by Taxon Family to explore expertise."
