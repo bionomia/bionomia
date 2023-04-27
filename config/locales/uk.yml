@@ -1,8 +1,8 @@
 uk:
   language: English
   locale: "en_EN"
-  "true": "Yes"
-  "false": "No"
+  "true": "Так"
+  "false": "Ні"
   number:
     format:
       delimiter: ","
