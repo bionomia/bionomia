@@ -26,11 +26,11 @@ it:
         significant: true
         strip_insignificant_zeros: true
   acknowledgments:
-    acknowledgments_title: Acknowledgments
+    acknowledgments_title: Ringraziamenti
     taxon_silhouettes: Taxon Family Silhouettes
     translations: Traduzioni
   admin:
-    change_photo: Change profile photo
+    change_photo: Cambia l'immagine del profilo
   agent:
     agent_title: Agent Strings
     search_title: Agent String Search
@@ -41,7 +41,7 @@ it:
     search_none: "No agent string found for %{searched}"
     search_count:
       unit:
-        one: "search result for"
+        one: "risultati della ricerca per"
         other: "search results for"
     warning: "ATTENZIONE:"
     warning_statement: Unlike all other URLs in this site, URLs for agent strings are unreliable for linking because they will point to different results every few weeks
@@ -49,11 +49,11 @@ it:
     agent_lede: A raw string from parsed collector and determiner names in natural history specimen data
     found_statement:
       unit:
-        one: "specimen found. Not all columns are shown."
+        one: "esemplare trovato. Non tutte le colonne sono mostrate."
         other: "specimens found. Not all columns are shown."
     search_html: "Search for %{agent_link} the person and help attribute their specimens."
-    example_agents: Random Samples or Results
-    gbifid: From gbifIDs
+    example_agents: Campioni o risultati casuali
+    gbifid: Dai gbifID
     gbifid_title: Agent Strings from gbifIDs
     gbifid_instructions: Paste a list of occurrence-based gbifIDs and receive a summary list of parsed agent strings from recordedBy.
   article:
@@ -68,11 +68,11 @@ it:
       unit:
         one: "person collected or identified specimens included in data downloaded from GBIF in support of this article"
         other: "people collected or identified specimens included in data downloaded from GBIF in support of this article"
-    placeholder: "Evolution and systematics of..."
-    people: People
+    placeholder: "Evoluzione e sistematica di..."
+    people: Persone
     agent_strings: Agent Strings
     agent_title: Article Agents
-    alphabetical: Alphabetical
+    alphabetical: Ordine alfabetico
     counts: Counts
     unclaimed: Unclaimed
     no_agent_strings_alert: Raw strings from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article have not been found
@@ -81,7 +81,7 @@ it:
         one: "raw string from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article"
         other: "raw strings from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article"
     claims: claims
-    specimens: specimens
+    specimens: esemplari
     no_search_alert: "No articles found for"
     search_alert:
       unit:
@@ -110,11 +110,11 @@ it:
     country_title: Paesi
     lede: From countries stated in ORCID accounts and Wikidata entries or specimen records in GBIF
     intro: From countries stated in ORCID accounts and Wikidata entries. Search by Taxon Family to explore expertise.
-    collected_from: "Collected %{family} from %{country}"
-    identified_from: "Identified %{family} from %{country}"
-    collected_identified_from: "Collected or identified %{family} from %{country}"
-    no_one_collected_from: "No one collected %{family} from %{country}"
-    no_one_identified_from: "No one identified %{family} from %{country}"
+    collected_from: "%{family} campionati da %{country}"
+    identified_from: "%{family} identificati da %{country}"
+    collected_identified_from: "%{family} campionati o identificati da %{country}"
+    no_one_collected_from: "Nessuno ha campionato %{family} in %{country}"
+    no_one_identified_from: "Nessun ha identificato %{family} da %{country}"
     no_one_collected_identified_from: "No one collected or identified %{family} from %{country}"
     no_one_message: "No one found from %{country}. Search by Taxon Family to explore expertise."
   dataset:
@@ -233,7 +233,7 @@ it:
     donor_wall_title: Donor Wall
     lede: Thanks to the following donors who are supporting the completion of the data pipeline.
   general:
-    search: Search
+    search: Cerca
     apply: Apply
     help_attribute: Help Attribute
     refresh_profile: Refresh
@@ -285,7 +285,7 @@ it:
     help_documentation: "Help Documentation"
     add_someone: "Add Someone"
     latest_recipients: Latest Recipients
-    new_people: New People
+    new_people: Nuove persone
     new_people_title: Newly Found People
     new_people_lede: Attribute specimens for recently discovered people in ORCID or Wikidata
     by_country: By Country
@@ -299,24 +299,24 @@ it:
     agents: Agents
     taxa: Taxonomic Families
     specimens: Specimens
-    visualizations: Visualizations
+    visualizations: Visualizzazioni
     strings: Collector Strings
     support: Helped By
-    specialties: Specialties
-    public_profile: Public Profile
-    make_public: Make Public
-    not_yet: Not yet
+    specialties: Specialità
+    public_profile: Profilo Pubblico
+    make_public: Rendi pubblico
+    not_yet: Non ancora
     viz_none_alert: Bionomia scribes have not yet helped attribute specimens.
-    viz_alert: Click regions on the map or bars in the chart to execute a filter.
-    problems: Problems Discovered
-    collections_before_birth: "Collections made before birth:"
-    collections_after_death: "Collections made after death:"
+    viz_alert: Fare clic su regioni sulla mappa o sulle barre nel grafico per eseguire un filtro.
+    problems: Problema identificato
+    collections_before_birth: "Campionamenti fatti prima della nascita:"
+    collections_after_death: "Campionamenti fatti dopo la morte:"
     identifications_before_birth: "Identifications made before birth:"
     identifications_after_death: "Identifications made after death:"
-    view: view
-    none: none
-    identified_from: Identified From
-    collected_from: Collected From
+    view: visualizzazione
+    none: nessuno
+    identified_from: Identificato Da
+    collected_from: Campionato Da
     no_filter_alert: Bionomia scribes have not yet helped attribute specimens under this filter.
     not_helped_alert: Bionomia scribes have not yet helped attribute specimens.
     upload_message:
@@ -331,15 +331,15 @@ it:
     no_co_collectors_alert: Co-collectors have not yet been recorded.
     co_collectors_alert: "Choose a co-collector to adjust attributions made for specimens in common."
     co_collector_name: "Specimens co-collected with %{name}."
-    switch: Switch
+    switch: Inverti
     not_co_collector_name: "Specimens have not been co-collected with %{name}."
     identified_for: Identified For
     no_identified_for_alert: Recipients of determinations have not yet been recorded.
     identified_for_alert: "Choose a collector to adjust attributions made for specimens collected by them."
-    identified_for_name: "Specimens collected by %{name} and identified by %{other_name}."
-    not_identified_for_name: "Specimens have not been collected by %{name} and identified by %{other_name}."
+    identified_for_name: "Esemplari raccolti da %{name} ed identificati da %{other_name}."
+    not_identified_for_name: "Gli esemplari non sono stati raccolti da %{name} e identificati da %{other_name}."
     identified_for_count:
-      one: "collected specimen"
+      one: "esemplari raccolti"
       other: "collected specimens"
     identifications_by: Identifications By
     no_determiners_alert: Determiners have not yet been recorded.

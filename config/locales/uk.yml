@@ -1,8 +1,8 @@
 uk:
-  language: English
+  language: Англійська
   locale: "en_EN"
-  "true": "Yes"
-  "false": "No"
+  "true": "Так"
+  "false": "Ні"
   number:
     format:
       delimiter: ","
@@ -14,11 +14,11 @@ uk:
       decimal_units:
         format: "%n %u"
         units:
-          billion: Billion
-          million: Million
-          quadrillion: Quadrillion
-          thousand: Thousand
-          trillion: Trillion
+          billion: Мільярд
+          million: Мільйон
+          quadrillion: Квадрильйон
+          thousand: Тисяча
+          trillion: Трильйон
           unit: ''
       format:
         delimiter: ''
@@ -26,48 +26,48 @@ uk:
         significant: true
         strip_insignificant_zeros: true
   acknowledgments:
-    acknowledgments_title: Acknowledgments
-    taxon_silhouettes: Taxon Family Silhouettes
-    translations: Translations
+    acknowledgments_title: Подяки
+    taxon_silhouettes: Сімейство силуетів таксону
+    translations: Переклади
   admin:
-    change_photo: Change profile photo
+    change_photo: Змінити фото профілю
   agent:
-    agent_title: Agent Strings
-    search_title: Agent String Search
+    agent_title: Агент рядків
+    search_title: Пошук у рядку агента
     lede:
       unit:
-        one: "raw string from parsed collector and determiner names in specimen data from GBIF"
+        one: "сирі рядки з розібраних імен колекторів та визначників у даних зразків з GBIF"
         few: "raw strings from parsed collector and determiner names in specimen data from GBIF"
         many: "raw strings from parsed collector and determiner names in specimen data from GBIF"
         other: "raw strings from parsed collector and determiner names in specimen data from GBIF"
-    search_none: "No agent string found for %{searched}"
+    search_none: "Не знайдено рядка агента для %{searched}"
     search_count:
       unit:
-        one: "search result for"
+        one: "Результати пошуку для"
         few: "search results for"
         many: "search results for"
         other: "search results for"
-    warning: "WARNING:"
-    warning_statement: Unlike all other URLs in this site, URLs for agent strings are unreliable for linking because they will point to different results every few weeks
-    agent_name_title: "%{agent_name} Specimens"
-    agent_lede: A raw string from parsed collector and determiner names in natural history specimen data
+    warning: "ПОПЕРЕДЖЕННЯ:"
+    warning_statement: На відміну від усіх інших посилань на цьому сайті, URL-адреси для рядків агента недостовірні для здійснення посилань оскільки вони вказують на різні результати кожні кілька тижнів
+    agent_name_title: "%{agent_name} Види"
+    agent_lede: Сирий рядок з аналізованого збирача і детермінантних назв природної історії зразків даних
     found_statement:
       unit:
-        one: "specimen found. Not all columns are shown."
+        one: "знайдено виділення. Не всі стовпці відображаються."
         few: "specimens found. Not all columns are shown."
         many: "specimens found. Not all columns are shown."
         other: "specimens found. Not all columns are shown."
-    search_html: "Search for %{agent_link} the person and help attribute their specimens."
-    example_agents: Random Samples or Results
-    gbifid: From gbifIDs
+    search_html: "Шукайте користувача %{agent_link} та допоможіть присвоювати види."
+    example_agents: Випадкові приклади або результати
+    gbifid: З gbifIDs
     gbifid_title: Agent Strings from gbifIDs
-    gbifid_instructions: Paste a list of occurrence-based gbifIDs and receive a summary list of parsed agent strings from recordedBy.
+    gbifid_instructions: Вставте список входжень gbifID і отримайте список рядків аналізованих агентів, що записуються.
   article:
-    article_title: Article
-    articles_title: Articles
+    article_title: Стаття
+    articles_title: Статті
     articles_lede:
       unit:
-        one: "article cited downloads from GBIF"
+        one: "Цитована стаття завантаження з GBIF"
         few: "articles that cited downloads from GBIF"
         many: "articles that cited downloads from GBIF"
         other: "articles that cited downloads from GBIF"
@@ -78,13 +78,13 @@ uk:
         few: "people collected or identified specimens included in data downloaded from GBIF in support of this article"
         many: "people collected or identified specimens included in data downloaded from GBIF in support of this article"
         other: "people collected or identified specimens included in data downloaded from GBIF in support of this article"
-    placeholder: "Evolution and systematics of..."
-    people: People
-    agent_strings: Agent Strings
-    agent_title: Article Agents
-    alphabetical: Alphabetical
-    counts: Counts
-    unclaimed: Unclaimed
+    placeholder: "Еволюція та систематика..."
+    people: Люди
+    agent_strings: Агент рядків
+    agent_title: Співробітники
+    alphabetical: За алфавітом
+    counts: Кількість
+    unclaimed: Не зайнято
     no_agent_strings_alert: Raw strings from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article have not been found
     agent_strings_alert:
       unit:
