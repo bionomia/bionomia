@@ -52,7 +52,7 @@ if options[:file]
   CSV.foreach(options[:file], headers: true) do |row|
     d = DestroyedUser.active_user_identifier(row["identifier"])
     if !d.nil?
-      u = User.find_by_identifier(d).id rescue nil
+      u = User.find_by_identifier(d.id) rescue nil
     else
       if row["identifier"].is_wiki_id?
         u = User.find_or_create_by({ wikidata: row["identifier"] })
