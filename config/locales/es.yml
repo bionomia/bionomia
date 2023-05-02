@@ -257,11 +257,11 @@ es:
     remove: Remover
     filtered_by: Filtrado por
     is_public: es público
-    has_occurrences: has specimens
+    has_occurrences: tiene especímenes
   help:
     ignored_title: "Help Reclaim Ignored for %{name}"
-    upload_user_title: "Bulk Upload for %{name}"
-    help_user_title: "Help Attribute Specimens for %{name}"
+    upload_user_title: "Subida masiva por %{name}"
+    help_user_title: "Ayude a atribuir especímenes a %{name}"
     help_title: Ayude a atribuir especímenes
     country_title: Ayude a atribuir especímenes
     latest_title: Últimos receptores
@@ -334,9 +334,9 @@ es:
     switch: Cambiar
     not_co_collector_name: "No se encontraron especímenes co-colectados con %{name}."
     identified_for: Identificado para
-    no_identified_for_alert: Recipients of determinations have not yet been recorded.
-    identified_for_alert: "Choose a collector to adjust attributions made for specimens collected by them."
-    identified_for_name: "Specimens collected by %{name} and identified by %{other_name}."
+    no_identified_for_alert: Aún no se han registrado reclamos o atribuciones.
+    identified_for_alert: "Elija un colector para ajustar las atribuciones hechas para especímenes colectados por ellos."
+    identified_for_name: "Especímenes colectados por %{name} e identificados por %{other_name}."
     not_identified_for_name: "Specimens have not been collected by %{name} and identified by %{other_name}."
     identified_for_count:
       one: "collected specimen"
