@@ -212,18 +212,18 @@ uk:
       century: "%C. century"
     month_names:
       - null
-      - January
-      - February
-      - March
-      - April
-      - May
-      - June
-      - July
-      - August
-      - September
-      - October
-      - November
-      - December
+      - Січень
+      - Лютого
+      - Березня
+      - Квітень
+      - Травень
+      - Червня
+      - Липень
+      - Серпня
+      - Вересень
+      - Жовтень
+      - Листопада
+      - Грудень
     abbr_month_names:
       - null
       - Jan
