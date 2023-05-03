@@ -104,6 +104,12 @@ module Sinatra
                 type: :best_fields,
                 fields: ["citation^3", "abstract"]
               }
+            },
+            highlight: {
+              fields: {
+                citation: { number_of_fragments: 0, no_match_size: 5_000, pre_tags: ["<mark>"], post_tags: ["</mark>"] },
+                abstract: { pre_tags: ["<mark>"], post_tags: ["</mark>"] }
+              }
             }
           }
         end

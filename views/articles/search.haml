@@ -43,8 +43,15 @@
           %span.text-muted
             [NO TITLE AVAILABLE]
         - else
-          #{h(article.citation)}
+          - if d[:highlight].has_key?(:citation)
+            #{d[:highlight][:citation].first}
+          - else
+            #{h(article.citation)}
         = link_to "https://doi.org/#{article.doi}", "https://doi.org/#{article.doi}"
+        - if d[:highlight].has_key?(:abstract)
+          - d[:highlight][:abstract].each do |highlight|
+            .small.pl-2.ml-2
+              &hellip;#{highlight}&hellip;
         .small.text-muted.pl-4.ml-2
           %span.mr-2
             %a{href: "/article/#{article.doi}"}
