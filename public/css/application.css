@@ -34,6 +34,9 @@ button.hide, button.remove, button.hide-all, button.remove-all {
 a, .page-link {
   color:#1F712C;
 }
+mark {
+  background-color:#fff2a8;
+}
 i {
   display: inline-block;
   width: 20px;
