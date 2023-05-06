@@ -84,6 +84,9 @@ a:hover, .page-link:hover{
 .navbar-dark .navbar-nav .nav-link {
   color: rgba(255, 255, 255, 0.6);
 }
+.breadcrumb-item+.breadcrumb-item::before {
+  content: "|";
+}
 #home-jumbotron{
   background-image: url('/images/banner.jpg');
   background-image: -webkit-image-set(url("/images/banner-small.jpg") 1x, url("/images/banner.jpg") 2x);

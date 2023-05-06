@@ -12,8 +12,18 @@
 
 = haml :'partials/developers/tabs', layout:false, locals: { active_tab: locals[:active_tab] }
 
-%h3.mt-4.mb-3
-  = I18n.t('developer.autocomplete_widget')
+%nav{"arial-label": "breadcrumb"}
+  %ol.breadcrumb
+    %li.breadcrumb-item
+      %a{href: "#auto-complete-widget"}= I18n.t('developer.autocomplete_widget')
+    %li.breadcrumb-item
+      %a{href: "#json-ld-search"}= I18n.t('developer.json_ld_search')
+    %li.breadcrumb-item
+      %a{href: "#json-ld-occurrence-search"}= I18n.t('developer.json_ld_occurrence_search')
+
+%a{id: "auto-complete-widget"}
+  %h3.mt-4.mb-3
+    = I18n.t('developer.autocomplete_widget')
 
 %p
   %img{src:"/images/search_widget.png", alt:"Autocomplete Widget"}
@@ -232,7 +242,8 @@
         }
         </style>
 
-%h3.mt-4.mb-3= I18n.t('developer.json_ld_search')
+%a{id: "json-ld-search"}
+  %h3.mt-4.mb-3= I18n.t('developer.json_ld_search')
 
 %p.mb-4
   Search for people is exposed as JSON-LD documents with Cross-Origin Resource Sharing (CORS) using elements from
@@ -350,7 +361,8 @@
             ]
           }
 
-%h3.mt-4.mb-3= I18n.t('developer.json_ld_occurrence_search')
+%a{id: "json-ld-occurrence-search"}
+  %h3.mt-4.mb-3= I18n.t('developer.json_ld_occurrence_search')
 
 %p.mb-4
   Search occurrences as JSON-LD documents with Cross-Origin Resource Sharing (CORS) using elements from
