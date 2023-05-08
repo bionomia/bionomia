@@ -80,6 +80,7 @@ module Sinatra
                 identifier: person.identifier,
                 fullname: person.fullname,
                 fullname_reverse: person.fullname_reverse,
+                label: person.label,
                 lifespan: lifespan
               })
             end
@@ -94,7 +95,8 @@ module Sinatra
               user_id: ignored.user.id,
               identifier: ignored.user.identifier,
               fullname: ignored.user.fullname,
-              fullname_reverse: ignored.user.fullname_reverse
+              fullname_reverse: ignored.user.fullname_reverse,
+              label: ignored.user.label
             })
           end
           ignored_users

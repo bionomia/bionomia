@@ -111,6 +111,12 @@ module Bionomia
                 }
               }
             },
+            label: {
+              type: 'text',
+              analyzer: :fullname_index,
+              search_analyzer: :fullname_search,
+              norms: false
+            },
             fullname: {
               type: 'text',
               analyzer: :fullname_index,
@@ -233,6 +239,7 @@ module Bionomia
         wikidata: u.wikidata,
         family: u.family,
         given: u.given,
+        label: u.label,
         fullname: u.fullname,
         fullname_reverse: u.fullname_reverse,
         other_names: other_names,

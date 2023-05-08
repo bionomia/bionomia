@@ -45,7 +45,7 @@
                       - if u[:user].is_bot?
                         #{u[:user].fullname}
                       - else
-                        #{u[:user].fullname_reverse}
+                        #{u[:user].label || u[:user].fullname}
                   - if u[:user].country
                     %p.small.text-muted.mt-0.mb-0 #{u[:user].country.split("|").join("; ")}
             - else
@@ -55,7 +55,7 @@
                     - if u[:user].is_bot?
                       #{u[:user].fullname}
                     - else
-                      #{u[:user].fullname_reverse}
+                      #{u[:user].label || u[:user].fullname}
                 - if u[:user].country
                   %p.small.text-muted.mt-0.mb-0 #{u[:user].country.split("|").join("; ")}
 

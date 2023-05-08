@@ -98,7 +98,7 @@ module Bionomia
               attributes.delete(col)
             end
             data = [o.action].concat(attributes.values)
-                             .concat([o.claimant.fullname_reverse, o.claimant.uri, o.created])
+                             .concat([(o.claimant.label || o.claimant.fullname), o.claimant.uri, o.created])
             y << CSV::Row.new(header, data).to_s
           end
         end

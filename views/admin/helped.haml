@@ -42,7 +42,7 @@
                   %img.card-img-profile.mr-2{src:"#{profile_image(u, 'medium')}", alt:"#{u.fullname}", width:48, height:48, loading:"lazy"}
                 .flex-grow-1
                   %h5
-                    %a{href: url("/admin/user/#{u.identifier}/support/#{@admin_user.identifier}")} #{u.fullname_reverse}
+                    %a{href: url("/admin/user/#{u.identifier}/support/#{@admin_user.identifier}")} #{u.label || u.fullname}
                   - if u.wikidata
                     %p.small.text-muted.mt-0.mb-0= format_lifespan(u)
                   - if u.country
@@ -50,7 +50,7 @@
             - else
               .card-header
                 %h5
-                  %a{href: url("/admin/user/#{u.identifier}/support/#{@admin_user.identifier}")} #{u.fullname_reverse}
+                  %a{href: url("/admin/user/#{u.identifier}/support/#{@admin_user.identifier}")} #{u.label || u.fullname}
                 - if u.wikidata
                   %p.small.text-muted.mt-0.mb-0= format_lifespan(u)
                 - if u.country

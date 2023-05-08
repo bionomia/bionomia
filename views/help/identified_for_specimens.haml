@@ -13,11 +13,11 @@
 
 - if @pagy.count == 0
   .alert.alert-warning{role: "alert"}
-    = I18n.t('help.not_identified_for_name', name: @collector.fullname, other_name: @viewed_user.fullname)
+    = I18n.t('help.not_identified_for_name', name: (@collector.label || @collector.fullname), other_name: (@viewed_user.label || @viewed_user.fullname))
 - else
   = haml :'partials/help/fixed_navbar', layout: false
   .alert.alert-warning{role: "alert"}
-    = I18n.t('help.identified_for_name', name: @collector.fullname, other_name: @viewed_user.fullname)
+    = I18n.t('help.identified_for_name', name: (@collector.label || @collector.fullname), other_name: (@viewed_user.label || @viewed_user.fullname))
     %span
       %i.fas.fa-random
       = link_to I18n.t('help.switch'), url("/help-others/#{@collector.identifier}/identifications-by/#{@viewed_user.identifier}")

@@ -35,7 +35,7 @@
                   %img.card-img-profile.mr-2{src:"#{profile_image(u, 'medium')}", alt:"#{u.fullname}", width:48, height:48, loading:"lazy"}
                 .flex-grow-1
                   %h5
-                    = link_to u.fullname_reverse, url("/help-others/#{u.identifier}/specimens?attributor=#{@user.identifier}")
+                    = link_to (u.label || u.fullname), url("/help-others/#{u.identifier}/specimens?attributor=#{@user.identifier}")
                   - if u.wikidata
                     %p.small.text-muted.mt-0.mb-0= format_lifespan(u)
                   - if u.country
@@ -51,7 +51,7 @@
             - else
               .card-header
                 %h5
-                  = link_to u.fullname_reverse, url("/help-others/#{u.identifier}/specimens?attributor=#{@user.identifier}")
+                  = link_to (u.label || u.fullname), url("/help-others/#{u.identifier}/specimens?attributor=#{@user.identifier}")
                 - if u.wikidata
                   %p.small.text-muted.mt-0.mb-0= format_lifespan(u)
                 - if u.country

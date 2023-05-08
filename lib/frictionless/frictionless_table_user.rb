@@ -58,7 +58,7 @@ module Bionomia
         aliases = user.other_names.split("|").to_s if user.other_names
         data = [
           user.id,
-          user.fullname,
+          user.viewname,
           user.family,
           user.particle,
           user.given,

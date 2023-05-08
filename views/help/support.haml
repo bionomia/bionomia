@@ -33,7 +33,7 @@
                       - if u[:user].is_bot?
                         #{u[:user].fullname}
                       - else
-                        #{u[:user].fullname_reverse}
+                        #{u[:user].label || u[:user].fullname}
                   - if u[:user].country
                     %p.small.text-muted.mt-0.mb-0
                       - country_codes = u[:user].country_code.split("|") rescue []
@@ -51,7 +51,7 @@
                     - if u[:user].is_bot?
                       #{u[:user].fullname}
                     - else
-                      #{u[:user].fullname_reverse}
+                      #{u[:user].label || u[:user].fullname}
                 - if u[:user].country
                   %p.small.text-muted.mt-0.mb-0 #{u[:user].country.split("|").join("; ")}
 

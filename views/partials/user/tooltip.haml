@@ -5,7 +5,7 @@
         %img.card-img-profile.mr-2{src:"#{profile_image(locals[:user], 'medium')}", alt:"#{locals[:user].fullname}", width:48, height:48}
       .flex-grow-1
         %h5.text-nowrap
-          #{locals[:user].fullname_reverse}
+          #{locals[:user].label || locals[:user].fullname}
         - if locals[:user].wikidata
           %p.text-muted.mt-0.mb-0.text-nowrap= format_lifespan(locals[:user])
         - if locals[:user].country
@@ -21,7 +21,7 @@
   - else
     .card-header
       %h5.text-nowrap
-        #{locals[:user].fullname_reverse}
+        #{locals[:user].label || locals[:user].fullname}
       - if locals[:user].wikidata
         %p.text-muted.mt-0.mb-0.text-nowrap= format_lifespan(locals[:user])
       - if locals[:user].country

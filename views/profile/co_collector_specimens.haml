@@ -12,10 +12,10 @@
 
 - if @pagy.count == 0
   .alert.alert-warning{role: "alert"}
-    #{I18n.t('profile.not_co_collector_name', { name: @co_collector.fullname })}
+    #{I18n.t('profile.not_co_collector_name', { name: (@co_collector.label || @co_collector.fullname) })}
 - else
   .alert.alert-warning{role: "alert"}
-    #{I18n.t('profile.co_collector_name', { name: @co_collector.fullname })}
+    #{I18n.t('profile.co_collector_name', { name: (@co_collector.label || @co_collector.fullname) })}
     %span
       %i.fas.fa-random
       = link_to I18n.t('profile.switch'), url("/help-others/#{@co_collector.identifier}/co-collector/#{@user.identifier}")

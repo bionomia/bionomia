@@ -12,10 +12,10 @@
 
 - if @pagy.count == 0
   .alert.alert-warning{role: "alert"}
-    = I18n.t('profile.not_determiner_name', name: @determiner.fullname)
+    = I18n.t('profile.not_determiner_name', name: (@determiner.label || @determiner.fullname))
 - else
   .alert.alert-warning{role: "alert"}
-    = I18n.t('profile.determiner_name', name: @determiner.fullname)
+    = I18n.t('profile.determiner_name', name: (@determiner.label || @determiner.fullname))
 
   #helper-info.alert.alert-info.tiny-margins{role: "alert"}
     = haml :'partials/choose_instructions', layout: false

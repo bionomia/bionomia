@@ -18,7 +18,7 @@
       .flex-grow-1
         %h5
           // Do not use url method here because caching breaks language-based subdomains
-          %a{href: "/#{locals[:user].identifier}"} #{locals[:user].fullname_reverse}
+          %a{href: "/#{locals[:user].identifier}"} #{locals[:user].label || locals[:user].fullname}
         - if locals[:user].wikidata
           %p.small.text-muted.mt-0.mb-0= format_lifespan(locals[:user])
         - if locals[:user].country
@@ -41,7 +41,7 @@
       .flex-grow-1
         %h5
           // Do not use url method here becase caching breaks language-based subdomains
-          %a{href: "/#{locals[:user].identifier}"} #{locals[:user].fullname_reverse}
+          %a{href: "/#{locals[:user].identifier}"} #{locals[:user].label || locals[:user].fullname}
         - if locals[:user].wikidata
           %p.small.text-muted.mt-0.mb-0= format_lifespan(locals[:user])
         - if locals[:user].country

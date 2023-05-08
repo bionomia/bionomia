@@ -173,6 +173,7 @@ module Sinatra
               uri: uri,
               fullname: n[:_source][:fullname],
               fullname_reverse: n[:_source][:fullname_reverse],
+              label: n[:_source][:label],
               other_names: n[:_source][:other_names],
               thumbnail: n[:_source][:thumbnail],
               lifespan: lifespan,

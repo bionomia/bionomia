@@ -51,11 +51,11 @@
             - if uo.claimant.is_bot?
               #{uo.claimant.fullname}
             - elsif uo.claimant.is_public?
-              = link_to uo.claimant.fullname_reverse, url("/#{uo.claimant.orcid}")
+              = link_to (uo.claimant.label || uo.claimant.fullname), url("/#{uo.claimant.orcid}")
             - elsif !uo.claimant.orcid.nil?
-              = link_to uo.claimant.fullname_reverse, "https://orcid.org/#{uo.claimant.orcid}"
+              = link_to (uo.claimant.label || uo.claimant.fullname), "https://orcid.org/#{uo.claimant.orcid}"
             - else
-              #{uo.claimant.fullname_reverse}
+              #{uo.claimant.fullname}
 
     - if @total > 25
       %tfoot.thead-light

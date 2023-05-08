@@ -126,7 +126,7 @@ var Application = (function($, window) {
           name: "agent",
           limit: 10,
           source : this.data_sources.agent.ttAdapter(),
-          display : "fullname_reverse"
+          display : "fullname"
         }
         ).on("typeahead:select", function(obj, datum) {
           var datasetKey = (typeof Filters !== "undefined") ? Filters.datasetKey : "";
@@ -151,8 +151,10 @@ var Application = (function($, window) {
         {
           name: "user",
           limit: 10,
-          source : this.data_sources.user.ttAdapter(),
-          display : "fullname_reverse",
+          source: this.data_sources.user.ttAdapter(),
+          display: function(item) {
+            return (item.display || item.fullname);
+          },
           templates: {
             suggestion: user_template,
             empty: user_empty

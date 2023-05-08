@@ -36,7 +36,7 @@
               %i.fab.fa-orcid
             - else
               %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD"}
-            %a{href: url("/help-others/#{user.identifier}")} #{user.fullname_reverse}
+            %a{href: url("/help-others/#{user.identifier}")} #{user.label || user.fullname}
             - if !user.is_public?
               %i.fas.fa-lock.text-muted.ml-2
           %td

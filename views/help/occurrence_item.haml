@@ -42,20 +42,20 @@
               - @occurrence.user_recordings.each do |recorder|
                 %p.orcid.text-lg-left.p-0.mt-1{"data-user-occurrence-id": "#{recorder.id}", "data-recorders": "#{recorder.user.identifier}", "data-user-id": "#{recorder.user.id}"}
                   - if recorder.user.orcid
-                    #{recorder.user.fullname_reverse}
+                    #{recorder.user.label || recorder.user.fullname}
                     %br
                     %a{href: "https://orcid.org/#{recorder.user.orcid}"}
                       %i.fab.fa-orcid
                       https://orcid.org/#{recorder.user.orcid}
                   - else
-                    #{recorder.user.fullname_reverse}
+                    #{recorder.user.label || recorder.user.fullname}
                     %small.muted.ml-2 #{format_lifespan(recorder.user)}
                     %br
                     %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD"}
                     = link_to "http://www.wikidata.org/entity/#{recorder.user.wikidata}", "http://www.wikidata.org/entity/#{recorder.user.wikidata}"
                   - if recorder.claimant != recorder.user && !recorder.claimant.is_bot?
                     %span.d-block.ml-3.text-muted.small
-                      Attributed by: #{recorder.claimant.fullname_reverse}
+                      Attributed by: #{recorder.claimant.label || recorder.claimant.fullname}
                       %a{href: "https://orcid.org/#{recorder.claimant.orcid}"}
                         %i.fab.fa-orcid
                         https://orcid.org/#{recorder.claimant.orcid}
@@ -111,20 +111,20 @@
               - @occurrence.user_identifications.each do |determiner|
                 %p.orcid.text-lg-left.p-0.mt-1{"data-user-occurrence-id": "#{determiner.id}", "data-determiners": "#{determiner.user.identifier}", "data-user-id": "#{determiner.user.id  }"}
                   - if determiner.user.orcid
-                    #{determiner.user.fullname_reverse}
+                    #{determiner.user.label || determiner.user.fullname}
                     %br
                     %a{href: "https://orcid.org/#{determiner.user.orcid}"}
                       %i.fab.fa-orcid
                       https://orcid.org/#{determiner.user.orcid}
                   - else
-                    #{determiner.user.fullname_reverse}
+                    #{determiner.user.label || determiner.user.fullname}
                     %small.muted.ml-2 #{format_lifespan(determiner.user)}
                     %br
                     %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD"}
                     = link_to "http://www.wikidata.org/entity/#{determiner.user.wikidata}", "http://www.wikidata.org/entity/#{determiner.user.wikidata}"
                   - if determiner.claimant != determiner.user && !determiner.claimant.is_bot?
                     %span.d-block.ml-3.text-muted.small
-                      Attributed by: #{determiner.claimant.fullname_reverse}
+                      Attributed by: #{determiner.claimant.label || determiner.claimant.fullname}
                       %a{href: "https://orcid.org/#{determiner.claimant.orcid}"}
                         %i.fab.fa-orcid
                         https://orcid.org/#{determiner.claimant.orcid}

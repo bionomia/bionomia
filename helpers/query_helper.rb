@@ -19,6 +19,7 @@ module Sinatra
                           "family^3",
                           "given",
                           "fullname^5",
+                          "label",
                           "other_names",
                           "*.edge"
                         ],

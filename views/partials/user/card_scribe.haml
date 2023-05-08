@@ -6,7 +6,7 @@
       .flex-grow-1
         %h5
           // Do not use url method here becase caching breaks language-based subdomains
-          = link_to locals[:user].fullname_reverse, "/#{locals[:user].identifier}"
+          = link_to (locals[:user].label || locals[:user].fullname), "/#{locals[:user].identifier}"
         - if locals[:user].country
           %p.small.text-muted.mt-0.mb-0
             - country_codes = locals[:user].country_code.split("|") rescue []
@@ -21,7 +21,7 @@
     .card-header
       %h5
         // Do not use url method here becase caching breaks language-based subdomains
-        = link_to locals[:user].fullname_reverse, "/#{locals[:user].identifier}"
+        = link_to (locals[:user].label || locals[:user].fullname), "/#{locals[:user].identifier}"
       - if locals[:user].country
         %p.small.text-muted.mt-0.mb-0
           - country_codes = locals[:user].country_code.split("|") rescue []

@@ -184,9 +184,9 @@
     - @agent_results.in_groups_of(25, false).each do |group|
       .col-12.col-md-3.mb-3
         %ul.list-unstyled.m-2
-          - group.each do |o|
+          - group.each do |a|
             %li
-              = link_to o[:fullname_reverse], url("#{locals[:url]}/advanced-search?datasetKey=#{params[:datasetKey]}&agent_id=#{o[:id]}&kingdom=#{params[:kingdom]}&taxon_id=#{params[:taxon_id]}")
+              = link_to a[:fullname_reverse], url("#{locals[:url]}/advanced-search?datasetKey=#{params[:datasetKey]}&agent_id=#{a[:id]}&kingdom=#{params[:kingdom]}&taxon_id=#{params[:taxon_id]}")
 
 - elsif params[:agent] && params[:agent].size > 0 && @agent_results.empty?
   .alert.alert-warning.tiny-margins{role: "alert"}

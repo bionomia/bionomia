@@ -79,10 +79,10 @@ OptionParser.new do |opts|
 end.parse!
 
 def update(u)
-  puts "#{u.fullname_reverse}".yellow
+  puts "#{u.label || u.fullname}".yellow
   u.update_profile
   u.flush_caches
-  puts "#{u.fullname_reverse}".green
+  puts "#{u.label || u.fullname}".green
 end
 
 def rebuild_stats
@@ -179,7 +179,7 @@ if options[:wikidata]
 elsif options[:orcid]
   u = User.find_or_create_by({ orcid: options[:orcid] })
   u.flush_caches
-  puts "#{u.fullname_reverse} created/updated".green
+  puts "#{u.label || u.fullname} created/updated".green
 elsif options[:logged]
   User.where.not(visited: nil).find_each do |u|
     update(u)

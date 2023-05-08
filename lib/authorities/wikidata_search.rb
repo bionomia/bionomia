@@ -287,7 +287,7 @@ module Bionomia
             u.delete
             puts "#{u.wikidata} deleted. Missing either family name, birth or death date".red
           else
-            puts "#{u.fullname_reverse}".green
+            puts "#{u.label}".green
           end
         end
       end
@@ -392,7 +392,12 @@ module Bionomia
 
     def wiki_date_precision(wiki_user, property)
       data = wiki_user.properties(property)
-                      .map{|a| { precision: a.precision_key, date: a.value.time, rank: rank_score(a.property.rank) } }
+                      .map{|a| { 
+                        precision: a.precision_key,
+                        date: a.value.time,
+                        rank: rank_score(a.property.rank)
+                        }
+                      }
                       .sort_by{|v| -v[:rank] }
                       .first rescue { precision: nil }
       return [nil, nil] if data.nil? || data.empty?
@@ -411,6 +416,18 @@ module Bionomia
       end
     end
 
+    def ranked_name(items)
+      items.map{|a| { 
+        title: a.title,
+        rank: (rank_score(a.property.rank) rescue 0)
+        }
+      }
+      .sort_by{|v| -v[:rank] }
+      .map{|a| a[:title] }
+      .compact
+      .join(" ") rescue nil
+    end
+
     def wiki_user_data(wikicode)
       wiki_user = Wikidata::Item.find(wikicode)
 
@@ -421,22 +438,28 @@ module Bionomia
         return
       end
 
-      name = wiki_user.dup.title
+      label = wiki_user.dup.title
+      family = ranked_name(wiki_user.properties("P734"))
+      given = ranked_name(wiki_user.properties("P735"))
+      particle = nil
 
-      parsed = name_parser.parse(name)[0] rescue nil
-      if parsed.nil?
-        parsed = DwcAgent.parse(name)[0] rescue nil
+      if !family && !given
+        parsed = name_parser.parse(label)[0] rescue nil
+        if parsed.nil?
+          parsed = DwcAgent.parse(label)[0] rescue nil
+        end
+
+        family = parsed.family rescue nil
+        given = parsed.given rescue nil
+
+        if family.nil? && !given.nil?
+          family = given.dup
+          given = ""
+        end
+
+        particle = parsed.particle rescue nil
       end
 
-      family = parsed.family rescue nil
-      given = parsed.given rescue nil
-
-      if family.nil? && !given.nil?
-        family = given.dup
-        given = ""
-      end
-
-      particle = parsed.particle rescue nil
       country = wiki_user.properties("P27")
                          .compact
                          .map(&:title)
@@ -493,6 +516,7 @@ module Bionomia
         family: family,
         given: given,
         particle: particle,
+        label: label,
         other_names: other_names,
         country: country,
         country_code: country_code,

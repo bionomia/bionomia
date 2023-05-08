@@ -98,7 +98,7 @@ module Bionomia
 
     def create_user(orcid)
       u = User.create(orcid: orcid)
-      puts "#{u.fullname_reverse}".green
+      puts "#{u.label || u.fullname}".green
     end
 
     def account_data(orcid)
@@ -116,9 +116,9 @@ module Bionomia
       family = data[:person][:name][:"family-name"][:value].strip rescue nil
       given = data[:person][:name][:"given-names"][:value].strip rescue nil
 
-      credit_name = [data[:person][:name][:"credit-name"][:value].strip] rescue []
+      label = data[:person][:name][:"credit-name"][:value].strip rescue nil
       aliases = data[:person][:"other-names"][:"other-name"].map{|n| n[:content].strip} rescue []
-      other_names = (credit_name + aliases).uniq.compact.join("|") rescue ""
+      other_names = aliases.uniq.compact.join("|") rescue ""
 
       keywords = data[:person][:keywords][:keyword].map{|k| k[:content]}.compact.join("|") rescue nil
       description = data[:person][:biography][:content] rescue nil
@@ -170,6 +170,7 @@ module Bionomia
       {
         family: family,
         given: given,
+        label: label,
         other_names: other_names,
         email: email,
         country: country,

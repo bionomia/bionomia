@@ -120,6 +120,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def viewname
+    label || fullname
+  end
+
+  def viewname_reverse
+    fullname_reverse
+  end
+
   def initials
     given.gsub(/([[:upper:]])[[:lower:]]+/, '\1.').gsub(/\s+/, '') rescue nil
   end

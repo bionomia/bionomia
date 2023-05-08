@@ -54,9 +54,9 @@ if options[:new]
       u.zenodo_doi = pub[:doi]
       u.zenodo_concept_doi = pub[:conceptdoi]
       u.save
-      puts "#{u.fullname_reverse}".green
+      puts "#{u.label || u.fullname}".green
     rescue
-      puts "#{u.fullname_reverse} (id=#{u.id}) token failed".red
+      puts "#{u.label || u.fullname} (id=#{u.id}) token failed".red
     end
   end
 
@@ -90,13 +90,13 @@ elsif options[:orcid]
       if !pub[:doi].nil?
         u.zenodo_doi = pub[:doi]
         u.save
-        puts "#{u.fullname_reverse}".green
+        puts "#{u.label || u.fullname}".green
       else
         z.discard_version(id: id)
-        puts "#{u.fullname_reverse}".red
+        puts "#{u.label || u.fullname}".red
       end
     rescue
-      puts "#{u.fullname_reverse} (id=#{u.id}) token failed".red
+      puts "#{u.label || u.fullname} (id=#{u.id}) token failed".red
     end
   end
 
@@ -132,13 +132,13 @@ elsif options[:all] || options[:within_week]
       if !pub[:doi].nil?
         u.zenodo_doi = pub[:doi]
         u.save
-        puts "#{u.fullname_reverse}".green
+        puts "#{u.label || u.fullname}".green
       else
         z.discard_version(id: id)
-        puts "#{u.fullname_reverse}".red
+        puts "#{u.label || u.fullname}".red
       end
     rescue
-      puts "#{u.fullname_reverse} (id=#{u.id}) token failed".red
+      puts "#{u.label || u.fullname} (id=#{u.id}) token failed".red
     end
   end
 end
@@ -149,9 +149,9 @@ if options[:refresh]
     begin
       u.zenodo_access_token = z.refresh_token
       u.save
-      puts "#{u.fullname_reverse} (id=#{u.id})".green
+      puts "#{u.label || u.fullname} (id=#{u.id})".green
     rescue
-      puts "#{u.fullname_reverse} (id=#{u.id}) token failed".red
+      puts "#{u.label || u.fullname} (id=#{u.id}) token failed".red
     end
   end
 end

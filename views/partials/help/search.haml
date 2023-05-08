@@ -26,7 +26,7 @@
     %div
       %img.rounded{src:"{{thumbnail}}", width:24, height:24}
     .ml-2.flex-grow-1.small
-      %h5.m-0.p-0 {{fullname_reverse}}
+      %h5.m-0.p-0 {{#if label}}{{label}}{{else}}{{fullname}}{{/if}}
       .m-0.p-0.small.muted{style:"line-height:1.2rem"} {{{lifespan}}}
       .m-0.p-0.small{style:"line-height:1.2rem"} {{{description}}}
 

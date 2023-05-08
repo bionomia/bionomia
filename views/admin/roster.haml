@@ -69,7 +69,7 @@
               %i.fab.fa-orcid
             - else
               %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD"}
-            %a{href: url("/admin/user/#{u.identifier}")} #{u.fullname_reverse}
+            %a{href: url("/admin/user/#{u.identifier}")} #{u.label}
           %td #{u.country}
           %td
             - if u.is_public?
