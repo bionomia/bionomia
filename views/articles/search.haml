@@ -48,21 +48,20 @@
           - else
             #{h(article.citation)}
         = link_to "https://doi.org/#{article.doi}", "https://doi.org/#{article.doi}"
-        - if d[:highlight].has_key?(:abstract)
-          - d[:highlight][:abstract].each do |highlight|
-            .small.pl-2.ml-2
-              &hellip;#{highlight}&hellip;
-        .small.text-muted.pl-4.ml-2
-          %span.mr-2
-            %a{href: "/article/#{article.doi}"}
-              %i{class:"fas fa-users"}
-              = I18n.t('article.people')
-          - stats = cache_block("article-#{article.id}-stats") { article_stats(article) }
-          %span.badge.badge-light.badge-pill.citation-correction #{number_with_delimiter(stats[:claimed_count])}
-          %span.text-muted= I18n.t('article.claims')
-          %span.badge.badge-light.badge-pill.citation-correction #{number_with_delimiter(stats[:occurrence_count])}
-          %span.text-muted= I18n.t('article.specimens')
-          %span.altmetric-embed.ml-2{"data-badge-popover":"right", "data-badge-type":"4", "data-doi":"#{article.doi}", "data-hide-no-mentions":"true"}
+      - if d[:highlight].has_key?(:abstract)
+        - d[:highlight][:abstract].each do |highlight|
+          .small.pl-2.ml-2
+            &hellip;#{highlight}&hellip;
+      .small.text-muted.pl-4.ml-2.mb-4
+        %span.mr-2
+          %a{href: "/article/#{article.doi}"}
+            %i{class:"fas fa-users"}
+            = I18n.t('article.people')
+        - stats = cache_block("article-#{article.id}-stats") { article_stats(article) }
+        %span.badge.badge-light.badge-pill.citation-correction #{number_with_delimiter(stats[:claimed_count])}
+        %span.text-muted= I18n.t('article.claims')
+        %span.badge.badge-light.badge-pill.citation-correction #{number_with_delimiter(stats[:occurrence_count])}
+        %span.text-muted= I18n.t('article.specimens')
 
   - if @pagy.pages > 1
     .y-scroll
