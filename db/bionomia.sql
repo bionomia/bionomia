@@ -7,6 +7,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+
 CREATE TABLE `agents` (
   `id` int NOT NULL,
   `family` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
@@ -69,6 +70,39 @@ CREATE TABLE `messages` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+CREATE TABLE `missing` (
+  `occurrence_id` bigint NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+CREATE TABLE `missing_occurrences` (
+  `gbifID` bigint UNSIGNED NOT NULL,
+  `datasetKey` binary(36) DEFAULT NULL,
+  `license` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `occurrenceID` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `basisOfRecord` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `dateIdentified` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `decimalLatitude` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `decimalLongitude` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `country` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `countryCode` varchar(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `eventDate` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `year` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `kingdom` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `family` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `identifiedBy` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `institutionCode` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `collectionCode` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `catalogNumber` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `recordedBy` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `scientificName` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `typeStatus` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `dateIdentified_processed` datetime DEFAULT NULL,
+  `eventDate_processed` datetime DEFAULT NULL,
+  `hasImage` tinyint(1) DEFAULT NULL,
+  `recordedByID` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `identifiedByID` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=COMPRESSED;
 
 CREATE TABLE `occurrences` (
   `gbifID` bigint UNSIGNED NOT NULL,
@@ -141,6 +175,11 @@ CREATE TABLE `orphaned_user_occurrences` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
+CREATE TABLE `remapped_occurrences` (
+  `old_occurrence_id` bigint NOT NULL,
+  `new_occurrence_id` bigint NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
 CREATE TABLE `schema_migrations` (
   `version` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
@@ -196,7 +235,8 @@ CREATE TABLE `users` (
   `zenodo_concept_doi` varchar(255) DEFAULT NULL,
   `wants_mail` tinyint(1) NOT NULL DEFAULT '0',
   `mail_last_sent` timestamp NULL DEFAULT NULL,
-  `wiki_sitelinks` text
+  `wiki_sitelinks` text,
+  `label` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 CREATE TABLE `user_occurrences` (
@@ -252,6 +292,12 @@ ALTER TABLE `messages`
   ADD KEY `index_messages_on_user_id` (`user_id`),
   ADD KEY `index_messages_on_recipient_id` (`recipient_id`);
 
+ALTER TABLE `missing_occurrences`
+  ADD PRIMARY KEY (`gbifID`) USING BTREE,
+  ADD KEY `typeStatus_idx` (`typeStatus`(50)),
+  ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`,`occurrenceID`(36)),
+  ADD KEY `catalogNumber_idx` (`catalogNumber`(100));
+
 ALTER TABLE `occurrences`
   ADD PRIMARY KEY (`gbifID`) USING BTREE,
   ADD KEY `typeStatus_idx` (`typeStatus`(50)),
@@ -280,6 +326,9 @@ ALTER TABLE `organizations`
 ALTER TABLE `orphaned_user_occurrences`
   ADD PRIMARY KEY (`id`),
   ADD KEY `index_orphaned_user_occurrences_on_occurrence_id` (`occurrence_id`);
+
+ALTER TABLE `remapped_occurrences`
+  ADD KEY `occurrence_id_idx` (`old_occurrence_id`);
 
 ALTER TABLE `schema_migrations`
   ADD UNIQUE KEY `unique_schema_migrations` (`version`);
