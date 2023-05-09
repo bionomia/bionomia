@@ -337,15 +337,15 @@ es:
     no_identified_for_alert: Aún no se han registrado reclamos o atribuciones.
     identified_for_alert: "Elija un colector para ajustar las atribuciones hechas para especímenes colectados por ellos."
     identified_for_name: "Especímenes colectados por %{name} e identificados por %{other_name}."
-    not_identified_for_name: "Specimens have not been collected by %{name} and identified by %{other_name}."
+    not_identified_for_name: "Especímenes no han sido colectados por %{name} e identificados por %{other_name}."
     identified_for_count:
       one: "especímenes colectados"
       other: "especímenes colectados"
     identifications_by: Identificaciones por
     no_determiners_alert: Determiners have not yet been recorded.
     determiners_alert: "Choose a determiner to adjust attributions made for specimens identified by them."
-    determiner_name: "Specimens identified by %{name} and collected by %{other_name}."
-    not_determiner_name: "Specimens have not been identified by %{name} and collected by %{other_name}."
+    determiner_name: "Especímenes identificados por %{name} y colectados por %{other_name}."
+    not_determiner_name: "Especímenes no han sido identificados por %{name} y colectados por %{other_name}."
     identified_by_count:
       one: "espécimen identificado"
       other: "especímenes identificados"
@@ -612,9 +612,9 @@ es:
       other: "especímenes co-colectadoss"
     identified_for: Identificado para
     no_identified_for_alert: Recipients of your determinations have not yet been recorded.
-    identified_for_alert: "Choose a collector to adjust attributions made for specimens collected by them and identified by you."
+    identified_for_alert: "Elija un colector para ajustar las atribuciones realizadas para especímenes colectados por ellos e identificados por usted."
     identified_for_name: "Specimens collected by %{name} and identified by you."
-    not_identified_for_name: "Specimens have not been collected by %{name} and identified by you."
+    not_identified_for_name: "Especímenes no han sido colectados por %{name} e identificados por usted."
     identified_for_count:
       one: "espécimen colectado"
       other: "especímenes colectados"
