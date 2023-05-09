@@ -25,10 +25,10 @@
         .card.card-flex.card-profile.m-3
           .card-header.p-0
             %a{href: url("/#{u.identifier}")}
-              %img{class: "card-img-top", src: profile_image(u, "social"), alt: "#{u.label || u.fullname}"}
+              %img{class: "card-img-top", src: profile_image(u, "social"), alt: "#{u.viewname}"}
           .card-body
             %p.card-text.text-center.mb-1
-              %a{href: url("/#{u.identifier}")}= (u.label || u.fullname)
+              %a{href: url("/#{u.identifier}")}= "#{u.viewname}"
             - if u.wikidata
               %p.small.text-muted.text-center.mt-0.mb-0= format_lifespan(u)
             %p.small.text-muted.text-center.mt-0.mb-0

@@ -287,7 +287,7 @@ module Bionomia
             u.delete
             puts "#{u.wikidata} deleted. Missing either family name, birth or death date".red
           else
-            puts "#{u.label}".green
+            puts "#{u.viewname}".green
           end
         end
       end

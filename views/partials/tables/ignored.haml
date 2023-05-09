@@ -52,7 +52,7 @@
             - if uo.claimant.is_bot?
               #{uo.claimant.fullname}
             - else
-              = link_to (uo.claimant.label || uo.claimant.fullname), url("/#{uo.claimant.orcid}")
+              = link_to uo.claimant.viewname, url("/#{uo.claimant.orcid}")
 
     - if @total > 25
       %tfoot.thead-light

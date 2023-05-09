@@ -25,7 +25,7 @@ end.parse!
 if options[:users]
   User.joins(:user_occurrences).distinct.find_each do |u|
     u.flush_caches
-    puts "#{u.label || u.fullname}".green
+    puts "#{u.viewname}".green
   end
 end
 

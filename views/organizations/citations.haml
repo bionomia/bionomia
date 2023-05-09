@@ -41,9 +41,9 @@
                   %span
                     - if index != article.user_ids.split(",").size - 1
                       = succeed ", " do
-                        = link_to user.fullname, url("/#{user.identifier}")
+                        = link_to user.viewname, url("/#{user.identifier}")
                     - else
-                      = link_to user.fullname, url("/#{user.identifier}")
+                      = link_to user.viewname, url("/#{user.identifier}")
 
       - if @pagy.pages > 1
         .y-scroll

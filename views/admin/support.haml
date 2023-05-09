@@ -1,5 +1,5 @@
 - content_for :title do
-  #{@admin_user.fullname} Help Received
+  #{@admin_user.viewname} Help Received
 
 - content_for :scripts do
   %script{src:"/js/profile.js"}
@@ -13,7 +13,7 @@
   .jumbotron.jumbotron-fluid.alert-warning
     .row
       .col-12.col-lg-4.alert-warning.mb-2
-        %h1.h3= @admin_user.fullname
+        %h1.h3= @admin_user.viewname
       .col-12.col-lg-8.mt-2
         = haml :'partials/admin/user_tabs', layout: false, locals: { active_page: "specimens" }
         = haml :'partials/admin/subtabs_specimens', layout: false, locals: { active_tab: "support"}
@@ -38,14 +38,14 @@
             - if u[:user].image_url
               .card-header.d-flex
                 %div
-                  %img.card-img-profile.mr-2{src:"#{profile_image(u[:user], 'medium')}", alt:"#{u[:user].fullname}", width:48, height:48, loading:"lazy"}
+                  %img.card-img-profile.mr-2{src:"#{profile_image(u[:user], 'medium')}", alt:"#{u[:user].viewname}", width:48, height:48, loading:"lazy"}
                 .flex-grow-1
                   %h5
                     %a{href: url("/admin/user/#{@admin_user.identifier}/support/#{u[:user].identifier}")}
                       - if u[:user].is_bot?
                         #{u[:user].fullname}
                       - else
-                        #{u[:user].label || u[:user].fullname}
+                        #{u[:user].viewname}
                   - if u[:user].country
                     %p.small.text-muted.mt-0.mb-0 #{u[:user].country.split("|").join("; ")}
             - else
@@ -55,7 +55,7 @@
                     - if u[:user].is_bot?
                       #{u[:user].fullname}
                     - else
-                      #{u[:user].label || u[:user].fullname}
+                      #{u[:user].viewname}
                 - if u[:user].country
                   %p.small.text-muted.mt-0.mb-0 #{u[:user].country.split("|").join("; ")}
 

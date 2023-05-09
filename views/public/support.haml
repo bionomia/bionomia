@@ -1,6 +1,6 @@
 = haml :'partials/user/twitter_img', layout: false
 
-- content_for(:title, "#{@viewed_user.fullname}")
+- content_for(:title, "#{@viewed_user.viewname}")
 
 - content_for :scripts do
   :javascript
@@ -30,7 +30,7 @@
                   .card.my-3
                     .card-header
                       %h5
-                        #{u[:user].fullname}
+                        #{u[:user].viewname}
                     .card-body
                     .card-footer.d-flex
                       .small.text-right.text-muted.mr-2
@@ -44,10 +44,10 @@
                     - if u[:user].image_url
                       .card-header.d-flex
                         %div
-                          %img.card-img-profile.mr-2{src:"#{profile_image(u[:user], 'medium')}", alt:"#{u[:user].fullname}", width:48, height:48, loading:"lazy"}
+                          %img.card-img-profile.mr-2{src:"#{profile_image(u[:user], 'medium')}", alt:"#{u[:user].viewname}", width:48, height:48, loading:"lazy"}
                         .flex-grow-1
                           %h5
-                            = link_to (u[:user].label || u[:user].fullname), url("/#{u[:user].identifier}")
+                            = link_to u[:user].viewname, url("/#{u[:user].identifier}")
                           - if u[:user].country
                             %p.small.text-muted.mt-0.mb-0
                               - country_codes = u[:user].country_code.split("|") rescue []
@@ -62,7 +62,7 @@
                       .card-header
                         %h5
                           %a{href: url("/#{u[:user].identifier}")}
-                            #{u[:user].label || u[:user].fullname}
+                            #{u[:user].viewname}
                         - if u[:user].country
                           %p.small.text-muted.mt-0.mb-0
                             - country_codes = u[:user].country_code.split("|") rescue []

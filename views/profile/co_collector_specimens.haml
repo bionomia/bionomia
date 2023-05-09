@@ -5,17 +5,17 @@
 .row
   .col-12.col-lg-4
     %h1.h3
-      = @user.fullname
+      = @user.viewname
   .col-12.col-lg-8.mt-2
     = haml :'partials/profile/tabs', layout: false, locals: { active_page: "specimens" }
     = haml :'partials/profile/subtabs_specimens', layout: false, locals: { active_tab: "co_collectors"}
 
 - if @pagy.count == 0
   .alert.alert-warning{role: "alert"}
-    #{I18n.t('profile.not_co_collector_name', { name: (@co_collector.label || @co_collector.fullname) })}
+    #{I18n.t('profile.not_co_collector_name', { name: @co_collector.viewname })}
 - else
   .alert.alert-warning{role: "alert"}
-    #{I18n.t('profile.co_collector_name', { name: (@co_collector.label || @co_collector.fullname) })}
+    #{I18n.t('profile.co_collector_name', { name: @co_collector.viewname })}
     %span
       %i.fas.fa-random
       = link_to I18n.t('profile.switch'), url("/help-others/#{@co_collector.identifier}/co-collector/#{@user.identifier}")

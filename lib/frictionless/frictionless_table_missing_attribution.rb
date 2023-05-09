@@ -70,7 +70,7 @@ module Bionomia
               uri = uo.user.uri
               identified_uri = uo.action.include?("identified") ? uri : nil
               recorded_uri = uo.action.include?("recorded") ? uri : nil
-              created_name = uo.claimant.fullname
+              created_name = uo.claimant.viewname
               created_uri = uo.claimant.uri
               created_date_time = uo.created.to_time.iso8601
               modified_date_time = !uo.updated.blank? ? uo.updated.to_time.iso8601 : nil

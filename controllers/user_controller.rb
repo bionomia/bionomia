@@ -53,7 +53,7 @@ module Sinatra
                 maker.items.new_item do |item|
                   item.link = "#{Settings.base_url}/#{user.identifier}"
                   item.title = "#{user.fullname}"
-                  item.description = "#{user.fullname} #{twitter} #{statement}".split.join(" ")
+                  item.description = "#{user.viewname} #{twitter} #{statement}".split.join(" ")
                   item.updated = user.updated
                 end
               end

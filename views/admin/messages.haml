@@ -1,5 +1,5 @@
 - content_for :title do
-  Thanks Received for #{@admin_user.fullname}
+  Thanks Received for #{@admin_user.viewname}
 - content_for :scripts do
   %script{src:"/js/profile.js"}
   :javascript
@@ -11,7 +11,7 @@
   .jumbotron.jumbotron-fluid.alert-warning
     .row
       .col-12.col-lg-4.alert-warning.mb-2
-        %h1.h3= @admin_user.fullname
+        %h1.h3= @admin_user.viewname
       .col-12.col-lg-8.mt-2
         = haml :'partials/admin/user_tabs', layout: false, locals: { active_page: "helped" }
         = haml :'partials/admin/subtabs_helped', layout: false, locals: { active_tab: "messages"}
@@ -36,10 +36,10 @@
             - if u.image_url
               .card-header.d-flex
                 %div
-                  %img.card-img-profile.mr-2{src:"#{profile_image(u, 'medium')}", alt:"#{u.fullname}", width:48, height:48, loading:"lazy"}
+                  %img.card-img-profile.mr-2{src:"#{profile_image(u, 'medium')}", alt:"#{u.viewname}", width:48, height:48, loading:"lazy"}
                 .flex-grow-1
                   %h5
-                    %a{href: url("/#{u.identifier}")} #{u.label || u.fullname}
+                    %a{href: url("/#{u.identifier}")} #{u.viewname}
                   - if u.wikidata
                     %p.small.text-muted.mt-0.mb-0= format_lifespan(u)
                   - if u.country
@@ -47,7 +47,7 @@
             - else
               .card-header
                 %h5
-                  %a{href: url("/#{u.identifier}")} #{u.label || u.fullname}
+                  %a{href: url("/#{u.identifier}")} #{u.viewname}
                 - if u.wikidata
                   %p.small.text-muted.mt-0.mb-0= format_lifespan(u)
                 - if u.country

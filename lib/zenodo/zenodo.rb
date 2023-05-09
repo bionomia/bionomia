@@ -13,8 +13,8 @@ module Bionomia
       {
         upload_type: "dataset",
         title: "Natural history specimens collected and/or identified and deposited.",
-        creators:  [{ name: @user.fullname, orcid: @user.orcid }],
-        description: "Natural history specimen data collected and/or identified by #{@user.fullname}, <a href=\"https://orcid.org/#{@user.orcid}\">https://orcid.org/#{@user.orcid}</a>. Claims were made on Bionomia, <a href=\"http://bionomia.net\">https://bionomia.net</a> using specimen data from the Global Biodiversity Information Facility, <a href=\"https://gbif.org\">https://gbif.org</a>.",
+        creators:  [{ name: @user.viewname, orcid: @user.orcid }],
+        description: "Natural history specimen data collected and/or identified by #{@user.viewname}, <a href=\"https://orcid.org/#{@user.orcid}\">https://orcid.org/#{@user.orcid}</a>. Claims were made on Bionomia, <a href=\"http://bionomia.net\">https://bionomia.net</a> using specimen data from the Global Biodiversity Information Facility, <a href=\"https://gbif.org\">https://gbif.org</a>.",
         access_right: "open",
         license: "cc-zero",
         keywords: ["specimen", "natural history", "taxonomy"]

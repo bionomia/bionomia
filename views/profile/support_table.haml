@@ -5,7 +5,7 @@
 .row
   .col-12.col-lg-4
     %h1.h3
-      = @user.fullname
+      = @user.viewname
   .col-12.col-lg-8.mt-2
     = haml :'partials/profile/tabs', layout: false, locals: { active_page: "specimens" }
     = haml :'partials/profile/subtabs_specimens', layout: false, locals: { active_tab: "support"}

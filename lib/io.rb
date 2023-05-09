@@ -98,7 +98,7 @@ module Bionomia
               attributes.delete(col)
             end
             data = [o.action].concat(attributes.values)
-                             .concat([(o.claimant.label || o.claimant.fullname), o.claimant.uri, o.created])
+                             .concat([o.claimant.viewname, o.claimant.uri, o.created])
             y << CSV::Row.new(header, data).to_s
           end
         end
@@ -159,7 +159,7 @@ module Bionomia
       w.push_key("familyName")
       w.push_value(@user.family)
       w.push_key("name")
-      w.push_value(@user.fullname)
+      w.push_value(@user.viewname)
       w.push_value(@user.other_names.split("|"), "alternateName")
       w.push_key("sameAs")
       w.push_value(@user.uri)

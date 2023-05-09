@@ -61,7 +61,7 @@ module Bionomia
         "@id": "#{base_url}/#{user.identifier}",
         givenName: user.given,
         familyName: user.family,
-        name: user.fullname,
+        name: user.viewname,
         alternateName: user.other_names.split("|"),
         sameAs: user.uri
       }

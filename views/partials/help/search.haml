@@ -1,7 +1,7 @@
 .p-2
   %form#form-helper-wrapper.form-inline.helpers{method: :get, action: "/help-others", "accept-charset": "UTF-8"}
     .form-group.w-65.w-md-75.w-xl-65
-      - username = @viewed_user ? @viewed_user.fullname : "Mary Smith"
+      - username = @viewed_user ? @viewed_user.viewname : "Mary Smith"
       %input#typeahead-user.typeahead.help-search{type: :text, name: "q", placeholder: "#{username}", value: "#{h(params[:q])}", size:"25", autocomplete:"off"}
     .btn-group
       %input.btn.btn-success.medium-margins.mr-0{type: :submit, value:"#{I18n.t('general.search')}"}

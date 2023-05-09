@@ -5,7 +5,7 @@
 .row
   .col-12.col-lg-4
     %h1.h3
-      = @user.fullname
+      = @user.viewname
   .col-12.col-lg-8.mt-2
     = haml :'partials/profile/tabs', layout: false, locals: { active_page: "specimens" }
     = haml :'partials/profile/subtabs_specimens', layout: false, locals: { active_tab: "support"}
@@ -26,14 +26,14 @@
             - if u[:user].image_url
               .card-header.d-flex
                 %div
-                  %img.card-img-profile.mr-2{src:"#{profile_image(u[:user], 'medium')}", alt:"#{u[:user].fullname}", width:48, height:48, loading:"lazy"}
+                  %img.card-img-profile.mr-2{src:"#{profile_image(u[:user], 'medium')}", alt:"#{u[:user].viewname}", width:48, height:48, loading:"lazy"}
                 .flex-grow-1
                   %h5
                     %a{href: url("/profile/support/#{u[:user].identifier}")}
                       - if u[:user].is_bot?
                         #{u[:user].fullname}
                       - else
-                        #{u[:user].label || u[:user].fullname}
+                        #{u[:user].viewname}
                   - if u[:user].country
                     %p.small.text-muted.mt-0.mb-0 #{u[:user].country.split("|").join("; ")}
             - else
@@ -43,7 +43,7 @@
                     - if u[:user].is_bot?
                       #{u[:user].fullname}
                     - else
-                      #{u[:user].label || u[:user].fullname}
+                      #{u[:user].viewname}
                 - if u[:user].country
                   %p.small.text-muted.mt-0.mb-0 #{u[:user].country.split("|").join("; ")}
 

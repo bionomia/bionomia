@@ -860,7 +860,7 @@ class User < ActiveRecord::Base
           .limit(10)
           .order(Arel.sql("RAND()"))
           .find_each do |u|
-          users << { identifier: u.identifier, fullname: u.fullname }
+          users << { identifier: u.identifier, fullname: u.viewname }
       end
     end
 

@@ -1,5 +1,5 @@
 - content_for :title do
-  #{@admin_user.fullname} Specimens
+  #{@admin_user.viewname} Specimens
 
 - content_for :scripts do
   %script{src:"/js/profile.js"}
@@ -13,7 +13,7 @@
   .jumbotron.jumbotron-fluid.alert-warning
     .row
       .col-12.col-lg-4.alert-warning.mb-2
-        %h1.h3= @admin_user.fullname
+        %h1.h3= @admin_user.viewname
       .col-12.col-lg-8.mt-2
         = haml :'partials/admin/user_tabs', layout: false, locals: { active_page: "specimens" }
         = haml :'partials/admin/subtabs_specimens', layout: false, locals: { active_tab: "specimens"}
@@ -29,9 +29,9 @@
   #helper-info.alert.alert-info.row.tiny-margins{role: "alert"}
     .col-12.col-md-8.p-0
       - if @filter.length > 0
-        #{@admin_user.fullname} has claimed #{number_with_delimiter(@pagy.count)} specimens with this filter.
+        #{@admin_user.viewname} has claimed #{number_with_delimiter(@pagy.count)} specimens with this filter.
       - else
-        #{@admin_user.fullname} has claimed #{number_with_delimiter(@total)} specimens.
+        #{@admin_user.viewname} has claimed #{number_with_delimiter(@total)} specimens.
       Choose
       %img{src:"/images/net-unselected.png", alt:"Collected", title:"Collected", width:18}
       collected,

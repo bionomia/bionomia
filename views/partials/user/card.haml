@@ -14,11 +14,11 @@
   - if locals[:user].image_url
     .card-header.d-flex
       %div
-        %img.card-img-profile.mr-2{src:"#{profile_image(locals[:user], 'medium')}", alt:"#{locals[:user].fullname}", width:48, height:48, loading:"lazy"}
+        %img.card-img-profile.mr-2{src:"#{profile_image(locals[:user], 'medium')}", alt:"#{locals[:user].viewname}", width:48, height:48, loading:"lazy"}
       .flex-grow-1
         %h5
           // Do not use url method here because caching breaks language-based subdomains
-          %a{href: "/#{locals[:user].identifier}"} #{locals[:user].label || locals[:user].fullname}
+          %a{href: "/#{locals[:user].identifier}"} #{locals[:user].viewname}
         - if locals[:user].wikidata
           %p.small.text-muted.mt-0.mb-0= format_lifespan(locals[:user])
         - if locals[:user].country
@@ -41,7 +41,7 @@
       .flex-grow-1
         %h5
           // Do not use url method here becase caching breaks language-based subdomains
-          %a{href: "/#{locals[:user].identifier}"} #{locals[:user].label || locals[:user].fullname}
+          %a{href: "/#{locals[:user].identifier}"} #{locals[:user].viewname}
         - if locals[:user].wikidata
           %p.small.text-muted.mt-0.mb-0= format_lifespan(locals[:user])
         - if locals[:user].country

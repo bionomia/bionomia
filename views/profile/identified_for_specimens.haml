@@ -5,17 +5,17 @@
 .row
   .col-12.col-lg-4
     %h1.h3
-      = @user.fullname
+      = @user.viewname
   .col-12.col-lg-8.mt-2
     = haml :'partials/profile/tabs', layout: false, locals: { active_page: "specimens" }
     = haml :'partials/profile/subtabs_specimens', layout: false, locals: { active_tab: "identified_for"}
 
 - if @pagy.count == 0
   .alert.alert-warning{role: "alert"}
-    = I18n.t('profile.not_identified_for_name', name: (@collector.label || @collector.fullname))
+    = I18n.t('profile.not_identified_for_name', name: @collector.viewname)
 - else
   .alert.alert-warning{role: "alert"}
-    = I18n.t('profile.identified_for_name', name: (@collector.label || @collector.fullname))
+    = I18n.t('profile.identified_for_name', name: @collector.viewname)
 
   #helper-info.alert.alert-info.tiny-margins{role: "alert"}
     = haml :'partials/choose_instructions', layout: false

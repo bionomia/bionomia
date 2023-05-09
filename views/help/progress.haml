@@ -37,7 +37,7 @@
               %i.fab.fa-orcid
             - else
               %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD"}
-            %a{href: url("/help-others/#{claim.user.identifier}")} #{claim.user.label || claim.user.fullname}
+            %a{href: url("/help-others/#{claim.user.identifier}")} #{claim.user.viewname}
             - if !claim.user.is_public?
               %i.fas.fa-lock.text-muted.ml-2
           %td
@@ -47,6 +47,6 @@
             - if claim.claimant.is_bot?
               #{claim.claimant.fullname}
             - else
-              = link_to (claim.claimant.label || claim.claimant.fullname), url("/#{claim.claimant.orcid}")
+              = link_to (claim.claimant.viewname), url("/#{claim.claimant.orcid}")
           %td
             #{claim.created}

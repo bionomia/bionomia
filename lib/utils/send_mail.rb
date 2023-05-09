@@ -83,7 +83,7 @@ module Bionomia
     end
 
     def construct_message(user, articles)
-      body  = salutation(user.fullname)
+      body  = salutation(user.viewname)
       body += articles.map{|a| format_article(a) }.join("\n\n")
       body += closing
       body

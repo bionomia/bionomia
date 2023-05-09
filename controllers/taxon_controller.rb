@@ -172,7 +172,7 @@ module Sinatra
               @timeline = users.map do |u|
                 card = haml :'partials/user/tooltip', layout: false, locals: { user: u }
                 [ u.identifier,
-                  u.fullname,
+                  u.viewname,
                   card,
                   u.min_date.to_time.iso8601,
                   u.max_date.to_time.iso8601,

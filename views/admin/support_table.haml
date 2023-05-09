@@ -1,5 +1,5 @@
 - content_for :title do
-  #{@admin_user.fullname} Help Received
+  #{@admin_user.viewname} Help Received
 
 - content_for :scripts do
   :javascript
@@ -11,7 +11,7 @@
   .jumbotron.jumbotron-fluid.alert-warning
     .row
       .col-12.col-lg-4.alert-warning.mb-2
-        %h1.h3= @admin_user.fullname
+        %h1.h3= @admin_user.viewname
       .col-12.col-lg-8.mt-2
         = haml :'partials/admin/user_tabs', layout: false, locals: { active_page: "specimens" }
         = haml :'partials/admin/subtabs_specimens', layout: false, locals: { active_tab: "support"}
@@ -30,7 +30,7 @@
       %img{src:"/images/microscope-unselected.png", alt:"Collected", title:"Collected", width:18}
       identified, or Both or the Remove button to refine attributions made by
       %span.font-weight-bold
-        #{@helped_user.fullname}
+        #{@helped_user.viewname}
 
   .table-responsive-lg.overflow-auto
     %table.table.table-hover.table-sm

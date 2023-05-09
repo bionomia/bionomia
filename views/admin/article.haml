@@ -64,11 +64,11 @@
               - if u.orcid
                 %a{href: url("/#{u.identifier}")}
                   %i.fab.fa-orcid
-                  #{u.fullname}
+                  #{u.viewname}
               - else
                 %img{src: "/images/wikidata_16x10.svg", alt:"Wikidata iD"}
                   %a{href: url("/#{u.identifier}")}
-                    #{u.fullname}
+                    #{u.viewname}
 
         %dt.col-sm-2 All data in study:
         %dd.col-sm-10

@@ -85,7 +85,7 @@ module Sinatra
               content_type "application/json", charset: 'utf-8'
               @stats = cache_block("#{@user.identifier}-stats") { user_stats(@user) }
               {
-                name: @user.fullname,
+                name: @user.viewname,
                 orcid: @user.orcid,
                 image_url: profile_image(@user, 'medium'),
                 stats: @stats

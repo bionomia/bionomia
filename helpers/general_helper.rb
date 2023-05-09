@@ -297,7 +297,7 @@ module Sinatra
           end
           attributor = nil
           if params[:attributor]
-            attributor = find_user(params[:attributor]).fullname rescue nil
+            attributor = find_user(params[:attributor]).viewname rescue nil
           end
           @filter = {
             action: action,

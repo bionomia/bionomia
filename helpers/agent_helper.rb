@@ -49,12 +49,12 @@ module Sinatra
         end
 
         def candidate_agents(user)
-          return [] if user.fullname && user.fullname.is_orcid?
+          return [] if user.viewname && user.viewname.is_orcid?
 
           cutoff_score = 65
 
-          agents = search_agents(user.fullname)
-          full_names = [user.fullname.dup]
+          agents = search_agents(user.viewname)
+          full_names = [user.viewname.dup]
           family_names = [user.family.dup]
           given_names = [user.given.dup]
 

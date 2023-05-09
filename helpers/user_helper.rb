@@ -131,7 +131,7 @@ module Sinatra
               if new_user.nil?
                 flash.next[:new_user] = { fullname: params[:identifier], slug: nil }
               else
-                flash.next[:new_user] = { fullname: new_user.fullname, slug: new_user.orcid }
+                flash.next[:new_user] = { fullname: new_user.viewname, slug: new_user.orcid }
               end
             elsif params[:identifier].is_wiki_id?
               wiki_search = ::Bionomia::WikidataSearch.new
@@ -159,7 +159,7 @@ module Sinatra
                   user.update_profile
                   user.flush_caches
                   DestroyedUser.create(identifier: user_data[:orcid], redirect_to: params[:identifier])
-                  flash.next[:new_user] = { fullname: user.fullname, slug: user.wikidata }
+                  flash.next[:new_user] = { fullname: user.viewname, slug: user.wikidata }
                 else
                   new_user = User.find_or_create_by({ wikidata: params[:identifier] })
                   if !new_user.valid_wikicontent?
@@ -167,7 +167,7 @@ module Sinatra
                     new_user.delete_search
                     new_user.delete
                   else
-                    flash.next[:new_user] = { fullname: new_user.fullname, slug: new_user.wikidata }
+                    flash.next[:new_user] = { fullname: new_user.viewname, slug: new_user.wikidata }
                   end
                 end
               end

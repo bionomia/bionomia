@@ -230,7 +230,7 @@ module Bionomia
       end
       other_names = u.other_names.split("|").map(&:strip) rescue []
       co_collectors = u.recorded_with
-                       .map{|o| { id: o.id, orcid: o.orcid, wikidata: o.wikidata, fullname: o.fullname } }
+                       .map{|o| { id: o.id, orcid: o.orcid, wikidata: o.wikidata, fullname: o.viewname } }
       family_countries = u.families_countries
       rank = family_countries[:recorded].map{|a| a[:family]}.uniq.compact.count
       {

@@ -1,5 +1,5 @@
 - content_for :title do
-  #{@admin_user.fullname} Cited Specimens
+  #{@admin_user.viewname} Cited Specimens
 
 - content_for :scripts do
   %script{src:"/js/profile.js"}
@@ -13,7 +13,7 @@
   .jumbotron.jumbotron-fluid.alert-warning
     .row
       .col-12.col-lg-4.alert-warning.mb-2
-        %h1.h3= @admin_user.fullname
+        %h1.h3= @admin_user.viewname
       .col-12.col-lg-8.mt-2
         = haml :'partials/admin/user_tabs', layout: false, locals: { active_page: "citations" }
 

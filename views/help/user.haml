@@ -1,4 +1,4 @@
-- content_for :title, I18n.t('help.help_user_title', name: (@viewed_user.label || @viewed_user.fullname))
+- content_for :title, I18n.t('help.help_user_title', name: @viewed_user.viewname)
 - content_for :scripts do
   :javascript
     $(function() {
@@ -11,7 +11,7 @@
 - if flash[:public]
   .alert.alert-success.alert-dismissible.fade.show.d-block{role: "alert"}
     %div
-      = I18n.t('help.now_public_html', person: link_to("#{@viewed_user.fullname}", url("/#{@viewed_user.identifier}")))
+      = I18n.t('help.now_public_html', person: link_to("#{@viewed_user.viewname}", url("/#{@viewed_user.identifier}")))
     %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
       %span{"aria-hidden":"true"} &times;
 

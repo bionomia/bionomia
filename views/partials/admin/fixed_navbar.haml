@@ -3,7 +3,7 @@
     %i.fas.fa-users-cog.text-muted.mr-2
     - if @admin_user.image_url
       %img{src:"#{profile_image(@admin_user, 'thumbnail')}", class:"rounded mr-2", alt:"#{@admin_user.fullname}"}
-    #{@admin_user.fullname}
+    #{@admin_user.viewname}
   - if !@admin_user.other_names.blank?
     %span.nav-item.text-muted.ml-2 [#{@admin_user.other_names.split("|")[0,2].join("; ")}]
   - if @admin_user.date_born || @admin_user.date_died

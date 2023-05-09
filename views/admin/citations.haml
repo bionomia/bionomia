@@ -1,5 +1,5 @@
 - content_for :title do
-  #{@admin_user.fullname} Citations
+  #{@admin_user.viewname} Citations
 
 - content_for :scripts do
   %script{src: "https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"}
@@ -14,13 +14,13 @@
   .jumbotron.jumbotron-fluid.alert-warning
     .row
       .col-12.col-lg-4.alert-warning.mb-2
-        %h1.h3= @admin_user.fullname
+        %h1.h3= @admin_user.viewname
       .col-12.col-lg-8.mt-2
         = haml :'partials/admin/user_tabs', layout: false, locals: { active_page: "citations" }
 
 - if @pagy.count == 0
   .alert.alert-info.tiny-margins{role: "alert"}
-    Publications that made use of #{@admin_user.fullname}'s specimen data have not yet been recorded by
+    Publications that made use of #{@admin_user.viewname}'s specimen data have not yet been recorded by
     %a{href:"https://gbif.org"} GBIF
 - else
   = haml :'partials/admin/fixed_navbar', layout: false

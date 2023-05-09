@@ -2,8 +2,8 @@
   %span.nav-item.text-nowrap
     %i.fas.fa-hands-helping.text-muted.mr-2
     - if @viewed_user.image_url
-      %img.rounded.mr-2{src:"#{profile_image(@viewed_user, 'thumbnail')}", alt:"#{@viewed_user.fullname}"}
-    #{@viewed_user.fullname}
+      %img.rounded.mr-2{src:"#{profile_image(@viewed_user, 'thumbnail')}", alt:"#{@viewed_user.viewname}"}
+    #{@viewed_user.viewname}
   - if !@viewed_user.other_names.blank?
     %span.nav-item.text-muted.ml-2 [#{@viewed_user.other_names.split("|")[0,2].join("; ")}]
   - if @viewed_user.date_born || @viewed_user.date_died
