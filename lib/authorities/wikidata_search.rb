@@ -285,7 +285,7 @@ module Bionomia
           if !u.valid_wikicontent?
             u.delete_search
             u.delete
-            puts "#{u.wikidata} deleted. Missing either family name, birth or death date".red
+            puts "#{u.wikidata} deleted. Missing either label, birth or death date".red
           else
             puts "#{u.viewname}".green
           end

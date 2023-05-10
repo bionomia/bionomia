@@ -128,7 +128,7 @@ if options[:file]
     if u.wikidata && !u.valid_wikicontent?
       u.delete_search
       u.delete
-      puts "#{u.wikidata} deleted. Missing either family name, birth or death date or has an ORCID".red
+      puts "#{u.wikidata} deleted. Missing either label, birth or death date or has an ORCID".red
     else
       update(u)
     end
@@ -178,7 +178,7 @@ if options[:wikidata]
   end
 elsif options[:orcid]
   u = User.find_or_create_by({ orcid: options[:orcid] })
-  u.flush_caches
+  update(u)
   puts "#{u.viewname} created/updated".green
 elsif options[:logged]
   User.where.not(visited: nil).find_each do |u|
