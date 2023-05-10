@@ -16,6 +16,10 @@ class Agent < ActiveRecord::Base
     [family, given].compact.reject(&:empty?).join(", ")
   end
 
+  def viewname
+    fullname
+  end
+
   def agents_same_family
     Agent.where(family: family)
   end
