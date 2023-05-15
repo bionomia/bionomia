@@ -428,6 +428,11 @@ module Bionomia
       .join(" ") rescue nil
     end
 
+    def extract_sitelinks(wiki_user)
+      wiki_user.sitelinks
+               .slice(*I18n.backend.translations.keys.map{|k| "#{k}wiki"}) rescue nil
+    end
+
     def wiki_user_data(wikicode)
       wiki_user = Wikidata::Item.find(wikicode)
 
@@ -530,7 +535,7 @@ module Bionomia
         date_born_precision: date_born_precision,
         date_died: date_died,
         date_died_precision: date_died_precision,
-        wiki_sitelinks: wiki_user.sitelinks,
+        wiki_sitelinks: extract_sitelinks(wiki_user),
         organizations: organizations
       }
     end
@@ -585,7 +590,7 @@ module Bionomia
         data[:bionomia_id] = wiki_user.properties("P6944").first.value rescue nil
         data[:twitter] = wiki_user.properties("P2002").first.value rescue nil
         data[:youtube_id] = wiki_user.properties("P1651").first.value rescue nil
-        data[:wiki_sitelinks] = wiki_user.sitelinks
+        data[:wiki_sitelinks] = sitelinks(wiki_user)
       end
       data
     end
