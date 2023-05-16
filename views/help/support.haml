@@ -30,10 +30,7 @@
                 .flex-grow-1
                   %h5
                     %a{href: url("/help-others/#{@viewed_user.identifier}/specimens?attributor=#{u[:user].identifier}")}
-                      - if u[:user].is_bot?
-                        #{u[:user].fullname}
-                      - else
-                        #{u[:user].viewname}
+                      #{u[:user].viewname}
                   - if u[:user].country
                     %p.small.text-muted.mt-0.mb-0
                       - country_codes = u[:user].country_code.split("|") rescue []
@@ -48,10 +45,7 @@
               .card-header
                 %h5
                   %a{href: url("/help-others/#{@viewed_user.identifier}/specimens?attributor=#{u[:user].identifier}")}
-                    - if u[:user].is_bot?
-                      #{u[:user].fullname}
-                    - else
-                      #{u[:user].viewname}
+                    #{u[:user].viewname}
                 - if u[:user].country
                   %p.small.text-muted.mt-0.mb-0 #{u[:user].country.split("|").join("; ")}
 

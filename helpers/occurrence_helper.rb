@@ -44,7 +44,7 @@ module Sinatra
               sameAs: id_url,
               givenName: "#{o.user.given}",
               familyName: "#{o.user.family}",
-              name: "#{o.user.fullname}",
+              name: "#{o.user.viewname}",
               alternateName: o.user.other_names.present? ? o.user.other_names.split("|") : []
             }
           }

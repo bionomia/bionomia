@@ -62,10 +62,10 @@ if options[:orphaned] && options[:directory]
       attributors = item[:user_ids].tr('[]', '')
                       .split(',')
                       .uniq
-                      .map{|u| User.find(u).fullname}
+                      .map{|u| User.find(u).viewname}
                       .uniq
                       .join("; ")
-      csv << [user.identifier, user.fullname, item[:num], attributors]
+      csv << [user.identifier, user.viewname, item[:num], attributors]
     end
   end
   puts "Done".green

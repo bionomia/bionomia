@@ -400,7 +400,7 @@ module Sinatra
               if @admin_user.nil?
                 halt 404
               end
-              name = @admin_user.fullname.dup
+              name = @admin_user.viewname.dup
               BIONOMIA.cache_clear("blocks/#{@admin_user.identifier}-stats")
               @admin_user.destroy
               flash.next[:destroyed] = name

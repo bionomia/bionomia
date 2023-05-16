@@ -42,20 +42,14 @@
                 .flex-grow-1
                   %h5
                     %a{href: url("/admin/user/#{@admin_user.identifier}/support/#{u[:user].identifier}")}
-                      - if u[:user].is_bot?
-                        #{u[:user].fullname}
-                      - else
-                        #{u[:user].viewname}
+                      #{u[:user].viewname}
                   - if u[:user].country
                     %p.small.text-muted.mt-0.mb-0 #{u[:user].country.split("|").join("; ")}
             - else
               .card-header
                 %h5
                   %a{href: url("/admin/user/#{@admin_user.identifier}/support/#{u[:user].identifier}")}
-                    - if u[:user].is_bot?
-                      #{u[:user].fullname}
-                    - else
-                      #{u[:user].viewname}
+                    #{u[:user].viewname}
                 - if u[:user].country
                   %p.small.text-muted.mt-0.mb-0 #{u[:user].country.split("|").join("; ")}
 

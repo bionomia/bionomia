@@ -56,8 +56,8 @@ module Bionomia
       "Bionomia :: New articles used your specimen data"
     end
 
-    def salutation(fullname = "")
-      "Dear #{fullname},\n\n"\
+    def salutation(viewname = "")
+      "Dear #{viewname},\n\n"\
       "The following articles were recently discovered by the Global Biodiversity Information Facility (GBIF) as having used the data from specimens you collected or identified.\n\n"
     end
 
