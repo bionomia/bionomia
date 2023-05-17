@@ -117,7 +117,7 @@ module Sinatra
                 remove_agents << a[:id] if scores.include?(0)
 
                 # Add to list of agent names to remove if the family names are not in the known list
-                remove_agents << a[:id] if !family_names.map{|n| n.transliterate.downcase}.include?(a[:family].transliterate.downcase)
+                remove_agents << a[:id] if !family_names.compact.map{|n| n.transliterate.downcase}.include?(a[:family].transliterate.downcase)
               end
             end
 
