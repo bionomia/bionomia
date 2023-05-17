@@ -448,21 +448,24 @@ module Bionomia
       given = ranked_name(wiki_user.properties("P735"))
       particle = nil
 
-      if !family && !given
-        parsed = name_parser.parse(label)[0] rescue nil
-        if parsed.nil?
-          parsed = DwcAgent.parse(label)[0] rescue nil
-        end
+      parsed = name_parser.parse(label)[0] rescue nil
+      if parsed.nil?
+        parsed = DwcAgent.parse(label)[0] rescue nil
+      end
 
+      particle = parsed.particle rescue nil
+
+      if family.blank?
         family = parsed.family rescue nil
+      end
+
+      if given.blank?
         given = parsed.given rescue nil
+      end
 
-        if family.nil? && !given.nil?
-          family = given.dup
-          given = ""
-        end
-
-        particle = parsed.particle rescue nil
+      if family.blank? && !given.blank?
+        family = given.dup
+        given = ""
       end
 
       country = wiki_user.properties("P27")

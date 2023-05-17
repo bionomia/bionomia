@@ -110,7 +110,7 @@ module Bionomia
                   norms: false,
                 }
               }
-            },
+            },           
             label: {
               type: 'text',
               analyzer: :fullname_index,
