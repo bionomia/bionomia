@@ -593,7 +593,7 @@ module Bionomia
         data[:bionomia_id] = wiki_user.properties("P6944").first.value rescue nil
         data[:twitter] = wiki_user.properties("P2002").first.value rescue nil
         data[:youtube_id] = wiki_user.properties("P1651").first.value rescue nil
-        data[:wiki_sitelinks] = sitelinks(wiki_user)
+        data[:wiki_sitelinks] = extract_sitelinks(wiki_user)
       end
       data
     end
