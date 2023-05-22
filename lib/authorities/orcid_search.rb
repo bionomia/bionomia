@@ -115,10 +115,11 @@ module Bionomia
 
       family = data[:person][:name][:"family-name"][:value].strip rescue nil
       given = data[:person][:name][:"given-names"][:value].strip rescue nil
-
       label = data[:person][:name][:"credit-name"][:value].strip rescue nil
+      fullname = "#{given} #{family}".strip
+
       aliases = data[:person][:"other-names"][:"other-name"].map{|n| n[:content].strip} rescue []
-      aliases << "#{given} #{family}".strip
+      aliases << fullname if !label || (label && label != fullname)
       other_names = aliases.uniq.compact.join("|") rescue ""
 
       keywords = data[:person][:keywords][:keyword].map{|k| k[:content]}.compact.join("|") rescue nil
