@@ -122,6 +122,9 @@ module Bionomia
       if label && label != fullname
         aliases << fullname
       end
+      if !family
+        aliases << given
+      end
 
       other_names = aliases.uniq.compact.join("|") rescue ""
 
