@@ -110,9 +110,9 @@ nl:
     country_title: Landen
     lede: From countries stated in ORCID accounts and Wikidata entries or specimen records in GBIF
     intro: From countries stated in ORCID accounts and Wikidata entries. Search by Taxon Family to explore expertise.
-    collected_from: "Collected %{family} from %{country}"
-    identified_from: "Identified %{family} from %{country}"
-    collected_identified_from: "Collected or identified %{family} from %{country}"
+    collected_from: "Verzamelde %{family} uit %{country}"
+    identified_from: "Identificeerde %{family} uit %{country}"
+    collected_identified_from: "Verzamelde of identificeerde %{family} uit %{country}"
     no_one_collected_from: "No one collected %{family} from %{country}"
     no_one_identified_from: "No one identified %{family} from %{country}"
     no_one_collected_identified_from: "No one collected or identified %{family} from %{country}"
@@ -136,7 +136,7 @@ nl:
     agents: Agents
     agent_strings: Agent Strings
     agent_strings_unclaimed: Unclaimed Agent Strings
-    alphabetical: Alphabetical
+    alphabetical: Alfabetisch
     counts: Counts
     unclaimed: Unclaimed
     no_agents_alert: Raw strings from parsed collector and determiner names in specimen data included in this dataset have not yet been recorded
@@ -163,11 +163,11 @@ nl:
       unit:
         one: "person claimed or was attributed specimens represented in this dataset"
         other: "people claimed or were attributed specimens represented in this dataset"
-    timeline: Timeline
+    timeline: Tijdlijn
     none_collected_timeline: "No one has collected and indicated a collection date"
     none_identified_timeline: "No one has identified and indicated a determination date"
     not_all_features: Large dataset, not all features are available.
-    badge_tooltip: Click to obtain HTML for this badge.
+    badge_tooltip: Klik om HTML voor deze badge te verkrijgen.
     badge_modal: Bionomia Dataset Badge
   date:
     formats:
@@ -706,7 +706,7 @@ nl:
         one: "agent string has unclaimed specimen records from data in GBIF"
         other: "agent strings have unclaimed specimen records from data in GBIF"
     no_agents_unclaimed: No specimen records are unclaimed or unattributed
-    alphabetical: Alphabetical
+    alphabetical: Alfabetisch
     counts: Counts
     unclaimed: Unclaimed
     example_families: Random Samples
