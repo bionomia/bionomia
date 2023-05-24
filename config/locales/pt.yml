@@ -226,23 +226,23 @@ pt:
     search_title: "For Developers: Search"
   donate:
     donate_title: Faça um donativo
-    lede: Sua doação única ou periódica ajudará a completar o pipeline de dados e garantir que o crédito seja dado por contribuições feitas para coleções de história natural o mais rápido e perfeitamente possível.
+    lede: O seu donativo ocasional ou regular ajudará a completar o pipeline de dados e a garantir que as contribuições feitas às coleções de história natural sejam reconhecidas da maneira mais rápida e eficiente possível.
     campaign: Campanha
     donor_wall: Parede de doadores
   donor_wall:
     donor_wall_title: Parede de doadores
     lede: Obrigado aos seguintes doadores que estão apoiando a conclusão do pipeline de dados.
   general:
-    search: Busca
-    apply: aplicar
-    help_attribute: Atributo de ajuda
+    search: Pesquisa
+    apply: Aplicar
+    help_attribute: Ajude a atribuir
     refresh_profile: Atualizar
-    refresh_stats: Atualizar status
+    refresh_stats: Atualizar dados
     settings: Configurações
     bulk_assignment: Atribuição em massa
-    collected_all: Todos coletados
-    collected: Coletaods
-    identified_all: Todos Identificados
+    collected_all: Coletou Todos
+    collected: Coletados
+    identified_all: Identificou Todos
     identified: Identificados
     both: Ambos
     either: Ou
@@ -250,7 +250,7 @@ pt:
     download: Transferir
     submit: Submeter
     upload_csv_instructions: Carregar csv com reivindicações
-    download_records: Baixar registros descobertos
+    download_records: Transferir registos encontrados
     download_alert: "Baixe registros de espécimes descobertos, trabalhe off-line e, em seguida, carregue novas reivindicações como um csv. Um arquivo contendo no máximo %{num_records} registros é gerado. Se você tiver muito mais do que isso, poderá trabalhar em lotes. Esta rotina não atualiza dados de espécimes subjacentes nem atualiza reivindicações existentes. Se reivindicações existentes estiverem presentes no upload, elas serão ignoradas. Seu csv carregado deve usar uma vírgula para separar as colunas, cada uma opcionalmente entre aspas."
     search_dropdown_no_users: "Sua busca resultou em 0 resultados."
     reset: Restabelecer
