@@ -32,24 +32,24 @@ pt:
   admin:
     change_photo: Mudar foto de perfil
   agent:
-    agent_title: Agente de usuário
-    search_title: Busca por agente de usuário
+    agent_title: Nomes
+    search_title: Pesquisa por nome
     lede:
       unit:
-        one: "cadeia de coletores e identificadores de nomes separados da data do especime do GBIF"
-        other: "cadeia de coletores e identificadores de nomes separados da data do especime do GBIF"
-    search_none: "Cadeia de usuário não encontrado %{searched}"
+        one: "nomes de coletores e identificadores extraídos dos dados dos espécimes do GBIF"
+        other: "cadeia de nomes de coletores e identificadores analisados dos dados do espécime do GBIF"
+    search_none: "Nenhum nome encontrado para %{searched}"
     search_count:
       unit:
-        one: "resultados de busca para"
+        one: "resultados de pesquisa para"
         other: "resultados de busca para"
     warning: "ATENÇÃO:"
-    warning_statement: Diferente de todas outras URLs neste site, URLs para cadeia de usuários não são confiáveis para conexão pois indicarão resultados diferentes em poucas semanas
+    warning_statement: Ao contrário de todos os outros URLs neste sítio, os URLs para os nomes não são fiáveis para estabelecer ligações porque apontam para resultados diferentes a cada par de semanas
     agent_name_title: "%{agent_name} Espécimes"
-    agent_lede: Uma cadeia não processada de coletores e identificadores de nomes separados na história natural istory specimen data
+    agent_lede: Cadeia de texto não processada de nomes de coletores e identificadores extraídos de dados de espécimes de história natural
     found_statement:
       unit:
-        one: "Espécime não encontrado. Nem todas as colunas são mostradas."
+        one: "espécime encontrado. Nem todas as colunas são mostradas."
         other: "Espécime ecnontrado. Nem todas as colunas são mostradas."
     search_html: "Busca por %{agent_link} a pessoas e ajude na atribuição de seus espécimes."
     example_agents: Amostras ou resultados aleatórios
