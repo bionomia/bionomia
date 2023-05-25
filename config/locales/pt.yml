@@ -28,28 +28,28 @@ pt:
   acknowledgments:
     acknowledgments_title: Agradecimentos
     taxon_silhouettes: Silhuetas de táxon família
-    translations: Translações
+    translations: Traduções
   admin:
     change_photo: Mudar foto de perfil
   agent:
-    agent_title: Agente de usuário
-    search_title: Busca por agente de usuário
+    agent_title: Nomes
+    search_title: Pesquisa por nome
     lede:
       unit:
-        one: "cadeia de coletores e identificadores de nomes separados da data do especime do GBIF"
-        other: "cadeia de coletores e identificadores de nomes separados da data do especime do GBIF"
-    search_none: "Cadeia de usuário não encontrado %{searched}"
+        one: "nomes de coletores e identificadores extraídos dos dados dos espécimes do GBIF"
+        other: "cadeia de nomes de coletores e identificadores analisados dos dados do espécime do GBIF"
+    search_none: "Nenhum nome encontrado para %{searched}"
     search_count:
       unit:
-        one: "resultados de busca para"
+        one: "resultados de pesquisa para"
         other: "resultados de busca para"
     warning: "ATENÇÃO:"
-    warning_statement: Diferente de todas outras URLs neste site, URLs para cadeia de usuários não são confiáveis para conexão pois indicarão resultados diferentes em poucas semanas
+    warning_statement: Ao contrário de todos os outros URLs neste sítio, os URLs para os nomes não são fiáveis para estabelecer ligações porque apontam para resultados diferentes a cada par de semanas
     agent_name_title: "%{agent_name} Espécimes"
-    agent_lede: Uma cadeia não processada de coletores e identificadores de nomes separados na história natural istory specimen data
+    agent_lede: Cadeia de texto não processada de nomes de coletores e identificadores extraídos de dados de espécimes de história natural
     found_statement:
       unit:
-        one: "Espécime não encontrado. Nem todas as colunas são mostradas."
+        one: "espécime encontrado. Nem todas as colunas são mostradas."
         other: "Espécime ecnontrado. Nem todas as colunas são mostradas."
     search_html: "Busca por %{agent_link} a pessoas e ajude na atribuição de seus espécimes."
     example_agents: Amostras ou resultados aleatórios
@@ -61,27 +61,27 @@ pt:
     articles_title: Artigos
     articles_lede:
       unit:
-        one: "artigo citou downloads do GBIF"
+        one: "artigos que citam descargas do GBIF"
         other: "artigos que citaram downloads do GBIF"
-    no_claims_alert: Pessoas ainda não reivindicaram ou foram atribuídos espécimes representados nos dados baixados do GBIF em suporte a este artigo
+    no_claims_alert: As pessoas ainda não reclamaram ou foram-lhes atribuídos os espécimes representados nos dados descarregados do GBIF para apoiar este artigo
     claims_alert:
       unit:
-        one: "pessoas coletaram ou identificaram espécimes incluídos na data derivada do GBIF em suporte a este artigo"
-        other: "pessoas coletaram ou identificaram espécimes incluídos na data derivada do GBIF em suporte a este artigo"
+        one: "pessoas coletaram ou identificaram espécimes incluídos nos dados descarregados do GBIF como suporte a este artigo"
+        other: "pessoas que recolheram ou identificaram espécimes incluídos nos dados descarregados do GBIF para apoiar este artigo"
     placeholder: "Evolução e sistemática de..."
     people: Pessoas
-    agent_strings: Agente de usuário
+    agent_strings: Nomes
     agent_title: Agentes do artigo
     alphabetical: Alfabético
     counts: Contagens
     unclaimed: Não Reclamado
-    no_agent_strings_alert: Cadeias brutas de coletores e identifcadores de nomes separados em data de espécimes derivadas do GBIF em suporte desse artigo não foram encontrados
+    no_agent_strings_alert: Não foram encontradas sequências de caracteres de nomes de coletores e identificadores extraídos de dados de espécimes descarregados do GBIF para apoiar este artigo
     agent_strings_alert:
       unit:
-        one: "cadeia bruta de coletores e identifcadores de nomes separados de especimens derivados do GBIF em suporte desse artigo"
+        one: "sequências de carateres de nomes de coletores e identificadores extraídos de dados de espécimes descarregados do GBIF para apoiar este artigo"
         other: "cadeias brutas de coletores e identifcadores de nomes separados de especimens derivados do GBIF em suporte desse artigo"
     claims: reivindicações
-    specimens: especimes
+    specimens: espécimes
     no_search_alert: "Nenhum artigo encontrado para"
     search_alert:
       unit:
@@ -108,7 +108,7 @@ pt:
     people: Pessoas
   country:
     country_title: Países
-    lede: De países indicados em contas ORCID e entradas de Wikidata ou registros de espécimes em GBIF
+    lede: De países indicados nas contas ORCID e entradas Wikidata ou registos de espécimes no GBIF
     intro: De países indicados em contas ORCID e entradas do Wikidata. Pesquise por família de táxons para explorar a especialização.
     collected_from: "Coletado %{family} de %{country}"
     identified_from: "Identificado %{family} do %{country}"
@@ -116,9 +116,9 @@ pt:
     no_one_collected_from: "Ninguém coletou %{family} do %{country}"
     no_one_identified_from: "Ninguém identificou %{family} do %{country}"
     no_one_collected_identified_from: "Ninguém coletou ou identificou %{family} do %{country}"
-    no_one_message: "Ninguém encontrado do %{country}. Pesquise por família de táxons para explorar a especialização."
+    no_one_message: "Não foi encontrado ninguém de %{country}. Pesquise pelo táxon Família para explorar a especialização."
   dataset:
-    dataset_title: Conjuto de dados
+    dataset_title: Conjunto de dados
     search_title: Pesquisa de conjuntos de dados
     scribes_title: Autores
     lede:
@@ -129,15 +129,15 @@ pt:
       unit:
         one: "dataset with content in dwc:recordedByID or dwc:identifiedByID"
         other: "datasets with content in dwc:recordedByID or dwc:identifiedByID"
-    placeholder: Borboletas do brasil
+    placeholder: Borboletas do Brasil
     people: Pessoas
     visualizations: Visualizações
     scribes: Autores
     agents: Agentes
-    agent_strings: Cadeias de agentes
-    agent_strings_unclaimed: Cadeias de agente não reclamados
+    agent_strings: Nomes
+    agent_strings_unclaimed: Nomes não reclamados
     alphabetical: Alfabético
-    counts: Contas
+    counts: Contagens
     unclaimed: Não reclamado
     no_agents_alert: Cadeias brutas de nomes de coletores e determinadores analisados em dados de espécimes incluídos neste conjunto de dados ainda não foram registrados
     agents_alert:
@@ -163,7 +163,7 @@ pt:
       unit:
         one: "pessoa reivindicou ou foi atribuída espécimes representados neste conjunto de dados"
         other: "pessoas reivindicaram ou foram atribuídos espécimes representados neste conjunto de dados"
-    timeline: Linha do tempo
+    timeline: Cronologia
     none_collected_timeline: "Ninguém coletou e indicou uma data de coleta"
     none_identified_timeline: "Ninguém se identificou e indicou uma data de identificação"
     not_all_features: Large dataset, not all features are available.
@@ -209,40 +209,40 @@ pt:
     not_allowed: Access is denied.
   developer:
     search: Procurar
-    autocomplete_widget: Ferramenta de Autocompletação
-    json_ld_search: Busca JSON-LD para pessoas
-    json_ld_occurrence_search: Busca JSON-LD para ocorrências
-    structured_data: Data Estruturada
-    raw_data: Data Crua
+    autocomplete_widget: Ferramenta de preenchimento automático
+    json_ld_search: JSON-LD Pesquisa por Pessoas
+    json_ld_occurrence_search: JSON-LD Pesquisa por Ocorrências
+    structured_data: Dados Estruturados
+    raw_data: Dados Brutos
     code: Código
     reconcile_title: Reconciliar
     recommended_use: Uso Recomendado
-    title: Para Desenvolvedores
-    code_title: "Para Desenvolvedores: Código"
+    title: Para Programadores
+    code_title: "Para Programadores: Código"
     parser: Separar Nomes
     parse_names: Separar Nomes Humanos
     parse_names_title: "Para Desenvolvedores: Separar Nomes"
     structured_data_title: "Para Desenvolvedores: Data Estruturada"
     search_title: "For Developers: Search"
   donate:
-    donate_title: Doe
-    lede: Sua doação única ou periódica ajudará a completar o pipeline de dados e garantir que o crédito seja dado por contribuições feitas para coleções de história natural o mais rápido e perfeitamente possível.
+    donate_title: Faça um donativo
+    lede: O seu donativo ocasional ou regular ajudará a completar o pipeline de dados e a garantir que as contribuições feitas às coleções de história natural sejam reconhecidas da maneira mais rápida e eficiente possível.
     campaign: Campanha
     donor_wall: Parede de doadores
   donor_wall:
     donor_wall_title: Parede de doadores
     lede: Obrigado aos seguintes doadores que estão apoiando a conclusão do pipeline de dados.
   general:
-    search: Busca
-    apply: aplicar
-    help_attribute: Atributo de ajuda
+    search: Pesquisa
+    apply: Aplicar
+    help_attribute: Ajude a atribuir
     refresh_profile: Atualizar
-    refresh_stats: Atualizar status
+    refresh_stats: Atualizar dados
     settings: Configurações
     bulk_assignment: Atribuição em massa
-    collected_all: Todos coletados
-    collected: Coletaods
-    identified_all: Todos Identificados
+    collected_all: Coletou Todos
+    collected: Coletados
+    identified_all: Identificou Todos
     identified: Identificados
     both: Ambos
     either: Ou
@@ -250,7 +250,7 @@ pt:
     download: Transferir
     submit: Submeter
     upload_csv_instructions: Carregar csv com reivindicações
-    download_records: Baixar registros descobertos
+    download_records: Transferir registos encontrados
     download_alert: "Baixe registros de espécimes descobertos, trabalhe off-line e, em seguida, carregue novas reivindicações como um csv. Um arquivo contendo no máximo %{num_records} registros é gerado. Se você tiver muito mais do que isso, poderá trabalhar em lotes. Esta rotina não atualiza dados de espécimes subjacentes nem atualiza reivindicações existentes. Se reivindicações existentes estiverem presentes no upload, elas serão ignoradas. Seu csv carregado deve usar uma vírgula para separar as colunas, cada uma opcionalmente entre aspas."
     search_dropdown_no_users: "Sua busca resultou em 0 resultados."
     reset: Restabelecer
