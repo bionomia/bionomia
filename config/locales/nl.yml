@@ -1,8 +1,8 @@
 nl:
-  language: English
+  language: Engels
   locale: "en_EN"
-  "true": "Yes"
-  "false": "No"
+  "true": "Ja"
+  "false": "Nee"
   number:
     format:
       delimiter: ","
@@ -14,11 +14,11 @@ nl:
       decimal_units:
         format: "%n %u"
         units:
-          billion: Billion
-          million: Million
-          quadrillion: Quadrillion
-          thousand: Thousand
-          trillion: Trillion
+          billion: Miljard
+          million: Miljoen
+          quadrillion: Biljard
+          thousand: Duizend
+          trillion: Biljoen
           unit: ''
       format:
         delimiter: ''
@@ -28,9 +28,9 @@ nl:
   acknowledgments:
     acknowledgments_title: Acknowledgments
     taxon_silhouettes: Taxon Family Silhouettes
-    translations: Translations
+    translations: Vertalingen
   admin:
-    change_photo: Change profile photo
+    change_photo: Profielfoto wijzigen
   agent:
     agent_title: Agent Strings
     search_title: Agent String Search
@@ -41,9 +41,9 @@ nl:
     search_none: "No agent string found for %{searched}"
     search_count:
       unit:
-        one: "search result for"
-        other: "search results for"
-    warning: "WARNING:"
+        one: "zoekresultaat voor"
+        other: "zoekresultaten voor"
+    warning: "WAARSCHUWING:"
     warning_statement: Unlike all other URLs in this site, URLs for agent strings are unreliable for linking because they will point to different results every few weeks
     agent_name_title: "%{agent_name} Specimens"
     agent_lede: A raw string from parsed collector and determiner names in natural history specimen data
@@ -57,8 +57,8 @@ nl:
     gbifid_title: Agent Strings from gbifIDs
     gbifid_instructions: Paste a list of occurrence-based gbifIDs and receive a summary list of parsed agent strings from recordedBy.
   article:
-    article_title: Article
-    articles_title: Articles
+    article_title: Artikel
+    articles_title: Artikelen
     articles_lede:
       unit:
         one: "article cited downloads from GBIF"
@@ -72,7 +72,7 @@ nl:
     people: People
     agent_strings: Agent Strings
     agent_title: Article Agents
-    alphabetical: Alphabetical
+    alphabetical: Alfabetisch
     counts: Counts
     unclaimed: Unclaimed
     no_agent_strings_alert: Raw strings from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article have not been found
@@ -85,12 +85,12 @@ nl:
     no_search_alert: "No articles found for"
     search_alert:
       unit:
-        one: "search result found for"
-        other: "search results found for"
+        one: "zoekresultaat gevonden voor"
+        other: "zoekresultaten gevonden voor"
   card:
-    collected: "Collected %{family}"
-    identified: "Identified %{family}"
-    identified_collected: "Collected %{collected} and identified %{identified}"
+    collected: "Verzamelde %{family}"
+    identified: "Identificeerde %{family}"
+    identified_collected: "Verzamelde %{collected} en identificeerde %{identified}"
     claimed:
       one: specimen claimed
       other: specimens claimed
@@ -101,18 +101,18 @@ nl:
       one: person helped
       other: people helped
   charts:
-    year: Year
+    year: Jaar
     number_specimens: "# specimens"
     identified: Identified
     collected: Collected
     people: People
   country:
-    country_title: Countries
+    country_title: Landen
     lede: From countries stated in ORCID accounts and Wikidata entries or specimen records in GBIF
     intro: From countries stated in ORCID accounts and Wikidata entries. Search by Taxon Family to explore expertise.
-    collected_from: "Collected %{family} from %{country}"
-    identified_from: "Identified %{family} from %{country}"
-    collected_identified_from: "Collected or identified %{family} from %{country}"
+    collected_from: "Verzamelde %{family} uit %{country}"
+    identified_from: "Identificeerde %{family} uit %{country}"
+    collected_identified_from: "Verzamelde of identificeerde %{family} uit %{country}"
     no_one_collected_from: "No one collected %{family} from %{country}"
     no_one_identified_from: "No one identified %{family} from %{country}"
     no_one_collected_identified_from: "No one collected or identified %{family} from %{country}"
@@ -136,7 +136,7 @@ nl:
     agents: Agents
     agent_strings: Agent Strings
     agent_strings_unclaimed: Unclaimed Agent Strings
-    alphabetical: Alphabetical
+    alphabetical: Alfabetisch
     counts: Counts
     unclaimed: Unclaimed
     no_agents_alert: Raw strings from parsed collector and determiner names in specimen data included in this dataset have not yet been recorded
@@ -163,11 +163,11 @@ nl:
       unit:
         one: "person claimed or was attributed specimens represented in this dataset"
         other: "people claimed or were attributed specimens represented in this dataset"
-    timeline: Timeline
+    timeline: Tijdlijn
     none_collected_timeline: "No one has collected and indicated a collection date"
     none_identified_timeline: "No one has identified and indicated a determination date"
     not_all_features: Large dataset, not all features are available.
-    badge_tooltip: Click to obtain HTML for this badge.
+    badge_tooltip: Klik om HTML voor deze badge te verkrijgen.
     badge_modal: Bionomia Dataset Badge
   date:
     formats:
@@ -706,7 +706,7 @@ nl:
         one: "agent string has unclaimed specimen records from data in GBIF"
         other: "agent strings have unclaimed specimen records from data in GBIF"
     no_agents_unclaimed: No specimen records are unclaimed or unattributed
-    alphabetical: Alphabetical
+    alphabetical: Alfabetisch
     counts: Counts
     unclaimed: Unclaimed
     example_families: Random Samples
