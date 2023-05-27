@@ -450,6 +450,7 @@ fr:
     identification: Identification
     location: Emplacement
     has_image: A une image
+    not_them: Ascribed Not Them
   offline:
     message: Bionomia est actuellement hors ligne, suivant des nouvelles données.
     warning: "Bionomia sera hors ligne %{datetime_off} pendant environ %{duration}, suivant des nouvelles données."

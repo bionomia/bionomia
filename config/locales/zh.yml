@@ -426,6 +426,7 @@ zh-CN:
     identification: Identification
     location: Location
     has_image: Has Image
+    not_them: Ascribed Not Them
   offline:
     message: Bionomia is currently offline, refreshing data from the Global Biodiversity Information Facility.
     warning: "Bionomia will be offline %{datetime_off} for approximately %{duration} to refresh specimen data from the Global Biodiversity Information Facility."

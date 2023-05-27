@@ -450,6 +450,7 @@ es:
     identification: Identificación
     location: Localidad
     has_image: Tiene imagen
+    not_them: Ascribed Not Them
   offline:
     message: Bionomía está actualmente fuera de línea, actualizando datos de la Global Biodiversity Information Facility.
     warning: "Bionomía estará fuera de línea %{datetime_off} por aproximadamente %{duration} para actualizar datos de especímenes de la Global Biodiversity Information Facility."
