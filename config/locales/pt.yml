@@ -450,6 +450,7 @@ pt:
     identification: Identificação
     location: Localização
     has_image: Tem imagem
+    not_them: Ascribed Not Them
   offline:
     message: Bionomia está atualmente offline, atualizando dados do Global Biodiversity Information Facility.
     warning: "Bionomia estará offline %{datetime_off} por aproximadamente %{duration} para atualizar dados de espécimes do Global Biodiversity Information Facility."
