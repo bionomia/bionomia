@@ -283,5 +283,63 @@
                       Attributed or refreshed on: #{determiner.updated || determiner.created}
         %dd.line-break
 
+  - if @occurrence.user_ignoreds.count > 0
+    #not_them.card.mb-4.border-warning
+      .card-header.border-bottom.bg-warning
+        %h5= I18n.t('occurrence.not_them')
+      .card-body.mt-2
+        %dl.dl-horizontal
+          %dt recordedBy
+          %dd.py-1 #{h(@occurrence.recordedBy)}
+          %dd.line-break
+
+          %dt recordedByID
+          %dd.py-1 #{h(@occurrence.recordedByID)}
+          %dd.line-break
+
+          %dt identifiedBy
+          %dd.py-1 #{h(@occurrence.identifiedBy)}
+          %dd.line-break
+
+          %dt identifiedByID
+          %dd.py-1 #{h(@occurrence.identifiedByID)}
+          %dd.line-break
+
+          %dt Different From
+          %dd.py-1
+            %hr
+            - @occurrence.user_ignoreds.each do |ignored|
+              %p.orcid.text-lg-left.p-0.mt-1{"data-user-occurrence-id": "#{ignored.id}", "data-ignored": "#{ignored.user.identifier}", "data-user-id": "#{ignored.user.id  }"}
+                - if ignored.user.orcid
+                  #{ignored.user.viewname}
+                  %a{href: "https://orcid.org/#{ignored.user.orcid}"}
+                    %i.fab.fa-orcid
+                    https://orcid.org/#{ignored.user.orcid}
+                - else
+                  #{ignored.user.viewname}
+                  %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD"}
+                  = link_to "http://www.wikidata.org/entity/#{ignored.user.wikidata}", "http://www.wikidata.org/entity/#{ignored.user.wikidata}"
+                %span.d-block.ml-3.text-muted.small
+                  - if ignored.claimant != ignored.user && !ignored.claimant.is_bot?
+                    Unascribed by: #{ignored.claimant.viewname}
+                    %a{href: "https://orcid.org/#{ignored.claimant.orcid}"}
+                      %i.fab.fa-orcid
+                      https://orcid.org/#{ignored.claimant.orcid}
+                  - elsif ignored.claimant == ignored.user && !ignored.claimant.is_bot?
+                    Unascribed by: #{ignored.claimant.viewname}
+                    %a{href: "https://orcid.org/#{ignored.claimant.orcid}"}
+                      %i.fab.fa-orcid
+                      https://orcid.org/#{ignored.claimant.orcid}
+                  - elsif ignored.claimant.is_bot?
+                    Unascribed by: Bionomia Bot or from source
+                %span.d-block.ml-3.text-muted.small
+                  - if ignored.claimant != ignored.user && !ignored.claimant.is_bot?
+                    Unascribed on: #{ignored.updated || ignored.created}
+                  - elsif ignored.claimant == ignored.user && !ignored.claimant.is_bot?
+                    Unascribed on: #{ignored.updated || ignored.created}
+                  - elsif ignored.claimant.is_bot?
+                    Unascribed or refreshed on: #{ignored.updated || ignored.created}
+          %dd.line-break
+
 %script{id: "selector-template", type: "text/x-handlebars-template"}
   = haml :'partials/single_selector_template', layout: false, locals: { occurrence: @occurrence }
