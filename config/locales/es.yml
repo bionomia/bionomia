@@ -223,7 +223,7 @@ es:
     parse_names: Analizar nombres humanos
     parse_names_title: "Para desarrolladores: Analizar nombres"
     structured_data_title: "Para desarrolladores: Datos estructurados"
-    search_title: "For Developers: Search"
+    search_title: "Para desarrolladores: Buscar"
   donate:
     donate_title: Donaciones
     lede: Su donación única o periódica ayudará a completar los protocolos para el procesamiento de los datos y garantizará que se otorgue crédito por las contribuciones realizadas a las colecciones de historia natural de la manera más rápida y fluida posible.
@@ -389,7 +389,7 @@ es:
       other: "especímenes co-colectados"
     occurrence_title: Ayuda a otros por Registro de Espécimen
     occurrence: Especímenes
-    occurrence_advance_message: Co-collected specimen records. Use the right arrow key on your keyboard or the arrow on the screen to advance a record until you receive one that you may attribute.
+    occurrence_advance_message: Registros de espécimen co-colectados. Utilice la tecla de la flecha derecha del teclado o la flecha de la pantalla para avanzar un registro hasta que reciba uno que pueda atribuir.
   home:
     tagline: Enlace especímenes de historia natural a los colectores del mundo.
     get_started: Comenzar
@@ -614,7 +614,7 @@ es:
     identified_for: Identificado para
     no_identified_for_alert: Recipients of your determinations have not yet been recorded.
     identified_for_alert: "Elija un colector para ajustar las atribuciones realizadas para especímenes colectados por ellos e identificados por usted."
-    identified_for_name: "Specimens collected by %{name} and identified by you."
+    identified_for_name: "Especímenes colectados por %{name} e identificados por ti."
     not_identified_for_name: "Especímenes no han sido colectados por %{name} e identificados por usted."
     identified_for_count:
       one: "espécimen colectado"
