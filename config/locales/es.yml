@@ -723,7 +723,7 @@ es:
     user_title: "%{taxon} Collectors or Determiners"
     agent_count_title: "%{taxon} Agent Counts"
     agent_unclaimed_title: "%{taxon} Agent Unclaimed"
-    agents_title: "%{taxon} Agents"
+    agents_title: "%{taxon} Agentes"
   user:
     caches_rebuilt: Se han reconstruido las memorias caché.
     overview: Descripción general
