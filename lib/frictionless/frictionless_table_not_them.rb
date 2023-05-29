@@ -88,7 +88,7 @@ module Bionomia
             UserOccurrence.joins(:occurrence, :user)
                           .includes(:occurrence, :user)
                           .where(occurrence_id: group)
-                          .where(user_occurrences: { visible: false }).each do |uo|
+                          .where(visible: false ).each do |uo|
 
                modified_date_time = !uo.updated.blank? ? uo.updated.to_time.iso8601 : nil
 
