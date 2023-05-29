@@ -17,7 +17,7 @@ module Bionomia
       uniq_ids = (ids - recs).uniq
       both = (recs & ids).uniq
 
-      row["agentIDs"].split("|").map(&:strip).uniq.each do |id|
+      row["agentIDs"].split("|").sort.map(&:strip).uniq.each do |id|
         next if id.empty?
         u = get_user(id)
         next if u.nil?
