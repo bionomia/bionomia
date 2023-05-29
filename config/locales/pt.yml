@@ -88,9 +88,9 @@ pt:
         one: "resultado da pesquisa encontrado para"
         other: "resultado da pesquisa encontrado para"
   card:
-    collected: "Coletado %{family}"
+    collected: "Coletou %{family}"
     identified: "Identificado %{family}"
-    identified_collected: "Coletado %{collected} e identificado %{identified}"
+    identified_collected: "Coletou %{collected} e identificou %{identified}"
     claimed:
       one: espécime reivindicado
       other: espécime reivindicado
@@ -110,9 +110,9 @@ pt:
     country_title: Países
     lede: De países indicados nas contas ORCID e entradas Wikidata ou registos de espécimes no GBIF
     intro: De países indicados em contas ORCID e entradas do Wikidata. Pesquise por família de táxons para explorar a especialização.
-    collected_from: "Coletado %{family} de %{country}"
+    collected_from: "Coletou %{family} de %{country}"
     identified_from: "Identificado %{family} do %{country}"
-    collected_identified_from: "Coletado or Identificado %{family} do %{country}"
+    collected_identified_from: "Coletou ou identificou %{family} de %{country}"
     no_one_collected_from: "Ninguém coletou %{family} do %{country}"
     no_one_identified_from: "Ninguém identificou %{family} do %{country}"
     no_one_collected_identified_from: "Ninguém coletou ou identificou %{family} do %{country}"
