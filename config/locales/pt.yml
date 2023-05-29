@@ -166,7 +166,7 @@ pt:
     timeline: Cronologia
     none_collected_timeline: "Ninguém coletou e indicou uma data de coleta"
     none_identified_timeline: "Ninguém se identificou e indicou uma data de identificação"
-    not_all_features: Large dataset, not all features are available.
+    not_all_features: Conjunto de dados extenso, nem todas as funcionalidades estão disponíveis.
     badge_tooltip: Click to obtain HTML for this badge.
     badge_modal: Bionomia Dataset Badge
   date:
@@ -205,8 +205,8 @@ pt:
       - Nov
       - Dez
   denied:
-    title: Denied
-    not_allowed: Access is denied.
+    title: Recusado
+    not_allowed: Acesso recusado.
   developer:
     search: Procurar
     autocomplete_widget: Ferramenta de preenchimento automático
@@ -223,7 +223,7 @@ pt:
     parse_names: Separar Nomes Humanos
     parse_names_title: "Para Desenvolvedores: Separar Nomes"
     structured_data_title: "Para Desenvolvedores: Data Estruturada"
-    search_title: "For Developers: Search"
+    search_title: "Para Programadores: Pesquisa"
   donate:
     donate_title: Faça um donativo
     lede: O seu donativo ocasional ou regular ajudará a completar o pipeline de dados e a garantir que as contribuições feitas às coleções de história natural sejam reconhecidas da maneira mais rápida e eficiente possível.
@@ -259,9 +259,9 @@ pt:
     is_public: é público
     has_occurrences: tem espécimes
   help:
-    ignored_title: "Help Reclaim Ignored for %{name}"
-    upload_user_title: "Bulk Upload for %{name}"
-    help_user_title: "Help Attribute Specimens for %{name}"
+    ignored_title: "Ajude a reivindicar ignorado para %{name}"
+    upload_user_title: "Carregamento de dados em massa para %{name}"
+    help_user_title: "Ajude a atribuir espécimes para %{name}"
     help_title: Espécimes de atributo de ajuda
     country_title: Espécimes de atributo de ajuda
     latest_title: Destinatários mais recentes
@@ -300,7 +300,7 @@ pt:
     taxa: Famílias Taxonômicas
     specimens: Espécimes
     visualizations: Visualizações
-    strings: Collector Strings
+    strings: Nomes de coletor
     support: Ajudado por
     specialties: Especialidades
     public_profile: Perfil público
@@ -333,21 +333,21 @@ pt:
     co_collector_name: "Espécimes co-coletados com %{name}."
     switch: Trocar
     not_co_collector_name: "Espécimes não foram co-coletadas com %{name}."
-    identified_for: Identified For
+    identified_for: Identificado para
     no_identified_for_alert: Recipients of determinations have not yet been recorded.
-    identified_for_alert: "Choose a collector to adjust attributions made for specimens collected by them."
+    identified_for_alert: "Escolha um coletor para ajustar as atribuições feitas para espécimes coletados por eles."
     identified_for_name: "Specimens collected by %{name} and identified by %{other_name}."
     not_identified_for_name: "Specimens have not been collected by %{name} and identified by %{other_name}."
     identified_for_count:
-      one: "collected specimen"
+      one: "espécime coletado"
       other: "collected specimens"
-    identifications_by: Identifications By
-    no_determiners_alert: Determiners have not yet been recorded.
-    determiners_alert: "Choose a determiner to adjust attributions made for specimens identified by them."
-    determiner_name: "Specimens identified by %{name} and collected by %{other_name}."
-    not_determiner_name: "Specimens have not been identified by %{name} and collected by %{other_name}."
+    identifications_by: Identificações por
+    no_determiners_alert: Ainda não foram registados identificadores.
+    determiners_alert: "Escolha um identificador para ajustar as atribuições feitas para espécimes identificados por eles."
+    determiner_name: "Espécimes identificados por %{name} e coletados por %{other_name}."
+    not_determiner_name: "Os espécimes não foram identificados por %{name} e coletados por %{other_name}."
     identified_by_count:
-      one: "identified specimen"
+      one: "espécime identificado"
       other: "identified specimens"
     bulk_attribution: Atribuições em massa
     reclaim_ignored: Reclaim Ignored
