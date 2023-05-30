@@ -88,10 +88,9 @@ module Bionomia
             UserOccurrence.joins(:occurrence, :user)
                           .includes(:occurrence, :user)
                           .where(occurrence_id: group)
-                          .where(visible: false ).each do |uo|
+                          .where(visible: false).each do |uo|
 
                modified_date_time = !uo.updated.blank? ? uo.updated.to_time.iso8601 : nil
-
                data = [
                   uo.occurrence_id,
                   uo.occurrence.catalogNumber,
@@ -109,7 +108,6 @@ module Bionomia
                   uo.created.to_time.iso8601,
                   modified_date_time
                ]
-
                @csv_handle << CSV::Row.new(header, data).to_s
            end
          end
