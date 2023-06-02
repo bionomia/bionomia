@@ -4,7 +4,8 @@
   %script{src: "/js/geochart-hierarchy.js"}
   %script{src: "//www.gstatic.com/charts/loader.js"}
   %script{src: "/js/progress-bar.js"}
-  - countries = @country_counts.map{|k,v| [ k, country_name(k), v ] if country_name(k) }.compact_blank.unshift(["Country", "Country Name", "#{I18n.t('charts.people')}"])
+  - country_counts = cache_block("country-counts") { @country_counts }
+  - countries = country_counts.map{|k,v| [ k, country_name(k), v ] if country_name(k) }.compact_blank.unshift(["Country", "Country Name", "#{I18n.t('charts.people')}"])
   :javascript
     $(function() {
       Application.init("", "GET", "/help-others");

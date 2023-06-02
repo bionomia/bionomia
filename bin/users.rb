@@ -112,6 +112,7 @@ if options[:cache]
     u.flush_caches
   end
   BIONOMIA.cache_clear("fragments/")
+  BIONOMIA.cache_clear("blocks/country-counts")
   rebuild_stats
 end
 
