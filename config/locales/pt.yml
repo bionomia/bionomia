@@ -89,17 +89,17 @@ pt:
         other: "resultado da pesquisa encontrado para"
   card:
     collected: "Coletou %{family}"
-    identified: "Identificado %{family}"
+    identified: "Identificou %{family}"
     identified_collected: "Coletou %{collected} e identificou %{identified}"
     claimed:
       one: espécime reivindicado
-      other: espécime reivindicado
+      other: espécimes reivindicados
     attributed:
       one: espécime atribuído
-      other: espécimes atribuído
+      other: espécimes atribuídos
     helped:
       one: pessoa ajudada
-      other: pessoa ajudada
+      other: pessoas ajudadas
   charts:
     year: Ano
     number_specimens: "# espécimes"
