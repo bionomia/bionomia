@@ -177,6 +177,14 @@ module Sinatra
           end
         end
 
+        def user_country_counts
+          User.where.not(country_code: nil)
+              .map{|u| u.country_code.split("|")}
+              .flatten
+              .reject(&:empty?)
+              .tally
+        end
+
         def user_stats(user)
           counts = user.country_counts
           cited = user.cited_specimens
