@@ -98,6 +98,7 @@ elsif options[:remove]
 elsif options[:counter]
   puts "Updating occurrence counts...".yellow
   Occurrence.counter_culture_fix_counts only: :dataset
+  Dataset.update_all source_attribution_count: 0
   sql = "UPDATE datasets INNER JOIN (SELECT count(*) as sum, o.datasetKey FROM `occurrences` o JOIN `user_occurrences` u ON u.occurrence_id = o.gbifID where u.created_by = 2 group by o.datasetKey ) a ON datasets.datasetKey = a.datasetKey set datasets.source_attribution_count = a.sum"
   puts "Updating source attributions counts...".yellow
   ActiveRecord::Base.connection.execute(sql)
