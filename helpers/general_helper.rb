@@ -102,7 +102,6 @@ module Sinatra
                               .joins("INNER JOIN (#{subq.to_sql}) sub ON sub.user_id = user_occurrences.user_id AND sub.created = user_occurrences.created")
                               .preload(:user, :claimant)
                               .where("user_occurrences.user_id != user_occurrences.created_by")
-                              .where.not(created_by: User::BOT_IDS)
                               .where.not(users: user_type)
                               .distinct
                               .limit(25)
