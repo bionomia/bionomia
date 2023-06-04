@@ -25,10 +25,10 @@ import org.apache.spark.sql.types._
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.avro._
 
-# Prevent warnings
+// Prevent warnings
 spark.conf.set("spark.sql.debug.maxToStringFields", 1000)
 
-# Deal with really old dates
+// Deal with really old dates
 spark.sql("SET spark.sql.avro.datetimeRebaseModeInWrite=CORRECTED")
 
 val occurrences = spark.
@@ -85,6 +85,17 @@ val missing = occurrences.
 //write to "missing" table then do additional querying there
 //such as make a unique list of datasetKeys whose caches later need flushing
 missing.write.mode("append").jdbc(url, "missing", prop)
+
+// Check if sources have mistakenly dropped all their existing claims/attributions
+val existing_counts = spark.read.jdbc(url, "datasets", prop).where("source_attribution_count > 0")
+val new_counts = occurrences.where("recordedByID IS NOT NULL OR identifiedByID IS NOT NULL").
+    groupBy("datasetKey").count()
+
+val differences = existing_counts.
+    join(new_counts, existing_counts("datasetKey") === new_counts("datasetKey"), "leftouter").
+    select(existing_counts("datasetKey").cast("STRING"), existing_counts("source_attribution_count"), new_counts("count")).
+    where("count IS NULL").
+    show(50, false)
 
 // Best to drop indices then recreate later
 // ALTER TABLE `occurrences` DROP KEY `typeStatus_idx`, DROP KEY `index_occurrences_on_datasetKey_occurrenceID`;
