@@ -408,7 +408,7 @@ pt:
     agent_strings: Cadeia de agentes
     help_others: Ajude outros
     help_received: Ajuda recebida
-    people_helped: Pessoas ajudaram
+    people_helped: Pessoas ajudadas
     toggle_dropdown: Alternar lista suspensa
     overview: Visão geral
     specimens: Espécimens
@@ -517,12 +517,12 @@ pt:
     specimens_title: Espécimes
     support_title: Ajuda recebida
     upload_title: Carregar
-    helped_title: Pessoas ajudaram
+    helped_title: Pessoas ajudadas
     citation_title: Citações
     citations_title: Citações
     overview: Visão geral
     specimens: Espécimes
-    people_helped: Pessoas ajudaram
+    people_helped: Pessoas ajudadas
     science_enabled: Ciência habilitada
     claimed: Reivindicada
     discovered: Descoberto
@@ -735,7 +735,7 @@ pt:
     science_enabled_specimens: Ciência habilitada por dados de espécimes
     helped_by: Ajudado por
     strings: Collector Strings
-    helped: Pessoas ajudaram
+    helped: Pessoas ajudadas
     no_scribe: Os espécimes não foram atribuídos por um autor.
     attributions_by: "Atribuições feitas por:"
     private: O perfil não está disponível publicamente.
