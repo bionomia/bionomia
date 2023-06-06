@@ -648,7 +648,7 @@ pt:
   specimen:
     scientific_name: Nome científico
     collected_by: Coletado Por
-    identified_by: Indentificado Por
+    identified_by: Identificado Por
     date_collected: Data da coleta
     date_identified: Data de identificação
     institution: Instituição
