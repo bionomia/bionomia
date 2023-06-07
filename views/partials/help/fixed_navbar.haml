@@ -1,10 +1,12 @@
-%nav#helper-navbar.navbar.navbar-expand-sm.bg-light.fixed-top.d-none
-  %span.nav-item.text-nowrap
-    %i.fas.fa-hands-helping.text-muted.mr-2
-    - if @viewed_user.image_url
-      %img.rounded.mr-2{src:"#{profile_image(@viewed_user, 'thumbnail')}", alt:"#{@viewed_user.viewname}"}
-    #{@viewed_user.viewname}
-  - if !@viewed_user.other_names.blank?
-    %span.nav-item.text-muted.ml-2 [#{@viewed_user.other_names.split("|")[0,2].join("; ")}]
-  - if @viewed_user.date_born || @viewed_user.date_died
-    %span.nav-item.text-muted.ml-2= format_lifespan(@viewed_user)
+#helper-navbar.container-fluid.fixed-top.d-none.bg-light.table-responsive-lg.overflow-auto
+  %nav.navbar.navbar-expand-sm
+    %span.nav-item.text-nowrap
+      %i.fas.fa-hands-helping.text-muted.mr-2
+      - if @viewed_user.image_url
+        %img.rounded.mr-2{src:"#{profile_image(@viewed_user, 'thumbnail')}", alt:"#{@viewed_user.viewname}"}
+      #{@viewed_user.viewname}
+    - if !@viewed_user.other_names.blank?
+      %span.nav-item.text-muted.ml-2 [#{@viewed_user.other_names.split("|")[0,2].join("; ")}]
+    - if @viewed_user.date_born || @viewed_user.date_died
+      %span.nav-item.text-muted.ml-2= format_lifespan(@viewed_user)
+  %table.table.table-sm.mb-0

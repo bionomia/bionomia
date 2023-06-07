@@ -863,11 +863,11 @@ var Application = (function($, window) {
 
     helper_navbar: function() {
       var self = this;
-      if ($('#helper-info').length && $('#helper-navbar').length) {
+      if ($('#specimen-list').length && $('#helper-navbar').length) {
         if (self.path === "/help-others" || self.path === "/admin") {
           var navbar = $('#helper-navbar');
           $(document).scroll(function() {
-            if ($(this).scrollTop() > $('#helper-info').offset().top) {
+            if ($(this).scrollTop() > $('#specimen-list').offset().top) {
               navbar.removeClass('d-none');
             } else {
               navbar.addClass('d-none');
