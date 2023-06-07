@@ -9,4 +9,3 @@
       %span.nav-item.text-muted.ml-2 [#{@viewed_user.other_names.split("|")[0,2].join("; ")}]
     - if @viewed_user.date_born || @viewed_user.date_died
       %span.nav-item.text-muted.ml-2= format_lifespan(@viewed_user)
-  %table.table.table-sm.mb-0
