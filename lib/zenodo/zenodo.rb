@@ -17,7 +17,8 @@ module Bionomia
         description: "Natural history specimen data collected and/or identified by #{@user.viewname}, <a href=\"https://orcid.org/#{@user.orcid}\">https://orcid.org/#{@user.orcid}</a>. Claims were made on Bionomia, <a href=\"http://bionomia.net\">https://bionomia.net</a> using specimen data from the Global Biodiversity Information Facility, <a href=\"https://gbif.org\">https://gbif.org</a>.",
         access_right: "open",
         license: "cc-zero",
-        keywords: ["specimen", "natural history", "taxonomy"]
+        keywords: ["specimen", "natural history", "taxonomy"],
+        communities: [{ identifier: 'bionomia' }]
       }
     end
 

@@ -15,7 +15,7 @@ $ curl -i --user davidpshorthouse:***password*** -H "Content-Type:application/js
 On a Mac with Homebrew:
 
 ```bash
-$ spark-shell --jars /usr/local/opt/mysql-connector-java/libexec/mysql-connector-j-8.0.31.jar --packages org.apache.spark:spark-avro_2.12:3.3.1 --driver-memory 12G
+$ spark-shell --jars /usr/local/opt/mysql-connector-java/libexec/mysql-connector-j-8.0.33.jar --packages org.apache.spark:spark-avro_2.12:3.4.0 --driver-memory 12G
 ```
 
 ```scala
@@ -101,7 +101,12 @@ val differences = existing_counts.
 // ALTER TABLE `occurrences` DROP KEY `typeStatus_idx`, DROP KEY `index_occurrences_on_datasetKey_occurrenceID`;
 
 //write occurrences data to the database
-occurrences.write.mode("append").jdbc(url, "occurrences", prop)
+occurrences.write.mode("append").
+    option("batchSize", "10000").
+    option("isolationLevel", "NONE").
+    option("numPartitions", "8").
+    option("rewriteBatchedStatements", "true").
+    jdbc(url, "occurrences", prop)
 
 // Recreate indices
 // ALTER TABLE `occurrences` ADD KEY `typeStatus_idx` (`typeStatus`(50)), ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`, `occurrenceID`(36));
