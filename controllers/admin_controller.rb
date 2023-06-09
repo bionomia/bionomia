@@ -467,7 +467,7 @@ module Sinatra
               cache_control :no_cache
               headers.delete("Content-Length")
               io = ::Bionomia::IO.new({ user: admin_user })
-              io.jsonld_stream("all")
+              io.jsonld_stream("all", StringIO.open("", "w+")).string
             end
 
             get '/user/:id/message-count.json' do

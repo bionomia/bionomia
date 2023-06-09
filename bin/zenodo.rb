@@ -52,8 +52,12 @@ if options[:new]
       io = Bionomia::IO.new({ user: u })
       csv = io.csv_stream_occurrences(u.visible_occurrences)
       z.add_file_enum(id: id, enum: csv, file_name: u.identifier + ".csv")
-      json = io.jsonld_stream("all")
-      z.add_file_string(id: id, string: json, file_name: u.identifier + ".json")
+      temp = Tempfile.new
+      temp.binmode
+      io.jsonld_stream("all", temp)
+      z.add_file(id: id, file_path: temp.path, file_name: u.identifier + ".json")
+      temp.close
+      temp.unlink
       pub = z.publish(id: id)
       u.zenodo_doi = pub[:doi]
       u.zenodo_concept_doi = pub[:conceptdoi]
@@ -89,8 +93,12 @@ elsif options[:identifier]
     io = Bionomia::IO.new({ user: u })
     csv = io.csv_stream_occurrences(u.visible_occurrences)
     z.add_file_enum(id: id, enum: csv, file_name: u.identifier + ".csv")
-    json = io.jsonld_stream("all")
-    z.add_file_string(id: id, string: json, file_name: u.identifier + ".json")
+    temp = Tempfile.new
+    temp.binmode
+    io.jsonld_stream("all", temp)
+    z.add_file(id: id, file_path: temp.path, file_name: u.identifier + ".json")
+    temp.close
+    temp.unlink
 
     pub = z.publish(id: id)
     if !pub[:doi].nil?
@@ -134,8 +142,12 @@ elsif options[:all] || options[:within_week]
       io = Bionomia::IO.new({ user: u })
       csv = io.csv_stream_occurrences(u.visible_occurrences)
       z.add_file_enum(id: id, enum: csv, file_name: u.identifier + ".csv")
-      json = io.jsonld_stream("all")
-      z.add_file_string(id: id, string: json, file_name: u.identifier + ".json")
+      temp = Tempfile.new
+      temp.binmode
+      io.jsonld_stream("all", temp)
+      z.add_file(id: id, file_path: temp.path, file_name: u.identifier + ".json")
+      temp.close
+      temp.unlink
 
       pub = z.publish(id: id)
       if !pub[:doi].nil?

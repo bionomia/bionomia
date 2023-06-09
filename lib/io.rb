@@ -145,8 +145,7 @@ module Bionomia
         })
     end
 
-    def jsonld_stream(scope = "paged")
-      output = StringIO.open("", "w+")
+    def jsonld_stream(scope = "paged", output)
       w = Oj::StreamWriter.new(output, indent: 1)
       w.push_object()
       w.push_value(jsonld_context.as_json, "@context")
@@ -224,7 +223,7 @@ module Bionomia
       end
 
       w.pop_all
-      output.string()
+      output
     end
 
     def jsonld_occurrences_paged(type = "identifcations")

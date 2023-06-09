@@ -214,7 +214,7 @@ module Sinatra
               headers.delete("Content-Length")
               content_type "application/ld+json", charset: 'utf-8'
               io = ::Bionomia::IO.new({ user: @user })
-              io.jsonld_stream("all")
+              io.jsonld_stream("all", StringIO.open("", "w+")).string
             end
 
             get '/download.csv' do

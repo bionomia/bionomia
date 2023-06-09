@@ -78,7 +78,7 @@ module Sinatra
             headers.delete("Content-Length")
             begin
               io = ::Bionomia::IO.new({ user: viewed_user, params: params, request: request })
-              io.jsonld_stream("paged")
+              io.jsonld_stream("paged", StringIO.open("", "w+")).string
             rescue
               halt 500, {}.to_json
             end
