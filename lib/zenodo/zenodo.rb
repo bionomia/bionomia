@@ -9,17 +9,29 @@ module Bionomia
       @settings = Settings.merge!(opts)
     end
 
+    def creator
+      if @user.orcid
+        { name: @user.viewname, orcid: @user.orcid }
+      else
+        { name: @user.viewname }
+      end
+    end
+
     def global_metadata
-      {
+      hash = {
         upload_type: "dataset",
         title: "Natural history specimens collected and/or identified and deposited.",
-        creators:  [{ name: @user.viewname, orcid: @user.orcid }],
-        description: "Natural history specimen data collected and/or identified by #{@user.viewname}, <a href=\"https://orcid.org/#{@user.orcid}\">https://orcid.org/#{@user.orcid}</a>. Claims were made on Bionomia, <a href=\"http://bionomia.net\">https://bionomia.net</a> using specimen data from the Global Biodiversity Information Facility, <a href=\"https://gbif.org\">https://gbif.org</a>.",
+        creators:  [ creator ],
+        description: "Natural history specimen data collected and/or identified by #{@user.viewname}, <a href=\"#{@user.uri}\">#{@user.uri}</a>. Claims or attributions were made on Bionomia, <a href=\"http://bionomia.net\">https://bionomia.net</a> using specimen data from the Global Biodiversity Information Facility, <a href=\"https://gbif.org\">https://gbif.org</a>.",
         access_right: "open",
         license: "cc-zero",
         keywords: ["specimen", "natural history", "taxonomy"],
         communities: [{ identifier: 'bionomia' }]
       }
+      if @user.wikidata
+        hash.merge!({ notes: @user.uri })
+      end
+      hash
     end
 
     def client
@@ -71,7 +83,8 @@ module Bionomia
     end
 
     def access_token
-      @access_token ||= OAuth2::AccessToken.from_hash(client, @user.zenodo_access_token)
+      token = @user.orcid ? @user.zenodo_access_token : { access_token: @settings.zenodo.access_token }
+      @access_token ||= OAuth2::AccessToken.from_hash(client, token)
     end
 
     # Have to store this again otherwise can no longer use the old one

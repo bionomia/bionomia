@@ -16,12 +16,12 @@ OptionParser.new do |opts|
     options[:all] = true
   end
 
-  opts.on("-w", "--within-week", "Push new versions to Zenodo but only for people who have logged in within last week.") do
+  opts.on("-w", "--within-week", "Push new versions to Zenodo but only accounts updated within last week.") do
     options[:within_week] = true
   end
 
-  opts.on("-o", "--orcid [ORCID]", String, "Push new version for a particular user with an ORCID") do |orcid|
-    options[:orcid] = orcid
+  opts.on("-i", "--identifier [IDENTIFIER]", String, "Push new version for an account by ORCID or Wikidata Q number") do |identifier|
+    options[:identifier] = identifier
   end
 
   opts.on("-r", "--refresh", "Refresh all Zenodo tokens") do
@@ -34,22 +34,26 @@ OptionParser.new do |opts|
   end
 end.parse!
 
+# TODO: incorporate a check here for wikidata-based accounts too
 if options[:new]
-  User.where.not(orcid: nil)
-      .where.not(zenodo_access_token: nil)
+  User.where.not(zenodo_access_token: nil)
       .where(zenodo_doi: nil).find_each do |u|
     z = Bionomia::Zenodo.new(user: u)
     begin
-      u.zenodo_access_token = z.refresh_token
-      u.save
+      u.skip_callbacks = true
+
+      if u.orcid
+        u.zenodo_access_token = z.refresh_token
+        u.save
+      end
 
       doi_id = z.new_deposit
       id = doi_id[:recid]
       io = Bionomia::IO.new({ user: u })
       csv = io.csv_stream_occurrences(u.visible_occurrences)
-      z.add_file_enum(id: id, enum: csv, file_name: u.orcid + ".csv")
+      z.add_file_enum(id: id, enum: csv, file_name: u.identifier + ".csv")
       json = io.jsonld_stream("all")
-      z.add_file_string(id: id, string: json, file_name: u.orcid + ".json")
+      z.add_file_string(id: id, string: json, file_name: u.identifier + ".json")
       pub = z.publish(id: id)
       u.zenodo_doi = pub[:doi]
       u.zenodo_concept_doi = pub[:conceptdoi]
@@ -60,44 +64,45 @@ if options[:new]
     end
   end
 
-elsif options[:orcid]
-  u = User.where(orcid: options[:orcid])
-          .where.not(zenodo_doi: nil)
-          .where.not(zenodo_access_token: nil)
-          .first
-  if !u.nil?
-    z = Bionomia::Zenodo.new(user: u)
-    begin
+elsif options[:identifier]
+  u = User.find_by_identifier(orcid: options[:identifier])
+  return if u.nil? || u.zenodo_doi.nil? || (u.orcid && u.zenodo_access_token.nil?)
+
+  z = Bionomia::Zenodo.new(user: u)
+  begin
+    u.skip_callbacks = true
+
+    if u.orcid
       u.zenodo_access_token = z.refresh_token
       u.save
-
-      old_id = u.zenodo_doi.split(".").last
-      doi_id = z.new_version(id: old_id)
-
-      id = doi_id[:recid]
-      files = z.list_files(id: id).map{|f| f[:id]}
-      files.each do |file_id|
-        z.delete_file(id: id, file_id: file_id)
-      end
-
-      io = Bionomia::IO.new({ user: u })
-      csv = io.csv_stream_occurrences(u.visible_occurrences)
-      z.add_file_enum(id: id, enum: csv, file_name: u.orcid + ".csv")
-      json = io.jsonld_stream("all")
-      z.add_file_string(id: id, string: json, file_name: u.orcid + ".json")
-
-      pub = z.publish(id: id)
-      if !pub[:doi].nil?
-        u.zenodo_doi = pub[:doi]
-        u.save
-        puts "#{u.viewname}".green
-      else
-        z.discard_version(id: id)
-        puts "#{u.viewname}".red
-      end
-    rescue
-      puts "#{u.viewname} (id=#{u.id}) token failed".red
     end
+
+    old_id = u.zenodo_doi.split(".").last
+    doi_id = z.new_version(id: old_id)
+
+    id = doi_id[:recid]
+    files = z.list_files(id: id).map{|f| f[:id]}
+    files.each do |file_id|
+      z.delete_file(id: id, file_id: file_id)
+    end
+
+    io = Bionomia::IO.new({ user: u })
+    csv = io.csv_stream_occurrences(u.visible_occurrences)
+    z.add_file_enum(id: id, enum: csv, file_name: u.identifier + ".csv")
+    json = io.jsonld_stream("all")
+    z.add_file_string(id: id, string: json, file_name: u.identifier + ".json")
+
+    pub = z.publish(id: id)
+    if !pub[:doi].nil?
+      u.zenodo_doi = pub[:doi]
+      u.save
+      puts "#{u.viewname}".green
+    else
+      z.discard_version(id: id)
+      puts "#{u.viewname}".red
+    end
+  rescue
+    puts "#{u.viewname} (id=#{u.id}) token failed".red
   end
 
 elsif options[:all] || options[:within_week]
@@ -105,13 +110,17 @@ elsif options[:all] || options[:within_week]
             .where.not(zenodo_access_token: nil)
   if options[:within_week]
     week_ago = DateTime.now - 7.days
-    qry = qry.where("visited >= '#{week_ago}'")
+    qry = qry.where("updated >= '#{week_ago}'")
   end
   qry.find_each do |u|
     z = Bionomia::Zenodo.new(user: u)
     begin
-      u.zenodo_access_token = z.refresh_token
-      u.save
+      u.skip_callbacks = true
+
+      if u.orcid
+        u.zenodo_access_token = z.refresh_token
+        u.save
+      end
 
       old_id = u.zenodo_doi.split(".").last
       doi_id = z.new_version(id: old_id)
@@ -124,9 +133,9 @@ elsif options[:all] || options[:within_week]
 
       io = Bionomia::IO.new({ user: u })
       csv = io.csv_stream_occurrences(u.visible_occurrences)
-      z.add_file_enum(id: id, enum: csv, file_name: u.orcid + ".csv")
+      z.add_file_enum(id: id, enum: csv, file_name: u.identifier + ".csv")
       json = io.jsonld_stream("all")
-      z.add_file_string(id: id, string: json, file_name: u.orcid + ".json")
+      z.add_file_string(id: id, string: json, file_name: u.identifier + ".json")
 
       pub = z.publish(id: id)
       if !pub[:doi].nil?
@@ -147,6 +156,7 @@ if options[:refresh]
   User.where.not(zenodo_access_token: nil).find_each do |u|
     z = Bionomia::Zenodo.new(user: u)
     begin
+      u.skip_callbacks = true
       u.zenodo_access_token = z.refresh_token
       u.save
       puts "#{u.viewname} (id=#{u.id})".green

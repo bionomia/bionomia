@@ -30,6 +30,7 @@ zenodo:
   api_url: 'https://sandbox.zenodo.org/api/'
   key: ''
   secret: ''
+  access_token: ''
   site: 'https://sandbox.zenodo.org'
   authorize_url: 'https://sandbox.zenodo.org/oauth/authorize'
   token_url: 'https://sandbox.zenodo.org/oauth/token'
