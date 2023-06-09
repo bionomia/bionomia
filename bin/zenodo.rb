@@ -69,7 +69,7 @@ if options[:new]
   end
 
 elsif options[:identifier]
-  u = User.find_by_identifier(orcid: options[:identifier])
+  u = User.find_by_identifier(options[:identifier])
   return if u.nil? || u.zenodo_doi.nil? || (u.orcid && u.zenodo_access_token.nil?)
 
   z = Bionomia::Zenodo.new(user: u)
