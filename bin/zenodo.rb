@@ -116,6 +116,7 @@ if options[:new]
         .where(zenodo_doi: nil).find_each do |u|
           submit_new(u)
     end
+  end
 
 elsif !options[:new] && options[:identifier]
   u = User.find_by_identifier(options[:identifier])
