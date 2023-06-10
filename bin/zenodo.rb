@@ -70,13 +70,13 @@ if options[:new] && options[:identifier]
   return if u.nil? || !u.zenodo_doi.nil?
   submit_new(u)
 
-elsif options[:new]
+elsif options[:new] && !options[:identifier]
   User.where.not(zenodo_access_token: nil)
       .where(zenodo_doi: nil).find_each do |u|
         submit_new(u)
   end
 
-elsif options[:identifier]
+elsif options[:identifier] && !options[:new]
   u = User.find_by_identifier(options[:identifier])
   return if u.nil? || u.zenodo_doi.nil? || (u.orcid && u.zenodo_access_token.nil?)
 
