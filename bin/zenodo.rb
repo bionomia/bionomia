@@ -30,11 +30,38 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-def submit_new(u)
-  z = Bionomia::Zenodo.new(user: u)
-  begin
-    u.skip_callbacks = true
+# Warning: must unlink after creation
+def make_csv(u)
+  io = Bionomia::IO.new({ user: u })
+  temp = Tempfile.new
+  temp.binmode
+  io.csv_stream_occurrences(u.visible_occurrences)
+    .each { |line| temp << line }
+  temp.close
+  temp
+end
 
+# Warning: must unlink after creation
+def make_json(u)
+  io = Bionomia::IO.new({ user: u })
+  temp = Tempfile.new
+  temp.binmode
+  io.jsonld_stream("all", temp)
+  temp.close
+  temp
+end
+
+def submit_new(u)
+  u.skip_callbacks = true
+
+  # Create the files
+  csv = make_csv(u)
+  json = make_json(u)
+
+  z = Bionomia::Zenodo.new(user: u)
+
+  begin
+    # Refresh the token
     if u.orcid
       u.zenodo_access_token = z.refresh_token
       u.save
@@ -43,31 +70,36 @@ def submit_new(u)
     doi_id = z.new_deposit
     id = doi_id[:recid]
 
-    io = Bionomia::IO.new({ user: u })
-    csv = io.csv_stream_occurrences(u.visible_occurrences)
-    z.add_file_enum(id: id, enum: csv, file_name: u.identifier + ".csv")
-    temp = Tempfile.new
-    temp.binmode
-    io.jsonld_stream("all", temp)
-    z.add_file(id: id, file_path: temp.path, file_name: u.identifier + ".json")
-    temp.close
-    temp.unlink
-
+    # POST the files & publish
+    z.add_file(id: id, file_path: csv.path, file_name: u.identifier + ".csv")
+    z.add_file(id: id, file_path: json.path, file_name: u.identifier + ".json")
     pub = z.publish(id: id)
+
     u.zenodo_doi = pub[:doi]
     u.zenodo_concept_doi = pub[:conceptdoi]
     u.save
+
     puts "#{u.viewname}".green
   rescue
     puts "#{u.viewname} (id=#{u.id}) token failed".red
   end
+
+  # Unlink the files
+  csv.unlink    
+  json.unlink
 end
 
 def submit_update(u)
-  z = Bionomia::Zenodo.new(user: u)
-  begin
-    u.skip_callbacks = true
+  u.skip_callbacks = true
 
+  # Create the files
+  csv = make_csv(u)
+  json = make_json(u)
+
+  z = Bionomia::Zenodo.new(user: u)
+
+  begin
+    # Refresh the token
     if u.orcid
       u.zenodo_access_token = z.refresh_token
       u.save
@@ -76,23 +108,18 @@ def submit_update(u)
     old_id = u.zenodo_doi.split(".").last
     doi_id = z.new_version(id: old_id)
 
+    # DELETE existing files
     id = doi_id[:recid]
     files = z.list_files(id: id).map{|f| f[:id]}
     files.each do |file_id|
       z.delete_file(id: id, file_id: file_id)
     end
 
-    io = Bionomia::IO.new({ user: u })
-    csv = io.csv_stream_occurrences(u.visible_occurrences)
-    z.add_file_enum(id: id, enum: csv, file_name: u.identifier + ".csv")
-    temp = Tempfile.new
-    temp.binmode
-    io.jsonld_stream("all", temp)
-    z.add_file(id: id, file_path: temp.path, file_name: u.identifier + ".json")
-    temp.close
-    temp.unlink
-
+    # POST the files & publish
+    z.add_file(id: id, file_path: csv.path, file_name: u.identifier + ".csv")
+    z.add_file(id: id, file_path: json.path, file_name: u.identifier + ".json")
     pub = z.publish(id: id)
+
     if !pub[:doi].nil?
       u.zenodo_doi = pub[:doi]
       u.save
@@ -104,6 +131,10 @@ def submit_update(u)
   rescue
     puts "#{u.viewname} (id=#{u.id}) token failed".red
   end
+
+  # Unlink the files
+  csv.unlink    
+  json.unlink
 end
 
 if options[:new]
