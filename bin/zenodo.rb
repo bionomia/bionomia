@@ -139,7 +139,8 @@ elsif options[:within_week]
           latest = u.visible_user_occurrences.order(created: :desc).limit(1).first rescue nil
           next if latest.nil? || User::BOT_IDS.include?(latest.created_by)
           submit_new(u)
-      end
+        end
+  end
 end
 
 if options[:refresh]
