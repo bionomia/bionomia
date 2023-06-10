@@ -61,7 +61,7 @@ module Sinatra
         end
 
         def stats_wikidata
-          User.select("COUNT(*) AS total, SUM(IF(is_public = true, 1, 0)) AS public")
+          User.select("COUNT(*) AS total, SUM(IF(is_public = true, 1, 0)) AS public, SUM(IF(zenodo_doi, 1, 0)) AS doi")
               .where.not(wikidata: nil)
               .first
         end
