@@ -82,9 +82,12 @@ module Bionomia
       "/api/deposit/depositions/#{id}/actions/publish"
     end
 
+    def token_hash
+      @token_hash ||= ( @user.orcid ? @user.zenodo_access_token : { access_token: @settings.zenodo.access_token } )
+    end
+
     def access_token
-      token = @user.orcid ? @user.zenodo_access_token : { access_token: @settings.zenodo.access_token }
-      @access_token ||= OAuth2::AccessToken.from_hash(client, token)
+      @access_token ||= OAuth2::AccessToken.from_hash(client, token_hash)
     end
 
     # Have to store this again otherwise can no longer use the old one
@@ -107,7 +110,7 @@ module Bionomia
     end
 
     def update_deposit(id:, metadata:)
-      headers = { "Content-Type": "application/json"}
+      headers = { "Content-Type": "application/json" }
       body = { metadata: metadata }
       raw_response = access_token.put(deposit_url(id), { body: body.to_json, headers: headers })
       JSON.parse(raw_response.body).deep_symbolize_keys
@@ -116,7 +119,7 @@ module Bionomia
     # Input, name: "Shorthouse, David", orcid: "0000-0001-7618-5230"
     # Returns { doi: "10.5281/zenodo.2652234", recid: 2652234}
     def new_deposit
-      headers = { "Content-Type": "application/json"}
+      headers = { "Content-Type": "application/json" }
       body = { metadata: global_metadata }
       raw_response = access_token.post(new_deposit_url, { body: body.to_json, headers: headers })
       response = JSON.parse(raw_response.body).deep_symbolize_keys
@@ -129,6 +132,18 @@ module Bionomia
     end
 
     def add_file(id:, file_path:, file_name: nil)
+      #TODO: New file upload API at Zenodo has a 50MB limit through multipart-form
+      # May look something like this:
+      # filename = file_name ||= File.basename(file_path)
+      # header = { "Content-Type": "application/json" }
+      # raw_response = access_token.post(deposits_url, { body: {}.to_json, headers: header })
+      # response = JSON.parse(raw_response.body).deep_symbolize_keys
+      # bucket_url = response[:links][:bucket]
+      # header = { "Content-Type": "application/octet-stream" }
+      # file = File.read(file_path) # Can we stream this instead?!
+      # response = access_token.put(bucket_url + "/#{filename}", { body: file, headers: header })
+      #JSON.parse(response.body).deep_symbolize_keys
+
       filename = file_name ||= File.basename(file_path)
       io = File.new(file_path, "r")
       mime_type = FileMagic.new(FileMagic::MAGIC_MIME).file(file_path)

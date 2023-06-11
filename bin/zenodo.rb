@@ -35,7 +35,7 @@ def make_csv(u)
   io = Bionomia::IO.new({ user: u })
   temp = Tempfile.new
   temp.binmode
-  io.csv_stream_occurrences(u.visible_occurrences)
+  io.csv_stream_occurrences(u.visible_occurrences.includes(:claimant))
     .each { |line| temp << line }
   temp.close
   temp
@@ -57,6 +57,14 @@ def submit_new(u)
   # Create the files
   csv = make_csv(u)
   json = make_json(u)
+
+  # Temporary hack because API can't handle files > 50MB
+  # See the add_file method in Bionomia::Zenodo
+  if csv.size > 50_000_000 || json.size > 50_000_000
+    csv.unlink
+    json.unlink
+    return
+  end
 
   z = Bionomia::Zenodo.new(user: u)
 
@@ -95,6 +103,14 @@ def submit_update(u)
   # Create the files
   csv = make_csv(u)
   json = make_json(u)
+
+  # Temporary hack because API can't handle files > 50MB
+  # See the add_file method in Bionomia::Zenodo
+  if csv.size > 50_000_000 || json.size > 50_000_000
+    csv.unlink
+    json.unlink
+    return
+  end
 
   z = Bionomia::Zenodo.new(user: u)
 
