@@ -7,7 +7,7 @@
     });
 - content_for :jumbotron do
   .jumbotron.jumbotron-fluid.alert-warning
-    %h1.h2 #{@dataset.title}
+    %h1.h2 Dataset Administration
 
 - if flash[:updated]
   .alert.alert-success.alert-dismissible.fade.show.d-block{role: "alert"}
@@ -16,65 +16,72 @@
     %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
       %span{"aria-hidden":"true"} &times;
 
-%form.helpers#form-org-wrapper{method: "POST", action: "/admin/dataset/#{@dataset.id}", "accept-charset": "UTF-8"}
+.row
+  = haml :'partials/dataset/jumbotron', layout:false, locals: locals
 
-  .form-group
-    %label{for:"title"} Title
-    %input.form-control#name{type:"text", value:"#{@dataset.title}", name:"title"}
-  .form-group
-    %label{for:"doi"} DOI
-    %input.form-control#address{type:"text", value:"#{@dataset.doi}", name:"doi"}
-  .form-group
-    %label{for:"licence"} License
-    %input.form-control#license{type:"text", value:"#{@dataset.license}", name:"license"}
-  .form-group
-    %label{for:"image_url"} Logo
-    %input.form-control#logo{type:"text", value:"#{@dataset.image_url}", name:"image_url"}
-  .form-group
-    %label{for:"description"} Description
-    %textarea.form-control#description{type:"text", name:"description"}= "#{@dataset.description}"
-    %small.form-text.text-muted#dataset-link
-      %a{href: "https://gbif.org/dataset/#{@dataset.uuid}"}
-        %img{src: "/images/gbif_18x18.svg", alt:"GBIF", width:"18px"}
-      %a{href: "https://gbif.org/dataset/#{@dataset.uuid}", target:"_blank"} https://gbif.org/dataset/#{@dataset.uuid}
+  .col-12.col-lg-8.mt-2
+    .alert.alert-success
+      %ul
+        %li
+          %span.badge.badge-light
+            #{number_with_delimiter(@dataset.occurrences_count)}
+          records
+        %li
+          %span.badge.badge-light
+            #{number_with_delimiter(@dataset.source_attribution_count)}
+          attributions from source
+        - last_refreshed = @dataset.updated_at || "never"
+        %li Last refreshed: #{last_refreshed}
+        - last_created = @dataset.frictionless_created_at || "never"
+        %li Frictionless last built: #{last_created}
 
-  %p
-    %a.btn.btn-sm.btn-outline-success.dataset-refresh.mt-3{href: url("/admin/dataset/refresh.json?datasetKey=#{@dataset.uuid}"), role:"button"}
-      %i.fas.fa-sync-alt
-      Refresh
-      %img{src: "/images/gbif_18x18.svg", alt:"GBIF", width:"18px"}
-    %a.btn.btn-sm.btn-outline-success.dataset-frictionless.mt-3{href: url("/admin/dataset/frictionless.json?datasetKey=#{@dataset.uuid}"), role:"button"}
-      %i.fas.fa-sync-alt
-      Rebuild
-      %i.fas.fa-file-archive
+    %form.helpers#form-org-wrapper{method: "POST", action: "/admin/dataset/#{@dataset.id}", "accept-charset": "UTF-8"}
 
-  .alert.alert-gbif.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}
-    Data from GBIF was refreshed.
-    %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
-      %span{"aria-hidden":"true"} &times;
+      .form-group
+        %label{for:"title"} Title
+        %input.form-control#name{type:"text", value:"#{@dataset.title}", name:"title"}
+      .form-group
+        %label{for:"doi"} DOI
+        %input.form-control#address{type:"text", value:"#{@dataset.doi}", name:"doi"}
+      .form-group
+        %label{for:"licence"} License
+        %input.form-control#license{type:"text", value:"#{@dataset.license}", name:"license"}
+      .form-group
+        %label{for:"image_url"} Logo
+        %input.form-control#logo{type:"text", value:"#{@dataset.image_url}", name:"image_url"}
+      .form-group
+        %label{for:"description"} Description
+        %textarea.form-control#description{type:"text", name:"description", rows: 5}= "#{@dataset.description}"
 
-  .alert.alert-frictionless.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}
-    Fricitonless data package is being rebuilt.
-    %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
-      %span{"aria-hidden":"true"} &times;
+      .form-group
+        %a.btn.btn-sm.btn-outline-success.dataset-frictionless{href: url("/admin/dataset/frictionless.json?datasetKey=#{@dataset.uuid}"), role:"button"}
+          %i.fas.fa-sync-alt
+          Rebuild Frictionless
+          %i.fas.fa-file-archive
 
-  %button.btn.btn-success{type:"submit"} Submit
-  %button.btn.btn-danger{type: "button", "data-toggle": "modal", "data-target": "#deleteModal"} Delete
+      .form-group
+        .alert.alert-frictionless.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}
+          Fricitonless data package is being rebuilt.
+          %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
+            %span{"aria-hidden":"true"} &times;
 
-  %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
+      .form-group
+        %button.btn.btn-success{type:"submit"} Submit
+        %button.btn.btn-danger{type: "button", "data-toggle": "modal", "data-target": "#deleteModal"} Delete
+        %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
 
-.modal.fade#deleteModal{tabindex:"-1", role:"dialog", "aria-labelledby":"deleteModal", "aria-hidden":"true"}
-  .modal-dialog{role:"document"}
-    .modal-content
-      .modal-header
-        %h5.modal-title#deleteLabel Delete Account
-        %button.close{type:"button", "data-dismiss":"modal", "aria-label":"Close"}
-          %span{"aria-hidden":"true"} &times;
-      .modal-body
-        Are you sure you want to delete this dataset?
-      .modal-footer
-        %form{action: "/admin/dataset/#{@dataset.id}", method: :post}
-          %button.btn.btn-sm.btn-outline-secondary{type:"button", "data-dismiss":"modal"} Cancel
-          %input{type: :hidden, name: "_method", value: 'DELETE'}
-          %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
-          %input.btn.btn-sm.btn-outline-danger{type: :submit, value:"Delete"}
+    .modal.fade#deleteModal{tabindex:"-1", role:"dialog", "aria-labelledby":"deleteModal", "aria-hidden":"true"}
+      .modal-dialog{role:"document"}
+        .modal-content
+          .modal-header
+            %h5.modal-title#deleteLabel Delete Account
+            %button.close{type:"button", "data-dismiss":"modal", "aria-label":"Close"}
+              %span{"aria-hidden":"true"} &times;
+          .modal-body
+            Are you sure you want to delete this dataset?
+          .modal-footer
+            %form{action: "/admin/dataset/#{@dataset.id}", method: :post}
+              %button.btn.btn-sm.btn-outline-secondary{type:"button", "data-dismiss":"modal"} Cancel
+              %input{type: :hidden, name: "_method", value: 'DELETE'}
+              %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
+              %input.btn.btn-sm.btn-outline-danger{type: :submit, value:"Delete"}

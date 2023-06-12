@@ -5,6 +5,7 @@ module Bionomia
   class Zenodo
 
     def initialize(user:, opts: {})
+      @bucket_url = nil
       @user = user
       @settings = Settings.merge!(opts)
     end
@@ -106,6 +107,7 @@ module Bionomia
     def get_deposit(id:)
       raw_response = access_token.get(deposit_url(id))
       response = JSON.parse(raw_response.body).deep_symbolize_keys
+      @bucket_url = response[:links][:bucket]
       response[:metadata]
     end
 
@@ -123,6 +125,7 @@ module Bionomia
       body = { metadata: global_metadata }
       raw_response = access_token.post(new_deposit_url, { body: body.to_json, headers: headers })
       response = JSON.parse(raw_response.body).deep_symbolize_keys
+      @bucket_url = response[:links][:bucket]
       response[:metadata][:prereserve_doi]
     end
 
@@ -132,17 +135,13 @@ module Bionomia
     end
 
     def add_file(id:, file_path:, file_name: nil)
-      #TODO: New file upload API at Zenodo has a 50MB limit through multipart-form
+      # TODO: New file upload API at Zenodo has a 50MB limit through multipart-form
       # May look something like this:
       # filename = file_name ||= File.basename(file_path)
-      # header = { "Content-Type": "application/json" }
-      # raw_response = access_token.post(deposits_url, { body: {}.to_json, headers: header })
-      # response = JSON.parse(raw_response.body).deep_symbolize_keys
-      # bucket_url = response[:links][:bucket]
       # header = { "Content-Type": "application/octet-stream" }
-      # file = File.read(file_path) # Can we stream this instead?!
-      # response = access_token.put(bucket_url + "/#{filename}", { body: file, headers: header })
-      #JSON.parse(response.body).deep_symbolize_keys
+      # file = File.read(file_path) # Can we stream this instead of reading it?! Something like in https://www.rubydoc.info/gems/activestorage/0.1/ActiveStorage/Service/DiskService#upload-instance_method
+      # response = access_token.put(@bucket_url + "/#{filename}", { body: file, headers: header })
+      # JSON.parse(response.body).deep_symbolize_keys
 
       filename = file_name ||= File.basename(file_path)
       io = File.new(file_path, "r")

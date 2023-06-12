@@ -55,9 +55,14 @@
         %img{src: "/images/gbif_18x18.svg", alt:"GBIF", width:"18px"}
 
       - if admin_authorized?
-        %a.mr-2.mb-2.text-nowrap{href: url("/admin/dataset/#{@dataset.uuid}")}
-          %i.fas.fa-cog
-          = I18n.t('general.settings')
+        - if locals[:active_page] == "administration"
+          %a.mr-2.mb-2.text-nowrap{href: url("/dataset/#{@dataset.uuid}")}
+            %i.fas.fa-users
+            = I18n.t('profile.public')
+        - else
+          %a.mr-2.mb-2.text-nowrap{href: url("/admin/dataset/#{@dataset.uuid}")}
+            %i.fas.fa-cog
+            = I18n.t('general.settings')
 
     #flush-message.alert.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}
       = I18n.t("user.caches_rebuilt")
