@@ -49,11 +49,12 @@
                 %p.card-text
                   Submit archive to Zenodo.
                 %p.card-text
-                  %button#zenodo-submit.btn.btn-sm.btn-outline-info= I18n.t('profile.integrate_zenodo')
+                  %button#zenodo-submit.btn.btn-sm.btn-outline-info{"data-action": "new"}= I18n.t('profile.integrate_zenodo')
             - if @admin_user.zenodo_concept_doi
               %p
                 %a{href:"https://doi.org/#{@admin_user.zenodo_concept_doi}"}
                   %img{src:"/images/#{@admin_user.zenodo_concept_doi}.svg"}
+              %button#zenodo-submit.btn.btn-sm.btn-outline-info{"data-action": "update"} Update on Zenodo
 
       .card-deck
         .card

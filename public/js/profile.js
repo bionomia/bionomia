@@ -135,7 +135,7 @@ var Profile = (function($, window) {
           url: self.path + "/zenodo.json",
           method: 'PUT',
           dataType: "json",
-          data: JSON.stringify({ action: 'new' })
+          data: JSON.stringify({ action: $(this).attr("data-action") })
         }).done(function(data) {
           button.remove();
         });
