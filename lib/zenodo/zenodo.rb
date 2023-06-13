@@ -137,16 +137,31 @@ module Bionomia
     def add_file(id:, file_path:, file_name: nil)
       # TODO: New file upload API at Zenodo has a 50MB limit through multipart-form
       # May look something like this:
-      # filename = file_name ||= File.basename(file_path)
-      # header = { "Content-Type": "application/octet-stream" }
-      # file = File.read(file_path) # Can we stream this instead of reading it?! Something like in https://www.rubydoc.info/gems/activestorage/0.1/ActiveStorage/Service/DiskService#upload-instance_method
-      # response = access_token.put(@bucket_url + "/#{filename}", { body: file, headers: header })
-      # JSON.parse(response.body).deep_symbolize_keys
+      #chunk_size = 2*1024*1024
+      #filename = file_name ||= File.basename(file_path)
+      #header = { "Content-Type" => "application/octet-stream", "Transfer-Encoding" => "chunked" }
+      #io = File.new(file_path, "r")
+      #total_size = io.dup.size
+      #io.each_with_index(nil, chunk_size) do |chunk, index|
+      #  start_byte = index*chunk.size
+      #  end_byte = (index+1)*chunk.size + 1 #TODO: does not work, have to verify byte count here
+      #  tmp = Tempfile.new
+      #  tmp << chunk
+      #  header.merge!({
+      #    "Content-Range" => "bytes #{start_byte}-#{end_byte}/#{total_size}",
+      #    "Content-Length" => "#{tmp.size}",
+      #    "Digest" => "sha=#{Digest::SHA256.base64digest(chunk)}"
+      #  })
+      #  response = access_token.put(@bucket_url + "/#{filename}", { body: tmp, headers: header })
+      #  JSON.parse(response.body).deep_symbolize_keys
+      #  tmp.close
+      #  tmp.unlink
+      #end
 
       filename = file_name ||= File.basename(file_path)
       io = File.new(file_path, "r")
       mime_type = FileMagic.new(FileMagic::MAGIC_MIME).file(file_path)
-      upload = Faraday::UploadIO.new io, mime_type, filename
+      upload = Faraday::Multipart::FilePart.new io, mime_type, filename
       response = access_token.post(add_file_url(id), { body: { filename: filename, file: upload }})
       JSON.parse(response.body).deep_symbolize_keys
     end
