@@ -136,15 +136,16 @@ module Bionomia
 
     def add_file(id:, file_path:, file_name: nil)
       # TODO: New file upload API at Zenodo has a 50MB limit through multipart-form
-      # May look something like this:
-      #chunk_size = 2*1024*1024
-      #filename = file_name ||= File.basename(file_path)
-      #header = { "Content-Type" => "application/octet-stream", "Transfer-Encoding" => "chunked" }
-      #io = File.new(file_path, "r")
-      #total_size = io.dup.size
-      #io.each_with_index(nil, chunk_size) do |chunk, index|
+      # Instead of Faraday, may perhaps use HTTPX, https://honeyryderchuck.gitlab.io/httpx/index.html
+      # May look something like this if it supported chunking and Content-Range:
+      # chunk_size = 2*1024*1024
+      # filename = file_name ||= File.basename(file_path)
+      # io = File.new(file_path, "r")
+      # total_size = io.dup.size
+      # header = { "Content-Type" => "application/octet-stream", "Transfer-Encoding" => "chunked" }
+      # io.each_with_index(nil, chunk_size) do |chunk, index|
       #  start_byte = index*chunk.size
-      #  end_byte = (index+1)*chunk.size + 1 #TODO: does not work, have to verify byte count here
+      #  end_byte = (index+1)*chunk.size
       #  tmp = Tempfile.new
       #  tmp << chunk
       #  header.merge!({
@@ -156,7 +157,7 @@ module Bionomia
       #  JSON.parse(response.body).deep_symbolize_keys
       #  tmp.close
       #  tmp.unlink
-      #end
+      # end
 
       filename = file_name ||= File.basename(file_path)
       io = File.new(file_path, "r")

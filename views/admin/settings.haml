@@ -33,21 +33,23 @@
             .row
               .col
                 %input.btn-claim#toggle-public{type:"checkbox", "data-toggle":"toggle", "data-on":"Public", "data-off":"Private", "data-onstyle": "success", "data-size": "small", checked: @admin_user.is_public?, "data-url": "/admin/user/#{@admin_user.identifier}/visibility.json" }
-              .col.text-right
-                - if @admin_user.is_public?
-                  %a{href: url("/#{@admin_user.identifier}"), target: "_blank"}
-                    Public Profile
-                    %i.fas.fa-external-link-alt
 
         .card
           %h5.card-header Citable Claims
           .card-body
-            - if !@admin_user.zenodo_access_token.nil?
-              %p.card-text
-                User has created a link to Zenodo
+            - if @admin_user.orcid
+              - if !@admin_user.zenodo_access_token.nil?
+                %p.card-text
+                  User has created a link to Zenodo.
+              - else
+                %p.card-text
+                  User has not yet created a link to Zenodo
             - else
-              %p.card-text
-                User has not yet created a link to Zenodo
+              - if !@admin_user.zenodo_concept_doi
+                %p.card-text
+                  Submit archive to Zenodo.
+                %p.card-text
+                  %button#zenodo-submit.btn.btn-sm.btn-outline-info= I18n.t('profile.integrate_zenodo')
             - if @admin_user.zenodo_concept_doi
               %p
                 %a{href:"https://doi.org/#{@admin_user.zenodo_concept_doi}"}

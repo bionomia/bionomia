@@ -734,6 +734,15 @@ module Sinatra
               { message: "ok" }.to_json
             end
 
+            put '/user/:id/zenodo.json' do
+              content_type "application/json", charset: 'utf-8'
+              req = JSON.parse(request.body.read).symbolize_keys
+              admin_user = find_user(params[:id])
+              vars = { id: admin_user.id, action: req[:action] }
+              ::Bionomia::ZenodoWorker.perform_async(vars)
+              { message: "ok" }.to_json
+            end
+
             post '/user-occurrence/bulk.json' do
               content_type "application/json", charset: 'utf-8'
               req = JSON.parse(request.body.read).symbolize_keys

@@ -115,14 +115,29 @@ var Profile = (function($, window) {
     },
 
     activate_zenodo: function() {
+      var self = this;
       $('#zenodo-disconnect').on('click', function() {
         $.ajax({
           url: '/auth/zenodo',
+          method: 'DELETE',
           type: 'DELETE',
           data: {}
         }).done(function(data) {
           $('#zenodoModal').modal('hide');
           location.reload();
+        });
+      });
+      $('#zenodo-submit').on('click', function(e) {
+        var button = $(this);
+        e.stopPropagation();
+        e.preventDefault();
+        $.ajax({
+          url: self.path + "/zenodo.json",
+          method: 'PUT',
+          dataType: "json",
+          data: JSON.stringify({ action: 'new' })
+        }).done(function(data) {
+          button.remove();
         });
       });
     },
