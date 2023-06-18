@@ -578,8 +578,6 @@ dl.citation{
   color: #f08d49;
 }
 
-.doi-badge{display:none;}
-
 @media (min-width: 1300px) {
   .d-xxl-inline-block {
     display: inline-block!important;
@@ -588,7 +586,6 @@ dl.citation{
 
 @media(max-width: 700px) {
   .card-deck{display:block;}
-  .doi-badge{display:block;}
 }
 
 @media(max-width: 767px) {
@@ -599,7 +596,6 @@ dl.citation{
 
 @media(max-width: 576px) {
   .button-login{display:inline-block;}
-  .doi-badge{display:block;}
 }
 
 @media (max-width: 530px) {
@@ -714,7 +710,6 @@ dl.citation{
   .text-lg-right { text-align: right; }
   .text-lg-center { text-align: center; }
   .text-lg-justify { text-align: justify; }
-  .doi-badge{display:block;}
   .w-xl-100 { width:100%!important; }
   .w-xl-75 { width:75%!important; }
   .w-xl-65 { width:65%!important; }
