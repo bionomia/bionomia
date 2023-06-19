@@ -24,13 +24,15 @@ module Bionomia
 
       def refresh
          z = Bionomia::Zenodo.new(user: user)
-         begin
-            user.skip_callbacks = true
-            user.zenodo_access_token = z.refresh_token
-            user.save
-            puts "#{user.viewname} (id=#{u.id})".green
-         rescue
-            puts "#{user.viewname} (id=#{u.id}) token failed".red
+         if user.orcid
+            begin
+               user.skip_callbacks = true
+               user.zenodo_access_token = z.refresh_token
+               user.save
+               puts "#{user.viewname} (id=#{user.id})".green
+            rescue
+               puts "#{user.viewname} (id=#{user.id}) token failed".red
+            end
          end
       end
 
