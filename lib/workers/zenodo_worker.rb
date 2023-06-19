@@ -127,7 +127,7 @@ module Bionomia
                user.save
             end
       
-            old_id = u.zenodo_doi.split(".").last
+            old_id = user.zenodo_doi.split(".").last
             doi_id = z.new_version(id: old_id)
       
             # DELETE existing files
