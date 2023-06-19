@@ -391,10 +391,10 @@ pt:
     occurrence: Espécimes
     occurrence_advance_message: Co-collected specimen records. Use the right arrow key on your keyboard or the arrow on the screen to advance a record until you receive one that you may attribute.
   home:
-    tagline: Vincule espécimes de história natural a colecionadores do mundo.
-    get_started: Inicie
+    tagline: Atribua espécimes de história natural aos coletores de todo o mundo.
+    get_started: Iniciar
     your_profile: Seu perfil
-    sample_profiles: Coletores em destaque de hoje
+    sample_profiles: Coletores em destaque hoje
     orcid_login: Entrar com ORCID
     orcid_logo: Logótipo do ORCID
   layout:
@@ -536,7 +536,7 @@ pt:
     thanks_alert: Os autores da Bionomia o ajudaram a reivindicar espécimes. Envie-lhes sua apreciação.
     thanks_received: Agradecimentos recebidos
     thanks_received_alert: Você recebeu agradecimentos por atribuir espécimes.
-    no_thanks_received_alert: Você ainda não recebeu agradecimentos por atribuir registros de espécimes a outros colecionadores. Você já tentou ajudar outras pessoas?
+    no_thanks_received_alert: Ainda não recebeu agradecimentos por atribuir registos de espécimes a outros coletores. Já tentou ajudar outras pessoas?
     change_photo: Alterar foto de perfil
     remove: Remover
     cancel: Cancelar
