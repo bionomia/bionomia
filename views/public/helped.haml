@@ -23,8 +23,7 @@
 
         - @results.in_groups_of(2).each do |group|
           .card-deck
-            - group.each do |m|
-              - u = m.user rescue nil
+            - group.each do |u|
               - if u.nil?
                 .card.border-0
               - else

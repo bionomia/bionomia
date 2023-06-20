@@ -21,66 +21,33 @@
 - else
   .alert.alert-info.row.tiny-margins{role: "alert"}= I18n.t('profile.helped_alert')
 
-  - @results.in_groups_of(3).each do |group|
-    .card-deck
-      - group.each do |m|
-        - u = m.user rescue nil
-        - if u.nil?
-          .card.border-0
-        - else
-          .card.card-profile.my-3
-            - if u.image_url
-              .card-header.d-flex
-                %div
-                  %img.card-img-profile.mr-2{src:"#{profile_image(u, 'medium')}", alt:"#{u.viewname}", width:48, height:48, loading:"lazy"}
-                .flex-grow-1
-                  %h5
-                    = link_to u.viewname, url("/help-others/#{u.identifier}/specimens?attributor=#{@user.identifier}")
-                  - if u.wikidata
-                    %p.small.text-muted.mt-0.mb-0= format_lifespan(u)
-                  - if u.country
-                    %p.small.text-muted.mt-0.mb-0
-                      - country_codes = u.country_code.split("|") rescue []
-                      - countries = u.country.split("|") rescue []
-                      - countries.each_with_index do |v,i|
-                        = succeed (countries[i+1]) ? ', ' : '' do
-                          - if !country_codes[i].nil? && !country_codes[i].empty?
-                            #{country_name(country_codes[i])}
-                          - else
-                            #{v}
-            - else
-              .card-header
-                %h5
-                  = link_to u.viewname, url("/help-others/#{u.identifier}/specimens?attributor=#{@user.identifier}")
-                - if u.wikidata
-                  %p.small.text-muted.mt-0.mb-0= format_lifespan(u)
-                - if u.country
-                  %p.small.text-muted.mt-0.mb-0
-                    - country_codes = u.country_code.split("|") rescue []
-                    - countries = u.country.split("|") rescue []
-                    - countries.each_with_index do |v,i|
-                      = succeed (countries[i+1]) ? ', ' : '' do
-                        - if !country_codes[i].nil? && !country_codes[i].empty?
-                          #{country_name(country_codes[i])}
-                        - else
-                          #{v}
+  .table-responsive-lg.mt-4
+    %table.table.table-hover.table-sm
+      %thead.thead-light
+        %tr
+          %th{scope: "col"}= I18n.t('help.person')
+          %th.text-right{scope: "col"}= I18n.t('profile.attributions')
+          %th{scope: "col"}= I18n.t('help.progress')
+          %th{scope: "col"}= I18n.t('help.latest_claim')
 
-            .card-body.d-flex
-              .flex-fill
-              .flex-fill
-              .progress.progress-border.flex-fill.ml-auto.align-self-end
-                .progress-bar.bg-info{id:"progress-bar_#{u.identifier}", role:"progressbar", style:"width: 0%;", "aria-valuenow":"0", "aria-valuemin":"0", "aria-valuemax":"100", "aria-label":"#{I18n.t('user.progress')}"}
-
-            .card-footer.d-flex
-              - if !u.is_public?
-                .small.text-right.text-muted.mr-2
-                  %i.fas.fa-lock
-              .small.text-left.text-muted.mr-2
-                %span.badge.badge-light
-                  #{number_with_delimiter(m[:attribution_count])}
-                #{I18n.t('profile.attributed_count', count: m[:attribution_count])}
-              .small.ml-auto.text-muted
-                = I18n.t('profile.latest_helped', time: m[:created])
+      %tbody
+        - @results.each do |claim|
+          %tr
+            %td
+              - if claim.user.orcid
+                %i.fab.fa-orcid
+              - else
+                %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD"}
+              %a{href: url("/help-others/#{claim.user.identifier}")} #{claim.user.viewname}
+              - if !claim.user.is_public?
+                %i.fas.fa-lock.text-muted.ml-2
+            %td.text-right
+              #{number_with_delimiter(claim[:attribution_count])}
+            %td
+              .progress.progress-border
+                .progress-bar.bg-info{id:"progress-bar_#{claim.user.identifier}", role:"progressbar", style:"width: 0%;", "aria-valuenow":"0", "aria-valuemin":"0", "aria-valuemax":"100", "aria-label":"#{I18n.t('user.progress')}"}
+            %td
+              #{claim.created}
 
   - if @pagy.pages > 1
     .y-scroll

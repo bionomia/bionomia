@@ -318,14 +318,6 @@ class User < ActiveRecord::Base
     claims.where(visible: true).where.not(user: self)
   end
 
-  def helped_count
-    helped_ids.count
-  end
-
-  def helped_ids
-    claims_given.pluck(:user_id).uniq
-  end
-
   def helped_counts
     claims_given.group(:user_id)
                 .order("NULL")
@@ -343,12 +335,6 @@ class User < ActiveRecord::Base
                 .preload(:user)
                 .group("user_occurrences.user_id")
                 .order("MAX(user_occurrences.created) desc")
-  end
-
-  def latest_helped_ids
-    claims_given.order(created: :desc)
-                .pluck(:user_id)
-                .uniq
   end
 
   def claims_received

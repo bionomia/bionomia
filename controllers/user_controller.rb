@@ -367,7 +367,8 @@ module Sinatra
 
             @stats = cache_block("#{@viewed_user.identifier}-stats") { user_stats(@viewed_user) }
             page = (params[:page] || 1).to_i
-            @pagy, @results = pagy_arel(@viewed_user.latest_helped, items: 30, page: page)
+
+            @pagy, @results = pagy_arel(@viewed_user.helped, items: 30, page: page)
             haml :'public/helped', locals: { active_page: "roster" }
           end
 
