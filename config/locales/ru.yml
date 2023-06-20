@@ -655,6 +655,7 @@ ru:
       few: "specimens attributed"
       many: "specimens attributed"
       other: "specimens attributed"
+    attributions: Attributions Made
     private_message_html: "Your profile is private. Claim your %{specimens} and then make it public in %{settings} to maximize reuse."
     no_claims_html: "Claim your discovered specimens under the %{specimens} tab to build your profile and start tracking your citations. Acknowledge your peers, mentors, or anyone who inspires you by attributing specimens under %{help_others}."
     try_again: Try again.

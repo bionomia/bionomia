@@ -593,6 +593,7 @@ pt:
     attributed_count:
       one: "espécime atribuído"
       other: "espécime atribuído"
+    attributions: Attributions Made
     private_message_html: "Seu perfil é privado. Reivindique suas %{specimens} e torne-as públicas em %{settings} para maximizar a reutilização."
     no_claims_html: "Reivindique seus espécimes descobertos na guia %{specimens} para construir seu perfil e começar a rastrear suas citações. Reconheça seus colegas, mentores ou qualquer pessoa que o inspire atribuindo espécimes sob %{help_others}."
     try_again: Tente novamente.
