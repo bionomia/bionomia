@@ -185,7 +185,7 @@ module Sinatra
             end
 
             get '/helped' do
-              @pagy, @results = pagy_arel(@user.latest_helped, items: 30)
+              @pagy, @results = pagy_arel(@user.latest_helped, items: 25)
               haml :'profile/helped', locals: { active_page: "profile" }
             end
 
