@@ -593,6 +593,7 @@ de:
     attributed_count:
       one: "Exemplar zugeordnet"
       other: "Exemplare zugeordnet"
+    attributions: Attributions Made
     private_message_html: "Ihr Profil ist privat. Beanspruchen Sie Ihr(e) %{specimens}. Die Veröffentlichung, um die Wiederverwendung zu maximieren, ist unter %{settings} möglich."
     no_claims_html: "Beanspruchen Sie Ihre entdeckten Exemplare unter der Registerkarte %{specimens}, um Ihr Profil zu erstellen und Ihre Zitate zu verfolgen. Würdigen Sie Ihre Kollegen, Mentoren oder andere Personen, die Sie inspirieren, indem Sie unter %{help_others} Exemplare zuordnen."
     try_again: Bitte erneut versuchen.
