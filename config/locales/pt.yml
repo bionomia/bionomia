@@ -262,8 +262,8 @@ pt:
     ignored_title: "Ajude a reivindicar ignorado para %{name}"
     upload_user_title: "Carregamento de dados em massa para %{name}"
     help_user_title: "Ajude a atribuir espécimes para %{name}"
-    help_title: Espécimes de atributo de ajuda
-    country_title: Espécimes de atributo de ajuda
+    help_title: Ajude a atribuir espécimes
+    country_title: Ajude a atribuir espécimes
     latest_title: Destinatários mais recentes
     country_name_title: "Ajude a atribuir espécimes para pessoas de %{country}"
     country_no_one: "Ninguém encontrado de"
@@ -666,7 +666,7 @@ pt:
     mismatch: Incompatibilidade com vida útil
   scribes:
     scribes_title: Autores
-    lede: "%{scribe_count} pessoas que atribuíram %{attribution_count} espécimes de história natural a %{recipient_count} de seus colegas, mentores e modelos de comportamento"
+    lede: "%{scribe_count} pessoas que atribuíram %{attribution_count} espécimes de história natural a %{recipient_count} dos seus pares, mentores e figuras de referência"
   statistics:
     title: Estatísticas
     claims: Cumulative Claims
