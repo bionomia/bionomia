@@ -297,7 +297,8 @@ uk:
     upload_user_title: "Bulk Upload for %{name}"
     help_user_title: "Help Attribute Specimens for %{name}"
     help_title: Help Attribute Specimens
-    country_title: Help Attribute Specimens
+    roster_title: Help Attribute Specimens
+    country_title: Help Attribute Specimens by Country
     latest_title: Latest Recipients
     country_name_title: "Help Attribute Specimens for People From %{country}"
     country_no_one: "No one found from"
@@ -309,6 +310,7 @@ uk:
     country_name_lede: From countries stated in ORCID or Wikidata
     latest_lede: Join the scribes by helping to attribute specimens
     country_lede: Join the scribes in acknowledging your peers, mentors, or anyone who inspires you
+    roster_lede: Join the scribes in acknowledging your peers, mentors, or anyone who inspires you
     person: Person
     progress: Progress
     public: Public
