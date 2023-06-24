@@ -34,6 +34,8 @@
         - if user.nil?
           .card.border-0
         - else
-          = haml :'partials/user/card_dynamic', layout: false, locals: { user: User.find(user[:_id]), path: "/admin/user" }
+          - user = User.find(user[:_id])
+          - stats = cache_block("#{user.identifier}-stats") { user_stats(user) }
+          = haml :'partials/user/card_dynamic', layout: false, locals: { user: user, stats: stats, path: "/admin/user" }
 
   = pagy_bootstrap_nav(@pagy) if @pagy.pages > 1

@@ -33,7 +33,8 @@
           - if u.nil?
             .card.border-0
           - else
-            = haml :'partials/user/card_dynamic', layout: false, locals: { user: u, path: "/help-others" }
+            - stats = cache_block("#{u.identifier}-stats") { user_stats(u) }
+            = haml :'partials/user/card_dynamic', layout: false, locals: { user: u, stats: stats, path: "/help-others" }
 
     - if @pagy.pages > 1
       .y-scroll

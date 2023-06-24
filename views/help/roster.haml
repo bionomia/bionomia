@@ -51,9 +51,12 @@
         .card.border-0
       - else
         - if params[:q] && !params[:q].blank?
-          = haml :'partials/user/card_dynamic', layout: false, locals: { user: User.find(user[:_id]), path: "/help-others" }
+          - user = User.find(user[:_id])
+          - stats = cache_block("#{user.identifier}-stats") { user_stats(user) }
+          = haml :'partials/user/card_dynamic', layout: false, locals: { user: user, stats: stats, path: "/help-others" }
         - else
-          = haml :'partials/user/card_dynamic', layout: false, locals: { user: user, path: "/help-others" }
+          - stats = cache_block("#{user.identifier}-stats") { user_stats(user) }
+          = haml :'partials/user/card_dynamic', layout: false, locals: { user: user, stats: stats, path: "/help-others" }
 
 - if @pagy.pages > 1
   .y-scroll
