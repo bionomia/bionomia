@@ -1,7 +1,9 @@
 .y-scroll
   %ul.nav.nav-tabs.pl-2.flex-nowrap
     %li.nav-item
-      %a{class: "text-nowrap nav-link#{locals[:active_main_tab] == "country" ? " active" : nil}", href: url("/help-others")}= I18n.t('help.by_country')
+      %a{class: "text-nowrap nav-link#{locals[:active_main_tab] == "roster" ? " active" : nil}", href: url("/help-others")}= I18n.t('layout.profiles')
+    %li.nav-item
+      %a{class: "text-nowrap nav-link#{locals[:active_main_tab] == "country" ? " active" : nil}", href: url("/help-others/countries")}= I18n.t('help.by_country')
     %li.nav-item
       %a{class: "text-nowrap nav-link#{locals[:active_main_tab] == "occurrence" ? " active" : nil}", href: url("/help-others/occurrence")}= I18n.t('help.occurrence')
     %li.nav-item

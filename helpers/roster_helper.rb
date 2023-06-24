@@ -9,6 +9,13 @@ module Sinatra
           @pagy, @results = pagy(User.where(is_public: true).order(:family))
         end
 
+        def help_roster
+          users = User.where.not(id: User::BOT_IDS)
+                      .where(Arel.sql("CONCAT(family, label) IS NOT NULL"))
+                      .order(Arel.sql("LOWER(CONCAT(family, label))"))
+          @pagy, @results = pagy(users)
+        end
+
         def roster_gallery
           users = User.where(is_public: true)
                       .where.not(image_url: nil)

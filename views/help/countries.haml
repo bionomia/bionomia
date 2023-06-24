@@ -56,43 +56,6 @@
       %p.lead.text-muted= I18n.t('help.country_lede')
     = haml :'partials/help/search', layout: false
 
-- if @results.empty? && params[:q] && !params[:q].empty?
-  .alert.alert-warning.tiny-margins{role: "alert"}
-    = I18n.t('help.no_one_found', name: h(params[:q]))
-    = I18n.t('help.add_someone_html', href: link_to(I18n.t('help.add_someone_href'), url('/help-others/add')))
-
-- if @results.empty? || params[:q].nil?
-  = haml :'partials/help/main_tabs', layout: false, locals: { active_main_tab: "country" }
-
-  - if !@friends.empty?
-    .alert.alert-info.tiny-margins{role: "alert"}
-      %i.fas.fa-user-friends.mr-2
-      = I18n.t('help.do_you_know')
-      %span#friends
-        - @friends.each_with_index do |u, i|
-          = succeed (@friends.count > i+1) ? ", " : "" do
-            = link_to u[:fullname], url("/help-others/#{u[:identifier]}")
-      %a.help-refresh.ml-2{href: url('/profile/who-might-know.json')}
-        %i.fas.fa-sync-alt
-        = I18n.t('profile.refresh')
-
-  = haml :'partials/help/countries', layout: false
-
-- else
-  .alert.alert-info.tiny-margins{role: "alert"}
-    = succeed "." do
-      = I18n.t('help.search_count', count: @pagy.count, search: h(params[:q]))
-    = I18n.t('help.add_someone_html', href: link_to(I18n.t('help.add_someone_href'), url('/help-others/add')))
-
-  %div
-    - @results.in_groups_of(3).each do |group|
-      .card-deck
-        - group.each do |user|
-          - if user.nil?
-            .card.border-0
-          - else
-            = haml :'partials/user/card_dynamic', layout: false, locals: { user: User.find(user[:_id]), path: "help-others" }
-
-    - if @pagy.pages > 1
-      .y-scroll
-        = pagy_bootstrap_nav(@pagy)
+= haml :'partials/help/main_tabs', layout: false, locals: { active_main_tab: "country" }
+= haml :'partials/help/countries', layout: false
+  

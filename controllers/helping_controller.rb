@@ -13,13 +13,12 @@ module Sinatra
             get '' do
               @results = []
               @friends = @user.who_might_know
-              @countries = I18nData.countries(I18n.locale)
-                            .group_by{|u| ActiveSupport::Inflector.transliterate(u[1][0]) }
-                            .sort
-              if params[:q]
+              if params[:q] && !params[:q].blank?
                 search_user
+              else
+                help_roster
               end
-              haml :'help/others', locals: { active_page: "help" }
+              haml :'help/roster', locals: { active_page: "help" }
             end
 
             get '/:id/candidate-count.json' do
@@ -65,6 +64,13 @@ module Sinatra
               users = User.where.not(wikidata: nil).order(created: :desc).limit(25)
               @pagy, @results = pagy(users, items: 25)
               haml :'help/new_people', locals: { active_page: "help", active_tab: "wikidata" }
+            end
+
+            get '/countries' do
+              @countries = I18nData.countries(I18n.locale)
+                            .group_by{|u| ActiveSupport::Inflector.transliterate(u[1][0]) }
+                            .sort
+              haml :'help/countries', locals: { active_page: "help" }
             end
 
             get '/country/:country_code' do
