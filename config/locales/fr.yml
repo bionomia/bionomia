@@ -263,7 +263,8 @@ fr:
     upload_user_title: "Téléchargement en bloc pour %{name}"
     help_user_title: "Aidez à attribuer des spécimens à %{name}"
     help_title: Aider à attribuer des spécimens
-    country_title: Aider à attribuer des spécimens
+    roster_title: Help Attribute Specimens
+    country_title: Help Attribute Specimens by Country
     latest_title: Derniers Bénéficiaires
     country_name_title: "Aidez à attribuer des spécimens aux personnes du %{country}"
     country_no_one: "Personne trouvé de"
@@ -275,6 +276,7 @@ fr:
     country_name_lede: De pays indiqués dans ORCID ou Wikidata
     latest_lede: Rejoignez les scribes en aidant à attribuer des spécimens
     country_lede: Rejoignez les scribes pour remercier vos pairs, mentors ou toute personne qui vous inspire
+    roster_lede: Join the scribes in acknowledging your peers, mentors, or anyone who inspires you
     person: Personne
     progress: Progrès
     public: Publique
