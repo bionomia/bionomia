@@ -263,7 +263,8 @@ pt:
     upload_user_title: "Carregamento de dados em massa para %{name}"
     help_user_title: "Ajude a atribuir espécimes para %{name}"
     help_title: Ajude a atribuir espécimes
-    country_title: Ajude a atribuir espécimes
+    roster_title: Help Attribute Specimens
+    country_title: Help Attribute Specimens by Country
     latest_title: Destinatários mais recentes
     country_name_title: "Ajude a atribuir espécimes para pessoas de %{country}"
     country_no_one: "Ninguém encontrado de"
@@ -275,6 +276,7 @@ pt:
     country_name_lede: De países indicados no ORCID ou Wikidata
     latest_lede: Junte-se aos autores ajudando a atribuir espécimes
     country_lede: Junte-se aos autores para reconhecer seus colegas, mentores ou qualquer pessoa que o inspire
+    roster_lede: Join the scribes in acknowledging your peers, mentors, or anyone who inspires you
     person: Pessoa
     progress: Progresso
     public: Público
