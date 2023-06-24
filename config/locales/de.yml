@@ -263,7 +263,8 @@ de:
     upload_user_title: "Bulk Upload for %{name}"
     help_user_title: "Help Attribute Specimens for %{name}"
     help_title: Zur Zuordnung von Exemplaren beitragen
-    country_title: Zur Zuordnung von Exemplaren beitragen
+    roster_title: Help Attribute Specimens
+    country_title: Help Attribute Specimens by Country
     latest_title: Neueste Empfänger
     country_name_title: "Helfen Sie, Proben für Personen aus %{country} zuzuordnen"
     country_no_one: "Es wurde niemand gefunden aus"
@@ -275,6 +276,7 @@ de:
     country_name_lede: Aus in ORCID oder Wikidata angegebenen Ländern
     latest_lede: Helfen Sie den Bearbeitern bei der Zuordnung von Exemplaren
     country_lede: Schließen Sie sich den Bearbeitern an und würdigen Sie Ihre Kollegen, Mentoren oder sonstige Personen, die Sie inspirieren
+    roster_lede: Join the scribes in acknowledging your peers, mentors, or anyone who inspires you
     person: Person
     progress: Fortschritt
     public: Öffentlich
