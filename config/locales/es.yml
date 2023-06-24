@@ -263,7 +263,8 @@ es:
     upload_user_title: "Subida masiva por %{name}"
     help_user_title: "Ayude a atribuir especímenes a %{name}"
     help_title: Ayude a atribuir especímenes
-    country_title: Ayude a atribuir especímenes
+    roster_title: Help Attribute Specimens
+    country_title: Help Attribute Specimens by Country
     latest_title: Últimos receptores
     country_name_title: "Ayude a atribuir especímenes a personas de %{country}"
     country_no_one: "No se encontraron personas de"
@@ -275,6 +276,7 @@ es:
     country_name_lede: Países indicados en ORCID o Wikidata
     latest_lede: Únase al grupo de anotadores ayudando a atribuir especímenes
     country_lede: Únase al grupo de anotadores reconociendo a sus colegas, mentores, o cualquier persona que le inspire.
+    roster_lede: Join the scribes in acknowledging your peers, mentors, or anyone who inspires you
     person: Persona
     progress: Progreso
     public: Público
