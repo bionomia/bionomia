@@ -263,8 +263,8 @@ es:
     upload_user_title: "Subida masiva por %{name}"
     help_user_title: "Ayude a atribuir especímenes a %{name}"
     help_title: Ayude a atribuir especímenes
-    roster_title: Help Attribute Specimens
-    country_title: Help Attribute Specimens by Country
+    roster_title: Ayude a atribuir especímenes
+    country_title: Ayude a atribuir especímenes por país
     latest_title: Últimos receptores
     country_name_title: "Ayude a atribuir especímenes a personas de %{country}"
     country_no_one: "No se encontraron personas de"
@@ -276,7 +276,7 @@ es:
     country_name_lede: Países indicados en ORCID o Wikidata
     latest_lede: Únase al grupo de anotadores ayudando a atribuir especímenes
     country_lede: Únase al grupo de anotadores reconociendo a sus colegas, mentores, o cualquier persona que le inspire.
-    roster_lede: Join the scribes in acknowledging your peers, mentors, or anyone who inspires you
+    roster_lede: Únase al grupo de anotadores reconociendo a sus colegas, mentores, o cualquier persona que le inspire
     person: Persona
     progress: Progreso
     public: Público
@@ -595,7 +595,7 @@ es:
     attributed_count:
       one: "espécimen atribuido"
       other: "especímens atribuidos"
-    attributions: Attributions Made
+    attributions: Atribuciones
     private_message_html: "Su perfil es privado. Reclame sus %{specimens} y luego hágalo público %{settings} para maximizar el re-uso."
     no_claims_html: "Reclame sus especímenes descubiertos bajo la pestaña %{specimens} para construir su perfil y comience a rastrear sus citaciones. Reconozca a sus colegas, mentores, o a cualquier persona que le inspire atribuyéndoles especímenes bajo %{help_others}."
     try_again: Intente nuevamente.
