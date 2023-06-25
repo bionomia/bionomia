@@ -143,19 +143,12 @@ module Sinatra
           content.join
         end
 
-        def format_agent(n)
-          { id: n[:_source][:id],
-            score: n[:_score],
-            name: [n[:_source][:family].presence, n[:_source][:given].presence].compact.join(", ")
-          }
-        end
-
         def format_agents
           @results.map{ |n|
             { id: n[:_source][:id],
               score: n[:_score],
               fullname: n[:_source][:fullname],
-              fullname_reverse: [n[:_source][:family].presence, n[:_source][:given].presence].compact.join(", ")
+              fullname_reverse: n[:_source][:fullname_reverse]
             }
           }
         end

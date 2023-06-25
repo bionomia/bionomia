@@ -92,6 +92,10 @@ module Bionomia
               search_analyzer: :fullname_search,
               norms: false
             },
+            fullname_reverse: {
+              type: 'text',
+              norms: false
+            },
             rank: {
               type: 'rank_feature'
             }
@@ -113,6 +117,7 @@ module Bionomia
         family: a.family,
         given: a.given,
         fullname: a.fullname,
+        fullname_reverse: a.fullname_reverse,
         rank: nil
       }
     end
