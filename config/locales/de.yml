@@ -206,7 +206,7 @@ de:
       - Dez
   denied:
     title: Denied
-    not_allowed: Access is denied.
+    not_allowed: Der Zugriff wird verweigert.
   developer:
     search: Suche
     autocomplete_widget: AutoVervollständigen-Widget
@@ -276,7 +276,7 @@ de:
     country_name_lede: Aus in ORCID oder Wikidata angegebenen Ländern
     latest_lede: Helfen Sie den Bearbeitern bei der Zuordnung von Exemplaren
     country_lede: Schließen Sie sich den Bearbeitern an und würdigen Sie Ihre Kollegen, Mentoren oder sonstige Personen, die Sie inspirieren
-    roster_lede: Join the scribes in acknowledging your peers, mentors, or anyone who inspires you
+    roster_lede: Schließen Sie sich den Bearbeitern an und würdigen Sie Ihre Kollegen, Mentoren oder sonstige Personen, die Sie inspirieren
     person: Person
     progress: Fortschritt
     public: Öffentlich
