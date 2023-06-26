@@ -639,7 +639,7 @@ pt:
     attributed: attributed
   roster:
     roster_title: Perfis Públicos
-    lede: "%{count} pessoas que compartilham seus perfis e os perfis de outras pessoas que reverenciam"
+    lede: "%{count} pessoas que compartilham seus perfis e os perfis de outras pessoas que admiram"
     no_one_found: Ninguém foi encontrado pelo nome
     search_result_count:
       unit:
