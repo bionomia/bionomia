@@ -70,15 +70,11 @@ elsif options[:within_week]
   User.where(id: user_ids.map(&:user_id))
     .find_each do |u|
       if u.zenodo_doi && u.orcid
-        submit_update(u)
+        submit_update(u) 
       elsif u.zenodo_doi && u.wikidata
         latest = u.visible_user_occurrences.order(created: :desc).limit(1).first rescue nil
         next if latest.nil? || User::BOT_IDS.include?(latest.created_by)
-        submit_update(u)  
-      elsif u.zenodo_doi.nil? && u.wikidata && u.is_public?
-        latest = u.visible_user_occurrences.order(created: :desc).limit(1).first rescue nil
-        next if latest.nil? || User::BOT_IDS.include?(latest.created_by)
-        #submit_new(u)
+        submit_update(u)
       end
   end
 end
