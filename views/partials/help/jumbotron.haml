@@ -66,13 +66,16 @@
               .modal-footer
                 %button.btn.btn-secondary{type: "button", "data-dismiss": "modal"}= I18n.t('help.close')
 
-      - org = @viewed_user.current_organization
-      - if !org.nil?
+      - if !@viewed_user.current_organization.nil?
         %p.text-center.p-0.mt-1.mb-1
-          = succeed "," do
-            %i.fas.fa-building
-            = link_to org.name, url("/organization/#{org.identifier}")
-          #{org.address}
+          - path = @viewed_user.current_organization.identifier
+          %i.fas.fa-building.fa-fw
+          - if @viewed_user.current_organization.address
+            = succeed "," do
+              = link_to @viewed_user.current_organization.name, url("/organization/#{path}")
+          - else
+            = link_to @viewed_user.current_organization.name, url("/organization/#{path}")
+          #{@viewed_user.current_organization.address}
 
       - if !@viewed_user.country.blank?
         %p.text-center.p-0.mt-1.mb-1
@@ -81,11 +84,16 @@
           - countries.each_with_index do |v,i|
             %span.mr-1.text-nowrap
               - if !country_codes[i].nil? && !country_codes[i].empty? && !country_name(country_codes[i]).nil?
-                %i.fas.fa-globe
+                %i.fas.fa-globe.fa-fw
                 = link_to country_name(country_codes[i]), url("/country/#{country_codes[i]}")
               - elsif v.presence
-                %i.fas.fa-globe
+                %i.fas.fa-globe.fa-fw
                 #{v}
+
+      - if @viewed_user.zenodo_doi
+        %p.text-center.p-0.mt-1.mb-1
+          %a{href:"https://doi.org/#{@viewed_user.zenodo_concept_doi}"}
+            %img{src:"/images/#{@viewed_user.zenodo_concept_doi}.svg", alt:"DOI badge", height:"20px"}
 
       - if authorized? && !@viewed_user.is_public? && !@viewed_user.wikidata.nil?
         #helperPublicModal.modal.fade.text-left{tabindex:"-1", role:"dialog", "aria-labelledby":"helperPublicModal", "aria-hidden":"true"}
