@@ -28,6 +28,9 @@ button.hide, button.remove, button.hide-all, button.remove-all {
   font-size:0.8rem;
   padding:0.25rem 0.35rem;
 }
+.dropdown-toggle-split {
+  border-left: 1px solid white;
+}
 .btn-outline-light:hover{
   color:#212529 !important;
 }
