@@ -48,7 +48,11 @@
           .flex
             %img.mr-2.card-img-taxon{src:"#{image}", alt:"#{locals[:stats][:specimens][:top_family_recorded]}", width:24, loading:"lazy"}
 
-  .card-body
+  .card-body.pt-0.pb-0
+    - if locals[:user].zenodo_doi
+      .text-right
+        %a{href:"https://doi.org/#{locals[:user].zenodo_concept_doi}"}
+          %img{src:"/images/#{locals[:user].zenodo_concept_doi}.svg", alt:"DOI badge", loading:"lazy", height:"20px"}
   .card-footer.d-flex.flex-wrap.justify-content-between.small
     .text-left.text-muted.mt-1
       - if !locals[:user].is_public?
