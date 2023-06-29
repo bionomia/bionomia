@@ -67,13 +67,13 @@ elsif options[:within_week]
   user_ids = UserOccurrence.select(:user_id, "MAX(created) AS created")
                            .where("created >= '#{week_ago}'")
                            .group(:user_id)
-  User.where(id: user_ids.map(&:user_id))
+  User.where(id: user_ids.map(&:user_id)).where.not(zenodo_doi: nil)
     .find_each do |u|
-      if u.zenodo_doi && u.orcid
+      if u.orcid
         submit_update(u)
-      elsif u.zenodo_doi && u.wikidata
+      elsif u.wikidata
         latest = u.visible_user_occurrences.order(created: :desc).limit(1).first rescue nil
-        next if latest.nil? || User::BOT_IDS.include?(latest.created_by)
+        next if User::BOT_IDS.include?(latest.created_by)
         submit_update(u)
       end
   end

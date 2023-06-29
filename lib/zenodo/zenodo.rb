@@ -43,7 +43,7 @@ module Bionomia
                       token_method: :post) do |stack|
                         stack.request :multipart
                         stack.request :url_encoded
-                        stack.adapter  Faraday.default_adapter
+                        stack.adapter Faraday.default_adapter
                   end
     end
 
@@ -57,10 +57,6 @@ module Bionomia
 
     def deposits_url
       "/api/deposit/depositions"
-    end
-
-    def add_file_url(id)
-      "/api/deposit/depositions/#{id}/files"
     end
 
     def list_files_url(id)
@@ -134,55 +130,27 @@ module Bionomia
       JSON.parse(raw_response.body).map(&:deep_symbolize_keys)
     end
 
-    def add_file(id:, file_path:, file_name: nil)
-      # TODO: New file upload API at Zenodo has a 50MB limit through multipart-form
-      # Instead of Faraday, may perhaps use HTTPX, https://honeyryderchuck.gitlab.io/httpx/index.html
-      # May look something like this if it supported chunking and Content-Range:
-      # chunk_size = 2*1024*1024
-      # filename = file_name ||= File.basename(file_path)
-      # io = File.new(file_path, "r")
-      # total_size = io.dup.size
-      # header = { "Content-Type" => "application/octet-stream", "Transfer-Encoding" => "chunked" }
-      # io.each_with_index(nil, chunk_size) do |chunk, index|
-      #  start_byte = index*chunk.size
-      #  end_byte = (index+1)*chunk.size
-      #  tmp = Tempfile.new
-      #  tmp << chunk
-      #  header.merge!({
-      #    "Content-Range" => "bytes #{start_byte}-#{end_byte}/#{total_size}",
-      #    "Content-Length" => "#{tmp.size}",
-      #    "Digest" => "sha=#{Digest::SHA256.base64digest(chunk)}"
-      #  })
-      #  response = access_token.put(@bucket_url + "/#{filename}", { body: tmp, headers: header })
-      #  JSON.parse(response.body).deep_symbolize_keys
-      #  tmp.close
-      #  tmp.unlink
-      # end
-
+    # Uses Net::HTTP here and not the OAuth2 Faraday adapter because these cannot stream a body
+    def add_file(file_path:, file_name: nil)
       filename = file_name ||= File.basename(file_path)
-      io = File.new(file_path, "r")
-      mime_type = FileMagic.new(FileMagic::MAGIC_MIME).file(file_path)
-      upload = Faraday::Multipart::FilePart.new io, mime_type, filename
-      response = access_token.post(add_file_url(id), { body: { filename: filename, file: upload }})
+      uri = URI(@bucket_url + "/#{filename}")
+      io = File.open(file_path, "rb")
+      total_size = io.dup.size
+      header = {
+        "Content-Type" => "application/octet-stream",
+        "Content-Length" => "#{total_size}",
+        "Authorization" => "Bearer #{access_token.token}"
+      }
+      request = Net::HTTP::Put.new(uri.request_uri, header)
+      request.body_stream = io
+      http = Net::HTTP.new(uri.hostname, uri.port)
+      http.use_ssl = true
+      response = http.request(request)
+      io.close
+      if response.code.to_i != 200
+        raise RuntimeError, "File upload failed."
+      end
       JSON.parse(response.body).deep_symbolize_keys
-    end
-
-    def add_file_string(id:, string:, file_name:)
-      temp = Tempfile.new
-      temp.binmode
-      temp.write(string)
-      temp.close
-      add_file(id: id, file_path: temp.path, file_name: file_name)
-      temp.unlink
-    end
-
-    def add_file_enum(id:, enum:, file_name:)
-      temp = Tempfile.new
-      temp.binmode
-      enum.each { |line| temp << line }
-      temp.close
-      add_file(id: id, file_path: temp.path, file_name: file_name)
-      temp.unlink
     end
 
     def delete_file(id:, file_id:)

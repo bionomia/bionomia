@@ -65,14 +65,6 @@ module Bionomia
          csv = make_csv
          json = make_json
       
-         # Temporary hack because API can't handle files > 50MB
-         # See the add_file method in Bionomia::Zenodo
-         if csv.size > 50_000_000 || json.size > 50_000_000
-            csv.unlink
-            json.unlink
-            return
-         end
-      
          z = Bionomia::Zenodo.new(user: user)
       
          begin
@@ -84,10 +76,10 @@ module Bionomia
       
             doi_id = z.new_deposit
             id = doi_id[:recid]
-      
-            # POST the files & publish
-            z.add_file(id: id, file_path: csv.path, file_name: user.identifier + ".csv")
-            z.add_file(id: id, file_path: json.path, file_name: user.identifier + ".json")
+
+            # PUT the files & publish
+            z.add_file(file_path: csv.path, file_name: user.identifier + ".csv")
+            z.add_file(file_path: json.path, file_name: user.identifier + ".json")
             pub = z.publish(id: id)
       
             user.zenodo_doi = pub[:doi]
@@ -111,14 +103,6 @@ module Bionomia
          csv = make_csv
          json = make_json
       
-         # Temporary hack because API can't handle files > 50MB
-         # See the add_file method in Bionomia::Zenodo
-         if csv.size > 50_000_000 || json.size > 50_000_000
-            csv.unlink
-            json.unlink
-            return
-         end
-      
          z = Bionomia::Zenodo.new(user: user)
       
          begin
@@ -138,9 +122,9 @@ module Bionomia
                z.delete_file(id: id, file_id: file_id)
             end
       
-            # POST the files & publish
-            z.add_file(id: id, file_path: csv.path, file_name: user.identifier + ".csv")
-            z.add_file(id: id, file_path: json.path, file_name: user.identifier + ".json")
+            # PUT the files & publish
+            z.add_file(file_path: csv.path, file_name: user.identifier + ".csv")
+            z.add_file(file_path: json.path, file_name: user.identifier + ".json")
             pub = z.publish(id: id)
       
             if !pub[:doi].nil?
