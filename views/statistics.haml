@@ -190,7 +190,9 @@
           %li Total: #{number_with_delimiter(@orcid.total)}
           %li Visited Once: #{number_with_delimiter(@orcid.visited)}
           %li Made Public: #{number_with_delimiter(@orcid.public)}
-          %li Archives Made to Zenodo: #{number_with_delimiter(@orcid.doi)}
+          %li
+            Archives Made to Zenodo:
+            %a{href: "https://zenodo.org/communities/bionomia"} #{number_with_delimiter(@orcid.doi)}
 
   .col-12.col-lg-4.mt-2
     .card
@@ -203,7 +205,9 @@
           %li Total: #{number_with_delimiter(@wikidata[:total])}
           %li Made Public: #{number_with_delimiter(@wikidata[:public])}
           %li Merged: #{number_with_delimiter(@wikidata[:merged])}
-          %li Archives Made to Zenodo: #{number_with_delimiter(@wikidata[:doi])}
+          %li
+            Archives Made to Zenodo: 
+            %a{href: "https://zenodo.org/communities/bionomia"} #{number_with_delimiter(@wikidata[:doi])}
 
   .col-12.col-lg-4.mt-2
     .card
