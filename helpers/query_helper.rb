@@ -253,6 +253,23 @@ module Sinatra
           qry
         end
 
+        def random_query
+          {
+           query: {
+            function_score: {
+              functions: [
+                {
+                  random_score: {
+                    seed: "#{Time.now.to_i}"
+                  }
+                }
+              ]
+            }
+           }
+
+          }
+        end
+
       end
     end
   end

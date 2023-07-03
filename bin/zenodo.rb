@@ -64,18 +64,18 @@ elsif !options[:new] && options[:identifier]
 
 elsif options[:within_week]
   week_ago = DateTime.now - 7.days
-  user_ids = UserOccurrence.select(:user_id, "MAX(created) AS created")
-                           .where("created >= '#{week_ago}'")
-                           .group(:user_id)
-  User.where(id: user_ids.map(&:user_id)).where.not(zenodo_doi: nil)
-    .find_each do |u|
-      if u.orcid
-        submit_update(u)
-      elsif u.wikidata
-        latest = u.visible_user_occurrences.order(created: :desc).limit(1).first rescue nil
-        next if User::BOT_IDS.include?(latest.created_by)
-        submit_update(u)
-      end
+  UserOccurrence.includes(:user)
+                .select(:user_id, "MAX(created) AS created")
+                .where("created >= '#{week_ago}'")
+                .group(:user_id).each do |uo|
+    next if uo.user.nil? || uo.user.zenodo_doi.nil?
+    if uo.user.orcid
+      submit_update(uo.user)
+    elsif uo.user.wikidata
+      latest = uo.user.visible_user_occurrences.order(created: :desc).limit(1).first rescue nil
+      next if User::BOT_IDS.include?(latest.created_by)
+      submit_update(uo.user)
+    end
   end
 end
 

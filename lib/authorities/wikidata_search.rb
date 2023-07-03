@@ -35,6 +35,20 @@ module Bionomia
       Namae::Parser.new(options)
     end
 
+    def wikidata_multiple_bionomia_ids_query
+      %Q(
+        SELECT ?item ?itemLabel (COUNT(?value) AS ?valueCount)
+        WHERE {
+          ?item wdt:P6944 ?value1 .
+          ?item wdt:P6944 ?value2 .
+          FILTER(?value1 != ?value2)
+          SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+        }
+        GROUP BY ?item ?itemLabel
+        HAVING (COUNT(?item) > 1)
+      )
+    end
+
     def wikidata_people_query(property)
       %Q(
           SELECT DISTINCT
@@ -601,6 +615,14 @@ module Bionomia
     def wiki_bionomia_id
       ids = []
       @sparql.query(wikidata_people_query("P6944")).each_solution do |solution|
+        ids << solution.to_h[:id].to_s
+      end
+      ids.uniq
+    end
+
+    def wiki_bionomia_multiple_ids
+      ids = []
+      @sparql.query(wikidata_multiple_bionomia_ids_query).each_solution do |solution|
         ids << solution.to_h[:id].to_s
       end
       ids.uniq

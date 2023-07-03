@@ -49,9 +49,9 @@
 
 - else
   .row.mt-3
-    - @results.in_groups_of(25, false).each do |group|
+    - format_agents.in_groups_of(25, false).each do |group|
       .col-12.col-sm-3.mb-3
         %ul.list-unstyled.m-2
           - group.each do |a|
             %li
-              = link_to a.fullname_reverse, url("/agent/#{a.id}")
+              = link_to a[:fullname_reverse], url("/agent/#{a[:id]}")
