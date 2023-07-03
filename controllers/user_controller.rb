@@ -373,6 +373,9 @@ module Sinatra
           end
 
           app.get '/:id/progress.json' do
+            check_identifier
+            check_redirect
+
             content_type "application/json"
             expires 0, :no_cache, :must_revalidate
 
