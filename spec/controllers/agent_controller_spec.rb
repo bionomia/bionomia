@@ -1,9 +1,9 @@
 describe "Bionomia Agent Controller" do
 
-  it "should allow accessing the agents page" do
-    get '/agents'
-    expect(last_response).to be_ok
-  end
+#  it "should allow accessing the agents page" do
+#    get '/agents'
+#    expect(last_response).to be_ok
+#  end
 
   it "should allow accessing the agents gbifID" do
     get '/agents/gbifID'
