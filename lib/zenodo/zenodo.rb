@@ -75,6 +75,10 @@ module Bionomia
       "/api/deposit/depositions/#{id}/actions/discard"
     end
 
+    def delete_url(id)
+      "/api/deposit/depositions/#{id}"
+    end
+
     def publish_url(id)
       "/api/deposit/depositions/#{id}/actions/publish"
     end
@@ -171,6 +175,15 @@ module Bionomia
     def discard_version(id:)
       begin
         raw_response = access_token.post(discard_version_url(id))
+        JSON.parse(raw_response.body).deep_symbolize_keys
+      rescue
+        {}
+      end
+    end
+
+    def delete_draft(id:)
+      begin
+        raw_response = access_token.delete(delete_url(id))
         JSON.parse(raw_response.body).deep_symbolize_keys
       rescue
         {}

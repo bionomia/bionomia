@@ -3,7 +3,7 @@
 module Bionomia
    class ZenodoWorker
       include SuckerPunch::Job
-      workers 2
+      workers 4
  
       def perform(data)
          ActiveRecord::Base.connection_pool.with_connection do
@@ -30,9 +30,9 @@ module Bionomia
                user.skip_callbacks = true
                user.zenodo_access_token = z.refresh_token
                user.save
-               puts "#{user.viewname} (id=#{user.id})".green
+               puts "#{user.viewname} (id=#{user.id}) ... token refreshed".green
             rescue
-               puts "#{user.viewname} (id=#{user.id}) token failed".red
+               puts "#{user.viewname} (id=#{user.id}) ... token failed".red
             end
          end
       end
@@ -86,9 +86,9 @@ module Bionomia
             user.zenodo_concept_doi = pub[:conceptdoi]
             user.save
       
-            puts "#{user.viewname}".green
+            puts "#{user.viewname}  (id=#{user.id}) ... created".green
          rescue
-            puts "#{user.viewname} (id=#{user.id}) token failed".red
+            puts "#{user.viewname} (id=#{user.id}) ... token failed".red
          end
       
          # Unlink the files
@@ -130,13 +130,13 @@ module Bionomia
             if !pub[:doi].nil?
                user.zenodo_doi = pub[:doi]
                user.save
-               puts "#{user.viewname}".green
+               puts "#{user.viewname}  (id=#{user.id}) ... new version created".green
             else
-               z.discard_version(id: id)
-               puts "#{user.viewname}".red
+               z.delete_draft(id: id)
+               puts "#{user.viewname} (id=#{user.id}) ... new version unnecessary".red
             end
          rescue
-            puts "#{user.viewname} (id=#{user.id}) token failed".red
+            puts "#{user.viewname} (id=#{user.id}) ... token failed".red
          end
       
          # Unlink the files

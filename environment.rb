@@ -83,6 +83,9 @@ Encoding.default_external = Encoding::UTF_8
 Zip.on_exists_proc = true
 Zip.continue_on_exists_proc = true
 
+# 10 minute suckerpunch timeout
+SuckerPunch.shutdown_timeout = 600
+
 Hashie.logger = Logger.new(nil)
 
 OmniAuth.config.request_validation_phase = OmniAuth::AuthenticityTokenProtection.new(reaction: :drop_session)
