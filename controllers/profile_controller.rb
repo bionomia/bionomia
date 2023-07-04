@@ -120,7 +120,7 @@ module Sinatra
             put '/settings' do
               youtube_id = params[:youtube_id] && !params[:youtube_id].empty? ? params[:youtube_id] : nil
               locale = params[:locale] && !params[:locale].empty? ? params[:locale] : nil
-              @user.wants_mail = params[:wants_mail] || false
+              @user.wants_mail = params[:wants_mail]
               @user.youtube_id = youtube_id
               @user.locale = locale
               @user.save
