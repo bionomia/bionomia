@@ -3,7 +3,7 @@
 module Bionomia
    class ZenodoWorker
       include SuckerPunch::Job
-      workers 1
+      workers 2
  
       def perform(data)
          ActiveRecord::Base.connection_pool.with_connection do
