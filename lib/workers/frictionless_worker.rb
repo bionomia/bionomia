@@ -2,14 +2,15 @@
 
 module Bionomia
   class FrictionlessWorker
-    include SuckerPunch::Job
+    include Sidekiq::Job
+    sidekiq_options queue: :frictionless, retry: 3
 
-    def perform(data)
-      ActiveRecord::Base.connection_pool.with_connection do
-        dataset = Dataset.find_by_uuid(data[:uuid])
-        f = FrictionlessGenerator.new(dataset: dataset, output_directory: data[:output_directory])
-        f.create
-      end
+    def perform(row)
+      data = JSON.parse(row, symbolize_names: true)
+      dataset = Dataset.find_by_uuid(data[:uuid]) rescue nil
+      return if dataset.nil?
+      f = FrictionlessGenerator.new(dataset: dataset, output_directory: data[:output_directory])
+      f.create
     end
 
   end

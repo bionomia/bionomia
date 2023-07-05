@@ -19,7 +19,6 @@ require 'htmlentities'
 require 'i18n'
 require 'iso_country_codes'
 require 'tilt/haml'
-require 'sucker_punch'
 require 'sinatra/base'
 require 'sinatra/content_for'
 require 'sinatra/cacher'
@@ -82,9 +81,6 @@ Encoding.default_external = Encoding::UTF_8
 
 Zip.on_exists_proc = true
 Zip.continue_on_exists_proc = true
-
-# 10 minute suckerpunch timeout
-SuckerPunch.shutdown_timeout = 600
 
 Hashie.logger = Logger.new(nil)
 

@@ -2,11 +2,12 @@
 
 module Bionomia
   class AgentWorker
-    include Sidekiq::Worker
-    sidekiq_options queue: :agent
+    include Sidekiq::Job
+    sidekiq_options queue: :agent, retry: 3
 
     def perform(row)
-      agents = DwcAgent.parse(row["agents"])
+      data = JSON.parse(row, symbolize_names: true)
+      agents = DwcAgent.parse(data[:agents])
                        .map{|a| DwcAgent.clean(a)}
                        .compact
                        .uniq
@@ -21,14 +22,14 @@ module Bionomia
           family: family,
           given: given
         })
-        row["gbifIDs_recordedBy"]
+        data[:gbifIDs_recordedBy]
           .tr('[]', '')
           .split(',')
           .in_groups_of(1000, false) do |group|
             import = group.map{|r| [ r.to_i, agent.id ] }
             OccurrenceRecorder.import [:occurrence_id, :agent_id], import, batch_size: 1000, validate: false, on_duplicate_key_ignore: true
           end
-        row["gbifIDs_identifiedBy"]
+        data[:gbifIDs_identifiedBy]
           .tr('[]', '')
           .split(',')
           .in_groups_of(1000, false) do |group|

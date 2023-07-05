@@ -2,12 +2,13 @@
 
 module Bionomia
   class TaxonWorker
-    include Sidekiq::Worker
-    sidekiq_options queue: :taxon
+    include Sidekiq::Job
+    sidekiq_options queue: :taxon, retry: 3
 
     def perform(row)
-      taxon = Taxon.create_or_find_by(family: row["family"].to_s.strip)
-      data = row["gbifIDs_family"]
+      data = JSON.parse(row, symbolize_names: true)
+      taxon = Taxon.create_or_find_by(family: data[:family].to_s.strip)
+      data = data[:gbifIDs_family]
                 .tr('[]', '')
                 .split(",")
                 .in_groups_of(1000, false) do |group|

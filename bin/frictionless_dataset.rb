@@ -16,7 +16,7 @@ OptionParser.new do |opts|
     options[:directory] = directory
   end
 
-  opts.on("-a", "--all", "Make data packages for all datasets that have at least one public claim") do
+  opts.on("-a", "--all", "Queue all data packages for all datasets that have at least one public claim") do
     options[:all] = true
   end
 
@@ -24,7 +24,7 @@ OptionParser.new do |opts|
     options[:skip] = true
   end
 
-  opts.on("-l", "--list x,y,z", Array, "List of dataset keys to update") do |list|
+  opts.on("-l", "--list x,y,z", Array, "Queue dataset keys to update") do |list|
     options[:list] = list
   end
 
@@ -40,42 +40,32 @@ end.parse!
 
 if options[:directory] && options[:key]
   dataset = Dataset.find_by_uuid(options[:key]) rescue nil
-  if dataset
-    begin
-      puts "Starting #{dataset.title}...".yellow
-      f = Bionomia::FrictionlessGenerator.new(dataset: dataset, output_directory: options[:directory])
-      f.create
-    rescue
-      puts "Package failed for #{dataset.uuid}".red
-    end
-  else
-    puts "Package #{options[:key]} not found".red
+  return if dataset.nil?
+  begin
+    puts "Starting #{dataset.title}...".yellow
+    f = Bionomia::FrictionlessGenerator.new(dataset: dataset, output_directory: options[:directory])
+    f.create
+  rescue
+    puts "Package failed for #{dataset.uuid}".red
   end
 elsif options[:directory] && ( options[:all] || options[:missing] )
-  Dataset.find_each do |d|
-    next if !d.has_claim?
-    next if options[:skip] && d.is_large?
-    puts "Starting #{d.title}...".yellow
-    begin
-      f = Bionomia::FrictionlessGenerator.new(dataset: d, output_directory: options[:directory])
-      f.create
-    rescue
-      puts "Package failed for #{d.uuid}".red
-    end
+  group = []
+  Dataset.find_each.with_index do |dataset, i|
+    next if !dataset.has_claim?
+    next if options[:skip] && dataset.is_large?
+    next if i % 100 != 0
+    group << [{ uuid: dataset.uuid, output_directory: options[:directory] }.to_json]
+    Sidekiq::Client.push_bulk({ 'class' => Bionomia::FrictionlessWorker, 'args' => group })
+    group = []
+  end
+  if group.size > 0
+    Sidekiq::Client.push_bulk({ 'class' => Bionomia::FrictionlessWorker, 'args' => group })
   end
 elsif options[:directory] && options[:list]
   options[:list].each do |key|
     dataset = Dataset.find_by_uuid(key) rescue nil
-    if dataset
-      puts "Starting #{dataset.title}...".yellow
-      begin
-        f = Bionomia::FrictionlessGenerator.new(dataset: dataset, output_directory: options[:directory])
-        f.create
-      rescue
-        puts "Package failed for #{dataset.uuid}".red
-      end
-    else
-      puts "Package #{key} not found".red
-    end
+    next if dataset.nil?
+    row = { uuid: dataset.uuid, output_directory: options[:directory] }.to_json
+    ::Bionomia::FrictionlessWorker.perform_async(row)
   end
 end

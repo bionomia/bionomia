@@ -63,8 +63,7 @@ module Sinatra
               content_type "application/json", charset: 'utf-8'
               vars = {
                 article_id: params[:id]
-              }
-
+              }.to_json
               ::Bionomia::ArticleWorker.perform_async(vars)
               { message: "ok" }.to_json
             end
@@ -115,8 +114,7 @@ module Sinatra
               vars = {
                 uuid: params[:datasetKey],
                 output_directory: File.join(app.root, "public", "data")
-              }
-
+              }.to_json
               ::Bionomia::FrictionlessWorker.perform_async(vars)
               { message: "ok" }.to_json
             end
@@ -738,7 +736,7 @@ module Sinatra
               content_type "application/json", charset: 'utf-8'
               req = JSON.parse(request.body.read).symbolize_keys
               admin_user = find_user(params[:id])
-              vars = { id: admin_user.id, action: req[:action] }
+              vars = { id: admin_user.id, action: req[:action] }.to_json
               ::Bionomia::ZenodoWorker.perform_async(vars)
               { message: "ok" }.to_json
             end

@@ -40,14 +40,3 @@
                 - else
                   %span.badge.badge-success.badge-pill #{number_with_delimiter(v)}
 
-%h4 SuckerPunch Jobs
-
-- if SuckerPunch::Queue.stats.size > 0
-  %ul.list-group.mt-3
-    - SuckerPunch::Queue.stats.each do |k,v|
-      %li.list-group-item.d-flex.justift-content-between.align-items-center
-        #{k}
-        %span #{v}
-- else
-  %p.font-italic None
-

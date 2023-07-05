@@ -2,11 +2,12 @@
 
 module Bionomia
   class OccurrenceCountWorker
-    include Sidekiq::Worker
-    sidekiq_options queue: :occurrence_count
+    include Sidekiq::Job
+    sidekiq_options queue: :occurrence_count, retry: 3
 
     def perform(row)
-      occurrence_count = OccurrenceCount.find(row["id"])
+      data = JSON.parse(row, symbolize_names: true)
+      occurrence_count = OccurrenceCount.find(data[:id])
       if !occurrence_count.has_candidate?
         occurrence_count.delete
       end

@@ -8,7 +8,9 @@ Sidekiq::Web.use Rack::Session::Cookie, key: 'rack.session',
                            path: '/',
                            secret: Settings.orcid.key,
                            domain: Settings.cookie_domain,
+                           httpdonly: true,
                            same_site: :lax
+Sidekiq::Web.use Rack::Protection::AuthenticityToken
 
 if defined?(PhusionPassenger)
  PhusionPassenger.require_passenger_lib 'rack/out_of_band_gc'
@@ -17,4 +19,4 @@ if defined?(PhusionPassenger)
  use PhusionPassenger::Rack::OutOfBandGc, 5
 end
 
-run Rack::URLMap.new('/' => BIONOMIA, '/sidekiq' => Sidekiq::Web)
+run Rack::URLMap.new('/' => BIONOMIA, '/admin/sidekiq' => Sidekiq::Web)

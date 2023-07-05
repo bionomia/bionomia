@@ -39,7 +39,7 @@ if options[:directory]
   files.each do |file|
     file_path = File.join(options[:directory], file)
     CSV.foreach(file_path, headers: true).with_index do |row, i|
-      Sidekiq::Client.push('class' => Bionomia::ExistingClaimsWorker, 'args' => [row.to_hash])
+      ::Bionomia::ExistingClaimsWorker.perform_async(row.to_json)
     end
     puts file.green
   end

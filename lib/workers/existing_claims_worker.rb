@@ -2,14 +2,15 @@
 
 module Bionomia
   class ExistingClaimsWorker
-    include Sidekiq::Worker
-    sidekiq_options queue: :existing_claims, retry: 0
+    include Sidekiq::Job
+    sidekiq_options queue: :existing_claims, retry: 3
 
     def perform(row)
-      recs = row["gbifIDs_recordedByID"]
+      data = JSON.parse(row, symbolize_names: true)
+      recs = data[:gbifIDs_recordedByID]
                 .tr('[]', '')
                 .split(',')
-      ids = row["gbifIDs_identifiedByID"]
+      ids = data[:gbifIDs_identifiedByID]
                 .tr('[]', '')
                 .split(',')
 
@@ -17,7 +18,7 @@ module Bionomia
       uniq_ids = (ids - recs).uniq
       both = (recs & ids).uniq
 
-      row["agentIDs"].split("|").sort.map(&:strip).uniq.each do |id|
+      data[:agentIDs].split("|").sort.map(&:strip).uniq.each do |id|
         next if id.empty?
         u = get_user(id)
         next if u.nil?

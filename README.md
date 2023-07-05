@@ -53,8 +53,6 @@ Unfortunately, gbifIDs are not persistent. These occasionally disappear through 
       $ RACK_ENV=production bundle exec ./bin/populate_agents.rb --truncate --directory /directory-to-spark-csv-files/
       # Can start 2+ workers, each with 40 threads to help speed-up processing
       $ RACK_ENV=production bundle exec sidekiq -c 40 -q agent -r ./application.rb
-      # For remote client, point to the server REDIS_URL and likewise, adjust MySQL connection strings in config
-      $ REDIS_URL=redis://192.168.2.4:6379 RACK_ENV=production bundle exec sidekiq -c 40 -q agent -r ./application.rb
 
 ### Step 4: Populate Taxa
 

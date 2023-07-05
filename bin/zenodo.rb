@@ -31,17 +31,17 @@ OptionParser.new do |opts|
 end.parse!
 
 def submit_new(u)
-  vars = { id: u.id, action: "new" }
+  vars = { id: u.id, action: "new" }.to_json
   ::Bionomia::ZenodoWorker.perform_async(vars)
 end
 
 def submit_update(u)
-  vars = { id: u.id, action: "update" }
+  vars = { id: u.id, action: "update" }.to_json
   ::Bionomia::ZenodoWorker.perform_async(vars)
 end
 
 def submit_refresh(u)
-  vars = { id: u.id, action: "refresh" }
+  vars = { id: u.id, action: "refresh" }.to_json
   ::Bionomia::ZenodoWorker.perform_async(vars)
 end
 

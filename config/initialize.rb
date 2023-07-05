@@ -58,7 +58,15 @@ module Sinatra
               }
            end
 
-           app.use Sinatra::Bionomia::Model::QueryCache
+          app.use Sinatra::Bionomia::Model::QueryCache
+
+          Sidekiq.configure_server do |config|
+            config.redis = { url: Settings.redis_url, network_timeout: 5 }
+          end
+          
+          Sidekiq.configure_client do |config|
+            config.redis = { url: Settings.redis_url, network_timeout: 5 }
+          end
 
         end
 

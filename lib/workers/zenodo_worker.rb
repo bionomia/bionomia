@@ -2,20 +2,21 @@
 
 module Bionomia
    class ZenodoWorker
-      include SuckerPunch::Job
-      workers 4
+      include Sidekiq::Job
+      sidekiq_options queue: :zenodo, retry: 3
  
-      def perform(data)
-         ActiveRecord::Base.connection_pool.with_connection do
-            @user = User.find(data[:id])
-            case data[:action]
-            when "new"
-               submit_new
-            when "update"
-               submit_update
-            when "refresh"
-               refresh
-            end
+      def perform(row)
+         data = JSON.parse(row, symbolize_names: true)
+         @user = User.find(data[:id]) rescue nil
+         return if @user.nil?
+
+         case data[:action]
+         when "new"
+            submit_new
+         when "update"
+            submit_update
+         when "refresh"
+            refresh
          end
       end
 
