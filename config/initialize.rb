@@ -26,6 +26,15 @@ module Sinatra
                                      same_site: :lax
           app.use Rack::Protection::AuthenticityToken
 
+          Sidekiq::Web.use Rack::Session::Cookie, key: 'rack.session',
+                          path: '/',
+                          secret: Settings.orcid.key,
+                          domain: Settings.cookie_domain,
+                          httpdonly: true,
+                          secure: secure,
+                          same_site: :lax
+          Sidekiq::Web.use Rack::Protection::AuthenticityToken
+
           app.use OmniAuth::Builder do
             provider :orcid, Settings.orcid.key, Settings.orcid.secret,
               :authorize_params => {
