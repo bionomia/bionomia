@@ -53,6 +53,8 @@ module Sinatra
               @user.zenodo_access_token = session_data[:info][:access_token_hash]
               @user.save
               session[:omniauth][:zenodo] = true
+              vars = { id: @user.id, action: "new" }.to_json
+              ::Bionomia::ZenodoWorker.perform_async(vars)
               redirect '/profile/settings'
             end
 
