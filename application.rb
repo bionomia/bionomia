@@ -29,6 +29,14 @@ class BIONOMIA < Sinatra::Base
   include Pagy::Frontend
   Pagy::DEFAULT[:items] = 30
 
+  Sidekiq.configure_server do |config|
+    config.redis = { url: Settings.redis_url, network_timeout: 5 }
+  end
+  
+  Sidekiq.configure_client do |config|
+    config.redis = { url: Settings.redis_url, network_timeout: 5 }
+  end
+
   not_found do
     haml :oops if !content_type
   end

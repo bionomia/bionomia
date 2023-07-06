@@ -12,14 +12,6 @@ Sidekiq::Web.use Rack::Session::Cookie, key: 'rack.session',
                            same_site: :lax
 Sidekiq::Web.use Rack::Protection::AuthenticityToken
 
-Sidekiq.configure_server do |config|
-   config.redis = { url: Settings.redis_url, network_timeout: 5 }
-end
- 
-Sidekiq.configure_client do |config|
-   config.redis = { url: Settings.redis_url, network_timeout: 5 }
-end
-
 if defined?(Sidekiq::Web)
    Sidekiq::Web.register Sinatra::Bionomia::SidekiqSecurity
 end
