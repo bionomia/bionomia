@@ -42,7 +42,8 @@ module OmniAuth
       #Override the build_access_token method because the redirect_uri is not supposed to have query parameters
       def build_access_token
         verifier = request.params["code"]
-        client.auth_code.get_token(verifier, {:redirect_uri => callback_url.split("?").first}.merge(token_params.to_hash(:symbolize_keys => true)), deep_symbolize(options.auth_token_params))
+        client.auth_code
+              .get_token(verifier, {:redirect_uri => callback_url.split("?").first}.merge(token_params.to_hash(:symbolize_keys => true)), deep_symbolize(options.auth_token_params))
       end
 
       def root_url

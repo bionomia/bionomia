@@ -26,15 +26,6 @@ module Sinatra
                                      same_site: :lax
           app.use Rack::Protection::AuthenticityToken
 
-          Sidekiq::Web.use Rack::Session::Cookie, key: 'rack.session',
-                          path: '/',
-                          secret: Settings.orcid.key,
-                          domain: Settings.cookie_domain,
-                          httpdonly: true,
-                          secure: secure,
-                          same_site: :lax
-          Sidekiq::Web.use Rack::Protection::AuthenticityToken
-
           app.use OmniAuth::Builder do
             provider :orcid, Settings.orcid.key, Settings.orcid.secret,
               :authorize_params => {
@@ -68,14 +59,6 @@ module Sinatra
            end
 
           app.use Sinatra::Bionomia::Model::QueryCache
-
-          Sidekiq.configure_server do |config|
-            config.redis = { url: Settings.redis_url, network_timeout: 5 }
-          end
-          
-          Sidekiq.configure_client do |config|
-            config.redis = { url: Settings.redis_url, network_timeout: 5 }
-          end
 
         end
 
