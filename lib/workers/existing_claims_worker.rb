@@ -6,11 +6,10 @@ module Bionomia
     sidekiq_options queue: :existing_claims, retry: 3
 
     def perform(row)
-      data = JSON.parse(row, symbolize_names: true)
-      recs = data[:gbifIDs_recordedByID]
+      recs = row["gbifIDs_recordedByID"]
                 .tr('[]', '')
                 .split(',')
-      ids = data[:gbifIDs_identifiedByID]
+      ids = row["gbifIDs_identifiedByID"]
                 .tr('[]', '')
                 .split(',')
 
@@ -18,7 +17,7 @@ module Bionomia
       uniq_ids = (ids - recs).uniq
       both = (recs & ids).uniq
 
-      data[:agentIDs].split("|").sort.map(&:strip).uniq.each do |id|
+      row["agentIDs"].split("|").sort.map(&:strip).uniq.each do |id|
         next if id.empty?
         u = get_user(id)
         next if u.nil?

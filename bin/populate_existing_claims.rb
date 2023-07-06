@@ -38,8 +38,16 @@ if options[:directory]
   files = Dir.entries(directory).select {|f| accepted_formats.include?(File.extname(f))}
   files.each do |file|
     file_path = File.join(options[:directory], file)
+
+    group = []
     CSV.foreach(file_path, headers: true).with_index do |row, i|
-      ::Bionomia::ExistingClaimsWorker.perform_async(row.to_json)
+      group << [row.to_hash]
+      next if i % 100 != 0
+      Sidekiq::Client.push_bulk({ 'class' => Bionomia::ExistingClaimsWorker, 'args' => group })
+      group = []
+    end
+    if group.size > 0
+      Sidekiq::Client.push_bulk({ 'class' => Bionomia::ExistingClaimsWorker, 'args' => group })
     end
     puts file.green
   end

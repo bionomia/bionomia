@@ -43,7 +43,7 @@ if options[:directory]
     file_path = File.join(options[:directory], file)
     group = []
     CSV.foreach(file_path, headers: true).with_index do |row, i|
-      group << [row.to_json]
+      group << [row.to_hash]
       next if i % 100 != 0
       Sidekiq::Client.push_bulk({ 'class' => Bionomia::TaxonWorker, 'args' => group })
       group = []

@@ -6,8 +6,7 @@ module Bionomia
     sidekiq_options queue: :agent, retry: 3
 
     def perform(row)
-      data = JSON.parse(row, symbolize_names: true)
-      agents = DwcAgent.parse(data[:agents])
+      agents = DwcAgent.parse(row["agents"])
                        .map{|a| DwcAgent.clean(a)}
                        .compact
                        .uniq
@@ -22,14 +21,14 @@ module Bionomia
           family: family,
           given: given
         })
-        data[:gbifIDs_recordedBy]
+        row["gbifIDs_recordedBy"]
           .tr('[]', '')
           .split(',')
           .in_groups_of(1000, false) do |group|
             import = group.map{|r| [ r.to_i, agent.id ] }
             OccurrenceRecorder.import [:occurrence_id, :agent_id], import, batch_size: 1000, validate: false, on_duplicate_key_ignore: true
           end
-        data[:gbifIDs_identifiedBy]
+        row["gbifIDs_identifiedBy"]
           .tr('[]', '')
           .split(',')
           .in_groups_of(1000, false) do |group|
