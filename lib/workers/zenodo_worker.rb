@@ -6,11 +6,10 @@ module Bionomia
       sidekiq_options queue: :zenodo, retry: 3
  
       def perform(row)
-         data = JSON.parse(row, symbolize_names: true)
-         @user = User.find(data[:id]) rescue nil
+         @user = User.find(row["id"]) rescue nil
          return if @user.nil?
 
-         case data[:action]
+         case row["action"]
          when "new"
             submit_new
          when "update"
