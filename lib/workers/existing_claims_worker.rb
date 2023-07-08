@@ -23,6 +23,9 @@ module Bionomia
         next if u.nil?
         next if !u.nil? && User::BOT_IDS.include?(u.id)
 
+        # Necessary to help avoid sidekiq CPU saturation errors
+        Thread.pass
+
         if !uniq_recs.empty?
           uo = uniq_recs.map{|r| [u.id, r.to_i, "recorded", User::GBIF_AGENT_ID]}
           import_user_occurrences(uo)

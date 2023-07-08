@@ -54,7 +54,7 @@ elsif options[:directory] && ( options[:all] || options[:missing] )
     next if !dataset.has_claim?
     next if options[:skip] && dataset.is_large?
     next if i % 100 != 0
-    group << [{ uuid: dataset.uuid, output_directory: options[:directory] }]
+    group << [{ uuid: dataset.uuid, output_directory: options[:directory] }.stringify_keys]
     Sidekiq::Client.push_bulk({ 'class' => Bionomia::FrictionlessWorker, 'args' => group })
     group = []
   end

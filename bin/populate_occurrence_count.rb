@@ -71,7 +71,7 @@ if options[:jobs]
   puts "Creating jobs for the queue...".yellow
   group = []
   OccurrenceCount.find_each do |o|
-    group << [{ id: o.id }]
+    group << [{ id: o.id }.stringify_keys]
     next if o.id % 1000 != 0
     Sidekiq::Client.push_bulk({ 'class' => Bionomia::OccurrenceCountWorker, 'args' => group })
     puts o.id.to_s.green
