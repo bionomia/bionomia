@@ -266,19 +266,6 @@ module Sinatra
           results
         end
 
-        def scribe_stats
-          attributions = UserOccurrence.where("created_by <> user_id")
-                                       .where.not(created_by: User::BOT_IDS)
-                                       .where(visible: true)
-          scribe_ids = attributions.pluck(:created_by).uniq.compact
-          {
-            scribe_ids: scribe_ids,
-            scribe_count: scribe_ids.count,
-            attribution_count: attributions.count,
-            recipient_count: attributions.select(:user_id).distinct.count
-          }
-        end
-
         def create_filter
           range = nil
           if params[:start_year] || params[:end_year]

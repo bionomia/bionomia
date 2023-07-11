@@ -32,8 +32,8 @@ module Sinatra
           end
 
           app.get '/scribes' do
-            @scribe_stats = cache_block("scribe-stats") { scribe_stats }
-            @pagy, @results = pagy(User.where(id: @scribe_stats[:scribe_ids]).order(:family))
+            @stats_scribes = cache_block("scribe-stats") { stats_scribes }
+            @pagy, @results = pagy(User.where(id: @stats_scribes[:scribe_ids]).order(:family))
             haml :'scribes', locals: { active_page: "scribes" }
           end
 

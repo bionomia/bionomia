@@ -8,6 +8,10 @@ options = {}
 OptionParser.new do |opts|
   opts.banner = "Usage: stats.rb [options]"
 
+  opts.on("-c", "--cache", "Rebuild daily cached stats.") do
+    options[:cache] = true
+  end
+
   opts.on("-u", "--users", "Rebuild user stats.") do
     options[:users] = true
   end
@@ -21,6 +25,15 @@ OptionParser.new do |opts|
     exit
   end
 end.parse!
+
+if options[:cache]
+  BIONOMIA.cache_clear("fragments/")
+  BIONOMIA.cache_clear("blocks/country-counts")
+  BIONOMIA.cache_clear("blocks/scribe-stats")
+  stats = Class.new
+  stats.extend Sinatra::Bionomia::Helper::StatsHelper
+  BIONOMIA.cache_put_tag("blocks/scribe-stats", stats.stats_scribes)
+end
 
 if options[:users]
   User.joins(:user_occurrences).distinct.find_each do |u|

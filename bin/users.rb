@@ -85,13 +85,6 @@ def update(u)
   puts "#{u.viewname}".green
 end
 
-def rebuild_stats
-  BIONOMIA.cache_clear("blocks/scribe-stats")
-  stats = Class.new
-  stats.extend Sinatra::Bionomia::Helper::GeneralHelper
-  BIONOMIA.cache_put_tag("blocks/scribe-stats", stats.scribe_stats)
-end
-
 if options[:poll_orcid]
   search = Bionomia::OrcidSearch.new
   search.add_new_users
@@ -112,9 +105,6 @@ if options[:cache]
     vars = { id: u.id }.stringify_keys
     ::Bionomia::UserWorker.perform_async(vars)
   end
-  BIONOMIA.cache_clear("fragments/")
-  BIONOMIA.cache_clear("blocks/country-counts")
-  rebuild_stats
 end
 
 if options[:file]
