@@ -109,7 +109,8 @@ if options[:cache]
                       .pluck(:user_id, :created_by)
                       .flatten.uniq
   User.where(id: ids).find_each do |u|
-    u.flush_caches
+    vars = { id: u.id }.stringify_keys
+    ::Bionomia::UserWorker.perform_async(vars)
   end
   BIONOMIA.cache_clear("fragments/")
   BIONOMIA.cache_clear("blocks/country-counts")
