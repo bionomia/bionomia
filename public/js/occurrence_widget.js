@@ -155,8 +155,9 @@ var OccurrenceWidget = (function($, window) {
           img = "<i class=\"fab fa-orcid pr-1\"></i>";
         }
         output = "<div class=\"row m-0 py-2 border-top bg-light\">";
-        var lifespan = (found.identifier[0] === "Q") ? "<small class=\"muted\">" + found.lifespan + "</small><br>" : "";
-        output += "<div class=\"col m-0\"><span class=\"d-block font-weight-bold\">" + found.label + "</span>" + lifespan + img + "<a href=\"" + url + "\">" + url + "</a></div>";
+        var name = found.label ||= found.fullname,
+            lifespan = (found.identifier[0] === "Q") ? "<small class=\"muted\">" + found.lifespan + "</small><br>" : "";
+        output += "<div class=\"col m-0\"><span class=\"d-block font-weight-bold\">" + name + "</span>" + lifespan + img + "<a href=\"" + url + "\">" + url + "</a></div>";
         output += "<div class=\"col-md-auto m-0 selector text-left\">" + this.template({ user_id: found.user_id }) + "</div>";
         output += "</div>";
       }
