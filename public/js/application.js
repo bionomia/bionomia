@@ -153,7 +153,7 @@ var Application = (function($, window) {
           limit: 10,
           source: this.data_sources.user.ttAdapter(),
           display: function(item) {
-            return (item.display || item.fullname);
+            return (item.label || item.fullname);
           },
           templates: {
             suggestion: user_template,
