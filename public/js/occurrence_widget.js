@@ -156,7 +156,7 @@ var OccurrenceWidget = (function($, window) {
         }
         output = "<div class=\"row m-0 py-2 border-top bg-light\">";
         var lifespan = (found.identifier[0] === "Q") ? "<small class=\"muted\">" + found.lifespan + "</small><br>" : "";
-        output += "<div class=\"col m-0\"><span class=\"d-block font-weight-bold\">" + found.fullname_reverse + "</span>" + lifespan + img + "<a href=\"" + url + "\">" + url + "</a></div>";
+        output += "<div class=\"col m-0\"><span class=\"d-block font-weight-bold\">" + found.label + "</span>" + lifespan + img + "<a href=\"" + url + "\">" + url + "</a></div>";
         output += "<div class=\"col-md-auto m-0 selector text-left\">" + this.template({ user_id: found.user_id }) + "</div>";
         output += "</div>";
       }
