@@ -14,10 +14,7 @@ class Dataset < ActiveRecord::Base
   after_destroy :remove_search, unless: :skip_callbacks
 
   def has_claim?
-    UserOccurrence.from("user_occurrences FORCE INDEX (user_occurrence_idx)")
-                  .joins(:occurrence)
-                  .where(occurrences: { datasetKey: datasetKey })
-                  .where(visible: true).any?
+    user_occurrences.where(user_occurrences: { visible: true }).any?
   end
 
   alias_method :has_user?, :has_claim?
@@ -30,11 +27,11 @@ class Dataset < ActiveRecord::Base
     determiner = OccurrenceDeterminer
                     .select(:agent_id)
                     .joins(:occurrence)
-                    .where(occurrences: { datasetKey: datasetKey }).any?
+                    .where(occurrences: { datasetKey: uuid }).any?
     recorder = OccurrenceRecorder
                     .select(:agent_id)
                     .joins(:occurrence)
-                    .where(occurrences: { datasetKey: datasetKey }).any?
+                    .where(occurrences: { datasetKey: uuid }).any?
     determiner || recorder
   end
 
@@ -50,7 +47,7 @@ class Dataset < ActiveRecord::Base
     subq = UserOccurrence.select(:user_id, :visible)
                          .from("user_occurrences FORCE INDEX (user_occurrence_idx)")
                          .joins(:occurrence)
-                         .where(occurrences: { datasetKey: datasetKey })
+                         .where(occurrences: { datasetKey: uuid })
                          .distinct.to_sql
     User.joins("INNER JOIN (#{subq}) a ON a.user_id = users.id")
         .where("a.visible": true)
@@ -58,7 +55,7 @@ class Dataset < ActiveRecord::Base
 
   def users_count
     UserOccurrence.joins(:occurrence)
-                  .where(occurrences: { datasetKey: datasetKey })
+                  .where(occurrences: { datasetKey: uuid })
                   .pluck(:user_id, :visible)
                   .map{|a| a[0] if a[1]}.compact.uniq.count
   end
@@ -70,14 +67,14 @@ class Dataset < ActiveRecord::Base
   def claimed_occurrences
     UserOccurrence.select(:id, :visible, "occurrences.*")
                   .joins(:occurrence)
-                  .where(occurrences: { datasetKey: datasetKey })
+                  .where(occurrences: { datasetKey: uuid })
   end
 
   def claimed_occurrences_count
     UserOccurrence.select(:occurrence_id)
                   .from("user_occurrences FORCE INDEX (user_occurrence_idx)")
                   .joins(:occurrence)
-                  .where(occurrences: { datasetKey: datasetKey })
+                  .where(occurrences: { datasetKey: uuid })
                   .where(user_occurrences: { visible: true })
                   .distinct
                   .count
@@ -87,11 +84,11 @@ class Dataset < ActiveRecord::Base
     determiners = OccurrenceDeterminer
                     .select(:agent_id)
                     .joins(:occurrence)
-                    .where(occurrences: { datasetKey: datasetKey })
+                    .where(occurrences: { datasetKey: uuid })
     recorders = OccurrenceRecorder
                     .select(:agent_id)
                     .joins(:occurrence)
-                    .where(occurrences: { datasetKey: datasetKey })
+                    .where(occurrences: { datasetKey: uuid })
     combined = recorders
                     .union_all(determiners)
                     .unscope(:order)
@@ -103,11 +100,11 @@ class Dataset < ActiveRecord::Base
   def agents_occurrence_counts
     determiners = OccurrenceDeterminer
                     .joins(:occurrence)
-                    .where(occurrences: { datasetKey: datasetKey })
+                    .where(occurrences: { datasetKey: uuid })
                     .distinct
     recorders = OccurrenceRecorder
                     .joins(:occurrence)
-                    .where(occurrences: { datasetKey: datasetKey })
+                    .where(occurrences: { datasetKey: uuid })
                     .distinct
     recorders.union_all(determiners)
              .select(:agent_id, "count(*) AS count_all")
@@ -119,13 +116,13 @@ class Dataset < ActiveRecord::Base
     determiners = OccurrenceDeterminer
                     .joins(:occurrence)
                     .joins("LEFT OUTER JOIN user_occurrences ON occurrences.gbifID = user_occurrences.occurrence_id AND user_occurrences.action IN ('identified', 'identified,recorded', 'recorded,identified')")
-                    .where(occurrences: { datasetKey: datasetKey })
+                    .where(occurrences: { datasetKey: uuid })
                     .where(user_occurrences: { occurrence_id: nil })
                     .distinct
     recorders = OccurrenceRecorder
                     .joins(:occurrence)
                     .joins("LEFT OUTER JOIN user_occurrences ON occurrences.gbifID = user_occurrences.occurrence_id AND user_occurrences.action IN ('recorded', 'identified,recorded', 'recorded,identified')")
-                    .where(occurrences: { datasetKey: datasetKey })
+                    .where(occurrences: { datasetKey: uuid })
                     .where(user_occurrences: { occurrence_id: nil })
                     .distinct
     recorders.union_all(determiners)
@@ -138,7 +135,7 @@ class Dataset < ActiveRecord::Base
     subq = UserOccurrence.select(:created_by, :visible)
                          .from("user_occurrences FORCE INDEX (user_occurrence_idx)")
                          .joins(:occurrence)
-                         .where(occurrences: { datasetKey: datasetKey })
+                         .where(occurrences: { datasetKey: uuid })
                          .where.not(created_by: User::BOT_IDS)
                          .where("user_occurrences.user_id != user_occurrences.created_by")
                          .distinct.to_sql
@@ -192,7 +189,7 @@ class Dataset < ActiveRecord::Base
   def collected_before_birth_after_death
     UserOccurrence.joins(:occurrence)
                   .joins(:user)
-                  .where(occurrences: { datasetKey: datasetKey })
+                  .where(occurrences: { datasetKey: uuid })
                   .where(action: ["recorded", "recorded,identified", "identified,recorded"])
                   .where("users.date_born >= occurrences.eventDate_processed OR users.date_died =< occurrences.eventDate_processed")
   end
@@ -201,9 +198,9 @@ class Dataset < ActiveRecord::Base
     begin
       response = RestClient::Request.execute(
         method: :get,
-        url: "https://api.gbif.org/v1/occurrence/search?dataset_key=#{datasetKey}&limit=0"
+        url: "https://api.gbif.org/v1/occurrence/search?dataset_key=#{uuid}&limit=0"
       )
-      response = JSON.parse(response, :symbolize_names => true)
+      response = JSON.parse(response, symbolize_names: true)
       response[:count].to_i
     rescue
       0
@@ -218,7 +215,7 @@ class Dataset < ActiveRecord::Base
                          .select(:user_id, :eventDate_processed, :visible)
                          .joins(:occurrence)
                          .where(user_occurrences: { action: ['recorded', 'identified,recorded', 'recorded,identified'] })
-                         .where(occurrences: { datasetKey: datasetKey})
+                         .where(occurrences: { datasetKey: uuid })
                          .where("eventDate_processed BETWEEN ? AND ?", start_date, end_date)
                          .distinct
 
@@ -238,7 +235,7 @@ class Dataset < ActiveRecord::Base
                          .select(:user_id, :dateIdentified_processed, :visible)
                          .joins(:occurrence)
                          .where(user_occurrences: { action: ['identified', 'identified,recorded', 'recorded,identified'] })
-                         .where(occurrences: { datasetKey: datasetKey})
+                         .where(occurrences: { datasetKey: uuid })
                          .where("dateIdentified_processed BETWEEN ? AND ?", start_date, end_date)
                          .distinct
 
@@ -254,7 +251,7 @@ class Dataset < ActiveRecord::Base
     ArticleOccurrence.select(:id, :article_id, :occurrence_id)
                      .joins(:occurrence)
                      .joins(:user_occurrences)
-                     .where(occurrences: { datasetKey: datasetKey })
+                     .where(occurrences: { datasetKey: uuid })
                      .where(user_occurrences: { visible: true })
                      .distinct
   end
