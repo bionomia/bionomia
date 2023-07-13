@@ -2,12 +2,13 @@ class Dataset < ActiveRecord::Base
   attr_accessor :skip_callbacks
 
   has_many :occurrences, primary_key: :datasetKey, foreign_key: :datasetKey
+  has_many :user_occurrences, through: :occurrences
 
   alias_attribute :uuid, :datasetKey
 
   validates :datasetKey, presence: true
 
-  before_update :set_update_time
+  before_update :set_update_time, unless: :skip_callbacks
   after_create :add_search, unless: :skip_callbacks
   after_update :update_search, :fix_occurrences_count, unless: :skip_callbacks
   after_destroy :remove_search, unless: :skip_callbacks
@@ -64,13 +65,6 @@ class Dataset < ActiveRecord::Base
 
   def user_ids
     users.select(:id)
-  end
-
-  def user_occurrences
-    UserOccurrence.joins(:user)
-                  .joins(:claimant)
-                  .joins(:occurrence)
-                  .where(occurrences: { datasetKey: datasetKey })
   end
 
   def claimed_occurrences
