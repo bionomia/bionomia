@@ -97,11 +97,22 @@ elsif options[:remove]
   end
 elsif options[:counter]
   puts "Updating occurrence counts...".yellow
-  Occurrence.counter_culture_fix_counts only: :dataset, batch_size: 100
-  Dataset.update_all source_attribution_count: 0
-  sql = "UPDATE datasets INNER JOIN (SELECT count(*) as sum, o.datasetKey FROM `occurrences` o JOIN `user_occurrences` u ON u.occurrence_id = o.gbifID where u.created_by = 2 group by o.datasetKey ) a ON datasets.datasetKey = a.datasetKey set datasets.source_attribution_count = a.sum"
-  puts "Updating source attributions counts...".yellow
-  ActiveRecord::Base.connection.execute(sql)
+  Dataset.update_all(occurrences_count: 0, source_attribution_count: 0)
+  Parallel.each(Dataset.find_in_batches(batch_size: 250), in_threads: 3) do |batch|
+    ids = batch.map(&:id)
+    Occurrence.counter_culture_fix_counts only: :dataset, start: ids.min, finish: ids.max
+    Dataset.joins(:user_occurrences)
+           .where(user_occurrences: { created_by: User::GBIF_AGENT_ID })
+           .where(id: ids.min..ids.max)
+           .group(:id)
+           .count
+           .each do |k,v|
+      d = Dataset.find(k)
+      d.skip_callbacks = true
+      d.source_attribution_count = v
+      d.save
+    end
+  end
   puts "Counters rebuilt".green
 elsif options[:verify]
   Dataset.where("occurrences_count > 1000").where(dataset_type: "OCCURRENCE").find_each do |d|

@@ -41,13 +41,8 @@ end.parse!
 if options[:directory] && options[:key]
   dataset = Dataset.find_by_uuid(options[:key]) rescue nil
   return if dataset.nil?
-  begin
-    puts "Starting #{dataset.title}...".yellow
-    f = Bionomia::FrictionlessGenerator.new(dataset: dataset, output_directory: options[:directory])
-    f.create
-  rescue
-    puts "Package failed for #{dataset.uuid}".red
-  end
+  row = { uuid: dataset.uuid, output_directory: options[:directory] }.stringify_keys
+  ::Bionomia::FrictionlessWorker.perform_async(row)
 elsif options[:directory] && ( options[:all] || options[:missing] )
   group = []
   Dataset.find_each.with_index do |dataset, i|
