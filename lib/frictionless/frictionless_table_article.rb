@@ -38,6 +38,7 @@ module Bionomia
         occurrence_ids.in_groups_of(1_000, false).each do |group|
           Article.joins(article_occurrences: :user_occurrences)
                  .where(user_occurrences: { occurrence_id: group })
+                 .where.not(user_occurrences: { action: nil })
                  .each do |article|
                    @set.add(article)
           end

@@ -58,8 +58,7 @@ module Bionomia
       @occurrence_files.each do |csv|
         occurrence_ids = CSV.read(csv).flatten
         occurrence_ids.in_groups_of(1_000, false).each do |group|
-          UserOccurrence.joins(:occurrence, :user)
-                        .includes(:occurrence, :user)
+          UserOccurrence.includes(:occurrence, :user)
                         .where.not(action: nil)
                         .where(occurrence_id: group).each do |uo|
               next if uo.action == "identified"

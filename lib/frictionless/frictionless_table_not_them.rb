@@ -63,11 +63,11 @@ module Bionomia
     end
 
     def occurrence_files
-      query = Occurrence.select(:gbifID)
-                        .joins(:user_occurrences)
-                        .where(datasetKey: datasetKey)
-                        .where(user_occurrences: { action: nil })
-                        .to_sql
+      query = UserOccurrence.select(:occurrence_id)
+                            .joins(:occurrence)
+                            .where(occurrence: { datasetKey: datasetKey })
+                            .where.not(user_occurrences: { action: nil })
+                            .to_sql
       mysql2 = ActiveRecord::Base.connection.instance_variable_get(:@connection)
       rows = mysql2.query(query, stream: true, cache_rows: false)
       tmp_csv = File.new(File.join(File.dirname(@csv_handle.path), "mismatch_tmp.csv"), "ab")
@@ -76,7 +76,7 @@ module Bionomia
       end
       tmp_csv.close
       system("sort -n #{tmp_csv.path} | uniq > #{tmp_csv.path}.tmp && mv #{tmp_csv.path}.tmp #{tmp_csv.path} > /dev/null 2>&1")
-      system("cat #{tmp_csv.path} | parallel --pipe -N 100000 'cat > #{tmp_csv.path}-{#}.csv' > /dev/null 2>&1")
+      system("cat #{tmp_csv.path} | parallel --pipe -N 10000 'cat > #{tmp_csv.path}-{#}.csv' > /dev/null 2>&1")
       File.unlink(tmp_csv.path)
       Dir.glob(File.dirname(tmp_csv) + "/**/#{File.basename(tmp_csv.path)}*.csv")
     end
@@ -85,7 +85,8 @@ module Bionomia
       occurrence_files.each do |csv|
          occurrence_ids = CSV.read(csv).flatten
          occurrence_ids.in_groups_of(1_000, false).each do |group|
-            UserOccurrence.includes(:occurrence, :user, :claimant)
+            UserOccurrence.joins(:occurrence, :user)
+                          .includes(:occurrence, :user, :claimant)
                           .where(occurrence_id: group)
                           .where(action: nil).each do |uo|
 

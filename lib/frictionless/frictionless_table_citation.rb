@@ -49,7 +49,9 @@ module Bionomia
       @occurrence_files.each do |csv|
         occurrence_ids = CSV.read(csv).flatten
         occurrence_ids.in_groups_of(1_000, false).each do |group|
-          ArticleOccurrence.where(occurrence_id: group)
+          ArticleOccurrence.joins(:user_occurrences)
+                           .where(occurrence_id: group)
+                           .where.not(user_occurrences: { action: nil })
             .each do |ao|
               data = [ ao.article_id, ao.occurrence_id ]
               @csv_handle << CSV::Row.new(header, data).to_s
