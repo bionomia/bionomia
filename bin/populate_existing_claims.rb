@@ -27,8 +27,15 @@ OptionParser.new do |opts|
 end.parse!
 
 if options[:truncate]
-  Sidekiq::Stats.new.reset
-  UserOccurrence.where(created_by: User::GBIF_AGENT_ID).delete_all
+  sql = %{ DELETE FROM user_occurrences WHERE created_by = 2 ORDER BY id DESC LIMIT 100000 }
+  total = UserOccurrence.where(created_by: User::GBIF_AGENT_ID).count
+  batch_total = total/100000
+  (1..batch_total).each do |i|
+    ActiveRecord::Base.connection.execute(sql)
+    puts (batch_total - i).to_s.yellow
+  end
+  ActiveRecord::Base.connection.execute(sql)
+  puts "Total records left: #{UserOccurrence.where(created_by: User::GBIF_AGENT_ID).count}".green
 end
 
 if options[:directory]

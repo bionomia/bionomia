@@ -50,7 +50,7 @@ module Bionomia
     end
 
     def import
-      Taxon.find_in_batches do |batch|
+      Parallel.each(Taxon.find_in_batches, progress: "Rebuilding taxon index", in_threads: 4) do |batch|
         bulk(batch)
       end
     end

@@ -78,9 +78,7 @@ Finally, import the bulk claims on production (will create users & make public i
 
      $ RACK_ENV=production bundle exec ./bin/bulk_claim.rb --file "gbif_claims.csv"
 
-The above recreates the caches and so cached file permissions may need to be set prior to its execution. The above also deletes records that originated from the source, which sometimes is extremely show to execute. One way to speed this up is to do:
-
-     mysql> DELETE FROM user_occurrences WHERE created_by = 2 ORDER BY id DESC;
+The above recreates the caches and so cached file permissions may need to be set prior to its execution.
 
 ### Step 6: Populate Search in Elasticsearch
 
@@ -144,8 +142,15 @@ One way to make this even faster is to copy database files from one database to 
 Take site offline and in the bionomia database, remove the tablespaces from the tables that will be overwritten. Before removing, it's a good idea to keep the \*.ibd files on-hand in the event something bad happens and they need to be restored.
 
 In the source database:
+      mysql> RENAME TABLE `agents` TO `agents_new`;
+      mysql> RENAME TABLE `occurrences` TO `occurrences_new`;
+      mysql> RENAME TABLE `occurrence_determiners` TO `occurrence_determiners_new`;
+      mysql> RENAME TABLE `occurrence_recorders` TO `occurrence_recorders_new`;
+      mysql> RENAME TABLE `occurrence_counts` TO `occurrence_counts_new`;
+      mysql> RENAME TABLE `taxa` TO `taxa_new`;
+      mysql> RENAME TABLE `taxon_occurrences` TO `taxon_occurrences_new`;
 
-      mysql> FLUSH TABLES `agents`, `occurrences`, `occurrence_determiners`, `occurrence_recorders`, `occurrence_counts`, `taxa`, `taxon_occurrences` FOR EXPORT;
+      mysql> FLUSH TABLES `agents_new`, `occurrences_new`, `occurrence_determiners_new`, `occurrence_recorders_new`, `occurrence_counts_new`, `taxa_new`, `taxon_occurrences_new` FOR EXPORT;
 
 Now copy the \*.ibd, and \*.cfg files for the above 6 tables from the bionomia_restore database into the bionomia database data directory, reset the permissions.
 
@@ -153,21 +158,39 @@ Now copy the \*.ibd, and \*.cfg files for the above 6 tables from the bionomia_r
 
 In the destination database:
 
-      mysql> ALTER TABLE `agents` DISCARD TABLESPACE;
-      mysql> ALTER TABLE `occurrences` DISCARD TABLESPACE;
-      mysql> ALTER TABLE `occurrence_determiners` DISCARD TABLESPACE;
-      mysql> ALTER TABLE `occurrence_recorders` DISCARD TABLESPACE;
-      mysql> ALTER TABLE `occurrence_counts` DISCARD TABLESPACE;
-      mysql> ALTER TABLE `taxa` DISCARD TABLESPACE;
-      mysql> ALTER TABLE `taxon_occurrences` DISCARD TABLESPACE;
+      mysql> ALTER TABLE `agents_new` DISCARD TABLESPACE;
+      mysql> ALTER TABLE `occurrences_new` DISCARD TABLESPACE;
+      mysql> ALTER TABLE `occurrence_determiners_new` DISCARD TABLESPACE;
+      mysql> ALTER TABLE `occurrence_recorders_new` DISCARD TABLESPACE;
+      mysql> ALTER TABLE `occurrence_counts_new` DISCARD TABLESPACE;
+      mysql> ALTER TABLE `taxa_new` DISCARD TABLESPACE;
+      mysql> ALTER TABLE `taxon_occurrences_new` DISCARD TABLESPACE;
 
-      mysql> ALTER TABLE `agents` IMPORT TABLESPACE;
-      mysql> ALTER TABLE `occurrences` IMPORT TABLESPACE;
-      mysql> ALTER TABLE `occurrence_determiners` IMPORT TABLESPACE;
-      mysql> ALTER TABLE `occurrence_recorders` IMPORT TABLESPACE;
-      mysql> ALTER TABLE `occurrence_counts` IMPORT TABLESPACE;
-      mysql> ALTER TABLE `taxa` IMPORT TABLESPACE;
-      mysql> ALTER TABLE `taxon_occurrences` IMPORT TABLESPACE;
+      mysql> ALTER TABLE `agents_new` IMPORT TABLESPACE;
+      mysql> ALTER TABLE `occurrences_new` IMPORT TABLESPACE;
+      mysql> ALTER TABLE `occurrence_determiners_new` IMPORT TABLESPACE;
+      mysql> ALTER TABLE `occurrence_recorders_new` IMPORT TABLESPACE;
+      mysql> ALTER TABLE `occurrence_counts_new` IMPORT TABLESPACE;
+      mysql> ALTER TABLE `taxa_new` IMPORT TABLESPACE;
+      mysql> ALTER TABLE `taxon_occurrences_new` IMPORT TABLESPACE;
+
+Now drop and rename the tables:
+
+      mysql> DROP TABLE `agents`;
+      mysql> DROP TABLE `occurrences`;
+      mysql> DROP TABLE `occurrence_determiners`;
+      mysql> DROP TABLE `occurrence_recorders`;
+      mysql> DROP TABLE `occurrence_counts`;
+      mysql> DROP TABLE `taxa`;
+      mysql> DROP TABLE `taxon_occurrences`;
+
+      mysql> RENAME TABLE `agents_new` TO `agents`;
+      mysql> RENAME TABLE `occurrences_new` TO `occurrences`;
+      mysql> RENAME TABLE `occurrence_determiners_new` TO `occurrence_determiners`;
+      mysql> RENAME TABLE `occurrence_recorders_new` TO `occurrence_recorders`;
+      mysql> RENAME TABLE `occurrence_counts_new` TO `occurrence_counts`;
+      mysql> RENAME TABLE `taxa_new` TO `taxa`;
+      mysql> RENAME TABLE `taxon_occurrences_new` TO `taxon_occurrences`;
 
 ## License
 

@@ -77,7 +77,7 @@ module Bionomia
     end
 
     def import
-      Organization.find_in_batches do |batch|
+      Parallel.each(Organization.find_in_batches, progress: "Rebuilding organization index", in_threads: 4) do |batch|
         bulk(batch)
       end
     end

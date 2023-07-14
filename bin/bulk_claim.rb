@@ -42,10 +42,16 @@ if options[:file]
   mime_type = `file --mime -b "#{options[:file]}"`.chomp
   raise RuntimeError, 'File must be a csv' if !mime_type.include?("text/csv")
 
-  UserOccurrence.where(created_by: User::GBIF_AGENT_ID)
-                .in_batches(of: 50_000) do |batch|
-                  batch.delete_all
+  puts "Flushing existing claims made by GBIF agent...".yellow
+  sql = %{ DELETE FROM user_occurrences WHERE created_by = 2 ORDER BY id DESC LIMIT 100000 }
+  total = UserOccurrence.where(created_by: User::GBIF_AGENT_ID).count
+  batch_total = total/100000
+  (1..batch_total).each do |i|
+    ActiveRecord::Base.connection.execute(sql)
+    puts (batch_total - i).to_s
   end
+  ActiveRecord::Base.connection.execute(sql)
+  puts "Total records left: #{UserOccurrence.where(created_by: User::GBIF_AGENT_ID).count}".green
 
   all_users = Set.new
 

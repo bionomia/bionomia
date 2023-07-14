@@ -77,7 +77,7 @@ module Bionomia
     end
 
     def import
-      Dataset.find_in_batches do |batch|
+      Parallel.each(Dataset.find_in_batches, progress: "Rebuilding dataset index", in_batches: 4) do |batch|
         bulk(batch)
       end
     end
