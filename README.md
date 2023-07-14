@@ -125,8 +125,8 @@ Then use this orphaned.csv file to run through the orphaned records and delete t
 
 This misses the ignored attributions, so also execute:
 
-     mysql> DELETE user_occurrences FROM user_occurrences LEFT JOIN occurrences ON user_occurrences.occurrence_id = occurrences.gbifID WHERE occurrences.gbifID IS NULL AND user_occurrences.visible = false;
-     mysql> DELETE article_occurrences FROM article_occurrences LEFT JOIN occurrences ON article_occurrences.occurrence_id = occurrences.gbifID WHERE occurrences.gbifID IS NULL;
+     DELETE user_occurrences FROM user_occurrences LEFT JOIN occurrences ON user_occurrences.occurrence_id = occurrences.gbifID WHERE occurrences.gbifID IS NULL AND user_occurrences.visible = false;
+     DELETE article_occurrences FROM article_occurrences LEFT JOIN occurrences ON article_occurrences.occurrence_id = occurrences.gbifID WHERE occurrences.gbifID IS NULL;
 
 To migrate tables, use mydumper and myloader. But for even faster data migration, drop indices before mydumper then recreate indices after myloader. This is especially true for the three largest tables: occurrences, occurrence_recorders, and occurrence_determiners whose indices are (almost) larger than the tables themselves.
 
@@ -137,60 +137,33 @@ To migrate tables, use mydumper and myloader. But for even faster data migration
      $ apt-get install mydumper
      $ nohup myloader --database bionomia_restore --user bionomia --password <PASSWORD> --threads 2 --queries-per-transaction 100 --compress-protocol --overwrite-tables --verbose 0 --directory /home/dshorthouse/bionomia_restore &
 
-One way to make this even faster is to copy database files from one database to another rather than dropping/truncating and importing, but this has to be done with a bit of care.
+     mysql>
 
-Take site offline and in the bionomia database, remove the tablespaces from the tables that will be overwritten. Before removing, it's a good idea to keep the \*.ibd files on-hand in the event something bad happens and they need to be restored.
+     RENAME TABLE bionomia_restore.agents TO bionomia.agents_new;
+     RENAME TABLE bionomia_restore.taxa TO bionomia.taxa_new;
+     RENAME TABLE bionomia_restore.occurrences TO bionomia.occurrences_new;
+     RENAME TABLE bionomia_restore.occurrence_determiners TO bionomia.occurrence_determiners_new;
+     RENAME TABLE bionomia_restore.occurrence_recorders TO bionomia.occurrence_recorders_new;
+     RENAME TABLE bionomia_restore.occurrence_counts TO bionomia.occurrence_counts_new;
+     RENAME TABLE bionomia_restore.taxon_occurrences TO bionomia.taxon_occurrences_new;
 
-In the source database:
-      mysql> RENAME TABLE `agents` TO `agents_new`;
-      mysql> RENAME TABLE `occurrences` TO `occurrences_new`;
-      mysql> RENAME TABLE `occurrence_determiners` TO `occurrence_determiners_new`;
-      mysql> RENAME TABLE `occurrence_recorders` TO `occurrence_recorders_new`;
-      mysql> RENAME TABLE `occurrence_counts` TO `occurrence_counts_new`;
-      mysql> RENAME TABLE `taxa` TO `taxa_new`;
-      mysql> RENAME TABLE `taxon_occurrences` TO `taxon_occurrences_new`;
+     DROP TABLE bionomia.agents;
+     DROP TABLE bionomia.taxa;
+     DROP TABLE bionomia.occurrences;
+     DROP TABLE bionomia.occurrence_determiners;
+     DROP TABLE bionomia.occurrence_recorders;
+     DROP TABLE bionomia.occurrence_counts;
+     DROP TABLE bionomia.taxon_occurrences;
 
-      mysql> FLUSH TABLES `agents_new`, `occurrences_new`, `occurrence_determiners_new`, `occurrence_recorders_new`, `occurrence_counts_new`, `taxa_new`, `taxon_occurrences_new` FOR EXPORT;
+     RENAME TABLE bionomia.agents_new TO bionomia.agents;
+     RENAME TABLE bionomia.taxa_new TO bionomia.taxa;
+     RENAME TABLE bionomia.occurrences_new TO bionomia.occurrences;
+     RENAME TABLE bionomia.occurrence_determiners_new TO bionomia.occurrence_determiners;
+     RENAME TABLE bionomia.occurrence_recorders_new TO bionomia.occurrence_recorders;
+     RENAME TABLE bionomia.occurrence_counts_new TO bionomia.occurrence_counts;
+     RENAME TABLE bionomia.taxon_occurrences_new TO bionomia.taxon_occurrences;
 
-Now copy the \*.ibd, and \*.cfg files for the above 6 tables from the bionomia_restore database into the bionomia database data directory, reset the permissions.
-
-      mysql> UNLOCK TABLES;
-
-In the destination database:
-
-      mysql> ALTER TABLE `agents_new` DISCARD TABLESPACE;
-      mysql> ALTER TABLE `occurrences_new` DISCARD TABLESPACE;
-      mysql> ALTER TABLE `occurrence_determiners_new` DISCARD TABLESPACE;
-      mysql> ALTER TABLE `occurrence_recorders_new` DISCARD TABLESPACE;
-      mysql> ALTER TABLE `occurrence_counts_new` DISCARD TABLESPACE;
-      mysql> ALTER TABLE `taxa_new` DISCARD TABLESPACE;
-      mysql> ALTER TABLE `taxon_occurrences_new` DISCARD TABLESPACE;
-
-      mysql> ALTER TABLE `agents_new` IMPORT TABLESPACE;
-      mysql> ALTER TABLE `occurrences_new` IMPORT TABLESPACE;
-      mysql> ALTER TABLE `occurrence_determiners_new` IMPORT TABLESPACE;
-      mysql> ALTER TABLE `occurrence_recorders_new` IMPORT TABLESPACE;
-      mysql> ALTER TABLE `occurrence_counts_new` IMPORT TABLESPACE;
-      mysql> ALTER TABLE `taxa_new` IMPORT TABLESPACE;
-      mysql> ALTER TABLE `taxon_occurrences_new` IMPORT TABLESPACE;
-
-Now drop and rename the tables:
-
-      mysql> DROP TABLE `agents`;
-      mysql> DROP TABLE `occurrences`;
-      mysql> DROP TABLE `occurrence_determiners`;
-      mysql> DROP TABLE `occurrence_recorders`;
-      mysql> DROP TABLE `occurrence_counts`;
-      mysql> DROP TABLE `taxa`;
-      mysql> DROP TABLE `taxon_occurrences`;
-
-      mysql> RENAME TABLE `agents_new` TO `agents`;
-      mysql> RENAME TABLE `occurrences_new` TO `occurrences`;
-      mysql> RENAME TABLE `occurrence_determiners_new` TO `occurrence_determiners`;
-      mysql> RENAME TABLE `occurrence_recorders_new` TO `occurrence_recorders`;
-      mysql> RENAME TABLE `occurrence_counts_new` TO `occurrence_counts`;
-      mysql> RENAME TABLE `taxa_new` TO `taxa`;
-      mysql> RENAME TABLE `taxon_occurrences_new` TO `taxon_occurrences`;
+     DROP DATABASE bionomia_restore;
 
 ## License
 
