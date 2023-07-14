@@ -386,7 +386,7 @@ module Sinatra
                           .where.not({ occurrence_id: claimed.select(:occurrence_id) })
                           .distinct
                           .count(:occurrence_id)
-            { claimed: claimed.where(visible: true).count, unclaimed: unclaimed }.to_json
+            { claimed: claimed.where.not(action: nil).count, unclaimed: unclaimed }.to_json
           end
 
           app.get '/:id/refresh.json' do

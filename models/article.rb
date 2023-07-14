@@ -19,15 +19,16 @@ class Article < ActiveRecord::Base
 
   def user_specimen_count(user_id)
     article_occurrences.joins(:user_occurrences)
-                       .where(user_occurrences: { user_id: user_id, visible: true } )
+                       .where(user_occurrences: { user_id: user_id })
+                       .where.not(user_occurrences: { action: nil })
                        .count
   end
 
 
   def claimed_specimen_count
     article_occurrences.select(:occurrence_id)
-                       .joins("INNER JOIN user_occurrences FORCE INDEX (user_occurrence_idx) ON article_occurrences.occurrence_id = user_occurrences.occurrence_id")
-                       .where(user_occurrences: { visible: true })
+                       .joins("INNER JOIN user_occurrences ON article_occurrences.occurrence_id = user_occurrences.occurrence_id")
+                       .where.not(user_occurrences: { action: nil })
                        .distinct
                        .count
   end

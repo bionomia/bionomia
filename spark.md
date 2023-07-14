@@ -78,7 +78,7 @@ val user_occurrences = spark.read.jdbc(url, "user_occurrences", prop)
 val missing = occurrences.
     join(user_occurrences, $"gbifID" === $"occurrence_id", "rightouter").
     select($"occurrence_id").
-    where("visible = true").
+    where("action IS NOT NULL").
     where("gbifID IS NULL").
     distinct
 

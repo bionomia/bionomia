@@ -9,7 +9,7 @@ class Occurrence < ActiveRecord::Base
   has_many :recorders, through: :occurrence_recorders, source: :agent
 
   has_many :user_occurrences
-  has_many :users, -> { where(user_occurrences: { visible: true }) }, through: :user_occurrences, source: :user
+  has_many :users, -> { where.not(user_occurrences: { action: nil }) }, through: :user_occurrences, source: :user
 
   has_many :claims, class_name: "UserOccurrence"
   has_many :claimants, through: :claims, primary_key: :created_by, class_name: "User"
@@ -116,21 +116,21 @@ class Occurrence < ActiveRecord::Base
   end
 
   def user_identifications
-    user_occurrences.where(visible: true)
+    user_occurrences.where.not(action: nil)
                     .where(qry_identified)
                     .includes(:user)
                     .includes(:claimant)
   end
 
   def user_recordings
-    user_occurrences.where(visible: true)
+    user_occurrences.where.not(action: nil)
                     .where(qry_recorded)
                     .includes(:user)
                     .includes(:claimant)
   end
 
   def user_ignoreds
-    user_occurrences.where(visible: false)
+    user_occurrences.where(action: nil)
                     .includes(:user)
                     .includes(:claimant)
   end

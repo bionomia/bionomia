@@ -98,7 +98,7 @@ class Organization < ActiveRecord::Base
     date_field = type == "recorded" ? "eventDate_processed" : "dateIdentified_processed"
 
     data = Occurrence.joins(users: :organizations)
-                .where(user_occurrences:  { visible: true })
+                .where.not(user_occurrences:  { action: nil })
                 .where("user_occurrences.action LIKE ?", "%#{type}%")
                 .where(user_organizations: { organization_id: id })
                 .where("( user_organizations.end_year IS NULL AND YEAR(occurrences.#{date_field}) >= user_organizations.start_year) OR ( user_organizations.end_year IS NOT NULL AND user_organizations.start_year IS NOT NULL AND YEAR(occurrences.#{date_field}) >= user_organizations.start_year AND YEAR(occurrences.#{date_field}) <= user_organizations.end_year )")
@@ -118,7 +118,7 @@ class Organization < ActiveRecord::Base
     date_field = type == "recorded" ? "eventDate_processed" : "dateIdentified_processed"
 
     data = Occurrence.joins(users: :organizations)
-                .where(user_occurrences: { visible: true })
+                .where.not(user_occurrences: { action: nil })
                 .where("user_occurrences.action LIKE ?", "%#{type}%")
                 .where(user_organizations: { organization_id: id })
                 .where("( user_organizations.end_year IS NULL AND user_organizations.start_year <= ? ) OR ( user_organizations.start_year IS NOT NULL AND user_organizations.end_year IS NOT NULL )", year)
@@ -140,7 +140,7 @@ class Organization < ActiveRecord::Base
     current = Article
                 .select(:id, :doi, :citation, :abstract, :created, "users.id AS user_id")
                 .joins(occurrences: { users: :organizations })
-                .where(user_occurrences: { visible: true })
+                .where.not(user_occurrences: { action: nil })
                 .where(user_organizations: { organization_id: id })
                 .where(user_organizations: { end_year: nil })
                 .where("YEAR(occurrences.eventDate_processed) >= user_organizations.start_year OR YEAR(occurrences.dateIdentified_processed) >= user_organizations.start_year")
@@ -148,7 +148,7 @@ class Organization < ActiveRecord::Base
     past = Article
                 .select(:id, :doi, :citation, :abstract, :created, "users.id AS user_id")
                 .joins(occurrences: { users: :organizations })
-                .where(user_occurrences: { visible: true })
+                .where.not(user_occurrences: { action: nil })
                 .where(user_organizations: { organization_id: id })
                 .where.not(user_organizations: { end_year: nil })
                 .where.not(user_organizations: { start_year: nil })

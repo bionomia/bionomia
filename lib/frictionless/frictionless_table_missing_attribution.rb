@@ -64,7 +64,7 @@ module Bionomia
                         .includes(:user, :claimant, :occurrence)
                         .where(occurrence_id: group)
                         .where.not(created_by: User::GBIF_AGENT_ID)
-                        .where(visible: true)
+                        .where.not(action: nil)
                         .where(occurrence: { recordedByID: nil, identifiedByID: nil })
                         .each do |uo|
               uri = uo.user.uri

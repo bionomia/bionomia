@@ -85,7 +85,7 @@ module Bionomia
       query = Occurrence.select(:gbifID)
                         .joins(:user_occurrences)
                         .where(datasetKey: @dataset.uuid)
-                        .where(user_occurrences: { visible: true })
+                        .where.not(user_occurrences: { action: nil })
                         .to_sql
       mysql2 = ActiveRecord::Base.connection.instance_variable_get(:@connection)
       rows = mysql2.query(query, stream: true, cache_rows: false)

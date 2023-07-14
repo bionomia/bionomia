@@ -57,7 +57,7 @@ module Bionomia
           UserOccurrence.joins(:user, :claimant)
                         .includes(:user, :claimant)
                         .where(occurrence_id: group)
-                        .where(visible: true)
+                        .where.not(action: nil)
                         .each do |uo|
 
               uri = uo.user.uri

@@ -130,7 +130,7 @@ end
 if options[:deleted]
   puts "Locating deleted wikidata entries that have attributions...".green
   local = User.joins(:user_occurrences)
-              .where(user_occurrences: { visible: true })
+              .where.not(user_occurrences: { action: nil })
               .where.not(wikidata: nil)
               .pluck(:wikidata).uniq
   wiki = Bionomia::WikidataSearch.new

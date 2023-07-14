@@ -60,7 +60,7 @@ module Bionomia
         occurrence_ids.in_groups_of(1_000, false).each do |group|
           UserOccurrence.joins(:occurrence, :user)
                         .includes(:occurrence, :user)
-                        .where(visible: true)
+                        .where.not(action: nil)
                         .where(occurrence_id: group).each do |uo|
               next if uo.action == "identified"
               next if !uo.user.wikidata

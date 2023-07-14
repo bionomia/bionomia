@@ -66,7 +66,7 @@ module Bionomia
       query = Occurrence.select(:gbifID)
                         .joins(:user_occurrences)
                         .where(datasetKey: datasetKey)
-                        .where(user_occurrences: { visible: false })
+                        .where(user_occurrences: { action: nil })
                         .to_sql
       mysql2 = ActiveRecord::Base.connection.instance_variable_get(:@connection)
       rows = mysql2.query(query, stream: true, cache_rows: false)
@@ -87,7 +87,7 @@ module Bionomia
          occurrence_ids.in_groups_of(1_000, false).each do |group|
             UserOccurrence.includes(:occurrence, :user, :claimant)
                           .where(occurrence_id: group)
-                          .where(visible: false).each do |uo|
+                          .where(action: nil).each do |uo|
 
                modified_date_time = !uo.updated.blank? ? uo.updated.to_time.iso8601 : nil
                data = [

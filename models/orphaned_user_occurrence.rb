@@ -5,7 +5,7 @@ class OrphanedUserOccurrence < ActiveRecord::Base
     delete_all
 
     Parallel.each(UserOccurrence.in_batches(of: 10_000), progress: "Building orphaned", in_threads: 4) do |relation|
-      relation.where.missing(:occurrence).each do |uo|
+      relation.where.not(action: nil).where.missing(:occurrence).each do |uo|
         self.create({
           occurrence_id: uo.occurrence_id,
           user_id: uo.user_id,

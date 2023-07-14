@@ -14,7 +14,7 @@ class Dataset < ActiveRecord::Base
   after_destroy :remove_search, unless: :skip_callbacks
 
   def has_claim?
-    user_occurrences.where(user_occurrences: { visible: true }).any?
+    user_occurrences.where.not(user_occurrences: { action: nil }).any?
   end
 
   alias_method :has_user?, :has_claim?
@@ -44,20 +44,11 @@ class Dataset < ActiveRecord::Base
   end
 
   def users
-    subq = UserOccurrence.select(:user_id, :visible)
-                         .from("user_occurrences FORCE INDEX (user_occurrence_idx)")
-                         .joins(:occurrence)
-                         .where(occurrences: { datasetKey: uuid })
-                         .distinct.to_sql
-    User.joins("INNER JOIN (#{subq}) a ON a.user_id = users.id")
-        .where("a.visible": true)
+    User.where(id: user_occurrences.where.not(action: nil).select(:user_id))
   end
 
   def users_count
-    UserOccurrence.joins(:occurrence)
-                  .where(occurrences: { datasetKey: uuid })
-                  .pluck(:user_id, :visible)
-                  .map{|a| a[0] if a[1]}.compact.uniq.count
+    users.count
   end
 
   def user_ids
@@ -65,19 +56,11 @@ class Dataset < ActiveRecord::Base
   end
 
   def claimed_occurrences
-    UserOccurrence.select(:id, :visible, "occurrences.*")
-                  .joins(:occurrence)
-                  .where(occurrences: { datasetKey: uuid })
+    user_occurrences.where.not(action: nil).select(:id, :visible, "occurrences.*")
   end
 
   def claimed_occurrences_count
-    UserOccurrence.select(:occurrence_id)
-                  .from("user_occurrences FORCE INDEX (user_occurrence_idx)")
-                  .joins(:occurrence)
-                  .where(occurrences: { datasetKey: uuid })
-                  .where(user_occurrences: { visible: true })
-                  .distinct
-                  .count
+    user_occurrences.where.not(action: nil).select(:occurrence_id).distinct.count
   end
 
   def agents
@@ -132,15 +115,8 @@ class Dataset < ActiveRecord::Base
   end
 
   def scribes
-    subq = UserOccurrence.select(:created_by, :visible)
-                         .from("user_occurrences FORCE INDEX (user_occurrence_idx)")
-                         .joins(:occurrence)
-                         .where(occurrences: { datasetKey: uuid })
-                         .where.not(created_by: User::BOT_IDS)
-                         .where("user_occurrences.user_id != user_occurrences.created_by")
-                         .distinct.to_sql
-    User.joins("INNER JOIN (#{subq}) a ON a.created_by = users.id")
-        .where("a.visible": true)
+    User.where(id: user_occurrences.where.not(action: nil).where("user_id != created_by").select(:created_by))
+        .where.not(id: User::BOT_IDS)
   end
 
   def license_icon(form = "button")
@@ -249,10 +225,7 @@ class Dataset < ActiveRecord::Base
 
   def article_occurrences
     ArticleOccurrence.select(:id, :article_id, :occurrence_id)
-                     .joins(:occurrence)
-                     .joins(:user_occurrences)
-                     .where(occurrences: { datasetKey: uuid })
-                     .where(user_occurrences: { visible: true })
+                     .where(occurrence_id: user_occurrences.select(:occurrence_id).where.not(action: nil ))
                      .distinct
   end
 

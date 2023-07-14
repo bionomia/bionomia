@@ -29,7 +29,7 @@ module Sinatra
         def stats_claims
           data = UserOccurrence.select("YEAR(created) AS year, MONTH(created) AS month, count(*) AS sum")
                                .where.not(created_by: User::BOT_IDS)
-                               .where(visible: true)
+                               .where.not(action: nil)
                                .where("created_by = user_id")
                                .where("created < DATE_SUB(CURRENT_DATE, INTERVAL DAYOFMONTH(CURRENT_DATE)-1 DAY)")
                                .group("YEAR(created), MONTH(created)")
@@ -41,7 +41,7 @@ module Sinatra
         def stats_attributions
           data = UserOccurrence.select("YEAR(created) AS year, MONTH(created) AS month, count(*) AS sum")
                                .where.not(created_by: User::BOT_IDS)
-                               .where(visible: true)
+                               .where.not(action: nil)
                                .where("created_by <> user_id")
                                .where("created < DATE_SUB(CURRENT_DATE, INTERVAL DAYOFMONTH(CURRENT_DATE)-1 DAY)")
                                .group("YEAR(created), MONTH(created)")
@@ -57,7 +57,7 @@ module Sinatra
         def stats_rejected
           data = UserOccurrence.select("YEAR(created) AS year, MONTH(created) AS month, count(*) AS sum")
                                .where.not(created_by: User::BOT_IDS)
-                               .where(visible: false)
+                               .where(action: nil)
                                .where("created < DATE_SUB(CURRENT_DATE, INTERVAL DAYOFMONTH(CURRENT_DATE)-1 DAY)")
                                .group("YEAR(created), MONTH(created)")
                                .order("YEAR(created), MONTH(created)")
