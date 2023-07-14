@@ -3,7 +3,7 @@
 module Bionomia
   class ArticleWorker
     include Sidekiq::Job
-    sidekiq_options queue: :article, retry: 3
+    sidekiq_options queue: :article, retry: 1
 
     def perform(row)
       gt = GbifTracker.new({ first_page_only: true })

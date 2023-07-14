@@ -3,7 +3,7 @@
 module Bionomia
   class UserWorker
     include Sidekiq::Job
-    sidekiq_options queue: :user, retry: 3
+    sidekiq_options queue: :user, retry: 2
  
     def perform(row)
       user = User.find(row["id"])

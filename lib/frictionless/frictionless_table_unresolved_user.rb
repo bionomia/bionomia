@@ -64,7 +64,9 @@ module Bionomia
       occurrence_files.each do |csv|
         occurrence_ids = CSV.read(csv).flatten
         occurrence_ids.in_groups_of(1_000, false).each do |group|
-          Occurrence.where(id: group).where.missing(:user_occurrences).each do |o|
+          Occurrence.where(id: group)
+                    .where.missing(:user_occurrences)
+                    .each do |o|
             data = [o.id, o.recordedBy, o.recordedByID]
             @csv_handle << CSV::Row.new(header, data).to_s
           end

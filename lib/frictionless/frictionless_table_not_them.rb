@@ -85,7 +85,7 @@ module Bionomia
       occurrence_files.each do |csv|
          occurrence_ids = CSV.read(csv).flatten
          occurrence_ids.in_groups_of(1_000, false).each do |group|
-            UserOccurrence.joins(:occurrence, :user)
+            UserOccurrence.joins(:occurrence, :user, :claimant)
                           .includes(:occurrence, :user, :claimant)
                           .where(occurrence_id: group)
                           .where(action: nil).each do |uo|

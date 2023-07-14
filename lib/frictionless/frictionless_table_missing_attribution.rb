@@ -61,6 +61,7 @@ module Bionomia
         occurrence_ids = CSV.read(csv).flatten
         occurrence_ids.in_groups_of(1_000, false).each do |group|
           UserOccurrence.includes(:user, :claimant, :occurrence)
+                        .joins(:user, :claimant, :occurrence)
                         .where(occurrence_id: group)
                         .where.not(created_by: User::GBIF_AGENT_ID)
                         .where.not(action: nil)
