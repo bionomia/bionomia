@@ -26,7 +26,7 @@ class Article < ActiveRecord::Base
 
   def claimed_specimen_count
     article_occurrences.select(:occurrence_id)
-                       .joins("INNER JOIN user_occurrences ON article_occurrences.occurrence_id = user_occurrences.occurrence_id")
+                       .joins(:user_occurrences)
                        .where(user_occurrences: { visible: true })
                        .distinct
                        .count
@@ -48,11 +48,13 @@ class Article < ActiveRecord::Base
   def agents
     determiners = OccurrenceDeterminer
                     .select(:agent_id)
-                    .joins("INNER JOIN article_occurrences ON article_occurrences.occurrence_id = occurrence_determiners.occurrence_id")
+                    .joins(:article_occurrence)
+                    .group(:agent_id)
                     .where(article_occurrences: { article_id: id })
     recorders = OccurrenceRecorder
                     .select(:agent_id)
-                    .joins("INNER JOIN article_occurrences ON article_occurrences.occurrence_id = occurrence_recorders.occurrence_id")
+                    .joins(:article_occurrence)
+                    .group(:agent_id)
                     .where(article_occurrences: { article_id: id })
     combined = recorders
                     .union_all(determiners)
@@ -64,10 +66,10 @@ class Article < ActiveRecord::Base
 
   def agents_occurrence_counts
     determiners = OccurrenceDeterminer
-                    .joins("INNER JOIN article_occurrences ON article_occurrences.occurrence_id = occurrence_determiners.occurrence_id")
+                    .joins(:article_occurrence)
                     .where(article_occurrences: { article_id: id })
     recorders = OccurrenceRecorder
-                    .joins("INNER JOIN article_occurrences ON article_occurrences.occurrence_id = occurrence_recorders.occurrence_id")
+                    .joins(:article_occurrence)
                     .where(article_occurrences: { article_id: id })
     recorders.union_all(determiners)
              .select(:agent_id, "count(*) AS count_all")
@@ -77,13 +79,13 @@ class Article < ActiveRecord::Base
 
   def agents_occurrence_counts_unclaimed
     determiners = OccurrenceDeterminer
-                    .joins("INNER JOIN article_occurrences ON occurrence_determiners.occurrence_id = article_occurrences.occurrence_id")
+                    .joins(:article_occurrence)
                     .joins("LEFT OUTER JOIN user_occurrences ON occurrence_determiners.occurrence_id = user_occurrences.occurrence_id AND user_occurrences.action IN ('identified', 'identified,recorded', 'recorded,identified')")
                     .where(article_occurrences: { article_id: id })
                     .where(user_occurrences: { occurrence_id: nil })
                     .distinct
     recorders = OccurrenceRecorder
-                    .joins("INNER JOIN article_occurrences ON occurrence_recorders.occurrence_id = article_occurrences.occurrence_id")
+                    .joins(:article_occurrence)
                     .joins("LEFT OUTER JOIN user_occurrences ON occurrence_recorders.occurrence_id = user_occurrences.occurrence_id AND user_occurrences.action IN ('recorded', 'identified,recorded', 'recorded,identified')")
                     .where(article_occurrences: { article_id: id })
                     .where(user_occurrences: { occurrence_id: nil })

@@ -25,16 +25,14 @@ class Taxon < ActiveRecord::Base
   end
 
   def agent_recorders
-    Agent.joins(:occurrence_recorders)
-         .joins("INNER JOIN taxon_occurrences ON occurrence_recorders.occurrence_id = taxon_occurrences.occurrence_id")
+    Agent.joins(occurrence_determiners: :taxon_occurrence)
          .where(taxon_occurrences: { taxon_id: id })
          .distinct
          .order(:family, :given)
   end
 
   def agent_determiners
-    Agent.joins(:occurrence_determiners)
-         .joins("INNER JOIN taxon_occurrences ON occurrence_determiners.occurrence_id = taxon_occurrences.occurrence_id")
+    Agent.joins(occurrence_determiners: :taxon_occurrence)
          .where(taxon_occurrences: { taxon_id: id })
          .distinct
          .order(:family, :given)
@@ -42,30 +40,29 @@ class Taxon < ActiveRecord::Base
 
   def occurrence_determiners_union_recorders
     determiners = OccurrenceDeterminer
-                    .select(:agent_id, :occurrence_id)
-                    .joins("INNER JOIN taxon_occurrences ON occurrence_determiners.occurrence_id = taxon_occurrences.occurrence_id")
+                    .select(:agent_id)
+                    .joins(:taxon_occurrence)
+                    .group(:agent_id)
                     .where(taxon_occurrences: { taxon_id: id })
     recorders = OccurrenceRecorder
-                    .select(:agent_id, :occurrence_id)
-                    .joins("INNER JOIN taxon_occurrences ON occurrence_recorders.occurrence_id = taxon_occurrences.occurrence_id")
+                    .select(:agent_id)
+                    .joins(:taxon_occurrence)
+                    .group(:agent_id)
                     .where(taxon_occurrences: { taxon_id: id })
-    recorders.union(determiners).unscope(:order)
+    recorders.union(determiners).unscope(:order).select(:agent_id).distinct
   end
 
   def agents
-    combined = occurrence_determiners_union_recorders
-                .select(:agent_id)
-                .distinct
-    Agent.where(id: combined).order(:family)
+    Agent.where(id: occurrence_determiners_union_recorders).order(:family)
   end
 
   def agent_counts
     determiners = OccurrenceDeterminer
-                    .joins("INNER JOIN taxon_occurrences ON occurrence_determiners.occurrence_id = taxon_occurrences.occurrence_id")
+                    .joins(:taxon_occurrence)
                     .where(taxon_occurrences: { taxon_id: id })
                     .distinct
     recorders = OccurrenceRecorder
-                    .joins("INNER JOIN taxon_occurrences ON occurrence_recorders.occurrence_id = taxon_occurrences.occurrence_id")
+                    .joins(:taxon_occurrence)
                     .where(taxon_occurrences: { taxon_id: id })
                     .distinct
     recorders.union_all(determiners)
@@ -76,13 +73,13 @@ class Taxon < ActiveRecord::Base
 
   def agent_counts_unclaimed
     determiners = OccurrenceDeterminer
-                    .joins("INNER JOIN taxon_occurrences ON occurrence_determiners.occurrence_id = taxon_occurrences.occurrence_id")
+                    .joins(:taxon_occurrence)
                     .joins("LEFT OUTER JOIN user_occurrences ON taxon_occurrences.occurrence_id = user_occurrences.occurrence_id AND user_occurrences.action IN ('identified', 'identified,recorded', 'recorded,identified')")
                     .where(taxon_occurrences: { taxon_id: id })
                     .where(user_occurrences: { occurrence_id: nil })
                     .distinct
     recorders = OccurrenceRecorder
-                    .joins("INNER JOIN taxon_occurrences ON occurrence_recorders.occurrence_id = taxon_occurrences.occurrence_id")
+                    .joins(:taxon_occurrence)
                     .joins("LEFT OUTER JOIN user_occurrences ON taxon_occurrences.occurrence_id = user_occurrences.occurrence_id AND user_occurrences.action IN ('recorded', 'identified,recorded', 'recorded,identified')")
                     .where(taxon_occurrences: { taxon_id: id })
                     .where(user_occurrences: { occurrence_id: nil })
@@ -94,10 +91,8 @@ class Taxon < ActiveRecord::Base
   end
 
   def timeline_recorded(start_year: 1000, end_year: Time.now.year)
-    subq = UserOccurrence.from("user_occurrences FORCE INDEX (user_occurrence_idx)")
-                         .select(:user_id, :eventDate_processed, :visible)
-                         .joins(:occurrence)
-                         .joins("INNER JOIN taxon_occurrences ON taxon_occurrences.occurrence_id = user_occurrences.occurrence_id")
+    subq = UserOccurrence.select(:user_id, :eventDate_processed, :visible)
+                         .joins(:occurrence, :taxon_occurrence)
                          .where(user_occurrences: { action: ['recorded', 'identified,recorded', 'recorded,identified'] })
                          .where(taxon_occurrences: { taxon_id: id })
                          .where("YEAR(eventDate_processed) BETWEEN ? AND ?", start_year, end_year)
@@ -112,10 +107,8 @@ class Taxon < ActiveRecord::Base
   end
 
   def timeline_identified(start_year: 1000, end_year: Time.now.year)
-    subq = UserOccurrence.from("user_occurrences FORCE INDEX (user_occurrence_idx)")
-                         .select(:user_id, :dateIdentified_processed, :visible)
-                         .joins(:occurrence)
-                         .joins("INNER JOIN taxon_occurrences ON taxon_occurrences.occurrence_id = user_occurrences.occurrence_id")
+    subq = UserOccurrence.select(:user_id, :dateIdentified_processed, :visible)
+                         .joins(:occurrence, :taxon_occurrence)
                          .where(user_occurrences: { action: ['identified', 'identified,recorded', 'recorded,identified'] })
                          .where(taxon_occurrences: { taxon_id: id })
                          .where("YEAR(dateIdentified_processed) BETWEEN ? AND ?", start_year, end_year)
