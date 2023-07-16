@@ -394,6 +394,7 @@ dl.dl-horizontal dd.line-break {
   -webkit-box-shadow: 0 3px 5px rgba(0,0,0,.2);
      -moz-box-shadow: 0 3px 5px rgba(0,0,0,.2);
           box-shadow: 0 3px 5px rgba(0,0,0,.2);
+  min-height:150px;
 }
 .card-profile:hover {
   background-color:#f8f9fa;
