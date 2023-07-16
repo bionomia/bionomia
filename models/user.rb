@@ -157,7 +157,7 @@ class User < ActiveRecord::Base
   end
 
   def visible_user_occurrences
-    user_occurrences.where.not(action: nil)
+    user_occurrences.where(visible: true)
   end
 
   def visible_occurrences
@@ -176,7 +176,7 @@ class User < ActiveRecord::Base
   end
 
   def hidden_user_occurrences
-    user_occurrences.where(action: nil)
+    user_occurrences.where(visible: false)
   end
 
   def claims_received_claimants
@@ -315,7 +315,7 @@ class User < ActiveRecord::Base
   end
 
   def claims_given
-    claims.where.not(action: nil).where.not(user: self)
+    claims.where(visible: true).where.not(user: self)
   end
 
   def helped_counts
@@ -542,8 +542,10 @@ class User < ActiveRecord::Base
     User.joins("JOIN user_occurrences as a ON a.user_id = users.id JOIN user_occurrences b ON a.occurrence_id = b.occurrence_id")
         .where("b.user_id = ?", id)
         .where("b.action IN ('recorded','recorded,identified','identified,recorded')")
+        .where("b.visible = true")
         .where("a.user_id != ?", id)
         .where("a.action IN ('recorded','recorded,identified','identified,recorded')")
+        .where("a.visible = true")
         .distinct
         .order(:family)
   end
@@ -552,8 +554,10 @@ class User < ActiveRecord::Base
     User.joins("JOIN user_occurrences as a ON a.user_id = users.id JOIN user_occurrences b ON a.occurrence_id = b.occurrence_id")
         .where("b.user_id = ?", id)
         .where("b.action IN ('identified','recorded,identified', 'identified,recorded')")
+        .where("b.visible = true")
         .where("a.user_id != ?", id)
         .where("a.action IN ('recorded','recorded,identified','identified,recorded')")
+        .where("a.visible = true")
         .distinct
         .order(:family)
   end
@@ -562,8 +566,10 @@ class User < ActiveRecord::Base
     User.joins("JOIN user_occurrences as a ON a.user_id = users.id JOIN user_occurrences b ON a.occurrence_id = b.occurrence_id")
         .where("b.user_id = ?", id)
         .where("b.action IN ('recorded','recorded,identified','identified,recorded')")
+        .where("b.visible = true")
         .where("a.user_id != ?", id)
         .where("a.action IN ('identified','recorded,identified','identified,recorded')")
+        .where("a.visible = true")
         .distinct
         .order(:family)
   end
@@ -780,7 +786,7 @@ class User < ActiveRecord::Base
   def articles_citing_specimens
     subq = Article.joins(article_occurrences: :user_occurrences)
                   .where(user_occurrences: { user_id: id })
-                  .where.not(user_occurrences: { action: nil })
+                  .where(user_occurrences: { visible: true })
                   .distinct
     Article.select('*').from(subq).order(created: :desc)
   end

@@ -19,8 +19,7 @@ class Article < ActiveRecord::Base
 
   def user_specimen_count(user_id)
     article_occurrences.joins(:user_occurrences)
-                       .where(user_occurrences: { user_id: user_id })
-                       .where.not(user_occurrences: { action: nil })
+                       .where(user_occurrences: { user_id: user_id, visible: true })
                        .count
   end
 
@@ -28,7 +27,7 @@ class Article < ActiveRecord::Base
   def claimed_specimen_count
     article_occurrences.select(:occurrence_id)
                        .joins("INNER JOIN user_occurrences ON article_occurrences.occurrence_id = user_occurrences.occurrence_id")
-                       .where.not(user_occurrences: { action: nil })
+                       .where(user_occurrences: { visible: true })
                        .distinct
                        .count
   end

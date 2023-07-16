@@ -34,7 +34,7 @@ if options[:file]
   CSV.foreach(options[:file], headers: true, header_converters: :symbol) do |row|
     user = User.find_by_identifier(row[:identifier])
     ids = UserOccurrence.left_joins(:occurrence)
-            .where.not(action: nil)
+            .where(visible: true)
             .where(occurrences: { id: nil })
             .where(user_id: user.id)
             .pluck(:id)

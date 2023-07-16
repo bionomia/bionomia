@@ -19,7 +19,7 @@ module Sinatra
           end
 
           app.get '/agents/gbifID' do
-            @gbifIDs = UserOccurrence.where.not(action: nil)
+            @gbifIDs = UserOccurrence.where(visible: true)
                                      .limit(20)
                                      .pluck(:occurrence_id)
             @output = []
@@ -27,7 +27,7 @@ module Sinatra
           end
 
           app.post '/agents/gbifID' do
-            @gbifIDs = UserOccurrence.where.not(action: nil)
+            @gbifIDs = UserOccurrence.where(visible: true)
                                      .limit(20)
                                      .pluck(:occurrence_id)
             lines = params[:gbifids].split("\r\n")[0..50_000]

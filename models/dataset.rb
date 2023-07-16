@@ -14,7 +14,7 @@ class Dataset < ActiveRecord::Base
   after_destroy :remove_search, unless: :skip_callbacks
 
   def has_claim?
-    user_occurrences.where.not(user_occurrences: { action: nil }).any?
+    user_occurrences.where(user_occurrences: { visible: true }).any?
   end
 
   alias_method :has_user?, :has_claim?
@@ -44,7 +44,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def users
-    User.where(id: user_occurrences.where.not(action: nil).select(:user_id))
+    User.where(id: user_occurrences.where(visible: true).select(:user_id))
   end
 
   def users_count
@@ -56,11 +56,11 @@ class Dataset < ActiveRecord::Base
   end
 
   def claimed_occurrences
-    user_occurrences.where.not(action: nil).select(:id, :visible, "occurrences.*")
+    user_occurrences.where(visible: true).select(:id, :visible, "occurrences.*")
   end
 
   def claimed_occurrences_count
-    user_occurrences.where.not(action: nil).select(:occurrence_id).distinct.count
+    user_occurrences.where(visible: true).select(:occurrence_id).distinct.count
   end
 
   def agents
@@ -115,7 +115,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def scribes
-    User.where(id: user_occurrences.where.not(action: nil).where("user_id != created_by").select(:created_by))
+    User.where(id: user_occurrences.where(visible: true).where("user_id != created_by").select(:created_by))
         .where.not(id: User::BOT_IDS)
   end
 
@@ -225,7 +225,7 @@ class Dataset < ActiveRecord::Base
 
   def article_occurrences
     ArticleOccurrence.select(:id, :article_id, :occurrence_id)
-                     .where(occurrence_id: user_occurrences.select(:occurrence_id).where.not(action: nil ))
+                     .where(occurrence_id: user_occurrences.select(:occurrence_id).where(visible: true ))
                      .distinct
   end
 

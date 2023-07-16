@@ -63,10 +63,11 @@ module Bionomia
     end
 
     def occurrence_files
+      #Note: use full user_occurrences hash in where clause because of a bug in ActiveRecord
       query = UserOccurrence.select(:occurrence_id)
                             .joins(:occurrence)
                             .where(occurrence: { datasetKey: datasetKey })
-                            .where.not(user_occurrences: { action: nil })
+                            .where(user_occurrences: { visible: false })
                             .to_sql
       mysql2 = ActiveRecord::Base.connection.instance_variable_get(:@connection)
       rows = mysql2.query(query, stream: true, cache_rows: false)
@@ -88,7 +89,7 @@ module Bionomia
             UserOccurrence.joins(:occurrence, :user, :claimant)
                           .includes(:occurrence, :user, :claimant)
                           .where(occurrence_id: group)
-                          .where(action: nil).each do |uo|
+                          .where(visible: false).each do |uo|
 
                modified_date_time = !uo.updated.blank? ? uo.updated.to_time.iso8601 : nil
                data = [

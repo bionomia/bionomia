@@ -112,7 +112,7 @@ module Sinatra
               .where(is_public: true)
               .where.not(image_url: nil)
               .where.not(orcid: nil)
-              .where.not(user_occurrences: { action: nil })
+              .where(user_occurrences: { visible: true })
               .distinct
               .limit(3)
               .order(Arel.sql("RAND()"))
@@ -120,7 +120,7 @@ module Sinatra
                              .where(is_public: true)
                              .where.not(image_url: nil)
                              .where.not(wikidata: nil)
-                             .where.not(user_occurrences: { action: nil })
+                             .where(user_occurrences: { visible: true })
                              .distinct
                              .limit(3)
                              .order(Arel.sql("RAND()")))
