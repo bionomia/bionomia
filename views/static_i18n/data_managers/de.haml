@@ -44,13 +44,7 @@
       %p
         %img.img-fluid{src:"/images/roundtrip.png", alt: "Datenrundreise"}
 
-    .col-12.col-md-6.mb-3
-      %a.twitter-timeline{"data-width": 500, "data-height": 750, href:"https://twitter.com/BionomiaTrack?ref_src=twsrc%5Etfw"} Tweets von BionomiaTrack
-      %script{async: true, src:"https://platform.twitter.com/widgets.js", charset:"utf-8"}
-
-  .row
     .col-12.col-md-6
-
       %h3
         Einbindung von Verbesserungen
 
@@ -111,6 +105,7 @@
         %em attributions.csv.zip
         eine Verknüpfungstabelle für die beiden anderen CSV-Dateien und enthält ebenfalls Spalten für die Person, die die Zuordnung vorgenommen hat, ihre ORCID-ID und einen Zeitstempel für den Zeitpunkt, zu dem sie die Zuordnung vorgenommen hat.
 
+  .row
     .col-12.col-md-6
 
       %h3
@@ -122,4 +117,5 @@
         Länder auf Karten und Datumsbereiche auf Diagrammen können ebenfalls angeklickt werden, um dynamische Filter auszuführen.
         Mit der Zeit und je mehr Zuordnungen vorgenommen werden, können Datenqualitätsberichte wie diese über Exemplar-Datensätze von Einzelpersonen zu Berichten auf Datensatzebene erweitert werden.
 
+    .col-12.col-md-6
       = haml_i18n :'reconcile', layout: false

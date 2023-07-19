@@ -44,13 +44,7 @@
       %p
         %img.img-fluid{src:"/images/roundtrip.png", alt: "Data round trip"}
 
-    .col-12.col-md-6.mb-3
-      %a.twitter-timeline{"data-width": 500, "data-height": 750, href:"https://twitter.com/BionomiaTrack?ref_src=twsrc%5Etfw"} Tweets by BionomiaTrack
-      %script{async: true, src:"https://platform.twitter.com/widgets.js", charset:"utf-8"}
-
-  .row
     .col-12.col-md-6
-
       %h3
         Incorporando mejoras
 
@@ -111,8 +105,8 @@
         %em attributions.csv.zip
         es una tabla combinada de los otros dos archivos csv y también contiene columnas para quién realizó la atribución, su identificador de ORCID y una marca de tiempo para cuando se realizó la atribución.
 
+  .row
     .col-12.col-md-6
-
       %h3
         Estimando la calidad de los datos
 
@@ -122,4 +116,5 @@
         También se puede hacer clic en países en mapas y rangos de fechas en gráficos para ejecutar filtros dinámicos.
         Con el tiempo y a medida que se realizan más atribuciones, los informes de calidad de datos como estos en los registros de especímenes de las personas pueden acumularse en informes a nivel de conjunto de datos.
 
+    .col-12.col-md-6
       = haml_i18n :'reconcile', layout: false
