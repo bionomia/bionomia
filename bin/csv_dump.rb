@@ -35,6 +35,7 @@ if options[:directory]
   directory = options[:directory]
   raise "Directory not found" unless File.directory?(directory)
 
+  #TODO: make more performant, perhaps with direct AR query
   if options[:all]
     csv_file = File.join(directory, "bionomia-public-claims.csv")
     puts "Making public claimed occurrences...".green
@@ -42,6 +43,7 @@ if options[:directory]
     CSV.open(csv_file, 'w') do |csv|
       csv << ["Subject", "Predicate", "Object"]
       UserOccurrence.includes(:user)
+                    .joins(:user)
                     .find_each(batch_size: 10_000) do |o|
         next if !o.visible
         next if o.action.nil?

@@ -8,24 +8,12 @@ options = {}
 OptionParser.new do |opts|
   opts.banner = "Usage: gbif_citations.rb [options]. Check and import citations of downloaded specimens"
 
-  opts.on("-f", "--first-page", "Download new articles and their data packages and parse for gbifIDs") do
+  opts.on("-f", "--first-page", "Download new articles and their data packages") do
     options[:first] = true
-  end
-
-  opts.on("-a", "--all", "Download all articles and their data packages and parse for gbifIDs") do
-    options[:all] = true
-  end
-
-  opts.on("-p", "--process", "Loop through unprocessed articles, download all their data packages and import") do
-    options[:process] = true
   end
 
   opts.on("-c", "--flush-caches", "Loop through processed articles and flush their caches") do
     options[:caches] = true
-  end
-
-  opts.on("-i", "--article_id [article_id]", Integer, "Submit unprocessed article id, download all its data packages and import") do |article_id|
-    options[:article_id] = article_id
   end
 
   opts.on("-e", "--email", "Send out email notifications to users") do
@@ -50,21 +38,11 @@ else
   params[:first_page_only] = false
 end
 
+
 tracker = Bionomia::GbifTracker.new(params)
 
-if options[:first] || options[:all]
+if options[:first]
   tracker.create_package_records
-end
-
-if options[:process]
-  tracker.process_articles
-elsif options[:article_id]
-  article = Article.find(options[:article_id])
-  tracker.process_article(article)
-end
-
-if options[:delete]
-  tracker.flush_irrelevant_entries
 end
 
 if options[:email]
