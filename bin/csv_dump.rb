@@ -35,31 +35,34 @@ if options[:directory]
   directory = options[:directory]
   raise "Directory not found" unless File.directory?(directory)
 
-  #TODO: make more performant, perhaps with direct AR query
   if options[:all]
     csv_file = File.join(directory, "bionomia-public-claims.csv")
     puts "Making public claimed occurrences...".green
-    pbar = ProgressBar.create(title: "Claims Dump", total: UserOccurrence.count, autofinish: false, format: '%t %b>> %i| %e')
+    query = UserOccurrence.joins(:user)
+                          .select(:occurrence_id, :action, :wikidata, :orcid)
+                          .where(user_occurrences: { visible: true })
+                          .where(users: {is_public: true })
+                          .to_sql
+    mysql2 = ActiveRecord::Base.connection.instance_variable_get(:@connection)
+    rows = mysql2.query(query, stream: true, cache_rows: false)
     CSV.open(csv_file, 'w') do |csv|
       csv << ["Subject", "Predicate", "Object"]
-      UserOccurrence.includes(:user)
-                    .joins(:user)
-                    .find_each(batch_size: 10_000) do |o|
-        next if !o.visible
-        next if o.action.nil?
-        next if !o.user.is_public?
-        o.action.split(",").each do |item|
+      rows.each do |row|
+        if row[2]
+          user = "http://www.wikidata.org/entity/#{row[2]}"
+        elsif row[3]
+          user = "https://orcid.org/#{row[3]}"
+        end
+        row[1].split(",").each do |item|
           if item.strip == "recorded"
             action = "http://rs.tdwg.org/dwc/iri/recordedBy"
           elsif item.strip == "identified"
             action = "http://rs.tdwg.org/dwc/iri/identifiedBy"
           end
-          csv << ["https://gbif.org/occurrence/#{o.occurrence_id}", action, o.user.uri]
+          csv << ["https://gbif.org/occurrence/#{row[0]}", action, user]
         end
-        pbar.increment
       end
     end
-    pbar.finish
 
     puts "Compressing...".green
     zipped = File.join(directory, "#{File.basename(csv_file, ".csv")}.csv.gz")
