@@ -50,8 +50,7 @@ The above recreates the caches and so cached file permissions may need to be set
 
 ### Step 6: Populate Search in Elasticsearch
 
-     $ RACK_ENV=production bundle exec ./bin/populate_search.rb --index agent
-     $ RACK_ENV=production bundle exec ./bin/populate_search.rb --index taxon
+     $ RACK_ENV=production bundle exec ./bin/populate_search.rb --indices agent,taxon
 
 Or from scratch:
 
@@ -71,7 +70,7 @@ Or from scratch:
 ### Step 8: Repopulate the occurrence_counts table in support of the help-others specimen widget
 
      # For best performance, first rebuild the Elasticsearch user index
-     # RACK_ENV=production bundle exec ./bin/populate_search.rb --index user
+     # RACK_ENV=production bundle exec ./bin/populate_search.rb --indices user
      $ RACK_ENV=production bundle exec ./bin/populate_occurrence_count.rb -t -a -j
      # Can start 2+ workers, each with 40 threads to help speed-up processing
      $ RACK_ENV=production bundle exec sidekiq -c 40 -q occurrence_count -r ./application.rb

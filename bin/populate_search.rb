@@ -4,8 +4,6 @@ require File.dirname(File.dirname(__FILE__)) + '/application.rb'
 
 ARGV << '-h' if ARGV.empty?
 
-INDICES = ["agent", "article", "dataset", "organization", "user", "taxon"]
-
 options = {}
 OptionParser.new do |opts|
   opts.banner = "Usage: populate_search.rb [options]"
@@ -14,8 +12,8 @@ OptionParser.new do |opts|
     options[:rebuild] = true
   end
 
-  opts.on("-i", "--index [directory]", String, "Rebuild a particular index. Acccepted are #{INDICES.join(", ")}") do |index|
-    options[:index] = index
+  opts.on("-i", "--indices [list]", Array, "Rebuild a list of indices. Acccepted are #{INDICES.join(", ")}") do |indices|
+    options[:indices] = indices
   end
 
   opts.on("-h", "--help", "Prints this help") do
@@ -24,28 +22,34 @@ OptionParser.new do |opts|
   end
 end.parse!
 
+def accepted_indices
+  ["agent", "article", "dataset", "organization", "user", "taxon"]
+end
+
 if options[:rebuild]
-  INDICES.each do |index_name|
-    index = Object.const_get("Bionomia::Elastic#{index_name.capitalize}").new
+  accepted_indices.each do |idx|
+    index = Object.const_get("Bionomia::Elastic#{idx.capitalize}").new
     index.delete_index
     index.create_index
     index.refresh_index
-    puts "Importing #{index_name}s..."
+    puts "Importing #{idx}s..."
     index.import
     index.refresh_index
   end
 end
 
-if options[:index]
-  if INDICES.include?(options[:index])
-    index = Object.const_get("Bionomia::Elastic#{options[:index].capitalize}").new
-    index.delete_index
-    index.create_index
-    index.refresh_index
-    puts "Importing #{options[:index]}s..."
-    index.import
-    index.refresh_index
-  else
-    puts "Accepted values are #{INDICES.join(", ")}"
+if options[:indices]
+  options[:indices].each do |idx|
+    if accepted_indices.include?(idx)
+      index = Object.const_get("Bionomia::Elastic#{idx.capitalize}").new
+      index.delete_index
+      index.create_index
+      index.refresh_index
+      puts "Importing #{idx}s..."
+      index.import
+      index.refresh_index
+    else
+      puts "Accepted values are #{accepted_indices.join(", ")}"
+    end
   end
 end
