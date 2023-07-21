@@ -12,7 +12,7 @@ OptionParser.new do |opts|
     options[:rebuild] = true
   end
 
-  opts.on("-i", "--indices [list]", Array, "Rebuild a list of indices. Acccepted are #{INDICES.join(", ")}") do |indices|
+  opts.on("-i", "--indices [list]", Array, "Rebuild a list of indices.") do |indices|
     options[:indices] = indices
   end
 
