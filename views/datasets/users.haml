@@ -11,6 +11,11 @@
       Application.init();
       ProgressBar.init("#{@dataset.uuid}", "dataset");
     });
+- else
+  :javascript
+    $(function() {
+      Application.init();
+    });
 
 .row
   = haml :'partials/dataset/jumbotron', layout:false
