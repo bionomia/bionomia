@@ -78,7 +78,8 @@ module Sinatra
         def dataset_users
           begin
             if @dataset.is_large?
-              @pagy, @results = pagy_countless(@dataset.users.order(:family))
+              @pagy = OpenStruct.new(count: nil, pages: 1)
+              @results = []
             else
               @pagy, @results = pagy(@dataset.users.order(:family))
             end
