@@ -4,6 +4,7 @@
 - content_for :scripts do
   %script{type: "application/ld+json"}
     = dataset_json_ld.to_json
+- if @pagy.count
   %script{src: "/js/progress-bar.js"}
   :javascript
     $(function() {
