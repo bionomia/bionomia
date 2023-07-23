@@ -44,7 +44,13 @@ class Dataset < ActiveRecord::Base
   end
 
   def users
-    User.where(id: user_occurrences.where(visible: true).select(:user_id))
+    subq = UserOccurrence.select(:user_id, :visible)
+                         .from("user_occurrences FORCE INDEX (user_occurrence_idx)")
+                         .joins(:occurrence)
+                         .where(occurrences: { datasetKey: datasetKey })
+                         .distinct.to_sql
+    User.joins("INNER JOIN (#{subq}) a ON a.user_id = users.id")
+        .where("a.visible": true)
   end
 
   def users_count
@@ -60,7 +66,13 @@ class Dataset < ActiveRecord::Base
   end
 
   def claimed_occurrences_count
-    user_occurrences.where(visible: true).select(:occurrence_id).distinct.count
+    UserOccurrence.select(:occurrence_id)
+                  .from("user_occurrences FORCE INDEX (user_occurrence_idx)")
+                  .joins(:occurrence)
+                  .where(occurrences: { datasetKey: datasetKey })
+                  .where(user_occurrences: { visible: true })
+                  .distinct
+                  .count
   end
 
   def agents
@@ -115,8 +127,15 @@ class Dataset < ActiveRecord::Base
   end
 
   def scribes
-    User.where(id: user_occurrences.where(visible: true).where("user_id != created_by").select(:created_by))
-        .where.not(id: User::BOT_IDS)
+    subq = UserOccurrence.select(:created_by, :visible)
+                         .from("user_occurrences FORCE INDEX (user_occurrence_idx)")
+                         .joins(:occurrence)
+                         .where(occurrences: { datasetKey: datasetKey })
+                         .where.not(created_by: User::BOT_IDS)
+                         .where("user_occurrences.user_id != user_occurrences.created_by")
+                         .distinct.to_sql
+    User.joins("INNER JOIN (#{subq}) a ON a.created_by = users.id")
+        .where("a.visible": true)
   end
 
   def license_icon(form = "button")
