@@ -307,11 +307,15 @@ var Application = (function($, window) {
 
     activate_switch: function() {
       $("#toggle-public").on("change", function() {
+        var self = this;
         $.ajax({
           method: "PUT",
-          url: $(this).attr("data-url"),
+          url: $(self).attr("data-url"),
           dataType: "json",
-          data: JSON.stringify({ is_public: $(this).prop("checked") })
+          data: JSON.stringify({ is_public: $(this).prop("checked") }),
+          beforeSend: function(xhr) {
+            $(self).prop("disabled", true).parent().addClass("disabled").find("label").css("cursor", "not-allowed");
+          }
         }).done(function(data) {
           location.reload();
         });
