@@ -716,9 +716,6 @@ class User < ActiveRecord::Base
       begin
         wikidata_lib = Bionomia::WikidataSearch.new
         wiki_data = wikidata_lib.wiki_user_by_orcid(orcid)
-        if !wiki_data[:twitter].nil?
-          data[:twitter] = wiki_data[:twitter]
-        end
         if !wiki_data[:youtube_id].nil?
           data[:youtube_id] = wiki_data[:youtube_id]
         end

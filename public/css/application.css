@@ -251,28 +251,6 @@ svg > g > g:not([column-id]):last-child { pointer-events: none }
   cursor:pointer;
 }
 
-.twitter {
-  background-color:#4099ff;
-  color:#fff;
-  width:42px;
-  height:42px;
-  border-radius:100px;
-  line-height:20px;
-  font-size:23px;
-  display:inline-block;
-  text-align:center;
-}
-
-.twitter:hover {
-  color:#fff;
-  background-color:#57a5ff;
-}
-
-.twitter i {
-  font-size:23px;
-  line-height:42px;
-}
-
 .github {
   background-color:#012429;
   color:#fff;

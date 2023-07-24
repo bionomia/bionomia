@@ -48,11 +48,6 @@ gmail:
   email: '____@gmail.com'
   username: ''
   password: ''
-twitter:
-  consumer_key: ''
-  consumer_secret: ''
-  access_token: '-'
-  access_token_secret: ''
 gbif:
   download_count:
   download_doi:

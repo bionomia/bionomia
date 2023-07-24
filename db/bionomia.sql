@@ -215,7 +215,6 @@ CREATE TABLE `users` (
   `country_code` varchar(100) DEFAULT NULL,
   `keywords` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `twitter` varchar(50) DEFAULT NULL,
   `image_url` text,
   `signature_url` text,
   `youtube_id` varchar(255) DEFAULT NULL,

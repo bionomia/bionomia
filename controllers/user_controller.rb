@@ -36,11 +36,7 @@ module Sinatra
                   .find_each do |user|
                 id_statement = nil
                 recorded_statement = nil
-                twitter = nil
                 statement = nil
-                if !user.twitter.nil?
-                  twitter = "@#{user.twitter}"
-                end
                 if !user.top_family_identified.nil?
                   id_statement = "identified #{user.top_family_identified}"
                 end
@@ -53,7 +49,7 @@ module Sinatra
                 maker.items.new_item do |item|
                   item.link = "#{Settings.base_url}/#{user.identifier}"
                   item.title = "#{user.viewname}"
-                  item.description = "#{user.viewname} #{twitter} #{statement}".split.join(" ")
+                  item.description = "#{user.viewname} #{statement}".split.join(" ")
                   item.updated = user.updated
                 end
               end
