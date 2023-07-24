@@ -205,8 +205,6 @@ module Sinatra
                 @user.made_public = Time.now
               end
               @user.save
-              @user.update_profile
-              @user.flush_caches
               { message: "ok"}.to_json
             end
 
