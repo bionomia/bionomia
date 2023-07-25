@@ -57,8 +57,8 @@ el:
     gbifid_title: Agent Strings from gbifIDs
     gbifid_instructions: Paste a list of occurrence-based gbifIDs and receive a summary list of parsed agent strings from recordedBy.
   article:
-    article_title: Article
-    articles_title: Articles
+    article_title: Άρθρο
+    articles_title: Άρθρα
     articles_lede:
       unit:
         one: "article cited downloads from GBIF"
@@ -101,14 +101,14 @@ el:
       one: person helped
       other: people helped
   charts:
-    year: Year
-    number_specimens: "# specimens"
-    identified: Identified
+    year: Έτος
+    number_specimens: "# δείγματα"
+    identified: Προσδιορίστηκε
     collected: Collected
-    people: People
+    people: Μέλη
   country:
-    country_title: Countries
-    lede: From countries stated in ORCID accounts and Wikidata entries or specimen records in GBIF
+    country_title: Χώρες
+    lede: Από χώρες που αναφέρονται σε λογαριασμούς ORCID και καταχωρήσεις Wikidata ή αρχεία δειγμάτων σε GBIF
     intro: From countries stated in ORCID accounts and Wikidata entries. Search by Taxon Family to explore expertise.
     collected_from: "Collected %{family} from %{country}"
     identified_from: "Identified %{family} from %{country}"
@@ -138,7 +138,7 @@ el:
     agent_strings_unclaimed: Unclaimed Agent Strings
     alphabetical: Alphabetical
     counts: Counts
-    unclaimed: Unclaimed
+    unclaimed: Αδιεκδίκητα
     no_agents_alert: Raw strings from parsed collector and determiner names in specimen data included in this dataset have not yet been recorded
     agents_alert:
       unit:
@@ -163,7 +163,7 @@ el:
       unit:
         one: "person claimed or was attributed specimens represented in this dataset"
         other: "people claimed or were attributed specimens represented in this dataset"
-    timeline: Timeline
+    timeline: Χρονοδιάγραμμα
     none_collected_timeline: "No one has collected and indicated a collection date"
     none_identified_timeline: "No one has identified and indicated a determination date"
     not_all_features: Large dataset, not all features are available.
@@ -178,11 +178,11 @@ el:
       century: "%C. αιώνας"
     month_names:
       - null
-      - January
-      - February
-      - March
-      - April
-      - May
+      - Ιανουάριος
+      - Φεβρουάριος
+      - Μάρτιος
+      - Απρίλιος
+      - Μάιος
       - June
       - July
       - August
@@ -279,15 +279,15 @@ el:
     roster_lede: Join the scribes in acknowledging your peers, mentors, or anyone who inspires you
     person: Person
     progress: Progress
-    public: Public
-    private: Profile is not public
-    created: Created
+    public: Δημόσιο
+    private: Το προφίλ δεν είναι δημόσιο
+    created: Δημιουργήθηκε
     latest_scribe: Latest Scribe
     latest_claim: Latest Claim
     help_documentation: "Help Documentation"
     add_someone: "Add Someone"
     latest_recipients: Latest Recipients
-    new_people: New People
+    new_people: Νέα Άτομα
     new_people_title: Newly Found People
     new_people_lede: Attribute specimens for recently discovered people in ORCID or Wikidata
     by_country: By Country
@@ -296,23 +296,23 @@ el:
     taxon_string: Taxon Family
     kingdom_string: Kingdom
     dataset: Dataset
-    country: Country
-    datasets: Datasets
+    country: Χώρα
+    datasets: Σύνολα δεδομένων
     agents: Agents
     taxa: Taxonomic Families
     specimens: Specimens
     visualizations: Visualizations
     strings: Collector Strings
-    support: Helped By
-    specialties: Specialties
-    public_profile: Public Profile
-    make_public: Make Public
-    not_yet: Not yet
+    support: Βοηθήθηκε Από
+    specialties: Ειδικότητες
+    public_profile: Δημόσιο Προφίλ
+    make_public: Μετατροπή σε Δημόσια
+    not_yet: Όχι ακόμα
     viz_none_alert: Bionomia scribes have not yet helped attribute specimens.
     viz_alert: Click regions on the map or bars in the chart to execute a filter.
-    problems: Problems Discovered
-    collections_before_birth: "Collections made before birth:"
-    collections_after_death: "Collections made after death:"
+    problems: Ανακαλύφθηκαν Προβλήματα
+    collections_before_birth: "Συλλογές που πραγματοποιήθηκαν πριν από τη γέννηση:"
+    collections_after_death: "Συλλογές που έγιναν μετά το θάνατο:"
     identifications_before_birth: "Identifications made before birth:"
     identifications_after_death: "Identifications made after death:"
     view: view
@@ -330,20 +330,20 @@ el:
     no_specialities_alert: Bionomia scribes have not yet helped attribute specimens.
     specialties_alert: "Collected or identified specimens in the following Families:"
     co-collectors: Co-collectors
-    no_co_collectors_alert: Co-collectors have not yet been recorded.
+    no_co_collectors_alert: Οι συνσυλλέκτες δεν έχουν ακόμη καταγραφεί.
     co_collectors_alert: "Choose a co-collector to adjust attributions made for specimens in common."
     co_collector_name: "Specimens co-collected with %{name}."
     switch: Switch
     not_co_collector_name: "Specimens have not been co-collected with %{name}."
-    identified_for: Identified For
-    no_identified_for_alert: Recipients of determinations have not yet been recorded.
-    identified_for_alert: "Choose a collector to adjust attributions made for specimens collected by them."
+    identified_for: Προσδιορίστηκε Για
+    no_identified_for_alert: Οι παραλήπτες των προσδιορισμών δεν έχουν ακόμη καταγραφεί.
+    identified_for_alert: "Επιλέξτε ένα συλλέκτη για να ρυθμίσετε τις ιδιότητες που γίνονται για τα δείγματα που συλλέγονται από αυτούς."
     identified_for_name: "Specimens collected by %{name} and identified by %{other_name}."
     not_identified_for_name: "Specimens have not been collected by %{name} and identified by %{other_name}."
     identified_for_count:
       one: "collected specimen"
       other: "collected specimens"
-    identifications_by: Identifications By
+    identifications_by: Αναγνωρίσεις Από
     no_determiners_alert: Determiners have not yet been recorded.
     determiners_alert: "Choose a determiner to adjust attributions made for specimens identified by them."
     determiner_name: "Specimens identified by %{name} and collected by %{other_name}."
@@ -351,7 +351,7 @@ el:
     identified_by_count:
       one: "identified specimen"
       other: "identified specimens"
-    bulk_attribution: Bulk Attributions
+    bulk_attribution: Μαζικές Καταχωρήσεις
     reclaim_ignored: Reclaim Ignored
     fix_claims: Fix Attributions
     discovered: Discovered
@@ -390,7 +390,7 @@ el:
       one: "co-collected specimen"
       other: "co-collected specimens"
     occurrence_title: Help Others By Specimen Record
-    occurrence: Specimens
+    occurrence: Δείγματα
     occurrence_advance_message: Co-collected specimen records. Use the right arrow key on your keyboard or the arrow on the screen to advance a record until you receive one that you may attribute.
   home:
     tagline: Link natural history specimens to the world's collectors.
