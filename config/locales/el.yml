@@ -26,11 +26,11 @@ el:
         significant: true
         strip_insignificant_zeros: true
   acknowledgments:
-    acknowledgments_title: Acknowledgments
+    acknowledgments_title: Ευχαριστίες
     taxon_silhouettes: Taxon Family Silhouettes
-    translations: Translations
+    translations: Μεταφράσεις
   admin:
-    change_photo: Change profile photo
+    change_photo: Αλλαγή φωτογραφίας προφίλ
   agent:
     agent_title: Agent Strings
     search_title: Agent String Search
@@ -43,7 +43,7 @@ el:
       unit:
         one: "search result for"
         other: "search results for"
-    warning: "WARNING:"
+    warning: "ΠΡΟΕΙΔΟΠΟΙΗΣΗ:"
     warning_statement: Unlike all other URLs in this site, URLs for agent strings are unreliable for linking because they will point to different results every few weeks
     agent_name_title: "%{agent_name} Specimens"
     agent_lede: A raw string from parsed collector and determiner names in natural history specimen data
