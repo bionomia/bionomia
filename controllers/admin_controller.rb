@@ -439,6 +439,8 @@ module Sinatra
               check_redirect
               @admin_user = find_user(params[:id])
               create_filter
+              @sort = params[:sort] || "desc"
+              @order = params[:order] || "typeStatus"
 
               begin
                 @page = (params[:page] || 1).to_i
@@ -450,7 +452,13 @@ module Sinatra
                 end
 
                 @page = 1 if @page <= 0
-                data = specimen_filters(@admin_user).order("occurrences.typeStatus desc")
+
+                if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
+                  if @order == "eventDate" || @order == "dateIdentified"
+                    @order = "#{@order}_processed"
+                  end
+                end
+                data = specimen_filters(@admin_user).order("occurrences.#{@order} #{@sort}")
                 @pagy, @results = pagy(data, items: search_size, page: @page)
                 haml :'admin/specimens', locals: { active_page: "administration" }
               rescue Pagy::OverflowError
@@ -727,8 +735,6 @@ module Sinatra
                 admin_user.made_public = Time.now
               end
               admin_user.save
-              admin_user.update_profile
-              admin_user.flush_caches
               { message: "ok" }.to_json
             end
 

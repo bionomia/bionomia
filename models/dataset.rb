@@ -111,13 +111,13 @@ class Dataset < ActiveRecord::Base
     determiners = OccurrenceDeterminer
                     .joins(:occurrence)
                     .joins("LEFT OUTER JOIN user_occurrences ON occurrences.gbifID = user_occurrences.occurrence_id AND user_occurrences.action IN ('identified', 'identified,recorded', 'recorded,identified')")
-                    .where(occurrences: { datasetKey: uuid })
+                    .where(occurrences: { datasetKey: datasetKey })
                     .where(user_occurrences: { occurrence_id: nil })
                     .distinct
     recorders = OccurrenceRecorder
                     .joins(:occurrence)
                     .joins("LEFT OUTER JOIN user_occurrences ON occurrences.gbifID = user_occurrences.occurrence_id AND user_occurrences.action IN ('recorded', 'identified,recorded', 'recorded,identified')")
-                    .where(occurrences: { datasetKey: uuid })
+                    .where(occurrences: { datasetKey: datasetKey })
                     .where(user_occurrences: { occurrence_id: nil })
                     .distinct
     recorders.union_all(determiners)

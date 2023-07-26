@@ -132,6 +132,8 @@ module Sinatra
             end
 
             get '/specimens' do
+              @sort = params[:sort] || "desc"
+              @order = params[:order] || "typeStatus"
               create_filter
 
               begin
@@ -144,7 +146,12 @@ module Sinatra
                 end
 
                 @page = 1 if @page <= 0
-                data = specimen_filters(@user).order("occurrences.typeStatus desc")
+                if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
+                  if @order == "eventDate" || @order == "dateIdentified"
+                    @order = "#{@order}_processed"
+                  end
+                end
+                data = specimen_filters(@user).order("occurrences.#{@order} #{@sort}")
                 @pagy, @results = pagy(data, items: search_size, page: @page)
                 haml :'profile/specimens', locals: { active_page: "profile" }
               rescue Pagy::OverflowError

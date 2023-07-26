@@ -47,7 +47,7 @@
             - elsif !uo.claimant.orcid.nil?
               = link_to uo.claimant.viewname, "https://orcid.org/#{uo.claimant.orcid}"
             - else
-                #{uo.claimant.viewname}
+              #{uo.claimant.viewname}
           %td
             %button.btn.btn-sm.btn-outline-warning.hide{type:"button", "data-occurrence-id":"#{uo.user_occurrence_id}", disabled: disabled}
               = I18n.t('specimen.not_them')
