@@ -792,10 +792,10 @@ var Application = (function($, window) {
                 self.wait_loader(item[0]).then(function() {
                   if(item[0].naturalHeight > 300) {
                     item.mlens({
-                      imgSrc:item.attr("data-big"),
-                      lensShape:"square",
+                      imgSrc: item.attr("data-big"),
+                      lensShape: "square",
                       lensSize: ["100px","100px"],
-                      borderSize:0,
+                      borderSize: 0,
                       zoomLevel: 1
                     });
                   }

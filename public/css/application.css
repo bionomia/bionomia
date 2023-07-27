@@ -178,6 +178,8 @@ table td.selector{
   background-color:#dae0e5;
 }
 
+.carousel-inner { padding: 15px; }
+
 .toggle-off.btn-sm {
   padding-left: 17px !important;
 }
