@@ -1,4 +1,4 @@
-- query = "?#{request.params.to_query}"
+- query = "?#{request.params.except("page").to_query}"
 %ul.nav.nav-pills.custom-pills
   %li.nav-item
     %a.nav-link{href: url("/country/#{@country[0]}#{query}"), class: locals[:active_tab] == "orcid" ? "active" : nil}= "ORCID"
