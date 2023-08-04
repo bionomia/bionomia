@@ -30,12 +30,14 @@ class BIONOMIA < Sinatra::Base
   Pagy::DEFAULT[:items] = 30
 
   Sidekiq.configure_server do |config|
-    config.redis = { url: Settings.redis_url, network_timeout: 5, size: 1 }
+    size = Settings.redis_url.include?("localhost") ? 120 : 1
+    config.redis = { url: Settings.redis_url, network_timeout: 5, size: size }
     config.average_scheduled_poll_interval = 30
   end
   
   Sidekiq.configure_client do |config|
-    config.redis = { url: Settings.redis_url, network_timeout: 5, size: 1 }
+    size = Settings.redis_url.include?("localhost") ? 120 : 1
+    config.redis = { url: Settings.redis_url, network_timeout: 5, size: size }
   end
 
   not_found do
