@@ -669,7 +669,7 @@ ar:
     identified_from: Identified From
     collected_from: Collected From
     resume: For Your Resume
-    specimens_used: specimens used
+    specimens_used: Specimens Used In
     public_availability: Public Availability
     public_profile: Public Profile
     make_citable: Make Your Data Citable
@@ -932,7 +932,7 @@ ar:
     co_collectors_alert: "Has collected with:"
     co_collectors: Co-collectors
     identified_for: Identified For
-    identifications_by: Arabic
+    identifications_by: Identifications By
     no_identifications_by_alert: Identifications made to collected specimens have not yet been recorded.
     identifications_by_alert: "Has collected specimens later identified by:"
     no_identified_for_alert: Identifications made to others' collected specimens have not yet been recorded.
