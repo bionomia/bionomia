@@ -167,12 +167,10 @@ class User < ActiveRecord::Base
   def hidden_occurrences_by_others
     hidden_user_occurrences.where.not(created_by: self)
                            .includes(:occurrence)
-                           .order(created: :desc)
   end
 
   def hidden_occurrences
     hidden_user_occurrences.includes(:occurrence)
-                           .order(created: :desc)
   end
 
   def hidden_user_occurrences
@@ -362,7 +360,7 @@ class User < ActiveRecord::Base
   end
 
   def claims_received_by(id)
-    visible_occurrences.where({ created_by: id }).order(created: :desc)
+    visible_occurrences.where({ created_by: id })
   end
 
   def helped_by

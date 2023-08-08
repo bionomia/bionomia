@@ -150,6 +150,9 @@ module Sinatra
                   if @order == "eventDate" || @order == "dateIdentified"
                     @order = "#{@order}_processed"
                   end
+                else
+                  @sort = "desc"
+                  @order = "typeStatus"
                 end
                 data = specimen_filters(@user).order("occurrences.#{@order} #{@sort}")
                 @pagy, @results = pagy(data, items: search_size, page: @page)
@@ -179,7 +182,24 @@ module Sinatra
               @helped_user = find_user(params[:id])
 
               @page = (params[:page] || 1).to_i
-              claims_received_by = @user.claims_received_by(@helped_user.id)
+              @sort = params[:sort] || "desc"
+              @order = params[:order] || "created"
+              if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
+                if @order == "eventDate" || @order == "dateIdentified"
+                  @order = "#{@order}_processed"
+                end
+              else
+                @sort = "desc"
+                @order = "typeStatus"
+              end
+
+              if @order == "created"
+                claims_received_by = @user.claims_received_by(@helped_user.id)
+                                          .order(created: :desc)
+              else
+                claims_received_by = @user.claims_received_by(@helped_user.id)
+                                          .order("occurrences.#{@order} #{@sort}")
+              end
               @total = claims_received_by.count
 
               if @page*search_size > @total
@@ -356,7 +376,24 @@ module Sinatra
 
             get '/ignored' do
               @page = (params[:page] || 1).to_i
-              hidden_occurrences = @user.hidden_occurrences
+              @sort = params[:sort] || "desc"
+              @order = params[:order] || "created"
+              if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
+                if @order == "eventDate" || @order == "dateIdentified"
+                  @order = "#{@order}_processed"
+                end
+              else
+                @sort = "desc"
+                @order = "created"
+              end
+
+              if @order == "created"
+                hidden_occurrences = @user.hidden_occurrences
+                                          .order(created: :desc)
+              else
+                hidden_occurrences = @user.hidden_occurrences
+                                          .order("occurrences.#{@order} #{@sort}")
+              end
               @total = hidden_occurrences.count
 
               if @page*search_size > @total
@@ -391,13 +428,25 @@ module Sinatra
 
             get '/citation/*' do
               article_from_param
+
+              @page = (params[:page] || 1).to_i
+              @sort = params[:sort] || "desc"
+              @order = params[:order] || "typeStatus"
+              if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
+                if @order == "eventDate" || @order == "dateIdentified"
+                  @order = "#{@order}_processed"
+                end
+              else
+                @sort = "desc"
+                @order = "typeStatus"
+              end
+
               cited_specimens = @user.cited_specimens_by_article(@article.id)
+                                     .order("occurrences.#{@order} #{@sort}")
               @total = cited_specimens.count
               if @total == 0
                 halt 404
               end
-
-              @page = (params[:page] || 1).to_i
 
               if @page*search_size > @total
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
@@ -418,7 +467,19 @@ module Sinatra
               @co_collector = find_user(@params[:id])
 
               @page = (params[:page] || 1).to_i
+              @sort = params[:sort] || "desc"
+              @order = params[:order] || "typeStatus"
+              if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
+                if @order == "eventDate" || @order == "dateIdentified"
+                  @order = "#{@order}_processed"
+                end
+              else
+                @sort = "desc"
+                @order = "typeStatus"
+              end
+
               co_collections = @user.recordings_with(@co_collector)
+                                    .order("occurrences.#{@order} #{@sort}")
               @total = co_collections.count
 
               if @page*search_size > @total
@@ -440,8 +501,21 @@ module Sinatra
             get '/identified-for/:id' do
               @collector = find_user(@params[:id])
 
+              @sort = params[:sort] || "desc"
+              @order = params[:order] || "typeStatus"
               @page = (params[:page] || 1).to_i
+
+              if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
+                if @order == "eventDate" || @order == "dateIdentified"
+                  @order = "#{@order}_processed"
+                end
+              else
+                @sort = "desc"
+                @order = "typeStatus"
+              end
+
               specimens = @user.identifications_for(@collector)
+                               .order("occurrences.#{@order} #{@sort}")
               @total = specimens.count
 
               if @page*search_size > @total
@@ -464,7 +538,19 @@ module Sinatra
               @determiner = find_user(@params[:id])
 
               @page = (params[:page] || 1).to_i
+              @sort = params[:sort] || "desc"
+              @order = params[:order] || "typeStatus"
+              if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
+                if @order == "eventDate" || @order == "dateIdentified"
+                  @order = "#{@order}_processed"
+                end
+              else
+                @sort = "desc"
+                @order = "typeStatus"
+              end
+
               identifications = @user.identifications_by(@determiner)
+                                     .order("occurrences.#{@order} #{@sort}")
               @total = identifications.count
 
               if @page*search_size > @total
