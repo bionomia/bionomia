@@ -1,9 +1,9 @@
 %nav#network-nav.navbar.navbar-light.navbar-expand.bg-light.overflow-auto
   %ul.navbar-nav.mr-auto
     %li.nav-item
-      %a{class:"nav-link#{locals[:active_subtab] == "collected" ? " active" : nil}", href: url("/taxon/#{@taxon.family}?action=collected")}= I18n.t('taxa.collected')
+      %a{class:"text-nowrap nav-link#{locals[:active_subtab] == "collected" ? " active" : nil}", href: url("/taxon/#{@taxon.family}?action=collected")}= I18n.t('taxa.collected')
     %li.nav-item
-      %a{class:"nav-link#{locals[:active_subtab] == "identified" ? " active" : nil}", href: url("/taxon/#{@taxon.family}?action=identified")}= I18n.t('taxa.identified')
+      %a{class:"text-nowrap nav-link#{locals[:active_subtab] == "identified" ? " active" : nil}", href: url("/taxon/#{@taxon.family}?action=identified")}= I18n.t('taxa.identified')
   %ul.navbar-nav
     %li.nav-item
       %i.fas.fa-file-csv.text-dark.h5.m-0.p-1

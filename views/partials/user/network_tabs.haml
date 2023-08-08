@@ -1,8 +1,8 @@
 %nav#network-nav.navbar.navbar-light.navbar-expand.bg-light.overflow-auto
   %ul.navbar-nav
     %li.nav-item
-      %a{class:"nav-link#{locals[:active_tab] == "co_collectors" ? " active" : nil}", href: url("/#{@viewed_user.identifier}/co-collectors")}= I18n.t('user.co_collectors')
+      %a{class:"text-nowrap nav-link#{locals[:active_tab] == "co_collectors" ? " active" : nil}", href: url("/#{@viewed_user.identifier}/co-collectors")}= I18n.t('user.co_collectors')
     %li.nav-item
-      %a{class:"nav-link#{locals[:active_tab] == "identified_for" ? " active" : nil}", href: url("/#{@viewed_user.identifier}/identified-for")}= I18n.t('user.identified_for')
+      %a{class:"text-nowrap nav-link#{locals[:active_tab] == "identified_for" ? " active" : nil}", href: url("/#{@viewed_user.identifier}/identified-for")}= I18n.t('user.identified_for')
     %li.nav-item
-      %a{class:"nav-link#{locals[:active_tab] == "identifications_by" ? " active" : nil}", href: url("/#{@viewed_user.identifier}/identifications-by")}= I18n.t('user.identifications_by')
+      %a{class:"text-nowrap nav-link#{locals[:active_tab] == "identifications_by" ? " active" : nil}", href: url("/#{@viewed_user.identifier}/identifications-by")}= I18n.t('user.identifications_by')

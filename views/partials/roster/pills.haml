@@ -1,7 +1,7 @@
 %ul.nav.nav-pills.custom-pills
   %li.nav-item
-    %a.nav-link{href: url("/roster"), class: locals[:active_tab] == "list" ? "active" : nil}= I18n.t('roster.list')
+    %a.nav-link.text-nowrap{href: url("/roster"), class: locals[:active_tab] == "list" ? "active" : nil}= I18n.t('roster.list')
   %li.nav-item
-    %a.nav-link{href: url("/roster/gallery"), class: locals[:active_tab] == "gallery" ? "active" : nil}= I18n.t('roster.gallery')
+    %a.nav-link.text-nowrap{href: url("/roster/gallery"), class: locals[:active_tab] == "gallery" ? "active" : nil}= I18n.t('roster.gallery')
   %li.nav-item
-    %a.nav-link{href: url("/roster/signatures"), class: locals[:active_tab] == "signatures" ? "active" : nil}= I18n.t('roster.signatures')
+    %a.nav-link.text-nowrap{href: url("/roster/signatures"), class: locals[:active_tab] == "signatures" ? "active" : nil}= I18n.t('roster.signatures')

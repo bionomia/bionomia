@@ -1,8 +1,8 @@
 %nav#specimen-nav.navbar.navbar-light.navbar-expand.bg-light.overflow-auto
   %ul.navbar-nav
     %li.nav-item
-      %a{class:"nav-link#{locals[:active_tab] == "specimens" ? " active" : nil}", href: url("/#{@viewed_user.identifier}/specimens")}= I18n.t('user.specimens')
+      %a{class:"text-nowrap nav-link#{locals[:active_tab] == "specimens" ? " active" : nil}", href: url("/#{@viewed_user.identifier}/specimens")}= I18n.t('user.specimens')
     %li.nav-item
-      %a{class:"nav-link#{locals[:active_tab] == "strings" ? " active" : nil}", href: url("/#{@viewed_user.identifier}/strings")}= I18n.t('user.strings')
+      %a{class:"text-nowrap nav-link#{locals[:active_tab] == "strings" ? " active" : nil}", href: url("/#{@viewed_user.identifier}/strings")}= I18n.t('user.strings')
     %li.nav-item
-      %a{class:"nav-link#{locals[:active_tab] == "support" ? " active" : nil}", href: url("/#{@viewed_user.identifier}/support")}= I18n.t('user.helped_by')
+      %a{class:"text-nowrap nav-link#{locals[:active_tab] == "support" ? " active" : nil}", href: url("/#{@viewed_user.identifier}/support")}= I18n.t('user.helped_by')

@@ -1,8 +1,8 @@
 %nav#network-nav.navbar.navbar-light.navbar-expand.bg-light.overflow-auto
   %ul.navbar-nav
     %li.nav-item
-      %a{class:"nav-link#{locals[:active_subtab] == "default" ? " active" : nil}", href: url("/taxon/#{@taxon.family}/agents")}= I18n.t('taxa.alphabetical')
+      %a{class:"text-nowrap nav-link#{locals[:active_subtab] == "default" ? " active" : nil}", href: url("/taxon/#{@taxon.family}/agents")}= I18n.t('taxa.alphabetical')
     %li.nav-item
-      %a{class:"nav-link#{locals[:active_subtab] == "counts" ? " active" : nil}", href: url("/taxon/#{@taxon.family}/agents/counts")}= I18n.t('taxa.counts')
+      %a{class:"text-nowrap nav-link#{locals[:active_subtab] == "counts" ? " active" : nil}", href: url("/taxon/#{@taxon.family}/agents/counts")}= I18n.t('taxa.counts')
     %li.nav-item
-      %a{class:"nav-link#{locals[:active_subtab] == "unclaimed" ? " active" : nil}", href: url("/taxon/#{@taxon.family}/agents/unclaimed")}= I18n.t('taxa.unclaimed')
+      %a{class:"text-nowrap nav-link#{locals[:active_subtab] == "unclaimed" ? " active" : nil}", href: url("/taxon/#{@taxon.family}/agents/unclaimed")}= I18n.t('taxa.unclaimed')

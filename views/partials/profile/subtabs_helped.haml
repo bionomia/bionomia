@@ -1,6 +1,6 @@
 %nav#helped-nav.navbar.navbar-light.navbar-expand.bg-light.overflow-auto
   %ul.navbar-nav
     %li.nav-item
-      %a{class:"nav-link#{locals[:active_tab] == "helped" ? " active" : nil}", href: url("/profile/helped")}= I18n.t('profile.helped')
+      %a{class:"text-nowrap nav-link#{locals[:active_tab] == "helped" ? " active" : nil}", href: url("/profile/helped")}= I18n.t('profile.helped')
     %li.nav-item
-      %a{class:"nav-link#{locals[:active_tab] == "messages" ? " active" : nil}", href: url("/profile/messages")}= I18n.t('profile.thanks_received')
+      %a{class:"text-nowrap nav-link#{locals[:active_tab] == "messages" ? " active" : nil}", href: url("/profile/messages")}= I18n.t('profile.thanks_received')
