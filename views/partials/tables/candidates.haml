@@ -1,51 +1,10 @@
-- sort = @sort == "asc" ? "desc" : "asc"
-- qry = Rack::Utils.build_nested_query(request.GET.except("order", "sort").merge({sort: sort}))
 #specimen-list.table-responsive-lg.overflow-auto
   %table.table.table-hover.table-sm
     %thead.thead-light
       %tr
         %th.text-nowrap.selector{scope: "col"}
           = haml :'partials/bulk_selector_top', layout: false
-        %th.text-nowrap{scope: "col"}
-          %a{href: url(request.path + "?order=scientificName&#{qry}#specimen-list")}
-            = I18n.t('specimen.scientific_name')
-            = sort_icon("scientificName", sort)
-        %th.text-nowrap{scope: "col"}
-          %a{href: url(request.path + "?order=recordedBy&#{qry}#specimen-list")}
-            = I18n.t('specimen.collected_by')
-            = sort_icon("recordedBy", sort)
-        %th.text-nowrap{scope: "col"}
-          %a{href: url(request.path + "?order=identifiedBy&#{qry}#specimen-list")}
-            = I18n.t('specimen.identified_by')
-            = sort_icon("identifiedBy", sort)
-        %th.text-nowrap{scope: "col"}
-          %a{href: url(request.path + "?order=eventDate&#{qry}#specimen-list")}
-            = I18n.t('specimen.date_collected')
-            = sort_icon("eventDate", sort)
-        %th.text-nowrap{scope: "col"}
-          %a{href: url(request.path + "?order=dateIdentified&#{qry}#specimen-list")}
-            = I18n.t('specimen.date_identified')
-            = sort_icon("dateIdentified", sort)
-        %th.text-nowrap{scope: "col"}
-          %a{href: url(request.path + "?order=family&#{qry}#specimen-list")}
-            = I18n.t('specimen.family')
-            = sort_icon("family", sort)
-        %th.text-nowrap{scope: "col"}
-          %a{href: url(request.path + "?order=institutionCode&#{qry}#specimen-list")}
-            = I18n.t('specimen.institution')
-            = sort_icon("institutionCode", sort)
-        %th.text-nowrap{scope: "col"}
-          %a{href: url(request.path + "?order=catalogNumber&#{qry}#specimen-list")}
-            = I18n.t('specimen.catalog_number')
-            = sort_icon("catalogNumber", sort)
-        %th.text-nowrap{scope: "col"}
-          %a{href: url(request.path + "?order=typeStatus&#{qry}#specimen-list")}
-            = I18n.t('specimen.type_status')
-            = sort_icon("typeStatus", sort)
-        %th.text-nowrap{scope: "col"}
-          %a{href: url(request.path + "?order=basisOfRecord&#{qry}#specimen-list")}
-            = I18n.t('specimen.basis_record')
-            = sort_icon("basisOfRecord", sort)
+        = haml :'partials/common_header_sort_columns', layout: false
         %th.text-nowrap{scope: "col", class:"btn-selector-wide"}
           - if @searched_user.nil?
             %button.btn.btn-sm.btn-warning.hide-all{type:"button", name:"notme-all"}
@@ -94,16 +53,7 @@
         %tr
           %th.text-nowrap.selector{scope: "col"}
             = haml :'partials/bulk_selector_bottom', layout: false
-          %th.text-nowrap{scope: "col"}= I18n.t('specimen.scientific_name')
-          %th.text-nowrap{scope: "col"}= I18n.t('specimen.collected_by')
-          %th.text-nowrap{scope: "col"}= I18n.t('specimen.identified_by')
-          %th.text-nowrap{scope: "col"}= I18n.t('specimen.date_collected')
-          %th.text-nowrap{scope: "col"}= I18n.t('specimen.date_identified')
-          %th.text-nowrap{scope: "col"}= I18n.t('specimen.family')
-          %th.text-nowrap{scope: "col"}= I18n.t('specimen.institution')
-          %th.text-nowrap{scope: "col"}= I18n.t('specimen.catalog_number')
-          %th.text-nowrap{scope: "col"}= I18n.t('specimen.type_status')
-          %th.text-nowrap{scope: "col"}= I18n.t('specimen.basis_record')
+          = haml :'partials/common_footer_columns', layout: false
           %th.text-nowrap{scope: "col"}
             - if @searched_user.nil?
               %button.btn.btn-sm.btn-warning.hide-all{type:"button", name:"notme-all"}

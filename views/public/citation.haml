@@ -37,16 +37,7 @@
             %thead.thead-light
               %tr
                 %th.text-nowrap{scope: "col", style:"min-width:65px"}
-                %th.text-nowrap{scope: "col"}= I18n.t('specimen.scientific_name')
-                %th.text-nowrap{scope: "col"}= I18n.t('specimen.collected_by')
-                %th.text-nowrap{scope: "col"}= I18n.t('specimen.identified_by')
-                %th.text-nowrap{scope: "col"}= I18n.t('specimen.date_collected')
-                %th.text-nowrap{scope: "col"}= I18n.t('specimen.date_identified')
-                %th.text-nowrap{scope: "col"}= I18n.t('specimen.family')
-                %th.text-nowrap{scope: "col"}= I18n.t('specimen.institution')
-                %th.text-nowrap{scope: "col"}= I18n.t('specimen.catalog_number')
-                %th.text-nowrap{scope: "col"}= I18n.t('specimen.type_status')
-                %th.text-nowrap{scope: "col"}= I18n.t('specimen.basis_record')
+                = haml :'partials/common_footer_columns', layout: false
 
             %tbody
               - @results.each do |uo|
