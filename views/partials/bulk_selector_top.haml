@@ -1,10 +1,11 @@
-.bulk-label= I18n.t('general.bulk_assignment')
-.btn-group.btn-group-toggle{"data-toggle":"buttons"}
-  %label.btn.btn-choice.btn-dark
-    %input{type:"radio", name:"selection-all", class:"action-radio #{locals[:klass]}", "data-action": "recorded", autocomplete:"off"}
-      %img{src:"/images/net.png", alt:"#{I18n.t('general.collected_all')}", title:"#{I18n.t('general.collected_all')}", width:18}
-  %label.btn.btn-choice.btn-dark
-    %input{type:"radio", name:"selection-all",  class:"action-radio #{locals[:klass]}", "data-action": "identified", autocomplete:"off"}
-      %img{src:"/images/microscope.png", alt:"#{I18n.t('general.identified_all')}", title: "#{I18n.t('general.identified_all')}",width:18}
-  %label.btn.btn-choice.btn-dark
-    %input{type:"radio", name:"selection-all",  class:"action-radio #{locals[:klass]}", "data-action": "recorded,identified", autocomplete:"off"}= I18n.t('general.both')
+%th.text-nowrap.selector{scope: "col"}
+  .bulk-label= I18n.t('general.bulk_assignment')
+  .btn-group.btn-group-toggle{"data-toggle":"buttons"}
+    %label.btn.btn-choice.btn-dark
+      %input{type:"radio", name:"selection-all", class:"action-radio #{locals[:klass]}", "data-action": "recorded", autocomplete:"off"}
+        %img{src:"/images/net.png", alt:"#{I18n.t('general.collected_all')}", title:"#{I18n.t('general.collected_all')}", width:18}
+    %label.btn.btn-choice.btn-dark
+      %input{type:"radio", name:"selection-all",  class:"action-radio #{locals[:klass]}", "data-action": "identified", autocomplete:"off"}
+        %img{src:"/images/microscope.png", alt:"#{I18n.t('general.identified_all')}", title: "#{I18n.t('general.identified_all')}",width:18}
+    %label.btn.btn-choice.btn-dark
+      %input{type:"radio", name:"selection-all",  class:"action-radio #{locals[:klass]}", "data-action": "recorded,identified", autocomplete:"off"}= I18n.t('general.both')

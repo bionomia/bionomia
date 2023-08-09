@@ -2,8 +2,7 @@
   %table.table.table-hover.table-sm
     %thead.thead-light
       %tr
-        %th.text-nowrap.selector{scope: "col"}
-          = haml :'partials/bulk_selector_top', layout: false
+        = haml :'partials/bulk_selector_top', layout: false
         = haml :'partials/common_header_sort_columns', layout: false
         %th.text-nowrap{scope: "col", class:"btn-selector-wide"}
           - if @searched_user.nil?
@@ -51,8 +50,7 @@
     - if @total > 25
       %tfoot.thead-light
         %tr
-          %th.text-nowrap.selector{scope: "col"}
-            = haml :'partials/bulk_selector_bottom', layout: false
+          = haml :'partials/bulk_selector_bottom', layout: false
           = haml :'partials/common_footer_columns', layout: false
           %th.text-nowrap{scope: "col"}
             - if @searched_user.nil?
