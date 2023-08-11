@@ -28,6 +28,7 @@ module Sinatra
               content_type "image/svg+xml", charset: 'utf-8'
               @doc = search_dataset_by_uuid(params[:id])
               if @doc.nil?
+                status 404
                 haml :dataset_badge_svg_404, layout: false
               else
                 haml :dataset_badge_svg, layout: false
