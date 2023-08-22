@@ -36,6 +36,7 @@ if options[:truncate]
   end
   ActiveRecord::Base.connection.execute(sql)
   puts "Total records left: #{UserOccurrence.where(created_by: User::GBIF_AGENT_ID).count}".green
+  Sidekiq::Stats.new.reset
 end
 
 if options[:directory]
