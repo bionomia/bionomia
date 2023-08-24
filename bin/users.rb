@@ -79,7 +79,6 @@ OptionParser.new do |opts|
 end.parse!
 
 def update(u)
-  puts "#{u.viewname}".yellow
   u.update_profile
   u.flush_caches
   puts "#{u.viewname}".green
@@ -122,6 +121,8 @@ if options[:file]
       u.delete_search
       u.delete
       puts "#{u.wikidata} deleted. Missing either label, birth or death date or has an ORCID".red
+    else
+      puts "#{u.viewname} #{u.identifier}".green
     end
   end
 end
