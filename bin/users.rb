@@ -112,7 +112,7 @@ if options[:file]
   raise RuntimeError, 'File must be a csv' if !mime_type.include?("text/plain")
   CSV.foreach(options[:file]) do |row|
     next if !row[0].is_orcid? && !row[0].is_wiki_id?
-    next if !DestroyedUser.find_by_identifier("0000-0002-0633-5974").blank?
+    next if !DestroyedUser.find_by_identifier(row[0]).blank?
     if row[0].is_wiki_id?
       u = User.find_or_create_by({ wikidata: row[0] })
     elsif row[0].is_orcid?
