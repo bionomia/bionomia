@@ -342,7 +342,7 @@ pt:
     not_identified_for_name: "Specimens have not been collected by %{name} and identified by %{other_name}."
     identified_for_count:
       one: "espécime coletado"
-      other: "collected specimens"
+      other: "espécimes coletados"
     identifications_by: Identificações por
     no_determiners_alert: Ainda não foram registados identificadores.
     determiners_alert: "Escolha um identificador para ajustar as atribuições feitas para espécimes identificados por eles."
@@ -388,7 +388,7 @@ pt:
     add_someone_href: "adicionar alguém"
     co_collected_count:
       one: "espécime co-coletado"
-      other: "espécime co-coletado"
+      other: "espécimes co-coletados"
     occurrence_title: Help Others By Specimen Record
     occurrence: Espécimes
     occurrence_advance_message: Co-collected specimen records. Use the right arrow key on your keyboard or the arrow on the screen to advance a record until you receive one that you may attribute.
@@ -462,11 +462,11 @@ pt:
     collected_title: Coletor neste dia
     collector_born: Coletor Nascido
     collector_died: Coletor Faleceu
-    type_collected: Tipo de espécimes coletados
+    type_collected: Espécimes Tipo Coletados
     none_died_alert: "Ninguém encontrado quem morreu em %{date}"
     none_born_alert: "Ninguém encontrado quem morreu em %{date}"
     limit_alert: Resultados limitados a 50 registros de espécimes de holótipo
-    no_types_alert: "Nenhum tipo de espécime encontrado coletado em %{date}"
+    no_types_alert: "Não foram encontrados espécimes-tipo coletados em %{date}"
   oops:
     not_found_title: Não encontrado
     not_found: Procuramos em todos os lugares, mas não encontramos essa página.
@@ -479,14 +479,14 @@ pt:
         one: "organização de contas ORCID e entradas de Wikidata"
         other: "organizações de contas ORCID e entradas do Wikidata"
     placeholder: Museu Canadiano da Natureza
-    affiliation_none_alert: Publicações baseadas em espécimes coletados ou identificados por pessoal atual e anterior ainda não foram registrados pelo GBIF
-    affiliation_alert: "%{count} publicações usaram dados de espécimes baixados do GBIF com base em espécimes coletados ou identificados por pessoal atual e anterior enquanto afiliado com %{org_name}"
+    affiliation_none_alert: Publicações baseadas em espécimes coletados ou identificados por pessoal atual e passado não foram ainda registadas pelo GBIF
+    affiliation_alert: "%{count} publicações usaram dados de espécimes baixados do GBIF com base em espécimes coletados ou identificados por pessoal atual e passado enquanto afiliados com %{org_name}"
     collected_by: "Espécimes coletados ou identificados por:"
     science_enabled: Ciência habilitada
     impact: Impacto nas atividades em outras organizações
     no_metric_alert: "Pessoal atual e anterior ainda não reivindicou ou foram atribuídos espécimes agora com curadoria de outras organizações enquanto eram afiliados com %{org_name}."
     metric_alert: "Pessoal atual e anterior reivindicou ou foi atribuído espécimes agora com curadoria nas seguintes organizações enquanto afiliado com %{org_name}."
-    none_collected_alert: "Espécimes coletados ou identificados em %{year} por pessoal e com curadoria de outro lugar ainda não foram reivindicados ou atribuídos."
+    none_collected_alert: "Espécimes coletados ou identificados em %{year} por pessoal e com curadoria noutro lugar não foram ainda reivindicados ou atribuídos."
     all_years: Todos Anos
     specimens: espécimes
     organizations: organizações
@@ -579,7 +579,7 @@ pt:
     active: "Activado"
     inactive: "Desactivado"
     make_public_message: Inclua sua conta em perfis públicos. Suas reivindicações serão incluídas em um download de dados em massa, exposto por meio de extensões do Google Chrome e do Firefox.
-    no_candidates_alert: Bionomia não encontrou nenhum espécime indexado pelo GBIF que você possa ter coletado ou identificado.
+    no_candidates_alert: Bionomia não encontrou nenhum espécime indexado pelo GBIF que possa ter sido coletado ou identificado por si.
     ignored_alert: Registros de espécimes que você marcou como "Não sou eu" aparecerão aqui.
     scribe_not_helped: Este autor Bionomia ainda não o ajudou a reivindicar espécimes.
     upload_error: Faça upload de uma imagem com menos de 5 MB.
@@ -612,7 +612,7 @@ pt:
     not_co_collector_name: "As amostras não foram co-coletadas com %{name}."
     co_collected_count:
       one: "espécime co-coletado"
-      other: "espécime co-coletado"
+      other: "espécimes co-coletados"
     identified_for: Identified For
     no_identified_for_alert: Recipients of your determinations have not yet been recorded.
     identified_for_alert: "Choose a collector to adjust attributions made for specimens collected by them and identified by you."
@@ -807,7 +807,7 @@ pt:
     stats_collected_specimens:
       unit:
         one: "espécime coletado de pelo menos"
-        other: "espécime coletado de pelo menos"
+        other: "espécimes coletados de pelo menos"
     stats_collected_countries:
       unit:
         one: "país"
