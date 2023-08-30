@@ -219,11 +219,13 @@ es:
     recommended_use: Uso recomendado
     title: Para desarrolladores
     code_title: "Para desarrolladores: Código"
+    clients: Client Libraries
     parser: Analizar nombres
     parse_names: Analizar nombres humanos
     parse_names_title: "Para desarrolladores: Analizar nombres"
     structured_data_title: "Para desarrolladores: Datos estructurados"
     search_title: "Para desarrolladores: Buscar"
+    client_title: "For Developers: Client Libraries"
   donate:
     donate_title: Donaciones
     lede: Su donación única o periódica ayudará a completar los protocolos para el procesamiento de los datos y garantizará que se otorgue crédito por las contribuciones realizadas a las colecciones de historia natural de la manera más rápida y fluida posible.

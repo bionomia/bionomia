@@ -219,11 +219,13 @@ de:
     recommended_use: Empfohlene Verwendung
     title: Für Entwickler
     code_title: "Für Entwickler: Code"
+    clients: Client Libraries
     parser: Namen analysieren
     parse_names: Menschliche Namen analysieren
     parse_names_title: "Für Entwickler: Namen analysieren"
     structured_data_title: "Für Entwickler: Strukturierte Daten"
     search_title: "For Developers: Search"
+    client_title: "For Developers: Client Libraries"
   donate:
     donate_title: Spenden
     lede: Ihre einmalige oder regelmäßige Spende hilft, die Datenpipeline zu vervollständigen und sicherzustellen, dass die Beiträge zu den naturkundlichen Sammlungen so schnell und einfach wie möglich gutgeschrieben werden.

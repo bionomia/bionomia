@@ -219,11 +219,13 @@ pt:
     recommended_use: Uso Recomendado
     title: Para Programadores
     code_title: "Para Programadores: Código"
+    clients: Client Libraries
     parser: Separar Nomes
     parse_names: Separar Nomes Humanos
     parse_names_title: "Para Desenvolvedores: Separar Nomes"
     structured_data_title: "Para Desenvolvedores: Data Estruturada"
     search_title: "Para Programadores: Pesquisa"
+    client_title: "For Developers: Client Libraries"
   donate:
     donate_title: Faça um donativo
     lede: O seu donativo ocasional ou regular ajudará a completar o pipeline de dados e a garantir que as contribuições feitas às coleções de história natural sejam reconhecidas da maneira mais rápida e eficiente possível.
