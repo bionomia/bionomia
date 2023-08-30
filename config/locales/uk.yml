@@ -253,11 +253,13 @@ uk:
     recommended_use: Recommended Use
     title: For Developers
     code_title: "For Developers: Code"
+    clients: Client Libraries
     parser: Parse Names
     parse_names: Parse Human Names
     parse_names_title: "For Developers: Parse Names"
     structured_data_title: "For Developers: Structured Data"
     search_title: "For Developers: Search"
+    client_title: "For Developers: Client Libraries"
   donate:
     donate_title: Donate
     lede: Your one-time or periodic donation will help complete the data pipeline and ensure that credit is given for contributions made to natural history collections as quickly and as seamlessly as possible.
