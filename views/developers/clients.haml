@@ -1,0 +1,28 @@
+- content_for :title, I18n.t('developer.client_title')
+- content_for :scripts do
+  :javascript
+    $(function() {
+      Application.init();
+    });
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2
+        = I18n.t('developer.title')
+
+= haml :'partials/developers/tabs', layout:false, locals: { active_tab: locals[:active_tab] }
+
+%h3.mt-4.mb-3
+  = I18n.t('developer.clients')
+
+%h4 Ruby
+
+%p
+  %a{href: "https://github.com/SpeciesFileGroup/bananomia"} bananomia
+  gem that simplifies REST requests and bundles both search and parse methods.
+  %br
+  Owner:
+  Geoff Ower,
+  %a{href: "https://orcid.org/0000-0002-9770-2345"}
+    %i.fab.fa-orcid
+    https://orcid.org/0000-0002-9770-2345

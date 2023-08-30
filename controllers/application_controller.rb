@@ -57,6 +57,10 @@ module Sinatra
             haml :'developers/parse', locals: { active_tab: "parse" }
           end
 
+          app.get '/developers/clients' do
+            haml :'developers/clients', locals: { active_tab: "clients" }
+          end
+
           app.get '/downloads' do
             file = File.join(app.root, "public", "data", "bionomia-public-claims.csv.gz")
             @compressed_file_size = (File.size(file).to_f / 2**20).round(2) rescue nil

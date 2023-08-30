@@ -8,3 +8,5 @@
       %a{class: "text-nowrap nav-link#{locals[:active_tab] == "structured_data" ? " active" : nil}", href: url("/developers/structured-data")}= I18n.t('developer.structured_data')
     %li.nav-item
       %a{class: "text-nowrap nav-link#{locals[:active_tab] == "code" ? " active" : nil}", href: url("/developers/code")}= I18n.t('developer.code')
+    %li.nav-item
+      %a{class: "text-nowrap nav-link#{locals[:active_tab] == "clients" ? " active" : nil}", href: url("/developers/clients")}= I18n.t('developer.clients')
