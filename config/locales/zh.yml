@@ -202,13 +202,13 @@ zh-CN:
     recommended_use: 推荐使用
     title: 面向开发人员
     code_title: "面向开发人员：代码"
-    clients: Client Libraries
+    clients: 客户资料库
     parser: Parse Names
     parse_names: Parse Human Names
     parse_names_title: "For Developers: Parse Names"
     structured_data_title: "面向开发人员：结构化数据"
     search_title: "For Developers: Search"
-    client_title: "For Developers: Client Libraries"
+    client_title: "开发者: 客户资料库"
   donate:
     donate_title: 赞助
     lede: 您的一次性或定期捐赠将有助于数据管道（data pipeline）的完成，并确保尽可能快速、无缝地捐赠与自然博物收藏。
