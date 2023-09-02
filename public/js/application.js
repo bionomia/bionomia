@@ -557,6 +557,23 @@ var Application = (function($, window) {
                    .find("i").removeClass("fa-heart").addClass("fa-check");
         });
       });
+
+      $("button.destroyed").on("click", function(e) {
+        e.stopPropagation();
+
+        var button = this,
+            id = $(this).attr("data-destroyed-id"),
+            row = $(this).parents("tr");
+        $.ajax({
+          method: "DELETE",
+          url: self.path + "/users/destroyed/" + id,
+          dataType: "json"
+        }).done(function(data) {
+          row.fadeOut(250, function() {
+            row.remove();
+          });
+        });
+      });
     },
 
     activate_refresh: function(){

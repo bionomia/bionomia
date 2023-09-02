@@ -38,6 +38,14 @@ module Sinatra
           @pagy, @results = pagy(data, items: 100)
         end
 
+        def destroyed_users
+          data = DestroyedUser.order(identifier: :asc)
+          if params[:order] && DestroyedUser.column_names.include?(params[:order]) && ["asc", "desc"].include?(params[:sort])
+            data = DestroyedUser.order("#{params[:order]} #{params[:sort]}")
+          end
+          @pagy, @results = pagy(data, items: 250)
+        end
+
       end
     end
   end

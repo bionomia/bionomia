@@ -331,6 +331,23 @@ module Sinatra
               haml :'admin/user_search', locals: { active_page: "administration" }
             end
 
+            get '/users/destroyed' do
+              sort = params[:sort] || nil
+              order = params[:order] || nil
+              destroyed_users
+              locals = {
+                active_page: "administration",
+                sort: sort, order: order
+              }
+              haml :'admin/destroyed', locals: locals
+            end
+
+            delete '/users/destroyed/:id' do
+              destroyed = DestroyedUser.find(params[:id]) rescue nil
+              destroyed.destroy if destroyed
+              { message: "ok" }.to_json
+            end
+
             get '/user/:id' do
               check_redirect
               @admin_user = find_user(params[:id])

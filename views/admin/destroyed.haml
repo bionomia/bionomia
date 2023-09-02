@@ -1,0 +1,54 @@
+- content_for :title do
+  Deleted Users & Redirects
+- content_for :scripts do
+  :javascript
+    $(function() {
+      Application.init("", "POST", "/admin");
+    });
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.alert-warning.d-flex.flex-wrap
+    .mr-auto
+      %h1.h2 Deleted Identifiers & Redirects
+    = haml :'partials/admin/user_search', layout: false
+
+- sort = locals[:sort] == "asc" ? "desc" : "asc"
+.table-responsive-lg
+  %table.table.table-hover.table-sm
+    %thead.thead-light
+      %tr
+        %th.text-nowrap{scope: "col"}
+          %a{href: url("/admin/users/destroyed?order=identifier&sort=#{sort}")}
+            Identifier
+        %th.text-nowrap{scope: "col"} Type
+        %th.text-nowrap{scope: "col"}
+          %a{href: url("/admin/users/destroyed?order=redirect_to&sort=#{sort}")}
+            Redirect To
+        %th.text-nowrap{scope: "col"}
+
+    %tbody
+      - @results.each do |d|
+        %tr
+          %td
+            - if d.identifier.is_orcid?
+              %a{href: "https://orcid.org/#{d.identifier}"}
+                %i.fab.fa-orcid
+                #{d.identifier}
+            - else
+              %a{href: "http://wikidata.org/entity/#{d.identifier}"}
+                #{d.identifier}
+            - if d.identifier.is_orcid? && !d.redirect_to.nil?
+              (deceased)
+          %td
+            - if d.redirect_to.nil?
+              %span.text-danger DELETED
+            - else
+              %span.text-success REDIRECTED
+          %td
+            - if d.redirect_to
+              %a{href: url("/admin/user/#{d.redirect_to}")}
+                #{d.redirect_to}
+          %td
+            - if d.identifier.is_orcid? && d.redirect_to.nil?
+              %button.btn.btn-small.btn-outline-danger.destroyed{type: "button", "data-destroyed-id": d.id } Remove
+
+= pagy_bootstrap_nav(@pagy) if @pagy.pages > 1
