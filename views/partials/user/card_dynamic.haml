@@ -48,7 +48,7 @@
           .flex
             %img.mr-2.card-img-taxon{src:"#{image}", alt:"#{locals[:stats][:specimens][:top_family_recorded]}", width:24, loading:"lazy"}
 
-  .card-body.pt-0.pb-0
+  .card-body.pt-0.pb-0.d-flex.flex-column.justify-content-end
     - if locals[:user].zenodo_doi
       .text-right
         %a{href:"https://doi.org/#{locals[:user].zenodo_concept_doi}"}
