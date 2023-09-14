@@ -70,7 +70,7 @@ prop.setProperty("driver", "com.mysql.cj.jdbc.Driver")
 prop.setProperty("user", "root")
 prop.setProperty("password", "")
 
-val url = "jdbc:mysql://localhost:3306/bionomia?serverTimezone=UTC&useSSL=false"
+val url = "jdbc:mysql://localhost:3306/bionomia?serverTimezone=UTC&useSSL=false&useServerPrepStmts=false&rewriteBatchedStatements=true"
 
 //check new occurrences against existing user_occurrences table to see how many orphaned occurrences we have
 val user_occurrences = spark.read.jdbc(url, "user_occurrences", prop)
