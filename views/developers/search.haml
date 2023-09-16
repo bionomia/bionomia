@@ -258,7 +258,7 @@
 
 %dl
   %dt Base URL
-  %dd.pl-2= "#{Settings.api_url}/users/search"
+  %dd.pl-2= "#{Settings.api_url}/user.jsonld"
 
   %dt ?q=
   %dd.pl-2 single human name (required)
@@ -283,7 +283,7 @@
 
   %dt.mt-3 Example
   %dd.pl-2
-    #{Settings.api_url}/users/search?q=smith&families_collected=scarabaeidae&strict=true
+    #{Settings.api_url}/user.jsonld?q=smith&families_collected=scarabaeidae&strict=true
 
   %dt Response
   %dd
@@ -299,11 +299,11 @@
             <span class="token property">"@type"</span>: <span class="token string">"DataFeed"</span>,
             <span class="token property">"opensearch:totalResults"</span>: <span class="token number">1</span>,
             <span class="token property">"opensearch:itemsPerPage"</span>: <span class="token number">1</span>,
-            <span class="token property">"as:first"</span>: <span class="token string">"https://api.bionomia.net/users/search?q=smith&families_collected=curculionidae&strict=true&page=1"</span>,
+            <span class="token property">"as:first"</span>: <span class="token string">"https://api.bionomia.net/user.jsonld?q=smith&families_collected=curculionidae&strict=true&page=1"</span>,
             <span class="token property">"as:prev"</span>: <span class="token symbol">null</span>,
-            <span class="token property">"as:current"</span>: <span class="token string">"https://api.bionomia.net/users/search?q=smith&families_collected=curculionidae&strict=true"</span>,
+            <span class="token property">"as:current"</span>: <span class="token string">"https://api.bionomia.net/user.jsonld?q=smith&families_collected=curculionidae&strict=true"</span>,
             <span class="token property">"as:next"</span>: <span class="token symbol">null</span>,
-            <span class="token property">"as:last"</span>: <span class="token string">"https://api.bionomia.net/users/search?q=smith&families_collected=curculionidae&strict=true&page=1"</span>,
+            <span class="token property">"as:last"</span>: <span class="token string">"https://api.bionomia.net/user.jsonld?q=smith&families_collected=curculionidae&strict=true&page=1"</span>,
             <span class="token property">"name"</span>: <span class="token string">"Bionomia user search results"</span>,
             <span class="token property">"description"</span>: <span class="token string">"Bionomia user search results expressed as a schema.org JSON-LD DataFeed.
               q={name} is a search by human name;
@@ -315,7 +315,7 @@
             <span class="token property">"license"</span>: <span class="token string">"https://creativecommons.org/publicdomain/zero/1.0/"</span>,
             <span class="token property">"potentialAction"</span>: {
               <span class="token property">"@type"</span>: <span class="token string">"SearchAction"</span>,
-              <span class="token property">"target"</span>: <span class="token string">"https://api.bionomia.net/users/search?q={name}&families_identified={families_identified}&families_collected={families_collected}&date={date}&page={page}&strict={true|false}"</span>
+              <span class="token property">"target"</span>: <span class="token string">"https://api.bionomia.net/user.jsonld?q={name}&families_identified={families_identified}&families_collected={families_collected}&date={date}&page={page}&strict={true|false}"</span>
             },
             <span class="token property">"dataFeedElement"</span>: [
               {
@@ -374,7 +374,7 @@
 
 %dl
   %dt Base URL
-  %dd.pl-2= "#{Settings.api_url}/occurrences/search"
+  %dd.pl-2= "#{Settings.api_url}/occurrences/search.jsonld"
 
   %dt &datasetKey=
   %dd.pl-2 registered UUID provided by the Global Biodiversity Information Facility (GBIF) (required)
@@ -387,7 +387,7 @@
 
   %dt.mt-3 Example
   %dd.pl-2
-    #{Settings.api_url}/occurrences/search?datasetKey=f86a681d-7db8-483b-819a-248def18b70a&occurrenceID=7a1daa39-8d7c-d7c4-968f-799d58b3c7b0
+    #{Settings.api_url}/occurrences/search.jsonld?datasetKey=f86a681d-7db8-483b-819a-248def18b70a&occurrenceID=7a1daa39-8d7c-d7c4-968f-799d58b3c7b0
 
   %dt Response
   %dd
@@ -435,7 +435,7 @@
             <span class="token property">"license"</span>: <span class="token string">"https://creativecommons.org/publicdomain/zero/1.0/"</span>,
             <span class="token property">"potentialAction"</span>: {
               <span class="token property">"@type"</span>: <span class="token string">"SearchAction"</span>,
-              <span class="token property">"target"</span>: <span class="token string">"https://bionomia.net/occurrences/search?datasetKey={datasetKey}&occurrenceID={occurrenceID}"</span>
+              <span class="token property">"target"</span>: <span class="token string">"https://bionomia.net/occurrences/search.jsonld?datasetKey={datasetKey}&occurrenceID={occurrenceID}"</span>
             },
             <span class="token property">"dataFeedElement"</span>: [
               {
