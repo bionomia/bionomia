@@ -22,21 +22,21 @@
 
 %dl
   %dt Base URL
-  %dd.pl-2 https://api.bionomia.net/parse
+  %dd.pl-2 https://api.bionomia.net/parse.json
 
   %dt ?names=
   %dd.pl-2 human name(s); use \r\n as line breaks, all content escaped for GET requests (required)
 
   %dt.mt-3 Example GET
   %dd.pl-2
-    https://api.bionomia.net/parse?names=Henry+Robert+Nicollon+des+Abbayes%3B+Groom+Q%0D%0AMrs.+John+Errol+Chandos+Aberdeen
+    https://api.bionomia.net/parse.json?names=Henry+Robert+Nicollon+des+Abbayes%3B+Groom+Q%0D%0AMrs.+John+Errol+Chandos+Aberdeen
 
   %dt.mt-3 Example POST
   %dd
     %pre.pre-scrollable.bg-dark.text-white.border.rounded.p-3
       %code
         :preserve
-          curl -X POST -d $'names=Henry Robert Nicollon des Abbayes; Groom Q\r\nMrs. John Errol Chandos Aberdeen' https://api.bionomia.net/parse
+          curl -X POST -d $'names=Henry Robert Nicollon des Abbayes; Groom Q\r\nMrs. John Errol Chandos Aberdeen' https://api.bionomia.net/parse.json
 
   %dt Response
   %dd
