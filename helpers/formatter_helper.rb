@@ -148,7 +148,9 @@ module Sinatra
             { id: n[:_source][:id],
               score: n[:_score],
               fullname: n[:_source][:fullname],
-              fullname_reverse: n[:_source][:fullname_reverse]
+              fullname_reverse: n[:_source][:fullname_reverse],
+              given: n[:_source][:given],
+              family: n[:_source][:family]
             }
           }
         end
@@ -166,6 +168,8 @@ module Sinatra
               uri: uri,
               fullname: n[:_source][:fullname],
               fullname_reverse: n[:_source][:fullname_reverse],
+              given: n[:_source][:given],
+              family: n[:_source][:family],
               label: n[:_source][:label],
               other_names: n[:_source][:other_names],
               thumbnail: n[:_source][:thumbnail],
