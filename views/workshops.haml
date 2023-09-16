@@ -11,6 +11,19 @@
         = I18n.t('workshops.title')
 
 %h3.mt-4
+  = I18n.l Date.parse("July 28, 2023"), format: :long
+
+%h4.mt-4
+  Claiming specimens from NEON fieldwork,
+  %a{href: "/0000-0002-0166-6985"} Andrew Johnston
+
+.row
+  .col-12.col-md-6.embed-responsive.embed-responsive-4by3
+    %iframe.embed-responsive-item.p-3{src:"https://www.youtube.com/embed/DJJlmol9HtE", frameborder:"0", allow:"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture", allowfullscreen: true}
+
+%hr
+
+%h3.mt-4
   = I18n.l Date.parse("July 23, 2023"), format: :long
 
 %h4.mt-4
@@ -31,6 +44,8 @@
       %a{href: "https://doi.org/10.5281/zenodo.7767332"}
         Documents
 
+%hr
+
 %h3.mt-4
   = I18n.l Date.parse("June 30, 2023"), format: :long
 
@@ -38,7 +53,7 @@
   Connecting Te Papa natural history collectors and identifiers,
   %a{href: "/0000-0002-5398-7721"} Siobhan Leachman
 
-.row
+.row.mt-4
   .col-12.col-md-6
     %a{href: "https://doi.org/10.5281/zenodo.8097988", target:"_blank"}
       %img{src:"/images/Leachman-2023-06-30.png", alt:"Connecting Te Papa natural history collectors and identifiers", class:"img-fluid"}
@@ -49,13 +64,14 @@
     %a{href:"https://doi.org/10.5281/zenodo.8097988", title:"Connecting Te Papa natural history collectors and identifiers", target:"_blank"}
       PowerPoint slides
 
+%hr
 
 %h3.mt-4
   = I18n.l Date.parse("March 24, 2023"), format: :long
 
 %h4.mt-4
   Supporting inclusive and sustainable research infrastructure for systematics (SISRIS)
-%p
+%p.mt-4
   %img{src: "/images/sisris.jpg", alt: "SISRIS logo", class:"img-fluid pull-left float-left mr-2", width: "150px", height: "150px"}
   Supported by a conference grant from the US National Science Foundation to Dr. Andrea Weeks (George Mason University; Ted R. Bradley Herbarium), and Drs. Shawn Zeringue-Krosnick and Twanelle Majors (Tennessee Tech University; Hollister Herbarium). It supports two US-based workshops and symposia at the 2023 annual meetings of the 
   %a{href: "https://www.sebiologists.org/asb-2023.html"} Association of Southeastern Biologists
@@ -70,6 +86,8 @@
     %li.list-inline-item
       %a{href: "https://doi.org/10.5281/zenodo.7767332"}
         Documents
+
+%hr
 
 %h3.mt-4
   = I18n.l Date.parse("April 12, 2022"), format: :long
@@ -97,6 +115,18 @@
 %hr
 
 %h3.mt-4
+  = I18n.l Date.parse("September 7, 2021"), format: :long
+
+%h4.mt-4
+  LD4 Wikidata Affinity Group
+
+.row.mt-4
+  .col-12.col-md-6
+    %a{href: "https://stanford.zoom.us/rec/play/zf35SCRXEPitpYg08G-ZnePxqtIQwspUlETXRqmS6o0m8ux2a3H2pCnCZAdhjP-IOAN2-TeNRmkP5Zdf.sD0Pb9OP54Y1kNqs?canPlayFromShare=true&from=share_recording_detail&startTime=1632239572000&componentName=rec-play&originRequestUrl=https%3A%2F%2Fstanford.zoom.us%2Frec%2Fshare%2Fuyi9G7wePH2-efoSumfq-Vz7kzlQCcE9b6xTNFpY7U123n8QO5GLYN4O3KGcIP0H.HY9o6Qo3ngtln4Zy%3FstartTime%3D1632239572000", target:"_blank"}
+      %img{src:"/images/Shorthouse-2021-09-07.png", alt:"LD4 Wikidata Affinity Group", class:"img-fluid"}
+
+
+%h3.mt-4
   = I18n.l Date.parse("April 15, 2021"), format: :long
 
 %h4.mt-4
@@ -105,15 +135,15 @@
   e
   %a{href: "/0000-0001-7618-5230"} David Shorthouse
 
+.row
+  .col-12.col-md-6.embed-responsive.embed-responsive-4by3
+    %iframe.embed-responsive-item.p-3{src:"https://www.youtube.com/embed/kXWXDWz6pEs?start=512", frameborder:"0", allow:"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture", allowfullscreen: true}
+
 %ul.list-unstyled.mt-3
   %li
     %i.far.fa-file-pdf
     = link_to "PDF slides", "/documents/Giron_Shorthouse_SiBColombia_2021.04.15.pdf"
     (3.7MB)
-
-.row
-  .col-12.col-md-6.embed-responsive.embed-responsive-4by3
-    %iframe.embed-responsive-item.p-3{src:"https://www.youtube.com/embed/kXWXDWz6pEs?start=512", frameborder:"0", allow:"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture", allowfullscreen: true}
 
 %hr
 
@@ -121,16 +151,6 @@
   = I18n.l Date.parse("December 1, 2020"), format: :long
 
 %h4.mt-4 The "Who" in Collections: Revealing the Network of Collectors and Determiners of Bat Specimens
-
-%ul.list-unstyled.mt-3
-  %li
-    %i.far.fa-file-pdf
-    = link_to "Background & Agenda", "/documents/WorkshopAgenda_Revealing_Who_Bat_Collecting.2020.12.01.pdf"
-    (280KB)
-  %li
-    %i.far.fa-file-powerpoint
-    %a{href:"https://doi.org/10.6084/m9.figshare.22297384.v1", title:"The Who in Collections: Revealing the Network of Collectors and Determiners of Bat Specimens", target:"_blank"}
-      PowerPoint slides
 
 .row
   .col-12.col-md-6.embed-responsive.embed-responsive-4by3
@@ -142,3 +162,13 @@
   .col-12.col-md-6.embed-responsive.embed-responsive-4by3
     %iframe.embed-responsive-item.p-3{src:"https://www.youtube.com/embed/BYvoXKBSGA8", frameborder:"0", allow:"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture", allowfullscreen: true}
   .col-12.col-md-6.embed-responsive.embed-responsive-4by3
+
+%ul.list-unstyled.mt-3
+  %li
+    %i.far.fa-file-pdf
+    = link_to "Background & Agenda", "/documents/WorkshopAgenda_Revealing_Who_Bat_Collecting.2020.12.01.pdf"
+    (280KB)
+  %li
+    %i.far.fa-file-powerpoint
+    %a{href:"https://doi.org/10.6084/m9.figshare.22297384.v1", title:"The Who in Collections: Revealing the Network of Collectors and Determiners of Bat Specimens", target:"_blank"}
+      PowerPoint slides
