@@ -52,3 +52,7 @@ gbif:
   download_count:
   download_doi:
   api: 'https://api.gbif.org/v1/'
+bluesky:
+  endpoint: 'https://bsky.social/xrpc/'
+  handle: ''
+  password: ''
