@@ -53,9 +53,9 @@
 
   %body.d-flex.flex-column
     %header
+      = haml :'global_navigation', layout: false, locals: { active_page: "#{locals[:active_page]}" }
       - if Settings.offline_warning.off_datetime
         = haml :'global_offline_warning', layout: false
-      = haml :'global_navigation', layout: false, locals: { active_page: "#{locals[:active_page]}" }
       = yield_content :jumbotron
 
     %main#main.mb-5

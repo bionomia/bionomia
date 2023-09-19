@@ -50,6 +50,9 @@ i.fa-feather{
 a:hover, .page-link:hover{
   color:#003309;
 }
+#offline-message {
+  background-color: #fcf8e3;
+}
 .flex-wrap {
   -webkit-flex-wrap: wrap!important;
 }
