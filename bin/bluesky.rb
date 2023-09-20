@@ -6,9 +6,9 @@ ARGV << '-h' if ARGV.empty?
 
 options = {}
 OptionParser.new do |opts|
-  opts.banner = "Usage: blueskyp.rb [options]"
+  opts.banner = "Usage: bluesky.rb [options]"
 
-  opts.on("-t", "--holotype", "Tweet a holotype collected today") do
+  opts.on("-t", "--holotype", "Post a holotype collected today") do
    options[:holotype] = true
   end
 
@@ -29,9 +29,8 @@ if options[:holotype]
                          .order(Arel.sql("RAND()"))
                          .limit(1)
    if !holotypes.nil?
-      bs = Bionomia::Bluesky.new
       o = holotypes[0]
-      return if o.nil? || o.class.name != "Occurrence"
+      return if o.nil?
       collectors = o.users
                     .where(user_occurrences: { action: ["recorded", "recorded,identified", "identified,recorded"]})
                     .map{|u| [u.fullname, "https://bionomia.net/#{u.identifier}"].compact.join(" ")}
@@ -42,6 +41,7 @@ if options[:holotype]
       statement = "#{collectors} collected the holotype #{family} #{o.scientificName} #{country}"
       message = "#{statement} #{o.uri} #TypeSpecimenToday"
 
+      bs = Bionomia::Bluesky.new
       bs.add_text(text: message)
       o.images.first(2).each do |i|
          alt_text = "Image of the holotype #{family} #{o.scientificName}"
