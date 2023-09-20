@@ -129,7 +129,11 @@ class Article < ActiveRecord::Base
 
   def update_search
     es = Bionomia::ElasticArticle.new
-    es.update(self)
+    if !es.get(self)
+      es.add(self)
+    else
+      es.update(self)
+    end
   end
 
   def remove_search
