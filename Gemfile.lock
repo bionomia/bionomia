@@ -95,7 +95,7 @@ GEM
     dwc-archive (1.1.7)
       biodiversity (~> 5.7.2)
       nokogiri (~> 1.14)
-    dwc_agent (3.0.12.0)
+    dwc_agent (3.0.13.0)
       namae (~> 1)
       namecase (~> 2)
     elasticsearch (7.17.8)
@@ -184,7 +184,7 @@ GEM
       net-protocol
     net-protocol (0.2.1)
       timeout
-    net-smtp (0.3.3)
+    net-smtp (0.4.0)
       net-protocol
     netrc (0.11.0)
     nokogiri (1.15.4)
