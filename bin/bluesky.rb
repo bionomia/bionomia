@@ -19,34 +19,33 @@ OptionParser.new do |opts|
 end.parse!
 
 if options[:holotype]
-   date = DateTime.now
-   holotypes = Occurrence.joins(:users)
-                         .where(hasImage: true)
-                         .where(typeStatus: ["HOLOTYPE", "holotype"])
-                         .where("MONTH(eventDate_processed) = ? and DAY(eventdate_processed) = ?", date.month, date.day)
-                         .where.not(users: { orcid: nil })
-                         .where(user_occurrences: { action: ["recorded", "recorded,identified", "identified,recorded"]})
-                         .order(Arel.sql("RAND()"))
-                         .limit(1)
-   if !holotypes.nil?
-      o = holotypes[0]
-      return if o.nil?
-      collectors = o.users
-                    .where(user_occurrences: { action: ["recorded", "recorded,identified", "identified,recorded"]})
-                    .map{|u| [u.fullname, "https://bionomia.net/#{u.identifier}"].compact.join(" ")}
-                    .first(2)
-                    .to_sentence
-      country = !o.interpretedCountry.nil? ? "in #{o.interpretedCountry}" : nil
-      family = !o.family.blank? ? "#{o.family.upcase}:" : nil
-      statement = "#{collectors} collected the holotype #{family} #{o.scientificName} #{country}"
-      message = "#{statement} #{o.uri} #TypeSpecimenToday"
+  date = DateTime.now
+  o = Occurrence.joins(:users)
+                 .where(hasImage: true)
+                 .where(typeStatus: ["HOLOTYPE", "holotype"])
+                 .where("MONTH(eventDate_processed) = ? and DAY(eventdate_processed) = ?", date.month, date.day)
+                 .where.not(users: { orcid: nil })
+                 .where(user_occurrences: { action: ["recorded", "recorded,identified", "identified,recorded"]})
+                 .order(Arel.sql("RAND()"))
+                 .limit(1)
+                 .first rescue nil
 
-      bs = Bionomia::Bluesky.new
-      bs.add_text(text: message)
-      o.images.first(2).each do |i|
-         alt_text = "Image of the holotype #{family} #{o.scientificName}"
-         bs.add_image(image_url: i[:large], alt_text: alt_text)
-     end
-     bs.post
-   end
+  return if o.nil?
+  collectors = o.users
+                .where(user_occurrences: { action: ["recorded", "recorded,identified", "identified,recorded"]})
+                .map{|u| [u.fullname, "https://bionomia.net/#{u.identifier}"].compact.join(" ")}
+                .first(2)
+                .to_sentence
+  country = !o.interpretedCountry.nil? ? "in #{o.interpretedCountry}" : nil
+  family = !o.family.blank? ? "#{o.family.upcase}:" : nil
+  statement = "#{collectors} collected the holotype #{family} #{o.scientificName} #{country}"
+  message = "#{statement} #{o.uri} #TypeSpecimenToday"
+
+  bs = Bionomia::Bluesky.new
+  bs.add_text(text: message)
+  o.images.first(2).each do |image|
+    alt_text = "Image of the holotype #{family} #{o.scientificName}"
+    bs.add_image(image_url: image[:large], alt_text: alt_text)
+  end
+  bs.post
 end

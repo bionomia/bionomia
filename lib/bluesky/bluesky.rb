@@ -19,7 +19,7 @@ module Bionomia
         @post_item.merge!({
           facets: []
         })
-        URI.extract(text).each do |url|
+        URI.extract(text, "https").each do |url|
           @post_item[:facets] << {
             index: {
               byteStart: text.index(url),
@@ -39,11 +39,13 @@ module Bionomia
     def add_image(image_url:, alt_text:) 
       url = Settings.bluesky.endpoint + "com.atproto.repo.uploadBlob"
       image = download_image(uri: image_url)
+      #TODO: why is this timing out??
       response = RestClient::Request.execute(
         method: :post,
         headers: { authorization: "Bearer #{@session[:accessJwt]}", content_type: "image/png" },
         url: url,
-        payload: image.to_blob
+        payload: image.to_blob,
+        timeout: 60
       )
       image.destroy!
       if !@post_item.key?(:embed)
