@@ -12,8 +12,8 @@ Strings of text in the user interface are translatable via [config/locales](conf
 ## Requirements
 
 1. ruby 3.2.1+
-2. Elasticsearch 8.8.2+
-3. MySQL 8.0.33
+2. Elasticsearch 8.10.2+
+3. MySQL 8.0.34+
 4. Redis 7.0.12+
 5. Apache Spark 3+
 6. Unix-based operating system to use GNU parallel to process GBIF downloads

@@ -3,7 +3,6 @@ host: localhost
 username: root
 password:
 database: bionomia
-reconnect: false
 pool: 40
 timeout: 5000
 helping_download_limit: 10000

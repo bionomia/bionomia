@@ -99,9 +99,21 @@
           #{@user.fullname_reverse}. #{DateTime.now.year}. Natural history specimens collected and/or identified and deposited. [Data set]. Zenodo.
           = link_to "https://doi.org/#{@user.zenodo_concept_doi}", "https://doi.org/#{@user.zenodo_concept_doi}"
 
+        %h4 Badge
+        .mb-3
+          %a{href:"https://doi.org/#{@user.zenodo_concept_doi}"}
+            %img{src:"/images/#{@user.zenodo_concept_doi}.svg"}
+
         %h5 HTML
         .alert.alert-secondary
           %pre.p-0.m-0
-            &lt;a href="https://doi.org/#{@user.zenodo_concept_doi}"&gt;&lt;img src="https://zenodo.org/badge/DOI/#{@user.zenodo_concept_doi}.svg" alt="DOI"&gt;&lt;/a&gt;
-        %a{href:"https://doi.org/#{@user.zenodo_concept_doi}"}
-          %img{src:"/images/#{@user.zenodo_concept_doi}.svg"}
+            %code
+              :preserve
+                &lt;a href="https://doi.org/#{@user.zenodo_concept_doi}"&gt;&lt;img src="https://zenodo.org/badge/DOI/#{@user.zenodo_concept_doi}.svg" alt="DOI"&gt;&lt;/a&gt;
+
+        %h5 Markdown
+        .alert.alert-secondary
+          %pre.p-0.m-0
+            %code
+              :preserve
+                &lsqb;!&lsqb;Bionomia&rsqb;&#40;https://zenodo.org/badge/DOI/#{@user.zenodo_concept_doi}.svg&#41;&rsqb;&#40;https://doi.org/#{@user.zenodo_concept_doi}&#41;
