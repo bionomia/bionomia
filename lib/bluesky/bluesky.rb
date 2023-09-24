@@ -15,7 +15,7 @@ module Bionomia
          createdAt: Time.now.iso8601,
          langs: ["en-US"]
       })
-      if text.include?("http")
+      if text.include?("https")
         @post_item.merge!({
           facets: []
         })
@@ -38,7 +38,7 @@ module Bionomia
 
     def add_image(image_url:, alt_text:) 
       url = Settings.bluesky.endpoint + "com.atproto.repo.uploadBlob"
-      image = download_image(uri: image_url)
+      image = download_image(url: image_url)
       if image
         response = RestClient::Request.execute(
           method: :post,
@@ -97,7 +97,7 @@ module Bionomia
        JSON.parse(response.body, symbolize_names: true)
     end
 
-    def download_image(uri:)
+    def download_image(url:)
       begin
         tempfile = Down::NetHttp.download(url, open_timeout: 60)
         image = MiniMagick::Image.open(tempfile.path)
