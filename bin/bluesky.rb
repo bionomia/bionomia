@@ -44,7 +44,9 @@ if options[:holotype]
   bs = Bionomia::Bluesky.new
   bs.add_text(text: message)
   o.images.first(2).each do |image|
-    alt_text = "Image of the holotype #{family} #{o.scientificName}"
+    rights = image[:rightsHolder] rescue ""
+    license = image[:license] rescue ""
+    alt_text = "Image of the holotype #{family} #{o.scientificName}. #{rights} #{license}".strip
     bs.add_image(image_url: image[:large], alt_text: alt_text)
   end
   bs.post if bs.has_image?
