@@ -41,6 +41,7 @@ if options[:holotype]
   statement = "#{collectors} collected the holotype #{family} #{o.scientificName} #{country}"
   message = "#{statement} #{o.uri} #TypeSpecimenToday"
 
+  puts "Post attempt: #{o.uri}"
   bs = Bionomia::Bluesky.new
   bs.add_text(text: message)
   o.images.first(2).each do |image|
@@ -49,5 +50,10 @@ if options[:holotype]
     alt_text = "Image of the holotype #{family} #{o.scientificName}. #{rights} #{license}".strip
     bs.add_image(image_url: image[:large], alt_text: alt_text)
   end
-  bs.post if bs.has_image?
+  if bs.has_image?
+    bs.post
+    puts "Success!".green
+  else
+    puts "Image failed".red
+  end
 end
