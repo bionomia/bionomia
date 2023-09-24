@@ -47,5 +47,5 @@ if options[:holotype]
     alt_text = "Image of the holotype #{family} #{o.scientificName}"
     bs.add_image(image_url: image[:large], alt_text: alt_text)
   end
-  bs.post
+  bs.post if bs.has_image?
 end

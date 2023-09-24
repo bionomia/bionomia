@@ -39,21 +39,26 @@ module Bionomia
     def add_image(image_url:, alt_text:) 
       url = Settings.bluesky.endpoint + "com.atproto.repo.uploadBlob"
       image = download_image(uri: image_url)
-      #TODO: why is this timing out??
-      response = RestClient::Request.execute(
-        method: :post,
-        headers: { authorization: "Bearer #{@session[:accessJwt]}", content_type: "image/png" },
-        url: url,
-        payload: image.to_blob,
-        timeout: 60
-      )
-      image.destroy!
-      if !@post_item.key?(:embed)
-        add_embed
+      if image
+        response = RestClient::Request.execute(
+          method: :post,
+          headers: { authorization: "Bearer #{@session[:accessJwt]}", content_type: "image/png" },
+          url: url,
+          payload: image.to_blob,
+          timeout: 60
+        )
+        image.destroy!
+        if !@post_item.key?(:embed)
+          add_embed
+        end
+        @post_item[:embed][:images] << { alt: alt_text, image: JSON.parse(response.body, symbolize_names: true)[:blob] }
       end
-      @post_item[:embed][:images] << { alt: alt_text, image: JSON.parse(response.body, symbolize_names: true)[:blob] }
     end
 
+    def has_image?
+      @post_item.key?[:embed] && !@post_item[:embed][:images].empty?
+    end
+  
     def post
       raise "No text in the post!" if @post_item.empty?
       begin
@@ -93,11 +98,16 @@ module Bionomia
     end
 
     def download_image(uri:)
-      image = MiniMagick::Image.open(uri)
-      image.resize "600x600"
-      image.strip
-      image.format "png"
-      image
+      begin
+        tempfile = Down::NetHttp.download(url, open_timeout: 60)
+        image = MiniMagick::Image.open(tempfile.path)
+        image.strip
+        image.format "png"
+        tempfile.unlink
+        image
+      rescue
+        nil
+      end
     end
 
     def add_embed
