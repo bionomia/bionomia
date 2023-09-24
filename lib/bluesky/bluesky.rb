@@ -56,7 +56,7 @@ module Bionomia
     end
 
     def has_image?
-      @post_item.key?[:embed] && !@post_item[:embed][:images].empty?
+      @post_item.key?(:embed) && !@post_item[:embed][:images].empty?
     end
   
     def post
