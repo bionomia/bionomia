@@ -36,8 +36,8 @@ if options[:holotype]
                 .map{|u| [u.fullname, "https://bionomia.net/#{u.identifier}"].compact.join(" ")}
                 .first(2)
                 .to_sentence
-  country = !o.interpretedCountry.nil? ? "in #{o.interpretedCountry}" : nil
-  family = !o.family.blank? ? "#{o.family.upcase}:" : nil
+  country = !o.interpretedCountry.nil? ? "in #{o.interpretedCountry}" : ""
+  family = !o.family.blank? ? "#{o.family.upcase}:" : ""
   statement = "#{collectors} collected the holotype #{family} #{o.scientificName} #{country}"
   message = "#{statement} #{o.uri} #TypeSpecimenToday"
 
