@@ -10,12 +10,12 @@ $ curl -i --user davidpshorthouse:***password*** -H "Content-Type:application/js
 
 - Create the database using the [schema in /db](db/bionomia.sql)
 - Ensure that MySQL has utf8mb4 collation. See [https://mathiasbynens.be/notes/mysql-utf8mb4](https://mathiasbynens.be/notes/mysql-utf8mb4) to set server connection
-- Get the mysql-connector-j (Connector/J) from [https://dev.mysql.com/downloads/connector/j/8.0.html](https://dev.mysql.com/downloads/connector/j/8.0.html).
+- Get the mysql-connector-j (Connector/J) from [https://dev.mysql.com/downloads/connector/j/8.1.html](https://dev.mysql.com/downloads/connector/j/8.1.html).
 
 On a Mac with Homebrew:
 
 ```bash
-$ spark-shell --jars /usr/local/opt/mysql-connector-java/libexec/mysql-connector-j-8.0.33.jar --packages org.apache.spark:spark-avro_2.12:3.4.0 --driver-memory 12G
+$ spark-shell --jars /usr/local/opt/mysql-connector-java/libexec/mysql-connector-j-8.1.0.jar --packages org.apache.spark:spark-avro_2.12:3.5.0 --driver-memory 12G
 ```
 
 ```scala
