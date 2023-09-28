@@ -62,7 +62,8 @@ val occurrences = spark.
     withColumnRenamed("v_typeStatus","typeStatus").
     withColumn("hasImage", when($"hasImage" === true, 1).otherwise(0)).
     withColumn("eventDate_processed", to_timestamp($"eventDate_processed")).
-    withColumn("dateIdentified_processed", to_timestamp($"dateIdentified_processed"))
+    withColumn("dateIdentified_processed", to_timestamp($"dateIdentified_processed")).
+    withColumn("typeStatus", lower($"typeStatus"))
 
 //set some properties for a MySQL connection
 val prop = new java.util.Properties

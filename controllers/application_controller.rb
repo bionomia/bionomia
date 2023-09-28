@@ -122,7 +122,7 @@ module Sinatra
             if params[:date]
               @date = DateTime.parse(params[:date]) rescue @date
             end
-            occurrences = Occurrence.where(typeStatus: ['holotype', 'HOLOTYPE'])
+            occurrences = Occurrence.where(typeStatus: 'holotype')
                                     .where("MONTH(eventDate_processed) = ? and DAY(eventDate_processed) = ?", @date.month, @date.day)
                                     .limit(50)
             @pagy, @results = pagy(occurrences)

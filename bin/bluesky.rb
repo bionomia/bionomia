@@ -21,14 +21,14 @@ end.parse!
 if options[:holotype]
   date = DateTime.now
   o = Occurrence.joins(:users)
-                 .where(hasImage: true)
-                 .where(typeStatus: ["HOLOTYPE", "holotype"])
-                 .where("MONTH(eventDate_processed) = ? and DAY(eventdate_processed) = ?", date.month, date.day)
-                 .where.not(users: { orcid: nil })
-                 .where(user_occurrences: { action: ["recorded", "recorded,identified", "identified,recorded"]})
-                 .order(Arel.sql("RAND()"))
-                 .limit(1)
-                 .first rescue nil
+                .where(hasImage: true)
+                .where(typeStatus: "holotype")
+                .where("MONTH(eventDate_processed) = ? and DAY(eventdate_processed) = ?", date.month, date.day)
+                .where.not(users: { orcid: nil })
+                .where(user_occurrences: { action: ["recorded", "recorded,identified", "identified,recorded"]})
+                .order(Arel.sql("RAND()"))
+                .limit(1)
+                .first rescue nil
 
   return if o.nil?
   collectors = o.users
