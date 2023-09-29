@@ -15,7 +15,7 @@
       .form-group.row
         %label.col-form-label.font-weight-bold.ml-2{for: "doi"} Add By DOI
         %div.ml-2
-          %input.orcid-add{type: :text, name: "doi", placeholder: "10.0000/0000", size:"15"}
+          %input.orcid-add{type: :text, name: "doi", placeholder: "10.0000/000", size:"12"}
         %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
       %input.ml-4{type: :submit, class:"btn btn-success", value: "Add"}
   .mr-3
