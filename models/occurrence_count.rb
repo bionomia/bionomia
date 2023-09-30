@@ -13,7 +13,7 @@ class OccurrenceCount < ActiveRecord::Base
     response = client.msearch index: Settings.elastic.user_index, body: body
     response["responses"].each do |response|
       response["hits"]["hits"].each do |hit|
-        if hit["_score"] > 40 && partial_network.include?(hit["_source"]["id"])
+        if hit["_score"] > 50 && partial_network.include?(hit["_id"].to_i)
           return true
         end
       end
@@ -42,15 +42,26 @@ class OccurrenceCount < ActiveRecord::Base
   def build_name_query(search)
     {
       query: {
-        multi_match: {
-          query:      search,
-          type:       :cross_fields,
-          analyzer:   :fullname_index,
-          fields:     ["family^5", "given^3", "fullname", "other_names", "*.edge"]
+        bool: {
+          must: [
+            {
+              multi_match: {
+                query:      search,
+                type:       :cross_fields,
+                analyzer:   :fullname_index,
+                fields:     ["family^5", "given^3", "fullname", "other_names", "*.edge"]
+              }
+            }
+          ],
+          filter: [
+            { term: { has_occurrences: true } }
+          ]
         }
       },
+      fields: ["id"],
       from: 0,
-      size: 3
+      size: 3,
+      "_source": false
     }
   end
 
