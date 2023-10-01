@@ -198,7 +198,7 @@ module Sinatra
           end
 
           app.get '/offline' do
-            haml :offline, layout: false
+            halt 503, haml(:offline, layout: false)
           end
 
           app.get '/workshops' do
