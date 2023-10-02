@@ -87,7 +87,7 @@ describe "Bionomia Application Controller" do
 
   it "should allow accessing the offline page" do
     get '/offline'
-    expect(last_response).to be_ok
+    expect(last_response.status).to eq(503) 
   end
 
   it "should allow accessing the scribes page" do
