@@ -313,7 +313,7 @@ class User < ActiveRecord::Base
   end
 
   def claims_given
-    claims.where(visible: true).where.not(user: self)
+    claims.where.not(user: self).where(visible: true)
   end
 
   def helped_counts

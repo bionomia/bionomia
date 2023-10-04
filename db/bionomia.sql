@@ -354,7 +354,7 @@ ALTER TABLE `users`
 ALTER TABLE `user_occurrences`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `user_occurrence_idx` (`occurrence_id`,`user_id`),
-  ADD KEY `created_by_idx` (`created_by`),
+  ADD KEY `created_by_user_visible_idx` (`created_by`, `user_id`, `visible`),
   ADD KEY `user_created_idx` (`user_id`,`created`),
   ADD KEY `user_created_by_idx` (`user_id`,`created_by`) USING BTREE;
 
