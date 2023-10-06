@@ -65,5 +65,5 @@
                     %img{src:"#{dataset.license_icon("small")}"}
 
   - if @pagy.pages > 1
-    .y-scroll
+    .overflow-auto
       = pagy_bootstrap_nav(@pagy)

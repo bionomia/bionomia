@@ -1,4 +1,4 @@
-.y-scroll
+.overflow-auto
   %ul.nav.nav-tabs.flex-nowrap
     %li.nav-item
       %a{class: "text-nowrap nav-link#{locals[:active_tab] == "people" ? " active" : nil}", href: url("/article/#{@article.doi}")}= I18n.t('article.people')

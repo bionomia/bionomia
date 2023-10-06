@@ -1,4 +1,4 @@
-.y-scroll
+.overflow-auto
   %ul.nav.nav-tabs.pl-2.flex-nowrap
     %li.nav-item
       %a{class: "text-nowrap nav-link#{locals[:active_page] == "overview" ? " active" : nil}", href: url("/#{@viewed_user.identifier}")}= I18n.t('user.overview')

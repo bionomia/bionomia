@@ -44,7 +44,7 @@
               = link_to o[:fullname_reverse], url("/agent/#{o[:id]}")
 
   - if @pagy.pages > 1
-    .y-scroll
+    .overflow-auto
       = pagy_bootstrap_nav(@pagy)
 
 - else

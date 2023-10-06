@@ -39,7 +39,7 @@ module Bionomia
     def add_image(image_url:, alt_text:) 
       url = Settings.bluesky.endpoint + "com.atproto.repo.uploadBlob"
       image = download_image(url: image_url)
-      if image
+      if image && (image.dimensions[0] >= 750 || image.dimensions[1] >= 750)
         response = RestClient::Request.execute(
           method: :post,
           headers: { authorization: "Bearer #{@session[:accessJwt]}", content_type: "image/png" },

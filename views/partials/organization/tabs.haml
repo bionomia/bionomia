@@ -1,4 +1,4 @@
-.y-scroll
+.overflow-auto
   %ul.nav.nav-tabs.mb-3.flex-nowrap
     %li.nav-item
       %a{class: "text-nowrap nav-link#{locals[:active_tab] == "organization-current" ? " active" : nil}", href: url("/organization/#{@organization.identifier}")}= I18n.t('organization.current')

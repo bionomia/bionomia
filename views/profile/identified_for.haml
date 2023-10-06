@@ -68,5 +68,5 @@
                 = I18n.t('profile.identified_for_count', count: @user.identifications_for(u).count)
 
   - if @pagy.pages > 1
-    .y-scroll
+    .overflow-auto
       = pagy_bootstrap_nav(@pagy)

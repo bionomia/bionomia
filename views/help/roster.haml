@@ -53,5 +53,5 @@
           = haml :'partials/user/card_dynamic', layout: false, locals: { user: user, stats: stats, path: "/help-others" }
 
 - if @pagy.pages > 1
-  .y-scroll
+  .overflow-auto
     = pagy_bootstrap_nav(@pagy)

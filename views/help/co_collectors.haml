@@ -69,5 +69,5 @@
                 #{I18n.t('help.co_collected_count', count: @viewed_user.recordings_with(u).count)}
 
   - if @pagy.pages > 1
-    .y-scroll
+    .overflow-auto
       = pagy_bootstrap_nav(@pagy)

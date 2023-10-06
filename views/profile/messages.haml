@@ -73,5 +73,5 @@
                 = I18n.t('profile.latest_helped', time: m[:latest])
 
   - if @pagy.pages > 1
-    .y-scroll
+    .overflow-auto
       = pagy_bootstrap_nav(@pagy)

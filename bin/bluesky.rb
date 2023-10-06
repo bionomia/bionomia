@@ -44,7 +44,7 @@ if options[:holotype]
   puts "Post attempt: #{o.uri}"
   bs = Bionomia::Bluesky.new
   bs.add_text(text: message)
-  o.images.first(2).each do |image|
+  o.images.first(3).each do |image|
     rights = image[:rightsHolder] rescue ""
     license = image[:license] rescue ""
     alt_text = "Image of the holotype #{family} #{o.scientificName}. #{rights} #{license}".strip
