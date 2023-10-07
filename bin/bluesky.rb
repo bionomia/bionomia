@@ -34,7 +34,7 @@ if options[:holotype]
   o = uo.occurrence
   collectors = o.users
                 .where(user_occurrences: { action: ["recorded", "recorded,identified", "identified,recorded"]})
-                .map{|u| [u.fullname, "https://bionomia.net/#{u.identifier}"].compact.join(" ")}
+                .map{|u| [u.viewname, "https://bionomia.net/#{u.identifier}"].compact.join(" ")}
                 .first(2)
                 .to_sentence
   country = !o.interpretedCountry.nil? ? "in #{o.interpretedCountry}" : ""
