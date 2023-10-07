@@ -20,17 +20,18 @@ end.parse!
 
 if options[:holotype]
   date = DateTime.now
-  o = Occurrence.joins(:users)
-                .where(hasImage: true)
-                .where(typeStatus: "holotype")
-                .where("MONTH(eventDate_processed) = ? and DAY(eventdate_processed) = ?", date.month, date.day)
-                .where.not(users: { orcid: nil })
-                .where(user_occurrences: { action: ["recorded", "recorded,identified", "identified,recorded"]})
-                .order(Arel.sql("RAND()"))
-                .limit(1)
-                .first rescue nil
+  occurrences = Occurrence.where(typeStatus: 'holotype')
+                          .where("MONTH(eventDate_processed) = ? and DAY(eventDate_processed) = ?", date.month, date.day)
+                          .where(hasImage: true)
+                          .limit(100)
+                          .pluck(:id)
+  uo = UserOccurrence.where(occurrence_id: occurrences)
+                     .where(action: ["recorded", "recorded,identified", "identified,recorded"])
+                     .order(Arel.sql("RAND()"))
+                     .limit(1).first
 
-  return if o.nil?
+  return if uo.nil?
+  o = uo.occurrence
   collectors = o.users
                 .where(user_occurrences: { action: ["recorded", "recorded,identified", "identified,recorded"]})
                 .map{|u| [u.fullname, "https://bionomia.net/#{u.identifier}"].compact.join(" ")}
