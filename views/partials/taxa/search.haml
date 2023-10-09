@@ -1,8 +1,5 @@
-.p-2.ml-3
-  %form#form-taxon-wrapper.helpers{method: :get, action: "/taxa", "accept-charset": "UTF-8"}
-    .row
-      .col-12.col-sm-8.p-0
-        .form-group.mb-2
-          %input#typeahead-taxon.typeahead.search-taxon{type: :text, name: "q", placeholder: "#{I18n.t('taxa.taxon_string')}", value: "#{h(params[:q] || params[:taxon])}", size:"25", autocomplete:"off"}
-      .col-4.p-0
-        %input.btn.btn-success.medium-margins.align-self-start{type: :submit, value:"#{I18n.t('general.search')}"}
+.p-2
+  %form#form-org-wrapper.form-inline.helpers{method: :get, action: "/taxa", "accept-charset": "UTF-8"}
+    .form-group.w-75
+      %input#typeahead-taxon.typeahead.search-taxon{type: :text, name: "q", placeholder: "#{I18n.t('taxa.taxon_string')}", value: "#{h(params[:q] || params[:taxon])}", size:"25", autocomplete:"off"}
+    %input.btn.btn-success.medium-margins{type: :submit, value:"#{I18n.t('general.search')}"}
