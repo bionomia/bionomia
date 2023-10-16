@@ -54,3 +54,5 @@
         - if !u.nil?
           - stats = cache_block("#{u.identifier}-stats") { user_stats(u) }
           = haml :'partials/user/card', layout: false, locals: { user: u, stats: stats }
+
+= haml :'partials/news_item', layout: false

@@ -10,6 +10,8 @@
       %h1.h2
         = I18n.t('workshops.title')
 
+= haml :'partials/news_item', layout: false
+
 %h3.mt-4
   = I18n.l Date.parse("July 28, 2023"), format: :long
 
