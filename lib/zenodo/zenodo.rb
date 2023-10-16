@@ -151,7 +151,7 @@ module Bionomia
       http.use_ssl = true
       response = http.request(request)
       io.close
-      if response.code.to_i != 200
+      if response.code.to_i != 201
         raise RuntimeError, "File upload failed."
       end
       JSON.parse(response.body).deep_symbolize_keys
