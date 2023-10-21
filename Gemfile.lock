@@ -46,7 +46,7 @@ GEM
     composite_primary_keys (14.0.6)
       activerecord (~> 7.0.2)
     concurrent-ruby (1.2.2)
-    config (4.2.1)
+    config (5.0.0)
       deep_merge (~> 1.2, >= 1.2.1)
       dry-validation (~> 1.0, >= 1.0.0)
     connection_pool (2.4.1)
@@ -179,7 +179,7 @@ GEM
     namecase (2.0.0)
     net-http-persistent (4.0.2)
       connection_pool (~> 2.2)
-    net-imap (0.4.1)
+    net-imap (0.4.2)
       date
       net-protocol
     net-pop (0.1.2)
