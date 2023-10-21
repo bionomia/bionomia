@@ -88,6 +88,7 @@ module Bionomia
       
             puts "#{user.viewname}  (id=#{user.id}) ... created".green
          rescue
+            z.delete_draft(id: id) if id
             puts "#{user.viewname} (id=#{user.id}) ... token failed".red
          end
       
@@ -136,6 +137,7 @@ module Bionomia
                puts "#{user.viewname} (id=#{user.id}) ... new version unnecessary".red
             end
          rescue
+            z.delete_draft(id: id) if id
             puts "#{user.viewname} (id=#{user.id}) ... token failed".red
          end
       
