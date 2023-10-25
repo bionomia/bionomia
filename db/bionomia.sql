@@ -15,7 +15,7 @@ CREATE TABLE `agents` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=COMPRESSED;
 
 CREATE TABLE `articles` (
-  `id` int NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `doi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `citation` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `abstract` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
@@ -29,7 +29,7 @@ CREATE TABLE `articles` (
 
 CREATE TABLE `article_occurrences` (
   `id` bigint UNSIGNED NOT NULL,
-  `article_id` mediumint UNSIGNED NOT NULL,
+  `article_id` bigint UNSIGNED NOT NULL,
   `occurrence_id` bigint UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin KEY_BLOCK_SIZE=8 ROW_FORMAT=COMPRESSED;
 
@@ -70,39 +70,6 @@ CREATE TABLE `messages` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-CREATE TABLE `missing` (
-  `occurrence_id` bigint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-CREATE TABLE `missing_occurrences` (
-  `gbifID` bigint UNSIGNED NOT NULL,
-  `datasetKey` binary(36) DEFAULT NULL,
-  `license` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `occurrenceID` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `basisOfRecord` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `dateIdentified` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `decimalLatitude` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `decimalLongitude` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `country` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `countryCode` varchar(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `eventDate` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `year` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `kingdom` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `family` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `identifiedBy` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `institutionCode` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `collectionCode` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `catalogNumber` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `recordedBy` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `scientificName` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `typeStatus` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `dateIdentified_processed` datetime DEFAULT NULL,
-  `eventDate_processed` datetime DEFAULT NULL,
-  `hasImage` tinyint(1) DEFAULT NULL,
-  `recordedByID` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `identifiedByID` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=COMPRESSED;
 
 CREATE TABLE `occurrences` (
   `gbifID` bigint UNSIGNED NOT NULL,
@@ -173,11 +140,6 @@ CREATE TABLE `orphaned_user_occurrences` (
   `created_by` int NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-CREATE TABLE `remapped_occurrences` (
-  `old_occurrence_id` bigint NOT NULL,
-  `new_occurrence_id` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `schema_migrations` (
@@ -291,12 +253,6 @@ ALTER TABLE `messages`
   ADD KEY `index_messages_on_user_id` (`user_id`),
   ADD KEY `index_messages_on_recipient_id` (`recipient_id`);
 
-ALTER TABLE `missing_occurrences`
-  ADD PRIMARY KEY (`gbifID`) USING BTREE,
-  ADD KEY `typeStatus_idx` (`typeStatus`(50)),
-  ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`,`occurrenceID`(36)),
-  ADD KEY `catalogNumber_idx` (`catalogNumber`(100));
-
 ALTER TABLE `occurrences`
   ADD PRIMARY KEY (`gbifID`) USING BTREE,
   ADD KEY `typeStatus_idx` (`typeStatus`(50)),
@@ -326,9 +282,6 @@ ALTER TABLE `orphaned_user_occurrences`
   ADD PRIMARY KEY (`id`),
   ADD KEY `index_orphaned_user_occurrences_on_occurrence_id` (`occurrence_id`);
 
-ALTER TABLE `remapped_occurrences`
-  ADD KEY `occurrence_id_idx` (`old_occurrence_id`);
-
 ALTER TABLE `schema_migrations`
   ADD UNIQUE KEY `unique_schema_migrations` (`version`);
 
@@ -354,9 +307,9 @@ ALTER TABLE `users`
 ALTER TABLE `user_occurrences`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `user_occurrence_idx` (`occurrence_id`,`user_id`),
-  ADD KEY `created_by_user_visible_idx` (`created_by`, `user_id`, `visible`),
   ADD KEY `user_created_idx` (`user_id`,`created`),
-  ADD KEY `user_created_by_idx` (`user_id`,`created_by`) USING BTREE;
+  ADD KEY `user_created_by_idx` (`user_id`,`created_by`) USING BTREE,
+  ADD KEY `created_by_user_visible_idx` (`created_by`,`user_id`,`visible`);
 
 ALTER TABLE `user_organizations`
   ADD PRIMARY KEY (`id`),
@@ -368,7 +321,7 @@ ALTER TABLE `agents`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `articles`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `article_occurrences`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
