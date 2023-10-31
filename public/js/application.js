@@ -337,13 +337,13 @@ var Application = (function($, window) {
 	    }
 
       $("#relaxed").on("change", function() {
-        url = new URL(window.location.href);
+        url = new URL(window.location.href.split('#')[0]);
         if ($(this).prop("checked")) {
           url.searchParams.set('relaxed', 1);
-          window.location.href = url.href;
+          window.location.href = url.href + "#specimen-list";
         } else {
           url.searchParams.set('relaxed', 0);
-          window.location.href = url.href;
+          window.location.href = url.href + "#specimen-list";
         }
         return false;
       });
