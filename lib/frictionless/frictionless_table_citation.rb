@@ -11,7 +11,7 @@ module Bionomia
     def resource
       {
         name: "article-occurrences",
-        description: "Citations of articles",
+        description: "A join table between occurrence and article to permit examination of particular occurrence records that were included in a GBIF download and later used in a published article.",
         format: "csv",
         mediatype: "text/csv",
         encoding: "utf-8",

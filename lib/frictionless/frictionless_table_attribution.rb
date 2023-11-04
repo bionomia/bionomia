@@ -11,6 +11,7 @@ module Bionomia
     def resource
       {
         name: "attributions",
+        description: "Details about the provenance for an attributed or claimed occurrence record.",
         format: "csv",
         mediatype: "text/csv",
         encoding: "utf-8",

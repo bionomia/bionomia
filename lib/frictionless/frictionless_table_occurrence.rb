@@ -33,6 +33,7 @@ module Bionomia
       end
       {
         name: "occurrences",
+        description: "Occurrence records shared to GBIF, limited to those linked to a collector or determiner.",
         format: "csv",
         mediatype: "text/csv",
         encoding: "utf-8",

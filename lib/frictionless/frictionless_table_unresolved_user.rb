@@ -11,6 +11,7 @@ module Bionomia
     def resource
       {
         name: "users_unresolved",
+        description: "Content in dwc:recordedByID that do not have a linked users, indicating that the identifier here could not be resolved against either wikidata or ORCID services.",
         format: "csv",
         mediatype: "text/csv",
         encoding: "utf-8",

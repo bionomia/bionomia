@@ -12,6 +12,7 @@ module Bionomia
     def resource
       {
         name: "articles",
+        description: "Published articles whose authors had downloaded and referenced a data package from GBIF containing occurrences that are linked to collectors or determiners.",
         format: "csv",
         mediatype: "text/csv",
         encoding: "utf-8",

@@ -11,6 +11,7 @@ module Bionomia
     def resource
       {
         name: "unascribed",
+        description: "Negative assertions made alongside the provenance, which may help inform local disambiguation activities.",
         format: "csv",
         mediatype: "text/csv",
         encoding: "utf-8",

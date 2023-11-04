@@ -12,6 +12,7 @@ module Bionomia
     def resource
       {
         name: "users",
+        description: "List of unique people that have either claimed or been attributed occurrence records through examination of either dwc:recordedBy or dwc:identifiedBy. Wikidata-based people contain some demographic information.",
         format: "csv",
         mediatype: "text/csv",
         encoding: "utf-8",

@@ -16,6 +16,7 @@ module Bionomia
     def resource
       {
         name: "missing-attributions",
+        description: "Attributions or claims made not previously shared via dwc:recordedByID or dwc:identifiedByID.",
         format: "csv",
         mediatype: "text/csv",
         encoding: "utf-8",
