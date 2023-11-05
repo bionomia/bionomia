@@ -457,14 +457,14 @@ module Bionomia
         return
       end
 
-      label = wiki_user.dup.title
+      label = wiki_user.title
       family = ranked_name(wiki_user.properties("P734"))
       given = ranked_name(wiki_user.properties("P735"))
       particle = nil
 
-      parsed = name_parser.parse(label)[0] rescue nil
+      parsed = name_parser.parse(label.dup)[0] rescue nil
       if parsed.nil?
-        parsed = DwcAgent.parse(label)[0] rescue nil
+        parsed = DwcAgent.parse(label.dup)[0] rescue nil
       end
 
       particle = parsed.particle rescue nil
