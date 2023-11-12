@@ -456,7 +456,7 @@ pt:
     not_them: Ascribed Not Them
   offline:
     message: Bionomia está atualmente offline, atualizando dados do Global Biodiversity Information Facility.
-    warning: "Bionomia estará offline %{datetime_off} por aproximadamente %{duration} para atualizar dados de espécimes do Global Biodiversity Information Facility."
+    warning: "Bionomia will be offline %{datetime_off} for %{duration} to refresh data from the Global Biodiversity Information Facility."
   on_this_day:
     global_title: Neste dia
     born_title: Coletor nasceu neste dia
