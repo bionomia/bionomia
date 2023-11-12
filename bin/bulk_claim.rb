@@ -6,7 +6,7 @@ ARGV << '-h' if ARGV.empty?
 
 options = {}
 OptionParser.new do |opts|
-  opts.banner = "Usage: bulk_claim.rb [options]. Assumes collector and determiner are spelled exactly the same."
+  opts.banner = "Usage: bulk_claim.rb [options]."
 
   opts.on("-a", "--agent [agent_id]", Integer, "Local agent identifier") do |agent_id|
     options[:agent_id] = agent_id
@@ -53,44 +53,49 @@ if options[:file]
   ActiveRecord::Base.connection.execute(sql)
   puts "Total records left: #{UserOccurrence.where(created_by: User::GBIF_AGENT_ID).count}".green
 
-  all_users = Set.new
+  all_users = {}
 
   CSV.foreach(options[:file], headers: true) do |row|
-    d = DestroyedUser.active_user_identifier(row["identifier"])
-    if !d.nil?
-      u = User.find_by_identifier(d.id) rescue nil
-    else
-      if row["identifier"].is_wiki_id?
-        u = User.find_or_create_by({ wikidata: row["identifier"] })
-        if u.wikidata && !u.valid_wikicontent?
-          u.delete_search
-          u.delete
-          next
+    if !all_users.keys.include?(row["identifier"])
+      d = DestroyedUser.active_user_identifier(row["identifier"])
+      if !d.nil?
+        u = User.find_by_identifier(d.id) rescue nil
+      else
+        if row["identifier"].is_wiki_id?
+          u = User.find_or_create_by({ wikidata: row["identifier"] })
+          if u.wikidata && !u.valid_wikicontent?
+            u.delete_search
+            u.delete
+            next
+          end
+        elsif row["identifier"].is_orcid?
+          u = User.find_or_create_by({ orcid: row["identifier"] })
         end
-      elsif row["identifier"].is_orcid?
-        u = User.find_or_create_by({ orcid: row["identifier"] })
       end
+      all_users[row["identifier"]] = u.id
+      puts row["identifier"].to_s.green
     end
 
-    next if u.nil? || User::BOT_IDS.include?(u.id)
+    next if User::BOT_IDS.include?(all_users[row["identifier"]])
     row["occurrence_ids"].tr('[]', '').split(',').in_groups_of(5_000, false) do |group|
-      import = group.map{|r| [ r.to_i, u.id, row["action"], User::GBIF_AGENT_ID ] }
+      import = group.map{|r| [ r.to_i, all_users[row["identifier"]], row["action"], User::GBIF_AGENT_ID ] }
       UserOccurrence.import [:occurrence_id, :user_id, :action, :created_by], import, batch_size: 5000, validate: false, on_duplicate_key_ignore: true
     end
-
-    all_users.add(u.id)
-    puts u.identifier.to_s.green
   end
 
-  puts "Flushing caches...".yellow
-  all_users.each do |id|
-    u = User.find(id)
-    if u.wikidata && !u.is_public?
-      u.is_public = true
-      u.save
+  Parallel.each(all_users.values.in_groups_of(3, false), progress: "Flushing caches...", in_threads: 3) do |batch|
+    batch.each do |id|
+      begin
+        u = User.find(id)
+        if u.wikidata && !u.is_public?
+          u.is_public = true
+          u.save
+        end
+        u.flush_caches
+      rescue
+        puts "#{id} did not flush".red
+      end
     end
-    u.flush_caches
-    puts u.identifier.to_s.green
   end
 elsif options[:agent_id] && ![options[:orcid], options[:wikidata]].compact.empty?
   agent = Agent.find(options[:agent_id])
