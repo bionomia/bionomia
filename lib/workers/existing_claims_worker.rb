@@ -6,38 +6,37 @@ module Bionomia
     sidekiq_options queue: :existing_claims, retry: 3
 
     def perform(row)
-      recs = row["gbifIDs_recordedByID"]
-                .tr('[]', '')
-                .split(',')
-      ids = row["gbifIDs_identifiedByID"]
-                .tr('[]', '')
-                .split(',')
+      id = row["user_id"]
 
-      uniq_recs = (recs - ids).uniq
-      uniq_ids = (ids - recs).uniq
-      both = (recs & ids).uniq
+      return if id.blank?
 
-      row["agentIDs"].split("|").sort.map(&:strip).uniq.each do |id|
-        next if id.empty?
-        u = get_user(id)
-        next if u.nil?
-        next if !u.nil? && User::BOT_IDS.include?(u.id)
+      source_user = SourceUser.find(id)
+      u = get_user(source_user.identifier)
 
-        # Necessary to help avoid sidekiq CPU saturation errors
-        Thread.pass
+      return if u.nil?
+      return if !u.nil? && User::BOT_IDS.include?(u.id)
 
-        if !uniq_recs.empty?
-          uo = uniq_recs.map{|r| [u.id, r.to_i, "recorded", User::GBIF_AGENT_ID]}
-          import_user_occurrences(uo)
-        end
-        if !uniq_ids.empty?
-          uo = uniq_ids.map{|r| [u.id, r.to_i, "identified", User::GBIF_AGENT_ID]}
-          import_user_occurrences(uo)
-        end
-        if !both.empty?
-          uo = both.map{|r| [u.id, r.to_i, "recorded,identified", User::GBIF_AGENT_ID]}
-          import_user_occurrences(uo)
-        end
+      recordings = source_user.recordings.pluck(:occurrence_id).uniq
+      identifications = source_user.identifications.pluck(:occurrence_id).uniq
+
+      uniq_recs = (recordings - identifications).uniq
+      uniq_ids = (identifications - recordings).uniq
+      both = (recordings & identifications).uniq
+
+      # Necessary to help avoid sidekiq CPU saturation errors
+      Thread.pass
+
+      if !uniq_recs.empty?
+        uo = uniq_recs.map{|r| [u.id, r.to_i, "recorded", User::GBIF_AGENT_ID]}
+        UserOccurrence.import [:user_id, :occurrence_id, :action, :created_by], uo, batch_size: 1_000, validate: false, on_duplicate_key_ignore: true
+      end
+      if !uniq_ids.empty?
+        uo = uniq_ids.map{|r| [u.id, r.to_i, "identified", User::GBIF_AGENT_ID]}
+        UserOccurrence.import [:user_id, :occurrence_id, :action, :created_by], uo, batch_size: 1_000, validate: false, on_duplicate_key_ignore: true
+      end
+      if !both.empty?
+        uo = both.map{|r| [u.id, r.to_i, "recorded,identified", User::GBIF_AGENT_ID]}
+        UserOccurrence.import [:user_id, :occurrence_id, :action, :created_by], uo, batch_size: 1_000, validate: false, on_duplicate_key_ignore: true
       end
     end
 
@@ -99,14 +98,6 @@ module Bionomia
         end
       end
       user
-    end
-
-    def import_user_occurrences(uo)
-      qry_string = uo.map { |pair| "(#{pair[1]},#{pair[0]})" }.join(",")
-      existing = UserOccurrence.where("(occurrence_id, user_id) IN (#{qry_string})")
-                               .pluck(:user_id, :occurrence_id)
-      uo.reject!{|k| existing.include?([k[0], k[1]])}
-      UserOccurrence.import [:user_id, :occurrence_id, :action, :created_by], uo, batch_size: 1_000, validate: false, on_duplicate_key_ignore: true
     end
 
   end

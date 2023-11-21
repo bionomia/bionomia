@@ -146,6 +146,18 @@ CREATE TABLE `schema_migrations` (
   `version` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
+CREATE TABLE `source_attributions` (
+  `id` bigint NOT NULL,
+  `user_id` int NOT NULL,
+  `occurrence_id` bigint NOT NULL,
+  `action` varchar(255) COLLATE utf8mb4_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+CREATE TABLE `source_users` (
+  `id` bigint NOT NULL,
+  `identifier` varchar(255) COLLATE utf8mb4_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
 CREATE TABLE `taxa` (
   `id` int NOT NULL,
   `family` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
@@ -285,6 +297,14 @@ ALTER TABLE `orphaned_user_occurrences`
 ALTER TABLE `schema_migrations`
   ADD UNIQUE KEY `unique_schema_migrations` (`version`);
 
+ALTER TABLE `source_attributions`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `source_attributions_composite` (`user_id`,`occurrence_id`,`action`);
+
+ALTER TABLE `source_users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `index_source_users_on_identifier` (`identifier`);
+
 ALTER TABLE `taxa`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `family_idx` (`family`);
@@ -342,6 +362,12 @@ ALTER TABLE `organizations`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `orphaned_user_occurrences`
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `source_attributions`
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `source_users`
   MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `taxa`

@@ -36,6 +36,8 @@ if options[:truncate]
   end
   ActiveRecord::Base.connection.execute(sql)
   puts "Total records left: #{UserOccurrence.where(created_by: User::GBIF_AGENT_ID).count}".green
+  ActiveRecord::Base.connection.execute("TRUNCATE TABLE source_users")
+  ActiveRecord::Base.connection.execute("TRUNCATE TABLE source_attributions")
   Sidekiq::Stats.new.reset
 end
 
@@ -46,18 +48,34 @@ if options[:directory]
   files = Dir.entries(directory).select {|f| accepted_formats.include?(File.extname(f))}
   files.each do |file|
     file_path = File.join(options[:directory], file)
-
-    group = []
     CSV.foreach(file_path, headers: true).with_index do |row, i|
-      group << [row.to_hash]
-      next if i % 100 != 0
-      Sidekiq::Client.push_bulk({ 'class' => Bionomia::ExistingClaimsWorker, 'args' => group })
-      group = []
-    end
-    if group.size > 0
-      Sidekiq::Client.push_bulk({ 'class' => Bionomia::ExistingClaimsWorker, 'args' => group })
+      row["agentIDs"].split("|").sort.map(&:strip).uniq.each do |id|
+        source_user = SourceUser.find_or_create_by({ identifier: id })
+        
+        uo = row["gbifIDs_recordedByID"]
+              .tr('[]', '')
+              .split(',')
+              .map{|r| [ source_user.id, r.to_i, "recorded" ]}.compact
+        if !uo.empty?
+          SourceAttribution.import [:user_id, :occurrence_id, :action], uo, batch_size: 1_000, validate: false, on_duplicate_key_ignore: true
+        end
+        
+        uo = row["gbifIDs_identifiedByID"]
+              .tr('[]', '')
+              .split(',')
+              .map{|r| [ source_user.id, r.to_i, "identified" ]}.compact
+        if !uo.empty?
+          SourceAttribution.import [:user_id, :occurrence_id, :action], uo, batch_size: 1_000, validate: false, on_duplicate_key_ignore: true
+        end
+      end
     end
     puts file.green
+  end
+  SourceUser.find_each do |u|
+    vars = {
+      user_id: u.id
+    }.stringify_keys
+    ::Bionomia::ExistingClaimsWorker.perform_async(vars)
   end
 end
 
