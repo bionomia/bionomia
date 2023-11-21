@@ -50,6 +50,8 @@ if options[:directory]
     file_path = File.join(options[:directory], file)
     CSV.foreach(file_path, headers: true).with_index do |row, i|
       row["agentIDs"].split("|").sort.map(&:strip).uniq.each do |id|
+        next if id.blank?
+
         source_user = SourceUser.find_or_create_by({ identifier: id })
         
         uo = row["gbifIDs_recordedByID"]

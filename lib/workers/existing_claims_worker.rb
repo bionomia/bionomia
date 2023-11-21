@@ -23,9 +23,6 @@ module Bionomia
       uniq_ids = (identifications - recordings).uniq
       both = (recordings & identifications).uniq
 
-      # Necessary to help avoid sidekiq CPU saturation errors
-      Thread.pass
-
       if !uniq_recs.empty?
         uo = uniq_recs.map{|r| [u.id, r.to_i, "recorded", User::GBIF_AGENT_ID]}
         UserOccurrence.import [:user_id, :occurrence_id, :action, :created_by], uo, batch_size: 1_000, validate: false, on_duplicate_key_ignore: true
