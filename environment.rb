@@ -75,6 +75,7 @@ require 'pluck_to_hash'
 require 'pony'
 require 'optparse'
 require 'typhoeus'
+require 'faraday/typhoeus'
 
 require_relative File.join(File.dirname(__FILE__), 'config', 'initialize')
 

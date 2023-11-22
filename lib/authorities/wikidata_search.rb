@@ -23,7 +23,7 @@ module Bionomia
             open_timeout: 20
           }
         }
-        config.faraday = -> (builder) { builder.adapter :typhoeus }
+        config.adapter = :typhoeus
       end
     end
 

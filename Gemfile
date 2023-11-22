@@ -58,7 +58,8 @@ gem 'sitemap_generator'
 gem 'sparql-client'
 gem 'thin'
 gem 'typhoeus'
-gem 'wikidata-client', git: 'https://github.com/dshorthouse/wikidata-client.git', branch: 'bump-dependencies'
+gem 'faraday-typhoeus'
+gem 'wikidata-client'
 
 group :production do
   gem 'passenger'
