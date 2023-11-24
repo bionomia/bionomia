@@ -109,6 +109,8 @@ GEM
     faraday-excon (2.1.0)
       excon (>= 0.27.4)
       faraday (~> 2.0)
+    faraday-multipart (1.0.4)
+      multipart-post (~> 2)
     faraday-net_http (3.0.2)
     faraday-typhoeus (1.1.0)
       faraday (~> 2.0)
@@ -146,6 +148,7 @@ GEM
     minitest (5.20.0)
     multi_json (1.15.0)
     multi_xml (0.6.0)
+    multipart-post (2.3.0)
     mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
     mysql2 (0.5.5)
@@ -327,6 +330,7 @@ DEPENDENCIES
   dwc-archive
   dwc_agent
   elasticsearch (~> 7.17)
+  faraday-multipart
   faraday-typhoeus
   haml (~> 5.2.2)
   htmlentities
