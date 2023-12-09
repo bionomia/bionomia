@@ -66,6 +66,7 @@
                 <span class="token string">"Anning"</span>
               ]
               <span class="token property">"thumbnail"</span>:<span class="token string">"https://abekpgaoen.cloudimg.io/crop/24x24/n/https://commons.wikimedia.org/wiki/Special:FilePath/Mary%20Anning%20painting.jpg"</span>,
+              <span class="token property">"image"</span>:<span class="token string">"https://abekpgaoen.cloudimg.io/v7/commons.wikimedia.org/wiki/Special:FilePath/Mary%20Anning%20painting.jpg?height=200\u0026org_if_sml=1"</span>,
               <span class="token property">"lifespan"</span>:<span class="token string">"* May 21, 1799 &ndash; March 09, 1847 †"</span>,
               <span class="token property">"description"</span>:<span class="token string">"British fossil collector, dealer, and paleontol..."</span>
               <span class="token property">"is_public"</span>:<span class="token boolean">true</span>
@@ -296,7 +297,8 @@
             <span class="token property">"@context"</span>: {
               <span class="token property">"@vocab"</span>: <span class="token string">"http://schema.org"</span>,
               <span class="token property">"opensearch"</span>: <span class="token string">"http://a9.com/-/spec/opensearch/1.1/"</span>,
-              <span class="token property">"as"</span>: <span class="token string">"https://www.w3.org/ns/activitystreams#"</span>
+              <span class="token property">"as"</span>: <span class="token string">"https://www.w3.org/ns/activitystreams#"</span>,
+              <span class="token property">"co_collector"</span>: <span class="token string">"http://schema.org/colleague"</span>
             },
             <span class="token property">"@type"</span>: <span class="token string">"DataFeed"</span>,
             <span class="token property">"opensearch:totalResults"</span>: <span class="token number">1</span>,
@@ -325,11 +327,22 @@
                 <span class="token property">"item"</span>: {
                   <span class="token property">"@type"</span>: <span class="token string">"Person"</span>,
                   <span class="token property">"@id"</span>: <span class="token string">"https://bionomia.net/0000-0002-8059-5133"</span>,
+                  <span class="token property">"sameAs"</span>: <span class="token string">"https://orcid.org/0000-0002-8059-5133"</span>,
                   <span class="token property">"name"</span>: <span class="token string">"Andrew B.T. Smith"</span>,
                   <span class="token property">"givenName"</span>: <span class="token string">"Andrew B.T."</span>,
                   <span class="token property">"familyName"</span>: <span class="token string">"Smith"</span>,
                   <span class="token property">"alternateName"</span>: [
                     <span class="token string">"Smith, Andrew B.T."</span>
+                  ],
+                  <span class="token property">"description"</span>: <span class="token string">"Scarab beetle taxonomist..."</span>,
+                  <span class="token property">"image"</span>: <span class="token string">"https://abekpgaoen.cloudimg.io/v7/commons.wikimedia.org/wiki/Special:FilePath/..."</span>,
+                  <span class="token property">"co_collector"</span>: [
+                    {
+                      <span class="token property">"@type"</span>: <span class="token string">"Person"</span>,
+                      <span class="token property">"@id"</span>: <span class="token string">"https://bionomia.net/0000-0002-0589-8791"</span>,
+                      <span class="token property">"sameAs"</span>: <span class="token string">"https://orcid.net/0000-0002-0589-8791"</span>,
+                      <span class="token property">"name"</span>: <span class="token string">"Brett Ratcliffe"</span>
+                    }
                   ],
                   <span class="token property">"knowsAbout"</span>: [
                     {
@@ -357,8 +370,7 @@
                         ...
                       ]
                     }
-                  ],
-                  <span class="token property">"sameAs"</span>: <span class="token string">"https://orcid.org/0000-0002-8059-5133"</span>
+                  ]
                 }
               }
             ]

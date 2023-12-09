@@ -173,6 +173,7 @@ module Sinatra
               label: n[:_source][:label],
               other_names: n[:_source][:other_names],
               thumbnail: n[:_source][:thumbnail],
+              image: n[:_source][:image],
               lifespan: lifespan,
               description: n[:_source][:description],
               is_public: n[:_source][:is_public],
