@@ -76,6 +76,7 @@ module Bionomia
             orcid: { type: 'keyword' },
             wikidata: { type: 'keyword' },
             thumbnail: { type: 'keyword', index: false },
+            image: { type: 'keyword', index: false },
             description: { type: 'text', index: false },
             is_public: { type: 'boolean' },
             has_occurrences: { type: 'boolean' },
@@ -222,6 +223,20 @@ module Bionomia
       img
     end
 
+    def image(u)
+      img = nil
+      if u.image_url
+        path = "?height=200&org_if_sml=1"
+        cloud_img = "https://abekpgaoen.cloudimg.io/v7/"
+        if u.wikidata
+          img =  cloud_img + u.image_url.sub("https://", "") + path
+        else
+          img = cloud_img + URI(Settings.base_url).host + "/images/users/" + u.image_url + path
+        end
+      end
+      img
+    end
+
     def document(u)
       description = nil
       if u.description
@@ -249,6 +264,7 @@ module Bionomia
         date_died: u.date_died,
         date_died_precision: u.date_died_precision,
         thumbnail: thumbnail(u),
+        image: image(u),
         description: description,
         is_public: u.is_public,
         has_occurrences: (u.has_recordings? || u.has_identifications?),
