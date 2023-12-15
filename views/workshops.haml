@@ -11,6 +11,201 @@
         = I18n.t('workshops.title')
 
 %h3.mt-4
+  = I18n.l Date.parse("December 6, 2023"), format: :long
+
+%h4 People Identifiers Roundtrip to Collection Management Systems
+
+%p
+  Put the disambiguation of people's names into practice with a particular focus on collections management systems. The purpose is for you to share how you or your colleagues do this (or intend to do this) in the software you use at your respective institutions through incorporation of logic, scripts, and/or persistent and unique identifiers. We will discuss and demonstrate how the Frictionless Data Packages available on Bionomia might facilitate this process. We will set the stage with a broader discussion about the purpose of person identifiers, where they can be found, and our motivations for applying, using, and sharing them.
+
+%p.font-italic
+  Questions & Answers as well as Breakout Groups are not recorded.
+  %br
+  Presenters may have additional content such as links to their slides included under their YouTube videos, each linked below. 
+
+%h5 Agenda
+
+.table-responsive-lg.overflow-auto
+  %table.table.table-sm
+    %thead
+      %tr.table-success
+        %th.text-nowrap{scope: "col"} Time (UTC)
+        %th.text-nowrap{scope: "col"} Title
+        %th.text-nowrap{scope: "col"} Presenter
+    %tbody
+      %tr
+        %td 13:00 – 13:05
+        %td Welcome, Agenda, Code of Conduct
+        %td
+          %a{href: "https://orcid.org/0000-0001-7618-5230"} David Shorthouse
+      %tr
+        %td 13:05 – 13:15
+        %td
+          %a{href: "https://youtu.be/Ks8D8YrSrUU", target: "_blank"}
+            Bionomia: Mission, Integrations, and Updates
+            %i.fas.fa-external-link-alt
+        %td
+          %a{href: "https://orcid.org/0000-0001-7618-5230"} David Shorthouse
+      %tr
+        %td 13:15 – 13:25
+        %td
+          %a{href: "https://youtu.be/u9uFfeoLz6g", target: "_blank"}
+            Collecting ORCIDs from the Research Landscape
+            %i.fas.fa-external-link-alt
+        %td
+          %a{href: "https://orcid.org/0009-0005-6221-4682"} Shivendra Naidoo
+      %tr
+        %td 13:25 – 13:35
+        %td
+          %a{href: "https://youtu.be/5iN9nFS3Soo", target: "_blank"}
+            Wikidata: The Rosetta Stone of the Linked Data Web
+            %i.fas.fa-external-link-alt
+        %td
+          %a{href: "https://orcid.org/0000-0002-3939-2115"} Lydia Pintscher
+      %tr.table-info
+        %td 13:35 – 13:45
+        %td Questions & Answers
+        %td
+      %tr
+        %td 13:45 – 13:55
+        %td
+          %a{href: "https://youtu.be/UsF6_ABaD4A", target: "_blank"}
+            The Impact of Who: in the database, in the wild
+            %i.fas.fa-external-link-alt
+        %td
+          %a{href: "https://orcid.org/0000-0003-2639-7520"} Deborah Paul
+      %tr
+        %td 13:55 – 14:15
+        %td Disambiguation Exhibition
+        %td
+      %tr
+        %td 
+        %td
+          %a{href: "https://youtu.be/Sa8vdtdOwwY", target: "_blank"}
+            The Tower of Babel in international collections
+            %i.fas.fa-external-link-alt
+        %td
+          %a{href: "https://orcid.org/0000-0002-5313-8674"} Krisztina Lohonya
+      %tr
+        %td
+        %td
+          %a{href: "https://youtu.be/IPRB3YJhgy0", target: "_blank"}
+            Betty Johnson: A disambiguation example
+            %i.fas.fa-external-link-alt
+        %td
+          %a{href: "https://orcid.org/0000-0002-5398-7721"} Siobhan Leachman
+      %tr
+        %td
+        %td
+          %a{href: "https://youtu.be/MHgHXHFrkJg", target: "_blank"}
+            The Gandalf Effect
+            %i.fas.fa-external-link-alt
+        %td
+          %a{href: "https://orcid.org/0000-0003-2982-7792"} Sabine von Mering
+      %tr.table-secondary
+        %td 14:15 – 14:30
+        %td Break
+        %td
+      %tr
+        %td 14:30 – 14:40
+        %td
+          %a{href: "https://youtu.be/1ceH_muMcQY", target: "_blank"}
+            TaxonWorks, GBIF, and Bionomia: how can we move from a one-way to a roundtrip?
+            %i.fas.fa-external-link-alt
+        %td
+          %a{href: "https://orcid.org/0000-0003-0390-4227"} Tommy McElrath
+      %tr
+        %td 14:40 – 14:50
+        %td
+          %a{href: "https://youtu.be/6Y75mBmad5M", target: "_blank"}
+            A workflow for working with three CMS's and an intern at RBGE.
+            %i.fas.fa-external-link-alt
+        %td
+          %a{href: "https://orcid.org/0000-0001-7902-3843 "} Robert Cubey
+      %tr
+        %td 14:50 – 15:00
+        %td
+          %a{href: "https://youtu.be/bbpf3r7EzFc", target: "_blank"}
+            Disambiguating and roundtripping with EMu and Wikidata at Te Papa
+            %i.fas.fa-external-link-alt
+        %td Gareth Watkins
+      %tr
+        %td 15:00 – 15:10
+        %td
+          %a{href: "https://youtu.be/Cm3oP3xRL6o", target: "_blank"}
+            EarthCape CMS Demo
+            %i.fas.fa-external-link-alt
+        %td
+          %a{href: "https://orcid.org/0000-0003-1986-2631"} Evgeniy Meyke
+      %tr
+        %td 15:10 – 15:20
+        %td
+          %a{href: "https://youtu.be/kPwW4rXlUg8", target: "_blank"}
+            Roundtripping through Wikidata and Darwin Core
+            %i.fas.fa-external-link-alt
+        %td
+          %a{href: "https://orcid.org/0000-0002-3973-1252"} Mathias Dillen
+      %tr
+        %td.align-top 15:20 – 15:35
+        %td.align-top
+          %a{href: "https://youtu.be/GGItWAveWB8", target: "_blank"}
+            Specify agents data model and identifiers
+            %br
+            Semi-automatically adding identifiers from frictionless data to SPECIFY CMS
+            %i.fas.fa-external-link-alt
+        %td.align-top
+          Grant Fitzsimmons
+          %br
+          %a{href: "https://orcid.org/0000-0002-2160-4968"} Joaquim Santos
+      %tr
+        %td 15:35 – 15:45
+        %td
+          %a{href: "https://youtu.be/hn6qkkFHZVk", target: "_blank"}
+            Roundtripping at the University of Oslo
+            %i.fas.fa-external-link-alt
+        %td
+          %a{href: "https://orcid.org/0000-0002-2857-2276"} Rukaya Johaadien
+      %tr.table-info
+        %td 15:45 – 16:00
+        %td Questions & Answers
+        %td
+      %tr.table-secondary
+        %td 16:00 – 16:15
+        %td Break
+        %td
+      %tr
+        %td 16:15 – 16:45
+        %td Breakout Groups
+        %td
+      %tr
+        %td 16:45 – 16:55
+        %td Breakout Group Reports
+        %td
+      %tr
+        %td 16:55 – 17:00
+        %td Wrap-Up & Next steps
+        %td
+          %a{href: "https://orcid.org/0000-0001-7618-5230"} David Shorthouse
+
+%h3.mt-4
+  = I18n.l Date.parse("November 27, 2023"), format: :long
+
+%h4 Systematikdagarna 2023
+%p
+  %a{href: "https://systematikforeningen.se/systematikdagarna-2023/"}
+    %img{src: "/images/systematiklogga.png", alt: "Systematikdagarna 2023", class: "img-fluid", width: "400px", height: "86px"}
+%p
+  Linking natural history specimens to the world's collectors,
+  %a{href: "https://systematikforeningen.se/systematikdagarna-2023/"}
+    https://systematikforeningen.se/systematikdagarna-2023/
+  in collaboration with
+  = succeed "." do
+    %a{href: "https://tettris.eu/"}
+      TETTRIs
+
+%hr
+
+%h3.mt-4
   = I18n.l Date.parse("November 4, 2023"), format: :long
 
 %h4
