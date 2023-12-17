@@ -59,12 +59,17 @@ module Bionomia
     end
 
     def datasetKey
-      row = CSV.open(@occurrence_files.first, 'r') { |csv| csv.first }
-      Occurrence.find(row[0]).datasetKey
+      begin
+        row = CSV.open(@occurrence_files.first, 'r') { |csv| csv.first }
+        Occurrence.find(row[0]).datasetKey
+      rescue
+        nil
+      end
     end
 
     def occurrence_files
       #Note: use full user_occurrences hash in where clause because of a bug in ActiveRecord
+      return [] if !datasetKey
       query = UserOccurrence.select(:occurrence_id)
                             .joins(:occurrence)
                             .where(occurrence: { datasetKey: datasetKey })
