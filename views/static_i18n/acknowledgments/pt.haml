@@ -20,27 +20,38 @@
       %h1.h2
         = I18n.t('acknowledgments.acknowledgments_title')
 
-.container.mt-3
-  .row.border
-    .col-12.col-md-4.p-3.text-center
-      %a{href: "https://bceenetwork.org"}
-        %img.img-fluid.mb-3{src:"/images/bceenet_logo.png", alt:"BCEENET"}
-    .col-12.col-md-8.p-3
-      %h3
-        Biological Collections in Ecology and Evolution Network (BCEENET)
-      %p.lead
-        Proud to announce that the 
-        %a{href: "https://bceenetwork.org"} Biological Collections in Ecology and Evolution Network 
-        (BCEENET) has made a contribution to Bionomia operations that helps ensure it will remain vibrant and active for the 2024 calendar year.
-      %p
-        BCEENET brings together undergraduate educators, natural history collections professionals, education experts, data experts, and researchers to support the development, implementation, and assessment of Course-based Undergraduate Research Experiences (CUREs) using digitized natural history collections data. BCEENET CUREs increase the accessibility of undergraduate research experiences by using open access data and programs, allowing implementation with student access to only a computer and the internet. This helps expand access to CUREs at all institution types, better reaching historically excluded and underrepresented students in STEM.
-      %p
-        See the BCEENET teaching resources on 
-        %a{href: "https://qubeshub.org/community/groups/bceenet/teaching_resources"}
-          Quantitative Undergraduate Biology Education and Synthesis
-        (QUBES).
+.row
+  .col-12.col-md-6.mb-3
+    .card
+      .card-header.border-bottom
+        %h4.card-title Biological Collections in Ecology and Evolution Network (BCEENET)
+      .card-body.mt-3
+        %a{href: "https://bceenetwork.org"}
+          %img.img-fluid.float-left.mr-3{src:"/images/bceenet_logo.png", alt:"BCEENET", width:"30%"}
+        %p.lead.card-text
+          Proud to announce that the 
+          %a{href: "https://bceenetwork.org"} Biological Collections in Ecology and Evolution Network 
+          (BCEENET) has made a contribution to Bionomia operations that helps ensure it will remain vibrant and active for the 2024 calendar year.
+        %p.card-text
+          BCEENET brings together undergraduate educators, natural history collections professionals, education experts, data experts, and researchers to support the development, implementation, and assessment of Course-based Undergraduate Research Experiences (CUREs) using digitized natural history collections data. BCEENET CUREs increase the accessibility of undergraduate research experiences by using open access data and programs, allowing implementation with student access to only a computer and the internet. This helps expand access to CUREs at all institution types, better reaching historically excluded and underrepresented students in STEM.
+        %p.card-text
+          See the BCEENET teaching resources on 
+          %a{href: "https://qubeshub.org/community/groups/bceenet/teaching_resources"}
+            Quantitative Undergraduate Biology Education and Synthesis
+          (QUBES).
+  .col-12.col-md-6.mb-3
+    .card
+      .card-header.border-bottom
+        %h4.card-title Ebbe Nielsen Challenge
+      .card-body.mt-3
+        %a{href: "https://www.gbif.org/news/EQgUzZ4YA75BSeLs1naI9/belgian-built-gbif-alert-system-wins-the-2023-ebbe-nielsen-challenge"}
+          %img.img-fluid.float-left.mr-3{src:"/images/ebbe_nielsen_2023.png", alt: "Ebbe Nielsen 2023", width:"30%"}
+        %p.card-text
+          The enhancements made to the automated Frictionless Data packages for datasets was awarded 2nd place in the Global Biodiversity Information Facilitiy's
+          %a{href: "https://www.gbif.org/news/EQgUzZ4YA75BSeLs1naI9/belgian-built-gbif-alert-system-wins-the-2023-ebbe-nielsen-challenge"} 2023 Ebbe Nielsen Challenge.
+          Thanks to the jury who recognized this work in support of round tripping activities and congratulations to all other winners.
 
-.row.mt-4
+.row
   .col-12.col-md-6.mb-3
     .card
       .card-header.border-bottom
