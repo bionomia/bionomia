@@ -459,28 +459,24 @@ module Sinatra
               @sort = params[:sort] || "desc"
               @order = params[:order] || "typeStatus"
 
-              begin
-                @page = (params[:page] || 1).to_i
-                @total = @admin_user.visible_occurrences.count
+              @page = (params[:page] || 1).to_i
+              @total = @admin_user.visible_occurrences.count
 
-                if @page*search_size > @total
-                  bump_page = @total % search_size.to_i != 0 ? 1 : 0
-                  @page = @total/search_size.to_i + bump_page
-                end
-
-                @page = 1 if @page <= 0
-
-                if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
-                  if @order == "eventDate" || @order == "dateIdentified"
-                    @order = "#{@order}_processed"
-                  end
-                end
-                data = specimen_filters(@admin_user).order("occurrences.#{@order} #{@sort}")
-                @pagy, @results = pagy(data, items: search_size, page: @page)
-                haml :'admin/specimens', locals: { active_page: "administration" }
-              rescue Pagy::OverflowError
-                halt 404, haml(:oops)
+              if @page*search_size > @total
+                bump_page = @total % search_size.to_i != 0 ? 1 : 0
+                @page = @total/search_size.to_i + bump_page
               end
+
+              @page = 1 if @page <= 0
+
+              if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
+                if @order == "eventDate" || @order == "dateIdentified"
+                  @order = "#{@order}_processed"
+                end
+              end
+              data = specimen_filters(@admin_user).order("occurrences.#{@order} #{@sort}")
+              @pagy, @results = pagy(data, items: search_size, page: @page)
+              haml :'admin/specimens', locals: { active_page: "administration" }
             end
 
             get '/user/:id/specimens.json(ld)?' do

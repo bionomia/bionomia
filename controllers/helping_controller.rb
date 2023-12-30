@@ -387,13 +387,9 @@ module Sinatra
               check_redirect
 
               @viewed_user = find_user(@params[:id])
-              begin
-                page = (params[:page] || 1).to_i
-                @pagy, @results = pagy(@viewed_user.recorded_with, page: page)
-                haml :'help/co_collectors', locals: { active_page: "help" }
-              rescue Pagy::OverflowError
-                halt 404, haml(:oops)
-              end
+              page = (params[:page] || 1).to_i
+              @pagy, @results = pagy(@viewed_user.recorded_with, page: page)
+              haml :'help/co_collectors', locals: { active_page: "help" }
             end
 
             get '/:id/co-collector/:id2' do
@@ -438,13 +434,9 @@ module Sinatra
               check_redirect
 
               @viewed_user = find_user(@params[:id])
-              begin
-                page = (params[:page] || 1).to_i
-                @pagy, @results = pagy(@viewed_user.identified_for, page: page)
-                haml :'help/identified_for', locals: { active_page: "help" }
-              rescue Pagy::OverflowError
-                halt 404, haml(:oops)
-              end
+              page = (params[:page] || 1).to_i
+              @pagy, @results = pagy(@viewed_user.identified_for, page: page)
+              haml :'help/identified_for', locals: { active_page: "help" }
             end
 
             get '/:id/identified-for/:id2' do
@@ -489,13 +481,9 @@ module Sinatra
               check_redirect
 
               @viewed_user = find_user(@params[:id])
-              begin
-                page = (params[:page] || 1).to_i
-                @pagy, @results = pagy(@viewed_user.identified_by, page: page)
-                haml :'help/identifications_by', locals: { active_page: "help" }
-              rescue Pagy::OverflowError
-                halt 404, haml(:oops)
-              end
+              page = (params[:page] || 1).to_i
+              @pagy, @results = pagy(@viewed_user.identified_by, page: page)
+              haml :'help/identifications_by', locals: { active_page: "help" }
             end
 
             get '/:id/identifications-by/:id2' do

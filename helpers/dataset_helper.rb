@@ -68,48 +68,28 @@ module Sinatra
           else
             data = Dataset.order(:title)
           end
-          begin
-            @pagy, @results = pagy(data)
-          rescue Pagy::OverflowError
-            halt 404
-          end
+          @pagy, @results = pagy(data)
         end
 
         def dataset_users
-          begin
-            if @dataset.is_large?
-              @pagy = OpenStruct.new(count: nil, pages: 1)
-              @results = []
-            else
-              @pagy, @results = pagy(@dataset.users.order(:family))
-            end
-          rescue Pagy::OverflowError
-            halt 404
+          if @dataset.is_large?
+            @pagy = OpenStruct.new(count: nil, pages: 1)
+            @results = []
+          else
+            @pagy, @results = pagy(@dataset.users.order(:family))
           end
         end
 
         def dataset_agents
-          begin
-            @pagy, @results = pagy_array(@dataset.agents.to_a, items: 75)
-          rescue Pagy::OverflowError
-            halt 404
-          end
+          @pagy, @results = pagy_array(@dataset.agents.to_a, items: 75)
         end
 
         def dataset_agents_counts
-          begin
-            @pagy, @results = pagy_array(@dataset.agents_occurrence_counts.to_a, items: 75)
-          rescue Pagy::OverflowError
-            halt 404
-          end
+          @pagy, @results = pagy_array(@dataset.agents_occurrence_counts.to_a, items: 75)
         end
 
         def dataset_agents_unclaimed_counts
-          begin
-            @pagy, @results = pagy_array(@dataset.agents_occurrence_unclaimed_counts.to_a, items: 75)
-          rescue Pagy::OverflowError
-            halt 404
-          end
+          @pagy, @results = pagy_array(@dataset.agents_occurrence_unclaimed_counts.to_a, items: 75)
         end
 
         def dataset_stats
@@ -125,11 +105,7 @@ module Sinatra
         end
 
         def dataset_scribes
-          begin
-            @pagy, @results = pagy(@dataset.scribes.order(:family))
-          rescue Pagy::OverflowError
-            halt 404
-          end
+          @pagy, @results = pagy(@dataset.scribes.order(:family))
         end
 
         def dataset_json_ld

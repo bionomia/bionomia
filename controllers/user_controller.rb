@@ -156,21 +156,17 @@ module Sinatra
             check_user_public
             create_filter
 
-            begin
-              @pagy, @results = {}, []
-              if @viewed_user.is_public?
-                page = (params[:page] || 1).to_i
-                data = specimen_filters(@viewed_user).order("occurrences.typeStatus desc")
-                @pagy, @results = pagy(data, page: page)
-              end
-              locals = {
-                active_page: "roster",
-                active_tab: "specimens"
-              }
-              haml :'public/specimens', locals: locals
-            rescue Pagy::OverflowError
-              halt 500, haml(:oops)
+            @pagy, @results = {}, []
+            if @viewed_user.is_public?
+              page = (params[:page] || 1).to_i
+              data = specimen_filters(@viewed_user).order("occurrences.typeStatus desc")
+              @pagy, @results = pagy(data, page: page)
             end
+            locals = {
+              active_page: "roster",
+              active_tab: "specimens"
+            }
+            haml :'public/specimens', locals: locals
           end
 
           app.get '/:id/strings' do
@@ -179,28 +175,24 @@ module Sinatra
             @viewed_user = find_user(params[:id])
             check_user_public
 
-            begin
-              @pagy, @results = {}, []
-              @page = (params[:page] || 1).to_i
-              strings = @viewed_user.collector_strings
-              @total = strings.count
+            @pagy, @results = {}, []
+            @page = (params[:page] || 1).to_i
+            strings = @viewed_user.collector_strings
+            @total = strings.count
 
-              if @page*50 > @total
-                bump_page = @total % 50 != 0 ? 1 : 0
-                @page = @total/50 + bump_page
-              end
-
-              @page = 1 if @page <= 0
-
-              @pagy, @results = pagy_array(strings.to_a, items: 50, page: @page)
-              locals = {
-                active_page: "roster",
-                active_tab: "strings"
-              }
-              haml :'public/strings', locals: locals
-            rescue Pagy::OverflowError
-              halt 500, haml(:oops)
+            if @page*50 > @total
+              bump_page = @total % 50 != 0 ? 1 : 0
+              @page = @total/50 + bump_page
             end
+
+            @page = 1 if @page <= 0
+
+            @pagy, @results = pagy_array(strings.to_a, items: 50, page: @page)
+            locals = {
+              active_page: "roster",
+              active_tab: "strings"
+            }
+            haml :'public/strings', locals: locals
           end
 
           app.get '/:id/support' do
@@ -209,27 +201,23 @@ module Sinatra
             @viewed_user = find_user(params[:id])
             check_user_public
 
-            begin
-              @page = (params[:page] || 1).to_i
-              helped_by = @viewed_user.helped_by_counts
-              @total = helped_by.count
+            @page = (params[:page] || 1).to_i
+            helped_by = @viewed_user.helped_by_counts
+            @total = helped_by.count
 
-              if @page*search_size > @total
-                bump_page = @total % search_size.to_i != 0 ? 1 : 0
-                @page = @total/search_size.to_i + bump_page
-              end
-
-              @page = 1 if @page <= 0
-
-              @pagy, @results = pagy_array(helped_by, items: search_size, page: @page)
-              locals = {
-                active_page: "roster",
-                active_tab: "support"
-              }
-              haml :'public/support', locals: locals
-            rescue Pagy::OverflowError
-              halt 500, haml(:oops)
+            if @page*search_size > @total
+              bump_page = @total % search_size.to_i != 0 ? 1 : 0
+              @page = @total/search_size.to_i + bump_page
             end
+
+            @page = 1 if @page <= 0
+
+            @pagy, @results = pagy_array(helped_by, items: search_size, page: @page)
+            locals = {
+              active_page: "roster",
+              active_tab: "support"
+            }
+            haml :'public/support', locals: locals
           end
 
           app.get '/:id/citations' do
@@ -238,17 +226,13 @@ module Sinatra
             @viewed_user = find_user(params[:id])
             check_user_public
 
-            begin
-              @pagy, @results = {}, []
-              if @viewed_user.is_public?
-                page = (params[:page] || 1).to_i
-                @stats = cache_block("#{@viewed_user.identifier}-stats") { user_stats(@viewed_user) }
-                @pagy, @results = pagy(@viewed_user.articles_citing_specimens, items: 10, page: page)
-              end
-              haml :'public/citations', locals: { active_page: "roster" }
-            rescue Pagy::OverflowError
-              halt 500, haml(:oops)
+            @pagy, @results = {}, []
+            if @viewed_user.is_public?
+              page = (params[:page] || 1).to_i
+              @stats = cache_block("#{@viewed_user.identifier}-stats") { user_stats(@viewed_user) }
+              @pagy, @results = pagy(@viewed_user.articles_citing_specimens, items: 10, page: page)
             end
+            haml :'public/citations', locals: { active_page: "roster" }
           end
 
           app.get '/:id/citation/*' do
@@ -262,16 +246,12 @@ module Sinatra
               halt 404, haml(:oops)
             end
 
-            begin
-              @pagy, @results = {}, []
-              if @viewed_user.is_public?
-                page = (params[:page] || 1).to_i
-                @pagy, @results = pagy(@viewed_user.cited_specimens_by_article(@article.id), page: page)
-              end
-              haml :'public/citation', locals: { active_page: "roster" }
-            rescue Pagy::OverflowError
-              halt 500, haml(:oops)
+            @pagy, @results = {}, []
+            if @viewed_user.is_public?
+              page = (params[:page] || 1).to_i
+              @pagy, @results = pagy(@viewed_user.cited_specimens_by_article(@article.id), page: page)
             end
+            haml :'public/citation', locals: { active_page: "roster" }
           end
 
           app.get '/:id/co-collectors' do
@@ -280,20 +260,16 @@ module Sinatra
             @viewed_user = find_user(params[:id])
             check_user_public
 
-            begin
-              @pagy, @results = {}, []
-              if @viewed_user.is_public?
-                page = (params[:page] || 1).to_i
-                @pagy, @results = pagy(@viewed_user.recorded_with, page: page)
-              end
-              locals = {
-                active_page: "roster",
-                active_tab: "co_collectors"
-              }
-              haml :'public/co_collectors', locals: locals
-            rescue Pagy::OverflowError
-              halt 500, haml(:oops)
+            @pagy, @results = {}, []
+            if @viewed_user.is_public?
+              page = (params[:page] || 1).to_i
+              @pagy, @results = pagy(@viewed_user.recorded_with, page: page)
             end
+            locals = {
+              active_page: "roster",
+              active_tab: "co_collectors"
+            }
+            haml :'public/co_collectors', locals: locals
           end
 
           app.get '/:id/identified-for' do
@@ -302,20 +278,16 @@ module Sinatra
             @viewed_user = find_user(params[:id])
             check_user_public
 
-            begin
-              @pagy, @results = {}, []
-              if @viewed_user.is_public?
-                page = (params[:page] || 1).to_i
-                @pagy, @results = pagy(@viewed_user.identified_for, page: page)
-              end
-              locals = {
-                active_page: "roster",
-                active_tab: "identified_for"
-              }
-              haml :'public/identified_for', locals: locals
-            rescue Pagy::OverflowError
-              halt 500, haml(:oops)
+            @pagy, @results = {}, []
+            if @viewed_user.is_public?
+              page = (params[:page] || 1).to_i
+              @pagy, @results = pagy(@viewed_user.identified_for, page: page)
             end
+            locals = {
+              active_page: "roster",
+              active_tab: "identified_for"
+            }
+            haml :'public/identified_for', locals: locals
           end
 
           app.get '/:id/identifications-by' do
@@ -324,20 +296,16 @@ module Sinatra
             @viewed_user = find_user(params[:id])
             check_user_public
 
-            begin
-              @pagy, @results = {}, []
-              if @viewed_user.is_public?
-                page = (params[:page] || 1).to_i
-                @pagy, @results = pagy(@viewed_user.identified_by, page: page)
-              end
-              locals = {
-                active_page: "roster",
-                active_tab: "identifications_by"
-              }
-              haml :'public/identifications_by', locals: locals
-            rescue Pagy::OverflowError
-              halt 500, haml(:oops)
+            @pagy, @results = {}, []
+            if @viewed_user.is_public?
+              page = (params[:page] || 1).to_i
+              @pagy, @results = pagy(@viewed_user.identified_by, page: page)
             end
+            locals = {
+              active_page: "roster",
+              active_tab: "identifications_by"
+            }
+            haml :'public/identifications_by', locals: locals
           end
 
           app.get '/:id/deposited-at' do

@@ -56,17 +56,13 @@ module Sinatra
             end
 
             get '/:id/citations' do
-              begin
-                page = (params[:page] || 1).to_i
-                @pagy, @results = pagy(organization_articles, items: 10, page: page)
-                locals = {
-                  active_page: "organizations",
-                  active_tab: "organization-articles"
-                }
-                haml :'organizations/citations', locals: locals
-              rescue Pagy::OverflowError
-                halt 404, haml(:oops)
-              end
+              page = (params[:page] || 1).to_i
+              @pagy, @results = pagy(organization_articles, items: 10, page: page)
+              locals = {
+                active_page: "organizations",
+                active_tab: "organization-articles"
+              }
+              haml :'organizations/citations', locals: locals
             end
 
             get '/:id/refresh.json' do

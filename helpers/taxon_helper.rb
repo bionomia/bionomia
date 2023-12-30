@@ -46,21 +46,13 @@ module Sinatra
         def taxon_agents_counts
           taxon_from_param
           page = (params[:page] || 1).to_i
-          begin
-            @pagy, @results = pagy_array(@taxon.agent_counts.to_a, items: 75, page: page)
-          rescue Pagy::OverflowError
-            halt 404
-          end
+          @pagy, @results = pagy_array(@taxon.agent_counts.to_a, items: 75, page: page)
         end
 
         def taxon_agents_unclaimed
           taxon_from_param
           page = (params[:page] || 1).to_i
-          begin
-            @pagy, @results = pagy_array(@taxon.agent_counts_unclaimed.to_a, items: 75, page: page)
-          rescue Pagy::OverflowError
-            halt 404
-          end
+          @pagy, @results = pagy_array(@taxon.agent_counts_unclaimed.to_a, items: 75, page: page)
         end
 
         def taxon_examples

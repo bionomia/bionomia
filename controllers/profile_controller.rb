@@ -136,30 +136,26 @@ module Sinatra
               @order = params[:order] || "typeStatus"
               create_filter
 
-              begin
-                @page = (params[:page] || 1).to_i
-                @total = @user.visible_occurrences.count
+              @page = (params[:page] || 1).to_i
+              @total = @user.visible_occurrences.count
 
-                if @page*search_size > @total
-                  bump_page = @total % search_size.to_i != 0 ? 1 : 0
-                  @page = @total/search_size.to_i + bump_page
-                end
-
-                @page = 1 if @page <= 0
-                if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
-                  if @order == "eventDate" || @order == "dateIdentified"
-                    @order = "#{@order}_processed"
-                  end
-                else
-                  @sort = "desc"
-                  @order = "typeStatus"
-                end
-                data = specimen_filters(@user).order("occurrences.#{@order} #{@sort}")
-                @pagy, @results = pagy(data, items: search_size, page: @page)
-                haml :'profile/specimens', locals: { active_page: "profile" }
-              rescue Pagy::OverflowError
-                halt 404, haml(:oops)
+              if @page*search_size > @total
+                bump_page = @total % search_size.to_i != 0 ? 1 : 0
+                @page = @total/search_size.to_i + bump_page
               end
+
+              @page = 1 if @page <= 0
+              if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
+                if @order == "eventDate" || @order == "dateIdentified"
+                  @order = "#{@order}_processed"
+                end
+              else
+                @sort = "desc"
+                @order = "typeStatus"
+              end
+              data = specimen_filters(@user).order("occurrences.#{@order} #{@sort}")
+              @pagy, @results = pagy(data, items: search_size, page: @page)
+              haml :'profile/specimens', locals: { active_page: "profile" }
             end
 
             get '/support' do
