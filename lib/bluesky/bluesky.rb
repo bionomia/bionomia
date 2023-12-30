@@ -22,8 +22,8 @@ module Bionomia
         URI.extract(text, "https").each do |url|
           @post_item[:facets] << {
             index: {
-              byteStart: text.index(url),
-              byteEnd: text.index(url) + url.length
+              byteStart: text.byteindex(url),
+              byteEnd: text.byteindex(url) + url.bytesize
             },
             features: [
               {
