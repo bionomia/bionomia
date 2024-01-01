@@ -25,6 +25,14 @@
         ]
       },
       {
+        "type": "not",
+        "predicate": {
+          "type": "equals",
+          "key": "OCCURRENCE_STATUS",
+          "value": "ABSENT"
+        }
+      },
+      {
         "type": "or",
         "predicates": [
           {
