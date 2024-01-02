@@ -11,7 +11,7 @@ end
 module Sinatra
   module Bionomia
     module Route
-      module User
+      module UserRoute
 
         def self.registered(app)
 

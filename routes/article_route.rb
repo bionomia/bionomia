@@ -3,7 +3,7 @@
 module Sinatra
   module Bionomia
     module Route
-      module Article
+      module ArticleRoute
 
         def self.registered(app)
 

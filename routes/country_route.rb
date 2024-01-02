@@ -3,7 +3,7 @@
 module Sinatra
   module Bionomia
     module Route
-      module Country
+      module CountryRoute
 
         def self.registered(app)
 

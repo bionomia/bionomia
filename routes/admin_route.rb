@@ -3,7 +3,7 @@
 module Sinatra
   module Bionomia
     module Route
-      module Admin
+      module AdminRoute
 
         def self.registered(app)
 
