@@ -3,9 +3,10 @@
 module Bionomia
   class FrictionlessGenerator
 
-    def initialize(dataset:, output_directory:)
+    def initialize(dataset:, output_directory: nil)
       @dataset = dataset
-      @folder = File.join(output_directory, @dataset.uuid)
+      output_dir = output_directory || File.join(BIONOMIA.settings.root, BIONOMIA.settings.public_folder, "data")
+      @folder = File.join(output_dir, @dataset.uuid)
       @created = Time.now
       @occurrence_files = []
       raise ArgumentError, 'Dataset not found' if !@dataset.is_a?(Dataset)

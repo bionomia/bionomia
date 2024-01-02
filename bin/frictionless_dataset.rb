@@ -41,14 +41,14 @@ end.parse!
 if options[:directory] && options[:key]
   dataset = Dataset.find_by_uuid(options[:key]) rescue nil
   return if dataset.nil?
-  row = { uuid: dataset.uuid, output_directory: options[:directory] }.stringify_keys
+  row = { uuid: dataset.uuid }.stringify_keys
   ::Bionomia::FrictionlessWorker.perform_async(row)
 elsif options[:directory] && ( options[:all] || options[:missing] )
   group = []
   Dataset.find_each.with_index do |dataset, i|
     next if !dataset.has_claim?
     next if options[:skip] && dataset.is_large?
-    group << [{ uuid: dataset.uuid, output_directory: options[:directory] }.stringify_keys]
+    group << [{ uuid: dataset.uuid }.stringify_keys]
     next if i % 100 != 0
     Sidekiq::Client.push_bulk({ 'class' => Bionomia::FrictionlessWorker, 'args' => group })
     group = []
@@ -60,7 +60,7 @@ elsif options[:directory] && options[:list]
   options[:list].each do |key|
     dataset = Dataset.find_by_uuid(key) rescue nil
     next if dataset.nil?
-    row = { uuid: dataset.uuid, output_directory: options[:directory] }.stringify_keys
+    row = { uuid: dataset.uuid }.stringify_keys
     ::Bionomia::FrictionlessWorker.perform_async(row)
   end
 end

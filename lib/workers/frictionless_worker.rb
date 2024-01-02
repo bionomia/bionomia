@@ -8,7 +8,7 @@ module Bionomia
     def perform(row)
       dataset = Dataset.find_by_uuid(row["uuid"]) rescue nil
       return if dataset.nil?
-      f = FrictionlessGenerator.new(dataset: dataset, output_directory: row["output_directory"])
+      f = FrictionlessGenerator.new(dataset: dataset)
       f.create
     end
 

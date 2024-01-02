@@ -61,9 +61,7 @@ module Sinatra
 
             get '/article/:id/process.json' do
               content_type "application/json", charset: 'utf-8'
-              vars = {
-                article_id: params[:id]
-              }.stringify_keys
+              vars = { id: params[:id] }.stringify_keys
               ::Bionomia::ArticleWorker.perform_async(vars)
               { message: "ok" }.to_json
             end
@@ -111,10 +109,7 @@ module Sinatra
             get '/dataset/frictionless.json' do
               content_type "application/json", charset: 'utf-8'
 
-              vars = {
-                uuid: params[:datasetKey],
-                output_directory: File.join(app.root, "public", "data")
-              }.stringify_keys
+              vars = { uuid: params[:datasetKey] }.stringify_keys
               ::Bionomia::FrictionlessWorker.perform_async(vars)
               { message: "ok" }.to_json
             end
