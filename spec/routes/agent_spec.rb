@@ -1,4 +1,4 @@
-describe "Bionomia Agent Controller" do
+describe "Bionomia Agent Route" do
 
 #  it "should allow accessing the agents page" do
 #    get '/agents'

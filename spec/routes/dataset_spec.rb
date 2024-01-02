@@ -1,4 +1,4 @@
-describe "Bionomia Dataset Controller" do
+describe "Bionomia Dataset Route" do
 
   before(:each) do
     @datasetkey = "826f67d2-f762-11e1-a439-00145eb45e9a"

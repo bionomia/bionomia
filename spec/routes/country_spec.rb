@@ -1,4 +1,4 @@
-describe "Bionomia Country Controller" do
+describe "Bionomia Country Route" do
 
   it "should allow accessing the countries page" do
     get '/countries'

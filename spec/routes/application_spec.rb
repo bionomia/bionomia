@@ -1,4 +1,4 @@
-describe "Bionomia Application Controller" do
+describe "Bionomia Application Route" do
 
   it "should allow accessing the home page" do
     get '/'

@@ -1,4 +1,4 @@
-describe "Bionomia Taxon Controller" do
+describe "Bionomia Taxon Route" do
   before(:each) do
     @taxon = Taxon.create!({ family: "Linyphiidae" })
   end

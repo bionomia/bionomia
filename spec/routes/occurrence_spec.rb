@@ -1,4 +1,4 @@
-describe "Bionomia Occurrence Controller" do
+describe "Bionomia Occurrence Route" do
   before(:each) do
     @id = 1
     @occurrence = Occurrence.create!({ gbifID: @id })

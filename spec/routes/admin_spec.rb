@@ -1,4 +1,4 @@
-describe "Bionomia Administration Controller" do
+describe "Bionomia Administration Route" do
   before(:each) do
     @user = User.new({ given: "John", family: "Smith", other_names: "Jack", is_admin: true })
     @user.skip_callbacks = true

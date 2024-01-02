@@ -1,4 +1,4 @@
-describe "Bionomia Profile Controller" do
+describe "Bionomia Profile Route" do
   before(:each) do
     @user = User.new({ given: "John", family: "Smith", other_names: "Jack" })
     @user.skip_callbacks = true

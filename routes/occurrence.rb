@@ -2,8 +2,8 @@
 
 module Sinatra
   module Bionomia
-    module Controller
-      module OccurrenceController
+    module Route
+      module Occurrence
 
         def self.registered(app)
 

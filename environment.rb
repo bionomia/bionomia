@@ -94,5 +94,5 @@ OmniAuth.config.request_validation_phase = OmniAuth::AuthenticityTokenProtection
 
 require_all File.join(File.dirname(__FILE__), 'lib')
 require_all File.join(File.dirname(__FILE__), 'helpers')
-require_all File.join(File.dirname(__FILE__), 'controllers')
+require_all File.join(File.dirname(__FILE__), 'routes')
 require_all File.join(File.dirname(__FILE__), 'models')

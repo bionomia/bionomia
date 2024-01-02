@@ -1,4 +1,4 @@
-describe "Bionomia Article Controller" do
+describe "Bionomia Article Route" do
   before(:each) do
     @doi = "10.0000/12345"
     gbif_dois = ["10.0001/1", "10.0001/2"]

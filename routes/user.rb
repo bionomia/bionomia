@@ -10,8 +10,8 @@ end
 
 module Sinatra
   module Bionomia
-    module Controller
-      module UserController
+    module Route
+      module User
 
         def self.registered(app)
 

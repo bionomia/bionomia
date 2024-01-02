@@ -1,4 +1,4 @@
-describe "Bionomia Organization Controller" do
+describe "Bionomia Organization Route" do
 
   before(:each) do
     @wikidata = "Q12345"

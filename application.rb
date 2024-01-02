@@ -19,7 +19,7 @@ class BIONOMIA < Sinatra::Base
   register Sinatra::OutputBuffer
   register Sinatra::Bionomia::Config::Initialize
   register Sinatra::Bionomia::Helper::Initialize
-  register Sinatra::Bionomia::Controller::Initialize
+  register Sinatra::Bionomia::Route::Initialize
   register Sinatra::Bionomia::Model::Initialize
 
   load_locales File.join(root, 'config', 'locales')

@@ -2,7 +2,7 @@
 
 module Sinatra
   module Bionomia
-    module Controller
+    module Route
       module Initialize
 
         def self.registered(app)
