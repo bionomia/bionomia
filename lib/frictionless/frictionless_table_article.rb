@@ -55,6 +55,7 @@ module Bionomia
         ]
         @csv_handle << CSV::Row.new(header, data).to_s
       end
+      @set.clear
     end
 
   end

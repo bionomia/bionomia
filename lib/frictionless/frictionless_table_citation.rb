@@ -52,8 +52,8 @@ module Bionomia
           ArticleOccurrence.joins(:user_occurrences)
                            .where(occurrence_id: group)
                            .where(user_occurrences: { visible: true })
-            .each do |ao|
-              data = [ ao.article_id, ao.occurrence_id ]
+                           .pluck(:article_id, :occurrence_id)
+            .each do |data|
               @csv_handle << CSV::Row.new(header, data).to_s
             end
         end

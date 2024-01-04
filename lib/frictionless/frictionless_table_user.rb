@@ -48,7 +48,7 @@ module Bionomia
         occurrence_ids.in_groups_of(1_000, false).each do |group|
           User.joins(:user_occurrences)
               .where(user_occurrences: { occurrence_id: group, visible: true })
-              .where(is_public: true)
+              .where(is_public: true).distinct
               .each do |user|
                 @set.add(user)
           end
@@ -74,6 +74,7 @@ module Bionomia
         ]
         @csv_handle << CSV::Row.new(header, data).to_s
       end
+      @set.clear
     end
 
   end
