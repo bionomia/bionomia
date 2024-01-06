@@ -12,6 +12,7 @@ module Bionomia
                        .uniq
       agents.each do |a|
         next if !a.family || a.family.length < 2 || a.family.length > 40
+        next if a.family.length < 5 && a.family.downcase.count('aäeëêiíïoöuü') == 0
 
         family = [a.particle.to_s.strip, a.family.to_s.strip].join(" ")
                                                              .squeeze(" ")
