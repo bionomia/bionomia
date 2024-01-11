@@ -311,9 +311,9 @@ module Bionomia
       merged_wikicodes = merged_users.dup
       qids_to_merge = merged_wikicodes.keys & existing_wikicodes
       qids_to_merge.each do |qid|
-        dest_qid = merged_wikicodes[qid]
-        User.merge_wikidata(qid, dest_qid)
-        puts "#{qid} => #{dest_qid}".red
+        dest_id = merged_wikicodes[qid]
+        User.merge_users(src_id: qid, dest_id: dest_id)
+        puts "#{qid} => #{dest_id}".red
       end
     end
 

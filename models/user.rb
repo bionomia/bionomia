@@ -23,39 +23,45 @@ class User < ActiveRecord::Base
   before_destroy :create_destroyed_user
   after_destroy :remove_search, unless: :skip_callbacks
 
-  def self.merge_wikidata(qid, dest_qid)
-    return if DestroyedUser.find_by_identifier(qid)
-    transaction do
-      DestroyedUser.where(identifier: qid, redirect_to: dest_qid).first_or_create
+  def self.merge_users(src_id:, dest_id:)
+    return if DestroyedUser.find_by_identifier(src_id)
 
-      src = User.default_scoped.find_by_wikidata(qid)
-      dest = User.default_scoped.find_by_wikidata(dest_qid)
-      if dest.nil?
-        src.wikidata = dest_qid
-        src.save
-        src.reload
-        src.update_wikidata_profile
-      else
-        src_occurrences = src.user_occurrences.pluck(:occurrence_id)
-        dest_occurrences = dest.user_occurrences.pluck(:occurrence_id) rescue []
-        (src_occurrences - dest_occurrences).in_groups_of(500, false) do |group|
-          src.user_occurrences.where(occurrence_id: group)
-                              .update_all({ user_id: dest.id })
-        end
-        if src.is_public?
-          dest.is_public = true
-          dest.save
-        end
-        dest.update_wikidata_profile
-        dest.flush_caches
-        src.user_occurrences.reload.delete_all
-        if ::Module::const_get("BIONOMIA")
-          BIONOMIA.cache_clear("blocks/#{src.identifier}-stats")
-        end
-        src.delete
-        src.delete_search
+    src = User.default_scoped.find_by_identifier(src_id)
+    dest = User.default_scoped.find_by_identifier(dest_id)
+    if dest.nil? && dest_id.first == "Q"
+      src.orcid = nil
+      src.wikidata = dest_id
+      src.save
+      src.reload
+      src.update_profile
+      src.flush_caches
+    elsif !dest.nil?
+      src_occurrences = src.user_occurrences.pluck(:occurrence_id)
+      dest_occurrences = dest.user_occurrences.pluck(:occurrence_id) rescue []
+      (src_occurrences - dest_occurrences).in_groups_of(1_000, false) do |group|
+        src.user_occurrences
+           .where(occurrence_id: group)
+           .update_all({ user_id: dest.id })
+        dest.user_occurrences
+            .reload
+            .where(occurrence_id: group)
+            .where(created_by: src.id)
+            .update_all({ created_by: dest.id })
       end
+      if src.is_public?
+        dest.is_public = true
+        dest.save
+      end
+      dest.update_profile
+      dest.flush_caches
+      src.user_occurrences.reload.delete_all
+      if ::Module::const_get("BIONOMIA")
+        BIONOMIA.cache_clear("blocks/#{src_id}-stats")
+      end
+      src.delete
+      src.delete_search
     end
+    DestroyedUser.create(identifier: src_id, redirect_to: dest_id)
   end
 
   def self.find_by_identifier(id)

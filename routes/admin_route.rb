@@ -353,7 +353,7 @@ module Sinatra
             end
 
             put '/user/:id/deceased' do
-              merge_users(src_id: params[:id], dest_id: params[:wikidata])
+              User.merge_users(src_id: params[:id], dest_id: params[:wikidata])
               flash.next[:updated] = true
               redirect "/admin/user/#{params[:wikidata]}/settings"
             end
