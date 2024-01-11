@@ -236,6 +236,44 @@ module Sinatra
           }
         end
 
+        def merge_users(src_id:, dest_id:)
+          src_user = User.find_by_identifier(src_id)
+          dest_user = User.find_by_identifier(dest_id)
+          old_id = src_user.identifier.dup
+          src_occurrences = src_user.user_occurrences.pluck(:occurrence_id)
+
+          if dest_user.nil? && dest_id.first == "Q"
+            src_user.orcid = nil
+            src_user.wikidata = dest_id
+            src_user.save
+            src_user.reload
+            src_user.update_profile
+            src_user.flush_caches
+            DestroyedUser.create(identifier: old_id, redirect_to: dest_id)
+          else
+            dest_occurrences = dest_user.user_occurrences.pluck(:occurrence_id) rescue []
+            (src_occurrences - dest_occurrences).in_groups_of(1_000, false) do |group|
+              src_user.user_occurrences
+                      .where(occurrence_id: group)
+                      .update_all({ user_id: dest_user.id})
+              dest_user.user_occurrences
+                       .reload
+                       .where(occurrence_id: group)
+                       .where(created_by: src_user.id)
+                       .update_all({ created_by: dest_user.id })
+            end
+            if src_user.is_public?
+              dest_user.is_public = true
+              dest_user.save
+            end
+            dest_user.update_profile
+            dest_user.flush_caches
+            src_user.reload.destroy
+            DestroyedUser.where(identifier: old_id)
+                         .update_all({ redirect_to: dest_user.identifier })
+          end
+        end
+
       end
     end
   end
