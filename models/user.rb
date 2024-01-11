@@ -28,6 +28,8 @@ class User < ActiveRecord::Base
 
     src = User.default_scoped.find_by_identifier(src_id)
     dest = User.default_scoped.find_by_identifier(dest_id)
+    orig_id = src.identifier.dup
+
     if dest.nil? && dest_id.first == "Q"
       src.orcid = nil
       src.wikidata = dest_id
@@ -61,7 +63,7 @@ class User < ActiveRecord::Base
       src.delete
       src.delete_search
     end
-    DestroyedUser.create(identifier: src_id, redirect_to: dest_id)
+    DestroyedUser.create(identifier: orig_id, redirect_to: dest_id)
   end
 
   def self.find_by_identifier(id)
