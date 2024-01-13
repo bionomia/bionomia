@@ -54,7 +54,7 @@ module Sinatra
               @user.save
               session[:omniauth][:zenodo] = true
               vars = { id: @user.id, action: "new" }.stringify_keys
-              ::Bionomia::ZenodoWorker.perform_async(vars)
+              ::Bionomia::ZenodoUserWorker.perform_async(vars)
               redirect '/profile/settings'
             end
 

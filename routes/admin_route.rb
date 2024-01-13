@@ -750,7 +750,7 @@ module Sinatra
               req = JSON.parse(request.body.read).symbolize_keys
               admin_user = find_user(params[:id])
               vars = { id: admin_user.id, action: req[:action] }.stringify_keys
-              ::Bionomia::ZenodoWorker.perform_async(vars)
+              ::Bionomia::ZenodoUserWorker.perform_async(vars)
               { message: "ok" }.to_json
             end
 
