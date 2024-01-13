@@ -42,8 +42,9 @@
 
       - if @frictionless_data
         - links = "<ul class=\"list-unstyled\"><li class=\"mb-2\"><a href=\"" + url("/dataset/#{@dataset.uuid}/datapackage.json") + "\">Descriptor</a> (JSON)</li>" + format_frictionless_links(@frictionless_data) + "</ul>"
+        - zenodo_badge = @dataset.zenodo_concept_doi ? "<p><a href=\"https://doi.org/#{@dataset.zenodo_concept_doi}\"><img src=\"/images/#{@dataset.zenodo_concept_doi}.svg\" alt=\"\"/></a></p>" : ""
         %p{class:"text-right m-0"}
-          %button.btn.btn-sm.btn-light{title: "Frictionless Data", "data-toggle": "popover", "data-content": "#{links}<div><small>Created #{@dataset.frictionless_created_at}</small></div>", "data-trigger": "click", "data-placement": "bottom"}
+          %button.btn.btn-sm.btn-light{title: "Frictionless Data", "data-toggle": "popover", "data-content": "#{links}#{zenodo_badge}<div><small>Created #{@dataset.frictionless_created_at}</small></div>", "data-trigger": "click", "data-placement": "bottom"}
             %img{src:"/images/frictionless.png", alt:"Frictionless Data"}
             Frictionless Data
 
