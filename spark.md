@@ -99,13 +99,13 @@ val differences = existing_counts.
     show(50, false)
 
 // Best to drop indices then recreate later
-// ALTER TABLE `occurrences` DROP KEY `typeStatus_idx`, DROP KEY `index_occurrences_on_datasetKey_occurrenceID`;
+// ALTER TABLE `occurrences` DROP KEY `typeStatus_idx`, DROP KEY `index_occurrences_on_datasetKey_occurrenceID`, DROP KEY `country_code_idx`;
 
 //write occurrences data to the database
-occurrences.write.mode("append").jdbc(url, "occurrences", prop)
+occurrences.distinct().sort(col("gbifID")).write.mode("append").jdbc(url, "occurrences", prop)
 
 // Recreate indices
-// ALTER TABLE `occurrences` ADD KEY `typeStatus_idx` (`typeStatus`(50)), ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`, `occurrenceID`(36));
+// ALTER TABLE `occurrences` ADD KEY `typeStatus_idx` (`typeStatus`(50)), ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`, `occurrenceID`(36)), ADD KEY `country_code_idx` (`countryCode`);
 
 def stringify(c: Column) = concat(lit("["), concat_ws(",", c), lit("]"))
 
