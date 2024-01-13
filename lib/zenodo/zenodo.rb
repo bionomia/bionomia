@@ -4,35 +4,27 @@ require 'filemagic'
 module Bionomia
   class Zenodo
 
-    def initialize(user:, opts: {})
+    def initialize(resource:, opts: {})
       @bucket_url = nil
-      @user = user
+      @resource = resource
       @settings = Settings.merge!(opts)
     end
 
-    def creator
-      if @user.orcid
-        { name: @user.viewname, orcid: @user.orcid }
-      else
-        { name: @user.viewname }
-      end
-    end
-
-    def global_metadata
-      hash = {
+    def package_metadata
+      {
         upload_type: "dataset",
         title: "Natural history specimens collected and/or identified and deposited.",
-        creators:  [ creator ],
-        description: "Natural history specimen data collected and/or identified by #{@user.viewname}, <a href=\"#{@user.uri}\">#{@user.uri}</a>. Claims or attributions were made on Bionomia, <a href=\"http://bionomia.net\">https://bionomia.net</a> using specimen data from the Global Biodiversity Information Facility, <a href=\"https://gbif.org\">https://gbif.org</a>.",
+        creators:  [ "Bionomia" ],
+        description: "Claims or attributions were made on Bionomia, <a href=\"http://bionomia.net\">https://bionomia.net</a> using specimen data from the Global Biodiversity Information Facility, <a href=\"https://gbif.org\">https://gbif.org</a>.",
         access_right: "open",
         license: "cc-zero",
         keywords: ["specimen", "natural history", "taxonomy"],
         communities: [{ identifier: 'bionomia' }]
       }
-      if @user.wikidata
-        hash.merge!({ notes: @user.uri })
-      end
-      hash
+    end
+
+    def token_hash
+      @token_hash ||= { access_token: @settings.zenodo.access_token }
     end
 
     def client
@@ -45,46 +37,6 @@ module Bionomia
                         stack.request :url_encoded
                         stack.adapter Faraday.default_adapter
                   end
-    end
-
-    def new_deposit_url
-      "/api/deposit/depositions"
-    end
-
-    def deposit_url(id)
-      "/api/deposit/depositions/#{id}"
-    end
-
-    def deposits_url
-      "/api/deposit/depositions"
-    end
-
-    def list_files_url(id)
-      "/api/deposit/depositions/#{id}/files"
-    end
-
-    def delete_file_url(id, file_id)
-      "/api/deposit/depositions/#{id}/files/#{file_id}"
-    end
-
-    def new_version_url(id)
-      "/api/deposit/depositions/#{id}/actions/newversion"
-    end
-
-    def discard_version_url(id)
-      "/api/deposit/depositions/#{id}/actions/discard"
-    end
-
-    def delete_url(id)
-      "/api/deposit/depositions/#{id}"
-    end
-
-    def publish_url(id)
-      "/api/deposit/depositions/#{id}/actions/publish"
-    end
-
-    def token_hash
-      @token_hash ||= ( @user.orcid ? @user.zenodo_access_token : { access_token: @settings.zenodo.access_token } )
     end
 
     def access_token
@@ -122,7 +74,7 @@ module Bionomia
     # Returns { doi: "10.5281/zenodo.2652234", recid: 2652234}
     def new_deposit
       headers = { "Content-Type": "application/json" }
-      body = { metadata: global_metadata }
+      body = { metadata: package_metadata }
       raw_response = access_token.post(new_deposit_url, { body: body.to_json, headers: headers })
       response = JSON.parse(raw_response.body).deep_symbolize_keys
       @bucket_url = response[:links][:bucket]
@@ -166,7 +118,7 @@ module Bionomia
       response = JSON.parse(raw_response.body).deep_symbolize_keys
       new_id = response[:links][:latest_draft].split("/").last.to_i
       metadata = get_deposit(id: new_id)
-      metadata.merge!(global_metadata)
+      metadata.merge!(package_metadata)
       metadata[:publication_date] = Time.now.strftime('%F')
       update_deposit(id: new_id, metadata: metadata)
       metadata[:prereserve_doi]
@@ -200,5 +152,43 @@ module Bionomia
       end
     end
 
+    private
+
+    def new_deposit_url
+      "/api/deposit/depositions"
+    end
+
+    def deposit_url(id)
+      "/api/deposit/depositions/#{id}"
+    end
+
+    def deposits_url
+      "/api/deposit/depositions"
+    end
+
+    def list_files_url(id)
+      "/api/deposit/depositions/#{id}/files"
+    end
+
+    def delete_file_url(id, file_id)
+      "/api/deposit/depositions/#{id}/files/#{file_id}"
+    end
+
+    def new_version_url(id)
+      "/api/deposit/depositions/#{id}/actions/newversion"
+    end
+
+    def discard_version_url(id)
+      "/api/deposit/depositions/#{id}/actions/discard"
+    end
+
+    def delete_url(id)
+      "/api/deposit/depositions/#{id}"
+    end
+
+    def publish_url(id)
+      "/api/deposit/depositions/#{id}/actions/publish"
+    end
+    
   end
 end

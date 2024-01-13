@@ -6,7 +6,7 @@ ARGV << '-h' if ARGV.empty?
 
 options = {}
 OptionParser.new do |opts|
-  opts.banner = "Usage: zenodo.rb [options]"
+  opts.banner = "Usage: zenodo_user.rb [options]"
 
   opts.on("-n", "--new", "Push brand new claims data to Zenodo for ORCID-based profiles") do
     options[:new] = true
@@ -32,17 +32,17 @@ end.parse!
 
 def submit_new(u)
   vars = { id: u.id, action: "new" }.stringify_keys
-  ::Bionomia::ZenodoWorker.perform_async(vars)
+  ::Bionomia::ZenodoUserWorker.perform_async(vars)
 end
 
 def submit_update(u)
   vars = { id: u.id, action: "update" }.stringify_keys
-  ::Bionomia::ZenodoWorker.perform_async(vars)
+  ::Bionomia::ZenodoUserWorker.perform_async(vars)
 end
 
 def submit_refresh(u)
   vars = { id: u.id, action: "refresh" }.stringify_keys
-  ::Bionomia::ZenodoWorker.perform_async(vars)
+  ::Bionomia::ZenodoUserWorker.perform_async(vars)
 end
 
 if options[:new]

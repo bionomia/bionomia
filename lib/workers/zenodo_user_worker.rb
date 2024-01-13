@@ -1,9 +1,9 @@
 # encoding: utf-8
 
 module Bionomia
-   class ZenodoWorker
+   class ZenodoUserWorker
       include Sidekiq::Job
-      sidekiq_options queue: :zenodo, retry: 1
+      sidekiq_options queue: :zenodo_user, retry: 1
  
       def perform(row)
          @user = User.find(row["id"]) rescue nil
@@ -24,7 +24,7 @@ module Bionomia
       end
 
       def refresh
-         z = Bionomia::Zenodo.new(user: user)
+         z = Bionomia::ZenodoUser.new(resource: user)
          if user.orcid
             begin
                user.skip_callbacks = true
@@ -65,7 +65,7 @@ module Bionomia
          csv = make_csv
          json = make_json
       
-         z = Bionomia::Zenodo.new(user: user)
+         z = Bionomia::ZenodoUser.new(resource: user)
       
          begin
             # Refresh the token
@@ -104,7 +104,7 @@ module Bionomia
          csv = make_csv
          json = make_json
       
-         z = Bionomia::Zenodo.new(user: user)
+         z = Bionomia::ZenodoUser.new(resource: user)
       
          begin
             # Refresh the token
