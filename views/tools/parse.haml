@@ -74,7 +74,7 @@
         - @output.each_with_index do |row, index|
           %tr
             %td.text-nowrap.small.border-right.font-weight-bold{scope:"row"}
-              #{row[index][:original]}
+              = h(row[index][:original])
             - row[index][:parsed].each do |col|
               %td #{col.title}
               %td #{col.appellation}

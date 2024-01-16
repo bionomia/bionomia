@@ -102,7 +102,7 @@ val differences = existing_counts.
 // ALTER TABLE `occurrences` DROP KEY `typeStatus_idx`, DROP KEY `index_occurrences_on_datasetKey_occurrenceID`, DROP KEY `country_code_idx`;
 
 //write occurrences data to the database
-occurrences.distinct().sort(col("gbifID")).write.mode("append").jdbc(url, "occurrences", prop)
+occurrences.sort(col("gbifID")).write.mode("append").jdbc(url, "occurrences", prop)
 
 // Recreate indices
 // ALTER TABLE `occurrences` ADD KEY `typeStatus_idx` (`typeStatus`(50)), ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`, `occurrenceID`(36)), ADD KEY `country_code_idx` (`countryCode`);
