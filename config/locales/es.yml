@@ -282,7 +282,7 @@ es:
     person: Persona
     progress: Progreso
     public: Público
-    private: El perfil no es público
+    private: Profile has not yet been made public
     created: Creado
     latest_scribe: Último anotador
     latest_claim: Última adjudicación
@@ -742,11 +742,11 @@ es:
     helped: Personas ayudadas
     no_scribe: No se han atribuido especímenes por un anotador.
     attributions_by: "Atribuciones hechas por:"
-    private: El perfil no está disponible públicamente.
+    private: Profile is not yet publicly available.
     private_with_claims:
       unit:
-        one: "espécimen fue reclamado o atribuido, pero este perfil no está disponible públicamente."
-        other: "especímenes fueron reclamados o atribuidos, pero este perfil no está disponible públicamente."
+        one: "specimen was claimed or attributed, but this profile has not yet been made publicly available."
+        other: "specimens were claimed or attributed, but this profile has not yet been made publicly available."
     no_specimens_cited: No se han incluido especímenes de descargas de GBIF y citado en este arículo de investigación.
     specimen_used: Datos de especímenes usados en
     no_publications: Aún no se han registrado publicaciones que usaron registros de especímenes incluidos en una descarga de GBIF.
