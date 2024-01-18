@@ -265,7 +265,7 @@ ko:
     person: Person
     progress: Progress
     public: Public
-    private: Profile is not public
+    private: Profile has not yet been made public
     created: Created
     latest_scribe: Latest Scribe
     latest_claim: Latest Claim
@@ -700,10 +700,10 @@ ko:
     helped: People Helped
     no_scribe: Specimens have not been attributed by a scribe.
     attributions_by: "Attributions made by:"
-    private: Profile is not publicly available.
+    private: Profile is not yet publicly available.
     private_with_claims:
       unit:
-        other: "specimens were claimed or attributed, but this profile is not publicly available."
+        other: "specimens were claimed or attributed, but this profile has not yet been made publicly available."
     no_specimens_cited: Specimens have not been included in downloads from GBIF and cited in this research article.
     specimen_used: Specimen Data Used In
     no_publications: Publications that used specimen records included in a download from GBIF have not yet been recorded.
