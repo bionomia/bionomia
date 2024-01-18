@@ -282,7 +282,7 @@ fr:
     person: Personne
     progress: Progrès
     public: Publique
-    private: Profil n'est pas public
+    private: Profile has not yet been made public
     created: Créé
     latest_scribe: Dernier scribe
     latest_claim: Dernière réclamation
@@ -742,11 +742,11 @@ fr:
     helped: Personnes Aidées
     no_scribe: Aucun spécimen n'a été attribué par une scribe.
     attributions_by: "Attribuer par:"
-    private: Cet profil n'est pas accessible au public.
+    private: Profile is not yet publicly available.
     private_with_claims:
       unit:
-        one: "spécimen a été attribué, mais ce profil n'est pas accessible au public."
-        other: "spécimens aient été attribués, mais ce profil n'est pas accessible au public."
+        one: "specimen was claimed or attributed, but this profile has not yet been made publicly available."
+        other: "specimens were claimed or attributed, but this profile has not yet been made publicly available."
     no_specimens_cited: Les spécimens n'ont pas été inclus dans les téléchargements du GBIF et cités dans cet article de recherche.
     specimen_used: Données des Spécimens Utilisées Dans
     no_publications: Les publications qui utilisaient des fiches spécimens incluses dans un téléchargement à partir du GBIF n'ont pas encore été enregistrées.
