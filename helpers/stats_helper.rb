@@ -92,7 +92,7 @@ module Sinatra
         end
 
         def stats_datasets
-          Dataset.select("COUNT(*) AS total, SUM(IF(frictionless_created_at, 1, 0)) AS frictionless, SUM(IF(source_attribution_count, 1, 0)) AS identifiers")
+          Dataset.select("COUNT(*) AS total, SUM(IF(frictionless_created_at, 1, 0)) AS frictionless, SUM(IF(source_attribution_count, 1, 0)) AS identifiers, SUM(IF(zenodo_concept_doi, 1, 0)) AS zenodo")
                  .first
         end
 

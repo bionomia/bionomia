@@ -222,4 +222,6 @@
           %li
             With dwc:recordedByID / dwc:identifiedByID:
             = link_to number_with_delimiter(@datasets.identifiers), url("/datasets?has_identifiers=true")
-          %li &nbsp;
+          %li
+            Archives Made to Zenodo:
+            %a{href: "https://zenodo.org/communities/bionomia?q=&f=file_type%3Azip&l=list&p=1&s=10&sort=newest"} #{number_with_delimiter(@datasets.zenodo)}
