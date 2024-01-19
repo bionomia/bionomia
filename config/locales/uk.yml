@@ -316,7 +316,7 @@ uk:
     person: Person
     progress: Progress
     public: Public
-    private: Profile is not public
+    private: Профіль ще не був публічним
     created: Created
     latest_scribe: Latest Scribe
     latest_claim: Latest Claim
@@ -826,13 +826,13 @@ uk:
     helped: People Helped
     no_scribe: Specimens have not been attributed by a scribe.
     attributions_by: "Attributions made by:"
-    private: Profile is not publicly available.
+    private: Профіль ще не є загальнодоступним.
     private_with_claims:
       unit:
-        one: "specimen was claimed or attributed, but this profile is not publicly available."
-        few: "specimens were claimed or attributed, but this profile is not publicly available."
-        many: "specimens were claimed or attributed, but this profile is not publicly available."
-        other: "specimens were claimed or attributed, but this profile is not publicly available."
+        one: "присвоєно або приписано, але цей профіль ще не був публічно доступним."
+        few: "присвоєно або приписано, але цей профіль ще не був публічно доступний."
+        many: "присвоєно або приписано, але цей профіль ще не був публічно доступний."
+        other: "приписувались або приписували, але цей профіль ще не був публічно доступний."
     no_specimens_cited: Specimens have not been included in downloads from GBIF and cited in this research article.
     specimen_used: Specimen Data Used In
     no_publications: Publications that used specimen records included in a download from GBIF have not yet been recorded.
