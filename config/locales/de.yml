@@ -168,7 +168,7 @@ de:
     none_identified_timeline: "Bisher wurde weder identifiziert noch ein Identifizierdatum angegeben"
     not_all_features: Large dataset, not all features are available.
     badge_tooltip: Click to obtain HTML for this badge.
-    badge_modal: Bionomia Dataset Badge
+    badge_modal: Bionomia Dataset Abzeichen
   date:
     formats:
       month_and_year: "%B %Y"
@@ -205,7 +205,7 @@ de:
       - Nov
       - Dez
   denied:
-    title: Denied
+    title: Verweigert
     not_allowed: Der Zugriff wird verweigert.
   developer:
     search: Suche
@@ -258,7 +258,7 @@ de:
     reset: Zurücksetzen
     remove: Entfernen
     filtered_by: Gefiltert nach
-    is_public: is public
+    is_public: ist öffentlich
     has_occurrences: has specimens
   help:
     ignored_title: "Help Reclaim Ignored for %{name}"
@@ -282,7 +282,7 @@ de:
     person: Person
     progress: Fortschritt
     public: Öffentlich
-    private: Profile has not yet been made public
+    private: Das Profil ist noch nicht veröffentlicht
     created: Erstellt
     latest_scribe: Letzter Bearbeiter
     latest_claim: Neueste Beanspruchung
@@ -742,7 +742,7 @@ de:
     helped: Personen geholfen
     no_scribe: Die Exemplare sind nicht durch einen Bearbeiter zugeordnet worden.
     attributions_by: "Zuordnungen erfolgt durch:"
-    private: Profile is not yet publicly available.
+    private: Das Profil ist noch nicht öffentlich verfügbar.
     private_with_claims:
       unit:
         one: "specimen was claimed or attributed, but this profile has not yet been made publicly available."
