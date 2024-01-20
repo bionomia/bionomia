@@ -219,13 +219,13 @@ fr:
     recommended_use: Utilisation recommandée
     title: Pour les informaticiens
     code_title: "Pour les informaticiens: Code Informatique"
-    clients: Client Libraries
+    clients: Forfaits de codes clients
     parser: Analyser les Noms
     parse_names: Analyser les Noms Humains
     parse_names_title: "Pour les informaticiens: Analyser les Noms"
     structured_data_title: "Pour les informaticiens: Données Structurées"
     search_title: "Pour les informaticiens: Chercher"
-    client_title: "For Developers: Client Libraries"
+    client_title: "Pour les développeurs : Forfaits de codes clients"
   donate:
     donate_title: Faire un don
     lede: Votre don unique ou périodique contribuera à compléter le pipeline de données et à garantir que le crédit est accordé aux contributions faites aux collections d'histoire naturelle le plus rapidement et le plus facilement possible.
@@ -276,13 +276,13 @@ fr:
     basic_instructions_lede: Instructions de base pour vous aider à démarrer
     add_someone_lede: "Ajouter quelqu'un pas encore découvert"
     country_name_lede: De pays indiqués dans ORCID ou Wikidata
-    latest_lede: Join the scribes in acknowledging your peers, mentors, or anyone who inspires you
+    latest_lede: Rejoignez les scribes pour remercier vos pairs, mentors ou toute personne qui vous inspire
     country_lede: Rejoignez les scribes pour remercier vos pairs, mentors ou toute personne qui vous inspire
     roster_lede: Rejoignez les scribes pour remercier vos pairs, mentors ou toute personne qui vous inspire
     person: Personne
     progress: Progrès
     public: Publique
-    private: Profile has not yet been made public
+    private: Ce profil n'a pas encore été rendu public
     created: Créé
     latest_scribe: Dernier scribe
     latest_claim: Dernière réclamation
@@ -742,11 +742,11 @@ fr:
     helped: Personnes Aidées
     no_scribe: Aucun spécimen n'a été attribué par une scribe.
     attributions_by: "Attribuer par:"
-    private: Profile is not yet publicly available.
+    private: Ce profil n'est pas encore accessible au public.
     private_with_claims:
       unit:
         one: "specimen was claimed or attributed, but this profile has not yet been made publicly available."
-        other: "specimens were claimed or attributed, but this profile has not yet been made publicly available."
+        other: "spécimens aient été attribués, mais ce profil n'est pas encore accessible au public."
     no_specimens_cited: Les spécimens n'ont pas été inclus dans les téléchargements du GBIF et cités dans cet article de recherche.
     specimen_used: Données des Spécimens Utilisées Dans
     no_publications: Les publications qui utilisaient des fiches spécimens incluses dans un téléchargement à partir du GBIF n'ont pas encore été enregistrées.
