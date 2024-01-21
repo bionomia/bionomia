@@ -527,7 +527,7 @@ module Bionomia
       organizations = []
       ["P108", "P1416"].each do |property|
         wiki_user.properties(property).each do |org|
-          next if org.nil?
+          next if org.nil? || (org.title rescue nil).nil?
           organization = wiki_user_organization(wiki_user, org, property)
           organizations << organization
         end
