@@ -282,7 +282,7 @@ es:
     person: Persona
     progress: Progreso
     public: Público
-    private: Profile has not yet been made public
+    private: El perfil aún no se ha hecho público
     created: Creado
     latest_scribe: Último anotador
     latest_claim: Última adjudicación
@@ -742,7 +742,7 @@ es:
     helped: Personas ayudadas
     no_scribe: No se han atribuido especímenes por un anotador.
     attributions_by: "Atribuciones hechas por:"
-    private: Profile is not yet publicly available.
+    private: El perfil aún no está disponible públicamente.
     private_with_claims:
       unit:
         one: "specimen was claimed or attributed, but this profile has not yet been made publicly available."
