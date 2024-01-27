@@ -83,7 +83,7 @@ module Bionomia
       end
       tmp_csv.close
       system("sort -n #{tmp_csv.path} | uniq > #{tmp_csv.path}.tmp && mv #{tmp_csv.path}.tmp #{tmp_csv.path} > /dev/null 2>&1")
-      system("cat #{tmp_csv.path} | parallel --pipe -N 10000 'cat > #{tmp_csv.path}-{#}.csv' > /dev/null 2>&1")
+      system("cat #{tmp_csv.path} | parallel --pipe -N 100000 'cat > #{tmp_csv.path}-{#}.csv' > /dev/null 2>&1")
       File.unlink(tmp_csv.path)
       Dir.glob(File.dirname(tmp_csv) + "/**/#{File.basename(tmp_csv.path)}*.csv")
     end

@@ -47,9 +47,6 @@ module Bionomia
       article.process_status = 2
       article.processed = true
       article.save
-      article.claimants.each do |user|
-        user.flush_caches
-      end
     end
 
     def process_articles
@@ -133,7 +130,7 @@ module Bionomia
             dwc.core.read(2_500) do |data, errors|
               records = data.map{|a| { article_id: article.id, occurrence_id: a[gbifID].to_i } if a[basisOfRecord] != "HUMAN_OBSERVATION" }
                             .compact
-              ArticleOccurrence.import records, on_duplicate_key_ignore: true, validate: true
+              ArticleOccurrence.import records, on_duplicate_key_ignore: true, validate: false
             end
           rescue
             tmp_csv = Tempfile.new(['gbif_csv', '.zip'])
@@ -142,16 +139,19 @@ module Bionomia
               if entry
                 entry.extract(tmp_csv)
                 #WARNING: requires GNU parallel to split CSV files
-                system("cat #{tmp_csv.path} | parallel --header : --pipe -N 2500 'cat > #{tmp_csv.path}-{#}.csv' > /dev/null 2>&1")
-                items = []
+                system("cat #{tmp_csv.path} | parallel --header : --pipe -N 50000 'cat > #{tmp_csv.path}-{#}.csv' > /dev/null 2>&1")
                 all_files = Dir.glob(File.dirname(tmp_csv) + "/**/#{File.basename(tmp_csv.path)}*.csv")
                 all_files.each do |csv|
+                  items = []
                   CSV.foreach(csv, headers: :first_row, col_sep: "\t", liberal_parsing: true, quote_char: "\x00") do |row|
                     occurrence_id = row["gbifid"] || row["gbifID"]
                     next if occurrence_id.nil? || row["basisOfRecord"] == "HUMAN_OBSERVATION"
-                    items << ArticleOccurrence.new(article_id: article.id, occurrence_id: occurrence_id)
+                    items << [ article.id, occurrence_id ]
                   end
-                  ArticleOccurrence.import items, on_duplicate_key_ignore: true, validate: true
+                  items.each_slice(2_500) do |group|
+                    ArticleOccurrence.import [:article_id, :occurrence_id], group, on_duplicate_key_ignore: true, validate: false
+                  end
+                  items = []
                   File.unlink(csv)
                 end
               end
