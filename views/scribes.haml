@@ -13,7 +13,7 @@
       %p.lead.text-muted
         = I18n.t('scribes.lede', scribe_count: number_with_delimiter(@stats_scribes[:scribe_count]), attribution_count: number_to_human(@stats_scribes[:attribution_count]), recipient_count: number_with_delimiter(@stats_scribes[:recipient_count]))
 
-- @results.in_groups_of(3).each do |group|
+- @results.in_groups_of(3) do |group|
   .card-deck
     - group.each do |u|
       - if u.nil?

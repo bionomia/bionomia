@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
     elsif !dest.nil?
       src_occurrences = src.user_occurrences.pluck(:occurrence_id)
       dest_occurrences = dest.user_occurrences.pluck(:occurrence_id) rescue []
-      (src_occurrences - dest_occurrences).in_groups_of(1_000, false) do |group|
+      (src_occurrences - dest_occurrences).each_slice(2_500) do |group|
         src.user_occurrences
            .where(occurrence_id: group)
            .update_all({ user_id: dest.id })

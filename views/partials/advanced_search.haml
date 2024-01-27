@@ -119,7 +119,7 @@
       %span.font-weight-bold #{h(params[:dataset])}
     Click dataset card below to add a filter.
 
-  - @dataset_results.in_groups_of(3).each do |group|
+  - @dataset_results.in_groups_of(3) do |group|
     .card-deck
       - group.each do |d|
         - if d.nil?
@@ -161,7 +161,7 @@
     Click Family below to add a filter.
 
   .row
-    - @taxon_results.in_groups_of(25, false).each do |group|
+    - @taxon_results.each_slice(25) do |group|
       .col-12.col-md-3.mb-3
         %ul.list-unstyled.m-2
           - group.each do |o|
@@ -181,7 +181,7 @@
     Click agent string below to add a search.
 
   .row
-    - @agent_results.in_groups_of(25, false).each do |group|
+    - @agent_results.each_slice(25) do |group|
       .col-12.col-md-3.mb-3
         %ul.list-unstyled.m-2
           - group.each do |a|

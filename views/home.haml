@@ -48,7 +48,7 @@
   = I18n.t('home.sample_profiles')
 
 - cache_fragment("homepage_profiles_#{I18n.locale}") do
-  - example_profiles.in_groups_of(3).each do |group|
+  - example_profiles.each_slice(3) do |group|
     .card-deck
       - group.each do |u|
         - if !u.nil?

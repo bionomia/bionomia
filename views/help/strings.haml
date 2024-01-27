@@ -15,7 +15,7 @@
   .alert.alert-info.tiny-margins{role: "alert"}= I18n.t('user.no_specimens')
 - else
   .row
-    - @results.in_groups_of(25, false).each do |group|
+    - @results.eaach_slice(25) do |group|
       .col-12.col-lg-6.mb-3
         %ul.list-group.mt-3
           - group.each do |k,v|

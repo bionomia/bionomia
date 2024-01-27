@@ -130,10 +130,10 @@ module Bionomia
             dwc = DarwinCore.new(tmp_file.path)
             gbifID = dwc.core.fields.select{|term| term[:term].include?("gbifID")}[0][:index]
             basisOfRecord = dwc.core.fields.select{|term| term[:term].include?("basisOfRecord")}[0][:index]
-            dwc.core.read(1000) do |data, errors|
+            dwc.core.read(2_500) do |data, errors|
               records = data.map{|a| { article_id: article.id, occurrence_id: a[gbifID].to_i } if a[basisOfRecord] != "HUMAN_OBSERVATION" }
                             .compact
-              ArticleOccurrence.import records, batch_size: 1_000, on_duplicate_key_ignore: true, validate: true
+              ArticleOccurrence.import records, on_duplicate_key_ignore: true, validate: true
             end
           rescue
             tmp_csv = Tempfile.new(['gbif_csv', '.zip'])
@@ -142,7 +142,7 @@ module Bionomia
               if entry
                 entry.extract(tmp_csv)
                 #WARNING: requires GNU parallel to split CSV files
-                system("cat #{tmp_csv.path} | parallel --header : --pipe -N 50000 'cat > #{tmp_csv.path}-{#}.csv' > /dev/null 2>&1")
+                system("cat #{tmp_csv.path} | parallel --header : --pipe -N 2500 'cat > #{tmp_csv.path}-{#}.csv' > /dev/null 2>&1")
                 items = []
                 all_files = Dir.glob(File.dirname(tmp_csv) + "/**/#{File.basename(tmp_csv.path)}*.csv")
                 all_files.each do |csv|
@@ -151,7 +151,7 @@ module Bionomia
                     next if occurrence_id.nil? || row["basisOfRecord"] == "HUMAN_OBSERVATION"
                     items << ArticleOccurrence.new(article_id: article.id, occurrence_id: occurrence_id)
                   end
-                  ArticleOccurrence.import items, batch_size: 10_000, on_duplicate_key_ignore: true, validate: true
+                  ArticleOccurrence.import items, on_duplicate_key_ignore: true, validate: true
                   File.unlink(csv)
                 end
               end

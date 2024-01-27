@@ -20,7 +20,7 @@
       .alert.alert-info.tiny-margins{role: "alert"}
         #{number_to_human(@pagy.count, units: :'dataset.agents_alert', delimiter: ",", precision: 0)}
       .row
-        - @results.in_groups_of(25, false).each do |group|
+        - @results.each_slice(25) do |group|
           .col-12.col-sm-3.mb-3
             %ul.list-unstyled.m-2
               - group.each do |a|

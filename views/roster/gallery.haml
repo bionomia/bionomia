@@ -16,7 +16,7 @@
 
 = haml :'partials/roster/pills', layout: false, locals: locals
 
-- @results.in_groups_of(6).each do |group|
+- @results.in_groups_of(6) do |group|
   .card-deck
     - group.each do |u|
       - if u.nil?

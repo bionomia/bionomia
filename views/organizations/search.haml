@@ -35,7 +35,7 @@
         %i.fas.fa-minus-circle
         #{I18n.t('general.remove')}
 
-  - @results.in_groups_of(3).each do |group|
+  - @results.in_groups_of(3) do |group|
     .card-deck
       - group.each do |o|
         - if o.nil?

@@ -22,7 +22,7 @@
   .alert.alert-info.tiny-margins{role: "alert"}
     #{number_to_human(@pagy.count, units: :'article.claims_alert', delimiter: ",", precision: 0)}
 
-  - @results.in_groups_of(3).each do |group|
+  - @results.in_groups_of(3) do |group|
     .card-deck.mt-3
       - group.each do |u|
         - if u.nil?

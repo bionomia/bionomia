@@ -25,7 +25,7 @@
   #helper-info.alert.alert-info.row.tiny-margins{role: "alert"}
     Binomia scribes have sent their appreciation.
 
-  - @results.in_groups_of(3).each do |group|
+  - @results.in_groups_of(3) do |group|
     .card-deck
       - group.each do |m|
         - if m.nil?

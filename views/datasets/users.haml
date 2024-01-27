@@ -48,7 +48,7 @@
             %img{src:"/images/frictionless.png", alt:"Frictionless Data"}
             Frictionless Data
 
-      - @results.in_groups_of(3).each do |group|
+      - @results.in_groups_of(3) do |group|
         .card-deck
           - group.each do |u|
             - if u.nil?

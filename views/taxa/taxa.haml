@@ -17,7 +17,7 @@
 - if !@pagy
   %h3= I18n.t('taxa.example_families')
   .row
-    - @results.in_groups_of(25, false).each do |group|
+    - @results.each_slice(25) do |group|
       .col-12.col-sm-3.mb-3
         %ul.list-group.m-2
           - group.each do |t|
@@ -48,7 +48,7 @@
         #{I18n.t('general.remove')}
 
   .row
-    - @taxon_results.in_groups_of(25, false).each do |group|
+    - @taxon_results.each_slice(25) do |group|
       .col-12.col-md-3.mb-3
         %ul.list-group.m-2
           - group.each do |o|

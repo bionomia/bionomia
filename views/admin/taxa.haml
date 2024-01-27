@@ -54,7 +54,7 @@
       #{h(params[:q])}
 
   .row
-    - @taxon_results.in_groups_of(25, false).each do |group|
+    - @taxon_results.each_slice(25) do |group|
       .col-12.col-md-3.mb-3
         %ul.list-group.m-2
           - group.each do |o|

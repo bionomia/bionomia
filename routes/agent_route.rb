@@ -32,7 +32,7 @@ module Sinatra
                                      .pluck(:occurrence_id)
             lines = params[:gbifids].split("\r\n")[0..50_000]
             agent_data = {}
-            lines.in_groups_of(100, false).each do |group|
+            lines.each_slice(100) do |group|
               cols = OccurrenceRecorder
                             .joins(:occurrence)
                             .where(occurrence_id: group)

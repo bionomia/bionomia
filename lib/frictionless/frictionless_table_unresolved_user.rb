@@ -64,7 +64,7 @@ module Bionomia
     def write_table_rows
       occurrence_files.each do |csv|
         occurrence_ids = CSV.read(csv).flatten
-        occurrence_ids.in_groups_of(1_000, false).each do |group|
+        occurrence_ids.each_slice(2_500) do |group|
           Occurrence.where(id: group)
                     .where.missing(:user_occurrences)
                     .pluck(:id, :recordedBy, :recordedByID)

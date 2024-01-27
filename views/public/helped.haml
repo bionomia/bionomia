@@ -21,7 +21,7 @@
           #{number_to_human(@stats[:attributions][:number], units: :'user.stats_attributions_specimens', delimiter: ",", precision: 0)}
           #{number_to_human(@stats[:attributions][:helped], units: :'user.stats_attributions_people', delimiter: ",", precision: 0)}
 
-        - @results.in_groups_of(2).each do |group|
+        - @results.in_groups_of(2) do |group|
           .card-deck
             - group.each do |u|
               - if u.nil?

@@ -27,7 +27,7 @@
     %i.fas.fa-filter
     = link_to "has dwc:recordedByID or dwc:identifiedByID", url("/datasets?has_identifiers=true")
 
-- @results.in_groups_of(3).each do |group|
+- @results.in_groups_of(3) do |group|
   .card-deck
     - group.each do |dataset|
       - if dataset.nil?

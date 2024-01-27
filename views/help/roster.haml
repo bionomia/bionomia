@@ -38,7 +38,7 @@
       = I18n.t('help.search_count', count: @pagy.count, search: h(params[:q]))
     = I18n.t('help.add_someone_html', href: link_to(I18n.t('help.add_someone_href'), url('/help-others/add')))
 
-- @results.in_groups_of(3).each do |group|
+- @results.in_groups_of(3) do |group|
   .card-deck
     - group.each do |user|
       - if user.nil?

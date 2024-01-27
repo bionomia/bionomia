@@ -27,7 +27,7 @@
           #{number_to_human(@pagy.count, units: :'organization.current_members_count', delimiter: ",", precision: 0)}
         - else
           #{number_to_human(@pagy.count, units: :'organization.past_members_count', delimiter: ",", precision: 0)}
-      - @results.in_groups_of(3).each do |group|
+      - @results.in_groups_of(3) do |group|
         .card-deck
           - group.each do |u|
             - if u.nil?

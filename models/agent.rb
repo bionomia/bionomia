@@ -79,7 +79,7 @@ class Agent < ActiveRecord::Base
 
   def recordings_with
     colleagues = Set.new
-    occurrence_recorders.pluck(:occurrence_id).in_groups_of(500, false).each do |group|
+    occurrence_recorders.pluck(:occurrence_id).each_slice(500) do |group|
       agents = Agent.joins(:occurrence_recorders)
                     .where(occurrence_recorders: { occurrence_id: group }).uniq
       colleagues.merge(agents)

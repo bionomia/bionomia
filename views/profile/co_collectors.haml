@@ -15,7 +15,7 @@
 - else
   .alert.alert-info.tiny-margins{role: "alert"}= I18n.t('profile.co_collectors_alert')
 
-  - @results.in_groups_of(4).each do |group|
+  - @results.in_groups_of(4) do |group|
     .card-deck
       - group.each do |u|
         - if u.nil?

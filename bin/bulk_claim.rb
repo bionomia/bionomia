@@ -77,9 +77,9 @@ if options[:file]
     end
 
     next if User::BOT_IDS.include?(all_users[row["identifier"]])
-    row["occurrence_ids"].tr('[]', '').split(',').in_groups_of(5_000, false) do |group|
+    row["occurrence_ids"].tr('[]', '').split(',').each_slice(2_500) do |group|
       import = group.map{|r| [ r.to_i, all_users[row["identifier"]], row["action"], User::GBIF_AGENT_ID ] }
-      UserOccurrence.import [:occurrence_id, :user_id, :action, :created_by], import, batch_size: 5000, validate: false, on_duplicate_key_ignore: true
+      UserOccurrence.import [:occurrence_id, :user_id, :action, :created_by], import, validate: false, on_duplicate_key_ignore: true
     end
   end
 
