@@ -3,7 +3,7 @@
 module Bionomia
   class TaxonWorker
     include Sidekiq::Job
-    sidekiq_options queue: :taxon, retry: 3
+    sidekiq_options queue: :default, retry: 3
 
     def perform(row)
       taxon = Taxon.create_or_find_by(family: row["family"].to_s.strip)

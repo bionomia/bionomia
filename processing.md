@@ -20,23 +20,23 @@ Unfortunately, gbifIDs are not persistent. These occasionally disappear through 
 
       $ RACK_ENV=production bundle exec ./bin/populate_agents.rb --truncate --directory /directory-to-spark-csv-files/
       # Can start 2+ workers, each with 40 threads to help speed-up processing
-      $ RACK_ENV=production bundle exec sidekiq -c 40 -q agent -r ./application.rb
+      $ RACK_ENV=production bundle exec sidekiq -C config/settings/sidekiq.yml -c 40 -r ./application.rb
 
 ### Step 4: Populate Taxa
 
      $ RACK_ENV=production bundle exec ./bin/populate_taxa.rb --truncate --directory /directory-to-spark-csv-files/
      # Can start 2+ workers, each with 40 threads to help speed-up processing
-     $ RACK_ENV=production bundle exec sidekiq -c 40 -q taxon -r ./application.rb
+     $ RACK_ENV=production bundle exec sidekiq -C config/settings/sidekiq.yml -c 40 -r ./application.rb
 
 ### Step 5: Import Existing recordedByID and identifiedByID
 
 First, import all users and user_occurrences content from production.
 
      $ RACK_ENV=production bundle exec ./bin/populate_existing_claims.rb --truncate --directory /directory-to-spark-csv-files/
-     # Can start 2+ workers, each with 40 threads to help speed-up processing
+     # Can start 2+ sidekiq processes, each with 40 threads to help speed-up processing
      # might need to increase ulimit
      $ ulimit -n 8192
-     $ RACK_ENV=production bundle exec sidekiq -c 2 -q existing_claims -r ./application.rb
+     $ RACK_ENV=production bundle exec sidekiq -C config/settings/sidekiq.yml -c 40 -r ./application.rb
 
 Export a csv pivot table (for import performance) of all claims made by User::GBIF_AGENT_ID.
 
@@ -73,7 +73,7 @@ Or from scratch:
      # RACK_ENV=production bundle exec ./bin/populate_search.rb --indices user
      $ RACK_ENV=production bundle exec ./bin/populate_occurrence_count.rb -t -a -j
      # Can start 2+ workers, each with 40 threads to help speed-up processing
-     $ RACK_ENV=production bundle exec sidekiq -c 40 -q occurrence_count -r ./application.rb
+     $ RACK_ENV=production bundle exec sidekiq -C config/settings/sidekiq.yml -c 40 -r ./application.rb
 
 ### Step 9: Rebuild the Frictionless Data Packages
 

@@ -3,7 +3,7 @@
 module Bionomia
   class OccurrenceCountWorker
     include Sidekiq::Job
-    sidekiq_options queue: :occurrence_count, retry: 3
+    sidekiq_options queue: :default, retry: 3
 
     def perform(row)
       occurrence_count = OccurrenceCount.find(row["id"])

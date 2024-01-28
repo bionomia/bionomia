@@ -3,7 +3,7 @@
 module Bionomia
   class ExistingClaimsWorker
     include Sidekiq::Job
-    sidekiq_options queue: :existing_claims, retry: 3
+    sidekiq_options queue: :default, retry: 3
 
     def perform(row)
       id = row["user_id"]

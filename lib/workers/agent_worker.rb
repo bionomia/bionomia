@@ -3,7 +3,7 @@
 module Bionomia
   class AgentWorker
     include Sidekiq::Job
-    sidekiq_options queue: :agent, retry: 3
+    sidekiq_options queue: :default, retry: 3
 
     def perform(row)
       agents = DwcAgent.parse(row["agents"])

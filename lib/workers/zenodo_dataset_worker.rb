@@ -3,7 +3,7 @@
 module Bionomia
    class ZenodoDatasetWorker
       include Sidekiq::Job
-      sidekiq_options queue: :zenodo_dataset, retry: 1
+      sidekiq_options queue: :default, retry: 1
  
       def perform(row)
          @dataset = Dataset.find(row["id"]) rescue nil

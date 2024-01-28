@@ -3,7 +3,7 @@
 module Bionomia
    class ZenodoUserWorker
       include Sidekiq::Job
-      sidekiq_options queue: :zenodo_user, retry: 1
+      sidekiq_options queue: :critical, retry: 1
  
       def perform(row)
          @user = User.find(row["id"]) rescue nil
