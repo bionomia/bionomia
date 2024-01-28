@@ -14,6 +14,7 @@ config.yml
 config/settings/test.yml
 config/settings/development.yml
 config/settings/production.yml
+config/settings/sidekiq.yml
 metastore_db
 derby.log
 agents-unioned-csv
