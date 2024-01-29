@@ -79,7 +79,7 @@ module Bionomia
       rows = mysql2.query(query, stream: true, cache_rows: false)
       tmp_csv = File.new(File.join(File.dirname(@csv_handle.path), "mismatch_tmp.csv"), "ab")
       CSV.open(tmp_csv.path, 'w') do |csv|
-        rows.each { |row| csv << [row[0]] if row[1] == 1 }
+        rows.each { |row| csv << [row[0]] if row[1] == 0 }
       end
       tmp_csv.close
       system("sort -n #{tmp_csv.path} | uniq > #{tmp_csv.path}.tmp && mv #{tmp_csv.path}.tmp #{tmp_csv.path} > /dev/null 2>&1")
