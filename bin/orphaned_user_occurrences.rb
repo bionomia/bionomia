@@ -40,8 +40,12 @@ if options[:file]
             .pluck(:id)
     if ids.length > 0
       UserOccurrence.where(id: ids).order(id: :desc).delete_all
-      user.flush_caches
-      puts row[:identifier].red
+      begin
+        user.flush_caches
+        puts row[:identifier].green
+      rescue
+        puts "#{row[:identifier]} did not flush_caches".red
+      end
     end
   end
 end
