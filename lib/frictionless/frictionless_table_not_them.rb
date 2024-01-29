@@ -70,16 +70,16 @@ module Bionomia
     def occurrence_files
       #Note: use full user_occurrences hash in where clause because of a bug in ActiveRecord
       return [] if !datasetKey
-      query = UserOccurrence.select(:occurrence_id)
+      query = UserOccurrence.select(:occurrence_id, :visible)
                             .joins(:occurrence)
                             .where(occurrence: { datasetKey: datasetKey })
-                            .where(user_occurrences: { visible: false })
+                            .unscope(:order)
                             .to_sql
       mysql2 = ActiveRecord::Base.connection.instance_variable_get(:@connection)
       rows = mysql2.query(query, stream: true, cache_rows: false)
       tmp_csv = File.new(File.join(File.dirname(@csv_handle.path), "mismatch_tmp.csv"), "ab")
       CSV.open(tmp_csv.path, 'w') do |csv|
-        rows.each { |row| csv << row }
+        rows.each { |row| csv << [row[0]] if row[1] == 1 }
       end
       tmp_csv.close
       system("sort -n #{tmp_csv.path} | uniq > #{tmp_csv.path}.tmp && mv #{tmp_csv.path}.tmp #{tmp_csv.path} > /dev/null 2>&1")

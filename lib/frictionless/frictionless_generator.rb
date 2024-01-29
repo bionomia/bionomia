@@ -83,16 +83,16 @@ module Bionomia
     # This is a bit bizarre, but is more performant than heaps of
     # expensive activerecord objects that each require these same gbifIDs
     def create_occurrence_files
-      query = Occurrence.select(:gbifID)
+      query = Occurrence.select(:gbifID, :visible)
                         .joins(:user_occurrences)
                         .where(datasetKey: @dataset.uuid)
-                        .where(user_occurrences: { visible: true })
+                        .unscope(:order)
                         .to_sql
       mysql2 = ActiveRecord::Base.connection.instance_variable_get(:@connection)
       rows = mysql2.query(query, stream: true, cache_rows: false)
       tmp_csv = File.new(File.join(@folder, "frictionless_tmp.csv"), "ab")
       CSV.open(tmp_csv.path, 'w') do |csv|
-        rows.each { |row| csv << row }
+        rows.each { |row| csv << [row[0]] if row[1] == 1 }
       end
       tmp_csv.close
       system("sort -n #{tmp_csv.path} | uniq > #{tmp_csv.path}.tmp && mv #{tmp_csv.path}.tmp #{tmp_csv.path} > /dev/null 2>&1")
