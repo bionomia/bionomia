@@ -53,7 +53,9 @@ CREATE TABLE `datasets` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `frictionless_created_at` timestamp NULL DEFAULT NULL,
   `occurrences_count` int UNSIGNED NOT NULL DEFAULT '0',
-  `source_attribution_count` int UNSIGNED NOT NULL DEFAULT '0'
+  `source_attribution_count` int UNSIGNED NOT NULL DEFAULT '0',
+  `zenodo_doi` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  `zenodo_concept_doi` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `destroyed_users` (
