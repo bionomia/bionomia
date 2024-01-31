@@ -115,6 +115,7 @@ module Bionomia
 
     def process_data_packages(article)
       article.gbif_downloadkeys.each do |key|
+        Thread.pass
         if datapackage_file_size(key) < @max_size
           tmp_file = Tempfile.new(['gbif', '.zip'])
           zip = RestClient.get("#{@package_url}#{key}.zip") rescue nil

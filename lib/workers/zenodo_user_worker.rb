@@ -78,8 +78,12 @@ module Bionomia
             id = doi_id[:recid]
 
             # PUT the files & publish
+            Thread.pass
             z.add_file(file_path: csv.path, file_name: user.identifier + ".csv")
+            
+            Thread.pass
             z.add_file(file_path: json.path, file_name: user.identifier + ".json")
+
             pub = z.publish(id: id)
       
             user.zenodo_doi = pub[:doi]
@@ -120,12 +124,17 @@ module Bionomia
             id = doi_id[:recid]
             files = z.list_files(id: id).map{|f| f[:id]}
             files.each do |file_id|
+               Thread.pass
                z.delete_file(id: id, file_id: file_id)
             end
       
             # PUT the files & publish
+            Thread.pass
             z.add_file(file_path: csv.path, file_name: user.identifier + ".csv")
+
+            Thread.pass
             z.add_file(file_path: json.path, file_name: user.identifier + ".json")
+
             pub = z.publish(id: id)
       
             if !pub[:doi].nil?

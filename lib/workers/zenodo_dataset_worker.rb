@@ -34,6 +34,7 @@ module Bionomia
             id = doi_id[:recid]
 
             Dir.glob(File.join(@directory, "*.{json,zip}")).each do |file|
+               Thread.pass
                z.add_file(file_path: file)
             end
             pub = z.publish(id: id)
@@ -62,10 +63,12 @@ module Bionomia
             id = doi_id[:recid]
             files = z.list_files(id: id).map{|f| f[:id]}
             files.each do |file_id|
+               Thread.pass
                z.delete_file(id: id, file_id: file_id)
             end
       
             Dir.glob(File.join(@directory, "*.{json,zip}")).each do |file|
+               Thread.pass
                z.add_file(file_path: file)
             end
             pub = z.publish(id: id)
