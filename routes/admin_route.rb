@@ -61,9 +61,16 @@ module Sinatra
 
             get '/article/:id/process.json' do
               content_type "application/json", charset: 'utf-8'
-              vars = { id: params[:id] }.stringify_keys
-              ::Bionomia::ArticleWorker.perform_async(vars)
-              { message: "ok" }.to_json
+              article = Article.find(params[:id]) rescue nil
+              if article
+                vars = { id: params[:id] }.stringify_keys
+                ::Bionomia::ArticleWorker.perform_async(vars)
+                article.process_status = 1
+                article.save
+                { message: "ok" }.to_json
+              else
+                { message: "failed" }.to_json
+              end
             end
 
             get '/article/:id' do
