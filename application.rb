@@ -31,14 +31,28 @@ class BIONOMIA < Sinatra::Base
   Pagy::DEFAULT[:overflow] = :last_page
 
   Sidekiq.configure_server do |config|
-    size = Settings.redis_url.include?("localhost") ? 120 : 1
-    config.redis = { url: Settings.redis_url, network_timeout: 5, size: size }
+    size = Settings.redis_url.include?("localhost") ? 120 : 2
+    config.redis = { 
+      url: Settings.redis_url,
+      network_timeout: 5,
+      size: size,
+      ssl_params: {
+        verify_mode: OpenSSL::SSL::VERIFY_NONE
+      }
+    }
     config.average_scheduled_poll_interval = 30
   end
   
   Sidekiq.configure_client do |config|
-    size = Settings.redis_url.include?("localhost") ? 120 : 1
-    config.redis = { url: Settings.redis_url, network_timeout: 5, size: size }
+    size = Settings.redis_url.include?("localhost") ? 120 : 2
+    config.redis = { 
+      url: Settings.redis_url,
+      network_timeout: 5,
+      size: size,
+      ssl_params: {
+        verify_mode: OpenSSL::SSL::VERIFY_NONE
+      }
+    }
   end
 
   not_found do
