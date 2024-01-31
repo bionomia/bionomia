@@ -17,10 +17,10 @@
       %a{href: "#{@dataset.license}"}
         %img{src:"#{@dataset.license_icon}", alt: ""}
 
-  - if @dataset.doi
+  - if @dataset.zenodo_concept_doi
     %p.mb-1
-      %a{href: "https://doi.org/#{@dataset.doi}"}
-        %img{src:"/images/#{@dataset.doi}.svg", alt: ""}
+      %a{href: "https://doi.org/#{@dataset.zenodo_concept_doi}"}
+        %img{src:"/images/#{@dataset.zenodo_concept_doi}.svg", alt: ""}
 
   %p.mb-1
     %img{src: "https://api.bionomia.net/dataset/#{@dataset.uuid}/badge.svg", alt: "Click to get badge html", width:"210", height:"20"}
