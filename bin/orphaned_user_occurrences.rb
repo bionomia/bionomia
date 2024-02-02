@@ -64,8 +64,7 @@ if options[:orphaned] && options[:directory]
                           .group(:user_id)
                           .each do |item|
       user = User.find(item[:user_id])
-      attributors = item[:user_ids].tr('[]', '')
-                      .split(',')
+      attributors = YAML.load(item[:user_ids])
                       .uniq
                       .map{|u| User.find(u).viewname}
                       .uniq

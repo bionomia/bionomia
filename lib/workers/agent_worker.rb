@@ -21,16 +21,12 @@ module Bionomia
           family: family,
           given: given
         })
-        row["gbifIDs_recordedBy"]
-          .tr('[]', '')
-          .split(',')
+        YAML.load(row["gbifIDs_recordedBy"])
           .each_slice(2_500) do |group|
             import = group.map{|r| [ r.to_i, agent.id ] }
             OccurrenceRecorder.import [:occurrence_id, :agent_id], import, validate: false, on_duplicate_key_ignore: true
           end
-        row["gbifIDs_identifiedBy"]
-          .tr('[]', '')
-          .split(',')
+        YAML.load(row["gbifIDs_identifiedBy"])
           .each_slice(2_500) do |group|
             import = group.map{|r| [ r.to_i, agent.id ] }
             OccurrenceDeterminer.import [:occurrence_id, :agent_id], import, validate: false, on_duplicate_key_ignore: true
