@@ -26,7 +26,7 @@
         %dt.col-sm-2 Silhouette:
         %dd.col-sm-10
           - if @taxon.has_image?
-            %img{src:"/images/taxa/#{@taxon.image.file_name}"}
+            %img{src:"#{taxon_image(@taxon)}"}
           - else
             None
         %dt.col-sm-2 Credit:

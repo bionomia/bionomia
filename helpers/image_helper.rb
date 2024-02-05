@@ -84,9 +84,11 @@ module Sinatra
            if size == "thumbnail"
              query = "&width=24"
            end
-           taxon_image = TaxonImage.find_by_family(taxon) rescue nil
-           if taxon_image
-             src = "?src=" + CGI.escapeURIComponent(Settings.base_url + "/images/taxa/" + taxon_image.file_name)
+           if taxon.kind_of?(String)
+            taxon = Taxon.find_by_family(taxon) rescue nil
+           end
+           if taxon && taxon.has_image?
+             src = "?src=" + CGI.escapeURIComponent(Settings.base_url + "/images/taxa/" + taxon.image.file_name)
              img = cloud_img + src + query
            end
            img
