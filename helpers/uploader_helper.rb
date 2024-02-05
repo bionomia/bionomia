@@ -70,7 +70,7 @@ module Sinatra
             if ["image/jpeg", "image/png"].include?(mime_encoding[0]) && tempfile.size <= 5_000_000
               extension = File.extname(tempfile.path)
               filename = File.basename(tempfile.path, extension)
-              new_name = Digest::MD5.hexdigest(filename) + extension
+              new_name = Digest::MD5.hexdigest(filename + Time.now.to_s) + extension
               FileUtils.chmod 0755, tempfile
               FileUtils.mv(tempfile, File.join(root, "public", "images", "users", new_name))
             else
