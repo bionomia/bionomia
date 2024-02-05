@@ -2,7 +2,7 @@
   .mr-auto.p-2
     - if @taxon.has_image?
       .media
-        %img.mr-4{src: "#{taxon_image(@taxon}", alt:"#{@taxon.family}"}
+        %img.mr-4{src: "#{taxon_image(@taxon)}", alt:"#{@taxon.family}"}
         .media-body
           %h1.h2.mt-0 #{@taxon.family}
           %p.lead.text-muted
