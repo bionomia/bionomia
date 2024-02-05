@@ -29,7 +29,7 @@ module Sinatra
                img = cloud_img + src + query
              end
            else
-             src = CGI.escapeURIComponent(Settings.base_url + "/images/photo.png")
+             src = "?src=" + CGI.escapeURIComponent(Settings.base_url + "/images/photo.png")
              img = cloud_img + src + query
            end
            img
