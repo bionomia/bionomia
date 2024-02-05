@@ -151,7 +151,7 @@ module Sinatra
           if @dataset.image_url
             descriptor.merge!(
               {
-                image: "https://abekpgaoen.cloudimg.io/bound/350x200/q100/#{@dataset.image_url}"
+                image: "#{@dataset.image_url}"
               }
             )
           end
@@ -165,6 +165,13 @@ module Sinatra
                 }
               }
             )
+          end
+          if @dataset.zenodo_concept_doi
+            descriptor[:identifier] << {
+              "@type": "PropertyValue",
+                propertyID: "doi",
+                value: "https://doi.org/#{@dataset.zenodo_concept_doi}"
+            }
           end
           descriptor
         end

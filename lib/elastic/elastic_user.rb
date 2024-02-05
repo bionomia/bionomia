@@ -5,6 +5,8 @@ module Bionomia
   class ElasticUser < ElasticIndexer
 
     def initialize(opts = {})
+      @img = Class.new
+      @img.extend Sinatra::Bionomia::Helper::ImageHelper
       super
       @settings = { index: Settings.elastic.user_index }.merge(opts)
     end
@@ -210,33 +212,6 @@ module Bionomia
       end
     end
 
-    def thumbnail(u)
-      img = Settings.base_url + "/images/photo24X24.png"
-      cloud_img = "https://abekpgaoen.cloudimg.io/crop/24x24/n/"
-      if u.image_url
-        if u.wikidata
-          img =  cloud_img + u.image_url
-        else
-          img = cloud_img + Settings.base_url + "/images/users/" + u.image_url
-        end
-      end
-      img
-    end
-
-    def image(u)
-      img = nil
-      if u.image_url
-        path = "?height=200&org_if_sml=1"
-        cloud_img = "https://abekpgaoen.cloudimg.io/v7/"
-        if u.wikidata
-          img =  cloud_img + u.image_url.sub("https://", "") + path
-        else
-          img = cloud_img + URI(Settings.base_url).host + "/images/users/" + u.image_url + path
-        end
-      end
-      img
-    end
-
     def document(u)
       description = nil
       if u.description
@@ -263,8 +238,8 @@ module Bionomia
         date_born_precision: u.date_born_precision,
         date_died: u.date_died,
         date_died_precision: u.date_died_precision,
-        thumbnail: thumbnail(u),
-        image: image(u),
+        thumbnail: @img.profile_image(u, "thumbnail"),
+        image: @img.profile_image(u),
         description: description,
         is_public: u.is_public,
         has_occurrences: (u.has_recordings? || u.has_identifications?),

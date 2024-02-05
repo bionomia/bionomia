@@ -37,7 +37,7 @@
           - if dataset.image_url
             .card-header.d-flex
               %div
-                %img.mr-2.rounded{src:"https://abekpgaoen.cloudimg.io/crop/48x48/n/#{dataset.image_url}", width:48, height:48, alt:"#{dataset.title}", loading:"lazy"}
+                %img.mr-2.rounded{src:"#{dataset_image(dataset, "crop")}", width:48, height:48, alt:"#{dataset.title}", loading:"lazy"}
               .flex-grow-1
                 %h5
                   = link_to h(dataset.title), url("/dataset/#{dataset.uuid}")
