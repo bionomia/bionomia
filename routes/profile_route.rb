@@ -241,7 +241,7 @@ module Sinatra
             end
 
             get '/download.csv' do
-              records = @user.visible_occurrences
+              records = @user.visible_occurrences.includes(:claimant)
               csv_stream_headers(@user.orcid)
               io = ::Bionomia::IO.new
               body io.csv_stream_occurrences(records)

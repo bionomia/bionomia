@@ -38,12 +38,14 @@ module Bionomia
         y << CSV::Row.new(header, header, true).to_s
         if !occurrences.empty?
           occurrences.find_each do |o|
-            attributes = o.attributes
-            ignored_cols.each do |col|
-              attributes.delete(col)
+            attributes = o.attributes rescue nil
+            if attributes
+              ignored_cols.each do |col|
+                attributes.delete(col)
+              end
+              data = attributes.values
+              y << CSV::Row.new(header, data).to_s
             end
-            data = attributes.values
-            y << CSV::Row.new(header, data).to_s
           end
         end
       end
@@ -74,13 +76,15 @@ module Bionomia
         y << CSV::Row.new(header, header, true).to_s
         if !occurrences.empty?
           occurrences.find_each do |o|
-            attributes = o.occurrence.attributes
-            ignored_cols.each do |col|
-              attributes.delete(col)
+            attributes = o.occurrence.attributes rescue nil
+            if attributes
+              ignored_cols.each do |col|
+                attributes.delete(col)
+              end
+              data = attributes.values
+              data.unshift article.doi
+              y << CSV::Row.new(header, data).to_s
             end
-            data = attributes.values
-            data.unshift article.doi
-            y << CSV::Row.new(header, data).to_s
           end
         end
       end
@@ -93,13 +97,15 @@ module Bionomia
         y << CSV::Row.new(header, header, true).to_s
         if !occurrences.empty?
           occurrences.find_each do |o|
-            attributes = o.occurrence.attributes
-            ignored_cols.each do |col|
-              attributes.delete(col)
+            attributes = o.occurrence.attributes rescue nil
+            if attributes
+              ignored_cols.each do |col|
+                attributes.delete(col)
+              end
+              data = [o.action].concat(attributes.values)
+                               .concat([o.claimant.viewname, o.claimant.uri, o.created])
+              y << CSV::Row.new(header, data).to_s
             end
-            data = [o.action].concat(attributes.values)
-                             .concat([o.claimant.viewname, o.claimant.uri, o.created])
-            y << CSV::Row.new(header, data).to_s
           end
         end
       end
@@ -112,13 +118,15 @@ module Bionomia
         y << CSV::Row.new(header, header, true).to_s
         if !occurrences.empty?
           occurrences.each do |o|
-            attributes = o.occurrence.attributes
-            ignored_cols.each do |col|
-              attributes.delete(col)
+            attributes = o.occurrence.attributes rescue nil
+            if attributes
+              ignored_cols.each do |col|
+                attributes.delete(col)
+              end
+              data = [""].concat(attributes.values)
+                         .concat([""])
+              y << CSV::Row.new(header, data).to_s
             end
-            data = [""].concat(attributes.values)
-                       .concat([""])
-            y << CSV::Row.new(header, data).to_s
           end
         end
       end
@@ -243,23 +251,29 @@ module Bionomia
       end
 
       items = results.map do |o|
-        { "@type": "PreservedSpecimen",
-          "@id": "#{Settings.base_url}/occurrence/#{o.occurrence.id}",
-          sameAs: "#{o.occurrence.uri}"
-        }.merge(o.occurrence.attributes.reject {|column| ignored_cols(false).include?(column)})
-        .merge({ license: o.occurrence.license_uri })
+        attributes = o.occurrence.attributes rescue nil
+        if attributes
+            { "@type": "PreservedSpecimen",
+            "@id": "#{Settings.base_url}/occurrence/#{o.occurrence.id}",
+            sameAs: "#{o.occurrence.uri}"
+            }.merge(attributes.reject {|column| ignored_cols(false).include?(column)})
+             .merge({ license: o.occurrence.license_uri })
+        end
       end
-      { metadata: metadata, results: items }
+      { metadata: metadata, results: items.compact }
     end
 
     def jsonld_occurrences_enum(type = "identifications")
       Enumerator.new do |y|
         @user.send(type).includes(:claimant).find_each do |o|
-          y << { "@type": "PreservedSpecimen",
-                 "@id": "#{Settings.base_url}/occurrence/#{o.occurrence.id}",
-                 sameAs: "#{o.occurrence.uri}"
-               }.merge(o.occurrence.attributes.reject {|column| ignored_cols(false).include?(column)})
+          attributes = o.occurrence.attributes rescue nil
+          if attributes
+            y << { "@type": "PreservedSpecimen",
+                "@id": "#{Settings.base_url}/occurrence/#{o.occurrence.id}",
+                sameAs: "#{o.occurrence.uri}"
+              }.merge(attributes.reject {|column| ignored_cols(false).include?(column)})
                .merge({ license: o.occurrence.license_uri })
+          end
         end
       end
     end

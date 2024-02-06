@@ -95,7 +95,7 @@ module Sinatra
 
             begin
               csv_stream_headers
-              records = @viewed_user.visible_occurrences
+              records = @viewed_user.visible_occurrences.includes(:claimant)
               io = ::Bionomia::IO.new
               body io.csv_stream_occurrences(records)
             rescue

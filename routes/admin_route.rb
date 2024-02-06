@@ -467,7 +467,7 @@ module Sinatra
             get '/user/:id/specimens.csv' do
               content_type "text/csv", charset: 'utf-8'
               admin_user = find_user(params[:id])
-              records = admin_user.visible_occurrences
+              records = admin_user.visible_occurrences.includes(:claimant)
               csv_stream_headers
               io = ::Bionomia::IO.new
               body io.csv_stream_occurrences(records)
