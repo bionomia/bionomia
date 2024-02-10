@@ -75,6 +75,7 @@ class Dataset < ActiveRecord::Base
                   .count
   end
 
+  # Slow query, uses temp sort
   def agents
     determiners = OccurrenceDeterminer
                     .select(:agent_id)
@@ -92,6 +93,7 @@ class Dataset < ActiveRecord::Base
     Agent.where(id: combined).order(:family)
   end
 
+  # Slow query, uses temp sort
   def agents_occurrence_counts
     determiners = OccurrenceDeterminer
                     .joins(:occurrence)
@@ -107,6 +109,7 @@ class Dataset < ActiveRecord::Base
              .order(count_all: :desc)
   end
 
+  # Slow query, uses temp sort
   def agents_occurrence_unclaimed_counts
     determiners = OccurrenceDeterminer
                     .joins(:occurrence)

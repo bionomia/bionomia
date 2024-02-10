@@ -25,21 +25,15 @@ module Bionomia
 
       if !uniq_recs.empty?
         uo = uniq_recs.map{|r| [u.id, r.to_i, "recorded", User::GBIF_AGENT_ID]}
-        uo.each_slice(2_500) do |group|
-          UserOccurrence.import [:user_id, :occurrence_id, :action, :created_by], group, validate: false, on_duplicate_key_ignore: true
-        end
+        UserOccurrence.import [:user_id, :occurrence_id, :action, :created_by], uo, validate: false, on_duplicate_key_ignore: true
       end
       if !uniq_ids.empty?
         uo = uniq_ids.map{|r| [u.id, r.to_i, "identified", User::GBIF_AGENT_ID]}
-        uo.each_slice(2_500) do |group|
-          UserOccurrence.import [:user_id, :occurrence_id, :action, :created_by], group, validate: false, on_duplicate_key_ignore: true
-        end
+        UserOccurrence.import [:user_id, :occurrence_id, :action, :created_by], uo, validate: false, on_duplicate_key_ignore: true
       end
       if !both.empty?
         uo = both.map{|r| [u.id, r.to_i, "recorded,identified", User::GBIF_AGENT_ID]}
-        uo.each_slice do |group|
-          UserOccurrence.import [:user_id, :occurrence_id, :action, :created_by], group, validate: false, on_duplicate_key_ignore: true
-        end
+        UserOccurrence.import [:user_id, :occurrence_id, :action, :created_by], uo, validate: false, on_duplicate_key_ignore: true
       end
     end
 

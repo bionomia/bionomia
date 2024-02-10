@@ -279,11 +279,11 @@ ALTER TABLE `occurrence_counts`
 
 ALTER TABLE `occurrence_determiners`
   ADD PRIMARY KEY (`agent_id`,`occurrence_id`),
-  ADD UNIQUE KEY `occurrence_agent_idx` (`occurrence_id`,`agent_id`);
+  ADD KEY `occurrence_idx` (`occurrence_id`);
 
 ALTER TABLE `occurrence_recorders`
   ADD PRIMARY KEY (`agent_id`,`occurrence_id`),
-  ADD UNIQUE KEY `occurrence_agent_idx` (`occurrence_id`,`agent_id`);
+  ADD KEY `occurrence_idx` (`occurrence_id`);
 
 ALTER TABLE `organizations`
   ADD PRIMARY KEY (`id`),

@@ -54,13 +54,17 @@ if options[:directory]
 
         source_user = SourceUser.find_or_create_by({ identifier: id })
         
-        uo = YAML.load(row["gbifIDs_recordedByID"])
+        uo = row["gbifIDs_recordedByID"]
+              .tr('[]', '')
+              .split(',')
               .map{|r| [ source_user.id, r.to_i, "recorded" ]}.compact
         if !uo.empty?
           SourceAttribution.import [:user_id, :occurrence_id, :action], uo, batch_size: 1_000, validate: false, on_duplicate_key_ignore: true
         end
         
-        uo = YAML.load(row["gbifIDs_identifiedByID"])
+        uo = row["gbifIDs_identifiedByID"]
+              .tr('[]', '')
+              .split(',')
               .map{|r| [ source_user.id, r.to_i, "identified" ]}.compact
         if !uo.empty?
           SourceAttribution.import [:user_id, :occurrence_id, :action], uo, batch_size: 1_000, validate: false, on_duplicate_key_ignore: true
