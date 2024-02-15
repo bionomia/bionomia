@@ -132,7 +132,7 @@ module Sinatra
                    .each{|a| scores[a[:id]] = a[:score] }
 
           occurrences = occurrences_by_agent_ids(scores.keys)
-                          .where.not(occurrence_id: user.user_occurrences.select(:occurrence_id))
+                          .where.not(occurrences: { id: user.user_occurrences.select(:occurrence_id) })
 
           if @dataset && @dataset[:datasetKey]
             occurrences = occurrences.where(occurrences: { datasetKey: @dataset[:datasetKey] })
@@ -165,14 +165,12 @@ module Sinatra
         end
 
         def occurrences_by_agent_ids(agent_ids = [])
-          OccurrenceRecorder.where({ agent_id: agent_ids })
-                            .union(OccurrenceDeterminer.where(agent_id: agent_ids))
-                            .includes(:occurrence)
+          OccurrenceAgent.where({ agent_id: agent_ids})
+                         .includes(:occurrences)
         end
 
         def user_occurrences_by_agent_ids(agent_ids = [])
-          OccurrenceRecorder.where({ agent_id: agent_ids })
-                            .union_all(OccurrenceDeterminer.where(agent_id: agent_ids))
+          OccurrenceAgent.where({ agent_id: agent_ids })
         end
 
         def search_size

@@ -270,7 +270,7 @@ ALTER TABLE `messages`
 ALTER TABLE `occurrences`
   ADD PRIMARY KEY (`gbifID`) USING BTREE,
   ADD KEY `country_code_idx` (`countryCode`),
-  ADD KEY `typeStatus_idx` (`typeStatus`(50)),
+  ADD KEY `typeStatus_idx` (`typeStatus`(10)),
   ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`,`occurrenceID`(36));
 
 ALTER TABLE `occurrence_counts`

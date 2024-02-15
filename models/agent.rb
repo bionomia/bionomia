@@ -1,10 +1,9 @@
 class Agent < ActiveRecord::Base
 
-  has_many :occurrence_determiners, dependent: :delete_all
-  has_many :determinations, through: :occurrence_determiners, source: :occurrence
-
-  has_many :occurrence_recorders, dependent: :delete_all
-  has_many :recordings, through: :occurrence_recorders, source: :occurrence
+  has_many :occurrence_agents, dependent: :delete_all
+  has_many :determinations, -> { where(agent_role: false) }, through: :occurrence_agents, source: :occurrences
+  has_many :recordings, -> { where(agent_role: true) }, through: :occurrence_agents, source: :occurrences
+  has_many :occurrences, -> { distinct }, through: :occurrence_agents, source: :occurrences
 
   validates :family, presence: true
 
@@ -89,10 +88,6 @@ class Agent < ActiveRecord::Base
 
   def identified_taxa
     determinations.pluck(:scientificName).compact.uniq
-  end
-
-  def occurrences
-    recordings.union(determinations)
   end
 
 end

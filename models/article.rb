@@ -2,7 +2,10 @@ class Article < ActiveRecord::Base
   attr_accessor :skip_callbacks
 
   has_many :article_occurrences
-  has_many :occurrences, through: :article_occurrences, source: :occurrence
+  has_many :occurrences, through: :article_occurrences
+
+  has_many :occurrence_agents, through: :article_occurrences, primary_key: :occurrence_id, foreign_key: :occurrence_id
+  has_many :agents, through: :occurrence_agents, primary_key: :agent_id, foreign_key: :id, source: :agents
 
   validates :doi, presence: true
   validates :gbif_dois, presence: true
@@ -43,25 +46,6 @@ class Article < ActiveRecord::Base
               article_occurrences.article_id = #{id}
             ) a ON a.user_id = users.id")
         .where("a.visible = true")
-  end
-
-  def agents
-    determiners = OccurrenceDeterminer
-                    .select(:agent_id)
-                    .joins(:article_occurrence)
-                    .group(:agent_id)
-                    .where(article_occurrences: { article_id: id })
-    recorders = OccurrenceRecorder
-                    .select(:agent_id)
-                    .joins(:article_occurrence)
-                    .group(:agent_id)
-                    .where(article_occurrences: { article_id: id })
-    combined = recorders
-                    .union_all(determiners)
-                    .unscope(:order)
-                    .select(:agent_id)
-                    .distinct
-    Agent.where(id: combined).order(:family)
   end
 
   def agents_occurrence_counts
