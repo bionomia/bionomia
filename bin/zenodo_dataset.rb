@@ -41,7 +41,8 @@ if options[:uuid]
       submit_update(d)
    end
 elsif options[:refresh]
-   Dataset.where.not("frictionless_created_at <= '#{week_ago}'").find_each do |d|
+   week_ago = DateTime.now - 7.days
+   Dataset.where("frictionless_created_at <= '#{week_ago}'").find_each do |d|
       return if d.nil? || !d.has_claim?
       if d.zenodo_doi.nil?
          submit_new(d)
