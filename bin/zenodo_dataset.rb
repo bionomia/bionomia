@@ -49,5 +49,6 @@ elsif options[:refresh]
       else
          submit_update(d)
       end
+      puts d.uuid.green
    end
 end
