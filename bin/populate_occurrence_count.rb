@@ -50,9 +50,11 @@ if options[:add]
            FROM
             user_occurrences u
           CROSS JOIN
-            occurrence_recorders r
+            occurrence_agents r
           WHERE
             r.occurrence_id = u.occurrence_id
+          AND
+            r.agent_role = true
           AND
             u.action IN ('recorded', 'recorded,identified', 'identified,recorded')
           AND

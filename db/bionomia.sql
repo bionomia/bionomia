@@ -109,14 +109,11 @@ CREATE TABLE `occurrence_counts` (
   `user_count` int UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
-CREATE TABLE `occurrence_determiners` (
+CREATE TABLE `occurrence_agents ` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `occurrence_id` bigint UNSIGNED NOT NULL,
-  `agent_id` int UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=COMPRESSED;
-
-CREATE TABLE `occurrence_recorders` (
-  `occurrence_id` bigint UNSIGNED NOT NULL,
-  `agent_id` int UNSIGNED NOT NULL
+  `agent_id` int UNSIGNED NOT NULL,
+  `agent_role` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=COMPRESSED;
 
 CREATE TABLE `organizations` (
@@ -277,12 +274,9 @@ ALTER TABLE `occurrence_counts`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `occurrence_id` (`occurrence_id`);
 
-ALTER TABLE `occurrence_determiners`
-  ADD PRIMARY KEY (`agent_id`,`occurrence_id`),
-  ADD KEY `occurrence_idx` (`occurrence_id`);
-
-ALTER TABLE `occurrence_recorders`
-  ADD PRIMARY KEY (`agent_id`,`occurrence_id`),
+ALTER TABLE `occurrence_agents`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `agent_occurrence_idx` (`agent_id`,`agent_role`,`occurrence_id`),
   ADD KEY `occurrence_idx` (`occurrence_id`);
 
 ALTER TABLE `organizations`

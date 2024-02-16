@@ -95,11 +95,11 @@ This misses the ignored attributions, so also execute:
      DELETE user_occurrences FROM user_occurrences LEFT JOIN occurrences ON user_occurrences.occurrence_id = occurrences.gbifID WHERE occurrences.gbifID IS NULL AND user_occurrences.visible = false;
      DELETE article_occurrences FROM article_occurrences LEFT JOIN occurrences ON article_occurrences.occurrence_id = occurrences.gbifID WHERE occurrences.gbifID IS NULL;
 
-To migrate tables, use mydumper and myloader. But for even faster data migration, drop indices before mydumper then recreate indices after myloader. This is especially true for the three largest tables: occurrences, occurrence_recorders, and occurrence_determiners whose indices are (almost) larger than the tables themselves.
+To migrate tables, use mydumper and myloader. But for even faster data migration, drop indices before mydumper then recreate indices after myloader. This is especially true for the two largest tables: occurrences and occurrence_agents whose indices are (almost) larger than the tables themselves.
 
      $ brew install mydumper
 
-     $ mydumper --user root --password <PASSWORD> --database bionomia --tables-list bionomia.agents,bionomia.occurrences,bionomia.occurrence_recorders,bionomia.occurrence_determiners,bionomia.occurrence_counts,bionomia.taxa,bionomia.taxon_occurrences --compress --threads 8 --rows 1000000  --outputdir /Users/dshorthouse/Documents/bionomia_dump
+     $ mydumper --user root --password <PASSWORD> --database bionomia --tables-list bionomia.agents,bionomia.occurrences,bionomia.occurrence_agents,bionomia.occurrence_counts,bionomia.taxa,bionomia.taxon_occurrences --compress --threads 8 --rows 1000000  --outputdir /Users/dshorthouse/Documents/bionomia_dump
 
      $ apt-get install mydumper
      $ nohup myloader --database bionomia_restore --user bionomia --password <PASSWORD> --threads 2 --queries-per-transaction 100 --compress-protocol --overwrite-tables --verbose 0 --directory /home/dshorthouse/bionomia_restore &
@@ -109,24 +109,21 @@ To migrate tables, use mydumper and myloader. But for even faster data migration
      RENAME TABLE bionomia_restore.agents TO bionomia.agents_new;
      RENAME TABLE bionomia_restore.taxa TO bionomia.taxa_new;
      RENAME TABLE bionomia_restore.occurrences TO bionomia.occurrences_new;
-     RENAME TABLE bionomia_restore.occurrence_determiners TO bionomia.occurrence_determiners_new;
-     RENAME TABLE bionomia_restore.occurrence_recorders TO bionomia.occurrence_recorders_new;
+     RENAME TABLE bionomia_restore.occurrence_agents TO bionomia.occurrence_agents_new;
      RENAME TABLE bionomia_restore.occurrence_counts TO bionomia.occurrence_counts_new;
      RENAME TABLE bionomia_restore.taxon_occurrences TO bionomia.taxon_occurrences_new;
 
      DROP TABLE bionomia.agents;
      DROP TABLE bionomia.taxa;
      DROP TABLE bionomia.occurrences;
-     DROP TABLE bionomia.occurrence_determiners;
-     DROP TABLE bionomia.occurrence_recorders;
+     DROP TABLE bionomia.occurrence_agents;
      DROP TABLE bionomia.occurrence_counts;
      DROP TABLE bionomia.taxon_occurrences;
 
      RENAME TABLE bionomia.agents_new TO bionomia.agents;
      RENAME TABLE bionomia.taxa_new TO bionomia.taxa;
      RENAME TABLE bionomia.occurrences_new TO bionomia.occurrences;
-     RENAME TABLE bionomia.occurrence_determiners_new TO bionomia.occurrence_determiners;
-     RENAME TABLE bionomia.occurrence_recorders_new TO bionomia.occurrence_recorders;
+     RENAME TABLE bionomia.occurrence_agents_new TO bionomia.occurrence_agents;
      RENAME TABLE bionomia.occurrence_counts_new TO bionomia.occurrence_counts;
      RENAME TABLE bionomia.taxon_occurrences_new TO bionomia.taxon_occurrences;
 
