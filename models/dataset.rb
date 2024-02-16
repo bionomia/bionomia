@@ -24,15 +24,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def has_agent?
-    determiner = OccurrenceDeterminer
-                    .select(:agent_id)
-                    .joins(:occurrence)
-                    .where(occurrences: { datasetKey: uuid }).any?
-    recorder = OccurrenceRecorder
-                    .select(:agent_id)
-                    .joins(:occurrence)
-                    .where(occurrences: { datasetKey: uuid }).any?
-    determiner || recorder
+    OccurrenceAgent.select(:agent_id).joins(:occurrences).where(occurrences: { datasetKey: uuid }).any?
   end
 
   def is_large?
@@ -75,58 +67,28 @@ class Dataset < ActiveRecord::Base
                   .count
   end
 
-  # Slow query, uses temp sort
+  #TODO: verify performance
   def agents
-    determiners = OccurrenceDeterminer
-                    .select(:agent_id)
-                    .joins(:occurrence)
-                    .where(occurrences: { datasetKey: uuid })
-    recorders = OccurrenceRecorder
-                    .select(:agent_id)
-                    .joins(:occurrence)
-                    .where(occurrences: { datasetKey: uuid })
-    combined = recorders
-                    .union_all(determiners)
-                    .unscope(:order)
-                    .select(:agent_id)
-                    .distinct
-    Agent.where(id: combined).order(:family)
+    agent_ids = occurrences.joins(:occurrence_agents).select(:agent_id)
+    Agent.where(id: agent_ids).distinct.order(:family)
   end
 
-  # Slow query, uses temp sort
+  #TODO: Slow query, uses temp sort
   def agents_occurrence_counts
-    determiners = OccurrenceDeterminer
-                    .joins(:occurrence)
-                    .where(occurrences: { datasetKey: uuid })
-                    .distinct
-    recorders = OccurrenceRecorder
-                    .joins(:occurrence)
-                    .where(occurrences: { datasetKey: uuid })
-                    .distinct
-    recorders.union_all(determiners)
-             .select(:agent_id, "count(*) AS count_all")
-             .group(:agent_id)
-             .order(count_all: :desc)
+    occurrences.joins(:occurrence_agents)
+               .select(:agent_id, "count(*) AS count_all")
+               .group(:agent_id)
+               .order(count_all: :desc)
   end
 
-  # Slow query, uses temp sort
+  #TODO: Slow query, uses temp sort
   def agents_occurrence_unclaimed_counts
-    determiners = OccurrenceDeterminer
-                    .joins(:occurrence)
-                    .joins("LEFT OUTER JOIN user_occurrences ON occurrences.gbifID = user_occurrences.occurrence_id AND user_occurrences.action IN ('identified', 'identified,recorded', 'recorded,identified')")
-                    .where(occurrences: { datasetKey: datasetKey })
-                    .where(user_occurrences: { occurrence_id: nil })
-                    .distinct
-    recorders = OccurrenceRecorder
-                    .joins(:occurrence)
-                    .joins("LEFT OUTER JOIN user_occurrences ON occurrences.gbifID = user_occurrences.occurrence_id AND user_occurrences.action IN ('recorded', 'identified,recorded', 'recorded,identified')")
-                    .where(occurrences: { datasetKey: datasetKey })
-                    .where(user_occurrences: { occurrence_id: nil })
-                    .distinct
-    recorders.union_all(determiners)
-             .select(:agent_id, "count(*) AS count_all")
-             .group(:agent_id)
-             .order(count_all: :desc)
+    occurrences.joins(:occurrence_agents)
+               .left_outer_joins(:user_occurrences)
+               .where(user_occurrences: { id: nil })
+               .select(:agent_id, "count(*) AS count_all")
+               .group(:agent_id)
+               .order(count_all: :desc)
   end
 
   def scribes

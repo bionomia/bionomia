@@ -12,4 +12,5 @@ class OccurrenceAgent < ActiveRecord::Base
 
    validates :occurrence_id, presence: true
    validates :agent_id, presence: true
+   validates :agent_role, presence: true
 end

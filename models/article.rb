@@ -4,8 +4,8 @@ class Article < ActiveRecord::Base
   has_many :article_occurrences
   has_many :occurrences, through: :article_occurrences
 
-  has_many :occurrence_agents, through: :article_occurrences, primary_key: :occurrence_id, foreign_key: :occurrence_id
-  has_many :agents, through: :occurrence_agents, primary_key: :agent_id, foreign_key: :id, source: :agents
+  has_many :occurrence_agents, through: :article_occurrences
+  has_many :agents, -> { distinct }, through: :occurrence_agents
 
   validates :doi, presence: true
   validates :gbif_dois, presence: true
@@ -48,36 +48,20 @@ class Article < ActiveRecord::Base
         .where("a.visible = true")
   end
 
+  # TODO: performance terrible, but below is the idea
   def agents_occurrence_counts
-    determiners = OccurrenceDeterminer
-                    .joins(:article_occurrence)
-                    .where(article_occurrences: { article_id: id })
-    recorders = OccurrenceRecorder
-                    .joins(:article_occurrence)
-                    .where(article_occurrences: { article_id: id })
-    recorders.union_all(determiners)
-             .select(:agent_id, "count(*) AS count_all")
-             .group(:agent_id)
-             .order(count_all: :desc)
+    occurrence_agents.select(:agent_id, "count(*) AS count_all")
+                     .group(:agent_id)
+                     .order(count_all: :desc)
   end
 
+  # TODO: performance terrible, but below is the idea
   def agents_occurrence_counts_unclaimed
-    determiners = OccurrenceDeterminer
-                    .joins(:article_occurrence)
-                    .joins("LEFT OUTER JOIN user_occurrences ON occurrence_determiners.occurrence_id = user_occurrences.occurrence_id AND user_occurrences.action IN ('identified', 'identified,recorded', 'recorded,identified')")
-                    .where(article_occurrences: { article_id: id })
-                    .where(user_occurrences: { occurrence_id: nil })
-                    .distinct
-    recorders = OccurrenceRecorder
-                    .joins(:article_occurrence)
-                    .joins("LEFT OUTER JOIN user_occurrences ON occurrence_recorders.occurrence_id = user_occurrences.occurrence_id AND user_occurrences.action IN ('recorded', 'identified,recorded', 'recorded,identified')")
-                    .where(article_occurrences: { article_id: id })
-                    .where(user_occurrences: { occurrence_id: nil })
-                    .distinct
-    recorders.union_all(determiners)
-             .select(:agent_id, "count(*) AS count_all")
-             .group(:agent_id)
-             .order(count_all: :desc)
+    occurrence_agents.select(:agent_id, "count(*) AS count_all")
+                     .left_outer_joins(:user_occurrences)
+                     .where(user_occurrences: { id: nil })
+                     .group(:agent_id)
+                     .order(count_all: :desc)
   end
 
   def flush_cache

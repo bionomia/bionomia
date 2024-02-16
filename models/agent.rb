@@ -1,11 +1,13 @@
 class Agent < ActiveRecord::Base
 
   has_many :occurrence_agents, dependent: :delete_all
-  has_many :determinations, -> { where(agent_role: false) }, through: :occurrence_agents, source: :occurrences
-  has_many :recordings, -> { where(agent_role: true) }, through: :occurrence_agents, source: :occurrences
+  has_many :determinations, -> { where(occurrence_agents: { agent_role: false }) }, through: :occurrence_agents, source: :occurrences
+  has_many :recordings, -> { where(occurrence_agents: { agent_role: true }) }, through: :occurrence_agents, source: :occurrences
   has_many :occurrences, -> { distinct }, through: :occurrence_agents, source: :occurrences
 
   validates :family, presence: true
+
+  # agent_role values: recorded = TRUE; identidied = FALSE
 
   def fullname
     [given, family].compact.reject(&:empty?).join(" ").strip
