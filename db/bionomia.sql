@@ -110,7 +110,7 @@ CREATE TABLE `occurrence_counts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `occurrence_agents` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL,
   `occurrence_id` bigint UNSIGNED NOT NULL,
   `agent_id` int UNSIGNED NOT NULL,
   `agent_role` tinyint(1) NOT NULL DEFAULT '1'
