@@ -28,7 +28,8 @@
         %ul.list-unstyled.m-2
           - group.each do |a|
             %li
-              = link_to a.agent.fullname_reverse, url("/agent/#{a.agent.id}")
+              - agent = Agent.find(a.agent_id)
+              = link_to agent.fullname_reverse, url("/agent/#{agent.id}")
               %span.badge.badge-light #{number_with_delimiter(a.count_all)}
 
   - if @pagy.pages > 1

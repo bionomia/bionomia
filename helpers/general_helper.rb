@@ -132,7 +132,7 @@ module Sinatra
                    .each{|a| scores[a[:id]] = a[:score] }
 
           occurrences = occurrences_by_agent_ids(scores.keys)
-                          .where.not(occurrences: { id: user.user_occurrences.select(:occurrence_id) })
+                          .where.not(occurrence_id: user.user_occurrences.select(:occurrence_id))
 
           if @dataset && @dataset[:datasetKey]
             occurrences = occurrences.where(occurrences: { datasetKey: @dataset[:datasetKey] })
