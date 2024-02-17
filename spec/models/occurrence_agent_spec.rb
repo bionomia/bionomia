@@ -10,7 +10,7 @@ describe "OccurrenceAgent model" do
     expect(od).to_not be_valid
   end
 
-  it "is not valid without an agent_role" do
+  it "is valid with a default agent_role" do
     od = OccurrenceAgent.new(agent_id: 1, occurrence_id: 1)
     expect(od).to_not be_valid
   end
