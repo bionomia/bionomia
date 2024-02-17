@@ -81,15 +81,15 @@ module Sinatra
         end
 
         def dataset_agents
-          @pagy, @results = pagy_array(@dataset.agents.to_a, items: 75)
+          @pagy, @results = pagy(@dataset.agents, items: 75)
         end
 
         def dataset_agents_counts
-          @pagy, @results = pagy_array(@dataset.agents_occurrence_counts.to_a, items: 75)
+          @pagy, @results = pagy(@dataset.agents_occurrence_counts, items: 75)
         end
 
         def dataset_agents_unclaimed_counts
-          @pagy, @results = pagy_array(@dataset.agents_occurrence_unclaimed_counts.to_a, items: 75)
+          @pagy, @results = pagy(@dataset.agents_occurrence_unclaimed_counts, items: 75)
         end
 
         def dataset_stats
