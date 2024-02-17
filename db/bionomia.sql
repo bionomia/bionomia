@@ -352,6 +352,9 @@ ALTER TABLE `destroyed_users`
 ALTER TABLE `messages`
   MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
 
+ALTER TABLE `occurrence_agents`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
 ALTER TABLE `occurrence_counts`
   MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
 
