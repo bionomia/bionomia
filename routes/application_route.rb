@@ -201,6 +201,10 @@ module Sinatra
             halt 503, haml(:offline, layout: false)
           end
 
+          app.get '/timeout' do
+            halt 504, haml(:timeout, layout: false)
+          end
+
           app.get '/workshops' do
             haml :workshops, locals: { active_page: "workshops" }
           end
