@@ -1,12 +1,13 @@
 class Agent < ActiveRecord::Base
 
-  has_many :occurrence_determiners, dependent: :delete_all
-  has_many :determinations, through: :occurrence_determiners, source: :occurrence
-
-  has_many :occurrence_recorders, dependent: :delete_all
-  has_many :recordings, through: :occurrence_recorders, source: :occurrence
+  has_many :occurrence_agents, dependent: :delete_all
+  has_many :determinations, -> { where(occurrence_agents: { agent_role: false }) }, through: :occurrence_agents, source: :occurrences
+  has_many :recordings, -> { where(occurrence_agents: { agent_role: true }) }, through: :occurrence_agents, source: :occurrences
+  has_many :occurrences, -> { distinct }, through: :occurrence_agents, source: :occurrences
 
   validates :family, presence: true
+
+  # agent_role values: recorded = TRUE; identidied = FALSE
 
   def fullname
     [given, family].compact.reject(&:empty?).join(" ").strip
@@ -79,9 +80,9 @@ class Agent < ActiveRecord::Base
 
   def recordings_with
     colleagues = Set.new
-    occurrence_recorders.pluck(:occurrence_id).each_slice(500) do |group|
-      agents = Agent.joins(:occurrence_recorders)
-                    .where(occurrence_recorders: { occurrence_id: group }).uniq
+    occurrence_agents.where(agent_role: true).pluck(:occurrence_id).each_slice(500) do |group|
+      agents = Agent.joins(:occurrence_agents)
+                    .where(occurrence_agents: { occurrence_id: group }).uniq
       colleagues.merge(agents)
     end
     colleagues.delete(self)
@@ -89,10 +90,6 @@ class Agent < ActiveRecord::Base
 
   def identified_taxa
     determinations.pluck(:scientificName).compact.uniq
-  end
-
-  def occurrences
-    recordings.union(determinations)
   end
 
 end

@@ -2,11 +2,9 @@ class Occurrence < ActiveRecord::Base
 
   self.primary_key = :gbifID
 
-  has_many :occurrence_determiners
-  has_many :determiners, through: :occurrence_determiners, source: :agent
-
-  has_many :occurrence_recorders
-  has_many :recorders, through: :occurrence_recorders, source: :agent
+  has_many :occurrence_agents, primary_key: :id, foreign_key: :occurrence_id
+  has_many :determiners, -> { where(occurrence_agents: { agent_role: false }) }, through: :occurrence_agents, source: :agents
+  has_many :recorders, -> { where(occurrence_agents: { agent_role: true }) }, through: :occurrence_agents, source: :agents
 
   has_many :user_occurrences
   has_many :users, -> { where(user_occurrences: { visible: true }) }, through: :user_occurrences, source: :user

@@ -138,23 +138,22 @@ class Organization < ActiveRecord::Base
 
   def articles
     current = Article
-                .select(:id, :doi, :citation, :abstract, :created, "users.id AS user_id")
-                .joins(occurrences: { users: :organizations })
+                .joins(occurrences: { users: :user_organizations })
                 .where(user_occurrences: { visible: true })
                 .where(user_organizations: { organization_id: id })
                 .where(user_organizations: { end_year: nil })
                 .where("YEAR(occurrences.eventDate_processed) >= user_organizations.start_year OR YEAR(occurrences.dateIdentified_processed) >= user_organizations.start_year")
 
     past = Article
-                .select(:id, :doi, :citation, :abstract, :created, "users.id AS user_id")
-                .joins(occurrences: { users: :organizations })
+                .joins(occurrences: { users: :user_organizations })
                 .where(user_occurrences: { visible: true })
                 .where(user_organizations: { organization_id: id })
                 .where.not(user_organizations: { end_year: nil })
                 .where.not(user_organizations: { start_year: nil })
                 .where("(YEAR(occurrences.eventDate_processed) >= user_organizations.start_year AND YEAR(occurrences.eventDate_processed) <= user_organizations.end_year) OR (YEAR(occurrences.dateIdentified_processed) >= user_organizations.start_year AND YEAR(occurrences.dateIdentified_processed) <= user_organizations.end_year)")
 
-    current.union_all(past).select(:id, :doi, :citation, :abstract, :created, "group_concat( DISTINCT user_id) AS user_ids")
+    current.or(past)
+           .select(:id, :doi, :citation, :abstract, :created, "group_concat( DISTINCT users.id) AS user_ids")
            .group(:id, :doi, :citation, :abstract, :created)
            .distinct
            .order(created: :desc)

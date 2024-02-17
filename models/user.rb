@@ -624,8 +624,8 @@ class User < ActiveRecord::Base
     claimed = user_occurrences.pluck(:occurrence_id)
 
     if conditions.blank?
-      agent_recordings = agent.occurrence_recorders.pluck(:occurrence_id)
-      agent_determinations = agent.occurrence_determiners.pluck(:occurrence_id)
+      agent_recordings = agent.occurrence_agents.where(agent_role: true).pluck(:occurrence_id)
+      agent_determinations = agent.occurrence_agents.where(agent_role: false).pluck(:occurrence_id)
     else
       conditions.gsub!('=>', ':')
 

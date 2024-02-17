@@ -1,7 +1,7 @@
 class Taxon < ActiveRecord::Base
+  has_one :image, class_name: "TaxonImage", foreign_key: :family, primary_key: :family
   has_many :taxon_occurrences, dependent: :delete_all
   has_many :occurrences, through: :taxon_occurrences, source: :occurrence
-  has_one :image, class_name: "TaxonImage", foreign_key: :family, primary_key: :family
 
   validates :family, presence: true
 
@@ -25,69 +25,40 @@ class Taxon < ActiveRecord::Base
   end
 
   def agent_recorders
-    Agent.joins(occurrence_determiners: :taxon_occurrence)
-         .where(taxon_occurrences: { taxon_id: id })
-         .distinct
-         .order(:family, :given)
+    agent_ids = taxon_occurrences.joins(:occurrence_agents)
+                                 .where(occurrence_agents: { agent_role: true })
+                                 .select(:agent_id)
+    Agent.where(id: agent_ids).distinct.order(:family, :given)
   end
 
   def agent_determiners
-    Agent.joins(occurrence_determiners: :taxon_occurrence)
-         .where(taxon_occurrences: { taxon_id: id })
-         .distinct
-         .order(:family, :given)
-  end
-
-  def occurrence_determiners_union_recorders
-    determiners = OccurrenceDeterminer
-                    .select(:agent_id)
-                    .joins(:taxon_occurrence)
-                    .group(:agent_id)
-                    .where(taxon_occurrences: { taxon_id: id })
-    recorders = OccurrenceRecorder
-                    .select(:agent_id)
-                    .joins(:taxon_occurrence)
-                    .group(:agent_id)
-                    .where(taxon_occurrences: { taxon_id: id })
-    recorders.union(determiners).unscope(:order).select(:agent_id).distinct
+    agent_ids = taxon_occurrences.joins(:occurrence_agents)
+                                 .where(occurrence_agents: { agent_role: false })
+                                 .select(:agent_id)
+    Agent.where(id: agent_ids).distinct.order(:family, :given)
   end
 
   def agents
-    Agent.where(id: occurrence_determiners_union_recorders).order(:family)
+    agent_ids = taxon_occurrences.joins(:occurrence_agents).select(:agent_id)
+    Agent.where(id: agent_ids).distinct.order(:family)
   end
 
+  #TODO: Slow query, uses temp sort
   def agent_counts
-    determiners = OccurrenceDeterminer
-                    .joins(:taxon_occurrence)
-                    .where(taxon_occurrences: { taxon_id: id })
-                    .distinct
-    recorders = OccurrenceRecorder
-                    .joins(:taxon_occurrence)
-                    .where(taxon_occurrences: { taxon_id: id })
-                    .distinct
-    recorders.union_all(determiners)
-             .select(:agent_id, "count(*) AS count_all")
-             .group(:agent_id)
-             .order(count_all: :desc)
+    taxon_occurrences.joins(:occurrence_agents)
+                     .select(:agent_id, "count(*) AS count_all")
+                     .group(:agent_id)
+                     .order(count_all: :desc)
   end
 
+  #TODO: Slow query, uses temp sort
   def agent_counts_unclaimed
-    determiners = OccurrenceDeterminer
-                    .joins(:taxon_occurrence)
-                    .joins("LEFT OUTER JOIN user_occurrences ON taxon_occurrences.occurrence_id = user_occurrences.occurrence_id AND user_occurrences.action IN ('identified', 'identified,recorded', 'recorded,identified')")
-                    .where(taxon_occurrences: { taxon_id: id })
-                    .where(user_occurrences: { occurrence_id: nil })
-                    .distinct
-    recorders = OccurrenceRecorder
-                    .joins(:taxon_occurrence)
-                    .joins("LEFT OUTER JOIN user_occurrences ON taxon_occurrences.occurrence_id = user_occurrences.occurrence_id AND user_occurrences.action IN ('recorded', 'identified,recorded', 'recorded,identified')")
-                    .where(taxon_occurrences: { taxon_id: id })
-                    .where(user_occurrences: { occurrence_id: nil })
-                    .distinct
-    recorders.union_all(determiners)
-             .select(:agent_id, "count(*) AS count_all")
-             .group(:agent_id)
-             .order(count_all: :desc)
+    taxon_occurrences.joins(:occurrence_agents)
+                     .left_outer_joins(:user_occurrence)
+                     .select(:agent_id, "count(*) AS count_all")
+                     .where(user_occurrence: { id: nil })
+                     .group(:agent_id)
+                     .order(count_all: :desc)
   end
 
   def timeline_recorded(start_year: 1000, end_year: Time.now.year)
