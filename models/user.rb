@@ -606,10 +606,9 @@ class User < ActiveRecord::Base
 
   def latest_messages_by_senders
     messages_received
-      .select(:user_id, :maximum_created_at)
+      .select(:user_id, :recipient_id, "MAX(created_at) AS maximum_created_at")
       .group(:user_id, :recipient_id)
       .order(maximum_created_at: :desc)
-      .maximum(:created_at)
   end
 
   def messages_by_sender_count(id)

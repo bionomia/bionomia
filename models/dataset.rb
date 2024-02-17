@@ -75,22 +75,20 @@ class Dataset < ActiveRecord::Base
 
   #TODO: Slow query, uses temp sort
   def agents_occurrence_counts
-    occurrences.select(:agent_id, :count_all)
+    occurrences.select(:agent_id, "COUNT(*) AS count_all")
                .joins(:occurrence_agents)
                .group(:agent_id)
                .order(count_all: :desc)
-               .count(:all)
   end
 
   #TODO: Slow query, uses temp sort
   def agents_occurrence_unclaimed_counts
-    occurrences.select(:agent_id, :count_all)
+    occurrences.select(:agent_id, "COUNT(*) AS count_all")
                .joins(:occurrence_agents)
                .left_outer_joins(:user_occurrences)
                .where(user_occurrences: { id: nil })
                .group(:agent_id)
                .order(count_all: :desc)
-               .count(:all)
   end
 
   def scribes

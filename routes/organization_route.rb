@@ -57,7 +57,8 @@ module Sinatra
 
             get '/:id/citations' do
               page = (params[:page] || 1).to_i
-              @pagy, @results = pagy(organization_articles, items: 10, page: page)
+              data = organization_articles.to_a
+              @pagy, @results = pagy_array(data, count: data.size, items: 10, page: page)
               locals = {
                 active_page: "organizations",
                 active_tab: "organization-articles"
