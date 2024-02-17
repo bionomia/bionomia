@@ -216,7 +216,7 @@ module Sinatra
 
             get '/messages' do
               @user.messages_received.update_all({ read: true })
-              @pagy, @results = pagy(@user.latest_messages_by_senders)
+              @pagy, @results = pagy_array(@user.latest_messages_by_senders.to_a)
               haml :'profile/messages', locals: { active_page: "profile" }
             end
 

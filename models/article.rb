@@ -50,18 +50,20 @@ class Article < ActiveRecord::Base
 
   # TODO: performance terrible, but below is the idea
   def agents_occurrence_counts
-    occurrence_agents.group(:agent_id)
+    occurrence_agents.select(:agent_id, :count_all)
+                     .group(:agent_id)
                      .order(count_all: :desc)
-                     .count
+                     .count(:all)
   end
 
   # TODO: performance terrible, but below is the idea
   def agents_occurrence_counts_unclaimed
-    occurrence_agents.left_outer_joins(:user_occurrences)
+    occurrence_agents.select(:agent_id, :count_all)
+                     .left_outer_joins(:user_occurrences)
                      .where(user_occurrences: { id: nil })
                      .group(:agent_id)
                      .order(count_all: :desc)
-                     .count
+                     .count(:all)
   end
 
   def flush_cache
