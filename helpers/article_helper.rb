@@ -53,12 +53,12 @@ module Sinatra
 
         def article_agents_counts
           article_from_param
-          @pagy, @results = pagy(@article.agents_occurrence_counts, items: 75)
+          @pagy, @results = pagy_array(@article.agents_occurrence_counts.to_a, items: 75)
         end
 
         def article_agents_unclaimed
           article_from_param
-          @pagy, @results = pagy(@article.agents_occurrence_counts_unclaimed, items: 75)
+          @pagy, @results = pagy_array(@article.agents_occurrence_counts_unclaimed.to_a, items: 75)
         end
 
         def article_stats(article)

@@ -46,19 +46,19 @@ class Taxon < ActiveRecord::Base
   #TODO: Slow query, uses temp sort
   def agent_counts
     taxon_occurrences.joins(:occurrence_agents)
-                     .select(:agent_id, "count(*) AS count_all")
                      .group(:agent_id)
                      .order(count_all: :desc)
+                     .count
   end
 
   #TODO: Slow query, uses temp sort
   def agent_counts_unclaimed
     taxon_occurrences.joins(:occurrence_agents)
                      .left_outer_joins(:user_occurrence)
-                     .select(:agent_id, "count(*) AS count_all")
                      .where(user_occurrence: { id: nil })
                      .group(:agent_id)
                      .order(count_all: :desc)
+                     .count
   end
 
   def timeline_recorded(start_year: 1000, end_year: Time.now.year)

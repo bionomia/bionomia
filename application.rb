@@ -28,6 +28,7 @@ class BIONOMIA < Sinatra::Base
   include Pagy::Backend
   include Pagy::Frontend
   Pagy::DEFAULT[:items] = 30
+  Pagy::DEFAULT[:size]  = [1, 3, 3, 1]
   Pagy::DEFAULT[:overflow] = :last_page
 
   Sidekiq.configure_server do |config|

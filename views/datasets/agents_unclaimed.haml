@@ -25,9 +25,9 @@
             %ul.list-unstyled.m-2
               - group.each do |a|
                 %li
-                  - agent = Agent.find(a.agent_id)
+                  - agent = Agent.find(a[0])
                   = link_to agent.fullname_reverse, url("/agent/#{agent.id}?datasetKey=#{@dataset.uuid}")
-                  %span.badge.badge-light #{number_with_delimiter(a.count_all)}
+                  %span.badge.badge-light #{number_with_delimiter(a[1])}
 
       - if @pagy.pages > 1
         .overflow-auto
