@@ -513,6 +513,7 @@ de:
       unit:
         one: ehemaliges Mitglied
         other: ehemalige Mitglieder
+    under_repair: This feature is presently under repair for better performance.
   profile:
     thanks_title: Dank erhalten
     candidates_title: Unbeanspruchte Exemplare
