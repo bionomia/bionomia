@@ -541,6 +541,7 @@ ro:
         one: past member
         few: past members
         other: past members
+    under_repair: This feature is presently under repair for better performance.
   profile:
     thanks_title: Thanks Received
     candidates_title: Unclaimed Specimens
