@@ -46,24 +46,32 @@ module Sinatra
             end
 
             get '/:id/metrics' do
-              @year = params[:year] || nil
-              organization_metrics
+              organization
               locals = {
                 active_page: "organizations",
                 active_tab: "organization-metrics"
               }
+              haml :'organizations/under_repair', locals: locals
+=begin
+              @year = params[:year] || nil
+              organization_metrics
               haml :'organizations/metrics', locals: locals
+=end
             end
 
             get '/:id/citations' do
-              page = (params[:page] || 1).to_i
-              data = organization_articles.to_a
-              @pagy, @results = pagy_array(data, count: data.size, items: 10, page: page)
+              organization
               locals = {
                 active_page: "organizations",
                 active_tab: "organization-articles"
               }
+              haml :'organizations/under_repair', locals: locals
+=begin
+              page = (params[:page] || 1).to_i
+              data = organization_articles.to_a
+              @pagy, @results = pagy_array(data, count: data.size, items: 10, page: page)
               haml :'organizations/citations', locals: locals
+=end
             end
 
             get '/:id/refresh.json' do

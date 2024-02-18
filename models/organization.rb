@@ -137,11 +137,14 @@ class Organization < ActiveRecord::Base
   end
 
   def articles
+    #TODO: maybe add year column to occurrences based on eventDate_processed and then index that
     current = Article
                 .joins(occurrences: { users: :user_organizations })
                 .where(user_occurrences: { visible: true })
                 .where(user_organizations: { organization_id: id })
                 .where(user_organizations: { end_year: nil })
+                .where("occurrences.eventDate_processed > 1900")
+                .where("user_organizations.start_year > 1900")
                 .where("YEAR(occurrences.eventDate_processed) >= user_organizations.start_year OR YEAR(occurrences.dateIdentified_processed) >= user_organizations.start_year")
 
     past = Article
@@ -155,7 +158,6 @@ class Organization < ActiveRecord::Base
     current.or(past)
            .select(:id, :doi, :citation, :abstract, :created, "GROUP_CONCAT(DISTINCT users.id) AS user_ids")
            .group(:id, :doi, :citation, :abstract, :created)
-           .distinct
            .order(created: :desc)
   end
 

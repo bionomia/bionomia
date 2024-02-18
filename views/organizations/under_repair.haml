@@ -1,0 +1,19 @@
+= haml :'partials/organization/twitter_img', layout: false
+
+- content_for :title, "#{@organization.name}"
+
+- content_for :stylesheets do
+  - if @organization.latitude
+    %link{href: "https://unpkg.com/leaflet@1.4.0/dist/leaflet.css", rel: "stylesheet", type: "text/css"}
+
+- content_for :scripts do
+  = haml :'partials/organization/jumbotron_scripts', layout:false
+
+.row
+  = haml :'partials/organization/jumbotron', layout:false
+
+  .col-12.col-lg-8.mt-2
+    = haml :'partials/organization/tabs', layout:false, locals: locals
+
+    .alert.alert-warning.tiny-margins.d-flex.flex-wrap{role: "alert"}
+      = I18n.t('organization.under_repair')
