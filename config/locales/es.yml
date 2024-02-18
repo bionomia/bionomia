@@ -513,6 +513,7 @@ es:
       unit:
         one: miembro anterior
         other: miembros anteriores
+    under_repair: This feature is presently under repair for better performance.
   profile:
     thanks_title: Gracias recibidas
     candidates_title: Especímenes sin reclamar
