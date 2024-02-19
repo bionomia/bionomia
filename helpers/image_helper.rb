@@ -10,6 +10,7 @@ module Sinatra
          end
 
          def profile_image(user, size=nil)
+           img = nil
            query = "&height=200"
            if size == "thumbnail"
              query = "&width=24&height=24"
@@ -28,8 +29,6 @@ module Sinatra
                src = "?src=" + CGI.escapeURIComponent(Settings.base_url + "/images/users/" + user.image_url)
                img = cloud_img + src + query
              end
-           else
-             img = Settings.base_url + "/images/photo.png"
            end
            img
          end

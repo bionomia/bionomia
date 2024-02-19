@@ -24,7 +24,7 @@
 %script#result-template{type:"text/x-handlebars-template"}
   .d-flex
     %div
-      %img{class:"rounded", src:"{{thumbnail}}", width:24, height:24}
+      %img{class:"rounded", src:"{{#if thumbnail}}{{thumbnail}}{{else}}/images/photo24X24.png{{/if}}", width:24, height:24}
     .ml-2.flex-grow-1.small
       %h5.m-0.p-0 {{#if label}}{{label}}{{else}}{{fullname}}{{/if}}
       .m-0.p-0.small.muted{style:"line-height:1.2rem"} {{{lifespan}}}
