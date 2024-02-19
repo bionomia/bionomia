@@ -36,7 +36,7 @@ end
 if options[:add]
   puts "Building occurrence_counts content...".yellow
   limit = 50000
-  max_occurrence_id = OccurrenceRecorder.maximum(:occurrence_id)
+  max_occurrence_id = OccurrenceAgent.maximum(:occurrence_id)
 
   #Over-estimate number of queries to execute, but break out when actual limit reached
   (max_occurrence_id/limit).times do |i|

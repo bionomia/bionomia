@@ -33,9 +33,10 @@ module Sinatra
             lines = params[:gbifids].split("\r\n")[0..50_000]
             agent_data = {}
             lines.each_slice(100) do |group|
-              cols = OccurrenceRecorder
-                            .joins(:occurrence)
+              cols = OccurrenceAgent
+                            .joins(:occurrences)
                             .where(occurrence_id: group)
+                            .where(agent_role: true)
                             .pluck(:agent_id, :year, :family, :institutionCode)
               cols.each do |col|
                 agent_data[col[0]] = [] if !agent_data.key?(col[0])
