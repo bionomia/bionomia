@@ -36,6 +36,7 @@ module Sinatra
                 @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
                 haml :'articles/agents_counts', locals: locals
               else
+                status 403
                 article_from_param
                 @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
                 haml :'articles/agents_unauthorized', locals: locals
@@ -53,6 +54,7 @@ module Sinatra
                 @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
                 haml :'articles/agents_unclaimed', locals: locals
               else
+                status 403
                 article_from_param
                 @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
                 haml :'articles/agents_unauthorized', locals: locals
@@ -70,6 +72,7 @@ module Sinatra
                 @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
                 haml :'articles/agents', locals: locals
               else
+                status 403
                 article_from_param
                 @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
                 haml :'articles/agents_unauthorized', locals: locals

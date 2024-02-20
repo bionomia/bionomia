@@ -102,6 +102,7 @@ module Sinatra
                 dataset_agents
                 haml :'datasets/agents', locals: locals
               else
+                status 403
                 haml :'datasets/agents_unauthorized', locals: locals
               end
             end
@@ -120,6 +121,7 @@ module Sinatra
                 dataset_agents_counts
                 haml :'datasets/agents_counts', locals: locals
               else
+                status 403
                 haml :'datasets/agents_unauthorized', locals: locals
               end
             end
@@ -138,6 +140,7 @@ module Sinatra
                 dataset_agents_unclaimed_counts
                 haml :'datasets/agents_unclaimed', locals: locals
               else
+                status 403
                 haml :'datasets/agents_unauthorized', locals: locals
               end
             end

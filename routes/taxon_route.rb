@@ -121,6 +121,7 @@ module Sinatra
                 taxon_agents
                 haml :'taxa/agents', locals: locals
               else
+                status 403
                 taxon_from_param
                 haml :'taxa/agents_unauthorized', locals: locals
               end
@@ -136,6 +137,7 @@ module Sinatra
                 taxon_agents_counts
                 haml :'taxa/agents_counts', locals: locals
               else
+                status 403
                 taxon_from_param
                 haml :'taxa/agents_unauthorized', locals: locals
               end
@@ -151,6 +153,7 @@ module Sinatra
                 taxon_agents_unclaimed
                 haml :'taxa/agents_unclaimed', locals: locals
               else
+                status 403
                 taxon_from_param
                 haml :'taxa/agents_unauthorized', locals: locals
               end
