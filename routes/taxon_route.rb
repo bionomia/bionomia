@@ -117,12 +117,13 @@ module Sinatra
                 active_tab: "agents",
                 active_subtab: "default"
               }
-              taxon_from_param
-              haml :'taxa/under_repair', locals: locals
-=begin
-              taxon_agents
-              haml :'taxa/agents', locals: locals
-=end
+              if authorized?
+                taxon_agents
+                haml :'taxa/agents', locals: locals
+              else
+                taxon_from_param
+                haml :'taxa/agents_unauthorized', locals: locals
+              end
             end
 
             get '/:taxon/agents/counts' do
@@ -131,12 +132,13 @@ module Sinatra
                 active_tab: "agents",
                 active_subtab: "counts"
               }
-              taxon_from_param
-              haml :'taxa/under_repair', locals: locals
-=begin
-              taxon_agents_counts
-              haml :'taxa/agents_counts', locals: locals
-=end
+              if authorized?
+                taxon_agents_counts
+                haml :'taxa/agents_counts', locals: locals
+              else
+                taxon_from_param
+                haml :'taxa/agents_unauthorized', locals: locals
+              end
             end
 
             get '/:taxon/agents/unclaimed' do
@@ -145,12 +147,13 @@ module Sinatra
                 active_tab: "agents",
                 active_subtab: "unclaimed"
               }
-              taxon_from_param
-              haml :'taxa/under_repair', locals: locals
-=begin
-              taxon_agents_unclaimed
-              haml :'taxa/agents_unclaimed', locals: locals
-=end
+              if authorized?
+                taxon_agents_unclaimed
+                haml :'taxa/agents_unclaimed', locals: locals
+              else
+                taxon_from_param
+                haml :'taxa/agents_unauthorized', locals: locals
+              end
             end
 
             get '/:taxon/visualizations' do
