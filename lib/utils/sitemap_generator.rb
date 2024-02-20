@@ -83,8 +83,6 @@ module Bionomia
       Organization.find_each do |o|
         sitemap.add "/organization/#{o.identifier}"
         sitemap.add "/organization/#{o.identifier}/past"
-        sitemap.add "/organization/#{o.identifier}/metrics"
-        sitemap.add "/organization/#{o.identifier}/citations"
       end
     end
 
@@ -100,11 +98,6 @@ module Bionomia
       puts "Adding datasets..."
       Dataset.find_each do |d|
         sitemap.add "/dataset/#{d.uuid}"
-        next if d.is_large?
-        sitemap.add "/dataset/#{d.uuid}/visualizations"
-        sitemap.add "/dataset/#{d.uuid}/visualizations?action=identified"
-        sitemap.add "/dataset/#{d.uuid}/scribes"
-        sitemap.add "/dataset/#{d.uuid}/agents"
       end
     end
 
@@ -119,12 +112,6 @@ module Bionomia
       puts "Adding taxa..."
       Taxon.find_each do |t|
         sitemap.add "/taxon/#{t.family}"
-        sitemap.add "/taxon/#{t.family}?action=identified"
-        sitemap.add "/taxon/#{t.family}/visualizations"
-        sitemap.add "/taxon/#{t.family}/visualizations?action=identified"
-        sitemap.add "/taxon/#{t.family}/agents"
-        sitemap.add "/taxon/#{t.family}/agents/counts"
-        sitemap.add "/taxon/#{t.family}/agents/unclaimed"
       end
     end
 

@@ -1,0 +1,18 @@
+= haml :'partials/dataset/twitter_img', layout: false
+
+- content_for :title, "#{@dataset.title}: #{I18n.t('dataset.agents')}"
+- content_for :scripts do
+  :javascript
+    $(function() {
+      Application.init();
+    });
+
+.row
+  = haml :'partials/dataset/jumbotron', layout:false
+
+  .col-12.col-lg-8.mt-2
+    = haml :'partials/dataset/tabs', layout: false, locals: { active_tab: locals[:active_tab] }
+    = haml :'partials/dataset/agent_nav', layout: false, locals: { active_subtab: locals[:active_subtab] }
+
+    .alert.alert-warning.tiny-margins.d-flex.flex-wrap{role: "alert"}
+      = I18n.t('organization.under_repair')

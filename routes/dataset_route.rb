@@ -93,13 +93,16 @@ module Sinatra
               if @dataset.is_large?
                 halt 404
               end
-              dataset_agents
               locals = {
                 active_page: "datasets",
                 active_tab: "agents",
                 active_subtab: "default"
               }
+              haml :'datasets/under_repair', locals: locals
+=begin
+              dataset_agents
               haml :'datasets/agents', locals: locals
+=end
             end
 
             get '/:id/agents/counts' do
@@ -107,13 +110,16 @@ module Sinatra
               if @dataset.is_large?
                 halt 404
               end
-              dataset_agents_counts
               locals = {
                 active_page: "datasets",
                 active_tab: "agents",
                 active_subtab: "counts"
               }
+              haml :'datasets/under_repair', locals: locals
+=begin
+              dataset_agents_counts
               haml :'datasets/agents_counts', locals: locals
+=end
             end
 
             get '/:id/agents/unclaimed' do
@@ -121,13 +127,16 @@ module Sinatra
               if @dataset.is_large?
                 halt 404
               end
-              dataset_agents_unclaimed_counts
               locals = {
                 active_page: "datasets",
                 active_tab: "agents",
                 active_subtab: "unclaimed"
               }
+              haml :'datasets/under_repair', locals: locals
+=begin
+              dataset_agents_unclaimed_counts
               haml :'datasets/agents_unclaimed', locals: locals
+=end
             end
 
             get '/:id/visualizations' do

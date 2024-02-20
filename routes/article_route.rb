@@ -26,36 +26,51 @@ module Sinatra
             end
 
             get '/*/agents/counts' do
-              article_agents_counts
               locals = {
                 active_page: "articles",
                 active_tab: "agents",
                 active_subtab: "counts"
               }
+              article_from_param
+              @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
+              haml :'articles/under_repair', locals: locals
+=begin
+              article_agents_counts
               @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
               haml :'articles/agents_counts', locals: locals
+=end
             end
 
             get '/*/agents/unclaimed' do
-              article_agents_unclaimed
               locals = {
                 active_page: "articles",
                 active_tab: "agents",
                 active_subtab: "unclaimed"
               }
+              article_from_param
+              @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
+              haml :'articles/under_repair', locals: locals
+=begin
+              article_agents_unclaimed
               @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
               haml :'articles/agents_unclaimed', locals: locals
+=end
             end
 
             get '/*/agents' do
-              article_agents
               locals = {
                 active_page: "articles",
                 active_tab: "agents",
                 active_subtab: "default"
               }
+              article_from_param
+              @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
+              haml :'articles/under_repair', locals: locals
+=begin
+              article_agents
               @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
               haml :'articles/agents', locals: locals
+=end
             end
 
             get '/*' do

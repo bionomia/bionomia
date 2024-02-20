@@ -112,33 +112,45 @@ module Sinatra
             end
 
             get '/:taxon/agents' do
-              taxon_agents
               locals = {
                 active_page: "taxa",
                 active_tab: "agents",
                 active_subtab: "default"
               }
+              taxon_from_param
+              haml :'taxa/under_repair', locals: locals
+=begin
+              taxon_agents
               haml :'taxa/agents', locals: locals
+=end
             end
 
             get '/:taxon/agents/counts' do
-              taxon_agents_counts
               locals = {
                 active_page: "taxa",
                 active_tab: "agents",
                 active_subtab: "counts"
               }
+              taxon_from_param
+              haml :'taxa/under_repair', locals: locals
+=begin
+              taxon_agents_counts
               haml :'taxa/agents_counts', locals: locals
+=end
             end
 
             get '/:taxon/agents/unclaimed' do
-              taxon_agents_unclaimed
               locals = {
                 active_page: "taxa",
                 active_tab: "agents",
                 active_subtab: "unclaimed"
               }
+              taxon_from_param
+              haml :'taxa/under_repair', locals: locals
+=begin
+              taxon_agents_unclaimed
               haml :'taxa/agents_unclaimed', locals: locals
+=end
             end
 
             get '/:taxon/visualizations' do

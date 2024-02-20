@@ -1,0 +1,15 @@
+- content_for :title, I18n.t('taxa.agents_title', taxon: @taxon.family)
+- content_for :scripts do
+   :javascript
+      $(function() {
+         Application.init("", "GET", "/taxa");
+      });
+
+- content_for :jumbotron do
+   = haml :'partials/taxa/jumbotron_agents', layout: false
+
+= haml :'partials/taxa/tabs', layout: false, locals: { active_tab: locals[:active_tab] }
+= haml :'partials/taxa/agent_nav', layout: false, locals: { active_subtab: locals[:active_subtab] }
+
+.alert.alert-warning.tiny-margins.d-flex.flex-wrap{role: "alert"}
+   = I18n.t('organization.under_repair')
