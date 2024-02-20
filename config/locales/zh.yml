@@ -243,7 +243,7 @@ zh-CN:
     filtered_by: Filtered by
     is_public: is public
     has_occurrences: has specimens
-    unauthorized: This feature requires that you login.
+    unauthorized: 此功能需登录后方可获得。
   help:
     ignored_title: "Help Reclaim Ignored for %{name}"
     upload_user_title: "Bulk Upload for %{name}"
