@@ -50,17 +50,17 @@ describe "Bionomia Dataset Route" do
 
   it "should allow accessing a dataset agents page" do
     get '/dataset/' + @datasetkey + '/agents'
-    expect(last_response).to be_ok
+    expect(last_response.status).to eq(403)
   end
 
   it "should allow accessing a dataset agents counts page" do
     get '/dataset/' + @datasetkey + '/agents/counts'
-    expect(last_response).to be_ok
+    expect(last_response.status).to eq(403)
   end
 
   it "should allow accessing a dataset agents unclaimed page" do
     get '/dataset/' + @datasetkey + '/agents/unclaimed'
-    expect(last_response).to be_ok
+    expect(last_response.status).to eq(403)
   end
 
   it "should allow accessing a dataset progress page" do

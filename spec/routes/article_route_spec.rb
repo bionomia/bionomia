@@ -24,12 +24,17 @@ describe "Bionomia Article Route" do
 
   it "should allow accessing an article agents page" do
     get '/article/' + @doi + '/agents'
-    expect(last_response).to be_ok
+    expect(last_response.status).to eq(403)
   end
 
   it "should allow accessing an article agent counts page" do
     get '/article/' + @doi + '/agents/counts'
-    expect(last_response).to be_ok
+    expect(last_response.status).to eq(403)
+  end
+
+  it "should allow accessing an article agent unclaimed page" do
+    get '/article/' + @doi + '/agents/unclaimed'
+    expect(last_response.status).to eq(403)
   end
 
 end

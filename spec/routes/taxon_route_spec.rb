@@ -14,17 +14,17 @@ describe "Bionomia Taxon Route" do
 
   it "should allow accessing a taxon agents page" do
     get '/taxon/' + @taxon.family + '/agents'
-    expect(last_response).to be_ok
+    expect(last_response.status).to eq(403)
   end
 
   it "should allow accessing a taxon agents counts page" do
     get '/taxon/' + @taxon.family + '/agents/counts'
-    expect(last_response).to be_ok
+    expect(last_response.status).to eq(403)
   end
 
   it "should allow accessing a taxon agents unclaimed page" do
     get '/taxon/' + @taxon.family + '/agents/unclaimed'
-    expect(last_response).to be_ok
+    expect(last_response.status).to eq(403)
   end
 
   it "should allow accessing the taxon json search" do
