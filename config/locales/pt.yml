@@ -260,6 +260,7 @@ pt:
     filtered_by: Filtrado por
     is_public: é público
     has_occurrences: tem espécimes
+    unauthorized: This feature requires that you login.
   help:
     ignored_title: "Ajude a reivindicar ignorado para %{name}"
     upload_user_title: "Carregamento de dados em massa para %{name}"

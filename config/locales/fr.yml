@@ -260,6 +260,7 @@ fr:
     filtered_by: Filtré par
     is_public: est publique
     has_occurrences: a des spécimens
+    unauthorized: This feature requires that you login.
   help:
     ignored_title: "Aide a récupéré pour %{name}"
     upload_user_title: "Téléchargement en bloc pour %{name}"

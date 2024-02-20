@@ -260,6 +260,7 @@ es:
     filtered_by: Filtrado por
     is_public: es público
     has_occurrences: tiene especímenes
+    unauthorized: This feature requires that you login.
   help:
     ignored_title: "Help Reclaim Ignored for %{name}"
     upload_user_title: "Subida masiva por %{name}"
