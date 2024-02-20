@@ -98,11 +98,12 @@ module Sinatra
                 active_tab: "agents",
                 active_subtab: "default"
               }
-              haml :'datasets/under_repair', locals: locals
-=begin
-              dataset_agents
-              haml :'datasets/agents', locals: locals
-=end
+              if authorized?
+                dataset_agents
+                haml :'datasets/agents', locals: locals
+              else
+                haml :'datasets/agents_unauthorized', locals: locals
+              end
             end
 
             get '/:id/agents/counts' do
@@ -115,11 +116,12 @@ module Sinatra
                 active_tab: "agents",
                 active_subtab: "counts"
               }
-              haml :'datasets/under_repair', locals: locals
-=begin
-              dataset_agents_counts
-              haml :'datasets/agents_counts', locals: locals
-=end
+              if authorized?
+                dataset_agents_counts
+                haml :'datasets/agents_counts', locals: locals
+              else
+                haml :'datasets/agents_unauthorized', locals: locals
+              end
             end
 
             get '/:id/agents/unclaimed' do
@@ -132,11 +134,12 @@ module Sinatra
                 active_tab: "agents",
                 active_subtab: "unclaimed"
               }
-              haml :'datasets/under_repair', locals: locals
-=begin
-              dataset_agents_unclaimed_counts
-              haml :'datasets/agents_unclaimed', locals: locals
-=end
+              if authorized?
+                dataset_agents_unclaimed_counts
+                haml :'datasets/agents_unclaimed', locals: locals
+              else
+                haml :'datasets/agents_unauthorized', locals: locals
+              end
             end
 
             get '/:id/visualizations' do

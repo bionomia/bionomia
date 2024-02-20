@@ -31,14 +31,15 @@ module Sinatra
                 active_tab: "agents",
                 active_subtab: "counts"
               }
-              article_from_param
-              @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
-              haml :'articles/under_repair', locals: locals
-=begin
-              article_agents_counts
-              @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
-              haml :'articles/agents_counts', locals: locals
-=end
+              if authorized?
+                article_agents_counts
+                @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
+                haml :'articles/agents_counts', locals: locals
+              else
+                article_from_param
+                @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
+                haml :'articles/agents_unauthorized', locals: locals
+              end
             end
 
             get '/*/agents/unclaimed' do
@@ -47,14 +48,15 @@ module Sinatra
                 active_tab: "agents",
                 active_subtab: "unclaimed"
               }
-              article_from_param
-              @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
-              haml :'articles/under_repair', locals: locals
-=begin
-              article_agents_unclaimed
-              @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
-              haml :'articles/agents_unclaimed', locals: locals
-=end
+              if authorized?
+                article_agents_unclaimed
+                @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
+                haml :'articles/agents_unclaimed', locals: locals
+              else
+                article_from_param
+                @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
+                haml :'articles/agents_unauthorized', locals: locals
+              end
             end
 
             get '/*/agents' do
@@ -63,14 +65,15 @@ module Sinatra
                 active_tab: "agents",
                 active_subtab: "default"
               }
-              article_from_param
-              @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
-              haml :'articles/under_repair', locals: locals
-=begin
-              article_agents
-              @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
-              haml :'articles/agents', locals: locals
-=end
+              if authorized?
+                article_agents
+                @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
+                haml :'articles/agents', locals: locals
+              else
+                article_from_param
+                @stats = cache_block("article-#{@article.id}-stats") { article_stats(@article) }
+                haml :'articles/agents_unauthorized', locals: locals
+              end
             end
 
             get '/*' do
