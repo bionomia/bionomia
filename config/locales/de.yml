@@ -260,6 +260,7 @@ de:
     filtered_by: Gefiltert nach
     is_public: ist öffentlich
     has_occurrences: has specimens
+    unauthorized: This feature requires that you login.
   help:
     ignored_title: "Help Reclaim Ignored for %{name}"
     upload_user_title: "Bulk Upload for %{name}"
