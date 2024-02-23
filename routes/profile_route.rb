@@ -136,12 +136,11 @@ module Sinatra
               @order = params[:order] || "typeStatus"
               create_filter
 
-              @page = page
               @total = @user.visible_occurrences.count
 
-              if @page*search_size > @total
+              if page*search_size > @total
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
-                @page = @total/search_size.to_i + bump_page
+                page = @total/search_size.to_i + bump_page
               end
 
               if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
@@ -153,19 +152,20 @@ module Sinatra
                 @order = "typeStatus"
               end
               data = specimen_filters(@user).order("occurrences.#{@order} #{@sort}")
-              @pagy, @results = pagy(data, items: search_size, page: @page)
+              @pagy, @results = pagy(data, items: search_size, page: page)
               haml :'profile/specimens', locals: { active_page: "profile" }
             end
 
             get '/support' do
-              @page = page
               helped_by = @user.helped_by_counts
               @total = helped_by.count
+              @page = page
 
               if @page*search_size > @total
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
                 @page = @total/search_size.to_i + bump_page
               end
+              @page = 1 if @page <= 0
 
               @pagy, @results = pagy_array(helped_by, items: search_size, page: @page)
               haml :'profile/support', locals: { active_page: "profile" }
@@ -173,7 +173,6 @@ module Sinatra
 
             get '/support/:id' do
               @helped_user = find_user(params[:id])
-
               @page = page
               @sort = params[:sort] || "desc"
               @order = params[:order] || "created"
@@ -199,6 +198,7 @@ module Sinatra
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
                 @page = @total/search_size.to_i + bump_page
               end
+              @page = 1 if @page <= 0
 
               @pagy, @results = pagy(claims_received_by, items: search_size, page: @page)
               haml :'profile/support_table', locals: { active_page: "profile" }
@@ -392,6 +392,7 @@ module Sinatra
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
                 @page = @total/search_size.to_i + bump_page
               end
+              @page = 1 if @page <= 0
 
               @pagy, @results = pagy(hidden_occurrences, items: search_size, page: @page)
               haml :'profile/ignored', locals: { active_page: "profile", active_tab: "ignored" }
@@ -441,6 +442,7 @@ module Sinatra
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
                 @page = @total/search_size.to_i + bump_page
               end
+              @page = 1 if @page <= 0
 
               @pagy, @results = pagy(cited_specimens, items: search_size, page: @page)
               haml :'profile/citation', locals: { active_page: "profile" }
@@ -474,6 +476,7 @@ module Sinatra
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
                 @page = @total/search_size.to_i + bump_page
               end
+              @page = 1 if @page <= 0
 
               @pagy, @results = pagy(co_collections, items: search_size, page: @page)
               haml :'profile/co_collector_specimens', locals: { active_page: "profile", active_tab: "co_collectors" }
@@ -508,6 +511,7 @@ module Sinatra
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
                 @page = @total/search_size.to_i + bump_page
               end
+              @page = 1 if @page <= 0
 
               @pagy, @results = pagy(specimens, items: search_size, page: @page)
               haml :'profile/identified_for_specimens', locals: { active_page: "profile", active_tab: "identified_for" }
@@ -541,6 +545,7 @@ module Sinatra
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
                 @page = @total/search_size.to_i + bump_page
               end
+              @page = 1 if @page <= 0
 
               @pagy, @results = pagy(identifications, items: search_size, page: @page)
               haml :'profile/identifications_by_specimens', locals: { active_page: "profile", active_tab: "determiners" }

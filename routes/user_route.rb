@@ -183,7 +183,6 @@ module Sinatra
               bump_page = @total % 50 != 0 ? 1 : 0
               @page = @total/50 + bump_page
             end
-
             @page = 1 if @page <= 0
 
             @pagy, @results = pagy_array(strings.to_a, items: 50, page: @page)
@@ -208,7 +207,6 @@ module Sinatra
               bump_page = @total % search_size.to_i != 0 ? 1 : 0
               @page = @total/search_size.to_i + bump_page
             end
-
             @page = 1 if @page <= 0
 
             @pagy, @results = pagy_array(helped_by, items: search_size, page: @page)

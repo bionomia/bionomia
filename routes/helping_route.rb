@@ -301,6 +301,7 @@ module Sinatra
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
                 @page = @total/search_size.to_i + bump_page
               end
+              @page = 1 if @page <= 0
 
               create_filter
 
@@ -332,6 +333,7 @@ module Sinatra
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
                 @page = @total/search_size.to_i + bump_page
               end
+              @page = 1 if @page <= 0
 
               @pagy, @results = pagy_array(helped_by, items: search_size, page: @page)
               haml :'help/support', locals: { active_page: "help" }
@@ -371,6 +373,7 @@ module Sinatra
                 bump_page = @total % 50 != 0 ? 1 : 0
                 @page = @total/50 + bump_page
               end
+              @page = 1 if @page <= 0
 
               @pagy, @results = pagy_array(strings.to_a, items: 50, page: @page)
               haml :'help/strings', locals: { active_page: "help" }
@@ -416,6 +419,7 @@ module Sinatra
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
                 @page = @total/search_size.to_i + bump_page
               end
+              @page = 1 if @page <= 0
 
               @pagy, @results = pagy(co_collections, items: search_size, page: @page)
               haml :'help/co_collector_specimens', locals: { active_page: "help" }
@@ -461,6 +465,7 @@ module Sinatra
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
                 @page = @total/search_size.to_i + bump_page
               end
+              @page = 1 if @page <= 0
 
               @pagy, @results = pagy(specimens, items: search_size, page: @page)
               haml :'help/identified_for_specimens', locals: { active_page: "help" }
@@ -506,6 +511,7 @@ module Sinatra
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
                 @page = @total/search_size.to_i + bump_page
               end
+              @page = 1 if @page <= 0
 
               @pagy, @results = pagy(determinations, items: search_size, page: @page)
               haml :'help/identifications_by_specimens', locals: { active_page: "help" }
@@ -542,6 +548,7 @@ module Sinatra
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
                 @page = @total/search_size.to_i + bump_page
               end
+              @page = 1 if @page <= 0
 
               @pagy, @results = pagy(hidden_occurrences, items: search_size, page: @page)
               haml :'help/ignored', locals: { active_page: "help" }

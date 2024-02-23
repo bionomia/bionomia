@@ -432,6 +432,7 @@ module Sinatra
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
                 @page = @total/search_size.to_i + bump_page
               end
+              @page = 1 if @page <= 0
 
               if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
                 if @order == "eventDate" || @order == "dateIdentified"
@@ -483,6 +484,7 @@ module Sinatra
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
                 @page = @total/search_size.to_i + bump_page
               end
+              @page = 1 if @page <= 0
 
               @pagy, @results = pagy_array(helped_by, items: search_size, page: @page)
               haml :'admin/support', locals: { active_page: "administration" }
@@ -518,6 +520,7 @@ module Sinatra
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
                 @page = @total/search_size.to_i + bump_page
               end
+              @page = 1 if @page <= 0
 
               @pagy, @results = pagy(claims_received_by, items: search_size, page: @page)
               haml :'admin/support_table', locals: { active_page: "administration" }
@@ -684,6 +687,7 @@ module Sinatra
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
                 @page = @total/search_size.to_i + bump_page
               end
+              @page = 1 if @page <= 0
 
               @pagy, @results = pagy(hidden_occurrences, items: search_size, page: @page)
               haml :'admin/ignored', locals: { active_page: "administration" }
@@ -724,6 +728,7 @@ module Sinatra
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
                 @page = @total/search_size.to_i + bump_page
               end
+              @page = 1 if @page <= 0
 
               @pagy, @results = pagy(cited_specimens, page: @page, items: search_size)
               haml :'admin/citation', locals: { active_page: "administration" }
