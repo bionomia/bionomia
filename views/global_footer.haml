@@ -48,6 +48,8 @@
 
 .px-3
   %ul.list-unstyled.text-small.list-group.flex-md-column.flex-row.list-group-flush
+    %li.text-center.list-group-item.my-0.pt-3.py-md-0.border-0.bg-transparent
+      %a.btn.btn-sm.btn-success{href: url("/donate"), role: "button"}= I18n.t('layout.support')
     %li.text-center.list-group-item.my-0.py-0.border-0.bg-transparent
       %a.mt-2.github{href: "https://github.com/bionomia/bionomia", "aria-label": "Bionomia on GitHub"}
         %i.fab.fa-github

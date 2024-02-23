@@ -61,8 +61,8 @@ val occurrences = spark.
     withColumnRenamed("v_recordedByID","recordedByID").
     withColumnRenamed("v_typeStatus","typeStatus").
     withColumn("hasImage", when($"hasImage" === true, 1).otherwise(0)).
-    withColumn("eventDate_processed", to_timestamp($"eventDate_processed")).
-    withColumn("dateIdentified_processed", to_timestamp($"dateIdentified_processed")).
+    withColumn("eventDate_processed", when(to_timestamp($"eventDate_processed").lt(current_timestamp()), to_date(to_timestamp($"eventDate_processed"), "YYY-MM-dd")).otherwise(null)).
+    withColumn("dateIdentified_processed", when(to_timestamp($"dateIdentified_processed").lt(current_timestamp()), to_date(to_timestamp($"dateIdentified_processed"), "YYY-MM-dd")).otherwise(null)).
     withColumn("typeStatus", lower($"typeStatus")).
     dropDuplicates("gbifID")
 
@@ -102,8 +102,7 @@ val differences = existing_counts.
 // Best to drop indices then recreate later
 // ALTER TABLE `occurrences` DROP KEY `typeStatus_idx`, DROP KEY `index_occurrences_on_datasetKey_occurrenceID`, DROP KEY `country_code_idx`;
 
-//write occurrences data to the database
-occurrences.sort(col("gbifID")).write.mode("append").jdbc(url, "occurrences", prop)
+occurrences.write.mode("append").jdbc(url, "occurrences", prop)
 
 // Recreate indices
 // ALTER TABLE `occurrences` ADD KEY `typeStatus_idx` (`typeStatus`(50)), ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`, `occurrenceID`(36)), ADD KEY `country_code_idx` (`countryCode`);
