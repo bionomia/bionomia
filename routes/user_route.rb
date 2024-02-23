@@ -158,7 +158,6 @@ module Sinatra
 
             @pagy, @results = {}, []
             if @viewed_user.is_public?
-              page = (params[:page] || 1).to_i
               data = specimen_filters(@viewed_user).order("occurrences.typeStatus desc")
               @pagy, @results = pagy(data, page: page)
             end
@@ -176,7 +175,7 @@ module Sinatra
             check_user_public
 
             @pagy, @results = {}, []
-            @page = (params[:page] || 1).to_i
+            @page = page
             strings = @viewed_user.collector_strings
             @total = strings.count
 
@@ -201,7 +200,7 @@ module Sinatra
             @viewed_user = find_user(params[:id])
             check_user_public
 
-            @page = (params[:page] || 1).to_i
+            @page = page
             helped_by = @viewed_user.helped_by_counts
             @total = helped_by.count
 
@@ -228,7 +227,6 @@ module Sinatra
 
             @pagy, @results = {}, []
             if @viewed_user.is_public?
-              page = (params[:page] || 1).to_i
               @stats = cache_block("#{@viewed_user.identifier}-stats") { user_stats(@viewed_user) }
               @pagy, @results = pagy(@viewed_user.articles_citing_specimens, items: 10, page: page)
             end
@@ -248,7 +246,6 @@ module Sinatra
 
             @pagy, @results = {}, []
             if @viewed_user.is_public?
-              page = (params[:page] || 1).to_i
               @pagy, @results = pagy(@viewed_user.cited_specimens_by_article(@article.id), page: page)
             end
             haml :'public/citation', locals: { active_page: "roster" }
@@ -262,7 +259,6 @@ module Sinatra
 
             @pagy, @results = {}, []
             if @viewed_user.is_public?
-              page = (params[:page] || 1).to_i
               @pagy, @results = pagy(@viewed_user.recorded_with, page: page)
             end
             locals = {
@@ -280,7 +276,6 @@ module Sinatra
 
             @pagy, @results = {}, []
             if @viewed_user.is_public?
-              page = (params[:page] || 1).to_i
               @pagy, @results = pagy(@viewed_user.identified_for, page: page)
             end
             locals = {
@@ -298,7 +293,6 @@ module Sinatra
 
             @pagy, @results = {}, []
             if @viewed_user.is_public?
-              page = (params[:page] || 1).to_i
               @pagy, @results = pagy(@viewed_user.identified_by, page: page)
             end
             locals = {
@@ -330,8 +324,6 @@ module Sinatra
             check_user_public
 
             @stats = cache_block("#{@viewed_user.identifier}-stats") { user_stats(@viewed_user) }
-            page = (params[:page] || 1).to_i
-
             @pagy, @results = pagy_arel(@viewed_user.helped, items: 30, page: page)
             haml :'public/helped', locals: { active_page: "roster" }
           end

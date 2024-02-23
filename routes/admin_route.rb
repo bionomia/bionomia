@@ -425,15 +425,13 @@ module Sinatra
               @sort = params[:sort] || "desc"
               @order = params[:order] || "typeStatus"
 
-              @page = (params[:page] || 1).to_i
+              @page = page
               @total = @admin_user.visible_occurrences.count
 
               if @page*search_size > @total
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
                 @page = @total/search_size.to_i + bump_page
               end
-
-              @page = 1 if @page <= 0
 
               if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
                 if @order == "eventDate" || @order == "dateIdentified"
@@ -477,7 +475,7 @@ module Sinatra
               check_redirect
               @admin_user = find_user(params[:id])
 
-              @page = (params[:page] || 1).to_i
+              @page = page
               helped_by = @admin_user.helped_by_counts
               @total = helped_by.count
 
@@ -485,8 +483,6 @@ module Sinatra
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
                 @page = @total/search_size.to_i + bump_page
               end
-
-              @page = 1 if @page <= 0
 
               @pagy, @results = pagy_array(helped_by, items: search_size, page: @page)
               haml :'admin/support', locals: { active_page: "administration" }
@@ -497,7 +493,7 @@ module Sinatra
               @admin_user = find_user(params[:id])
               @helped_user = find_user(params[:id2])
 
-              @page = (params[:page] || 1).to_i
+              @page = page
               @sort = params[:sort] || "desc"
               @order = params[:order] || "created"
               if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
@@ -522,8 +518,6 @@ module Sinatra
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
                 @page = @total/search_size.to_i + bump_page
               end
-
-              @page = 1 if @page <= 0
 
               @pagy, @results = pagy(claims_received_by, items: search_size, page: @page)
               haml :'admin/support_table', locals: { active_page: "administration" }
@@ -559,7 +553,7 @@ module Sinatra
             get '/user/:id/candidates' do
               check_redirect
               occurrence_ids = []
-              @page = (params[:page] || 1).to_i
+              @page = page
               @sort = params[:sort] || nil
               @order = params[:order] || nil
 
@@ -665,7 +659,7 @@ module Sinatra
             get '/user/:id/ignored' do
               check_redirect
               @admin_user = find_user(params[:id])
-              @page = (params[:page] || 1).to_i
+              @page = page
               @sort = params[:sort] || "desc"
               @order = params[:order] || "created"
               if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
@@ -691,8 +685,6 @@ module Sinatra
                 @page = @total/search_size.to_i + bump_page
               end
 
-              @page = 1 if @page <= 0
-
               @pagy, @results = pagy(hidden_occurrences, items: search_size, page: @page)
               haml :'admin/ignored', locals: { active_page: "administration" }
             end
@@ -709,7 +701,6 @@ module Sinatra
             get '/user/:id/citations' do
               check_redirect
               @admin_user = find_user(params[:id])
-              page = (params[:page] || 1).to_i
               cited = @admin_user.articles_citing_specimens
               @total = cited.count
 
@@ -725,7 +716,7 @@ module Sinatra
                 halt 404
               end
 
-              @page = (params[:page] || 1).to_i
+              @page = page
               cited_specimens = @admin_user.cited_specimens_by_article(@article.id)
               @total = cited_specimens.count
 
@@ -733,8 +724,6 @@ module Sinatra
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
                 @page = @total/search_size.to_i + bump_page
               end
-
-              @page = 1 if @page <= 0
 
               @pagy, @results = pagy(cited_specimens, page: @page, items: search_size)
               haml :'admin/citation', locals: { active_page: "administration" }

@@ -199,7 +199,7 @@ module Sinatra
               check_redirect
 
               occurrence_ids = []
-              @page = (params[:page] || 1).to_i
+              @page = page
               @sort = params[:sort] || nil
               @order = params[:order] || nil
 
@@ -292,7 +292,7 @@ module Sinatra
 
               @viewed_user = find_user(params[:id])
 
-              @page = (params[:page] || 1).to_i
+              @page = page
               @order = params[:order] || nil
               @sort = params[:sort] || nil
               @total = specimen_filters(@viewed_user).count
@@ -301,8 +301,6 @@ module Sinatra
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
                 @page = @total/search_size.to_i + bump_page
               end
-
-              @page = 1 if @page <= 0
 
               create_filter
 
@@ -326,7 +324,7 @@ module Sinatra
               check_redirect
 
               @viewed_user = find_user(params[:id])
-              @page = (params[:page] || 1).to_i
+              @page = page
               helped_by = @viewed_user.helped_by_counts
               @total = helped_by.count
 
@@ -334,8 +332,6 @@ module Sinatra
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
                 @page = @total/search_size.to_i + bump_page
               end
-
-              @page = 1 if @page <= 0
 
               @pagy, @results = pagy_array(helped_by, items: search_size, page: @page)
               haml :'help/support', locals: { active_page: "help" }
@@ -367,7 +363,7 @@ module Sinatra
 
               @viewed_user = find_user(@params[:id])
               @pagy, @results = {}, []
-              @page = (params[:page] || 1).to_i
+              @page = page
               strings = @viewed_user.collector_strings
               @total = strings.count
 
@@ -375,8 +371,6 @@ module Sinatra
                 bump_page = @total % 50 != 0 ? 1 : 0
                 @page = @total/50 + bump_page
               end
-
-              @page = 1 if @page <= 0
 
               @pagy, @results = pagy_array(strings.to_a, items: 50, page: @page)
               haml :'help/strings', locals: { active_page: "help" }
@@ -387,7 +381,6 @@ module Sinatra
               check_redirect
 
               @viewed_user = find_user(@params[:id])
-              page = (params[:page] || 1).to_i
               @pagy, @results = pagy(@viewed_user.recorded_with, page: page)
               haml :'help/co_collectors', locals: { active_page: "help" }
             end
@@ -403,7 +396,7 @@ module Sinatra
                 redirect "/profile/co-collector/#{@co_collector.identifier}", 301
               end
 
-              @page = (params[:page] || 1).to_i
+              @page = page
               @sort = params[:sort] || "desc"
               @order = params[:order] || "typeStatus"
               if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
@@ -424,7 +417,6 @@ module Sinatra
                 @page = @total/search_size.to_i + bump_page
               end
 
-              @page = 1 if @page <= 0
               @pagy, @results = pagy(co_collections, items: search_size, page: @page)
               haml :'help/co_collector_specimens', locals: { active_page: "help" }
             end
@@ -434,7 +426,6 @@ module Sinatra
               check_redirect
 
               @viewed_user = find_user(@params[:id])
-              page = (params[:page] || 1).to_i
               @pagy, @results = pagy(@viewed_user.identified_for, page: page)
               haml :'help/identified_for', locals: { active_page: "help" }
             end
@@ -450,7 +441,7 @@ module Sinatra
                 redirect "/profile/identified-for/#{@collector.identifier}", 301
               end
 
-              @page = (params[:page] || 1).to_i
+              @page = page
               @sort = params[:sort] || "desc"
               @order = params[:order] || "typeStatus"
               if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
@@ -471,7 +462,6 @@ module Sinatra
                 @page = @total/search_size.to_i + bump_page
               end
 
-              @page = 1 if @page <= 0
               @pagy, @results = pagy(specimens, items: search_size, page: @page)
               haml :'help/identified_for_specimens', locals: { active_page: "help" }
             end
@@ -481,7 +471,6 @@ module Sinatra
               check_redirect
 
               @viewed_user = find_user(@params[:id])
-              page = (params[:page] || 1).to_i
               @pagy, @results = pagy(@viewed_user.identified_by, page: page)
               haml :'help/identifications_by', locals: { active_page: "help" }
             end
@@ -497,7 +486,7 @@ module Sinatra
                 redirect "/profile/identifications-by/#{@determiner.identifier}", 301
               end
 
-              @page = (params[:page] || 1).to_i
+              @page = page
               @sort = params[:sort] || "desc"
               @order = params[:order] || "typeStatus"
               if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
@@ -518,7 +507,6 @@ module Sinatra
                 @page = @total/search_size.to_i + bump_page
               end
 
-              @page = 1 if @page <= 0
               @pagy, @results = pagy(determinations, items: search_size, page: @page)
               haml :'help/identifications_by_specimens', locals: { active_page: "help" }
             end
@@ -529,7 +517,7 @@ module Sinatra
 
               @viewed_user = find_user(params[:id])
 
-              @page = (params[:page] || 1).to_i
+              @page = page
               @sort = params[:sort] || "desc"
               @order = params[:order] || "created"
               if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
@@ -554,8 +542,6 @@ module Sinatra
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
                 @page = @total/search_size.to_i + bump_page
               end
-
-              @page = 1 if @page <= 0
 
               @pagy, @results = pagy(hidden_occurrences, items: search_size, page: @page)
               haml :'help/ignored', locals: { active_page: "help" }

@@ -136,7 +136,7 @@ module Sinatra
               @order = params[:order] || "typeStatus"
               create_filter
 
-              @page = (params[:page] || 1).to_i
+              @page = page
               @total = @user.visible_occurrences.count
 
               if @page*search_size > @total
@@ -144,7 +144,6 @@ module Sinatra
                 @page = @total/search_size.to_i + bump_page
               end
 
-              @page = 1 if @page <= 0
               if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
                 if @order == "eventDate" || @order == "dateIdentified"
                   @order = "#{@order}_processed"
@@ -159,7 +158,7 @@ module Sinatra
             end
 
             get '/support' do
-              @page = (params[:page] || 1).to_i
+              @page = page
               helped_by = @user.helped_by_counts
               @total = helped_by.count
 
@@ -168,8 +167,6 @@ module Sinatra
                 @page = @total/search_size.to_i + bump_page
               end
 
-              @page = 1 if @page <= 0
-
               @pagy, @results = pagy_array(helped_by, items: search_size, page: @page)
               haml :'profile/support', locals: { active_page: "profile" }
             end
@@ -177,7 +174,7 @@ module Sinatra
             get '/support/:id' do
               @helped_user = find_user(params[:id])
 
-              @page = (params[:page] || 1).to_i
+              @page = page
               @sort = params[:sort] || "desc"
               @order = params[:order] || "created"
               if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
@@ -202,8 +199,6 @@ module Sinatra
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
                 @page = @total/search_size.to_i + bump_page
               end
-
-              @page = 1 if @page <= 0
 
               @pagy, @results = pagy(claims_received_by, items: search_size, page: @page)
               haml :'profile/support_table', locals: { active_page: "profile" }
@@ -288,7 +283,7 @@ module Sinatra
 
             get '/candidates' do
               occurrence_ids = []
-              @page = (params[:page] || 1).to_i
+              @page = page
               @sort = params[:sort] || nil
               @order = params[:order] || nil
 
@@ -372,7 +367,7 @@ module Sinatra
             end
 
             get '/ignored' do
-              @page = (params[:page] || 1).to_i
+              @page = page
               @sort = params[:sort] || "desc"
               @order = params[:order] || "created"
               if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
@@ -398,8 +393,6 @@ module Sinatra
                 @page = @total/search_size.to_i + bump_page
               end
 
-              @page = 1 if @page <= 0
-
               @pagy, @results = pagy(hidden_occurrences, items: search_size, page: @page)
               haml :'profile/ignored', locals: { active_page: "profile", active_tab: "ignored" }
             end
@@ -411,7 +404,6 @@ module Sinatra
             end
 
             get '/citations' do
-              page = (params[:page] || 1).to_i
               @pagy, @results = pagy(@user.articles_citing_specimens, items: 10, page: page)
               haml :'profile/citations', locals: { active_page: "profile" }
             end
@@ -426,7 +418,7 @@ module Sinatra
             get '/citation/*' do
               article_from_param
 
-              @page = (params[:page] || 1).to_i
+              @page = page
               @sort = params[:sort] || "desc"
               @order = params[:order] || "typeStatus"
               if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
@@ -455,7 +447,6 @@ module Sinatra
             end
 
             get '/co-collectors' do
-              page = (params[:page] || 1).to_i
               @pagy, @results = pagy(@user.recorded_with, page: page)
               haml :'profile/co_collectors', locals: { active_page: "profile", active_tab: "co_collectors" }
             end
@@ -463,7 +454,7 @@ module Sinatra
             get '/co-collector/:id' do
               @co_collector = find_user(@params[:id])
 
-              @page = (params[:page] || 1).to_i
+              @page = page
               @sort = params[:sort] || "desc"
               @order = params[:order] || "typeStatus"
               if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
@@ -484,13 +475,11 @@ module Sinatra
                 @page = @total/search_size.to_i + bump_page
               end
 
-              @page = 1 if @page <= 0
               @pagy, @results = pagy(co_collections, items: search_size, page: @page)
               haml :'profile/co_collector_specimens', locals: { active_page: "profile", active_tab: "co_collectors" }
             end
 
             get '/identified-for' do
-              page = (params[:page] || 1).to_i
               @pagy, @results = pagy(@user.identified_for, page: page)
               haml :'profile/identified_for', locals: { active_page: "profile", active_tab: "identified_for" }
             end
@@ -500,7 +489,7 @@ module Sinatra
 
               @sort = params[:sort] || "desc"
               @order = params[:order] || "typeStatus"
-              @page = (params[:page] || 1).to_i
+              @page = page
 
               if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
                 if @order == "eventDate" || @order == "dateIdentified"
@@ -520,13 +509,11 @@ module Sinatra
                 @page = @total/search_size.to_i + bump_page
               end
 
-              @page = 1 if @page <= 0
               @pagy, @results = pagy(specimens, items: search_size, page: @page)
               haml :'profile/identified_for_specimens', locals: { active_page: "profile", active_tab: "identified_for" }
             end
 
             get '/identifications-by' do
-              page = (params[:page] || 1).to_i
               @pagy, @results = pagy(@user.identified_by, page: page)
               haml :'profile/identifications_by', locals: { active_page: "profile", active_tab: "determiners" }
             end
@@ -534,7 +521,7 @@ module Sinatra
             get '/identifications-by/:id' do
               @determiner = find_user(@params[:id])
 
-              @page = (params[:page] || 1).to_i
+              @page = page
               @sort = params[:sort] || "desc"
               @order = params[:order] || "typeStatus"
               if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
@@ -555,7 +542,6 @@ module Sinatra
                 @page = @total/search_size.to_i + bump_page
               end
 
-              @page = 1 if @page <= 0
               @pagy, @results = pagy(identifications, items: search_size, page: @page)
               haml :'profile/identifications_by_specimens', locals: { active_page: "profile", active_tab: "determiners" }
             end

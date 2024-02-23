@@ -64,6 +64,11 @@ module Sinatra
           s1.to_s.casecmp(s2.to_s) == 0
         end
 
+        def page
+          p = params[:page].to_i # converts strings to 0 (or the number they start with)
+          p.positive? ? p : 1 # when no valid page number is given, set page to 1
+        end
+
         def check_identifier
           if !params[:id].is_orcid? && !params[:id].is_wiki_id?
             halt 404

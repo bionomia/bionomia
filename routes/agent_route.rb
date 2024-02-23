@@ -58,7 +58,6 @@ module Sinatra
 
             get '/:id' do
               id = params[:id].to_i
-              page = (params[:page] || 1).to_i
               agent_filter
 
               sort = params[:sort] || nil
