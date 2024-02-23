@@ -134,14 +134,16 @@ module Sinatra
             get '/specimens' do
               @sort = params[:sort] || "desc"
               @order = params[:order] || "typeStatus"
+              @page = page
               create_filter
 
               @total = @user.visible_occurrences.count
 
-              if page*search_size > @total
+              if @page*search_size > @total
                 bump_page = @total % search_size.to_i != 0 ? 1 : 0
-                page = @total/search_size.to_i + bump_page
+                @page = @total/search_size.to_i + bump_page
               end
+              @page = 1 if @page <= 0
 
               if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
                 if @order == "eventDate" || @order == "dateIdentified"
@@ -152,7 +154,7 @@ module Sinatra
                 @order = "typeStatus"
               end
               data = specimen_filters(@user).order("occurrences.#{@order} #{@sort}")
-              @pagy, @results = pagy(data, items: search_size, page: page)
+              @pagy, @results = pagy(data, items: search_size, page: @page)
               haml :'profile/specimens', locals: { active_page: "profile" }
             end
 
