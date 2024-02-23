@@ -31,7 +31,7 @@
         - if m.nil?
           .card.border-0
         - else
-          - u = User.find(m[0][0])
+          - u = User.find(m[:user_id])
           .card.card-profile.my-3
             - if u.image_url
               .card-header.d-flex
@@ -60,7 +60,7 @@
                   %i.fas.fa-lock
               .small.text-left.text-muted.mr-2
                 %span.badge.badge-light
-                  #{u.messages_by_recipient(m[0][1]).count}
+                  #{u.messages_by_recipient(m[:recipient_id]).count}
                 %span.text-danger
                   %i.fas.fa-heart
               .small.ml-auto.text-muted
