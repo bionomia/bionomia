@@ -6,7 +6,9 @@ module Bionomia
     sidekiq_options queue: :default, retry: 3
 
     def perform(row)
-      taxon = Taxon.create_or_find_by(family: row["family"].to_s.strip)
+      family = row["family"].to_s.strip
+      return if family.match(/\A[a-zA-Z]*\z/).blank?
+      taxon = Taxon.create_or_find_by(family: family)
       row["gbifIDs_family"]
         .tr('[]', '')
         .split(',')
