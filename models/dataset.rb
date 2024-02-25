@@ -17,7 +17,7 @@ class Dataset < ActiveRecord::Base
     UserOccurrence.select(:id)
                   .from("user_occurrences FORCE INDEX (user_occurrence_idx)")
                   .joins(:occurrence)
-                  .where(occurrences: { datasetKey: datasetKey })
+                  .where(occurrences: { datasetKey: uuid })
                   .where(user_occurrences: { visible: true }).any?
   end
 
@@ -28,7 +28,10 @@ class Dataset < ActiveRecord::Base
   end
 
   def has_agent?
-    OccurrenceAgent.select(:agent_id).joins(:occurrences).where(occurrences: { datasetKey: uuid }).any?
+    OccurrenceAgent.select(:agent_id)
+                   .joins(:occurrences)
+                   .where(occurrences: { datasetKey: uuid })
+                   .any?
   end
 
   def is_large?
@@ -43,7 +46,7 @@ class Dataset < ActiveRecord::Base
     subq = UserOccurrence.select(:user_id, :visible)
                          .from("user_occurrences FORCE INDEX (user_occurrence_idx)")
                          .joins(:occurrence)
-                         .where(occurrences: { datasetKey: datasetKey })
+                         .where(occurrences: { datasetKey: uuid })
                          .distinct.to_sql
     User.joins("INNER JOIN (#{subq}) a ON a.user_id = users.id")
         .where("a.visible": true)
@@ -57,15 +60,11 @@ class Dataset < ActiveRecord::Base
     users.select(:id)
   end
 
-  def claimed_occurrences
-    user_occurrences.where(visible: true).select(:id, :visible, "occurrences.*")
-  end
-
   def claimed_occurrences_count
     UserOccurrence.select(:occurrence_id)
                   .from("user_occurrences FORCE INDEX (user_occurrence_idx)")
                   .joins(:occurrence)
-                  .where(occurrences: { datasetKey: datasetKey })
+                  .where(occurrences: { datasetKey: uuid })
                   .where(user_occurrences: { visible: true })
                   .distinct
                   .count
@@ -99,7 +98,7 @@ class Dataset < ActiveRecord::Base
     subq = UserOccurrence.select(:created_by, :visible)
                          .from("user_occurrences FORCE INDEX (user_occurrence_idx)")
                          .joins(:occurrence)
-                         .where(occurrences: { datasetKey: datasetKey })
+                         .where(occurrences: { datasetKey: uuid })
                          .where.not(created_by: User::BOT_IDS)
                          .where("user_occurrences.user_id != user_occurrences.created_by")
                          .distinct.to_sql
@@ -248,7 +247,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def fix_occurrences_count
-    Occurrence.counter_culture_fix_counts only: :dataset, where: { datasetKey: datasetKey }
+    Occurrence.counter_culture_fix_counts only: :dataset, where: { datasetKey: uuid }
   end
 
 end
