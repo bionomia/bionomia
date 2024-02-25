@@ -14,7 +14,11 @@ class Dataset < ActiveRecord::Base
   after_destroy :remove_search, unless: :skip_callbacks
 
   def has_claim?
-    user_occurrences.where(user_occurrences: { visible: true }).any?
+    UserOccurrence.select(:id)
+                  .from("user_occurrences FORCE INDEX (user_occurrence_idx)")
+                  .joins(:occurrence)
+                  .where(occurrences: { datasetKey: datasetKey })
+                  .where(user_occurrences: { visible: true }).any?
   end
 
   alias_method :has_user?, :has_claim?
