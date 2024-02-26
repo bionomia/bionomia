@@ -41,7 +41,7 @@ if options[:uuid]
       submit_update(d)
    end
 elsif options[:refresh]
-   Dataset.not(frictionless_created_at: nil).find_each do |d|
+   Dataset.where.not(frictionless_created_at: nil).find_each do |d|
       next if d.nil? || !d.has_claim?
       if d.zenodo_doi.nil?
          submit_new(d)
