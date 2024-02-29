@@ -125,7 +125,7 @@ module Sinatra
             occurrences = Occurrence.where(typeStatus: 'holotype')
                                     .where("MONTH(eventDate_processed) = ? and DAY(eventDate_processed) = ?", @date.month, @date.day)
                                     .limit(50)
-            @pagy, @results = pagy(occurrences)
+            @pagy, @results = pagy_countless(occurrences, items: 50, size: 50)
             haml :'on_this_day/collected', locals: { active_tab: "specimens" }
           end
 
