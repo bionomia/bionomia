@@ -123,6 +123,7 @@ module Sinatra
               @date = DateTime.parse(params[:date]) rescue @date
             end
             occurrences = Occurrence.where(typeStatus: 'holotype')
+                                    .where(hasImage: true)
                                     .where("MONTH(eventDate_processed) = ? and DAY(eventDate_processed) = ?", @date.month, @date.day)
                                     .limit(50)
             @pagy, @results = pagy_countless(occurrences, items: 50, size: 50)
