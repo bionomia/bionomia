@@ -7,14 +7,14 @@ class Agent < ActiveRecord::Base
 
   validates :family, presence: true
 
-  # agent_role values: recorded = TRUE; identidied = FALSE
+  # agent_role values: recorded = TRUE; identified = FALSE
 
   def fullname
     [given, family].compact.reject(&:empty?).join(" ").strip
   end
 
   def fullname_reverse
-    [family, given].compact.reject(&:empty?).join(", ")
+    [family, given].compact.reject(&:empty?).join(", ").strip
   end
 
   def viewname
