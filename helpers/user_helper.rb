@@ -224,8 +224,8 @@ module Sinatra
               recorded: countries_recorded
             },
             articles: {
-              specimens_cited: cited.select(:occurrence_id).distinct.count,
-              number: cited.select(:article_id).distinct.count
+              specimens_cited: cited.select(:occurrence_id).distinct.order("NULL").count,
+              number: cited.select(:article_id).distinct.order("NULL").count
             },
             recorded_bins: user.recorded_bins
                                .delete_if{|k,v| k > Date.today.year || k <= 1700 || v == 0}

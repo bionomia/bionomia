@@ -39,7 +39,9 @@ if options[:file]
             .where(user_id: user.id)
             .pluck(:id)
     if ids.length > 0
-      UserOccurrence.where(id: ids).order(id: :desc).delete_all
+      ids.sort.reverse.in_groups_of(1_000, false) do |group|
+        UserOccurrence.where(id: group).delete_all
+      end
       begin
         user.flush_caches
         puts row[:identifier].green
