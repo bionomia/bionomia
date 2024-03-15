@@ -90,8 +90,7 @@ module Sinatra
 
             get '/:id/still_images.json' do
               content_type "application/json", charset: 'utf-8'
-              Occurrence.find(params[:id])
-                        .images
+              Occurrence.images(id: params[:id])
                         .to_json
             end
 

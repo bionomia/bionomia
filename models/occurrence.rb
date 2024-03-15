@@ -38,6 +38,28 @@ class Occurrence < ActiveRecord::Base
     Occurrence.column_names - Occurrence::IGNORED_COLUMNS_OUTPUT
   end
 
+  def self.images(id:)
+    begin
+      response = RestClient::Request.execute(
+        method: :get,
+        url: "https://api.gbif.org/v1/occurrence/#{id}"
+      )
+      result = JSON.parse(response, :symbolize_names => true)
+      api = "https://api.gbif.org/v1/image/unsafe/"
+      result[:media].map{|a| {
+            original: api + CGI.escape(a[:identifier]),
+            small: "#{api}fit-in/250x/#{CGI.escape(a[:identifier])}",
+            large: "#{api}fit-in/750x/#{CGI.escape(a[:identifier])}",
+            license: "#{a[:license]}",
+            rightsHolder: "#{a[:rightsHolder]}"
+            } if a[:type] == "StillImage"
+          }
+          .compact
+    rescue
+      []
+    end
+  end
+
   def has_image?
     hasImage
   end
@@ -89,28 +111,6 @@ class Occurrence < ActiveRecord::Base
         }
       }
     }
-  end
-
-  def images
-    begin
-      response = RestClient::Request.execute(
-        method: :get,
-        url: "https://api.gbif.org/v1/occurrence/#{id}"
-      )
-      result = JSON.parse(response, :symbolize_names => true)
-      api = "https://api.gbif.org/v1/image/unsafe/"
-      result[:media].map{|a| {
-            original: api + CGI.escape(a[:identifier]),
-            small: "#{api}fit-in/250x/#{CGI.escape(a[:identifier])}",
-            large: "#{api}fit-in/750x/#{CGI.escape(a[:identifier])}",
-            license: "#{a[:license]}",
-            rightsHolder: "#{a[:rightsHolder]}"
-            } if a[:type] == "StillImage"
-          }
-          .compact
-    rescue
-      []
-    end
   end
 
   def user_identifications

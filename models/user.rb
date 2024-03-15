@@ -620,7 +620,6 @@ class User < ActiveRecord::Base
   end
 
   def bulk_claim(agent:, conditions:, ignore: false)
-
     claimed = user_occurrences.pluck(:occurrence_id)
 
     if conditions.blank?
