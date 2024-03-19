@@ -143,9 +143,9 @@ class Organization < ActiveRecord::Base
                 .where(user_occurrences: { visible: true })
                 .where(user_organizations: { organization_id: id })
                 .where(user_organizations: { end_year: nil })
-                .where("occurrences.eventDate_processed > 1900")
+                .where("occurrences.eventDate_processed_year > 1900")
                 .where("user_organizations.start_year > 1900")
-                .where("YEAR(occurrences.eventDate_processed) >= user_organizations.start_year OR YEAR(occurrences.dateIdentified_processed) >= user_organizations.start_year")
+                .where("occurrences.eventDate_processed_year >= user_organizations.start_year OR YEAR(occurrences.dateIdentified_processed) >= user_organizations.start_year")
 
     past = Article
                 .joins(occurrences: { users: :user_organizations })
@@ -153,7 +153,7 @@ class Organization < ActiveRecord::Base
                 .where(user_organizations: { organization_id: id })
                 .where.not(user_organizations: { end_year: nil })
                 .where.not(user_organizations: { start_year: nil })
-                .where("(YEAR(occurrences.eventDate_processed) >= user_organizations.start_year AND YEAR(occurrences.eventDate_processed) <= user_organizations.end_year) OR (YEAR(occurrences.dateIdentified_processed) >= user_organizations.start_year AND YEAR(occurrences.dateIdentified_processed) <= user_organizations.end_year)")
+                .where("(occurrences.eventDate_processed_year >= user_organizations.start_year AND occurrences.eventDate_processed_year <= user_organizations.end_year) OR (YEAR(occurrences.dateIdentified_processed) >= user_organizations.start_year AND YEAR(occurrences.dateIdentified_processed) <= user_organizations.end_year)")
 
     current.or(past)
            .select(:id, :doi, :citation, :abstract, :created, "GROUP_CONCAT(DISTINCT users.id) AS user_ids")

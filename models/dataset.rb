@@ -171,21 +171,18 @@ class Dataset < ActiveRecord::Base
   end
 
   def timeline_recorded(start_year: 1000, end_year: Time.now.year)
-    start_date = Date.new(start_year, 1, 1)
-    end_date = Date.new(end_year, 12, 31)
-
     subq = UserOccurrence.from("user_occurrences FORCE INDEX (user_occurrence_idx)")
-                         .select(:user_id, :eventDate_processed, :visible)
+                         .select(:user_id, :eventDate_processed, :eventDate_processed_year, :visible)
                          .joins(:occurrence)
                          .where(user_occurrences: { action: ['recorded', 'identified,recorded', 'recorded,identified'] })
                          .where(occurrences: { datasetKey: uuid })
-                         .where("eventDate_processed BETWEEN ? AND ?", start_date, end_date)
+                         .where("eventDate_processed_year BETWEEN ? AND ?", start_year, end_year)
                          .distinct
 
     User.select("users.*", "MIN(a.eventDate_processed) AS min_date", "MAX(a.eventDate_processed) AS max_date")
         .joins("INNER JOIN (#{subq.to_sql}) a ON a.user_id = users.id")
         .where("a.visible": true)
-        .where.not("a.eventDate_processed": nil)
+        .where.not("a.eventDate_processed_year": nil)
         .group(:id)
         .order("min_date")
   end

@@ -31,7 +31,10 @@ class Occurrence < ActiveRecord::Base
     "gbifID",
     "dateIdentified_processed",
     "eventDate_processed",
-    "hasImage"
+    "hasImage",
+    "eventDate_procesed_year",
+    "eventDate_processed_month",
+    "eventDate_processed_day"
   ]
 
   def self.accepted_fields
