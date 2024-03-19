@@ -33,13 +33,6 @@ CREATE TABLE `article_occurrences` (
   `occurrence_id` bigint UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin KEY_BLOCK_SIZE=8 ROW_FORMAT=COMPRESSED;
 
-CREATE TABLE `ar_internal_metadata` (
-  `key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `created_at` datetime(6) NOT NULL,
-  `updated_at` datetime(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
 CREATE TABLE `datasets` (
   `id` bigint NOT NULL,
   `datasetKey` binary(36) NOT NULL,
@@ -54,8 +47,8 @@ CREATE TABLE `datasets` (
   `frictionless_created_at` timestamp NULL DEFAULT NULL,
   `occurrences_count` int UNSIGNED NOT NULL DEFAULT '0',
   `source_attribution_count` int UNSIGNED NOT NULL DEFAULT '0',
-  `zenodo_doi` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
-  `zenodo_concept_doi` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL
+  `zenodo_doi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `zenodo_concept_doi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `destroyed_users` (
@@ -95,11 +88,21 @@ CREATE TABLE `occurrences` (
   `recordedBy` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `scientificName` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `typeStatus` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  `dateIdentified_processed` datetime DEFAULT NULL,
-  `eventDate_processed` datetime DEFAULT NULL,
+  `dateIdentified_processed` date DEFAULT NULL,
+  `eventDate_processed` date DEFAULT NULL,
+  `eventDate_processed_year` int GENERATED ALWAYS AS (year(`eventDate_processed`)) STORED,
+  `eventDate_processed_month` int GENERATED ALWAYS AS (month(`eventDate_processed`)) STORED,
+  `eventDate_processed_day` int GENERATED ALWAYS AS (dayofmonth(`eventDate_processed`)) STORED,
   `hasImage` tinyint(1) DEFAULT NULL,
   `recordedByID` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `identifiedByID` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=COMPRESSED;
+
+CREATE TABLE `occurrence_agents` (
+  `id` bigint NOT NULL,
+  `occurrence_id` bigint NOT NULL,
+  `agent_id` int NOT NULL,
+  `agent_role` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=COMPRESSED;
 
 CREATE TABLE `occurrence_counts` (
@@ -108,13 +111,6 @@ CREATE TABLE `occurrence_counts` (
   `agent_count` int UNSIGNED NOT NULL,
   `user_count` int UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-CREATE TABLE `occurrence_agents` (
-  `id` bigint NOT NULL,
-  `occurrence_id` bigint UNSIGNED NOT NULL,
-  `agent_id` int UNSIGNED NOT NULL,
-  `agent_role` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=COMPRESSED;
 
 CREATE TABLE `organizations` (
   `id` int NOT NULL,
@@ -130,15 +126,6 @@ CREATE TABLE `organizations` (
   `longitude` float DEFAULT NULL,
   `image_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `website` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-CREATE TABLE `orphaned_user_occurrences` (
-  `id` bigint NOT NULL,
-  `occurrence_id` bigint NOT NULL,
-  `user_id` int NOT NULL,
-  `created_by` int NOT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `schema_migrations` (
@@ -248,9 +235,6 @@ ALTER TABLE `article_occurrences`
   ADD UNIQUE KEY `occurrence_article_idx` (`occurrence_id`,`article_id`),
   ADD KEY `article_idx` (`article_id`);
 
-ALTER TABLE `ar_internal_metadata`
-  ADD PRIMARY KEY (`key`);
-
 ALTER TABLE `datasets`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `index_datasets_on_datasetKey` (`datasetKey`);
@@ -266,18 +250,19 @@ ALTER TABLE `messages`
 
 ALTER TABLE `occurrences`
   ADD PRIMARY KEY (`gbifID`) USING BTREE,
+  ADD KEY `typeStatus_idx` (`typeStatus`(50)),
+  ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`,`occurrenceID`(36)),
   ADD KEY `country_code_idx` (`countryCode`),
-  ADD KEY `typeStatus_idx` (`typeStatus`(10)),
-  ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`,`occurrenceID`(36));
+  ADD KEY `eventDate_processed_idx` (`eventDate_processed_year`,`eventDate_processed_month`,`eventDate_processed_day`);
+
+ALTER TABLE `occurrence_agents`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `agent_occurrence_idx` (`agent_id`,`agent_role`,`occurrence_id`),
+  ADD KEY `occurrence_idx` (`occurrence_id`);
 
 ALTER TABLE `occurrence_counts`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `occurrence_id` (`occurrence_id`);
-
-ALTER TABLE `occurrence_agents`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `agent_occurrence_idx` (`agent_id`,`agent_role`,`occurrence_id`),
-  ADD KEY `occurrence_idx` (`occurrence_id`);
 
 ALTER TABLE `organizations`
   ADD PRIMARY KEY (`id`),
@@ -286,10 +271,6 @@ ALTER TABLE `organizations`
   ADD KEY `isni_idx` (`isni`),
   ADD KEY `wikidata` (`wikidata`),
   ADD KEY `index_organizations_on_ror` (`ror`);
-
-ALTER TABLE `orphaned_user_occurrences`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `index_orphaned_user_occurrences_on_occurrence_id` (`occurrence_id`);
 
 ALTER TABLE `schema_migrations`
   ADD UNIQUE KEY `unique_schema_migrations` (`version`);
@@ -353,16 +334,13 @@ ALTER TABLE `messages`
   MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `occurrence_agents`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `occurrence_counts`
   MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `organizations`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `orphaned_user_occurrences`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `source_attributions`
   MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
