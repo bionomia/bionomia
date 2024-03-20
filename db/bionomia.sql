@@ -89,6 +89,9 @@ CREATE TABLE `occurrences` (
   `scientificName` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `typeStatus` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `dateIdentified_processed` date DEFAULT NULL,
+  `dateIdentified_processed_year` int GENERATED ALWAYS AS (year(`dateIdentified_processed`)) STORED,
+  `dateIdentified_processed_month` int GENERATED ALWAYS AS (month(`dateIdentified_processed`)) STORED,
+  `dateIdentified_processed_day` int GENERATED ALWAYS AS (dayofmonth(`dateIdentified_processed`)) STORED,
   `eventDate_processed` date DEFAULT NULL,
   `eventDate_processed_year` int GENERATED ALWAYS AS (year(`eventDate_processed`)) STORED,
   `eventDate_processed_month` int GENERATED ALWAYS AS (month(`eventDate_processed`)) STORED,
@@ -253,7 +256,8 @@ ALTER TABLE `occurrences`
   ADD KEY `typeStatus_idx` (`typeStatus`(50)),
   ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`,`occurrenceID`(36)),
   ADD KEY `country_code_idx` (`countryCode`),
-  ADD KEY `eventDate_processed_idx` (`eventDate_processed_year`,`eventDate_processed_month`,`eventDate_processed_day`);
+  ADD KEY `eventDate_processed_idx` (`eventDate_processed_year`,`eventDate_processed_month`,`eventDate_processed_day`),
+  ADD KEY `dateIdentified_processed_idx` (`dateIdentified_processed_year`,`dateIdentified_processed_month`,`dateIdentified_processed_day`);
 
 ALTER TABLE `occurrence_agents`
   ADD PRIMARY KEY (`id`),
