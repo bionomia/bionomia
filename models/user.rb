@@ -513,9 +513,9 @@ class User < ActiveRecord::Base
     recordings = visible_user_occurrences
         .joins(:occurrence)
         .where(qry_identified)
-        .where.not(occurrences: { dateIdentified_processed: nil})
+        .where.not(occurrences: { dateIdentified_processed_year: nil})
         .where("occurrences.dateIdentified_processed <= CURDATE()")
-        .select("FLOOR(YEAR(occurrences.dateIdentified_processed)/#{years})*#{years} as bin", "count(*) as sum")
+        .select("FLOOR(occurrences.dateIdentified_processed_year/#{years})*#{years} as bin", "count(*) as sum")
         .group("bin")
         .order("NULL")
         .compact
@@ -531,9 +531,9 @@ class User < ActiveRecord::Base
         .where.not(created_by: self)
         .joins(:occurrence)
         .where(qry_identified)
-        .where.not(occurrences: { dateIdentified_processed: nil})
+        .where.not(occurrences: { dateIdentified_processed_year: nil})
         .where("occurrences.dateIdentified_processed <= CURDATE()")
-        .select("FLOOR(YEAR(occurrences.dateIdentified_processed)/#{years})*#{years} as bin", "count(*) as sum")
+        .select("FLOOR(occurrences.dateIdentified_processed_year/#{years})*#{years} as bin", "count(*) as sum")
         .group("bin")
         .order("NULL")
         .compact

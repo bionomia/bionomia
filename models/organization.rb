@@ -95,18 +95,18 @@ class Organization < ActiveRecord::Base
   end
 
   def others_specimens(type = "recorded")
-    date_field = type == "recorded" ? "eventDate_processed" : "dateIdentified_processed"
+    date_field = type == "recorded" ? "eventDate_processed_year" : "dateIdentified_processed_year"
 
-    data = Occurrence.joins(users: :organizations)
+    data = Occurrence.joins(:user_occurrences)
+                .joins("INNER JOIN user_organizations ON user_organizations.user_id = user_occurrences.user_id")
                 .where(user_occurrences: { visible: true })
                 .where("user_occurrences.action LIKE ?", "%#{type}%")
                 .where(user_organizations: { organization_id: id })
-                .where("( user_organizations.end_year IS NULL AND YEAR(occurrences.#{date_field}) >= user_organizations.start_year) OR ( user_organizations.end_year IS NOT NULL AND user_organizations.start_year IS NOT NULL AND YEAR(occurrences.#{date_field}) >= user_organizations.start_year AND YEAR(occurrences.#{date_field}) <= user_organizations.end_year )")
+                .where("( user_organizations.end_year IS NULL AND occurrences.#{date_field} >= user_organizations.start_year) OR ( user_organizations.end_year IS NOT NULL AND user_organizations.start_year IS NOT NULL AND occurrences.#{date_field} >= user_organizations.start_year AND occurrences.#{date_field} <= user_organizations.end_year )")
                 .where.not(occurrences: { institutionCode: nil })
                 .where("occurrences.institutionCode NOT IN (?)", institution_codes)
-                .distinct
                 .unscope(:order)
-                .pluck(:gbifID, :institutionCode).compact
+                .pluck(:gbifID, :institutionCode).uniq.compact
 
     Hash.new(0).tap{ |h| data.each { |f| h[f[1]] += 1 } }
                .sort_by {|_key, value| value}
@@ -115,20 +115,19 @@ class Organization < ActiveRecord::Base
   end
 
   def others_specimens_by_year(type = "recorded", year = DateTime.now.year)
-    date_field = type == "recorded" ? "eventDate_processed" : "dateIdentified_processed"
+    date_field = type == "recorded" ? "eventDate_processed_year" : "dateIdentified_processed_year"
 
-    data = Occurrence.joins(users: :organizations)
+    data = Occurrence.joins(:user_occurrences)
+                .joins("INNER JOIN user_organizations ON user_organizations.user_id = user_occurrences.user_id")
                 .where(user_occurrences: { visible: true })
                 .where("user_occurrences.action LIKE ?", "%#{type}%")
                 .where(user_organizations: { organization_id: id })
                 .where("( user_organizations.end_year IS NULL AND user_organizations.start_year <= ? ) OR ( user_organizations.start_year IS NOT NULL AND user_organizations.end_year IS NOT NULL )", year)
-                .where("YEAR(occurrences.#{date_field}) = ?", year)
+                .where("occurrences.#{date_field} = ?", year)
                 .where.not(occurrences: { institutionCode: nil })
                 .where("occurrences.institutionCode NOT IN (?)", institution_codes)
-                .distinct
                 .unscope(:order)
-                .pluck(:gbifID, :institutionCode).compact
-                .compact
+                .pluck(:gbifID, :institutionCode).uniq.compact
 
     Hash.new(0).tap{ |h| data.each { |f| h[f[1]] += 1 } }
                .sort_by {|_key, value| value}
@@ -137,7 +136,6 @@ class Organization < ActiveRecord::Base
   end
 
   def articles
-    #TODO: maybe add year column to occurrences based on eventDate_processed and then index that
     current = Article
                 .joins(occurrences: { users: :user_organizations })
                 .where(user_occurrences: { visible: true })
@@ -145,7 +143,7 @@ class Organization < ActiveRecord::Base
                 .where(user_organizations: { end_year: nil })
                 .where("occurrences.eventDate_processed_year > 1900")
                 .where("user_organizations.start_year > 1900")
-                .where("occurrences.eventDate_processed_year >= user_organizations.start_year OR YEAR(occurrences.dateIdentified_processed) >= user_organizations.start_year")
+                .where("occurrences.eventDate_processed_year >= user_organizations.start_year OR occurrences.dateIdentified_processed_year >= user_organizations.start_year")
 
     past = Article
                 .joins(occurrences: { users: :user_organizations })
@@ -153,7 +151,7 @@ class Organization < ActiveRecord::Base
                 .where(user_organizations: { organization_id: id })
                 .where.not(user_organizations: { end_year: nil })
                 .where.not(user_organizations: { start_year: nil })
-                .where("(occurrences.eventDate_processed_year >= user_organizations.start_year AND occurrences.eventDate_processed_year <= user_organizations.end_year) OR (YEAR(occurrences.dateIdentified_processed) >= user_organizations.start_year AND YEAR(occurrences.dateIdentified_processed) <= user_organizations.end_year)")
+                .where("(occurrences.eventDate_processed_year >= user_organizations.start_year AND occurrences.eventDate_processed_year <= user_organizations.end_year) OR (occurrences.dateIdentified_processed_year >= user_organizations.start_year AND occurrences.dateIdentified_processed_year <= user_organizations.end_year)")
 
     current.or(past)
            .select(:id, :doi, :citation, :abstract, :created, "GROUP_CONCAT(DISTINCT users.id) AS user_ids")

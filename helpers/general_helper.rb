@@ -219,12 +219,10 @@ module Sinatra
             if params[:action] == "identified"
               results = user.identifications.joins(:occurrence)
               if params[:start_year]
-                start_date = Date.new(params[:start_year].to_i, 1, 1)
-                results = results.where("occurrences.dateIdentified_processed >= ?", start_date)
+                results = results.where("occurrences.dateIdentified_processed_year >= ?", params[:start_year])
               end
               if params[:end_year]
-                end_date = Date.new(params[:end_year].to_i, 12, 31)
-                results = results.where("occurrences.dateIdentified_processed <= ?", end_date)
+                results = results.where("occurrences.dateIdentified_processed_year <= ?", params[:end_year])
               end
             end
           else

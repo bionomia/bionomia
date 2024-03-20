@@ -34,7 +34,10 @@ class Occurrence < ActiveRecord::Base
     "hasImage",
     "eventDate_procesed_year",
     "eventDate_processed_month",
-    "eventDate_processed_day"
+    "eventDate_processed_day",
+    "dateIdentified_procesed_year",
+    "dateIdentified_processed_month",
+    "dateIdentified_processed_day"
   ]
 
   def self.accepted_fields

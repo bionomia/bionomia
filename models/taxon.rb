@@ -78,17 +78,17 @@ class Taxon < ActiveRecord::Base
   end
 
   def timeline_identified(start_year: 1000, end_year: Time.now.year)
-    subq = UserOccurrence.select(:user_id, :dateIdentified_processed, :visible)
+    subq = UserOccurrence.select(:user_id, :dateIdentified_processed, :dateIdentified_processed_year, :visible)
                          .joins(:occurrence, :taxon_occurrence)
                          .where(user_occurrences: { action: ['identified', 'identified,recorded', 'recorded,identified'] })
                          .where(taxon_occurrences: { taxon_id: id })
-                         .where("YEAR(dateIdentified_processed) BETWEEN ? AND ?", start_year, end_year)
+                         .where("dateIdentified_processed_year BETWEEN ? AND ?", start_year, end_year)
                          .distinct
 
     User.select("users.*", "MIN(a.dateIdentified_processed) AS min_date", "MAX(a.dateIdentified_processed) AS max_date")
         .joins("INNER JOIN (#{subq.to_sql}) a ON a.user_id = users.id")
         .where("a.visible": true)
-        .where.not("a.dateIdentified_processed": nil)
+        .where.not("a.dateIdentified_processed_year": nil)
         .group(:id)
         .order("min_date")
   end

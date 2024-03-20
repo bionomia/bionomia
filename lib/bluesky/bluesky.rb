@@ -15,10 +15,28 @@ module Bionomia
          createdAt: Time.now.iso8601,
          langs: ["en-US"]
       })
-      if text.include?("https")
+      if text.include?("https") || text.include?("#")
         @post_item.merge!({
           facets: []
         })
+        # Extract hash tags
+        re = /(#[^\d\s]\S*)(?=\s)?/
+        re.match(text).captures.each do |match|
+          match.strip!
+          @post_item[:facets] << {
+            index: {
+              byteStart: text.byteindex(match),
+              byteEnd: text.byteindex(match) + match.bytesize
+            },
+            features: [
+              {
+                "$type": "app.bsky.richtext.facet#tag",
+                "tag": match.sub("#", "")
+              }
+            ]
+          }
+        end
+        # Extract URLs
         URI.extract(text, "https").each do |url|
           @post_item[:facets] << {
             index: {
