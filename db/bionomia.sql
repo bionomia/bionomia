@@ -102,7 +102,7 @@ CREATE TABLE `occurrences` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=COMPRESSED;
 
 CREATE TABLE `occurrence_agents` (
-  `id` bigint NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `occurrence_id` bigint NOT NULL,
   `agent_id` int NOT NULL,
   `agent_role` tinyint(1) NOT NULL DEFAULT '1'
@@ -111,8 +111,8 @@ CREATE TABLE `occurrence_agents` (
 CREATE TABLE `occurrence_counts` (
   `id` bigint NOT NULL,
   `occurrence_id` bigint UNSIGNED NOT NULL,
-  `agent_count` int UNSIGNED NOT NULL,
-  `user_count` int UNSIGNED NOT NULL
+  `agent_count` int UNSIGNED DEFAULT NULL,
+  `user_count` int UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `organizations` (
@@ -266,7 +266,8 @@ ALTER TABLE `occurrence_agents`
 
 ALTER TABLE `occurrence_counts`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `occurrence_id` (`occurrence_id`);
+  ADD UNIQUE KEY `occurrence_id` (`occurrence_id`),
+  ADD KEY `agent_count_idx` (`agent_count`);
 
 ALTER TABLE `organizations`
   ADD PRIMARY KEY (`id`),
@@ -338,7 +339,7 @@ ALTER TABLE `messages`
   MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `occurrence_agents`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `occurrence_counts`
   MODIFY `id` bigint NOT NULL AUTO_INCREMENT;

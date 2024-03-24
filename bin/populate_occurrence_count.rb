@@ -34,38 +34,59 @@ if options[:truncate]
 end
 
 if options[:add]
-  puts "Building occurrence_counts content...".yellow
-  limit = 25000
-  max_occurrence_id = OccurrenceAgent.maximum(:occurrence_id)
+  puts "Building occurrence_counts content from UserOccurrence...".yellow
+  sql = "INSERT INTO occurrence_counts (occurrence_id, user_count)
+      SELECT
+        u.occurrence_id,
+        COUNT(u.user_id) as user_count
+      FROM
+        user_occurrences u
+      WHERE 
+        u.action LIKE '%recorded%'
+      GROUP BY
+        u.occurrence_id"
+  ActiveRecord::Base.connection.execute(sql)
 
-  #Over-estimate number of queries to execute, but break out when actual limit reached
-  (max_occurrence_id/limit).times do |i|
-    counter = OccurrenceCount.maximum(:occurrence_id) || 0
-    break if counter >= max_occurrence_id
-    sql = "INSERT INTO occurrence_counts (occurrence_id, agent_count, user_count)
-           SELECT
-            r.occurrence_id,
-            count(DISTINCT r.agent_id) as agent_count,
-            count(DISTINCT u.user_id) as user_count
-           FROM
-            user_occurrences u
-          CROSS JOIN
-            occurrence_agents r
-          WHERE
-            r.occurrence_id = u.occurrence_id
-          AND
-            r.agent_role = true
-          AND
-            u.action IN ('recorded', 'recorded,identified', 'identified,recorded')
-          AND
-            r.occurrence_id > #{counter}
-          GROUP BY
-            u.occurrence_id
-          HAVING agent_count > 2 AND agent_count <> user_count
-          LIMIT #{limit}"
-    ActiveRecord::Base.connection.execute(sql)
-    break if counter == OccurrenceCount.maximum(:occurrence_id)
+  puts "Refining occurrence_counts content from OccurrenceAgents..."
+  OccurrenceCount.find_in_batches(batch_size: 10_000) do |group|
+    ids = group.pluck(:occurrence_id).join(",")
+    sql = "UPDATE 
+        occurrence_counts 
+      JOIN 
+        (SELECT 
+          occurrence_id, 
+          COUNT(agent_id) AS agent_count 
+        FROM 
+          occurrence_agents
+        WHERE 
+          occurrence_id IN (#{ids}) 
+        GROUP BY occurrence_id) a 
+      ON 
+        occurrence_counts.occurrence_id = a.occurrence_id 
+      SET occurrence_counts.agent_count = a.agent_count"
+      ActiveRecord::Base.connection.execute(sql)
   end
+
+  puts "Flushing unnecessary records...(part 1/2)".yellow
+  sql = %{ DELETE FROM occurrence_counts WHERE agent_count IN (1,2) ORDER BY id DESC LIMIT 100000 }
+  total = OccurrenceCount.where("agent_count = 2").count
+  batch_total = total/100000
+  (1..batch_total).each do |i|
+    ActiveRecord::Base.connection.execute(sql)
+    puts (batch_total - i).to_s.yellow
+  end
+  ActiveRecord::Base.connection.execute(sql)
+
+  puts "Flushing unnecessary records...(part 2/2)".yellow
+  sql = %{ DELETE FROM occurrence_counts WHERE agent_count IS NULL ORDER BY id DESC LIMIT 100000 }
+  total = OccurrenceCount.where("agent_count IS NULL").count
+  batch_total = total/100000
+  (1..batch_total).each do |i|
+    ActiveRecord::Base.connection.execute(sql)
+    puts (batch_total - i).to_s.yellow
+  end
+  ActiveRecord::Base.connection.execute(sql)
+
   puts "Done!".green
 end
 
