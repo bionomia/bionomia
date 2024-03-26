@@ -32,10 +32,10 @@ class Occurrence < ActiveRecord::Base
     "dateIdentified_processed",
     "eventDate_processed",
     "hasImage",
-    "eventDate_procesed_year",
+    "eventDate_processed_year",
     "eventDate_processed_month",
     "eventDate_processed_day",
-    "dateIdentified_procesed_year",
+    "dateIdentified_processed_year",
     "dateIdentified_processed_month",
     "dateIdentified_processed_day"
   ]
