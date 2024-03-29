@@ -17,7 +17,11 @@ module Bionomia
             license: "cc-zero",
             keywords: ["specimen", "natural history", "taxonomy"],
             communities: [{ identifier: 'bionomia' }],
-            related_identifiers: [{ identifier: "#{@resource.doi}", relation: 'isDerivedFrom' }]
+            related_identifiers: [
+               { identifier: "#{@resource.doi}", relation: 'isDerivedFrom' },
+               { identifier: "https://gbif.org/dataset/#{@resource.uuid}", relation: 'isDerivedFrom' },
+               { identifier: "https://bionomia.net/dataset/#{@resource.uuid}", relation: 'isDerivedFrom' }
+            ]
          }
       end
 
