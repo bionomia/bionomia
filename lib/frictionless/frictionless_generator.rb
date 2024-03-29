@@ -148,6 +148,7 @@ module Bionomia
         resource[:compression] = "zip"
         bytes = File.size(File.join(@folder, obj.file + ".zip"))
         resource[:bytes] = bytes
+        resource[:hash] = Digest::MD5.file(File.join(@folder, obj.file + ".zip")).hexdigest
         desc[:resources] << resource
       end
       File.open(File.join(@folder, "datapackage.json"), 'wb') do |file|
