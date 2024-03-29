@@ -59,14 +59,8 @@ module Sinatra
 
             get '/:id' do
               dataset_from_param
+              dataset_frictionless
               dataset_users
-
-              @frictionless_data = nil
-              file = File.join(app.root, "public", "data", "#{@dataset.uuid}", "datapackage.json")
-              if File.file?(file)
-                data_hash = JSON.parse(File.read(file), symbolize_names: true)
-                @frictionless_data = data_hash[:resources].map{|d| d.slice(:name, :path, :bytes) }
-              end
 
               locals = {
                 active_page: "datasets",
@@ -77,6 +71,7 @@ module Sinatra
 
             get '/:id/scribes' do
               dataset_from_param
+              dataset_frictionless
               if @dataset.is_large?
                 halt 404
               end
@@ -90,6 +85,7 @@ module Sinatra
 
             get '/:id/agents' do
               dataset_from_param
+              dataset_frictionless
               if @dataset.is_large?
                 halt 404
               end
@@ -109,6 +105,7 @@ module Sinatra
 
             get '/:id/agents/counts' do
               dataset_from_param
+              dataset_frictionless
               if @dataset.is_large?
                 halt 404
               end
@@ -128,6 +125,7 @@ module Sinatra
 
             get '/:id/agents/unclaimed' do
               dataset_from_param
+              dataset_frictionless
               if @dataset.is_large?
                 halt 404
               end
@@ -147,6 +145,7 @@ module Sinatra
 
             get '/:id/visualizations' do
               dataset_from_param
+              dataset_frictionless
               if @dataset.is_large?
                 halt 404
               end

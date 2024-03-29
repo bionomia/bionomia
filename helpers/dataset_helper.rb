@@ -178,6 +178,15 @@ module Sinatra
           descriptor
         end
 
+        def dataset_frictionless
+          @frictionless_data = nil
+          file = File.join(BIONOMIA.root, "public", "data", "#{@dataset.uuid}", "datapackage.json")
+          if File.file?(file)
+            data_hash = JSON.parse(File.read(file), symbolize_names: true)
+            @frictionless_data = data_hash[:resources].map{|d| d.slice(:name, :path, :bytes) }
+          end
+        end
+
       end
     end
   end

@@ -50,6 +50,9 @@ i.fa-feather{
 a:hover, .page-link:hover{
   color:#003309;
 }
+h3.popover-header{
+  color:#343a40!important;
+}
 #offline-message {
   background-color: #fcf8e3;
 }
