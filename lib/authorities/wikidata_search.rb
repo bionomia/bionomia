@@ -459,6 +459,10 @@ module Bionomia
 
       label = wiki_user.title
       family = ranked_name(wiki_user.properties("P734"))
+      second_family = ranked_name(wiki_user.properties("P1950"))
+      if family && second_family
+        family = [family, second_family].join(" ")
+      end
       given = ranked_name(wiki_user.properties("P735"))
       particle = nil
 

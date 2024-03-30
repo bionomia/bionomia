@@ -737,7 +737,7 @@ class User < ActiveRecord::Base
     wikidata_lib = Bionomia::WikidataSearch.new
     data = wikidata_lib.wiki_user_data(wikidata)
     if data && wikidata != data[:wikidata]
-      User.merge_wikidata(wikidata, data[:wikidata])
+      User.merge_users(wikidata, data[:wikidata])
       return
     end
     if data
