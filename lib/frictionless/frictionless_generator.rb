@@ -35,6 +35,7 @@ module Bionomia
         title: "ATTRIBUTIONS MADE FOR: #{@dataset.title}",
         description: "#{@dataset.description}",
         datasetKey: @dataset.uuid,
+        doi: (@dataset.zenodo_concept_doi ? "https://doi.org/#{@dataset.zenodo_concept_doi}" : nil),
         homepage: "https://bionomia.net/dataset/#{@dataset.uuid}",
         created: @created.to_time.iso8601,
         sources: [
