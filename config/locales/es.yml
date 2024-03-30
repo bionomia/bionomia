@@ -90,7 +90,7 @@ es:
   card:
     collected: "Colectó %{family}"
     identified: "Identificó %{family}"
-    identified_collected: "Colectó %{collected} y identificó %{identified}"
+    identified_collected: "Colectó %{collected} e identificó %{identified}"
     claimed:
       one: espécimen reclamado
       other: especímenes reclamados
