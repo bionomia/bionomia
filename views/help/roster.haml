@@ -3,7 +3,11 @@
   %script{src: "/js/progress-bar.js"}
   :javascript
     $(function() {
-      var ids = $.map($('.progress-bar'), function(obj) { return $(obj).attr("id").split("_").pop(); });
+      var ids = $.map($('.progress-bar'), function(obj) {
+        if ( parseInt($(obj).parent().parent().find(".badge").text(), 10) > 0 ) {
+          return $(obj).attr("id").split("_").pop();
+        }
+      });
       Application.init("", "GET", "/help-others");
       ProgressBar.forEachParallel(ids, ProgressBar.init, 10);
     });
