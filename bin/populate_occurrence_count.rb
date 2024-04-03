@@ -44,7 +44,8 @@ if options[:add]
       WHERE 
         u.action LIKE '%recorded%'
       GROUP BY
-        u.occurrence_id"
+        u.occurrence_id
+      HAVING count(u.user_id) > 1"
   ActiveRecord::Base.connection.execute(sql)
 
   puts "Refining occurrence_counts content from OccurrenceAgents..."
@@ -60,6 +61,8 @@ if options[:add]
           occurrence_agents
         WHERE 
           occurrence_id IN (#{ids}) 
+        AND
+          agent_role = true
         GROUP BY occurrence_id) a 
       ON 
         occurrence_counts.occurrence_id = a.occurrence_id 
@@ -67,26 +70,15 @@ if options[:add]
       ActiveRecord::Base.connection.execute(sql)
   end
 
-  puts "Flushing unnecessary records...(part 1/2)".yellow
-  sql = %{ DELETE FROM occurrence_counts WHERE agent_count IN (1,2) ORDER BY id DESC LIMIT 100000 }
-  total = OccurrenceCount.where("agent_count = 2").count
+  puts "Flushing unnecessary records...".yellow
+  sql = %{ DELETE FROM occurrence_counts WHERE (agent_count IN (1,2) OR agent_count IS NULL) ORDER BY id DESC LIMIT 100000 }
+  total = OccurrenceCount.where(agent_count: [1,2]).or(OccurrenceCount.where(agent_count: nil)).count
   batch_total = total/100000
   (1..batch_total).each do |i|
     ActiveRecord::Base.connection.execute(sql)
     puts (batch_total - i).to_s.yellow
   end
   ActiveRecord::Base.connection.execute(sql)
-
-  puts "Flushing unnecessary records...(part 2/2)".yellow
-  sql = %{ DELETE FROM occurrence_counts WHERE agent_count IS NULL ORDER BY id DESC LIMIT 100000 }
-  total = OccurrenceCount.where("agent_count IS NULL").count
-  batch_total = total/100000
-  (1..batch_total).each do |i|
-    ActiveRecord::Base.connection.execute(sql)
-    puts (batch_total - i).to_s.yellow
-  end
-  ActiveRecord::Base.connection.execute(sql)
-
   puts "Done!".green
 end
 

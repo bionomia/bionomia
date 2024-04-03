@@ -13,4 +13,7 @@ class OccurrenceAgent < ActiveRecord::Base
    validates :occurrence_id, presence: true
    validates :agent_id, presence: true
    validates :agent_role, presence: true
+
+   # recorders: agent_role = true / 1
+   # determiners: agent_role = false / 0
 end
