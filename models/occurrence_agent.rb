@@ -1,7 +1,7 @@
 class OccurrenceAgent < ActiveRecord::Base
+   belongs_to :occurrence, primary_key: :id, foreign_key: :occurrence_id
+   belongs_to :agent, primary_key: :id, foreign_key: :agent_id
 
-   has_many :occurrences, primary_key: :occurrence_id, foreign_key: :id
-   has_many :agents, primary_key: :agent_id, foreign_key: :id
    has_many :user_occurrences, primary_key: :occurrence_id, foreign_key: :occurrence_id
 
    has_one :taxon_occurrence, primary_key: :occurrence_id, foreign_key: :occurrence_id

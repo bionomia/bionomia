@@ -117,8 +117,8 @@ module Bionomia
                            .concat(["not me"])
         y << CSV::Row.new(header, header, true).to_s
         if !occurrences.empty?
-          occurrences.each do |o|
-            attributes = o.occurrences.first.attributes rescue nil
+          occurrences.find_each do |o|
+            attributes = o.occurrence.attributes rescue nil
             if attributes
               ignored_cols.each do |col|
                 attributes.delete(col)

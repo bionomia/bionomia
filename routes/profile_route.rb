@@ -277,7 +277,7 @@ module Sinatra
               records = occurrences_by_agent_ids(agent_ids)
                           .where
                           .not(occurrence_id: @user.user_occurrences.select(:occurrence_id))
-                          .limit(5_000)
+                          .limit(Settings.helping_download_limit)
               csv_stream_headers("bionomia-candidates")
               io = ::Bionomia::IO.new
               body io.csv_stream_candidates(records)

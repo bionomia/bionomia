@@ -171,7 +171,7 @@ module Sinatra
 
         def occurrences_by_agent_ids(agent_ids = [])
           OccurrenceAgent.where({ agent_id: agent_ids})
-                         .includes(:occurrences)
+                         .includes(:occurrence)
         end
 
         def user_occurrences_by_agent_ids(agent_ids = [])
