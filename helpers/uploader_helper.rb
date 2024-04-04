@@ -5,6 +5,7 @@ module Sinatra
     module Helper
       module UploaderHelper
 
+        # TODO: convert to a background task, parse the csv and convert to jobs
         def upload_file(user_id:, created_by:)
           @record_count = 0
 
