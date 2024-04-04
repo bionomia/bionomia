@@ -34,7 +34,7 @@ module Sinatra
             agent_data = {}
             lines.each_slice(100) do |group|
               cols = OccurrenceAgent
-                            .joins(:occurrences)
+                            .joins(:occurrence)
                             .where(occurrence_id: group)
                             .where(agent_role: true)
                             .pluck(:agent_id, :year, :family, :institutionCode)
