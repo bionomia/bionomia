@@ -3,7 +3,7 @@
 - content_for(:title, "#{@viewed_user.viewname}")
 
 - content_for :scripts do
-  - if authorized? && @user != @viewed_user
+  - if @edit_ui
     :javascript
       $(function() {
         Application.init(#{@viewed_user.id}, "PUT", "/help-others", "#{@viewed_user.identifier}");
@@ -49,7 +49,7 @@
               %tr
                 %th.text-nowrap{scope: "col", style:"min-width:65px"}
                 = haml :'partials/common_footer_columns', layout: false
-                - if authorized? && @user != @viewed_user
+                - if @edit_ui
                   %th.btn-selector-wide{scope: "col"}
                   %th.btn-selector-wide{scope: "col"}
                   %th{scope: "col"}= I18n.t('specimen.scribe')
@@ -59,7 +59,7 @@
                 - o = uo.occurrence
                 - next if o.nil?
                 %tr
-                  - if authorized? && @user != @viewed_user
+                  - if @edit_ui
                     - disabled = (@viewed_user.id == uo.created_by) ? true : false
                     %td.selector
                       = haml :'partials/single_selector_preselected', layout: false, locals: { occurrence: uo, user_id: @viewed_user.id }
@@ -83,18 +83,18 @@
                   %td #{h(o.identifiedBy)}
                   %td
                     #{h(o.eventDate || o.year)}
-                    - if authorized? && @user != @viewed_user && recordedBy_has_warning?(@viewed_user, o)
+                    - if @edit_ui && recordedBy_has_warning?(@viewed_user, o)
                       %i.fas.fa-exclamation-triangle.text-warning{"data-toggle":"tooltip", title: "#{I18n.t('specimen.mismatch')}"}
                   %td
                     #{h(o.dateIdentified)}
-                    - if authorized? && @user != @viewed_user && identifiedBy_has_warning?(@viewed_user, o)
+                    - if @edit_ui && identifiedBy_has_warning?(@viewed_user, o)
                       %i.fas.fa-exclamation-triangle.text-warning{"data-toggle":"tooltip", title: "#{I18n.t('specimen.mismatch')}"}
                   %td #{h(o.family)}
                   %td #{h(o.institutionCode)}
                   %td #{h(o.catalogNumber)}
                   %td #{h(o.typeStatus)}
                   %td #{h(o.basisOfRecord)}
-                  - if authorized? && @user != @viewed_user
+                  - if @edit_ui
                     %td
                       %button.btn.btn-sm.btn-outline-warning.hide{type:"button", "data-occurrence-id":"#{uo.user_occurrence_id}", disabled: disabled}
                         = I18n.t('specimen.not_them')

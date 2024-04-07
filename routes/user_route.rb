@@ -153,12 +153,16 @@ module Sinatra
             check_identifier
             check_redirect
             @viewed_user = find_user(params[:id])
+            @edit_ui = (authorized? && @user != @viewed_user) ? true : false
             check_user_public
             create_filter
 
             @pagy, @results = {}, []
             if @viewed_user.is_public?
               data = specimen_filters(@viewed_user).order("occurrences.typeStatus desc")
+              if @edit_ui
+                data = data.includes(:claimant)
+              end
               @pagy, @results = pagy(data, page: page)
             end
             locals = {
