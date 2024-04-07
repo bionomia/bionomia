@@ -59,7 +59,7 @@ if options[:file]
     if !all_users.keys.include?(row["identifier"])
       d = DestroyedUser.active_user_identifier(row["identifier"])
       if !d.nil?
-        u = User.find_by_identifier(d.id) rescue nil
+        u = User.find_by_identifier(d)
       else
         if row["identifier"].is_wiki_id?
           u = User.find_or_create_by({ wikidata: row["identifier"] })
@@ -77,6 +77,8 @@ if options[:file]
     end
 
     next if User::BOT_IDS.include?(all_users[row["identifier"]])
+    next if !all_users.keys.include?(row["identifier"])
+
     row["occurrence_ids"].tr('[]', '').split(',').each_slice(2_500) do |group|
       import = group.map{|r| [ r.to_i, all_users[row["identifier"]], row["action"], User::GBIF_AGENT_ID ] }
       UserOccurrence.import [:occurrence_id, :user_id, :action, :created_by], import, validate: false, on_duplicate_key_ignore: true
