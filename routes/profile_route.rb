@@ -383,9 +383,11 @@ module Sinatra
 
               if @order == "created"
                 hidden_occurrences = @user.hidden_occurrences
+                                          .includes(:claimant)
                                           .order(created: :desc)
               else
                 hidden_occurrences = @user.hidden_occurrences
+                                          .includes(:claimant)
                                           .order("occurrences.#{@order} #{@sort}")
               end
               @total = hidden_occurrences.count
