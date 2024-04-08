@@ -305,7 +305,7 @@ module Sinatra
 
               create_filter
 
-              occurrences = specimen_filters(@viewed_user)
+              occurrences = specimen_filters(@viewed_user).includes(:claimant)
 
               if @order && Occurrence.column_names.include?(@order) && ["asc", "desc"].include?(@sort)
                 if @order == "eventDate" || @order == "dateIdentified"
@@ -537,9 +537,11 @@ module Sinatra
 
               if @order == "created"
                 hidden_occurrences = @viewed_user.hidden_occurrences_by_others
+                                                 .includes(:claimant)
                                                  .order(created: :desc)
               else
                 hidden_occurrences = @viewed_user.hidden_occurrences_by_others
+                                                 .includes(:claimant)
                                                  .order("occurrences.#{@order} #{@sort}")
               end
               @total = hidden_occurrences.count

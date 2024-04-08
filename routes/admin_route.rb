@@ -439,7 +439,9 @@ module Sinatra
                   @order = "#{@order}_processed"
                 end
               end
-              data = specimen_filters(@admin_user).order("occurrences.#{@order} #{@sort}")
+              data = specimen_filters(@admin_user)
+                      .includes(:claimant)
+                      .order("occurrences.#{@order} #{@sort}")
               @pagy, @results = pagy(data, items: search_size, page: @page)
               haml :'admin/specimens', locals: { active_page: "administration" }
             end
@@ -678,9 +680,11 @@ module Sinatra
 
               if @order == "created"
                 hidden_occurrences = @admin_user.hidden_occurrences
+                                          .includes(:claimant)
                                           .order(created: :desc)
               else
                 hidden_occurrences = @admin_user.hidden_occurrences
+                                          .includes(:claimant)
                                           .order("occurrences.#{@order} #{@sort}")
               end
               @total = hidden_occurrences.count
