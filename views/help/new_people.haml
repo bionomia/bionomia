@@ -5,7 +5,7 @@
     $(function() {
       var ids = $.map($('.progress-bar'), function(obj) { return $(obj).attr("id").split("_").pop(); });
       Application.init("", "GET", "/help-others");
-      ProgressBar.forEachParallel(ids, ProgressBar.init, 10);
+      Application.forEachParallel(ids, ProgressBar.init, 10);
     });
 
 - content_for :jumbotron do

@@ -11,7 +11,7 @@
           return $(obj).attr("id").split("_").pop();
         }
       });
-      ProgressBar.forEachParallel(ids, ProgressBar.init, 10);
+      Application.forEachParallel(ids, ProgressBar.init, 10);
     });
 
 - content_for :jumbotron do
