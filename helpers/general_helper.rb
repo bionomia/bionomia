@@ -332,7 +332,7 @@ module Sinatra
 
         def recordedBy_has_warning?(user, occurrence)
           return if !user.date_born || !occurrence.recordedBy || !occurrence.eventDate_processed
-          return if !occurrence.recordedBy.downcase.include?(user.family.downcase)
+          return if !occurrence.recordedBy.transliterate.downcase.include?(user.family.transliterate.downcase)
           date_died = user.date_died
           if (user.date_died && user.date_died_precision == "year")
             date_died = "#{user.date_died.year}-12-31".to_date rescue nil
@@ -348,7 +348,7 @@ module Sinatra
 
         def identifiedBy_has_warning?(user, occurrence)
           return if !user.date_born || !occurrence.identifiedBy || !occurrence.dateIdentified_processed
-          return if !occurrence.identifiedBy.downcase.include?(user.family.downcase)
+          return if !occurrence.identifiedBy.transliterate.downcase.include?(user.family.transliterate.downcase)
           date_died = user.date_died
           if (user.date_died && user.date_died_precision == "year")
             date_died = "#{user.date_died.year}-12-31".to_date rescue nil

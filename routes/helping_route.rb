@@ -45,8 +45,14 @@ module Sinatra
             end
 
             post '/add' do
-              create_user
-              redirect '/help-others/add'
+              flash.next[:identifiers] = params[:identifiers].split("\r\n")[0..24]
+              redirect '/help-others/add#progress'
+            end
+
+            post '/add-user.json' do
+              content_type "application/json", charset: 'utf-8'
+              req = JSON.parse(request.body.read).symbolize_keys
+              create_user(req[:identifier]).to_json
             end
 
             get '/progress/wikidata' do
