@@ -32,6 +32,10 @@ class UserOccurrence < ActiveRecord::Base
      action.include? "identified"
    end
 
+   def recorded_identified?
+      recorded? && identified?
+   end
+
    def shared?
      !shared_user_occurrences.empty?
    end

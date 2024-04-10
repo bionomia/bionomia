@@ -19,7 +19,13 @@
 - if @pagy.count == 0
   .alert.alert-info.tiny-margins{role: "alert"}= I18n.t('profile.not_helped_alert')
 - else
-  .alert.alert-info.row.tiny-margins{role: "alert"}= I18n.t('profile.helped_alert')
+  .alert.alert-info.row.tiny-margins{role: "alert"}
+    .col-12.col-md-9.p-0
+      =I18n.t('profile.helped_alert')
+    .col-12.col-md-3.p-0.text-md-right
+      %a.mr-2{href: url("/profile/attributions.csv"), alt:"CSV file download"}
+        %i.fas.fa-file-csv.text-dark.h5.m-0.p-1
+        CSV
 
   .table-responsive-lg.mt-4
     %table.table.table-hover.table-sm

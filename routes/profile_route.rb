@@ -245,6 +245,13 @@ module Sinatra
               body io.csv_stream_occurrences(records)
             end
 
+            get '/attributions.csv' do
+              records = @user.claims_given.includes(:occurrence, :user)
+              csv_stream_headers("attributions")
+              io = ::Bionomia::IO.new
+              body io.csv_stream_attributions(records)
+            end
+
             get '/who-might-know.json' do
               content_type "application/json", charset: 'utf-8'
               @user.who_might_know.to_json

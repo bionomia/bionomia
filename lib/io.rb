@@ -111,6 +111,35 @@ module Bionomia
       end
     end
 
+    def csv_stream_attributions(occurrences)
+      Enumerator.new do |y|
+        header = (Occurrence.attribute_names - ignored_cols)
+                           .concat(["action", "BIONOMIArecordedByID", "BIONOMIAidentifiedByID", "BIONOMIAcreated"])
+        y << CSV::Row.new(header, header, true).to_s
+        if !occurrences.empty?
+          occurrences.find_each do |o|
+            attributes = o.occurrence.attributes rescue nil
+            if attributes
+              ignored_cols.each do |col|
+                attributes.delete(col)
+              end
+              if o.recorded_identified? 
+                recipient = [o.user.uri, o.user.uri]
+              elsif o.recorded?
+                recipient = [o.user.uri, nil]
+              else
+                recipient = [nil, o.user.uri]
+              end
+              data = attributes.values.concat([o.action])
+                               .concat(recipient)
+                               .concat([o.created])
+              y << CSV::Row.new(header, data).to_s
+            end
+          end
+        end
+      end
+    end
+
     def csv_stream_candidates(occurrences)
       Enumerator.new do |y|
         header = ["action"].concat(Occurrence.attribute_names - ignored_cols)
