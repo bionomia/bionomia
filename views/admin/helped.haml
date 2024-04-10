@@ -26,7 +26,12 @@
     Has not yet attributed specimens to anyone.
 - else
   .alert.alert-info.row.tiny-margins{role: "alert"}
-    Helped attribute specimens to the following people, with the most recent shown first.
+    .col-12.col-md-9.p-0
+      Helped attribute specimens to the following people, with the most recent shown first.
+    .col-12.col-md-3.p-0.text-md-right
+      %a.mr-2{href: url("/admin/user/#{@admin_user.identifier}/attributions.csv"), alt:"CSV file download"}
+        %i.fas.fa-file-csv.text-dark.h5.m-0.p-1
+        CSV
 
   .table-responsive-lg.mt-4
     %table.table.table-hover.table-sm
