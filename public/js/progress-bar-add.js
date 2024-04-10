@@ -38,17 +38,6 @@ var ProgressBarAdd = (function($, window) {
       return html; 
      },
 
-     tooltips: function() {
-         $('[data-toggle="tooltip"]').tooltip();
-         $('[data-toggle="tooltip"]', 'nav').on("mouseenter", function() {
-         if ($(this).find("span").is(":visible")) {
-            $(this).tooltip('hide');
-         }
-         }).on("focus", function() {
-         $(this).tooltip('hide');
-         });
-     },
-
      add_user: function() {
        var self = this, progress_bar = $(".progress div[data-identifier='" + this.identifier + "']");
        return $.ajax({
@@ -66,9 +55,8 @@ var ProgressBarAdd = (function($, window) {
             } else {
                progress_bar.width('100%');
                progress_bar.removeClass("bg-info").addClass("bg-danger");
-               progress_bar.parent().parent().next().html(self.format_unsuccessful());
+               progress_bar.parent().parent().next().html(self.format_unsuccessful()).find("i").tooltip();
             }
-            self.tooltips();
          });
      },
  
