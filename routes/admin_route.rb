@@ -476,7 +476,7 @@ module Sinatra
             get '/user/:id/attributions.csv' do
               admin_user = find_user(params[:id])
               records = admin_user.claims_given.includes(:occurrence, :user)
-              csv_stream_headers("attributions")
+              csv_stream_headers("#{id}-attributions")
               io = ::Bionomia::IO.new
               body io.csv_stream_attributions(records)
             end

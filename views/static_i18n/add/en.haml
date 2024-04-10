@@ -55,7 +55,7 @@
   .d-flex.flex-sm-row.flex-column.mt-3
     .form-group
       %label.font-weight-bold{for: "identifiers"} Add ORCID Identifiers or Wikidata Q Numbers
-      %textarea.form-control{name: "identifiers", rows: 5, "data-max-rows": 25, placeholder:"Q3734567\n0000-0002-0112-8837"}
+      %textarea.form-control{name: "identifiers", rows: 5, "data-max-rows": 50, placeholder:"Q3734567\n0000-0002-0112-8837"}
       %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
       %input{type: :submit, class:"btn btn-success mt-3", value: "Add"}
 
