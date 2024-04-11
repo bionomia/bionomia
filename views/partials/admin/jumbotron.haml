@@ -108,7 +108,7 @@
 
     %p
       %a{href:"https://doi.org/#{@admin_user.zenodo_concept_doi}"}
-        %img{src:"/images/#{@admin_user.zenodo_concept_doi}.svg", alt:"DOI badge", height:"20px"}
+        %img{src:"/images/#{@admin_user.zenodo_concept_doi}.svg", alt:"DOI badge", height:20}
 
   - if @admin_user.youtube_id
     = haml :'youtube', layout: false, locals: { youtube_id: @admin_user.youtube_id }
@@ -131,7 +131,7 @@
         - if @admin_user.orcid
           %i.fab.fa-orcid
         - else
-          %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD", width:"18px"}
+          %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD", width:18}
     %p.mb-0
       - if locals[:active_page] == "settings"
         %a.mb-2.text-nowrap{href: url("/admin/user/#{@admin_user.identifier}")}

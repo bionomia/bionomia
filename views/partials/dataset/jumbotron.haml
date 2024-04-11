@@ -28,7 +28,7 @@
         %img{src:"/images/#{@dataset.zenodo_concept_doi}.svg", alt: ""}
 
   %p.mb-1.text-left
-    %img{src: "https://api.bionomia.net/dataset/#{@dataset.uuid}/badge.svg", alt: "Click to get badge html", width:"210", height:"20"}
+    %img{src: "https://api.bionomia.net/dataset/#{@dataset.uuid}/badge.svg", alt: "Click to get badge html", width:210, height:20}
     %a{href: "#", "data-toggle": "modal", "data-target": "#badge_content", "data-keyboard": "true", "data-focus": "true"}
       %i.fas.fa-info-circle{"data-toggle":"tooltip", title: "#{I18n.t('dataset.badge_tooltip')}"}
       Code
@@ -64,7 +64,7 @@
       %a.profile-flush.mr-2.mb-2.text-nowrap{href: url("/dataset/#{@dataset.uuid}/refresh.json")}
         %i.fas.fa-sync-alt
         = I18n.t('general.refresh_profile')
-        %img{src: "/images/gbif_18x18.svg", alt:"GBIF", width:"18px"}
+        %img{src: "/images/gbif_18x18.svg", alt:"GBIF", width:18}
 
       - if admin_authorized?
         - if locals[:active_page] == "administration"

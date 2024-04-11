@@ -123,7 +123,7 @@ module Bionomia
               ignored_cols.each do |col|
                 attributes.delete(col)
               end
-              if o.recorded_identified? 
+              if o.recorded_identified?
                 recipient = [o.user.uri, o.user.uri]
               elsif o.recorded?
                 recipient = [o.user.uri, nil]

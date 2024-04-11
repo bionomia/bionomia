@@ -95,7 +95,7 @@
       = link_to "https://doi.org/#{@viewed_user.zenodo_concept_doi}", "https://doi.org/#{@viewed_user.zenodo_concept_doi}"
     %p
       %a{href:"https://doi.org/#{@viewed_user.zenodo_concept_doi}"}
-        %img{src:"/images/#{@viewed_user.zenodo_concept_doi}.svg", alt:"DOI badge", height:"20px"}
+        %img{src:"/images/#{@viewed_user.zenodo_concept_doi}.svg", alt:"DOI badge", height:20}
 
   - if @viewed_user.youtube_id
     = haml :'youtube', layout: false, locals: { youtube_id: @viewed_user.youtube_id }
@@ -122,7 +122,7 @@
           - if @viewed_user.orcid
             %i.fab.fa-orcid
           - else
-            %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD", width:"18px"}
+            %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD", width:18}
 
       - if admin_authorized?
         %a.mb-2.text-nowrap{href: url("/admin/user/#{@viewed_user.identifier}/settings")}

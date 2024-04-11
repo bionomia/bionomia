@@ -93,7 +93,7 @@
       - if @viewed_user.zenodo_doi
         %p.text-center.p-0.mt-1.mb-1
           %a{href:"https://doi.org/#{@viewed_user.zenodo_concept_doi}"}
-            %img{src:"/images/#{@viewed_user.zenodo_concept_doi}.svg", alt:"DOI badge", height:"20px"}
+            %img{src:"/images/#{@viewed_user.zenodo_concept_doi}.svg", alt:"DOI badge", height:20}
 
       - if authorized? && !@viewed_user.is_public? && !@viewed_user.wikidata.nil?
         #helperPublicModal.modal.fade.text-left{tabindex:"-1", role:"dialog", "aria-labelledby":"helperPublicModal", "aria-hidden":"true"}
@@ -147,7 +147,7 @@
             - if @viewed_user.orcid
               %i.fab.fa-orcid
             - else
-              %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD", width:"18px"}
+              %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD", width:18}
 
           - if admin_authorized?
             %a.mb-2{href: url("/admin/user/#{@viewed_user.identifier}/settings")}

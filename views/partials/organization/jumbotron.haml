@@ -24,7 +24,7 @@
         %a.profile-flush.mr-2.mb-2.text-nowrap{href: url("/organization/#{@organization.identifier}/refresh.json")}
           %i.fas.fa-sync-alt
           = I18n.t('general.refresh_profile')
-          %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD", width:"18px"}
+          %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD", width:18}
 
       - if admin_authorized?
         %a.mr-2.mb-2.text-nowrap{href: url("/admin/organization/#{@organization.id}")}

@@ -77,9 +77,9 @@
             %a{class:"btn btn-outline-light#{locals[:active_page] == "profile" ? " active" : " text-muted"}", href: url("/profile"), role:"button"}
               - if @user.image_url
                 - if locals[:active_page] == "profile"
-                  %img{src:"#{profile_image(@user, 'thumbnail')}", alt:"#{@user.viewname}", width: "24px", height:"24px"}
+                  %img{src:"#{profile_image(@user, 'thumbnail')}", alt:"#{@user.viewname}", width:24, height:24}
                 - else
-                  %img{src:"#{profile_image(@user, 'thumbnail_grey')}", alt:"#{@user.viewname}", width: "24px", height:"24px"}
+                  %img{src:"#{profile_image(@user, 'thumbnail_grey')}", alt:"#{@user.viewname}", width:24, height:24}
               - else
                 %i.fas.fa-user.fa-fw{alt:"#{@user.viewname}"}
             %button.btn.btn-outline-light.dropdown-toggle{type:"button", "data-toggle": "dropdown", "aria-haspopup": "true", "aria-expanded": "false"}
