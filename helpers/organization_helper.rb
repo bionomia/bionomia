@@ -81,7 +81,11 @@ module Sinatra
             @others_identified = @organization.others_specimens_by_year("identified", @year)
           else
             @others_recorded = @organization.others_specimens("recorded")
+                                            .sort_by {|_key, value| -value}
+                                            .to_h
             @others_identified = @organization.others_specimens("identified")
+                                              .sort_by {|_key, value| -value}
+                                              .to_h
           end
         end
 

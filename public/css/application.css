@@ -57,6 +57,7 @@ h3.popover-header{
   background-color: #fcf8e3;
 }
 .flex-wrap {
+  flex-wrap: wrap!important;
   -webkit-flex-wrap: wrap!important;
 }
 .custom-pills .active, .custom-pills .active:hover {

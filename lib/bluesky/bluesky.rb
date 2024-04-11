@@ -112,7 +112,7 @@ module Bionomia
          url: url,
          payload: payload.to_json
        )
-       JSON.parse(response.body, symbolize_names: true)
+      JSON.parse(response.body, symbolize_names: true)
     end
 
     def download_image(url:)
