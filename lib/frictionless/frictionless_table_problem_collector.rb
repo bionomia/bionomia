@@ -66,28 +66,7 @@ module Bionomia
               next if !uo.user.wikidata
               next if !uo.occurrence.eventDate_processed
 
-              date_born = uo.user.date_born
-              if(uo.user.date_born && uo.user.date_born_precision == "century")
-                date_born = "#{uo.user.date_born.year - 100}-01-01".to_date rescue nil
-              end
-              if (uo.user.date_born && uo.user.date_born_precision == "year")
-                date_born = "#{uo.user.date_born.year}-12-31".to_date rescue nil
-              end
-              if (uo.user.date_born && uo.user.date_born_precision == "month")
-                date_born = "#{uo.user.date_born.year}-#{uo.user.date_born.month}-28".to_date rescue nil
-              end
-
-              date_died = uo.user.date_died
-              if(uo.user.date_died && uo.user.date_died_precision == "century")
-                date_died = "#{uo.user.date_died.year - 100}-01-01".to_date rescue nil
-              end
-              if (uo.user.date_died && uo.user.date_died_precision == "year")
-                date_died = "#{uo.user.date_died.year}-12-31".to_date rescue nil
-              end
-              if (uo.user.date_died && uo.user.date_died_precision == "month")
-                date_died = "#{uo.user.date_died.year}-#{uo.user.date_died.month}-28".to_date rescue nil
-              end
-
+              date_born, date_died = ::Bionomia::Validator.resolved_user_dates(uo.user)
               if ( date_born && date_born >= uo.occurrence.eventDate_processed ) ||
                 ( date_died && date_died <= uo.occurrence.eventDate_processed )
                 data = [

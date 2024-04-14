@@ -3,6 +3,32 @@
 module Bionomia
   module Validator
 
+    def self.resolved_user_dates(user)
+      date_born = user.date_born
+      if(user.date_born && user.date_born_precision == "century")
+        date_born = "#{user.date_born.year - 100}-01-01".to_date rescue nil
+      end
+      if (user.date_born && user.date_born_precision == "year")
+        date_born = "#{user.date_born.year}-12-31".to_date rescue nil
+      end
+      if (user.date_born && user.date_born_precision == "month")
+        date_born = "#{user.date_born.year}-#{user.date_born.month}-28".to_date rescue nil
+      end
+
+      date_died = user.date_died
+      if(user.date_died && user.date_died_precision == "century")
+        date_died = "#{user.date_died.year - 100}-01-01".to_date rescue nil
+      end
+      if (user.date_died && user.date_died_precision == "year")
+        date_died = "#{user.date_died.year}-12-31".to_date rescue nil
+      end
+      if (user.date_died && user.date_died_precision == "month")
+        date_died = "#{user.date_died.year}-#{user.date_died.month}-28".to_date rescue nil
+      end
+
+      [date_born, date_died]
+    end
+
     def self.valid_year(year)
       return if year.presence.nil?
 
