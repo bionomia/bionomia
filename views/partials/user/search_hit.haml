@@ -1,0 +1,41 @@
+- identified = locals[:stats][:specimens][:top_family_identified]
+- recorded = locals[:stats][:specimens][:top_family_recorded]
+
+- if identified && recorded
+   - statement = "#{I18n.t('card.identified_collected', identified: identified, collected: recorded)}"
+- elsif identified
+   - statement = "#{I18n.t('card.identified', family: identified)}"
+- elsif recorded
+   - statement = "#{I18n.t('card.collected', family: recorded)}"
+- else
+   - statement = nil
+
+.mt-4.mb-4
+   .d-flex
+      - if locals[:user].image_url
+         %div
+            %img.card-img-profile.mr-2{src:"#{profile_image(locals[:user], 'medium')}", alt:"#{locals[:user].viewname}", width:48, height:48, loading:"lazy"}
+      .flex-grow-1
+         %h5.mb-1
+            %a{href: "/#{locals[:user].identifier}"} #{locals[:user].viewname}
+         - if locals[:user].description
+            %p.mt-0.mb-0= locals[:user].description
+         %p.m-0 #{statement}
+         - if locals[:user].wikidata
+            %p.small.text-muted.mt-0.mb-0= format_lifespan(locals[:user])
+         - if locals[:user].country
+            %p.small.text-muted.mt-0.mb-0
+               - country_codes = locals[:user].country_code.split("|") rescue []
+               - countries = locals[:user].country.split("|") rescue []
+               - countries.each_with_index do |v,i|
+                  = succeed (countries[i+1]) ? '; ' : '' do
+                     - if !country_codes[i].nil? && !country_codes[i].empty?
+                        #{country_name(country_codes[i])}
+                     - else
+                        #{v}
+
+   %p.small.text-muted
+      - if !locals[:user].is_public?
+         %i.fas.fa-lock
+      %span.badge.badge-light #{number_with_delimiter(locals[:stats][:specimens][:total])}
+      #{I18n.t('card.claimed', count: locals[:stats][:specimens][:total])}
