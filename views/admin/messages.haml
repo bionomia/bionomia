@@ -63,7 +63,7 @@
                   #{u.messages_by_recipient(m[:recipient_id]).count}
                 %span.text-danger
                   %i.fas.fa-heart
-              .small.ml-auto.text-muted
-                Latest at #{m[1]}
+              .small.ml-auto.text-muted 
+                = I18n.t('profile.latest_helped', time: m[:maximum_created_at])
 
   = pagy_bootstrap_nav(@pagy) if @pagy.pages > 1
