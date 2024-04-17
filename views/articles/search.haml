@@ -47,6 +47,7 @@
             #{d[:highlight][:citation].first}
           - else
             #{h(article.citation)}
+        %br
         = link_to "https://doi.org/#{article.doi}", "https://doi.org/#{article.doi}"
       - if d[:highlight].has_key?(:abstract)
         - d[:highlight][:abstract].each do |highlight|
