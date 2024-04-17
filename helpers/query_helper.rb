@@ -57,6 +57,12 @@ module Sinatra
                 type: :best_fields,
                 fields: ["institution_codes^5", "name^3", "address"]
               }
+            },
+            highlight: {
+              fields: {
+                name: { number_of_fragments: 0, no_match_size: 5_000, pre_tags: ["<mark>"], post_tags: ["</mark>"] },
+                address: { number_of_fragments: 0, no_match_size: 5_000, pre_tags: ["<mark>"], post_tags: ["</mark>"] }
+              }
             }
           }
         end
@@ -92,6 +98,12 @@ module Sinatra
                     weight: 1
                   }
                 ]
+              }
+            },
+            highlight: {
+              fields: {
+                title: { number_of_fragments: 0, no_match_size: 5_000, pre_tags: ["<mark>"], post_tags: ["</mark>"] },
+                description: { pre_tags: ["<mark>"], post_tags: ["</mark>"] }
               }
             }
           }

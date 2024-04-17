@@ -34,10 +34,11 @@
                 #{v}
 
   .card-body
-  .card-footer.d-flex
-    .small.text-left.text-muted.mr-2
-      %span.badge.badge-light #{number_with_delimiter(locals[:stats][:attributions][:number])}
-      #{I18n.t('card.attributed', count: locals[:stats][:attributions][:number])}
-    .small.ml-auto.text-muted
-      %span.badge.badge-light #{number_with_delimiter(locals[:stats][:attributions][:helped])}
-      #{I18n.t('card.helped', count: locals[:stats][:attributions][:helped])}
+  - if locals[:footer]
+    .card-footer.d-flex
+      .small.text-left.text-muted.mr-2
+        %span.badge.badge-light #{number_with_delimiter(locals[:stats][:attributions][:number])}
+        #{I18n.t('card.attributed', count: locals[:stats][:attributions][:number])}
+      .small.ml-auto.text-muted
+        %span.badge.badge-light #{number_with_delimiter(locals[:stats][:attributions][:helped])}
+        #{I18n.t('card.helped', count: locals[:stats][:attributions][:helped])}

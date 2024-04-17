@@ -32,37 +32,29 @@
         %i.fas.fa-minus-circle
         #{I18n.t('general.remove')}
 
-  - @results.in_groups_of(3) do |group|
-    .card-deck
-
-      - group.each do |d|
-        - if d.nil?
-          .card.border-0
-        - else
-          - dataset = Dataset.find(d[:_id].to_i) rescue nil
-          - if dataset.nil?
-            .card.border-0
-          - else
-            .card.card-profile.m-3
-              - if dataset.image_url
-                .card-header.d-flex
-                  %div
-                    %img.mr-2.rounded{src:"#{dataset_image(dataset, "crop")}", width:48, height:48, alt:"#{dataset.title}", loading:"lazy"}
-                  .flex-grow-1
-                    %h5
-                      = link_to dataset.title, url("/dataset/#{dataset.uuid}")
-                    %p.text-muted
+  - @results.each do |d|
+    - dataset = Dataset.find(d[:_id].to_i) rescue nil
+    - if !dataset.nil?
+      .mt-4.mb-4
+        .d-flex
+          - if dataset.image_url
+            %div
+              %img.mr-2.rounded{src:"#{dataset_image(dataset, "crop")}", width:48, height:48, alt:"#{dataset.title}", loading:"lazy"}
+          .flex-grow-1
+            %h5.mb-1
+              - if d[:highlight].has_key?(:title)
+                = link_to "#{d[:highlight][:title].first}", url("/dataset/#{dataset.uuid}")
               - else
-                .card-header
-                  %h5
-                    = link_to dataset.title, url("/dataset/#{dataset.uuid}")
-                  %p.text-muted
-              .card-body
-              .card-footer
-                .col.small.text-left.text-muted
-                .col.small.text-right.text-muted
-                  %a{href: "#{dataset.license}"}
-                    %img{src:"#{dataset.license_icon("small")}"}
+                = link_to dataset.title, url("/dataset/#{dataset.uuid}")
+        
+        - if d[:highlight].has_key?(:description)
+          - d[:highlight][:description].each do |highlight|
+            .small.text-muted-pl-2.ml-2
+              &hellip;#{highlight}&hellip;
+
+        %p.small.text-muted
+          %a{href: "#{dataset.license}"}
+            %img{src:"#{dataset.license_icon("small")}"}
 
   - if @pagy.pages > 1
     .overflow-auto

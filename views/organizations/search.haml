@@ -35,35 +35,31 @@
         %i.fas.fa-minus-circle
         #{I18n.t('general.remove')}
 
-  - @results.in_groups_of(3) do |group|
-    .card-deck
-      - group.each do |o|
-        - if o.nil?
-          .card.border-0
-        - else
-          - org = Organization.find(o[:_id].to_i)
-          - if !o.nil?
-            .card.card-profile.m-3
-              - if org.image_url
-                .card-header.d-flex
-                  %div
-                    %img.mr-2.rounded{src:"#{organization_image(org, 'medium')}", width:48, height:48, alt:"#{org.name}", loading:"lazy"}
-                  .flex-grow-1
-                    %h5
-                      = link_to org.name, url("/organization/#{org.identifier}")
-                    %p.text-muted #{org.address}
+  - @results.each do |o|
+    - org = Organization.find(o[:_id].to_i)
+    - if !o.nil?
+      .mt-4.mb-4
+        .d-flex
+          - if org.image_url
+            %div
+              %img.mr-2.rounded{src:"#{organization_image(org, 'medium')}", width:48, height:48, alt:"#{org.name}", loading:"lazy"}
+          .flex-grow-1
+            %h5.mb-1
+              - if o[:highlight].has_key?(:name)
+                = link_to "#{o[:highlight][:name].first}", url("/organization/#{org.identifier}")
               - else
-                .card-header
-                  %h5
-                    = link_to org.name, url("/organization/#{org.identifier}")
-                  %p.text-muted #{org.address}
-              .card-body
-              .card-footer
-                .col.small.text-left.text-muted
-                .col.small.text-right.text-muted
-                  - count = org.active_users.count
-                  %span.badge.badge-light #{number_with_delimiter(count)}
-                  #{'member'.pluralize(count)}
+                = link_to org.name, url("/organization/#{org.identifier}")
+              
+        %p.text-muted.mb-0
+          - if o[:highlight].has_key?(:address)
+            #{o[:highlight][:address].first}
+          - else
+            #{org.address}
+
+        %p.small.text-muted.mb-0
+          - count = org.active_users.count
+          %span.badge.badge-light #{number_with_delimiter(count)}
+          #{'member'.pluralize(count)}
 
   - if @pagy.pages > 1
     .overflow-auto

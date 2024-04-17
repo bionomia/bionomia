@@ -34,6 +34,8 @@
                      - else
                         #{v}
 
+   .progress.progress-border.flex-fill.align-self-end{style: "max-width:100px;min-width:100px"}
+      .progress-bar.bg-info{id:"progress-bar_#{locals[:user].identifier}", role:"progressbar", style:"width: 0%;", "aria-valuenow":"0", "aria-valuemin":"0", "aria-valuemax":"100", "aria-label":"#{I18n.t('user.progress')}"}
    %p.small.text-muted
       - if !locals[:user].is_public?
          %i.fas.fa-lock
