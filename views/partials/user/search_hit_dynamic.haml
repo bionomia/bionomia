@@ -18,13 +18,18 @@
       .flex-grow-1
          %h5.mb-1
             %a{href: "#{locals[:path]}/#{locals[:user].identifier}"} #{locals[:user].viewname}
-         - if locals[:user].description
-            %p.mt-0.mb-0= locals[:user].description.truncate(150)
-         %p.m-0 #{statement}
+         - if locals[:user].other_names
+            %p.small.text-muted.m-0 #{locals[:user].other_names.split("|").join("; ")}
          - if locals[:user].wikidata
-            %p.small.text-muted.mt-0.mb-0= format_lifespan(locals[:user])
+            %p.small.text-muted.m-0= format_lifespan(locals[:user])
+         - if locals[:user].keywords
+            %p.small.text-muted.font-italic.m-0
+               #{locals[:user].keywords.split("|").join(", ")}
+         - if locals[:user].description
+            %p.mt-1.mb-0= locals[:user].description.truncate(255)
+         %p.m-0 #{statement}
          - if locals[:user].country
-            %p.small.text-muted.mt-0.mb-0
+            %p.m-0
                - country_codes = locals[:user].country_code.split("|") rescue []
                - countries = locals[:user].country.split("|") rescue []
                - countries.each_with_index do |v,i|
