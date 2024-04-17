@@ -62,7 +62,7 @@
   - @results.each do |u|
     - u = User.find(u[:_id])
     - stats = cache_block("#{u.identifier}-stats") { user_stats(u) }
-    = haml :'partials/user/search_hit_dynamic', layout: false, locals: { user: u, stats: stats }
+    = haml :'partials/user/search_hit_dynamic', layout: false, locals: { user: u, stats: stats, path: "/help-others" }
 
   - if @pagy.pages > 1
     .overflow-auto

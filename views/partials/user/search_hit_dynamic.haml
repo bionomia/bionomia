@@ -17,7 +17,7 @@
             %img.card-img-profile.mr-2{src:"#{profile_image(locals[:user], 'medium')}", alt:"#{locals[:user].viewname}", width:48, height:48, loading:"lazy"}
       .flex-grow-1
          %h5.mb-1
-            %a{href: "/#{locals[:user].identifier}"} #{locals[:user].viewname}
+            %a{href: "#{locals[:path]}/#{locals[:user].identifier}"} #{locals[:user].viewname}
          - if locals[:user].description
             %p.mt-0.mb-0= locals[:user].description.truncate(150)
          %p.m-0 #{statement}
