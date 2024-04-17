@@ -50,11 +50,11 @@
               - else
                 = link_to org.name, url("/organization/#{org.identifier}")
               
-        %p.text-muted.mb-0
-          - if o[:highlight].has_key?(:address)
-            #{o[:highlight][:address].first}
-          - else
-            #{org.address}
+            %p.text-muted.mb-0
+              - if o[:highlight].has_key?(:address)
+                #{o[:highlight][:address].first}
+              - else
+                #{org.address}
 
         %p.small.text-muted.mb-0
           - count = org.active_users.count

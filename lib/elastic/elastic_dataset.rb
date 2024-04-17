@@ -69,7 +69,7 @@ module Bionomia
               analyzer: :institution_codes,
               norms: false
             },
-            user_count: { type: 'integer', index: false }
+            users_count: { type: 'integer', index: false }
           }
         }
       }
@@ -77,7 +77,7 @@ module Bionomia
     end
 
     def import
-      Parallel.each(Dataset.find_in_batches, progress: "Rebuilding dataset index", in_batches: 4) do |batch|
+      Parallel.each(Dataset.find_in_batches, progress: "Rebuilding dataset index", in_threads: 4) do |batch|
         bulk(batch)
       end
     end
@@ -87,7 +87,7 @@ module Bionomia
         id: d.id,
         datasetkey: d.uuid,
         title: d.title,
-        description: d.description,
+        description: (d.description.gsub(/<\/?[^>]*>/, "") rescue nil),
         top_collection_codes: d.top_collection_codes,
         top_institution_codes: d.top_institution_codes,
         kind: d.dataset_type,

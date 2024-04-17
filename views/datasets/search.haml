@@ -36,25 +36,22 @@
     - dataset = Dataset.find(d[:_id].to_i) rescue nil
     - if !dataset.nil?
       .mt-4.mb-4
-        .d-flex
-          - if dataset.image_url
-            %div
-              %img.mr-2.rounded{src:"#{dataset_image(dataset, "crop")}", width:48, height:48, alt:"#{dataset.title}", loading:"lazy"}
-          .flex-grow-1
-            %h5.mb-1
-              - if d[:highlight].has_key?(:title)
-                = link_to "#{d[:highlight][:title].first}", url("/dataset/#{dataset.uuid}")
-              - else
-                = link_to dataset.title, url("/dataset/#{dataset.uuid}")
+        %h5.mb-1
+          - if d[:highlight].has_key?(:title)
+            = link_to "#{d[:highlight][:title].first}", url("/dataset/#{dataset.uuid}")
+          - else
+            = link_to dataset.title, url("/dataset/#{dataset.uuid}")
         
         - if d[:highlight].has_key?(:description)
-          - d[:highlight][:description].each do |highlight|
+          - d[:highlight][:description].compact.each do |highlight|
             .small.text-muted-pl-2.ml-2
               &hellip;#{highlight}&hellip;
 
-        %p.small.text-muted
-          %a{href: "#{dataset.license}"}
-            %img{src:"#{dataset.license_icon("small")}"}
+        %p.small.text-muted.mb-0
+          %img{src:"#{dataset.license_icon("small")}"}
+        %p.small.text-muted.mt-0
+          %span.badge.badge-light #{number_with_delimiter(d[:_source][:users_count])}
+          #{'person'.pluralize(d[:_source][:users_count])}
 
   - if @pagy.pages > 1
     .overflow-auto
