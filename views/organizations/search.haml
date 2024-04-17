@@ -45,16 +45,10 @@
               %img.mr-2.rounded{src:"#{organization_image(org, 'medium')}", width:48, height:48, alt:"#{org.name}", loading:"lazy"}
           .flex-grow-1
             %h5.mb-1
-              - if o[:highlight].has_key?(:name)
-                = link_to "#{o[:highlight][:name].first}", url("/organization/#{org.identifier}")
-              - else
-                = link_to org.name, url("/organization/#{org.identifier}")
+              = link_to org.name, url("/organization/#{org.identifier}")
               
             %p.text-muted.mb-0
-              - if o[:highlight].has_key?(:address)
-                #{o[:highlight][:address].first}
-              - else
-                #{org.address}
+              #{org.address}
 
         %p.small.text-muted.mb-0
           - count = org.active_users.count

@@ -37,11 +37,8 @@
     - if !dataset.nil?
       .mt-4.mb-4
         %h5.mb-1
-          - if d[:highlight].has_key?(:title)
-            = link_to "#{d[:highlight][:title].first}", url("/dataset/#{dataset.uuid}")
-          - else
-            = link_to dataset.title, url("/dataset/#{dataset.uuid}")
-        
+          = link_to dataset.title, url("/dataset/#{dataset.uuid}")
+
         - if d[:highlight].has_key?(:description)
           - d[:highlight][:description].compact.each do |highlight|
             .small.text-muted-pl-2.ml-2
