@@ -38,18 +38,16 @@
   - @results.each do |o|
     - org = Organization.find(o[:_id].to_i)
     - if !o.nil?
-      .mt-4.mb-4
+      .mt-3.mb-5
         .d-flex
           - if org.image_url
             %div
               %img.mr-2.rounded{src:"#{organization_image(org, 'medium')}", width:48, height:48, alt:"#{org.name}", loading:"lazy"}
           .flex-grow-1
-            %h5.mb-1
+            %h5.m-0
               = link_to org.name, url("/organization/#{org.identifier}")
-              
             %p.text-muted.mb-0
               #{org.address}
-
         %p.small.text-muted.mb-0
           - count = org.active_users.count
           %span.badge.badge-light #{number_with_delimiter(count)}
