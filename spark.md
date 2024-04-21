@@ -117,7 +117,7 @@ identifiers.select("identifier", "gbifIDsRecordedByID", "gbifIDsIdentifiedByID")
     option("header", "true").
     option("quote", "\"").
     option("escape", "\"").
-    csv("claims-unioned-csv")
+    csv("identifiers-csv")
 
 val agents = spark.
     read.
@@ -135,7 +135,7 @@ agents.select("agent", "gbifIDsRecordedBy", "gbifIDsIdentifiedBy").
     option("header", "true").
     option("quote", "\"").
     option("escape", "\"").
-    csv("agents-unioned-csv")
+    csv("agents-csv")
 
 val families = spark.
     read.
@@ -150,7 +150,7 @@ families.select("family", "gbifIDsFamily").
     option("header", "true").
     option("quote", "\"").
     option("escape", "\"").
-    csv("family-csv")
+    csv("families-csv")
 
 // Best to drop indices then recreate later
 // ALTER TABLE `occurrences` DROP KEY `typeStatus_idx`, DROP KEY `index_occurrences_on_datasetKey_occurrenceID`, DROP KEY `country_code_idx`, DROP KEY `eventDate_processed_idx`, DROP KEY `dateIdentified_processed_idx`;
