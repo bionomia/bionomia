@@ -10,13 +10,13 @@ module Sinatra
           scribe_ids = Set.new
           recipient_ids = Set.new
           UserOccurrence.select(:id, :user_id, :created_by)
-                        .where(visible: true)
+                        .where.not(action: nil)
                         .where.not(created_by: User::BOT_IDS)
-                        .find_in_batches(batch_size: 500_000) do |group|
-            group.delete_if{ |uo| uo.user_id == uo.created_by }
-            attributions += group.size
-            scribe_ids.merge(group.map(&:created_by))
-            recipient_ids.merge(group.map(&:user_id))
+                        .find_in_batches(batch_size: 100_000) do |batch|
+            batch.delete_if{ |uo| uo.user_id == uo.created_by }
+            attributions += batch.size
+            scribe_ids.merge(batch.map(&:created_by))
+            recipient_ids.merge(batch.map(&:user_id))
           end
           {
             scribe_ids: scribe_ids.to_a.sort,

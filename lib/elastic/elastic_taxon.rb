@@ -50,8 +50,8 @@ module Bionomia
     end
 
     def import
-      Parallel.each(Taxon.find_in_batches, progress: "Rebuilding taxon index", in_threads: 4) do |batch|
-        bulk(batch)
+      Parallel.each((Taxon.minimum(:id)..Taxon.maximum(:id)).each_slice(2_400), progress: "Rebuilding taxon index", in_threads: 6) do |ids|
+        bulk(Taxon.where(id: ids))
       end
     end
 

@@ -77,8 +77,8 @@ module Bionomia
     end
 
     def import
-      Parallel.each(Dataset.find_in_batches, progress: "Rebuilding dataset index", in_threads: 4) do |batch|
-        bulk(batch)
+      Parallel.each((Dataset.minimum(:id)..Dataset.maximum(:id)).each_slice(12), progress: "Rebuilding dataset index", in_threads: 4) do |ids|
+        bulk(Dataset.where(id: ids))
       end
     end
 

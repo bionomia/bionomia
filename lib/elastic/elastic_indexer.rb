@@ -77,7 +77,9 @@ module Bionomia
           }
         }
       end
-      client.bulk index: @settings[:index], refresh: false, body: documents
+      if !documents.empty?
+        client.bulk index: @settings[:index], refresh: false, body: documents
+      end
     end
 
     def import

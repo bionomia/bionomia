@@ -77,8 +77,8 @@ module Bionomia
     end
 
     def import
-      Parallel.each(Organization.find_in_batches, progress: "Rebuilding organization index", in_threads: 4) do |batch|
-        bulk(batch)
+      Parallel.each((Organization.minimum(:id)..Organization.maximum(:id)).each_slice(2_400), progress: "Rebuilding organization index", in_threads: 6) do |ids|
+        bulk(Organization.where(id: ids))
       end
     end
 

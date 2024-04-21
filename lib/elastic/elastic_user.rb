@@ -204,11 +204,11 @@ module Bionomia
     end
 
     def import
-      batches = User.where.not(family: [nil, ""])
-                    .where.not(id: User::BOT_IDS)
-                    .find_in_batches
-      Parallel.each(batches, progress: "Rebuilding user index", in_threads: 3) do |batch|
-        bulk(batch)
+      identifiers = User.where.not(family: [nil, ""])
+                        .where.not(id: User::BOT_IDS)
+                        .pluck(:id)
+      Parallel.each(identifiers, progress: "Rebuilding user index", in_threads: 3) do |ids|
+        bulk(User.where(id: ids))
       end
     end
 

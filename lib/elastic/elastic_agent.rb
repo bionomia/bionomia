@@ -106,8 +106,8 @@ module Bionomia
     end
 
     def import
-      Parallel.each(Agent.find_in_batches(batch_size: 2_500), progress: "Rebuilding agent index", in_threads: 4) do |batch|
-        bulk(batch)
+      Parallel.each((Agent.minimum(:id)..Agent.maximum(:id)).each_slice(2_400), progress: "Rebuilding agent index", in_threads: 6) do |ids|
+        bulk(Agent.where(id: ids))
       end
     end
 
