@@ -17,14 +17,14 @@ config/settings/production.yml
 config/settings/sidekiq.yml
 metastore_db
 derby.log
-agents-unioned-csv
-family-csv
+agents-csv
+families-csv
 occurrences
 occurrences-csv
 occurrences-unioned
 processed
 verbatim
-claims-unioned-csv
+identifiers-csv
 users-csv
 missing-claims
 tmp
