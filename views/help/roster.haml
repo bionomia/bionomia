@@ -54,7 +54,7 @@
   - alert_class = "alert-info"
   - if @pagy.count == 0
     - alert_class = "alert-warning"
-  .alert.tiny-margins{role: "alert", class: "#{alert_class}"}
+  .alert.tiny-margins.mb-5{role: "alert", class: "#{alert_class}"}
     = succeed "." do
       = I18n.t('help.search_count', count: @pagy.count, search: h(params[:q]))
     = I18n.t('help.add_someone_html', href: link_to(I18n.t('help.add_someone_href'), url('/help-others/add')))

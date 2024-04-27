@@ -23,7 +23,7 @@
         %i.fas.fa-minus-circle
         #{I18n.t('general.remove')}
 - elsif @pagy && @pagy.count > 0
-  .alert.alert-info.tiny-margins.d-flex.flex-wrap{role: "alert"}
+  .alert.alert-info.tiny-margins.d-flex.flex-wrap.mb-5{role: "alert"}
     %div
       #{number_to_human(@pagy.count, units: :'dataset.search_found', delimiter: ",", precision: 0)}
       %span #{h(params[:q])}
@@ -35,7 +35,7 @@
   - @results.each do |d|
     - dataset = Dataset.find(d[:_id].to_i) rescue nil
     - if !dataset.nil?
-      .mt-3.mb-5
+      .mt-3.mb-5.ml-2
         %h5.m-0
           = link_to dataset.title, url("/dataset/#{dataset.uuid}")
         - if d[:highlight].has_key?(:description)

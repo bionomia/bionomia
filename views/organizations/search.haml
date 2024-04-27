@@ -26,7 +26,7 @@
         %i.fas.fa-minus-circle
         #{I18n.t('general.remove')}
 - elsif @pagy && @pagy.count > 0
-  .alert.alert-info.tiny-margins.d-flex.flex-wrap{role: "alert"}
+  .alert.alert-info.tiny-margins.d-flex.flex-wrap.mb-5{role: "alert"}
     %div
       #{number_to_human(@pagy.count, units: :'organization.search_alert', delimiter: ",", precision: 0)}
       %span #{h(params[:q])}
@@ -38,7 +38,7 @@
   - @results.each do |o|
     - org = Organization.find(o[:_id].to_i)
     - if !o.nil?
-      .mt-3.mb-5
+      .mt-3.mb-5.ml-2
         .d-flex
           - if org.image_url
             %div
