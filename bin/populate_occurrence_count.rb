@@ -48,7 +48,7 @@ if options[:add]
       HAVING count(u.user_id) > 1"
   ActiveRecord::Base.connection.execute(sql)
 
-  puts "Refining occurrence_counts content from OccurrenceAgents..."
+  puts "Refining occurrence_counts content from OccurrenceAgents...".yellow
   OccurrenceCount.find_in_batches(batch_size: 10_000) do |group|
     ids = group.pluck(:occurrence_id).join(",")
     sql = "UPDATE 
