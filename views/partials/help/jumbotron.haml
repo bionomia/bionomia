@@ -34,10 +34,10 @@
 
       - if !@viewed_user.description.nil?
         - layout_class = (@viewed_user.description.length > 100) ? "text-lg-left" : "text-center"
-        %p{class: "#{layout_class} p-0 mt-3 mb-1"}
+        %p{class: "#{layout_class} p-0 mt-1 mb-1"}
           #{h(@viewed_user.description.truncate(255))}
 
-      %p.orcid.text-center.p-0.mt-3.mb-1
+      %p.orcid.text-center.p-0.mt-1.mb-1
         - if @viewed_user.orcid
           %a{href: "https://orcid.org/#{@viewed_user.orcid}"}
             %i.fab.fa-orcid

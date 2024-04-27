@@ -44,10 +44,10 @@
       #{@admin_user.keywords.split("|").join(", ")}
 
   - if !@admin_user.description.nil?
-    %p.text-lg-left.p-0.mt-3.mb-1
+    %p.text-lg-left.p-0.mt-1.mb-1
       #{h(@admin_user.description.truncate(255))}
 
-  %p.orcid.text-lg-left.p-0.mt-3.mb-1
+  %p.orcid.text-lg-left.p-0.mt-1.mb-1
     - if @admin_user.orcid
       %a{href: "https://orcid.org/#{@admin_user.orcid}"}
         %i.fab.fa-orcid.fa-fw
