@@ -11,7 +11,10 @@ module Bionomia
                        .compact
                        .uniq
       agents.each do |a|
-        next if !a.family || a.family.length < 2 || a.family.length > 40 || a.family.count(".") > 4 || a.given.count(".") > 5
+        next if !a.family
+        next if a.family.length < 2 || a.family.length > 40
+        next if a.family.count(".") > 4
+        next if a.given && a.given.count(".") > 5
 
         family = [a.particle.to_s.strip, a.family.to_s.strip].join(" ")
                                                              .squeeze(" ")
