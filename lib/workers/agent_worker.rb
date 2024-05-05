@@ -14,6 +14,7 @@ module Bionomia
         next if !a.family
         next if a.family.length < 2 || a.family.length > 40
         next if a.family.count(".") > 4
+        next if a.given && a.given.length > 40
         next if a.given && a.given.count(".") > 5
 
         family = [a.particle.to_s.strip, a.family.to_s.strip].join(" ")
