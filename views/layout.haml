@@ -34,7 +34,6 @@
       - else
         %link{href: "#{Settings.base_url.sub("://", "://#{lang}.")}#{request.fullpath}", rel:"alternate", hreflang: "#{lang}"}
     %link{href: "#{Settings.base_url}#{request.fullpath}", rel:"alternate", hreflang: "x-default"}
-
     %link{href: "/favicon.ico", rel:"shortcut icon", type:"image/x-icon"}
     %link{href: "/favicon.ico", rel:"icon", type:"image/x-icon"}
     %link{href: "/favicon-32x32.png", rel:"icon", sizes:"32x32"}
@@ -44,12 +43,10 @@
     %link{href: "/css/bootstrap-combined.min.css", rel: "stylesheet", type: "text/css"}
     %link{href: "/css/application.css", rel: "stylesheet", type: "text/css"}
     = yield_content :stylesheets
-
     %script{src: "//kit.fontawesome.com/c0c5b90533.js", crossorigin: "anonymous", defer: true}
     %script{src: "/js/combined-libs.min.js"}
     %script{src: "/js/application.min.js", defer: true}
     = yield_content :scripts
-
   %body.d-flex.flex-column
     %header
       = haml :'global_navigation', layout: false, locals: { active_page: "#{locals[:active_page]}" }
