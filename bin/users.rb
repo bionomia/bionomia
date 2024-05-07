@@ -152,10 +152,11 @@ if options[:flagged_deletion]
     puts "No wikidata entities flagged for deletion.".green
   else
     puts "Oh, oh. Something may have been flagged for deletion".red
-    sm = Bionomia::SendMail.new({ subject: "ALERT! A wikidata page is flagged for deletion." })
+    subject = "ALERT! A wikidata page is flagged for deletion."
     body = "A wikidata page(s) may have been flagged for deletion!\n\n"
     body += flagged.join("\n")
-    sm.send_message(email: Settings.gmail.email, body: body)
+    vars = { email: Settings.gmail.email, subject: subject, body: body }.stringify_keys
+    ::Bionomia::MailWorker.perform_async(vars)
   end
 end
 

@@ -4,28 +4,6 @@ module Bionomia
   class SendMail
 
     def initialize(opts = {})
-      settings = Settings.merge!(opts)
-      Pony.options = {
-        charset: 'UTF-8',
-        from: settings.gmail.email,
-        subject: (settings.subject || subject),
-        via: :smtp,
-        via_options: {
-          address: 'smtp.gmail.com',
-          port: '587',
-          enable_starttls_auto: true,
-          user_name: settings.gmail.username,
-          password: settings.gmail.password,
-          domain: settings.gmail.domain
-        }
-      }
-    end
-
-    def send_message(email:, body:)
-      Pony.mail(
-        to: email,
-        body: body
-      )
     end
 
     def send_messages
@@ -35,13 +13,9 @@ module Bionomia
       users.find_each do |user|
         articles = user_articles(user)
         if articles.count > 0
-          begin
-            body = construct_message(user, articles)
-            send_message(email: user.email, body: body)
-          rescue
-            puts "Email failed for #{user.email}"
-            next
-          end
+          body = construct_message(user, articles)
+          vars = { email: user.email, subject: subject, body: body }.stringify_keys
+          ::Bionomia::MailWorker.perform_async(vars)
         end
         user.mail_last_sent = Time.now
         user.save
