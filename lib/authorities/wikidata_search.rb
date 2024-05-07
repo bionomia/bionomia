@@ -439,7 +439,7 @@ module Bionomia
       .sort_by{|v| -v[:rank] }
       .map{|a| a[:title] }
       .compact
-      .join(" ") rescue nil
+      .join(" ").strip rescue nil
     end
 
     def extract_sitelinks(wiki_user)
@@ -461,7 +461,7 @@ module Bionomia
       family = ranked_name(wiki_user.properties("P734"))
       second_family = ranked_name(wiki_user.properties("P1950"))
       if family && second_family
-        family = [family, second_family].join(" ")
+        family = [family, second_family].join(" ").strip
       end
       given = ranked_name(wiki_user.properties("P735"))
       particle = nil
@@ -474,11 +474,11 @@ module Bionomia
       particle = parsed.particle rescue nil
 
       if family.blank?
-        family = parsed.family rescue nil
+        family = parsed.family.strip rescue nil
       end
 
       if given.blank?
-        given = parsed.given rescue nil
+        given = parsed.given.strip rescue nil
       end
 
       if family.blank? && !given.blank?
