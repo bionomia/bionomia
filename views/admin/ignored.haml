@@ -29,4 +29,4 @@
     %img{src:"/images/microscope-unselected.png", alt:"Collected", title:"Collected", width:18}
     identified, or Both to claim specimens mistakenly marked as "Not me"
 
-  = haml :'partials/tables/ignored', layout: false
+  = haml :'partials/tables/ignored', layout: false, locals: { user: @admin_user }

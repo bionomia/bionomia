@@ -18,4 +18,4 @@
     = haml :'partials/choose_instructions', layout: false
 
 - if !@results.empty?
-  = haml :'partials/tables/ignored', layout: false
+  = haml :'partials/tables/ignored', layout: false, locals: { user: @user }

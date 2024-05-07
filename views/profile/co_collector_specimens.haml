@@ -22,4 +22,4 @@
   #helper-info.alert.alert-info.tiny-margins{role: "alert"}
     = haml :'partials/choose_instructions', layout: false
 
-  = haml :'partials/tables/specimens', layout: false
+  = haml :'partials/tables/specimens', layout: false, locals: { user: @user }

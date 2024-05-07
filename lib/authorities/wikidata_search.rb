@@ -336,7 +336,7 @@ module Bionomia
     end
 
     def institution_wikidata(identifier)
-      name, wikicode, latitude, longitude, image_url, logo_url, website = nil
+      name, wikicode, latitude, longitude, image_url, website = nil
 
       if identifier.match(/Q[0-9]{1,}/)
         data = Wikidata::Item.find(identifier)

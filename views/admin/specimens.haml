@@ -45,4 +45,4 @@
         %i.fas.fa-file-code.text-dark.h5.m-0.p-1
         JSON-LD
 
-  = haml :'partials/admin/specimens', layout: false
+  = haml :'partials/admin/specimens', layout: false, locals: { user: @admin_user }

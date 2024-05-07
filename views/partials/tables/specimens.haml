@@ -22,8 +22,14 @@
               %i.fas.fa-image.ml-1.text-muted{"data-toggle":"popover", "data-gbifid":"#{o.id}"}
           %td #{h(o.recordedBy)}
           %td #{h(o.identifiedBy)}
-          %td #{h(o.eventDate || o.year)}
-          %td #{h(o.dateIdentified)}
+          %td
+            #{h(o.eventDate || o.year)}
+            - if recordedBy_has_warning?(locals[:user], o)
+              %i.fas.fa-exclamation-triangle.text-warning{"data-toggle":"tooltip", title: "#{I18n.t('specimen.mismatch')}"}
+          %td
+            #{h(o.dateIdentified)}
+            - if identifiedBy_has_warning?(locals[:user], o)
+              %i.fas.fa-exclamation-triangle.text-warning{"data-toggle":"tooltip", title: "#{I18n.t('specimen.mismatch')}"}
           %td #{h(o.family)}
           %td #{h(o.institutionCode)}
           %td #{h(o.catalogNumber)}

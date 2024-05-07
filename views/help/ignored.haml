@@ -17,4 +17,4 @@
   #helper-info.alert.alert-info.tiny-margins{role: "alert"}
     = haml :'partials/choose_instructions', layout: false
 
-  = haml :'partials/tables/ignored', layout: false
+  = haml :'partials/tables/ignored', layout: false, locals: { user: @viewed_user }
