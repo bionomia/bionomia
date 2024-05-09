@@ -15,7 +15,7 @@
     - bg_class = @admin_user.image_url ? "" : "profile-image-bg"
     #profile-image.image-placeholder.mx-auto.d-block.align-self-center.align-items-center.mb-2{class:"#{bg_class}"}
       - image = profile_image(@admin_user) || "/images/photo.png"
-      %img.rounded.mx-auto.d-block.img-fluid.align-top.m-2{src:"#{image}", alt:"#{@admin_user.viewname}", height:"200px"}
+      %img.rounded.mx-auto.d-block.img-fluid.align-top.m-2{src:"#{image}", alt:"#{@admin_user.viewname}", height: 200}
       - if locals[:active_page] == "settings"
         %span
           = link_to I18n.t('admin.change_photo'), "#"
@@ -29,7 +29,7 @@
 
   - if @admin_user.signature_url
     #signature-image.mx-auto.d-block.align-self-center.align-items-center.mb-2
-      %img.mx-auto.d-block.img-fluid{src:"#{signature_image(@admin_user)}", itemprop:"image", height:"80px"}
+      %img.mx-auto.d-block.img-fluid{src:"#{signature_image(@admin_user)}", itemprop:"image", height: 80}
 
   %h1.mt-2.h2= (@admin_user.viewname)
 
