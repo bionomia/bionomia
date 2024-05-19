@@ -12,7 +12,6 @@ module Sinatra
             host: Settings.host,
             username: Settings.username,
             password: Settings.password,
-            reconnect: Settings.reconnect,
             pool: Settings.pool,
             timeout: Settings.timeout
           }
