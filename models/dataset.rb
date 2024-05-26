@@ -70,10 +70,10 @@ class Dataset < ActiveRecord::Base
                   .count
   end
 
-  #TODO: verify performance
   def agents
-    agent_ids = occurrences.joins(:occurrence_agents).select(:agent_id)
-    Agent.where(id: agent_ids).distinct.order(:family)
+    Agent.joins(occurrence_agents: :occurrence)
+         .where(occurrence: { datasetKey: datasetKey })
+         .distinct.order(:family)
   end
 
   #TODO: Slow query, uses temp sort

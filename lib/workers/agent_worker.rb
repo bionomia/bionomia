@@ -13,6 +13,7 @@ module Bionomia
       agents.each do |a|
         next if !a.family
         next if a.family.length < 2 || a.family.length > 40
+        next if a.family.length == 2 && a.family.count(".") == 1
         next if a.family.count(".") > 4
         next if a.given && a.given.length > 40
         next if a.given && a.given.count(".") > 5
