@@ -37,9 +37,8 @@ module Bionomia
       @occurrence_files.each do |csv|
         occurrence_ids = CSV.read(csv).flatten
         occurrence_ids.each_slice(2_500) do |group|
-          Article.joins(article_occurrences: :user_occurrences)
-                 .where(user_occurrences: { occurrence_id: group })
-                 .where(user_occurrences: { visible: true })
+          Article.joins(:article_occurrences)
+                 .where(article_occurrences: { occurrence_id: group })
                  .each do |article|
                    @set.add(article)
           end
