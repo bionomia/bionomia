@@ -87,9 +87,12 @@
     %a.btn.btn-sm.btn-outline-success.codes-refresh{href: url("/admin/organization/#{@organization.id}/codes.json"), role:"button"}
       %i.fas.fa-sync-alt
       Refresh
+    %a.btn.btn-sm.btn-outline-success.codes-refresh{href: url("/admin/organization/#{@organization.id}/refresh-metrics.json"), role:"button"}
+      %i.fas.fa-sync-alt
+      Refresh stats
 
     #organization-codes-refresh.alert.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}
-      Data from Wikidata was refreshed.
+      Data were refreshed.
       %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
         %span{"aria-hidden":"true"} &times;
 

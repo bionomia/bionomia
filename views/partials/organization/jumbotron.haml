@@ -21,7 +21,7 @@
   - if (authorized? && @organization.wikidata) || admin_authorized?
     .mt-3.pt-3.border-top
       - if locals[:active_tab] == "organization-metrics"
-        %a.profile-flush.mr-2.mb-2.text-nowrap{href: url("/admin/organization/#{@organization.id}/refresh-stats.json")}
+        %a.profile-flush.mr-2.mb-2.text-nowrap{href: url("/admin/organization/#{@organization.id}/refresh-metrics.json")}
           %i.fas.fa-sync-alt
           = I18n.t('general.refresh_stats')
 
