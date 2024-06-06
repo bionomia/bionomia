@@ -108,6 +108,8 @@ class Organization < ActiveRecord::Base
       .unscope(:order)
       .group(:institutionCode)
       .count
+      .sort_by {|_key, value| -value}
+      .to_h
   end
 
   def others_specimens_by_year(type = "recorded", year = DateTime.now.year)
@@ -174,6 +176,15 @@ class Organization < ActiveRecord::Base
     wikidata_lib = Bionomia::WikidataSearch.new
     codes = wikidata_lib.wiki_organization_codes(wikidata)
     update(codes)
+  end
+
+  def flush_metrics
+    return if !::Module::const_get("BIONOMIA")
+    BIONOMIA.cache_clear("blocks/organization-#{id}-recorded")
+    BIONOMIA.cache_clear("blocks/organization-#{id}-identified")
+
+    BIONOMIA.cache_put_tag("blocks/organization-#{id}-recorded", others_specimens("recorded"))
+    BIONOMIA.cache_put_tag("blocks/organization-#{id}-identified", others_specimens("identified"))
   end
 
   private

@@ -7,13 +7,13 @@
     %link{href: "https://unpkg.com/leaflet@1.4.0/dist/leaflet.css", rel: "stylesheet", type: "text/css"}
 
 - content_for :scripts do
-  = haml :'partials/organization/jumbotron_scripts', layout:false
+  = haml :'partials/organization/jumbotron_scripts', layout: false
 
 .row
-  = haml :'partials/organization/jumbotron', layout:false
+  = haml :'partials/organization/jumbotron', layout: false, locals: { active_tab: 'organization-metrics' }
 
   .col-12.col-lg-8.mt-2
-    = haml :'partials/organization/tabs', layout:false, locals: { active_tab: 'organization-metrics' }
+    = haml :'partials/organization/tabs', layout: false, locals: { active_tab: 'organization-metrics' }
 
     %h4.mt-3= I18n.t('organization.impact')
 

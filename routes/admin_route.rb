@@ -224,6 +224,13 @@ module Sinatra
               { message: "ok" }.to_json
             end
 
+            get '/organization/:id/refresh-stats.json' do
+              content_type "application/json", charset: 'utf-8'
+              organization = Organization.find(params[:id])
+              organization.flush_metrics
+              { message: "ok" }.to_json
+            end
+
             get '/organization/:id/codes.json' do
               content_type "application/json", charset: 'utf-8'
               organization = Organization.find(params[:id])

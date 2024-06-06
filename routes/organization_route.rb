@@ -51,12 +51,22 @@ module Sinatra
                 active_page: "organizations",
                 active_tab: "organization-metrics"
               }
-              haml :'organizations/under_repair', locals: locals
-=begin
+
               @year = params[:year] || nil
-              organization_metrics
+              organization_redirect("/metrics")
+
+              if Organization::METRICS_YEAR_RANGE.to_a.include?(@year.to_i)
+                @others_recorded = @organization.others_specimens_by_year("recorded", @year)
+                @others_identified = @organization.others_specimens_by_year("identified", @year)
+              else
+                @others_recorded = cache_block("organization-#{@organization.id}-recorded") { 
+                  @organization.others_specimens("recorded")
+                  } 
+                @others_identified = cache_block("organization-#{@organization.id}-identified") {
+                  @organization.others_specimens("identified")
+                  }
+              end
               haml :'organizations/metrics', locals: locals
-=end
             end
 
             get '/:id/citations' do
