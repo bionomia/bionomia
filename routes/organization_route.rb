@@ -51,7 +51,8 @@ module Sinatra
                 active_page: "organizations",
                 active_tab: "organization-metrics"
               }
-
+              haml :'organizations/under_repair', locals: locals
+=begin
               @year = params[:year] || nil
               organization_redirect("/metrics")
 
@@ -67,6 +68,7 @@ module Sinatra
                   }
               end
               haml :'organizations/metrics', locals: locals
+=end
             end
 
             get '/:id/citations' do

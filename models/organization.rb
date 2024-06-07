@@ -96,15 +96,16 @@ class Organization < ActiveRecord::Base
 
   def others_specimens(type = "recorded")
     date_field = type == "recorded" ? "eventDate_processed_year" : "dateIdentified_processed_year"
+    start_year = user_organizations.minimum(:start_year) || 1600
 
     Occurrence.joins(:user_occurrences)
       .joins("INNER JOIN user_organizations ON user_organizations.user_id = user_occurrences.user_id")
       .where(user_organizations: { organization_id: id })
-      .where(user_occurrences: { user_id: users.map(&:id) })
       .where("( user_organizations.end_year IS NULL AND occurrences.#{date_field} >= user_organizations.start_year) OR ( user_organizations.end_year IS NOT NULL AND user_organizations.start_year IS NOT NULL AND occurrences.#{date_field} >= user_organizations.start_year AND occurrences.#{date_field} <= user_organizations.end_year )")
       .where("user_occurrences.action LIKE ?", "%#{type}%")
       .where.not(occurrences: { institutionCode: nil })
       .where("occurrences.institutionCode NOT IN (?)", institution_codes)
+      .where("occurrences.#{date_field} >= #{start_year}")
       .unscope(:order)
       .group(:institutionCode)
       .count
@@ -118,7 +119,6 @@ class Organization < ActiveRecord::Base
     data = Occurrence.joins(:user_occurrences)
                 .joins("INNER JOIN user_organizations ON user_organizations.user_id = user_occurrences.user_id")
                 .where(user_organizations: { organization_id: id })
-                .where(user_occurrences: { user_id: users.map(&:id) })
                 .where("( user_organizations.end_year IS NULL AND user_organizations.start_year <= ? ) OR ( user_organizations.start_year <= ? AND user_organizations.end_year >= ? )", year, year, year)
                 .where("occurrences.#{date_field} = ?", year)
                 .where("user_occurrences.action LIKE ?", "%#{type}%")
