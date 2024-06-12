@@ -116,17 +116,17 @@ class Organization < ActiveRecord::Base
   def others_specimens_by_year(type = "recorded", year = DateTime.now.year)
     date_field = type == "recorded" ? "eventDate_processed_year" : "dateIdentified_processed_year"
 
-    data = Occurrence.joins(:user_occurrences)
-                .joins("INNER JOIN user_organizations ON user_organizations.user_id = user_occurrences.user_id")
-                .where(user_organizations: { organization_id: id })
-                .where("( user_organizations.end_year IS NULL AND user_organizations.start_year <= ? ) OR ( user_organizations.start_year <= ? AND user_organizations.end_year >= ? )", year, year, year)
-                .where("occurrences.#{date_field} = ?", year)
-                .where("user_occurrences.action LIKE ?", "%#{type}%")
-                .where.not(occurrences: { institutionCode: nil })
-                .where("occurrences.institutionCode NOT IN (?)", institution_codes)
-                .unscope(:order)
-                .group(:institutionCode)
-                .count
+    Occurrence.joins(:user_occurrences)
+      .joins("INNER JOIN user_organizations ON user_organizations.user_id = user_occurrences.user_id")
+      .where(user_organizations: { organization_id: id })
+      .where("( user_organizations.end_year IS NULL AND user_organizations.start_year <= ? ) OR ( user_organizations.start_year <= ? AND user_organizations.end_year >= ? )", year, year, year)
+      .where("occurrences.#{date_field} = ?", year)
+      .where("user_occurrences.action LIKE ?", "%#{type}%")
+      .where.not(occurrences: { institutionCode: nil })
+      .where("occurrences.institutionCode NOT IN (?)", institution_codes)
+      .unscope(:order)
+      .group(:institutionCode)
+      .count
   end
 
   def articles
