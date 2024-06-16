@@ -49,7 +49,7 @@ if options[:directory]
   files.each do |file|
     file_path = File.join(options[:directory], file)
     CSV.foreach(file_path, headers: true).with_index do |row, i|
-      row["agentIDs"].split("|").sort.map(&:strip).uniq.each do |id|
+      row["agentIDs"].split(/[|,]/).sort.map{|i| i.blank? ? nil : i.strip}.uniq.compact.each do |id|
         next if id.blank?
 
         source_user = SourceUser.find_or_create_by({ identifier: id })
