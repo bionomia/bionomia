@@ -87,21 +87,21 @@ zh-CN:
     claimed:
       other: 已认领的标本
     attributed:
-      other: specimens attributed
+      other: 标本归属
     helped:
-      other: people helped
+      other: 帮助的人
   charts:
     year: 年
     number_specimens: "# 标本"
-    identified: Identified
-    collected: Collected
-    people: People
+    identified: 已识别
+    collected: 已收集
+    people: 人员
   country:
     country_title: 国家
     lede: 来自ORCID账户和维基数据（Wikidata）条目中规定的国家或GBIF中的标本记录
     intro: 来自ORCID账户和维基数据（Wikidata）条目中规定的国家。按分类科属（Taxon Family）搜索专业知识。
-    collected_from: "Collected %{family} from %{country}"
-    identified_from: "Identified %{family} from %{country}"
+    collected_from: "从 %{country} 收集的 %{family}"
+    identified_from: "来自 %{country} 被鉴定的 %{family}"
     collected_identified_from: "Collected or identified %{family} from %{country}"
     no_one_collected_from: "No one collected %{family} from %{country}"
     no_one_identified_from: "没有来自 %{country} 的 %{family} 的鉴定"
@@ -110,7 +110,7 @@ zh-CN:
   dataset:
     dataset_title: 数据集
     search_title: 数据集查询
-    scribes_title: Scribes
+    scribes_title: 文书员
     lede:
       unit:
         other: "来自 GBIF 的数据集"
@@ -120,13 +120,13 @@ zh-CN:
     placeholder: 巴西的蝴蝶
     people: People
     visualizations: 可视化
-    scribes: Scribes
-    agents: Agents
-    agent_strings: Agent Strings
-    agent_strings_unclaimed: Unclaimed Agent Strings
+    scribes: 文书员
+    agents: 代理
+    agent_strings: 代理字符串
+    agent_strings_unclaimed: 未认领的代理字符串
     alphabetical: Alphabetical
     counts: Counts
-    unclaimed: Unclaimed
+    unclaimed: 未认领的
     no_agents_alert: Raw strings from parsed collector and determiner names in specimen data included in this dataset have not yet been recorded
     agents_alert:
       unit:
@@ -138,7 +138,7 @@ zh-CN:
     search_found:
       unit:
         other: "搜索结果"
-    no_scribes_alert: Scribes have not yet attributed specimens to collector or determimers represented in this dataset
+    no_scribes_alert: 文书员尚未将标本归属于此数据集中代表的的收集者或鉴定者
     scribes_alert:
       unit:
         other: "scribes attributed specimens to collectors or determiners represented in this dataset"
@@ -195,10 +195,10 @@ zh-CN:
     autocomplete_widget: Autocomplete Widget
     json_ld_search: JSON-LD Search for People
     json_ld_occurrence_search: JSON-LD Search for Occurrences
-    structured_data: Structured Data
+    structured_data: 结构化数据
     raw_data: 原始数据
     code: 代码
-    reconcile_title: Reconcile
+    reconcile_title: 对账
     recommended_use: 推荐使用
     title: 面向开发人员
     code_title: "面向开发人员：代码"
@@ -220,17 +220,17 @@ zh-CN:
   general:
     search: 搜索
     apply: Apply
-    help_attribute: Help Attribute
+    help_attribute: 帮助归属
     refresh_profile: 刷新
-    refresh_stats: Refresh stats
+    refresh_stats: 刷新统计数据
     settings: 设置
-    bulk_assignment: Bulk Assignment
+    bulk_assignment: 批量分配
     collected_all: Collected All
-    collected: Collected
-    identified_all: Identified All
-    identified: Identified
-    both: Both
-    either: Either
+    collected: 已收集
+    identified_all: 已识别所有
+    identified: 已识别
+    both: 两者
+    either: 任一
     per_page: 每页
     download: 下载
     submit: 提交
@@ -241,8 +241,8 @@ zh-CN:
     reset: Reset
     remove: Remove
     filtered_by: Filtered by
-    is_public: is public
-    has_occurrences: has specimens
+    is_public: 已公开
+    has_occurrences: 有标本
     unauthorized: 此功能需登录后方可获得。
   help:
     ignored_title: "Help Reclaim Ignored for %{name}"
@@ -254,20 +254,20 @@ zh-CN:
     latest_title: Latest Recipients
     country_name_title: "Help Attribute Specimens for People From %{country}"
     country_no_one: "No one found from"
-    advanced_search_title: "Advanced Search & Filter"
-    fix_title: Help Fix Attributions
-    upload_title: Upload
-    basic_instructions_lede: Basic instructions to get you started
-    add_someone_lede: "Add someone not yet discovered"
-    country_name_lede: From countries stated in ORCID or Wikidata
+    advanced_search_title: "高级搜索与筛选"
+    fix_title: 帮助修复归属
+    upload_title: 上载
+    basic_instructions_lede: 入门基本说明
+    add_someone_lede: "添加尚未发现的人员"
+    country_name_lede: 来自在ORCID或Wikidata声明的国家
     latest_lede: 加入我们的行列，感谢你的同伴、导师或任何激励你的人
     country_lede: Join the scribes in acknowledging your peers, mentors, or anyone who inspires you
     roster_lede: 加入抄写员的行列，感谢你的同伴、导师或任何激励你的人
-    person: Person
-    progress: Progress
-    public: Public
+    person: 人员
+    progress: 进度
+    public: 公开
     private: 档案资料尚未公开
-    created: Created
+    created: 创建于
     latest_scribe: Latest Scribe
     latest_claim: Latest Claim
     help_documentation: "Help Documentation"
@@ -280,14 +280,14 @@ zh-CN:
     not_ignored_alert: Bionomia scribes have not flagged specimens to be ignored.
     agent_string: Agent String
     taxon_string: Taxon Family
-    kingdom_string: Kingdom
-    dataset: Dataset
-    country: Country
-    datasets: Datasets
-    agents: Agents
+    kingdom_string: 界
+    dataset: 数据集
+    country: 国家
+    datasets: 数据集
+    agents: 代理
     taxa: Taxonomic Families
-    specimens: Specimens
-    visualizations: Visualizations
+    specimens: 标本
+    visualizations: 可视化
     strings: Collector Strings
     support: Helped By
     specialties: Specialties
