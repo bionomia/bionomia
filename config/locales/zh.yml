@@ -32,26 +32,26 @@ zh-CN:
   admin:
     change_photo: 更换头像
   agent:
-    agent_title: Agent Strings
-    search_title: Agent String Search
+    agent_title: 代理字符串
+    search_title: 代理字符串搜索
     lede:
       unit:
-        other: "raw strings from parsed collector and determiner names in specimen data from GBIF"
-    search_none: "No agent string found for %{searched}"
+        other: "从 GBIF 标本数据中解析的收集者和鉴定者姓名的原字符串"
+    search_none: "未找到代理字符串%{searched}"
     search_count:
       unit:
         other: "搜索结果"
     warning: "警告："
-    warning_statement: Unlike all other URLs in this site, URLs for agent strings are unreliable for linking because they will point to different results every few weeks
+    warning_statement: 不像此站所有其它的URL，代理字符串的URL不可靠，因为它们每隔几周就会指向不同的结果
     agent_name_title: "%{agent_name} 标本"
-    agent_lede: A raw string from parsed collector and determiner names in natural history specimen data
+    agent_lede: 从自然历史标本数据中解析的收集者和鉴定者姓名的原始字符串
     found_statement:
       unit:
         other: "找到标本，并未显示全部搜索结果。"
-    search_html: "Search for %{agent_link} the person and help attribute their specimens."
-    example_agents: Random Samples or Results
-    gbifid: From gbifIDs
-    gbifid_title: Agent Strings from gbifIDs
+    search_html: "搜索 %{agent_link} 代理，并帮助归属他们的标本"
+    example_agents: 随机抽样或结果
+    gbifid: 来自 gbifIDs
+    gbifid_title: 来自gbifID的代理字符串
     gbifid_instructions: Paste a list of occurrence-based gbifIDs and receive a summary list of parsed agent strings from recordedBy.
   article:
     article_title: 文章
@@ -64,8 +64,8 @@ zh-CN:
       unit:
         other: "人们从GBIF下载的数据中收集或识别支持本文的样本"
     placeholder: "进化和系统学..."
-    people: People
-    agent_strings: Agent Strings
+    people: 人员
+    agent_strings: 代理字符串
     agent_title: Article Agents
     alphabetical: Alphabetical
     counts: 计数
@@ -74,7 +74,7 @@ zh-CN:
     agent_strings_alert:
       unit:
         other: "raw strings from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article"
-    claims: claims
+    claims: 认领
     specimens: 标本
     no_search_alert: "未找到以下相关文章"
     search_alert:
@@ -85,7 +85,7 @@ zh-CN:
     identified: "已鉴定为 %{family}"
     identified_collected: "Collected %{collected} and identified %{identified}"
     claimed:
-      other: specimens claimed
+      other: 已认领的标本
     attributed:
       other: specimens attributed
     helped:
