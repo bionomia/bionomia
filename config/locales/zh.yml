@@ -52,7 +52,7 @@ zh-CN:
     example_agents: 随机抽样或结果
     gbifid: 来自 gbifIDs
     gbifid_title: 来自gbifID的代理字符串
-    gbifid_instructions: Paste a list of occurrence-based gbifIDs and receive a summary list of parsed agent strings from recordedBy.
+    gbifid_instructions: 粘贴基于出现记录的 gbifID 列表，并接收 recordedBy 中解析的代理字符串摘要列表。
   article:
     article_title: 文章
     articles_title: 文集
@@ -67,10 +67,10 @@ zh-CN:
     people: 人员
     agent_strings: 代理字符串
     agent_title: Article Agents
-    alphabetical: Alphabetical
+    alphabetical: 按字母顺序
     counts: 计数
     unclaimed: 未声明
-    no_agent_strings_alert: Raw strings from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article have not been found
+    no_agent_strings_alert: 未找到从 GBIF 下载的样本数据中解析过的收集者和鉴定者姓名的原始字符串来支持这篇文章
     agent_strings_alert:
       unit:
         other: "raw strings from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article"
@@ -239,13 +239,13 @@ zh-CN:
     download_alert: "Download discovered specimen records, work offline, then upload new claims as a csv. A file containing at most %{num_records} records is generated. If you have many more than this, you may work in batches. This routine does not update underlying specimen data nor does it update existing claims. If existing claims are present in the upload, these will be skipped. Your uploaded csv must use a comma to separate columns each optionally enclosed by quotes."
     search_dropdown_no_users: "Your search turned up 0 results."
     reset: Reset
-    remove: Remove
-    filtered_by: Filtered by
+    remove: 移除
+    filtered_by: 筛选条件
     is_public: 已公开
     has_occurrences: 有标本
     unauthorized: 此功能需登录后方可获得。
   help:
-    ignored_title: "Help Reclaim Ignored for %{name}"
+    ignored_title: "帮助 %{name} 归属被忽略的内容"
     upload_user_title: "Bulk Upload for %{name}"
     help_user_title: "Help Attribute Specimens for %{name}"
     help_title: Help Attribute Specimens
