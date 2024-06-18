@@ -118,19 +118,19 @@ zh-CN:
       unit:
         other: "datasets with content in dwc:recordedByID or dwc:identifiedByID"
     placeholder: 巴西的蝴蝶
-    people: People
+    people: 人员
     visualizations: 可视化
     scribes: 文书员
     agents: 代理
     agent_strings: 代理字符串
     agent_strings_unclaimed: 未认领的代理字符串
-    alphabetical: Alphabetical
-    counts: Counts
+    alphabetical: 按字母顺序
+    counts: 计数
     unclaimed: 未认领的
-    no_agents_alert: Raw strings from parsed collector and determiner names in specimen data included in this dataset have not yet been recorded
+    no_agents_alert: 标本数据中解析出的收集者和鉴定者姓名的原始字符串尚未记录在此数据集中
     agents_alert:
       unit:
-        other: "raw strings from parsed collector and determiner names in specimen data included in this dataset"
+        other: "此数据集包含的标本数据中解析出的收集者和鉴定者姓名的原始字符串"
     agents_alert_unclaimed:
       unit:
         other: "raw strings from parsed collector and determiner names in unattributed specimen data included in this dataset"
@@ -238,7 +238,7 @@ zh-CN:
     download_records: Download discovered records
     download_alert: "Download discovered specimen records, work offline, then upload new claims as a csv. A file containing at most %{num_records} records is generated. If you have many more than this, you may work in batches. This routine does not update underlying specimen data nor does it update existing claims. If existing claims are present in the upload, these will be skipped. Your uploaded csv must use a comma to separate columns each optionally enclosed by quotes."
     search_dropdown_no_users: "Your search turned up 0 results."
-    reset: Reset
+    reset: 重置
     remove: 移除
     filtered_by: 筛选条件
     is_public: 已公开
@@ -246,7 +246,7 @@ zh-CN:
     unauthorized: 此功能需登录后方可获得。
   help:
     ignored_title: "帮助 %{name} 归属被忽略的内容"
-    upload_user_title: "Bulk Upload for %{name}"
+    upload_user_title: "%{name} 的批量上传"
     help_user_title: "Help Attribute Specimens for %{name}"
     help_title: Help Attribute Specimens
     roster_title: 帮助属性标本
