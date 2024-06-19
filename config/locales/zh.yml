@@ -354,53 +354,53 @@ zh-CN:
     upload_label: 上传包含声明的 csv
     choose_instructions_html: "选择 %{coll_img} 收集的、%{det_img} 鉴定的，或两者。"
     search_count:
-      other: "%{count} search results for %{search}"
-    make_public_yes: "Yes, Make Public"
-    other_scribes: "Other scribes have also helped attribute %{user_name}'s specimens:"
-    no_scribes: "No other scribes have helped attribute %{user_name}'s specimens."
-    make_public_question: "Would you like to make %{user_name}'s profile publicly available?"
-    view_public_html: "View the public %{href}"
-    view_public_href: "profile"
-    now_public_html: "Thank you for your help! The profile for %{person} is now visible to the public."
-    do_you_know: Do you know
-    no_one_found: "No one found by the name %{name}."
-    add_someone_html: "See how to %{href}."
-    add_someone_href: "add someone"
+      other: "共找到 %{count} 条与 %{search} 有关的搜索结果"
+    make_public_yes: "是的，公开。"
+    other_scribes: "其他记录员也帮助归属了 %{user_name} 的标本："
+    no_scribes: "没有其他记录员帮助归属 %{user_name} 的标本。"
+    make_public_question: "您是否希望将 %{user_name} 的个人资料公开？"
+    view_public_html: "查看公开的 %{href}"
+    view_public_href: "个人资料"
+    now_public_html: "感谢您的帮助！现在 %{person} 的个人资料已经公开。"
+    do_you_know: 您知道吗？
+    no_one_found: "未找到名为 %{name} 的人员。"
+    add_someone_html: "查看如何 %{href}。"
+    add_someone_href: "添加某人"
     co_collected_count:
-      other: "co-collected specimens"
-    occurrence_title: Help Others By Specimen Record
-    occurrence: Specimens
-    occurrence_advance_message: Co-collected specimen records. Use the right arrow key on your keyboard or the arrow on the screen to advance a record until you receive one that you may attribute.
+      other: "共同采集的标本"
+    occurrence_title: 通过标本记录帮助他人
+    occurrence: 标本
+    occurrence_advance_message: 共同采集的标本记录。使用键盘上的右箭头键或屏幕上的箭头键来逐个查看记录，直到找到您可以归属的记录。
   home:
-    tagline: Link natural history specimens to the world's collectors.
-    get_started: Get started
-    your_profile: Your profile
-    sample_profiles: Today's Featured Collectors
-    orcid_login: Log in with ORCID
-    orcid_logo: ORCID logo
+    tagline: 链接自然历史样本与全球的收藏家。
+    get_started: 开始
+    your_profile: 您的个人资料
+    sample_profiles: 今日精选收藏家
+    orcid_login: 使用ORCID登录
+    orcid_logo: ORCID 标志
   layout:
-    profiles: Profiles
-    scribes: Scribes
-    organizations: Organizations
-    datasets: Datasets
-    articles: Articles
-    countries: Countries
-    taxa: Families
-    agent_strings: Agent Strings
-    help_others: Help Others
-    help_received: Help Received
-    people_helped: People Helped
-    toggle_dropdown: Toggle Dropdown
-    overview: Overview
-    specimens: Specimens
-    discovered: Discovered
-    science_enabled: Science enabled
-    settings: Settings
-    administration: Administration
-    logout: Logout
-    resources: Resources
-    integrations: Integrations
-    for_developers: For Developers
+    profiles: 个人资料
+    scribes: 抄写员
+    organizations: 组织
+    datasets: 数据集
+    articles: 文集
+    countries: 国家
+    taxa: 科
+    agent_strings: 代理字符串
+    help_others: 帮助他人
+    help_received: 得到帮助
+    people_helped: 已帮助过的人
+    toggle_dropdown: 收起下拉列表
+    overview: 概览
+    specimens: 标本
+    discovered: 发现
+    science_enabled: 科学启用
+    settings: 设置
+    administration: 管理界面
+    logout: 登出
+    resources: 资源
+    integrations: 集成
+    for_developers: 开发人员适用
     for_data_managers: 对于数据管理员
     policies: 政策
     privacy: 隐私政策
@@ -488,58 +488,58 @@ zh-CN:
         other: past members
     under_repair: 该功能目前正在修复中，以获得更好的性能。
   profile:
-    thanks_title: Thanks Received
-    candidates_title: Unclaimed Specimens
-    ignored_title: Ignored
-    specimens_title: Specimens
-    support_title: Help Received
-    upload_title: Upload
-    helped_title: People Helped
-    citation_title: Citation
-    citations_title: Citations
-    overview: Overview
-    specimens: Specimens
-    people_helped: People Helped
-    science_enabled: Science Enabled
-    claimed: Claimed
-    discovered: Discovered
-    upload: Upload
-    ignored: Ignored
-    help_received: Help Received
-    helped: Helped
-    helped_alert: You helped attribute specimens to the following people, with the most recent shown first.
-    not_helped_alert: You have not yet attributed specimens to anyone.
-    no_help_alert: Bionomia scribes have not yet helped you claim specimens.
-    thanks_alert: Bionomia scribes have helped you claim specimens. Send them your appreciation.
-    thanks_received: Thanks Received
-    thanks_received_alert: You have received thanks for attributing specimens.
-    no_thanks_received_alert: You have not yet received thanks for attributing specimen records to other collectors. Have you tried helping others?
-    change_photo: Change profile photo
-    remove: Remove
-    cancel: Cancel
-    update: Update
-    settings: Settings & Integrations
-    youtube: Use a YouTube ID for a video to appear in your profile (eg uxRERDmfAcw).
+    thanks_title: 收到的致谢
+    candidates_title: 未认领的标本
+    ignored_title: 已忽略
+    specimens_title: 标本
+    support_title: 得到帮助
+    upload_title: 上载
+    helped_title: 已帮助过的人
+    citation_title: 引用
+    citations_title: 引用
+    overview: 概览
+    specimens: 标本
+    people_helped: 已帮助过的人
+    science_enabled: 科学启用
+    claimed: 已认领
+    discovered: 发现
+    upload: 上载
+    ignored: 已忽略
+    help_received: 得到帮助
+    helped: 已帮助
+    helped_alert: 您已将标本归属于以下人员，最近的显示在前：
+    not_helped_alert: 您尚未将样本归于任何人。
+    no_help_alert: Bionomia记录员尚未帮助您认领标本。
+    thanks_alert: Bionomia 记录员已帮助您认领了标本。向他们表达您的谢意。
+    thanks_received: 收到的致谢
+    thanks_received_alert: 您已因归纳标本而收到感谢。
+    no_thanks_received_alert: 您尚未收到关于将标本记录归属于其他收藏家的谢意。您是否尝试帮助他人？
+    change_photo: 更换头像
+    remove: 移除
+    cancel: 取消
+    update: 更新
+    settings: 设置与集成
+    youtube: 使用 YouTube 视频的 ID 在您的个人资料中显示视频 (例如，uxRERDmfAcw)。
     no_science: Your specimen data have not yet been recorded in downloads from GBIF and used in new publications.
     no_citation_alert: Your specimens were not included in a download from GBIF in support of this study.
     has_science:
       unit:
         other: "publications made use of your specimen data downloaded from GBIF"
-    identified_from: Identified From
-    collected_from: Collected From
-    resume: For Your Resume
+    identified_from: 识别自
+    collected_from: 采集自
+    resume: 用于您的简历
     specimens_used: specimens used
-    public_availability: Public Availability
-    public_profile: Public Profile
-    make_citable: Make Your Data Citable
-    email_notifications: Email Notifications
-    delete_account: Delete Your Account
-    delete: Delete
-    permanent_delete: Permanently delete your account.
-    delete_warning: Are you sure you want to delete your account? All your claims AND all the attributions you have made for others will be permanently removed.
+    public_availability: 公开可用
+    public_profile: 公开个人资料
+    make_citable: 使您的数据可被引用
+    email_notifications: 邮件通知
+    delete_account: 删除您的帐户
+    delete: 删除
+    permanent_delete: 永久删除您的帐户。
+    delete_warning: 您确定要删除您的账户吗？您所有的认领和所有您为他人的归属将被永久删除。
     email_instructions: Receive email notifications of new papers that made use of data derived from the specimens you identified or collected. Make your primary email address publicly available in your ORCID account and then refresh your ORCID data above.
     email_procedure: "Receive notification of new publications that made use of data derived from the specimens you identified or collected. Your primary, publicly available email address, %{email} comes from your ORCID account."
-    disconnect: Disconnect
+    disconnect: 断开连接
     disconnect_warning: Are you sure you want to disconnect your account from Zenodo? Your data will remain archived and accessible but no new versions will be created. If you later reconnect your account, a new data package will be created.
     connect_zenodo: Connect your account to Zenodo where versioned snapshots of your claims will be stored and a DataCite DOI assigned. A citation will be provided for inclusion in your resume.
     connect_zenodo_claim: Claim at least one of your specimens and return here to connect your account to Zenodo where versioned snapshots of your claims will be stored and a DataCite DOI assigned. A citation will be provided for inclusion in your resume.
@@ -597,16 +597,16 @@ zh-CN:
     determiner_name: "Specimens identified by %{name}."
     not_determiner_name: "Specimens you collected have not been identified by %{name}."
     identified_by_count:
-      other: "identified specimens"
-    zenodo_html: "Your profile is linked to %{zenodo} and your claims are versioned and archived."
-    language: Preferred Language
-    language_explanation: Choose your preferred language
-    specimens_used_num: specimens used
-    updated: Your profile was updated.
-    thanks: Thanks
-    attributed: attributed
+      other: "已识别的标本"
+    zenodo_html: "您的个人资料已链接至 %{zenodo}，您的认领已经进行版本管理和归档。"
+    language: 首选语言
+    language_explanation: 请选择您的首选语言
+    specimens_used_num: 使用的标本
+    updated: 您的个人资料已更新。
+    thanks: 谢谢
+    attributed: 归属
   roster:
-    roster_title: Public Profiles
+    roster_title: 公共档案
     lede: "%{count} people who share their profiles and the profiles of others they revere"
     no_one_found: No one found by the name
     search_result_count:
@@ -628,16 +628,16 @@ zh-CN:
     family: Family
     type_status: Type Status
     scribe: Scribe
-    not_me: Not me
-    not_them: Not them
-    not_recorded: not recorded
-    remove: Remove
+    not_me: 不是我
+    not_them: 不是他们
+    not_recorded: 未记录
+    remove: 移除
     mismatch: 与寿命不匹配
   scribes:
-    scribes_title: Scribes
+    scribes_title: 抄写员
     lede: "%{scribe_count} people who have attributed %{attribution_count} natural history specimens to %{recipient_count} of their peers, mentors, and role models"
   statistics:
-    title: Statistics
+    title: 统计数据
     claims: Cumulative Claims
     attributions: Cumulative Attributions
     rejected: Cumulative Rejected Candidates
