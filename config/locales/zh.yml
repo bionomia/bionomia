@@ -309,44 +309,44 @@ zh-CN:
     not_helped_alert: Bionomia 记录员尚未归属标本。
     upload_message:
       unit:
-        other: "records were handled. Existing claims, if present in your upload, were skipped."
-    help_question: "Want to help attribute specimens to %{name}?"
-    try_again: Try again.
-    no_specialities_alert: Bionomia scribes have not yet helped attribute specimens.
-    specialties_alert: "Collected or identified specimens in the following Families:"
-    co-collectors: Co-collectors
-    no_co_collectors_alert: Co-collectors have not yet been recorded.
-    co_collectors_alert: "Choose a co-collector to adjust attributions made for specimens in common."
-    co_collector_name: "Specimens co-collected with %{name}."
+        other: "记录已处理。如果您的上传中存在现有的认领，这些认领已被跳过。"
+    help_question: "想要帮助将标本归属给 %{name} 吗？"
+    try_again: 请重试。
+    no_specialities_alert: Bionomia 记录员尚未归属标本。
+    specialties_alert: "收集或鉴定以下分类科的标本："
+    co-collectors: 共同收集者
+    no_co_collectors_alert: 尚未记录共同收集者。
+    co_collectors_alert: "选择一位共同采集者来调整共同标本的归属。"
+    co_collector_name: "与 %{name} 共同采集的标本。"
     switch: 切换
     not_co_collector_name: "标本未与 %{name} 共同采集"
     identified_for: 为识别
-    no_identified_for_alert: Recipients of determinations have not yet been recorded.
-    identified_for_alert: "Choose a collector to adjust attributions made for specimens collected by them."
-    identified_for_name: "Specimens collected by %{name} and identified by %{other_name}."
-    not_identified_for_name: "Specimens have not been collected by %{name} and identified by %{other_name}."
+    no_identified_for_alert: 尚未有鉴定接收者的记录。
+    identified_for_alert: "选择一位采集者来调整标本的归属。"
+    identified_for_name: "由 %{name} 采集并由 %{other_name} 鉴定的标本。"
+    not_identified_for_name: "标本尚未被 %{name} 采集，且未被 %{other_name} 识别。"
     identified_for_count:
-      other: "collected specimens"
-    identifications_by: Identifications By
-    no_determiners_alert: Determiners have not yet been recorded.
-    determiners_alert: "Choose a determiner to adjust attributions made for specimens identified by them."
-    determiner_name: "Specimens identified by %{name} and collected by %{other_name}."
-    not_determiner_name: "Specimens have not been identified by %{name} and collected by %{other_name}."
+      other: "采集的标本"
+    identifications_by: 识别者
+    no_determiners_alert: 尚未记录识别者。
+    determiners_alert: "选择一位识别者来调整由他们鉴定的标本的归属。"
+    determiner_name: "由 %{name} 识别并由 %{other_name} 采集的标本。"
+    not_determiner_name: "标本尚未被 %{name} 识别，且未被 %{other_name} 采集。"
     identified_by_count:
-      other: "identified specimens"
-    bulk_attribution: Bulk Attributions
-    reclaim_ignored: Reclaim Ignored
-    fix_claims: Fix Attributions
-    discovered: Discovered
-    support_alert: The following scribes have attributed specimens.
-    advanced_search: Advanced Search & Filter
-    less_exact: Make less exact
-    no_unclaimed: Bionomia did not find any unclaimed specimens.
-    close: Close
-    add_person: Add a Person
-    add_orcid_wikidata: Add ORCID Identifier or Wikidata Q Number
+      other: "已识别的标本"
+    bulk_attribution: 批量归属
+    reclaim_ignored: 回归被忽略的归属
+    fix_claims: 修正归属
+    discovered: 发现
+    support_alert: 以下记录员已归属标本。
+    advanced_search: 高级搜索与筛选
+    less_exact: 降低精确度
+    no_unclaimed: Bionomia 没找到任何未认领的标本。
+    close: 关闭
+    add_person: 添加人员
+    add_orcid_wikidata: 添加 ORCID 标识符或 Wikidata Q 号
     attribute_count:
-      other: Help attribute %{count} specimens.
+      other: 帮助归属 %{count} 个标本
     specimens_attributed_count:
       other: specimens attributed
     download: Download
@@ -401,25 +401,25 @@ zh-CN:
     resources: Resources
     integrations: Integrations
     for_developers: For Developers
-    for_data_managers: For Data Managers
-    policies: Policies
-    privacy: Privacy Policy
-    terms_service: Terms of Service
-    on_this_day: On This Day
-    about: About
-    rationale: Rationale
-    how_works: How it Works
-    history: History
-    feedback: Feedback
-    support: Donate
-    help: Help Documents
-    tools: Tools
-    parse: Parse Names
-    reconcile: Reconcile Names
-    acknowledgments: Acknowledgments
-    workshops: Workshops
-    stats: Statistics
-    downloads: Downloads
+    for_data_managers: 对于数据管理员
+    policies: 政策
+    privacy: 隐私政策
+    terms_service: 服务条款
+    on_this_day: 往昔今日
+    about: 关于
+    rationale: 原理
+    how_works: 工作原理
+    history: 历史记录
+    feedback: 反馈
+    support: 捐赠
+    help: 帮助文档
+    tools: 工具
+    parse: 解析姓名
+    reconcile: 对帐姓名
+    acknowledgments: 鸣谢
+    workshops: 工坊
+    stats: 统计数据
+    downloads: 下载
   not_authorized:
     not_authorized: Not authorized or session terminated.
   occurrence:
