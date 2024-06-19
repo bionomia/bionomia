@@ -236,7 +236,7 @@ zh-CN:
     submit: 提交
     upload_csv_instructions: 上传包含认领的 csv
     download_records: 下载已发现的记录
-    download_alert: "Download discovered specimen records, work offline, then upload new claims as a csv. A file containing at most %{num_records} records is generated. If you have many more than this, you may work in batches. This routine does not update underlying specimen data nor does it update existing claims. If existing claims are present in the upload, these will be skipped. Your uploaded csv must use a comma to separate columns each optionally enclosed by quotes."
+    download_alert: "下载发现的标本记录，离线工作，然后再以 csv 格式上传新的声明。这将产生最多包含 %{num_records} 记录的文件。若您有更多记录，您可以分批处理。此例程不会更新基础标本数据，也不会更新现有声明。若上传中存在现有声明，这些声明将被跳过。您上传的 csv 必须使用逗号分隔列，每列可选地用引号括起来。"
     search_dropdown_no_users: "您的搜索未找到任何结果。"
     reset: 重置
     remove: 移除
@@ -348,11 +348,11 @@ zh-CN:
     attribute_count:
       other: 帮助归属 %{count} 个标本
     specimens_attributed_count:
-      other: specimens attributed
-    download: Download
-    download_label: Download discovered records
-    upload_label: Upload csv with claims
-    choose_instructions_html: "Choose %{coll_img} collected, %{det_img} identified, or Both."
+      other: 归属的标本
+    download: 下载
+    download_label: 下载发现的记录
+    upload_label: 上传包含声明的 csv
+    choose_instructions_html: "选择 %{coll_img} 收集的、%{det_img} 鉴定的，或两者。"
     search_count:
       other: "%{count} search results for %{search}"
     make_public_yes: "Yes, Make Public"
