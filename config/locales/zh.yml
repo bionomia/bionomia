@@ -145,11 +145,11 @@ zh-CN:
     no_users_alert: 此数据集的标本尚未被认领或归属
     users_alert:
       unit:
-        other: "people claimed or were attributed specimens represented in this dataset"
+        other: "此数据集中已认领或被归属标本的人"
     timeline: 时间轴
-    none_collected_timeline: "No one has collected and indicated a collection date"
-    none_identified_timeline: "No one has identified and indicated a determination date"
-    not_all_features: Large dataset, not all features are available.
+    none_collected_timeline: "尚未有人收集并注明收集日期"
+    none_identified_timeline: "尚未有人鉴定并注明鉴定日期"
+    not_all_features: 大型数据集，无法提供所有功能。
     badge_tooltip: 点击这里获取此徽章的链接 。
     badge_modal: Bionomia 数据集徽章。
   date:
@@ -192,9 +192,9 @@ zh-CN:
     not_allowed: 无权访问
   developer:
     search: 搜索
-    autocomplete_widget: Autocomplete Widget
-    json_ld_search: JSON-LD Search for People
-    json_ld_occurrence_search: JSON-LD Search for Occurrences
+    autocomplete_widget: 自动完成小部件
+    json_ld_search: 用于搜索人员的 JSON-LD
+    json_ld_occurrence_search: 用于搜索出现记录的 JSON-LD
     structured_data: 结构化数据
     raw_data: 原始数据
     code: 代码
@@ -203,16 +203,16 @@ zh-CN:
     title: 面向开发人员
     code_title: "面向开发人员：代码"
     clients: 客户资料库
-    parser: Parse Names
-    parse_names: Parse Human Names
-    parse_names_title: "For Developers: Parse Names"
+    parser: 解析名称
+    parse_names: 解析姓名
+    parse_names_title: "至开发者: 解析名称"
     structured_data_title: "面向开发人员：结构化数据"
-    search_title: "For Developers: Search"
+    search_title: "至开发者: 搜索"
     client_title: "开发者: 客户资料库"
   donate:
     donate_title: 赞助
     lede: 您的一次性或定期捐赠将有助于数据管道（data pipeline）的完成，并确保尽可能快速、无缝地捐赠与自然博物收藏。
-    campaign: Campaign
+    campaign: 捐款活动
     donor_wall: 感恩墙
   donor_wall:
     donor_wall_title: 感恩墙
@@ -237,7 +237,7 @@ zh-CN:
     upload_csv_instructions: 上传包含认领的 csv
     download_records: 下载已发现的记录
     download_alert: "Download discovered specimen records, work offline, then upload new claims as a csv. A file containing at most %{num_records} records is generated. If you have many more than this, you may work in batches. This routine does not update underlying specimen data nor does it update existing claims. If existing claims are present in the upload, these will be skipped. Your uploaded csv must use a comma to separate columns each optionally enclosed by quotes."
-    search_dropdown_no_users: "Your search turned up 0 results."
+    search_dropdown_no_users: "您的搜索未找到任何结果。"
     reset: 重置
     remove: 移除
     filtered_by: 筛选条件
@@ -247,13 +247,13 @@ zh-CN:
   help:
     ignored_title: "帮助 %{name} 归属被忽略的内容"
     upload_user_title: "%{name} 的批量上传"
-    help_user_title: "Help Attribute Specimens for %{name}"
-    help_title: Help Attribute Specimens
+    help_user_title: "为 %{name} 归属标本"
+    help_title: 帮助属性标本
     roster_title: 帮助属性标本
     country_title: 按国家划分的帮助属性标本
     latest_title: 最新收件人
     country_name_title: "为来自 %{country} 的人员归属标本"
-    country_no_one: "No one found from"
+    country_no_one: "没有找到来自"
     advanced_search_title: "高级搜索与筛选"
     fix_title: 帮助修复归属
     upload_title: 上载
@@ -306,7 +306,7 @@ zh-CN:
     identified_from: 识别自
     collected_from: 采集自
     no_filter_alert: Bionomia 记录员尚未在此筛选条件下归属标本。
-    not_helped_alert: Bionomia scribes have not yet helped attribute specimens.
+    not_helped_alert: Bionomia 记录员尚未归属标本。
     upload_message:
       unit:
         other: "records were handled. Existing claims, if present in your upload, were skipped."
