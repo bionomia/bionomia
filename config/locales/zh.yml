@@ -423,44 +423,44 @@ zh-CN:
   not_authorized:
     not_authorized: Not authorized or session terminated.
   occurrence:
-    occurrence_title: Specimen Record
-    lede: From partial data obtained from GBIF
-    record: Record
-    event: Event
-    identification: Identification
-    location: Location
-    has_image: Has Image
+    occurrence_title: 标本记录
+    lede: 从 GBIF 获取的部分数据
+    record: 记录
+    event: 活動
+    identification: 识别
+    location: 位置
+    has_image: 包含图像
     not_them: 不归于他们
   offline:
-    message: Bionomia is currently offline, refreshing data from the Global Biodiversity Information Facility.
+    message: Bionomia 目前离线，正在从全球生物多样性信息机构 (GBIF) 刷新数据。
     warning: "%{datetime_off} Bionomia 将离线 %{duration} ，以刷新来自全球生物多样性信息设施的数据。"
   on_this_day:
-    global_title: On This Day
-    born_title: Collector Born On This Day
-    died_title: Collector Died On This Day
-    collected_title: Collected On This Day
-    collector_born: Collector Born
-    collector_died: Collector Died
-    type_collected: Type Specimens Collected
-    none_died_alert: "No one found who died on %{date}"
-    none_born_alert: "No one found who was born on %{date}"
-    limit_alert: Results limited to 50 holotype specimen records
-    no_types_alert: "No type specimens found collected on %{date}"
+    global_title: 往昔今日
+    born_title: 今天出生的采集者
+    died_title: 今天逝世的采集者
+    collected_title: 此日采集的
+    collector_born: 收藏家出生于
+    collector_died: 收藏家逝世
+    type_collected: 收集的模式标本
+    none_died_alert: "没有找到在 %{date} 逝世的人"
+    none_born_alert: "没有找到在 %{date} 出生的人"
+    limit_alert: 结果仅限50个正模式标本记录
+    no_types_alert: "没找到在 %{date} 被采集的标本"
   oops:
-    not_found_title: Not found
-    not_found: We looked everywhere but could not find that page.
-    error_title: Error
-    error: Sorry, we experienced an error.
+    not_found_title: 未找到
+    not_found: 无法找到该页面。
+    error_title: 错误
+    error: 抱歉，我们遇到了一个错误。
   organization:
-    organization_title: Organizations
+    organization_title: 组织
     lede:
       unit:
-        other: "organizations from ORCID accounts and Wikidata entries"
-    placeholder: Canadian Museum of Nature
-    affiliation_none_alert: Publications based on specimens collected or identified by current and previous personnel have not yet been recorded by GBIF
-    affiliation_alert: "%{count} publications used specimen data downloaded from GBIF based on specimens collected or identified by current and previous personnel while affiliated with %{org_name}"
-    collected_by: "Specimens collected or identified by:"
-    science_enabled: Science Enabled
+        other: "来自 ORCID 账户和 Wikidata 条目的组织机构"
+    placeholder: 加拿大自然博物馆
+    affiliation_none_alert: GBIF 尚未记录基于现任和前任人员采集或鉴定的标本的刊物
+    affiliation_alert: "%{count} 刊物使用了从 GBIF 下载的标本数据，这些数据基于现任和前任人员在隶属于 %{org_name} 时采集或鉴定的标本。"
+    collected_by: "采集或鉴定标本的人员"
+    science_enabled: 科学启用
     impact: Impact on Activities in Other Organizations
     no_metric_alert: "Current and previous personnel have not yet claimed or have been attributed specimens now curated at other organizations while they were affiliated with %{org_name}."
     metric_alert: "Current and previous personnel have claimed or were attributed specimens now curated at the following organizations while affiliated with %{org_name}."
