@@ -461,31 +461,31 @@ zh-CN:
     affiliation_alert: "%{count} 刊物使用了从 GBIF 下载的标本数据，这些数据基于现任和前任人员在隶属于 %{org_name} 时采集或鉴定的标本。"
     collected_by: "采集或鉴定标本的人员"
     science_enabled: 科学启用
-    impact: Impact on Activities in Other Organizations
+    impact: 对其他组织活动的影响
     no_metric_alert: "Current and previous personnel have not yet claimed or have been attributed specimens now curated at other organizations while they were affiliated with %{org_name}."
-    metric_alert: "Current and previous personnel have claimed or were attributed specimens now curated at the following organizations while affiliated with %{org_name}."
-    none_collected_alert: "Specimens collected or identified in %{year} by personnel and curated elsewhere have not yet been claimed or attributed."
-    all_years: All Years
-    specimens: specimens
-    organizations: organizations
-    specimens_identified: Specimens Identified
-    specimens_collected: Specimens Collected
-    no_current_members_alert: "Current members of %{org_name} have not yet been recorded."
-    no_previous_members_alert: "Previous members of %{org_name} have not yet been recorded."
-    no_search_alert: "No organizations found for"
+    metric_alert: "现任和前任人员在隶属于 %{org_name} 期间已认领或被归属于以下组织管理的标本。"
+    none_collected_alert: "在 %{year} 采集或鉴定并在其他地方管理的标本尚未被认领或归属。"
+    all_years: 所有年份
+    specimens: 标本
+    organizations: 组织
+    specimens_identified: 标本鉴定
+    specimens_collected: 采集标本
+    no_current_members_alert: "%{org_name} 的现有成员尚未记录。"
+    no_previous_members_alert: "%{org_name} 的前任成员尚未记录在案。"
+    no_search_alert: "未找到相关组织"
     search_alert:
       unit:
-        other: "search results for"
-    current: Current
-    previous: Previous
-    metrics: Metrics
-    member: member
+        other: "搜索结果"
+    current: 当前
+    previous: 上一页
+    metrics: 指标
+    member: 成员
     current_members_count:
       unit:
-        other: current members
+        other: 现任成员
     past_members_count:
       unit:
-        other: past members
+        other: 前任成员
     under_repair: 该功能目前正在修复中，以获得更好的性能。
   profile:
     thanks_title: 收到的致谢
@@ -590,12 +590,12 @@ zh-CN:
     identified_for_name: "Specimens collected by %{name} and identified by you."
     not_identified_for_name: "Specimens have not been collected by %{name} and identified by you."
     identified_for_count:
-      other: "collected specimens"
-    identifications_by: Identifications By
-    no_determiners_alert: Determiners of your collected specimens have not yet been recorded.
-    determiners_alert: "Your specimens have been identified by:"
-    determiner_name: "Specimens identified by %{name}."
-    not_determiner_name: "Specimens you collected have not been identified by %{name}."
+      other: "采集的标本"
+    identifications_by: 鉴定人
+    no_determiners_alert: 尚未记录您所采集标本的鉴定者。
+    determiners_alert: "您的标本已由以下人员鉴定："
+    determiner_name: "标本由 %{name} 鉴定。"
+    not_determiner_name: "您采集的标本尚未被 %{name} 鉴定。"
     identified_by_count:
       other: "已识别的标本"
     zenodo_html: "您的个人资料已链接至 %{zenodo}，您的认领已经进行版本管理和归档。"
@@ -608,26 +608,26 @@ zh-CN:
   roster:
     roster_title: 公共档案
     lede: "%{count} people who share their profiles and the profiles of others they revere"
-    no_one_found: No one found by the name
+    no_one_found: 未找到名为的人员。
     search_result_count:
       unit:
-        other: "search results for"
-    list: List
-    gallery: Gallery
-    signatures: Signatures
+        other: "搜索结果"
+    list: 列表
+    gallery: 图库
+    signatures: 签名
   specimen:
-    scientific_name: Scientific Name
-    collected_by: Collected By
-    identified_by: Identified By
-    date_collected: Date Collected
-    date_identified: Date Identified
-    institution: Institution
-    catalog_number: Catalog Number
-    basis_record: Basis Of Record
-    country: Country
-    family: Family
+    scientific_name: 学名
+    collected_by: 收藏者
+    identified_by: 鉴定者
+    date_collected: 采集日期
+    date_identified: 鉴定日期
+    institution: 机构
+    catalog_number: 目录编号
+    basis_record: 记录基础
+    country: 国家
+    family: 科
     type_status: Type Status
-    scribe: Scribe
+    scribe: 抄写员
     not_me: 不是我
     not_them: 不是他们
     not_recorded: 未记录
@@ -638,45 +638,45 @@ zh-CN:
     lede: "%{scribe_count} people who have attributed %{attribution_count} natural history specimens to %{recipient_count} of their peers, mentors, and role models"
   statistics:
     title: 统计数据
-    claims: Cumulative Claims
-    attributions: Cumulative Attributions
-    rejected: Cumulative Rejected Candidates
+    claims: 累积认领
+    attributions: 累积归属
+    rejected: 累计被拒绝的人选
     profiles: Cumulative Profiles Imported
-    month: Month
+    month: 月
   taxa:
     lede:
       unit:
-        other: "taxonomic Families from specimen data in GBIF"
-    search_title: Taxonomic Families
-    none_found: "No taxonomic Family found for %{searched}"
+        other: "GBIF 标本数据中的分类科"
+    search_title: 分类科
+    none_found: "未找到 %{searched} 的分类科"
     search_found:
       unit:
-        other: "search results for"
-    people: People
-    visualizations: Visualizations
-    timeline: Timeline
-    agent_strings: Agent Strings
-    collected: Collected
-    identified: Identified
+        other: "搜索结果"
+    people: 人员
+    visualizations: 可视化
+    timeline: 时间轴
+    agent_strings: 代理字符串
+    collected: 已采集
+    identified: 已识别
     number_collected:
       unit:
-        other: "people collected specimens from data in GBIF"
+        other: "从 GBIF 数据中采集标本的人员"
     number_identified:
       unit:
-        other: "people identified specimens from data in GBIF"
+        other: "GBIF 的数据中识别标本的鉴定者"
     number_agents:
       unit:
-        other: "agent strings from specimen data in GBIF"
+        other: "来自 GBIF 标本数据的代理字符串"
     number_agents_unclaimed:
       unit:
-        other: "agent strings have unclaimed specimen records from data in GBIF"
+        other: "代理字符串在 GBIF 数据中有未认领的标本记录"
     no_agents_unclaimed: 没有任何未申报或未指定的样本记录
-    alphabetical: Alphabetical
-    counts: Counts
-    unclaimed: Unclaimed
-    example_families: Random Samples
-    none_collected_identified: "No one has collected or identified %{taxon}"
-    none_collected: "No one has collected %{taxon}"
+    alphabetical: 按字母顺序
+    counts: 计数
+    unclaimed: 未认领的
+    example_families: 随机示例
+    none_collected_identified: "未有人采集或鉴定过 %{taxon}"
+    none_collected: "未有人采集过 %{taxon}"
     none_identified: "No one has identified %{taxon}"
     none_collected_timeline: "No one has collected %{taxon} and indicated a collection date"
     none_identified_timeline: "No one has identified %{taxon} and indicated a determination date"
@@ -737,48 +737,48 @@ zh-CN:
     progress: Progress
     identified_from: Identified From
     collected_from: Collected From
-    dates_collected: Dates Collected
-    dates_identified: Dates Identified
-    specimens_attributed: specimens attributed
-    collected: collected
-    identified: identified
-    not_all_columns: Not all available columns are shown.
-    map: Map
-    list: List
-    chart: Chart
-    no_specimens: Specimens have not yet been claimed or attributed.
+    dates_collected: 采集日期
+    dates_identified: 鉴定日期
+    specimens_attributed: 归属的标本
+    collected: 已采集
+    identified: 已识别
+    not_all_columns: 并未显示所有可用列。
+    map: 地图
+    list: 列表
+    chart: 图表
+    no_specimens: 标本尚未被认领或归属。
     no_specimens_filter: Specimens have not yet been claimed or attributed with this applied filter.
     stats_identified_specimens_nocountry:
       unit:
-        other: "specimens identified"
+        other: "标本鉴定"
     stats_collected_specimens_nocountry:
       unit:
-        other: "specimens collected"
+        other: "采集标本"
     stats_identified_specimens:
       unit:
         other: "specimens identified from at least"
     stats_identified_countries:
       unit:
-        other: "countries"
+        other: "国家"
     stats_collected_specimens:
       unit:
         other: "specimens collected from at least"
     stats_collected_countries:
       unit:
-        other: "countries"
+        other: "国家"
     stats_attributions_specimens:
       unit:
-        other: "specimens attributed to"
+        other: "归属的标本"
     stats_attributions_people:
       unit:
-        other: "people"
+        other: "人员"
     stats_articles_specimens:
       unit:
-        other: "specimens used in"
+        other: "标本用于"
     stats_articles_articles:
       unit:
-        other: "works"
+        other: "作品"
     specimen_icon_count:
       other: "%{coll_img} collected or %{det_img} identified %{count} specimens."
   workshops:
-    title: Workshops
+    title: 工坊
