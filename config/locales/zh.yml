@@ -520,11 +520,11 @@ zh-CN:
     update: 更新
     settings: 设置与集成
     youtube: 使用 YouTube 视频的 ID 在您的个人资料中显示视频 (例如，uxRERDmfAcw)。
-    no_science: Your specimen data have not yet been recorded in downloads from GBIF and used in new publications.
-    no_citation_alert: Your specimens were not included in a download from GBIF in support of this study.
+    no_science: 您的标本数据尚未记录在 GBIF 的下载中，也未用于新的刊物。
+    no_citation_alert: 您的标本未包括在 GBIF 为支持本研究而提供的下载中。
     has_science:
       unit:
-        other: "publications made use of your specimen data downloaded from GBIF"
+        other: "使用了从 GBIF 下载含有你的样本数据的刊物"
     identified_from: 识别自
     collected_from: 采集自
     resume: 用于您的简历
@@ -537,29 +537,29 @@ zh-CN:
     delete: 删除
     permanent_delete: 永久删除您的帐户。
     delete_warning: 您确定要删除您的账户吗？您所有的认领和所有您为他人的归属将被永久删除。
-    email_instructions: Receive email notifications of new papers that made use of data derived from the specimens you identified or collected. Make your primary email address publicly available in your ORCID account and then refresh your ORCID data above.
-    email_procedure: "Receive notification of new publications that made use of data derived from the specimens you identified or collected. Your primary, publicly available email address, %{email} comes from your ORCID account."
+    email_instructions: 接收使用来自您识别或采集的标本数据发表的新论文的电邮通知。 在您的 ORCID 帐户中公开您的主要电子邮件地址，然后刷新您的 ORCID 数据。
+    email_procedure: "接收使用您识别或采集的标本数据发表的新刊物的通知。您的主要公开电子邮件地址 %{email} 来自您的 ORCID 账户。"
     disconnect: 断开连接
-    disconnect_warning: Are you sure you want to disconnect your account from Zenodo? Your data will remain archived and accessible but no new versions will be created. If you later reconnect your account, a new data package will be created.
-    connect_zenodo: Connect your account to Zenodo where versioned snapshots of your claims will be stored and a DataCite DOI assigned. A citation will be provided for inclusion in your resume.
-    connect_zenodo_claim: Claim at least one of your specimens and return here to connect your account to Zenodo where versioned snapshots of your claims will be stored and a DataCite DOI assigned. A citation will be provided for inclusion in your resume.
-    disconnect_zenodo: Disconnect From Zenodo
-    integrate_zenodo: Integrate with Zenodo
-    zenodo_linked: Your account is now linked and data will be pushed within the hour
-    orcid_updates: Pull new updates to your publicly available name, aliases, keywords, country, education, and employment from your ORCID account.
-    refresh: Refresh
-    orcid_refreshed: ORCID data was refreshed.
-    public: Public
-    private: Private
-    active: "On"
-    inactive: "Off"
+    disconnect_warning: 您确定要断开与 Zenodo 的帐户连接吗？您的数据将保持存档和可访问状态，但不会创建新版本。如果您以后重新连接您的帐户，一个新的数据包将被创建。
+    connect_zenodo: 将您的帐户连接到Zenodo，您的认领将存储为版本化快照并分配DataCite DOI。这将提供引文以供您在简历上使用。
+    connect_zenodo_claim: 至少认领一个标本，然后返回此处将您的账户与 Zenodo 连接，Zenodo 将存储您标本认领的版本快照并分配 DataCite DOI。这将为您的简历提供引文。
+    disconnect_zenodo: 断开与 Zenodo 的连接
+    integrate_zenodo: 与 Zenodo 集成
+    zenodo_linked: 您的账户已连接，数据将在一小时内推送
+    orcid_updates: 从您的 ORCID 账户中获取您的公开姓名、别名、关键字、国家、学历和工作的新更新。
+    refresh: 刷新
+    orcid_refreshed: ORCID 数据已刷新。
+    public: 公开
+    private: 隐私模式
+    active: "开"
+    inactive: "关闭"
     make_public_message: 包括您在公开的个人档案中的账户。您的请求将包含在批量数据下载中，通过谷歌Chrome和Firefox扩展显示。
-    no_candidates_alert: Bionomia did not find any specimens indexed by GBIF that you may have collected or identified.
-    ignored_alert: Specimen records you marked as "Not me" will appear here.
-    scribe_not_helped: This Bionomia scribe has not yet helped you claim specimens.
-    upload_error: Please upload an image less than 5MB in size.
-    bulk_claim: Bulk Claim
-    advanced_search: Advanced Search & Filter
+    no_candidates_alert: Bionomia 没有在 GBIF 索引中找到任何您可能采集或鉴定过的标本。
+    ignored_alert: 您标记为 "不是我 "的标本记录将出现在这里。
+    scribe_not_helped: 这位 Bionomia 抄写员尚未帮助您认领标本。
+    upload_error: 请上传小于 5MB 的图像。
+    bulk_claim: 批量认领
+    advanced_search: 高级搜索与筛选
     no_specimens_filter: You have not yet claimed any specimens with this applied filter. See your candidate specimen records on the Discovered page.
     no_specimens: You have not yet claimed any specimens. See your candidate specimen records on the Discovered page.
     candidate_count:
