@@ -421,7 +421,7 @@ zh-CN:
     stats: 统计数据
     downloads: 下载
   not_authorized:
-    not_authorized: Not authorized or session terminated.
+    not_authorized: 未授权或会话终止。
   occurrence:
     occurrence_title: 标本记录
     lede: 从 GBIF 获取的部分数据
@@ -462,7 +462,7 @@ zh-CN:
     collected_by: "采集或鉴定标本的人员"
     science_enabled: 科学启用
     impact: 对其他组织活动的影响
-    no_metric_alert: "Current and previous personnel have not yet claimed or have been attributed specimens now curated at other organizations while they were affiliated with %{org_name}."
+    no_metric_alert: "现任和前任人员在隶属于 %{org_name} 时，尚未认领或已将标本归属于其他组织。"
     metric_alert: "现任和前任人员在隶属于 %{org_name} 期间已认领或被归属于以下组织管理的标本。"
     none_collected_alert: "在 %{year} 采集或鉴定并在其他地方管理的标本尚未被认领或归属。"
     all_years: 所有年份
