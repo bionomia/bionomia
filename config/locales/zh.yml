@@ -578,17 +578,17 @@ zh-CN:
     upload_view_html: "%{view} 您所有的认领。"
     co_collectors: 共同采集者
     no_co_collectors_alert: 共同采集者尚未记录在案。
-    co_collectors_alert: "You have collected with:"
-    co_collector_name: "Specimens co-collected with %{name}."
-    switch: View theirs
-    not_co_collector_name: "Specimens have not been co-collected with %{name}."
+    co_collectors_alert: "您已与此人共同采集："
+    co_collector_name: "与 %{name} 共同采集的标本。"
+    switch: 查看他们的
+    not_co_collector_name: "标本未与 %{name} 共同采集。"
     co_collected_count:
-      other: "co-collected specimens"
-    identified_for: Identified For
-    no_identified_for_alert: Recipients of your determinations have not yet been recorded.
-    identified_for_alert: "Choose a collector to adjust attributions made for specimens collected by them and identified by you."
-    identified_for_name: "Specimens collected by %{name} and identified by you."
-    not_identified_for_name: "Specimens have not been collected by %{name} and identified by you."
+      other: "共同采集的标本"
+    identified_for: 为识别
+    no_identified_for_alert: 您为其进行物种分类的人尚未记录在案。
+    identified_for_alert: "选择一位采集者，调整由其采集并由您鉴定的标本的归属。"
+    identified_for_name: "由 %{name} 采集并由您鉴定的标本。"
+    not_identified_for_name: "标本尚未被 %{name} 采集，且未被您识别。"
     identified_for_count:
       other: "采集的标本"
     identifications_by: 鉴定人
@@ -607,7 +607,7 @@ zh-CN:
     attributed: 归属
   roster:
     roster_title: 公共档案
-    lede: "%{count} people who share their profiles and the profiles of others they revere"
+    lede: "%{count} 人已分享自己和所推崇的人的简介"
     no_one_found: 未找到名为的人员。
     search_result_count:
       unit:
@@ -626,7 +626,7 @@ zh-CN:
     basis_record: 记录基础
     country: 国家
     family: 科
-    type_status: Type Status
+    type_status: 类型状态
     scribe: 抄写员
     not_me: 不是我
     not_them: 不是他们
@@ -635,13 +635,13 @@ zh-CN:
     mismatch: 与寿命不匹配
   scribes:
     scribes_title: 抄写员
-    lede: "%{scribe_count} people who have attributed %{attribution_count} natural history specimens to %{recipient_count} of their peers, mentors, and role models"
+    lede: "%{scribe_count} 名抄写员已将 %{attribution_count} 自然历史标本归功于 %{recipient_count} 同行、导师和榜样的人"
   statistics:
     title: 统计数据
     claims: 累积认领
     attributions: 累积归属
     rejected: 累计被拒绝的人选
-    profiles: Cumulative Profiles Imported
+    profiles: 累计导入简介
     month: 月
   taxa:
     lede:
@@ -677,66 +677,66 @@ zh-CN:
     example_families: 随机示例
     none_collected_identified: "未有人采集或鉴定过 %{taxon}"
     none_collected: "未有人采集过 %{taxon}"
-    none_identified: "No one has identified %{taxon}"
-    none_collected_timeline: "No one has collected %{taxon} and indicated a collection date"
-    none_identified_timeline: "No one has identified %{taxon} and indicated a determination date"
-    no_agents: "No agents have collected or identified %{taxon}"
-    taxon_string: Taxon Family
-    start_year: Start Year
-    end_year: End Year
-    user_title: "%{taxon} Collectors or Determiners"
-    agent_count_title: "%{taxon} Agent Counts"
-    agent_unclaimed_title: "%{taxon} Agent Unclaimed"
-    agents_title: "%{taxon} Agents"
+    none_identified: "未有人识别过 %{taxon}"
+    none_collected_timeline: "尚未有人采集 %{taxon} 并注明采集日期"
+    none_identified_timeline: "尚未有人识别 %{taxon} 并注明识别日期"
+    no_agents: "尚未有人采集或识别过 %{taxon}"
+    taxon_string: 分类科
+    start_year: 起始年份
+    end_year: 结束年份
+    user_title: "%{taxon} 采集者或鉴定者"
+    agent_count_title: "%{taxon} 代理计数"
+    agent_unclaimed_title: "代理未认领 %{taxon}"
+    agents_title: "%{taxon} 代理"
   user:
-    caches_rebuilt: Caches were rebuilt.
-    overview: Overview
-    specialties: Specialties
-    network: Network
-    deposited_at: Deposited At
-    specimens: Specimens
-    science_enabled: Science Enabled
-    science_enabled_specimens: Science Enabled by Specimen Data
-    helped_by: Helped By
-    strings: Collector Strings
-    helped: People Helped
-    no_scribe: Specimens have not been attributed by a scribe.
-    attributions_by: "Attributions made by:"
+    caches_rebuilt: 重建了高速缓存。
+    overview: 概览
+    specialties: 专业
+    network: 网络
+    deposited_at: 存放于
+    specimens: 标本
+    science_enabled: 科学启用
+    science_enabled_specimens: 标本数据启用的科学
+    helped_by: 得到帮助
+    strings: 采集者字符串
+    helped: 帮助过的人
+    no_scribe: 标本尚未被抄写员归属。
+    attributions_by: "由下列人士作出的归因："
     private: 档案资料尚不可公开。
     private_with_claims:
       unit:
         other: "一个\n标本已被认领或归属，但该档案尚未公开。\n其他\n标本已被认领或归属，但该档案尚不可公开。"
-    no_specimens_cited: Specimens have not been included in downloads from GBIF and cited in this research article.
-    specimen_used: Specimen Data Used In
+    no_specimens_cited: 本研究文章中引用的标本未包括从 GBIF 下载的标本。
+    specimen_used: 标本数据用于
     no_publications: 使用包括了从GBIF下载的样本记录的出版物尚未记录在案。
     publication_count:
       unit:
         other: "使用了从GBIF下载的样本数据的出版物"
-    no_co_collectors_alert: Co-collectors have not yet been recorded.
-    co_collectors_alert: "Has collected with:"
-    co_collectors: Co-collectors
-    identified_for: Identified For
-    identifications_by: Identifications By
+    no_co_collectors_alert: 共同采集者尚未记录在案。
+    co_collectors_alert: "与此人共同采集："
+    co_collectors: 共同采集者
+    identified_for: 为识别
+    identifications_by: 鉴定人
     no_identifications_by_alert: 对采集标本的鉴定尚未记录在案。
-    identifications_by_alert: "Has collected specimens later identified by:"
+    identifications_by_alert: "采集的标本后来由下列人员识别："
     no_identified_for_alert: 对他人采集标本的鉴定尚未记录在案。
-    identified_for_alert: "Has identified specimens collected by:"
+    identified_for_alert: "鉴定了由以下人员采集的标本："
     comment_alert: 分享一个有关采集历程、事件或任何其它事情的趣闻。
     no_institutions_alert: 尚未记录的机构。
     institutions_alert: "在下列机构存放和管理的标本："
-    organizations: organizations
-    specimens_metric: specimens
-    specimens_identified: Specimens Identified
-    specimens_collected: Specimens Collected
-    no_specialities_alert: Specialties have not yet been recorded.
-    specialties_alert: "Collected or identified specimens in the following Families:"
-    families_collected: Families Collected
-    families_identified: Families Identified
-    no_claims_alert: Claims or attributions have not yet been recorded.
-    no_helped_alert: Attributions have not yet been made.
-    progress: Progress
-    identified_from: Identified From
-    collected_from: Collected From
+    organizations: 组织
+    specimens_metric: 标本
+    specimens_identified: 已识别标本
+    specimens_collected: 采集的标本
+    no_specialities_alert: 尚未记录专业。
+    specialties_alert: "采集或鉴定以下分类科的标本："
+    families_collected: 采集的分类科
+    families_identified: 已识别的分类科
+    no_claims_alert: 认领或归属尚未记录在案。
+    no_helped_alert: 尚未归属。
+    progress: 进度
+    identified_from: 识别自
+    collected_from: 采集自
     dates_collected: 采集日期
     dates_identified: 鉴定日期
     specimens_attributed: 归属的标本
