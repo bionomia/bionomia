@@ -747,7 +747,7 @@ zh-CN:
     list: 列表
     chart: 图表
     no_specimens: 标本尚未被认领或归属。
-    no_specimens_filter: Specimens have not yet been claimed or attributed with this applied filter.
+    no_specimens_filter: 此应用过滤器未找到任何认领或归属的标本。
     stats_identified_specimens_nocountry:
       unit:
         other: "标本鉴定"
@@ -756,13 +756,13 @@ zh-CN:
         other: "采集标本"
     stats_identified_specimens:
       unit:
-        other: "specimens identified from at least"
+        other: "标本鉴定至少从"
     stats_identified_countries:
       unit:
         other: "国家"
     stats_collected_specimens:
       unit:
-        other: "specimens collected from at least"
+        other: "标本采集至少从"
     stats_collected_countries:
       unit:
         other: "国家"
@@ -779,6 +779,6 @@ zh-CN:
       unit:
         other: "作品"
     specimen_icon_count:
-      other: "%{coll_img} collected or %{det_img} identified %{count} specimens."
+      other: "%{coll_img} 采集或 %{det_img} 鉴定 %{count} 标本。"
   workshops:
     title: 工坊
