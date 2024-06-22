@@ -577,7 +577,7 @@ zh-CN:
     upload_view: 查看
     upload_view_html: "%{view} 您所有的认领。"
     co_collectors: 共同采集者
-    no_co_collectors_alert: Co-collectors have not yet been recorded.
+    no_co_collectors_alert: 共同采集者尚未记录在案。
     co_collectors_alert: "You have collected with:"
     co_collector_name: "Specimens co-collected with %{name}."
     switch: View theirs
