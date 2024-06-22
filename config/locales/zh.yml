@@ -560,23 +560,23 @@ zh-CN:
     upload_error: 请上传小于 5MB 的图像。
     bulk_claim: 批量认领
     advanced_search: 高级搜索与筛选
-    no_specimens_filter: You have not yet claimed any specimens with this applied filter. See your candidate specimen records on the Discovered page.
-    no_specimens: You have not yet claimed any specimens. See your candidate specimen records on the Discovered page.
+    no_specimens_filter: 您尚未认领任何使用此过滤器的标本。请在 "发现 "页面查看您的候选标本记录。
+    no_specimens: 您尚未认领任何标本。请在 "发现 "页面查看您的候选标本记录。
     candidate_count:
-      other: "Found %{count} specimens."
-    latest_helped: "Latest at %{time}"
+      other: "找到 %{count} 标本。"
+    latest_helped: "最新时间为 %{time}"
     attributed_count:
-      other: "specimens attributed"
+      other: "归属的标本"
     attributions: 属性已生成
-    private_message_html: "Your profile is private. Claim your %{specimens} and then make it public in %{settings} to maximize reuse."
-    no_claims_html: "Claim your discovered specimens under the %{specimens} tab to build your profile and start tracking your citations. Acknowledge your peers, mentors, or anyone who inspires you by attributing specimens under %{help_others}."
-    try_again: Try again.
+    private_message_html: "您的个人资料处于隐私模式。请认领您的 %{specimens}，然后在 %{settings} 中将其公开，以便最大限度地重复使用。"
+    no_claims_html: "在 %{specimens} 标签下添加您发现的标本，以建立您的个人资料并开始跟踪您的引用情况。在 %{help_others} 标签下标本归属，以感谢您的同行、导师或任何激励过您的人。"
+    try_again: 请重试。
     upload_count:
-      other: "A total of %{count} records were handled."
-    upload_skipped: Existing claims, if present in your upload, were skipped.
-    upload_view: View
-    upload_view_html: "%{view} all your claims."
-    co_collectors: Co-collectors
+      other: "共处理了 %{count} 条记录。"
+    upload_skipped: 现有认领（如果存在于您的上传中）将被跳过。
+    upload_view: 查看
+    upload_view_html: "%{view} 您所有的认领。"
+    co_collectors: 共同采集者
     no_co_collectors_alert: Co-collectors have not yet been recorded.
     co_collectors_alert: "You have collected with:"
     co_collector_name: "Specimens co-collected with %{name}."
