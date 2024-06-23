@@ -145,11 +145,11 @@ zh-CN:
     no_users_alert: 此数据集的标本尚未被认领或归属
     users_alert:
       unit:
-        other: "people claimed or were attributed specimens represented in this dataset"
+        other: "此数据集中已认领或被归属标本的人"
     timeline: 时间轴
-    none_collected_timeline: "No one has collected and indicated a collection date"
-    none_identified_timeline: "No one has identified and indicated a determination date"
-    not_all_features: Large dataset, not all features are available.
+    none_collected_timeline: "尚未有人收集并注明收集日期"
+    none_identified_timeline: "尚未有人鉴定并注明鉴定日期"
+    not_all_features: 大型数据集，无法提供所有功能。
     badge_tooltip: 点击这里获取此徽章的链接 。
     badge_modal: Bionomia 数据集徽章。
   date:
@@ -192,9 +192,9 @@ zh-CN:
     not_allowed: 无权访问
   developer:
     search: 搜索
-    autocomplete_widget: Autocomplete Widget
-    json_ld_search: JSON-LD Search for People
-    json_ld_occurrence_search: JSON-LD Search for Occurrences
+    autocomplete_widget: 自动完成小部件
+    json_ld_search: 用于搜索人员的 JSON-LD
+    json_ld_occurrence_search: 用于搜索出现记录的 JSON-LD
     structured_data: 结构化数据
     raw_data: 原始数据
     code: 代码
@@ -203,16 +203,16 @@ zh-CN:
     title: 面向开发人员
     code_title: "面向开发人员：代码"
     clients: 客户资料库
-    parser: Parse Names
-    parse_names: Parse Human Names
-    parse_names_title: "For Developers: Parse Names"
+    parser: 解析名称
+    parse_names: 解析姓名
+    parse_names_title: "至开发者: 解析名称"
     structured_data_title: "面向开发人员：结构化数据"
-    search_title: "For Developers: Search"
+    search_title: "至开发者: 搜索"
     client_title: "开发者: 客户资料库"
   donate:
     donate_title: 赞助
     lede: 您的一次性或定期捐赠将有助于数据管道（data pipeline）的完成，并确保尽可能快速、无缝地捐赠与自然博物收藏。
-    campaign: Campaign
+    campaign: 捐款活动
     donor_wall: 感恩墙
   donor_wall:
     donor_wall_title: 感恩墙
@@ -236,8 +236,8 @@ zh-CN:
     submit: 提交
     upload_csv_instructions: 上传包含认领的 csv
     download_records: 下载已发现的记录
-    download_alert: "Download discovered specimen records, work offline, then upload new claims as a csv. A file containing at most %{num_records} records is generated. If you have many more than this, you may work in batches. This routine does not update underlying specimen data nor does it update existing claims. If existing claims are present in the upload, these will be skipped. Your uploaded csv must use a comma to separate columns each optionally enclosed by quotes."
-    search_dropdown_no_users: "Your search turned up 0 results."
+    download_alert: "下载发现的标本记录，离线工作，然后再以 csv 格式上传新的声明。这将产生最多包含 %{num_records} 记录的文件。若您有更多记录，您可以分批处理。此例程不会更新基础标本数据，也不会更新现有声明。若上传中存在现有声明，这些声明将被跳过。您上传的 csv 必须使用逗号分隔列，每列可选地用引号括起来。"
+    search_dropdown_no_users: "您的搜索未找到任何结果。"
     reset: 重置
     remove: 移除
     filtered_by: 筛选条件
@@ -247,13 +247,13 @@ zh-CN:
   help:
     ignored_title: "帮助 %{name} 归属被忽略的内容"
     upload_user_title: "%{name} 的批量上传"
-    help_user_title: "Help Attribute Specimens for %{name}"
-    help_title: Help Attribute Specimens
+    help_user_title: "为 %{name} 归属标本"
+    help_title: 帮助属性标本
     roster_title: 帮助属性标本
     country_title: 按国家划分的帮助属性标本
     latest_title: 最新收件人
     country_name_title: "为来自 %{country} 的人员归属标本"
-    country_no_one: "No one found from"
+    country_no_one: "没有找到来自"
     advanced_search_title: "高级搜索与筛选"
     fix_title: 帮助修复归属
     upload_title: 上载
@@ -306,479 +306,479 @@ zh-CN:
     identified_from: 识别自
     collected_from: 采集自
     no_filter_alert: Bionomia 记录员尚未在此筛选条件下归属标本。
-    not_helped_alert: Bionomia scribes have not yet helped attribute specimens.
+    not_helped_alert: Bionomia 记录员尚未归属标本。
     upload_message:
       unit:
-        other: "records were handled. Existing claims, if present in your upload, were skipped."
-    help_question: "Want to help attribute specimens to %{name}?"
-    try_again: Try again.
-    no_specialities_alert: Bionomia scribes have not yet helped attribute specimens.
-    specialties_alert: "Collected or identified specimens in the following Families:"
-    co-collectors: Co-collectors
-    no_co_collectors_alert: Co-collectors have not yet been recorded.
-    co_collectors_alert: "Choose a co-collector to adjust attributions made for specimens in common."
-    co_collector_name: "Specimens co-collected with %{name}."
+        other: "记录已处理。如果您的上传中存在现有的认领，这些认领已被跳过。"
+    help_question: "想要帮助将标本归属给 %{name} 吗？"
+    try_again: 请重试。
+    no_specialities_alert: Bionomia 记录员尚未归属标本。
+    specialties_alert: "收集或鉴定以下分类科的标本："
+    co-collectors: 共同收集者
+    no_co_collectors_alert: 尚未记录共同收集者。
+    co_collectors_alert: "选择一位共同采集者来调整共同标本的归属。"
+    co_collector_name: "与 %{name} 共同采集的标本。"
     switch: 切换
     not_co_collector_name: "标本未与 %{name} 共同采集"
     identified_for: 为识别
-    no_identified_for_alert: Recipients of determinations have not yet been recorded.
-    identified_for_alert: "Choose a collector to adjust attributions made for specimens collected by them."
-    identified_for_name: "Specimens collected by %{name} and identified by %{other_name}."
-    not_identified_for_name: "Specimens have not been collected by %{name} and identified by %{other_name}."
+    no_identified_for_alert: 尚未有鉴定接收者的记录。
+    identified_for_alert: "选择一位采集者来调整标本的归属。"
+    identified_for_name: "由 %{name} 采集并由 %{other_name} 鉴定的标本。"
+    not_identified_for_name: "标本尚未被 %{name} 采集，且未被 %{other_name} 识别。"
     identified_for_count:
-      other: "collected specimens"
-    identifications_by: Identifications By
-    no_determiners_alert: Determiners have not yet been recorded.
-    determiners_alert: "Choose a determiner to adjust attributions made for specimens identified by them."
-    determiner_name: "Specimens identified by %{name} and collected by %{other_name}."
-    not_determiner_name: "Specimens have not been identified by %{name} and collected by %{other_name}."
+      other: "采集的标本"
+    identifications_by: 识别者
+    no_determiners_alert: 尚未记录识别者。
+    determiners_alert: "选择一位识别者来调整由他们鉴定的标本的归属。"
+    determiner_name: "由 %{name} 识别并由 %{other_name} 采集的标本。"
+    not_determiner_name: "标本尚未被 %{name} 识别，且未被 %{other_name} 采集。"
     identified_by_count:
-      other: "identified specimens"
-    bulk_attribution: Bulk Attributions
-    reclaim_ignored: Reclaim Ignored
-    fix_claims: Fix Attributions
-    discovered: Discovered
-    support_alert: The following scribes have attributed specimens.
-    advanced_search: Advanced Search & Filter
-    less_exact: Make less exact
-    no_unclaimed: Bionomia did not find any unclaimed specimens.
-    close: Close
-    add_person: Add a Person
-    add_orcid_wikidata: Add ORCID Identifier or Wikidata Q Number
+      other: "已识别的标本"
+    bulk_attribution: 批量归属
+    reclaim_ignored: 回归被忽略的归属
+    fix_claims: 修正归属
+    discovered: 发现
+    support_alert: 以下记录员已归属标本。
+    advanced_search: 高级搜索与筛选
+    less_exact: 降低精确度
+    no_unclaimed: Bionomia 没找到任何未认领的标本。
+    close: 关闭
+    add_person: 添加人员
+    add_orcid_wikidata: 添加 ORCID 标识符或 Wikidata Q 号
     attribute_count:
-      other: Help attribute %{count} specimens.
+      other: 帮助归属 %{count} 个标本
     specimens_attributed_count:
-      other: specimens attributed
-    download: Download
-    download_label: Download discovered records
-    upload_label: Upload csv with claims
-    choose_instructions_html: "Choose %{coll_img} collected, %{det_img} identified, or Both."
+      other: 归属的标本
+    download: 下载
+    download_label: 下载发现的记录
+    upload_label: 上传包含声明的 csv
+    choose_instructions_html: "选择 %{coll_img} 收集的、%{det_img} 鉴定的，或两者。"
     search_count:
-      other: "%{count} search results for %{search}"
-    make_public_yes: "Yes, Make Public"
-    other_scribes: "Other scribes have also helped attribute %{user_name}'s specimens:"
-    no_scribes: "No other scribes have helped attribute %{user_name}'s specimens."
-    make_public_question: "Would you like to make %{user_name}'s profile publicly available?"
-    view_public_html: "View the public %{href}"
-    view_public_href: "profile"
-    now_public_html: "Thank you for your help! The profile for %{person} is now visible to the public."
-    do_you_know: Do you know
-    no_one_found: "No one found by the name %{name}."
-    add_someone_html: "See how to %{href}."
-    add_someone_href: "add someone"
+      other: "共找到 %{count} 条与 %{search} 有关的搜索结果"
+    make_public_yes: "是的，公开。"
+    other_scribes: "其他记录员也帮助归属了 %{user_name} 的标本："
+    no_scribes: "没有其他记录员帮助归属 %{user_name} 的标本。"
+    make_public_question: "您是否希望将 %{user_name} 的个人资料公开？"
+    view_public_html: "查看公开的 %{href}"
+    view_public_href: "个人资料"
+    now_public_html: "感谢您的帮助！现在 %{person} 的个人资料已经公开。"
+    do_you_know: 您知道吗？
+    no_one_found: "未找到名为 %{name} 的人员。"
+    add_someone_html: "查看如何 %{href}。"
+    add_someone_href: "添加某人"
     co_collected_count:
-      other: "co-collected specimens"
-    occurrence_title: Help Others By Specimen Record
-    occurrence: Specimens
-    occurrence_advance_message: Co-collected specimen records. Use the right arrow key on your keyboard or the arrow on the screen to advance a record until you receive one that you may attribute.
+      other: "共同采集的标本"
+    occurrence_title: 通过标本记录帮助他人
+    occurrence: 标本
+    occurrence_advance_message: 共同采集的标本记录。使用键盘上的右箭头键或屏幕上的箭头键来逐个查看记录，直到找到您可以归属的记录。
   home:
-    tagline: Link natural history specimens to the world's collectors.
-    get_started: Get started
-    your_profile: Your profile
-    sample_profiles: Today's Featured Collectors
-    orcid_login: Log in with ORCID
-    orcid_logo: ORCID logo
+    tagline: 链接自然历史样本与全球的收藏家。
+    get_started: 开始
+    your_profile: 您的个人资料
+    sample_profiles: 今日精选收藏家
+    orcid_login: 使用ORCID登录
+    orcid_logo: ORCID 标志
   layout:
-    profiles: Profiles
-    scribes: Scribes
-    organizations: Organizations
-    datasets: Datasets
-    articles: Articles
-    countries: Countries
-    taxa: Families
-    agent_strings: Agent Strings
-    help_others: Help Others
-    help_received: Help Received
-    people_helped: People Helped
-    toggle_dropdown: Toggle Dropdown
-    overview: Overview
-    specimens: Specimens
-    discovered: Discovered
-    science_enabled: Science enabled
-    settings: Settings
-    administration: Administration
-    logout: Logout
-    resources: Resources
-    integrations: Integrations
-    for_developers: For Developers
-    for_data_managers: For Data Managers
-    policies: Policies
-    privacy: Privacy Policy
-    terms_service: Terms of Service
-    on_this_day: On This Day
-    about: About
-    rationale: Rationale
-    how_works: How it Works
-    history: History
-    feedback: Feedback
-    support: Donate
-    help: Help Documents
-    tools: Tools
-    parse: Parse Names
-    reconcile: Reconcile Names
-    acknowledgments: Acknowledgments
-    workshops: Workshops
-    stats: Statistics
-    downloads: Downloads
+    profiles: 个人资料
+    scribes: 抄写员
+    organizations: 组织
+    datasets: 数据集
+    articles: 文集
+    countries: 国家
+    taxa: 科
+    agent_strings: 代理字符串
+    help_others: 帮助他人
+    help_received: 得到帮助
+    people_helped: 已帮助过的人
+    toggle_dropdown: 收起下拉列表
+    overview: 概览
+    specimens: 标本
+    discovered: 发现
+    science_enabled: 科学启用
+    settings: 设置
+    administration: 管理界面
+    logout: 登出
+    resources: 资源
+    integrations: 集成
+    for_developers: 开发人员适用
+    for_data_managers: 对于数据管理员
+    policies: 政策
+    privacy: 隐私政策
+    terms_service: 服务条款
+    on_this_day: 往昔今日
+    about: 关于
+    rationale: 原理
+    how_works: 工作原理
+    history: 历史记录
+    feedback: 反馈
+    support: 捐赠
+    help: 帮助文档
+    tools: 工具
+    parse: 解析姓名
+    reconcile: 对帐姓名
+    acknowledgments: 鸣谢
+    workshops: 工坊
+    stats: 统计数据
+    downloads: 下载
   not_authorized:
-    not_authorized: Not authorized or session terminated.
+    not_authorized: 未授权或会话终止。
   occurrence:
-    occurrence_title: Specimen Record
-    lede: From partial data obtained from GBIF
-    record: Record
-    event: Event
-    identification: Identification
-    location: Location
-    has_image: Has Image
+    occurrence_title: 标本记录
+    lede: 从 GBIF 获取的部分数据
+    record: 记录
+    event: 活動
+    identification: 识别
+    location: 位置
+    has_image: 包含图像
     not_them: 不归于他们
   offline:
-    message: Bionomia is currently offline, refreshing data from the Global Biodiversity Information Facility.
+    message: Bionomia 目前离线，正在从全球生物多样性信息机构 (GBIF) 刷新数据。
     warning: "%{datetime_off} Bionomia 将离线 %{duration} ，以刷新来自全球生物多样性信息设施的数据。"
   on_this_day:
-    global_title: On This Day
-    born_title: Collector Born On This Day
-    died_title: Collector Died On This Day
-    collected_title: Collected On This Day
-    collector_born: Collector Born
-    collector_died: Collector Died
-    type_collected: Type Specimens Collected
-    none_died_alert: "No one found who died on %{date}"
-    none_born_alert: "No one found who was born on %{date}"
-    limit_alert: Results limited to 50 holotype specimen records
-    no_types_alert: "No type specimens found collected on %{date}"
+    global_title: 往昔今日
+    born_title: 今天出生的采集者
+    died_title: 今天逝世的采集者
+    collected_title: 此日采集的
+    collector_born: 收藏家出生于
+    collector_died: 收藏家逝世
+    type_collected: 收集的模式标本
+    none_died_alert: "没有找到在 %{date} 逝世的人"
+    none_born_alert: "没有找到在 %{date} 出生的人"
+    limit_alert: 结果仅限50个正模式标本记录
+    no_types_alert: "没找到在 %{date} 被采集的标本"
   oops:
-    not_found_title: Not found
-    not_found: We looked everywhere but could not find that page.
-    error_title: Error
-    error: Sorry, we experienced an error.
+    not_found_title: 未找到
+    not_found: 无法找到该页面。
+    error_title: 错误
+    error: 抱歉，我们遇到了一个错误。
   organization:
-    organization_title: Organizations
+    organization_title: 组织
     lede:
       unit:
-        other: "organizations from ORCID accounts and Wikidata entries"
-    placeholder: Canadian Museum of Nature
-    affiliation_none_alert: Publications based on specimens collected or identified by current and previous personnel have not yet been recorded by GBIF
-    affiliation_alert: "%{count} publications used specimen data downloaded from GBIF based on specimens collected or identified by current and previous personnel while affiliated with %{org_name}"
-    collected_by: "Specimens collected or identified by:"
-    science_enabled: Science Enabled
-    impact: Impact on Activities in Other Organizations
-    no_metric_alert: "Current and previous personnel have not yet claimed or have been attributed specimens now curated at other organizations while they were affiliated with %{org_name}."
-    metric_alert: "Current and previous personnel have claimed or were attributed specimens now curated at the following organizations while affiliated with %{org_name}."
-    none_collected_alert: "Specimens collected or identified in %{year} by personnel and curated elsewhere have not yet been claimed or attributed."
-    all_years: All Years
-    specimens: specimens
-    organizations: organizations
-    specimens_identified: Specimens Identified
-    specimens_collected: Specimens Collected
-    no_current_members_alert: "Current members of %{org_name} have not yet been recorded."
-    no_previous_members_alert: "Previous members of %{org_name} have not yet been recorded."
-    no_search_alert: "No organizations found for"
+        other: "来自 ORCID 账户和 Wikidata 条目的组织机构"
+    placeholder: 加拿大自然博物馆
+    affiliation_none_alert: GBIF 尚未记录基于现任和前任人员采集或鉴定的标本的刊物
+    affiliation_alert: "%{count} 刊物使用了从 GBIF 下载的标本数据，这些数据基于现任和前任人员在隶属于 %{org_name} 时采集或鉴定的标本。"
+    collected_by: "采集或鉴定标本的人员"
+    science_enabled: 科学启用
+    impact: 对其他组织活动的影响
+    no_metric_alert: "现任和前任人员在隶属于 %{org_name} 时，尚未认领或已将标本归属于其他组织。"
+    metric_alert: "现任和前任人员在隶属于 %{org_name} 期间已认领或被归属于以下组织管理的标本。"
+    none_collected_alert: "在 %{year} 采集或鉴定并在其他地方管理的标本尚未被认领或归属。"
+    all_years: 所有年份
+    specimens: 标本
+    organizations: 组织
+    specimens_identified: 标本鉴定
+    specimens_collected: 采集标本
+    no_current_members_alert: "%{org_name} 的现有成员尚未记录。"
+    no_previous_members_alert: "%{org_name} 的前任成员尚未记录在案。"
+    no_search_alert: "未找到相关组织"
     search_alert:
       unit:
-        other: "search results for"
-    current: Current
-    previous: Previous
-    metrics: Metrics
-    member: member
+        other: "搜索结果"
+    current: 当前
+    previous: 上一页
+    metrics: 指标
+    member: 成员
     current_members_count:
       unit:
-        other: current members
+        other: 现任成员
     past_members_count:
       unit:
-        other: past members
+        other: 前任成员
     under_repair: 该功能目前正在修复中，以获得更好的性能。
   profile:
-    thanks_title: Thanks Received
-    candidates_title: Unclaimed Specimens
-    ignored_title: Ignored
-    specimens_title: Specimens
-    support_title: Help Received
-    upload_title: Upload
-    helped_title: People Helped
-    citation_title: Citation
-    citations_title: Citations
-    overview: Overview
-    specimens: Specimens
-    people_helped: People Helped
-    science_enabled: Science Enabled
-    claimed: Claimed
-    discovered: Discovered
-    upload: Upload
-    ignored: Ignored
-    help_received: Help Received
-    helped: Helped
-    helped_alert: You helped attribute specimens to the following people, with the most recent shown first.
-    not_helped_alert: You have not yet attributed specimens to anyone.
-    no_help_alert: Bionomia scribes have not yet helped you claim specimens.
-    thanks_alert: Bionomia scribes have helped you claim specimens. Send them your appreciation.
-    thanks_received: Thanks Received
-    thanks_received_alert: You have received thanks for attributing specimens.
-    no_thanks_received_alert: You have not yet received thanks for attributing specimen records to other collectors. Have you tried helping others?
-    change_photo: Change profile photo
-    remove: Remove
-    cancel: Cancel
-    update: Update
-    settings: Settings & Integrations
-    youtube: Use a YouTube ID for a video to appear in your profile (eg uxRERDmfAcw).
-    no_science: Your specimen data have not yet been recorded in downloads from GBIF and used in new publications.
-    no_citation_alert: Your specimens were not included in a download from GBIF in support of this study.
+    thanks_title: 收到的致谢
+    candidates_title: 未认领的标本
+    ignored_title: 已忽略
+    specimens_title: 标本
+    support_title: 得到帮助
+    upload_title: 上载
+    helped_title: 已帮助过的人
+    citation_title: 引用
+    citations_title: 引用
+    overview: 概览
+    specimens: 标本
+    people_helped: 已帮助过的人
+    science_enabled: 科学启用
+    claimed: 已认领
+    discovered: 发现
+    upload: 上载
+    ignored: 已忽略
+    help_received: 得到帮助
+    helped: 已帮助
+    helped_alert: 您已将标本归属于以下人员，最近的显示在前：
+    not_helped_alert: 您尚未将样本归于任何人。
+    no_help_alert: Bionomia记录员尚未帮助您认领标本。
+    thanks_alert: Bionomia 记录员已帮助您认领了标本。向他们表达您的谢意。
+    thanks_received: 收到的致谢
+    thanks_received_alert: 您已因归纳标本而收到感谢。
+    no_thanks_received_alert: 您尚未收到关于将标本记录归属于其他收藏家的谢意。您是否尝试帮助他人？
+    change_photo: 更换头像
+    remove: 移除
+    cancel: 取消
+    update: 更新
+    settings: 设置与集成
+    youtube: 使用 YouTube 视频的 ID 在您的个人资料中显示视频 (例如，uxRERDmfAcw)。
+    no_science: 您的标本数据尚未记录在 GBIF 的下载中，也未用于新的刊物。
+    no_citation_alert: 您的标本未包括在 GBIF 为支持本研究而提供的下载中。
     has_science:
       unit:
-        other: "publications made use of your specimen data downloaded from GBIF"
-    identified_from: Identified From
-    collected_from: Collected From
-    resume: For Your Resume
+        other: "使用了从 GBIF 下载含有你的样本数据的刊物"
+    identified_from: 识别自
+    collected_from: 采集自
+    resume: 用于您的简历
     specimens_used: specimens used
-    public_availability: Public Availability
-    public_profile: Public Profile
-    make_citable: Make Your Data Citable
-    email_notifications: Email Notifications
-    delete_account: Delete Your Account
-    delete: Delete
-    permanent_delete: Permanently delete your account.
-    delete_warning: Are you sure you want to delete your account? All your claims AND all the attributions you have made for others will be permanently removed.
-    email_instructions: Receive email notifications of new papers that made use of data derived from the specimens you identified or collected. Make your primary email address publicly available in your ORCID account and then refresh your ORCID data above.
-    email_procedure: "Receive notification of new publications that made use of data derived from the specimens you identified or collected. Your primary, publicly available email address, %{email} comes from your ORCID account."
-    disconnect: Disconnect
-    disconnect_warning: Are you sure you want to disconnect your account from Zenodo? Your data will remain archived and accessible but no new versions will be created. If you later reconnect your account, a new data package will be created.
-    connect_zenodo: Connect your account to Zenodo where versioned snapshots of your claims will be stored and a DataCite DOI assigned. A citation will be provided for inclusion in your resume.
-    connect_zenodo_claim: Claim at least one of your specimens and return here to connect your account to Zenodo where versioned snapshots of your claims will be stored and a DataCite DOI assigned. A citation will be provided for inclusion in your resume.
-    disconnect_zenodo: Disconnect From Zenodo
-    integrate_zenodo: Integrate with Zenodo
-    zenodo_linked: Your account is now linked and data will be pushed within the hour
-    orcid_updates: Pull new updates to your publicly available name, aliases, keywords, country, education, and employment from your ORCID account.
-    refresh: Refresh
-    orcid_refreshed: ORCID data was refreshed.
-    public: Public
-    private: Private
-    active: "On"
-    inactive: "Off"
+    public_availability: 公开可用
+    public_profile: 公开个人资料
+    make_citable: 使您的数据可被引用
+    email_notifications: 邮件通知
+    delete_account: 删除您的帐户
+    delete: 删除
+    permanent_delete: 永久删除您的帐户。
+    delete_warning: 您确定要删除您的账户吗？您所有的认领和所有您为他人的归属将被永久删除。
+    email_instructions: 接收使用来自您识别或采集的标本数据发表的新论文的电邮通知。 在您的 ORCID 帐户中公开您的主要电子邮件地址，然后刷新您的 ORCID 数据。
+    email_procedure: "接收使用您识别或采集的标本数据发表的新刊物的通知。您的主要公开电子邮件地址 %{email} 来自您的 ORCID 账户。"
+    disconnect: 断开连接
+    disconnect_warning: 您确定要断开与 Zenodo 的帐户连接吗？您的数据将保持存档和可访问状态，但不会创建新版本。如果您以后重新连接您的帐户，一个新的数据包将被创建。
+    connect_zenodo: 将您的帐户连接到Zenodo，您的认领将存储为版本化快照并分配DataCite DOI。这将提供引文以供您在简历上使用。
+    connect_zenodo_claim: 至少认领一个标本，然后返回此处将您的账户与 Zenodo 连接，Zenodo 将存储您标本认领的版本快照并分配 DataCite DOI。这将为您的简历提供引文。
+    disconnect_zenodo: 断开与 Zenodo 的连接
+    integrate_zenodo: 与 Zenodo 集成
+    zenodo_linked: 您的账户已连接，数据将在一小时内推送
+    orcid_updates: 从您的 ORCID 账户中获取您的公开姓名、别名、关键字、国家、学历和工作的新更新。
+    refresh: 刷新
+    orcid_refreshed: ORCID 数据已刷新。
+    public: 公开
+    private: 隐私模式
+    active: "开"
+    inactive: "关闭"
     make_public_message: 包括您在公开的个人档案中的账户。您的请求将包含在批量数据下载中，通过谷歌Chrome和Firefox扩展显示。
-    no_candidates_alert: Bionomia did not find any specimens indexed by GBIF that you may have collected or identified.
-    ignored_alert: Specimen records you marked as "Not me" will appear here.
-    scribe_not_helped: This Bionomia scribe has not yet helped you claim specimens.
-    upload_error: Please upload an image less than 5MB in size.
-    bulk_claim: Bulk Claim
-    advanced_search: Advanced Search & Filter
-    no_specimens_filter: You have not yet claimed any specimens with this applied filter. See your candidate specimen records on the Discovered page.
-    no_specimens: You have not yet claimed any specimens. See your candidate specimen records on the Discovered page.
+    no_candidates_alert: Bionomia 没有在 GBIF 索引中找到任何您可能采集或鉴定过的标本。
+    ignored_alert: 您标记为 "不是我 "的标本记录将出现在这里。
+    scribe_not_helped: 这位 Bionomia 抄写员尚未帮助您认领标本。
+    upload_error: 请上传小于 5MB 的图像。
+    bulk_claim: 批量认领
+    advanced_search: 高级搜索与筛选
+    no_specimens_filter: 您尚未认领任何使用此过滤器的标本。请在 "发现 "页面查看您的候选标本记录。
+    no_specimens: 您尚未认领任何标本。请在 "发现 "页面查看您的候选标本记录。
     candidate_count:
-      other: "Found %{count} specimens."
-    latest_helped: "Latest at %{time}"
+      other: "找到 %{count} 标本。"
+    latest_helped: "最新时间为 %{time}"
     attributed_count:
-      other: "specimens attributed"
+      other: "归属的标本"
     attributions: 属性已生成
-    private_message_html: "Your profile is private. Claim your %{specimens} and then make it public in %{settings} to maximize reuse."
-    no_claims_html: "Claim your discovered specimens under the %{specimens} tab to build your profile and start tracking your citations. Acknowledge your peers, mentors, or anyone who inspires you by attributing specimens under %{help_others}."
-    try_again: Try again.
+    private_message_html: "您的个人资料处于隐私模式。请认领您的 %{specimens}，然后在 %{settings} 中将其公开，以便最大限度地重复使用。"
+    no_claims_html: "在 %{specimens} 标签下添加您发现的标本，以建立您的个人资料并开始跟踪您的引用情况。在 %{help_others} 标签下标本归属，以感谢您的同行、导师或任何激励过您的人。"
+    try_again: 请重试。
     upload_count:
-      other: "A total of %{count} records were handled."
-    upload_skipped: Existing claims, if present in your upload, were skipped.
-    upload_view: View
-    upload_view_html: "%{view} all your claims."
-    co_collectors: Co-collectors
-    no_co_collectors_alert: Co-collectors have not yet been recorded.
-    co_collectors_alert: "You have collected with:"
-    co_collector_name: "Specimens co-collected with %{name}."
-    switch: View theirs
-    not_co_collector_name: "Specimens have not been co-collected with %{name}."
+      other: "共处理了 %{count} 条记录。"
+    upload_skipped: 现有认领（如果存在于您的上传中）将被跳过。
+    upload_view: 查看
+    upload_view_html: "%{view} 您所有的认领。"
+    co_collectors: 共同采集者
+    no_co_collectors_alert: 共同采集者尚未记录在案。
+    co_collectors_alert: "您已与此人共同采集："
+    co_collector_name: "与 %{name} 共同采集的标本。"
+    switch: 查看他们的
+    not_co_collector_name: "标本未与 %{name} 共同采集。"
     co_collected_count:
-      other: "co-collected specimens"
-    identified_for: Identified For
-    no_identified_for_alert: Recipients of your determinations have not yet been recorded.
-    identified_for_alert: "Choose a collector to adjust attributions made for specimens collected by them and identified by you."
-    identified_for_name: "Specimens collected by %{name} and identified by you."
-    not_identified_for_name: "Specimens have not been collected by %{name} and identified by you."
+      other: "共同采集的标本"
+    identified_for: 为识别
+    no_identified_for_alert: 您为其进行物种分类的人尚未记录在案。
+    identified_for_alert: "选择一位采集者，调整由其采集并由您鉴定的标本的归属。"
+    identified_for_name: "由 %{name} 采集并由您鉴定的标本。"
+    not_identified_for_name: "标本尚未被 %{name} 采集，且未被您识别。"
     identified_for_count:
-      other: "collected specimens"
-    identifications_by: Identifications By
-    no_determiners_alert: Determiners of your collected specimens have not yet been recorded.
-    determiners_alert: "Your specimens have been identified by:"
-    determiner_name: "Specimens identified by %{name}."
-    not_determiner_name: "Specimens you collected have not been identified by %{name}."
+      other: "采集的标本"
+    identifications_by: 鉴定人
+    no_determiners_alert: 尚未记录您所采集标本的鉴定者。
+    determiners_alert: "您的标本已由以下人员鉴定："
+    determiner_name: "标本由 %{name} 鉴定。"
+    not_determiner_name: "您采集的标本尚未被 %{name} 鉴定。"
     identified_by_count:
-      other: "identified specimens"
-    zenodo_html: "Your profile is linked to %{zenodo} and your claims are versioned and archived."
-    language: Preferred Language
-    language_explanation: Choose your preferred language
-    specimens_used_num: specimens used
-    updated: Your profile was updated.
-    thanks: Thanks
-    attributed: attributed
+      other: "已识别的标本"
+    zenodo_html: "您的个人资料已链接至 %{zenodo}，您的认领已经进行版本管理和归档。"
+    language: 首选语言
+    language_explanation: 请选择您的首选语言
+    specimens_used_num: 使用的标本
+    updated: 您的个人资料已更新。
+    thanks: 谢谢
+    attributed: 归属
   roster:
-    roster_title: Public Profiles
-    lede: "%{count} people who share their profiles and the profiles of others they revere"
-    no_one_found: No one found by the name
+    roster_title: 公共档案
+    lede: "%{count} 人已分享自己和所推崇的人的简介"
+    no_one_found: 未找到名为的人员。
     search_result_count:
       unit:
-        other: "search results for"
-    list: List
-    gallery: Gallery
-    signatures: Signatures
+        other: "搜索结果"
+    list: 列表
+    gallery: 图库
+    signatures: 签名
   specimen:
-    scientific_name: Scientific Name
-    collected_by: Collected By
-    identified_by: Identified By
-    date_collected: Date Collected
-    date_identified: Date Identified
-    institution: Institution
-    catalog_number: Catalog Number
-    basis_record: Basis Of Record
-    country: Country
-    family: Family
-    type_status: Type Status
-    scribe: Scribe
-    not_me: Not me
-    not_them: Not them
-    not_recorded: not recorded
-    remove: Remove
+    scientific_name: 学名
+    collected_by: 收藏者
+    identified_by: 鉴定者
+    date_collected: 采集日期
+    date_identified: 鉴定日期
+    institution: 机构
+    catalog_number: 目录编号
+    basis_record: 记录基础
+    country: 国家
+    family: 科
+    type_status: 类型状态
+    scribe: 抄写员
+    not_me: 不是我
+    not_them: 不是他们
+    not_recorded: 未记录
+    remove: 移除
     mismatch: 与寿命不匹配
   scribes:
-    scribes_title: Scribes
-    lede: "%{scribe_count} people who have attributed %{attribution_count} natural history specimens to %{recipient_count} of their peers, mentors, and role models"
+    scribes_title: 抄写员
+    lede: "%{scribe_count} 名抄写员已将 %{attribution_count} 自然历史标本归功于 %{recipient_count} 同行、导师和榜样的人"
   statistics:
-    title: Statistics
-    claims: Cumulative Claims
-    attributions: Cumulative Attributions
-    rejected: Cumulative Rejected Candidates
-    profiles: Cumulative Profiles Imported
-    month: Month
+    title: 统计数据
+    claims: 累积认领
+    attributions: 累积归属
+    rejected: 累计被拒绝的人选
+    profiles: 累计导入简介
+    month: 月
   taxa:
     lede:
       unit:
-        other: "taxonomic Families from specimen data in GBIF"
-    search_title: Taxonomic Families
-    none_found: "No taxonomic Family found for %{searched}"
+        other: "GBIF 标本数据中的分类科"
+    search_title: 分类科
+    none_found: "未找到 %{searched} 的分类科"
     search_found:
       unit:
-        other: "search results for"
-    people: People
-    visualizations: Visualizations
-    timeline: Timeline
-    agent_strings: Agent Strings
-    collected: Collected
-    identified: Identified
+        other: "搜索结果"
+    people: 人员
+    visualizations: 可视化
+    timeline: 时间轴
+    agent_strings: 代理字符串
+    collected: 已采集
+    identified: 已识别
     number_collected:
       unit:
-        other: "people collected specimens from data in GBIF"
+        other: "从 GBIF 数据中采集标本的人员"
     number_identified:
       unit:
-        other: "people identified specimens from data in GBIF"
+        other: "GBIF 的数据中识别标本的鉴定者"
     number_agents:
       unit:
-        other: "agent strings from specimen data in GBIF"
+        other: "来自 GBIF 标本数据的代理字符串"
     number_agents_unclaimed:
       unit:
-        other: "agent strings have unclaimed specimen records from data in GBIF"
+        other: "代理字符串在 GBIF 数据中有未认领的标本记录"
     no_agents_unclaimed: 没有任何未申报或未指定的样本记录
-    alphabetical: Alphabetical
-    counts: Counts
-    unclaimed: Unclaimed
-    example_families: Random Samples
-    none_collected_identified: "No one has collected or identified %{taxon}"
-    none_collected: "No one has collected %{taxon}"
-    none_identified: "No one has identified %{taxon}"
-    none_collected_timeline: "No one has collected %{taxon} and indicated a collection date"
-    none_identified_timeline: "No one has identified %{taxon} and indicated a determination date"
-    no_agents: "No agents have collected or identified %{taxon}"
-    taxon_string: Taxon Family
-    start_year: Start Year
-    end_year: End Year
-    user_title: "%{taxon} Collectors or Determiners"
-    agent_count_title: "%{taxon} Agent Counts"
-    agent_unclaimed_title: "%{taxon} Agent Unclaimed"
-    agents_title: "%{taxon} Agents"
+    alphabetical: 按字母顺序
+    counts: 计数
+    unclaimed: 未认领的
+    example_families: 随机示例
+    none_collected_identified: "未有人采集或鉴定过 %{taxon}"
+    none_collected: "未有人采集过 %{taxon}"
+    none_identified: "未有人识别过 %{taxon}"
+    none_collected_timeline: "尚未有人采集 %{taxon} 并注明采集日期"
+    none_identified_timeline: "尚未有人识别 %{taxon} 并注明识别日期"
+    no_agents: "尚未有人采集或识别过 %{taxon}"
+    taxon_string: 分类科
+    start_year: 起始年份
+    end_year: 结束年份
+    user_title: "%{taxon} 采集者或鉴定者"
+    agent_count_title: "%{taxon} 代理计数"
+    agent_unclaimed_title: "代理未认领 %{taxon}"
+    agents_title: "%{taxon} 代理"
   user:
-    caches_rebuilt: Caches were rebuilt.
-    overview: Overview
-    specialties: Specialties
-    network: Network
-    deposited_at: Deposited At
-    specimens: Specimens
-    science_enabled: Science Enabled
-    science_enabled_specimens: Science Enabled by Specimen Data
-    helped_by: Helped By
-    strings: Collector Strings
-    helped: People Helped
-    no_scribe: Specimens have not been attributed by a scribe.
-    attributions_by: "Attributions made by:"
+    caches_rebuilt: 重建了高速缓存。
+    overview: 概览
+    specialties: 专业
+    network: 网络
+    deposited_at: 存放于
+    specimens: 标本
+    science_enabled: 科学启用
+    science_enabled_specimens: 标本数据启用的科学
+    helped_by: 得到帮助
+    strings: 采集者字符串
+    helped: 帮助过的人
+    no_scribe: 标本尚未被抄写员归属。
+    attributions_by: "由下列人士作出的归因："
     private: 档案资料尚不可公开。
     private_with_claims:
       unit:
         other: "一个\n标本已被认领或归属，但该档案尚未公开。\n其他\n标本已被认领或归属，但该档案尚不可公开。"
-    no_specimens_cited: Specimens have not been included in downloads from GBIF and cited in this research article.
-    specimen_used: Specimen Data Used In
+    no_specimens_cited: 本研究文章中引用的标本未包括从 GBIF 下载的标本。
+    specimen_used: 标本数据用于
     no_publications: 使用包括了从GBIF下载的样本记录的出版物尚未记录在案。
     publication_count:
       unit:
         other: "使用了从GBIF下载的样本数据的出版物"
-    no_co_collectors_alert: Co-collectors have not yet been recorded.
-    co_collectors_alert: "Has collected with:"
-    co_collectors: Co-collectors
-    identified_for: Identified For
-    identifications_by: Identifications By
+    no_co_collectors_alert: 共同采集者尚未记录在案。
+    co_collectors_alert: "与此人共同采集："
+    co_collectors: 共同采集者
+    identified_for: 为识别
+    identifications_by: 鉴定人
     no_identifications_by_alert: 对采集标本的鉴定尚未记录在案。
-    identifications_by_alert: "Has collected specimens later identified by:"
+    identifications_by_alert: "采集的标本后来由下列人员识别："
     no_identified_for_alert: 对他人采集标本的鉴定尚未记录在案。
-    identified_for_alert: "Has identified specimens collected by:"
+    identified_for_alert: "鉴定了由以下人员采集的标本："
     comment_alert: 分享一个有关采集历程、事件或任何其它事情的趣闻。
     no_institutions_alert: 尚未记录的机构。
     institutions_alert: "在下列机构存放和管理的标本："
-    organizations: organizations
-    specimens_metric: specimens
-    specimens_identified: Specimens Identified
-    specimens_collected: Specimens Collected
-    no_specialities_alert: Specialties have not yet been recorded.
-    specialties_alert: "Collected or identified specimens in the following Families:"
-    families_collected: Families Collected
-    families_identified: Families Identified
-    no_claims_alert: Claims or attributions have not yet been recorded.
-    no_helped_alert: Attributions have not yet been made.
-    progress: Progress
-    identified_from: Identified From
-    collected_from: Collected From
-    dates_collected: Dates Collected
-    dates_identified: Dates Identified
-    specimens_attributed: specimens attributed
-    collected: collected
-    identified: identified
-    not_all_columns: Not all available columns are shown.
-    map: Map
-    list: List
-    chart: Chart
-    no_specimens: Specimens have not yet been claimed or attributed.
-    no_specimens_filter: Specimens have not yet been claimed or attributed with this applied filter.
+    organizations: 组织
+    specimens_metric: 标本
+    specimens_identified: 已识别标本
+    specimens_collected: 采集的标本
+    no_specialities_alert: 尚未记录专业。
+    specialties_alert: "采集或鉴定以下分类科的标本："
+    families_collected: 采集的分类科
+    families_identified: 已识别的分类科
+    no_claims_alert: 认领或归属尚未记录在案。
+    no_helped_alert: 尚未归属。
+    progress: 进度
+    identified_from: 识别自
+    collected_from: 采集自
+    dates_collected: 采集日期
+    dates_identified: 鉴定日期
+    specimens_attributed: 归属的标本
+    collected: 已采集
+    identified: 已识别
+    not_all_columns: 并未显示所有可用列。
+    map: 地图
+    list: 列表
+    chart: 图表
+    no_specimens: 标本尚未被认领或归属。
+    no_specimens_filter: 此应用过滤器未找到任何认领或归属的标本。
     stats_identified_specimens_nocountry:
       unit:
-        other: "specimens identified"
+        other: "标本鉴定"
     stats_collected_specimens_nocountry:
       unit:
-        other: "specimens collected"
+        other: "采集标本"
     stats_identified_specimens:
       unit:
-        other: "specimens identified from at least"
+        other: "标本鉴定至少从"
     stats_identified_countries:
       unit:
-        other: "countries"
+        other: "国家"
     stats_collected_specimens:
       unit:
-        other: "specimens collected from at least"
+        other: "标本采集至少从"
     stats_collected_countries:
       unit:
-        other: "countries"
+        other: "国家"
     stats_attributions_specimens:
       unit:
-        other: "specimens attributed to"
+        other: "归属的标本"
     stats_attributions_people:
       unit:
-        other: "people"
+        other: "人员"
     stats_articles_specimens:
       unit:
-        other: "specimens used in"
+        other: "标本用于"
     stats_articles_articles:
       unit:
-        other: "works"
+        other: "作品"
     specimen_icon_count:
-      other: "%{coll_img} collected or %{det_img} identified %{count} specimens."
+      other: "%{coll_img} 采集或 %{det_img} 鉴定 %{count} 标本。"
   workshops:
-    title: Workshops
+    title: 工坊
