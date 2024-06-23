@@ -1,18 +1,18 @@
 describe "Agent model" do
 
-  it "is not valid without both a given and family name" do
-    agent = Agent.new(given: nil, family: nil)
+  it "is not valid without given content" do
+    agent = Agent.new(given: nil, family: "", parsed: "")
     expect(agent).to_not be_valid
   end
 
-  it "is not valid without a family name" do
-    agent = Agent.new(family: nil)
+  it "is not valid without family content" do
+    agent = Agent.new(given: "", family: nil, parsed: "")
     expect(agent).to_not be_valid
   end
 
-  it "is valid with a family name but not a given name" do
-    agent = Agent.new(family: "Smith", given: nil)
-    expect(agent).to be_valid
+  it "is not valid without parsed content" do
+    agent = Agent.new(given: "", family: "", parsed: nil)
+    expect(agent).to_not be_valid
   end
 
 end
