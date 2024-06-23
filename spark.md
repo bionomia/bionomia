@@ -124,18 +124,15 @@ val agents = spark.
     format("avro").
     load("agents.avro")
 
+// TUNCATE TABLE agent_jobs
+
 agents.select("agent", "gbifIDsRecordedBy", "gbifIDsIdentifiedBy").
     withColumn("gbifIDsRecordedBy", stringify($"gbifIDsRecordedBy")).
     withColumn("gbifIDsIdentifiedBy", stringify($"gbifIDsIdentifiedBy")).
     withColumnRenamed("agent","agents").
     withColumnRenamed("gbifIDsRecordedBy","gbifIDs_recordedBy").
     withColumnRenamed("gbifIDsIdentifiedBy","gbifIDs_identifiedBy").
-    write.
-    mode("overwrite").
-    option("header", "true").
-    option("quote", "\"").
-    option("escape", "\"").
-    csv("agents-csv")
+    write.mode("append").jdbc(url, "agent_jobs", prop)
 
 val families = spark.
     read.

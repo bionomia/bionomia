@@ -5,8 +5,6 @@ class Agent < ActiveRecord::Base
   has_many :recordings, -> { where(occurrence_agents: { agent_role: true }) }, through: :occurrence_agents, source: :occurrence
   has_many :occurrences, -> { distinct }, through: :occurrence_agents, source: :occurrence
 
-  validates :family, presence: true
-
   # agent_role values: recorded = TRUE; identified = FALSE
 
   def fullname

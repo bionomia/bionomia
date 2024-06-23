@@ -41,7 +41,7 @@ module Sinatra
             reload_connections: 1_000,
             adapter: :typhoeus
           )
-          body = build_name_query(search)
+          body = build_candidate_agent_query(search)
           response = client.search index: Settings.elastic.agent_index, size: 50, body: body
           results = response["hits"].deep_symbolize_keys
           results[:hits].map{|n| n[:_source].merge(score: n[:_score]) }.compact rescue []
@@ -74,6 +74,9 @@ module Sinatra
             user.other_names.split("|").first(10).each do |other_name|
               #Attempt to ignore botanist abbreviation or naked family name, often as "other" name in wikidata
               next if user.family && user.family.include?(other_name.gsub(".",""))
+
+              full_names << other_name
+              agents.concat search_agents(other_name)
 
               #Attempt to tack on family name because single given name often in ORCID
               if !other_name.include?(" ")
@@ -149,7 +152,27 @@ module Sinatra
             reload_connections: 1_000,
             adapter: :typhoeus
           )
-          body = random_query
+          body = {
+            query: {
+              function_score: {
+                query: {
+                  bool: {
+                    must_not: [
+                      { term: { family: { value: "" } } }
+                    ]
+                  },
+                },
+                functions: [
+                  {
+                    random_score: {
+                      seed: "#{Time.now.to_i}"
+                    },
+                  }
+                ],
+                boost_mode: "replace"
+              }
+            }
+          }
           response = client.search index: Settings.elastic.agent_index, size: 50, body: body
           results = response["hits"].deep_symbolize_keys
           results[:hits]

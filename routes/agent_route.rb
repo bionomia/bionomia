@@ -8,7 +8,16 @@ module Sinatra
         def self.registered(app)
 
           app.get '/agents' do
-            @count = Agent.count
+            body = {
+              query: {
+                bool: {
+                  must_not: [
+                    { term: { family: { value: "" } } }
+                  ]
+                }
+              }
+            }
+            @count = ::Bionomia::ElasticAgent.new.count(body: body)
             if params[:q] && !params[:q].empty?
               search_agent({ item_size: 75 })
               @formatted_results = format_agents
@@ -69,6 +78,7 @@ module Sinatra
 
               begin
                 @agent = Agent.find(id)
+                raise if !@agent.unparsed.blank?
                 occurrences = @agent.occurrences
                 if params[:datasetKey] && !params[:datasetKey].empty?
                   occurrences = occurrences.where({ datasetKey: params[:datasetKey] })

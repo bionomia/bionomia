@@ -1,5 +1,4 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -10,9 +9,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `agents` (
   `id` int NOT NULL,
-  `family` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
-  `given` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT ''
+  `family` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
+  `given` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
+  `unparsed` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=COMPRESSED;
+
+CREATE TABLE `agent_jobs` (
+  `id` int NOT NULL,
+  `agents` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `gbifIDs_recordedBy` mediumtext COLLATE utf8mb4_bin,
+  `gbifIDs_identifiedBy` mediumtext COLLATE utf8mb4_bin,
+  `parsed` mediumtext COLLATE utf8mb4_bin,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `articles` (
   `id` bigint UNSIGNED NOT NULL,
@@ -227,7 +235,10 @@ CREATE TABLE `user_organizations` (
 
 ALTER TABLE `agents`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `full_name` (`family`,`given`) USING BTREE;
+  ADD UNIQUE KEY `full_name` (`family`,`given`,`unparsed`) USING BTREE;
+
+ALTER TABLE `agent_jobs`
+  ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `articles`
   ADD PRIMARY KEY (`id`),
@@ -323,6 +334,9 @@ ALTER TABLE `user_organizations`
 ALTER TABLE `agents`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
+ALTER TABLE `agent_jobs`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
 ALTER TABLE `articles`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
@@ -367,7 +381,6 @@ ALTER TABLE `user_occurrences`
 
 ALTER TABLE `user_organizations`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

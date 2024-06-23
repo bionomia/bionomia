@@ -49,6 +49,45 @@ module Sinatra
           qry
         end
 
+        def build_candidate_agent_query(search, obj = {})
+          qry = {
+            query: {
+              bool: {
+                should: [
+                  { 
+                    match: { 
+                      "unparsed.keyword": { query: search, boost: 10 } 
+                    }
+                  },
+                  {
+                    multi_match: {
+                      query:      search,
+                      type:       :cross_fields,
+                      analyzer:   :fullname_index,
+                      fields:     [
+                        "family^3",
+                        "given",
+                        "fullname^5",
+                        "label^4",
+                        "other_names",
+                        "*.edge"
+                      ],
+                    }
+                  },
+                  rank_feature: {
+                    field: "rank"
+                  }
+                ],
+                filter: []
+              }
+            },
+            sort: [
+              "_score"
+            ]
+          }
+          qry
+        end
+
         def build_organization_query(search)
           {
             query: {
@@ -112,9 +151,8 @@ module Sinatra
         def build_article_query(search)
           {
             query: {
-              multi_match: {
+              combined_fields: {
                 query: search,
-                type: :best_fields,
                 fields: ["citation^3", "abstract"]
               }
             },

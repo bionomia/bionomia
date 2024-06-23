@@ -18,7 +18,11 @@ Unfortunately, gbifIDs are not persistent. These occasionally disappear through 
 
 ### Step 3: Parse & Populate Agents
 
-      $ RACK_ENV=production bundle exec ./bin/populate_agents.rb --truncate --directory /directory-to-spark-csv-files/
+      $ RACK_ENV=production bundle exec ./bin/parse_agents.rb
+      # Can start 2+ workers, each with 40 threads to help speed-up processing
+      $ RACK_ENV=production bundle exec sidekiq -C config/settings/sidekiq.yml -c 40 -r ./application.rb
+
+      $ RACK_ENV=production bundle exec ./bin/populate_agents.rb --truncate
       # Can start 2+ workers, each with 40 threads to help speed-up processing
       $ RACK_ENV=production bundle exec sidekiq -C config/settings/sidekiq.yml -c 40 -r ./application.rb
 

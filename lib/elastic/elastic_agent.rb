@@ -24,6 +24,11 @@ module Bionomia
                 min_gram: 1,
                 max_gram: 50
               },
+              initials: {
+                type: "pattern_replace",
+                pattern: "[a-z\\.\\s]",
+                replacement: ""
+              }
             },
             tokenizer: {
               simple_split: {
@@ -51,6 +56,11 @@ module Bionomia
                 type: "custom",
                 tokenizer: :simple_split,
                 filter: ["lowercase", "asciifolding", "german_normalization", :autocomplete]
+              },
+              unparsed_index: {
+                type: "custom",
+                tokenizer: "keyword",
+                filter: [:initials, "lowercase", "asciifolding"]
               }
             }
           }
@@ -96,6 +106,20 @@ module Bionomia
               type: 'text',
               norms: false
             },
+            unparsed: {
+              type: 'text',
+              fielddata: true,
+              analyzer: :standard,
+              norms: false,
+              fields: {
+                keyword: {
+                  type: 'text',
+                  analyzer: :unparsed_index,
+                  search_analyzer: :unparsed_index,
+                  norms: false
+                }
+              }
+            },
             rank: {
               type: 'rank_feature'
             }
@@ -118,6 +142,7 @@ module Bionomia
         given: a.given,
         fullname: a.fullname,
         fullname_reverse: a.fullname_reverse,
+        unparsed: a.unparsed,
         rank: nil
       }
     end

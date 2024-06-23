@@ -41,8 +41,8 @@ module Bionomia
       usage[@settings[:index]]["store_size"]
     end
 
-    def count
-      response = client.count index: @settings[:index]
+    def count(body: {})
+      response = client.count index: @settings[:index], body: body
       response["count"]
     end
 
@@ -108,6 +108,16 @@ module Bionomia
 
     def document(d)
       { id: d.id }
+    end
+
+    def analyze(analyzer:, text:)
+      client.indices.analyze(
+        index: @settings[:index],
+        body: {
+          analyzer: analyzer,
+          text: text
+        }
+      )
     end
 
   end
