@@ -19,7 +19,7 @@ CREATE TABLE `agent_jobs` (
   `agents` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `gbifIDs_recordedBy` mediumtext COLLATE utf8mb4_bin,
   `gbifIDs_identifiedBy` mediumtext COLLATE utf8mb4_bin,
-  `parsed` mediumtext COLLATE utf8mb4_bin,
+  `parsed` mediumtext COLLATE utf8mb4_bin
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `articles` (
