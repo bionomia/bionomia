@@ -515,6 +515,10 @@ de:
         one: ehemaliges Mitglied
         other: ehemalige Mitglieder
     under_repair: This feature is presently under repair for better performance.
+  pagy:
+    next: ">"
+    prev: "<"
+    gap: "..."
   profile:
     thanks_title: Dank erhalten
     candidates_title: Unbeanspruchte Exemplare

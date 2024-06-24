@@ -515,6 +515,10 @@ fr:
         one: ancien membre
         other: anciens membres
     under_repair: Cette fonctionnalité est actuellement en cours de réparation pour de meilleures performances.
+  pagy:
+    next: ">"
+    prev: "<"
+    gap: "..."
   profile:
     thanks_title: Remerciements Reçus
     candidates_title: Spécimens non réclamés

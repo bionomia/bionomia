@@ -330,7 +330,6 @@ ALTER TABLE `user_organizations`
   ADD KEY `user_idx` (`user_id`),
   ADD KEY `organization_idx` (`organization_id`);
 
-
 ALTER TABLE `agents`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 

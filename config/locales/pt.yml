@@ -515,6 +515,10 @@ pt:
         one: membro anterior
         other: membros anteriores
     under_repair: This feature is presently under repair for better performance.
+  pagy:
+    next: ">"
+    prev: "<"
+    gap: "..."
   profile:
     thanks_title: Agradecimentos recebidos
     candidates_title: Espécimes Não Reivindicados
