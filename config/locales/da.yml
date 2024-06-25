@@ -515,6 +515,10 @@ da:
         one: past member
         other: past members
     under_repair: This feature is presently under repair for better performance.
+  pagy:
+    next: ">"
+    prev: "<"
+    gap: "..."
   profile:
     thanks_title: Thanks Received
     candidates_title: Unclaimed Specimens
