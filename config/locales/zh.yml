@@ -487,6 +487,10 @@ zh-CN:
       unit:
         other: 前任成员
     under_repair: 该功能目前正在修复中，以获得更好的性能。
+  pagy:
+    next: ">"
+    prev: "<"
+    gap: "..."
   profile:
     thanks_title: 收到的致谢
     candidates_title: 未认领的标本
