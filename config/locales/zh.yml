@@ -80,75 +80,75 @@ zh:
       unit:
         one: "raw string from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article"
         other: "为证明本文而从 GBIF 下载的样本数据中解析过的收集者和鉴定者姓名的原始字符串"
-    claims: claims
-    specimens: specimens
-    no_search_alert: "No articles found for"
+    claims: 认领
+    specimens: 标本
+    no_search_alert: "未找到以下相关文章"
     search_alert:
       unit:
         one: "search result found for"
-        other: "search results found for"
+        other: "找到以下搜索结果"
   card:
-    collected: "Collected %{family}"
-    identified: "Identified %{family}"
-    identified_collected: "Collected %{collected} and identified %{identified}"
+    collected: "收集的 %{family}"
+    identified: "已鉴定为 %{family}"
+    identified_collected: "收集了 %{collected} 并鉴定了 %{identified}"
     claimed:
       one: specimen claimed
-      other: specimens claimed
+      other: 已认领的标本
     attributed:
       one: specimen attributed
-      other: specimens attributed
+      other: 标本归属
     helped:
       one: person helped
-      other: people helped
+      other: 帮助的人
   charts:
-    year: Year
-    number_specimens: "# specimens"
-    identified: Identified
-    collected: Collected
-    people: People
+    year: 年
+    number_specimens: "# 标本"
+    identified: 已识别
+    collected: 已收集
+    people: 人员
   country:
-    country_title: Countries
-    lede: From countries stated in ORCID accounts and Wikidata entries or specimen records in GBIF
-    intro: From countries stated in ORCID accounts and Wikidata entries. Search by Taxon Family to explore expertise.
-    collected_from: "Collected %{family} from %{country}"
-    identified_from: "Identified %{family} from %{country}"
-    collected_identified_from: "Collected or identified %{family} from %{country}"
-    no_one_collected_from: "No one collected %{family} from %{country}"
-    no_one_identified_from: "No one identified %{family} from %{country}"
-    no_one_collected_identified_from: "No one collected or identified %{family} from %{country}"
-    no_one_message: "No one found from %{country}. Search by Taxon Family to explore expertise."
+    country_title: 国家
+    lede: 来自ORCID账户和维基数据（Wikidata）条目中规定的国家或GBIF中的标本记录
+    intro: 来自ORCID账户和维基数据（Wikidata）条目中规定的国家。按分类科属（Taxon Family）搜索专业知识。
+    collected_from: "从 %{country} 收集的 %{family}"
+    identified_from: "来自 %{country} 被鉴定的 %{family}"
+    collected_identified_from: "收集或鉴定来自 %{country} 的 %{family}"
+    no_one_collected_from: "未有人从 %{country} 收集 %{family}"
+    no_one_identified_from: "没有来自 %{country} 的 %{family} 的鉴定"
+    no_one_collected_identified_from: "没有来自 %{country} 的 %{family} 的收集或鉴定"
+    no_one_message: "未发现来自 %{country} 的结果，请按分类科属搜索专业知识。"
   dataset:
-    dataset_title: Datasets
-    search_title: Datasets Search
-    scribes_title: Scribes
+    dataset_title: 数据集
+    search_title: 数据集查询
+    scribes_title: 文书员
     lede:
       unit:
         one: "dataset from GBIF"
-        other: "datasets from GBIF"
+        other: "来自 GBIF 的数据集"
     identifiers_alert:
       unit:
         one: "dataset with content in dwc:recordedByID or dwc:identifiedByID"
-        other: "datasets with content in dwc:recordedByID or dwc:identifiedByID"
-    placeholder: Butterflies of Brazil
-    people: People
-    visualizations: Visualizations
-    scribes: Scribes
-    agents: Agents
-    agent_strings: Agent Strings
-    agent_strings_unclaimed: Unclaimed Agent Strings
-    alphabetical: Alphabetical
-    counts: Counts
-    unclaimed: Unclaimed
-    no_agents_alert: Raw strings from parsed collector and determiner names in specimen data included in this dataset have not yet been recorded
+        other: "含有 dwc:recordedByID 或 dwc:identifiedByID 内容的数据集"
+    placeholder: 巴西的蝴蝶
+    people: 人员
+    visualizations: 可视化
+    scribes: 文书员
+    agents: 代理
+    agent_strings: 代理字符串
+    agent_strings_unclaimed: 未认领的代理字符串
+    alphabetical: 按字母顺序
+    counts: 计数
+    unclaimed: 未认领的
+    no_agents_alert: 标本数据中解析出的收集者和鉴定者姓名的原始字符串尚未记录在此数据集中
     agents_alert:
       unit:
         one: "raw string from parsed collector and determiner names in specimen data included in this dataset"
-        other: "raw strings from parsed collector and determiner names in specimen data included in this dataset"
+        other: "此数据集包含的标本数据中解析出的收集者和鉴定者姓名的原始字符串"
     agents_alert_unclaimed:
       unit:
         one: "raw string from parsed collector and determiner names in unattributed specimen data included in this dataset"
-        other: "raw strings from parsed collector and determiner names in unattributed specimen data included in this dataset"
-    none_found: "No datasets found for %{searched}"
+        other: "此数据集中未归属标本数据中解析出的收集者和鉴定者姓名的原始字符串"
+    none_found: "没有找到%{searched} 的数据集"
     search_found:
       unit:
         one: "search result for"
@@ -200,61 +200,61 @@ zh:
       - Jun
       - Jul
       - Aug
-      - Sep
-      - Oct
-      - Nov
-      - Dec
+      - 九月
+      - 十月
+      - 十一月
+      - 十二月
   denied:
-    title: Denied
-    not_allowed: Access is denied.
+    title: 拒绝
+    not_allowed: 无权访问
   developer:
-    search: Search
-    autocomplete_widget: Autocomplete Widget
-    json_ld_search: JSON-LD Search for People
-    json_ld_occurrence_search: JSON-LD Search for Occurrences
-    structured_data: Structured Data
-    raw_data: Raw Data
-    code: Code
-    reconcile_title: Reconcile
-    recommended_use: Recommended Use
-    title: For Developers
-    code_title: "For Developers: Code"
-    clients: Client Libraries
-    parser: Parse Names
-    parse_names: Parse Human Names
-    parse_names_title: "For Developers: Parse Names"
-    structured_data_title: "For Developers: Structured Data"
-    search_title: "For Developers: Search"
-    client_title: "For Developers: Client Libraries"
+    search: 搜索
+    autocomplete_widget: 自动完成小部件
+    json_ld_search: 用于搜索人员的 JSON-LD
+    json_ld_occurrence_search: 用于搜索出现记录的 JSON-LD
+    structured_data: 结构化数据
+    raw_data: 原始数据
+    code: 代码
+    reconcile_title: 对账
+    recommended_use: 推荐使用
+    title: 面向开发人员
+    code_title: "面向开发人员：代码"
+    clients: 客户资料库
+    parser: 解析名称
+    parse_names: 解析姓名
+    parse_names_title: "至开发者: 解析名称"
+    structured_data_title: "面向开发人员：结构化数据"
+    search_title: "至开发者: 搜索"
+    client_title: "开发者: 客户资料库"
   donate:
-    donate_title: Donate
-    lede: Your one-time or periodic donation will help complete the data pipeline and ensure that credit is given for contributions made to natural history collections as quickly and as seamlessly as possible.
-    campaign: Campaign
-    donor_wall: Donor Wall
+    donate_title: 赞助
+    lede: 您的一次性或定期捐赠将有助于数据管道（data pipeline）的完成，并确保尽可能快速、无缝地捐赠与自然博物收藏。
+    campaign: 捐款活动
+    donor_wall: 感恩墙
   donor_wall:
-    donor_wall_title: Donor Wall
-    lede: Thanks to the following donors who are supporting the completion of the data pipeline.
+    donor_wall_title: 感恩墙
+    lede: 感谢以下捐助者支持data pipeline的完成。
   general:
-    search: Search
+    search: 搜索
     apply: Apply
-    help_attribute: Help Attribute
-    refresh_profile: Refresh
-    refresh_stats: Refresh stats
-    settings: Settings
-    bulk_assignment: Bulk Assignment
-    collected_all: Collected All
-    collected: Collected
-    identified_all: Identified All
-    identified: Identified
-    both: Both
-    either: Either
-    per_page: Per page
-    download: Download
-    submit: Submit
-    upload_csv_instructions: Upload csv with claims
-    download_records: Download discovered records
-    download_alert: "Download discovered specimen records, work offline, then upload new claims as a csv. A file containing at most %{num_records} records is generated. If you have many more than this, you may work in batches. This routine does not update underlying specimen data nor does it update existing claims. If existing claims are present in the upload, these will be skipped. Your uploaded csv must use a comma to separate columns each optionally enclosed by quotes."
-    search_dropdown_no_users: "Your search turned up 0 results."
+    help_attribute: 帮助归属
+    refresh_profile: 刷新
+    refresh_stats: 刷新统计数据
+    settings: 设置
+    bulk_assignment: 批量分配
+    collected_all: 全部收集
+    collected: 已收集
+    identified_all: 已识别所有
+    identified: 已识别
+    both: 两者
+    either: 任一
+    per_page: 每页
+    download: 下载
+    submit: 提交
+    upload_csv_instructions: 上传包含认领的 csv
+    download_records: 下载已发现的记录
+    download_alert: "下载发现的标本记录，离线工作，然后再以 csv 格式上传新的声明。这将产生最多包含 %{num_records} 记录的文件。若您有更多记录，您可以分批处理。此例程不会更新基础标本数据，也不会更新现有声明。若上传中存在现有声明，这些声明将被跳过。您上传的 csv 必须使用逗号分隔列，每列可选地用引号括起来。"
+    search_dropdown_no_users: "您的搜索未找到任何结果。"
     reset: Reset
     remove: Remove
     filtered_by: Filtered by
@@ -305,63 +305,63 @@ zh:
     taxa: Taxonomic Families
     specimens: Specimens
     visualizations: Visualizations
-    strings: Collector Strings
-    support: Helped By
-    specialties: Specialties
-    public_profile: Public Profile
-    make_public: Make Public
-    not_yet: Not yet
-    viz_none_alert: Bionomia scribes have not yet helped attribute specimens.
-    viz_alert: Click regions on the map or bars in the chart to execute a filter.
-    problems: Problems Discovered
-    collections_before_birth: "Collections made before birth:"
-    collections_after_death: "Collections made after death:"
-    identifications_before_birth: "Identifications made before birth:"
-    identifications_after_death: "Identifications made after death:"
-    view: view
-    none: none
-    identified_from: Identified From
-    collected_from: Collected From
-    no_filter_alert: Bionomia scribes have not yet helped attribute specimens under this filter.
-    not_helped_alert: Bionomia scribes have not yet helped attribute specimens.
+    strings: 收集者字符串
+    support: 帮助者
+    specialties: 专业
+    public_profile: 公开档案
+    make_public: 公开
+    not_yet: 未
+    viz_none_alert: Bionomia 记录员尚未归属标本。
+    viz_alert: 点击地图上的区域或图表中的条形图来筛选。
+    problems: 发现的问题
+    collections_before_birth: "出生前的搜藏："
+    collections_after_death: "身亡后的搜藏："
+    identifications_before_birth: "出生前的识别："
+    identifications_after_death: "身亡后的识别"
+    view: 查看
+    none: 无
+    identified_from: 识别自
+    collected_from: 采集自
+    no_filter_alert: Bionomia 记录员尚未在此筛选条件下归属标本。
+    not_helped_alert: Bionomia 记录员尚未归属标本。
     upload_message:
       unit:
         one: "record was handled. Existing claims, if present in your upload, were skipped."
-        other: "records were handled. Existing claims, if present in your upload, were skipped."
-    help_question: "Want to help attribute specimens to %{name}?"
-    try_again: Try again.
-    no_specialities_alert: Bionomia scribes have not yet helped attribute specimens.
-    specialties_alert: "Collected or identified specimens in the following Families:"
-    co-collectors: Co-collectors
-    no_co_collectors_alert: Co-collectors have not yet been recorded.
-    co_collectors_alert: "Choose a co-collector to adjust attributions made for specimens in common."
-    co_collector_name: "Specimens co-collected with %{name}."
-    switch: Switch
-    not_co_collector_name: "Specimens have not been co-collected with %{name}."
-    identified_for: Identified For
-    no_identified_for_alert: Recipients of determinations have not yet been recorded.
-    identified_for_alert: "Choose a collector to adjust attributions made for specimens collected by them."
-    identified_for_name: "Specimens collected by %{name} and identified by %{other_name}."
-    not_identified_for_name: "Specimens have not been collected by %{name} and identified by %{other_name}."
+        other: "记录已处理。如果您的上传中存在现有的认领，这些认领已被跳过。"
+    help_question: "想要帮助将标本归属给 %{name} 吗？"
+    try_again: 请重试。
+    no_specialities_alert: Bionomia 记录员尚未归属标本。
+    specialties_alert: "收集或鉴定以下分类科的标本："
+    co-collectors: 共同收集者
+    no_co_collectors_alert: 尚未记录共同收集者。
+    co_collectors_alert: "选择一位共同采集者来调整共同标本的归属。"
+    co_collector_name: "与 %{name} 共同采集的标本。"
+    switch: 切换
+    not_co_collector_name: "标本未与 %{name} 共同采集"
+    identified_for: 为识别
+    no_identified_for_alert: 尚未有鉴定接收者的记录。
+    identified_for_alert: "选择一位采集者来调整标本的归属。"
+    identified_for_name: "由 %{name} 采集并由 %{other_name} 鉴定的标本。"
+    not_identified_for_name: "标本尚未被 %{name} 采集，且未被 %{other_name} 识别。"
     identified_for_count:
       one: "collected specimen"
-      other: "collected specimens"
-    identifications_by: Identifications By
-    no_determiners_alert: Determiners have not yet been recorded.
-    determiners_alert: "Choose a determiner to adjust attributions made for specimens identified by them."
-    determiner_name: "Specimens identified by %{name} and collected by %{other_name}."
-    not_determiner_name: "Specimens have not been identified by %{name} and collected by %{other_name}."
+      other: "采集的标本"
+    identifications_by: 识别者
+    no_determiners_alert: 尚未记录识别者。
+    determiners_alert: "选择一位识别者来调整由他们鉴定的标本的归属。"
+    determiner_name: "由 %{name} 识别并由 %{other_name} 采集的标本。"
+    not_determiner_name: "标本尚未被 %{name} 识别，且未被 %{other_name} 采集。"
     identified_by_count:
       one: "identified specimen"
-      other: "identified specimens"
-    bulk_attribution: Bulk Attributions
-    reclaim_ignored: Reclaim Ignored
-    fix_claims: Fix Attributions
-    discovered: Discovered
-    support_alert: The following scribes have attributed specimens.
-    advanced_search: Advanced Search & Filter
-    less_exact: Make less exact
-    no_unclaimed: Bionomia did not find any unclaimed specimens.
+      other: "已识别的标本"
+    bulk_attribution: 批量归属
+    reclaim_ignored: 回归被忽略的归属
+    fix_claims: 修正归属
+    discovered: 发现
+    support_alert: 以下记录员已归属标本。
+    advanced_search: 高级搜索与筛选
+    less_exact: 降低精确度
+    no_unclaimed: Bionomia 没找到任何未认领的标本。
     close: Close
     add_person: Add a Person
     add_orcid_wikidata: Add ORCID Identifier or Wikidata Q Number
@@ -419,23 +419,23 @@ zh:
     specimens: Specimens
     discovered: Discovered
     science_enabled: Science enabled
-    settings: Settings
-    administration: Administration
-    logout: Logout
-    resources: Resources
-    integrations: Integrations
-    for_developers: For Developers
-    for_data_managers: For Data Managers
-    policies: Policies
-    privacy: Privacy Policy
-    terms_service: Terms of Service
-    on_this_day: On This Day
-    about: About
-    rationale: Rationale
-    how_works: How it Works
-    history: History
-    feedback: Feedback
-    support: Donate
+    settings: 设置
+    administration: 管理界面
+    logout: 登出
+    resources: 资源
+    integrations: 集成
+    for_developers: 开发人员适用
+    for_data_managers: 对于数据管理员
+    policies: 政策
+    privacy: 隐私政策
+    terms_service: 服务条款
+    on_this_day: 往昔今日
+    about: 关于
+    rationale: 原理
+    how_works: 工作原理
+    history: 历史记录
+    feedback: 反馈
+    support: 捐赠
     help: Help Documents
     tools: Tools
     parse: Parse Names
