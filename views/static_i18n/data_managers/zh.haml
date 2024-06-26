@@ -1,0 +1,127 @@
+- content_for :title, "For Data Managers"
+- content_for :scripts do
+  :javascript
+    $(function() {
+      Application.init();
+    });
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2
+        For Data Managers
+
+.container-fluid
+
+  %h3
+    Background
+  %p
+    Bionomia
+    = link_to "scribes", url("/scribes")
+    attribute specimen records to the collectors and determiners represented in your dataset(s) by linking natural history specimen records you publish to
+    = link_to "GBIF", "https://gbif.org"
+    to their
+    = link_to "Wikidata", "https://www.wikidata.org"
+    Q numbers or
+    = link_to "ORCID", "https://orcid.org"
+    IDs. People with ORCID IDs also claim records for the specimens they themselves collected or identified. Wikidata and ORCID identifiers have associated resources and services that are unquestionably useful for collections ranging from disambiguating people names to gauging the impact your collection has on the academic community.
+
+  .row
+    .col-12.col-md-6
+      %h3
+        Engaging With Your Community
+
+      %p
+        Bionomia scribes are a welcoming, international group of enthusiasts who are driven to help you attribute specimen records to the collectors and determiners represented in your dataset(s). They work tirelessly to enhance entries in
+        = link_to "Wikidata", "https://www.wikidata.org"
+        by adding links and attributes like birth and death dates to deceased natural historians. They are also advocates of
+        = link_to "ORCID", "https://orcid.org"
+        and can help you campaign for its adoption at your institution.
+
+      %p
+        %img.img-fluid{src:"/images/roundtrip.png", alt: "Data round trip"}
+
+    .col-12.col-md-6
+      %h3
+        Incorporating Enhancements
+
+      %p
+        Every few weeks, Bionomia refreshes a subset of the Darwin Core data you publish to
+        = succeed "." do
+          = link_to "GBIF", "https://gbif.org"
+        See
+        = link_to "how it works", url("/how-it-works")
+        for more details.
+
+      .media.mb-3.mt-3.d-flex.flex-wrap.flex-column.flex-md-row
+        %a{href:"https://frictionlessdata.io/"}
+          %img.mb-3.mr-3{src:"/images/frictionless-color-logo.png", alt:"Frictionless Data"}
+        .media-body
+          %p
+            Search for your
+            = link_to "dataset(s)", url("/datasets")
+            and find the link to a
+            = link_to "Frictionless Data", "https://frictionlessdata.io/"
+            package. These zipped, UTF-8 encoded relational files are similar to the Darwin Core Archives you produced for GBIF. They differ in that they more efficiently represent
+            %em many:many
+            relationships. There is also a breadth of
+            = link_to "open software libraries", "https://frictionlessdata.io/universe/"
+            in many programming languages that read, validate, and process Frictionless Data. You can also extract the zipped package and import the UTF-8 encoded csv files into any spreadsheet software, provided the files are not excessively large.
+
+      %p
+        The packages contain a standard
+        %em datapackage.json
+        metadata file and up to ten zipped csv files:
+        %em users.csv.zip, occurrences.csv.zip, problem_collector_dates.csv.zip, problem_determiner_dates.csv.zip, citations.csv.zip, articles.csv.zip, attributions.csv.zip
+        and
+        %em missing_attributions.csv.zip, unresolved_users.csv.zip, and not_them_assertions.csv.zip
+        (all three optional).
+      %p
+        The
+        %em datapackage.json
+        metadata file contains a "created" timestamp for when the package was last produced. Regeneration of these packages typically occurs once every few weeks but if you would like a more up-to-date version, please
+        = succeed "." do
+          = link_to "create a ticket", "https://github.com/bionomia/bionomia/issues"
+      %p
+        The
+        %em users.csv.zip
+        file contains a list of unique users that were attributed or have claimed specimen records as their own in your dataset. It also contains their full names, aliases,
+        = link_to "ORCID", "https://orcid.org"
+        IDs or
+        = link_to "Wikidata", "https://www.wikidata.org"
+        Q numbers plus birth and death dates for the latter.
+        The
+        %em occurrences.csv.zip
+        file contains the subset of Darwin Core fields from your specimen records for which attributions have been made.
+        The
+        %em problem_collector_dates.csv.zip
+        file contains a list of occurrence records whose eventDate is earlier than a collector's birthDate or later than their deathDate.
+        The
+        %em problem_determiner_dates.csv.zip
+        file contains a list of occurrence records whose dateIdentified is earlier than a determiner's birthDate or later than their deathDate.
+        The
+        %em attributions.csv.zip
+        file is a join table for the other two csv files and also contains columns for who made the attribution, their ORCID ID, and a timestamp for when they made the attribution.
+        The optional
+        %em missing_attributions.csv.zip
+        file contains attributions made in Bionomia but not present in a data source's identifiedByID and recordedByID data fields.
+        The optional
+        %em unresolved_users.csv.zip
+        file contains recordedBy and recordedByID when the latter could not be resolved via ORCID or wikidata and therefore not included in Bionomia.
+        These latter two files are not generated if no attributions have yet been made at the source.
+        The optional
+        %em not_them_assertions.csv.zip
+        file contains a list of "not them" assertions made by scribes against the recordedByID provided by the dataset publisher.
+
+  .row
+    .col-12.col-md-6
+      %h3
+        Assessing Data Quality
+
+      %p
+        In the set of "Help Others" pages where specimen records are attributed to collectors and determiners, there are tabs to Fix and Visualize records.
+        Here, a collector's birth and death dates are cross-referenced against those on their specimen records.
+        Countries on maps and date ranges on charts can also be clicked to execute dynamic filters.
+        In time and as more attributions are made, data quality reports like these on individuals' specimen records may be rolled-up to dataset-level reports.
+
+    .col-12.col-md-6
+      = haml_i18n :'reconcile', layout: false
