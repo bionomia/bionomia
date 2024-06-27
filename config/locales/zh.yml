@@ -95,7 +95,7 @@ zh:
       one: specimen claimed
       other: 已认领的标本
     attributed:
-      one: specimen attributed
+      one:
       other: 标本归属
     helped:
       one: person helped
