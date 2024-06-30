@@ -54,11 +54,6 @@ module Sinatra
             query: {
               bool: {
                 should: [
-                  { 
-                    match: { 
-                      "unparsed.keyword": { query: search, boost: 10 } 
-                    }
-                  },
                   {
                     multi_match: {
                       query:      search,
@@ -72,6 +67,11 @@ module Sinatra
                         "other_names",
                         "*.edge"
                       ],
+                    }
+                  },
+                  { 
+                    match: { 
+                      "unparsed.keyword": { query: search, boost: 10 } 
                     }
                   },
                   rank_feature: {

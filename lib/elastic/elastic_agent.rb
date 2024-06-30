@@ -143,7 +143,7 @@ module Bionomia
         fullname: a.fullname,
         fullname_reverse: a.fullname_reverse,
         unparsed: a.unparsed,
-        rank: nil
+        rank: ((a.given.blank? && a.family.blank?) ? nil : 1)
       }
     end
 
