@@ -236,7 +236,7 @@ zh:
     lede: 感谢以下捐助者支持data pipeline的完成。
   general:
     search: 搜索
-    apply: Apply
+    apply: 申请
     help_attribute: 帮助归属
     refresh_profile: 刷新
     refresh_stats: 刷新统计数据
@@ -818,7 +818,7 @@ zh:
         other: "标本采集至少从"
     stats_collected_countries:
       unit:
-        one: "country"
+        one: "国家"
         other: "国家"
     stats_attributions_specimens:
       unit:
