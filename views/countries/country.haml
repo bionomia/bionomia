@@ -53,7 +53,7 @@
           .card.border-0
         - else
           - if @action || @family
-            - u = User.find(u[:_id]) rescue User.find(4)
+            - u = User.find(u[:_id])
           - stats = cache_block("#{u.identifier}-stats") { user_stats(u) }
           = haml :'partials/user/card', layout: false, locals: { user: u, stats: stats }
 
