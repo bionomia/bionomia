@@ -36,10 +36,10 @@
             = I18n.t('user.specimen_icon_count', coll_img: haml(coll_img, layout: false), det_img: haml(det_img, layout: false), count: number_with_delimiter(@pagy.count, delimiter: ","))
             = I18n.t('user.not_all_columns')
           .col-12.col-md-3.p-0.text-md-right
-            %a.mr-2{href: url("/#{@viewed_user.identifier}/specimens.csv")}
+            %a.mr-2{href: "#{Settings.api_url}/#{@viewed_user.identifier}/specimens.csv"}
               %i.fas.fa-file-csv.text-dark.h5.m-0.p-1
               CSV
-            %a{href: url("/#{@viewed_user.identifier}/specimens.jsonld")}
+            %a{href: "#{Settings.api_url}/#{@viewed_user.identifier}/specimens.jsonld"}
               %i.fas.fa-file-code.text-dark.h5.m-0.p-1
               JSON-LD
 
