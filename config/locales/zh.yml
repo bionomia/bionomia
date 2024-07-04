@@ -810,7 +810,7 @@ zh:
         other: "标本鉴定至少从"
     stats_identified_countries:
       unit:
-        one: "country"
+        one: "国家"
         other: "国家"
     stats_collected_specimens:
       unit:
