@@ -74,8 +74,8 @@ module Sinatra
 
             get '/countries' do
               @countries = I18nData.countries(I18n.locale)
-                            .group_by{|u| ActiveSupport::Inflector.transliterate(u[1][0]) }
-                            .sort
+                                   .sort_alphabetical_by(&:last)
+                                   .group_by{|a| a[1][0]}
               haml :'help/countries', locals: { active_page: "help" }
             end
 
