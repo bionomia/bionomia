@@ -37,7 +37,7 @@ zh:
     lede:
       unit:
         one: "raw string from parsed collector and determiner names in specimen data from GBIF"
-        other: "从 GBIF 标本数据中解析的收集者和鉴定者姓名的原字符串"
+        other: "从 GBIF 标本数据中解析的采集员和鉴定员姓名的原字符串"
     search_none: "未找到代理字符串%{searched}"
     search_count:
       unit:
@@ -46,7 +46,7 @@ zh:
     warning: "警告："
     warning_statement: 不像此站所有其它的URL，代理字符串的URL不可靠，因为它们每隔几周就会指向不同的结果
     agent_name_title: "%{agent_name} 标本"
-    agent_lede: 从自然历史标本数据中解析的收集者和鉴定者姓名的原始字符串
+    agent_lede: 从自然历史标本数据中解析的采集员和鉴定员姓名的原始字符串
     found_statement:
       unit:
         one: "specimen found. Not all columns are shown."
@@ -67,7 +67,7 @@ zh:
     claims_alert:
       unit:
         one: "person collected or identified specimens included in data downloaded from GBIF in support of this article"
-        other: "人们从GBIF下载的数据中收集或识别支持本文的样本"
+        other: "人们从GBIF下载的数据中采集或鉴定支持本文的样本"
     placeholder: "进化和系统学..."
     people: 人员
     agent_strings: 代理字符串
@@ -75,11 +75,11 @@ zh:
     alphabetical: 按字母顺序
     counts: 计数
     unclaimed: 未声明
-    no_agent_strings_alert: 未找到从 GBIF 下载的样本数据中解析过的收集者和鉴定者姓名的原始字符串来支持这篇文章
+    no_agent_strings_alert: 未找到从 GBIF 下载的样本数据中解析过的采集员和鉴定员姓名的原始字符串来支持这篇文章
     agent_strings_alert:
       unit:
         one: "raw string from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article"
-        other: "为证明本文而从 GBIF 下载的样本数据中解析过的收集者和鉴定者姓名的原始字符串"
+        other: "为证明本文而从 GBIF 下载的样本数据中解析过的采集员和鉴定员姓名的原始字符串"
     claims: 认领
     specimens: 标本
     no_search_alert: "未找到以下相关文章"
@@ -88,14 +88,14 @@ zh:
         one: "search result found for"
         other: "找到以下搜索结果"
   card:
-    collected: "收集的 %{family}"
+    collected: "采集的 %{family}"
     identified: "已鉴定为 %{family}"
-    identified_collected: "收集了 %{collected} 并鉴定了 %{identified}"
+    identified_collected: "采集了 %{collected} 并鉴定了 %{identified}"
     claimed:
       one: specimen claimed
       other: 已认领的标本
     attributed:
-      one:
+      one: 标本归属
       other: 标本归属
     helped:
       one: person helped
@@ -103,24 +103,24 @@ zh:
   charts:
     year: 年
     number_specimens: "# 标本"
-    identified: 已识别
-    collected: 已收集
+    identified: 已鉴定
+    collected: 已采集
     people: 人员
   country:
     country_title: 国家
     lede: 来自ORCID账户和维基数据（Wikidata）条目中规定的国家或GBIF中的标本记录
     intro: 来自ORCID账户和维基数据（Wikidata）条目中规定的国家。按分类科属（Taxon Family）搜索专业知识。
-    collected_from: "从 %{country} 收集的 %{family}"
+    collected_from: "从 %{country} 采集的 %{family}"
     identified_from: "来自 %{country} 被鉴定的 %{family}"
-    collected_identified_from: "收集或鉴定来自 %{country} 的 %{family}"
-    no_one_collected_from: "未有人从 %{country} 收集 %{family}"
+    collected_identified_from: "采集或鉴定来自 %{country} 的 %{family}"
+    no_one_collected_from: "未有人从 %{country} 采集 %{family}"
     no_one_identified_from: "没有来自 %{country} 的 %{family} 的鉴定"
-    no_one_collected_identified_from: "没有来自 %{country} 的 %{family} 的收集或鉴定"
+    no_one_collected_identified_from: "没有来自 %{country} 的 %{family} 的采集或鉴定"
     no_one_message: "未发现来自 %{country} 的结果，请按分类科属搜索专业知识。"
   dataset:
     dataset_title: 数据集
     search_title: 数据集查询
-    scribes_title: 文书员
+    scribes_title: 记录员
     lede:
       unit:
         one: "dataset from GBIF"
@@ -132,39 +132,39 @@ zh:
     placeholder: 巴西的蝴蝶
     people: 人员
     visualizations: 可视化
-    scribes: 文书员
+    scribes: 记录员
     agents: 代理
     agent_strings: 代理字符串
     agent_strings_unclaimed: 未认领的代理字符串
     alphabetical: 按字母顺序
     counts: 计数
     unclaimed: 未认领的
-    no_agents_alert: 标本数据中解析出的收集者和鉴定者姓名的原始字符串尚未记录在此数据集中
+    no_agents_alert: 标本数据中解析出的采集员和鉴定员姓名的原始字符串尚未记录在此数据集中
     agents_alert:
       unit:
         one: "raw string from parsed collector and determiner names in specimen data included in this dataset"
-        other: "此数据集包含的标本数据中解析出的收集者和鉴定者姓名的原始字符串"
+        other: "此数据集包含的标本数据中解析出的采集员和鉴定员姓名的原始字符串"
     agents_alert_unclaimed:
       unit:
         one: "raw string from parsed collector and determiner names in unattributed specimen data included in this dataset"
-        other: "此数据集中未归属标本数据中解析出的收集者和鉴定者姓名的原始字符串"
+        other: "此数据集中未归属标本数据中解析出的采集员和鉴定员姓名的原始字符串"
     none_found: "没有找到%{searched} 的数据集"
     search_found:
       unit:
         one: "search result for"
         other: "搜索结果"
-    no_scribes_alert: 文书员尚未将标本归属于此数据集中代表的的收集者或鉴定者
+    no_scribes_alert: 文书员尚未将标本归属于此数据集中代表的的采集员或鉴定员
     scribes_alert:
       unit:
         one: "scribe attributed specimens to collectors or determiners represented in this dataset"
-        other: "将标本归属于此数据集中代表的收集者或鉴定者的记录员"
+        other: "将标本归属于此数据集中代表的采集员或鉴定员的记录员"
     no_users_alert: 此数据集的标本尚未被认领或归属
     users_alert:
       unit:
         one: "person claimed or was attributed specimens represented in this dataset"
         other: "此数据集中已认领或被归属标本的人"
     timeline: 时间轴
-    none_collected_timeline: "尚未有人收集并注明收集日期"
+    none_collected_timeline: "尚未有人采集并注明采集日期"
     none_identified_timeline: "尚未有人鉴定并注明鉴定日期"
     not_all_features: 大型数据集，无法提供所有功能。
     badge_tooltip: 点击这里获取此徽章的链接 。
@@ -242,10 +242,10 @@ zh:
     refresh_stats: 刷新统计数据
     settings: 设置
     bulk_assignment: 批量分配
-    collected_all: 全部收集
-    collected: 已收集
-    identified_all: 已识别所有
-    identified: 已识别
+    collected_all: 全部采集
+    collected: 已采集
+    identified_all: 已鉴定所有
+    identified: 已鉴定
     both: 两者
     either: 任一
     per_page: 每页
@@ -278,8 +278,8 @@ zh:
     add_someone_lede: "添加尚未发现的人员"
     country_name_lede: 来自在ORCID或Wikidata声明的国家
     latest_lede: 加入我们的行列，感谢你的同伴、导师或任何激励你的人
-    country_lede: 加入抄写员的行列，感谢你的同伴、导师或任何激励您的人
-    roster_lede: 加入抄写员的行列，感谢你的同伴、导师或任何激励你的人
+    country_lede: 加入记录员的行列，感谢你的同伴、导师或任何激励您的人
+    roster_lede: 加入记录员的行列，感谢你的同伴、导师或任何激励你的人
     person: 人员
     progress: 进度
     public: 公开
@@ -305,7 +305,7 @@ zh:
     taxa: 分类科
     specimens: 标本
     visualizations: 可视化
-    strings: 收集者字符串
+    strings: 采集员字符串
     support: 帮助者
     specialties: 专业
     public_profile: 公开档案
@@ -316,11 +316,11 @@ zh:
     problems: 发现的问题
     collections_before_birth: "出生前的搜藏："
     collections_after_death: "身亡后的搜藏："
-    identifications_before_birth: "出生前的识别："
-    identifications_after_death: "身亡后的识别"
+    identifications_before_birth: "出生前的鉴定："
+    identifications_after_death: "身亡后的鉴定"
     view: 查看
     none: 无
-    identified_from: 识别自
+    identified_from: 鉴定自
     collected_from: 采集自
     no_filter_alert: Bionomia 记录员尚未在此筛选条件下归属标本。
     not_helped_alert: Bionomia 记录员尚未归属标本。
@@ -331,29 +331,29 @@ zh:
     help_question: "想要帮助将标本归属给 %{name} 吗？"
     try_again: 请重试。
     no_specialities_alert: Bionomia 记录员尚未归属标本。
-    specialties_alert: "收集或鉴定以下分类科的标本："
-    co-collectors: 共同收集者
-    no_co_collectors_alert: 尚未记录共同收集者。
-    co_collectors_alert: "选择一位共同采集者来调整共同标本的归属。"
+    specialties_alert: "采集或鉴定以下分类科的标本："
+    co-collectors: 共同采集员
+    no_co_collectors_alert: 尚未记录共同采集员。
+    co_collectors_alert: "选择一位共同采集员来调整共同标本的归属。"
     co_collector_name: "与 %{name} 共同采集的标本。"
     switch: 切换
     not_co_collector_name: "标本未与 %{name} 共同采集"
-    identified_for: 为识别
+    identified_for: 为鉴定
     no_identified_for_alert: 尚未有鉴定接收者的记录。
-    identified_for_alert: "选择一位采集者来调整标本的归属。"
+    identified_for_alert: "选择一位采集员来调整标本的归属。"
     identified_for_name: "由 %{name} 采集并由 %{other_name} 鉴定的标本。"
-    not_identified_for_name: "标本尚未被 %{name} 采集，且未被 %{other_name} 识别。"
+    not_identified_for_name: "标本尚未被 %{name} 采集，且未被 %{other_name} 鉴定。"
     identified_for_count:
       one: "collected specimen"
       other: "采集的标本"
-    identifications_by: 识别者
-    no_determiners_alert: 尚未记录识别者。
-    determiners_alert: "选择一位识别者来调整由他们鉴定的标本的归属。"
-    determiner_name: "由 %{name} 识别并由 %{other_name} 采集的标本。"
-    not_determiner_name: "标本尚未被 %{name} 识别，且未被 %{other_name} 采集。"
+    identifications_by: 鉴定员
+    no_determiners_alert: 尚未记录鉴定员。
+    determiners_alert: "选择一位鉴定员来调整由他们鉴定的标本的归属。"
+    determiner_name: "由 %{name} 鉴定并由 %{other_name} 采集的标本。"
+    not_determiner_name: "标本尚未被 %{name} 鉴定，且未被 %{other_name} 采集。"
     identified_by_count:
       one: "identified specimen"
-      other: "已识别的标本"
+      other: "已鉴定的标本"
     bulk_attribution: 批量归属
     reclaim_ignored: 回归被忽略的归属
     fix_claims: 修正归属
@@ -374,7 +374,7 @@ zh:
     download: 下载
     download_label: 下载发现的记录
     upload_label: 上传包含声明的 csv
-    choose_instructions_html: "选择 %{coll_img} 收集的、%{det_img} 鉴定的，或两者。"
+    choose_instructions_html: "选择 %{coll_img} 采集的、%{det_img} 鉴定的，或两者。"
     search_count:
       one: "1 search result for %{search}"
       other: "共找到 %{count} 条与 %{search} 有关的搜索结果"
@@ -404,7 +404,7 @@ zh:
     orcid_logo: ORCID 标志
   layout:
     profiles: 个人资料
-    scribes: 抄写员
+    scribes: 记录员
     organizations: 组织
     datasets: 数据集
     articles: 文集
@@ -451,7 +451,7 @@ zh:
     lede: 从 GBIF 获取的部分数据
     record: 记录
     event: 活動
-    identification: 识别
+    identification: 鉴定
     location: 位置
     has_image: 包含图像
     not_them: 不归于他们
@@ -460,12 +460,12 @@ zh:
     warning: "%{datetime_off} Bionomia 将离线 %{duration} ，以刷新来自全球生物多样性信息设施的数据。"
   on_this_day:
     global_title: 往昔今日
-    born_title: 今天出生的采集者
-    died_title: 今天逝世的采集者
+    born_title: 今天出生的采集员
+    died_title: 今天逝世的采集员
     collected_title: 此日采集的
     collector_born: 收藏家出生于
     collector_died: 收藏家逝世
-    type_collected: 收集的模式标本
+    type_collected: 采集的模式标本
     none_died_alert: "没有找到在 %{date} 逝世的人"
     none_born_alert: "没有找到在 %{date} 出生的人"
     limit_alert: 结果仅限50个正模式标本记录
@@ -558,7 +558,7 @@ zh:
       unit:
         one: "publication made use of your specimen data downloaded from GBIF"
         other: "使用了从 GBIF 下载含有你的样本数据的刊物"
-    identified_from: 识别自
+    identified_from: 鉴定自
     collected_from: 采集自
     resume: 用于您的简历
     specimens_used: specimens used
@@ -570,8 +570,8 @@ zh:
     delete: 删除
     permanent_delete: 永久删除您的帐户。
     delete_warning: 您确定要删除您的账户吗？您所有的认领和所有您为他人的归属将被永久删除。
-    email_instructions: 接收使用来自您识别或采集的标本数据发表的新论文的电邮通知。 在您的 ORCID 帐户中公开您的主要电子邮件地址，然后刷新您的 ORCID 数据。
-    email_procedure: "接收使用您识别或采集的标本数据发表的新刊物的通知。您的主要公开电子邮件地址 %{email} 来自您的 ORCID 账户。"
+    email_instructions: 接收使用来自您鉴定或采集的标本数据发表的新论文的电邮通知。 在您的 ORCID 帐户中公开您的主要电子邮件地址，然后刷新您的 ORCID 数据。
+    email_procedure: "接收使用您鉴定或采集的标本数据发表的新刊物的通知。您的主要公开电子邮件地址 %{email} 来自您的 ORCID 账户。"
     disconnect: 断开连接
     disconnect_warning: 您确定要断开与 Zenodo 的帐户连接吗？您的数据将保持存档和可访问状态，但不会创建新版本。如果您以后重新连接您的帐户，一个新的数据包将被创建。
     connect_zenodo: 将您的帐户连接到Zenodo，您的认领将存储为版本化快照并分配DataCite DOI。这将提供引文以供您在简历上使用。
@@ -589,7 +589,7 @@ zh:
     make_public_message: 包括您在公开的个人档案中的账户。您的请求将包含在批量数据下载中，通过谷歌Chrome和Firefox扩展显示。
     no_candidates_alert: Bionomia 没有在 GBIF 索引中找到任何您可能采集或鉴定过的标本。
     ignored_alert: 您标记为 "不是我 "的标本记录将出现在这里。
-    scribe_not_helped: 这位 Bionomia 抄写员尚未帮助您认领标本。
+    scribe_not_helped: 这位 Bionomia 记录员尚未帮助您认领标本。
     upload_error: 请上传小于 5MB 的图像。
     bulk_claim: 批量认领
     advanced_search: 高级搜索与筛选
@@ -612,8 +612,8 @@ zh:
     upload_skipped: 现有认领（如果存在于您的上传中）将被跳过。
     upload_view: 查看
     upload_view_html: "%{view} 您所有的认领。"
-    co_collectors: 共同采集者
-    no_co_collectors_alert: 共同采集者尚未记录在案。
+    co_collectors: 共同采集员
+    no_co_collectors_alert: 共同采集员尚未记录在案。
     co_collectors_alert: "您已与此人共同采集："
     co_collector_name: "与 %{name} 共同采集的标本。"
     switch: 查看他们的
@@ -621,22 +621,22 @@ zh:
     co_collected_count:
       one: "co-collected specimen"
       other: "共同采集的标本"
-    identified_for: 为识别
+    identified_for: 为鉴定
     no_identified_for_alert: 您为其进行物种分类的人尚未记录在案。
-    identified_for_alert: "选择一位采集者，调整由其采集并由您鉴定的标本的归属。"
+    identified_for_alert: "选择一位采集员，调整由其采集并由您鉴定的标本的归属。"
     identified_for_name: "由 %{name} 采集并由您鉴定的标本。"
-    not_identified_for_name: "标本尚未被 %{name} 采集，且未被您识别。"
+    not_identified_for_name: "标本尚未被 %{name} 采集，且未被您鉴定。"
     identified_for_count:
       one: "collected specimen"
       other: "采集的标本"
-    identifications_by: 鉴定人
-    no_determiners_alert: 尚未记录您所采集标本的鉴定者。
+    identifications_by: 鉴定员
+    no_determiners_alert: 尚未记录您所采集标本的鉴定员。
     determiners_alert: "您的标本已由以下人员鉴定："
     determiner_name: "标本由 %{name} 鉴定。"
     not_determiner_name: "您采集的标本尚未被 %{name} 鉴定。"
     identified_by_count:
       one: "identified specimen"
-      other: "已识别的标本"
+      other: "已鉴定的标本"
     zenodo_html: "您的个人资料已链接至 %{zenodo}，您的认领已经进行版本管理和归档。"
     language: 首选语言
     language_explanation: 请选择您的首选语言
@@ -658,7 +658,7 @@ zh:
   specimen:
     scientific_name: 学名
     collected_by: 收藏者
-    identified_by: 鉴定者
+    identified_by: 鉴定员
     date_collected: 采集日期
     date_identified: 鉴定日期
     institution: 机构
@@ -667,15 +667,15 @@ zh:
     country: 国家
     family: 科
     type_status: 类型状态
-    scribe: 抄写员
+    scribe: 记录员
     not_me: 不是我
     not_them: 不是他们
     not_recorded: 未记录
     remove: 移除
     mismatch: 与寿命不匹配
   scribes:
-    scribes_title: 抄写员
-    lede: "%{scribe_count} 名抄写员已将 %{attribution_count} 自然历史标本归功于 %{recipient_count} 同行、导师和榜样的人"
+    scribes_title: 记录员
+    lede: "%{scribe_count} 名记录员已将 %{attribution_count} 自然历史标本归功于 %{recipient_count} 同行、导师和榜样的人"
   statistics:
     title: 统计数据
     claims: 累积认领
@@ -699,7 +699,7 @@ zh:
     timeline: 时间轴
     agent_strings: 代理字符串
     collected: 已采集
-    identified: 已识别
+    identified: 已鉴定
     number_collected:
       unit:
         one: "person collected specimens from data in GBIF"
@@ -707,7 +707,7 @@ zh:
     number_identified:
       unit:
         one: "person identified specimens from data in GBIF"
-        other: "GBIF 的数据中识别标本的鉴定者"
+        other: "GBIF 的数据中鉴定标本的鉴定员"
     number_agents:
       unit:
         one: "agent string from specimen data in GBIF"
@@ -723,14 +723,14 @@ zh:
     example_families: 随机示例
     none_collected_identified: "未有人采集或鉴定过 %{taxon}"
     none_collected: "未有人采集过 %{taxon}"
-    none_identified: "未有人识别过 %{taxon}"
+    none_identified: "未有人鉴定过 %{taxon}"
     none_collected_timeline: "尚未有人采集 %{taxon} 并注明采集日期"
-    none_identified_timeline: "尚未有人识别 %{taxon} 并注明识别日期"
-    no_agents: "尚未有人采集或识别过 %{taxon}"
+    none_identified_timeline: "尚未有人鉴定 %{taxon} 并注明鉴定日期"
+    no_agents: "尚未有人采集或鉴定过 %{taxon}"
     taxon_string: 分类科
     start_year: 起始年份
     end_year: 结束年份
-    user_title: "%{taxon} 采集者或鉴定者"
+    user_title: "%{taxon} 采集员或鉴定员"
     agent_count_title: "%{taxon} 代理计数"
     agent_unclaimed_title: "代理未认领 %{taxon}"
     agents_title: "%{taxon} 代理"
@@ -744,9 +744,9 @@ zh:
     science_enabled: 科学启用
     science_enabled_specimens: 标本数据启用的科学
     helped_by: 得到帮助
-    strings: 采集者字符串
+    strings: 采集员字符串
     helped: 帮助过的人
-    no_scribe: 标本尚未被抄写员归属。
+    no_scribe: 标本尚未被记录员归属。
     attributions_by: "由下列人士作出的归因："
     private: 档案资料尚不可公开。
     private_with_claims:
@@ -760,13 +760,13 @@ zh:
       unit:
         one: "publication used specimen data downloaded from GBIF"
         other: "使用了从GBIF下载的样本数据的出版物"
-    no_co_collectors_alert: 共同采集者尚未记录在案。
+    no_co_collectors_alert: 共同采集员尚未记录在案。
     co_collectors_alert: "与此人共同采集："
-    co_collectors: 共同采集者
-    identified_for: 为识别
-    identifications_by: 鉴定人
+    co_collectors: 共同采集员
+    identified_for: 为鉴定
+    identifications_by: 鉴定员
     no_identifications_by_alert: 对采集标本的鉴定尚未记录在案。
-    identifications_by_alert: "采集的标本后来由下列人员识别："
+    identifications_by_alert: "采集的标本后来由下列人员鉴定："
     no_identified_for_alert: 对他人采集标本的鉴定尚未记录在案。
     identified_for_alert: "鉴定了由以下人员采集的标本："
     comment_alert: 分享一个有关采集历程、事件或任何其它事情的趣闻。
@@ -774,22 +774,22 @@ zh:
     institutions_alert: "在下列机构存放和管理的标本："
     organizations: 组织
     specimens_metric: 标本
-    specimens_identified: 已识别标本
+    specimens_identified: 已鉴定标本
     specimens_collected: 采集的标本
     no_specialities_alert: 尚未记录专业。
     specialties_alert: "采集或鉴定以下分类科的标本："
     families_collected: 采集的分类科
-    families_identified: 已识别的分类科
+    families_identified: 已鉴定的分类科
     no_claims_alert: 认领或归属尚未记录在案。
     no_helped_alert: 尚未归属。
     progress: 进度
-    identified_from: 识别自
+    identified_from: 鉴定自
     collected_from: 采集自
     dates_collected: 采集日期
     dates_identified: 鉴定日期
     specimens_attributed: 归属的标本
     collected: 已采集
-    identified: 已识别
+    identified: 已鉴定
     not_all_columns: 并未显示所有可用列。
     map: 地图
     list: 列表
