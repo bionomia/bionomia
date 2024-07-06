@@ -568,6 +568,8 @@ de:
     email_notifications: E-Mail-Benachrichtigungen
     delete_account: Ihr Konto löschen
     delete: Löschen
+    delete_reason: Why do you want to delete your profile?
+    delete_feedback: Please provide a reason.
     permanent_delete: Ihr Konto endgültig löschen.
     delete_warning: Sind Sie sicher, dass Sie Ihr Konto löschen möchten? Alle Ihre Beanspruchungen UND alle Zuordnungen, die Sie für andere geleistet haben, werden dauerhaft entfernt.
     email_instructions: Erhalten Sie E-Mail-Benachrichtigungen über neue Veröffentlichungen, die solche Daten verwenden, die von den von Ihnen identifizierten oder gesammelten Exemplaren stammen. Machen Sie Ihre primäre E-Mail-Adresse in Ihrem ORCID-Konto öffentlich zugänglich und aktualisieren Sie dann Ihre ORCID-Daten oben.
