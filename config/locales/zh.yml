@@ -568,6 +568,8 @@ zh:
     email_notifications: 邮件通知
     delete_account: 删除您的帐户
     delete: 删除
+    delete_reason: Why do you want to delete your profile?
+    delete_feedback: Please provide a reason.
     permanent_delete: 永久删除您的帐户。
     delete_warning: 您确定要删除您的账户吗？您所有的认领和所有您为他人的归属将被永久删除。
     email_instructions: 接收使用来自您鉴定或采集的标本数据发表的新论文的电邮通知。 在您的 ORCID 帐户中公开您的主要电子邮件地址，然后刷新您的 ORCID 数据。
