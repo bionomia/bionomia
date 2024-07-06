@@ -267,7 +267,7 @@ ALTER TABLE `messages`
 
 ALTER TABLE `occurrences`
   ADD PRIMARY KEY (`gbifID`) USING BTREE,
-  ADD KEY `typeStatus_idx` (`typeStatus`(50)),
+  ADD KEY `typeStatus_idx` (`typeStatus`(50), `hasImage`),
   ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`,`occurrenceID`(36)),
   ADD KEY `country_code_idx` (`countryCode`),
   ADD KEY `eventDate_processed_idx` (`eventDate_processed_year`,`eventDate_processed_month`,`eventDate_processed_day`),

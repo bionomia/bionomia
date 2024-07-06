@@ -21,8 +21,8 @@ end.parse!
 if options[:holotype]
   date = DateTime.now
   occurrences = Occurrence.where(typeStatus: 'holotype')
-                          .where("eventDate_processed_year > 1800 and eventDate_processed_month = ? and eventDate_processed_day = ?", date.month, date.day)
                           .where(hasImage: true)
+                          .where("eventDate_processed_year > 1800 and eventDate_processed_month = ? and eventDate_processed_day = ?", date.month, date.day)
                           .limit(100)
                           .pluck(:id)
   uo = UserOccurrence.where(occurrence_id: occurrences)
