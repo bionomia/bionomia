@@ -626,6 +626,8 @@ uk:
     email_notifications: Email Notifications
     delete_account: Delete Your Account
     delete: Delete
+    delete_reason: Why do you want to delete your profile?
+    delete_feedback: Please provide a reason.
     permanent_delete: Permanently delete your account.
     delete_warning: Are you sure you want to delete your account? All your claims AND all the attributions you have made for others will be permanently removed.
     email_instructions: Receive email notifications of new papers that made use of data derived from the specimens you identified or collected. Make your primary email address publicly available in your ORCID account and then refresh your ORCID data above.

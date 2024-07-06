@@ -568,6 +568,8 @@ fr:
     email_notifications: Notifications Par Courriel
     delete_account: Supprimer Votre Compte
     delete: Supprimer
+    delete_reason: Why do you want to delete your profile?
+    delete_feedback: Please provide a reason.
     permanent_delete: Supprimez définitivement votre compte.
     delete_warning: Voulez-vous vraiment supprimer votre compte? Toutes vos réclamations ET toutes les attributions que vous avez faites seront définitivement supprimées.
     email_instructions: Recevez des notifications par courriel de nouveaux articles scientifiques qui ont utilisé des données dérivées des spécimens que vous avez identifiés ou collectés. Rendez votre adresse courriel principale accessible au public dans votre compte ORCID, puis actualisez vos données ci-dessus.
