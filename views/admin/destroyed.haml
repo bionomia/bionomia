@@ -24,6 +24,12 @@
           %a{href: url("/admin/users/destroyed?order=redirect_to&sort=#{sort}")}
             Redirect To
         %th.text-nowrap{scope: "col"}
+          %a{href: url("/admin/users/destroyed?order=reason&sort=#{sort}")}
+            Reason
+        %th.text-nowrap{scope: "col"}
+          %a{href: url("/admin/users/destroyed?order=created_at&sort=#{sort}")}
+            Created
+        %th.text-nowrap{scope: "col"}
 
     %tbody
       - @results.each do |d|
@@ -47,6 +53,10 @@
             - if d.redirect_to
               %a{href: url("/admin/user/#{d.redirect_to}")}
                 #{d.redirect_to}
+          %td
+            #{d.reason}
+          %td
+            #{d.created_at}
           %td
             - if d.identifier.is_orcid? && d.redirect_to.nil?
               %button.btn.btn-small.btn-outline-danger.destroyed{type: "button", "data-destroyed-id": d.id } Remove

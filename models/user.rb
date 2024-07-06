@@ -20,7 +20,6 @@ class User < ActiveRecord::Base
   before_update :set_update_time
   after_create :update_profile, :add_search, unless: :skip_callbacks
   after_update :update_search, unless: :skip_callbacks
-  before_destroy :create_destroyed_user
   after_destroy :remove_search, unless: :skip_callbacks
 
   def self.merge_users(src_id:, dest_id:)

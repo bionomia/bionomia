@@ -121,13 +121,19 @@
             #deleteModal.modal.fade{tabindex:"-1", role:"dialog", "aria-labelledby":"deleteModal", "aria-hidden":"true"}
               .modal-dialog{role:"document"}
                 .modal-content
-                  .modal-header
-                    %h5#deleteLabel.modal-title= I18n.t('profile.delete_account')
-                    %button.close{type:"button", "data-dismiss":"modal", "aria-label":"Close"}
-                      %span{"aria-hidden":"true"} &times;
-                  .modal-body= I18n.t('profile.delete_warning')
-                  .modal-footer
-                    %form{action: "/profile/destroy", method: :post}
+                  %form.needs-validation{action: "/profile/destroy", method: :post, novalidate: true}
+                    .modal-header
+                      %h5#deleteLabel.modal-title= I18n.t('profile.delete_account')
+                      %button.close{type:"button", "data-dismiss":"modal", "aria-label":"Close"}
+                        %span{"aria-hidden":"true"} &times;
+                    .modal-body
+                      = I18n.t('profile.delete_warning')
+                      .mt-2.form-row
+                        %label{for: "reason"}= I18n.t('profile.delete_reason')
+                        %textarea.w-100.form-control{name: "reason", rows: 3, required: true}
+                        .invalid-feedback
+                          = I18n.t('profile.delete_feedback')
+                    .modal-footer
                       %button.btn.btn-sm.btn-outline-secondary{type:"button", "data-dismiss":"modal"}= I18n.t('profile.cancel')
                       %input{type: :hidden, name: "_method", value: 'DELETE'}
                       %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}

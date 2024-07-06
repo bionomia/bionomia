@@ -390,6 +390,8 @@ module Sinatra
               end
               name = @admin_user.viewname.dup
               BIONOMIA.cache_clear("blocks/#{@admin_user.identifier}-stats")
+              reason = params["reason"].truncate(255)
+              DestroyedUser.find_or_create_by({ identifier: @admin_user.identifier, reason: reason })
               @admin_user.destroy
               flash.next[:destroyed] = name
               redirect '/admin/users'

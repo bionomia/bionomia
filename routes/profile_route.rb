@@ -575,6 +575,8 @@ module Sinatra
 
             delete '/destroy' do
               BIONOMIA.cache_clear("blocks/#{@user.identifier}-stats")
+              reason = params["reason"].truncate(255)
+              DestroyedUser.find_or_create_by({ identifier: @user.identifier, reason: reason })
               @user.destroy
               session.clear
               redirect '/'
