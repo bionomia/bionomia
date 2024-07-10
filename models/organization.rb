@@ -107,10 +107,7 @@ class Organization < ActiveRecord::Base
       .where("occurrences.institutionCode NOT IN (?)", institution_codes)
       .where("occurrences.#{date_field} >= #{start_year}")
       .unscope(:order)
-      .group(:institutionCode)
-      .count
-      .sort_by {|_key, value| -value}
-      .to_h
+      .pluck(:institutionCode).tally
   end
 
   def others_specimens_by_year(type = "recorded", year = DateTime.now.year)
@@ -125,8 +122,7 @@ class Organization < ActiveRecord::Base
       .where.not(occurrences: { institutionCode: nil })
       .where("occurrences.institutionCode NOT IN (?)", institution_codes)
       .unscope(:order)
-      .group(:institutionCode)
-      .count
+      .pluck(:institutionCode).tally
   end
 
   def articles

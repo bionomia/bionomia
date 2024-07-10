@@ -83,13 +83,14 @@ if options[:directory]
     puts "Making public profiles...".green
     users = User.where(is_public: true)
     CSV.open(csv_file, 'w') do |csv|
-      csv << ["Family", "Given", "Particle", "OtherNames", "Country", "Keywords", "wikidata", "ORCID", "URL"]
+      csv << ["Family", "Given", "Particle", "OtherNames", "label", "Country", "Keywords", "wikidata", "ORCID", "URL"]
       users.find_each do |u|
         csv << [
           u.family,
           u.given,
           u.particle,
           u.other_names,
+          u.label,
           u.country,
           u.keywords,
           u.wikidata,
