@@ -72,6 +72,10 @@ OptionParser.new do |opts|
     options[:flagged_deletion] = true
   end
 
+  opts.on("-b", "--make-public", "Make private wikidata profiles public that have received attributions") do
+    options[:make_public] = true
+  end
+
   opts.on("-h", "--help", "Prints this help") do
     puts opts
     exit
@@ -208,4 +212,12 @@ elsif options[:modified_wikidata]
 elsif options[:duplicates]
   wiki = Bionomia::WikidataSearch.new
   wiki.merge_users
+end
+
+if options[:make_public]
+  User.where.not(wikidata: nil).where(is_public: false).find_each do |u|
+    next if !u.has_specimens?
+    u.is_public = true
+    u.save
+  end
 end
