@@ -215,9 +215,16 @@ elsif options[:duplicates]
 end
 
 if options[:make_public]
-  User.where.not(wikidata: nil).where(is_public: false).find_each do |u|
-    next if !u.has_specimens?
+  last_week = DateTime.now - 7.days
+  User.joins(:user_occurrences)
+      .where("user_occurrences.created >= '#{last_week}'")
+      .where.not(user_occurrences: { visible: nil })
+      .where.not(wikidata: nil)
+      .where(is_public: false)
+      .distinct
+      .find_each do |u|
     u.is_public = true
     u.save
+    u.flush_caches
   end
 end
