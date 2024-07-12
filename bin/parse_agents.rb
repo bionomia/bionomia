@@ -19,6 +19,8 @@ OptionParser.new do |opts|
 end.parse!
 
 if options[:queue]
+  Sidekiq::Stats.new.reset
+
   progressbar = ProgressBar.create(title: "Agent Jobs", total: AgentJob.count)
 
   group = []
