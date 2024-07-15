@@ -69,7 +69,6 @@
               %a.dropdown-item{href: "#{Settings.base_url}#{request.fullpath}"} English
             - locale_name_pairs.each do |lang|
               - next if lang[0] == "en"
-              - next if lang[0] == "zh" 
               %a.dropdown-item{href: "#{Settings.base_url.sub("://", "://#{lang[0]}.")}#{request.fullpath}"} #{lang[1]}
 
       - if authorized?
