@@ -1,8 +1,8 @@
 hu:
-  language: English
-  locale: "en_EN"
-  "true": "Yes"
-  "false": "No"
+  language: Magyar
+  locale: "hu"
+  "true": "Igen"
+  "false": "Nem"
   number:
     format:
       delimiter: ","
@@ -14,11 +14,11 @@ hu:
       decimal_units:
         format: "%n %u"
         units:
-          billion: Billion
+          billion: Milliárd
           million: Million
           quadrillion: Quadrillion
           thousand: Thousand
-          trillion: Trillion
+          trillion: Trillió
           unit: ''
       format:
         delimiter: ''
