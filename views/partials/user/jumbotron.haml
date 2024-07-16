@@ -124,7 +124,8 @@
           - else
             %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD", width:18}
 
-      - if admin_authorized?
+    - if admin_authorized?
+      .m-0.pl-3.pr-3
         %a.mb-2.text-nowrap{href: url("/admin/user/#{@viewed_user.identifier}/settings")}
           %i.fas.fa-cog
           = I18n.t('general.settings')

@@ -114,7 +114,7 @@
     = haml :'youtube', layout: false, locals: { youtube_id: @admin_user.youtube_id }
 
   .mt-3.pt-3.border-top
-    %p.mb-0
+    .m-0.pl-3.pr-3
       - if @admin_user.is_public?
         %a.mr-2.text-nowrap{href: url("/#{@admin_user.identifier}")}
           %i.fas.fa-user
@@ -132,7 +132,7 @@
           %i.fab.fa-orcid
         - else
           %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD", width:18}
-    %p.mb-0
+    .m-0.pl-3.pr-3
       - if locals[:active_page] == "settings"
         %a.mb-2.text-nowrap{href: url("/admin/user/#{@admin_user.identifier}")}
           %i.fas.fa-user

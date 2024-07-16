@@ -86,10 +86,10 @@
 
   .mt-3.pt-3.border-top
     - if !@user.is_public?
-      %p.m-3.alert.alert-warning
+      .m-3.alert.alert-warning
         %i.fas.fa-lock
         = I18n.t('profile.private_message_html', specimens: link_to(I18n.t('profile.specimens'), url("/profile/candidates")), settings: link_to(I18n.t('profile.settings'), url("/profile/settings")))
-    %p.m-0.pl-3.pr-3
+    .m-0.pl-3.pr-3
       - if @user.is_public?
         %a.mr-2.mb-2.text-nowrap{href: url("/#{@user.orcid}")}
           %i.fas.fa-users
@@ -101,6 +101,7 @@
         %i.fas.fa-sync-alt
         = I18n.t('general.refresh_profile')
         %i.fab.fa-orcid
+    .m-0.pl-3.pr-3
       - if locals[:active_page] != "settings"
         %a.mb-2.text-nowrap{href: url("/profile/settings")}
           %i.fas.fa-cog
