@@ -62,13 +62,13 @@ module Sinatra
 
             get '/new-people' do
               users = User.where.not(orcid: nil).order(created: :desc).limit(25)
-              @pagy, @results = pagy(users, items: 25)
+              @pagy, @results = pagy(users, limit: 25)
               haml :'help/new_people', locals: { active_page: "help", active_tab: "orcid" }
             end
 
             get '/new-people/wikidata' do
               users = User.where.not(wikidata: nil).order(created: :desc).limit(25)
-              @pagy, @results = pagy(users, items: 25)
+              @pagy, @results = pagy(users, limit: 25)
               haml :'help/new_people', locals: { active_page: "help", active_tab: "wikidata" }
             end
 
@@ -88,7 +88,7 @@ module Sinatra
               @results = []
               begin
                 users = User.where("country_code LIKE ?", "%#{country_code}%").order(:family)
-                @pagy, @results = pagy(users, items: 30)
+                @pagy, @results = pagy(users, limit: 30)
                 haml :'help/country', locals: { active_page: "help" }
               rescue
                 status 404
@@ -322,7 +322,7 @@ module Sinatra
                 occurrences = occurrences.order(created: :desc)
               end
 
-              @pagy, @results = pagy(occurrences, items: search_size, page: @page)
+              @pagy, @results = pagy(occurrences, limit: search_size, page: @page)
               haml :'help/specimens', locals: { active_page: "help" }
             end
 
@@ -341,7 +341,7 @@ module Sinatra
               end
               @page = 1 if @page <= 0
 
-              @pagy, @results = pagy_array(helped_by, items: search_size, page: @page)
+              @pagy, @results = pagy_array(helped_by, limit: search_size, page: @page)
               haml :'help/support', locals: { active_page: "help" }
             end
 
@@ -381,7 +381,7 @@ module Sinatra
               end
               @page = 1 if @page <= 0
 
-              @pagy, @results = pagy_array(strings.to_a, items: 50, page: @page)
+              @pagy, @results = pagy_array(strings.to_a, limit: 50, page: @page)
               haml :'help/strings', locals: { active_page: "help" }
             end
 
@@ -427,7 +427,7 @@ module Sinatra
               end
               @page = 1 if @page <= 0
 
-              @pagy, @results = pagy(co_collections, items: search_size, page: @page)
+              @pagy, @results = pagy(co_collections, limit: search_size, page: @page)
               haml :'help/co_collector_specimens', locals: { active_page: "help" }
             end
 
@@ -473,7 +473,7 @@ module Sinatra
               end
               @page = 1 if @page <= 0
 
-              @pagy, @results = pagy(specimens, items: search_size, page: @page)
+              @pagy, @results = pagy(specimens, limit: search_size, page: @page)
               haml :'help/identified_for_specimens', locals: { active_page: "help" }
             end
 
@@ -519,7 +519,7 @@ module Sinatra
               end
               @page = 1 if @page <= 0
 
-              @pagy, @results = pagy(determinations, items: search_size, page: @page)
+              @pagy, @results = pagy(determinations, limit: search_size, page: @page)
               haml :'help/identifications_by_specimens', locals: { active_page: "help" }
             end
 
@@ -558,7 +558,7 @@ module Sinatra
               end
               @page = 1 if @page <= 0
 
-              @pagy, @results = pagy(hidden_occurrences, items: search_size, page: @page)
+              @pagy, @results = pagy(hidden_occurrences, limit: search_size, page: @page)
               haml :'help/ignored', locals: { active_page: "help" }
             end
 

@@ -37,7 +37,7 @@ module Sinatra
           response = client.search index: Settings.elastic.article_index, from: from, size: 30, body: body
           results = response["hits"].deep_symbolize_keys
 
-          @pagy = Pagy.new(count: results[:total][:value], items: 25, page: page)
+          @pagy = Pagy.new(count: results[:total][:value], limit: 25, page: page)
           @results = results[:hits]
         end
 
@@ -48,19 +48,19 @@ module Sinatra
 
         def article_agents
           article_from_param
-          @pagy, @results = pagy(@article.agents.order(:family), items: 75)
+          @pagy, @results = pagy(@article.agents.order(:family), limit: 75)
         end
 
         def article_agents_counts
           article_from_param
           data = @article.agents_occurrence_counts.to_a
-          @pagy, @results = pagy_array(data, count: data.size, items: 75)
+          @pagy, @results = pagy_array(data, count: data.size, limit: 75)
         end
 
         def article_agents_unclaimed
           article_from_param
           data = @article.agents_occurrence_counts_unclaimed.to_a
-          @pagy, @results = pagy_array(data, count: data.size, items: 75)
+          @pagy, @results = pagy_array(data, count: data.size, limit: 75)
         end
 
         def article_stats(article)

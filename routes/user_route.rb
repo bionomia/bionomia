@@ -189,7 +189,7 @@ module Sinatra
             end
             @page = 1 if @page <= 0
 
-            @pagy, @results = pagy_array(strings.to_a, items: 50, page: @page)
+            @pagy, @results = pagy_array(strings.to_a, limit: 50, page: @page)
             locals = {
               active_page: "roster",
               active_tab: "strings"
@@ -213,7 +213,7 @@ module Sinatra
             end
             @page = 1 if @page <= 0
 
-            @pagy, @results = pagy_array(helped_by, items: search_size, page: @page)
+            @pagy, @results = pagy_array(helped_by, limit: search_size, page: @page)
             locals = {
               active_page: "roster",
               active_tab: "support"
@@ -230,7 +230,7 @@ module Sinatra
             @pagy, @results = {}, []
             if @viewed_user.is_public?
               @stats = cache_block("#{@viewed_user.identifier}-stats") { user_stats(@viewed_user) }
-              @pagy, @results = pagy(@viewed_user.articles_citing_specimens, items: 10, page: page)
+              @pagy, @results = pagy(@viewed_user.articles_citing_specimens, limit: 10, page: page)
             end
             haml :'public/citations', locals: { active_page: "roster" }
           end
@@ -326,7 +326,7 @@ module Sinatra
             check_user_public
 
             @stats = cache_block("#{@viewed_user.identifier}-stats") { user_stats(@viewed_user) }
-            @pagy, @results = pagy_arel(@viewed_user.helped, items: 30, page: page)
+            @pagy, @results = pagy_arel(@viewed_user.helped, limit: 30, page: page)
             haml :'public/helped', locals: { active_page: "roster" }
           end
 

@@ -268,7 +268,7 @@ module Bionomia
 
     def jsonld_occurrences_paged(type = "identifcations")
       begin
-        pagy, results = pagy_countless(@user.send(type).includes(:claimant), items: 100)
+        pagy, results = pagy_countless(@user.send(type).includes(:claimant), limit: 100)
         metadata = pagy_metadata(pagy)
       rescue
         results = []

@@ -33,7 +33,7 @@ module Sinatra
           response = client.search index: Settings.elastic.dataset_index, from: from, size: 30, body: body
           results = response["hits"].deep_symbolize_keys
 
-          @pagy = Pagy.new(count: results[:total][:value], items: 30, page: page)
+          @pagy = Pagy.new(count: results[:total][:value], limit: 30, page: page)
           @results = results[:hits]
         end
 
@@ -81,17 +81,17 @@ module Sinatra
         end
 
         def dataset_agents
-          @pagy, @results = pagy(@dataset.agents, items: 75)
+          @pagy, @results = pagy(@dataset.agents, limit: 75)
         end
 
         def dataset_agents_counts
           data = @dataset.agents_occurrence_counts.to_a
-          @pagy, @results = pagy_array(data, count: data.size, items: 75)
+          @pagy, @results = pagy_array(data, count: data.size, limit: 75)
         end
 
         def dataset_agents_unclaimed_counts
           data = @dataset.agents_occurrence_unclaimed_counts.to_a
-          @pagy, @results = pagy_array(data, count: data.size, items: 75)
+          @pagy, @results = pagy_array(data, count: data.size, limit: 75)
         end
 
         def dataset_stats

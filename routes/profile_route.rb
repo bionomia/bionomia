@@ -154,7 +154,7 @@ module Sinatra
                 @order = "typeStatus"
               end
               data = specimen_filters(@user).order("occurrences.#{@order} #{@sort}")
-              @pagy, @results = pagy(data, items: search_size, page: @page)
+              @pagy, @results = pagy(data, limit: search_size, page: @page)
               haml :'profile/specimens', locals: { active_page: "profile" }
             end
 
@@ -169,7 +169,7 @@ module Sinatra
               end
               @page = 1 if @page <= 0
 
-              @pagy, @results = pagy_array(helped_by, items: search_size, page: @page)
+              @pagy, @results = pagy_array(helped_by, limit: search_size, page: @page)
               haml :'profile/support', locals: { active_page: "profile" }
             end
 
@@ -202,12 +202,12 @@ module Sinatra
               end
               @page = 1 if @page <= 0
 
-              @pagy, @results = pagy(claims_received_by, items: search_size, page: @page)
+              @pagy, @results = pagy(claims_received_by, limit: search_size, page: @page)
               haml :'profile/support_table', locals: { active_page: "profile" }
             end
 
             get '/helped' do
-              @pagy, @results = pagy_arel(@user.latest_helped, items: 25)
+              @pagy, @results = pagy_arel(@user.latest_helped, limit: 25)
               haml :'profile/helped', locals: { active_page: "profile" }
             end
 
@@ -405,7 +405,7 @@ module Sinatra
               end
               @page = 1 if @page <= 0
 
-              @pagy, @results = pagy(hidden_occurrences, items: search_size, page: @page)
+              @pagy, @results = pagy(hidden_occurrences, limit: search_size, page: @page)
               haml :'profile/ignored', locals: { active_page: "profile", active_tab: "ignored" }
             end
 
@@ -416,7 +416,7 @@ module Sinatra
             end
 
             get '/citations' do
-              @pagy, @results = pagy(@user.articles_citing_specimens, items: 10, page: page)
+              @pagy, @results = pagy(@user.articles_citing_specimens, limit: 10, page: page)
               haml :'profile/citations', locals: { active_page: "profile" }
             end
 
@@ -455,7 +455,7 @@ module Sinatra
               end
               @page = 1 if @page <= 0
 
-              @pagy, @results = pagy(cited_specimens, items: search_size, page: @page)
+              @pagy, @results = pagy(cited_specimens, limit: search_size, page: @page)
               haml :'profile/citation', locals: { active_page: "profile" }
             end
 
@@ -489,7 +489,7 @@ module Sinatra
               end
               @page = 1 if @page <= 0
 
-              @pagy, @results = pagy(co_collections, items: search_size, page: @page)
+              @pagy, @results = pagy(co_collections, limit: search_size, page: @page)
               haml :'profile/co_collector_specimens', locals: { active_page: "profile", active_tab: "co_collectors" }
             end
 
@@ -524,7 +524,7 @@ module Sinatra
               end
               @page = 1 if @page <= 0
 
-              @pagy, @results = pagy(specimens, items: search_size, page: @page)
+              @pagy, @results = pagy(specimens, limit: search_size, page: @page)
               haml :'profile/identified_for_specimens', locals: { active_page: "profile", active_tab: "identified_for" }
             end
 
@@ -558,7 +558,7 @@ module Sinatra
               end
               @page = 1 if @page <= 0
 
-              @pagy, @results = pagy(identifications, items: search_size, page: @page)
+              @pagy, @results = pagy(identifications, limit: search_size, page: @page)
               haml :'profile/identifications_by_specimens', locals: { active_page: "profile", active_tab: "determiners" }
             end
 

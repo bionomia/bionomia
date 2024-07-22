@@ -194,11 +194,11 @@ module Sinatra
           if @total < search_size || @total == search_size
             @page = 1
           end
-          @pagy, results = pagy_array(occurrence_ids, items: search_size, page: @page)
+          @pagy, results = pagy_array(occurrence_ids, limit: search_size, page: @page)
           @results = Occurrence.find(occurrence_ids[@pagy.offset, search_size])
           if @total > 0 && @results.empty?
             @page -= 1
-            @pagy, results = pagy_array(occurrence_ids, items: search_size, page: @page)
+            @pagy, results = pagy_array(occurrence_ids, limit: search_size, page: @page)
             @results = Occurrence.find(occurrence_ids[@pagy.offset, search_size])
           end
         end

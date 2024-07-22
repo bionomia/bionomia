@@ -33,26 +33,26 @@ module Sinatra
           response = client.search index: Settings.elastic.taxon_index, from: from, size: 30, body: body
           results = response["hits"].deep_symbolize_keys
 
-          @pagy = Pagy.new(count: results[:total][:value], items: 30, page: page)
+          @pagy = Pagy.new(count: results[:total][:value], limit: 30, page: page)
           @results = results[:hits]
         end
 
         def taxon_agents
           taxon_from_param
           page = (params[:page] || 1).to_i
-          @pagy, @results = pagy_array(@taxon.agents.to_a, items: 75, page: page)
+          @pagy, @results = pagy_array(@taxon.agents.to_a, limit: 75, page: page)
         end
 
         def taxon_agents_counts
           taxon_from_param
           page = (params[:page] || 1).to_i
-          @pagy, @results = pagy_array(@taxon.agent_counts.to_a, items: 75, page: page)
+          @pagy, @results = pagy_array(@taxon.agent_counts.to_a, limit: 75, page: page)
         end
 
         def taxon_agents_unclaimed
           taxon_from_param
           page = (params[:page] || 1).to_i
-          @pagy, @results = pagy_array(@taxon.agent_counts_unclaimed.to_a, items: 75, page: page)
+          @pagy, @results = pagy_array(@taxon.agent_counts_unclaimed.to_a, limit: 75, page: page)
         end
 
         def taxon_examples

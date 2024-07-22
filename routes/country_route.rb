@@ -33,7 +33,7 @@ module Sinatra
                 users = User.where("country_code LIKE ?", "%#{country_code}%")
                             .where.not(orcid: nil)
                             .order(:family)
-                @pagy, @results = pagy(users, items: 30)
+                @pagy, @results = pagy(users, limit: 30)
               end
               haml :'countries/country', locals: { active_page: "countries", active_tab: @profile_type }
             rescue
@@ -60,7 +60,7 @@ module Sinatra
                 users = User.where("country_code LIKE ?", "%#{country_code}%")
                             .where.not(wikidata: nil)
                             .order(:family)
-                @pagy, @results = pagy(users, items: 30)
+                @pagy, @results = pagy(users, limit: 30)
               end
               haml :'countries/country', locals: { active_page: "countries", active_tab: @profile_type }
             rescue

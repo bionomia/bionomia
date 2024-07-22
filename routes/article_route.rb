@@ -11,7 +11,7 @@ module Sinatra
             articles = Article.where(processed: true)
                               .where.not(citation: nil)
                               .order(created: :desc)
-            @pagy, @results = pagy(articles, items: 25)
+            @pagy, @results = pagy(articles, limit: 25)
             haml :'articles/articles', locals: { active_page: "articles" }
           end
 

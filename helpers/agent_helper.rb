@@ -27,7 +27,7 @@ module Sinatra
           response = client.search index: Settings.elastic.agent_index, from: from, size: size, body: body
           results = response["hits"].deep_symbolize_keys
 
-          @pagy = Pagy.new(count: results[:total][:value], items: size, page: page)
+          @pagy = Pagy.new(count: results[:total][:value], limit: size, page: page)
           @results = results[:hits]
         end
 

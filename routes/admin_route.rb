@@ -26,7 +26,7 @@ module Sinatra
             end
 
             get '/articles' do
-              @pagy, @results = pagy(Article.order(created: :desc), items: 50)
+              @pagy, @results = pagy(Article.order(created: :desc), limit: 50)
               haml :'admin/articles', locals: { active_page: "administration" }
             end
 
@@ -306,7 +306,7 @@ module Sinatra
                 search_taxon
                 @taxon_results = format_taxon
               else
-                @pagy, @results = pagy(Taxon.includes(:image).order(family: :asc), items: 50)
+                @pagy, @results = pagy(Taxon.includes(:image).order(family: :asc), limit: 50)
               end
               haml :'admin/taxa', locals: { active_page: "administration" }
             end
@@ -451,7 +451,7 @@ module Sinatra
               data = specimen_filters(@admin_user)
                       .includes(:claimant)
                       .order("occurrences.#{@order} #{@sort}")
-              @pagy, @results = pagy(data, items: search_size, page: @page)
+              @pagy, @results = pagy(data, limit: search_size, page: @page)
               haml :'admin/specimens', locals: { active_page: "administration" }
             end
 
@@ -504,7 +504,7 @@ module Sinatra
               end
               @page = 1 if @page <= 0
 
-              @pagy, @results = pagy_array(helped_by, items: search_size, page: @page)
+              @pagy, @results = pagy_array(helped_by, limit: search_size, page: @page)
               haml :'admin/support', locals: { active_page: "administration" }
             end
 
@@ -540,7 +540,7 @@ module Sinatra
               end
               @page = 1 if @page <= 0
 
-              @pagy, @results = pagy(claims_received_by, items: search_size, page: @page)
+              @pagy, @results = pagy(claims_received_by, limit: search_size, page: @page)
               haml :'admin/support_table', locals: { active_page: "administration" }
             end
 
@@ -548,7 +548,7 @@ module Sinatra
               check_redirect
               @admin_user = find_user(params[:id])
 
-              @pagy, @results = pagy_arel(@admin_user.latest_helped, items: 25)
+              @pagy, @results = pagy_arel(@admin_user.latest_helped, limit: 25)
               haml :'admin/helped', locals: { active_page: "administration" }
             end
 
@@ -711,7 +711,7 @@ module Sinatra
               end
               @page = 1 if @page <= 0
 
-              @pagy, @results = pagy(hidden_occurrences, items: search_size, page: @page)
+              @pagy, @results = pagy(hidden_occurrences, limit: search_size, page: @page)
               haml :'admin/ignored', locals: { active_page: "administration" }
             end
 
@@ -752,7 +752,7 @@ module Sinatra
               end
               @page = 1 if @page <= 0
 
-              @pagy, @results = pagy(cited_specimens, page: @page, items: search_size)
+              @pagy, @results = pagy(cited_specimens, page: @page, limit: search_size)
               haml :'admin/citation', locals: { active_page: "administration" }
             end
 
