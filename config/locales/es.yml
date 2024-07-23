@@ -253,7 +253,7 @@ es:
     submit: Enviar
     upload_csv_instructions: Enviar csv con adjudicaciones
     download_records: Descargar registros descubiertos
-    download_alert: "Descargue registros de especímenes descubiertos, trabaje desconectado, luego cargue adjudicaciones nuevas como csv. Se ha generado un archivo que contiene al menos %{num_records} registros. Si tiene mucho más que estos, puede trabajar en tandas. Esta rutina no actualiza los datos de los especímenes subyacentes ni actualiza las adjudicaciones existentes. Si hay reclamos existentes en el archivo a cargar, estos se omitirán. Su csv cargado debe usar una coma para separar las columnas, cada una opcionalmente entre comillas."
+    download_alert: "Descargue registros de especímenes descubiertos, trabaje desconectado, luego cargue adjudicaciones nuevas como csv. Se genera un archivo que contiene como máximo %{num_records} registros. Si usted tiene muchos más que estos, puede trabajar en tandas. Esta rutina no actualiza los datos de los especímenes subyacentes ni actualiza las adjudicaciones existentes. Si hay reclamos existentes en el archivo a cargar, estos se omitirán. Su csv cargado debe usar una coma para separar las columnas, cada una opcionalmente entre comillas."
     search_dropdown_no_users: "Su búsqueda encontró 0 resultados."
     reset: Reiniciar
     remove: Remover
