@@ -65,7 +65,7 @@ class Dataset < ActiveRecord::Base
                   .where(occurrences: { datasetKey: uuid })
                   .unscope(:order)
                   .pluck(:gbifID, :visible)
-                  .map{|a| a[:occurrence_id] if a[:visible] }.compact.uniq.count
+                  .map{|a| a[0] if a[1] }.compact.uniq.count
   end
 
   def agents
