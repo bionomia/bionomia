@@ -41,5 +41,5 @@
       %span.badge.badge-light #{number_with_delimiter(locals[:stats][:specimens][:total])}
       #{I18n.t('card.claimed', count: locals[:stats][:specimens][:total])}
    - if locals[:progress_bar]
-      .progress.progress-border.flex-fill.align-self-end{style: "max-width:100px;min-width:100px"}
+      .progress.progress-border.flex-fill.align-self-end.mt-1{style: "max-width:100px;min-width:100px"}
          .progress-bar.bg-info{id:"progress-bar_#{locals[:user].identifier}", role:"progressbar", style:"width: 0%;", "aria-valuenow":"0", "aria-valuemin":"0", "aria-valuemax":"100", "aria-label":"#{I18n.t('user.progress')}"}

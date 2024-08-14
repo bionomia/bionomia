@@ -61,13 +61,11 @@ class Dataset < ActiveRecord::Base
   end
 
   def claimed_occurrences_count
-    UserOccurrence.select(:occurrence_id)
-                  .from("user_occurrences FORCE INDEX (user_occurrence_idx)")
+    UserOccurrence.select(:occurrence_id, :visible)
                   .joins(:occurrence)
                   .where(occurrences: { datasetKey: uuid })
-                  .where(user_occurrences: { visible: true })
-                  .distinct
-                  .count
+                  .unscope(:order)
+                  .map{|a| a[:occurrence_id] if a[:visible] }.compact.uniq.count
   end
 
   def agents
