@@ -61,10 +61,10 @@ class Dataset < ActiveRecord::Base
   end
 
   def claimed_occurrences_count
-    UserOccurrence.select(:occurrence_id, :visible)
-                  .joins(:occurrence)
+    UserOccurrence.joins(:occurrence)
                   .where(occurrences: { datasetKey: uuid })
                   .unscope(:order)
+                  .pluck(:gbifID, :visible)
                   .map{|a| a[:occurrence_id] if a[:visible] }.compact.uniq.count
   end
 
