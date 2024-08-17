@@ -1,5 +1,7 @@
 - content_for :title, I18n.t('occurrence.occurrence_title')
+
 - content_for :scripts do
+  %meta{name:"robots", content:"noindex,nofollow"}
   %script{src: "//www.gstatic.com/charts/loader.js"}
   %script{src: "/js/jquery.throttledresize.js"}
   %script{src: "/js/occurrence_widget.js"}
