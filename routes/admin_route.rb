@@ -18,7 +18,7 @@ module Sinatra
               content_type "application/json", charset: 'utf-8'
               params = {
                 max_size: 100_000_000,
-                from: Date.yesterday.to_s
+                from: (Date.today - 7).to_s
               }
               tracker = ::Bionomia::GbifTracker.new(params)
               tracker.create_package_records
