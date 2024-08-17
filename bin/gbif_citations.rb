@@ -8,8 +8,8 @@ options = {}
 OptionParser.new do |opts|
   opts.banner = "Usage: gbif_citations.rb [options]. Check and import citations of downloaded specimens"
 
-  opts.on("-f", "--first-page", "Download new articles and their data packages") do
-    options[:first] = true
+  opts.on("-f", "--from [from]", Date, "Download new articles and their data packages using from date to today when added") do |from|
+    options[:from] = from
   end
 
   opts.on("-c", "--flush-caches", "Loop through processed articles and flush their caches") do
@@ -32,12 +32,9 @@ end.parse!
 
 params = { max_size: 100_000_000 }
 
-if options[:first]
-  params[:first_page_only] = true
-else
-  params[:first_page_only] = false
+if options[:from ]
+  params[:from] = options[:from]
 end
-
 
 tracker = Bionomia::GbifTracker.new(params)
 

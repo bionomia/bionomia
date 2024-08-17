@@ -4,16 +4,16 @@ module Bionomia
   class GbifTracker
 
     def initialize(args = {})
-      @url = "#{Settings.gbif.api}literature/search?contentType=literature&literatureType=journal&literatureType=working_paper&relevance=GBIF_USED&peerReview=true&limit=200&offset="
+      @url = "#{Settings.gbif.api}literature/search?literatureType=JOURNAL&literatureType=WORKING_PAPER&relevance=GBIF_USED&peerReview=true&limit=200"
       @package_url = "#{Settings.gbif.api}occurrence/download/request/"
       args = defaults.merge(args)
-      @first_page_only = args[:first_page_only]
+      @from = args[:from]
       @max_size = args[:max_size]
       Zip.on_exists_proc = true
     end
 
     def by_doi(doi)
-      @url = "#{Settings.gbif.api}literature/search?doi=#{doi}&offset="
+      @url = "#{Settings.gbif.api}literature/search?doi=#{doi}"
     end
 
     def create_package_records
@@ -56,12 +56,15 @@ module Bionomia
     end
 
     def citation_downloads_enum
+      if @from
+        @url += "&added=#{@from},#{Date.today.to_s}"
+      end
       Enumerator.new do |yielder|
         offset = 0
         loop do
           response = RestClient::Request.execute(
             method: :get,
-            url: "#{@url}#{offset}"
+            url: "#{@url}&offset=#{offset}"
           )
           results = JSON.parse(response, :symbolize_names => true)[:results] rescue []
           if results.size > 0
@@ -82,7 +85,6 @@ module Bionomia
           else
             raise StopIteration
           end
-          break if @first_page_only
           offset += 200
         end
       end.lazy
