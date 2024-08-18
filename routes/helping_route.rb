@@ -51,7 +51,7 @@ module Sinatra
 
             post '/add-user.json' do
               content_type "application/json", charset: 'utf-8'
-              req = JSON.parse(request.body.read).symbolize_keys
+              req = env['rack.request.form_hash'].symbolize_keys
               create_user(req[:identifier]).to_json
             end
 
@@ -98,7 +98,7 @@ module Sinatra
 
             post '/user-occurrence/bulk.json' do
               content_type "application/json", charset: 'utf-8'
-              req = JSON.parse(request.body.read).symbolize_keys
+              req = env['rack.request.form_hash'].symbolize_keys
               action = req[:action] rescue nil
               visible = req[:visible] rescue true
               occurrence_ids = req[:occurrence_ids].split(",")
@@ -122,7 +122,7 @@ module Sinatra
 
             post '/user-occurrence/:occurrence_id.json' do
               content_type "application/json", charset: 'utf-8'
-              req = JSON.parse(request.body.read).symbolize_keys
+              req = env['rack.request.form_hash'].symbolize_keys
               action = req[:action] rescue nil
               visible = req[:visible] rescue true
               uo = UserOccurrence.new
@@ -140,7 +140,7 @@ module Sinatra
 
             put '/user-occurrence/bulk.json' do
               content_type "application/json", charset: 'utf-8'
-              req = JSON.parse(request.body.read).symbolize_keys
+              req = env['rack.request.form_hash'].symbolize_keys
               occurrence_ids = req[:occurrence_ids].split(",")
               visible = req[:visible] rescue true
               UserOccurrence.where({ id: occurrence_ids, user_id: req[:user_id].to_i })
@@ -150,7 +150,7 @@ module Sinatra
 
             delete '/user-occurrence/bulk.json' do
               content_type "application/json", charset: 'utf-8'
-              req = JSON.parse(request.body.read).symbolize_keys
+              req = env['rack.request.form_hash'].symbolize_keys
               occurrence_ids = req[:occurrence_ids].split(",")
               UserOccurrence.where({ id: occurrence_ids, user_id: req[:user_id].to_i })
                             .delete_all
@@ -159,7 +159,7 @@ module Sinatra
 
             put '/user-occurrence/:id.json' do
               content_type "application/json", charset: 'utf-8'
-              req = JSON.parse(request.body.read).symbolize_keys
+              req = env['rack.request.form_hash'].symbolize_keys
               uo = UserOccurrence.find(params[:id])
               uo.action = req[:action] ||= nil
               uo.visible = req[:visible] ||= true
@@ -170,7 +170,7 @@ module Sinatra
 
             delete '/user-occurrence/:id.json' do
               content_type "application/json", charset: 'utf-8'
-              req = JSON.parse(request.body.read).symbolize_keys
+              req = env['rack.request.form_hash'].symbolize_keys
               UserOccurrence.where(id: params[:id].to_i, user_id: req[:user_id].to_i)
                             .delete_all
               { message: "ok" }.to_json

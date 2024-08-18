@@ -150,6 +150,7 @@ var Profile = (function($, window) {
         $.ajax({
           url: self.path + "/zenodo.json",
           method: 'PUT',
+          contentType: "application/json",
           dataType: "json",
           data: JSON.stringify({ action: $(this).attr("data-action") }),
           beforeSend: function(xhr) {

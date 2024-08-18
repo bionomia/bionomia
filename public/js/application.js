@@ -310,6 +310,7 @@ var Application = (function($, window) {
         var self = this;
         $.ajax({
           method: "PUT",
+          contentType: "application/json",
           url: $(self).attr("data-url"),
           dataType: "json",
           data: JSON.stringify({ is_public: $(this).prop("checked") }),
@@ -365,6 +366,7 @@ var Application = (function($, window) {
                   method: self.method,
                   url: self.path + "/user-occurrence/bulk.json",
                   dataType: "json",
+                  contentType: "application/json",
                   data: JSON.stringify({
                     user_id: self.user_id,
                     occurrence_ids: occurrence_ids,
@@ -405,6 +407,7 @@ var Application = (function($, window) {
                   method: self.method,
                   url: self.path + "/user-occurrence/" + occurrence_id + ".json",
                   dataType: "json",
+                  contentType: "application/json",
                   data: JSON.stringify({
                     user_id: self.user_id,
                     action: action,
@@ -438,6 +441,7 @@ var Application = (function($, window) {
             row = $(this).parents("tr");
         $.ajax({
             method: "DELETE",
+            contentType: "application/json",
             url: self.path + "/user-occurrence/" + occurrence_id + ".json",
             data: JSON.stringify({ user_id: self.user_id }),
             beforeSend: function(xhr) {
@@ -465,6 +469,7 @@ var Application = (function($, window) {
         $.ajax({
             method: "DELETE",
             url: self.path + "/user-occurrence/bulk.json",
+            contentType: "application/json",
             dataType: "json",
             data: JSON.stringify({
               user_id: self.user_id,
@@ -494,6 +499,7 @@ var Application = (function($, window) {
         $.ajax({
             method: self.method,
             url: self.path + "/user-occurrence/bulk.json",
+            contentType: "application/json",
             dataType: "json",
             data: JSON.stringify({
               user_id: self.user_id,
@@ -520,6 +526,7 @@ var Application = (function($, window) {
         $.ajax({
             method: self.method,
             url: self.path + "/user-occurrence/" + occurrence_id + ".json",
+            contentType: "application/json",
             dataType: "json",
             data: JSON.stringify({ user_id: self.user_id, visible: 0 }),
             beforeSend: function(xhr) {
@@ -544,6 +551,7 @@ var Application = (function($, window) {
             recipient_identifier = $(this).attr("data-recipient-identifier");
         $.ajax({
           method: "POST",
+          contentType: "application/json",
           url: self.path + "/message.json",
           dataType: "json",
           data: JSON.stringify({

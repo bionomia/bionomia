@@ -220,7 +220,7 @@ module Sinatra
 
             put '/visibility.json' do
               content_type "application/json", charset: 'utf-8'
-              req = JSON.parse(request.body.read).symbolize_keys
+              req = env['rack.request.form_hash'].symbolize_keys
               @user.is_public = req[:is_public]
               if req[:is_public]
                 @user.made_public = Time.now
@@ -564,7 +564,7 @@ module Sinatra
 
             post '/message.json' do
               content_type "application/json", charset: 'utf-8'
-              req = JSON.parse(request.body.read).symbolize_keys
+              req = env['rack.request.form_hash'].symbolize_keys
               m = Message.new
               m.user_id = @user.id
               recipient = find_user(req[:recipient_identifier])
@@ -584,7 +584,7 @@ module Sinatra
 
             post '/user-occurrence/bulk.json' do
               content_type "application/json", charset: 'utf-8'
-              req = JSON.parse(request.body.read).symbolize_keys
+              req = env['rack.request.form_hash'].symbolize_keys
               action = req[:action] rescue nil
               visible = req[:visible] rescue true
               occurrence_ids = req[:occurrence_ids].split(",")
@@ -608,7 +608,7 @@ module Sinatra
 
             post '/user-occurrence/:occurrence_id.json' do
               content_type "application/json", charset: 'utf-8'
-              req = JSON.parse(request.body.read).symbolize_keys
+              req = env['rack.request.form_hash'].symbolize_keys
               action = req[:action] rescue nil
               visible = req[:visible] rescue true
               uo = UserOccurrence.new
@@ -626,7 +626,7 @@ module Sinatra
 
             put '/user-occurrence/bulk.json' do
               content_type "application/json", charset: 'utf-8'
-              req = JSON.parse(request.body.read).symbolize_keys
+              req = env['rack.request.form_hash'].symbolize_keys
               action = req[:action] rescue nil
               visible = req[:visible] rescue true
               ids = req[:occurrence_ids].split(",")
@@ -637,7 +637,7 @@ module Sinatra
 
             put '/user-occurrence/:id.json' do
               content_type "application/json", charset: 'utf-8'
-              req = JSON.parse(request.body.read).symbolize_keys
+              req = env['rack.request.form_hash'].symbolize_keys
               uo = UserOccurrence.find_by({ id: params[:id], user_id: @user.id })
               uo.action = req[:action] ||= nil
               uo.visible = req[:visible] ||= true
@@ -647,7 +647,7 @@ module Sinatra
 
             delete '/user-occurrence/bulk.json' do
               content_type "application/json", charset: 'utf-8'
-              req = JSON.parse(request.body.read).symbolize_keys
+              req = env['rack.request.form_hash'].symbolize_keys
               occurrence_ids = req[:occurrence_ids].split(",")
               UserOccurrence.where({ id: occurrence_ids, user_id: @user.id })
                             .delete_all

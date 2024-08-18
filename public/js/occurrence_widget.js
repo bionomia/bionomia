@@ -89,6 +89,7 @@ var OccurrenceWidget = (function($, window) {
 
         $.ajax({
           method: method,
+          contentType: "application/json",
           url: url,
           dataType: "json",
           data: JSON.stringify({
@@ -120,6 +121,7 @@ var OccurrenceWidget = (function($, window) {
       action_input.on('click', function() {
         $.ajax({
           method: "POST",
+          contentType: "application/json",
           url: url,
           data: JSON.stringify({
             user_id: user_id,

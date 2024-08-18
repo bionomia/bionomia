@@ -8,6 +8,7 @@ module Sinatra
         def self.registered(app)
           app.use Rack::Locale
           app.use Rack::MethodOverride
+          app.use Rack::JSONBodyParser
 
           secure = false
           if app.environment == :production
