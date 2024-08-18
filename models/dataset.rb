@@ -71,13 +71,15 @@ class Dataset < ActiveRecord::Base
   def agents
     Agent.joins(occurrence_agents: :occurrence)
          .where(occurrence: { datasetKey: datasetKey })
+         .where.not(family: "")
          .distinct.order(:family)
   end
 
   #TODO: Slow query, uses temp sort
   def agents_occurrence_counts
     occurrences.select(:agent_id, "COUNT(*) AS count_all")
-               .joins(:occurrence_agents)
+               .joins(occurrence_agents: :agent)
+               .where.not(agent: { family: "" })
                .group(:agent_id)
                .order(count_all: :desc)
   end
@@ -85,9 +87,10 @@ class Dataset < ActiveRecord::Base
   #TODO: Slow query, uses temp sort
   def agents_occurrence_unclaimed_counts
     occurrences.select(:agent_id, "COUNT(*) AS count_all")
-               .joins(:occurrence_agents)
+               .joins(occurrence_agents: :agent)
                .left_outer_joins(:user_occurrences)
                .where(user_occurrences: { id: nil })
+               .where.not(agent: { family: "" })
                .group(:agent_id)
                .order(count_all: :desc)
   end

@@ -39,13 +39,16 @@ class Taxon < ActiveRecord::Base
   end
 
   def agents
-    agent_ids = taxon_occurrences.joins(:occurrence_agents).select(:agent_id)
+    agent_ids = taxon_occurrences.joins(occurrence_agents: :agent)
+                                 .select(:agent_id)
+                                 .where.not(agent: { family: "" })
     Agent.where(id: agent_ids).distinct.order(:family)
   end
 
   #TODO: Slow query, uses temp sort
   def agent_counts
-    taxon_occurrences.joins(:occurrence_agents)
+    taxon_occurrences.joins(occurrence_agents: :agent)
+                     .where.not(agent: { family: "" })
                      .group(:agent_id)
                      .order(count_all: :desc)
                      .count
@@ -53,9 +56,10 @@ class Taxon < ActiveRecord::Base
 
   #TODO: Slow query, uses temp sort
   def agent_counts_unclaimed
-    taxon_occurrences.joins(:occurrence_agents)
+    taxon_occurrences.joins(occurrence_agents: :agent)
                      .left_outer_joins(:user_occurrence)
                      .where(user_occurrence: { id: nil })
+                     .where.not(agent: { family: "" })
                      .group(:agent_id)
                      .order(count_all: :desc)
                      .count

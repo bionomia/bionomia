@@ -48,7 +48,7 @@ module Sinatra
 
         def article_agents
           article_from_param
-          @pagy, @results = pagy(@article.agents.order(:family), limit: 75)
+          @pagy, @results = pagy(@article.agents_with_family.order(:family), limit: 75)
         end
 
         def article_agents_counts

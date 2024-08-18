@@ -48,9 +48,15 @@ class Article < ActiveRecord::Base
         .where("a.visible = true")
   end
 
+  def agents_with_family
+    agents.where.not(family: "")
+  end
+
   # TODO: performance terrible, but below is the idea
   def agents_occurrence_counts
     occurrence_agents.select(:agent_id, "COUNT(*) AS count_all")
+                     .joins(:agent)
+                     .where.not(agent: { family: "" })
                      .group(:agent_id)
                      .order(count_all: :desc)
   end
@@ -58,7 +64,9 @@ class Article < ActiveRecord::Base
   # TODO: performance terrible, but below is the idea
   def agents_occurrence_counts_unclaimed
     occurrence_agents.select(:agent_id, "COUNT(*) AS count_all")
+                     .joins(:agent)
                      .left_outer_joins(:user_occurrences)
+                     .where.not(agent: { family: "" })
                      .where(user_occurrences: { id: nil })
                      .group(:agent_id)
                      .order(count_all: :desc)
