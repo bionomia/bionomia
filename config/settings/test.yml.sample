@@ -19,7 +19,7 @@ google:
   api_key: ''
 orcid:
   api_url: 'https://pub.orcid.org/v3.0/'
-  key: ''
+  key: 'ABC-1234567890-abcdef'
   secret: ''
   site: 'https://orcid.org'
   authorize_url: 'https://orcid.org/oauth/authorize'
