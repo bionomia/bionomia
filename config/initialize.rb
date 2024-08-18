@@ -19,7 +19,7 @@ module Sinatra
 
           app.use Rack::Session::Cookie, key: 'rack.session',
                                      path: '/',
-                                     secret: Settings.orcid.key,
+                                     secret: Settings.orcid.key * 4,
                                      domain: Settings.cookie_domain,
                                      httpdonly: true,
                                      secure: secure,
