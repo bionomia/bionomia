@@ -81,16 +81,16 @@ module Sinatra
         end
 
         def dataset_agents
-          @pagy, @results = pagy(@dataset.agents, limit: 75)
+          @pagy, @results = pagy_array(@dataset.agents.to_a, limit: 75)
         end
 
         def dataset_agents_counts
-          data = @dataset.agents_occurrence_counts.to_a
+          data = @dataset.agents_occurrence_counts.to_a.sort_by{|a| -a[:count_all]}
           @pagy, @results = pagy_array(data, count: data.size, limit: 75)
         end
 
         def dataset_agents_unclaimed_counts
-          data = @dataset.agents_occurrence_unclaimed_counts.to_a
+          data = @dataset.agents_occurrence_unclaimed_counts.to_a.sort_by{|a| -a[:count_all]}
           @pagy, @results = pagy_array(data, count: data.size, limit: 75)
         end
 

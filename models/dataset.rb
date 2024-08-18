@@ -69,22 +69,22 @@ class Dataset < ActiveRecord::Base
   end
 
   def agents
-    Agent.joins(occurrence_agents: :occurrence)
-         .where(occurrence: { datasetKey: datasetKey })
-         .where.not(family: "")
-         .distinct.order(:family)
+    Agent.where(id: occurrences.select(:agent_id)
+                               .joins(occurrence_agents: :agent)
+                               .where.not(agent: { family: "" })
+                               .group(:agent_id))
+         .order(:family)
+
+
   end
 
-  #TODO: Slow query, uses temp sort
   def agents_occurrence_counts
     occurrences.select(:agent_id, "COUNT(*) AS count_all")
                .joins(occurrence_agents: :agent)
                .where.not(agent: { family: "" })
                .group(:agent_id)
-               .order(count_all: :desc)
   end
 
-  #TODO: Slow query, uses temp sort
   def agents_occurrence_unclaimed_counts
     occurrences.select(:agent_id, "COUNT(*) AS count_all")
                .joins(occurrence_agents: :agent)
@@ -92,7 +92,6 @@ class Dataset < ActiveRecord::Base
                .where(user_occurrences: { id: nil })
                .where.not(agent: { family: "" })
                .group(:agent_id)
-               .order(count_all: :desc)
   end
 
   def scribes
