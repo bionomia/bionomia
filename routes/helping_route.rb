@@ -562,11 +562,19 @@ module Sinatra
               haml :'help/ignored', locals: { active_page: "help" }
             end
 
+            get '/:id/bulk' do
+              check_identifier
+              check_redirect
+              @viewed_user = find_user(params[:id])
+              @agents = candidate_agents(@viewed_user)
+              haml :'help/bulk', locals: { active_page: "help", active_tab: "bulk" }
+            end
+
             get '/:id/upload' do
               check_identifier
               check_redirect
               @viewed_user = find_user(params[:id])
-              haml :'help/upload', locals: { active_page: "help" }
+              haml :'help/upload', locals: { active_page: "help", active_tab: "upload" }
             end
 
             get '/:id/candidates.csv' do
@@ -598,7 +606,7 @@ module Sinatra
               rescue => e
                 flash.now[:error] = e.message
               end
-              haml :'help/upload_result', locals: { active_page: "help" }
+              haml :'help/upload_result', locals: { active_page: "help", active_tab: "upload" }
             end
 
             put '/:id/visibility' do

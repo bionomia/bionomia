@@ -136,11 +136,7 @@ module Sinatra
           # Remove agent if score is half the cut-off
           agents.delete_if{|a| a[:score] < 0.5*cutoff_score}
 
-          agents.pluck(:id)
-                .uniq
-                .map{|b| [b, agents.map{|v| v[:score] if v[:id] == b }.compact.max]}
-                .sort_by{|k,v| -v}
-                .map{|a| { id: a[0], score: a[1] }}
+          agents.sort_by{|a| -a[:score]}
         end
 
         def agent_examples
