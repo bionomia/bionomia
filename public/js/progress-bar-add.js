@@ -43,6 +43,7 @@ var ProgressBarAdd = (function($, window) {
        return $.ajax({
            method: "POST",
            url: "/help-others/add-user.json",
+           contentType: "application/json",
            dataType: "json",
            data: JSON.stringify({
             identifier: this.identifier
