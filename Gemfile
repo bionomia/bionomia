@@ -26,6 +26,7 @@ gem 'i18n'
 gem 'i18n_data'
 gem 'iso_country_codes'
 gem 'mini_magick'
+gem 'mustermann', '3.0.1' #Temporary kludge https://github.com/sinatra/sinatra/issues/2041
 gem 'mysql2'
 gem 'namae'
 gem 'nokogiri'
