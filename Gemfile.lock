@@ -119,7 +119,7 @@ GEM
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
     multipart-post (2.4.1)
-    mustermann (3.0.2)
+    mustermann (3.0.1)
       ruby2_keywords (~> 0.0.1)
     mysql2 (0.5.6)
     namae (1.2.0)
@@ -326,6 +326,7 @@ DEPENDENCIES
   i18n_data
   iso_country_codes
   mini_magick
+  mustermann (= 3.0.1)
   mysql2
   namae
   nokogiri
