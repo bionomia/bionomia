@@ -28,7 +28,7 @@ Strings of text in the user interface are translatable via [config/locales](conf
      $ cp config/settings/development.yml.sample config/settings/development.yml
      # Adjust content of development.yml
      # Copy and edit production.yml and test.yml as above
-     $ rackup -p 4567 config.ru
+     $ RUBY_YJIT_ENABLE=true rackup -p 4567 config.ru
 
 ## License
 
