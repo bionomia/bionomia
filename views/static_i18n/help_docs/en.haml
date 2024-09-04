@@ -14,13 +14,28 @@
 %h3.mt-4.mb-3
   For New Users & Group Settings
 
-.card{style:"max-width: 505px;"}
-  %a{href: "http://doi.org/10.5281/zenodo.3908726"}
-    %img.img-fluid.mx-auto.d-block{src:"/images/leachman_auckland_wmm.png", alt:"Leachman help doc for volunteers"}
-  .card-body
-    %p.citation
-      Siobhan Leachman. (2020, June 26). Auckland Museum Volunteer Instructions for Bionomia. Zenodo. 26pp. PDF
-      = link_to "https://doi.org/10.5281/zenodo.3908726", "https://doi.org/10.5281/zenodo.3908726"
+.row.mt-4
+  .col-12.col-md-6.mb-3
+    .card
+      .card-body
+        .container-fluid.mt-2.mb-2
+          .row
+            .col-3
+              %a{href: "https://doi.org/10.5281/zenodo.7767332"}
+                %img.img-fluid.pull-left.float-left.mr-4{src: "/images/sisris.jpg", alt: "SISRIS logo", height:150, width:150}
+            .col-9
+              %p How-to directions that address topics such as historical attribution, claiming one's specimens, reporting institutional metrics, and importing unique collecor identifiers back into institutional databases.
+              %p.citation
+                Paul, Deborah, David P. Shorthouse, Andrea Weeks, Zack Murell. (2023). Bionomia for SISRIS Tutorial. Zenodo. 21pp. PDF
+                = link_to "https://doi.org/10.5281/zenodo.7767332", "https://doi.org/10.5281/zenodo.7767332"
+  .col-12.col-md-6.mb-3
+    .card
+      %a{href: "http://doi.org/10.5281/zenodo.3908726"}
+        %img.img-fluid.mx-auto.d-block{src:"/images/leachman_auckland_wmm.png", alt:"Leachman help doc for volunteers"}
+      .card-body
+        %p.citation
+          Siobhan Leachman. (2020, June 26). Auckland Museum Volunteer Instructions for Bionomia. Zenodo. 26pp. PDF
+          = link_to "https://doi.org/10.5281/zenodo.3908726", "https://doi.org/10.5281/zenodo.3908726"
 
 %h3.mt-4.mb-3
   Focused Tasks
