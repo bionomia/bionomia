@@ -9,3 +9,14 @@
   = haml :'partials/help/jumbotron', layout: false
 
 = haml :'partials/help/tabs', layout: false, locals: { active_tab: "upload" }
+= haml :'partials/help/bulk', layout: false, locals: { active_subtab: "bulk" }
+
+.mt-3
+  %form
+    - @agents.each do |agent|
+      - name = agent[:fullname].blank? ? agent[:unparsed] : agent[:fullname]
+      .form-check
+        %input.form-check-input{type: "radio", name: "agent-select", id: "agent-select-#{agent[:id]}", value: "#{agent[:id]}"}
+        %label.form-check-label{for: "agent-select-#{agent[:id]}"}
+          #{name}
+        

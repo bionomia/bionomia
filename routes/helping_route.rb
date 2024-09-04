@@ -566,7 +566,7 @@ module Sinatra
               check_identifier
               check_redirect
               @viewed_user = find_user(params[:id])
-              @agents = candidate_agents(@viewed_user)
+              @agents = candidate_agents(@viewed_user).map{|a| a.except(:score, :rank)}.uniq
               haml :'help/bulk', locals: { active_page: "help", active_tab: "bulk" }
             end
 

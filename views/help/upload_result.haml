@@ -9,6 +9,7 @@
   = haml :'partials/help/jumbotron', layout: false
 
 = haml :'partials/help/tabs', layout: false, locals: { active_tab: "upload" }
+= haml :'partials/help/bulk', layout: false, locals: { active_subtab: "upload" }
 
 - if flash[:error]
   .alert.alert-danger.tiny-margins{role: "alert"}
