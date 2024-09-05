@@ -3,4 +3,4 @@
     %li.nav-item
       %a{class:"text-nowrap nav-link#{locals[:active_subtab] == "upload" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/upload")}= I18n.t('help.spreadsheet')
     %li.nav-item
-      %a{class:"text-nowrap nav-link#{locals[:active_subtab] == "bulk" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/bulk")}= I18n.t('help.bulk')
+      %a{class:"text-nowrap nav-link#{locals[:active_subtab] == "bulk" ? " active" : nil}", href: url("/help-others/#{@viewed_user.identifier}/bulk-claim")}= I18n.t('help.bulk')

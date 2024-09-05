@@ -562,12 +562,32 @@ module Sinatra
               haml :'help/ignored', locals: { active_page: "help" }
             end
 
-            get '/:id/bulk' do
+            get '/:id/bulk-claim' do
               check_identifier
               check_redirect
               @viewed_user = find_user(params[:id])
               @agents = candidate_agents(@viewed_user).map{|a| a.except(:score, :rank)}.uniq
-              haml :'help/bulk', locals: { active_page: "help", active_tab: "bulk" }
+              locals = {
+                active_page: "help",
+                active_tab: "bulk",
+                bulk_error: flash.now[:error],
+                bulk_count: flash.now[:bulk_count]
+              }
+              haml :'help/bulk', locals: locals
+            end
+
+            post '/:id/bulk-claim' do
+              check_identifier
+              check_redirect
+              @viewed_user = find_user(params[:id])
+              agent = Agent.find(params[:agent_id])
+              begin
+                result = @viewed_user.bulk_claim(agent: agent, conditions: params[:conditions], ignore: params[:ignore], created_by: @user.id)
+                flash.next[:bulk_count] = result[:num_attributed]
+              rescue ArgumentError => e
+                flash.next[:error] = "#{e.message}"
+              end
+              redirect "/help-others/#{params[:id]}/bulk-claim"
             end
 
             get '/:id/upload' do

@@ -11,12 +11,40 @@
 = haml :'partials/help/tabs', layout: false, locals: { active_tab: "upload" }
 = haml :'partials/help/bulk', layout: false, locals: { active_subtab: "bulk" }
 
+- if locals[:bulk_error]
+  .alert.alert-danger.tiny-margins{role:"alert"}= locals[:bulk_error]
+
+- if locals[:bulk_count]
+  .alert.alert-info.tiny-margines{role: "alert"}
+    #{I18n.t('help.bulk_count', count: locals[:bulk_count])}
+
+- if !locals[:bulk_error] && !locals[:bulk_count]
+  .alert.alert-warning.tiny-margins{role: "alert"}
+    = I18n.t('help.bulk_instructions')
+
 .mt-3
-  %form
-    - @agents.each do |agent|
+  %form{method: :post, action: "/help-others/#{@viewed_user.identifier}/bulk-claim", enctype: "multipart/form-data", "accept-charset": "UTF-8"}
+    %p= I18n.t('help.discovered_agents', person: @viewed_user.viewname)
+
+    - @agents.each_with_index do |agent, index|
       - name = agent[:fullname].blank? ? agent[:unparsed] : agent[:fullname]
       .form-check
-        %input.form-check-input{type: "radio", name: "agent-select", id: "agent-select-#{agent[:id]}", value: "#{agent[:id]}"}
+        - checked = index == 0 ? "checked" : nil
+        %input.form-check-input{type: "radio", name: "agent_id", id: "agent-select-#{agent[:id]}", value: "#{agent[:id]}", checked: checked}
         %label.form-check-label{for: "agent-select-#{agent[:id]}"}
           #{name}
+
+    %p.mt-3= I18n.t('help.bulk_json', keys: Occurrence.accepted_fields.join(", "))
+    .form-group.mt-3
+      %label{for:"bulk-json"} JSON
+      %div
+        %input#bulk-json.form-control{type:"text", name:"conditions"}
+
+    .form-check
+      %input#ignore.form-check-input{type:"checkbox", name:"ignore"}
+      %label.form-check-label{for:"ignore"} Bulk Not Them
+
+    .form-group
+      %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
+      %button.btn.btn-success.mt-3{type:"submit"} Submit
         

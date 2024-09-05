@@ -618,7 +618,7 @@ class User < ActiveRecord::Base
     messages_sent.where({ recipient_id: recipient_id })
   end
 
-  def bulk_claim(agent:, conditions:, ignore: false)
+  def bulk_claim(agent:, conditions:, ignore: false, created_by: BOT_IDS[0])
     claimed = user_occurrences.pluck(:occurrence_id)
 
     if conditions.blank?
@@ -659,7 +659,7 @@ class User < ActiveRecord::Base
 
     uniq_recordings = (agent_recordings - agent_determinations) - claimed
     uniq_determinations = (agent_determinations - agent_recordings) - claimed
-    both = (agent_recordings & agent_determinations) - claimed
+    both = (agent_recordings + agent_determinations) - claimed
 
     if ignore
       all = (agent_recordings + agent_determinations).uniq - claimed
@@ -668,21 +668,21 @@ class User < ActiveRecord::Base
         occurrence_id: o,
         action: nil,
         visible: 0,
-        created_by: BOT_IDS[0]
+        created_by: created_by
       } }, batch_size: 500, validate: false, on_duplicate_key_ignore: true
     else
       UserOccurrence.import uniq_recordings.map{|o| {
         user_id: id,
         occurrence_id: o,
         action: "recorded",
-        created_by: BOT_IDS[0]
+        created_by: created_by
       } }, batch_size: 500, validate: false, on_duplicate_key_ignore: true
 
       UserOccurrence.import uniq_determinations.map{|o| {
         user_id: id,
         occurrence_id: o,
         action: "identified",
-        created_by: BOT_IDS[0]
+        created_by: created_by
       } }, batch_size: 500, validate: false, on_duplicate_key_ignore: true
 
       UserOccurrence.import both.map{|o| {
