@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
   has_many :organizations, through: :user_organizations, source: :organization
   has_many :messages_received, foreign_key: :recipient_id, class_name: "Message", dependent: :delete_all
   has_many :messages_sent, class_name: "Message", foreign_key: :user_id, dependent: :delete_all
+  has_many :bulk_attribution_queries_made, class_name: "BulkAttributionQuery", foreign_key: :created_by, dependent: :delete_all
+  has_many :bulk_attribution_queries_received, class_name: "BulkAttributionQuery", foreign_key: :user_id, dependent: :delete_all
 
   before_update :set_update_time
   after_create :update_profile, :add_search, unless: :skip_callbacks
@@ -693,6 +695,7 @@ class User < ActiveRecord::Base
       } }, batch_size: 500, validate: false, on_duplicate_key_ignore: true
     end
 
+    BulkAttributionQuery.create(created_by: User.find(created_by), user: self, query: conditions)
     { num_attributed: (both || all).count, ignored: ignore }
   end
 
