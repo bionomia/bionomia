@@ -395,6 +395,14 @@ zh:
     occurrence_title: 通过标本记录帮助他人
     occurrence: 标本
     occurrence_advance_message: 共同采集的标本记录。使用键盘上的右箭头键或屏幕上的箭头键来逐个查看记录，直到找到您可以归属的记录。
+    spreadsheet: Spreadsheet
+    bulk: Semi-automated
+    bulk_instructions: "WARNING: This feature requires care and precision. Choose an agent string from a list that is generated via the same search algorithm used to present candidate specimen records and then craft conditional statements in the form of JSON."
+    discovered_agents: "Step 1: Choose an agent string parsed from content in recordedBy and identifiedBy as a possible match for %{person}"
+    bulk_json: "Step 2: Create a JSON statement where all key:value pairs will be treated as exact, case-dependent matches alongside your chosen agent string such as: { \"institutionCode\" : \"CAN\", \"eventDate\" : [2020, 2021] } or { \"scientificName LIKE ?\":\"Bolbelasmus %\"} . Recommended best practice is to include as many key:value pairs as is reasonable to prevent misattributions. Available keys are: %{keys}"
+    bulk_count:
+      one: "A total of 1 record was handled."
+      other: "A total of %{count} records were handled."
   home:
     tagline: 链接自然历史样本与全球的收藏家。
     get_started: 开始
