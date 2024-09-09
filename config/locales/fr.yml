@@ -398,7 +398,7 @@ fr:
     spreadsheet: Fichier CSV
     bulk: Semi-automatisé
     bulk_instructions: "AVERTISSEMENT : Cette fonctionnalité nécessite des soins et de la précision. Choisissez une chaîne d'agent dans une liste qui est générée par le même algorithme de recherche utilisé pour présenter des enregistrements de spécimens candidats et ensuite créez des instructions conditionnelles sous la forme de JSON."
-    discovered_agents: "Étape 1 : Choisissez une chaîne d'agent analysée à partir du contenu recordedBy et identifiedBy comme une correspondance possible pour %{person}"
+    discovered_agents: "Step 1: Choose an agent string parsed from content in recordedBy and identifiedBy. Numbers in square brackets indicate the number of unattributed records."
     bulk_json: "Étape 2 : Créer une instruction JSON où toutes les paires clé:value seront traitées comme exactes, les correspondances dépendantes de la casse à côté de la chaîne de votre agent choisi telles que: { \"institutionCode\" : \"CAN\", \"eventDate\" : [2020, 2021] } ou { \"scientificName LIKE ? :\"Bolbelasmus %\"} . Les meilleures pratiques recommandées sont d'inclure autant de paires clé:valeur qu'il est raisonnable pour éviter les mauvaises attributions. Les clés disponibles sont : %{keys}"
     bulk_count:
       one: "Un total de 1 enregistrement a été géré."
