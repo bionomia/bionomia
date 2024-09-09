@@ -356,7 +356,6 @@ module Sinatra
             end
 
             get '/upload' do
-              @unattributed_count = user_unattributed_count(@user)
               haml :'profile/upload', locals: { active_page: "profile" }
             end
 

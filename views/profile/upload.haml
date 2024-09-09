@@ -11,28 +11,24 @@
     = haml :'partials/profile/subtabs_specimens', layout: false, locals: { active_tab: "upload"}
     = haml :'partials/profile/subtabs_bulk', layout: false, locals: { active_subtab: "spreadsheet"}
 
-- if @unattributed_count == 0
-  .alert.alert-info.tiny-margins{role: "alert"}
-    = I18n.t('help.no_unclaimed')
-- else
-  = haml :'partials/upload_instructions', layout: false
+= haml :'partials/upload_instructions', layout: false
 
-  %form#form-wrapper.form.mt-4{method: :post, action: "/profile/upload-result", enctype: "multipart/form-data", "accept-charset": "UTF-8"}
-    - relaxed = params[:relaxed] == "1" ? "?relaxed=1" : nil
-    - checked = params[:relaxed] == "1" ? "checked" : nil
-    .form-group.row#specimen-list{style: "display:flex;align-items:center;"}
-      %label.col-sm-4.col-lg-3.col-form-label.text-left.text-sm-right{for:"relaxed"}= I18n.t('help.less_exact')
-      .col-sm-8.col-lg-9
-        %input#relaxed{type: "checkbox", checked: checked, style:"scale:1.5" }
-    .form-group.row
-      .col-sm-4.col-lg-3.col-form-label.text-left.text-sm-right= I18n.t('general.download_records')
-      .col-sm-8.col-lg-9
-        %a.btn.btn-primary{href: url("/profile/candidates.csv#{relaxed}")}
-          %i.fas.fa-file-download
-          = I18n.t('general.download')
-    .form-group.row
-      %label.col-sm-4.col-lg-3.col-form-label.text-left.text-sm-right{for:"candidate-file"}= I18n.t('general.upload_csv_instructions')
-      .col-sm-8.col-lg-9
-        %input#candidate-file.form-control-file{type:"file", name: "file"}
-        %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
-        %button.btn.btn-success.mt-3{type:"submit"}= I18n.t('general.submit')
+%form#form-wrapper.form.mt-4{method: :post, action: "/profile/upload-result", enctype: "multipart/form-data", "accept-charset": "UTF-8"}
+  - relaxed = params[:relaxed] == "1" ? "?relaxed=1" : nil
+  - checked = params[:relaxed] == "1" ? "checked" : nil
+  .form-group.row#specimen-list{style: "display:flex;align-items:center;"}
+    %label.col-sm-4.col-lg-3.col-form-label.text-left.text-sm-right{for:"relaxed"}= I18n.t('help.less_exact')
+    .col-sm-8.col-lg-9
+      %input#relaxed{type: "checkbox", checked: checked, style:"scale:1.5" }
+  .form-group.row
+    .col-sm-4.col-lg-3.col-form-label.text-left.text-sm-right= I18n.t('general.download_records')
+    .col-sm-8.col-lg-9
+      %a.btn.btn-primary{href: url("/profile/candidates.csv#{relaxed}")}
+        %i.fas.fa-file-download
+        = I18n.t('general.download')
+  .form-group.row
+    %label.col-sm-4.col-lg-3.col-form-label.text-left.text-sm-right{for:"candidate-file"}= I18n.t('general.upload_csv_instructions')
+    .col-sm-8.col-lg-9
+      %input#candidate-file.form-control-file{type:"file", name: "file"}
+      %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
+      %button.btn.btn-success.mt-3{type:"submit"}= I18n.t('general.submit')
