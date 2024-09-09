@@ -42,6 +42,15 @@ CREATE TABLE `article_occurrences` (
   `occurrence_id` bigint UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin KEY_BLOCK_SIZE=8 ROW_FORMAT=COMPRESSED;
 
+CREATE TABLE `bulk_attribution_queries` (
+  `id` bigint NOT NULL,
+  `user_id` int NOT NULL,
+  `created_by` int NOT NULL,
+  `query` text COLLATE utf8mb4_bin,
+  `created_at` datetime(6) NOT NULL,
+  `updated_at` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
 CREATE TABLE `datasets` (
   `id` bigint NOT NULL,
   `datasetKey` binary(36) NOT NULL,
@@ -64,7 +73,7 @@ CREATE TABLE `destroyed_users` (
   `id` int NOT NULL,
   `identifier` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `redirect_to` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `reason` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  `reason` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
@@ -252,6 +261,11 @@ ALTER TABLE `article_occurrences`
   ADD UNIQUE KEY `occurrence_article_idx` (`occurrence_id`,`article_id`),
   ADD KEY `article_idx` (`article_id`);
 
+ALTER TABLE `bulk_attribution_queries`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_idx` (`user_id`),
+  ADD KEY `created_by_idx` (`created_by`);
+
 ALTER TABLE `datasets`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `index_datasets_on_datasetKey` (`datasetKey`);
@@ -267,7 +281,7 @@ ALTER TABLE `messages`
 
 ALTER TABLE `occurrences`
   ADD PRIMARY KEY (`gbifID`) USING BTREE,
-  ADD KEY `typeStatus_idx` (`typeStatus`(50), `hasImage`),
+  ADD KEY `typeStatus_idx` (`typeStatus`(50),`hasImage`),
   ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`,`occurrenceID`(36)),
   ADD KEY `country_code_idx` (`countryCode`),
   ADD KEY `eventDate_processed_idx` (`eventDate_processed_year`,`eventDate_processed_month`,`eventDate_processed_day`),
@@ -345,6 +359,9 @@ ALTER TABLE `articles`
 
 ALTER TABLE `article_occurrences`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `bulk_attribution_queries`
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `datasets`
   MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
