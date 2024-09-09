@@ -18,33 +18,48 @@
   .alert.alert-info.tiny-margines{role: "alert"}
     #{I18n.t('help.bulk_count', count: locals[:bulk_count])}
 
-- if !locals[:bulk_error] && !locals[:bulk_count]
+- if @unattributed_count > 0 && !locals[:bulk_error] && !locals[:bulk_count]
   .alert.alert-warning.tiny-margins{role: "alert"}
     = I18n.t('help.bulk_instructions')
 
-.mt-3
-  %form{method: :post, action: "/help-others/#{@viewed_user.identifier}/bulk-claim", enctype: "multipart/form-data", "accept-charset": "UTF-8"}
-    %p= I18n.t('help.discovered_agents', person: @viewed_user.viewname)
+- if @unattributed_count == 0
+  .alert.alert-info.tiny-margins{role: "alert"}
+    = I18n.t('help.no_unclaimed')
+- else
+  .mt-3
+    %form{method: :post, action: "/help-others/#{@viewed_user.identifier}/bulk-claim", enctype: "multipart/form-data", "accept-charset": "UTF-8"}
+      %p= I18n.t('help.discovered_agents', person: @viewed_user.viewname)
 
-    - @agents.each_with_index do |agent, index|
-      - name = agent[:fullname].blank? ? agent[:unparsed] : agent[:fullname]
+      .row
+        - index = 0
+        - @agent_ids.each_slice(10) do |group|
+          .col-12.col-md-3.mb-3
+            - group.each do |agent_id, count|
+              - agent = Agent.find(agent_id)
+              - index += 1
+              - name = agent.fullname.blank? ? agent.unparsed : agent.fullname
+              .form-check
+                - checked = index == 1 ? "checked" : nil
+                %input.form-check-input{type: "radio", name: "agent_id", id: "agent-select-#{agent.id}", value: "#{agent.id}", checked: checked}
+                %label.form-check-label{for: "agent-select-#{agent.id}"}
+                  #{name}
+                  - if count == 0
+                    [#{count}]
+                  - else
+                    = surround '[', ']' do
+                      %span.text-success #{count}
+
+      %p.mt-3= I18n.t('help.bulk_json', keys: Occurrence.accepted_fields.join(", "))
+      .form-group.mt-3
+        %label{for:"bulk-json"} JSON
+        %div
+          %input#bulk-json.form-control{type:"text", name:"conditions"}
+
       .form-check
-        - checked = index == 0 ? "checked" : nil
-        %input.form-check-input{type: "radio", name: "agent_id", id: "agent-select-#{agent[:id]}", value: "#{agent[:id]}", checked: checked}
-        %label.form-check-label{for: "agent-select-#{agent[:id]}"}
-          #{name}
+        %input#ignore.form-check-input{type:"checkbox", name:"ignore"}
+        %label.form-check-label{for:"ignore"}= I18n.t('specimen.not_them')
 
-    %p.mt-3= I18n.t('help.bulk_json', keys: Occurrence.accepted_fields.join(", "))
-    .form-group.mt-3
-      %label{for:"bulk-json"} JSON
-      %div
-        %input#bulk-json.form-control{type:"text", name:"conditions"}
-
-    .form-check
-      %input#ignore.form-check-input{type:"checkbox", name:"ignore"}
-      %label.form-check-label{for:"ignore"} Bulk Not Them
-
-    .form-group
-      %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
-      %button.btn.btn-success.mt-3{type:"submit"} Submit
+      .form-group
+        %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
+        %button.btn.btn-success.mt-3{type:"submit"}= I18n.t('general.submit')
         

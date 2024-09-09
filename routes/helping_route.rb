@@ -24,14 +24,7 @@ module Sinatra
             get '/:id/candidate-count.json' do
               content_type "application/json", charset: 'utf-8'
               user = find_user(params[:id])
-              return { count: 0 }.to_json if user.family.nil?
-
-              agent_ids = candidate_agents(user).pluck(:id)
-              count = occurrences_by_agent_ids(agent_ids)
-                        .where.not({ occurrence_id: user.user_occurrences.select(:occurrence_id) })
-                        .pluck(:occurrence_id)
-                        .uniq
-                        .count
+              count = user_unattributed_count(user)
               { count: count }.to_json
             end
 
@@ -566,7 +559,8 @@ module Sinatra
               check_identifier
               check_redirect
               @viewed_user = find_user(params[:id])
-              @agents = candidate_agents(@viewed_user).map{|a| a.except(:score, :rank)}.uniq
+              @agent_ids = user_agent_ids_unattributed_count(@viewed_user)
+              @unattributed_count = @agent_ids.values.sum
               locals = {
                 active_page: "help",
                 active_tab: "bulk",
@@ -594,6 +588,7 @@ module Sinatra
               check_identifier
               check_redirect
               @viewed_user = find_user(params[:id])
+              @unattributed_count = user_unattributed_count(@viewed_user)
               haml :'help/upload', locals: { active_page: "help", active_tab: "upload" }
             end
 

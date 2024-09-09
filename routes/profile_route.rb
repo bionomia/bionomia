@@ -259,14 +259,7 @@ module Sinatra
 
             get '/candidate-count.json' do
               content_type "application/json", charset: 'utf-8'
-              return { count: 0}.to_json if @user.family.nil?
-
-              agent_ids = candidate_agents(@user).pluck(:id)
-              count = occurrences_by_agent_ids(agent_ids)
-                        .where.not(occurrence_id: @user.user_occurrences.select(:occurrence_id))
-                        .pluck(:occurrence_id)
-                        .uniq
-                        .count
+              count = user_unattributed_count(@user)
               { count: count }.to_json
             end
 
