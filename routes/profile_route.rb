@@ -356,6 +356,7 @@ module Sinatra
             end
 
             get '/upload' do
+              @unattributed_count = user_unattributed_count(@user)
               haml :'profile/upload', locals: { active_page: "profile" }
             end
 
@@ -366,6 +367,30 @@ module Sinatra
                 flash.now[:error] = e.message
               end
               haml :'profile/upload_result', locals: { active_page: "profile" }
+            end
+
+            get '/bulk-claim' do
+              @agent_ids = user_agent_ids_unattributed_count(@user)
+              @unattributed_count = @agent_ids.values.sum
+              locals = {
+                active_page: "specimens",
+                active_tab: "upload",
+                active_subtab: "bulk_claim",
+                bulk_error: flash.now[:error],
+                bulk_count: flash.now[:bulk_count]
+              }
+              haml :'profile/bulk', locals: locals
+            end
+
+            post '/bulk-claim' do
+              agent = Agent.find(params[:agent_id])
+              begin
+                result = @user.bulk_claim(agent: agent, conditions: params[:conditions], ignore: params[:ignore], created_by: @user.id)
+                flash.next[:bulk_count] = result[:num_attributed]
+              rescue ArgumentError => e
+                flash.next[:error] = "#{e.message}"
+              end
+              redirect "/profile/bulk-claim"
             end
 
             get '/ignored' do

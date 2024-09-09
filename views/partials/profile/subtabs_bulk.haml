@@ -1,0 +1,6 @@
+%nav#bulk-nav.navbar.navbar-light.navbar-expand.bg-light.overflow-auto
+  %ul.navbar-nav
+    %li.nav-item
+      %a{class:"text-nowrap nav-link#{locals[:active_subtab] == "spreadsheet" ? " active" : nil}", href: url("/profile/upload")}= I18n.t('help.spreadsheet')
+    %li.nav-item
+      %a{class:"text-nowrap nav-link#{locals[:active_subtab] == "bulk-claim" ? " active" : nil}", href: url("/profile/bulk-claim")}= I18n.t('help.bulk')
