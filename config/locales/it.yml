@@ -398,7 +398,7 @@ it:
     spreadsheet: Spreadsheet
     bulk: Semi-automated
     bulk_instructions: "WARNING: This feature requires care and precision. Choose an agent string from a list that is generated via the same search algorithm used to present candidate specimen records and then craft conditional statements in the form of JSON."
-    discovered_agents: "Step 1: Choose an agent string parsed from content in recordedBy and identifiedBy as a possible match for %{person}"
+    discovered_agents: "Step 1: Choose an agent string parsed from content in recordedBy and identifiedBy. Numbers in square brackets indicate the number of unattributed records."
     bulk_json: "Step 2: Create a JSON statement where all key:value pairs will be treated as exact, case-dependent matches alongside your chosen agent string such as: { \"institutionCode\" : \"CAN\", \"eventDate\" : [2020, 2021] } or { \"scientificName LIKE ?\":\"Bolbelasmus %\"} . Recommended best practice is to include as many key:value pairs as is reasonable to prevent misattributions. Available keys are: %{keys}"
     bulk_count:
       one: "A total of 1 record was handled."
