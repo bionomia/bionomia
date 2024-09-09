@@ -395,14 +395,14 @@ fr:
     occurrence_title: Aidez les autres par spécimen d'enregistrement
     occurrence: Spécimens
     occurrence_advance_message: Registres de spécimens coconstitués. Utilisez la touche fléchée droite de votre clavier ou la flèche de l'écran pour faire avancer un enregistrement jusqu'à ce que vous en receviez une que vous pouvez attribuer.
-    spreadsheet: Spreadsheet
-    bulk: Semi-automated
-    bulk_instructions: "WARNING: This feature requires care and precision. Choose an agent string from a list that is generated via the same search algorithm used to present candidate specimen records and then craft conditional statements in the form of JSON."
-    discovered_agents: "Step 1: Choose an agent string parsed from content in recordedBy and identifiedBy as a possible match for %{person}"
-    bulk_json: "Step 2: Create a JSON statement where all key:value pairs will be treated as exact, case-dependent matches alongside your chosen agent string such as: { \"institutionCode\" : \"CAN\", \"eventDate\" : [2020, 2021] } or { \"scientificName LIKE ?\":\"Bolbelasmus %\"} . Recommended best practice is to include as many key:value pairs as is reasonable to prevent misattributions. Available keys are: %{keys}"
+    spreadsheet: Fichier CSV
+    bulk: Semi-automatisé
+    bulk_instructions: "AVERTISSEMENT : Cette fonctionnalité nécessite des soins et de la précision. Choisissez une chaîne d'agent dans une liste qui est générée par le même algorithme de recherche utilisé pour présenter des enregistrements de spécimens candidats et ensuite créez des instructions conditionnelles sous la forme de JSON."
+    discovered_agents: "Étape 1 : Choisissez une chaîne d'agent analysée à partir du contenu recordedBy et identifiedBy comme une correspondance possible pour %{person}"
+    bulk_json: "Étape 2 : Créer une instruction JSON où toutes les paires clé:value seront traitées comme exactes, les correspondances dépendantes de la casse à côté de la chaîne de votre agent choisi telles que: { \"institutionCode\" : \"CAN\", \"eventDate\" : [2020, 2021] } ou { \"scientificName LIKE ? :\"Bolbelasmus %\"} . Les meilleures pratiques recommandées sont d'inclure autant de paires clé:valeur qu'il est raisonnable pour éviter les mauvaises attributions. Les clés disponibles sont : %{keys}"
     bulk_count:
-      one: "A total of 1 record was handled."
-      other: "A total of %{count} records were handled."
+      one: "Un total de 1 enregistrement a été géré."
+      other: "Au total, %{count} enregistrements téléchargés ont été traités."
   home:
     tagline: Reliez des spécimens d'histoire naturelle aux collectionneurs du monde.
     get_started: Commencer
@@ -576,8 +576,8 @@ fr:
     email_notifications: Notifications Par Courriel
     delete_account: Supprimer Votre Compte
     delete: Supprimer
-    delete_reason: Why do you want to delete your profile?
-    delete_feedback: Please provide a reason.
+    delete_reason: Pourquoi voulez-vous supprimer votre profil?
+    delete_feedback: Veuillez donner une raison.
     permanent_delete: Supprimez définitivement votre compte.
     delete_warning: Voulez-vous vraiment supprimer votre compte? Toutes vos réclamations ET toutes les attributions que vous avez faites seront définitivement supprimées.
     email_instructions: Recevez des notifications par courriel de nouveaux articles scientifiques qui ont utilisé des données dérivées des spécimens que vous avez identifiés ou collectés. Rendez votre adresse courriel principale accessible au public dans votre compte ORCID, puis actualisez vos données ci-dessus.
