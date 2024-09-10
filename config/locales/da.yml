@@ -264,6 +264,7 @@ da:
   help:
     ignored_title: "Help Reclaim Ignored for %{name}"
     upload_user_title: "Bulk Upload for %{name}"
+    bulk_user_title: "Bulk Attribution for %{name}"
     help_user_title: "Help Attribute Specimens for %{name}"
     help_title: Help Attribute Specimens
     roster_title: Help Attribute Specimens
