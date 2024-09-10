@@ -264,6 +264,7 @@ pt:
   help:
     ignored_title: "Ajude a reivindicar ignorado para %{name}"
     upload_user_title: "Carregamento de dados em massa para %{name}"
+    bulk_user_title: "Bulk Attribution for %{name}"
     help_user_title: "Ajude a atribuir espécimes para %{name}"
     help_title: Ajude a atribuir espécimes
     roster_title: Help Attribute Specimens
