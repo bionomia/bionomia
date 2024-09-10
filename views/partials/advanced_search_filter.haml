@@ -16,7 +16,8 @@
         %i.fas.fa-search
         Searched for
         %span.font-weight-bold.mr-2
-          #{@agent.fullname_reverse}
+          - name = @agent.fullname.blank? ? @agent.unparsed : @agent.fullname
+          #{name}  
         %a.ml-2.text-danger{href: url("#{locals[:url]}?datasetKey=#{params[:datasetKey]}&taxon_id=#{params[:taxon_id]}&kingdom=#{params[:kingdom]}&country_code=#{params[:country_code]}&agent_id=")}
           %i.fas.fa-minus-circle
           = I18n.t('general.remove')
