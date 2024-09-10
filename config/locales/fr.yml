@@ -264,6 +264,7 @@ fr:
   help:
     ignored_title: "Aide a récupéré pour %{name}"
     upload_user_title: "Téléchargement en bloc pour %{name}"
+    bulk_user_title: "Bulk Attribution for %{name}"
     help_user_title: "Aidez à attribuer des spécimens à %{name}"
     help_title: Aider à attribuer des spécimens
     roster_title: Aider à attribuer des spécimens
