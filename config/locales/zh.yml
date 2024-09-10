@@ -264,6 +264,7 @@ zh:
   help:
     ignored_title: "帮助 %{name} 归属被忽略的内容"
     upload_user_title: "%{name} 的批量上传"
+    bulk_user_title: "Bulk Attribution for %{name}"
     help_user_title: "为 %{name} 归属标本"
     help_title: 帮助属性标本
     roster_title: 帮助属性标本

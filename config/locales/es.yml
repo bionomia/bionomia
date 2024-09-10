@@ -264,6 +264,7 @@ es:
   help:
     ignored_title: "Help Reclaim Ignored for %{name}"
     upload_user_title: "Subida masiva por %{name}"
+    bulk_user_title: "Bulk Attribution for %{name}"
     help_user_title: "Ayude a atribuir especímenes a %{name}"
     help_title: Ayude a atribuir especímenes
     roster_title: Ayude a atribuir especímenes
