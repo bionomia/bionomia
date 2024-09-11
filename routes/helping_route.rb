@@ -558,6 +558,7 @@ module Sinatra
             get '/:id/bulk-claim' do
               check_identifier
               check_redirect
+
               @viewed_user = find_user(params[:id])
               @agent_ids = user_agent_ids_unattributed_count(@viewed_user)
               @unattributed_count = @agent_ids.values.sum
@@ -573,6 +574,7 @@ module Sinatra
             post '/:id/bulk-claim' do
               check_identifier
               check_redirect
+
               @viewed_user = find_user(params[:id])
               agent = Agent.find(params[:agent_id])
               begin

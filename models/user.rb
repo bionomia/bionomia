@@ -691,7 +691,7 @@ class User < ActiveRecord::Base
         user_id: id,
         occurrence_id: o,
         action: "recorded,identified",
-        created_by: BOT_IDS[0]
+        created_by: created_by
       } }, batch_size: 500, validate: false, on_duplicate_key_ignore: true
     end
 
