@@ -37,7 +37,6 @@ module Sinatra
                             description: description
                           )
                          .find_or_create_by(orcid: orcid)
-              organization = user.current_organization.as_json.symbolize_keys rescue nil
               user.update(visited: Time.now)
               session[:omniauth] = OpenStruct.new({ id: user.id })
               if request.env['omniauth.origin']
