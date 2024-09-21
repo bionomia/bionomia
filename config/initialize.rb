@@ -25,6 +25,7 @@ module Sinatra
                                      httpdonly: true,
                                      secure: secure,
                                      same_site: :lax
+                                     
           app.use Rack::Protection::AuthenticityToken
 
           app.use OmniAuth::Builder do

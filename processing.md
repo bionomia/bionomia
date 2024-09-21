@@ -18,80 +18,80 @@ Unfortunately, gbifIDs are not persistent. These occasionally disappear through 
 
 ### Step 3: Parse & Populate Agents
 
-      $ RACK_ENV=production bundle exec ./bin/parse_agents.rb --queue
+      $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/parse_agents.rb --queue
       # Can start 2+ workers, each with 40 threads to help speed-up processing
-      $ RACK_ENV=production bundle exec sidekiq -C config/settings/sidekiq.yml -c 40 -r ./application.rb
+      $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec sidekiq -C config/settings/sidekiq.yml -c 40 -r ./application.rb
 
-      $ RACK_ENV=production bundle exec ./bin/populate_agents.rb --truncate --queue
+      $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/populate_agents.rb --truncate --queue
       # Can start 2+ workers, each with 40 threads to help speed-up processing
-      $ RACK_ENV=production bundle exec sidekiq -C config/settings/sidekiq.yml -c 40 -r ./application.rb
+      $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec sidekiq -C config/settings/sidekiq.yml -c 40 -r ./application.rb
 
 ### Step 4: Populate Taxa
 
-     $ RACK_ENV=production bundle exec ./bin/populate_taxa.rb --truncate --directory /directory-to-spark-csv-files/
+     $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/populate_taxa.rb --truncate --directory /directory-to-spark-csv-files/
      # Can start 2+ workers, each with 40 threads to help speed-up processing
-     $ RACK_ENV=production bundle exec sidekiq -C config/settings/sidekiq.yml -c 40 -r ./application.rb
+     $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec sidekiq -C config/settings/sidekiq.yml -c 40 -r ./application.rb
 
 ### Step 5: Import Existing recordedByID and identifiedByID
 
 First, import all users and user_occurrences content from production.
 
-     $ RACK_ENV=production bundle exec ./bin/populate_existing_claims.rb --truncate --directory /directory-to-spark-csv-files/
+     $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/populate_existing_claims.rb --truncate --directory /directory-to-spark-csv-files/
      # might need to increase ulimit
      $ ulimit -n 8192
-     $ RACK_ENV=production bundle exec sidekiq -C config/settings/sidekiq.yml -c 2 -r ./application.rb
+     $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec sidekiq -C config/settings/sidekiq.yml -c 2 -r ./application.rb
 
 Export a csv pivot table (for import performance) of all claims made by User::GBIF_AGENT_ID.
 
-     $ RACK_ENV=production bundle exec ./bin/populate_existing_claims.rb --export "gbif_claims.csv"
+     $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/populate_existing_claims.rb --export "gbif_claims.csv"
 
 Finally, import the bulk claims on production (will create users & make public if wikidata):
 
-     $ RACK_ENV=production bundle exec ./bin/bulk_claim.rb --file "gbif_claims.csv"
+     $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/bulk_claim.rb --file "gbif_claims.csv"
 
 The above recreates the caches and so cached file permissions may need to be set prior to its execution.
 
 ### Step 6: Populate Search in Elasticsearch
 
-     $ RACK_ENV=production bundle exec ./bin/populate_search.rb --indices agent,taxon
+     $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/populate_search.rb --indices agent,taxon
 
 Or from scratch:
 
-     $ RACK_ENV=production ./bin/populate_search.rb --rebuild
+     $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/populate_search.rb --rebuild
 
 ### Step 7: Populate dataset metadata
 
-     $ RACK_ENV=production bundle exec ./bin/gbif_datasets.rb --new
-     $ RACK_ENV=production bundle exec ./bin/gbif_datasets.rb --flush
-     $ RACK_ENV=production bundle exec ./bin/gbif_datasets.rb --remove-without-agents
-     $ RACK_ENV=production bundle exec ./bin/gbif_datasets.rb --counter
+     $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/gbif_datasets.rb --new
+     $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/gbif_datasets.rb --flush
+     $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/gbif_datasets.rb --remove-without-agents
+     $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/gbif_datasets.rb --counter
 
 Or from scratch:
 
-     $ RACK_ENV=production bundle exec ./bin/gbif_datasets.rb --populate
+     $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/gbif_datasets.rb --populate
 
 ### Step 8: Repopulate the occurrence_counts table in support of the help-others specimen widget
 
      # For best performance, first rebuild the Elasticsearch user index
-     # RACK_ENV=production bundle exec ./bin/populate_search.rb --indices user
-     $ RACK_ENV=production bundle exec ./bin/populate_occurrence_count.rb -t -a -j
+     # RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/populate_search.rb --indices user
+     $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/populate_occurrence_count.rb -t -a -j
      # Can start 2+ workers, each with 40 threads to help speed-up processing
-     $ RACK_ENV=production bundle exec sidekiq -C config/settings/sidekiq.yml -c 40 -r ./application.rb
+     $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec sidekiq -C config/settings/sidekiq.yml -c 40 -r ./application.rb
 
 ### Step 9: Rebuild the Frictionless Data Packages
 
-    $ RACK_ENV=production bundle exec ./bin/frictionless_dataset.rb -d /var/www/bionomia/public/data -s -a
+    $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/frictionless_dataset.rb -d /var/www/bionomia/public/data -s -a
 
 ## Successive Data Migrations
 
 Unfortunately, gbifIDs are not persistent. These occasionally disappear through processing at GBIF's end. As a result, claims may no longer point to an existing occurrence record and these must then be purged from the user_occurrences table. The following are a few methods to produce a csv file of affected users and to then delete the orphans:
 
      # csv dump requires approx. 15min for 20M attributions
-     $ RACK_ENV=production bundle exec ./bin/orphaned_user_occurrences.rb -d ~/Desktop -o
+     $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/orphaned_user_occurrences.rb -d ~/Desktop -o
 
 Then use this orphaned.csv file to run through the orphaned records and delete them:
 
-     $ RACK_ENV=production bundle exec ./bin/orphaned_user_occurrences.rb -f orphaned.csv
+     $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/orphaned_user_occurrences.rb -f orphaned.csv
 
 This misses the ignored attributions, so also execute:
 
