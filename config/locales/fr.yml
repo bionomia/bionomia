@@ -55,7 +55,7 @@ fr:
     example_agents: Exemples ou résultats aléatoires
     gbifid: À partir des gbifID
     gbifid_title: Chaînes d'agents provenant de gbifIDs
-    gbifid_instructions: Paste a list of occurrence-based gbifIDs and receive a summary list of parsed agent strings from dwc:recordedBy.
+    gbifid_instructions: Collez une liste de gbifIDs basés sur les occurrences et recevez une liste de chaînes d'agents analysées depuis dwc:recordedBy.
   article:
     article_title: Article
     articles_title: Articles
@@ -264,7 +264,7 @@ fr:
   help:
     ignored_title: "Aide a récupéré pour %{name}"
     upload_user_title: "Téléchargement en bloc pour %{name}"
-    bulk_user_title: "Bulk Attribution for %{name}"
+    bulk_user_title: "Attribution en bloc pour %{name}"
     help_user_title: "Aidez à attribuer des spécimens à %{name}"
     help_title: Aider à attribuer des spécimens
     roster_title: Aider à attribuer des spécimens
@@ -399,7 +399,7 @@ fr:
     spreadsheet: Fichier CSV
     bulk: Semi-automatisé
     bulk_instructions: "AVERTISSEMENT : Cette fonctionnalité nécessite des soins et de la précision. Choisissez une chaîne d'agent dans une liste qui est générée par le même algorithme de recherche utilisé pour présenter des enregistrements de spécimens candidats et ensuite créez des instructions conditionnelles sous la forme de JSON."
-    discovered_agents: "Step 1: Choose an agent string parsed from content in dwc:recordedBy and dwc:identifiedBy. Numbers in square brackets indicate the number of unattributed records."
+    discovered_agents: "Étape 1 : Choisissez une chaîne d'agent analysée à partir du contenu dans dwc:recordedBy et dwc:identifiedBy. Les nombres entre crochets indiquent le nombre d'enregistrements non attribués."
     bulk_json: "Étape 2 : Créer une instruction JSON où toutes les paires clé:value seront traitées comme exactes, les correspondances dépendantes de la casse à côté de la chaîne de votre agent choisi telles que: { \"institutionCode\" : \"CAN\", \"eventDate\" : [2020, 2021] } ou { \"scientificName LIKE ? :\"Bolbelasmus %\"} . Les meilleures pratiques recommandées sont d'inclure autant de paires clé:valeur qu'il est raisonnable pour éviter les mauvaises attributions. Les clés disponibles sont : %{keys}"
     bulk_count:
       one: "Un total de 1 enregistrement a été géré."
