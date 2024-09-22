@@ -10,6 +10,13 @@
     .mr-auto
       %h1.h2 Statistics
 
+%h4 Environment
+
+#{`ruby -v`}
+
+- if RubyVM::YJIT.enabled?
+  +YJIT enabled
+
 %h4 Active Database Connections
 
 %ul.list-group.mt-3
@@ -39,4 +46,3 @@
                   %span.badge.badge-success.p-2 OK
                 - else
                   %span.badge.badge-success.badge-pill #{number_with_delimiter(v)}
-
