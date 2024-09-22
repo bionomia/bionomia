@@ -13,10 +13,11 @@ module Bionomia
                        .map{|a| DwcAgent.clean(a)}
                        .compact
                        .uniq
-         if !agents.empty?
-            agent_job.parsed = agents
-            agent_job.save
-         end
+         return if agents.empty?
+         return if agents.size == 1 && agents.first == DwcAgent.default
+
+         agent_job.parsed = agents
+         agent_job.save
       end
 
    end

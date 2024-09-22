@@ -22,7 +22,7 @@ module Bionomia
       agent_job.parsed.each do |agent|
 
         # Create an unparsed agent if it has all nil keys
-        if agent.symbolize_keys == Namae::Name.new.to_h
+        if agent.symbolize_keys == DwcAgent.default.to_h
           agent = Agent.create_or_find_by({
             family: "",
             given: "",
