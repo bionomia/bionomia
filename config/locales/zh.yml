@@ -55,7 +55,7 @@ zh:
     example_agents: 随机抽样或结果
     gbifid: 来自 gbifIDs
     gbifid_title: 来自gbifID的代理字符串
-    gbifid_instructions: 粘贴基于出现记录的 gbifID 列表，并接收 recordedBy 中解析的代理字符串摘要列表。
+    gbifid_instructions: Paste a list of occurrence-based gbifIDs and receive a summary list of parsed agent strings from dwc:recordedBy.
   article:
     article_title: 文章
     articles_title: 文集
@@ -399,7 +399,7 @@ zh:
     spreadsheet: Spreadsheet
     bulk: Semi-automated
     bulk_instructions: "WARNING: This feature requires care and precision. Choose an agent string from a list that is generated via the same search algorithm used to present candidate specimen records and then craft conditional statements in the form of JSON."
-    discovered_agents: "Step 1: Choose an agent string parsed from content in recordedBy and identifiedBy. Numbers in square brackets indicate the number of unattributed records."
+    discovered_agents: "Step 1: Choose an agent string parsed from content in dwc:recordedBy and dwc:identifiedBy. Numbers in square brackets indicate the number of unattributed records."
     bulk_json: "Step 2: Create a JSON statement where all key:value pairs will be treated as exact, case-dependent matches alongside your chosen agent string such as: { \"institutionCode\" : \"CAN\", \"eventDate\" : [2020, 2021] } or { \"scientificName LIKE ?\":\"Bolbelasmus %\"} . Recommended best practice is to include as many key:value pairs as is reasonable to prevent misattributions. Available keys are: %{keys}"
     bulk_count:
       one: "A total of 1 record was handled."
