@@ -20,11 +20,24 @@ module Bionomia
       end
 
       agent_job.parsed.each do |agent|
+
+        # Create an unparsed agent if it has all nil keys
+        if agent.symbolize_keys == Namae::Name.new.to_h
+          agent = Agent.create_or_find_by({
+            family: "",
+            given: "",
+            unparsed: agent_job.agents.truncate(150).strip
+          })
+          import(agent_id: agent.id, row: agent_job)
+          next
+        end
+
         family = [agent["particle"].to_s.strip, agent["family"].to_s.strip].join(" ")
                     .squeeze(" ")
                     .strip
         given = agent["given"].to_s.squeeze(" ").strip
 
+        # Create an unparsed agent if it's missing features
         if missing_features(agent: agent)
           agent = Agent.create_or_find_by({
             family: "",
@@ -35,6 +48,7 @@ module Bionomia
           next
         end
 
+        # Create an agent with a given and family name
         agent = Agent.create_or_find_by({
           family: family.truncate(40),
           given: given,
