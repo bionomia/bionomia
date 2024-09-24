@@ -60,7 +60,7 @@
         %dd.py-1
           %a{href: gbif_occurrence_url(@occurrence.id), target:"_blank"}
             #{@occurrence.id}
-            %i.fas.fa-external-link-alt
+            %i.fa-solid.fa-external-link-alt
         %dd.line-break
 
         %dt datasetKey
@@ -68,7 +68,7 @@
           - if @occurrence.datasetKey
             %a{href: "https://gbif.org/dataset/#{@occurrence.datasetKey}", target:"_blank"}
               #{@occurrence.datasetKey}
-              %i.fas.fa-external-link-alt
+              %i.fa-solid.fa-external-link-alt
         %dd.line-break
 
         %dt occurrenceID
@@ -104,7 +104,7 @@
         %dd.py-1
           #{I18n.t(@occurrence.hasImage.present?.to_s)}
           - if @occurrence.has_image?
-            %i.fas.fa-image.ml-1.text-muted{"data-toggle":"popover", "data-gbifid":"#{@occurrence.id}"}
+            %i.fa-solid.fa-image.ml-1.text-muted{"data-toggle":"popover", "data-gbifid":"#{@occurrence.id}"}
 
   #location.card.mb-4
     .card-header.border-bottom
@@ -162,7 +162,7 @@
                   %li.agent_recorders
                     %span
                       #{agent_recorder.fullname}
-                    %i.fas.fa-spinner.fa-pulse
+                    %i.fa-solid.fa-spinner.fa-pulse
           %dd.line-break
 
         %dt Attributions
@@ -175,7 +175,7 @@
                   - if recorder.user.orcid
                     #{recorder.user.viewname}
                     %a{href: "https://orcid.org/#{recorder.user.orcid}"}
-                      %i.fab.fa-orcid
+                      %i.fa-brands.fa-orcid
                       https://orcid.org/#{recorder.user.orcid}
                   - else
                     #{recorder.user.viewname}
@@ -185,12 +185,12 @@
                     - if recorder.claimant != recorder.user && !recorder.claimant.is_bot?
                       Attributed by: #{recorder.claimant.viewname}
                       %a{href: "https://orcid.org/#{recorder.claimant.orcid}"}
-                        %i.fab.fa-orcid
+                        %i.fa-brands.fa-orcid
                         https://orcid.org/#{recorder.claimant.orcid}
                     - elsif recorder.claimant == recorder.user && !recorder.claimant.is_bot?
                       Claimed by: #{recorder.claimant.viewname}
                       %a{href: "https://orcid.org/#{recorder.claimant.orcid}"}
-                        %i.fab.fa-orcid
+                        %i.fa-brands.fa-orcid
                         https://orcid.org/#{recorder.claimant.orcid}
                     - elsif recorder.claimant.is_bot?
                       Attributed by: Bionomia Bot or from source
@@ -243,7 +243,7 @@
                   %li.agent_determiners
                     %span
                       #{agent_determiner.fullname}
-                    %i.fas.fa-spinner.fa-pulse
+                    %i.fa-solid.fa-spinner.fa-pulse
           %dd.line-break
 
         %dt Attributions
@@ -256,7 +256,7 @@
                   - if determiner.user.orcid
                     #{determiner.user.viewname}
                     %a{href: "https://orcid.org/#{determiner.user.orcid}"}
-                      %i.fab.fa-orcid
+                      %i.fa-brands.fa-orcid
                       https://orcid.org/#{determiner.user.orcid}
                   - else
                     #{determiner.user.viewname}
@@ -266,12 +266,12 @@
                     - if determiner.claimant != determiner.user && !determiner.claimant.is_bot?
                       Attributed by: #{determiner.claimant.viewname}
                       %a{href: "https://orcid.org/#{determiner.claimant.orcid}"}
-                        %i.fab.fa-orcid
+                        %i.fa-brands.fa-orcid
                         https://orcid.org/#{determiner.claimant.orcid}
                     - elsif determiner.claimant == determiner.user && !determiner.claimant.is_bot?
                       Claimed by: #{determiner.claimant.viewname}
                       %a{href: "https://orcid.org/#{determiner.claimant.orcid}"}
-                        %i.fab.fa-orcid
+                        %i.fa-brands.fa-orcid
                         https://orcid.org/#{determiner.claimant.orcid}
                     - elsif determiner.claimant.is_bot?
                       Attributed by: Bionomia Bot or from source
@@ -314,7 +314,7 @@
                 - if ignored.user.orcid
                   #{ignored.user.viewname}
                   %a{href: "https://orcid.org/#{ignored.user.orcid}"}
-                    %i.fab.fa-orcid
+                    %i.fa-brands.fa-orcid
                     https://orcid.org/#{ignored.user.orcid}
                 - else
                   #{ignored.user.viewname}
@@ -324,12 +324,12 @@
                   - if ignored.claimant != ignored.user && !ignored.claimant.is_bot?
                     Unascribed by: #{ignored.claimant.viewname}
                     %a{href: "https://orcid.org/#{ignored.claimant.orcid}"}
-                      %i.fab.fa-orcid
+                      %i.fa-brands.fa-orcid
                       https://orcid.org/#{ignored.claimant.orcid}
                   - elsif ignored.claimant == ignored.user && !ignored.claimant.is_bot?
                     Unascribed by: #{ignored.claimant.viewname}
                     %a{href: "https://orcid.org/#{ignored.claimant.orcid}"}
-                      %i.fab.fa-orcid
+                      %i.fa-brands.fa-orcid
                       https://orcid.org/#{ignored.claimant.orcid}
                   - elsif ignored.claimant.is_bot?
                     Unascribed by: Bionomia Bot or from source

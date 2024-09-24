@@ -2,7 +2,7 @@
   .col.col-12.col-md-8.p-0
   .col.col-12.col-md-4.p-0.text-md-right
     %a{href: url("#{locals[:dest]}")}
-      %i.fas.fa-search-minus
+      %i.fa-solid.fa-search-minus
       = I18n.t('help.close')
 
 .mt-3
@@ -23,7 +23,7 @@
           - q = params.except("id", "authenticity_token", "agent", "dataset", "taxon", "kingdom").to_query
           %span
             %a.text-danger{href: url("#{locals[:url]}/advanced-search?#{q}")}
-              %i.fas.fa-minus-circle
+              %i.fa-solid.fa-minus-circle
               = I18n.t('general.remove')
           %span
             #{@kingdom}
@@ -38,7 +38,7 @@
           - q = params.except("id", "authenticity_token", "agent", "dataset", "taxon", "taxon_id").to_query
           %span
             %a{href: url("#{locals[:url]}/advanced-search?#{q}"), class:"text-danger"}
-              %i.fas.fa-minus-circle
+              %i.fa-solid.fa-minus-circle
               = I18n.t('general.remove')
           %span
             #{@taxon.family}
@@ -53,7 +53,7 @@
           - q = params.except("id", "authenticity_token", "agent", "dataset", "taxon", "datasetKey").to_query
           %span
             %a.text-danger{href: url("#{locals[:url]}/advanced-search?#{q}")}
-              %i.fas.fa-minus-circle
+              %i.fa-solid.fa-minus-circle
               = I18n.t('general.remove')
           %span
             #{@dataset.title}
@@ -68,7 +68,7 @@
           - q = params.except("id", "authenticity_token", "agent", "dataset", "taxon", "agent_id").to_query
           %span
             %a{href: url("#{locals[:url]}/advanced-search?#{q}"), class:"text-danger"}
-              %i.fas.fa-minus-circle
+              %i.fa-solid.fa-minus-circle
               = I18n.t('general.remove')
           %span
             #{@agent.fullname_reverse}
@@ -87,7 +87,7 @@
           - q = params.except("id", "authenticity_token", "agent", "dataset", "taxon", "country_code").to_query
           %span
             %a.text-danger{href: url("#{locals[:url]}/advanced-search?#{q}")}
-              %i.fas.fa-minus-circle
+              %i.fa-solid.fa-minus-circle
               = I18n.t('general.remove')
           %span
             #{I18nData.countries(I18n.locale).slice(@country_code.upcase).flatten.last}

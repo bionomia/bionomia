@@ -56,7 +56,7 @@
   .card-footer.d-flex.flex-wrap.justify-content-between.small
     .text-left.text-muted.mt-1
       - if !locals[:user].is_public?
-        %i.fas.fa-lock
+        %i.fa-solid.fa-lock
       - count = locals[:user].all_occurrences_count
       %span.badge.badge-light #{number_with_delimiter(count)}
       #{I18n.t('card.claimed', count: count)}

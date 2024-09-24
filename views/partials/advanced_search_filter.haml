@@ -2,49 +2,49 @@
   .alert.alert-warning{role: "alert"}
     - if @dataset
       %div
-        %i.fas.fa-filter
+        %i.fa-solid.fa-filter
         Filtered by
         %span.font-weight-bold.mr-2
           #{@dataset.title.truncate(125, separator: ' ')}
         %a{href: "#{@dataset.license}", itemprop: "license"}
           %img{src:"#{@dataset.license_icon("small")}"}
         %a.ml-2.text-danger{href: url("#{locals[:url]}?agent_id=#{params[:agent_id]}&taxon_id=#{params[:taxon_id]}&kingdom=#{params[:kingdom]}&country_code=#{params[:country_code]}&datasetKey=")}
-          %i.fas.fa-minus-circle
+          %i.fa-solid.fa-minus-circle
           = I18n.t('general.remove')
     - if @agent
       %div
-        %i.fas.fa-search
+        %i.fa-solid.fa-search
         Searched for
         %span.font-weight-bold.mr-2
           - name = @agent.fullname.blank? ? @agent.unparsed : @agent.fullname
           #{name}  
         %a.ml-2.text-danger{href: url("#{locals[:url]}?datasetKey=#{params[:datasetKey]}&taxon_id=#{params[:taxon_id]}&kingdom=#{params[:kingdom]}&country_code=#{params[:country_code]}&agent_id=")}
-          %i.fas.fa-minus-circle
+          %i.fa-solid.fa-minus-circle
           = I18n.t('general.remove')
     - if @kingdom
       %div
-        %i.fas.fa-filter
+        %i.fa-solid.fa-filter
         Filtered by
         %span.font-weight-bold.mr-2
           #{@kingdom}
         %a.ml-2.text-danger{href: url("#{locals[:url]}?datasetKey=#{params[:datasetKey]}&agent_id=#{params[:agent_id]}&taxon_id=#{params[:taxon_id]}&country_code=#{params[:country_code]}&kingdom=")}
-          %i.fas.fa-minus-circle
+          %i.fa-solid.fa-minus-circle
           = I18n.t('general.remove')
     - if @taxon
       %div
-        %i.fas.fa-filter
+        %i.fa-solid.fa-filter
         Filtered by
         %span.font-weight-bold.mr-2
           #{@taxon.family}
         %a.ml-2.text-danger{href: url("#{locals[:url]}?datasetKey=#{params[:datasetKey]}&agent_id=#{params[:agent_id]}&kingdom=#{params[:kingdom]}&country_code=#{params[:country_code]}&taxon_id=")}
-          %i.fas.fa-minus-circle
+          %i.fa-solid.fa-minus-circle
           = I18n.t('general.remove')
     - if @country_code
       %div
-        %i.fas.fa-filter
+        %i.fa-solid.fa-filter
         Filtered by
         %span.font-weight-bold.mr-2
           #{I18nData.countries(I18n.locale).slice(@country_code.upcase).flatten.last}
         %a.ml-2.text-danger{href: url("#{locals[:url]}?datasetKey=#{params[:datasetKey]}&agent_id=#{params[:agent_id]}&kingdom=#{params[:kingdom]}&taxon_id=#{params[:taxon_id]}&country_code=")}
-          %i.fas.fa-minus-circle
+          %i.fa-solid.fa-minus-circle
           = I18n.t('general.remove')

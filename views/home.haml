@@ -39,7 +39,7 @@
         #{I18n.t('home.get_started')} »
       - if !authorized?
         %button.btn.btn-lg.btn-outline-dark.button-login.connect-orcid-button
-          %i.fab.fa-orcid
+          %i.fa-brands.fa-orcid
           = I18n.t('home.orcid_login')
         %input{type:"hidden", name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
       - else

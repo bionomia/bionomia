@@ -24,7 +24,7 @@
       =I18n.t('profile.helped_alert')
     .col-12.col-md-3.p-0.text-md-right
       %a.mr-2{href: url("/profile/attributions.csv"), alt:"CSV file download"}
-        %i.fas.fa-file-csv.text-dark.h5.m-0.p-1
+        %i.fa-solid.fa-file-csv.text-dark.h5.m-0.p-1
         CSV
 
   .table-responsive-lg.mt-4
@@ -41,12 +41,12 @@
           %tr
             %td
               - if claim.user.orcid
-                %i.fab.fa-orcid
+                %i.fa-brands.fa-orcid
               - else
                 %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD"}
               %a{href: url("/help-others/#{claim.user.identifier}")} #{claim.user.viewname}
               - if !claim.user.is_public?
-                %i.fas.fa-lock.text-muted.ml-2
+                %i.fa-solid.fa-lock.text-muted.ml-2
             %td.text-right
               #{number_with_delimiter(claim[:attribution_count])}
             %td

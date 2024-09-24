@@ -45,7 +45,7 @@
             .card-footer.d-flex
               - if !u[:user].is_public?
                 .small.text-right.text-muted.mr-2
-                  %i.fas.fa-lock
+                  %i.fa-solid.fa-lock
               .small.text-left.text-muted.mr-2
                 %span.badge.badge-light
                   #{number_with_delimiter(u[:total])}
@@ -54,7 +54,7 @@
               .small.ml-auto
                 - if !u[:user].is_bot?
                   %button.btn.btn-sm.btn-outline-danger.thanks{type:"button", "data-recipient-identifier": "#{u[:user].orcid}"}
-                    %i.fas.fa-heart
+                    %i.fa-solid.fa-heart
                     = I18n.t('profile.thanks')
                     - if u[:user].messages_by_sender_count(@user.id) > 0
                       (#{u[:user].messages_by_sender_count(@user.id)})

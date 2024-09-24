@@ -4,13 +4,6 @@
 require File.dirname(__FILE__) + '/environment.rb'
 
 class BIONOMIA < Sinatra::Base
-  set :root, File.dirname(__FILE__)
-  set :haml, :format => :html5
-  set :public_folder, 'public'
-  set :cache_enabled_in, [:development, :production]
-  set :protection, :except => [:json_csrf, :remote]
-  set :strict_paths, false
-
   register Config
   register Sinatra::I18nSupport
   register Sinatra::Cacher
@@ -21,6 +14,13 @@ class BIONOMIA < Sinatra::Base
   register Sinatra::Bionomia::Helper::Initialize
   register Sinatra::Bionomia::Route::Initialize
   register Sinatra::Bionomia::Model::Initialize
+
+  set :root, File.dirname(__FILE__)
+  set :haml, :format => :html5
+  set :public_folder, 'public'
+  set :cache_enabled_in, [:development, :production]
+  set :protection, :except => [:json_csrf, :remote]
+  set :strict_paths, false
 
   load_locales File.join(root, 'config', 'locales')
   I18n.available_locales = [:en, :fr, :es, :pt, :de, :zh]

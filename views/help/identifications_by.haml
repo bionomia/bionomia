@@ -63,7 +63,7 @@
             .card-footer.d-flex
               - if !u.is_public?
                 .small.text-right.text-muted.mr-2
-                  %i.fas.fa-lock
+                  %i.fa-solid.fa-lock
               .small.text-left.text-muted.mr-2
                 %span.badge.badge-light #{number_with_delimiter(@viewed_user.identifications_by(u).count, delimiter: ",")}
                 #{I18n.t('help.identified_by_count', count: @viewed_user.identifications_by(u).count)}

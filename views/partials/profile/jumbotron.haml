@@ -46,13 +46,13 @@
 
   %p.orcid.text-lg-left.p-0.mt-3.mb-1
     %a{href: "https://orcid.org/#{@user.orcid}"}
-      %i.fab.fa-orcid.fa-fw
+      %i.fa-brands.fa-orcid.fa-fw
       https://orcid.org/#{@user.orcid}
 
   - if !@user.current_organization.nil?
     %p.text-lg-left.p-0.mt-1.mb-1
       - path = @user.current_organization.identifier
-      %i.fas.fa-building.fa-fw
+      %i.fa-solid.fa-building.fa-fw
       - if @user.current_organization.address
         = succeed ", " do
           = link_to @user.current_organization.name, url("/organization/#{path}")
@@ -67,10 +67,10 @@
       - countries.each_with_index do |v,i|
         %span.mr-1.text-nowrap
           - if !country_codes[i].nil? && !country_codes[i].empty?  && !country_name(country_codes[i]).nil?
-            %i.fas.fa-globe.fa-fw
+            %i.fa-solid.fa-globe.fa-fw
             = link_to country_name(country_codes[i]), url("/country/#{country_codes[i]}")
           - elsif v.presence
-            %i.fas.fa-globe.fa-fw
+            %i.fa-solid.fa-globe.fa-fw
             #{v}
 
   - if @user.zenodo_doi
@@ -87,28 +87,28 @@
   .mt-3.pt-3.border-top
     - if !@user.is_public?
       .m-3.alert.alert-warning
-        %i.fas.fa-lock
+        %i.fa-solid.fa-lock
         = I18n.t('profile.private_message_html', specimens: link_to(I18n.t('profile.specimens'), url("/profile/candidates")), settings: link_to(I18n.t('profile.settings'), url("/profile/settings")))
     .m-0.pl-3.pr-3
       - if @user.is_public?
         %a.mr-2.mb-2.text-nowrap{href: url("/#{@user.orcid}")}
-          %i.fas.fa-users
+          %i.fa-solid.fa-users
           = I18n.t('profile.public_profile')
       %a.profile-flush.mr-2.mb-2.text-nowrap{href: url("/#{@user.identifier}/refresh-stats.json")}
-        %i.fas.fa-sync-alt
+        %i.fa-solid.fa-sync-alt
         = I18n.t('general.refresh_stats')
       %a.profile-flush.mr-2.mb-2.text-nowrap{href: url("/#{@user.identifier}/refresh.json")}
-        %i.fas.fa-sync-alt
+        %i.fa-solid.fa-sync-alt
         = I18n.t('general.refresh_profile')
-        %i.fab.fa-orcid
+        %i.fa-brands.fa-orcid
     .m-0.pl-3.pr-3
       - if locals[:active_page] != "settings"
         %a.mb-2.text-nowrap{href: url("/profile/settings")}
-          %i.fas.fa-cog
+          %i.fa-solid.fa-cog
           = I18n.t('profile.settings')
       - else
         %a.mb-2.text-nowrap{href: url("/profile")}
-          %i.fas.fa-user
+          %i.fa-solid.fa-user
           = I18n.t('profile.overview')
 
     #flush-message.alert.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}

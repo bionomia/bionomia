@@ -6,5 +6,5 @@
       %a{class:"text-nowrap nav-link#{locals[:active_subtab] == "identified" ? " active" : nil}", href: url("/taxon/#{@taxon.family}?action=identified")}= I18n.t('taxa.identified')
   %ul.navbar-nav
     %li.nav-item
-      %i.fas.fa-file-csv.text-dark.h5.m-0.p-1
+      %i.fa-solid.fa-file-csv.text-dark.h5.m-0.p-1
       = link_to "CSV", url("/taxon/#{@taxon.family}/people.csv")

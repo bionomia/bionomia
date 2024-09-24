@@ -25,7 +25,7 @@
       %span #{h(params[:q])}
     .ml-auto.text-right
       %a.text-danger{href: url("/roster")}
-        %i.fas.fa-minus-circle
+        %i.fa-solid.fa-minus-circle
         #{I18n.t('general.remove')}
 - else
   - if params[:q] && params[:q].present?
@@ -35,7 +35,7 @@
         %span #{h(params[:q])}
       .ml-auto.text-right
         %a.text-danger{href: url("/roster")}
-          %i.fas.fa-minus-circle
+          %i.fa-solid.fa-minus-circle
           #{I18n.t('general.remove')}
 
     - @results.each do |u|

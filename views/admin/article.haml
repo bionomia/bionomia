@@ -38,7 +38,7 @@
               %label.form-check-label{for: "processed"} Flag as processed
             .mt-2
               %a.btn.btn-sm.btn-outline-success.article-process{href: url("/admin/article/#{@article.id}/process.json"), role:"button"}
-                %i.fas.fa-sync-alt
+                %i.fa-solid.fa-sync-alt
                 Process
 
             .alert.alert-article-process.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}
@@ -63,7 +63,7 @@
             %span.mr-2
               - if u.orcid
                 %a{href: url("/#{u.identifier}")}
-                  %i.fab.fa-orcid
+                  %i.fa-brands.fa-orcid
                   #{u.viewname}
               - else
                 %img{src: "/images/wikidata_16x10.svg", alt:"Wikidata iD"}

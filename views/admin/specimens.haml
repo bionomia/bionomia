@@ -39,10 +39,10 @@
       identified, or Both.
     .col-12.col-md-4.p-0.text-md-right
       %a{href: url("/admin/user/#{@admin_user.identifier}/specimens.csv"), class:"mr-2"}
-        %i.fas.fa-file-csv.text-dark.h5.m-0.p-1
+        %i.fa-solid.fa-file-csv.text-dark.h5.m-0.p-1
         CSV
       %a{href: url("/admin/user/#{@admin_user.identifier}/specimens.jsonld")}
-        %i.fas.fa-file-code.text-dark.h5.m-0.p-1
+        %i.fa-solid.fa-file-code.text-dark.h5.m-0.p-1
         JSON-LD
 
   = haml :'partials/admin/specimens', layout: false, locals: { user: @admin_user }

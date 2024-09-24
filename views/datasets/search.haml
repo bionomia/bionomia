@@ -20,7 +20,7 @@
       = I18n.t('dataset.none_found', searched: h(params[:q]))
     .ml-auto.text-right
       %a.text-danger{href: url("/datasets")}
-        %i.fas.fa-minus-circle
+        %i.fa-solid.fa-minus-circle
         #{I18n.t('general.remove')}
 - elsif @pagy && @pagy.count > 0
   .alert.alert-info.tiny-margins.d-flex.flex-wrap.mb-5{role: "alert"}
@@ -29,7 +29,7 @@
       %span #{h(params[:q])}
     .ml-auto.text-right
       %a.text-danger{href: url("/datasets")}
-        %i.fas.fa-minus-circle
+        %i.fa-solid.fa-minus-circle
         #{I18n.t('general.remove')}
 
   - @results.each do |d|

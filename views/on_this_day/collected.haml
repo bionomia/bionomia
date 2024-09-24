@@ -37,7 +37,7 @@
       #datepicker.input-group.date{"date-provide":"datepicker"}
         .input-group-prepend
           .input-group-text
-            %i.fas.fa-calendar-alt
+            %i.fa-solid.fa-calendar-alt
         %input.form-control{type:"text", placeholder:"#{@date.strftime("%Y-%m-%d")}", size:"12"}
 
 = haml :'partials/on_this_day/tabs', layout: false, locals: { active_tab: "specimens" }
@@ -69,9 +69,9 @@
               - scientific_name = o.scientificName.nil? ? "not recorded" : o.scientificName
               %a{href: gbif_occurrence_url(o.id), target:"_blank"}= h(scientific_name)
               %a{href: "/occurrence/#{o.id}"}
-                %i.fas.fa-feather.text-muted
+                %i.fa-solid.fa-feather.text-muted
               - if o.has_image?
-                %i.fas.fa-image.ml-1.text-muted{"data-toggle":"popover", "data-gbifid":"#{o.id}"}
+                %i.fa-solid.fa-image.ml-1.text-muted{"data-toggle":"popover", "data-gbifid":"#{o.id}"}
             %td #{h(o.recordedBy)}
             %td #{h(o.identifiedBy)}
             %td #{h(o.eventDate || o.year)}

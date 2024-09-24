@@ -20,11 +20,11 @@
       #{number_to_human(@pagy.count, units: :'dataset.identifiers_alert', delimiter: ",", precision: 0)}
     .ml-auto.text-right
       %a.text-danger{href: url("/datasets")}
-        %i.fas.fa-minus-circle
+        %i.fa-solid.fa-minus-circle
         #{I18n.t('general.remove')}
 - else
   %p.text-right
-    %i.fas.fa-filter
+    %i.fa-solid.fa-filter
     = link_to "has dwc:recordedByID or dwc:identifiedByID", url("/datasets?has_identifiers=true")
 
 - @results.in_groups_of(3) do |group|

@@ -38,7 +38,7 @@
               %a{href: gbif_occurrence_url(o.id), target:"_blank"}
                 #{h(scientific_name)}
               - if o.has_image?
-                %i.fas.fa-image.ml-1{"data-toggle":"popover", "data-gbifid":"#{o.id}"}
+                %i.fa-solid.fa-image.ml-1{"data-toggle":"popover", "data-gbifid":"#{o.id}"}
             %td #{h(o.recordedBy)}
             %td #{h(o.identifiedBy)}
             %td #{h(o.eventDate || o.year)}

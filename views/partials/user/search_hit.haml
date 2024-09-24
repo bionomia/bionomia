@@ -37,7 +37,7 @@
    %p.small.text-muted.m-0 #{statement}
    %p.small.text-muted.m-0
       - if !locals[:user].is_public?
-         %i.fas.fa-lock
+         %i.fa-solid.fa-lock
       %span.badge.badge-light #{number_with_delimiter(locals[:stats][:specimens][:total])}
       #{I18n.t('card.claimed', count: locals[:stats][:specimens][:total])}
    - if locals[:progress_bar]

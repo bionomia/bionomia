@@ -42,7 +42,7 @@
                 #{taxon.image.credit}
             %td
               %a.btn.btn-sm.btn-outline-success.taxon-process.text-nowrap{href: url("/admin/taxon/#{taxon.family}/process.json"), role:"button"}
-                %i.fas.fa-sync-alt
+                %i.fa-solid.fa-sync-alt
                 Update
 
   = pagy_bootstrap_nav(@pagy) if @pagy.pages > 1

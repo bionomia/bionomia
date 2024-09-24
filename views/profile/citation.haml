@@ -17,7 +17,7 @@
       = haml :'partials/choose_instructions', layout: false
     .col-12.col-md-3.p-0.text-md-right
       %a.mr-2{href: url("/profile/citation/#{@article.doi}.csv"), alt:"CSV file download"}
-        %i.fas.fa-file-csv.text-dark.h5.m-0.p-1
+        %i.fa-solid.fa-file-csv.text-dark.h5.m-0.p-1
         CSV
 
 
@@ -51,9 +51,9 @@
               - scientific_name = o.scientificName.nil? ? "#{I18n.t('specimen.not_recorded')}" : o.scientificName
               %a{href: gbif_occurrence_url(o.id), target:"_blank"}= h(scientific_name)
               %a{href: "/occurrence/#{o.id}"}
-                %i.fas.fa-feather.text-muted
+                %i.fa-solid.fa-feather.text-muted
               - if o.has_image?
-                %i.fas.fa-image.ml-1.text-muted{"data-toggle":"popover", "data-gbifid":"#{o.id}"}
+                %i.fa-solid.fa-image.ml-1.text-muted{"data-toggle":"popover", "data-gbifid":"#{o.id}"}
 
             %td #{h(o.recordedBy)}
             %td #{h(o.identifiedBy)}

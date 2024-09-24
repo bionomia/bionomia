@@ -47,7 +47,7 @@
                     %span.text-success #{count}
                 %span
                   %a{href: "/profile/candidates?agent_id=#{agent.id}"}
-                    %i.fas.fa-search{style: "width:16px"}
+                    %i.fa-solid.fa-search{style: "width:16px"}
                     = I18n.t('help.view')
 
       %p.mt-3= I18n.t('help.bulk_json', keys: Occurrence.accepted_fields.join(", "))

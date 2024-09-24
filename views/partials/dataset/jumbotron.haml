@@ -30,7 +30,7 @@
   %p.mb-1.text-left
     %img{src: "https://api.bionomia.net/dataset/#{@dataset.uuid}/badge.svg", alt: "Click to get badge html", width:210, height:20}
     %a{href: "#", "data-toggle": "modal", "data-target": "#badge_content", "data-keyboard": "true", "data-focus": "true"}
-      %i.fas.fa-info-circle{"data-toggle":"tooltip", title: "#{I18n.t('dataset.badge_tooltip')}"}
+      %i.fa-solid.fa-info-circle{"data-toggle":"tooltip", title: "#{I18n.t('dataset.badge_tooltip')}"}
       Code
   #badge_content.modal.fade{tabindex: "-1"}
     .modal-dialog.modal-dialog-centered.modal-dialog-scrollable.modal-xl{style: "height:100%"}
@@ -62,18 +62,18 @@
   - if authorized?
     .mt-3.pt-3.border-top
       %a.profile-flush.mr-2.mb-2.text-nowrap{href: url("/dataset/#{@dataset.uuid}/refresh.json")}
-        %i.fas.fa-sync-alt
+        %i.fa-solid.fa-sync-alt
         = I18n.t('general.refresh_profile')
         %img{src: "/images/gbif_18x18.svg", alt:"GBIF", width:18}
 
       - if admin_authorized?
         - if locals[:active_page] == "administration"
           %a.mr-2.mb-2.text-nowrap{href: url("/dataset/#{@dataset.uuid}")}
-            %i.fas.fa-users
+            %i.fa-solid.fa-users
             = I18n.t('profile.public')
         - else
           %a.mr-2.mb-2.text-nowrap{href: url("/admin/dataset/#{@dataset.uuid}")}
-            %i.fas.fa-cog
+            %i.fa-solid.fa-cog
             = I18n.t('general.settings')
 
     #flush-message.alert.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}

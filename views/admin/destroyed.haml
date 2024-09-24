@@ -37,7 +37,7 @@
           %td
             - if d.identifier.is_orcid?
               %a{href: "https://orcid.org/#{d.identifier}"}
-                %i.fab.fa-orcid
+                %i.fa-brands.fa-orcid
                 #{d.identifier}
             - else
               %a{href: "http://wikidata.org/entity/#{d.identifier}"}

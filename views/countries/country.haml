@@ -20,7 +20,7 @@
 - if @results.size == 0
   .alert.alert-warning.tiny-margins{role: "alert"}
     - if @action || @family
-      %i.fas.fa-filter
+      %i.fa-solid.fa-filter
       - if @action == "collected"
         = I18n.t('country.no_one_collected_from', family: h(@family), country: @country[1])
       - elsif @action == "identified"
@@ -28,14 +28,14 @@
       - else
         = I18n.t('country.no_one_collected_identified_from', family: h(@family), country: @country[1])
       %a.text-danger.ml-2{href: url("/country/#{@country[0]}#{path}")}
-        %i.fas.fa-minus-circle
+        %i.fa-solid.fa-minus-circle
         #{I18n.t('general.remove')}
     - else
       #{I18n.t('country.no_one_message', country: @country[1])}
 - else
   - if @action || @family
     .alert.alert-info.tiny-margins{role: "alert"}
-      %i.fas.fa-filter
+      %i.fa-solid.fa-filter
       - if @action == "collected"
         = I18n.t('country.collected_from', family: h(@family), country: @country[1])
       - elsif @action === "identified"
@@ -43,7 +43,7 @@
       - else
         = I18n.t('country.collected_identified_from', family: h(@family), country: @country[1])
       %a.text-danger.ml-2{href: url("/country/#{@country[0]}#{path}")}
-        %i.fas.fa-minus-circle
+        %i.fa-solid.fa-minus-circle
         #{I18n.t('general.remove')}
 
   - @results.in_groups_of(3) do |group|

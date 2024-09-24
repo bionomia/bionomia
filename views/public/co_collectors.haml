@@ -23,7 +23,7 @@
             = I18n.t('user.co_collectors_alert')
           .col-12.col-md-3.p-0.text-md-right
             %a{href: url("/#{@viewed_user.identifier}/network.json")}
-              %i.fas.fa-file-code.text-dark.h5.m-0.p-1
+              %i.fa-solid.fa-file-code.text-dark.h5.m-0.p-1
               JSON-LD
 
         - @results.in_groups_of(2) do |group|

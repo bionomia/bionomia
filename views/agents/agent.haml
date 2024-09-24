@@ -15,12 +15,12 @@
 
 - if @filter.length > 0
   .alert.alert-warning{role: "alert"}
-    %i.fas.fa-filter
+    %i.fa-solid.fa-filter
     #{I18n.t('general.filtered_by')}
     %span.font-weight-bold.mr-2
       #{h([@filter.values].compact.join(", "))}
     %a.text-danger{href: url("/agent/#{@agent.id}")}
-      %i.fas.fa-minus-circle
+      %i.fa-solid.fa-minus-circle
       #{I18n.t('general.remove')}
 
 .alert.alert-info.tiny-margins.row{role:"alert"}
@@ -31,7 +31,7 @@
   .col.col-12.col-lg-2.text-lg-right.p-0
     - if authorized?
       %a{href: url("/agent/#{@agent.id}/specimens.csv")}
-        %i.fas.fa-file-csv.text-dark.h5.m-0.p-1
+        %i.fa-solid.fa-file-csv.text-dark.h5.m-0.p-1
         CSV
 
 - sort = locals[:sort] == "asc" ? "desc" : "asc"
@@ -92,9 +92,9 @@
             - scientific_name = o.scientificName.nil? ? "#{I18n.t('specimen.not_recorded')}" : o.scientificName
             %a{href: gbif_occurrence_url(o.id), target:"_blank"}= h(scientific_name)
             %a{href: "/occurrence/#{o.id}"}
-              %i.fas.fa-feather.text-muted
+              %i.fa-solid.fa-feather.text-muted
             - if o.has_image?
-              %i.fas.fa-image.text-muted.ml-1{"data-toggle":"popover", "data-gbifid":"#{o.id}"}
+              %i.fa-solid.fa-image.text-muted.ml-1{"data-toggle":"popover", "data-gbifid":"#{o.id}"}
           %td #{h(o.recordedBy)}
           %td #{h(o.identifiedBy)}
           %td #{h(o.eventDate || o.year)}

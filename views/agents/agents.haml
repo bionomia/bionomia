@@ -23,7 +23,7 @@
       = I18n.t('agent.search_none', searched: h(params[:q]))
     .ml-auto.text-right
       %a.text-danger{href: url("/agents")}
-        %i.fas.fa-minus-circle
+        %i.fa-solid.fa-minus-circle
         #{I18n.t('general.remove')}
 - elsif @pagy && @pagy.count > 0
   .alert.alert-info.tiny-margins.mt-4.d-flex.flex-wrap{role: "alert"}
@@ -32,7 +32,7 @@
       %span #{h(params[:q])}
     .ml-auto.text-right
       %a.text-danger{href: url("/agents")}
-        %i.fas.fa-minus-circle
+        %i.fa-solid.fa-minus-circle
         #{I18n.t('general.remove')}
 
   .row

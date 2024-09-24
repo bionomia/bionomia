@@ -29,7 +29,7 @@
                 - if @user.is_public?
                   %a{href: url("/#{@user.orcid}")}
                     = I18n.t('profile.public_profile')
-                    %i.fas.fa-users
+                    %i.fa-solid.fa-users
 
         .card
           %h5.card-header= I18n.t('profile.make_citable')
@@ -67,7 +67,7 @@
                 - else
                   %p.card-text= I18n.t('profile.connect_zenodo')
                   %p.alert.alert-success
-                    %i.fas.fa-check-circle
+                    %i.fa-solid.fa-check-circle
                     = I18n.t('profile.zenodo_linked')
 
       .card-deck

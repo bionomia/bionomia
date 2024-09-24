@@ -19,7 +19,7 @@
   .alert.alert-warning{role: "alert"}
     = I18n.t('help.determiner_name', name: @determiner.viewname, other_name: @viewed_user.viewname)
     %span
-      %i.fas.fa-random
+      %i.fa-solid.fa-random
       = link_to I18n.t('help.switch'), url("/help-others/#{@determiner.identifier}/identified-for/#{@viewed_user.identifier}")
   #helper-info.alert.alert-info.tiny-margins{role: "alert"}
     = haml :'partials/choose_instructions', layout: false

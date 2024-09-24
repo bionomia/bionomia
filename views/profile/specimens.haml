@@ -24,10 +24,10 @@
       = haml :'partials/choose_instructions', layout: false
     .col-12.col-md-3.p-0.text-md-right
       %a.mr-2{href: url("/profile/download.csv"), alt:"CSV file download"}
-        %i.fas.fa-file-csv.text-dark.h5.m-0.p-1
+        %i.fa-solid.fa-file-csv.text-dark.h5.m-0.p-1
         CSV
       %a{href: url("/profile/download.json"), alt:"JSON file download"}
-        %i.fas.fa-file-code.text-dark.h5.m-0.p-1
+        %i.fa-solid.fa-file-code.text-dark.h5.m-0.p-1
         JSON-LD
 
   = haml :'partials/tables/specimens', layout: false, locals: { user: @user }

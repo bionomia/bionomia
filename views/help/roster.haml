@@ -24,14 +24,14 @@
 - if params[:q].blank?
   - if !@friends.empty?
     .alert.alert-info.tiny-margins{role: "alert"}
-      %i.fas.fa-user-friends.mr-2
+      %i.fa-solid.fa-user-friends.mr-2
       = I18n.t('help.do_you_know')
       %span#friends
         - @friends.each_with_index do |u, i|
           = succeed (@friends.count > i+1) ? ", " : "" do
             = link_to u[:fullname], url("/help-others/#{u[:identifier]}")
       %a.help-refresh.ml-2{href: url('/profile/who-might-know.json')}
-        %i.fas.fa-sync-alt
+        %i.fa-solid.fa-sync-alt
         = I18n.t('profile.refresh')
   - @results.in_groups_of(3) do |group|
     .card-deck

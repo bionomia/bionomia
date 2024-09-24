@@ -62,7 +62,7 @@
             .card-footer.d-flex
               - if !u.is_public?
                 .small.text-right.text-muted.mr-2
-                  %i.fas.fa-lock
+                  %i.fa-solid.fa-lock
               .small.text-left.text-muted.mr-2
                 %span.badge.badge-light #{number_with_delimiter(@user.recordings_with(u).count, delimiter: ",")}
                 = I18n.t('profile.co_collected_count', count: @user.recordings_with(u).count)

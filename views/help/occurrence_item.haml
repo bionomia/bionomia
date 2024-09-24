@@ -31,7 +31,7 @@
                   %li.agent_recorders
                     %span
                       #{agent_recorder.fullname}
-                    %i.fas.fa-spinner.fa-pulse
+                    %i.fa-solid.fa-spinner.fa-pulse
           %dd.line-break
 
         %dt Attributions
@@ -45,7 +45,7 @@
                     #{recorder.user.viewname}
                     %br
                     %a{href: "https://orcid.org/#{recorder.user.orcid}"}
-                      %i.fab.fa-orcid
+                      %i.fa-brands.fa-orcid
                       https://orcid.org/#{recorder.user.orcid}
                   - else
                     #{recorder.user.viewname}
@@ -57,7 +57,7 @@
                     %span.d-block.ml-3.text-muted.small
                       Attributed by: #{recorder.claimant.viewname}
                       %a{href: "https://orcid.org/#{recorder.claimant.orcid}"}
-                        %i.fab.fa-orcid
+                        %i.fa-brands.fa-orcid
                         https://orcid.org/#{recorder.claimant.orcid}
         %dd.line-break
 
@@ -100,7 +100,7 @@
                   %li.agent_determiners
                     %span
                       #{agent_determiner.fullname}
-                    %i.fas.fa-spinner.fa-pulse
+                    %i.fa-solid.fa-spinner.fa-pulse
           %dd.line-break
 
         %dt Attributions
@@ -114,7 +114,7 @@
                     #{determiner.user.viewname}
                     %br
                     %a{href: "https://orcid.org/#{determiner.user.orcid}"}
-                      %i.fab.fa-orcid
+                      %i.fa-brands.fa-orcid
                       https://orcid.org/#{determiner.user.orcid}
                   - else
                     #{determiner.user.viewname}
@@ -126,7 +126,7 @@
                     %span.d-block.ml-3.text-muted.small
                       Attributed by: #{determiner.claimant.viewname}
                       %a{href: "https://orcid.org/#{determiner.claimant.orcid}"}
-                        %i.fab.fa-orcid
+                        %i.fa-brands.fa-orcid
                         https://orcid.org/#{determiner.claimant.orcid}
         %dd.line-break
 

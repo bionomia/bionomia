@@ -50,7 +50,7 @@
   %p.orcid.text-lg-left.p-0.mt-1.mb-1
     - if @admin_user.orcid
       %a{href: "https://orcid.org/#{@admin_user.orcid}"}
-        %i.fab.fa-orcid.fa-fw
+        %i.fa-brands.fa-orcid.fa-fw
         https://orcid.org/#{@admin_user.orcid}
     - else
       %a{href: "http://www.wikidata.org/entity/#{@admin_user.wikidata}"}
@@ -61,7 +61,7 @@
     %p.orcid.text-lg-left.p-0.mt-0.mb-1
       - wiki_url = "https://#{I18n.locale}.wikipedia.org/wiki/#{@admin_user.wiki_sitelinks["#{I18n.locale}wiki"]["title"].gsub(/\s/, "_")}"
       %a{href: "#{wiki_url}" }
-        %i.fab.fa-wikipedia-w.fa-fw
+        %i.fa-brands.fa-wikipedia-w.fa-fw
         #{wiki_url}
       %a{href: "#", "data-toggle": "modal", "data-target": "#wiki_content", "data-keyboard": "true", "data-focus": "true"}
         [#{I18n.t("profile.upload_view")}]
@@ -79,7 +79,7 @@
 
   - if !@admin_user.current_organization.nil?
     %p.text-lg-left.p-0.mt-1.mb-1
-      %i.fas.fa-building.fa-fw
+      %i.fa-solid.fa-building.fa-fw
       - path = @admin_user.current_organization.identifier
       - if @admin_user.current_organization.address
         = succeed "," do
@@ -95,10 +95,10 @@
       - countries.each_with_index do |v,i|
         %span.mr-1.text-nowrap
           - if !country_codes[i].nil? && !country_codes[i].empty? && !country_name(country_codes[i]).nil?
-            %i.fas.fa-globe.fa-fw
+            %i.fa-solid.fa-globe.fa-fw
             = link_to country_name(country_codes[i]), url("/country/#{country_codes[i]}")
           - elsif v.presence
-            %i.fas.fa-globe.fa-fw
+            %i.fa-solid.fa-globe.fa-fw
             #{v}
 
   - if @admin_user.zenodo_doi
@@ -117,29 +117,29 @@
     .m-0.pl-3.pr-3
       - if @admin_user.is_public?
         %a.mr-2.text-nowrap{href: url("/#{@admin_user.identifier}")}
-          %i.fas.fa-user
+          %i.fa-solid.fa-user
           = I18n.t('profile.public_profile')
       - else
-        %i.fas.fa-lock
+        %i.fa-solid.fa-lock
         %span.mr-2 Private Profile
       %a.profile-flush.mr-2.mb-2.text-nowrap{href: url("/#{@admin_user.identifier}/refresh-stats.json")}
-        %i.fas.fa-sync-alt
+        %i.fa-solid.fa-sync-alt
         = I18n.t('general.refresh_stats')
       %a.profile-flush.mr-2.mb-2.text-nowrap{href: url("/#{@admin_user.identifier}/refresh.json")}
-        %i.fas.fa-sync-alt
+        %i.fa-solid.fa-sync-alt
         = I18n.t('general.refresh_profile')
         - if @admin_user.orcid
-          %i.fab.fa-orcid
+          %i.fa-brands.fa-orcid
         - else
           %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD", width:18}
     .m-0.pl-3.pr-3
       - if locals[:active_page] == "settings"
         %a.mb-2.text-nowrap{href: url("/admin/user/#{@admin_user.identifier}")}
-          %i.fas.fa-user
+          %i.fa-solid.fa-user
           = I18n.t('profile.overview')
       - else
         %a.text-nowrap{href: url("/admin/user/#{@admin_user.identifier}/settings")}
-          %i.fas.fa-cog
+          %i.fa-solid.fa-cog
           = I18n.t('profile.settings')
     %ul.list-inline.mt-2
       - if @admin_user.orcid

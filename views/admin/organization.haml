@@ -70,7 +70,7 @@
           %img{src: "/images/wikidata_16x10.svg", alt:"Wikidata iD"}
         %a{href: "http://www.wikidata.org/entity/#{@organization.wikidata}", target:"_blank"} http://www.wikidata.org/entity/#{@organization.wikidata}
       %a.btn.btn-sm.btn-outline-success.organization-refresh{href: url("/admin/organization/#{@organization.id}/refresh.json"), role:"button"}
-        %i.fas.fa-sync-alt
+        %i.fa-solid.fa-sync-alt
         Refresh
         %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD", width:18}
 
@@ -85,10 +85,10 @@
     %small.form-text.text-muted
       Use pipe-separated values.
     %a.btn.btn-sm.btn-outline-success.codes-refresh{href: url("/admin/organization/#{@organization.id}/codes.json"), role:"button"}
-      %i.fas.fa-sync-alt
+      %i.fa-solid.fa-sync-alt
       Refresh
     %a.btn.btn-sm.btn-outline-success.codes-refresh{href: url("/admin/organization/#{@organization.id}/refresh-metrics.json"), role:"button"}
-      %i.fas.fa-sync-alt
+      %i.fa-solid.fa-sync-alt
       Refresh stats
 
     #organization-codes-refresh.alert.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}

@@ -26,7 +26,7 @@
     %form{action: "/auth/orcid?lang=#{I18n.locale}", method: :post}
       %p
         %button.btn.btn-lg.btn-outline-dark
-          %i.fab.fa-orcid
+          %i.fa-brands.fa-orcid
           = I18n.t('home.orcid_login')
         %input{type:"hidden", name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
 

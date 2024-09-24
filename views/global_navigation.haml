@@ -10,56 +10,56 @@
     %ul.navbar-nav.mr-sm-auto
       %li.nav-item
         %a{href: url("/roster"), class:"nav-link#{locals[:active_page] == "roster" ? " active" : nil}", "aria-label": "#{I18n.t('layout.profiles')}", "data-toggle": "tooltip", title: I18n.t('layout.profiles') }
-          %i.fas.fa-users.fa-fw
+          %i.fa-solid.fa-users.fa-fw
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.profiles')
       %li.nav-item
         %a{href: url("/scribes"), class: "nav-link#{locals[:active_page] == "scribes" ? " active" : nil}", "aria-label": "#{I18n.t('layout.scribes')}", "data-toggle": "tooltip", title: I18n.t('layout.scribes')}
-          %i.fas.fa-feather-alt.fa-fw
+          %i.fa-solid.fa-feather-alt.fa-fw
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.scribes')
       %li.nav-item
         %a{href: url("/organizations"), class:"nav-link#{locals[:active_page] == "organizations" ? " active" : nil}", "aria-label": "#{I18n.t('layout.organizations')}", "data-toggle": "tooltip", title: I18n.t('layout.organizations') }
-          %i.fas.fa-building.fa-fw
+          %i.fa-solid.fa-building.fa-fw
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.organizations')
       %li.nav-item
         %a{href: url("/datasets"), class:"nav-link#{locals[:active_page] == "datasets" ? " active" : nil}", "aria-label": "#{I18n.t('layout.datasets')}", "data-toggle": "tooltip", title: I18n.t('layout.datasets') }
-          %i.fas.fa-database.fa-fw
+          %i.fa-solid.fa-database.fa-fw
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.datasets')
       %li.nav-item
         %a{href: url("/articles"), class:"nav-link#{locals[:active_page] == "articles" ? " active" : nil}", "aria-label": "#{I18n.t('layout.articles')}", "data-toggle": "tooltip", title: I18n.t('layout.articles') }
-          %i.fas.fa-file-alt.fa-fw
+          %i.fa-solid.fa-file-alt.fa-fw
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.articles')
       %li.nav-item
         %a{href: url("/countries"), class:"nav-link#{locals[:active_page] == "countries" ? " active" : nil}", "aria-label": "#{I18n.t('layout.countries')}", "data-toggle": "tooltip", title: I18n.t('layout.countries') }
-          %i.fas.fa-globe.fa-fw
+          %i.fa-solid.fa-globe.fa-fw
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.countries')
       %li.nav-item
         %a{href: url("/taxa"), class: "nav-link#{locals[:active_page] == "taxa" ? " active" : nil}", "aria-label": "#{I18n.t('layout.taxa')}", "data-toggle": "tooltip", title: I18n.t('layout.taxa') }
-          %i.fab.fa-pagelines.fa-fw
+          %i.fa-brands.fa-pagelines.fa-fw
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.taxa')
       %li.nav-item
         %a{href: url("/agents"), class: "nav-link#{locals[:active_page] == "agents" ? " active" : nil}", "aria-label": "#{I18n.t('layout.agent_strings')}", "data-toggle": "tooltip", title: I18n.t('layout.agent_strings') }
-          %i.fas.fa-signature.fa-fw
+          %i.fa-solid.fa-signature.fa-fw
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.agent_strings')
     %ul.navbar-nav
       - if authorized?
         %li.nav-item
           %a{href: url("/help-others"), class: "nav-link#{locals[:active_page] == "help" ? " active" : nil}", "aria-label": "#{I18n.t('layout.help_others')}", "data-toggle": "tooltip", title: I18n.t('layout.help_others')}
-            %i.fas.fa-hands-helping.fa-fw
+            %i.fa-solid.fa-hands-helping.fa-fw
             %span.d-inline-block.d-sm-none.d-md-inline-block
               = I18n.t('layout.help_others')
 
       %li.nav-item
         .btn-group
           %button.btn.dropdown-toggle.text-white-50{type:"button", "data-toggle": "dropdown", "aria-haspopup": "true", "aria-expanded": "false"}
-            %i.fas.fa-language.fa-fw
+            %i.fa-solid.fa-language.fa-fw
             %span.sr-only
               = I18n.t('layout.toggle_dropdown')
           .dropdown-menu.dropdown-menu-right
@@ -81,37 +81,37 @@
                 - else
                   %img{src:"#{profile_image(@user, 'thumbnail_grey')}", alt:"#{@user.viewname}", width:24, height:24}
               - else
-                %i.fas.fa-user.fa-fw{alt:"#{@user.viewname}"}
+                %i.fa-solid.fa-user.fa-fw{alt:"#{@user.viewname}"}
             %button.btn.btn-outline-light.dropdown-toggle{type:"button", "data-toggle": "dropdown", "aria-haspopup": "true", "aria-expanded": "false"}
               %span.sr-only
                 = I18n.t('layout.toggle_dropdown')
             .dropdown-menu.dropdown-menu-right
               %a.dropdown-item{href: url("/profile"), "aria-label": "#{I18n.t('layout.overview')}"}
-                %i.fas.fa-user.fa-fw
+                %i.fa-solid.fa-user.fa-fw
                 = I18n.t('layout.overview')
               %a.dropdown-item{href: url("/profile/specimens"), "aria-label": "#{I18n.t('layout.specimens')}"}
-                %i.fas.fa-th.fa-fw
+                %i.fa-solid.fa-th.fa-fw
                 = I18n.t('layout.specimens')
               %a.dropdown-item{href: url("/profile/helped"), "aria-label": "#{I18n.t('layout.people_helped')}"}
-                %i.fas.fa-hands-helping.fa-fw
+                %i.fa-solid.fa-hands-helping.fa-fw
                 = I18n.t('layout.people_helped')
               %a.dropdown-item{href: url("/profile/citations"), "aria-label": "#{I18n.t('layout.science_enabled')}"}
-                %i.fas.fa-flask.fa-fw
+                %i.fa-solid.fa-flask.fa-fw
                 = I18n.t('layout.science_enabled')
               %a.dropdown-item{href: url("/profile/settings"), "aria-label": "#{I18n.t('layout.settings')}"}
-                %i.fas.fa-cog.fa-fw
+                %i.fa-solid.fa-cog.fa-fw
                 = I18n.t('layout.settings')
               - if admin_authorized?
                 %a.dropdown-item{href: url("/admin"), "aria-label": "#{I18n.t('layout.administration')}"}
-                  %i.fas.fa-users-cog.fa-fw
+                  %i.fa-solid.fa-users-cog.fa-fw
                   = I18n.t('layout.administration')
               %a.dropdown-item{href: url("/logout"), "aria-label": "#{I18n.t('layout.logout')}"}
-                %i.fas.fa-sign-out-alt.fa-fw
+                %i.fa-solid.fa-sign-out-alt.fa-fw
                 = I18n.t('layout.logout')
       - else
         %li
           %form{action: "/auth/orcid?lang=#{I18n.locale}", method: :post }
             %button.btn.btn-outline-light.connect-orcid-button
-              %i.fab.fa-orcid
+              %i.fa-brands.fa-orcid
               = I18n.t('home.orcid_login')
             %input{type:"hidden", name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}

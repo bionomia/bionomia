@@ -40,7 +40,7 @@
         %label.relaxed{for:"relaxed"} Make less exact
     .col.col-12.col-md-4.p-0.text-md-right
       %a{href: url("/admin/user/#{@admin_user.identifier}/advanced-search")}
-        %i.fas.fa-search-plus
+        %i.fa-solid.fa-search-plus
         Advanced Search & Filter
 - else
   = haml :'partials/admin/fixed_navbar', layout: false
@@ -64,7 +64,7 @@
 
     .col.col-12.col-md-4.p-0.text-md-right
       %a{href: url("/admin/user/#{@admin_user.identifier}/advanced-search")}
-        %i.fas.fa-search-plus
+        %i.fa-solid.fa-search-plus
         Advanced Search & Filter
 
   = haml :'partials/tables/candidates', layout: false, locals: { user_scope: "other", user: @admin_user }

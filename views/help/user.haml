@@ -31,7 +31,7 @@
           %label.relaxed{for:"relaxed"}= I18n.t('help.less_exact')
     .col.col-12.col-md-4.p-0.text-md-right
       %a{href: url("/help-others/#{@viewed_user.identifier}/advanced-search")}
-        %i.fas.fa-search-plus
+        %i.fa-solid.fa-search-plus
         = I18n.t('help.advanced_search')
 - else
   = haml :'partials/help/fixed_navbar', layout: false
@@ -46,7 +46,7 @@
           %label.relaxed{for:"relaxed"}= I18n.t('help.less_exact')
     .col.col-12.col-md-4.p-0.text-md-right
       %a{href: url("/help-others/#{@viewed_user.identifier}/advanced-search")}
-        %i.fas.fa-search-plus
+        %i.fa-solid.fa-search-plus
         = I18n.t('help.advanced_search')
 
 - if @pagy.count > 0

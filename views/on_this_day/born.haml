@@ -40,7 +40,7 @@
       #datepicker.input-group.date{"date-provide":"datepicker"}
         .input-group-prepend
           .input-group-text
-            %i.fas.fa-calendar-alt
+            %i.fa-solid.fa-calendar-alt
         %input.form-control{type:"text", placeholder:"#{@date.strftime("%Y-%m-%d")}", size:"12"}
 
 = haml :'partials/on_this_day/tabs', layout: false, locals: { active_tab: "born" }

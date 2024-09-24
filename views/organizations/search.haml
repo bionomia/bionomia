@@ -23,7 +23,7 @@
       %span #{h(params[:q])}
     .ml-auto.text-right
       %a.text-danger{href: url("/organizations")}
-        %i.fas.fa-minus-circle
+        %i.fa-solid.fa-minus-circle
         #{I18n.t('general.remove')}
 - elsif @pagy && @pagy.count > 0
   .alert.alert-info.tiny-margins.d-flex.flex-wrap.mb-5{role: "alert"}
@@ -32,7 +32,7 @@
       %span #{h(params[:q])}
     .ml-auto.text-right
       %a.text-danger{href: url("/organizations")}
-        %i.fas.fa-minus-circle
+        %i.fa-solid.fa-minus-circle
         #{I18n.t('general.remove')}
 
   - @results.each do |o|

@@ -1,6 +1,6 @@
 %nav#helper-navbar.navbar.navbar-expand-sm.bg-light.d-none.fixed-top
   %span.nav-item.text-nowrap
-    %i.fas.fa-users-cog.text-muted.mr-2
+    %i.fa-solid.fa-users-cog.text-muted.mr-2
     - if @admin_user.image_url
       %img{src:"#{profile_image(@admin_user, 'thumbnail')}", class:"rounded mr-2", alt:"#{@admin_user.fullname}"}
     #{@admin_user.viewname}

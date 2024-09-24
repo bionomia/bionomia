@@ -28,7 +28,7 @@
       .col-sm-4.col-lg-3.col-form-label.text-left.text-sm-right= I18n.t('help.download_label')
       .col-sm-8.col-lg-9
         %a.btn.btn-primary{href: url("/help-others/#{@viewed_user.identifier}/candidates.csv#{relaxed}")}
-          %i.fas.fa-file-csv.h4.m-0.p-0
+          %i.fa-solid.fa-file-csv.h4.m-0.p-0
           #{I18n.t('help.download')}
     .form-group.row
       %label.col-sm-4.col-lg-3.col-form-label.text-left.text-sm-right{for:"candidate-file"}= I18n.t('help.upload_label')

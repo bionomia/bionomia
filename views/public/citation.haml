@@ -56,9 +56,9 @@
                     - scientific_name = o.scientificName.nil? ? "not recorded" : o.scientificName
                     %a{href: gbif_occurrence_url(o.id), target: "_blank" }= h(scientific_name)
                     %a{href: "/occurrence/#{o.id}"}
-                      %i.fas.fa-feather.text-muted
+                      %i.fa-solid.fa-feather.text-muted
                     - if o.has_image?
-                      %i.fa.fa-image.ml-1.text-muted{"data-toggle":"popover", "data-gbifid":"#{o.id}"}
+                      %i.fa-solid.fa-image.ml-1.text-muted{"data-toggle":"popover", "data-gbifid":"#{o.id}"}
                   %td #{h(o.recordedBy)}
                   %td #{h(o.identifiedBy)}
                   %td #{h(o.eventDate || o.year)}

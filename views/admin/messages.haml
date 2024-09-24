@@ -57,12 +57,12 @@
             .card-footer.d-flex
               - if !u.is_public?
                 .small.text-right.text-muted.mr-2
-                  %i.fas.fa-lock
+                  %i.fa-solid.fa-lock
               .small.text-left.text-muted.mr-2
                 %span.badge.badge-light
                   #{u.messages_by_recipient(m[:recipient_id]).count}
                 %span.text-danger
-                  %i.fas.fa-heart
+                  %i.fa-solid.fa-heart
               .small.ml-auto.text-muted 
                 = I18n.t('profile.latest_helped', time: m[:maximum_created_at])
 

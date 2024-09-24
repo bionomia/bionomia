@@ -35,7 +35,7 @@
       = I18n.t('taxa.none_found', searched: h(params[:q]))
     .ml-auto.text-right
       %a.text-danger{href: url("/taxa")}
-        %i.fas.fa-minus-circle
+        %i.fa-solid.fa-minus-circle
         #{I18n.t('general.remove')}
 - elsif @pagy && @pagy.count > 0
   .alert.alert-info.tiny-margins.d-flex.flex-wrap{role: "alert"}
@@ -44,7 +44,7 @@
       %span #{h(params[:q])}
     .ml-auto.text-right
       %a.text-danger{href: url("/taxa")}
-        %i.fas.fa-minus-circle
+        %i.fa-solid.fa-minus-circle
         #{I18n.t('general.remove')}
 
   .row
