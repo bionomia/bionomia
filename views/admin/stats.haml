@@ -12,10 +12,12 @@
 
 %h4 Environment
 
-#{`ruby -v`}
-
-- if RubyVM::YJIT.enabled?
-  +YJIT enabled
+%p
+  #{`ruby -v`}
+  - if RubyVM::YJIT.enabled?
+    +YJIT enabled
+  - else
+    \-YJIT disabled
 
 %h4 Active Database Connections
 
