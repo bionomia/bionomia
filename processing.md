@@ -2,7 +2,7 @@
 
 There are occasional hiccups at either the data publisher's end or at GBIF. BEFORE each successive data refresh routine outlined below, first produce a list of datasets whose total number of records here are greater than what is currently available at GBIF. If they are, this is a first indication that republication has gone wrong, harvesting at GBIF's end has skipped a number of records, or a dataset has recently been unpublished. The script below assumes a previous, full round of data processing has already been executed and that there are counts on datasets produced from Step 7.
 
-    $ RACK_ENV=production bundle exec ./bin/gbif_datasets.rb --verify
+    $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/gbif_datasets.rb --verify
 
 ## Steps to Import Data & Execute Parsing / Clustering
 
