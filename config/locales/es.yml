@@ -639,7 +639,7 @@ es:
     not_identified_for_name: "Especímenes no han sido colectados por %{name} e identificados por usted."
     identified_for_count:
       one: "espécimen colectado"
-      other: "especímenes colectados"
+      other: "espécimenes colectados"
     identifications_by: Identificaciones por
     no_determiners_alert: Determiners of your collected specimens have not yet been recorded.
     determiners_alert: "Tus especímenes han sido identificados por:"
