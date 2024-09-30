@@ -14,11 +14,7 @@ class Dataset < ActiveRecord::Base
   after_destroy :remove_search, unless: :skip_callbacks
 
   def has_claim?
-    UserOccurrence.select(:id)
-                  .from("user_occurrences FORCE INDEX (user_occurrence_idx)")
-                  .joins(:occurrence)
-                  .where(occurrences: { datasetKey: uuid })
-                  .where(user_occurrences: { visible: true }).any?
+    user_occurrences.where(visible: true).any?
   end
 
   alias_method :has_user?, :has_claim?
@@ -70,12 +66,10 @@ class Dataset < ActiveRecord::Base
 
   def agents
     Agent.where(id: occurrences.select(:agent_id)
-                               .joins(occurrence_agents: :agent)
-                               .where.not(agent: { family: "" })
+                               .joins(:occurrence_agents)
                                .group(:agent_id))
+         .where.not(family: "" )
          .order(:family)
-
-
   end
 
   def agents_occurrence_counts
@@ -150,11 +144,9 @@ class Dataset < ActiveRecord::Base
   end
 
   def collected_before_birth_after_death
-    UserOccurrence.joins(:occurrence)
-                  .joins(:user)
-                  .where(occurrences: { datasetKey: uuid })
-                  .where(action: ["recorded", "recorded,identified", "identified,recorded"])
-                  .where("users.date_born >= occurrences.eventDate_processed OR users.date_died =< occurrences.eventDate_processed")
+    user_occurrences.joins(:user)
+                    .where(action: ["recorded", "recorded,identified", "identified,recorded"])
+                    .where("users.date_born >= occurrences.eventDate_processed OR users.date_died <= occurrences.eventDate_processed")
   end
 
   def current_occurrences_count
