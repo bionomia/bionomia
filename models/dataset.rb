@@ -39,12 +39,9 @@ class Dataset < ActiveRecord::Base
   end
 
   def users
-    subq = UserOccurrence.select(:user_id, :visible)
-                         .from("user_occurrences FORCE INDEX (user_occurrence_idx)")
-                         .joins(:occurrence)
-                         .where(occurrences: { datasetKey: uuid })
-                         .distinct.to_sql
-    User.joins("INNER JOIN (#{subq}) a ON a.user_id = users.id")
+    subq = user_occurrences.select(:user_id, :visible).distinct.to_sql
+    User.optimizer_hints("INDEX(user_occurrences user_occurrence_idx)")
+        .joins("INNER JOIN (#{subq}) a ON a.user_id = users.id")
         .where("a.visible": true)
   end
 
@@ -57,11 +54,9 @@ class Dataset < ActiveRecord::Base
   end
 
   def claimed_occurrences_count
-    UserOccurrence.joins(:occurrence)
-                  .where(occurrences: { datasetKey: uuid })
-                  .unscope(:order)
-                  .pluck(:gbifID, :visible)
-                  .map{|a| a[0] if a[1] }.compact.uniq.count
+    user_occurrences.pluck(:occurrence_id, :visible)
+                    .map{|a| a[0] if a[1] }
+                    .compact.uniq.count
   end
 
   def agents
@@ -89,15 +84,10 @@ class Dataset < ActiveRecord::Base
   end
 
   def scribes
-    subq = UserOccurrence.select(:created_by, :visible)
-                         .from("user_occurrences FORCE INDEX (user_occurrence_idx)")
-                         .joins(:occurrence)
-                         .where(occurrences: { datasetKey: uuid })
-                         .where.not(created_by: User::BOT_IDS)
-                         .where("user_occurrences.user_id != user_occurrences.created_by")
-                         .distinct.to_sql
-    User.joins("INNER JOIN (#{subq}) a ON a.created_by = users.id")
-        .where("a.visible": true)
+    user_ids = user_occurrences.pluck(:created_by, :user_id, :visible)
+                    .map{|a| a[0] if a[2] && a[0] != a[1] && !User::BOT_IDS.include?(a[0])}
+                    .compact.uniq
+    User.where(id: user_ids)
   end
 
   def license_icon(form = "button")
@@ -163,15 +153,13 @@ class Dataset < ActiveRecord::Base
   end
 
   def timeline_recorded(start_year: 1000, end_year: Time.now.year)
-    subq = UserOccurrence.from("user_occurrences FORCE INDEX (user_occurrence_idx)")
-                         .select(:user_id, :eventDate_processed, :eventDate_processed_year, :visible)
-                         .joins(:occurrence)
-                         .where(user_occurrences: { action: ['recorded', 'identified,recorded', 'recorded,identified'] })
-                         .where(occurrences: { datasetKey: uuid })
-                         .where("eventDate_processed_year BETWEEN ? AND ?", start_year, end_year)
+    subq = user_occurrences.select(:user_id, :eventDate_processed, :eventDate_processed_year, :visible)
+                         .where(action: ['recorded', 'identified,recorded', 'recorded,identified'])
+                         .where("occurrences.eventDate_processed_year BETWEEN ? AND ?", start_year, end_year)
                          .distinct
 
-    User.select("users.*", "MIN(a.eventDate_processed) AS min_date", "MAX(a.eventDate_processed) AS max_date")
+    User.optimizer_hints("INDEX(user_occurrences user_occurrence_idx)")
+        .select("users.*", "MIN(a.eventDate_processed) AS min_date", "MAX(a.eventDate_processed) AS max_date")
         .joins("INNER JOIN (#{subq.to_sql}) a ON a.user_id = users.id")
         .where("a.visible": true)
         .where.not("a.eventDate_processed_year": nil)
@@ -180,15 +168,13 @@ class Dataset < ActiveRecord::Base
   end
 
   def timeline_identified(start_year: 1000, end_year: Time.now.year)
-    subq = UserOccurrence.from("user_occurrences FORCE INDEX (user_occurrence_idx)")
-                         .select(:user_id, :dateIdentified_processed, :dateIdentified_processed_year, :visible)
-                         .joins(:occurrence)
-                         .where(user_occurrences: { action: ['identified', 'identified,recorded', 'recorded,identified'] })
-                         .where(occurrences: { datasetKey: uuid })
-                         .where("dateIdentified_processed_year BETWEEN ? AND ?", start_year, end_year)
+    subq = user_occurrences.select(:user_id, :dateIdentified_processed, :dateIdentified_processed_year, :visible)
+                         .where(action: ['identified', 'identified,recorded', 'recorded,identified'] )
+                         .where("occurrences.dateIdentified_processed_year BETWEEN ? AND ?", start_year, end_year)
                          .distinct
 
-    User.select("users.*", "MIN(a.dateIdentified_processed) AS min_date", "MAX(a.dateIdentified_processed) AS max_date")
+    User.optimizer_hints("INDEX(user_occurrences user_occurrence_idx)")
+        .select("users.*", "MIN(a.dateIdentified_processed) AS min_date", "MAX(a.dateIdentified_processed) AS max_date")
         .joins("INNER JOIN (#{subq.to_sql}) a ON a.user_id = users.id")
         .where("a.visible": true)
         .where.not("a.dateIdentified_processed_year": nil)

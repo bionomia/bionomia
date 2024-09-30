@@ -36,16 +36,13 @@ class Article < ActiveRecord::Base
   end
 
   def claimants
-    User.joins("INNER JOIN ( SELECT DISTINCT
-              user_occurrences.user_id, user_occurrences.visible
-            FROM
-              user_occurrences FORCE INDEX (user_occurrence_idx)
-            INNER JOIN
-              article_occurrences ON article_occurrences.occurrence_id = user_occurrences.occurrence_id
-            WHERE
-              article_occurrences.article_id = #{id}
-            ) a ON a.user_id = users.id")
-        .where("a.visible = true")
+    subq = article_occurrences.joins(:user_occurrences)
+                              .select(:user_id, :visible)
+                              .distinct
+                  
+    User.optimizer_hints("INDEX(user_occurrences user_occurrence_idx)")
+        .joins("INNER JOIN (#{subq.to_sql}) a ON a.user_id = users.id")
+        .where("a.visible": true)
   end
 
   def agents_with_family
