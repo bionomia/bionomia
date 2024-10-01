@@ -38,8 +38,7 @@ class Article < ActiveRecord::Base
   def claimants
     subq = article_occurrences.joins(:user_occurrences)
                               .select(:user_id, :visible)
-                              .distinct
-                  
+                              .distinct        
     User.optimizer_hints("INDEX(user_occurrences user_occurrence_idx)")
         .joins("INNER JOIN (#{subq.to_sql}) a ON a.user_id = users.id")
         .where("a.visible": true)

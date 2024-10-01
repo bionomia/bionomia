@@ -157,7 +157,6 @@ class Dataset < ActiveRecord::Base
                          .where(action: ['recorded', 'identified,recorded', 'recorded,identified'])
                          .where("occurrences.eventDate_processed_year BETWEEN ? AND ?", start_year, end_year)
                          .distinct
-
     User.optimizer_hints("INDEX(user_occurrences user_occurrence_idx)")
         .select("users.*", "MIN(a.eventDate_processed) AS min_date", "MAX(a.eventDate_processed) AS max_date")
         .joins("INNER JOIN (#{subq.to_sql}) a ON a.user_id = users.id")
@@ -172,7 +171,6 @@ class Dataset < ActiveRecord::Base
                          .where(action: ['identified', 'identified,recorded', 'recorded,identified'] )
                          .where("occurrences.dateIdentified_processed_year BETWEEN ? AND ?", start_year, end_year)
                          .distinct
-
     User.optimizer_hints("INDEX(user_occurrences user_occurrence_idx)")
         .select("users.*", "MIN(a.dateIdentified_processed) AS min_date", "MAX(a.dateIdentified_processed) AS max_date")
         .joins("INNER JOIN (#{subq.to_sql}) a ON a.user_id = users.id")
