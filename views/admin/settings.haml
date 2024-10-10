@@ -1,12 +1,7 @@
 - content_for :title do
   Settings
 - content_for :scripts do
-  %script{src:"/js/profile.js"}
-  :javascript
-    $(function() {
-      Application.init(#{@admin_user.id}, "PUT", "/admin", "#{@admin_user.identifier}");
-      Profile.init("/admin/user/#{@admin_user.identifier}");
-    });
+  = haml :'partials/admin/scripts', layout: false, locals: { action_type: "PUT" }
 
 .row
   = haml :'partials/admin/jumbotron', layout: false, locals: { active_page: "settings" }

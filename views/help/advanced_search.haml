@@ -4,9 +4,7 @@
 - content_for :scripts do
   :javascript
     var Filters = { "datasetKey": "#{params[:datasetKey]}", "agent_id": "#{params[:agent_id]}", "taxon_id": "#{params[:taxon_id]}", "kingdom": "#{params[:kingdom]}", "country_code": "#{params[:country_code]}" };
-    $(function() {
-      Application.init(#{@viewed_user.id}, "POST", "/help-others", "#{@viewed_user.identifier}");
-    });
+  = haml :'partials/help/scripts', layout: false, locals: { action_type: "POST" }
 
 - content_for :jumbotron do
   = haml :'partials/help/jumbotron', layout: false

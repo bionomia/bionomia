@@ -2,12 +2,9 @@
   People Helped by #{@admin_user.viewname}
 
 - content_for :scripts do
-  %script{src:"/js/progress-bar.js"}
-  %script{src:"/js/profile.js"}
+  = haml :'partials/admin/scripts', layout: false, locals: { action_type: "PUT" }
   :javascript
     $(function() {
-      Application.init(#{@admin_user.id}, "PUT", "/admin", "#{@admin_user.identifier}");
-      Profile.init("/admin/user/#{@admin_user.identifier}");
       var ids = $.map($('.progress-bar'), function(obj) { return $(obj).attr("id").split("_").pop(); });
       Application.forEachParallel(ids, ProgressBar.init, 10);
     });

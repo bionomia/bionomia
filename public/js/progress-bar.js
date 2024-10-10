@@ -15,11 +15,21 @@ var ProgressBar = (function($, window) {
 
     candidate_counter: function() {
       var self = this, denominator, percent, message, progress_bar = $('#progress-bar_' + this.identifier),
+          badge = $('#specimen-counter-' + this.identifier),
           path = (this.path == "user") ? "" : this.path + "/";
       return $.ajax({
           method: "GET",
           url: "/" + path + self.identifier + "/progress.json"
         }).done(function(data) {
+
+          if (badge.length) {
+            if (data.unclaimed > 0 && data.unclaimed <= 50) {
+              badge.text(data.unclaimed).show();
+            } else if (data.unclaimed > 50) {
+              badge.text("50+").show();
+            }
+          }
+
           denominator = data.claimed + data.unclaimed;
           if (denominator === 0) {
             percent = 100;

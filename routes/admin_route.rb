@@ -582,22 +582,17 @@ module Sinatra
 
               @admin_user = find_user(params[:id])
 
-              if @admin_user.family.nil?
-                @results = []
-                @total = nil
+              filter_instances
+
+              if @agent
+                id_scores = [{ id: @agent.id, score: 3 }]
+                occurrence_ids = occurrences_by_score(id_scores, @admin_user)
               else
-                filter_instances
-
-                if @agent
-                  id_scores = [{ id: @agent.id, score: 3 }]
-                  occurrence_ids = occurrences_by_score(id_scores, @admin_user)
-                else
-                  id_scores = candidate_agents(@admin_user)
-                  occurrence_ids = occurrences_by_score(id_scores, @admin_user)
-                end
-
-                specimen_pager(occurrence_ids.uniq)
+                id_scores = candidate_agents(@admin_user)
+                occurrence_ids = occurrences_by_score(id_scores, @admin_user)
               end
+
+              specimen_pager(occurrence_ids.uniq)
 
               bulk_error_message = flash.now[:error] ? flash.now[:error] : ""
               locals = {
@@ -651,13 +646,6 @@ module Sinatra
               @admin_user = find_user(params[:id])
               filter_instances
               haml :'admin/advanced_search', locals: { active_page: "administration" }
-            end
-
-            get '/user/:id/candidate-count.json' do
-              content_type "application/json", charset: 'utf-8'
-              admin_user = find_user(params[:id])
-              count = user_unattributed_count(admin_user)
-              { count: count }.to_json
             end
 
             post '/user/:id/candidates/agent/:agent_id/bulk-claim' do

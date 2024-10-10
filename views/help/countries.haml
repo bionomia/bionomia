@@ -3,20 +3,11 @@
   %script{src: "/js/jquery.throttledresize.js"}
   %script{src: "/js/geochart-hierarchy.js"}
   %script{src: "//www.gstatic.com/charts/loader.js"}
-  %script{src: "/js/progress-bar.js"}
   - country_counts = cache_block("country-counts") { user_country_counts }
   - countries = country_counts.map{|k,v| [ k, country_name(k), v ] if country_name(k) }.compact_blank.unshift(["Country", "Country Name", "#{I18n.t('charts.people')}"])
   :javascript
     $(function() {
       Application.init("", "GET", "/help-others");
-      var ids = $.map($('.progress-bar'), function(obj) {
-        if ( parseInt($(obj).parent().parent().find(".badge").text(), 10) > 0 ) {
-          return $(obj).attr("id").split("_").pop();
-        }
-      });
-      $.each(ids, function(key, id) {
-        ProgressBar.init(id);
-      });
 
       if ($('#country-map').length) {
         var countries = #{countries}, map;

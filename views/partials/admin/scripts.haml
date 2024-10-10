@@ -1,0 +1,9 @@
+- action_type = locals[:action_type] ||= "POST"
+%script{src:"/js/profile.js"}
+%script{src: "/js/progress-bar.js"}
+:javascript
+   $(function() {
+      Application.init(#{@admin_user.id}, "#{action_type}", "/admin", "#{@admin_user.identifier}");
+      Profile.init("/admin/user/#{@admin_user.identifier}");
+      ProgressBar.init("#{@admin_user.identifier}");
+   });

@@ -2,12 +2,7 @@
   #{@admin_user.viewname} Cited Specimens
 
 - content_for :scripts do
-  %script{src:"/js/profile.js"}
-  :javascript
-    $(function() {
-      Application.init(#{@admin_user.id}, "PUT", "/admin", "#{@admin_user.identifier}");
-      Profile.init("/admin/user/#{@admin_user.identifier}");
-    });
+  = haml :'partials/admin/scripts', layout: false, locals: { action_type: "PUT" }
 
 - content_for :jumbotron do
   .jumbotron.jumbotron-fluid.alert-warning

@@ -21,13 +21,6 @@ module Sinatra
               haml :'help/roster', locals: { active_page: "help" }
             end
 
-            get '/:id/candidate-count.json' do
-              content_type "application/json", charset: 'utf-8'
-              user = find_user(params[:id])
-              count = user_unattributed_count(user)
-              { count: count }.to_json
-            end
-
             get '/progress' do
               latest_claims("living")
               haml :'help/progress', locals: { active_page: "help", active_tab: "orcid" }
@@ -215,20 +208,15 @@ module Sinatra
 
                 filter_instances
 
-                if @viewed_user.family.nil?
-                  results = []
-                  @total = 0
-                  @pagy, @results = pagy_array(results)
+                if @agent
+                  id_scores = [{ id: @agent.id, score: 3 }]
+                  occurrence_ids = occurrences_by_score(id_scores, @viewed_user)
                 else
-                  if @agent
-                    id_scores = [{ id: @agent.id, score: 3 }]
-                    occurrence_ids = occurrences_by_score(id_scores, @viewed_user)
-                  else
-                    id_scores = candidate_agents(@viewed_user)
-                    occurrence_ids = occurrences_by_score(id_scores, @viewed_user)
-                  end
-                  specimen_pager(occurrence_ids.uniq)
+                  id_scores = candidate_agents(@viewed_user)
+                  occurrence_ids = occurrences_by_score(id_scores, @viewed_user)
                 end
+                specimen_pager(occurrence_ids.uniq)
+
               end
 
               haml :'help/user', locals: { active_page: "help" }

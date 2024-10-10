@@ -256,12 +256,6 @@ module Sinatra
               @user.who_might_know.to_json
             end
 
-            get '/candidate-count.json' do
-              content_type "application/json", charset: 'utf-8'
-              count = user_unattributed_count(@user)
-              { count: count }.to_json
-            end
-
             get '/message-count.json' do
               content_type "application/json", charset: 'utf-8'
               return { count: 0}.to_json if @user.family.nil?
@@ -288,25 +282,21 @@ module Sinatra
               @sort = params[:sort] || nil
               @order = params[:order] || nil
 
-              if @user.family.nil?
-                @results = []
-                @total = nil
+              filter_instances
+
+              if @agent
+                id_scores = [{ id: @agent.id, score: 3 }]
+                occurrence_ids = occurrences_by_score(id_scores, @user)
               else
-                filter_instances
-                if @agent
-                  id_scores = [{ id: @agent.id, score: 3 }]
-                  occurrence_ids = occurrences_by_score(id_scores, @user)
-                else
-                  id_scores = candidate_agents(@user)
-                  occurrence_ids = occurrences_by_score(id_scores, @user)
-                end
-
-                if !id_scores.empty?
-                  occurrence_ids = occurrences_by_score(id_scores, @user)
-                end
-
-                specimen_pager(occurrence_ids.uniq)
+                id_scores = candidate_agents(@user)
+                occurrence_ids = occurrences_by_score(id_scores, @user)
               end
+
+              if !id_scores.empty?
+                occurrence_ids = occurrences_by_score(id_scores, @user)
+              end
+
+              specimen_pager(occurrence_ids.uniq)
 
               haml :'profile/candidates', locals: { active_page: "profile" }
             end

@@ -2,14 +2,7 @@
   #{@admin_user.viewname} Overview
 
 - content_for :scripts do
-  %script{src:"/js/profile.js"}
-  %script{src: "/js/progress-bar.js"}
-  :javascript
-    $(function() {
-      Application.init(#{@admin_user.id}, "PUT", "/admin", "#{@admin_user.identifier}");
-      Profile.init("/admin/user/#{@admin_user.identifier}");
-      ProgressBar.init("#{@admin_user.identifier}");
-    });
+  = haml :'partials/admin/scripts', layout: false, locals: { action_type: "PUT" }
   = haml :'partials/viz_scripts', layout: false, locals: { path: "/admin/user/#{@admin_user.identifier}" }
 
 .row

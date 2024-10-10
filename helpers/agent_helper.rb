@@ -42,36 +42,41 @@ module Sinatra
             adapter: :typhoeus
           )
           body = build_candidate_agent_query(search)
-          response = client.search index: Settings.elastic.agent_index, size: 50, body: body
+          response = client.search index: Settings.elastic.agent_index, size: 100, body: body
           results = response["hits"].deep_symbolize_keys
           results[:hits].map{|n| n[:_source].merge(score: n[:_score]) }.compact rescue []
         end
 
         def candidate_agents(user)
-          return [] if user.viewname && user.viewname.is_orcid?
-
+          agents = []
+          full_names = []
+          family_names = []
+          given_names = []
           cutoff_score = 65
 
-          agents = search_agents(user.viewname)
-          full_names = [user.viewname.dup]
-          family_names = [user.family.dup]
-          given_names = [user.given.dup]
+          if !user.viewname.is_orcid?
+            agents = search_agents(user.viewname)
+            full_names = [user.viewname.dup]
+            family_names = [user.family.dup]
+            given_names = [user.given.dup]
 
-          full_names << user.family.dup
-          agents.concat search_agents(user.family.dup)
+            full_names << user.family.dup
+            agents.concat search_agents(user.family.dup)
 
-          initials = user.initials
-          if initials != user.given
-            initials.split(".").each_with_index do |element, index|
-              abbreviated_name = [initials[0..index*2+1], user.family].join(" ")
-              agents.concat search_agents(abbreviated_name)
-              full_names << abbreviated_name
-              given_names << initials[0..index*2+1].dup
+            initials = user.initials
+            if initials != user.given
+              initials.split(".").each_with_index do |element, index|
+                abbreviated_name = [initials[0..index*2+1], user.family].join(" ")
+                agents.concat search_agents(abbreviated_name)
+                full_names << abbreviated_name
+                given_names << initials[0..index*2+1].dup
+              end
             end
           end
 
           if !user.other_names.empty?
             user.other_names.split("|").first(10).each do |other_name|
+
               #Attempt to ignore botanist abbreviation or naked family name, often as "other" name in wikidata
               next if user.family && user.family.include?(other_name.gsub(".",""))
 
@@ -81,10 +86,9 @@ module Sinatra
               #Attempt to tack on family name because single given name often in ORCID
               if !other_name.include?(" ")
                 other_name = [other_name, user.family].join(" ")
+                full_names << other_name
+                agents.concat search_agents(other_name)
               end
-
-              full_names << other_name
-              agents.concat search_agents(other_name)
 
               parsed_other_name = Namae.parse(other_name)[0] rescue nil
 

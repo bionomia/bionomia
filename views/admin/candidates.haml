@@ -2,12 +2,10 @@
   #{@admin_user.viewname} Candidate Specimens
 
 - content_for :scripts do
-  %script{src:"/js/profile.js"}
+  = haml :'partials/admin/scripts', layout: false, locals: { action_type: "POST" }
   :javascript
     $(function() {
       var BULK_ERROR_MESSAGE = "#{locals[:bulk_error]}";
-      Application.init(#{@admin_user.id}, "POST", "/admin", "#{@admin_user.identifier}");
-      Profile.init("/admin/user/#{@admin_user.identifier}");
       if (BULK_ERROR_MESSAGE) {
         $("#bot_claims").modal("show");
       }

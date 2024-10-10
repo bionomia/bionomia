@@ -243,7 +243,6 @@ module Sinatra
         end
 
         def user_unattributed_count(user)
-          return 0 if user.family.nil?
           agent_ids = candidate_agents(user).pluck(:id)
           occurrences_by_agent_ids(agent_ids)
             .where.not({ occurrence_id: user.user_occurrences.select(:occurrence_id) })
@@ -253,7 +252,6 @@ module Sinatra
         end
 
         def user_agent_ids_unattributed_count(user)
-          return 0 if user.family.nil?
           agent_ids = candidate_agents(user).map{|a| a.except(:score, :rank)}.uniq.pluck(:id)
           occurrences_by_agent_ids(agent_ids)
             .select("DISTINCT(occurrence_id), agent_id")

@@ -49,7 +49,6 @@ var Application = (function($, window) {
       this.activate_switch();
       this.activate_refresh();
       this.activate_popovers();
-      this.candidate_counter();
       this.helper_navbar();
       this.helper_modal();
     },
@@ -865,29 +864,6 @@ var Application = (function($, window) {
       }
       html += '</div>';
       return html;
-    },
-
-    candidate_counter: function() {
-      var self = this, slug = "";
-      if (self.path === "/profile") {
-        slug = self.path;
-      } else if (self.path === "/admin" && self.identifier) {
-        slug = self.path + "/user/" + self.identifier;
-      } else if (self.path === "/help-others" && self.identifier) {
-        slug = self.path + "/" + self.identifier;
-      }
-      if (slug.length > 0 && $("#specimen-counter").length) {
-        $.ajax({
-          method: "GET",
-          url: slug + "/candidate-count.json"
-        }).done(function(data) {
-          if (data.count > 0 && data.count <= 50) {
-            $("#specimen-counter").text(data.count).show();
-          } else if (data.count > 50) {
-            $("#specimen-counter").text("50+").show();
-          }
-        });
-      }
     },
 
     helper_navbar: function() {
