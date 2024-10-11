@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 # encoding: utf-8
-require 'optparse/date'
 require File.dirname(File.dirname(__FILE__)) + '/application.rb'
 
 ARGV << '-h' if ARGV.empty?
