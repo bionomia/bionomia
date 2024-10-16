@@ -13,12 +13,8 @@ OptionParser.new do |opts|
     options[:directory] = directory
   end
 
-  opts.on("-a", "--all", "Dump all claims") do
+  opts.on("-a", "--all", "Dump all claims and public profiles and upload to Zenodo") do
     options[:all] = true
-  end
-
-  opts.on("-p", "--profiles", "Dump list of profiles") do
-    options[:profiles] = true
   end
 
   opts.on("-q", "--quickstatements", "Dump list of new wikidata profiles to be used in quickstatements") do
@@ -36,69 +32,7 @@ if options[:directory]
   raise "Directory not found" unless File.directory?(directory)
 
   if options[:all]
-    csv_file = File.join(directory, "bionomia-public-claims.csv")
-    puts "Making public claimed occurrences...".green
-    query = UserOccurrence.joins(:user)
-                          .select(:occurrence_id, :action, :wikidata, :orcid)
-                          .where(user_occurrences: { visible: true })
-                          .where(users: {is_public: true })
-                          .to_sql
-    mysql2 = ActiveRecord::Base.connection.instance_variable_get(:@connection)
-    rows = mysql2.query(query, stream: true, cache_rows: false)
-    CSV.open(csv_file, 'w') do |csv|
-      csv << ["Subject", "Predicate", "Object"]
-      rows.each do |row|
-        if row[2]
-          user = "http://www.wikidata.org/entity/#{row[2]}"
-        elsif row[3]
-          user = "https://orcid.org/#{row[3]}"
-        end
-        row[1].split(",").each do |item|
-          if item.strip == "recorded"
-            action = "http://rs.tdwg.org/dwc/iri/recordedBy"
-          elsif item.strip == "identified"
-            action = "http://rs.tdwg.org/dwc/iri/identifiedBy"
-          end
-          csv << ["https://gbif.org/occurrence/#{row[0]}", action, user]
-        end
-      end
-    end
-
-    puts "Compressing...".green
-    zipped = File.join(directory, "#{File.basename(csv_file, ".csv")}.csv.gz")
-    Zlib::GzipWriter.open(zipped) do |gz|
-      gz.mtime = File.mtime(csv_file)
-      gz.orig_name = csv_file
-      File.open(csv_file) do |file|
-        while chunk = file.read(16*1024) do
-          gz.write(chunk)
-        end
-      end
-    end
-    File.delete(csv_file)
-  end
-
-  if options[:profiles]
-    csv_file = File.join(directory, "bionomia-public-profiles.csv")
-    puts "Making public profiles...".green
-    users = User.where(is_public: true)
-    CSV.open(csv_file, 'w') do |csv|
-      csv << ["Family", "Given", "Particle", "OtherNames", "LabelName", "Country", "Keywords", "wikidata", "ORCID", "URL"]
-      users.find_each do |u|
-        csv << [
-          u.family,
-          u.given,
-          u.particle,
-          u.other_names,
-          u.label,
-          u.country,
-          u.keywords,
-          u.wikidata,
-          u.orcid,
-          Settings.base_url + "/" + u.identifier
-        ]
-      end
-    end
+    ::Bionomia::ZenodoDownloadWorker.perform_async
   end
 
   if options[:quickstatements]
