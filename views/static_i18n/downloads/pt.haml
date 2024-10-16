@@ -27,3 +27,8 @@
       Includes a header, "Subject, Predicate, Object" and each row resembles:
       %br
       https://gbif.org/occurrence/1801358422, http://rs.tdwg.org/dwc/iri/identifiedBy, https://orcid.org/0000-0001-9008-0611
+
+- if KeyValue.get("zenodo_concept_doi")
+  %p
+    %a{href:"https://doi.org/#{KeyValue.get("zenodo_concept_doi")}"}
+      %img{src:"/images/#{KeyValue.get("zenodo_concept_doi")}.svg", alt:"DOI badge", height:20}
