@@ -142,7 +142,7 @@ module Bionomia
             u.keywords,
             u.wikidata,
             u.orcid,
-            BIONOMIA.settings.base_url + "/" + u.identifier
+            "https://bionomia.net/" + u.identifier
           ]
         end
       end
