@@ -20,11 +20,21 @@ module Bionomia
     end
 
     def submit_new
+      # Create the files
+      csv = make_csv
+      gzip = make_gzip
+
       begin
         doi_id = @z.new_deposit
         id = doi_id[:recid]
-        @z.add_file(file_path: gzip_file)
-        @z.add_file(file_path: csv_file)
+
+        # PUT the files & publish
+        Thread.pass
+        @z.add_file(file_path: csv)
+
+        Thread.pass
+        @z.add_file(file_path: gzip)
+
         pub = @z.publish(id: id)
       
         KeyValue.set("zenodo_doi", pub[:doi])
@@ -37,6 +47,10 @@ module Bionomia
     end
 
     def submit_update
+      # Create the files
+      csv = make_csv
+      gzip = make_gzip
+
       begin
         old_id = @doi.split(".").last
         doi_id = @z.new_version(id: old_id)
@@ -47,9 +61,14 @@ module Bionomia
         files.each do |file_id|
           @z.delete_file(id: id, file_id: file_id)
         end
-    
-        @z.add_file(file_path: gzip_file)
-        @z.add_file(file_path: csv_file)
+
+        # PUT the files & publish
+        Thread.pass
+        @z.add_file(file_path: csv)
+
+        Thread.pass
+        @z.add_file(file_path: gzip)
+
         pub = @z.publish(id: id)
     
         if pub[:doi].nil?
@@ -65,7 +84,7 @@ module Bionomia
 
     private
 
-    def gzip_file
+    def make_gzip
       csv_file = File.join(@directory, "bionomia-public-claims.csv")
       query = UserOccurrence.joins(:user)
                           .select(:occurrence_id, :action, :wikidata, :orcid)
@@ -107,7 +126,7 @@ module Bionomia
       gzip_file
     end
 
-    def csv_file
+    def make_csv
       csv_file = File.join(@directory, "bionomia-public-profiles.csv")
       users = User.where(is_public: true)
       CSV.open(csv_file, 'w') do |csv|

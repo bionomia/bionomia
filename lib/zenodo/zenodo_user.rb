@@ -20,7 +20,7 @@ module Bionomia
         upload_type: "dataset",
         title: "Natural history specimens collected and/or identified and deposited.",
         creators:  [ creator ],
-        description: "Natural history specimen data collected and/or identified by #{@resource.viewname}, <a href=\"#{@resource.uri}\">#{@resource.uri}</a>. Claims or attributions were made on Bionomia, <a href=\"http://bionomia.net\">https://bionomia.net</a> using specimen data from the Global Biodiversity Information Facility, <a href=\"https://gbif.org\">https://gbif.org</a>.",
+        description: "Natural history specimen data collected and/or identified by #{@resource.viewname}, <a href=\"#{@resource.uri}\">#{@resource.uri}</a>. Claims or attributions were made on Bionomia, <a href=\"https://bionomia.net\">https://bionomia.net</a> using specimen data from the Global Biodiversity Information Facility, <a href=\"https://gbif.org\">https://gbif.org</a>.",
         access_right: "open",
         license: "cc-zero",
         keywords: ["specimen", "natural history", "taxonomy"],
