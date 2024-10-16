@@ -29,5 +29,5 @@ module Bionomia
          @token_hash ||= { access_token: @settings.zenodo.access_token }
       end
 
-  end
+   end
 end

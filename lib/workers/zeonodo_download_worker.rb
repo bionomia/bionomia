@@ -9,7 +9,7 @@ module Bionomia
       @directory = File.join(BIONOMIA.settings.root, BIONOMIA.settings.public_folder, "data")
       return if !Dir.exist?(@directory) || Dir.empty?(@directory)
 
-      @z = Bionomia::ZenodoDownload.new
+      @z = Bionomia::ZenodoDownload.new(resource: nil)
 
       @doi = KeyValue.get('zenodo_doi')
       if @doi
