@@ -313,7 +313,7 @@ module Sinatra
             end
 
             put '/settings' do
-              params.except("_method", "authenticity_token").each do |k,v|
+              params.except("_method", "authenticity_token").compact.each do |k,v|
                 KeyValue.set(k, v)
               end
               flash.next[:updated] = true
