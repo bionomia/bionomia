@@ -12,50 +12,82 @@
 .citation-wrapper.ml-0
 
   .card-deck
-    .card.card-profile.m-2
+    .card.card-profile.m-3
       %h5.card-header
-        %a{href: url("/admin/users")} All People
+        %a{href: url("/admin/users")}
+          %i.fa-solid.fa-users.fa-fw
+          All People
       .card-body
         %p.card-text View and search through a paginated and ordered list of people. This includes when last logged in, public status, and links to manage their settings.
-    .card.card-profile.m-2
+    .card.card-profile.m-3
       %h5.card-header
-        %a{href: url("/admin/users/destroyed")} Deleted Identifiers & Redirects
+        %a{href: url("/admin/users/destroyed")}
+          %i.fa-solid.fa-arrows-split-up-and-left.fa-fw
+          Deleted Identifiers & Redirects
       .card-body
         %p.card-text View and manage deleted ORCID or Wikidata identifiers and redirects.
 
   .card-deck
-    .card.card-profile.m-2
+    .card.card-profile.m-3
       %h5.card-header
-        %a{href: url("/admin/articles")} Articles
+        %a{href: url("/admin/articles")}
+          %i.fa-solid.fa-file-alt.fa-fw
+          Articles
       .card-body
         %p.card-text View a paginated and ordered list of latest references indexed by GBIF. This includes the number of specimens used in the study, the number claimed or attributed, and a list of claimants.
-    .card.card-profile.m-2
+    .card.card-profile.m-3
       %h5.card-header
-        %a{href: url("/admin/organizations")} Organizations
+        %a{href: url("/admin/organizations")}
+          %i.fa-solid.fa-building.fa-fw
+          Organizations
       .card-body
         %p.card-text View a paginated and ordered list of organizations from ORCID accounts. This includes their ISNI, RoR, ringgold, GRID, and wikidata identifiers.
 
   .card-deck
-    .card.card-profile.m-2
+    .card.card-profile.m-3
       %h5.card-header
-        %a{href: url("/admin/datasets")} Datasets
+        %a{href: url("/admin/datasets")}
+          %i.fa-solid.fa-database.fa-fw
+          Datasets
       .card-body
         %p.card-text View a paginated and ordered list of datasets and adjust their metadata.
-    .card.card-profile.m-2
+    .card.card-profile.m-3
       %h5.card-header
-        %a{href: url("/admin/taxa")} Taxa
+        %a{href: url("/admin/taxa")}
+          %i.fa-brands.fa-pagelines.fa-fw
+          Taxa
       .card-body
         %p.card-text View a list of all the taxa (Families) and update the PhyloPic silhouettes.
 
   .card-deck
-    .card.card-profile.m-2
+    .card.card-profile.m-3
       %h5.card-header
-        %a{href: url("/admin/stats")} Server Statistics
+        %a{href: url("/admin/stats")}
+          %i.fa-solid.fa-chart-simple.fa-fw
+          Server Statistics
       .card-body
         %p.card-text View reports on server performance.
-    .card.card-profile.m-2
+    .card.card-profile.m-3
       %h5.card-header
-        %a{href: url("/admin/sidekiq")} Sidekiq Queues
+        %a{href: url("/admin/sidekiq")}
+          %i.fa-solid.fa-list.fa-fw
+          Sidekiq Queues
       .card-body
         %p.card-text View all the running background jobs.
+
+  .card-deck
+    .card.card-profile.m-3
+      %h5.card-header
+        %a{href: url("/admin/settings")}
+          %i.fa-solid.fa-cog.fa-fw
+          Settings
+      .card-body
+        %p.card-text Adjust site settings such as the download DOI.
+    .card.card-profile.m-3
+      %h5.card-header
+        %a{href: url("/admin/queries")}
+          %i.fa-solid.fa-bulldozer.fa-fw
+          Bulk Attribution Queries
+      .card-body
+        %p.card-text View all the bulk attribution queries.
 

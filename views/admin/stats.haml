@@ -21,7 +21,7 @@
 
 %h4 Active Database Connections
 
-%ul.list-group.mt-3
+%ul.list-group.mt-3{style:"max-width:400px"}
   - ActiveRecord::Base.connection_pool.stat.each do |k,v|
     %li.list-group-item.d-flex.justify-content-between.align-items-center
       #{k}

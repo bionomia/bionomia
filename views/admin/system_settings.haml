@@ -1,0 +1,43 @@
+- content_for :title do
+   System Settings
+- content_for :scripts do
+   :javascript
+      $(function() {
+         Application.init();
+      });
+- content_for :jumbotron do
+   .jumbotron.jumbotron-fluid.alert-warning.d-flex.flex-wrap
+      .mr-auto
+         %h1.h2 System Settings
+
+%h4 Key Values
+
+- if flash[:updated]
+   .alert.alert-success.alert-dismissible.fade.show.d-block{role: "alert"}
+      %div
+         Key:values updated
+      %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
+         %span{"aria-hidden":"true"} &times;
+
+%form{method: :post, action: url("/admin/settings")}
+   %input{type: :hidden, name: "_method", value: 'PUT'}
+   %input{type: :hidden, name: "authenticity_token", value:"#{env['rack.session'][:csrf]}"}
+
+   .table-responsive-lg.mt-4{style:"max-width:600px"}
+      %table.table.table-hover.table-sm
+         %thead.thead-light
+            %tr
+               %th.text-nowrap{scope: "col"} Key
+               %th.text-nowrap{scope: "col"} Value
+
+         %tbody
+            - @results.each do |kv|
+               %tr
+                  %td.align-middle
+                     #{kv.k}
+                  %td
+                     %input.form-control{value: "#{kv.v}", name: "#{kv.k}"}
+
+   %input.btn.btn-success{type: :submit, value:"Update"}
+
+   = pagy_bootstrap_nav(@pagy) if @pagy.pages > 1

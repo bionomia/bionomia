@@ -1,0 +1,45 @@
+- content_for :title do
+   Bulk Queries
+- content_for :scripts do
+   :javascript
+      $(function() {
+         Application.init();
+      });
+- content_for :jumbotron do
+   .jumbotron.jumbotron-fluid.alert-warning.d-flex.flex-wrap
+      .mr-auto
+         %h1.h2 Bulk Queries
+
+- sort = locals[:sort] == "asc" ? "desc" : "asc"
+.table-responsive-lg
+   %table.table.table-hover.table-sm
+      %thead.thead-light
+         %tr
+            %th.text-nowrap{scope: "col"}
+               %a{href: url("/admin/queries?order=user_id&sort=#{sort}")}
+                  Recipient Identifier
+                  = sort_icon("user_id", sort)
+            %th.text-nowrap{scope: "col"} Recipient
+            %th.text-nowrap{scope: "col"} Scribe
+            %th.text-nowrap{scope: "col"} Query
+            %th.text-nowrap{scope: "col"}
+               %a{href: url("/admin/queries?order=created_at&sort=#{sort}")}
+                  Created
+                  = sort_icon("created_at", sort)
+
+      %tbody
+         - @results.each do |b|
+            %tr
+               %td
+                  #{b.user.identifier}
+               %td
+                  %a{href: url("/help-others/#{b.user.identifier}/specimens?attributor=#{b.created_by.identifier}")}
+                     #{b.user.viewname}
+               %td
+                  #{b.created_by.viewname}
+               %td
+                  #{b.query}
+               %td
+                  #{b.created_at}
+
+= pagy_bootstrap_nav(@pagy) if @pagy.pages > 1

@@ -19,16 +19,20 @@
         %th.text-nowrap{scope: "col"}
           %a{href: url("/admin/users/destroyed?order=identifier&sort=#{sort}")}
             Identifier
+            = sort_icon("identifier", sort)
         %th.text-nowrap{scope: "col"} Type
         %th.text-nowrap{scope: "col"}
           %a{href: url("/admin/users/destroyed?order=redirect_to&sort=#{sort}")}
             Redirect To
+            = sort_icon("redirect_to", sort)
         %th.text-nowrap{scope: "col"}
           %a{href: url("/admin/users/destroyed?order=reason&sort=#{sort}")}
             Reason
+            = sort_icon("reason", sort)
         %th.text-nowrap{scope: "col"}
           %a{href: url("/admin/users/destroyed?order=created_at&sort=#{sort}")}
             Created
+            = sort_icon("created_at", sort)
         %th.text-nowrap{scope: "col"}
 
     %tbody

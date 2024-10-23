@@ -289,6 +289,37 @@ module Sinatra
               redirect "/admin/organizations"
             end
 
+            get '/queries' do
+              sort = params[:sort] || nil
+              order = params[:order] || nil
+              if order && BulkAttributionQuery.column_names.include?(order) && ["asc", "desc"].include?(sort)
+                data = BulkAttributionQuery.includes(:user, :created_by)
+                                           .order("#{order} #{sort}")
+              else
+                data = BulkAttributionQuery.includes(:user, :created_by)
+                                           .order(created_at: :desc)
+              end
+              locals = {
+                active_page: "administration",
+                sort: sort, order: order
+              }
+              @pagy, @results = pagy(data, limit: 50)
+              haml :'admin/queries', locals: locals
+            end
+
+            get '/settings' do
+              @pagy, @results = pagy(KeyValue.all, limit: 50)
+              haml :'admin/system_settings', locals: { active_page: "administration" }
+            end
+
+            put '/settings' do
+              params.except("_method", "authenticity_token").each do |k,v|
+                KeyValue.set(k, v)
+              end
+              flash.next[:updated] = true
+              redirect "/admin/settings"
+            end
+
             get '/stats' do
               @health = {}
               indices = ["agent", "article", "dataset", "organization", "user", "taxon"]
