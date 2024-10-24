@@ -31,4 +31,4 @@
 - if KeyValue.get("zenodo_concept_doi")
   %p
     %a{href:"#{KeyValue.get("zenodo_concept_doi")}"}
-      %img{src:"/images/#{KeyValue.get("zenodo_concept_doi").slice!("https://doi.org/")}.svg", alt:"DOI badge", height:20}
+      %img{src:"/images/#{KeyValue.get("zenodo_concept_doi").sub("https://doi.org/", "")}.svg", alt:"DOI badge", height:20}
