@@ -294,9 +294,11 @@ module Sinatra
               order = params[:order] || nil
               if order && BulkAttributionQuery.column_names.include?(order) && ["asc", "desc"].include?(sort)
                 data = BulkAttributionQuery.includes(:user, :created_by)
+                                           .where.not(query: [nil, ""])
                                            .order("#{order} #{sort}")
               else
                 data = BulkAttributionQuery.includes(:user, :created_by)
+                                           .where.not(query: [nil, ""])
                                            .order(created_at: :desc)
               end
               locals = {
@@ -314,6 +316,7 @@ module Sinatra
 
             put '/settings' do
               params.except("_method", "authenticity_token").compact.each do |k,v|
+                v = nil if v.blank?
                 KeyValue.set(k, v)
               end
               flash.next[:updated] = true

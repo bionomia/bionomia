@@ -22,6 +22,12 @@ class BIONOMIA < Sinatra::Base
   set :protection, :except => [:json_csrf, :remote]
   set :strict_paths, false
 
+  Settings.add_source!({
+    off_datetime: KeyValue.get("off_datetime"),
+    off_duration: KeyValue.get("off_duration"),
+    online_when: KeyValue.get("online_when")
+  })
+
   load_locales File.join(root, 'config', 'locales')
   I18n.available_locales = [:en, :fr, :es, :pt, :de, :zh]
 

@@ -49,8 +49,8 @@
     %img{class:"mb-3 mr-3", src:"/images/gbif-logo.jpg", alt:"GBIF logo"}
   %div{class:"media-body"}
     %p
-      Approximately #{Settings.gbif.download_count}
-      %a{href: "https://doi.org/#{Settings.gbif.download_doi}"} specimen records
+      Approximately #{KeyValue.get("gbif_download_count")}
+      %a{href: "#{KeyValue.get("gbif_download_doi")}"} specimen records
       are downloaded from
       %a{href:"https://gbif.org"} GBIF
       as a custom format based on Apache Avro. Records with the basisOfRecord PRESERVED_SPECIMEN, FOSSIL_SPECIMEN, MATERIAL_SAMPLE or LIVING_SPECIMEN are selected as well as content in either
