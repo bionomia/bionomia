@@ -30,5 +30,5 @@
 
 - if KeyValue.get("zenodo_concept_doi")
   %p
-    %a{href:"https://doi.org/#{KeyValue.get("zenodo_concept_doi")}"}
+    %a{href:"#{KeyValue.get("zenodo_concept_doi")}"}
       %img{src:"/images/#{KeyValue.get("zenodo_concept_doi")}.svg", alt:"DOI badge", height:20}

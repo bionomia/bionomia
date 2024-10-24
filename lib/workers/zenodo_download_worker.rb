@@ -37,8 +37,8 @@ module Bionomia
 
         pub = @z.publish(id: id)
       
-        KeyValue.set("zenodo_doi", pub[:doi])
-        KeyValue.set("zenodo_concept_doi", pub[:conceptdoi])
+        KeyValue.set("zenodo_doi", "https://doi.org/#{pub[:doi]}")
+        KeyValue.set("zenodo_concept_doi", "https://doi.org/#{pub[:conceptdoi]}")
         puts "Created".green
       rescue
         @z.delete_draft(id: id) if id
@@ -74,7 +74,7 @@ module Bionomia
         if pub[:doi].nil?
           @z.delete_draft(id: id)
         else
-          KeyValue.set("zenodo_doi", pub[:doi])
+          KeyValue.set("zenodo_doi", "https://doi.org/#{pub[:doi]}")
         end
       rescue
         @z.delete_draft(id: id) if id
