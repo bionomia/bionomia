@@ -10,10 +10,6 @@ base_url: 'https://bionomia.net'
 api_url: 'https://api.bionomia.net'
 redis_url: 'redis://192.168.2.4:6379/0'
 cookie_domain: '.bionomia.net'
-offline_warning:
-  off_datetime:
-  off_duration:
-  online_when:
 google:
   analytics: ''
   api_key: ''
@@ -48,8 +44,6 @@ gmail:
   username: ''
   password: ''
 gbif:
-  download_count: '99M'
-  download_doi: '10.15468/00000'
   api: 'https://api.gbif.org/v1/'
 bluesky:
   endpoint: 'https://bsky.social/xrpc/'
