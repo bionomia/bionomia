@@ -10,7 +10,7 @@ class OccurrenceCount < ActiveRecord::Base
 
     body = occurrence.recorders
                      .map{|a| { search: build_name_query(a.fullname) } }
-    response = client.msearch index: Settings.elastic.user_index, body: body
+    response = ::Bionomia::ElasticUser.new.msearch(body: body)
     response["responses"].each do |response|
       response["hits"]["hits"].each do |hit|
         if hit["_score"] > 50 && partial_network.include?(hit["_id"].to_i)
@@ -27,7 +27,7 @@ class OccurrenceCount < ActiveRecord::Base
   def collector_network
     collectors = occurrence.user_recordings.pluck(:user_id).uniq rescue []
     whole_network = []
-    response = client.mget index: Settings.elastic.user_index, body: { ids: collectors } rescue nil
+    response = ::Bionomia::ElasticUser.new.mget(ids: collectors) rescue nil
     begin
       response["docs"].each do |doc|
         results = doc["_source"]
@@ -63,16 +63,6 @@ class OccurrenceCount < ActiveRecord::Base
       size: 3,
       "_source": false
     }
-  end
-
-  def client
-    @client ||= Elasticsearch::Client.new(
-      url: Settings.elastic.server,
-      request_timeout: 5*60,
-      retry_on_failure: true,
-      reload_on_failure: true,
-      adapter: :typhoeus
-    )
   end
 
 end

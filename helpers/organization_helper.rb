@@ -11,19 +11,10 @@ module Sinatra
           return if !searched_term.present?
 
           page = (params[:page] || 1).to_i
-
-          client = Elasticsearch::Client.new(
-            url: Settings.elastic.server,
-            request_timeout: 5*60,
-            retry_on_failure: true,
-            reload_on_failure: true,
-            reload_connections: 1_000,
-            adapter: :typhoeus
-          )
-          body = build_organization_query(searched_term)
           from = (page -1) * 30
+          body = build_organization_query(searched_term)
 
-          response = client.search index: Settings.elastic.organization_index, from: from, size: 30, body: body
+          response = ::Bionomia::ElasticOrganization.new.search(from: from, size: 30, body: body)
           results = response["hits"].deep_symbolize_keys
 
           @pagy = Pagy.new(count: results[:total][:value], limit: 30, page: page)

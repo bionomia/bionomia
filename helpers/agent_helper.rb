@@ -11,20 +11,12 @@ module Sinatra
           return if !searched_term.present?
 
           page = (params[:page] || 1).to_i
-
           size = opts[:item_size] || search_size
-          client = Elasticsearch::Client.new(
-            url: Settings.elastic.server,
-            request_timeout: 5*60,
-            retry_on_failure: true,
-            reload_on_failure: true,
-            reload_connections: 1_000,
-            adapter: :typhoeus
-          )
+
           body = build_name_query(searched_term)
           from = (page -1) * size
 
-          response = client.search index: Settings.elastic.agent_index, from: from, size: size, body: body
+          response = ::Bionomia::ElasticAgent.new.search(from: from, size: size, body: body)
           results = response["hits"].deep_symbolize_keys
 
           @pagy = Pagy.new(count: results[:total][:value], limit: size, page: page)
@@ -33,16 +25,8 @@ module Sinatra
 
         def search_agents(search)
           return [] if !search.present?
-          client = Elasticsearch::Client.new(
-            url: Settings.elastic.server,
-            request_timeout: 5*60,
-            retry_on_failure: true,
-            reload_on_failure: true,
-            reload_connections: 1_000,
-            adapter: :typhoeus
-          )
           body = build_candidate_agent_query(search)
-          response = client.search index: Settings.elastic.agent_index, size: 100, body: body
+          response = ::Bionomia::ElasticAgent.new.search(size: 100, body: body)
           results = response["hits"].deep_symbolize_keys
           results[:hits].map{|n| n[:_source].merge(score: n[:_score]) }.compact rescue []
         end
@@ -144,14 +128,6 @@ module Sinatra
         end
 
         def agent_examples
-          client = Elasticsearch::Client.new(
-            url: Settings.elastic.server,
-            request_timeout: 5*60,
-            retry_on_failure: true,
-            reload_on_failure: true,
-            reload_connections: 1_000,
-            adapter: :typhoeus
-          )
           body = {
             query: {
               function_score: {
@@ -173,7 +149,7 @@ module Sinatra
               }
             }
           }
-          response = client.search index: Settings.elastic.agent_index, size: 50, body: body
+          response = ::Bionomia::ElasticAgent.new.search(size: 50, body: body)
           results = response["hits"].deep_symbolize_keys
           results[:hits]
         end

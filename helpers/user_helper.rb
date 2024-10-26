@@ -27,18 +27,10 @@ module Sinatra
             opts[:has_occurrences] = false
           end
 
-          client = Elasticsearch::Client.new(
-            url: Settings.elastic.server,
-            request_timeout: 5*60,
-            retry_on_failure: true,
-            reload_on_failure: true,
-            reload_connections: 1_000,
-            adapter: :typhoeus
-          )
-          body = build_name_query(searched_term, opts)
           from = (page -1) * limit
+          body = build_name_query(searched_term, opts)
 
-          response = client.search index: Settings.elastic.user_index, from: from, size: limit, body: body
+          response = ::Bionomia::ElasticUser.new.search(from: from, size: limit, body: body)
           results = response["hits"].deep_symbolize_keys
 
           @pagy = Pagy.new(count: results[:total][:value], limit: limit, page: page)
@@ -57,18 +49,10 @@ module Sinatra
           page = (params[:page] || 1).to_i
           limit = (params[:limit] || 30).to_i
 
-          client = Elasticsearch::Client.new(
-            url: Settings.elastic.server,
-            request_timeout: 5*60,
-            retry_on_failure: true,
-            reload_on_failure: true,
-            reload_connections: 1_000,
-            adapter: :typhoeus
-          )
-          body = build_user_country_query(country_code, action, family, @profile_type)
           from = (page -1) * limit
+          body = build_user_country_query(country_code, action, family, @profile_type)
 
-          response = client.search index: Settings.elastic.user_index, from: from, size: limit, body: body
+          response = ::Bionomia::ElasticUser.new.search(from: from, size: limit, body: body)
           results = response["hits"].deep_symbolize_keys
 
           @pagy = Pagy.new(count: results[:total][:value], limit: limit, page: page)
@@ -86,19 +70,10 @@ module Sinatra
           page = (params[:page] || 1).to_i
           limit = (params[:limit] || 30).to_i
 
-          client = Elasticsearch::Client.new(
-            url: Settings.elastic.server,
-            request_timeout: 5*60,
-            retry_on_failure: true,
-            reload_on_failure: true,
-            reload_connections: 1_000,
-            adapter: :typhoeus
-          )
+          from = (page -1) * limit
           body = build_user_taxon_query(family, action)
 
-          from = (page -1) * limit
-
-          response = client.search index: Settings.elastic.user_index, from: from, size: limit, body: body
+          response = ::Bionomia::ElasticUser.new.search(from: from, size: limit, body: body)
           results = response["hits"].deep_symbolize_keys
 
           @pagy = Pagy.new(count: results[:total][:value], limit: limit, page: page)

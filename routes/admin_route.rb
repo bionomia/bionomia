@@ -310,14 +310,16 @@ module Sinatra
             end
 
             get '/settings' do
-              @pagy, @results = pagy(KeyValue.all, limit: 50)
+              @pagy, @results = pagy(KeyValue.all.order(:k), limit: 10)
               haml :'admin/system_settings', locals: { active_page: "administration" }
             end
 
             put '/settings' do
               params.except("_method", "authenticity_token").compact.each do |k,v|
                 v = nil if v.blank?
-                KeyValue.set(k, v)
+                if KeyValue.get(k) != v
+                  KeyValue.set(k, v)
+                end
               end
               flash.next[:updated] = true
               redirect "/admin/settings"

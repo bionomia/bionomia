@@ -4,13 +4,12 @@ require_relative "elastic_indexer"
 module Bionomia
   class ElasticDataset < ElasticIndexer
 
-    def initialize(opts = {})
-      super
-      @settings = { index: Settings.elastic.dataset_index }.merge(opts)
+    def index
+      Settings.elastic.dataset_index
     end
 
-    def create_index
-      config = {
+    def config
+      {
         settings: {
           index: {
             number_of_replicas: 0,
@@ -73,7 +72,6 @@ module Bionomia
           }
         }
       }
-      client.indices.create index: @settings[:index], body: config
     end
 
     def import

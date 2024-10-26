@@ -18,19 +18,10 @@ module Sinatra
           return if !searched_term.present?
 
           page = (params[:page] || 1).to_i
-
-          client = Elasticsearch::Client.new(
-            url: Settings.elastic.server,
-            request_timeout: 5*60,
-            retry_on_failure: true,
-            reload_on_failure: true,
-            reload_connections: 1_000,
-            adapter: :typhoeus
-          )
-          body = build_dataset_query(searched_term)
           from = (page -1) * 30
+          body = build_dataset_query(searched_term)
 
-          response = client.search index: Settings.elastic.dataset_index, from: from, size: 30, body: body
+          response = ::Bionomia::ElasticDataset.new.search(from: from, size: 30, body: body)
           results = response["hits"].deep_symbolize_keys
 
           @pagy = Pagy.new(count: results[:total][:value], limit: 30, page: page)
@@ -38,14 +29,6 @@ module Sinatra
         end
 
         def search_dataset_by_uuid(uuid)
-          client = Elasticsearch::Client.new(
-            url: Settings.elastic.server,
-            request_timeout: 5*60,
-            retry_on_failure: true,
-            reload_on_failure: true,
-            reload_connections: 1_000,
-            adapter: :typhoeus
-          )
           body = {
             query: {
               term: {
@@ -55,7 +38,7 @@ module Sinatra
               }
             }
           }
-          response = client.search index: Settings.elastic.dataset_index, size: 1, body: body
+          response = ::Bionomia::ElasticDataset.new.search(size: 1, body: body)
           results = response["hits"].deep_symbolize_keys
           results[:hits][0][:_source] rescue nil
         end

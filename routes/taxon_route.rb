@@ -54,16 +54,10 @@ module Sinatra
               attachment "#{params[:taxon]}.csv"
               cache_control :no_cache
               headers.delete("Content-Length")
-              client = Elasticsearch::Client.new(
-                url: Settings.elastic.server,
-                request_timeout: 5*60,
-                retry_on_failure: true,
-                reload_on_failure: true,
-                reload_connections: 1_000,
-                adapter: :typhoeus
-              )
+
               body = build_user_taxon_query(@taxon.family)
-              response = client.search index: Settings.elastic.user_index, body: body, scroll: '5m'
+              client = ::Bionomia::ElasticUser.new
+              response = client.search(body: body, scroll: '5m')
               scroll_id = response['_scroll_id']
               header = [
                 "name",
@@ -106,7 +100,7 @@ module Sinatra
                            ]
                     y << CSV::Row.new(header, data).to_s
                   end
-                  response = client.scroll(scroll: '5m', body: { scroll_id: scroll_id })
+                  response = client.scroll(scroll_id: scroll_id )
                 end
               end
             end

@@ -7,12 +7,14 @@ module Bionomia
     def initialize(opts = {})
       @img = Class.new
       @img.extend Sinatra::Bionomia::Helper::ImageHelper
-      super
-      @settings = { index: Settings.elastic.user_index }.merge(opts)
     end
 
-    def create_index
-      config = {
+    def index
+      Settings.elastic.user_index
+    end
+
+    def config
+      {
         settings: {
           index: {
             number_of_replicas: 0,
@@ -200,7 +202,6 @@ module Bionomia
           }
         }
       }
-      client.indices.create index: @settings[:index], body: config
     end
 
     def import
@@ -272,7 +273,7 @@ module Bionomia
           }
         }
       }
-      client.search index: @settings[:index], body: body, size: size, scroll: "1m"
+      search size: size, body: body, scroll: "1m"
     end
 
   end
