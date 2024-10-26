@@ -10,4 +10,8 @@ class KeyValue < ActiveRecord::Base
     upsert({ k: key, v: value })
   end
 
+  def self.destroy(key)
+    find_by_k(key).destroy rescue nil
+  end
+
 end

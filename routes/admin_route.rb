@@ -325,6 +325,17 @@ module Sinatra
               redirect "/admin/settings"
             end
 
+            delete '/settings' do
+              KeyValue.destroy(params[:key])
+            end
+
+            post '/settings/add' do
+              value = params["value"].blank? ? nil : params["value"].strip
+              KeyValue.set(params["key"].strip, value)
+              flash.next[:updated] = true
+              redirect "/admin/settings"
+            end
+            
             get '/stats' do
               @health = {}
               indices = ["agent", "article", "dataset", "organization", "user", "taxon"]

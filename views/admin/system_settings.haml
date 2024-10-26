@@ -4,13 +4,25 @@
    :javascript
       $(function() {
          Application.init();
+         $('.remove-key').on('click', function(e) {
+            e.preventDefault();
+
+            var key = $(this).attr("data-key");
+            $.ajax({
+               method: "DELETE",
+               url: "/admin/settings",
+               contentType: "application/json",
+               data: JSON.stringify({ key: key }),
+            }).done(function(data) {
+               location.reload();
+            });
+            return false;
+         });
       });
 - content_for :jumbotron do
    .jumbotron.jumbotron-fluid.alert-warning.d-flex.flex-wrap
       .mr-auto
          %h1.h2 System Settings
-
-%h4 Key Values
 
 - if flash[:updated]
    .alert.alert-success.alert-dismissible.fade.show.d-block{role: "alert"}
@@ -19,16 +31,50 @@
       %button.close{type:"button", "data-dismiss":"alert", "aria-label":"Close"}
          %span{"aria-hidden":"true"} &times;
 
-%form{method: :post, action: url("/admin/settings")}
-   %input{type: :hidden, name: "_method", value: 'PUT'}
+%h4 Add Key Value
+
+%form{method: :post, action: url("/admin/settings/add")}
+   %input{type: :hidden, name: "_method", value: 'POST'}
    %input{type: :hidden, name: "authenticity_token", value:"#{env['rack.session'][:csrf]}"}
 
-   .table-responsive-lg.mt-4{style:"max-width:600px"}
+   .table-responsive-lg.mt-4{style:"max-width:650px"}
       %table.table.table-hover.table-sm
          %thead.thead-light
             %tr
                %th.text-nowrap{scope: "col"} Key
                %th.text-nowrap{scope: "col"} Value
+               %th
+         %tbody
+            %tr
+               %td
+                  %input.form-control{name: "key"}
+               %td
+                  %input.form-control{name: "value"}
+               %td
+                  %input.btn.btn-success{type: :submit, value:"Create"}
+
+%h4 Adjust Key Values
+
+.alert.alert-warning.tiny-margins.mt-0{style:"max-width:650px"}
+   %em
+      off_datetime,
+   %em off_duration,
+   and
+   %em
+      online_when
+   require web server restart to take effect.
+
+%form{method: :post, action: url("/admin/settings")}
+   %input{type: :hidden, name: "_method", value: 'PUT'}
+   %input{type: :hidden, name: "authenticity_token", value:"#{env['rack.session'][:csrf]}"}
+
+   .table-responsive-lg.mt-4{style:"max-width:650px"}
+      %table.table.table-hover.table-sm
+         %thead.thead-light
+            %tr
+               %th.text-nowrap{scope: "col"} Key
+               %th.text-nowrap{scope: "col"} Value
+               %th
          %tbody
             - @results.each do |kv|
                %tr
@@ -36,6 +82,8 @@
                      #{kv.k}
                   %td
                      %input.form-control{value: "#{kv.v}", name: "#{kv.k}"}
+                  %td
+                     %button.btn.btn-small.btn-outline-danger.remove-key{"data-key": "#{kv.k}"} Remove
 
    %input.btn.btn-success{type: :submit, value:"Update"}
 
