@@ -1,7 +1,6 @@
 - content_for :title, "Bionomia"
 - content_for :stylesheets do
   %link{href: "/font/subset-LovelyHome.otf", rel: "preload", as: "font", type: "font/otf", crossorigin: true}
-  %link{href: "/images/banner.jpg", rel: "preload", as: "image", imagesrcset: "/images/banner-small.jpg 1x, /images/banner.jpg 2x" }
 - content_for :scripts do
   :javascript
     $(function() {
@@ -26,7 +25,7 @@
       }
 
 - content_for :jumbotron do
-  .jumbotron.jumbotron-fluid.d-flex.flex-wrap#home-jumbotron
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap#home-jumbotron{style: "background-image: image-set(/images/banner.jpg 2x, /images/banner-small.jpg 1x); background-size: cover;" }
     .mr-auto.p-2
       %h1 Bionomia>
     = haml :'partials/user/search', layout: false

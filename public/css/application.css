@@ -100,10 +100,6 @@ h3.popover-header{
 }
 #home-jumbotron{
   background-image: url('/images/banner.jpg');
-  background-image: -webkit-image-set(url("/images/banner-small.jpg") 1x, url("/images/banner.jpg") 2x);
-  background-image: image-set(url("/images/banner-small.jpg") 1x, url("/images/banner.jpg") 2x);
-  background-size: cover;
-  background-repeat: no-repeat;
   position:relative;
 }
 #home-jumbotron h1{
