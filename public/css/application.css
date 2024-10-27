@@ -99,7 +99,6 @@ h3.popover-header{
   content: "|";
 }
 #home-jumbotron{
-  background-image: url('/images/banner.jpg');
   position:relative;
 }
 #home-jumbotron h1{
