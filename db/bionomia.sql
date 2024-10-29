@@ -18,8 +18,8 @@ CREATE TABLE `agents` (
 CREATE TABLE `agent_jobs` (
   `id` int NOT NULL,
   `agents` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `gbifIDs_recordedBy` mediumtext COLLATE utf8mb4_bin,
-  `gbifIDs_identifiedBy` mediumtext COLLATE utf8mb4_bin,
+  `gbifIDs_recordedBy` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `gbifIDs_identifiedBy` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `parsed` mediumtext COLLATE utf8mb4_bin
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
@@ -46,10 +46,10 @@ CREATE TABLE `bulk_attribution_queries` (
   `id` bigint NOT NULL,
   `user_id` int NOT NULL,
   `created_by` int NOT NULL,
-  `query` text COLLATE utf8mb4_bin,
+  `query` text,
   `created_at` datetime(6) NOT NULL,
   `updated_at` datetime(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `datasets` (
   `id` bigint NOT NULL,
@@ -75,6 +75,12 @@ CREATE TABLE `destroyed_users` (
   `redirect_to` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `reason` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+CREATE TABLE `key_values` (
+  `id` bigint NOT NULL,
+  `k` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `v` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `messages` (
@@ -149,10 +155,6 @@ CREATE TABLE `organizations` (
   `longitude` float DEFAULT NULL,
   `image_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `website` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-CREATE TABLE `schema_migrations` (
-  `version` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `source_attributions` (
@@ -274,6 +276,10 @@ ALTER TABLE `destroyed_users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `identifier_idx` (`identifier`);
 
+ALTER TABLE `key_values`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `index_key_values_on_k` (`k`);
+
 ALTER TABLE `messages`
   ADD PRIMARY KEY (`id`),
   ADD KEY `index_messages_on_user_id` (`user_id`),
@@ -304,9 +310,6 @@ ALTER TABLE `organizations`
   ADD KEY `isni_idx` (`isni`),
   ADD KEY `wikidata` (`wikidata`),
   ADD KEY `index_organizations_on_ror` (`ror`);
-
-ALTER TABLE `schema_migrations`
-  ADD UNIQUE KEY `unique_schema_migrations` (`version`);
 
 ALTER TABLE `source_attributions`
   ADD PRIMARY KEY (`id`),
@@ -368,6 +371,9 @@ ALTER TABLE `datasets`
 
 ALTER TABLE `destroyed_users`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `key_values`
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `messages`
   MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
