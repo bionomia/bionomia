@@ -205,8 +205,7 @@ module Bionomia
     end
 
     def import
-      identifiers = User.where.not(family: [nil, ""])
-                        .where.not(id: User::BOT_IDS)
+      identifiers = User.where.not(id: User::BOT_IDS)
                         .pluck(:id)
       Parallel.each(identifiers, progress: "Rebuilding user index", in_threads: 3) do |ids|
         bulk(User.where(id: ids))

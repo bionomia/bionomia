@@ -878,14 +878,14 @@ class User < ActiveRecord::Base
   end
 
   def add_search
-    if !self.family.blank?
+    if !self.viewname.blank?
       es = ::Bionomia::ElasticUser.new
       es.add(self)
     end
   end
 
   def update_search
-    if !self.family.blank?
+    if !self.viewname.blank?
       es = ::Bionomia::ElasticUser.new
       if !es.get(self)
         es.add(self)
