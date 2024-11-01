@@ -30,7 +30,7 @@ Unfortunately, gbifIDs are not persistent. These occasionally disappear through 
 
      $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/populate_taxa.rb --truncate --directory /directory-to-spark-csv-files/
      # Can start 2+ workers, each with 40 threads to help speed-up processing
-     $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec sidekiq -C config/settings/sidekiq.yml -c 40 -r ./application.rb
+     $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec sidekiq -C config/settings/sidekiq.yml -c 10 -r ./application.rb
 
 ### Step 5: Import Existing recordedByID and identifiedByID
 

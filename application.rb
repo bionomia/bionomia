@@ -27,6 +27,7 @@ class BIONOMIA < Sinatra::Base
     off_duration: KeyValue.get("off_duration"),
     online_when: KeyValue.get("online_when")
   })
+  Settings.reload!
 
   load_locales File.join(root, 'config', 'locales')
   I18n.available_locales = [:en, :fr, :es, :pt, :de, :zh]
