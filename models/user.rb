@@ -165,6 +165,12 @@ class User < ActiveRecord::Base
     has_recordings? || has_identifications?
   end
 
+  def latest_attribution
+    visible_user_occurrences.select("GREATEST(MAX(created), MAX(updated)) as latest")
+                            .unscope(:order)[0]
+                            .latest.iso8601 rescue nil
+  end
+
   def visible_user_occurrences
     user_occurrences.where(visible: true)
   end

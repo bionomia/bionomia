@@ -202,6 +202,8 @@ module Bionomia
       w.push_value(@user.other_names.split("|"), "alternateName")
       w.push_key("sameAs")
       w.push_value(@user.uri)
+      w.push_key("dateModified")
+      w.push_value(@user.latest_attribution)
 
       if scope == "paged"
         identifications = jsonld_occurrences_paged("identifications")
