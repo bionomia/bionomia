@@ -166,9 +166,12 @@ class User < ActiveRecord::Base
   end
 
   def latest_attribution
-    visible_user_occurrences.select("GREATEST(MAX(created), MAX(updated)) as latest")
-                            .unscope(:order)[0]
-                            .latest.iso8601 rescue nil
+    visible_user_occurrences.select("GREATEST(MAX(created), IFNULL(MAX(updated), 0)) as latest")
+                            .unscope(:order)
+                            .first
+                            .latest
+                            .to_datetime
+                            .iso8601
   end
 
   def visible_user_occurrences
