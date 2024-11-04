@@ -81,6 +81,7 @@ require 'optparse/date'
 require 'typhoeus'
 require 'faraday/typhoeus'
 require 'sort_alphabetical'
+require 'webrick'
 
 require_relative File.join(File.dirname(__FILE__), 'config', 'initialize')
 

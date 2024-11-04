@@ -704,7 +704,8 @@ class User < ActiveRecord::Base
       } }, batch_size: 500, validate: false, on_duplicate_key_ignore: true
     end
 
-    BulkAttributionQuery.create(created_by: User.find(created_by), user: self, query: conditions)
+    agent_name = agent.fullname.blank? ? agent.unparsed : agent.fullname
+    BulkAttributionQuery.create(created_by: User.find(created_by), user: self, query: conditions, agent_name: agent_name, not_them: ignore)
     { num_attributed: (both || all).count, ignored: ignore }
   end
 

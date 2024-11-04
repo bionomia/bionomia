@@ -60,6 +60,7 @@ gem 'sitemap_generator'
 gem 'sort_alphabetical'
 gem 'sparql-client'
 gem 'typhoeus'
+gem 'webrick'
 gem 'wikidata-client'
 
 group :production do

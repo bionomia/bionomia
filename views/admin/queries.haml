@@ -21,7 +21,9 @@
                   = sort_icon("user_id", sort)
             %th.text-nowrap{scope: "col"} Recipient
             %th.text-nowrap{scope: "col"} Scribe
+            %th.text-nowrap{scope: "col"} Agent Name
             %th.text-nowrap{scope: "col"} Query
+            %th.text-nowrap{scope: "col"} Not Them
             %th.text-nowrap{scope: "col"}
                %a{href: url("/admin/queries?order=created_at&sort=#{sort}")}
                   Created
@@ -38,7 +40,11 @@
                %td
                   #{b.created_by.viewname}
                %td
+                  #{b.agent_name}
+               %td
                   #{b.query}
+               %td
+                  #{b.not_them}
                %td
                   #{b.created_at}
 
