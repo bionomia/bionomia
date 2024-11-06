@@ -520,7 +520,7 @@ module Bionomia
       other_names = ""
       aliases = []
       aliases.concat(wiki_user.properties("P1559").compact.map{|a| a.value.text})
-      aliases.concat(wiki_user.aliases.values.compact.map{|a| a.map{|b| b.value if b.language == "en"}.compact}.flatten) rescue nil
+      aliases.concat(wiki_user.aliases.values.compact.map{|a| a.map{|b| b.value if ["en", "mul"].include?(b.language)}.compact}.flatten) rescue nil
       if aliases.length > 0
         other_names = aliases.uniq.join("|")
       end
