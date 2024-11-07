@@ -60,9 +60,8 @@ class Dataset < ActiveRecord::Base
   end
 
   def agents
-    Agent.where(id: occurrences.select(:agent_id)
-                               .joins(:occurrence_agents)
-                               .group(:agent_id))
+    Agent.where(id: occurrences.joins(:occurrence_agents)
+                               .pluck("occurrence_agents.agent_id").uniq)
          .where.not(family: "" )
          .order(:family)
   end
