@@ -47,6 +47,8 @@ CREATE TABLE `bulk_attribution_queries` (
   `user_id` int NOT NULL,
   `created_by` int NOT NULL,
   `query` text,
+  `agent_name` varchar(255) DEFAULT NULL,
+  `not_them` tinyint(1) DEFAULT NULL,
   `created_at` datetime(6) NOT NULL,
   `updated_at` datetime(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -155,6 +157,10 @@ CREATE TABLE `organizations` (
   `longitude` float DEFAULT NULL,
   `image_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `website` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+CREATE TABLE `schema_migrations` (
+  `version` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `source_attributions` (
@@ -310,6 +316,9 @@ ALTER TABLE `organizations`
   ADD KEY `isni_idx` (`isni`),
   ADD KEY `wikidata` (`wikidata`),
   ADD KEY `index_organizations_on_ror` (`ror`);
+
+ALTER TABLE `schema_migrations`
+  ADD UNIQUE KEY `unique_schema_migrations` (`version`);
 
 ALTER TABLE `source_attributions`
   ADD PRIMARY KEY (`id`),
