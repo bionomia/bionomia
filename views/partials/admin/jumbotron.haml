@@ -123,10 +123,10 @@
         %i.fa-solid.fa-lock
         %span.mr-2 Private Profile
       %a.profile-flush.mr-2.mb-2.text-nowrap{href: url("/#{@admin_user.identifier}/refresh-stats.json")}
-        %i.fa-solid.fa-sync-alt
+        %i.fa-solid.fa-arrows-rotate
         = I18n.t('general.refresh_stats')
       %a.profile-flush.mr-2.mb-2.text-nowrap{href: url("/#{@admin_user.identifier}/refresh.json")}
-        %i.fa-solid.fa-sync-alt
+        %i.fa-solid.fa-arrows-rotate
         = I18n.t('general.refresh_profile')
         - if @admin_user.orcid
           %i.fa-brands.fa-orcid

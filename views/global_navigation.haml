@@ -15,7 +15,7 @@
             = I18n.t('layout.profiles')
       %li.nav-item
         %a{href: url("/scribes"), class: "nav-link#{locals[:active_page] == "scribes" ? " active" : nil}", "aria-label": "#{I18n.t('layout.scribes')}", "data-toggle": "tooltip", title: I18n.t('layout.scribes')}
-          %i.fa-solid.fa-feather-alt.fa-fw
+          %i.fa-solid.fa-feather-pointed.fa-fw
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.scribes')
       %li.nav-item
@@ -30,7 +30,7 @@
             = I18n.t('layout.datasets')
       %li.nav-item
         %a{href: url("/articles"), class:"nav-link#{locals[:active_page] == "articles" ? " active" : nil}", "aria-label": "#{I18n.t('layout.articles')}", "data-toggle": "tooltip", title: I18n.t('layout.articles') }
-          %i.fa-solid.fa-file-alt.fa-fw
+          %i.fa-solid.fa-file-lines.fa-fw
           %span.d-inline-block.d-sm-none.d-xxl-inline-block
             = I18n.t('layout.articles')
       %li.nav-item
@@ -90,7 +90,7 @@
                 %i.fa-solid.fa-user.fa-fw
                 = I18n.t('layout.overview')
               %a.dropdown-item{href: url("/profile/specimens"), "aria-label": "#{I18n.t('layout.specimens')}"}
-                %i.fa-solid.fa-th.fa-fw
+                %i.fa-solid.fa-table-cells.fa-fw
                 = I18n.t('layout.specimens')
               %a.dropdown-item{href: url("/profile/helped"), "aria-label": "#{I18n.t('layout.people_helped')}"}
                 %i.fa-solid.fa-hands-helping.fa-fw
@@ -106,7 +106,7 @@
                   %i.fa-solid.fa-users-cog.fa-fw
                   = I18n.t('layout.administration')
               %a.dropdown-item{href: url("/logout"), "aria-label": "#{I18n.t('layout.logout')}"}
-                %i.fa-solid.fa-sign-out-alt.fa-fw
+                %i.fa-solid.fa-right-from-bracket.fa-fw
                 = I18n.t('layout.logout')
       - else
         %li

@@ -5,7 +5,7 @@
       = I18n.t('profile.overview')
   %li.nav-item.badge-item
     %a{class: "text-nowrap nav-link#{locals[:active_page] == "specimens" ? " active" : nil}", href: url("/profile/specimens")}
-      %i.fa-solid.fa-th
+      %i.fa-solid.fa-table-cells
       = I18n.t('profile.specimens')
     %span{id: "specimen-counter-#{@user.identifier}", class: "badge-notify badge badge-success badge-pill"}
   %li.nav-item.badge-item

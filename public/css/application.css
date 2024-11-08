@@ -272,6 +272,10 @@ svg > g > g:not([column-id]):last-child { pointer-events: none }
   font-size:20px;
 }
 
+.github i, .bluesky i {
+  width: 21px;
+}
+
 .github:hover, .bluesky:hover {
   color:#fff;
   background-color:#02414b;

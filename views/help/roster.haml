@@ -31,7 +31,7 @@
           = succeed (@friends.count > i+1) ? ", " : "" do
             = link_to u[:fullname], url("/help-others/#{u[:identifier]}")
       %a.help-refresh.ml-2{href: url('/profile/who-might-know.json')}
-        %i.fa-solid.fa-sync-alt
+        %i.fa-solid.fa-arrows-rotate
         = I18n.t('profile.refresh')
   - @results.in_groups_of(3) do |group|
     .card-deck
