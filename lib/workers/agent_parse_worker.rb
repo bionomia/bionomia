@@ -16,8 +16,7 @@ module Bionomia
          return if agents.empty?
          return if agents.size == 1 && agents.first == DwcAgent.default
 
-         agent_job.parsed = agents
-         agent_job.save
+         agent_job.update_column(:parsed, agents)
       end
 
    end

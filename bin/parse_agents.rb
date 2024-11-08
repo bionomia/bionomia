@@ -21,17 +21,11 @@ end.parse!
 if options[:queue]
   Sidekiq::Stats.new.reset
 
-  progressbar = ProgressBar.create(title: "Agent Jobs", total: AgentJob.count)
+  agent_count = AgentJob.count
+  progressbar = ProgressBar.create(title: "Agent Jobs", total: agent_count)
 
-  group = []
-  AgentJob.find_each do |o|
-    group << [{ id: o.id }.stringify_keys]
-    next if o.id % 50_000 != 0
-    Sidekiq::Client.push_bulk({ 'class' => Bionomia::AgentParseWorker, 'args' => group })
-    progressbar.progress += group.size
-    group = []
-  end
-  if group.size > 0
+  (1..agent_count).each_slice(50_000) do |slice|
+    group = slice.map{|a| [{ id: a }.stringify_keys]}
     Sidekiq::Client.push_bulk({ 'class' => Bionomia::AgentParseWorker, 'args' => group })
     progressbar.progress += group.size
   end
