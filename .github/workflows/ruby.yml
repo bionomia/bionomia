@@ -19,7 +19,7 @@ jobs:
           MYSQL_PASSWORD: password
           MYSQL_AUTHENTICATION_PLUGIN: mysql_native_password
         ports:
-          - 3306/tcp
+          - 3306:3306
         options: >-
           --health-cmd="mysqladmin ping"
           --health-interval=10s
@@ -36,7 +36,7 @@ jobs:
       RUBY_YJIT_ENABLE: true
       MYSQL_USERNAME: test
       MYSQL_PASSWORD: password
-      MYSQL_HOST: localhost
+      MYSQL_HOST: 0.0.0.0
       MYSQL_DATABASE: bionomia_test
     steps:
     - uses: actions/checkout@v3
