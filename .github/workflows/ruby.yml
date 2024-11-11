@@ -15,6 +15,8 @@ jobs:
         env:
           ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: bionomia_test
+          MYSQL_USER: test
+          MYSQL_PASSWORD: password
           MYSQL_AUTHENTICATION_PLUGIN: mysql_native_password
         ports:
           - 3306/tcp
@@ -23,12 +25,6 @@ jobs:
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
-          -e MYSQL_ROOT_PASSWORD=password
-          -e MYSQL_USER=test
-          -e MYSQL_PASSWORD=password
-          -e MYSQL_DATABASE=bionomia_test
-          --entrypoint sh bitnami/mysql:8.3.0 -c "exec docker-entrypoint.sh mysqld --default-authentication-plugin=mysql_native_password"
-
     strategy:
       matrix:
         mysql: ['bitnami/mysql:8.3.0']
