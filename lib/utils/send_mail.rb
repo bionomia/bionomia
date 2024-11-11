@@ -39,10 +39,10 @@ module Bionomia
       "#{article[:citation]} https://doi.org/#{article[:doi]}. [Your records: https://bionomia.net/profile/citation/#{article[:doi]}]"
     end
 
-    def closing
+    def closing(user)
       "\n\n\nWe hope you enjoy Bionomia, https://bionomia.net and find it useful. "\
       "Your support is greatly appreciated, https://bionomia.net/donate.\n"\
-      "If you wish to stop receiving these messages, login to your account and adjust the email notification settings in your profile."
+      "If you wish to stop receiving these messages, unsubscribe using https://bionomia.net/#{user.orcid}/unsubscribe?mail_token=#{user.mail_token}."
     end
 
     private
@@ -59,7 +59,7 @@ module Bionomia
     def construct_message(user, articles)
       body  = salutation(user.viewname)
       body += articles.map{|a| format_article(a) }.join("\n\n")
-      body += closing
+      body += closing(user)
       body
     end
 

@@ -122,7 +122,15 @@ var Profile = (function($, window) {
           method: "PUT",
           url: self.path + "/settings",
           dataType: "json",
-          data: "wants_mail=" + $(this).prop("checked") + "&youtube_id=" + $("#youtube_id").val() + "&locale=" + $('#locale').val()
+          contentType: "application/json",
+          data: JSON.stringify({
+            wants_mail: $(this).prop("checked"),
+            youtube_id: $("#youtube_id").val(),
+            locale: $('#locale').val()
+          }),
+          beforeSend: function(xhr) {
+            $(this).addClass("disabled");
+          }
         }).done(function(data) {
           location.reload();
         });

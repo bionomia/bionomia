@@ -5,11 +5,26 @@ module Sinatra
     module Route
       module ProfileRoute
 
-        def self.registered(app)
+          def self.registered(app)
 
           app.get '/logout' do
             session.clear
             redirect '/'
+          end
+
+          app.get '/:id/unsubscribe' do
+            @viewed_user = find_user(params[:id])
+            mail_token = params[:mail_token]
+            if @viewed_user && @viewed_user.wants_mail? && mail_token == @viewed_user.mail_token
+              @viewed_user.skip_callbacks
+              @viewed_user.wants_mail = false
+              @viewed_user.mail_last_sent = nil
+              @viewed_user.mail_token = nil
+              @viewed_user.save
+              haml :'profile/unsubscribe'
+            else
+              halt 401, haml(:oops)
+            end
           end
 
           # /auth is automatically added by OmniAuth
@@ -122,12 +137,23 @@ module Sinatra
               youtube_id = params[:youtube_id] && !params[:youtube_id].empty? ? params[:youtube_id] : nil
               locale = params[:locale] && !params[:locale].empty? ? params[:locale] : nil
               @user.wants_mail = params[:wants_mail]
+              if params[:wants_mail] && params[:wants_mail] != "false" && @user.mail_token.nil?
+                @user.mail_token = SecureRandom.hex(10)
+              end
+              if params.include?(:wants_mail) && (!params[:wants_mail] || params[:wants_mail] == "false")
+                @user.mail_token = nil
+              end
               @user.youtube_id = youtube_id
               @user.locale = locale
               @user.save
-              flash.next[:updated] = true
-              canonical_host = request.env['HTTP_HOST'].match(/(?:[a-z]{2}\.)?(.*)$/)
-              redirect "#{request.env['rack.url_scheme']}://#{canonical_host[1]}/profile/settings"
+
+              if request.content_type == "application/json"
+                { message: "ok" }.to_json
+              else
+                flash.next[:updated] = true
+                canonical_host = request.env['HTTP_HOST'].match(/(?:[a-z]{2}\.)?(.*)$/)
+                redirect "#{request.env['rack.url_scheme']}://#{canonical_host[1]}/profile/settings"
+              end
             end
 
             get '/specimens' do
