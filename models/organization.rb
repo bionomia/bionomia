@@ -1,7 +1,7 @@
 class Organization < ActiveRecord::Base
   attr_accessor :skip_callbacks
 
-  serialize :institution_codes, JSON
+  serialize :institution_codes, coder: JSON
 
   has_many :user_organizations, dependent: :delete_all
   has_many :users, through: :user_organizations, source: :user

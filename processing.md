@@ -19,18 +19,18 @@ Unfortunately, gbifIDs are not persistent. These occasionally disappear through 
 ### Step 3: Parse & Populate Agents
 
       $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/parse_agents.rb --queue
-      # Can start 2+ workers, each with 40 threads to help speed-up processing
-      $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec sidekiq -C config/settings/sidekiq.yml -c 40 -r ./application.rb
+      # Can start 2+ workers, each with 5 threads to help speed-up processing
+      $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec sidekiq -C config/settings/sidekiq.yml -r ./application.rb
 
       $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/populate_agents.rb --truncate --queue
-      # Can start 2+ workers, each with 40 threads to help speed-up processing
-      $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec sidekiq -C config/settings/sidekiq.yml -c 40 -r ./application.rb
+      # Can start 2+ workers, each with 5 threads to help speed-up processing
+      $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec sidekiq -C config/settings/sidekiq.yml -r ./application.rb
 
 ### Step 4: Populate Taxa
 
      $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/populate_taxa.rb --truncate --directory /directory-to-spark-csv-files/
-     # Can start 2+ workers, each with 40 threads to help speed-up processing
-     $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec sidekiq -C config/settings/sidekiq.yml -c 10 -r ./application.rb
+     # Can start 2+ workers, each with 5 threads to help speed-up processing
+     $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec sidekiq -C config/settings/sidekiq.yml -r ./application.rb
 
 ### Step 5: Import Existing recordedByID and identifiedByID
 
@@ -75,8 +75,8 @@ Or from scratch:
      # For best performance, first rebuild the Elasticsearch user index
      # RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/populate_search.rb --indices user
      $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/populate_occurrence_count.rb -t -a -j
-     # Can start 2+ workers, each with 40 threads to help speed-up processing
-     $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec sidekiq -C config/settings/sidekiq.yml -c 40 -r ./application.rb
+     # Can start 2+ workers, each with 5 threads to help speed-up processing
+     $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec sidekiq -C config/settings/sidekiq.yml -r ./application.rb
 
 ### Step 9: Rebuild the Frictionless Data Packages
 

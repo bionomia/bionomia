@@ -12,6 +12,9 @@ module Sinatra
             host: Settings.host,
             username: Settings.username,
             password: Settings.password,
+            ssl: Settings.ssl,
+            ssl_mode: Trilogy::SSL_PREFERRED_NOVERIFY,
+            tls_min_version: Trilogy::TLS_VERSION_12,
             pool: Settings.pool,
             timeout: Settings.timeout
           }

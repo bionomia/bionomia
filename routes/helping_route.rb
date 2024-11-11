@@ -26,6 +26,11 @@ module Sinatra
               haml :'help/progress', locals: { active_page: "help", active_tab: "orcid" }
             end
 
+            get '/progress/wikidata' do
+              latest_claims("deceased")
+              haml :'help/progress', locals: { active_page: "help", active_tab: "wikidata" }
+            end
+
             get '/add' do
               haml_i18n :'add', locals: { active_page: "add" }
             end
@@ -39,11 +44,6 @@ module Sinatra
               content_type "application/json", charset: 'utf-8'
               req = env['rack.request.form_hash'].symbolize_keys
               create_user(req[:identifier]).to_json
-            end
-
-            get '/progress/wikidata' do
-              latest_claims("deceased")
-              haml :'help/progress', locals: { active_page: "help", active_tab: "wikidata" }
             end
 
             get '/new-people' do

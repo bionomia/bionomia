@@ -96,7 +96,7 @@ module Sinatra
 
         def latest_claims(type = "living")
           user_type = (type == "living") ? { orcid: nil } : { wikidata: nil }
-          month = DateTime.now - 31.days
+          month = DateTime.now - 14.days
           subq = UserOccurrence.select("user_occurrences.user_id AS user_id, MAX(user_occurrences.created) AS created")
                                .where("user_occurrences.created >= '#{month}'")
                                .group("user_occurrences.user_id")

@@ -1,6 +1,6 @@
 class KeyValue < ActiveRecord::Base
 
-  serialize :v, JSON
+  serialize :v, coder: JSON
 
   def self.get(key)
     find_by_k(key).v rescue nil

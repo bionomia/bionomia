@@ -1,3 +1,3 @@
 class AgentJob < ActiveRecord::Base
-   serialize :parsed, JSON
+   serialize :parsed, coder: JSON
 end
