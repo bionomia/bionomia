@@ -655,6 +655,8 @@ zh:
     updated: 您的个人资料已更新。
     thanks: 谢谢
     attributed: 归属
+    unsubscribe_title: Unsubscribe
+    unsubscribe: "The email address %{email} is now unsubscribed from notifcations."
   roster:
     roster_title: 公共档案
     lede: "%{count} 人已分享自己和所推崇的人的简介"

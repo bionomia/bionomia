@@ -619,6 +619,8 @@ ja:
     updated: Your profile was updated.
     thanks: Thanks
     attributed: attributed
+    unsubscribe_title: Unsubscribe
+    unsubscribe: "The email address %{email} is now unsubscribed from notifcations."
   roster:
     roster_title: Public Profiles
     lede: "%{count} people who share their profiles and the profiles of others they revere"

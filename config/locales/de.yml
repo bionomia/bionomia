@@ -655,6 +655,8 @@ de:
     updated: Ihr Profil wurde aktualisiert.
     thanks: Danke
     attributed: zugeordnet
+    unsubscribe_title: Unsubscribe
+    unsubscribe: "The email address %{email} is now unsubscribed from notifcations."
   roster:
     roster_title: Öffentliche Profile
     lede: "%{count} Personen, die ihre Profile sowie die Profile von anderen, die sie verehren, teilen"
