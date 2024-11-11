@@ -9,14 +9,14 @@ SET time_zone = "+00:00";
 
 
 CREATE TABLE `agents` (
-  `id` int NOT NULL,
+  `id` int UNSIGNED NOT NULL,
   `family` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
   `given` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
   `unparsed` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=COMPRESSED;
 
 CREATE TABLE `agent_jobs` (
-  `id` int NOT NULL,
+  `id` int UNSIGNED NOT NULL,
   `agents` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `gbifIDs_recordedBy` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `gbifIDs_identifiedBy` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
@@ -43,7 +43,7 @@ CREATE TABLE `article_occurrences` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin KEY_BLOCK_SIZE=8 ROW_FORMAT=COMPRESSED;
 
 CREATE TABLE `bulk_attribution_queries` (
-  `id` bigint NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `user_id` int NOT NULL,
   `created_by` int NOT NULL,
   `query` text,
@@ -54,7 +54,7 @@ CREATE TABLE `bulk_attribution_queries` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `datasets` (
-  `id` bigint NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `datasetKey` binary(36) NOT NULL,
   `title` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
@@ -72,7 +72,7 @@ CREATE TABLE `datasets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `destroyed_users` (
-  `id` int NOT NULL,
+  `id` int UNSIGNED NOT NULL,
   `identifier` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `redirect_to` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `reason` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
@@ -80,13 +80,13 @@ CREATE TABLE `destroyed_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `key_values` (
-  `id` bigint NOT NULL,
+  `id` int UNSIGNED NOT NULL,
   `k` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `v` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `messages` (
-  `id` bigint NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `user_id` int UNSIGNED NOT NULL,
   `recipient_id` int UNSIGNED NOT NULL,
   `read` tinyint(1) DEFAULT '0',
@@ -131,20 +131,20 @@ CREATE TABLE `occurrences` (
 
 CREATE TABLE `occurrence_agents` (
   `id` bigint UNSIGNED NOT NULL,
-  `occurrence_id` bigint NOT NULL,
-  `agent_id` int NOT NULL,
+  `occurrence_id` bigint UNSIGNED DEFAULT NULL,
+  `agent_id` int UNSIGNED NOT NULL,
   `agent_role` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=COMPRESSED;
 
 CREATE TABLE `occurrence_counts` (
-  `id` bigint NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `occurrence_id` bigint UNSIGNED NOT NULL,
   `agent_count` int UNSIGNED DEFAULT NULL,
   `user_count` int UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `organizations` (
-  `id` int NOT NULL,
+  `id` int UNSIGNED NOT NULL,
   `isni` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `ringgold` int DEFAULT NULL,
   `grid` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
@@ -164,24 +164,24 @@ CREATE TABLE `schema_migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `source_attributions` (
-  `id` bigint NOT NULL,
-  `user_id` int NOT NULL,
-  `occurrence_id` bigint NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` int UNSIGNED NOT NULL,
+  `occurrence_id` bigint UNSIGNED NOT NULL,
   `action` varchar(255) COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `source_users` (
-  `id` bigint NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `identifier` varchar(255) COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `taxa` (
-  `id` int NOT NULL,
+  `id` int UNSIGNED NOT NULL,
   `family` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `taxon_images` (
-  `id` int NOT NULL,
+  `id` int UNSIGNED NOT NULL,
   `family` varchar(255) COLLATE utf8mb4_bin NOT NULL,
   `file_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `credit` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
@@ -194,7 +194,7 @@ CREATE TABLE `taxon_occurrences` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=COMPRESSED;
 
 CREATE TABLE `users` (
-  `id` int NOT NULL,
+  `id` int UNSIGNED NOT NULL,
   `family` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `given` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `particle` varchar(50) DEFAULT NULL,
@@ -225,12 +225,13 @@ CREATE TABLE `users` (
   `zenodo_concept_doi` varchar(255) DEFAULT NULL,
   `wants_mail` tinyint(1) NOT NULL DEFAULT '0',
   `mail_last_sent` timestamp NULL DEFAULT NULL,
+  `mail_token` varchar(25) DEFAULT NULL,
   `wiki_sitelinks` text,
   `label` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 CREATE TABLE `user_occurrences` (
-  `id` int NOT NULL,
+  `id` int UNSIGNED NOT NULL,
   `user_id` int UNSIGNED NOT NULL,
   `occurrence_id` bigint UNSIGNED NOT NULL,
   `action` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
@@ -241,7 +242,7 @@ CREATE TABLE `user_occurrences` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 CREATE TABLE `user_organizations` (
-  `id` int NOT NULL,
+  `id` int UNSIGNED NOT NULL,
   `user_id` int UNSIGNED NOT NULL,
   `organization_id` int UNSIGNED NOT NULL,
   `start_year` int UNSIGNED DEFAULT NULL,
@@ -361,10 +362,10 @@ ALTER TABLE `user_organizations`
 
 
 ALTER TABLE `agents`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `agent_jobs`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `articles`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
@@ -373,49 +374,49 @@ ALTER TABLE `article_occurrences`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `bulk_attribution_queries`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `datasets`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `destroyed_users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `key_values`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `messages`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `occurrence_agents`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `occurrence_counts`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `organizations`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `source_attributions`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `source_users`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `taxa`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `taxon_images`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `user_occurrences`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `user_organizations`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
