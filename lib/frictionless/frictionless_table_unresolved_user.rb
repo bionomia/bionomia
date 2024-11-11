@@ -48,8 +48,8 @@ module Bionomia
       query = Occurrence.select(:gbifID)
                         .where(datasetKey: datasetKey)
                         .where.not(recordedByID: nil).to_sql
-      mysql2 = ActiveRecord::Base.connection.instance_variable_get(:@connection)
-      rows = mysql2.query(query, stream: true, cache_rows: false)
+      db = ActiveRecord::Base.connection.instance_variable_get(:@connection)
+      rows = db.query(query, stream: true, cache_rows: false)
       tmp_csv = File.new(File.join(File.dirname(@csv_handle.path), "unresolved_tmp.csv"), "ab")
       CSV.open(tmp_csv.path, 'w') do |csv|
         rows.each { |row| csv << row }

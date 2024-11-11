@@ -1,4 +1,4 @@
-adapter: mysql2
+adapter: trilogy
 host: MYSQL_HOST
 username: MYSQL_USERNAME
 password: MYSQL_PASSWORD

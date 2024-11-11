@@ -89,8 +89,8 @@ module Bionomia
                         .where(datasetKey: @dataset.uuid)
                         .unscope(:order)
                         .to_sql
-      mysql2 = ActiveRecord::Base.connection.instance_variable_get(:@connection)
-      rows = mysql2.query(query, stream: true, cache_rows: false)
+      db = ActiveRecord::Base.connection.instance_variable_get(:@connection)
+      rows = db.query(query, stream: true, cache_rows: false)
       tmp_csv = File.new(File.join(@folder, "frictionless_tmp.csv"), "ab")
       CSV.open(tmp_csv.path, 'w') do |csv|
         rows.each { |row| csv << [row[0]] if row[1] == 1 }

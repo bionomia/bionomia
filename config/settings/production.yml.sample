@@ -1,4 +1,4 @@
-adapter: mysql2
+adapter: trilogy
 host: localhost
 username: root
 password:

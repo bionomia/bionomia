@@ -91,8 +91,8 @@ module Bionomia
                           .where(user_occurrences: { visible: true })
                           .where(users: {is_public: true })
                           .to_sql
-      mysql2 = ActiveRecord::Base.connection.instance_variable_get(:@connection)
-      rows = mysql2.query(query, stream: true, cache_rows: false)
+      db = ActiveRecord::Base.connection.instance_variable_get(:@connection)
+      rows = db.query(query, stream: true, cache_rows: false)
       CSV.open(csv_file, 'w') do |csv|
         csv << ["Subject", "Predicate", "Object"]
         rows.each do |row|
