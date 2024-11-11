@@ -9,6 +9,17 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_USER: test
+          MYSQL_PASSWORD: password
+          MYSQL_DATABASE: bionomia_test
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5 -e MYSQL_ROOT_PASSWORD=password -e MYSQL_USER=test -e MYSQL_PASSWORD=password -e MYSQL_DATABASE=bionomia_test --entrypoint sh mysql:8 -c "exec docker-entrypoint.sh mysqld --default-authentication-plugin=mysql_native_password"
     strategy:
       matrix:
         ruby-version: ['3.2']
@@ -16,8 +27,9 @@ jobs:
       RUBY_VERSION: 3.2.1
       BUNDLER_VERSION: 2.4.6
       RACK_ENV: test
-      MYSQL_USERNAME: root
-      MYSQL_PASSWORD: root
+      RUBY_YJIT_ENABLE: true
+      MYSQL_USERNAME: test
+      MYSQL_PASSWORD: password
       MYSQL_HOST: localhost
       MYSQL_DATABASE: bionomia_test
     steps:
@@ -27,9 +39,9 @@ jobs:
       with:
         ruby-version: ${{ env.RUBY_VERSION }}
         bundler-cache: true
-    - name: Set up MySQL
-      run: |
-        sudo /etc/init.d/mysql start
+#    - name: Set up MySQL
+#      run: |
+#        sudo /etc/init.d/mysql start
     - name: Setup Database Config
       run: |
           cp config/settings/test.yml.sample config/settings/test.yml
