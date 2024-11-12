@@ -159,7 +159,7 @@ module Sinatra
 
             @pagy, @results = {}, []
             if @viewed_user.is_public?
-              data = specimen_filters(@viewed_user).order("occurrences.typeStatus desc")
+              data = specimen_filters(@viewed_user)
               if @edit_ui
                 data = data.includes(:claimant)
               end
