@@ -420,7 +420,7 @@ var Application = (function($, window) {
                 if(self.method === "POST" || input.hasClass("restore-ignored")) {
                   input.parents("tr").fadeOut(250).promise().done(function() {
                     $(this).remove();
-                    if ($("input.action-radio").length <= 6) {
+                    if ($(".table tbody tr").length === 0) {
                       $(".table tbody").append("<tr><td colspan=\"12\">" + self.spinner + "</td></tr>");
                       location.reload();
                     }
