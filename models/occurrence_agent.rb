@@ -1,6 +1,6 @@
 class OccurrenceAgent < ActiveRecord::Base
-   belongs_to :occurrence, primary_key: :id, foreign_key: :occurrence_id
-   belongs_to :agent, primary_key: :id, foreign_key: :agent_id
+   belongs_to :occurrence
+   belongs_to :agent
 
    has_many :user_occurrences, primary_key: :occurrence_id, foreign_key: :occurrence_id
 
