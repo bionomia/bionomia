@@ -10,6 +10,7 @@ class OccurrenceCount < ActiveRecord::Base
 
     body = occurrence.recorders
                      .map{|a| { search: build_name_query(a.fullname) } }
+    return false if body.empty?
     response = ::Bionomia::ElasticUser.new.msearch(body: body)
     response["responses"].each do |response|
       response["hits"]["hits"].each do |hit|
