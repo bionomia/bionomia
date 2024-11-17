@@ -1,1 +1,3 @@
-#offline-message.p-1.pl-2.m-0.alert.alert-warning.text-muted.small= I18n.t('offline.warning', datetime_off: Settings.off_datetime, duration: Settings.off_duration)
+#offline-message.p-1.pl-2.m-0.alert.alert-warning.text-muted.small
+   %i.fa-solid.fa-triangle-exclamation.text-warning
+   = I18n.t('offline.warning', datetime_off: Settings.off_datetime, duration: Settings.off_duration)

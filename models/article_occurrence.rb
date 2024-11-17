@@ -1,5 +1,4 @@
 class ArticleOccurrence < ActiveRecord::Base
-
    belongs_to :occurrence
    belongs_to :article
 
