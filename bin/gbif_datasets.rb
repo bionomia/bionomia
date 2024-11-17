@@ -95,7 +95,17 @@ elsif options[:remove]
     puts d.uuid.red
     d.destroy
   end
-elsif options[:counter]
+elsif options[:verify]
+  Dataset.where("occurrences_count > 1000").where(dataset_type: "OCCURRENCE").find_each do |d|
+    if d.current_occurrences_count < d.occurrences_count
+      puts d.uuid.red
+    else
+      puts d.uuid.green
+    end
+  end
+end
+
+if options[:counter]
   puts "Updating occurrence counts...".yellow
   Dataset.update_all(occurrences_count: 0, source_attribution_count: 0)
   Parallel.each(Dataset.find_in_batches(batch_size: 250), progress: "Rebuilding dataset counters", in_threads: 3) do |batch|
@@ -114,12 +124,4 @@ elsif options[:counter]
     end
   end
   puts "Counters rebuilt".green
-elsif options[:verify]
-  Dataset.where("occurrences_count > 1000").where(dataset_type: "OCCURRENCE").find_each do |d|
-    if d.current_occurrences_count < d.occurrences_count
-      puts d.uuid.red
-    else
-      puts d.uuid.green
-    end
-  end
 end
