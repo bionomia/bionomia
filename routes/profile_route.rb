@@ -318,10 +318,6 @@ module Sinatra
                 occurrence_ids = occurrences_by_score(id_scores, @user)
               end
 
-              if !id_scores.empty?
-                occurrence_ids = occurrences_by_score(id_scores, @user)
-              end
-
               specimen_pager(occurrence_ids.uniq)
 
               haml :'profile/candidates', locals: { active_page: "profile" }

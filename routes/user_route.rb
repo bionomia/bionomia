@@ -157,6 +157,9 @@ module Sinatra
             check_user_public
             create_filter
 
+            candidate_agents = candidate_agents(@viewed_user)
+            @user_agent_ids = candidate_agents.map{|a| a[:id]}
+
             @pagy, @results = {}, []
             if @viewed_user.is_public?
               data = specimen_filters(@viewed_user)

@@ -196,6 +196,8 @@ module Sinatra
               @order = params[:order] || nil
 
               @viewed_user = find_user(params[:id])
+              candidate_agents = candidate_agents(@viewed_user)
+              @user_agent_ids = candidate_agents.map{|a| a[:id]}
 
               if !@viewed_user
                 halt 404
@@ -209,11 +211,9 @@ module Sinatra
                 filter_instances
 
                 if @agent
-                  id_scores = [{ id: @agent.id, score: 3 }]
-                  occurrence_ids = occurrences_by_score(id_scores, @viewed_user)
+                  occurrence_ids = occurrences_by_score([{ id: @agent.id, score: 3 }], @viewed_user)
                 else
-                  id_scores = candidate_agents(@viewed_user)
-                  occurrence_ids = occurrences_by_score(id_scores, @viewed_user)
+                  occurrence_ids = occurrences_by_score(candidate_agents, @viewed_user)
                 end
                 specimen_pager(occurrence_ids.uniq)
 
@@ -278,6 +278,8 @@ module Sinatra
               check_redirect
 
               @viewed_user = find_user(params[:id])
+              candidate_agents = candidate_agents(@viewed_user)
+              @user_agent_ids = candidate_agents.map{|a| a[:id]}
 
               @page = page
               @order = params[:order] || nil
@@ -397,7 +399,10 @@ module Sinatra
                 @sort = "desc"
                 @order = "typeStatus"
               end
-              
+
+              candidate_agents = candidate_agents(@viewed_user)
+              @user_agent_ids = candidate_agents.map{|a| a[:id]}
+
               co_collections = @viewed_user.recordings_with(@co_collector)
                                            .order("occurrences.#{@order} #{@sort}")
               @total = co_collections.count
@@ -443,6 +448,9 @@ module Sinatra
                 @sort = "desc"
                 @order = "typeStatus"
               end
+
+              candidate_agents = candidate_agents(@viewed_user)
+              @user_agent_ids = candidate_agents.map{|a| a[:id]}
 
               specimens = @viewed_user.identifications_for(@collector)
                                       .order("occurrences.#{@order} #{@sort}")
@@ -490,6 +498,9 @@ module Sinatra
                 @order = "typeStatus"
               end
 
+              candidate_agents = candidate_agents(@viewed_user)
+              @user_agent_ids = candidate_agents.map{|a| a[:id]}
+
               determinations = @viewed_user.identifications_by(@determiner)
                                            .order("occurrences.#{@order} #{@sort}")
               @total = determinations.count
@@ -521,6 +532,9 @@ module Sinatra
                 @sort = "desc"
                 @order = "created"
               end
+
+              candidate_agents = candidate_agents(@viewed_user)
+              @user_agent_ids = candidate_agents.map{|a| a[:id]}
 
               if @order == "created"
                 hidden_occurrences = @viewed_user.hidden_occurrences_by_others

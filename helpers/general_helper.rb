@@ -331,7 +331,9 @@ module Sinatra
         end
 
         def recordedBy_has_warning?(user, occurrence)
+          return if !@user_agent_ids
           return if !user.date_born || !occurrence.recordedBy || !occurrence.eventDate_processed
+          return if (occurrence.occurrence_recorders.pluck(:agent_id) & @user_agent_ids).empty?
 
           date_born, date_died = ::Bionomia::Validator.resolved_user_dates(user) 
           if ( date_born && date_born >= occurrence.eventDate_processed ) ||
@@ -341,7 +343,9 @@ module Sinatra
         end
 
         def identifiedBy_has_warning?(user, occurrence)
+          return if !@user_agent_ids
           return if !user.date_born || !occurrence.identifiedBy || !occurrence.dateIdentified_processed
+          return if (occurrence.occurrence_determiners.pluck(:agent_id) & @user_agent_ids).empty?
 
           date_born, date_died = ::Bionomia::Validator.resolved_user_dates(user) 
           if ( date_born && date_born >= occurrence.dateIdentified_processed ) ||

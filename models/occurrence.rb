@@ -3,8 +3,8 @@ class Occurrence < ActiveRecord::Base
   self.primary_key = :gbifID
 
   has_many :occurrence_agents
-  has_many :determiners, -> { where(occurrence_agents: { agent_role: false }) }, through: :occurrence_agents, source: :agent
   has_many :recorders, -> { where(occurrence_agents: { agent_role: true }) }, through: :occurrence_agents, source: :agent
+  has_many :determiners, -> { where(occurrence_agents: { agent_role: false }) }, through: :occurrence_agents, source: :agent
 
   has_many :user_occurrences
   has_many :users, -> { where(user_occurrences: { visible: true }) }, through: :user_occurrences, source: :user
@@ -100,6 +100,14 @@ class Occurrence < ActiveRecord::Base
 
   def interpretedCountry(lang = :en)
     I18nData.countries(lang)[countryCode]
+  end
+
+  def occurrence_recorders
+    occurrence_agents.where(agent_role: true)
+  end
+
+  def occurrence_determiners
+    occurrence_agents.where(agent_role: false)
   end
 
   def agents

@@ -479,6 +479,9 @@ module Sinatra
               @sort = params[:sort] || "desc"
               @order = params[:order] || "typeStatus"
 
+              candidate_agents = candidate_agents(@admin_user)
+              @user_agent_ids = candidate_agents.map{|a| a[:id]}
+
               @page = page
               @total = @admin_user.visible_occurrences.count
 
@@ -558,6 +561,9 @@ module Sinatra
               @admin_user = find_user(params[:id])
               @helped_user = find_user(params[:id2])
 
+              candidate_agents = candidate_agents(@admin_user)
+              @user_agent_ids = candidate_agents.map{|a| a[:id]}
+
               @page = page
               @sort = params[:sort] || "desc"
               @order = params[:order] || "created"
@@ -626,15 +632,15 @@ module Sinatra
               @order = params[:order] || nil
 
               @admin_user = find_user(params[:id])
+              candidate_agents = candidate_agents(@admin_user)
+              @user_agent_ids = candidate_agents.map{|a| a[:id]}
 
               filter_instances
 
               if @agent
-                id_scores = [{ id: @agent.id, score: 3 }]
-                occurrence_ids = occurrences_by_score(id_scores, @admin_user)
+                occurrence_ids = occurrences_by_score([{ id: @agent.id, score: 3 }], @admin_user)
               else
-                id_scores = candidate_agents(@admin_user)
-                occurrence_ids = occurrences_by_score(id_scores, @admin_user)
+                occurrence_ids = occurrences_by_score(candidate_agents, @admin_user)
               end
 
               specimen_pager(occurrence_ids.uniq)
@@ -767,6 +773,9 @@ module Sinatra
               if !@article
                 halt 404
               end
+
+              candidate_agents = candidate_agents(@admin_user)
+              @user_agent_ids = candidate_agents.map{|a| a[:id]}
 
               @page = page
               cited_specimens = @admin_user.cited_specimens_by_article(@article.id)
