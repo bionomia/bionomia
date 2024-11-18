@@ -85,14 +85,16 @@ module Bionomia
     private
 
     def make_gzip
-      csv_file = File.join(@directory, "bionomia-public-claims.csv")
+=begin
+      # Dammit this only works with the mysql2 gem; the trilogy client has no option to stream
       query = UserOccurrence.joins(:user)
                           .select(:occurrence_id, :action, :wikidata, :orcid)
                           .where(user_occurrences: { visible: true })
-                          .where(users: {is_public: true })
+                          .where(users: { is_public: true })
                           .to_sql
-      db = ActiveRecord::Base.connection.instance_variable_get(:@connection)
+      db = ActiveRecord::Base.connection.instance_variable_get(:@raw_connection)
       rows = db.query(query, stream: true, cache_rows: false)
+      csv_file = File.join(@directory, "bionomia-public-claims.csv")
       CSV.open(csv_file, 'w') do |csv|
         csv << ["Subject", "Predicate", "Object"]
         rows.each do |row|
@@ -110,6 +112,33 @@ module Bionomia
             csv << ["https://gbif.org/occurrence/#{row[0]}", action, user]
           end
         end
+      end
+=end
+
+      csv_file = File.join(@directory, "bionomia-public-claims.csv")
+      CSV.open(csv_file, 'w') do |csv|
+        csv << ["Subject", "Predicate", "Object"]
+        UserOccurrence.joins(:user)
+          .select(:id, :occurrence_id, :action, :wikidata, :orcid)
+          .where(user_occurrences: { visible: true })
+          .where(users: { is_public: true })
+          .find_in_batches(batch_size: 10_000) do |group|
+            group.each do |row|
+              if row.wikidata
+                user = "http://www.wikidata.org/entity/#{row.wikidata}"
+              elsif row.orcid
+                user = "https://orcid.org/#{row.orcid}"
+              end
+              row.action.split(",").each do |item|
+                if item.strip == "recorded"
+                  action = "http://rs.tdwg.org/dwc/iri/recordedBy"
+                elsif item.strip == "identified"
+                  action = "http://rs.tdwg.org/dwc/iri/identifiedBy"
+                end
+                csv << ["https://gbif.org/occurrence/#{row.occurrence_id}", action, user]
+              end
+            end
+          end
       end
 
       gzip_file = File.join(@directory, "#{File.basename(csv_file, ".csv")}.csv.gz")
