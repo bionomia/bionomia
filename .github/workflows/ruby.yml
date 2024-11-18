@@ -68,8 +68,8 @@ jobs:
           RACK_ENV=test bundle exec rake db:create:all
           RACK_ENV=test bundle exec rake db:schema:load
 
-    - name: Start Elasticsearch
-      uses: ./elasticsearch
+    - name: Runs Elasticsearch
+      uses: elastic/elastic-github-actions/elasticsearch@masters
       with:
         security-enabled: false
         stack-version: ${{ matrix.elasticsearch }}
