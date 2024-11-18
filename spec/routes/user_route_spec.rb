@@ -1,4 +1,19 @@
 describe "Bionomia User Route" do
+  before(:all) do
+    index = ::Bionomia::ElasticAgent.new
+    index.create_index if !index.exists?
+    @agent = Agent.create(given: "Test", family: "Test", unparsed: "")
+    index.add(@agent)
+  end
+
+  after(:all) do
+    index = ::Bionomia::ElasticAgent.new
+    if index.exists? && @agent
+      index.delete(@agent)
+      @agent.destroy
+    end
+  end
+
   before(:each) do
     @user = User.new({ given: "John", family: "Smith", other_names: "Jack", is_public: true })
     @user.skip_callbacks = true

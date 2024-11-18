@@ -21,6 +21,10 @@ module Bionomia
       }
     end
 
+    def exists?
+      client.indices.exists index: index
+    end
+
     def count(body: {})
       response = client.count index: index, body: body
       response["count"]
@@ -38,6 +42,10 @@ module Bionomia
 
     def refresh_index
       client.indices.refresh index: index
+    end
+
+    def ping
+      client.ping
     end
 
     def bulk(batch)
