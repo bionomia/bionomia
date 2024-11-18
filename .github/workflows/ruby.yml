@@ -69,7 +69,7 @@ jobs:
           RACK_ENV=test bundle exec rake db:schema:load
 
     - name: Runs Elasticsearch
-      uses: elastic/elastic-github-actions/elasticsearch@masters
+      uses: elastic/elastic-github-actions/elasticsearch@master
       with:
         security-enabled: false
         stack-version: ${{ matrix.elasticsearch }}
