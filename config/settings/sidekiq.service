@@ -57,6 +57,7 @@ Type=notify
 WatchdogSec=10
 
 Environment=RACK_ENV=production
+Environment=RUBY_YJIT_ENABLE=true
 
 WorkingDirectory=/var/www/bionomia
 # If you use rbenv:

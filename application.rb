@@ -39,11 +39,9 @@ class BIONOMIA < Sinatra::Base
   Pagy::DEFAULT[:overflow] = :last_page
 
   Sidekiq.configure_server do |config|
-    size = Settings.redis_url.include?("localhost") ? 120 : 2
     config.redis = { 
       url: Settings.redis_url,
-      network_timeout: 5,
-      size: size,
+      timeout: 15,
       ssl_params: {
         verify_mode: OpenSSL::SSL::VERIFY_NONE
       }
@@ -52,11 +50,9 @@ class BIONOMIA < Sinatra::Base
   end
   
   Sidekiq.configure_client do |config|
-    size = Settings.redis_url.include?("localhost") ? 120 : 2
-    config.redis = { 
+    config.redis = {
       url: Settings.redis_url,
-      network_timeout: 5,
-      size: size,
+      timeout: 15,
       ssl_params: {
         verify_mode: OpenSSL::SSL::VERIFY_NONE
       }

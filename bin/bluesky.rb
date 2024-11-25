@@ -23,7 +23,7 @@ if options[:holotype]
   occurrences = Occurrence.where(typeStatus: 'holotype')
                           .where(hasImage: true)
                           .where("eventDate_processed_year > 1800 and eventDate_processed_month = ? and eventDate_processed_day = ?", date.month, date.day)
-                          .limit(100)
+                          .limit(50)
                           .pluck(:id)
   uo = UserOccurrence.where(occurrence_id: occurrences)
                      .where(action: ["recorded", "recorded,identified", "identified,recorded"])
