@@ -8,6 +8,7 @@ Sidekiq::Web.use Rack::Session::Cookie, key: 'rack.session',
                            path: '/',
                            secret: Settings.orcid.key * 4,
                            domain: Settings.cookie_domain,
+                           expire_after: 2592000,
                            httpdonly: true,
                            same_site: :lax
 Sidekiq::Web.use Rack::Protection::AuthenticityToken

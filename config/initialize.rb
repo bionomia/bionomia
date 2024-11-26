@@ -22,6 +22,7 @@ module Sinatra
                                      path: '/',
                                      secret: Settings.orcid.key * 4,
                                      domain: Settings.cookie_domain,
+                                     expire_after: 2592000,
                                      httpdonly: true,
                                      secure: secure,
                                      same_site: :lax
