@@ -9,8 +9,10 @@ timeout: 5000
 helping_download_limit: 10000
 base_url: 'https://bionomia.local'
 api_url: 'https://api.bionomia.local'
-redis_url: 'redis://192.168.2.4:6379/0'
 cookie_domain: '.bionomia.local'
+redis:
+  url: 'redis://localhost:6379/0'
+  size: 10
 google:
   analytics: ''
   api_key: ''
