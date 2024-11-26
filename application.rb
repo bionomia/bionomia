@@ -41,6 +41,7 @@ class BIONOMIA < Sinatra::Base
   Sidekiq.configure_server do |config|
     config.redis = { 
       url: Settings.redis_url,
+      size: (Settings.redis_url.include?("localhost") ? 120 : 2),
       timeout: 15,
       ssl_params: {
         verify_mode: OpenSSL::SSL::VERIFY_NONE
@@ -52,6 +53,7 @@ class BIONOMIA < Sinatra::Base
   Sidekiq.configure_client do |config|
     config.redis = {
       url: Settings.redis_url,
+      size: (Settings.redis_url.include?("localhost") ? 120 : 2),
       timeout: 15,
       ssl_params: {
         verify_mode: OpenSSL::SSL::VERIFY_NONE
