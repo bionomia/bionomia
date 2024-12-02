@@ -5,9 +5,9 @@
       Application.init();
     });
 - content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class:"mr-auto p-2"}
-      %h1{class:"h2"} How it Works
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2 How it Works
 
 %p
   Bionomia is developed and maintained by
@@ -44,10 +44,10 @@
 
 %h4 Integration with GBIF
 
-%div{class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
+.media.mb-3.mt-3.d-flex.flex-wrap.flex-column.flex-md-row
   %a{href:"https://gbif.org"}
-    %img{class:"mb-3 mr-3", src:"/images/gbif-logo.jpg", alt:"GBIF logo"}
-  %div{class:"media-body"}
+    %img.mb-3.mr-3{src:"/images/gbif-logo.jpg", alt:"GBIF logo"}
+  .media-body
     %p
       Approximately #{KeyValue.get("gbif_download_count")}
       %a{href: "#{KeyValue.get("gbif_download_doi")}"} specimen records
@@ -74,10 +74,10 @@
 
 %h4 Integration with Wikidata
 
-%div{class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
+.media.mb-3.mt-3.d-flex.flex-wrap.flex-column.flex-md-row
   %a{href:"https://www.wikidata.org"}
-    %img{class:"mb-3 mr-3", src:"/images/wikidata-logo.png", alt:"Wikidata logo"}
-  %div{class:"media-body"}
+    %img.mb-3.mr-3{src:"/images/wikidata-logo.png", alt:"Wikidata logo"}
+  .media-body
     %p
       Synchrony with
       %a{href:"https://www.wikidata.org"} wikidata
@@ -106,17 +106,17 @@
       %li
         a Scribe can refresh on demand
 
-    %p{class:"small"}
+    %p.small
       Example SPARQL queries above are limited to
       %em Entomologists of the World (P5370)
       but all the watched properties are used in production
 
 %h4 Integration with ORCID
 
-%div{class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
+.media.mb-3.mt-3.d-flex.flex-wrap.flex-column.flex-md-row
   %a{href:"https://orcid.org"}
-    %img{class:"mb-3 mr-3", src:"/images/orcid-logo.png", alt:"ORCID logo"}
-  %div{class:"media-body"}
+    %img.mb-3.mr-3{src:"/images/orcid-logo.png", alt:"ORCID logo"}
+  .media-body
     %p
       Synchrony with
       %a{href: "https://orcid.org"} ORCID
@@ -145,10 +145,10 @@
 
 %h4 Integration with Zenodo
 
-%div{class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
+.media.mb-3.mt-3.d-flex.flex-wrap.flex-column.flex-md-row
   %a{href:"https://zenodo.org/communities/bionomia"}
-    %img{class:"mb-3 mr-3", src:"/images/zenodo-logo.png", alt:"Zenodo logo"}
-  %div{class:"media-body"}
+    %img.mb-3.mr-3{src:"/images/zenodo-logo.png", alt:"Zenodo logo"}
+  .media-body
     %p
       From the settings panel in your account, you may connect with
       %a{href:"https://zenodo.org/"} Zenodo

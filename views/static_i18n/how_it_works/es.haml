@@ -5,14 +5,14 @@
       Application.init();
     });
 - content_for :jumbotron do
-  %div{class:"jumbotron jumbotron-fluid d-flex flex-wrap"}
-    %div{class:"mr-auto p-2"}
-      %h1{class:"h2"} Como funciona
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2 Como funciona
 
 %p
   Bionomía es desarrollada y mantenida por
   %a{href:"https://orcid.org/0000-0001-7618-5230"}
-    %i{class:"fab fa-orcid"}
+    %i.fab.fa-orcid
     David P. Shorthouse
   utilizando datos de especímenes descargados periódicamente de la
   %a{href: "https://gbif.org"} Global Biodiversity Information Facility
@@ -45,10 +45,10 @@
 
 %h4 Integración con GBIF
 
-%div{class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
+.media.mb-3.mt-3.d-flex.flex-wrap.flex-column.flex-md-row
   %a{href:"https://gbif.org"}
-    %img{class:"mb-3 mr-3", src:"/images/gbif-logo.jpg", alt:"GBIF logo"}
-  %div{class:"media-body"}
+    %img.mb-3.mr-3{src:"/images/gbif-logo.jpg", alt:"GBIF logo"}
+  .media-body
     %p
       Approximadamente #{KeyValue.get("gbif_download_count")}
       %a{href: "#{KeyValue.get("gbif_download_doi")}"} registros de especímenes
@@ -75,10 +75,10 @@
 
 %h4 Integración con Wikidata
 
-%div{class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
+.media.mb-3.mt-3.d-flex.flex-wrap.flex-column.flex-md-row
   %a{href:"https://www.wikidata.org"}
-    %img{class:"mb-3 mr-3", src:"/images/wikidata-logo.png", alt:"Wikidata logo"}
-  %div{class:"media-body"}
+    %img.mb-3.mr-3{src:"/images/wikidata-logo.png", alt:"Wikidata logo"}
+  .media-body
     %p
       La sincronización con
       %a{href:"https://www.wikidata.org"} Wikidata
@@ -107,17 +107,17 @@
       %li
         un anotador puede actualizar a solicitud en cualquier momento
 
-    %p{class:"small"}
+    %p.small
       Las consultas SPARQL de ejemplo anteriores están limitadas a
       %em Entomólogos del mundo (P5370)
       pero todas las propiedades observadas se utilizan en producción
 
 %h4 Integración con ORCID
 
-%div{class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
+.media.mb-3.mt-3.d-flex.flex-wrap.flex-column.flex-md-row
   %a{href:"https://orcid.org"}
-    %img{class:"mb-3 mr-3", src:"/images/orcid-logo.png", alt:"ORCID logo"}
-  %div{class:"media-body"}
+    %img.mb-3.mr-3{src:"/images/orcid-logo.png", alt:"ORCID logo"}
+  .media-body
     %p
       La sincronización con
       %a{href: "https://orcid.org"} ORCID
@@ -146,10 +146,10 @@
 
 %h4 Integración con Zenodo
 
-%div{class:"media mb-3 mt-3 d-flex flex-wrap flex-column flex-md-row"}
+.media.mb-3.mt-3.d-flex.flex-wrap.flex-column.flex-md-row
   %a{href:"https://zenodo.org/communities/bionomia"}
-    %img{class:"mb-3 mr-3", src:"/images/zenodo-logo.png", alt:"Zenodo logo"}
-  %div{class:"media-body"}
+    %img.mb-3.mr-3{src:"/images/zenodo-logo.png", alt:"Zenodo logo"}
+  .media-body
     %p
       Desde el panel de configuración de su cuenta, usted puede conectarse con
       %a{href:"https://zenodo.org/"} Zenodo
