@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: If you use this software, please cite it using these metadata.
+title: Bionomia application code
+abstract: Link natural history specimens to the world's collectors. The application lives at https://bionomia.net.
+authors:
+  - family-names: Shorthouse
+    given-names: David
+    orcid: "https://orcid.org/0000-0001-7618-5230"
+date-released: "2024-12-06"
+license: MIT
+repository-code: "https://github.com/bionomia/bionomia"
