@@ -150,10 +150,10 @@ families.select("family", "gbifIDsFamily").
     csv("families-csv")
 
 // Best to drop indices then recreate later
-// ALTER TABLE `occurrences` DROP KEY `typeStatus_idx`, DROP KEY `index_occurrences_on_datasetKey_occurrenceID`, DROP KEY `country_code_idx`, DROP KEY `eventDate_processed_idx`, DROP KEY `dateIdentified_processed_idx`;
+// ALTER TABLE `occurrences` DROP KEY `index_occurrences_on_datasetKey_occurrenceID`, DROP KEY `country_code_idx`, DROP KEY `eventDate_processed_idx`, DROP KEY `dateIdentified_processed_idx`;
 
 occurrences.write.mode("append").jdbc(url, "occurrences", prop)
 
 // Recreate indices
-// ALTER TABLE `occurrences` ADD KEY `typeStatus_idx` (`typeStatus`(50), `hasImage`), ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`, `occurrenceID`(36)), ADD KEY `country_code_idx` (`countryCode`), ADD KEY `eventDate_processed_idx` (`eventDate_processed_year`,`eventDate_processed_month`,`eventDate_processed_day`), ADD KEY `dateIdentified_processed_idx` (`dateIdentified_processed_year`,`dateIdentified_processed_month`,`dateIdentified_processed_day`);
+// ALTER TABLE `occurrences` ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`, `occurrenceID`(36)), ADD KEY `country_code_idx` (`countryCode`), ADD KEY `eventDate_processed_idx` (`typeStatus`(50),`eventDate_processed_month`,`eventDate_processed_day`,`eventDate_processed_year`), ADD KEY `dateIdentified_processed_idx` (`dateIdentified_processed_month`,`dateIdentified_processed_day`,`dateIdentified_processed_year`);
 ```

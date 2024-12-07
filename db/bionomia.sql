@@ -44,8 +44,8 @@ CREATE TABLE `article_occurrences` (
 
 CREATE TABLE `bulk_attribution_queries` (
   `id` bigint UNSIGNED NOT NULL,
-  `user_id` int NOT NULL,
-  `created_by` int NOT NULL,
+  `user_id` int UNSIGNED NOT NULL,
+  `created_by` int UNSIGNED NOT NULL,
   `query` text,
   `agent_name` varchar(255) DEFAULT NULL,
   `not_them` tinyint(1) DEFAULT NULL,
@@ -124,7 +124,7 @@ CREATE TABLE `occurrences` (
   `eventDate_processed_year` int GENERATED ALWAYS AS (year(`eventDate_processed`)) STORED,
   `eventDate_processed_month` int GENERATED ALWAYS AS (month(`eventDate_processed`)) STORED,
   `eventDate_processed_day` int GENERATED ALWAYS AS (dayofmonth(`eventDate_processed`)) STORED,
-  `hasImage` tinyint(1) DEFAULT NULL,
+  `hasImage` tinyint(1) DEFAULT '0',
   `recordedByID` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `identifiedByID` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=COMPRESSED;
@@ -259,7 +259,8 @@ ALTER TABLE `agents`
   ADD UNIQUE KEY `full_name` (`family`,`given`,`unparsed`) USING BTREE;
 
 ALTER TABLE `agent_jobs`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `agent_idx` (`agents`(100));
 
 ALTER TABLE `articles`
   ADD PRIMARY KEY (`id`),
@@ -293,12 +294,11 @@ ALTER TABLE `messages`
   ADD KEY `index_messages_on_recipient_id` (`recipient_id`);
 
 ALTER TABLE `occurrences`
-  ADD PRIMARY KEY (`gbifID`) USING BTREE,
-  ADD KEY `typeStatus_idx` (`typeStatus`(50),`hasImage`),
+  ADD PRIMARY KEY (`gbifID`),
   ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`,`occurrenceID`(36)),
   ADD KEY `country_code_idx` (`countryCode`),
-  ADD KEY `eventDate_processed_idx` (`eventDate_processed_year`,`eventDate_processed_month`,`eventDate_processed_day`),
-  ADD KEY `dateIdentified_processed_idx` (`dateIdentified_processed_year`,`dateIdentified_processed_month`,`dateIdentified_processed_day`);
+  ADD KEY `dateIdentified_processed_idx` (`dateIdentified_processed_month`,`dateIdentified_processed_day`,`dateIdentified_processed_year`) USING BTREE,
+  ADD KEY `eventDate_processed_idx` (`typeStatus`(50),`eventDate_processed_month`,`eventDate_processed_day`,`eventDate_processed_year`) USING BTREE;
 
 ALTER TABLE `occurrence_agents`
   ADD PRIMARY KEY (`id`),
