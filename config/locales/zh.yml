@@ -671,6 +671,7 @@ zh:
   specimen:
     scientific_name: 学名
     collected_by: 收藏者
+    linked_collected_by: Linked Collected By
     identified_by: 鉴定员
     date_collected: 采集日期
     date_identified: 鉴定日期

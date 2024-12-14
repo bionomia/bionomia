@@ -671,6 +671,7 @@ de:
   specimen:
     scientific_name: Wissenschaftlicher Name
     collected_by: Gesammelt von
+    linked_collected_by: Linked Collected By
     identified_by: Identifiziert von
     date_collected: Sammeldatum
     date_identified: Identifikationsdatum
