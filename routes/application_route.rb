@@ -122,12 +122,14 @@ module Sinatra
             if params[:date]
               @date = DateTime.parse(params[:date]) rescue @date
             end
-            occurrences = Occurrence.where(typeStatus: 'holotype')
+            occurrences = Occurrence.joins(:collectors)
+                                    .includes(:collectors)
+                                    .where(typeStatus: 'holotype')
                                     .where(hasImage: true)
                                     .where("eventDate_processed_month = ? and eventDate_processed_day = ? and eventDate_processed_year > 1800", @date.month, @date.day)
-                                    .limit(50)
+                                    .order(eventDate_processed: :desc)
             
-            @pagy, @results = pagy_countless(occurrences, limit: 50, size: 50)
+            @pagy, @results = pagy_countless(occurrences)
             haml :'on_this_day/collected', locals: { active_tab: "specimens" }
           end
 

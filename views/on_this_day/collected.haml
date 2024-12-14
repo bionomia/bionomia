@@ -45,22 +45,19 @@
 - if @pagy.count == 0
   .alert.alert-warning.tiny-margins{role: "alert"}= I18n.t('on_this_day.no_types_alert', date: @date.strftime("%B %-d"))
 - else
-  .alert.alert-info.tiny-margins{role: "alert"}= I18n.t('on_this_day.limit_alert')
 
-  .table-responsive-lg.overflow-auto
+  .table-responsive-lg.overflow-auto.mt-3
     %table.table.table-hover.table-sm
       %thead.thead-light
         %tr
           %th.text-nowrap{scope: "col"}= I18n.t('specimen.scientific_name')
           %th.text-nowrap{scope: "col"}= I18n.t('specimen.collected_by')
-          %th.text-nowrap{scope: "col"}= I18n.t('specimen.identified_by')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.collected_by')
           %th.text-nowrap{scope: "col"}= I18n.t('specimen.date_collected')
-          %th.text-nowrap{scope: "col"}= I18n.t('specimen.date_identified')
           %th.text-nowrap{scope: "col"}= I18n.t('specimen.family')
           %th.text-nowrap{scope: "col"}= I18n.t('specimen.institution')
           %th.text-nowrap{scope: "col"}= I18n.t('specimen.catalog_number')
           %th.text-nowrap{scope: "col"}= I18n.t('specimen.type_status')
-          %th.text-nowrap{scope: "col"}= I18n.t('specimen.basis_record')
 
       %tbody
         - @results.each do |o|
@@ -73,11 +70,24 @@
               - if o.has_image?
                 %i.fa-solid.fa-image.ml-1.text-muted{"data-toggle":"popover", "data-gbifid":"#{o.id}"}
             %td #{h(o.recordedBy)}
-            %td #{h(o.identifiedBy)}
+            %td
+              - o.collectors.each do |u|
+                .pr-1
+                  - if u.orcid
+                    %i.fa-brands.fa-orcid.fa-fw
+                    %a{href: "https://orcid.org/#{u.orcid}"}
+                      #{u.viewname}
+                  - else
+                    %img{src: "/images/wikidata_18x12.svg", alt:"Wikidata iD"}
+                    %a{href: "http://www.wikidata.org/entity/#{u.wikidata}"}
+                      #{u.viewname}
+ 
             %td #{h(o.eventDate || o.year)}
-            %td #{h(o.dateIdentified)}
             %td #{h(o.family)}
             %td #{h(o.institutionCode)}
             %td #{h(o.catalogNumber)}
             %td #{h(o.typeStatus)}
-            %td #{h(o.basisOfRecord)}
+
+  - if @pagy.pages > 1
+    .overflow-auto
+      = pagy_bootstrap_nav(@pagy)
