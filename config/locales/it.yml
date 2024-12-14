@@ -671,6 +671,7 @@ it:
   specimen:
     scientific_name: Scientific Name
     collected_by: Collected By
+    linked_collected_by: Linked Collected By
     identified_by: Identified By
     date_collected: Date Collected
     date_identified: Date Identified
