@@ -71,11 +71,13 @@ module Bionomia
             results.each do |result|
               begin
                 if result[:identifiers][:doi] && !result[:gbifDownloadKey].empty?
+                  occurrence_count = downloadkey_occurrences(keys: result[:gbifDownloadKey])
                   yielder << {
                     doi: result[:identifiers][:doi],
                     abstract: result[:abstract],
                     gbif_dois: result[:tags].map{ |d| d.sub("gbifDOI:","") if d[0..7] == "gbifDOI:" }.compact,
                     gbif_downloadkeys: result[:gbifDownloadKey],
+                    gbif_occurrence_count: occurrence_count,
                     created: result[:added]
                   }
                 end
@@ -88,6 +90,18 @@ module Bionomia
           offset += 200
         end
       end.lazy
+    end
+
+    def downloadkey_occurrences(keys:)
+      count = 0
+      keys.each do |key|
+        response = RestClient::Request.execute(
+          method: :get,
+          url: "#{Settings.gbif.api}occurrence/download/#{key}"
+        )
+        count += JSON.parse(response, :symbolize_names => true)[:totalRecords] rescue 0
+      end
+      count
     end
 
     def flush_irrelevant_entries(article_id: nil)
