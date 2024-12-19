@@ -113,4 +113,14 @@ namespace :db do
     end
   end
 
+  namespace :seed do
+    statements = [
+      "INSERT INTO key_values(k,v) VALUES ('off_datetime', NULL), ('off_duration', NULL), ('online_when', NULL)"
+    ]
+    ActiveRecord::Base.establish_connection(Settings.to_hash)
+    statements.each do |stmt|
+      ActiveRecord::Base.connection.execute(stmt)
+    end
+  end
+
 end
