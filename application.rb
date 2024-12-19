@@ -22,7 +22,7 @@ class BIONOMIA < Sinatra::Base
   set :protection, :except => [:json_csrf, :remote]
   set :strict_paths, false
 
-  offline_settings = KeyValue.mget(["off_datetime", "off_duration", "online_when"])
+  offline_settings = KeyValue.mget(["off_datetime", "off_duration", "online_when"]) rescue {}
   Settings.add_source!({
     off_datetime: offline_settings[:off_datetime],
     off_duration: offline_settings[:off_duration],
