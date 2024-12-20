@@ -15,7 +15,7 @@ class KeyValue < ActiveRecord::Base
   end
 
   def self.mget(keys)
-    where(k: keys).map{|a| { "#{a.k}": a.v}}.reduce(&:merge)
+    where(k: keys).map{|a| { "#{a.k}": a.v }}.reduce(&:merge) || {}
   end
 
 end
