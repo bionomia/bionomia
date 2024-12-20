@@ -58,7 +58,6 @@ namespace :elastic do
 end
 
 namespace :db do
-
   desc "Migrate the database"
   task(:migrate => :environment) do
     ActiveRecord::Base.logger = Logger.new(STDOUT)
@@ -114,13 +113,15 @@ namespace :db do
   end
 
   namespace :seed do
-    if ['0.0.0.0', '127.0.0.1', 'localhost'].include?(Settings[:host].strip)
-      statements = [
-        "INSERT INTO key_values(k,v) VALUES ('off_datetime', NULL), ('off_duration', NULL), ('online_when', NULL)"
-      ]
-      ActiveRecord::Base.establish_connection(Settings.to_hash)
-      statements.each do |stmt|
-        ActiveRecord::Base.connection.execute(stmt)
+    task(:all) do
+      if ['0.0.0.0', '127.0.0.1', 'localhost'].include?(Settings[:host].strip)
+        statements = [
+          "INSERT INTO key_values(k,v) VALUES ('off_datetime', NULL), ('off_duration', NULL), ('online_when', NULL)"
+        ]
+        ActiveRecord::Base.establish_connection(Settings.to_hash)
+        statements.each do |stmt|
+          ActiveRecord::Base.connection.execute(stmt)
+        end
       end
     end
   end

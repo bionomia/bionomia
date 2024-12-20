@@ -67,7 +67,7 @@ jobs:
       run: |
           RACK_ENV=test bundle exec rake db:create:all
           RACK_ENV=test bundle exec rake db:schema:load
-          RACK_ENV=test bundle exec rake db:seed
+          RACK_ENV=test bundle exec rake db:seed:all
 
     - name: Runs Elasticsearch
       uses: elastic/elastic-github-actions/elasticsearch@master
