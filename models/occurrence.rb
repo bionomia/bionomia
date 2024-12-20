@@ -54,16 +54,19 @@ class Occurrence < ActiveRecord::Base
         url: "https://api.gbif.org/v1/occurrence/#{id}"
       )
       result = JSON.parse(response, :symbolize_names => true)
-      api = "https://api.gbif.org/v1/image/unsafe/"
-      result[:media].map{|a| {
-            original: api + CGI.escape(a[:identifier]),
-            small: "#{api}fit-in/250x/#{CGI.escape(a[:identifier])}",
-            large: "#{api}fit-in/750x/#{CGI.escape(a[:identifier])}",
+      api = "https://api.gbif.org/v1/image/cache/fit-in/"
+      result[:media].map do |a|
+        if a[:type] == "StillImage" && a[:identifier]
+          md5 = Digest::MD5.hexdigest(a[:identifier])
+          {
+            original: "https://api.gbif.org/v1/image/unsafe/" + CGI.escape(a[:identifier]),
+            small: "#{api}250x/occurrence/#{id}/media/#{md5}",
+            large: "#{api}750x/occurrence/#{id}/media/#{md5}",
             license: "#{a[:license]}",
             rightsHolder: "#{a[:rightsHolder]}"
-            } if a[:type] == "StillImage"
           }
-          .compact
+        end
+      end.compact
     rescue
       []
     end

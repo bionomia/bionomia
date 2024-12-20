@@ -68,11 +68,13 @@ namespace :db do
   namespace :drop do
     task(:all) do
       if ['0.0.0.0', '127.0.0.1', 'localhost'].include?(Settings[:host].strip)
+
         Settings.add_source!({
           ssl_mode: Trilogy::SSL_PREFERRED_NOVERIFY,
           tls_min_version: Trilogy::TLS_VERSION_12
         })
         Settings.reload!
+
         database = Settings.delete(:database)
         ActiveRecord::Base.establish_connection(Settings.to_hash)
         ActiveRecord::Base.connection.execute("drop database if exists #{database}")
@@ -83,11 +85,13 @@ namespace :db do
   namespace :create do
     task(:all) do
       if ['0.0.0.0', '127.0.0.1', 'localhost'].include?(Settings[:host].strip)
+
         Settings.add_source!({
           ssl_mode: Trilogy::SSL_PREFERRED_NOVERIFY,
           tls_min_version: Trilogy::TLS_VERSION_12
         })
         Settings.reload!
+
         database = Settings.delete_field(:database)
         ActiveRecord::Base.establish_connection(Settings.to_hash)
         ActiveRecord::Base.connection.execute("create database if not exists #{database}")
@@ -130,6 +134,7 @@ namespace :db do
           tls_min_version: Trilogy::TLS_VERSION_12
         })
         Settings.reload!
+
         ActiveRecord::Base.establish_connection(Settings.to_hash)
         statements.each do |stmt|
           ActiveRecord::Base.connection.execute(stmt)
