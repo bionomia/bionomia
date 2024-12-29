@@ -37,19 +37,25 @@ cs:
     lede:
       unit:
         one: "surový řetězec z analyzovaných jmen sběratelů a určovatelů v datech exemplářů z GBIF"
+        few: "raw strings from parsed collector and determiner names in specimen data from GBIF"
+        many: "raw strings from parsed collector and determiner names in specimen data from GBIF"
         other: "surové řetězce z analyzovaných jmen sběratelů a určovatelů v datech exemplářů z GBIF"
     search_none: "Pro %{searched} nebyl nalezen žádný agentní řetězec"
     search_count:
       unit:
         one: "výsledek hledání pro"
+        few: "search results for"
+        many: "search results for"
         other: "výsledky hledání pro"
     warning: "UPOZORNĚNÍ:"
     warning_statement: Na rozdíl od všech ostatních URL na tomto webu jsou URL pro agentní řetězce nespolehlivé pro propojení, protože budou každých několik týdnů ukazovat na jiné výsledky
-    agent_name_title: Exempláře %{agent_name}
+    agent_name_title: "Exempláře %{agent_name}"
     agent_lede: Surový řetězec z analyzovaných jmen sběratelů a určovatelů v datech přírodovědných exemplářů
     found_statement:
       unit:
         one: "exemplář nalezen. Ne všechny sloupce jsou zobrazeny."
+        few: "specimens found. Not all columns are shown."
+        many: "specimens found. Not all columns are shown."
         other: "exempláře nalezeny. Ne všechny sloupce jsou zobrazeny."
     search_html: "Hledat %{agent_link} osobu a pomoci přiřadit jejich exempláře."
     example_agents: Náhodné vzorky nebo výsledky
@@ -62,11 +68,15 @@ cs:
     articles_lede:
       unit:
         one: "článek citovaný staženími z GBIF"
+        few: "articles that cited downloads from GBIF"
+        many: "articles that cited downloads from GBIF"
         other: "články citující stažení z GBIF"
     no_claims_alert: Lidé dosud neprohlásili ani nebyli přiřazeni exempláře zastoupené v datech stažených z GBIF na podporu tohoto článku
     claims_alert:
       unit:
         one: "osoba sbírala nebo určovala exempláře zahrnuté v datech stažených z GBIF na podporu tohoto článku"
+        few: "people collected or identified specimens included in data downloaded from GBIF in support of this article"
+        many: "people collected or identified specimens included in data downloaded from GBIF in support of this article"
         other: "lidé sbírali nebo určovali exempláře zahrnuté v datech stažených z GBIF na podporu tohoto článku"
     placeholder: "Evoluce a systematika..."
     people: Lidé
@@ -79,6 +89,8 @@ cs:
     agent_strings_alert:
       unit:
         one: "surový řetězec z analyzovaných jmen sběratelů a určovatelů v datech exemplářů stažených z GBIF na podporu tohoto článku"
+        few: "raw strings from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article"
+        many: "raw strings from parsed collector and determiner names in specimen data downloaded from GBIF in support of this article"
         other: "surové řetězce z analyzovaných jmen sběratelů a určovatelů v datech exemplářů stažených z GBIF na podporu tohoto článku"
     claims: nároky
     specimens: exempláře
@@ -86,6 +98,8 @@ cs:
     search_alert:
       unit:
         one: "výsledek hledání nalezen pro"
+        few: "search results found for"
+        many: "search results found for"
         other: "výsledky hledání nalezeny pro"
   card:
     collected: "Sbíráno %{family}"
@@ -93,12 +107,18 @@ cs:
     identified_collected: "Sbíráno %{collected} a určeno %{identified}"
     claimed:
       one: exemplář nárokován
+      few: specimens claimed
+      many: specimens claimed
       other: exempláře nárokovány
     attributed:
       one: exemplář přiřazen
+      few: specimens attributed
+      many: specimens attributed
       other: exempláře přiřazeny
     helped:
       one: osoba pomohla
+      few: people helped
+      many: people helped
       other: lidé pomohli
   charts:
     year: Rok
@@ -124,10 +144,14 @@ cs:
     lede:
       unit:
         one: "datová sada z GBIF"
+        few: "datasets from GBIF"
+        many: "datasets from GBIF"
         other: "datové sady z GBIF"
     identifiers_alert:
       unit:
         one: "datová sada s obsahem v dwc:recordedByID nebo dwc:identifiedByID"
+        few: "datasets with content in dwc:recordedByID or dwc:identifiedByID"
+        many: "datasets with content in dwc:recordedByID or dwc:identifiedByID"
         other: "datové sady s obsahem v dwc:recordedByID nebo dwc:identifiedByID"
     placeholder: Motýli Brazílie
     people: Lidé
@@ -143,26 +167,37 @@ cs:
     agents_alert:
       unit:
         one: "surový řetězec z analyzovaných jmen sběratelů a určovatelů v datech exemplářů zahrnutých v této datové sadě"
+        few: "raw strings from parsed collector and determiner names in specimen data included in this dataset"
+        many: "raw strings from parsed collector and determiner names in specimen data included in this dataset"
         other: "surové řetězce z analyzovaných jmen sběratelů a určovatelů v datech exemplářů zahrnutých v této datové sadě"
     agents_alert_unclaimed:
       unit:
         one: "surový řetězec z analyzovaných jmen sběratelů a určovatelů v nepřiřazených datech exemplářů zahrnutých v této datové sadě"
+        few: "raw strings from parsed collector and determiner names in unattributed specimen data included in this dataset"
+        many: "raw strings from parsed collector and determiner names in unattributed specimen data included in this dataset"
         other: "surové řetězce z analyzovaných jmen sběratelů a určovatelů v nepřiřazených datech exemplářů zahrnutých v této datové sadě"
     none_found: "Pro %{searched} nebyly nalezeny žádné datové sady"
     search_found:
       unit:
         one: "výsledek hledání pro"
+        few: "search results for"
+        many: "search results for"
         other: "výsledky hledání pro"
     no_scribes_alert: Písaři dosud nepřiřadili exempláře sběratelům nebo určovatelům zastoupeným v této datové sadě
     scribes_alert:
       unit:
         one: "písař přiřadil exempláře sběratelům nebo určovatelům zastoupeným v této datové sadě"
+        few: "scribes attributed specimens to collectors or determiners represented in this dataset"
+        many: "scribes attributed specimens to collectors or determiners represented in this dataset"
+        other: "písaři přiřadili exempláře sběratelům nebo určovatelům zastoupeným v této datové sadě"
         other: "písaři přiřadili exempláře sběratelům nebo určovatelům zastoupeným v této datové sadě"
     people: Lidé
     no_users_alert: Lidé dosud neprohlásili ani nebyli přiřazeni exempláře zastoupené v této datové sadě
     users_alert:
       unit:
         one: "osoba prohlásila nebo byla přiřazena exempláře zastoupené v této datové sadě"
+        few: "people claimed or were attributed specimens represented in this dataset"
+        many: "people claimed or were attributed specimens represented in this dataset"
         other: "lidé prohlásili nebo byli přiřazeni exempláře zastoupené v této datové sadě"
     timeline: Časová osa
     none_collected_timeline: "Nikdo nesbíral a neuváděl datum sběru"
@@ -177,8 +212,34 @@ cs:
       long: "%B %d, %Y"
       year: "%Y"
       century: "%C. století"
-    month_names: [~, Leden, Únor, Březen, Duben, Květen, Červen, Červenec, Srpen, Září, Říjen, Listopad, Prosinec]
-    abbr_month_names: [~, Led, Úno, Bře, Dub, Kvě, Čer, Čvc, Srp, Zář, Říj, Lis, Pro]
+    month_names:
+      - null
+      - Leden
+      - Únor
+      - Březen
+      - Duben
+      - Květen
+      - Červen
+      - Červenec
+      - Srpen
+      - Září
+      - Říjen
+      - Listopad
+      - Prosinec
+    abbr_month_names:
+      - null
+      - Led
+      - Úno
+      - Bře
+      - Dub
+      - Kvě
+      - Čer
+      - Čvc
+      - Srp
+      - Zář
+      - Říj
+      - Lis
+      - Pro
   denied:
     title: Zamítnuto
     not_allowed: Přístup zamítnut.
@@ -304,6 +365,8 @@ cs:
     upload_message:
       unit:
         one: "záznam byl zpracován. Existující nároky, pokud byly přítomny ve vašem nahrávání, byly přeskočeny."
+        few: "records were handled. Existing claims, if present in your upload, were skipped."
+        many: "records were handled. Existing claims, if present in your upload, were skipped."
         other: "záznamy byly zpracovány. Existující nároky, pokud byly přítomny ve vašem nahrávání, byly přeskočeny."
     help_question: "Chcete pomoci přiřadit exempláře k %{name}?"
     try_again: Zkuste to znovu.
@@ -322,6 +385,8 @@ cs:
     not_identified_for_name: "Exempláře nebyly sbírány %{name} a identifikovány %{other_name}."
     identified_for_count:
       one: "sbíraný exemplář"
+      few: "collected specimens"
+      many: "collected specimens"
       other: "sbírané exempláře"
     identifications_by: Identifikace od
     no_determiners_alert: Určovatelé dosud nebyli zaznamenáni.
@@ -330,6 +395,8 @@ cs:
     not_determiner_name: "Exempláře nebyly identifikovány %{name} a sbírány %{other_name}."
     identified_by_count:
       one: "identifikovaný exemplář"
+      few: "identified specimens"
+      many: "identified specimens"
       other: "identifikované exempláře"
     bulk_attribution: Hromadná přiřazení
     reclaim_ignored: Nárokovat ignorované
@@ -344,9 +411,13 @@ cs:
     add_orcid_wikidata: Přidat ORCID identifikátor nebo Wikidata Q číslo
     attribute_count:
       one: Pomozte přiřadit 1 exemplář.
+      few: Help attribute %{count} specimens.
+      many: Help attribute %{count} specimens.
       other: Pomozte přiřadit %{count} exemplářů.
     specimens_attributed_count:
       one: přiřazený exemplář
+      few: specimens attributed
+      many: specimens attributed
       other: přiřazené exempláře
     download: Stáhnout
     download_label: Stáhnout objevené záznamy
@@ -354,6 +425,8 @@ cs:
     choose_instructions_html: "Vyberte %{coll_img} sbíráno, %{det_img} identifikováno, nebo Obojí."
     search_count:
       one: "1 výsledek hledání pro %{search}"
+      few: "%{count} search results for %{search}"
+      many: "%{count} search results for %{search}"
       other: "%{count} výsledků hledání pro %{search}"
     make_public_yes: "Ano, zveřejnit"
     other_scribes: "Ostatní písaři také pomohli přiřadit exempláře %{user_name}:"
@@ -368,6 +441,8 @@ cs:
     add_someone_href: "přidat někoho"
     co_collected_count:
       one: "spolu-sbíraný exemplář"
+      few: "co-collected specimens"
+      many: "co-collected specimens"
       other: "spolu-sbírané exempláře"
     occurrence_title: Pomozte ostatním podle záznamu o exempláři
     occurrence: Exempláře
@@ -379,6 +454,8 @@ cs:
     bulk_json: "Krok 2: Vytvořte JSON výrok, kde všechny páry klíč:hodnota budou považovány za přesné, na velikosti písmen závislé shody vedle vašeho vybraného agentního řetězce, například: { \"institutionCode\" : \"CAN\", \"eventDate\" : [2020, 2021] } nebo { \"scientificName LIKE ?\":\"Bolbelasmus %\"}. Doporučená nejlepší praxe je zahrnout co nejvíce párů klíč:hodnota, jak je rozumné, aby se předešlo nesprávným přiřazením. Dostupné klíče jsou: %{keys}"
     bulk_count:
       one: "Celkem byl zpracován 1 záznam."
+      few: "A total of %{count} records were handled."
+      many: "A total of %{count} records were handled."
       other: "Celkem bylo zpracováno %{count} záznamů."
   home:
     tagline: Spojte přírodovědné exempláře se sběrateli světa.
@@ -463,9 +540,11 @@ cs:
   organization:
     organization_title: Organizace
     lede:
-     unit:
-       one: "organizace z ORCID účtů a Wikidata záznamů"
-       other: "organizace z ORCID účtů a Wikidata záznamů"
+      unit:
+        one: "organizace z ORCID účtů a Wikidata záznamů"
+        few: "organizations from ORCID accounts and Wikidata entries"
+        many: "organizations from ORCID accounts and Wikidata entries"
+        other: "organizace z ORCID účtů a Wikidata záznamů"
     placeholder: Kanadské muzeum přírody
     affiliation_none_alert: Publikace založené na exemplářích sbíraných nebo identifikovaných současným a předchozím personálem dosud nebyly zaznamenány GBIF
     affiliation_alert: "%{count} publikací použilo data o exemplářích stažená z GBIF založená na exemplářích sbíraných nebo identifikovaných současným a předchozím personálem během jejich působení v %{org_name}"
@@ -486,6 +565,8 @@ cs:
     search_alert:
       unit:
         one: "výsledek hledání pro"
+        few: "search results for"
+        many: "search results for"
         other: "výsledky hledání pro"
     current: Současní
     previous: Předchozí
@@ -495,10 +576,14 @@ cs:
     current_members_count:
       unit:
         one: současný člen
+        few: current members
+        many: current members
         other: současní členové
     past_members_count:
       unit:
         one: předchozí člen
+        few: past members
+        many: past members
         other: předchozí členové
     under_repair: Tato funkce je momentálně opravována pro lepší výkon.
   pagy:
@@ -543,6 +628,8 @@ cs:
     has_science:
       unit:
         one: "publikace použila vaše data o exemplářích stažené z GBIF"
+        few: "publications made use of your specimen data downloaded from GBIF"
+        many: "publications made use of your specimen data downloaded from GBIF"
         other: "publikace použily vaše data o exemplářích stažené z GBIF"
     identified_from: Identifikováno z
     collected_from: Sbíráno z
@@ -585,10 +672,14 @@ cs:
     no_specimens: Dosud jste nenárokovali žádné exempláře. Podívejte se na své kandidátní záznamy exemplářů na stránce Objeveno.
     candidate_count:
       one: Nalezen 1 exemplář.
+      few: "Found %{count} specimens."
+      many: "Found %{count} specimens."
       other: "Nalezeno %{count} exemplářů."
     latest_helped: "Naposledy v %{time}"
     attributed_count:
       one: "přiřazený exemplář"
+      few: "specimens attributed"
+      many: "specimens attributed"
       other: "přiřazené exempláře"
     attributions: Přiřazení provedena
     private_message_html: "Váš profil je soukromý. Nárokujte své %{specimens} a poté jej zveřejněte v %{settings}, abyste maximalizovali opětovné použití."
@@ -596,6 +687,8 @@ cs:
     try_again: Zkuste to znovu.
     upload_count:
       one: "Celkem byl zpracován 1 nahraný záznam."
+      few: "A total of %{count} records were handled."
+      many: "A total of %{count} records were handled."
       other: "Celkem bylo zpracováno %{count} záznamů."
     upload_skipped: Existující nároky, pokud byly přítomny ve vašem nahrávání, byly přeskočeny.
     upload_view: Zobrazit
@@ -608,6 +701,8 @@ cs:
     not_co_collector_name: "Exempláře nebyly sbírány spolu s %{name}."
     co_collected_count:
       one: "spolu-sbíraný exemplář"
+      few: "co-collected specimens"
+      many: "co-collected specimens"
       other: "spolu-sbírané exempláře"
     identified_for: Identifikováno pro
     no_identified_for_alert: Příjemci vašich určení dosud nebyli zaznamenáni.
@@ -616,6 +711,8 @@ cs:
     not_identified_for_name: "Exempláře nebyly sbírány %{name} a identifikované vámi."
     identified_for_count:
       one: "sbíraný exemplář"
+      few: "collected specimens"
+      many: "collected specimens"
       other: "sbírané exempláře"
     identifications_by: Identifikace od
     no_determiners_alert: Určovatelé vašich sbíraných exemplářů dosud nebyli zaznamenáni.
@@ -624,6 +721,8 @@ cs:
     not_determiner_name: "Exempláře, které jste sbírali, nebyly identifikovány %{name}."
     identified_by_count:
       one: "identifikovaný exemplář"
+      few: "identified specimens"
+      many: "identified specimens"
       other: "identifikované exempláře"
     zenodo_html: "Váš profil je propojen s %{zenodo} a vaše nároky jsou verzovány a archivovány."
     language: Preferovaný jazyk
@@ -641,6 +740,8 @@ cs:
     search_result_count:
       unit:
         one: "výsledek hledání pro"
+        few: "search results for"
+        many: "search results for"
         other: "výsledky hledání pro"
     list: Seznam
     gallery: Galerie
@@ -678,12 +779,16 @@ cs:
     lede:
       unit:
         one: "taxonomická rodina z dat exemplářů v GBIF"
+        few: "taxonomic Families from specimen data in GBIF"
+        many: "taxonomic Families from specimen data in GBIF"
         other: "taxonomické rodiny z dat exemplářů v GBIF"
     search_title: Taxonomické rodiny
     none_found: "Nebyly nalezeny žádné taxonomické rodiny pro %{searched}"
     search_found:
       unit:
         one: "výsledek hledání pro"
+        few: "search results for"
+        many: "search results for"
         other: "výsledky hledání pro"
     people: Lidé
     visualizations: Vizualizace
@@ -694,18 +799,26 @@ cs:
     number_collected:
       unit:
         one: "osoba sbírala exempláře z dat v GBIF"
+        few: "people collected specimens from data in GBIF"
+        many: "people collected specimens from data in GBIF"
         other: "lidé sbírali exempláře z dat v GBIF"
     number_identified:
       unit:
         one: "osoba identifikovala exempláře z dat v GBIF"
+        few: "people identified specimens from data in GBIF"
+        many: "people identified specimens from data in GBIF"
         other: "lidé identifikovali exempláře z dat v GBIF"
     number_agents:
       unit:
         one: "agentní řetězec z dat exemplářů v GBIF"
+        few: "agent strings from specimen data in GBIF"
+        many: "agent strings from specimen data in GBIF"
         other: "agentní řetězce z dat exemplářů v GBIF"
     number_agents_unclaimed:
       unit:
         one: "agentní řetězec má nepřiřazené záznamy exemplářů z dat v GBIF"
+        few: "agent strings have unclaimed specimen records from data in GBIF"
+        many: "agent strings have unclaimed specimen records from data in GBIF"
         other: "agentní řetězce mají nepřiřazené záznamy exemplářů z dat v GBIF"
     no_agents_unclaimed: Žádné záznamy exemplářů nejsou nepřiřazené nebo nepřidělené
     alphabetical: Abecední
@@ -743,6 +856,8 @@ cs:
     private_with_claims:
       unit:
         one: "exemplář byl nárokován nebo přiřazen, ale tento profil ještě nebyl zveřejněn."
+        few: "specimens were claimed or attributed, but this profile has not yet been made publicly available."
+        many: "specimens were claimed or attributed, but this profile has not yet been made publicly available."
         other: "exempláře byly nárokovány nebo přiřazeny, ale tento profil ještě nebyl zveřejněn."
     no_specimens_cited: Exempláře nebyly zahrnuty ve stahováních z GBIF a citovány v tomto výzkumném článku.
     specimen_used: Data o exemplářích použity v
@@ -750,6 +865,8 @@ cs:
     publication_count:
       unit:
         one: "publikace použila data o exemplářích stažené z GBIF"
+        few: "publications used specimen data downloaded from GBIF"
+        many: "publications used specimen data downloaded from GBIF"
         other: "publikace použily data o exemplářích stažené z GBIF"
     no_co_collectors_alert: Spolu-sběratelé dosud nebyli zaznamenáni.
     co_collectors_alert: "Sbíral s:"
@@ -790,45 +907,67 @@ cs:
     stats_identified_specimens_nocountry:
       unit:
         one: "identifikovaný exemplář"
+        few: "specimens identified"
+        many: "specimens identified"
         other: "identifikované exempláře"
     stats_collected_specimens_nocountry:
       unit:
         one: "sbíraný exemplář"
+        few: "specimens collected"
+        many: "specimens collected"
         other: "sbírané exempláře"
     stats_identified_specimens:
       unit:
         one: "identifikovaný exemplář z alespoň"
+        few: "specimens identified from at least"
+        many: "specimens identified from at least"
         other: "identifikované exempláře z alespoň"
     stats_identified_countries:
       unit:
         one: "země"
+        few: "countries"
+        many: "countries"
         other: "zemí"
     stats_collected_specimens:
       unit:
         one: "sbíraný exemplář z alespoň"
+        few: "specimens collected from at least"
+        many: "specimens collected from at least"
         other: "sbírané exempláře z alespoň"
     stats_collected_countries:
       unit:
         one: "země"
+        few: "countries"
+        many: "countries"
         other: "zemí"
     stats_attributions_specimens:
       unit:
         one: "přiřazený exemplář k"
+        few: "specimens attributed to"
+        many: "specimens attributed to"
         other: "přiřazené exempláře k"
     stats_attributions_people:
       unit:
         one: "osoba"
+        few: "people"
+        many: "people"
         other: "lidí"
     stats_articles_specimens:
       unit:
         one: "exemplář použit v"
+        few: "specimens used in"
+        many: "specimens used in"
         other: "exempláře použity v"
     stats_articles_articles:
       unit:
         one: "práce"
+        few: "works"
+        many: "works"
         other: "prací"
     specimen_icon_count:
       one: "%{coll_img} sbíral nebo %{det_img} identifikoval 1 exemplář."
+      few: "%{coll_img} collected or %{det_img} identified %{count} specimens."
+      many: "%{coll_img} collected or %{det_img} identified %{count} specimens."
       other: "%{coll_img} sbíral nebo %{det_img} identifikoval %{count} exemplářů."
   workshops:
     title: Workshopy
