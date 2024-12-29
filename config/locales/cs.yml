@@ -274,7 +274,7 @@ cs:
     not_ignored_alert: Písaři Bionomia neoznačili exempláře k ignorování.
     agent_string: Agentní řetězec
     taxon_string: Taxonomická rodina
-kingdom_string: Říše
+    kingdom_string: Říše
     dataset: Datová sada
     country: Země
     datasets: Datové sady
