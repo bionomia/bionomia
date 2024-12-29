@@ -1,0 +1,834 @@
+cs:
+  language: Čeština
+  locale: "cs_CZ"
+  "true": "Ano"
+  "false": "Ne"
+  number:
+    format:
+      delimiter: ","
+      precision: 3
+      separator: "."
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion: Miliarda
+          million: Milion
+          quadrillion: Kvadrilion
+          thousand: Tisíc
+          trillion: Trilion
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+  acknowledgments:
+    acknowledgments_title: Poděkování
+    taxon_silhouettes: Siluety taxonomických rodin
+    translations: Překlady
+  admin:
+    change_photo: Změnit profilovou fotku
+  agent:
+    agent_title: Agentní řetězce
+    search_title: Hledání agentního řetězce
+    lede:
+      unit:
+        one: "surový řetězec z analyzovaných jmen sběratelů a určovatelů v datech exemplářů z GBIF"
+        other: "surové řetězce z analyzovaných jmen sběratelů a určovatelů v datech exemplářů z GBIF"
+    search_none: "Pro %{searched} nebyl nalezen žádný agentní řetězec"
+    search_count:
+      unit:
+        one: "výsledek hledání pro"
+        other: "výsledky hledání pro"
+    warning: "UPOZORNĚNÍ:"
+    warning_statement: Na rozdíl od všech ostatních URL na tomto webu jsou URL pro agentní řetězce nespolehlivé pro propojení, protože budou každých několik týdnů ukazovat na jiné výsledky
+    agent_name_title: Exempláře %{agent_name}
+    agent_lede: Surový řetězec z analyzovaných jmen sběratelů a určovatelů v datech přírodovědných exemplářů
+    found_statement:
+      unit:
+        one: "exemplář nalezen. Ne všechny sloupce jsou zobrazeny."
+        other: "exempláře nalezeny. Ne všechny sloupce jsou zobrazeny."
+    search_html: "Hledat %{agent_link} osobu a pomoci přiřadit jejich exempláře."
+    example_agents: Náhodné vzorky nebo výsledky
+    gbifid: Z gbifID
+    gbifid_title: Agentní řetězce z gbifID
+    gbifid_instructions: Vložte seznam gbifID na bázi výskytu a získejte souhrnný seznam analyzovaných agentních řetězců z dwc:recordedBy.
+  article:
+    article_title: Článek
+    articles_title: Články
+    articles_lede:
+      unit:
+        one: "článek citovaný staženími z GBIF"
+        other: "články citující stažení z GBIF"
+    no_claims_alert: Lidé dosud neprohlásili ani nebyli přiřazeni exempláře zastoupené v datech stažených z GBIF na podporu tohoto článku
+    claims_alert:
+      unit:
+        one: "osoba sbírala nebo určovala exempláře zahrnuté v datech stažených z GBIF na podporu tohoto článku"
+        other: "lidé sbírali nebo určovali exempláře zahrnuté v datech stažených z GBIF na podporu tohoto článku"
+    placeholder: "Evoluce a systematika..."
+    people: Lidé
+    agent_strings: Agentní řetězce
+    agent_title: Agentní články
+    alphabetical: Abecední
+    counts: Počty
+    unclaimed: Nepřihlášeno
+    no_agent_strings_alert: Surové řetězce z analyzovaných jmen sběratelů a určovatelů v datech exemplářů stažených z GBIF na podporu tohoto článku nebyly nalezeny
+    agent_strings_alert:
+      unit:
+        one: "surový řetězec z analyzovaných jmen sběratelů a určovatelů v datech exemplářů stažených z GBIF na podporu tohoto článku"
+        other: "surové řetězce z analyzovaných jmen sběratelů a určovatelů v datech exemplářů stažených z GBIF na podporu tohoto článku"
+    claims: nároky
+    specimens: exempláře
+    no_search_alert: "Pro %{searched} nebyly nalezeny žádné články"
+    search_alert:
+      unit:
+        one: "výsledek hledání nalezen pro"
+        other: "výsledky hledání nalezeny pro"
+  card:
+    collected: "Sbíráno %{family}"
+    identified: "Určeno %{family}"
+    identified_collected: "Sbíráno %{collected} a určeno %{identified}"
+    claimed:
+      one: exemplář nárokován
+      other: exempláře nárokovány
+    attributed:
+      one: exemplář přiřazen
+      other: exempláře přiřazeny
+    helped:
+      one: osoba pomohla
+      other: lidé pomohli
+  charts:
+    year: Rok
+    number_specimens: "# exemplářů"
+    identified: Určeno
+    collected: Sbíráno
+    people: Lidé
+  country:
+    country_title: Země
+    lede: Ze zemí uvedených v ORCID účtech a Wikidata záznamech nebo záznamech exemplářů v GBIF
+    intro: Ze zemí uvedených v ORCID účtech a Wikidata záznamech. Hledejte podle taxonomické rodiny, abyste prozkoumali odborné znalosti.
+    collected_from: "Sbíráno %{family} z %{country}"
+    identified_from: "Určeno %{family} z %{country}"
+    collected_identified_from: "Sbíráno nebo určeno %{family} z %{country}"
+    no_one_collected_from: "Nikdo nesbíral %{family} z %{country}"
+    no_one_identified_from: "Nikdo neurčoval %{family} z %{country}"
+    no_one_collected_identified_from: "Nikdo nesbíral nebo neurčoval %{family} z %{country}"
+    no_one_message: "Nikdo nebyl nalezen z %{country}. Hledejte podle taxonomické rodiny, abyste prozkoumali odborné znalosti."
+  dataset:
+    dataset_title: Datové sady
+    search_title: Hledání datových sad
+    scribes_title: Písaři
+    lede:
+      unit:
+        one: "datová sada z GBIF"
+        other: "datové sady z GBIF"
+    identifiers_alert:
+      unit:
+        one: "datová sada s obsahem v dwc:recordedByID nebo dwc:identifiedByID"
+        other: "datové sady s obsahem v dwc:recordedByID nebo dwc:identifiedByID"
+    placeholder: Motýli Brazílie
+    people: Lidé
+    visualizations: Vizualizace
+    scribes: Písaři
+    agents: Agentní řetězce
+    agent_strings: Agentní řetězce
+    agent_strings_unclaimed: Nepřihlášené agentní řetězce
+    alphabetical: Abecední
+    counts: Počty
+    unclaimed: Nepřihlášené
+    no_agents_alert: Surové řetězce z analyzovaných jmen sběratelů a určovatelů v datech exemplářů zahrnutých v této datové sadě dosud nebyly zaznamenány
+    agents_alert:
+      unit:
+        one: "surový řetězec z analyzovaných jmen sběratelů a určovatelů v datech exemplářů zahrnutých v této datové sadě"
+        other: "surové řetězce z analyzovaných jmen sběratelů a určovatelů v datech exemplářů zahrnutých v této datové sadě"
+    agents_alert_unclaimed:
+      unit:
+        one: "surový řetězec z analyzovaných jmen sběratelů a určovatelů v nepřiřazených datech exemplářů zahrnutých v této datové sadě"
+        other: "surové řetězce z analyzovaných jmen sběratelů a určovatelů v nepřiřazených datech exemplářů zahrnutých v této datové sadě"
+    none_found: "Pro %{searched} nebyly nalezeny žádné datové sady"
+    search_found:
+      unit:
+        one: "výsledek hledání pro"
+        other: "výsledky hledání pro"
+    no_scribes_alert: Písaři dosud nepřiřadili exempláře sběratelům nebo určovatelům zastoupeným v této datové sadě
+    scribes_alert:
+      unit:
+        one: "písař přiřadil exempláře sběratelům nebo určovatelům zastoupeným v této datové sadě"
+        other: "písaři přiřadili exempláře sběratelům nebo určovatelům zastoupeným v této datové sadě"
+    people: Lidé
+    no_users_alert: Lidé dosud neprohlásili ani nebyli přiřazeni exempláře zastoupené v této datové sadě
+    users_alert:
+      unit:
+        one: "osoba prohlásila nebo byla přiřazena exempláře zastoupené v této datové sadě"
+        other: "lidé prohlásili nebo byli přiřazeni exempláře zastoupené v této datové sadě"
+    timeline: Časová osa
+    none_collected_timeline: "Nikdo nesbíral a neuváděl datum sběru"
+    none_identified_timeline: "Nikdo neurčoval a neuváděl datum určení"
+    not_all_features: Velká datová sada, ne všechny funkce jsou dostupné.
+    badge_tooltip: Klikněte pro získání HTML tohoto odznaku.
+    badge_modal: Bionomia odznak datové sady
+  date:
+    formats:
+      month_and_year: "%B %Y"
+      month_and_day: "%B %d"
+      long: "%B %d, %Y"
+      year: "%Y"
+      century: "%C. století"
+    month_names: [~, Leden, Únor, Březen, Duben, Květen, Červen, Červenec, Srpen, Září, Říjen, Listopad, Prosinec]
+    abbr_month_names: [~, Led, Úno, Bře, Dub, Kvě, Čer, Čvc, Srp, Zář, Říj, Lis, Pro]
+  denied:
+    title: Zamítnuto
+    not_allowed: Přístup zamítnut.
+  developer:
+    search: Hledat
+    autocomplete_widget: Widget automatického doplňování
+    json_ld_search: JSON-LD hledání pro lidi
+    json_ld_occurrence_search: JSON-LD hledání pro výskyty
+    structured_data: Strukturovaná data
+    raw_data: Surová data
+    code: Kód
+    reconcile_title: Sladit
+    recommended_use: Doporučené použití
+    title: Pro vývojáře
+    code_title: "Pro vývojáře: Kód"
+    code: Kód
+    clients: Klientské knihovny
+    parser: Analyzátor jmen
+    parse_names: Analyzovat lidská jména
+    parse_names_title: "Pro vývojáře: Analyzovat jména"
+    structured_data_title: "Pro vývojáře: Strukturovaná data"
+    search_title: "Pro vývojáře: Hledat"
+    client_title: "Pro vývojáře: Klientské knihovny"
+  donate:
+    donate_title: Darovat
+    lede: Váš jednorázový nebo pravidelný dar pomůže dokončit datový kanál a zajistit, že budou co nejrychleji a nejpřesněji připsány zásluhy za příspěvky do přírodovědných sbírek.
+    campaign: Kampaň
+    donor_wall: Zeď dárců
+  donor_wall:
+    donor_wall_title: Zeď dárců
+    lede: Děkujeme následujícím dárcům, kteří podporují dokončení datového kanálu.
+  general:
+    search: Hledat
+    apply: Použít
+    help_attribute: Pomoci přiřadit
+    refresh_profile: Obnovit
+    refresh_stats: Obnovit statistiky
+    settings: Nastavení
+    bulk_assignment: Hromadné přiřazení
+    collected_all: Sbíráno vše
+    collected: Sbíráno
+    identified_all: Určeno vše
+    identified: Určeno
+    both: Obojí
+    either: Obojí
+    per_page: Na stránku
+    download: Stáhnout
+    submit: Odeslat
+    upload_csv_instructions: Nahrajte csv s nároky
+    download_records: Stáhnout objevené záznamy
+    download_alert: "Stáhněte objevené záznamy exemplářů, pracujte offline a poté nahrajte nové nároky jako csv. Vytvoří se soubor obsahující nejvýše %{num_records} záznamů. Pokud máte mnohem více, můžete pracovat v dávkách. Tato rutina neaktualizuje základní údaje o exemplářích ani neaktualizuje stávající nároky. Pokud jsou v nahrávání přítomny stávající nároky, budou přeskočeny. Vaše nahrané csv musí používat čárku k oddělení sloupců, každý volitelně uzavřený v uvozovkách."
+    search_dropdown_no_users: "Vaše hledání nepřineslo žádné výsledky."
+    reset: Resetovat
+    remove: Odstranit
+    filtered_by: Filtrováno podle
+    is_public: je veřejný
+    has_occurrences: má exempláře
+    unauthorized: Tato funkce vyžaduje přihlášení.
+  help:
+    ignored_title: "Pomoci znovu nárokovat Ignorované pro %{name}"
+    upload_user_title: "Hromadné nahrávání pro %{name}"
+    bulk_user_title: "Hromadné přiřazení pro %{name}"
+    help_user_title: "Pomoci přiřadit exempláře pro %{name}"
+    help_title: Pomoci přiřadit exempláře
+    roster_title: Pomoci přiřadit exempláře
+    country_title: Pomoci přiřadit exempláře podle zemí
+    latest_title: Poslední příjemci
+    country_name_title: "Pomoci přiřadit exempláře pro lidi z %{country}"
+    country_no_one: "Nikdo nebyl nalezen z"
+    advanced_search_title: "Pokročilé hledání a filtrování"
+    fix_title: Pomoci opravit přiřazení
+    upload_title: Nahrát
+    basic_instructions_lede: Základní pokyny pro začátek
+    add_someone_lede: "Přidat někoho, kdo ještě nebyl objeven"
+    country_name_lede: Z zemí uvedených v ORCID nebo Wikidata
+    latest_lede: Připojte se k písařům při uznávání vašich kolegů, mentorů nebo kohokoli, kdo vás inspiruje
+    country_lede: Připojte se k písařům při uznávání vašich kolegů, mentorů nebo kohokoli, kdo vás inspiruje
+    roster_lede: Připojte se k písařům při uznávání vašich kolegů, mentorů nebo kohokoli, kdo vás inspiruje
+    person: Osoba
+    progress: Pokrok
+    public: Veřejný
+    private: Profil dosud nebyl zveřejněn
+    created: Vytvořeno
+    latest_scribe: Poslední písař
+    latest_claim: Poslední nárok
+    help_documentation: "Dokumentace nápovědy"
+    add_someone: "Přidat někoho"
+    latest_recipients: Poslední příjemci
+    new_people: Noví lidé
+    new_people_title: Nově objevení lidé
+    new_people_lede: Přiřaďte exempláře pro nedávno objevené lidi v ORCID nebo Wikidata
+    by_country: Podle zemí
+    not_ignored_alert: Písaři Bionomia neoznačili exempláře k ignorování.
+    agent_string: Agentní řetězec
+    taxon_string: Taxonomická rodina
+kingdom_string: Říše
+    dataset: Datová sada
+    country: Země
+    datasets: Datové sady
+    agents: Agenti
+    taxa: Taxonomické rodiny
+    specimens: Exempláře
+    visualizations: Vizualizace
+    strings: Řetězce sběratelů
+    support: Pomáháno
+    specialties: Specializace
+    public_profile: Veřejný profil
+    make_public: Zveřejnit
+    not_yet: Ještě ne
+    viz_none_alert: Písaři Bionomia dosud nepomohli přiřadit exempláře.
+    viz_alert: Klikněte na oblasti na mapě nebo na sloupce v grafu pro provedení filtru.
+    problems: Zjištěné problémy
+    collections_before_birth: "Sbírky vytvořené před narozením:"
+    collections_after_death: "Sbírky vytvořené po smrti:"
+    identifications_before_birth: "Identifikace před narozením:"
+    identifications_after_death: "Identifikace po smrti:"
+    view: zobrazení
+    none: žádné
+    identified_from: Identifikováno z
+    collected_from: Sbíráno z
+    no_filter_alert: Písaři Bionomia dosud nepomohli přiřadit exempláře pod tímto filtrem.
+    not_helped_alert: Písaři Bionomia dosud nepomohli přiřadit exempláře.
+    upload_message:
+      unit:
+        one: "záznam byl zpracován. Existující nároky, pokud byly přítomny ve vašem nahrávání, byly přeskočeny."
+        other: "záznamy byly zpracovány. Existující nároky, pokud byly přítomny ve vašem nahrávání, byly přeskočeny."
+    help_question: "Chcete pomoci přiřadit exempláře k %{name}?"
+    try_again: Zkuste to znovu.
+    no_specialities_alert: Písaři Bionomia dosud nepomohli přiřadit exempláře.
+    specialties_alert: "Sbíráno nebo identifikováno exempláře v následujících rodinách:"
+    co-collectors: Spolu-sběratelé
+    no_co_collectors_alert: Spolu-sběratelé dosud nebyli zaznamenáni.
+    co_collectors_alert: "Vyberte spolu-sběratele pro úpravu přiřazení exemplářů v běžné."
+    co_collector_name: "Exempláře sbírány spolu s %{name}."
+    switch: Přepnout
+    not_co_collector_name: "Exempláře nebyly sbírány spolu s %{name}."
+    identified_for: Identifikováno pro
+    no_identified_for_alert: Příjemci určení dosud nebyli zaznamenáni.
+    identified_for_alert: "Vyberte sběratele pro úpravu přiřazení exemplářů sbíraných jimi."
+    identified_for_name: "Exempláře sbírány %{name} a identifikovány %{other_name}."
+    not_identified_for_name: "Exempláře nebyly sbírány %{name} a identifikovány %{other_name}."
+    identified_for_count:
+      one: "sbíraný exemplář"
+      other: "sbírané exempláře"
+    identifications_by: Identifikace od
+    no_determiners_alert: Určovatelé dosud nebyli zaznamenáni.
+    determiners_alert: "Vyberte určovatele pro úpravu přiřazení exemplářů identifikovaných jimi."
+    determiner_name: "Exempláře identifikovány %{name} a sbírány %{other_name}."
+    not_determiner_name: "Exempláře nebyly identifikovány %{name} a sbírány %{other_name}."
+    identified_by_count:
+      one: "identifikovaný exemplář"
+      other: "identifikované exempláře"
+    bulk_attribution: Hromadná přiřazení
+    reclaim_ignored: Nárokovat ignorované
+    fix_claims: Opravit přiřazení
+    discovered: Objeveno
+    support_alert: Následující písaři přiřadili exempláře.
+    advanced_search: Pokročilé hledání a filtrování
+    less_exact: Méně přesné
+    no_unclaimed: Bionomia nenašla žádné nepřiřazené exempláře.
+    close: Zavřít
+    add_person: Přidat osobu
+    add_orcid_wikidata: Přidat ORCID identifikátor nebo Wikidata Q číslo
+    attribute_count:
+      one: Pomozte přiřadit 1 exemplář.
+      other: Pomozte přiřadit %{count} exemplářů.
+    specimens_attributed_count:
+      one: přiřazený exemplář
+      other: přiřazené exempláře
+    download: Stáhnout
+    download_label: Stáhnout objevené záznamy
+    upload_label: Nahrát csv s nároky
+    choose_instructions_html: "Vyberte %{coll_img} sbíráno, %{det_img} identifikováno, nebo Obojí."
+    search_count:
+      one: "1 výsledek hledání pro %{search}"
+      other: "%{count} výsledků hledání pro %{search}"
+    make_public_yes: "Ano, zveřejnit"
+    other_scribes: "Ostatní písaři také pomohli přiřadit exempláře %{user_name}:"
+    no_scribes: "Žádní další písaři nepomohli přiřadit exempláře %{user_name}."
+    make_public_question: "Chcete zveřejnit profil %{user_name}?"
+    view_public_html: "Zobrazit veřejný %{href}"
+    view_public_href: "profil"
+    now_public_html: "Děkujeme za vaši pomoc! Profil pro %{person} je nyní viditelný veřejnosti."
+    do_you_know: Znáte
+    no_one_found: "Nikdo nebyl nalezen pod jménem %{name}."
+    add_someone_html: "Podívejte se, jak %{href}."
+    add_someone_href: "přidat někoho"
+    co_collected_count:
+      one: "spolu-sbíraný exemplář"
+      other: "spolu-sbírané exempláře"
+    occurrence_title: Pomozte ostatním podle záznamu o exempláři
+    occurrence: Exempláře
+    occurrence_advance_message: Záznamy o spolu-sbíraných exemplářích. Použijte pravou šipku na klávesnici nebo šipku na obrazovce pro posun záznamu, dokud nedostanete jeden, který můžete přiřadit.
+    spreadsheet: Tabulka
+    bulk: Poloautomatické
+    bulk_instructions: "VAROVÁNÍ: Tato funkce vyžaduje opatrnost a přesnost. Vyberte agentní řetězec ze seznamu generovaného podle stejného algoritmu hledání použitým k prezentaci kandidátních záznamů exemplářů a pak vytvořte podmíněné výrazy ve formě JSON."
+    discovered_agents: "Krok 1: Vyberte agentní řetězec analyzovaný z obsahu v dwc:recordedBy a dwc:identifiedBy. Čísla v hranatých závorkách označují počet nepřiřazených záznamů."
+    bulk_json: "Krok 2: Vytvořte JSON výrok, kde všechny páry klíč:hodnota budou považovány za přesné, na velikosti písmen závislé shody vedle vašeho vybraného agentního řetězce, například: { \"institutionCode\" : \"CAN\", \"eventDate\" : [2020, 2021] } nebo { \"scientificName LIKE ?\":\"Bolbelasmus %\"}. Doporučená nejlepší praxe je zahrnout co nejvíce párů klíč:hodnota, jak je rozumné, aby se předešlo nesprávným přiřazením. Dostupné klíče jsou: %{keys}"
+    bulk_count:
+      one: "Celkem byl zpracován 1 záznam."
+      other: "Celkem bylo zpracováno %{count} záznamů."
+  home:
+    tagline: Spojte přírodovědné exempláře se sběrateli světa.
+    get_started: Začněte
+    your_profile: Váš profil
+    sample_profiles: Dnešní doporučení sběratelé
+    orcid_login: Přihlásit se pomocí ORCID
+    orcid_logo: ORCID logo
+  layout:
+    profiles: Profily
+    scribes: Písaři
+    organizations: Organizace
+    datasets: Datové sady
+    articles: Články
+    countries: Země
+    taxa: Rodiny
+    agent_strings: Agentní řetězce
+    help_others: Pomoc ostatním
+    help_received: Přijatá pomoc
+    people_helped: Pomoc lidem
+    toggle_dropdown: Rozbalit nabídku
+    overview: Přehled
+    specimens: Exempláře
+    discovered: Objeveno
+    science_enabled: Umožněná věda
+    settings: Nastavení
+    administration: Administrace
+    logout: Odhlásit se
+    resources: Zdroje
+    integrations: Integrace
+    for_developers: Pro vývojáře
+    for_data_managers: Pro správce dat
+    policies: Politiky
+    privacy: Zásady ochrany osobních údajů
+    terms_service: Podmínky služby
+    on_this_day: V tento den
+    about: O nás
+    rationale: Odůvodnění
+    how_works: Jak to funguje
+    history: Historie
+    feedback: Zpětná vazba
+    support: Darovat
+    help: Nápověda
+    tools: Nástroje
+    parse: Analyzovat jména
+    reconcile: Sladit jména
+    acknowledgments: Poděkování
+    workshops: Workshopy
+    stats: Statistiky
+    downloads: Stahování
+  not_authorized:
+    not_authorized: Neautorizováno nebo relace ukončena.
+  occurrence:
+    occurrence_title: Záznam o exempláři
+    lede: Z částečných dat získaných z GBIF
+    record: Záznam
+    event: Událost
+    identification: Identifikace
+    location: Umístění
+    has_image: Má obrázek
+    not_them: Připsáno není jimi
+  offline:
+    message: Bionomia je aktuálně offline, obnovuje data z Global Biodiversity Information Facility.
+    warning: "Bionomia bude offline %{datetime_off} po dobu %{duration} pro obnovu dat z Global Biodiversity Information Facility."
+  on_this_day:
+    global_title: V tento den
+    born_title: Sběratel narozený v tento den
+    died_title: Sběratel zemřelý v tento den
+    collected_title: Sbíráno v tento den
+    collector_born: Sběratel narozen
+    collector_died: Sběratel zemřel
+    type_collected: Typové exempláře sbírány
+    none_died_alert: "Nikdo nebyl nalezen, kdo zemřel %{date}"
+    none_born_alert: "Nikdo nebyl nalezen, kdo se narodil %{date}"
+    limit_alert: Výsledky omezeny na 50 záznamů holotypových exemplářů
+    no_types_alert: "Žádné typové exempláře nebyly nalezeny sbírány %{date}"
+  oops:
+    not_found_title: Nenalezeno
+    not_found: Hledali jsme všude, ale nemohli jsme najít tuto stránku.
+    error_title: Chyba
+    error: Omlouváme se, došlo k chybě.
+  organization:
+    organization_title: Organizace
+    lede:
+     unit:
+       one: "organizace z ORCID účtů a Wikidata záznamů"
+       other: "organizace z ORCID účtů a Wikidata záznamů"
+    placeholder: Kanadské muzeum přírody
+    affiliation_none_alert: Publikace založené na exemplářích sbíraných nebo identifikovaných současným a předchozím personálem dosud nebyly zaznamenány GBIF
+    affiliation_alert: "%{count} publikací použilo data o exemplářích stažená z GBIF založená na exemplářích sbíraných nebo identifikovaných současným a předchozím personálem během jejich působení v %{org_name}"
+    collected_by: "Exempláře sbírány nebo identifikovány:"
+    science_enabled: Věda umožněná prostřednictvím exemplářů sbíraných nebo identifikovaných personálem
+    impact: Dopad na činnosti v jiných organizacích
+    no_metric_alert: "Současný a předchozí personál dosud neprohlásil ani nebyl přiřazen exempláře nyní kurátorované v jiných organizacích během jejich působení v %{org_name}."
+    metric_alert: "Současný a předchozí personál prohlásil nebo byl přiřazen exempláře nyní kurátorované v následujících organizacích během jejich působení v %{org_name}."
+    none_collected_alert: "Exempláře sbírané nebo identifikované v %{year} personálem a kurátorované jinde dosud nebyly prohlášeny nebo přiřazeny."
+    all_years: Všechny roky
+    specimens: exempláře
+    organizations: organizace
+    specimens_identified: Identifikované exempláře
+    specimens_collected: Sbírané exempláře
+    no_current_members_alert: "Současní členové %{org_name} dosud nebyli zaznamenáni."
+    no_previous_members_alert: "Předchozí členové %{org_name} dosud nebyli zaznamenáni."
+    no_search_alert: "Žádné organizace nebyly nalezeny pro"
+    search_alert:
+      unit:
+        one: "výsledek hledání pro"
+        other: "výsledky hledání pro"
+    current: Současní
+    previous: Předchozí
+    metrics: Metriky
+    science_enabled: Umožněná věda
+    member: člen
+    current_members_count:
+      unit:
+        one: současný člen
+        other: současní členové
+    past_members_count:
+      unit:
+        one: předchozí člen
+        other: předchozí členové
+    under_repair: Tato funkce je momentálně opravována pro lepší výkon.
+  pagy:
+    next: ">"
+    prev: "<"
+    gap: "..."
+  profile:
+    thanks_title: Přijaté poděkování
+    candidates_title: Nepřiřazené exempláře
+    ignored_title: Ignorováno
+    specimens_title: Exempláře
+    support_title: Přijatá pomoc
+    upload_title: Nahrát
+    helped_title: Pomoc lidem
+    citation_title: Citace
+    citations_title: Citace
+    overview: Přehled
+    specimens: Exempláře
+    people_helped: Pomoc lidem
+    science_enabled: Umožněná věda
+    claimed: Prohlášeno
+    discovered: Objeveno
+    upload: Nahrát
+    ignored: Ignorováno
+    help_received: Přijatá pomoc
+    helped: Pomáháno
+    helped_alert: Pomohli jste přiřadit exempláře následujícím lidem, nejnovější zobrazeny jako první.
+    not_helped_alert: Dosud jste nepřiřadili exempláře nikomu.
+    no_help_alert: Písaři Bionomia vám dosud nepomohli prohlásit exempláře.
+    thanks_alert: Písaři Bionomia vám pomohli prohlásit exempláře. Poděkujte jim.
+    thanks_received: Přijaté poděkování
+    thanks_received_alert: Obdrželi jste poděkování za přiřazení exemplářů.
+    no_thanks_received_alert: Dosud jste neobdrželi žádné poděkování za přiřazení záznamů exemplářů jiným sběratelům. Zkusili jste pomoci ostatním?
+    change_photo: Změnit profilovou fotku
+    remove: Odstranit
+    cancel: Zrušit
+    update: Aktualizovat
+    settings: Nastavení a integrace
+    youtube: Použijte YouTube ID pro video, které se objeví ve vašem profilu (např. uxRERDmfAcw).
+    no_science: Vaše data o exemplářích dosud nebyla zaznamenána ve stahováních z GBIF a použita v nových publikacích.
+    no_citation_alert: Vaše exempláře nebyly zahrnuty ve stažení z GBIF na podporu této studie.
+    has_science:
+      unit:
+        one: "publikace použila vaše data o exemplářích stažené z GBIF"
+        other: "publikace použily vaše data o exemplářích stažené z GBIF"
+    identified_from: Identifikováno z
+    collected_from: Sbíráno z
+    resume: Pro váš životopis
+    specimens_used: Exempláře použité v
+    public_availability: Veřejná dostupnost
+    public_profile: Veřejný profil
+    make_citable: Umožněte citovatelnost vašich dat
+    email_notifications: E-mailová upozornění
+    delete_account: Smazat účet
+    delete: Smazat
+    delete_reason: Proč chcete smazat svůj profil?
+    delete_feedback: Uveďte prosím důvod.
+    permanent_delete: Trvale smazat účet.
+    delete_warning: Opravdu chcete smazat svůj účet? Všechny vaše nároky A všechna přiřazení, která jste udělali pro ostatní, budou trvale odstraněna.
+    email_instructions: Dostávejte e-mailová upozornění na nové články, které využívají data odvozená z exemplářů, které jste identifikovali nebo sbírali. Udělejte svou primární e-mailovou adresu veřejně dostupnou ve svém účtu ORCID a poté aktualizujte své ORCID údaje výše.
+    email_procedure: "Dostávejte upozornění na nové publikace, které využívají data odvozená z exemplářů, které jste identifikovali nebo sbírali. Vaše primární, veřejně dostupná e-mailová adresa, %{email}, pochází z vašeho účtu ORCID."
+    disconnect: Odpojit
+    disconnect_warning: Opravdu chcete odpojit svůj účet od Zenodo? Vaše data zůstanou archivována a přístupná, ale nebudou vytvořeny žádné nové verze. Pokud později znovu připojíte svůj účet, bude vytvořen nový balíček dat.
+    connect_zenodo: Připojte svůj účet k Zenodo, kde budou uloženy verze vašich nároků a bude přidělen DOI od DataCite. Bude poskytnuta citace pro zahrnutí do vašeho životopisu.
+    connect_zenodo_claim: Nárokujte alespoň jeden ze svých exemplářů a vraťte se sem, abyste připojili svůj účet k Zenodo, kde budou uloženy verze vašich nároků a bude přidělen DOI od DataCite. Bude poskytnuta citace pro zahrnutí do vašeho životopisu.
+    disconnect_zenodo: Odpojit od Zenodo
+    integrate_zenodo: Integrovat se Zenodo
+    zenodo_linked: Váš účet je nyní propojen a data budou odeslána do hodiny.
+    orcid_updates: Stáhněte nové aktualizace svého veřejně dostupného jména, aliasů, klíčových slov, země, vzdělání a zaměstnání z vašeho účtu ORCID.
+    refresh: Aktualizovat
+    orcid_refreshed: Data ORCID byla aktualizována.
+    public: Veřejný
+    private: Soukromý
+    active: "Zapnuto"
+    inactive: "Vypnuto"
+    make_public_message: Zahrňte svůj účet do veřejných profilů. Vaše nároky budou zahrnuty do hromadného stahování dat, zpřístupněny prostřednictvím rozšíření pro Google Chrome a Firefox.
+    no_candidates_alert: Bionomia nenašla žádné exempláře indexované GBIF, které jste mohli sbírat nebo identifikovat.
+    ignored_alert: Záznamy exemplářů, které jste označili jako "Ne já", se zde zobrazí.
+    scribe_not_helped: Tento písař Bionomia vám dosud nepomohl prohlásit exempláře.
+    upload_error: Nahrajte prosím obrázek menší než 5MB.
+    bulk_claim: Hromadný nárok
+    advanced_search: Pokročilé hledání a filtrování
+    no_specimens_filter: Dosud jste nenárokovali žádné exempláře s tímto aplikovaným filtrem. Podívejte se na své kandidátní záznamy exemplářů na stránce Objeveno.
+    no_specimens: Dosud jste nenárokovali žádné exempláře. Podívejte se na své kandidátní záznamy exemplářů na stránce Objeveno.
+    candidate_count:
+      one: Nalezen 1 exemplář.
+      other: "Nalezeno %{count} exemplářů."
+    latest_helped: "Naposledy v %{time}"
+    attributed_count:
+      one: "přiřazený exemplář"
+      other: "přiřazené exempláře"
+    attributions: Přiřazení provedena
+    private_message_html: "Váš profil je soukromý. Nárokujte své %{specimens} a poté jej zveřejněte v %{settings}, abyste maximalizovali opětovné použití."
+    no_claims_html: "Nárokujte své objevené exempláře v kartě %{specimens}, abyste si vytvořili profil a začali sledovat své citace. Uznávejte své kolegy, mentory nebo kohokoli, kdo vás inspiruje, přiřazením exemplářů v %{help_others}."
+    try_again: Zkuste to znovu.
+    upload_count:
+      one: "Celkem byl zpracován 1 nahraný záznam."
+      other: "Celkem bylo zpracováno %{count} záznamů."
+    upload_skipped: Existující nároky, pokud byly přítomny ve vašem nahrávání, byly přeskočeny.
+    upload_view: Zobrazit
+    upload_view_html: "%{view} všechny vaše nároky."
+    co_collectors: Spolu-sběratelé
+    no_co_collectors_alert: Spolu-sběratelé dosud nebyli zaznamenáni.
+    co_collectors_alert: "Sbírali jste s:"
+    co_collector_name: "Exempláře sbírané spolu s %{name}."
+    switch: Zobrazit jejich
+    not_co_collector_name: "Exempláře nebyly sbírány spolu s %{name}."
+    co_collected_count:
+      one: "spolu-sbíraný exemplář"
+      other: "spolu-sbírané exempláře"
+    identified_for: Identifikováno pro
+    no_identified_for_alert: Příjemci vašich určení dosud nebyli zaznamenáni.
+    identified_for_alert: "Vyberte sběratele pro úpravu přiřazení exemplářů sbíraných jimi a identifikovaných vámi."
+    identified_for_name: "Exempláře sbírané %{name} a identifikované vámi."
+    not_identified_for_name: "Exempláře nebyly sbírány %{name} a identifikované vámi."
+    identified_for_count:
+      one: "sbíraný exemplář"
+      other: "sbírané exempláře"
+    identifications_by: Identifikace od
+    no_determiners_alert: Určovatelé vašich sbíraných exemplářů dosud nebyli zaznamenáni.
+    determiners_alert: "Vaše exempláře byly identifikovány:"
+    determiner_name: "Exempláře identifikovány %{name}."
+    not_determiner_name: "Exempláře, které jste sbírali, nebyly identifikovány %{name}."
+    identified_by_count:
+      one: "identifikovaný exemplář"
+      other: "identifikované exempláře"
+    zenodo_html: "Váš profil je propojen s %{zenodo} a vaše nároky jsou verzovány a archivovány."
+    language: Preferovaný jazyk
+    language_explanation: Vyberte si svůj preferovaný jazyk
+    specimens_used_num: použité exempláře
+    updated: Váš profil byl aktualizován.
+    thanks: Děkujeme
+    attributed: přiřazeno
+    unsubscribe_title: Odhlásit odběr
+    unsubscribe: "E-mailová adresa %{email} je nyní odhlášena z upozornění."
+  roster:
+    roster_title: Veřejné profily
+    lede: "%{count} lidí, kteří sdílejí své profily a profily ostatních, které si váží"
+    no_one_found: Nikdo nebyl nalezen pod jménem
+    search_result_count:
+      unit:
+        one: "výsledek hledání pro"
+        other: "výsledky hledání pro"
+    list: Seznam
+    gallery: Galerie
+    signatures: Podpisy
+  specimen:
+    scientific_name: Vědecké jméno
+    collected_by: Sbíráno kým
+    linked_collected_by: Propojeno sbíráno kým
+    identified_by: Identifikováno kým
+    date_collected: Datum sběru
+    date_identified: Datum identifikace
+    institution: Instituce
+    catalog_number: Katalogové číslo
+    basis_record: Základ záznamu
+    country: Země
+    family: Rodina
+    type_status: Typový status
+    scribe: Písař
+    not_me: Ne já
+    not_them: Ne oni
+    not_recorded: nezaznamenáno
+    remove: Odstranit
+    mismatch: Nesoulad s délkou života
+  scribes:
+    scribes_title: Písaři
+    lede: "%{scribe_count} lidí, kteří přiřadili %{attribution_count} přírodovědných exemplářů %{recipient_count} jejich kolegům, mentorům a vzorům"
+  statistics:
+    title: Statistiky
+    claims: Kumulativní nároky
+    attributions: Kumulativní přiřazení
+    rejected: Kumulativně odmítnutí kandidáti
+    profiles: Kumulativně importované profily
+    month: Měsíc
+  taxa:
+    lede:
+      unit:
+        one: "taxonomická rodina z dat exemplářů v GBIF"
+        other: "taxonomické rodiny z dat exemplářů v GBIF"
+    search_title: Taxonomické rodiny
+    none_found: "Nebyly nalezeny žádné taxonomické rodiny pro %{searched}"
+    search_found:
+      unit:
+        one: "výsledek hledání pro"
+        other: "výsledky hledání pro"
+    people: Lidé
+    visualizations: Vizualizace
+    timeline: Časová osa
+    agent_strings: Agentní řetězce
+    collected: Sbíráno
+    identified: Identifikováno
+    number_collected:
+      unit:
+        one: "osoba sbírala exempláře z dat v GBIF"
+        other: "lidé sbírali exempláře z dat v GBIF"
+    number_identified:
+      unit:
+        one: "osoba identifikovala exempláře z dat v GBIF"
+        other: "lidé identifikovali exempláře z dat v GBIF"
+    number_agents:
+      unit:
+        one: "agentní řetězec z dat exemplářů v GBIF"
+        other: "agentní řetězce z dat exemplářů v GBIF"
+    number_agents_unclaimed:
+      unit:
+        one: "agentní řetězec má nepřiřazené záznamy exemplářů z dat v GBIF"
+        other: "agentní řetězce mají nepřiřazené záznamy exemplářů z dat v GBIF"
+    no_agents_unclaimed: Žádné záznamy exemplářů nejsou nepřiřazené nebo nepřidělené
+    alphabetical: Abecední
+    counts: Počty
+    unclaimed: Nepřiřazené
+    example_families: Náhodné vzorky
+    none_collected_identified: "Nikdo nesbíral nebo neidentifikoval %{taxon}"
+    none_collected: "Nikdo nesbíral %{taxon}"
+    none_identified: "Nikdo neidentifikoval %{taxon}"
+    none_collected_timeline: "Nikdo nesbíral %{taxon} a neuvedl datum sběru"
+    none_identified_timeline: "Nikdo neidentifikoval %{taxon} a neuvedl datum určení"
+    no_agents: "Žádní agenti nesbírali nebo neidentifikovali %{taxon}"
+    taxon_string: Taxonomická rodina
+    start_year: Počáteční rok
+    end_year: Konečný rok
+    user_title: "%{taxon} Sběratelé nebo určovatelé"
+    agent_count_title: "%{taxon} Počty agentů"
+    agent_unclaimed_title: "%{taxon} Nepřiřazení agenti"
+    agents_title: "%{taxon} Agenti"
+  user:
+    caches_rebuilt: Cache byly obnoveny.
+    overview: Přehled
+    specialties: Specializace
+    network: Síť
+    deposited_at: Uloženo v
+    specimens: Exempláře
+    science_enabled: Umožněná věda
+    science_enabled_specimens: Věda umožněná daty exemplářů
+    helped_by: Pomáháno kým
+    strings: Řetězce sběratelů
+    helped: Pomoc lidem
+    no_scribe: Exempláře nebyly přiděleny písařem.
+    attributions_by: "Přiřazení provedena kým:"
+    private: Profil ještě není veřejně dostupný.
+    private_with_claims:
+      unit:
+        one: "exemplář byl nárokován nebo přiřazen, ale tento profil ještě nebyl zveřejněn."
+        other: "exempláře byly nárokovány nebo přiřazeny, ale tento profil ještě nebyl zveřejněn."
+    no_specimens_cited: Exempláře nebyly zahrnuty ve stahováních z GBIF a citovány v tomto výzkumném článku.
+    specimen_used: Data o exemplářích použity v
+    no_publications: Publikace, které použily záznamy exemplářů zahrnuté ve stažení z GBIF, dosud nebyly zaznamenány.
+    publication_count:
+      unit:
+        one: "publikace použila data o exemplářích stažené z GBIF"
+        other: "publikace použily data o exemplářích stažené z GBIF"
+    no_co_collectors_alert: Spolu-sběratelé dosud nebyli zaznamenáni.
+    co_collectors_alert: "Sbíral s:"
+    co_collectors: Spolu-sběratelé
+    identified_for: Identifikováno pro
+    identifications_by: Identifikace od
+    no_identifications_by_alert: Identifikace provedena na sbírané exempláře dosud nebyla zaznamenána.
+    identifications_by_alert: "Sbíral exempláře později identifikované:"
+    no_identified_for_alert: Identifikace provedena na exempláře jiných dosud nebyla zaznamenána.
+    identified_for_alert: "Identifikoval exempláře sbírané:"
+    comment_alert: Sdílejte anekdotu o sběratelské výpravě, události nebo cokoli jiného.
+    no_institutions_alert: Instituce dosud nebyly zaznamenány.
+    institutions_alert: "Exempláře uloženy a kurátorovány v následujících institucích:"
+    organizations: organizace
+    specimens_metric: exempláře
+    specimens_identified: Identifikované exempláře
+    specimens_collected: Sbírané exempláře
+    no_specialities_alert: Specializace dosud nebyly zaznamenány.
+    specialties_alert: "Sbírané nebo identifikované exempláře v následujících rodinách:"
+    families_collected: Sbírané rodiny
+    families_identified: Identifikované rodiny
+    no_claims_alert: Nároky nebo přiřazení dosud nebyly zaznamenány.
+    no_helped_alert: Přiřazení dosud nebyla provedena.
+    progress: Pokrok
+    identified_from: Identifikováno z
+    collected_from: Sbíráno z
+    dates_collected: Data sběru
+    dates_identified: Data identifikace
+    specimens_attributed: přiřazené exempláře
+    collected: sbíráno
+    identified: identifikováno
+    not_all_columns: Nejsou zobrazeny všechny dostupné sloupce.
+    map: Mapa
+    list: Seznam
+    chart: Graf
+    no_specimens: Exempláře dosud nebyly nárokovány nebo přiřazeny.
+    no_specimens_filter: Exempláře dosud nebyly nárokovány nebo přiřazeny s tímto aplikovaným filtrem.
+    stats_identified_specimens_nocountry:
+      unit:
+        one: "identifikovaný exemplář"
+        other: "identifikované exempláře"
+    stats_collected_specimens_nocountry:
+      unit:
+        one: "sbíraný exemplář"
+        other: "sbírané exempláře"
+    stats_identified_specimens:
+      unit:
+        one: "identifikovaný exemplář z alespoň"
+        other: "identifikované exempláře z alespoň"
+    stats_identified_countries:
+      unit:
+        one: "země"
+        other: "zemí"
+    stats_collected_specimens:
+      unit:
+        one: "sbíraný exemplář z alespoň"
+        other: "sbírané exempláře z alespoň"
+    stats_collected_countries:
+      unit:
+        one: "země"
+        other: "zemí"
+    stats_attributions_specimens:
+      unit:
+        one: "přiřazený exemplář k"
+        other: "přiřazené exempláře k"
+    stats_attributions_people:
+      unit:
+        one: "osoba"
+        other: "lidí"
+    stats_articles_specimens:
+      unit:
+        one: "exemplář použit v"
+        other: "exempláře použity v"
+    stats_articles_articles:
+      unit:
+        one: "práce"
+        other: "prací"
+    specimen_icon_count:
+      one: "%{coll_img} sbíral nebo %{det_img} identifikoval 1 exemplář."
+      other: "%{coll_img} sbíral nebo %{det_img} identifikoval %{count} exemplářů."
+  workshops:
+    title: Workshopy
