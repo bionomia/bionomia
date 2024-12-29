@@ -49,6 +49,7 @@
         %tr
           %th{scope: "col"} Article
           %th{scope: "col"} DOI
+          %th{scope: "col"} Download Occurrence Count
           %th{scope: "col"} Processed
           %th{scope: "col"} Created
 
@@ -62,6 +63,7 @@
                 %a{href: url("/admin/article/#{article.id}")} NO TITLE
             %td
               %a{href: "https://doi.org/#{article.doi}"} #{article.doi}
+            %td #{number_with_delimiter(article.gbif_occurrence_count)}
             %td
               - if article.processed
                 %span.text-success #{article.processed}

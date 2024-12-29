@@ -29,9 +29,9 @@ jobs:
       matrix:
         mysql: ['bitnami/mysql:8.3.0']
         elasticsearch: ['7.x-SNAPSHOT']
-        ruby-version: ['3.2']
+        ruby-version: ['3.3']
     env:
-      RUBY_VERSION: 3.2.1
+      RUBY_VERSION: 3.3.6
       BUNDLER_VERSION: 2.4.6
       RACK_ENV: test
       RUBY_YJIT_ENABLE: true
@@ -67,6 +67,7 @@ jobs:
       run: |
           RACK_ENV=test bundle exec rake db:create:all
           RACK_ENV=test bundle exec rake db:schema:load
+          RACK_ENV=test bundle exec rake db:seed:all
 
     - name: Runs Elasticsearch
       uses: elastic/elastic-github-actions/elasticsearch@master

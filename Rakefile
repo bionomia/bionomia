@@ -58,7 +58,6 @@ namespace :elastic do
 end
 
 namespace :db do
-
   desc "Migrate the database"
   task(:migrate => :environment) do
     ActiveRecord::Base.logger = Logger.new(STDOUT)
@@ -69,11 +68,13 @@ namespace :db do
   namespace :drop do
     task(:all) do
       if ['0.0.0.0', '127.0.0.1', 'localhost'].include?(Settings[:host].strip)
+
         Settings.add_source!({
           ssl_mode: Trilogy::SSL_PREFERRED_NOVERIFY,
           tls_min_version: Trilogy::TLS_VERSION_12
         })
         Settings.reload!
+
         database = Settings.delete(:database)
         ActiveRecord::Base.establish_connection(Settings.to_hash)
         ActiveRecord::Base.connection.execute("drop database if exists #{database}")
@@ -84,11 +85,13 @@ namespace :db do
   namespace :create do
     task(:all) do
       if ['0.0.0.0', '127.0.0.1', 'localhost'].include?(Settings[:host].strip)
+
         Settings.add_source!({
           ssl_mode: Trilogy::SSL_PREFERRED_NOVERIFY,
           tls_min_version: Trilogy::TLS_VERSION_12
         })
         Settings.reload!
+
         database = Settings.delete_field(:database)
         ActiveRecord::Base.establish_connection(Settings.to_hash)
         ActiveRecord::Base.connection.execute("create database if not exists #{database}")
@@ -104,11 +107,38 @@ namespace :db do
         # this needs to match the delimiter of your queries
         STATEMENT_SEPARATOR = ";\n"
 
+        Settings.add_source!({
+          ssl_mode: Trilogy::SSL_PREFERRED_NOVERIFY,
+          tls_min_version: Trilogy::TLS_VERSION_12
+        })
+        Settings.reload!
+
         ActiveRecord::Base.establish_connection(Settings.to_hash)
         script.split(STATEMENT_SEPARATOR).each do |stmt|
           ActiveRecord::Base.connection.execute(stmt)
         end
 
+      end
+    end
+  end
+
+  namespace :seed do
+    task(:all) do
+      if ['0.0.0.0', '127.0.0.1', 'localhost'].include?(Settings[:host].strip)
+        statements = [
+          "INSERT IGNORE INTO key_values(k,v) VALUES ('off_datetime', NULL), ('off_duration', NULL), ('online_when', NULL)"
+        ]
+
+        Settings.add_source!({
+          ssl_mode: Trilogy::SSL_PREFERRED_NOVERIFY,
+          tls_min_version: Trilogy::TLS_VERSION_12
+        })
+        Settings.reload!
+
+        ActiveRecord::Base.establish_connection(Settings.to_hash)
+        statements.each do |stmt|
+          ActiveRecord::Base.connection.execute(stmt)
+        end
       end
     end
   end

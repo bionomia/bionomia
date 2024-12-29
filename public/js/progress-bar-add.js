@@ -50,14 +50,18 @@ var ProgressBarAdd = (function($, window) {
            })
          }).done(function(data) {
             if (data.identifier) {
-               progress_bar.width('100%');
-               progress_bar.removeClass("bg-info").addClass("bg-success");
-               progress_bar.parent().parent().next().html(self.format_user_link(data));
+              progress_bar.width('100%');
+              progress_bar.removeClass("bg-info").addClass("bg-success");
+              progress_bar.parent().parent().next().html(self.format_user_link(data));
             } else {
-               progress_bar.width('100%');
-               progress_bar.removeClass("bg-info").addClass("bg-danger");
-               progress_bar.parent().parent().next().html(self.format_unsuccessful()).find("i").tooltip();
+              progress_bar.width('100%');
+              progress_bar.removeClass("bg-info").addClass("bg-danger");
+              progress_bar.parent().parent().next().html(self.format_unsuccessful()).find("i").tooltip();
             }
+         }).fail(function(data) {
+            progress_bar.width('100%');
+            progress_bar.removeClass("bg-info").addClass("bg-danger");
+            progress_bar.parent().parent().next().html(self.format_unsuccessful()).find("i").tooltip();
          });
      },
  

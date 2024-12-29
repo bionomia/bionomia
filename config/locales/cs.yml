@@ -190,6 +190,8 @@ cs:
         few: "scribes attributed specimens to collectors or determiners represented in this dataset"
         many: "scribes attributed specimens to collectors or determiners represented in this dataset"
         other: "písaři přiřadili exempláře sběratelům nebo určovatelům zastoupeným v této datové sadě"
+        other: "písaři přiřadili exempláře sběratelům nebo určovatelům zastoupeným v této datové sadě"
+    people: Lidé
     no_users_alert: Lidé dosud neprohlásili ani nebyli přiřazeni exempláře zastoupené v této datové sadě
     users_alert:
       unit:
@@ -253,6 +255,7 @@ cs:
     recommended_use: Doporučené použití
     title: Pro vývojáře
     code_title: "Pro vývojáře: Kód"
+    code: Kód
     clients: Klientské knihovny
     parser: Analyzátor jmen
     parse_names: Analyzovat lidská jména
@@ -546,7 +549,7 @@ cs:
     affiliation_none_alert: Publikace založené na exemplářích sbíraných nebo identifikovaných současným a předchozím personálem dosud nebyly zaznamenány GBIF
     affiliation_alert: "%{count} publikací použilo data o exemplářích stažená z GBIF založená na exemplářích sbíraných nebo identifikovaných současným a předchozím personálem během jejich působení v %{org_name}"
     collected_by: "Exempláře sbírány nebo identifikovány:"
-    science_enabled: Umožněná věda
+    science_enabled: Věda umožněná prostřednictvím exemplářů sbíraných nebo identifikovaných personálem
     impact: Dopad na činnosti v jiných organizacích
     no_metric_alert: "Současný a předchozí personál dosud neprohlásil ani nebyl přiřazen exempláře nyní kurátorované v jiných organizacích během jejich působení v %{org_name}."
     metric_alert: "Současný a předchozí personál prohlásil nebo byl přiřazen exempláře nyní kurátorované v následujících organizacích během jejich působení v %{org_name}."
@@ -568,6 +571,7 @@ cs:
     current: Současní
     previous: Předchozí
     metrics: Metriky
+    science_enabled: Umožněná věda
     member: člen
     current_members_count:
       unit:

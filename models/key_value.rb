@@ -14,4 +14,8 @@ class KeyValue < ActiveRecord::Base
     find_by_k(key).destroy rescue nil
   end
 
+  def self.mget(keys)
+    where(k: keys).map{|a| { "#{a.k}": a.v }}.reduce(&:merge) || {}
+  end
+
 end

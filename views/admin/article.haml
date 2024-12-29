@@ -51,6 +51,9 @@
           %a{href: "https://doi.org/#{@article.doi}"} #{@article.doi}
         %dt.col-sm-2 Abstract:
         %dd.col-sm-10.text-muted #{h(@article.abstract)}
+        %dt.col-sm-2 Download occurrence count:
+        %dd.col-sm-10
+          %span.badge.badge-light.badge-pill.citation-correction #{number_with_delimiter(@article.gbif_occurrence_count)}
         %dt.col-sm-2 Specimens used:
         %dd.col-sm-10
           %span.badge.badge-light.badge-pill.citation-correction #{number_with_delimiter(@article.article_occurrences.count)}
