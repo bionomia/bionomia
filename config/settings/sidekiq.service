@@ -70,7 +70,7 @@ WorkingDirectory=/var/www/bionomia
 # ExecStart=/home/deploy/.rvm/gems/ruby-2.6.5@gemset-name/wrappers/bundle exec sidekiq -e production
 # If you use rvm in production with gemset and ruby version/gemset is specified in .ruby-version,
 # .ruby-gemsetor or .rvmrc file in the working directory
-ExecStart=/usr/share/rvm/wrappers/ruby-3.2.1@bionomia/bundle exec sidekiq -C /var/www/bionomia/config/settings/sidekiq.yml -c 2 -r ./application.rb
+ExecStart=/usr/share/rvm/wrappers/ruby-3.3.6@bionomia/bundle exec sidekiq -C /var/www/bionomia/config/settings/sidekiq.yml -c 2 -r ./application.rb
 
 # Use `systemctl kill -s TSTP sidekiq` to quiet the Sidekiq process
 
