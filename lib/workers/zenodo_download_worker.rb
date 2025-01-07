@@ -119,11 +119,10 @@ module Bionomia
       CSV.open(csv_file, 'w') do |csv|
         csv << ["Subject", "Predicate", "Object"]
         UserOccurrence.joins(:user)
-          .select(:id, :occurrence_id, :action, :wikidata, :orcid)
-          .where(user_occurrences: { visible: true })
-          .where(users: { is_public: true })
-          .find_in_batches(batch_size: 10_000) do |group|
+          .select(:id, :occurrence_id, :action, :is_public, :wikidata, :orcid)
+          .in_batches(of: 10_000) do |group|
             group.each do |row|
+              next if row.action.nil? || !row.is_public
               if row.wikidata
                 user = "http://www.wikidata.org/entity/#{row.wikidata}"
               elsif row.orcid
