@@ -49,6 +49,9 @@ jobs:
         sudo sysctl -w fs.file-max=262144
         sudo sysctl -w vm.max_map_count=262144
 
+    - name: Install libmagic
+      run: sudo apt-get install libmagic-dev
+
     - name: Set up ruby
       uses: ruby/setup-ruby@v1
       with:
