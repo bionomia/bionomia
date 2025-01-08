@@ -30,6 +30,7 @@ CREATE TABLE `articles` (
   `abstract` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `gbif_dois` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `gbif_downloadkeys` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `gbif_occurrence_count` bigint DEFAULT '0',
   `processed` tinyint(1) DEFAULT NULL,
   `process_status` int DEFAULT '0',
   `mail_sent` tinyint(1) NOT NULL DEFAULT '0',
@@ -297,8 +298,8 @@ ALTER TABLE `occurrences`
   ADD PRIMARY KEY (`gbifID`),
   ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`,`occurrenceID`(36)),
   ADD KEY `country_code_idx` (`countryCode`),
-  ADD KEY `dateIdentified_processed_idx` (`dateIdentified_processed_month`,`dateIdentified_processed_day`,`dateIdentified_processed_year`) USING BTREE,
-  ADD KEY `eventDate_processed_idx` (`typeStatus`(50),`eventDate_processed_month`,`eventDate_processed_day`,`eventDate_processed_year`) USING BTREE;
+  ADD KEY `eventDate_processed_idx` (`typeStatus`(50),`eventDate_processed_month`,`eventDate_processed_day`,`eventDate_processed_year`),
+  ADD KEY `dateIdentified_processed_idx` (`dateIdentified_processed_month`,`dateIdentified_processed_day`,`dateIdentified_processed_year`);
 
 ALTER TABLE `occurrence_agents`
   ADD PRIMARY KEY (`id`),
