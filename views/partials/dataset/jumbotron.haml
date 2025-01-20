@@ -11,6 +11,13 @@
   - if @dataset.description
     %p.text-muted.text-left
       #{h(Sanitize.fragment(@dataset.description))}
+  
+  - if @dataset.administrative_contact
+    %p.text-muted.text-left
+      %strong
+        = I18n.t('dataset.primary_administrative_contact')
+      %br
+      = dataset_contact(dataset: @dataset)
 
   %p.mb-1.text-left
     - if @dataset.license && @dataset.license_icon

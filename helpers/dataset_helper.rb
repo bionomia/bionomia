@@ -170,6 +170,15 @@ module Sinatra
           end
         end
 
+        def dataset_contact(dataset:)
+          email = dataset.administrative_contact["email"].first rescue nil
+          name = [dataset.administrative_contact["firstName"], dataset.administrative_contact["lastName"]].join(" ").strip
+          name << "<br>" if !name.blank?
+          if email || name
+            "#{name} <a href= \"mailto:#{email}\">#{email}</a>".strip
+          end
+        end
+
       end
     end
   end
