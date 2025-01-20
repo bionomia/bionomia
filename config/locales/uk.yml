@@ -203,6 +203,7 @@ uk:
     not_all_features: Large dataset, not all features are available.
     badge_tooltip: Click to obtain HTML for this badge.
     badge_modal: Bionomia Dataset Badge
+    primary_administrative_contact: Primary administrative contact
   date:
     formats:
       month_and_year: "%B %Y"
