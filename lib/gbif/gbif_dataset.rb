@@ -13,6 +13,10 @@ module Bionomia
       end
     end
 
+    def contact(contacts: )
+      contacts.select{|contact| contact[:type] == "ADMINISTRATIVE_POINT_OF_CONTACT" && contact[:primary] == true}.first rescue nil
+    end
+
     def process_dataset(datasetkey)
       begin
         response = RestClient::Request.execute(
@@ -29,6 +33,7 @@ module Bionomia
         dataset.license = response[:license] || nil
         dataset.image_url = response[:logoUrl] || nil
         dataset.dataset_type = response[:type] || nil
+        dataset.administrative_contact = contact(contacts: response[:contacts])
         dataset.save
       rescue
       end

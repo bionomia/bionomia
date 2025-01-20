@@ -1,6 +1,8 @@
 class Dataset < ActiveRecord::Base
   attr_accessor :skip_callbacks
 
+  serialize :administrative_contact, coder: JSON
+
   has_many :occurrences, primary_key: :datasetKey, foreign_key: :datasetKey
   has_many :user_occurrences, through: :occurrences
 
