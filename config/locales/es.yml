@@ -169,6 +169,7 @@ es:
     not_all_features: Conjunto de datos grande, no todas las características están disponibles.
     badge_tooltip: Haga clic para obtener HTML para esta insignia.
     badge_modal: Insignia de datos de Bionomia
+    primary_administrative_contact: Primary administrative contact
   date:
     formats:
       month_and_year: "%B %Y"
