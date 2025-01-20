@@ -203,6 +203,7 @@ cs:
     not_all_features: Velká datová sada, ne všechny funkce jsou dostupné.
     badge_tooltip: Klikněte pro získání HTML tohoto odznaku.
     badge_modal: Bionomia odznak datové sady
+    primary_administrative_contact: Primary administrative contact
   date:
     formats:
       month_and_year: "%B %Y"
