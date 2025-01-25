@@ -37,9 +37,9 @@ cs:
     lede:
       unit:
         one: "surový řetězec z analyzovaných jmen sběratelů a určovatelů v datech exemplářů z GBIF"
-        few: "raw strings from parsed collector and determiner names in specimen data from GBIF"
-        many: "raw strings from parsed collector and determiner names in specimen data from GBIF"
-        other: "surové řetězce z analyzovaných jmen sběratelů a určovatelů v datech exemplářů z GBIF"
+        few: "nezpracované řetězce z analyzovaných jmen sběratelů a určovatelů v datech exemplářů z GBIF"
+        many: "nezpracovaných řetězců z analyzovaných jmen sběratelů a určovatelů v datech exemplářů z GBIF"
+        other: "nezpracovaných řetězců z analyzovaných jmen sběratelů a určovatelů v datech exemplářů z GBIF"
     search_none: "Pro %{searched} nebyl nalezen žádný agentní řetězec"
     search_count:
       unit:
@@ -54,8 +54,8 @@ cs:
     found_statement:
       unit:
         one: "exemplář nalezen. Ne všechny sloupce jsou zobrazeny."
-        few: "specimens found. Not all columns are shown."
-        many: "specimens found. Not all columns are shown."
+        few: "exempláře nalezeny. Ne všechny sloupce jsou zobrazeny."
+        many: "exemplářů nalezeno. Ne všechny sloupce jsou zobrazeny."
         other: "exempláře nalezeny. Ne všechny sloupce jsou zobrazeny."
     search_html: "Hledat %{agent_link} osobu a pomoci přiřadit jejich exempláře."
     example_agents: Náhodné vzorky nebo výsledky
@@ -75,8 +75,8 @@ cs:
     claims_alert:
       unit:
         one: "osoba sbírala nebo určovala exempláře zahrnuté v datech stažených z GBIF na podporu tohoto článku"
-        few: "people collected or identified specimens included in data downloaded from GBIF in support of this article"
-        many: "people collected or identified specimens included in data downloaded from GBIF in support of this article"
+        few: "lidé sbírali nebo určovali exempláře zahrnuté v datech stažených z GBIF na podporu tohoto článku"
+        many: "lidí sbíralo nebo určovalo exempláře zahrnuté v datech stažených z GBIF na podporu tohoto článku"
         other: "lidé sbírali nebo určovali exempláře zahrnuté v datech stažených z GBIF na podporu tohoto článku"
     placeholder: "Evoluce a systematika..."
     people: Lidé
@@ -203,7 +203,7 @@ cs:
     not_all_features: Velká datová sada, ne všechny funkce jsou dostupné.
     badge_tooltip: Klikněte pro získání HTML tohoto odznaku.
     badge_modal: Bionomia odznak datové sady
-    primary_administrative_contact: Primary administrative contact
+    primary_administrative_contact: Hlavní správní kontakt
   date:
     formats:
       month_and_year: "%B %Y"
@@ -952,8 +952,8 @@ cs:
     stats_articles_specimens:
       unit:
         one: "exemplář použit v"
-        few: "specimens used in"
-        many: "specimens used in"
+        few: "exempláře použity v"
+        many: "exemplářů použito v"
         other: "exempláře použity v"
     stats_articles_articles:
       unit:
