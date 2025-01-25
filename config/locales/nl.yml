@@ -169,6 +169,7 @@ nl:
     not_all_features: Large dataset, not all features are available.
     badge_tooltip: Klik om HTML voor deze badge te verkrijgen.
     badge_modal: Bionomia Dataset Badge
+    primary_administrative_contact: Primary administrative contact
   date:
     formats:
       month_and_year: "%B %Y"

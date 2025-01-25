@@ -169,6 +169,7 @@ fr:
     not_all_features: Grand jeu de données, toutes les fonctionnalités ne sont pas disponibles.
     badge_tooltip: Cliquez pour obtenir le code HTML de ce badge.
     badge_modal: Badge du jeu de données Bionomia
+    primary_administrative_contact: Primary administrative contact
   date:
     formats:
       month_and_year: "%B %Y"

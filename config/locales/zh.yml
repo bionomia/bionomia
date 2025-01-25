@@ -169,6 +169,7 @@ zh:
     not_all_features: 大型数据集，无法提供所有功能。
     badge_tooltip: 点击这里获取此徽章的链接 。
     badge_modal: Bionomia 数据集徽章。
+    primary_administrative_contact: Primary administrative contact
   date:
     formats:
       month_and_year: "%B %Y"
