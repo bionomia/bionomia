@@ -796,8 +796,8 @@ cs:
     number_collected:
       unit:
         one: "osoba sbírala exempláře z dat v GBIF"
-        few: "people collected specimens from data in GBIF"
-        many: "people collected specimens from data in GBIF"
+        few: "osoby sbíraly exempláře z dat v GBIF"
+        many: "osob sbíralo exempláře z dat v GBIF"
         other: "lidé sbírali exempláře z dat v GBIF"
     number_identified:
       unit:
