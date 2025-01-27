@@ -279,9 +279,9 @@ pt:
     basic_instructions_lede: Instruções básicas para você começar
     add_someone_lede: "Adicione alguém ainda não descoberto"
     country_name_lede: De países indicados no ORCID ou Wikidata
-    latest_lede: Join the scribes in acknowledging your peers, mentors, or anyone who inspires you
+    latest_lede: Junte-se aos escribas e reconheça os seus pares, mentores ou qualquer pessoa que o inspire
     country_lede: Junte-se aos autores para reconhecer seus colegas, mentores ou qualquer pessoa que o inspire
-    roster_lede: Join the scribes in acknowledging your peers, mentors, or anyone who inspires you
+    roster_lede: Junte-se aos escribas e reconheça os seus pares, mentores ou qualquer pessoa que o inspire
     person: Pessoa
     progress: Progresso
     public: Público
@@ -341,10 +341,10 @@ pt:
     switch: Trocar
     not_co_collector_name: "Espécimes não foram co-coletadas com %{name}."
     identified_for: Identificado para
-    no_identified_for_alert: Recipients of determinations have not yet been recorded.
+    no_identified_for_alert: Ainda não foram registados quaisquer pedidos ou prémios.
     identified_for_alert: "Escolha um coletor para ajustar as atribuições feitas para espécimes coletados por eles."
-    identified_for_name: "Specimens collected by %{name} and identified by %{other_name}."
-    not_identified_for_name: "Specimens have not been collected by %{name} and identified by %{other_name}."
+    identified_for_name: "Espécimes recolhidos por %{name} e identificados por %{other_name}."
+    not_identified_for_name: "Os espécimes não foram recolhidos por %{name} e identificados por %{other_name}."
     identified_for_count:
       one: "espécime coletado"
       other: "espécimes coletados"
@@ -355,7 +355,7 @@ pt:
     not_determiner_name: "Os espécimes não foram identificados por %{name} e coletados por %{other_name}."
     identified_by_count:
       one: "espécime identificado"
-      other: "identified specimens"
+      other: "espécimes identificados"
     bulk_attribution: Atribuições em massa
     reclaim_ignored: Reclaim Ignored
     fix_claims: Atribuições fixas
@@ -399,7 +399,7 @@ pt:
     occurrence_advance_message: Co-collected specimen records. Use the right arrow key on your keyboard or the arrow on the screen to advance a record until you receive one that you may attribute.
     spreadsheet: Spreadsheet
     bulk: Semi-automated
-    bulk_instructions: "WARNING: This feature requires care and precision. Choose an agent string from a list that is generated via the same search algorithm used to present candidate specimen records and then craft conditional statements in the form of JSON."
+    bulk_instructions: "AVISO: Esta funcionalidade requer cuidado e precisão. Escolha uma cadeia de agentes de uma lista que é gerada através do mesmo algoritmo de pesquisa utilizado para apresentar registos de espécimes candidatos e, em seguida, crie declarações condicionais sob a forma de JSON."
     discovered_agents: "Step 1: Choose an agent string parsed from content in dwc:recordedBy and dwc:identifiedBy. Numbers in square brackets indicate the number of unattributed records."
     bulk_json: "Step 2: Create a JSON statement where all key:value pairs will be treated as exact, case-dependent matches alongside your chosen agent string such as: { \"institutionCode\" : \"CAN\", \"eventDate\" : [2020, 2021] } or { \"scientificName LIKE ?\":\"Bolbelasmus %\"} . Recommended best practice is to include as many key:value pairs as is reasonable to prevent misattributions. Available keys are: %{keys}"
     bulk_count:
@@ -656,7 +656,7 @@ pt:
     updated: Your profile was updated.
     thanks: Obrigado
     attributed: attributed
-    unsubscribe_title: Unsubscribe
+    unsubscribe_title: Cancelar subscrição
     unsubscribe: "The email address %{email} is now unsubscribed from notifcations."
   roster:
     roster_title: Perfis Públicos
@@ -766,7 +766,7 @@ pt:
     private: O perfil ainda não está disponível publicamente.
     private_with_claims:
       unit:
-        one: "specimen was claimed or attributed, but this profile has not yet been made publicly available."
+        one: "foi reivindicado ou atribuído espécime, mas este perfil ainda não foi disponibilizado ao público."
         other: "specimens were claimed or attributed, but this profile has not yet been made publicly available."
     no_specimens_cited: As amostras não foram incluídas em downloads do GBIF e citadas neste artigo de pesquisa.
     specimen_used: Dados de espécime usados em
