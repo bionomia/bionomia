@@ -150,8 +150,8 @@ cs:
     identifiers_alert:
       unit:
         one: "datová sada s obsahem v dwc:recordedByID nebo dwc:identifiedByID"
-        few: "datasets with content in dwc:recordedByID or dwc:identifiedByID"
-        many: "datasets with content in dwc:recordedByID or dwc:identifiedByID"
+        few: "datové sady s obsahem v dwc:recordedByID nebo dwc:identifiedByID"
+        many: "datových sad s obsahem v dwc:recordedByID nebo dwc:identifiedByID"
         other: "datové sady s obsahem v dwc:recordedByID nebo dwc:identifiedByID"
     placeholder: Motýli Brazílie
     people: Lidé
@@ -173,8 +173,8 @@ cs:
     agents_alert_unclaimed:
       unit:
         one: "surový řetězec z analyzovaných jmen sběratelů a určovatelů v nepřiřazených datech exemplářů zahrnutých v této datové sadě"
-        few: "raw strings from parsed collector and determiner names in unattributed specimen data included in this dataset"
-        many: "raw strings from parsed collector and determiner names in unattributed specimen data included in this dataset"
+        few: "surové řetězce z analyzovaných jmen sběratelů a určovatelů v nepřiřazených datech exemplářů zahrnutých v této datové sadě"
+        many: "surových řetězců z analyzovaných jmen sběratelů a určovatelů v nepřiřazených datech exemplářů zahrnutých v této datové sadě"
         other: "surové řetězce z analyzovaných jmen sběratelů a určovatelů v nepřiřazených datech exemplářů zahrnutých v této datové sadě"
     none_found: "Pro %{searched} nebyly nalezeny žádné datové sady"
     search_found:
@@ -187,16 +187,16 @@ cs:
     scribes_alert:
       unit:
         one: "písař přiřadil exempláře sběratelům nebo určovatelům zastoupeným v této datové sadě"
-        few: "scribes attributed specimens to collectors or determiners represented in this dataset"
-        many: "scribes attributed specimens to collectors or determiners represented in this dataset"
+        few: "písaři přiřadili exempláře sběratelům nebo určovatelům zastoupeným v této datové sadě"
+        many: "písařů přiřadilo exempláře sběratelům nebo určovatelům zastoupeným v této datové sadě"
         other: "písaři přiřadili exempláře sběratelům nebo určovatelům zastoupeným v této datové sadě"
     no_users_alert: Lidé dosud neprohlásili ani nebyli přiřazeni exempláře zastoupené v této datové sadě
     users_alert:
       unit:
-        one: "osoba prohlásila nebo byla přiřazena exempláře zastoupené v této datové sadě"
-        few: "people claimed or were attributed specimens represented in this dataset"
-        many: "people claimed or were attributed specimens represented in this dataset"
-        other: "lidé prohlásili nebo byli přiřazeni exempláře zastoupené v této datové sadě"
+        one: "osoba, která si nárokovala nebo jí byly připsány exempláře zastoupené v tomto souboru dat"
+        few: "osoby, které si nárokovaly nebo jim byly připsány exempláře zastoupené v tomto souboru dat"
+        many: "osob, které si nárokovaly nebo jim byly připsány exempláře zastoupené v tomto souboru dat"
+        other: "osob, které si nárokovaly nebo jim byly připsány exempláře zastoupené v tomto souboru dat"
     timeline: Časová osa
     none_collected_timeline: "Nikdo nesbíral a neuváděl datum sběru"
     none_identified_timeline: "Nikdo neurčoval a neuváděl datum určení"
@@ -363,8 +363,8 @@ cs:
     upload_message:
       unit:
         one: "záznam byl zpracován. Existující nároky, pokud byly přítomny ve vašem nahrávání, byly přeskočeny."
-        few: "records were handled. Existing claims, if present in your upload, were skipped."
-        many: "records were handled. Existing claims, if present in your upload, were skipped."
+        few: "záznamy byly zpracovány. Existující nároky, pokud byly přítomny ve vašem nahrávání, byly přeskočeny."
+        many: "záznamů bylo zpracováno. Existující nároky, pokud byly přítomny ve vašem nahrávání, byly přeskočeny."
         other: "záznamy byly zpracovány. Existující nároky, pokud byly přítomny ve vašem nahrávání, byly přeskočeny."
     help_question: "Chcete pomoci přiřadit exempláře k %{name}?"
     try_again: Zkuste to znovu.
@@ -383,8 +383,8 @@ cs:
     not_identified_for_name: "Exempláře nebyly sbírány %{name} a identifikovány %{other_name}."
     identified_for_count:
       one: "sbíraný exemplář"
-      few: "collected specimens"
-      many: "collected specimens"
+      few: "sbírané exempláře"
+      many: "sbíraných exemplářů"
       other: "sbírané exempláře"
     identifications_by: Identifikace od
     no_determiners_alert: Určovatelé dosud nebyli zaznamenáni.
@@ -393,8 +393,8 @@ cs:
     not_determiner_name: "Exempláře nebyly identifikovány %{name} a sbírány %{other_name}."
     identified_by_count:
       one: "identifikovaný exemplář"
-      few: "identified specimens"
-      many: "identified specimens"
+      few: "identifikované exempláře"
+      many: "identifikovaných exemplářů"
       other: "identifikované exempláře"
     bulk_attribution: Hromadná přiřazení
     reclaim_ignored: Nárokovat ignorované
@@ -409,13 +409,13 @@ cs:
     add_orcid_wikidata: Přidat ORCID identifikátor nebo Wikidata Q číslo
     attribute_count:
       one: Pomozte přiřadit 1 exemplář.
-      few: Help attribute %{count} specimens.
-      many: Help attribute %{count} specimens.
+      few: Pomozte přiřadit %{count} exempláře.
+      many: Pomozte přiřadit %{count} exemplářů.
       other: Pomozte přiřadit %{count} exemplářů.
     specimens_attributed_count:
       one: přiřazený exemplář
-      few: specimens attributed
-      many: specimens attributed
+      few: přiřazené exempláře
+      many: přiřazených exemplářů
       other: přiřazené exempláře
     download: Stáhnout
     download_label: Stáhnout objevené záznamy
@@ -423,8 +423,8 @@ cs:
     choose_instructions_html: "Vyberte %{coll_img} sbíráno, %{det_img} identifikováno, nebo Obojí."
     search_count:
       one: "1 výsledek hledání pro %{search}"
-      few: "%{count} search results for %{search}"
-      many: "%{count} search results for %{search}"
+      few: "%{count} výsledky hledání pro %{search}"
+      many: "%{count} výsledků hledání pro %{search}"
       other: "%{count} výsledků hledání pro %{search}"
     make_public_yes: "Ano, zveřejnit"
     other_scribes: "Ostatní písaři také pomohli přiřadit exempláře %{user_name}:"
@@ -439,8 +439,8 @@ cs:
     add_someone_href: "přidat někoho"
     co_collected_count:
       one: "spolu-sbíraný exemplář"
-      few: "co-collected specimens"
-      many: "co-collected specimens"
+      few: "spolu-sbírané exempláře"
+      many: "spolu-sbíraných exemplářů"
       other: "spolu-sbírané exempláře"
     occurrence_title: Pomozte ostatním podle záznamu o exempláři
     occurrence: Exempláře
@@ -452,8 +452,8 @@ cs:
     bulk_json: "Krok 2: Vytvořte JSON výrok, kde všechny páry klíč:hodnota budou považovány za přesné, na velikosti písmen závislé shody vedle vašeho vybraného agentního řetězce, například: { \"institutionCode\" : \"CAN\", \"eventDate\" : [2020, 2021] } nebo { \"scientificName LIKE ?\":\"Bolbelasmus %\"}. Doporučená nejlepší praxe je zahrnout co nejvíce párů klíč:hodnota, jak je rozumné, aby se předešlo nesprávným přiřazením. Dostupné klíče jsou: %{keys}"
     bulk_count:
       one: "Celkem byl zpracován 1 záznam."
-      few: "A total of %{count} records were handled."
-      many: "A total of %{count} records were handled."
+      few: "Celkem byly zpracovány %{count} záznamy."
+      many: "Celkem bylo zpracováno %{count} záznamů."
       other: "Celkem bylo zpracováno %{count} záznamů."
   home:
     tagline: Spojte přírodovědné exempláře se sběrateli světa.
@@ -563,8 +563,8 @@ cs:
     search_alert:
       unit:
         one: "výsledek hledání pro"
-        few: "search results for"
-        many: "search results for"
+        few: "výsledky hledání pro"
+        many: "výsledků hledání pro"
         other: "výsledky hledání pro"
     current: Současní
     previous: Předchozí
@@ -573,15 +573,15 @@ cs:
     current_members_count:
       unit:
         one: současný člen
-        few: current members
-        many: current members
+        few: současní členové
+        many: současných členů
         other: současní členové
     past_members_count:
       unit:
-        one: předchozí člen
-        few: past members
-        many: past members
-        other: předchozí členové
+        one: bývalý člen
+        few: bývalí členové
+        many: bývalých členů
+        other: bývalí členové
     under_repair: Tato funkce je momentálně opravována pro lepší výkon.
   pagy:
     next: ">"
@@ -624,9 +624,9 @@ cs:
     no_citation_alert: Vaše exempláře nebyly zahrnuty ve stažení z GBIF na podporu této studie.
     has_science:
       unit:
-        one: "publikace použila vaše data o exemplářích stažené z GBIF"
-        few: "publications made use of your specimen data downloaded from GBIF"
-        many: "publications made use of your specimen data downloaded from GBIF"
+        one: "publikace použila vaše data o exemplářích stažených z GBIF"
+        few: "publikace použily vaše data o exemplářích stažených z GBIF"
+        many: "publikací použilo vaše data o exemplářích stažených z GBIF"
         other: "publikace použily vaše data o exemplářích stažené z GBIF"
     identified_from: Identifikováno z
     collected_from: Sbíráno z
@@ -675,8 +675,8 @@ cs:
     latest_helped: "Naposledy v %{time}"
     attributed_count:
       one: "přiřazený exemplář"
-      few: "specimens attributed"
-      many: "specimens attributed"
+      few: "přiřazené exempláře"
+      many: "přiřazených exemplářů"
       other: "přiřazené exempláře"
     attributions: Přiřazení provedena
     private_message_html: "Váš profil je soukromý. Nárokujte své %{specimens} a poté jej zveřejněte v %{settings}, abyste maximalizovali opětovné použití."
@@ -784,8 +784,8 @@ cs:
     search_found:
       unit:
         one: "výsledek hledání pro"
-        few: "search results for"
-        many: "search results for"
+        few: "výsledky hledání pro"
+        many: "výsledků hledání pro"
         other: "výsledky hledání pro"
     people: Lidé
     visualizations: Vizualizace
