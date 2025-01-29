@@ -126,7 +126,7 @@ module Bionomia
     end
 
     def defaults
-      { first_page_only: false, max_size: 100_000_000 }
+      { first_page_only: false, max_size: KeyValue.get("gbif_download_max_size").to_i }
     end
 
     def process_data_packages(article)
@@ -175,7 +175,6 @@ module Bionomia
             end
             tmp_csv.unlink
           end
-
           tmp_file.unlink
         end
       end

@@ -28,7 +28,7 @@ end.parse!
 
 if options[:from]
   params = {
-    max_size: 100_000_000,
+    max_size: KeyValue.get("gbif_download_max_size").to_i,
     from: options[:from]
   }
   tracker = Bionomia::GbifTracker.new(params)

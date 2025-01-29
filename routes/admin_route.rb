@@ -17,7 +17,7 @@ module Sinatra
             get '/articles/check-new.json' do
               content_type "application/json", charset: 'utf-8'
               params = {
-                max_size: 100_000_000,
+                max_size: KeyValue.get("gbif_download_max_size").to_i,
                 from: (Date.today - 7).to_s
               }
               tracker = ::Bionomia::GbifTracker.new(params)
@@ -42,7 +42,7 @@ module Sinatra
               end
 
               params = {
-                max_size: 100_000_000,
+                max_size: KeyValue.get("gbif_download_max_size").to_i,
                 first_page_only: true
               }
               tracker = ::Bionomia::GbifTracker.new(params)
