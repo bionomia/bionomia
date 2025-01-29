@@ -69,20 +69,16 @@ module Bionomia
           results = JSON.parse(response, :symbolize_names => true)[:results] rescue []
           if results.size > 0
             results.each do |result|
-              begin
-                if result[:identifiers][:doi] && !result[:gbifDownloadKey].empty?
-                  occurrence_count = downloadkey_occurrences(keys: result[:gbifDownloadKey])
-                  yielder << {
-                    doi: result[:identifiers][:doi],
-                    abstract: result[:abstract],
-                    gbif_dois: result[:tags].map{ |d| d.sub("gbifDOI:","") if d[0..7] == "gbifDOI:" }.compact,
-                    gbif_downloadkeys: result[:gbifDownloadKey],
-                    gbif_occurrence_count: occurrence_count,
-                    created: result[:added]
-                  }
-                end
-              rescue
-              end
+              next if Article.find_by_doi(result[:identifiers][:doi]) || result[:gbifDownloadKey].empty?
+              occurrence_count = downloadkey_occurrences(keys: result[:gbifDownloadKey])
+              yielder << {
+                doi: result[:identifiers][:doi],
+                abstract: result[:abstract],
+                gbif_dois: result[:tags].map{ |d| d.sub("gbifDOI:","") if d[0..7] == "gbifDOI:" }.compact,
+                gbif_downloadkeys: result[:gbifDownloadKey],
+                gbif_occurrence_count: occurrence_count,
+                created: result[:added]
+              }
             end
           else
             raise StopIteration
