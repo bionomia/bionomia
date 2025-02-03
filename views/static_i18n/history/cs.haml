@@ -1,0 +1,37 @@
+- content_for :title, "History"
+- content_for :scripts do
+  :javascript
+    $(function() {
+      Application.init();
+    });
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2
+        History
+
+.row.mt-4
+  .col-12.col-xl-6.mb-3
+    .card
+      .card-header.border-bottom
+        %h4
+          A Rebrand
+      .card-body.mt-3
+        %p June 15, 2020
+        %p Friends,
+        %p
+          I must rebrand Bloodhound Tracker including a new domain name. I stumbled across a paper in June 2020 and I ask that you please set aside about hour or more to read it:
+        %p
+          Parry, T.D., and C.W. Yingling. 2020. Slave Hounds and Abolition in the Americas.
+          %em Past & Present
+          246: 69–108.
+          = link_to "https://doi.org/10.1093/pastj/gtz020", "https://doi.org/10.1093/pastj/gtz020"
+        %p.clearfix
+          %img.float-left.mr-3{src:"/images/bloodhound_logo.png", alt:"Bloodhound Tracker"}
+          I am horrified by the events in that paper and I am ashamed of my naivety. Bloodhound as a brand and its logo are inexcusable. Natural history museums of the world have
+          = link_to "acknowledged their role", "https://www.nhm.ac.uk/discover/news/2019/july/are-natural-history-museums-inherently-racist.html"
+          in colonialism and the transatlantic slave trade. I reject any whitewashing of this past. All Black and Indigenous People of Colour must feel comfortable and empowered to be here, to participate, to learn, and to lead.
+        %p
+          All links from Bloodhound Tracker redirect to Bionomia. On December 1, 2020, the Bloodhound Tracker site will be entirely eliminated, which ought to provide sufficient time for search indices and sites to update links and to use the new logo.
+        %p
+          David P. Shorthouse

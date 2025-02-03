@@ -1,0 +1,80 @@
+- content_for :title, "Help Attribute Specimens"
+- content_for :scripts do
+  %script{src: "/js/progress-bar-add.js"}
+  :javascript
+    $(function() {
+      Application.init("", "GET", "/help-others");
+      $('textarea').on('keypress', function (e) {
+        var textarea = $(this),
+        numberOfLines = (textarea.val().match(/\n/g) || []).length + 1,
+        maxRows = parseInt(textarea.attr('data-max-rows'));
+        if (e.which === 13 && numberOfLines === maxRows ) {
+          return false;
+        }
+      });
+      var ids = $.map($('.progress-bar'), function(obj) { return $(obj).attr("data-identifier"); });
+      Application.forEachParallel(ids, ProgressBarAdd.init, 10);
+    });
+
+- content_for :jumbotron do
+  .jumbotron.jumbotron-fluid.d-flex.flex-wrap
+    .mr-auto.p-2
+      %h1.h2
+        Help Attribute Specimens
+      %p.lead.text-muted
+        Add someone not yet discovered
+    = haml :'partials/help/search', layout: false
+
+= haml :'partials/help/main_tabs', layout: false, locals: { active_main_tab: "add" }
+
+.mt-4
+  .alert.alert-info.tiny-margins{role: "alert"}
+    Couldn't find someone?
+    %ul
+      %li
+        %strong
+          Living:
+        Ask them to create an
+        = link_to "ORCID account", "https://orcid.org/register"
+        with a publicly available name. If they assign themselves one or more of the keywords
+        %span.font-italic #{Settings.orcid.keywords.join(", ")}
+        to their ORCID account, Bionomia will add them the following day
+      %li
+        %strong
+          Deceased:
+        Search on
+        = link_to "Wikidata", "https://www.wikidata.org"
+        and ensure they have a death date and there is a value for any of the properties:
+        %span.font-italic #{::Bionomia::WikidataSearch::PEOPLE_PROPERTIES.keys.join(", ")}
+        \. Bionomia will also add them by the following day.
+
+%h4
+  Add People
+
+%form.helpers#form-user-wrapper{method: :post, action: "/help-others/add", "accept-charset": "UTF-8"}
+  .d-flex.flex-sm-row.flex-column.mt-3
+    .form-group
+      %label.font-weight-bold{for: "identifiers"} Add ORCID Identifiers or Wikidata Q Numbers
+      %textarea.form-control{name: "identifiers", rows: 5, "data-max-rows": 50, placeholder:"Q3734567\n0000-0002-0112-8837"}
+      %input{type: :hidden, name:"authenticity_token", value:"#{env['rack.session'][:csrf]}"}
+      %input{type: :submit, class:"btn btn-success mt-3", value: "Add"}
+
+- if flash[:identifiers] && !flash[:identifiers].empty?
+  %a{name: "progress"}
+  %table#add-users.table.table-hover.table-sm.mt-3.mb-3
+    %thead.thead-light
+      %th{scope: "col"}
+      %th{scope: "col"}= I18n.t('help.progress')
+      %th{scope: "col"}
+    %tbody
+      - flash[:identifiers].each do |identifier|
+        %tr
+          %td.w-25{scope: "row"}= "#{identifier}"
+          %td.w-10
+            .progress.progress-border
+              .progress-bar.bg-info{"data-identifier": identifier, role:"progressbar", style:"width: 0%;", "aria-valuenow":"0", "aria-valuemin":"0", "aria-valuemax":"100", "aria-label":"#{I18n.t('user.progress')}"}
+          %td.w-65
+
+  %script#failed-result{type:"text/x-handlebars-template"}
+    %i.fa-solid.fa-exclamation-triangle.text-warning{"data-toggle":"tooltip", title: "Identifier incorrectly formatted, or if a wikidata Q number then item is either not a human, not deceased, or has no family name."}
+    Unsuccessful
