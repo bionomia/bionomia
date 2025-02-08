@@ -119,10 +119,17 @@ module Bionomia
       aliases = data[:person][:"other-names"][:"other-name"].map{|n| n[:content].strip} rescue []
 
       fullname = "#{given} #{family}".strip
+
+      # given name is the only required field for ORCID. Use it as a label when necessary
+      if !family && !label && given
+        label = given
+      end
+
       if label && label != fullname
         aliases << fullname
       end
-      if !family
+
+      if !family && label != fullname
         aliases << given
       end
 
