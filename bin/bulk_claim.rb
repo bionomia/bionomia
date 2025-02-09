@@ -89,6 +89,7 @@ if options[:file]
     batch.each do |id|
       begin
         u = User.find(id)
+        u.skip_callbacks = true
         if u.wikidata && !u.is_public?
           u.is_public = true
           u.save

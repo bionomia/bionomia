@@ -73,6 +73,7 @@ module Bionomia
     
         if pub[:doi].nil?
           @z.delete_draft(id: id)
+          puts "Update failed".red
         else
           KeyValue.set("zenodo_doi", "https://doi.org/#{pub[:doi]}")
         end

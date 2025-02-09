@@ -34,6 +34,7 @@ module Sinatra
               orcid = session_data[:uid]
               check_banned(orcid)
 
+              #Placeholder material, will be further updated from the after_create callback in User model
               family = session_data[:info][:last_name] rescue nil
               given = session_data[:info][:first_name] rescue nil
               email = session_data[:info][:email] rescue nil
@@ -41,6 +42,7 @@ module Sinatra
               country_code = session_data[:extra][:raw_info][:location]
               country = I18nData.countries(:en)[country_code] rescue nil
               description = session_data[:info][:description] rescue nil
+
               user = User.create_with(
                             family: family,
                             given: given,
@@ -52,6 +54,7 @@ module Sinatra
                             description: description
                           )
                          .find_or_create_by(orcid: orcid)
+
               user.update(visited: Time.now)
               session[:omniauth] = OpenStruct.new({ id: user.id })
               if request.env['omniauth.origin']
