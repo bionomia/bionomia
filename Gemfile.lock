@@ -5,6 +5,17 @@ GIT
     active_record_union (1.3.0)
       activerecord (>= 6.0)
 
+GIT
+  remote: https://github.com/dshorthouse/wikidata-client
+  revision: 382189655638097757705f484f1ae1c93ebd2306
+  branch: patch-1
+  specs:
+    wikidata-client (0.1.0)
+      excon (~> 0.92)
+      faraday (~> 2.2)
+      faraday-excon (~> 2.1)
+      hashie (~> 5.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -130,7 +141,7 @@ GEM
     mime-types (3.6.0)
       logger
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2025.0220)
+    mime-types-data (3.2025.0304)
     mini_magick (5.2.0)
       benchmark
       logger
@@ -200,7 +211,7 @@ GEM
     puma (6.6.0)
       nio4r (~> 2.0)
     racc (1.8.1)
-    rack (3.1.10)
+    rack (3.1.11)
     rack-contrib (2.5.0)
       rack (< 4)
     rack-protection (4.1.1)
@@ -232,7 +243,7 @@ GEM
       link_header (~> 0.0, >= 0.0.8)
     redis (5.4.0)
       redis-client (>= 0.22.0)
-    redis-client (0.23.2)
+    redis-client (0.24.0)
       connection_pool
     require_all (3.0.0)
     rest-client (2.1.0)
@@ -265,12 +276,12 @@ GEM
       crass (~> 1.0.2)
       nokogiri (>= 1.16.8)
     securerandom (0.4.1)
-    sidekiq (7.3.9)
-      base64
-      connection_pool (>= 2.3.0)
-      logger
-      rack (>= 2.2.4)
-      redis-client (>= 0.22.2)
+    sidekiq (8.0.1)
+      connection_pool (>= 2.5.0)
+      json (>= 2.9.0)
+      logger (>= 1.6.2)
+      rack (>= 3.1.0)
+      redis-client (>= 0.23.2)
     simple_po_parser (1.1.6)
     sinatra (4.1.1)
       logger (>= 1.6.0)
@@ -313,11 +324,6 @@ GEM
     unicode_utils (1.4.0)
     uri (1.0.3)
     version_gem (1.1.6)
-    wikidata-client (0.1.0)
-      excon (~> 0.92)
-      faraday (~> 2.2)
-      faraday-excon (~> 2.1)
-      hashie (~> 5.0)
 
 PLATFORMS
   x86_64-darwin-23
@@ -388,7 +394,7 @@ DEPENDENCIES
   sparql-client
   trilogy
   typhoeus
-  wikidata-client
+  wikidata-client!
 
 RUBY VERSION
    ruby 3.3.6p108

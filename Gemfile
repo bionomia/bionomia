@@ -61,7 +61,7 @@ gem 'sitemap_generator'
 gem 'sort_alphabetical'
 gem 'sparql-client'
 gem 'typhoeus'
-gem 'wikidata-client'
+gem 'wikidata-client', git: 'https://github.com/dshorthouse/wikidata-client', branch: 'patch-1'
 
 group :production do
   gem 'passenger'
