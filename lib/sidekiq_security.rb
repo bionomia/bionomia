@@ -11,6 +11,7 @@ module Sinatra
                   user = User.find(session[:omniauth].id) rescue nil
                   session[:sidekiqauth] = true if user && user.is_admin?
                end
+               redirect "/admin" if !session[:sidekiqauth]
             end
          end
 
