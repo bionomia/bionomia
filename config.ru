@@ -14,7 +14,7 @@ Sidekiq::Web.use Rack::Session::Cookie, key: 'rack.session',
 Sidekiq::Web.use Rack::Protection::AuthenticityToken
 
 if defined?(Sidekiq::Web)
-   Sidekiq::Web.register Sinatra::Bionomia::SidekiqSecurity
+   #Sidekiq::Web.configure {|cfg| cfg.register(Sinatra::Bionomia::SidekiqSecurity, name: 'SidekiqSecurity', tab: 'security', index: 'admin') }
 end
 
 if defined?(PhusionPassenger)
