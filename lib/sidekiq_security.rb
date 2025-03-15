@@ -2,16 +2,22 @@
 
 module Sinatra
    module Bionomia
-      module SidekiqSecurity
+      class SidekiqSecurity
 
-         def self.registered(app)
-            app.before do
-               redirect "/admin" if !session[:omniauth]
-               if !session[:sidekiqauth]
-                  user = User.find(session[:omniauth].id) rescue nil
-                  session[:sidekiqauth] = true if user && user.is_admin?
+         def initialize(app, options = nil)
+            @app = app
+         end
+
+         def call(env)
+            if env["REQUEST_PATH"][0..13] == "/admin/sidekiq"
+               user = User.find(env["rack.session"]["omniauth"].id) rescue nil
+               if user && user.is_admin?
+                  @app.call(env)
+               else
+                  [302, { "location" => "/admin" }, []]
                end
-               redirect "/admin" if !session[:sidekiqauth]
+            else
+               @app.call(env)
             end
          end
 

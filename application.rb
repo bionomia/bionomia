@@ -22,16 +22,6 @@ class BIONOMIA < Sinatra::Base
   set :protection, :except => [:json_csrf, :remote]
   set :strict_paths, false
 
-  offline_settings = KeyValue.mget(["off_datetime", "off_duration", "online_when"]) rescue {}
-  if offline_settings
-    Settings.add_source!({
-      off_datetime: offline_settings[:off_datetime],
-      off_duration: offline_settings[:off_duration],
-      online_when: offline_settings[:online_when]
-    })
-    Settings.reload!
-  end
-
   load_locales File.join(root, 'config', 'locales')
   I18n.available_locales = [:en, :fr, :es, :pt, :de, :zh, :cs]
 
@@ -40,29 +30,6 @@ class BIONOMIA < Sinatra::Base
   Pagy::DEFAULT[:limit] = 30
   Pagy::DEFAULT[:size]  = 7
   Pagy::DEFAULT[:overflow] = :last_page
-
-  Sidekiq.configure_server do |config|
-    config.redis = { 
-      url: Settings.redis.url,
-      size: Settings.redis.size,
-      timeout: 5,
-      ssl_params: {
-        verify_mode: OpenSSL::SSL::VERIFY_NONE
-      }
-    }
-    config.average_scheduled_poll_interval = 30
-  end
-  
-  Sidekiq.configure_client do |config|
-    config.redis = {
-      url: Settings.redis.url,
-      size: Settings.redis.size,
-      timeout: 5,
-      ssl_params: {
-        verify_mode: OpenSSL::SSL::VERIFY_NONE
-      }
-    }
-  end
 
   not_found do
     haml :oops if !content_type

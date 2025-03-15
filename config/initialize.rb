@@ -10,6 +10,16 @@ module Sinatra
           app.use Rack::MethodOverride
           app.use Rack::JSONBodyParser, verbs: ['GET', 'PUT', 'POST', 'DELETE']
 
+          offline_settings = KeyValue.mget(["off_datetime", "off_duration", "online_when"]) rescue {}
+          if offline_settings
+            Settings.add_source!({
+              off_datetime: offline_settings[:off_datetime],
+              off_duration: offline_settings[:off_duration],
+              online_when: offline_settings[:online_when]
+            })
+            Settings.reload!
+          end
+
           secure = false
           if app.environment == :production
             secure = true
@@ -18,6 +28,7 @@ module Sinatra
             end
           end
 
+          # This is already in config.ru so why we do again???
           app.use Rack::Session::Cookie, key: 'rack.session',
                                      path: '/',
                                      secret: Settings.orcid.key * 4,
@@ -28,6 +39,7 @@ module Sinatra
                                      same_site: :lax
                                      
           app.use Rack::Protection::AuthenticityToken
+          app.use Sinatra::Bionomia::SidekiqSecurity
 
           app.use OmniAuth::Builder do
             provider :orcid, Settings.orcid.key, Settings.orcid.secret,
@@ -60,6 +72,29 @@ module Sinatra
                 :redirect_uri => Settings.base_url + '/auth/zenodo/callback'
               }
            end
+
+          Sidekiq.configure_server do |config|
+            config.redis = { 
+              url: Settings.redis.url,
+              size: Settings.redis.size,
+              timeout: 5,
+              ssl_params: {
+                verify_mode: OpenSSL::SSL::VERIFY_NONE
+              }
+            }
+            config.average_scheduled_poll_interval = 30
+          end
+          
+          Sidekiq.configure_client do |config|
+            config.redis = {
+              url: Settings.redis.url,
+              size: Settings.redis.size,
+              timeout: 5,
+              ssl_params: {
+                verify_mode: OpenSSL::SSL::VERIFY_NONE
+              }
+            }
+          end
 
           app.use Sinatra::Bionomia::Model::QueryCache
 
