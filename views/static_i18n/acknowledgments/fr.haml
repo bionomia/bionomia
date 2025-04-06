@@ -1,16 +1,7 @@
 - content_for :title, I18n.t('acknowledgments.acknowledgments_title')
 - content_for :scripts do
-  %script{src: "//crowdin.com/js/crowdjet/crowdjet.js"}
   :javascript
     $(function() {
-      var checkExist = setInterval(function() {
-        if ($('#crowdjet-expand-container').children().length > 0) {
-          $('#crowdjet-container').css("position", "relative");
-          $('#crowdjet-expand-container').css("position", "absolute");
-          $('#crowdin-widget').show();
-          clearInterval(checkExist);
-        }
-      }, 1000);
       Application.init();
     });
 
@@ -103,7 +94,3 @@
               %img{src: "https://badges.crowdin.net/bionomia/localized.svg"}
           Want to help translate into other languages? Visit
           = link_to "https://translate.bionomia.net", "https://translate.bionomia.net"
-          or click the Crowdin widget below.
-        #crowdin-widget{style:"position:relative;min-height:5em;padding-bottom:80px;display:none;"}
-          #crowdjet-container{"data-project-id": 462580, "data-language-code": "fr", style:"position:absolute;top:80px;left:0px;"}
-          #crowdjet-expand-container{style:"position:absolute;top:0px;left:0px;"}

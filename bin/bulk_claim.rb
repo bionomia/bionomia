@@ -96,7 +96,7 @@ if options[:file]
         end
         u.flush_caches
       rescue
-        puts "#{id} did not flush".red
+        puts "#{u.identifier} did not flush".red
       end
     end
   end
