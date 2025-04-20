@@ -85,21 +85,17 @@ if options[:file]
     end
   end
 
-  Parallel.each(all_users.values.in_groups_of(3, false), progress: "Flushing caches...", in_threads: 3) do |batch|
-    batch.each do |id|
-      begin
-        u = User.find(id)
-        u.skip_callbacks = true
-        if u.wikidata && !u.is_public?
-          u.is_public = true
-          u.save
-        end
-        u.flush_caches
-      rescue
-        puts "#{u.identifier} did not flush".red
-      end
+  all_users.values.each do |id|
+    u = User.find(id)
+    u.skip_callbacks = true
+    if u.wikidata && !u.is_public?
+      u.is_public = true
+      u.save
     end
+    vars = { id: u.id }.stringify_keys
+    ::Bionomia::UserWorker.perform_async(vars) 
   end
+
 elsif options[:agent_id] && ![options[:orcid], options[:wikidata]].compact.empty?
   agent = Agent.find(options[:agent_id])
 
