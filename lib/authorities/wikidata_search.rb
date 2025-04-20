@@ -453,7 +453,7 @@ module Bionomia
       if !wiki_user ||
           wiki_user.properties("P31").size == 0 ||
          !wiki_user.properties("P31")[0].respond_to?("title") ||
-          wiki_user.properties("P31")[0].title != "human"
+          !["human", "Homo sapiens"].include?(wiki_user.properties("P31")[0].title)
         return
       end
 
