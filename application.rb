@@ -14,6 +14,7 @@ class BIONOMIA < Sinatra::Base
   register Sinatra::Bionomia::Helper::Initialize
   register Sinatra::Bionomia::Route::Initialize
   register Sinatra::Bionomia::Model::Initialize
+  register Sinatra::Bionomia::Config::InitializeState
 
   set :root, File.dirname(__FILE__)
   set :haml, :format => :html5

@@ -83,6 +83,7 @@ require 'faraday/typhoeus'
 require 'sort_alphabetical'
 
 require_relative File.join(File.dirname(__FILE__), 'config', 'initialize')
+require_relative File.join(File.dirname(__FILE__), 'config', 'initialize_state')
 
 Encoding.default_internal = Encoding::UTF_8
 Encoding.default_external = Encoding::UTF_8
