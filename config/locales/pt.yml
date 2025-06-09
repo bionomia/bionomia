@@ -127,7 +127,7 @@ pt:
         other: "conjunto de dados do GBIF"
     identifiers_alert:
       unit:
-        one: "dataset with content in dwc:recordedByID or dwc:identifiedByID"
+        one: "conjunto de dados com conteúdo em dwc:recordedByID ou dwc:identifiedByID"
         other: "conjuntos de dados com conteúdo em dwc:recordedByID ou dwc:identifiedByID"
     placeholder: Borboletas do Brasil
     people: Pessoas
@@ -403,7 +403,7 @@ pt:
     discovered_agents: "Passo 1: Escolha uma cadeia de agentes analisada a partir do conteúdo em dwc:recordedBy e dwc:identifiedBy. Os números entre parênteses retos indicam o número de registos não atribuídos."
     bulk_json: "Passo 2: Crie uma declaração JSON em que todos os pares chave:valor serão tratados como correspondências exatas e dependentes do caso, juntamente com a cadeia de agentes escolhida, como: { “institutionCode” : “CAN”, ‘eventDate’ : [2020, 2021] } ou { “scientificName LIKE ?”: “Bolbelasmus %”}. A melhor prática recomendada é incluir tantos pares de chave:valor quantos forem razoáveis para evitar atribuições incorretas. As chaves disponíveis são: %{keys}"
     bulk_count:
-      one: "A total of 1 record was handled."
+      one: "Foi tratado um total de 1 registo."
       other: "Foi tratado um total de %{count} registos."
   home:
     tagline: Atribua espécimes de história natural aos coletores de todo o mundo.
@@ -614,7 +614,7 @@ pt:
     attributed_count:
       one: "espécime atribuído"
       other: "espécime atribuído"
-    attributions: Attributions Made
+    attributions: Atribuições efetuadas
     private_message_html: "Seu perfil é privado. Reivindique suas %{specimens} e torne-as públicas em %{settings} para maximizar a reutilização."
     no_claims_html: "Reivindique seus espécimes descobertos na guia %{specimens} para construir seu perfil e começar a rastrear suas citações. Reconheça seus colegas, mentores ou qualquer pessoa que o inspire atribuindo espécimes sob %{help_others}."
     try_again: Tente novamente.
@@ -633,31 +633,31 @@ pt:
     co_collected_count:
       one: "espécime co-coletado"
       other: "espécimes co-coletados"
-    identified_for: Identified For
-    no_identified_for_alert: Recipients of your determinations have not yet been recorded.
-    identified_for_alert: "Choose a collector to adjust attributions made for specimens collected by them and identified by you."
-    identified_for_name: "Specimens collected by %{name} and identified by you."
-    not_identified_for_name: "Specimens have not been collected by %{name} and identified by you."
+    identified_for: Identificado para
+    no_identified_for_alert: Os destinatários das suas determinações ainda não foram registados.
+    identified_for_alert: "Escolha um colecionador para ajustar as atribuições feitas a espécimes recolhidos por ele e identificados por si."
+    identified_for_name: "Espécimes recolhidos por %{name} e identificados por si."
+    not_identified_for_name: "Os espécimes não foram recolhidos por %{name} e identificados por si."
     identified_for_count:
-      one: "collected specimen"
-      other: "collected specimens"
-    identifications_by: Identifications By
-    no_determiners_alert: Determiners of your collected specimens have not yet been recorded.
-    determiners_alert: "Your specimens have been identified by:"
-    determiner_name: "Specimens identified by %{name}."
-    not_determiner_name: "Specimens you collected have not been identified by %{name}."
+      one: "amostra recolhida"
+      other: "amostras recolhidas"
+    identifications_by: Identificações por
+    no_determiners_alert: Os determinantes dos seus espécimes recolhidos ainda não foram registados.
+    determiners_alert: "Os seus espécimes foram identificados por:"
+    determiner_name: "Espécimes identificados por %{name}."
+    not_determiner_name: "Os espécimes que recolheu não foram identificados por %{name}."
     identified_by_count:
-      one: "identified specimen"
-      other: "identified specimens"
+      one: "espécime identificado"
+      other: "espécimes identificados"
     zenodo_html: "O seu perfil está ligado a %{zenodo} e as suas reclamações são versionadas e arquivadas."
-    language: Preferred Language
-    language_explanation: Choose your preferred language
-    specimens_used_num: specimens used
-    updated: Your profile was updated.
+    language: Língua preferida
+    language_explanation: Escolha a sua língua preferida
+    specimens_used_num: espécimes utilizados
+    updated: O seu perfil foi atualizado.
     thanks: Obrigado
-    attributed: attributed
+    attributed: atribuído
     unsubscribe_title: Cancelar subscrição
-    unsubscribe: "The email address %{email} is now unsubscribed from notifcations."
+    unsubscribe: "O endereço de email %{email} deixou de estar inscrito nas notificações."
   roster:
     roster_title: Perfis Públicos
     lede: "%{count} pessoas que compartilham seus perfis e os perfis de outras pessoas que admiram"
@@ -672,13 +672,13 @@ pt:
   specimen:
     scientific_name: Nome científico
     collected_by: Coletado Por
-    linked_collected_by: Linked Collected By
+    linked_collected_by: Coletado por
     identified_by: Identificado Por
     date_collected: Data da coleta
     date_identified: Data de identificação
     institution: Instituição
     catalog_number: Número de catálogo
-    basis_record: Basis Of Record
+    basis_record: Base do registo
     country: País
     family: Família
     type_status: Status do tipo
@@ -693,10 +693,10 @@ pt:
     lede: "%{scribe_count} pessoas que atribuíram %{attribution_count} espécimes de história natural a %{recipient_count} dos seus pares, mentores e figuras de referência"
   statistics:
     title: Estatísticas
-    claims: Cumulative Claims
-    attributions: Cumulative Attributions
-    rejected: Cumulative Rejected Candidates
-    profiles: Cumulative Profiles Imported
+    claims: Créditos acumulados
+    attributions: Atribuições acumuladas
+    rejected: Candidatos rejeitados acumulados
+    profiles: Perfis cumulativos importados
     month: Mês
   taxa:
     lede:
@@ -745,10 +745,10 @@ pt:
     taxon_string: Família Taxon
     start_year: Ano de início
     end_year: Fim de ano
-    user_title: "%{taxon} Collectors or Determiners"
-    agent_count_title: "%{taxon} Agent Counts"
-    agent_unclaimed_title: "%{taxon} Agent Unclaimed"
-    agents_title: "%{taxon} Agents"
+    user_title: "%{taxon} Coletores ou Determinadores"
+    agent_count_title: "%{taxon} Contagens de agentes"
+    agent_unclaimed_title: "%{taxon} Agente não reclamado"
+    agents_title: "%{taxon} Agentes"
   user:
     caches_rebuilt: Caches foram reconstruídos.
     overview: Visão geral
@@ -759,7 +759,7 @@ pt:
     science_enabled: Ciência habilitada
     science_enabled_specimens: Ciência habilitada por dados de espécimes
     helped_by: Ajudado por
-    strings: Collector Strings
+    strings: Sequências de coletores
     helped: Pessoas ajudadas
     no_scribe: Os espécimes não foram atribuídos por um autor.
     attributions_by: "Atribuições feitas por:"
@@ -767,7 +767,7 @@ pt:
     private_with_claims:
       unit:
         one: "foi reivindicado ou atribuído espécime, mas este perfil ainda não foi disponibilizado ao público."
-        other: "specimens were claimed or attributed, but this profile has not yet been made publicly available."
+        other: "foram reivindicados ou atribuídos espécimes, mas este perfil ainda não foi disponibilizado ao público."
     no_specimens_cited: As amostras não foram incluídas em downloads do GBIF e citadas neste artigo de pesquisa.
     specimen_used: Dados de espécime usados em
     no_publications: Publicações que usaram registros de espécimes incluídos em um download do GBIF ainda não foram registradas.
