@@ -47,21 +47,27 @@ module Bionomia
         user = get_orcid_user(id.orcid_from_url) rescue nil
       elsif id.viaf_from_url
         #TODO: how to cache this & all look-ups below?
+        sleep 2
         wikidata = wiki.wiki_by_property('viaf', id.viaf_from_url)[:wikidata] rescue nil
         user = get_wiki_user(wikidata) if wikidata
       elsif id.isni_from_url
+        sleep 2
         wikidata = wiki.wiki_by_property('isni', id.isni_from_url)[:wikidata] rescue nil
         user = get_wiki_user(wikidata) if wikidata
       elsif id.ipni_from_url
+        sleep 2
         wikidata = wiki.wiki_by_property('ipni', id.ipni_from_url)[:wikidata] rescue nil
         user = get_wiki_user(wikidata) if wikidata
       elsif id.bhl_from_url
+        sleep 2
         wikidata = wiki.wiki_by_property('bhl', id.bhl_from_url)[:wikidata] rescue nil
         user = get_wiki_user(wikidata) if wikidata
       elsif id.zoobank_from_url
+        sleep 2
         wikidata = wiki.wiki_by_property('zoobank', id.zoobank_from_url)[:wikidata] rescue nil
         user = get_wiki_user(wikidata) if wikidata
       elsif id.library_congress_from_url
+        sleep 2
         wikidata = wiki.wiki_by_property('congress', id.library_congress_from_url)[:wikidata] rescue nil
         user = get_wiki_user(wikidata) if wikidata
       end

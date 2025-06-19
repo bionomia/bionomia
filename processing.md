@@ -105,7 +105,7 @@ To migrate tables, use mydumper and myloader. But for even faster data migration
      $ mydumper --user root --password <PASSWORD> --database bionomia --tables-list bionomia.agents,bionomia.occurrences,bionomia.occurrence_agents,bionomia.occurrence_counts,bionomia.taxa,bionomia.taxon_occurrences --compress --threads 8 --rows 1000000 --clear --outputdir /Users/dshorthouse/Documents/bionomia_dump
 
      $ apt-get install mydumper
-     $ nohup myloader --database bionomia_restore --user bionomia --password <PASSWORD> --threads 2 --queries-per-transaction 100 --innodb-optimize-keys=AFTER_IMPORT_ALL_TABLES --compress-protocol --overwrite-tables --verbose 0 --directory /home/dshorthouse/bionomia_restore &
+     $ nohup myloader --database bionomia_restore --user bionomia --password <PASSWORD> --threads 2 --queries-per-transaction 100 --optimize-keys=AFTER_IMPORT_ALL_TABLES --compress-protocol --overwrite-tables --verbose 0 --directory /home/dshorthouse/bionomia_restore &
 
      mysql>
 
