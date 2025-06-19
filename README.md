@@ -12,7 +12,7 @@ Strings of text in the user interface are translatable via [config/locales](conf
 ## Requirements
 
 1. ruby 3.3.6s+
-2. Elasticsearch 8.10.2+
+2. Elasticsearch 8.18.1+
 3. MySQL 8.0.34+
 4. Redis 7.0.12+
 5. Apache Spark 3+
@@ -28,6 +28,10 @@ Strings of text in the user interface are translatable via [config/locales](conf
      $ cp config/settings/development.yml.sample config/settings/development.yml
      # Adjust content of development.yml
      # Copy and edit production.yml and test.yml as above
+     # A development docker image for elasticsearch can be run like:
+     $ docker network create elastic
+     $ docker pull docker.elastic.co/elasticsearch/elasticsearch:8.18.2
+     $ docker run -d --name elasticsearch --net elastic --restart unless-stopped -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e "xpack.security.enabled=false" elasticsearch:8.18.2
      $ RUBY_YJIT_ENABLE=true rackup -p 4567 config.ru
 
 ## License
