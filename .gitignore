@@ -8,6 +8,7 @@
 .vagrant
 .DS_Store
 .sass-cache
+artifacts
 tags
 log/*.log
 config.yml

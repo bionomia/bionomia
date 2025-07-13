@@ -13,7 +13,7 @@ module Bionomia
         .tr('[]', '')
         .split(',')
         .each_slice(2_500) do |group|
-          import = group.map{|r| [ r.to_i, taxon.id] }
+          import = group.map{|r| [ r.to_i, taxon.id ] }
           TaxonOccurrence.import [:occurrence_id, :taxon_id],  import, validate: false, on_duplicate_key_ignore: true
       end
     end
