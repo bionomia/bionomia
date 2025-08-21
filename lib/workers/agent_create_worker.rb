@@ -69,19 +69,19 @@ module Bionomia
     end
 
     def import(agent_id:, row:)
+      slice = 1_000
+      cols = [:occurrence_id, :agent_id, :agent_role]
       row.gbifIDs_recordedBy
          .tr('[]', '')
          .split(',')
-         .each_slice(1_000) do |group|
-            import = group.map{|r| [ r.to_i, agent_id, true ] }
-            OccurrenceAgent.import [:occurrence_id, :agent_id, :agent_role], import, validate: false, on_duplicate_key_ignore: true
+         .each_slice(slice) do |group|
+            OccurrenceAgent.import cols, group(&:to_i).zip([agent_id]*slice, [true]*slice), validate: false, on_duplicate_key_ignore: true
          end
       row.gbifIDs_identifiedBy
          .tr('[]', '')
          .split(',')
-         .each_slice(1_000) do |group|
-            import = group.map{|r| [ r.to_i, agent_id, false ] }
-            OccurrenceAgent.import [:occurrence_id, :agent_id, :agent_role], import, validate: false, on_duplicate_key_ignore: true
+         .each_slice(slice) do |group|
+            OccurrenceAgent.import cols, group(&:to_i).zip([agent_id]*slice, [false]*slice), validate: false, on_duplicate_key_ignore: true
          end
     end
 
