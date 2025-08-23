@@ -75,13 +75,19 @@ module Bionomia
          .tr('[]', '')
          .split(',')
          .each_slice(slice) do |group|
-            OccurrenceAgent.import cols, group(&:to_i).zip([agent_id]*slice, [true]*slice), validate: false, on_duplicate_key_ignore: true
+            OccurrenceAgent.import cols,
+                                   group.map(&:to_i).zip([agent_id]*slice, [true]*slice), 
+                                   validate: false, 
+                                   on_duplicate_key_ignore: true
          end
       row.gbifIDs_identifiedBy
          .tr('[]', '')
          .split(',')
          .each_slice(slice) do |group|
-            OccurrenceAgent.import cols, group(&:to_i).zip([agent_id]*slice, [false]*slice), validate: false, on_duplicate_key_ignore: true
+            OccurrenceAgent.import cols, 
+                                   group.map(&:to_i).zip([agent_id]*slice, [false]*slice), 
+                                   validate: false, 
+                                   on_duplicate_key_ignore: true
          end
     end
 

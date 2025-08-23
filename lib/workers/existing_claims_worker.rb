@@ -23,17 +23,19 @@ module Bionomia
       uniq_ids = (identifications - recordings).uniq
       both = (recordings & identifications).uniq
 
+      cols = [:user_id, :occurrence_id, :action, :created_by]
+
       if !uniq_recs.empty?
         uo = uniq_recs.map{|r| [u.id, r.to_i, "recorded", User::GBIF_AGENT_ID]}
-        UserOccurrence.import [:user_id, :occurrence_id, :action, :created_by], uo, validate: false, on_duplicate_key_ignore: true
+        UserOccurrence.import cols, uo, validate: false, on_duplicate_key_ignore: true
       end
       if !uniq_ids.empty?
         uo = uniq_ids.map{|r| [u.id, r.to_i, "identified", User::GBIF_AGENT_ID]}
-        UserOccurrence.import [:user_id, :occurrence_id, :action, :created_by], uo, validate: false, on_duplicate_key_ignore: true
+        UserOccurrence.import cols, uo, validate: false, on_duplicate_key_ignore: true
       end
       if !both.empty?
         uo = both.map{|r| [u.id, r.to_i, "recorded,identified", User::GBIF_AGENT_ID]}
-        UserOccurrence.import [:user_id, :occurrence_id, :action, :created_by], uo, validate: false, on_duplicate_key_ignore: true
+        UserOccurrence.import cols, uo, validate: false, on_duplicate_key_ignore: true
       end
     end
 
