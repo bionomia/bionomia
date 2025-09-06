@@ -37,6 +37,7 @@ Unfortunately, gbifIDs are not persistent. These occasionally disappear through 
 First, import all users and user_occurrences content from production.
 
      $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/populate_existing_claims.rb --truncate --directory /directory-to-spark-csv-files/
+     # Make sure that Elasticsearch is running
      # might need to increase ulimit
      $ ulimit -n 8192
      $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec sidekiq -C config/settings/sidekiq.yml -c 2 -r ./application.rb
