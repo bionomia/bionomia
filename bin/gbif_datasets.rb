@@ -107,9 +107,9 @@ end
 
 if options[:counter]
   puts "Updating occurrence counts...".yellow
-  Dataset.update_all(occurrences_count: 0, source_attribution_count: 0)
   Parallel.each(Dataset.find_in_batches(batch_size: 250), progress: "Rebuilding dataset counters", in_threads: 3) do |batch|
     ids = batch.map(&:id)
+    Dataset.where(id: ids).update_all(occurrences_count: 0, source_attribution_count: 0)
     Occurrence.counter_culture_fix_counts only: :dataset, start: ids.min, finish: ids.max
     Dataset.joins(:user_occurrences)
            .where(user_occurrences: { created_by: User::GBIF_AGENT_ID })
