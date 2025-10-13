@@ -141,7 +141,8 @@ module Sinatra
                 functions: [
                   {
                     random_score: {
-                      seed: "#{Time.now.to_i}"
+                      seed: "#{Time.now.to_i}",
+                      field: "id"
                     },
                   }
                 ],

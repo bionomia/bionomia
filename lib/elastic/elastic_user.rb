@@ -255,6 +255,7 @@ module Bionomia
         query: {
           function_score: {
             random_score: {
+              field: "id",
               seed: Time.now.to_i
             },
             query: {
