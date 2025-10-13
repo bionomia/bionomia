@@ -40,6 +40,7 @@ module Sinatra
 
           if !user.viewname.is_orcid?
             agents = search_agents(user.viewname)
+
             full_names = [user.viewname.dup]
             family_names = [user.family.dup]
             given_names = [user.given.dup]

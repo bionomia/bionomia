@@ -71,7 +71,7 @@ module Sinatra
                   },
                   { 
                     match: { 
-                      "unparsed.keyword": { query: search, boost: 10 } 
+                      "unparsed.keyword": { query: search, boost: 5 } 
                     }
                   },
                   rank_feature: {
