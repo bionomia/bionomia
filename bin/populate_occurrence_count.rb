@@ -49,7 +49,7 @@ if options[:add]
   ActiveRecord::Base.connection.execute(sql)
 
   puts "Refining occurrence_counts content from OccurrenceAgents...".yellow
-  OccurrenceCount.find_in_batches(batch_size: 10_000) do |group|
+  Parallel.each(OccurrenceCount.find_in_batches(batch_size: 10_000), progress: "Refining occurrence_counts", in_threads: 6) do |group|
     ids = group.pluck(:occurrence_id).join(",")
     sql = "UPDATE 
         occurrence_counts 
@@ -67,7 +67,7 @@ if options[:add]
       ON 
         occurrence_counts.occurrence_id = a.occurrence_id 
       SET occurrence_counts.agent_count = a.agent_count"
-      ActiveRecord::Base.connection.execute(sql)
+    ActiveRecord::Base.connection.execute(sql)
   end
 
   puts "Flushing unnecessary records...".yellow

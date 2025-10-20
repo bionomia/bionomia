@@ -142,7 +142,7 @@ module Bionomia
         obj.write_table_rows
         file.close
 
-        Zip::File.open(file_path + ".zip", Zip::File::CREATE) do |zipfile|
+        Zip::File.open(file_path + ".zip", create: true) do |zipfile|
           zipfile.add(File.basename(file_path), File.join(@folder, File.basename(file_path)))
         end
 
