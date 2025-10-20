@@ -42,12 +42,8 @@ if options[:file]
       ids.sort.reverse.in_groups_of(1_000, false) do |group|
         UserOccurrence.where(id: group).delete_all
       end
-      begin
-        user.flush_caches
-        puts row[:identifier].green
-      rescue
-        puts "#{row[:identifier]} did not flush_caches".red
-      end
+      vars = { id: user.id }.stringify_keys
+      ::Bionomia::UserWorker.perform_async(vars)
     end
   end
 end
