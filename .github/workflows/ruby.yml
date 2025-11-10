@@ -57,7 +57,6 @@ jobs:
 
     - name: Setup Database Config
       run: |
-          sudo systemctl start mysql.service
           cp config/settings/test.yml.sample config/settings/test.yml
           sed -i 's/MYSQL_HOST/${{ env.MYSQL_HOST }}/g' config/settings/test.yml
           sed -i 's/MYSQL_USERNAME/${{ env.MYSQL_USERNAME }}/g' config/settings/test.yml
