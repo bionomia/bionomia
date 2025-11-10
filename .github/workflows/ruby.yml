@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       mysql:
-        image: bitnami/mysql:8.3.0
+        image: mysql:8.0
         env:
           ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: bionomia_test
@@ -27,7 +27,7 @@ jobs:
           --health-retries=5
     strategy:
       matrix:
-        mysql: ['bitnami/mysql:8.3.0']
+        mysql: ['mysql:8.0']
         elasticsearch: ['7.x-SNAPSHOT']
         ruby-version: ['3.3']
     env:
@@ -60,6 +60,7 @@ jobs:
 
     - name: Setup Database Config
       run: |
+          sudo systemctl start mysql.service
           cp config/settings/test.yml.sample config/settings/test.yml
           sed -i 's/MYSQL_HOST/${{ env.MYSQL_HOST }}/g' config/settings/test.yml
           sed -i 's/MYSQL_USERNAME/${{ env.MYSQL_USERNAME }}/g' config/settings/test.yml
