@@ -69,6 +69,7 @@ module Sinatra
             get '/:id.json(ld)?' do
               content_type "application/ld+json", charset: 'utf-8'
               response = jsonld_occurrence_context
+
               response["@type"] = "PreservedSpecimen"
               begin
                 occurrence = Occurrence.find(params[:id])
@@ -82,6 +83,8 @@ module Sinatra
                 response["recorded"] = jsonld_occurrence_actions(occurrence, "recordings")
                 response["identified"] = jsonld_occurrence_actions(occurrence, "identifications")
                 response["associatedReferences"] = jsonld_occurrence_references(occurrence)
+                # NOTE: oa:hasAnnotation is not valid. Better solution is to make a dedicated document with separate route
+                response["oa:hasAnnotation"] = jsonld_occurrence_annotations(occurrence)
                 JSON.pretty_generate(response)
               rescue
                 halt 404, {}.to_json

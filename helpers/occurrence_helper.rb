@@ -20,6 +20,10 @@ module Sinatra
           ]
           response["@context"] = {
             "@vocab": "http://schema.org/",
+            "oa": "http://www.w3.org/ns/oa#",
+            "dcterms": "http://purl.org/dc/terms/",
+            "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
             sameAs: {
               "@id": "sameAs",
               "@type": "@id"
@@ -53,11 +57,42 @@ module Sinatra
         def jsonld_occurrence_references(occurrence)
           occurrence.articles.map{|a| {
               "@type": "ScholarlyArticle",
-              "@id": "https://doi.org/#{a.doi}",
+              "@id": "#{Settings.base_url}/article/#{a.doi}",
               sameAs: "https://doi.org/#{a.doi}",
               description: a.citation
             }
           }
+        end
+
+        def jsonld_occurrence_annotations(occurrence)
+          annotations = []
+          occurrence.user_recordings.each do |o|
+            if recordedBy_has_warning?(o.user, occurrence, agent_check: false)
+              annotations << 
+              {
+                "@type": "oa:Annotation",
+                "@id": "#{Settings.base_url}/occurrence/#{occurrence.id}#annotation-eventDate",
+                "oa:motivatedBy": "oa:assessing",
+                "oa:hasTarget": {
+                  "@type": "oa:SpecificResource",
+                  "oa:hasSelector": {
+                    "@type": "oa:PropertySelector",
+                    "oa:property": "eventDate"
+                  }
+                },
+                "oa:hasBody": {
+                  "@type": "oa:TextualBody",
+                  "rdf:value": "The eventDate value #{occurrence.eventDate} may be incorrect because it falls outside the known lifespan for #{o.user.viewname}, which is #{format_lifespan(o.user)}.",
+                  "dcterms:creator": {
+                    "@type": "Organization",
+                    name: "Bionomia"
+                  }
+                }
+              }
+              break
+            end
+          end
+          annotations
         end
 
         def occurrence_api_404
