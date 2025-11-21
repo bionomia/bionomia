@@ -31,19 +31,19 @@ module Sinatra
         def taxon_agents
           taxon_from_param
           page = (params[:page] || 1).to_i
-          @pagy, @results = pagy_array(@taxon.agents.to_a, limit: 75, page: page)
+          @pagy, @results = pagy(:offset, @taxon.agents.to_a, limit: 75, page: page)
         end
 
         def taxon_agents_counts
           taxon_from_param
           page = (params[:page] || 1).to_i
-          @pagy, @results = pagy_array(@taxon.agent_counts.to_a, limit: 75, page: page)
+          @pagy, @results = pagy(:offset, @taxon.agent_counts.to_a, limit: 75, page: page)
         end
 
         def taxon_agents_unclaimed
           taxon_from_param
           page = (params[:page] || 1).to_i
-          @pagy, @results = pagy_array(@taxon.agent_counts_unclaimed.to_a, limit: 75, page: page)
+          @pagy, @results = pagy(:offset, @taxon.agent_counts_unclaimed.to_a, limit: 75, page: page)
         end
 
         def taxon_examples

@@ -71,4 +71,4 @@
                 false
             %td #{article.created}
 
-  = pagy_bootstrap_nav(@pagy) if @pagy.pages > 1
+  = @pagy.series_nav(:bootstrap) if @pagy.pages > 1

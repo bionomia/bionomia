@@ -324,7 +324,7 @@ module Sinatra
               end
               @page = 1 if @page <= 0
 
-              @pagy, @results = pagy_array(helped_by, limit: search_size, page: @page)
+              @pagy, @results = pagy(:offset, helped_by, limit: search_size, page: @page)
               haml :'help/support', locals: { active_page: "help" }
             end
 
@@ -364,7 +364,7 @@ module Sinatra
               end
               @page = 1 if @page <= 0
 
-              @pagy, @results = pagy_array(strings.to_a, limit: 50, page: @page)
+              @pagy, @results = pagy(:offset, strings.to_a, limit: 50, page: @page)
               haml :'help/strings', locals: { active_page: "help" }
             end
 

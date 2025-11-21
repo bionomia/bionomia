@@ -552,7 +552,7 @@ module Sinatra
               end
               @page = 1 if @page <= 0
 
-              @pagy, @results = pagy_array(helped_by, limit: search_size, page: @page)
+              @pagy, @results = pagy(:offset, helped_by, limit: search_size, page: @page)
               haml :'admin/support', locals: { active_page: "administration" }
             end
 
@@ -599,7 +599,7 @@ module Sinatra
               check_redirect
               @admin_user = find_user(params[:id])
 
-              @pagy, @results = pagy_arel(@admin_user.latest_helped, limit: 25)
+              @pagy, @results = pagy(:offset, @admin_user.latest_helped, count_over: true, limit: 25)
               haml :'admin/helped', locals: { active_page: "administration" }
             end
 
@@ -607,7 +607,7 @@ module Sinatra
               check_redirect
               @admin_user = find_user(params[:id])
 
-              @pagy, @results = pagy_array(@admin_user.latest_messages_by_senders.to_a)
+              @pagy, @results = pagy(:offset, @admin_user.latest_messages_by_senders.to_a)
               haml :'admin/messages', locals: { active_page: "administration" }
             end
 

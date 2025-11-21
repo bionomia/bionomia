@@ -65,4 +65,4 @@
             - if d.identifier.is_orcid? && d.redirect_to.nil?
               %button.btn.btn-small.btn-outline-danger.destroyed{type: "button", "data-destroyed-id": d.id } Remove
 
-= pagy_bootstrap_nav(@pagy) if @pagy.pages > 1
+= @pagy.series_nav(:bootstrap) if @pagy.pages > 1

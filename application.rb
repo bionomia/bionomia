@@ -26,11 +26,9 @@ class BIONOMIA < Sinatra::Base
   load_locales File.join(root, 'config', 'locales')
   I18n.available_locales = [:en, :fr, :es, :pt, :de, :zh, :cs]
 
-  include Pagy::Backend
-  include Pagy::Frontend
-  Pagy::DEFAULT[:limit] = 30
-  Pagy::DEFAULT[:size]  = 7
-  Pagy::DEFAULT[:overflow] = :last_page
+  include Pagy::Method
+  Pagy.options[:limit] = 30
+  Pagy.options[:size] = 7
 
   not_found do
     haml :oops if !content_type

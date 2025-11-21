@@ -129,7 +129,7 @@ module Sinatra
                                     .where("eventDate_processed_month = ? and eventDate_processed_day = ? and eventDate_processed_year > 1800", @date.month, @date.day)
                                     .order(eventDate_processed: :desc)
             
-            @pagy, @results = pagy_countless(occurrences)
+            @pagy, @results = pagy(:countless, occurrences)
             haml :'on_this_day/collected', locals: { active_tab: "specimens" }
           end
 

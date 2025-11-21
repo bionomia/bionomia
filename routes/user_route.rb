@@ -192,7 +192,7 @@ module Sinatra
             end
             @page = 1 if @page <= 0
 
-            @pagy, @results = pagy_array(strings.to_a, limit: 50, page: @page)
+            @pagy, @results = pagy(:offset, strings.to_a, limit: 50, page: @page)
             locals = {
               active_page: "roster",
               active_tab: "strings"
@@ -216,7 +216,7 @@ module Sinatra
             end
             @page = 1 if @page <= 0
 
-            @pagy, @results = pagy_array(helped_by, limit: search_size, page: @page)
+            @pagy, @results = pagy(:offset, helped_by, limit: search_size, page: @page)
             locals = {
               active_page: "roster",
               active_tab: "support"
@@ -329,7 +329,7 @@ module Sinatra
             check_user_public
 
             @stats = cache_block("#{@viewed_user.identifier}-stats") { user_stats(@viewed_user) }
-            @pagy, @results = pagy_arel(@viewed_user.helped, limit: 30, page: page)
+            @pagy, @results = pagy(:offset, @viewed_user.helped, count_over: true, limit: 30, page: page)
             haml :'public/helped', locals: { active_page: "roster" }
           end
 

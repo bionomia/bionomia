@@ -80,7 +80,7 @@ module Sinatra
               haml :'organizations/under_repair', locals: locals
 =begin
               data = organization_articles.to_a
-              @pagy, @results = pagy_array(data, count: data.size, limit: 10, page: page)
+              @pagy, @results = pagy(:offset, data, count: data.size, limit: 10, page: page)
               haml :'organizations/citations', locals: locals
 =end
             end

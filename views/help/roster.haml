@@ -49,7 +49,7 @@
 
   - if @pagy.pages > 1
     .overflow-auto
-      = pagy_bootstrap_nav(@pagy)
+      = @pagy.series_nav(:bootstrap)
 - else
   - alert_class = "alert-info"
   - if @pagy.count == 0
@@ -66,4 +66,4 @@
 
   - if @pagy.pages > 1
     .overflow-auto
-      = pagy_bootstrap_nav(@pagy)
+      = @pagy.series_nav(:bootstrap)

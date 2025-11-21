@@ -3,7 +3,7 @@
 module Bionomia
   class IO
 
-    include Pagy::Backend
+    include Pagy::Method
 
     def initialize(args = {})
       args = defaults.merge(args)
@@ -270,8 +270,8 @@ module Bionomia
 
     def jsonld_occurrences_paged(type = "identifcations")
       begin
-        pagy, results = pagy_countless(@user.send(type).includes(:claimant), limit: 100)
-        metadata = pagy_metadata(pagy)
+        pagy, results = pagy(:countless, @user.send(type).includes(:claimant), limit: 100)
+        metadata = pagy.data_hash(pagy)
       rescue
         results = []
         metadata = {

@@ -45,13 +45,13 @@ module Sinatra
         def article_agents_counts
           article_from_param
           data = @article.agents_occurrence_counts.to_a.sort_by{|a| -a[:count_all]}
-          @pagy, @results = pagy_array(data, count: data.size, limit: 75)
+          @pagy, @results = pagy(:offset, data, count: data.size, limit: 75)
         end
 
         def article_agents_unclaimed
           article_from_param
           data = @article.agents_occurrence_counts_unclaimed.to_a.sort_by{|a| -a[:count_all]}
-          @pagy, @results = pagy_array(data, count: data.size, limit: 75)
+          @pagy, @results = pagy(:offset, data, count: data.size, limit: 75)
         end
 
         def article_stats(article)

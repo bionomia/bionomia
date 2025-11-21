@@ -197,7 +197,7 @@ module Sinatra
               end
               @page = 1 if @page <= 0
 
-              @pagy, @results = pagy_array(helped_by, limit: search_size, page: @page)
+              @pagy, @results = pagy(:offset, helped_by, limit: search_size, page: @page)
               haml :'profile/support', locals: { active_page: "profile" }
             end
 
@@ -235,14 +235,14 @@ module Sinatra
             end
 
             get '/helped' do
-              @pagy, @results = pagy_arel(@user.latest_helped, limit: 25)
+              @pagy, @results = pagy(:offset, @user.latest_helped, count_over: true, limit: 25)
               haml :'profile/helped', locals: { active_page: "profile" }
             end
 
             get '/messages' do
               @user.messages_received.update_all({ read: true })
               data = @user.latest_messages_by_senders.to_a
-              @pagy, @results = pagy_array(data, count: data.size)
+              @pagy, @results = pagy(:offset, data, count: data.size)
               haml :'profile/messages', locals: { active_page: "profile" }
             end
 
