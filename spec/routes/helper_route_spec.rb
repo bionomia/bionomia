@@ -1,6 +1,5 @@
 describe "Bionomia Helper Route" do
   before(:each) do
-    User.skip_callback(:before, :after)
     @user = User.new({ given: "John", family: "Smith", other_names: "Jack" })
     @user.skip_callbacks = true
     @user.save
