@@ -23,9 +23,8 @@ module Sinatra
 
           response = ::Bionomia::ElasticDataset.new.search(from: from, size: 30, body: body)
           results = response["hits"].deep_symbolize_keys
-
-          @pagy = Pagy.new(count: results[:total][:value], limit: 30, page: page)
-          @results = results[:hits]
+          
+          @pagy, @results = pagy(:offset, results[:hits], count: results[:total][:value], limit: 30, page: page)
         end
 
         def search_dataset_by_uuid(uuid)

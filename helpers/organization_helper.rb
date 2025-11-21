@@ -17,7 +17,7 @@ module Sinatra
           response = ::Bionomia::ElasticOrganization.new.search(from: from, size: 30, body: body)
           results = response["hits"].deep_symbolize_keys
 
-          @pagy = Pagy.new(count: results[:total][:value], limit: 30, page: page)
+          @pagy = Pagy::Offset.new(count: results[:total][:value], page: page, limit: 30, request: Pagy::Request.new(request))
           @results = results[:hits]
         end
 
