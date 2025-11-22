@@ -28,7 +28,7 @@ module Sinatra
           response = ::Bionomia::ElasticArticle.new.search(from: from, size: 30, body: body)
           results = response["hits"].deep_symbolize_keys
 
-          @pagy = Pagy::Offset.new(count: results[:total][:value], page: page, limit: 25, request: Pagy::Request.new(request))
+          @pagy = Pagy::Offset.new(count: results[:total][:value], page: page, limit: 25, request: request)
           @results = results[:hits]
         end
 
