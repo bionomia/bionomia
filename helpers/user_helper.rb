@@ -33,7 +33,7 @@ module Sinatra
           response = ::Bionomia::ElasticUser.new.search(from: from, size: limit, body: body)
           results = response["hits"].deep_symbolize_keys
 
-          @pagy = Pagy::Offset.new(count: results[:total][:value], page: page, limit: limit, request: request)
+          @pagy = Pagy::Offset.new(count: results[:total][:value], page: page, limit: limit, request: Pagy::Request.new(request))
           @results = results[:hits]
         end
 
@@ -55,7 +55,7 @@ module Sinatra
           response = ::Bionomia::ElasticUser.new.search(from: from, size: limit, body: body)
           results = response["hits"].deep_symbolize_keys
 
-          @pagy = Pagy::Offset.new(count: results[:total][:value], page: page, limit: limit, request: request)
+          @pagy = Pagy::Offset.new(count: results[:total][:value], page: page, limit: limit, request: Pagy::Request.new(request))
           @results = results[:hits]
         end
 
@@ -76,7 +76,7 @@ module Sinatra
           response = ::Bionomia::ElasticUser.new.search(from: from, size: limit, body: body)
           results = response["hits"].deep_symbolize_keys
 
-          @pagy = Pagy::Offset.new(count: results[:total][:value], page: page, limit: limit, request: request)
+          @pagy = Pagy::Offset.new(count: results[:total][:value], page: page, limit: limit, request: Pagy::Request.new(request))
           @results = results[:hits]
         end
 
