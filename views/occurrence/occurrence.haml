@@ -165,12 +165,13 @@
                     %i.fa-solid.fa-spinner.fa-pulse
           %dd.line-break
 
+        - collectors = @occurrence.user_recordings
         %dt Attributions
         %dd.py-1
-          - if @occurrence.user_recordings.count > 0
+          - if collectors.count > 0
             %hr
             .mt-2
-              - @occurrence.user_recordings.each do |recorder|
+              - collectors.each do |recorder|
                 %p.orcid.text-lg-left.p-0.mt-1{"data-user-occurrence-id": "#{recorder.id}", "data-recorders": "#{recorder.user.identifier}", "data-user-id": "#{recorder.user.id}"}
                   - if recorder.user.orcid
                     #{recorder.user.viewname}
@@ -207,10 +208,10 @@
           %a{name: "annotation-eventDate"}
           Event Date Annotations
         %dd.py-1
-          - if @occurrence.user_recordings.count > 0
+          - if collectors.count > 0
             %hr
             .mt-2
-              - @occurrence.user_recordings.each do |recorder|
+              - collectors.each do |recorder|
                 - if recordedBy_has_warning?(recorder.user, @occurrence, agent_check: false)
                   The eventDate value #{@occurrence.eventDate} may be incorrect because it falls outside the known lifespan for #{recorder.user.viewname}, which is #{format_lifespan(recorder.user)}.
         %dd.line-break
