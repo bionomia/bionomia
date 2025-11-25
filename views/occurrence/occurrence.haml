@@ -201,7 +201,18 @@
                       Claimed on: #{recorder.updated || recorder.created}
                     - elsif recorder.claimant.is_bot?
                       Attributed or refreshed on: #{recorder.updated || recorder.created}
+        %dd.line-break
 
+        %dt
+          %a{name: "annotation-eventDate"}
+          Event Date Annotations
+        %dd.py-1
+          - if @occurrence.user_recordings.count > 0
+            %hr
+            .mt-2
+              - @occurrence.user_recordings.each do |recorder|
+                - if recordedBy_has_warning?(recorder.user, @occurrence, agent_check: false)
+                  The eventDate value #{@occurrence.eventDate} may be incorrect because it falls outside the known lifespan for #{recorder.user.viewname}, which is #{format_lifespan(recorder.user)}.
         %dd.line-break
 
   #identification.card.mb-4
