@@ -1,14 +1,17 @@
 class Agent < ActiveRecord::Base
+  attr_accessor :skip_callbacks
 
   has_many :occurrence_agents, dependent: :delete_all
   has_many :determinations, -> { where(occurrence_agents: { agent_role: false }) }, through: :occurrence_agents, source: :occurrence
   has_many :recordings, -> { where(occurrence_agents: { agent_role: true }) }, through: :occurrence_agents, source: :occurrence
   has_many :occurrences, -> { distinct }, through: :occurrence_agents, source: :occurrence
 
+  after_create :add_search, unless: :skip_callbacks
+
   # agent_role values: recorded = TRUE; identified = FALSE
 
   def fullname
-    [appellation, given_part, family_part, suffix].compact.reject(&:empty?).join(' ').strip
+    [given_part, family_part, suffix].compact.reject(&:empty?).join(' ').strip
   end
 
   alias_method :viewname, :fullname
@@ -22,7 +25,11 @@ class Agent < ActiveRecord::Base
   end
   
   def given_part
-    [given, dropping_particle].compact.reject(&:empty?).join(' ').strip
+    [prefix, given, dropping_particle].compact.reject(&:empty?).join(' ').strip
+  end
+
+  def prefix
+    [appellation, title].compact.reject(&:empty?).join(' ').strip
   end
 
   def agents_same_family
@@ -31,10 +38,6 @@ class Agent < ActiveRecord::Base
 
   def agents_same_family_first_initial
     agents_same_family.where("LOWER(LEFT(given,1)) = '#{given[0].downcase}'") rescue []
-  end
-
-  def processed?
-    processed
   end
 
   def determinations_institutions
@@ -94,6 +97,13 @@ class Agent < ActiveRecord::Base
 
   def identified_taxa
     determinations.pluck(:scientificName).compact.uniq
+  end
+
+  private
+
+  def add_search
+    es = ::Bionomia::ElasticAgent.new
+    es.add(self)
   end
 
 end

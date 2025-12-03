@@ -30,6 +30,10 @@ if options[:truncate]
   tables.each do |table|
     Agent.connection.execute("TRUNCATE TABLE #{table}")
   end
+  index = Bionomia::ElasticAgent.new
+  index.delete_index
+  index.create_index
+  index.refresh_index
   Sidekiq::Stats.new.reset
 end
 
