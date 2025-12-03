@@ -8,15 +8,21 @@ class Agent < ActiveRecord::Base
   # agent_role values: recorded = TRUE; identified = FALSE
 
   def fullname
-    [given, family].compact.reject(&:empty?).join(" ").strip
+    [appellation, given_part, family_part, suffix].compact.reject(&:empty?).join(' ').strip
   end
+
+  alias_method :viewname, :fullname
 
   def fullname_reverse
-    [family, given].compact.reject(&:empty?).join(", ").strip
+    [family_part, given_part].compact.reject(&:empty?).join(", ").strip
   end
 
-  def viewname
-    fullname
+  def family_part
+    [particle, family].compact.reject(&:empty?).join(' ').strip
+  end
+  
+  def given_part
+    [given, dropping_particle].compact.reject(&:empty?).join(' ').strip
   end
 
   def agents_same_family
