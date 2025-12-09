@@ -157,7 +157,7 @@ if options[:flagged_deletion]
   else
     puts "Oh, oh. Something may have been flagged for deletion".red
     subject = "ALERT! A wikidata page is flagged for deletion."
-    body = "A wikidata page(s) may have been flagged for deletion!\n\n"
+    body = "A wikidata page(s) may have been flagged for deletion on https://www.wikidata.org/wiki/Wikidata:Requests_for_deletions\n\n"
     body += flagged.join("\n")
     vars = { email: Settings.gmail.email, subject: subject, body: body }.stringify_keys
     ::Bionomia::MailWorker.perform_async(vars)
