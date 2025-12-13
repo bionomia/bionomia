@@ -64,12 +64,6 @@ val occurrences = spark.
     withColumn("eventDate_processed", when(to_timestamp($"eventDate_processed").lt(current_timestamp()), to_date(to_timestamp($"eventDate_processed"), "YYY-MM-dd")).otherwise(null)).
     withColumn("dateIdentified_processed", when(to_timestamp($"dateIdentified_processed").lt(current_timestamp()), to_date(to_timestamp($"dateIdentified_processed"), "YYY-MM-dd")).otherwise(null)).
     withColumn("typeStatus", lower($"typeStatus")).
-    withColumn("dateIdentified_processed_year", lit(null).cast("string")).
-    withColumn("dateIdentified_processed_month", lit(null).cast("string")).
-    withColumn("dateIdentified_processed_day", lit(null).cast("string")).
-    withColumn("eventDate_processed_year", lit(null).cast("string")).
-    withColumn("eventDate_processed_month", lit(null).cast("string")).
-    withColumn("eventDate_processed_day", lit(null).cast("string")).
     dropDuplicates("gbifID")
 
 //set some properties for a MySQL connection
@@ -125,21 +119,6 @@ identifiers.select("identifier", "gbifIDsRecordedByID", "gbifIDsIdentifiedByID")
     option("escape", "\"").
     csv("identifiers-csv")
 
-val agents = spark.
-    read.
-    format("avro").
-    load("agents.avro")
-
-// TUNCATE TABLE agent_jobs
-
-agents.select("agent", "gbifIDsRecordedBy", "gbifIDsIdentifiedBy").
-    withColumn("gbifIDsRecordedBy", stringify($"gbifIDsRecordedBy")).
-    withColumn("gbifIDsIdentifiedBy", stringify($"gbifIDsIdentifiedBy")).
-    withColumnRenamed("agent","agents").
-    withColumnRenamed("gbifIDsRecordedBy","gbifIDs_recordedBy").
-    withColumnRenamed("gbifIDsIdentifiedBy","gbifIDs_identifiedBy").
-    write.mode("append").jdbc(url, "agent_jobs", prop)
-
 val families = spark.
     read.
     format("avro").
@@ -157,22 +136,25 @@ families.select("family", "gbifIDsFamily").
     option("escape", "\"").
     csv("families-csv")
 
+val agents = spark.
+    read.
+    format("avro").
+    load("agents.avro")
+
+// TUNCATE TABLE agent_jobs
+
+agents.select("agent", "gbifIDsRecordedBy", "gbifIDsIdentifiedBy").
+    withColumn("gbifIDsRecordedBy", stringify($"gbifIDsRecordedBy")).
+    withColumn("gbifIDsIdentifiedBy", stringify($"gbifIDsIdentifiedBy")).
+    withColumnRenamed("agent","agents").
+    withColumnRenamed("gbifIDsRecordedBy","gbifIDs_recordedBy").
+    withColumnRenamed("gbifIDsIdentifiedBy","gbifIDs_identifiedBy").
+    write.mode("append").jdbc(url, "agent_jobs", prop)
+
 // Best to drop indices then recreate later
 // ALTER TABLE `occurrences` DROP KEY `index_occurrences_on_datasetKey_occurrenceID`, DROP KEY `country_code_idx`, DROP KEY `eventDate_processed_idx`, DROP KEY `dateIdentified_processed_idx`;
 
 occurrences.write.mode("append").jdbc(url, "occurrences", prop)
-
-// Can alternatively spit out csv files so that LOAD DATA INFILE can be used
-// First, swap empty values with \N so that MySQL understands it
- val db_occurrences = spark.read.jdbc(url, "occurrences", prop)
- occurrences.select(db_occurrences.columns.toSeq.map(col): _*).
-    write.
-    mode("overwrite").
-    option("header", "false").
-    option("quote", "\"").
-    option("escape", "\"").
-    option("nullValue", "\\N").
-    csv("occurrences-csv")
 
 // Recreate indices
 // ALTER TABLE `occurrences` ADD KEY `index_occurrences_on_datasetKey_occurrenceID` (`datasetKey`, `occurrenceID`(36)), ADD KEY `country_code_idx` (`countryCode`), ADD KEY `eventDate_processed_idx` (`typeStatus`(50),`eventDate_processed_month`,`eventDate_processed_day`,`eventDate_processed_year`), ADD KEY `dateIdentified_processed_idx` (`dateIdentified_processed_month`,`dateIdentified_processed_day`,`dateIdentified_processed_year`);
