@@ -562,8 +562,8 @@ module Sinatra
               check_redirect
 
               @viewed_user = find_user(params[:id])
-              @agent_ids = user_agent_ids_unattributed_count(@viewed_user)
-              @unattributed_count = @agent_ids.values.sum
+              @agents = user_agent_ids_unattributed_count(@viewed_user)
+              @unattributed_count = @agents.map{|a| a[:count]}.sum
               locals = {
                 active_page: "help",
                 active_tab: "bulk",

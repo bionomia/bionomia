@@ -49,7 +49,7 @@ if options[:add]
   ActiveRecord::Base.connection.execute(sql)
 
   puts "Refining occurrence_counts content from OccurrenceAgents...".yellow
-  Parallel.each(OccurrenceCount.find_in_batches(batch_size: 10_000), progress: "Refining occurrence_counts", in_threads: 6) do |group|
+  Parallel.each(OccurrenceCount.in_batches(of: 4_000), progress: "Refining occurrence_counts", in_threads: 4) do |group|
     ids = group.pluck(:occurrence_id).join(",")
     sql = "UPDATE 
         occurrence_counts 

@@ -33,7 +33,7 @@ module Sinatra
           response = ::Bionomia::ElasticUser.new.search(from: from, size: limit, body: body)
           results = response["hits"].deep_symbolize_keys
 
-          @pagy = Pagy::Offset.new(count: results[:total][:value], page: page, limit: limit, request: Pagy::Request.new(request))
+          @pagy = Pagy::Offset.new(count: results[:total][:value], page: page, limit: limit, request: request)
           @results = results[:hits]
         end
 
@@ -55,7 +55,7 @@ module Sinatra
           response = ::Bionomia::ElasticUser.new.search(from: from, size: limit, body: body)
           results = response["hits"].deep_symbolize_keys
 
-          @pagy = Pagy::Offset.new(count: results[:total][:value], page: page, limit: limit, request: Pagy::Request.new(request))
+          @pagy = Pagy::Offset.new(count: results[:total][:value], page: page, limit: limit, request: request)
           @results = results[:hits]
         end
 
@@ -76,7 +76,7 @@ module Sinatra
           response = ::Bionomia::ElasticUser.new.search(from: from, size: limit, body: body)
           results = response["hits"].deep_symbolize_keys
 
-          @pagy = Pagy::Offset.new(count: results[:total][:value], page: page, limit: limit, request: Pagy::Request.new(request))
+          @pagy = Pagy::Offset.new(count: results[:total][:value], page: page, limit: limit, request: request)
           @results = results[:hits]
         end
 
@@ -227,12 +227,14 @@ module Sinatra
         end
 
         def user_agent_ids_unattributed_count(user)
-          agent_ids = candidate_agents(user).map{|a| a.except(:score, :rank)}.uniq.pluck(:id)
-          occurrences_by_agent_ids(agent_ids)
+          search_hash = candidate_agents(user).uniq
+          count_hash = occurrences_by_agent_ids(search_hash.pluck(:id).uniq)
             .select("DISTINCT(occurrence_id), agent_id")
             .where.not({ occurrence_id: user.user_occurrences.select(:occurrence_id) })
             .group(:agent_id)
             .count
+            .map{|k,v| { id: k, count: v } }
+          merge_arrays_of_hashes(search_hash, count_hash, :id).delete_if{|i| !i.key?(:count) }
         end
 
       end

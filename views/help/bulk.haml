@@ -29,21 +29,20 @@
 
       .row
         - index = 0
-        - @agent_ids.each_slice(10) do |group|
+        - @agents.each_slice(10) do |group|
           .col-12.col-md-3.mb-3
-            - group.each do |agent_id, count|
-              - agent = Agent.find(agent_id)
+            - group.each do |agent|
               - index += 1
-              - name = agent.fullname.blank? ? agent.unparsed : agent.fullname
+              - name = agent[:fullname].blank? ? agent[:unparsed] : agent[:fullname]
               .form-check
                 - checked = index == 1 ? "checked" : nil
-                %input.form-check-input{type: "radio", name: "agent_id", id: "agent-select-#{agent.id}", value: "#{agent.id}", checked: checked}
-                %label.form-check-label{for: "agent-select-#{agent.id}"}
+                %input.form-check-input{type: "radio", name: "agent_id", id: "agent-select-#{agent[:id]}", value: "#{agent[:id]}", checked: checked}
+                %label.form-check-label{for: "agent-select-#{agent[:id]}"}
                   #{name}
                   = surround '[', ']' do
-                    %span.text-success #{count}
+                    %span.text-success #{agent[:count]}
                 %span
-                  %a{href: "/help-others/#{@viewed_user.identifier}?agent_id=#{agent.id}"}
+                  %a{href: "/help-others/#{@viewed_user.identifier}?agent_id=#{agent[:id]}"}
                     %i.fa-solid.fa-search{style: "width:16px"}
                     = I18n.t('help.view')
 

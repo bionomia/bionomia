@@ -13,6 +13,20 @@ module Sinatra
           end
         end
 
+        def merge_arrays_of_hashes(array1, array2, key)
+          # 1. Combine both arrays into a single temporary hash, keyed by the common key.
+          # The block handles duplicate keys, merging values from the second hash into the first.
+          merged_hash = (array1 + array2).each_with_object({}) do |hash, memo|
+            memo.merge!(hash[key] => hash) do |_k, old_val, new_val|
+              # When a key exists in both, merge the hashes
+              old_val.merge(new_val)
+            end
+          end
+
+          # 2. Convert the resulting hash's values back into an array.
+          merged_hash.values
+        end
+
         def base_url
           @base_url ||= "#{request.env['rack.url_scheme']}://#{request.env['HTTP_HOST']}"
         end
