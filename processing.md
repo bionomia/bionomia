@@ -75,7 +75,7 @@ Or from scratch:
 
      # For best performance, first rebuild the Elasticsearch user index
      # RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/populate_search.rb --indices user
-     $ RACK_ENV=production RUBY_YJIT_ENABLE=t     rue bundle exec ./bin/populate_occurrence_count.rb -t -a -j
+     $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/populate_occurrence_count.rb -t -a -j
      # Can start 2+ workers, each with 5 threads to help speed-up processing
      $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec sidekiq -C config/settings/sidekiq.yml -r ./application.rb
 
