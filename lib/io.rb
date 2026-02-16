@@ -209,16 +209,16 @@ module Bionomia
         identifications = jsonld_occurrences_paged("identifications")
         recordings = jsonld_occurrences_paged("recordings")
 
-        if identifications[:metadata][:prev].nil? && recordings[:metadata][:prev].nil?
-          prev_url = nil
+        if identifications[:metadata][:previous].nil? && recordings[:metadata][:previous].nil?
+          previous_url = nil
         else
           if identifications[:metadata][:prev].nil?
-            prev_url = "#{Settings.api_url}#{recordings[:metadata][:prev_url]}"
+            previous_url = "#{Settings.api_url}#{recordings[:metadata][:previous_url]}"
           else
-            prev_url = "#{Settings.api_url}#{identifications[:metadata][:prev_url]}"
+            previous_url = "#{Settings.api_url}#{identifications[:metadata][:previous_url]}"
           end
         end
-        w.push_value(prev_url, "as:prev")
+        w.push_value(previous_url, "as:prev")
 
         current_stub = identifications[:metadata][:page_url] || recordings[:metadata][:page_url]
         if current_stub.nil?
@@ -271,15 +271,15 @@ module Bionomia
     def jsonld_occurrences_paged(type = "identifcations")
       begin
         pagy, results = pagy(:countless, @user.send(type).includes(:claimant), limit: 100)
-        metadata = pagy.data_hash(pagy)
+        metadata = pagy.data_hash(data_keys: %i[first_url previous_url page_url next_url previous next])
       rescue
         results = []
         metadata = {
           first_url: nil,
-          prev_url: nil,
+          previous_url: nil,
           page_url: nil,
           next_url: nil,
-          prev: nil,
+          previous: nil,
           next: nil
         }
       end
