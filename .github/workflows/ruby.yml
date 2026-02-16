@@ -25,7 +25,7 @@ jobs:
     strategy:
       matrix:
         mysql: ['mysql:8.0']
-        elasticsearch: ['7.x-SNAPSHOT']
+        elasticsearch: ['8.19.11']
         ruby-version: ['3.3']
     env:
       RUBY_VERSION: 3.3.6
