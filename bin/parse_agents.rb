@@ -11,7 +11,7 @@ OptionParser.new do |opts|
   end
 
   opts.on("-p", "--parallel", "Parse the agent strings without a queue.") do
-    options[:queue] = true
+    options[:parallel] = true
   end
 
   opts.on("-h", "--help", "Prints this help") do
@@ -23,8 +23,7 @@ end.parse!
 if options[:queue]
   Sidekiq::Stats.new.reset
 
-  agent_count = AgentJob.count
-  progressbar = ProgressBar.create(title: "Agent Jobs", total: agent_count)
+  progressbar = ProgressBar.create(title: "Agent Jobs", total: AgentJob.count)
 
   (1..agent_count).each_slice(50_000) do |slice|
     group = slice.map{|a| [{ id: a }.stringify_keys]}
@@ -32,9 +31,11 @@ if options[:queue]
     progressbar.progress += group.size
   end
 elsif options[:parallel]
-  Parallel.each(AgentJob.in_batches(of: 1_000), progress: "Parsing agents", in_threads: 5) do |batch|
+  progressbar = ProgressBar.create(title: "Agent Jobs", total: AgentJob.count)
+
+  AgentJob.in_batches(of: 5_000) do |batch|
     batch.each do |agent_job|
-      next if agent_job.nil?
+      next if agent_job.nil? || !agent_job.parsed.blank?
 
       agents = DwcAgent.parse(agent_job.agents)
                     .map{|a| DwcAgent.clean(a)}
@@ -45,5 +46,6 @@ elsif options[:parallel]
   
       agent_job.update_column(:parsed, agents)
     end
+    progressbar.progress += batch.size
   end
 end

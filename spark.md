@@ -21,12 +21,22 @@ $ spark-shell --jars /usr/local/opt/mysql-connector-java/libexec/mysql-connector
 ```scala
 import sys.process._
 import org.apache.spark.sql.Column
+import org.apache.spark.sql.Row
 import org.apache.spark.sql.types._
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.avro._
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.scala.DefaultScalaModule
+import java.net.URI
+import java.net.http.{HttpClient, HttpRequest, HttpResponse}
+import java.nio.charset.StandardCharsets
+import scala.jdk.CollectionConverters._
 
 // Prevent warnings
 spark.conf.set("spark.sql.debug.maxToStringFields", 10000)
+
+// Ignore corrupted files
+spark.conf.set("spark.sql.files.ignoreCorruptFiles", true)
 
 // Deal with really old dates
 spark.sql("SET spark.sql.avro.datetimeRebaseModeInWrite=CORRECTED")
@@ -136,6 +146,35 @@ families.select("family", "gbifIDsFamily").
     option("escape", "\"").
     csv("families-csv")
 
+// ── Go sidecar call ───────────────────────────────────────────────────────────
+//
+// Sends an entire partition's agent strings in one HTTP POST to /parse_batch
+// and returns the parsed JSON array string for each input, in the same order.
+// One HTTP round-trip per partition instead of one per row.
+
+val capturedPort = 7654
+
+def callSidecar(inputs: Seq[String]): Seq[String] = {
+  if (inputs.isEmpty) return Seq.empty
+
+  val mapper  = new ObjectMapper().registerModule(DefaultScalaModule)
+  val body    = mapper.writeValueAsString(Map("inputs" -> inputs))
+  val client  = HttpClient.newHttpClient()
+  val request = HttpRequest.newBuilder()
+    .uri(URI.create(s"http://127.0.0.1:$capturedPort/parse_batch"))
+    .header("Content-Type", "application/json")
+    .POST(HttpRequest.BodyPublishers.ofString(body, StandardCharsets.UTF_8))
+    .build()
+
+  val response = client.send(request, HttpResponse.BodyHandlers.ofString())
+  if (response.statusCode() != 200)
+    throw new RuntimeException(
+      s"dwcagent-server error ${response.statusCode()}: ${response.body().take(200)}")
+
+  val root = mapper.readTree(response.body())
+  root.elements().asScala.map(_.get("parsed").toString).toSeq
+}
+
 val agents = spark.
     read.
     format("avro").
@@ -143,7 +182,34 @@ val agents = spark.
 
 // TUNCATE TABLE agent_jobs
 
-agents.select("agent", "gbifIDsRecordedBy", "gbifIDsIdentifiedBy").
+val agentColIndex = agents.columns.indexOf("agent")
+val outputSchema = agents.schema.add("parsed", StringType, nullable = true)
+
+// How many rows to send to the sidecar in each HTTP call.
+// Tune this down if you still see memory pressure, up if throughput is low.
+val capturedBatchSize = 500
+
+val parsedRDD = agents.rdd.mapPartitions { partition =>
+
+  // grouped() is lazy — it reads from the iterator batchSize rows at a time
+  // without buffering the rest of the partition.
+  partition.grouped(capturedBatchSize).flatMap { batch =>
+
+    val inputs = batch.map { row =>
+      if (row.isNullAt(agentColIndex)) "" else row.getString(agentColIndex)
+    }
+
+    val parsed = callSidecar(inputs)
+
+    batch.zip(parsed).map { case (row, json) =>
+      Row.fromSeq(row.toSeq :+ json)
+    }
+  }
+}
+
+val result = spark.createDataFrame(parsedRDD, outputSchema)
+
+result.select("agent", "gbifIDsRecordedBy", "gbifIDsIdentifiedBy", "parsed").
     withColumn("gbifIDsRecordedBy", stringify($"gbifIDsRecordedBy")).
     withColumn("gbifIDsIdentifiedBy", stringify($"gbifIDsIdentifiedBy")).
     withColumnRenamed("agent","agents").
