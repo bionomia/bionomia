@@ -18,11 +18,9 @@ Unfortunately, gbifIDs are not persistent. These occasionally disappear through 
 
 ### Step 3: Parse & Populate Agents
 
-      $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/parse_agents.rb --queue
-      # Alternative to the above is to use parallel processing
-      # $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/parse_agents.rb --parallel
-      # Can start 2+ workers, each with 5 threads to help speed-up processing
-      $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec sidekiq -C config/settings/sidekiq.yml -r ./application.rb
+      # Build & start the Go-based dwcagent-server available from https://github.com/bionomia/dwc_agent_golang
+      # Then modify and use the agent_create.scala script to populate the Agent and OccurrenceAgent models
+      # Alternatively, use the ruby-based processing queue as follows:
 
       $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/populate_agents.rb --truncate --queue
       # Can start 2+ workers, each with 5 threads to help speed-up processing
