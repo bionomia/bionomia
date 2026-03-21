@@ -32,6 +32,14 @@ import java.net.http.{HttpClient, HttpRequest, HttpResponse}
 import java.nio.charset.StandardCharsets
 import scala.jdk.CollectionConverters._
 
+// ── Configuration ─────────────────────────────────────────────────────────────
+
+val mysqlHost        = "localhost"
+val mysqlPort        = 3306
+val mysqlDb          = "bionomia"
+val mysqlUser        = "root"
+val mysqlPassword    = ""
+
 // Prevent warnings
 spark.conf.set("spark.sql.debug.maxToStringFields", 10000)
 
@@ -78,11 +86,12 @@ val occurrences = spark.
 
 //set some properties for a MySQL connection
 val prop = new java.util.Properties
-prop.setProperty("driver", "com.mysql.cj.jdbc.Driver")
-prop.setProperty("user", "root")
-prop.setProperty("password", "")
+prop.setProperty("driver",   "com.mysql.cj.jdbc.Driver")
+prop.setProperty("user",     mysqlUser)
+prop.setProperty("password", mysqlPassword)
 
-val url = "jdbc:mysql://localhost:3306/bionomia?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false&useServerPrepStmts=false&rewriteBatchedStatements=true"
+val url = s"jdbc:mysql://$mysqlHost:$mysqlPort/$mysqlDb" +
+  "?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false&useServerPrepStmts=false&characterEncoding=UTF-8&rewriteBatchedStatements=true"
 
 //check new occurrences against existing user_occurrences table to see how many orphaned occurrences we have
 val user_occurrences = spark.read.jdbc(url, "user_occurrences", prop)
