@@ -28,6 +28,9 @@ Unfortunately, gbifIDs are not persistent. These occasionally disappear through 
 
 ### Step 4: Populate Taxa
 
+     # Modify and use the taxa_create.scala script to populate the Taxon and TaxonOccurrence models
+     # Alternatively, use the ruby-based processing queue as follows:
+     
      $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/populate_taxa.rb --truncate --directory /directory-to-spark-csv-files/
      # Can start 2+ workers, each with 5 threads to help speed-up processing
      $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec sidekiq -C config/settings/sidekiq.yml -r ./application.rb

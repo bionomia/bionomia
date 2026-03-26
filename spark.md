@@ -49,6 +49,17 @@ spark.conf.set("spark.sql.files.ignoreCorruptFiles", true)
 // Deal with really old dates
 spark.sql("SET spark.sql.avro.datetimeRebaseModeInWrite=CORRECTED")
 
+//set some properties for a MySQL connection
+val prop = new java.util.Properties
+prop.setProperty("driver",   "com.mysql.cj.jdbc.Driver")
+prop.setProperty("user",     mysqlUser)
+prop.setProperty("password", mysqlPassword)
+
+val url = s"jdbc:mysql://$mysqlHost:$mysqlPort/$mysqlDb" +
+  "?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false&useServerPrepStmts=false&characterEncoding=UTF-8&rewriteBatchedStatements=true"
+
+def stringify(c: Column) = concat(lit("["), concat_ws(",", c), lit("]"))
+
 val occurrences = spark.
     read.
     format("avro").
@@ -84,15 +95,6 @@ val occurrences = spark.
     withColumn("typeStatus", lower($"typeStatus")).
     dropDuplicates("gbifID")
 
-//set some properties for a MySQL connection
-val prop = new java.util.Properties
-prop.setProperty("driver",   "com.mysql.cj.jdbc.Driver")
-prop.setProperty("user",     mysqlUser)
-prop.setProperty("password", mysqlPassword)
-
-val url = s"jdbc:mysql://$mysqlHost:$mysqlPort/$mysqlDb" +
-  "?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false&useServerPrepStmts=false&characterEncoding=UTF-8&rewriteBatchedStatements=true"
-
 //check new occurrences against existing user_occurrences table to see how many orphaned occurrences we have
 val user_occurrences = spark.read.jdbc(url, "user_occurrences", prop)
 
@@ -117,8 +119,6 @@ val differences = existing_counts.
     select(existing_counts("datasetKey").cast("STRING"), existing_counts("source_attribution_count"), new_counts("count")).
     where("count IS NULL").
     show(50, false)
-
-def stringify(c: Column) = concat(lit("["), concat_ws(",", c), lit("]"))
 
 val identifiers = spark.
     read.
@@ -229,6 +229,7 @@ result.select("agent", "gbifIDsRecordedBy", "gbifIDsIdentifiedBy", "parsed").
 // Best to drop indices then recreate later
 // ALTER TABLE `occurrences` DROP KEY `index_occurrences_on_datasetKey_occurrenceID`, DROP KEY `country_code_idx`, DROP KEY `eventDate_processed_idx`, DROP KEY `dateIdentified_processed_idx`;
 
+// Could use the occurrence_create.scala script instead of the following:
 occurrences.write.mode("append").jdbc(url, "occurrences", prop)
 
 // Recreate indices

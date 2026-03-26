@@ -303,7 +303,7 @@ withConn { conn =>
   println("Dropping indexes on occurrence_agents for fast bulk insert...")
   // Drop each index separately so a missing index does not abort the others.
   // Adjust names to match your schema: SHOW CREATE TABLE occurrence_agents\G
-  Seq("agent_idx", "occurrence_idx", "unique_occurrence_agent").foreach { idx =>
+  Seq("agent_occurrence_idx", "occurrence_idx").foreach { idx =>
     try { stmt.execute(s"ALTER TABLE `occurrence_agents` DROP KEY `$idx`") }
     catch { case _: Exception => /* index may not exist yet */ }
   }
@@ -327,9 +327,8 @@ withConn { conn =>
   // Adjust key names and columns to match your schema exactly.
   conn.createStatement().execute("""
     ALTER TABLE `occurrence_agents`
-      ADD KEY        `agent_idx`               (`agent_id`),
-      ADD KEY        `occurrence_idx`          (`occurrence_id`),
-      ADD UNIQUE KEY `unique_occurrence_agent` (`occurrence_id`, `agent_id`, `agent_role`)
+      ADD UNIQUE KEY `agent_occurrence_idx` (`agent_id`, `agent_role`, `occurrence_id`),
+      ADD KEY        `occurrence_idx`          (`occurrence_id`)
   """)
   println("Indexes rebuilt on occurrence_agents")
 }
