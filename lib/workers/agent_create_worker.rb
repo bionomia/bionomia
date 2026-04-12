@@ -77,6 +77,7 @@ module Bionomia
     def missing_features(agent:)
       return true if agent["family"].blank?
       return true if agent["family"].length > 40
+      return true if agent["family"].count(" ") > 2
       return true if agent["family"].count(".") > 4
       return true if agent["given"] && agent["given"].length > 40
       return true if agent["given"] && agent["given"].count(".") > 5
