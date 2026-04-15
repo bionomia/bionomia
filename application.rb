@@ -27,8 +27,8 @@ class BIONOMIA < Sinatra::Base
   I18n.available_locales = [:en, :fr, :es, :pt, :de, :zh, :cs]
 
   include Pagy::Method
-  Pagy.options[:limit] = 30
-  Pagy.options[:size] = 7
+  Pagy::OPTIONS[:limit] = 30
+  Pagy::OPTIONS[:size] = 7
 
   not_found do
     haml :oops if !content_type
