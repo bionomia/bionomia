@@ -406,7 +406,7 @@ module Bionomia
       property = wiki_user.best_value_for(prop)
       return [nil, nil] if !property.respond_to?(:precision)
       precision = convert_precision(property.precision)
-      date = (property.precision == 7) ? property.historical_year : property.to_s
+      date = (property.precision == 7) ? property.historical_year.to_s : property.to_s
       return [nil, nil] if date.empty?
 
       data = { precision: precision, date: date }
