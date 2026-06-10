@@ -404,11 +404,12 @@ module Bionomia
 
     def wiki_date_precision(wiki_user, prop)
       property = wiki_user.best_value_for(prop)
-      precision = convert_precision(property.precision) rescue [nil, nil]
+      return [nil, nil] if !property.respond_to?(:precision)
+      precision = convert_precision(property.precision)
       date = (property.precision == 7) ? property.historical_year : property.to_s
-      data = { precision: precision, date: date }
+      return [nil, nil] if date.empty?
 
-      return [nil, nil] if precision.nil? || date.empty?
+      data = { precision: precision, date: date }
 
       case data[:precision]
       when :day
