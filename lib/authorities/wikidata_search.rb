@@ -419,7 +419,7 @@ module Bionomia
       when :year
         [Date.parse(data[:date][1..4] + "-01-01"), "year"]
       when :century
-        [Date.parse(data[:date][1..4] + "-01-01"), "century"]
+        [Date.parse(data[:date] + "-01-01"), "century"]
       else
         [nil, nil]
       end
