@@ -521,8 +521,9 @@ module Bionomia
       aliases.push(wiki_user.best_value_for("P1559").to_s)
       aliases.concat(wiki_user.aliases(:mul))
       aliases.concat(wiki_user.aliases(:en))
-      if aliases.compact.length > 0
-        other_names = aliases.compact.uniq.join("|")
+      aliases.reject!(&:blank?)
+      if aliases.length > 0
+        other_names = aliases.uniq.join("|")
       end
 
       date_born, date_born_precision = wiki_date_precision(wiki_user, "P569")
