@@ -387,19 +387,6 @@ module Bionomia
       { year: year, month: month, day: day }
     end
 
-    def rank_score(rank)
-      case rank
-      when "preferred"
-        2
-      when "normal"
-        1
-      when "deprecated"
-        -1
-      else
-        0
-      end
-    end
-
     def convert_precision(precision)
       case precision
       when 11..14
@@ -415,14 +402,13 @@ module Bionomia
       end
     end
 
-    def wiki_date_precision(wiki_user, property)
-      property = wiki_user.best_value_for(property)
-      data = { 
-        precision: convert_precision(property.precision),
-        date: property.to_s 
-      } rescue { precision: nil }
+    def wiki_date_precision(wiki_user, prop)
+      property = wiki_user.best_value_for(prop)
+      precision = convert_precision(property.precision)
+      date = (property.precision == 7) ? property.historical_year : property.to_s
+      data = { precision: precision, date: date }
 
-      return [nil, nil] if data.nil? || data.empty?
+      return [nil, nil] if precision.nil? || date.empty?
 
       case data[:precision]
       when :day
