@@ -140,9 +140,9 @@ if options[:deleted]
   wiki = Bionomia::WikidataSearch.new
   qnumbers = local - wiki.wiki_bionomia_id
   qnumbers.each do |wikicode|
-    wiki_user = Wikidata::Item.find(wikicode)
+    wiki_user = Wikidata::Item.find_by_id(wikicode)
     if wiki_user
-      puts wiki_user.title.green
+      puts wiki_user.label.green
     else
       puts wikicode.red
     end

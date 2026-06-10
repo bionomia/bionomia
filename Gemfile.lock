@@ -6,15 +6,16 @@ GIT
       activerecord (>= 6.0)
 
 GIT
-  remote: https://github.com/dshorthouse/wikidata-client
-  revision: 382189655638097757705f484f1ae1c93ebd2306
-  branch: patch-1
+  remote: https://github.com/wilg/wikidata
+  revision: 31e16da322d720035399ff5835bd792e19a2d014
   specs:
-    wikidata-client (0.1.0)
-      excon (~> 0.92)
-      faraday (~> 2.2)
-      faraday-excon (~> 2.1)
-      hashie (~> 5.0)
+    wikidata (0.0.4)
+      colorize
+      faraday
+      hashie (>= 2.0)
+      i18n
+      terminal-table
+      thor
 
 GEM
   remote: http://rubygems.org/
@@ -48,6 +49,8 @@ GEM
       uri (>= 0.13.1)
     addressable (2.9.0)
       public_suffix (>= 2.0.2, < 8.0)
+    auth-sanitizer (0.2.1)
+      version_gem (~> 1.1, >= 1.1.10)
     base64 (0.3.0)
     bcp47_spec (0.2.1)
     bigdecimal (3.3.1)
@@ -97,17 +100,13 @@ GEM
     ethon (0.18.0)
       ffi (>= 1.15.0)
       logger
-    excon (0.112.0)
-    faraday (2.14.1)
+    faraday (2.14.2)
       faraday-net_http (>= 2.0, < 3.5)
       json
       logger
-    faraday-excon (2.2.0)
-      excon (>= 0.109.0)
-      faraday (>= 2.11.0, < 3)
     faraday-multipart (1.2.0)
       multipart-post (~> 2.0)
-    faraday-net_http (3.4.2)
+    faraday-net_http (3.4.4)
       net-http (~> 0.5)
     faraday-typhoeus (2.0.0)
       faraday (~> 2.0)
@@ -129,8 +128,8 @@ GEM
       simple_po_parser (~> 1.1)
     io-console (0.8.2)
     iso_country_codes (0.7.8)
-    json (2.19.5)
-    jwt (3.1.2)
+    json (2.19.8)
+    jwt (3.2.0)
       base64
     link_header (0.0.8)
     logger (1.7.0)
@@ -165,7 +164,7 @@ GEM
       uri (>= 0.11.1)
     net-http-persistent (4.0.8)
       connection_pool (>= 2.2.4, < 4)
-    net-imap (0.6.4)
+    net-imap (0.6.4.1)
       date
       net-protocol
     net-pop (0.1.2)
@@ -180,15 +179,16 @@ GEM
       racc (~> 1.4)
     nokogiri (1.19.3-x86_64-linux-gnu)
       racc (~> 1.4)
-    oauth2 (2.0.18)
+    oauth2 (2.0.22)
+      auth-sanitizer (~> 0.2, >= 0.2.1)
       faraday (>= 0.17.3, < 4.0)
       jwt (>= 1.0, < 4.0)
       logger (~> 1.2)
       multi_xml (~> 0.5)
       rack (>= 1.2, < 4)
-      snaky_hash (~> 2.0, >= 2.0.3)
-      version_gem (~> 1.1, >= 1.1.9)
-    oj (3.17.0)
+      snaky_hash (~> 2.0, >= 2.0.5)
+      version_gem (~> 1.1, >= 1.1.11)
+    oj (3.17.3)
       bigdecimal (>= 3.0)
       ostruct (>= 0.2)
     omniauth (2.1.4)
@@ -203,12 +203,12 @@ GEM
       omniauth-oauth2 (~> 1.3)
       ruby_dig (~> 0.0.2)
     ostruct (0.6.3)
-    pagy (43.5.3)
+    pagy (43.5.6)
       json
       uri
       yaml
     parallel (2.1.0)
-    passenger (6.1.2)
+    passenger (6.1.5)
       logger (>= 1.7.0)
       rack (>= 1.6.13)
       rackup (>= 1.0.1)
@@ -220,7 +220,7 @@ GEM
       mail (>= 2.0)
     prism (1.9.0)
     public_suffix (7.0.5)
-    puma (8.0.1)
+    puma (8.0.2)
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (3.2.6)
@@ -260,7 +260,7 @@ GEM
       reline
     redis (5.4.1)
       redis-client (>= 0.22.0)
-    redis-client (0.28.0)
+    redis-client (0.29.0)
       connection_pool
     reline (0.6.3)
       io-console (~> 0.5)
@@ -284,22 +284,22 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
     rspec-support (3.13.7)
-    rss (0.3.2)
+    rss (0.3.3)
       rexml
     ruby-filemagic (0.7.3)
     ruby-progressbar (1.13.0)
     ruby_dig (0.0.2)
-    rubyzip (3.3.0)
+    rubyzip (3.3.1)
     sanitize (7.0.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.16.8)
     securerandom (0.4.1)
-    sidekiq (8.1.3)
+    sidekiq (8.1.6)
       connection_pool (>= 3.0.0)
       json (>= 2.16.0)
       logger (>= 1.7.0)
       rack (>= 3.2.0)
-      redis-client (>= 0.26.0)
+      redis-client (>= 0.29.0)
     simple_po_parser (1.1.6)
     sinatra (4.2.1)
       logger (>= 1.6.0)
@@ -323,7 +323,7 @@ GEM
       sinatra (>= 1.0)
     sitemap_generator (7.0.1)
       builder (~> 3.0)
-    snaky_hash (2.0.3)
+    snaky_hash (2.0.5)
       hashie (>= 0.1.0, < 6)
       version_gem (>= 1.1.8, < 3)
     sort_alphabetical (1.1.0)
@@ -332,17 +332,23 @@ GEM
       net-http-persistent (~> 4.0, >= 4.0.2)
       rdf (~> 3.3)
     temple (0.10.4)
+    terminal-table (4.0.0)
+      unicode-display_width (>= 1.1.1, < 4)
+    thor (1.5.0)
     tilt (2.7.0)
     timeout (0.6.1)
-    trilogy (2.12.4)
+    trilogy (2.12.5)
       bigdecimal
     typhoeus (1.6.0)
       ethon (>= 0.18.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    unicode-display_width (3.2.0)
+      unicode-emoji (~> 4.1)
+    unicode-emoji (4.2.0)
     unicode_utils (1.4.0)
     uri (1.1.1)
-    version_gem (1.1.9)
+    version_gem (1.1.11)
     yaml (0.4.0)
 
 PLATFORMS
@@ -414,7 +420,7 @@ DEPENDENCIES
   sparql-client
   trilogy
   typhoeus
-  wikidata-client!
+  wikidata!
 
 RUBY VERSION
    ruby 3.3.6p108

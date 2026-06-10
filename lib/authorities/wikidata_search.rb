@@ -14,16 +14,11 @@ module Bionomia
     }
 
     def initialize
-      headers = { 'User-Agent' => 'Bionomia/1.0' }
+      headers = { 'User-Agent' => 'Bionomia/1.0 (https://bionomia.net)' }
       @sparql = SPARQL::Client.new("https://query.wikidata.org/sparql", headers: headers, read_timeout: 240, keep_alive: 240)
       Wikidata.configure do |config|
-        config.options = {
-          request: {
-            timeout: 60,
-            open_timeout: 60
-          }
-        }
-        config.adapter = :typhoeus
+        config.user_agent = headers['User-Agent']
+        config.faraday_adapter = :typhoeus
       end
     end
 
@@ -327,11 +322,11 @@ module Bionomia
     end
 
     def wiki_organization_codes(qid)
-      data = Wikidata::Item.find(qid)
-      isni = data.properties("P213").first.value.gsub(/[[:space:]]+/, "") rescue nil
-      grid = data.properties("P2427").first.value rescue nil
-      ringgold = data.properties("P3500").first.value rescue nil
-      ror = data.properties("P6782").first.value rescue nil
+      data = Wikidata::Item.find_by_id(qid)
+      isni = data.best_value_for("P213").to_s.gsub(/[[:space:]]+/, "") rescue nil
+      grid = data.best_value_for("P2427").to_s rescue nil
+      ringgold = data.best_value_for("P3500").to_s rescue nil
+      ror = data.best_value_for("P6782").to_s rescue nil
       { isni: isni, grid: grid, ringgold: ringgold, ror: ror }
     end
 
@@ -339,15 +334,16 @@ module Bionomia
       name, wikicode, latitude, longitude, image_url, website = nil
 
       if identifier.match(/Q[0-9]{1,}/)
-        data = Wikidata::Item.find(identifier)
-        name = data.title
+        data = Wikidata::Item.find_by_id(identifier)
+        name = data.label
         wikicode = identifier
-        latitude = data.properties("P625").first.latitude.to_f rescue nil
-        longitude = data.properties("P625").first.longitude.to_f rescue nil
-        image = data.properties("P18").first.url rescue nil
-        logo = data.properties("P154").first.url rescue nil
+
+        latitude = data.best_value_for("P625").latitude.to_f rescue nil
+        longitude = data.best_value_for("P625").longitude.to_f rescue nil
+        image = data.best_value_for("P18").url rescue nil
+        logo = data.best_value_for("P154").url rescue nil
         image_url = image || logo
-        website = data.properties("P856").last.value rescue nil
+        website = data.best_value_for("P856").to_s rescue nil
       else
         response = @sparql.query(wikidata_institution_wiki_query(identifier))
                           .first
@@ -404,16 +400,28 @@ module Bionomia
       end
     end
 
+    def convert_precision(precision)
+      case precision
+      when 11..14
+        :day
+      when 10
+        :month
+      when 9
+        :year
+      when 7
+        :century
+      else
+        nil
+      end
+    end
+
     def wiki_date_precision(wiki_user, property)
-      data = wiki_user.properties(property)
-                      .map{|a| { 
-                        precision: a.precision_key,
-                        date: a.value.time,
-                        rank: rank_score(a.property.rank)
-                        }
-                      }
-                      .sort_by{|v| -v[:rank] }
-                      .first rescue { precision: nil }
+      property = wiki_user.best_value_for(property)
+      data = { 
+        precision: convert_precision(property.precision),
+        date: property.to_s 
+      } rescue { precision: nil }
+
       return [nil, nil] if data.nil? || data.empty?
 
       case data[:precision]
@@ -430,47 +438,37 @@ module Bionomia
       end
     end
 
-    def ranked_name(items)
-      items.map{|a| { 
-        title: a.title,
-        rank: (rank_score(a.property.rank) rescue 0)
-        }
-      }
-      .sort_by{|v| -v[:rank] }
-      .map{|a| a[:title] }
-      .compact
-      .join(" ").strip rescue nil
-    end
-
     def extract_sitelinks(wiki_user)
-      wiki_user.sitelinks
-               .slice(*I18n.backend.translations.keys.map{|k| "#{k}wiki"}) rescue nil
+      begin
+        wiki_user.sitelinks.to_hash
+                .slice(*I18n.backend.translations.keys.map{|k| "#{k}wiki"})
+      rescue
+        nil
+      end
     end
 
     def wiki_user_data(wikicode)
-      wiki_user = Wikidata::Item.find(wikicode)
+      wiki_user = Wikidata::Item.find_by_id(wikicode)
 
-      if !wiki_user ||
-          wiki_user.properties("P31").size == 0 ||
-         !wiki_user.properties("P31")[0].respond_to?("title") ||
-          !["human", "Homo sapiens"].include?(wiki_user.properties("P31")[0].title)
+      if !wiki_user || wiki_user.instance_of.first.label != "human"
         return
       end
 
-      label = wiki_user.title
-      family = ranked_name(wiki_user.properties("P734"))
-      second_family = ranked_name(wiki_user.properties("P1950"))
+      label = wiki_user.all_labels["mul"] || wiki_user.all_labels["en"]
+      family = wiki_user.values_for("P734").map{|a| a.entity.label}.join(" ")
+
+      second_family = wiki_user.values_for("P1950").map{|a| a.entity.label}.join(" ")
       if family && second_family
         family = [family, second_family].join(" ").strip
       end
-      given = ranked_name(wiki_user.properties("P735"))
+
+      given = wiki_user.values_for("P735").map{|a| a.entity.label}.join(" ")
       particle = nil
 
       parsed = name_parser.parse(label.dup)[0] rescue nil
       if parsed.nil?
         parsed = DwcAgent.parse(label.dup)[0] rescue nil
       end
-
       particle = parsed.particle rescue nil
 
       if family.blank?
@@ -486,43 +484,45 @@ module Bionomia
         given = ""
       end
 
-      country = wiki_user.properties("P27")
-                         .compact
-                         .map(&:title)
+      country = wiki_user.values_for("P27")
+                         .map{|a| a.entity.label}
                          .join("|") rescue nil
-      country_code = wiki_user.properties("P27")
-                              .compact
-                              .map{|a| I18nData.country_code(a.title) || IsoCountryCodes.search_by_name(a.title).first.alpha2 || "" }
-                              .compact
-                              .join("|")
-                              .presence rescue nil
-      keywords = wiki_user.properties("P106")
-                          .map{|k| k.title if !/^Q\d+/.match?(k.title)}
+      
+      country_code = wiki_user.values_for("P27").map do |a|
+        I18nData.country_code(a.entity.label) || 
+        (IsoCountryCodes.search_by_name(a.entity.label).first.alpha2 rescue nil)
+      end.compact.join("|")
+
+      keywords = wiki_user.values_for("P106")
+                          .map{|a| a.entity.label}
+                          .delete_if{|a| /^Q\d+/.match?(a)}
                           .compact
                           .join("|") rescue nil
-      description = wiki_user.descriptions["en"].value rescue nil
-      orcid = wiki_user.properties("P496")
-                       .first
-                       .value rescue nil
+
+      description = wiki_user.all_descriptions["en"] rescue nil
+
+      orcid = wiki_user.best_value_for("P496").to_s rescue nil
 
       image_url = nil
       signature_url = nil
-      youtube_id = wiki_user.properties("P1651").first.value rescue nil
-      image = wiki_user.image.value rescue nil
-      if image
+      youtube_id = wiki_user.best_value_for("P1651").to_s rescue nil
+
+      image = wiki_user.image.to_s rescue nil
+      if image && !image.empty?
         image_url = "https://commons.wikimedia.org/wiki/Special:FilePath/" << Addressable::URI.encode(image)
       end
-      signature = wiki_user.properties("P109").first.value rescue nil
-      if signature
+      signature = wiki_user.best_value_for("P109").to_s rescue nil
+      if signature && !signature.empty?
         signature_url = "https://commons.wikimedia.org/wiki/Special:FilePath/" << Addressable::URI.encode(signature)
       end
 
       other_names = ""
       aliases = []
-      aliases.concat(wiki_user.properties("P1559").compact.map{|a| a.value.text})
-      aliases.concat(wiki_user.aliases.values.compact.map{|a| a.map{|b| b.value if ["en", "mul"].include?(b.language)}.compact}.flatten) rescue nil
-      if aliases.length > 0
-        other_names = aliases.uniq.join("|")
+      aliases.push(wiki_user.best_value_for("P1559").to_s)
+      aliases.concat(wiki_user.aliases(:mul))
+      aliases.concat(wiki_user.aliases(:en))
+      if aliases.compact.length > 0
+        other_names = aliases.compact.uniq.join("|")
       end
 
       date_born, date_born_precision = wiki_date_precision(wiki_user, "P569")
@@ -530,8 +530,9 @@ module Bionomia
 
       organizations = []
       ["P108", "P1416"].each do |property|
-        wiki_user.properties(property).each do |org|
-          next if org.nil? || (org.title rescue nil).nil?
+        orgs = wiki_user.values_for(property)
+        next if orgs.empty?
+        orgs.each do |org|
           organization = wiki_user_organization(wiki_user, org, property)
           organizations << organization
         end
@@ -565,7 +566,7 @@ module Bionomia
       start_time = { year: nil, month: nil, day: nil }
       end_time = { year: nil, month: nil, day: nil }
 
-      qualifiers = wiki_user.hash[:claims][property.to_sym]
+      qualifiers = wiki_user.data_hash[:claims][property.to_sym]
                             .select{|a| a[:mainsnak][:datavalue][:value][:id] == org.id}
                             .first
                             .qualifiers rescue nil
@@ -587,7 +588,7 @@ module Bionomia
         end
       end
       {
-        name: org.title,
+        name: org.entity.label,
         wikidata: org.id,
         ringgold: nil,
         grid: nil,
@@ -606,10 +607,10 @@ module Bionomia
       data = {}
       wikicode = @sparql.query(wikidata_by_orcid_query(orcid)).first[:qid].value rescue nil
       if wikicode
-        wiki_user = Wikidata::Item.find(wikicode)
+        wiki_user = Wikidata::Item.find_by_id(wikicode)
         data[:qid] = wikicode
-        data[:bionomia_id] = wiki_user.properties("P6944").first.value rescue nil
-        data[:youtube_id] = wiki_user.properties("P1651").first.value rescue nil
+        data[:bionomia_id] = wiki_user.best_value_for("P6944").to_s rescue nil
+        data[:youtube_id] = wiki_user.best_value_for("P1651").to_s rescue nil
         data[:wiki_sitelinks] = extract_sitelinks(wiki_user)
       end
       data
