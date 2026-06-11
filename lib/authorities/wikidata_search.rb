@@ -406,8 +406,11 @@ module Bionomia
       property = wiki_user.best_value_for(prop)
       return [nil, nil] if !property.respond_to?(:precision)
       precision = convert_precision(property.precision)
-      date = (property.precision == 7) ? property.historical_year.to_s : property.to_s
-      return [nil, nil] if date.empty?
+
+      clean_time = property.time.sub('-00-00', '-01-01').sub('-00T', '-01T')
+      date = DateTime.strptime(clean_time, '+%Y-%m-%dT%H:%M:%S%Z') 
+                     .strftime("%Y-%m-%d") rescue nil
+      return [nil, nil] if date.nil?
 
       data = { precision: precision, date: date }
 
@@ -415,11 +418,11 @@ module Bionomia
       when :day
         [Date.parse(data[:date]), "day"]
       when :month
-        [Date.parse(data[:date][1..7] + "-01"), "month"]
+        [Date.parse(data[:date]), "month"]
       when :year
-        [Date.parse(data[:date][1..4] + "-01-01"), "year"]
+        [Date.parse(data[:date]), "year"]
       when :century
-        [Date.parse(data[:date] + "-01-01"), "century"]
+        [Date.parse(data[:date]), "century"]
       else
         [nil, nil]
       end
