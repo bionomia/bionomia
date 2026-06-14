@@ -407,6 +407,7 @@ de:
       other: "A total of %{count} records were handled."
   home:
     tagline: Verbinden Sie naturhistorische Exemplare mit den Sammlern der Welt.
+    keywords: credit,specimens,natural,history,collection,museum,attribution,tracker,tracking,gbif
     get_started: Los geht’s
     your_profile: Ihr Profil
     sample_profiles: Die heutigen vorgestellten Sammler
