@@ -407,6 +407,7 @@ es:
       other: "A total of %{count} records were handled."
   home:
     tagline: Enlace especímenes de historia natural a los colectores del mundo.
+    keywords: credit,specimens,natural,history,collection,museum,attribution,tracker,tracking,gbif
     get_started: Comenzar
     your_profile: Su perfil
     sample_profiles: Colectores destacados de hoy
