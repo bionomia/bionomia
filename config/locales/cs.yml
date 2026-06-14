@@ -457,6 +457,7 @@ cs:
       other: "Celkem bylo zpracováno %{count} záznamů."
   home:
     tagline: Spojte přírodovědné exempláře se sběrateli světa.
+    keywords: credit,specimens,natural,history,collection,museum,attribution,tracker,tracking,gbif
     get_started: Začněte
     your_profile: Váš profil
     sample_profiles: Dnešní doporučení sběratelé
