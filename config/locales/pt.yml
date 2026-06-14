@@ -407,6 +407,7 @@ pt:
       other: "Foi tratado um total de %{count} registos."
   home:
     tagline: Atribua espécimes de história natural aos coletores de todo o mundo.
+    keywords: credit,specimens,natural,history,collection,museum,attribution,tracker,tracking,gbif
     get_started: Iniciar
     your_profile: Seu perfil
     sample_profiles: Coletores em destaque hoje
