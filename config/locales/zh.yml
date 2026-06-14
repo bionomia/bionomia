@@ -407,6 +407,7 @@ zh:
       other: "A total of %{count} records were handled."
   home:
     tagline: 链接自然历史样本与全球的收藏家。
+    keywords: credit,specimens,natural,history,collection,museum,attribution,tracker,tracking,gbif
     get_started: 开始
     your_profile: 您的个人资料
     sample_profiles: 今日精选收藏家

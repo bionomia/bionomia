@@ -407,6 +407,7 @@ el:
       other: "A total of %{count} records were handled."
   home:
     tagline: Link natural history specimens to the world's collectors.
+    keywords: credit,specimens,natural,history,collection,museum,attribution,tracker,tracking,gbif
     get_started: Get started
     your_profile: Your profile
     sample_profiles: Today's Featured Collectors

@@ -407,6 +407,7 @@ fr:
       other: "Au total, %{count} enregistrements téléchargés ont été traités."
   home:
     tagline: Reliez des spécimens d'histoire naturelle aux collectionneurs du monde.
+    keywords: credit,specimens,natural,history,collection,museum,attribution,tracker,tracking,gbif
     get_started: Commencer
     your_profile: Votre profil
     sample_profiles: Collecteurs en vedette du jour
