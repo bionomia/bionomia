@@ -30,6 +30,7 @@ if options[:truncate]
   puts "Truncating table...".yellow
   Occurrence.connection.execute("TRUNCATE TABLE occurrence_counts")
   Sidekiq::Stats.new.reset
+  Sidekiq::DeadSet.new.clear
   puts "Done!".green
 end
 

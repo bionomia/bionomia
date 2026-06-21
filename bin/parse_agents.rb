@@ -22,6 +22,7 @@ end.parse!
 
 if options[:queue]
   Sidekiq::Stats.new.reset
+  Sidekiq::DeadSet.new.clear
 
   progressbar = ProgressBar.create(title: "Agent Jobs", total: AgentJob.count)
 

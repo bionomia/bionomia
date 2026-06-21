@@ -10,7 +10,7 @@ if defined?(Sidekiq::Web)
       secret: Settings.orcid.key * 4,
       domain: Settings.cookie_domain,
       expire_after: 2592000,
-      httpdonly: true,
+      httponly: true,
       same_site: :lax
    use Rack::Protection::AuthenticityToken
    use Sinatra::Bionomia::SidekiqSecurity

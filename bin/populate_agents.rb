@@ -35,6 +35,7 @@ if options[:truncate]
   index.create_index
   index.refresh_index
   Sidekiq::Stats.new.reset
+  Sidekiq::DeadSet.new.clear
 end
 
 if options[:queue]

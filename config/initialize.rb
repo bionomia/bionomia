@@ -24,10 +24,9 @@ module Sinatra
                                      secret: Settings.orcid.key * 4,
                                      domain: Settings.cookie_domain,
                                      expire_after: 2592000,
-                                     httpdonly: true,
+                                     httponly: true,
                                      secure: secure,
                                      same_site: :lax
-                                     
           app.use Rack::Protection::AuthenticityToken
           app.use Sinatra::Bionomia::SidekiqSecurity
 

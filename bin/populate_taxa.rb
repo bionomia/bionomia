@@ -31,6 +31,7 @@ if options[:truncate]
     Occurrence.connection.execute("TRUNCATE TABLE #{table}")
   end
   Sidekiq::Stats.new.reset
+  Sidekiq::DeadSet.new.clear
 end
 
 if options[:directory]

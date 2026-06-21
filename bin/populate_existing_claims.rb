@@ -39,6 +39,7 @@ if options[:truncate]
   ActiveRecord::Base.connection.execute("TRUNCATE TABLE source_users")
   ActiveRecord::Base.connection.execute("TRUNCATE TABLE source_attributions")
   Sidekiq::Stats.new.reset
+  Sidekiq::DeadSet.new.clear
 end
 
 if options[:directory]

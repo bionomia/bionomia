@@ -10,7 +10,7 @@ module Sinatra
 
          def call(env)
             request = Rack::Request.new(env)
-            if request.path == "/admin/sidekiq"
+            if request.path.include? "sidekiq"
                user = User.find(request.session["omniauth"].id) rescue nil
                if user && user.is_admin?
                   @app.call(env)
