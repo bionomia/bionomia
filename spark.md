@@ -196,7 +196,7 @@ val outputSchema = agents.schema.add("parsed", StringType, nullable = true)
 
 // How many rows to send to the sidecar in each HTTP call.
 // Tune this down if you still see memory pressure, up if throughput is low.
-val capturedBatchSize = 500
+val capturedBatchSize = 250
 
 val parsedRDD = agents.rdd.mapPartitions { partition =>
 
