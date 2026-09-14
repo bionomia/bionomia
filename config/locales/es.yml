@@ -679,6 +679,7 @@ es:
     date_identified: Fecha de identificación
     institution: Institución
     catalog_number: Número de catálogo
+    record_number: Record Number
     basis_record: Base del Registro
     country: País
     family: Familia

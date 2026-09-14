@@ -827,6 +827,7 @@ ar:
     date_identified: Date Identified
     institution: Institution
     catalog_number: Catalog Number
+    record_number: Record Number
     basis_record: Basis Of Record
     country: Country
     family: Family
