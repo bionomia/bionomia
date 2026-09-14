@@ -753,6 +753,7 @@ cs:
     date_identified: Datum identifikace
     institution: Instituce
     catalog_number: Katalogové číslo
+    record_number: Record Number
     basis_record: Základ záznamu
     country: Země
     family: Rodina
