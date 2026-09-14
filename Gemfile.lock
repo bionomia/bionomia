@@ -130,7 +130,7 @@ GEM
       simple_po_parser (~> 1.1)
     io-console (0.9.3)
     iso_country_codes (0.7.8)
-    json (3.0.2)
+    json (2.21.2)
     jwt (3.3.0)
       base64
     link_header (0.0.8)
@@ -386,6 +386,7 @@ DEPENDENCIES
   i18n
   i18n_data
   iso_country_codes
+  json (~> 2.21)
   mini_magick
   namae
   nokogiri

@@ -1,6 +1,9 @@
 class Article < ActiveRecord::Base
   attr_accessor :skip_callbacks
 
+  serialize :gbif_dois, coder: JSON
+  serialize :gbif_downloadkeys, coder: JSON
+
   has_many :article_occurrences
   has_many :occurrences, through: :article_occurrences
 
@@ -10,9 +13,6 @@ class Article < ActiveRecord::Base
   validates :doi, presence: true
   validates :gbif_dois, presence: true
   validates :gbif_downloadkeys, presence: true
-
-  serialize :gbif_dois, coder: JSON
-  serialize :gbif_downloadkeys, coder: JSON
 
   after_create :update_citation, :add_search, unless: :skip_callbacks
   after_update :update_citation, :update_search, :flush_cache, unless: :skip_callbacks
