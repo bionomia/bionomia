@@ -115,6 +115,7 @@ val occurrences = spark
   .withColumnRenamed("v_institutionCode", "institutionCode")
   .withColumnRenamed("v_collectionCode",  "collectionCode")
   .withColumnRenamed("v_catalogNumber",   "catalogNumber")
+  .withColumnRenamed("v_recordNumber",    "recordNumber")
   .withColumnRenamed("v_recordedBy",      "recordedBy")
   .withColumnRenamed("v_recordedByID",    "recordedByID")
   .withColumnRenamed("v_typeStatus",      "typeStatus")

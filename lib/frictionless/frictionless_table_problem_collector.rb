@@ -20,6 +20,7 @@ module Bionomia
           fields: [
             { name: "occurrence_id", type: "integer" },
             { name: "catalogNumber", type: "string", "skos:exactMatch": "http://rs.tdwg.org/dwc/terms/catalogNumber" },
+            { name: "recordNumber", type: "string", "skos:exactMatch": "http://rs.tdwg.org/dwc/terms/recordNumber" },
             { name: "user_id", type: "integer" },
             { name: "wikidata", type: "string" },
             { name: "birthDate", type: "date", "skos:exactMatch": "https://schema.org/birthDate" },
@@ -72,6 +73,7 @@ module Bionomia
                 data = [
                   uo.occurrence.id,
                   uo.occurrence.catalogNumber,
+                  uo.occurrence.recordNumber,
                   uo.user.id,
                   uo.user.wikidata,
                   uo.user.date_born,

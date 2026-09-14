@@ -88,6 +88,7 @@ val occurrences = spark.
     withColumnRenamed("v_catalogNumber","catalogNumber").
     withColumnRenamed("v_recordedBy","recordedBy").
     withColumnRenamed("v_recordedByID","recordedByID").
+    withColumnRenamed("v_recordNumber","recordNumber").
     withColumnRenamed("v_typeStatus","typeStatus").
     withColumn("hasImage", when($"hasImage" === true, 1).otherwise(0)).
     withColumn("eventDate_processed", when(to_timestamp($"eventDate_processed").lt(current_timestamp()), to_date(to_timestamp($"eventDate_processed"), "YYY-MM-dd")).otherwise(null)).

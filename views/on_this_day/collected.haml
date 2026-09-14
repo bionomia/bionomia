@@ -57,6 +57,7 @@
           %th.text-nowrap{scope: "col"}= I18n.t('specimen.family')
           %th.text-nowrap{scope: "col"}= I18n.t('specimen.institution')
           %th.text-nowrap{scope: "col"}= I18n.t('specimen.catalog_number')
+          %th.text-nowrap{scope: "col"}= I18n.t('specimen.record_number')
           %th.text-nowrap{scope: "col"}= I18n.t('specimen.type_status')
 
       %tbody
@@ -86,6 +87,7 @@
             %td #{h(o.family)}
             %td #{h(o.institutionCode)}
             %td #{h(o.catalogNumber)}
+            %td #{h(o.recordNumber)}
             %td #{h(o.typeStatus)}
 
   - if @pagy.pages > 1

@@ -33,6 +33,10 @@
       = I18n.t('specimen.catalog_number')
       = sort_icon("catalogNumber", sort)
 %th.text-nowrap{scope: "col"}
+   %a{href: url(request.path + "?order=recordNumber&#{qry}#specimen-list")}
+      = I18n.t('specimen.record_number')
+      = sort_icon("recordNumber", sort)
+%th.text-nowrap{scope: "col"}
    %a{href: url(request.path + "?order=typeStatus&#{qry}#specimen-list")}
       = I18n.t('specimen.type_status')
       = sort_icon("typeStatus", sort)

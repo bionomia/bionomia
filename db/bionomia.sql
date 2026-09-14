@@ -159,6 +159,7 @@ CREATE TABLE occurrences (
   institutionCode text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   collectionCode text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   catalogNumber text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  recordNumber text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   recordedBy text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   scientificName text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   typeStatus text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,

@@ -77,6 +77,10 @@
             = I18n.t('specimen.catalog_number')
             = sort_icon("catalogNumber", sort)
         %th.text-nowrap{scope: "col"}
+          %a{href: url("/agent/#{@agent.id}?order=recordNumber&#{qry}")}
+            = I18n.t('specimen.record_number')
+            = sort_icon("recordNumber", sort)
+        %th.text-nowrap{scope: "col"}
           %a{href: url("/agent/#{@agent.id}?order=typeStatus&#{qry}")}
             = I18n.t('specimen.type_status')
             = sort_icon("typeStatus", sort)
@@ -103,6 +107,7 @@
           %td #{h(o.family)}
           %td #{h(o.institutionCode)}
           %td #{h(o.catalogNumber)}
+          %td #{h(o.recordNumber)}
           %td #{h(o.typeStatus)}
           %td #{h(o.basisOfRecord)}
 

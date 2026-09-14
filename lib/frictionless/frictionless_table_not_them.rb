@@ -20,6 +20,7 @@ module Bionomia
           fields: [
             { name: "occurrence_id", type: "integer" },
             { name: "catalogNumber", type: "string", "skos:exactMatch": "http://rs.tdwg.org/dwc/terms/catalogNumber" },
+            { name: "recordNumber", type: "string", "skos:exactMatch": "http://rs.tdwg.org/dwc/terms/recordNumber" },
             { name: "recordedBy", type: "string", "skos:exactMatch": "http://rs.tdwg.org/dwc/terms/recordedeBy" },
             { name: "recordedByID", type: "string", "skos:exactMatch": "http://rs.tdwg.org/dwc/terms/recordedByID" },
             { name: "identifiedBy", type: "string", "skos:exactMatch": "http://rs.tdwg.org/dwc/terms/identifiedBy" },
@@ -116,6 +117,7 @@ module Bionomia
                data = [
                   uo.occurrence_id,
                   uo.occurrence.catalogNumber,
+                  uo.occurrence.recordNumber,
                   uo.occurrence.recordedBy,
                   uo.occurrence.recordedByID,
                   uo.occurrence.identifiedBy,
