@@ -679,6 +679,7 @@ fr:
     date_identified: Date identifiée
     institution: Organisme
     catalog_number: Numéro de catalogue
+    record_number: Record Number
     basis_record: Type d'occurrence
     country: Pays
     family: Famille
