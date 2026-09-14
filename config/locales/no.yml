@@ -679,6 +679,7 @@
     date_identified: Date Identified
     institution: Institusjon
     catalog_number: Katalog nummer
+    record_number: Record Number
     basis_record: Basis Of Record
     country: Land
     family: Familie
