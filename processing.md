@@ -86,6 +86,10 @@ Or from scratch:
 
     $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/frictionless_dataset.rb -d /var/www/bionomia/public/data -s -a
 
+### Step 10: Republish Datasets to Zenodo
+
+    $ RACK_ENV=production RUBY_YJIT_ENABLE=true bundle exec ./bin/zenodo_dataset.rb -r
+
 ## Successive Data Migrations
 
 Unfortunately, gbifIDs are not persistent. These occasionally disappear through processing at GBIF's end. As a result, claims may no longer point to an existing occurrence record and these must then be purged from the user_occurrences table. The following are a few methods to produce a csv file of affected users and to then delete the orphans:
