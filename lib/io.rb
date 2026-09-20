@@ -270,7 +270,7 @@ module Bionomia
 
     def jsonld_occurrences_paged(type = "identifcations")
       begin
-        pagy, results = pagy(:countless, @user.send(type).includes(:claimant), limit: 100)
+        pagy, results = pagy(:offset, @user.send(type).includes(:claimant), limit: 100)
         metadata = pagy.data_hash(data_keys: %i[first_url previous_url page_url next_url previous next])
       rescue
         results = []
