@@ -1,0 +1,33 @@
+{
+  "creator": "davidpshorthouse",
+  "notificationAddresses": ["davidpshorthouse@gmail.com"],
+  "sendNotification": true,
+  "format": "BIONOMIA",
+  "predicate": {
+    "type": "and",
+    "predicates": [
+      {
+        "type": "in",
+        "key": "TAXON_KEY",
+        "values": [
+          "CV7YB"
+        ],
+        "checklistKey": "7ddf754f-d193-4cc9-b351-99906754a03b"
+      },
+      {
+        "type": "in",
+        "key": "OCCURRENCE_STATUS",
+        "values": [
+          "PRESENT"
+        ]
+      },
+      {
+        "type": "in",
+        "key": "BASIS_OF_RECORD",
+        "values": [
+          "PRESERVED_SPECIMEN"
+        ]
+      }
+    ]
+  }
+}

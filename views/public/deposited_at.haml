@@ -39,7 +39,7 @@
               %ul.list-group
                 - @identifications_at.each do |k,v|
                   %li.list-group-item.d-flex.justify-content-between.align-items-center
-                    = link_to k, url("/#{@viewed_user.identifier}/specimens?action=identified&institutionCode=#{ERB::Util.url_encode(k)}")
+                    #{k}
                     %span.badge.badge-light.badge-pill #{number_with_delimiter(v)}
             - elsif !@recordings_at.empty?
               %h4.mt-0= I18n.t('user.specimens_collected')
@@ -57,7 +57,7 @@
               %ul.list-group
                 - @recordings_at.each do |k,v|
                   %li.list-group-item.d-flex.justify-content-between.align-items-center
-                    = link_to k, url("/#{@viewed_user.identifier}/specimens?action=collected&institutionCode=#{ERB::Util.url_encode(k)}")
+                    #{k}
                     %span.badge.badge-light.badge-pill #{number_with_delimiter(v)}
           .col-12.col-lg-6.mb-3
             - if !@recordings_at.empty? && !@identifications_at.empty?
@@ -76,7 +76,7 @@
               %ul.list-group
                 - @identifications_at.each do |k,v|
                   %li.list-group-item.d-flex.justify-content-between.align-items-center
-                    = link_to k, url("/#{@viewed_user.identifier}/specimens?action=identified&institutionCode=#{ERB::Util.url_encode(k)}")
+                    #{k}
                     %span.badge.badge-light.badge-pill #{number_with_delimiter(v)}
 
     - else

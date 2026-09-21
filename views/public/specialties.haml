@@ -35,7 +35,7 @@
                         %img{src:"#{image}", alt:"#{k}", class:"mr-2", width:24, style:"max-height:64px;", loading:"lazy"}
                       - else
                         %span.d-inline-block.mr-2{style:"width:24px;max-height:64px;"}
-                      = link_to k, url("/#{@viewed_user.identifier}/specimens?action=identified&family=#{ERB::Util.url_encode(k)}")
+                      #{k}
                     %span.badge.badge-light.badge-pill #{number_with_delimiter(v)}
             - elsif !@families_recorded.empty?
               %h4.d-flex.justify-content-between.mt-0
@@ -50,7 +50,7 @@
                         %img.mr-2{src:"#{image}", alt:"#{k}", width:24, style:"max-height:64px;", loading:"lazy"}
                       - else
                         %span.d-inline-block.mr-2{style:"width:24px;max-height:64px;"}
-                      = link_to k, url("/#{@viewed_user.identifier}/specimens?action=collected&family=#{ERB::Util.url_encode(k)}")
+                      #{k}
                     %span.badge.badge-light.badge-pill #{number_with_delimiter(v)}
           .col-12.col-lg-6.mb-3
             - if !@families_recorded.empty? && !@families_identified.empty?
@@ -66,7 +66,7 @@
                         %img.mr-2{src:"#{image}", alt:"#{k}", width:24, style:"max-height:64px;", loading:"lazy"}
                       - else
                         %span.d-inline-block.mr-2{style:"width:24px;max-height:64px;"}
-                      = link_to k, url("/#{@viewed_user.identifier}/specimens?action=identified&family=#{ERB::Util.url_encode(k)}")
+                      #{k}
                     %span.badge.badge-light.badge-pill #{number_with_delimiter(v)}
 
     - else
