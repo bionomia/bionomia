@@ -457,7 +457,7 @@ cs:
       other: "Celkem bylo zpracováno %{count} záznamů."
   home:
     tagline: Spojte přírodovědné exempláře se sběrateli světa.
-    keywords: credit,specimens,natural,history,collection,museum,attribution,tracker,tracking,gbif
+    keywords: kredit,exempláře,přírodní,historie,sbírka,muzeum,alokace,tracker,tracking,gbif
     get_started: Začněte
     your_profile: Váš profil
     sample_profiles: Dnešní doporučení sběratelé
@@ -753,6 +753,7 @@ cs:
     date_identified: Datum identifikace
     institution: Instituce
     catalog_number: Katalogové číslo
+    record_number: Číslo záznamu
     basis_record: Základ záznamu
     country: Země
     family: Rodina

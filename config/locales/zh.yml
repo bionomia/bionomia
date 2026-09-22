@@ -679,6 +679,7 @@ zh:
     date_identified: 鉴定日期
     institution: 机构
     catalog_number: 目录编号
+    record_number: Record Number
     basis_record: 记录基础
     country: 国家
     family: 科
