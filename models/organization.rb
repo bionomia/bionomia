@@ -15,6 +15,7 @@ class Organization < ActiveRecord::Base
   def self.active_user_organizations
     self.includes(:user_organizations)
         .where(user_organizations: { end_year: nil })
+        .where.not(name: nil)
         .distinct
   end
 

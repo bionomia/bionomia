@@ -160,6 +160,8 @@ module Sinatra
             if @viewed_user.is_public?
               if @edit_ui
                 create_filter
+                candidate_agents = candidate_agents(@viewed_user)
+                @user_agent_ids = candidate_agents.map{|a| a[:id]}
                 data = specimen_filters(@viewed_user).includes(:claimant)
               else
                 @filter = {}
