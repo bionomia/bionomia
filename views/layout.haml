@@ -43,10 +43,12 @@
     = yield_content :preloaders
     %link{href: "/css/bootstrap-combined.min.css", rel: "stylesheet", type: "text/css"}
     %link{href: "/css/application.css", rel: "stylesheet", type: "text/css"}
+    %link{href: "/css/fontawesome/css/fontawesome.min.css", rel: "stylesheet", type: "text/css"}
+    %link{href: "/css/fontawesome/css/brands.min.css", rel: "stylesheet", type: "text/css"}
+    %link{href: "/css/fontawesome/css/solid.min.css", rel: "stylesheet", type: "text/css"}
     = yield_content :stylesheets
     %script{src: "/js/combined-libs.min.js"}
     %script{src: "/js/application.min.js", defer: true}
-    %script{src: "https://kit.fontawesome.com/e50ae24ed2.js", crossorigin: "anonymous", defer: true}
     = yield_content :scripts
   %body.d-flex.flex-column
     %header
