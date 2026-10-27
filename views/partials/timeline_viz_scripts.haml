@@ -1,6 +1,7 @@
 - content_for :scripts do
   %script{src: "//www.gstatic.com/charts/loader.js", defer: true}
   %script{src: "/js/jquery.throttledresize.js", defer: true}
+  - authorized = authorized? ? true : false
 
   :javascript
     $.fn.outerHTML = function(s) {
@@ -12,7 +13,7 @@
     $(function() {
       Application.init("", "GET", "/taxa");
 
-      var timeline = #{@timeline};
+      var timeline = #{@timeline}, authorized = #{authorized};
 
       function range(a, b) {
         if (a === b) {
@@ -123,22 +124,24 @@
               avoidOverlappingGridLines: false
             }
           };
-          /*
-          google.visualization.events.addListener(chart, 'onmouseover', function(e) {
-            if (e.row !== null) { $('#timeline').css('cursor','pointer'); }
-          });
-          google.visualization.events.addListener(chart, 'onmouseout', function() { $('#timeline').css('cursor','default'); });
-          google.visualization.events.addListener(chart, 'select', function() {
-            var sel = chart.getSelection()[0];
-            var id = $(dataTable.getValue(sel.row, 2)).attr("data-identifier");
-            var start_year = dataTable.getValue(sel.row, 4).getFullYear();
-            var end_year = dataTable.getValue(sel.row, 5).getFullYear();
-            var extra_param = ""
-            if (typeof sel.row !== "undefined" && sel.row !== null) {
-              window.location = "/" + id + "/specimens?action=#{@action}&start_year=" + start_year + "&end_year=" + end_year + "#{locals[:extra_param]}";
-            }
-          });
-          */
+          
+          if (authorized) {
+            google.visualization.events.addListener(chart, 'onmouseover', function(e) {
+              if (e.row !== null) { $('#timeline').css('cursor','pointer'); }
+            });
+            google.visualization.events.addListener(chart, 'onmouseout', function() { $('#timeline').css('cursor','default'); });
+            google.visualization.events.addListener(chart, 'select', function() {
+              var sel = chart.getSelection()[0];
+              var id = $(dataTable.getValue(sel.row, 2)).attr("data-identifier");
+              var start_year = dataTable.getValue(sel.row, 4).getFullYear();
+              var end_year = dataTable.getValue(sel.row, 5).getFullYear();
+              var extra_param = ""
+              if (typeof sel.row !== "undefined" && sel.row !== null) {
+                window.location = "/" + id + "/specimens?action=#{@action}&start_year=" + start_year + "&end_year=" + end_year + "#{locals[:extra_param]}";
+              }
+            });
+          }
+          
           chart.draw(dataTable, options);
         }
       }

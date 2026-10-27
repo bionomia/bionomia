@@ -5,6 +5,7 @@
     %script{src: "/js/jquery.throttledresize.js", defer: true}
     - recorded = @stats[:countries][:recorded].to_a.map{|a| [ a[0], country_name(a[0]), a[1] ] }.unshift(["Country", "Country Name", "#{I18n.t('charts.collected')}"])
     - identified = @stats[:countries][:identified].to_a.map{|a| [ a[0], country_name(a[0]), a[1] ] }.unshift(["Country", "Country Name", "#{I18n.t('charts.identified')}"])
+    - authorized = authorized? ? true : false
     :javascript
       $(function() {
         if (!$('#chart-collected').length && !$('#chart-identified').length) { return; }
@@ -20,7 +21,8 @@
             identified_hierarchies = $.map(#{@stats[:countries][:identified].keys}, function(i) {
               return [ancestors(GeoChartHierarchy, i)];
             }).filter(function (el) { return el; }),
-            collectedMap, identifiedMap, collectedChart, identifiedChart;
+            collectedMap, identifiedMap, collectedChart, identifiedChart,
+            authorized = #{authorized};
 
         function ancestors(array, id) {
           if (typeof array != 'undefined') {
@@ -104,16 +106,16 @@
 
           collectedMap = new google.visualization.GeoChart($('#map-collected')[0]);
 
-          /*
-          google.visualization.events.addListener(collectedMap, 'regionClick', function(e) {
-            var clicked = e.region.split("-")[0];
-            if (recorded_countryCodes.includes(clicked)) {
-              window.location = "#{locals[:path]}/specimens?action=collected&country_code=" + clicked;
-            } else {
-              return;   
-            }
-          });
-          */
+          if (authorized) {
+            google.visualization.events.addListener(collectedMap, 'regionClick', function(e) {
+              var clicked = e.region.split("-")[0];
+              if (recorded_countryCodes.includes(clicked)) {
+                window.location = "#{locals[:path]}/specimens?action=collected&country_code=" + clicked;
+              } else {
+                return;   
+              }
+            });
+          }
 
           google.visualization.events.addListener(collectedMap, 'ready', function(e) {
             $("#map-collected-wrapper").height(collectedMap.container.offsetHeight);
@@ -133,16 +135,16 @@
 
           identifiedMap = new google.visualization.GeoChart($('#map-identified')[0]);
 
-          /*
-          google.visualization.events.addListener(identifiedMap, 'regionClick', function(e) {
-            var clicked = e.region.split("-")[0];
-            if (identified_countryCodes.includes(clicked)) {
-              window.location = "#{locals[:path]}/specimens?action=identified&country_code=" + clicked;
-            } else {
-              return;   
-            }
-          });
-          */
+          if (authorized) {
+            google.visualization.events.addListener(identifiedMap, 'regionClick', function(e) {
+              var clicked = e.region.split("-")[0];
+              if (identified_countryCodes.includes(clicked)) {
+                window.location = "#{locals[:path]}/specimens?action=identified&country_code=" + clicked;
+              } else {
+                return;   
+              }
+            });
+          }
 
           google.visualization.events.addListener(identifiedMap, 'ready', function(e) {
             $("#map-identified-wrapper").height(identifiedMap.container.offsetHeight);
@@ -163,21 +165,21 @@
 
           collectedChart = new google.visualization.ColumnChart(div[0]);
 
-          /*
-          google.visualization.events.addListener(collectedChart, 'onmouseover', function(e) {
-            if (e.row !== null) { div.css('cursor','pointer'); }
-          });
-          google.visualization.events.addListener(collectedChart, 'onmouseout', function(e) {
-            div.css('cursor','default');
-          });
-          google.visualization.events.addListener(collectedChart, 'select', function(e) {
-            var sel = collectedChart.getSelection()[0];
-            if (typeof sel.row !== "undefined" && sel.row !== null) {
-              var yr = data.getValue(sel.row, 0);
-              window.location = "#{locals[:path]}/specimens?action=collected&start_year=" + yr + "&end_year=" + (parseInt(yr, 10)+5);
-            }
-          });
-          */
+          if (authorized) {
+            google.visualization.events.addListener(collectedChart, 'onmouseover', function(e) {
+              if (e.row !== null) { div.css('cursor','pointer'); }
+            });
+            google.visualization.events.addListener(collectedChart, 'onmouseout', function(e) {
+              div.css('cursor','default');
+            });
+            google.visualization.events.addListener(collectedChart, 'select', function(e) {
+              var sel = collectedChart.getSelection()[0];
+              if (typeof sel.row !== "undefined" && sel.row !== null) {
+                var yr = data.getValue(sel.row, 0);
+                window.location = "#{locals[:path]}/specimens?action=collected&start_year=" + yr + "&end_year=" + (parseInt(yr, 10)+5);
+              }
+            });
+          }
 
           if (recordedData.length > 1) {
             collectedChart.draw(data, chartOptions('collected'));
@@ -190,21 +192,21 @@
 
           identifiedChart = new google.visualization.ColumnChart(div[0]);
 
-          /*
-          google.visualization.events.addListener(identifiedChart, 'onmouseover', function(e) {
-            if (e.row !== null) { div.css('cursor','pointer'); }
-          });
-          google.visualization.events.addListener(identifiedChart, 'onmouseout', function(e) {
-            div.css('cursor','default');
-          });
-          google.visualization.events.addListener(identifiedChart, 'select', function(e) {
-            var sel = identifiedChart.getSelection()[0];
-            if (typeof sel.row !== "undefined" && sel.row !== null) {
-              var yr = data.getValue(sel.row, 0);
-              window.location = "#{locals[:path]}/specimens?action=identified&start_year=" + yr + "&end_year=" + (parseInt(yr, 10)+5);
-            }
-          });
-          */
+          if (authorized) {
+            google.visualization.events.addListener(identifiedChart, 'onmouseover', function(e) {
+              if (e.row !== null) { div.css('cursor','pointer'); }
+            });
+            google.visualization.events.addListener(identifiedChart, 'onmouseout', function(e) {
+              div.css('cursor','default');
+            });
+            google.visualization.events.addListener(identifiedChart, 'select', function(e) {
+              var sel = identifiedChart.getSelection()[0];
+              if (typeof sel.row !== "undefined" && sel.row !== null) {
+                var yr = data.getValue(sel.row, 0);
+                window.location = "#{locals[:path]}/specimens?action=identified&start_year=" + yr + "&end_year=" + (parseInt(yr, 10)+5);
+              }
+            });
+          }
 
           if (identifiedData.length > 1) {
             identifiedChart.draw(data, chartOptions('identified'));
