@@ -123,7 +123,7 @@
               avoidOverlappingGridLines: false
             }
           };
-
+          /*
           google.visualization.events.addListener(chart, 'onmouseover', function(e) {
             if (e.row !== null) { $('#timeline').css('cursor','pointer'); }
           });
@@ -138,7 +138,7 @@
               window.location = "/" + id + "/specimens?action=#{@action}&start_year=" + start_year + "&end_year=" + end_year + "#{locals[:extra_param]}";
             }
           });
-
+          */
           chart.draw(dataTable, options);
         }
       }
