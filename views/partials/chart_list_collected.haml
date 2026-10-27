@@ -14,5 +14,8 @@
       - @stats[:recorded_bins].each do |bin|
         %li.list-group-item.d-flex.justify-content-between.align-items-center
           - end_year = ((bin[0].to_i + 5) >= current_year) ? current_year : bin[0].to_i + 5
-          #{bin[0]} – #{end_year}
+          - if authorized?
+            = link_to "#{bin[0]} – #{end_year}", "#{locals[:path]}/specimens?action=collected&start_year=#{bin[0]}&end_year=#{end_year}"
+          - else
+            #{bin[0]} – #{end_year}
           %span.badge.badge-light.badge-pill #{number_with_delimiter(bin[1])}
