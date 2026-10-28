@@ -37,7 +37,7 @@
   %p.mb-1.text-left
     %img{src: "https://api.bionomia.net/dataset/#{@dataset.uuid}/badge.svg", alt: "Click to get badge html", width:210, height:20}
     %a{href: "#", "data-toggle": "modal", "data-target": "#badge_content", "data-keyboard": "true", "data-focus": "true"}
-      %i.fa-solid.fa-info-circle{"data-toggle":"tooltip", title: "#{I18n.t('dataset.badge_tooltip')}"}
+      %i.fa-solid.fa-circle-info{"data-toggle":"tooltip", title: "#{I18n.t('dataset.badge_tooltip')}"}
       Code
   #badge_content.modal.fade{tabindex: "-1"}
     .modal-dialog.modal-dialog-centered.modal-dialog-scrollable.modal-xl{style: "height:100%"}
@@ -80,7 +80,7 @@
             = I18n.t('profile.public')
         - else
           %a.mr-2.mb-2.text-nowrap{href: url("/admin/dataset/#{@dataset.uuid}")}
-            %i.fa-solid.fa-cog
+            %i.fa-solid.fa-gear
             = I18n.t('general.settings')
 
     #flush-message.alert.alert-success.alert-dismissible.fade.show.text-center{role: "alert"}

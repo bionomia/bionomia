@@ -20,7 +20,7 @@
       #{number_to_human(@pagy.count, units: :'dataset.identifiers_alert', delimiter: ",", precision: 0)}
     .ml-auto.text-right
       %a.text-danger{href: url("/datasets")}
-        %i.fa-solid.fa-minus-circle
+        %i.fa-solid.fa-circle-minus
         #{I18n.t('general.remove')}
 - else
   %p.text-right

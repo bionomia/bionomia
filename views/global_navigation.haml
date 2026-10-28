@@ -99,11 +99,11 @@
                 %i.fa-solid.fa-flask.fa-fw
                 = I18n.t('layout.science_enabled')
               %a.dropdown-item{href: url("/profile/settings"), "aria-label": "#{I18n.t('layout.settings')}"}
-                %i.fa-solid.fa-cog.fa-fw
+                %i.fa-solid.fa-gear.fa-fw
                 = I18n.t('layout.settings')
               - if admin_authorized?
                 %a.dropdown-item{href: url("/admin"), "aria-label": "#{I18n.t('layout.administration')}"}
-                  %i.fa-solid.fa-users-cog.fa-fw
+                  %i.fa-solid.fa-users-gear.fa-fw
                   = I18n.t('layout.administration')
               %a.dropdown-item{href: url("/logout"), "aria-label": "#{I18n.t('layout.logout')}"}
                 %i.fa-solid.fa-right-from-bracket.fa-fw

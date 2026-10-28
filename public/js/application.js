@@ -271,11 +271,11 @@ var Application = (function($, window) {
         var child = $(this).children().first();
         e.stopPropagation();
         e.preventDefault();
-        if(child.hasClass("fa-angle-double-down")) {
-          child.removeClass("fa-angle-double-down").addClass("fa-angle-double-up");
+        if(child.hasClass("fa-angles-down")) {
+          child.removeClass("fa-angles-down").addClass("fa-angles-up");
           $(this).parent().prev().css({"max-height":"100%"});
         } else {
-          child.removeClass("fa-angle-double-up").addClass("fa-angle-double-down");
+          child.removeClass("fa-angles-up").addClass("fa-angles-down");
           $(this).parent().prev().css({"max-height":"300px"});
         }
       });

@@ -24,7 +24,7 @@
 - if params[:q].blank?
   - if !@friends.empty?
     .alert.alert-info.tiny-margins{role: "alert"}
-      %i.fa-solid.fa-user-friends.mr-2
+      %i.fa-solid.fa-user-group.mr-2
       = I18n.t('help.do_you_know')
       %span#friends
         - @friends.each_with_index do |u, i|
