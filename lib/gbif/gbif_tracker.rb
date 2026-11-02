@@ -128,15 +128,20 @@ module Bionomia
     def process_data_packages(article)
       article.gbif_downloadkeys.each do |key|
         Thread.pass
-        if datapackage_file_size(key) < @max_size
-          tmp_file = Tempfile.new(['gbif', '.zip'])
-          zip = RestClient.get("#{@package_url}#{key}.zip") rescue nil
-          next if zip.nil?
-          File.open(tmp_file, 'wb') do |output|
-            output.write zip
-          end
 
-          begin
+        if datapackage_file_size(key) < @max_size
+          raw = RestClient::Request.execute(
+                  method: :get,
+                  url: "#{@package_url}#{key}.zip",
+                  raw_response: true) rescue nil
+          next if raw.nil?
+
+          tmp_file = Tempfile.new(['gbif', '.zip'])
+          FileUtils.mv(raw.file.path, tmp_file.path)
+
+          tmp_dir = Dir.mktmpdir
+
+          begin          
             dwc = DarwinCore.new(tmp_file.path)
             gbifID = dwc.core.fields.select{|term| term[:term].include?("gbifID")}[0][:index]
             basisOfRecord = dwc.core.fields.select{|term| term[:term].include?("basisOfRecord")}[0][:index]
@@ -146,32 +151,35 @@ module Bionomia
               ArticleOccurrence.import records, on_duplicate_key_ignore: true, validate: false
             end
           rescue
-            tmp_csv = Tempfile.new(['gbif_csv', '.zip'])
-            Zip::File.open(tmp_file) do |zip_file|
-              entry = zip_file.glob('*.csv').first
-              if entry
-                entry.extract(tmp_csv)
-                #WARNING: requires GNU parallel to split CSV files
-                system("cat #{tmp_csv.path} | parallel --header : --pipe -N 50000 'cat > #{tmp_csv.path}-{#}.csv' > /dev/null 2>&1")
-                all_files = Dir.glob(File.dirname(tmp_csv) + "/**/#{File.basename(tmp_csv.path)}*.csv")
-                all_files.each do |csv|
-                  items = []
-                  CSV.foreach(csv, headers: :first_row, col_sep: "\t", liberal_parsing: true, quote_char: "\x00") do |row|
-                    occurrence_id = row["gbifid"] || row["gbifID"]
-                    next if occurrence_id.nil? || row["basisOfRecord"] == "HUMAN_OBSERVATION"
-                    items << [ article.id, occurrence_id ]
-                  end
-                  items.each_slice(2_500) do |group|
-                    ArticleOccurrence.import [:article_id, :occurrence_id], group, on_duplicate_key_ignore: true, validate: false
-                  end
-                  items = []
-                  File.unlink(csv)
-                end
-              end
+            Zip::File.open(tmp_file.path) do |zip_file|
+              zip_file.extract_all(tmp_dir)
             end
-            tmp_csv.unlink
+
+            csv_file = Dir.glob(File.join(tmp_dir, "*.csv")).first
+
+            #WARNING: requires GNU parallel to split CSV files
+            system("cat #{csv_file} | parallel --header : --pipe -N 50000 'cat > #{tmp_dir}/partial-{#}.csv' > /dev/null 2>&1")
+            
+            File.unlink(csv_file) if csv_file && File.exist?(csv_file)
+
+            Dir.glob(File.join(tmp_dir, "*.csv")).each do |csv|
+              items = []
+              CSV.foreach(csv, headers: :first_row, col_sep: "\t", liberal_parsing: true, quote_char: "\x00") do |row|
+                occurrence_id = row["gbifid"] || row["gbifID"]
+                next if occurrence_id.nil? || row["basisOfRecord"] == "HUMAN_OBSERVATION"
+                items << [ article.id, occurrence_id ]
+              end
+              items.each_slice(2_500) do |group|
+                ArticleOccurrence.import [:article_id, :occurrence_id], group, on_duplicate_key_ignore: true, validate: false
+              end
+              items = []
+              File.unlink(csv)
+            end
+          ensure
+            File.unlink(tmp_file) if tmp_file && File.exist?(tmp_file)
+            FileUtils.remove_entry(tmp_dir) if tmp_dir && Dir.exist?(tmp_dir)
           end
-          tmp_file.unlink
+
         end
       end
     end
