@@ -171,23 +171,28 @@ module Sinatra
                 end_year = params[:end_year].to_i
               end
 
-              if @action == "collected"
-                users = @dataset.timeline_recorded(start_year: start_year, end_year: end_year)
-              elsif @action == "identified"
-                users = @dataset.timeline_identified(start_year: start_year, end_year: end_year)
+              if authorized?
+                if @action == "collected"
+                  users = @dataset.timeline_recorded(start_year: start_year, end_year: end_year)
+                elsif @action == "identified"
+                  users = @dataset.timeline_identified(start_year: start_year, end_year: end_year)
+                end
+                @timeline = users.map do |u|
+                  card = haml :'partials/user/tooltip', layout: false, locals: { user: u }
+                  [ u.identifier,
+                    u.viewname,
+                    card,
+                    u.min_date.to_time.iso8601,
+                    u.max_date.to_time.iso8601,
+                    (u.date_born ? u.date_born.to_time.iso8601 : ""),
+                    (u.date_died ? u.date_died.to_time.iso8601 : "")
+                  ].compact
+                end
+                haml :'datasets/visualizations', locals: locals
+              else
+                status 403
+                haml :'datasets/visualizations_unauthorized', locals: locals
               end
-              @timeline = users.map do |u|
-                card = haml :'partials/user/tooltip', layout: false, locals: { user: u }
-                [ u.identifier,
-                  u.viewname,
-                  card,
-                  u.min_date.to_time.iso8601,
-                  u.max_date.to_time.iso8601,
-                  (u.date_born ? u.date_born.to_time.iso8601 : ""),
-                  (u.date_died ? u.date_died.to_time.iso8601 : "")
-                ].compact
-              end
-              haml :'datasets/visualizations', locals: locals
             end
 
             get '/:id/refresh.json' do

@@ -1,0 +1,15 @@
+= haml :'partials/dataset/twitter_img', layout: false
+
+- content_for :title, "#{@dataset.title}: #{I18n.t('dataset.visualizations')}"
+
+= haml :'partials/timeline_viz_scripts', layout: false, locals: { extra_param: "&datasetKey=#{@dataset.uuid}" }
+
+.row
+  = haml :'partials/dataset/jumbotron', layout:false
+
+  .col-12.col-lg-8.mt-2
+    = haml :'partials/dataset/tabs', layout: false, locals: { active_tab: locals[:active_tab] }
+    = haml :'partials/dataset/people_viz_nav', layout: false, locals: { active_subtab: locals[:active_subtab] }
+
+    .alert.alert-warning.tiny-margins.d-flex.flex-wrap{role: "alert"}
+      = I18n.t('general.unauthorized')

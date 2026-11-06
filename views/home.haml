@@ -1,7 +1,7 @@
 - content_for :title, "Bionomia"
 - content_for :preloaders do
   %link{href: "/font/subset-LovelyHome.otf", rel: "preload", as: "font", type: "font/otf", crossorigin: true}
-  %link{href: "/images/banner.jpg", rel: "preload", as: "image", imagesrcset: "/images/banner.jpg 2x, /images/banner-small.jpg 1x", crossorigin: true}
+  %link{href: "/images/banner.jpg", rel: "preload", as: "image", imagesrcset: "/images/banner.jpg 2x, /images/banner-small.jpg 1x", crossorigin: true, fetchpriority: "high"}
 - content_for :scripts do
   :javascript
     $(function() {
