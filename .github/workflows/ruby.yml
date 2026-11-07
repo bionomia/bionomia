@@ -28,7 +28,7 @@ jobs:
         elasticsearch: ['8.19.11']
         ruby-version: ['3.3']
     env:
-      RUBY_VERSION: 3.3
+      RUBY_VERSION: 3.3.13
       BUNDLER_VERSION: 2.4.6
       RACK_ENV: test
       RUBY_YJIT_ENABLE: true
