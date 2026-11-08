@@ -45,7 +45,7 @@ describe "Bionomia Dataset Route" do
 
   it "should produce a 403 when accessing a dataset visualizations page" do
     get '/dataset/' + @datasetkey + '/visualizations'
-    expect(last_response).to eq(403)
+    expect(last_response.status).to eq(403)
   end
 
   it "should produce a 403 when accessing a dataset agents page" do
