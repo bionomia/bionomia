@@ -38,27 +38,27 @@ describe "Bionomia Dataset Route" do
     expect(last_response).to be_ok
   end
 
-  it "should allow accessing a dataset visualizations page" do
-    get '/dataset/' + @datasetkey + '/visualizations'
-    expect(last_response).to be_ok
-  end
-
   it "should allow accessing a dataset scribes page" do
     get '/dataset/' + @datasetkey + '/scribes'
     expect(last_response).to be_ok
   end
 
-  it "should allow accessing a dataset agents page" do
+  it "should produce a 403 when accessing a dataset visualizations page" do
+    get '/dataset/' + @datasetkey + '/visualizations'
+    expect(last_response).to eq(403)
+  end
+
+  it "should produce a 403 when accessing a dataset agents page" do
     get '/dataset/' + @datasetkey + '/agents'
     expect(last_response.status).to eq(403)
   end
 
-  it "should allow accessing a dataset agents counts page" do
+  it "should produce a 403 when accessing a dataset agents counts page" do
     get '/dataset/' + @datasetkey + '/agents/counts'
     expect(last_response.status).to eq(403)
   end
 
-  it "should allow accessing a dataset agents unclaimed page" do
+  it "should produce a 403 when accessing a dataset agents unclaimed page" do
     get '/dataset/' + @datasetkey + '/agents/unclaimed'
     expect(last_response.status).to eq(403)
   end
